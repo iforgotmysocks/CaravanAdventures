@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+	<name>Caravan Adventures</name>
+	<author>iforgotmysocks</author>
+	<url></url>
+  <supportedVersions>
+    <li>1.1</li>
+  </supportedVersions>
+  <packageId>iforgotmysocks.CaravanAdventures</packageId>
+	<description>
+  Caravan Adventures and improvements.
+	</description>
+</ModMetaData>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <SettleWithoutUnloading>Settle Caravan</SettleWithoutUnloading>
+  <SettleWithoutUnloadingDesc>Allows the caravan to settle without unloading to find a good spot first or leave quickly.</SettleWithoutUnloadingDesc>
+  <AllowNightTravel>Allow night travel</AllowNightTravel>
+  <AllowNightTravelDesc>Allow your caravan to travel through the night, but keep in mind that this harbours great risk for strong attacks and if your caravan members get too tired, they have no choice but to rest.</AllowNightTravelDesc>
+</LanguageData>
