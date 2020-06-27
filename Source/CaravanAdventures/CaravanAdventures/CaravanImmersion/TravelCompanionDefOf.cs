@@ -21,6 +21,11 @@ namespace CaravanAdventures.CaravanImmersion
             return DefDatabase<PawnRelationDef>.GetNamed(defName, true);
         }
 
+        public static ThoughtDef ThoughtNamed(string defName)
+        {
+            return DefDatabase<ThoughtDef>.GetNamed(defName, true);
+        }
+
         public static TravelCompanionDef Outsider;
         public static TravelCompanionDef ThirdWheel;
         public static TravelCompanionDef FamiliarFool;

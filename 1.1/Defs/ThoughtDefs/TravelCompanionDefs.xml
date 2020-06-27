@@ -36,7 +36,7 @@
     <defName>TrustedMate</defName>
     <label>Trusted mate</label>
     <thoughtStage>4</thoughtStage>
-    <maxDays>180</maxDays>
+    <maxDays>240</maxDays>
     <relationDefName>TrustedMateRelation</relationDefName>
   </CaravanAdventures.CaravanImmersion.TravelCompanionDef>
 
@@ -44,7 +44,7 @@
     <defName>TrueFriend</defName>
     <label>True friend</label>
     <thoughtStage>5</thoughtStage>
-    <maxDays>240</maxDays>
+    <maxDays>360</maxDays>
     <relationDefName>TrueFriendRelation</relationDefName>
   </CaravanAdventures.CaravanImmersion.TravelCompanionDef>
 
@@ -52,8 +52,8 @@
     <defName>OutsiderRelation</defName>
     <label>Outsider</label>
     <labelFemale>Outsider</labelFemale>
-    <importance>-10</importance>
-    <opinionOffset>-10</opinionOffset>
+    <!--<importance>-10</importance>-->
+    <opinionOffset>-20</opinionOffset>
     <implied>false</implied>
     <modExtensions>
       <li Class="CaravanAdventures.CaravanImmersion.TravelCompanionModExt">
@@ -67,7 +67,7 @@
     <label>Thrid wheel</label>
     <labelFemale>Third wheel</labelFemale>
     <!--<importance>80</importance>-->
-    <opinionOffset>-5</opinionOffset>
+    <opinionOffset>-10</opinionOffset>
     <implied>false</implied>
     <modExtensions>
       <li Class="CaravanAdventures.CaravanImmersion.TravelCompanionModExt">
@@ -81,7 +81,7 @@
     <label>Familiar fool</label>
     <labelFemale>Familiar fool</labelFemale>
     <!--<importance>90</importance>-->
-    <opinionOffset>5</opinionOffset>
+    <opinionOffset>10</opinionOffset>
     <implied>false</implied>
     <modExtensions>
       <li Class="CaravanAdventures.CaravanImmersion.TravelCompanionModExt">
@@ -94,8 +94,8 @@
     <defName>PartOfTheGangRelation</defName>
     <label>Part of the gang</label>
     <labelFemale>Part of the gang</labelFemale>
-    <importance>95</importance>
-    <opinionOffset>10</opinionOffset>
+    <!--<importance>95</importance>-->
+    <opinionOffset>20</opinionOffset>
     <implied>false</implied>
     <modExtensions>
       <li Class="CaravanAdventures.CaravanImmersion.TravelCompanionModExt">
@@ -108,8 +108,8 @@
     <defName>TrustedMateRelation</defName>
     <label>Trusted mate</label>
     <labelFemale>Trusted mate</labelFemale>
-    <importance>150</importance>
-    <opinionOffset>20</opinionOffset>
+    <!--<importance>150</importance>-->
+    <opinionOffset>30</opinionOffset>
     <implied>false</implied>
     <modExtensions>
       <li Class="CaravanAdventures.CaravanImmersion.TravelCompanionModExt">
@@ -122,8 +122,8 @@
     <defName>TrueFriendRelation</defName>
     <label>True friend</label>
     <labelFemale>True friend</labelFemale>
-    <importance>180</importance>
-    <opinionOffset>30</opinionOffset>
+    <!--<importance>180</importance>-->
+    <opinionOffset>40</opinionOffset>
     <implied>false</implied>
     <modExtensions>
       <li Class="CaravanAdventures.CaravanImmersion.TravelCompanionModExt">
@@ -131,4 +131,126 @@
       </li>
     </modExtensions>
   </PawnRelationDef>
+
+  
+  <!-- thoughts not in use, mainly testing -->
+  <ThoughtDef>
+    <defName>OutsiderRelation</defName>
+    <thoughtClass>Thought_MemorySocial</thoughtClass>
+    <stackLimit>300</stackLimit>
+    <nullifyingTraits>
+      <li>Psychopath</li>
+    </nullifyingTraits>
+    <stages>
+      <li>
+        <label>Outsider</label>
+        <baseOpinionOffset>-10</baseOpinionOffset>
+      </li>
+    </stages>
+    <modExtensions>
+      <li Class="CaravanAdventures.CaravanImmersion.TravelCompanionModExt">
+        <isTravelCompanionRelation>true</isTravelCompanionRelation>
+      </li>
+    </modExtensions>
+  </ThoughtDef>
+  
+  <ThoughtDef>
+    <defName>ThirdWheelRelation</defName>
+    <thoughtClass>Thought_MemorySocial</thoughtClass>
+    <stackLimit>300</stackLimit>
+    <nullifyingTraits>
+      <li>Psychopath</li>
+    </nullifyingTraits>
+    <stages>
+      <li>
+        <label>Thrid wheel</label>
+        <baseOpinionOffset>-5</baseOpinionOffset>
+      </li>
+    </stages>
+    <modExtensions>
+      <li Class="CaravanAdventures.CaravanImmersion.TravelCompanionModExt">
+        <isTravelCompanionRelation>true</isTravelCompanionRelation>
+      </li>
+    </modExtensions>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>FamiliarFoolRelation</defName>
+    <thoughtClass>Thought_MemorySocial</thoughtClass>
+    <stackLimit>300</stackLimit>
+    <nullifyingTraits>
+      <li>Psychopath</li>
+    </nullifyingTraits>
+    <stages>
+      <li>
+        <label>Familiar fool</label>
+        <baseOpinionOffset>5</baseOpinionOffset>
+      </li>
+    </stages>
+    <modExtensions>
+      <li Class="CaravanAdventures.CaravanImmersion.TravelCompanionModExt">
+        <isTravelCompanionRelation>true</isTravelCompanionRelation>
+      </li>
+    </modExtensions>
+  </ThoughtDef>
+  
+  <ThoughtDef>
+    <defName>PartOfTheGangRelation</defName>
+    <thoughtClass>Thought_MemorySocial</thoughtClass>
+    <stackLimit>300</stackLimit>
+    <nullifyingTraits>
+      <li>Psychopath</li>
+    </nullifyingTraits>
+    <stages>
+      <li>
+        <label>Part of the gang</label>
+        <baseOpinionOffset>10</baseOpinionOffset>
+      </li>
+    </stages>
+    <modExtensions>
+      <li Class="CaravanAdventures.CaravanImmersion.TravelCompanionModExt">
+        <isTravelCompanionRelation>true</isTravelCompanionRelation>
+      </li>
+    </modExtensions>
+  </ThoughtDef>
+  
+  <ThoughtDef>
+    <defName>TrustedMateRelation</defName>
+    <thoughtClass>Thought_MemorySocial</thoughtClass>
+    <stackLimit>300</stackLimit>
+    <nullifyingTraits>
+      <li>Psychopath</li>
+    </nullifyingTraits>
+    <stages>
+      <li>
+        <label>Trusted mate</label>
+        <baseOpinionOffset>20</baseOpinionOffset>
+      </li>
+    </stages>
+    <modExtensions>
+      <li Class="CaravanAdventures.CaravanImmersion.TravelCompanionModExt">
+        <isTravelCompanionRelation>true</isTravelCompanionRelation>
+      </li>
+    </modExtensions>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>TrueFriendRelation</defName>
+    <thoughtClass>Thought_MemorySocial</thoughtClass>
+    <stackLimit>300</stackLimit>
+    <nullifyingTraits>
+      <li>Psychopath</li>
+    </nullifyingTraits>
+    <stages>
+      <li>
+        <label>True friend</label>
+        <baseOpinionOffset>30</baseOpinionOffset>
+      </li>
+    </stages>
+    <modExtensions>
+      <li Class="CaravanAdventures.CaravanImmersion.TravelCompanionModExt">
+        <isTravelCompanionRelation>true</isTravelCompanionRelation>
+      </li>
+    </modExtensions>
+  </ThoughtDef>
 </Defs>

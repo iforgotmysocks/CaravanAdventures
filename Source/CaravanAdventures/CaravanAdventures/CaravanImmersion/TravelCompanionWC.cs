@@ -24,9 +24,37 @@ namespace CaravanAdventures.CaravanImmersion
             if (ticks > 1200)
             {
                 ApplySocialRelations();
+                //ApplySocialThoughts();
                 ticks = 0;
             }
             ticks++;
+        }
+
+        private void ApplySocialThoughts()
+        {
+            var playerPawns = PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction.Where(x => x.RaceProps.Humanlike).ToList();
+
+            foreach (var mainPawn in playerPawns)
+            {
+                foreach (var pawn in playerPawns)
+                {
+                    if (pawn == mainPawn) continue;
+                    var memory = pawn.needs.mood.thoughts.memories.Memories.FirstOrDefault(x => x.otherPawn == mainPawn && x.def.HasModExtension<TravelCompanionModExt>());
+                        //.DirectRelations.FirstOrDefault(x => (x.def.GetModExtension<TravelCompanionModExt>()?.isTravelCompanionRelation ?? false) == true && x.otherPawn == mainPawn);
+                    var newRelation = CalculateNewRelation(mainPawn, pawn);
+                    if (newRelation == null)
+                    {
+                        Log.Error($"newRelation is null, which should not be happening!!! -> TravelCompanionWC -> ApplySocialRelation -> CalculateNewRelation()");
+                        continue;
+                    }
+                    if (memory != null && memory.def.defName == newRelation.relationDefName) continue;
+                    if (memory != null && memory.def.defName != newRelation.relationDefName)
+                    {
+                        pawn.needs.mood.thoughts.memories.Memories.Remove(memory);
+                    }
+                    pawn.needs.mood.thoughts.memories.TryGainMemory(TravelCompanionDefOf.ThoughtNamed(newRelation.relationDefName), mainPawn);
+                }
+            }
         }
 
         private void ApplySocialRelations()
