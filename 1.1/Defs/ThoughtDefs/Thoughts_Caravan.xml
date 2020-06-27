@@ -11,7 +11,7 @@
       <li>
         <label>Outsider</label>
         <description>I had no choice but to join them... i'd have died alone, but i'm scared what they might do to me.</description>
-        <baseMoodEffect>-5</baseMoodEffect>
+        <baseMoodEffect>-6</baseMoodEffect>
       </li>
       <li>
         <label>Third wheel</label>
@@ -26,20 +26,61 @@
       <li>
         <label>Part of the gang</label>
         <description>My companions start to value my skills and insight, i get to sit at the table!</description>
-        <baseMoodEffect>3</baseMoodEffect>
+        <baseMoodEffect>4</baseMoodEffect>
       </li>
       <li>
         <label>Trusted mate</label>
         <description>My companions are there when i need them and they can count on me!</description>
-        <baseMoodEffect>6</baseMoodEffect>
+        <baseMoodEffect>8</baseMoodEffect>
       </li>
       <li>
         <label>True friend</label>
         <description>We have been through alot together and always have each others backs. We would die for each other!</description>
-        <baseMoodEffect>9</baseMoodEffect>
+        <baseMoodEffect>12</baseMoodEffect>
       </li>
     </stages>
     <validWhileDespawned>true</validWhileDespawned>
   </ThoughtDef>
+
+  <!--<ThoughtDef>
+    <defName>TravelCompanionMemory</defName>
+    <thoughtClass>Thought_MemorySocial</thoughtClass>
+    <nullifyingTraits>
+      <li>Psychopath</li>
+    </nullifyingTraits>
+    <stages>
+      <li>
+        <label>Outsider</label>
+        <description>I had no choice but to join them... i'd have died alone, but i'm scared what they might do to me.</description>
+        <baseOpinionOffset>25</baseOpinionOffset>
+      </li>
+      <li>
+        <label>Third wheel</label>
+        <description>I don't really know these people, should i stay?</description>
+        <baseOpinionOffset>25</baseOpinionOffset>
+      </li>
+      <li>
+        <label>Familiar fool</label>
+        <description>Most jokes are on me and i get to do all the crappy work, but i seem to start being accepted!</description>
+        <baseOpinionOffset>25</baseOpinionOffset>
+      </li>
+      <li>
+        <label>Part of the gang</label>
+        <description>My companions start to value my skills and insight, i get to sit at the table!</description>
+        <baseOpinionOffset>25</baseOpinionOffset>
+      </li>
+      <li>
+        <label>Trusted mate</label>
+        <description>My companions are there when i need them and they can count on me!</description>
+        <baseOpinionOffset>25</baseOpinionOffset>
+      </li>
+      <li>
+        <label>True friend</label>
+        <description>We have been through alot together and always have each others backs. We would die for each other!</description>
+        <baseOpinionOffset>25</baseOpinionOffset>
+      </li>
+    </stages>
+    <validWhileDespawned>true</validWhileDespawned>
+  </ThoughtDef>-->
   
 </Defs>

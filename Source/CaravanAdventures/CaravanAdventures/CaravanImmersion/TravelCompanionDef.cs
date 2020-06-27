@@ -12,6 +12,7 @@ namespace CaravanAdventures.CaravanImmersion
     {
         public int thoughtStage = -1;
         public float maxDays = -1;
+        public string relationDefName;
 
         public static TravelCompanionDef Named(string defName)
         {

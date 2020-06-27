@@ -16,10 +16,24 @@ namespace CaravanAdventures.CaravanImmersion
             DefOfHelper.EnsureInitializedInCtor(typeof(TravelCompanionDefOf));
         }
 
+        public static PawnRelationDef RelationNamed(string defName)
+        {
+            return DefDatabase<PawnRelationDef>.GetNamed(defName, true);
+        }
+
+        public static TravelCompanionDef Outsider;
         public static TravelCompanionDef ThirdWheel;
         public static TravelCompanionDef FamiliarFool;
         public static TravelCompanionDef PartOfTheGang;
         public static TravelCompanionDef TrustedMate;
         public static TravelCompanionDef TrueFriend;
+
+        public static PawnRelationDef OutsiderRelation;
+        public static PawnRelationDef ThirdWheelRelation;
+        public static PawnRelationDef FamiliarFoolRelation;
+        public static PawnRelationDef PartOfTheGangRelation;
+        public static PawnRelationDef TrustedMateRelation;
+        public static PawnRelationDef TrueFriendRelation;
+
     }
 }

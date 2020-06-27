@@ -10,7 +10,7 @@ namespace CaravanAdventures.CaravanImmersion
 {
     class ThoughtWorker_TravelCompanions : ThoughtWorker
     {
-        private List<TravelCompanionDef> companionDefs;
+        //private List<TravelCompanionDef> companionDefs;
         protected override ThoughtState CurrentStateInternal(Pawn p)
         {
             TravelCompanionDef companionDef = GetCurrentDef(p);
@@ -19,6 +19,7 @@ namespace CaravanAdventures.CaravanImmersion
                 return ThoughtState.Inactive;
             }
             //var adjustedThoughtStage = ApplySocialBonds(p, companionDef);
+
             return ThoughtState.ActiveAtStage(companionDef.thoughtStage);
         }
 
@@ -28,18 +29,12 @@ namespace CaravanAdventures.CaravanImmersion
             return companionDef;
         }
 
-        private TravelCompanionDef GetCurrentDef(Pawn p)
+        public static TravelCompanionDef GetCurrentDef(Pawn p)
         {
-            if (Current.ProgramState != ProgramState.Playing)
-            {
-                return null;
-            }
-            if (p.Faction != Faction.OfPlayer)
-            {
-                return null;
-            }
+            if (Current.ProgramState != ProgramState.Playing) return null;
+            if (p.Faction != Faction.OfPlayer) return null;
 
-            companionDefs = DefDatabase<TravelCompanionDef>.AllDefs.OrderByDescending(y => y.thoughtStage).ToList();
+            var companionDefs = DefDatabase<TravelCompanionDef>.AllDefs.OrderByDescending(y => y.thoughtStage).ToList();
 
             var time = p.records.GetValue(RecordDefOf.TimeAsColonistOrColonyAnimal);
             foreach (var def in companionDefs)

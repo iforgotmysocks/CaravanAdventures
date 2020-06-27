@@ -5,6 +5,7 @@
     <label>Outsider</label>
     <thoughtStage>0</thoughtStage>
     <maxDays>0</maxDays>
+    <relationDefName>OutsiderRelation</relationDefName>
   </CaravanAdventures.CaravanImmersion.TravelCompanionDef>
 
   <CaravanAdventures.CaravanImmersion.TravelCompanionDef>
@@ -12,6 +13,7 @@
     <label>Third wheel</label>
     <thoughtStage>1</thoughtStage>
     <maxDays>30</maxDays>
+    <relationDefName>ThirdWheelRelation</relationDefName>
   </CaravanAdventures.CaravanImmersion.TravelCompanionDef>
 
   <CaravanAdventures.CaravanImmersion.TravelCompanionDef>
@@ -19,6 +21,7 @@
     <label>Familiar fool</label>
     <thoughtStage>2</thoughtStage>
     <maxDays>60</maxDays>
+    <relationDefName>FamiliarFoolRelation</relationDefName>
   </CaravanAdventures.CaravanImmersion.TravelCompanionDef>
 
   <CaravanAdventures.CaravanImmersion.TravelCompanionDef>
@@ -26,6 +29,7 @@
     <label>Part of the gang</label>
     <thoughtStage>3</thoughtStage>
     <maxDays>120</maxDays>
+    <relationDefName>PartOfTheGangRelation</relationDefName>
   </CaravanAdventures.CaravanImmersion.TravelCompanionDef>
 
   <CaravanAdventures.CaravanImmersion.TravelCompanionDef>
@@ -33,6 +37,7 @@
     <label>Trusted mate</label>
     <thoughtStage>4</thoughtStage>
     <maxDays>180</maxDays>
+    <relationDefName>TrustedMateRelation</relationDefName>
   </CaravanAdventures.CaravanImmersion.TravelCompanionDef>
 
   <CaravanAdventures.CaravanImmersion.TravelCompanionDef>
@@ -40,6 +45,90 @@
     <label>True friend</label>
     <thoughtStage>5</thoughtStage>
     <maxDays>240</maxDays>
+    <relationDefName>TrueFriendRelation</relationDefName>
   </CaravanAdventures.CaravanImmersion.TravelCompanionDef>
-  
+
+  <PawnRelationDef>
+    <defName>OutsiderRelation</defName>
+    <label>Outsider</label>
+    <labelFemale>Outsider</labelFemale>
+    <importance>-10</importance>
+    <opinionOffset>-10</opinionOffset>
+    <implied>false</implied>
+    <modExtensions>
+      <li Class="CaravanAdventures.CaravanImmersion.TravelCompanionModExt">
+        <isTravelCompanionRelation>true</isTravelCompanionRelation>
+      </li>
+    </modExtensions>
+  </PawnRelationDef>
+
+  <PawnRelationDef>
+    <defName>ThirdWheelRelation</defName>
+    <label>Thrid wheel</label>
+    <labelFemale>Third wheel</labelFemale>
+    <!--<importance>80</importance>-->
+    <opinionOffset>-5</opinionOffset>
+    <implied>false</implied>
+    <modExtensions>
+      <li Class="CaravanAdventures.CaravanImmersion.TravelCompanionModExt">
+        <isTravelCompanionRelation>true</isTravelCompanionRelation>
+      </li>
+    </modExtensions>
+  </PawnRelationDef>
+
+  <PawnRelationDef>
+    <defName>FamiliarFoolRelation</defName>
+    <label>Familiar fool</label>
+    <labelFemale>Familiar fool</labelFemale>
+    <!--<importance>90</importance>-->
+    <opinionOffset>5</opinionOffset>
+    <implied>false</implied>
+    <modExtensions>
+      <li Class="CaravanAdventures.CaravanImmersion.TravelCompanionModExt">
+        <isTravelCompanionRelation>true</isTravelCompanionRelation>
+      </li>
+    </modExtensions>
+  </PawnRelationDef>
+
+  <PawnRelationDef>
+    <defName>PartOfTheGangRelation</defName>
+    <label>Part of the gang</label>
+    <labelFemale>Part of the gang</labelFemale>
+    <importance>95</importance>
+    <opinionOffset>10</opinionOffset>
+    <implied>false</implied>
+    <modExtensions>
+      <li Class="CaravanAdventures.CaravanImmersion.TravelCompanionModExt">
+        <isTravelCompanionRelation>true</isTravelCompanionRelation>
+      </li>
+    </modExtensions>
+  </PawnRelationDef>
+
+  <PawnRelationDef>
+    <defName>TrustedMateRelation</defName>
+    <label>Trusted mate</label>
+    <labelFemale>Trusted mate</labelFemale>
+    <importance>150</importance>
+    <opinionOffset>20</opinionOffset>
+    <implied>false</implied>
+    <modExtensions>
+      <li Class="CaravanAdventures.CaravanImmersion.TravelCompanionModExt">
+        <isTravelCompanionRelation>true</isTravelCompanionRelation>
+      </li>
+    </modExtensions>
+  </PawnRelationDef>
+
+  <PawnRelationDef>
+    <defName>TrueFriendRelation</defName>
+    <label>True friend</label>
+    <labelFemale>True friend</labelFemale>
+    <importance>180</importance>
+    <opinionOffset>30</opinionOffset>
+    <implied>false</implied>
+    <modExtensions>
+      <li Class="CaravanAdventures.CaravanImmersion.TravelCompanionModExt">
+        <isTravelCompanionRelation>true</isTravelCompanionRelation>
+      </li>
+    </modExtensions>
+  </PawnRelationDef>
 </Defs>
