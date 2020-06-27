@@ -15,30 +15,13 @@ namespace CaravanAdventures
 
         public Init(Map map) : base(map)
         {
+
+            // ModLister.RoyaltyInstalled or ModsConfig.RoyaltyActive
+
             // todo figure out why chosenPawnSelected isn't being saved!
             if (!chosenPawnSelected)
             {
-                //var pawns = PawnsFinder.AllMapsWorldAndTemporary_Alive.Where(x => x.Faction.def == FactionDefOf.PlayerColony);
                 
-                //var chosen = pawns.FirstOrDefault(x => x.Name.ToString().ToLower().Contains("kay")) ?? pawns.FirstOrDefault();
-                //if (chosen == null)
-                //{
-                //    Log.Message("Couldn't find pawn, skipping");
-                //    return;
-                //}
-
-                //Log.Message(chosen.Name + " " + chosen.NameFullColored);
-
-                //chosen.health.AddHediff(DefDatabase<HediffDef>.AllDefs.FirstOrDefault(x => x.defName == "PsychicAmplifier"), chosen.health.hediffSet.GetBrain());
-                //chosen.health.AddHediff(DefDatabase<HediffDef>.AllDefs.FirstOrDefault(x => x.defName == "AncientGift"), chosen.health.hediffSet.GetBrain());
-
-                //var abilityDef = DefDatabase<AbilityDef>.AllDefs.FirstOrDefault(x => x.defName == "AncientMeditate");
-                //chosen.abilities.GainAbility(abilityDef);
-                //abilityDef = DefDatabase<AbilityDef>.AllDefs.FirstOrDefault(x => x.defName == "AncientProtectiveAura");
-                //chosen.abilities.GainAbility(abilityDef);
-                //abilityDef = DefDatabase<AbilityDef>.AllDefs.FirstOrDefault(x => x.defName == "ConjureLight");
-                //chosen.abilities.GainAbility(abilityDef);
-                //chosenPawnSelected = true;
             }
         }
 

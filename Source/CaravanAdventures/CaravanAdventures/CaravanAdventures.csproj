@@ -54,6 +54,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CaravanImmersion\ThoughtWorker_TravelCompanions.cs" />
+    <Compile Include="CaravanImmersion\TravelCompanionDef.cs" />
+    <Compile Include="CaravanImmersion\TravelCompanionDefOf.cs" />
     <Compile Include="CaravanImprovements\CaravanEnterMapImprovementUtility.cs" />
     <Compile Include="CaravanImprovements\CompCaravanDecisions.cs" />
     <Compile Include="Helper.cs" />

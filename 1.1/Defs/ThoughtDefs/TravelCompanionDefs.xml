@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <CaravanAdventures.CaravanImmersion.TravelCompanionDef>
+    <defName>Outsider</defName>
+    <label>Outsider</label>
+    <thoughtStage>0</thoughtStage>
+    <maxDays>0</maxDays>
+  </CaravanAdventures.CaravanImmersion.TravelCompanionDef>
+
+  <CaravanAdventures.CaravanImmersion.TravelCompanionDef>
+    <defName>ThirdWheel</defName>
+    <label>Third wheel</label>
+    <thoughtStage>1</thoughtStage>
+    <maxDays>30</maxDays>
+  </CaravanAdventures.CaravanImmersion.TravelCompanionDef>
+
+  <CaravanAdventures.CaravanImmersion.TravelCompanionDef>
+    <defName>FamiliarFool</defName>
+    <label>Familiar fool</label>
+    <thoughtStage>2</thoughtStage>
+    <maxDays>60</maxDays>
+  </CaravanAdventures.CaravanImmersion.TravelCompanionDef>
+
+  <CaravanAdventures.CaravanImmersion.TravelCompanionDef>
+    <defName>PartOfTheGang</defName>
+    <label>Part of the gang</label>
+    <thoughtStage>3</thoughtStage>
+    <maxDays>120</maxDays>
+  </CaravanAdventures.CaravanImmersion.TravelCompanionDef>
+
+  <CaravanAdventures.CaravanImmersion.TravelCompanionDef>
+    <defName>TrustedMate</defName>
+    <label>Trusted mate</label>
+    <thoughtStage>4</thoughtStage>
+    <maxDays>180</maxDays>
+  </CaravanAdventures.CaravanImmersion.TravelCompanionDef>
+
+  <CaravanAdventures.CaravanImmersion.TravelCompanionDef>
+    <defName>TrueFriend</defName>
+    <label>True friend</label>
+    <thoughtStage>5</thoughtStage>
+    <maxDays>240</maxDays>
+  </CaravanAdventures.CaravanImmersion.TravelCompanionDef>
+  
+</Defs>
