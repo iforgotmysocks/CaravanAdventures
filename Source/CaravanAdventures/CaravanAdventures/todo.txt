@@ -1,0 +1,2 @@
+﻿- relations are applied to all pawns, not just to the group!! (should be fixed?)
+- function that generates the new caravan gizmos may be spammy and called too often, (had 900 calls there once)

@@ -55,6 +55,7 @@
     <!--<importance>-10</importance>-->
     <opinionOffset>-20</opinionOffset>
     <implied>false</implied>
+    <reflexive>true</reflexive>
     <modExtensions>
       <li Class="CaravanAdventures.CaravanImmersion.TravelCompanionModExt">
         <isTravelCompanionRelation>true</isTravelCompanionRelation>
@@ -69,6 +70,7 @@
     <!--<importance>80</importance>-->
     <opinionOffset>-10</opinionOffset>
     <implied>false</implied>
+    <reflexive>true</reflexive>
     <modExtensions>
       <li Class="CaravanAdventures.CaravanImmersion.TravelCompanionModExt">
         <isTravelCompanionRelation>true</isTravelCompanionRelation>
@@ -83,6 +85,7 @@
     <!--<importance>90</importance>-->
     <opinionOffset>10</opinionOffset>
     <implied>false</implied>
+    <reflexive>true</reflexive>
     <modExtensions>
       <li Class="CaravanAdventures.CaravanImmersion.TravelCompanionModExt">
         <isTravelCompanionRelation>true</isTravelCompanionRelation>
@@ -97,6 +100,7 @@
     <!--<importance>95</importance>-->
     <opinionOffset>20</opinionOffset>
     <implied>false</implied>
+    <reflexive>true</reflexive>
     <modExtensions>
       <li Class="CaravanAdventures.CaravanImmersion.TravelCompanionModExt">
         <isTravelCompanionRelation>true</isTravelCompanionRelation>
@@ -111,6 +115,7 @@
     <!--<importance>150</importance>-->
     <opinionOffset>30</opinionOffset>
     <implied>false</implied>
+    <reflexive>true</reflexive>
     <modExtensions>
       <li Class="CaravanAdventures.CaravanImmersion.TravelCompanionModExt">
         <isTravelCompanionRelation>true</isTravelCompanionRelation>
@@ -125,6 +130,7 @@
     <!--<importance>180</importance>-->
     <opinionOffset>40</opinionOffset>
     <implied>false</implied>
+    <reflexive>true</reflexive>
     <modExtensions>
       <li Class="CaravanAdventures.CaravanImmersion.TravelCompanionModExt">
         <isTravelCompanionRelation>true</isTravelCompanionRelation>
@@ -132,7 +138,7 @@
     </modExtensions>
   </PawnRelationDef>
 
-  
+
   <!-- thoughts not in use, mainly testing -->
   <ThoughtDef>
     <defName>OutsiderRelation</defName>
@@ -153,7 +159,7 @@
       </li>
     </modExtensions>
   </ThoughtDef>
-  
+
   <ThoughtDef>
     <defName>ThirdWheelRelation</defName>
     <thoughtClass>Thought_MemorySocial</thoughtClass>
@@ -193,7 +199,7 @@
       </li>
     </modExtensions>
   </ThoughtDef>
-  
+
   <ThoughtDef>
     <defName>PartOfTheGangRelation</defName>
     <thoughtClass>Thought_MemorySocial</thoughtClass>
@@ -213,7 +219,7 @@
       </li>
     </modExtensions>
   </ThoughtDef>
-  
+
   <ThoughtDef>
     <defName>TrustedMateRelation</defName>
     <thoughtClass>Thought_MemorySocial</thoughtClass>
