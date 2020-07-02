@@ -7,6 +7,7 @@ using RimWorld;
 using Verse;
 using HarmonyLib;
 using System.Reflection;
+using CaravanAdventures.CaravanItemSelection;
 
 namespace CaravanAdventures
 {
@@ -15,6 +16,7 @@ namespace CaravanAdventures
         public Main(ModContentPack content) : base(content)
         {
             GetSettings<ModSettings>();
+            
         }
 
         public override void DoSettingsWindowContents(UnityEngine.Rect inRect)

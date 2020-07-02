@@ -6,23 +6,22 @@ using System.Threading.Tasks;
 using RimWorld;
 using Verse;
 using RimWorld.Planet;
+using CaravanAdventures.CaravanItemSelection;
 
 namespace CaravanAdventures
 {
-    class Init : MapComponent
+    class Init : WorldComponent
     {
-        private bool chosenPawnSelected;
 
-        public Init(Map map) : base(map)
+        public Init(World world) : base(world)
         {
 
-            // ModLister.RoyaltyInstalled or ModsConfig.RoyaltyActive
+        }
 
-            // todo figure out why chosenPawnSelected isn't being saved!
-            if (!chosenPawnSelected)
-            {
-                
-            }
+        public override void FinalizeInit()
+        {
+            base.FinalizeInit();
+            FilterCombs.InitFilterSets();
         }
 
         public override void ExposeData()
