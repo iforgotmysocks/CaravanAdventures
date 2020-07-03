@@ -27,13 +27,12 @@ namespace CaravanAdventures.Patches
         public static void CarTravelPostfix(ref bool __result, Caravan __instance)
         {
             var decisions = __instance.GetComponent<CompCaravanDecisions>();
-            if (decisions?.allowNightTravel ?? false && !CaravanNeedsResting()) __result = false;
+            if ((decisions?.allowNightTravel ?? false) && !CaravanNeedsResting(__instance)) __result = false;
         }
 
-        private static bool CaravanNeedsResting()
+        private static bool CaravanNeedsResting(Caravan caravan)
         {
-            // todo
-            return false;
+            return caravan.pawns.InnerListForReading.Where(x => x?.needs?.rest.CurLevelPercentage != null).Any(x => x?.needs?.rest.CurLevelPercentage <= 0.01);
         }
     }
 }

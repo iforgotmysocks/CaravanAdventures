@@ -18,25 +18,33 @@ namespace CaravanAdventures.Patches
 
     class AutomaticItemSelection
     {
+        private static Section peopleSection;
         public static void ApplyPatches(Harmony harmony)
-        {   
+        {
             var orgOnGUI = AccessTools.Method(typeof(TransferableOneWayWidget), "OnGUI", new Type[]
             {
                 typeof(Rect),
                 typeof(bool).MakeByRefType()
             });
+            var preOnGUI = new HarmonyMethod(typeof(AutomaticItemSelection).GetMethod(nameof(OnGUI_Prefix)));
             var postOnGUI = new HarmonyMethod(typeof(AutomaticItemSelection).GetMethod(nameof(OnGUI_Postfix)));
             harmony.Patch(orgOnGUI, null, postOnGUI);
         }
 
-        public static void OnGUI_Postfix(TransferableOneWayWidget __instance, List<Section> ___sections, Rect inRect, out bool anythingChanged)
+        public static bool OnGUI_Prefix(TransferableOneWayWidget __instance, List<Section> ___sections, out List<Section> __state, Rect inRect, out bool anythingChanged)
         {
-            // todo need to fix this
-            anythingChanged = true;
-            DoOwnButtons(___sections);
+            __state = new List<Section>(___sections);
+            anythingChanged = false;
+            return true;
         }
 
-        private static void DoOwnButtons(List<Section> sections)
+        public static void OnGUI_Postfix(TransferableOneWayWidget __instance, List<Section> ___sections, List<Section> __state, Rect inRect, ref bool anythingChanged)
+        {
+            // todo save the amount of last active travelers
+            DoOwnButtons(___sections, ref anythingChanged);
+        }
+
+        private static void DoOwnButtons(List<Section> sections, ref bool anythingChanged)
         {
             GUI.BeginGroup(new Rect(350f, 0f, 460f, 27f));
             Text.Font = GameFont.Tiny;
@@ -49,23 +57,30 @@ namespace CaravanAdventures.Patches
             {
                 // todo create filter for things that make sense - or rather which don't
                 FilterCombs.ApplyAll(sections);
+                anythingChanged = true;
             }
             if (Widgets.ButtonText(new Rect(rect2.xMax + 5f, 0f, 70f, 27f), "Pack up", true, true, true))
             {
+
                 FilterCombs.ApplyPackUp(sections);
+                anythingChanged = true;
             }
             if (Widgets.ButtonText(new Rect(rect2.xMax + 10f + 70f, 0f, 70f, 27f), "Journey", true, true, true))
             {
                 // todo figure out pplcount?
                 FilterCombs.ApplyPackUp(sections);
+
+                anythingChanged = true;
             }
             if (Widgets.ButtonText(new Rect(rect2.xMax + 15f + 140f, 0f, 70f, 27f), "Goods", true, true, true))
             {
-                FilterCombs.ApplyPackUp(sections);
+                FilterCombs.ApplyGoods(sections);
+                anythingChanged = true;
             }
             if (Widgets.ButtonText(new Rect(rect2.xMax + 20f + 210f, 0f, 50f, 27f), "Clear", true, true, true))
             {
                 FilterCombs.ApplyNone(sections);
+                anythingChanged = true;
             }
             GUI.EndGroup();
         }

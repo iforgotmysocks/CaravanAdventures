@@ -45,6 +45,8 @@ namespace CaravanAdventures.CaravanItemSelection
         public string Name { get; set; }
         public FilterOperation Operation { get; set; }
         public FilterConnection Connection { get; set; }
+        public bool AllowOverride { get; set; }
+        public QualityCategory? MaxQuality { get; set; }
         public Action<List<TransferableOneWay>> FilterAction { get; set; }
         public List<ThingDef> ThingDefs = new List<ThingDef>();
         public List<ThingCategoryDef> ThingCategoryDefs = new List<ThingCategoryDef>();

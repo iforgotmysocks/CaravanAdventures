@@ -40,7 +40,6 @@ namespace CaravanAdventures.CaravanImprovements
 
         public override IEnumerable<Gizmo> GetCaravanGizmos(Caravan caravan)
         {
-            Log.Message($"Do we even get here?");
             var gizmos = base.GetCaravanGizmos(caravan).ToList();
             // todo check and change
             if (this.parent != null && this.parent.Faction != null && this.parent.Faction == Faction.OfPlayerSilentFail || true)
