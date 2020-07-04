@@ -12,25 +12,13 @@ namespace CaravanAdventures.CaravanItemSelection
 {
     static class FilterHelper
     {
-        public static bool DoFiltersApply<T>(FilterSet filterSet, T trans)
+        internal static bool DoFiltersApply<T>(FilterSet filterSet, T trans)
         {
             Type t = trans.GetType();
             var thingDef = t.GetProperty("ThingDef")?.GetValue(trans, null) as ThingDef;
             if (thingDef == null) return false;
             var thing = t.GetProperty("AnyThing")?.GetValue(trans, null) as Thing;
-
             var standartResult = true;
-
-            Log.Message($"Got here on {thingDef.defName}");
-            if (thingDef.thingCategories != null)
-            {
-                foreach (var cat in thingDef.thingCategories)
-                {
-                    Log.Message($"Cat: {cat.defName}");
-                }
-            }
-            
-            bool[] filterResults = null;
 
             foreach (var filter in filterSet.appliedFilters.OrderBy(x => x.Operation))
             {
@@ -39,7 +27,6 @@ namespace CaravanAdventures.CaravanItemSelection
                 if (filter.MaxQuality != null)
                 {
                     if (thing != null && thing.TryGetQuality(out quality)) canUseQuality = true;
-                    Log.Message($"Did the conversion work? {canUseQuality} :  {quality}");
                 }
                 if (filter.Connection == FilterConnection.NEG)
                 {
@@ -55,7 +42,6 @@ namespace CaravanAdventures.CaravanItemSelection
                     }
                     if (canUseQuality)
                     {
-                        Log.Message($"Can use quality on {thingDef.defName}: {canUseQuality}");
                         if (((int)quality <= (int)filter.MaxQuality) && thingDef.thingCategories.Any(x => filter.ThingCategoryDefs.Contains(x))) return true;
                     }
                     else if (thingDef.thingCategories.Any(x => filter.ThingCategoryDefs.Contains(x))) return true;
@@ -70,19 +56,51 @@ namespace CaravanAdventures.CaravanItemSelection
                     }
                     if (thingDef.thingCategories.Any(x => filter.ThingCategoryDefs.Contains(x))) return false;
                 }
-
-
             }
             return standartResult;
         }
+        internal static void ApplyTravelSupplies(List<Patches.Section> sections, FilterSet journey, List<Pawn> caravanMembers)
+        {
+            List<object[]> requiredSupplyStatus = new List<object[]>();
+            var restAmount = 0;
+            foreach (var filter in journey.appliedFilters)
+            {
+                restAmount = filter.Amount * (caravanMembers != null ? caravanMembers.Count : 0);
+                if (filter.ThingDefs.Contains(ThingDefOf.Bedroll)) filter.ThingDefs.Add(ThingDefOf.MinifiedThing);
+                var items = sections.SelectMany(section => section.cachedTransferables.Where(trans => filter.ThingDefs.Contains(trans.ThingDef)).Select(trans => trans));
+                foreach (var item in items.OrderByDescending(trans => trans.AnyThing.GetInnerIfMinified().MarketValue))
+                {
+                    if (ThingIsMinifiedButNotBedroll(item)) continue;
+                    restAmount -= item.CountToTransfer;
+                    var canFillBy = item.GetMaximumToTransfer() - item.CountToTransfer;
+                    if (canFillBy >= restAmount) {
+                        item.AdjustBy(restAmount);
+                        restAmount = 0;
+                    }
+                    else
+                    {
+                        item.AdjustBy(canFillBy);
+                        restAmount -= canFillBy;
+                    }
+                }
+            }
+        }
 
-        public static void SetMaxAmount<T>(T trans)
+        private static bool ThingIsMinifiedButNotBedroll(TransferableOneWay trans)
+        {
+            if (trans.ThingDef != ThingDefOf.MinifiedThing) return false;
+            var unminifiedThing = MinifyUtility.GetInnerIfMinified(trans.AnyThing);
+            if (unminifiedThing.def == ThingDefOf.Bedroll) return false;
+            return true;
+        }
+
+        internal static void SetMaxAmount<T>(T trans)
         {
             var maximumToTransferAmount = trans.GetType().GetMethod("GetMaximumToTransfer").Invoke(trans, null);
             trans.GetType().GetMethod("AdjustTo").Invoke(trans, new object[] { maximumToTransferAmount });
         }
 
-        public static void SetMinAmount<T>(T trans)
+        internal static void SetMinAmount<T>(T trans)
         {
             var minimumToTransferAmount = trans.GetType().GetMethod("GetMinimumToTransfer").Invoke(trans, null);
             trans.GetType().GetMethod("AdjustTo").Invoke(trans, new object[] { minimumToTransferAmount });
@@ -94,5 +112,7 @@ namespace CaravanAdventures.CaravanItemSelection
             trans.GetType().GetMethod("AdjustTo").Invoke(trans, new object[] { amount <= (int)maximumToTransferAmount ? amount : maximumToTransferAmount});
 
         }
+
+        
     }
 }

@@ -79,19 +79,21 @@ namespace CaravanAdventures.Patches
                 FilterCombs.ApplyPackUp(sections);
                 anythingChanged = true;
             }
-            if (Widgets.ButtonText(new Rect(rect2.xMax + 10f + 70f, 0f, 70f, 27f), "Journey", true, true, true))
-            {
-                // todo figure out pplcount?
-                FilterCombs.ApplyJourney(sections);
-
-                anythingChanged = true;
-            }
-            if (Widgets.ButtonText(new Rect(rect2.xMax + 15f + 140f, 0f, 70f, 27f), "Goods", true, true, true))
+           
+            if (Widgets.ButtonText(new Rect(rect2.xMax + 10f + 70f, 0f, 70f, 27f), "Goods", true, true, true))
             {
                 FilterCombs.ApplyGoods(sections);
                 anythingChanged = true;
             }
-            if (Widgets.ButtonText(new Rect(rect2.xMax + 20f + 210f, 0f, 50f, 27f), "Clear", true, true, true))
+
+            if (Widgets.ButtonText(new Rect(rect2.xMax + 15f + 140f, 0f, 85f, 27f), "Add supplies", true, true, true))
+            {
+                // todo figure out pplcount?
+                FilterCombs.ApplyJourney(sections, caravanMembers);
+
+                anythingChanged = true;
+            }
+            if (Widgets.ButtonText(new Rect(rect2.xMax + 20f + 225f, 0f, 50f, 27f), "Clear", true, true, true))
             {
                 FilterCombs.ApplyNone(sections);
                 anythingChanged = true;

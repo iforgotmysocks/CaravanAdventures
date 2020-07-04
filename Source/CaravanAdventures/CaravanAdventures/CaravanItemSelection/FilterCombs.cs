@@ -139,17 +139,9 @@ namespace CaravanAdventures.CaravanItemSelection
             }
         }
 
-        public static void ApplyJourney(List<Patches.Section> sections)
+        public static void ApplyJourney(List<Patches.Section> sections, List<Pawn> caravanMembers)
         {
-            foreach (var section in sections)
-            {
-                foreach (var trans in section.cachedTransferables)
-                {
-                    // create new method just for this application type
-                    //if (FilterHelper.DoFiltersApply(journey, trans)) FilterHelper.SetAmount(trans, amount);
-                    //else FilterHelper.SetMinAmount(trans);
-                }
-            }
+            FilterHelper.ApplyTravelSupplies(sections, journey, caravanMembers);
         }
 
         public static void ApplyGoods(List<Patches.Section> sections)
