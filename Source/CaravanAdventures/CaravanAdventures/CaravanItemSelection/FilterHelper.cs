@@ -106,13 +106,12 @@ namespace CaravanAdventures.CaravanItemSelection
             trans.GetType().GetMethod("AdjustTo").Invoke(trans, new object[] { minimumToTransferAmount });
         }
 
-        internal static void SetAmount(TransferableOneWay trans, int amount)
+        internal static void SetAmount<T>(T trans, int amount)
         {
             var maximumToTransferAmount = trans.GetType().GetMethod("GetMaximumToTransfer").Invoke(trans, null);
             trans.GetType().GetMethod("AdjustTo").Invoke(trans, new object[] { amount <= (int)maximumToTransferAmount ? amount : maximumToTransferAmount});
 
         }
-
-        
+    
     }
 }

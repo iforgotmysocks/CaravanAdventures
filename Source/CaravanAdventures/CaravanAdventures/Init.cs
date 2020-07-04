@@ -12,10 +12,9 @@ namespace CaravanAdventures
 {
     class Init : WorldComponent
     {
-
+        private int removeRuinsTick = 0;
         public Init(World world) : base(world)
         {
-
         }
 
         public override void FinalizeInit()
@@ -24,10 +23,34 @@ namespace CaravanAdventures
             FilterCombs.InitFilterSets();
         }
 
+        public override void WorldComponentTick()
+        {
+            base.WorldComponentTick();
+            RemoveRuins();
+
+
+            removeRuinsTick++;
+        }
+
+        private void RemoveRuins()
+        {
+            if (removeRuinsTick > 60000)
+            {
+                var settlements = Find.WorldObjects.AllWorldObjects.Where(settlement => settlement.def == WorldObjectDefOf.AbandonedSettlement && settlement.Faction.IsPlayer);
+                Log.Message($"Trying to remove {settlements.Count()} settlements");
+
+                foreach (var settlement in settlements.Reverse())
+                {
+                    Find.WorldObjects.Remove(settlement);
+                }
+                removeRuinsTick = 0;
+            }
+        }
+
         public override void ExposeData()
         {
             base.ExposeData();
-            //Scribe_Values.Look(ref chosenPawnSelected, "chosenPawnSelected", false);
+            Scribe_Values.Look(ref removeRuinsTick, "removeRuinsTick", 0);
         }
 
 

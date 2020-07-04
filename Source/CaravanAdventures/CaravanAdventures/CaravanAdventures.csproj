@@ -68,6 +68,7 @@
     <Compile Include="CaravanImmersion\TravelCompanionWC.cs" />
     <Compile Include="CaravanImprovements\CaravanEnterMapImprovementUtility.cs" />
     <Compile Include="CaravanImprovements\CompCaravanDecisions.cs" />
+    <Compile Include="CaravanIncidents\IncidentWorker_CaravanDamselInDistress.cs" />
     <Compile Include="CaravanItemSelection\FilterCombs.cs" />
     <Compile Include="CaravanItemSelection\FilterHelper.cs" />
     <Compile Include="CaravanItemSelection\FilterSet.cs" />

@@ -162,5 +162,28 @@ namespace CaravanAdventures.CaravanItemSelection
                 foreach (var trans in section.cachedTransferables)
                     FilterHelper.SetMinAmount(trans);
         }
+
+        internal static void ApplyAllTrade(List<Tradeable> tradeables)
+        {
+            foreach (var trans in tradeables)
+                FilterHelper.SetMinAmount(trans);
+        }
+
+        internal static void ApplyGoodsTrade(List<Tradeable> tradeables)
+        {
+            foreach (var trans in tradeables)
+            {
+                if (FilterHelper.DoFiltersApply(goods, trans)) FilterHelper.SetMinAmount(trans);
+                else FilterHelper.SetAmount(trans, 0);
+            }
+        }
+
+        internal static void ApplyNoneTrade(List<Tradeable> tradeables)
+        {
+            foreach (var trans in tradeables)
+                FilterHelper.SetAmount(trans, 0);
+        }
+
+
     }
 }

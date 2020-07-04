@@ -29,6 +29,14 @@ namespace CaravanAdventures.Patches
             var preOnGUI = new HarmonyMethod(typeof(AutomaticItemSelection).GetMethod(nameof(OnGUI_Prefix)));
             var postOnGUI = new HarmonyMethod(typeof(AutomaticItemSelection).GetMethod(nameof(OnGUI_Postfix)));
             harmony.Patch(orgOnGUI, null, postOnGUI);
+
+            var orgDoWindowContents = AccessTools.Method(typeof(Dialog_Trade), "DoWindowContents", new Type[]
+            {
+                typeof(Rect),
+            });
+            var postDoWindowContents = new HarmonyMethod(typeof(AutomaticItemSelection).GetMethod(nameof(DoWindowContents_Postfix)));
+            harmony.Patch(orgDoWindowContents, null, postDoWindowContents);
+
         }
 
         public static bool OnGUI_Prefix(TransferableOneWayWidget __instance, List<Section> ___sections, out List<Section> __state, Rect inRect, out bool anythingChanged)
@@ -41,7 +49,14 @@ namespace CaravanAdventures.Patches
         public static void OnGUI_Postfix(TransferableOneWayWidget __instance, List<Section> ___sections, List<Section> __state, Rect inRect, ref bool anythingChanged)
         {
             UpdatePeopleSection(___sections);
-            DoOwnButtons(___sections, ref anythingChanged);
+            DoOwnCaravanFormButtons(___sections, ref anythingChanged);
+        }
+
+        public static void DoWindowContents_Postfix(Dialog_Trade __instance, List<Tradeable> ___cachedTradeables, Rect inRect)
+        {
+            var anythingChanged = false;
+            DoOwnTradeButtons(___cachedTradeables, ref anythingChanged);
+            if (anythingChanged) Traverse.Create(__instance).Method("CountToTransferChanged").GetValue();
         }
 
         private static void UpdatePeopleSection(List<Section> ___sections)
@@ -58,7 +73,7 @@ namespace CaravanAdventures.Patches
             if (detectedPeople.Count > 0) caravanMembers = detectedPeople;
         }
 
-        private static void DoOwnButtons(List<Section> sections, ref bool anythingChanged)
+        private static void DoOwnCaravanFormButtons(List<Section> sections, ref bool anythingChanged)
         {
             GUI.BeginGroup(new Rect(350f, 0f, 460f, 27f));
             Text.Font = GameFont.Tiny;
@@ -88,7 +103,6 @@ namespace CaravanAdventures.Patches
 
             if (Widgets.ButtonText(new Rect(rect2.xMax + 15f + 140f, 0f, 85f, 27f), "Add supplies", true, true, true))
             {
-                // todo figure out pplcount?
                 FilterCombs.ApplyJourney(sections, caravanMembers);
 
                 anythingChanged = true;
@@ -101,7 +115,36 @@ namespace CaravanAdventures.Patches
             GUI.EndGroup();
         }
 
-        
+        private static void DoOwnTradeButtons(List<Tradeable> tradeables, ref bool anythingChanged)
+        {
+            GUI.BeginGroup(new Rect(550f, 52f, 460f, 27f));
+            Text.Font = GameFont.Tiny;
+            Rect rect = new Rect(0f, 0f, 30f, 27f);
+            Text.Anchor = TextAnchor.MiddleLeft;
+            Widgets.Label(rect, "Sell");
+            Text.Anchor = TextAnchor.UpperLeft;
+            Rect rect2 = new Rect(rect.xMax + 5f, 0f, 40f, 27f);
+            if (Widgets.ButtonText(rect2, "All", true, true, true))
+            {
+                FilterCombs.ApplyAllTrade(tradeables);
+                anythingChanged = true;
+            }
+
+            if (Widgets.ButtonText(new Rect(rect2.xMax + 5f, 0f, 60f, 27f), "Goods", true, true, true))
+            {
+                FilterCombs.ApplyGoodsTrade(tradeables);
+                anythingChanged = true;
+            }
+           
+            if (Widgets.ButtonText(new Rect(rect2.xMax + 10f + 60, 0f, 50f, 27f), "Reset", true, true, true))
+            {
+                FilterCombs.ApplyNoneTrade(tradeables);
+                anythingChanged = true;
+            }
+            GUI.EndGroup();
+        }
+
+
     }
 
 }
