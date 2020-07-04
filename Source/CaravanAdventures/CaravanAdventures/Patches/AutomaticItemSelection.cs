@@ -18,7 +18,7 @@ namespace CaravanAdventures.Patches
 
     class AutomaticItemSelection
     {
-        private static Section peopleSection;
+        private static List<Pawn> caravanMembers;
         public static void ApplyPatches(Harmony harmony)
         {
             var orgOnGUI = AccessTools.Method(typeof(TransferableOneWayWidget), "OnGUI", new Type[]
@@ -40,8 +40,22 @@ namespace CaravanAdventures.Patches
 
         public static void OnGUI_Postfix(TransferableOneWayWidget __instance, List<Section> ___sections, List<Section> __state, Rect inRect, ref bool anythingChanged)
         {
-            // todo save the amount of last active travelers
+            UpdatePeopleSection(___sections);
             DoOwnButtons(___sections, ref anythingChanged);
+        }
+
+        private static void UpdatePeopleSection(List<Section> ___sections)
+        {
+            var detectedPeople = ___sections.SelectMany(section => section.cachedTransferables.Where(trans =>
+            {
+                var pawn = trans.AnyThing as Pawn;
+                if (pawn == null) return false;
+                if (pawn.RaceProps.Humanlike && trans.CountToTransfer > 0) return true;
+                return false;
+            }).Select(trans => (Pawn)trans.AnyThing)
+            ).ToList();
+
+            if (detectedPeople.Count > 0) caravanMembers = detectedPeople;
         }
 
         private static void DoOwnButtons(List<Section> sections, ref bool anythingChanged)
@@ -68,7 +82,7 @@ namespace CaravanAdventures.Patches
             if (Widgets.ButtonText(new Rect(rect2.xMax + 10f + 70f, 0f, 70f, 27f), "Journey", true, true, true))
             {
                 // todo figure out pplcount?
-                FilterCombs.ApplyPackUp(sections);
+                FilterCombs.ApplyJourney(sections);
 
                 anythingChanged = true;
             }

@@ -15,11 +15,13 @@ namespace CaravanAdventures.CaravanItemSelection
     {
         public static FilterSet packUp;
         public static FilterSet goods;
+        public static FilterSet journey;
 
         public static void InitFilterSets()
         {
             packUp = new FilterSet();
             goods = new FilterSet();
+            journey = new FilterSet();
 
             packUp.appliedFilters.Add(new Filter(new object[] {
                 ThingCategoryDefOf.Chunks,
@@ -79,8 +81,43 @@ namespace CaravanAdventures.CaravanItemSelection
                 Connection = FilterConnection.NEG,
                 Operation = FilterOperation.Include,
                 MaxQuality = QualityCategory.Excellent,
-                AllowOverride = true,
             });
+
+            // fix NEG being used in a different context as AND / OR
+            journey.appliedFilters.Add(new Filter(new object[]
+            {
+                ThingDefOf.MedicineHerbal,
+                ThingDefOf.MedicineIndustrial })
+            {
+                Name = "Meds",
+                Amount = 1,
+                Connection = FilterConnection.NEG,
+                Operation = FilterOperation.Include,
+            });
+
+            journey.appliedFilters.Add(new Filter(new object[]
+            {
+                ThingDefOf.Bedroll})
+            {
+                Name = "Bedroll",
+                Amount = 1,
+                Connection = FilterConnection.OR,
+                Operation = FilterOperation.Include,
+            });
+
+            journey.appliedFilters.Add(new Filter(new object[]
+            {
+                ThingDefOf.MealSurvivalPack,
+                ThingDefOf.MealSimple,
+                })
+            {
+                Name = "Bedroll",
+                Amount = 5,
+                Connection = FilterConnection.OR,
+                Operation = FilterOperation.Include,
+            });
+
+
         }
 
         public static void ApplyAll(List<Patches.Section> sections)
@@ -98,6 +135,19 @@ namespace CaravanAdventures.CaravanItemSelection
                 {
                     if (FilterHelper.DoFiltersApply(packUp, trans)) FilterHelper.SetMaxAmount(trans);
                     else FilterHelper.SetMinAmount(trans);
+                }
+            }
+        }
+
+        public static void ApplyJourney(List<Patches.Section> sections)
+        {
+            foreach (var section in sections)
+            {
+                foreach (var trans in section.cachedTransferables)
+                {
+                    // create new method just for this application type
+                    //if (FilterHelper.DoFiltersApply(journey, trans)) FilterHelper.SetAmount(trans, amount);
+                    //else FilterHelper.SetMinAmount(trans);
                 }
             }
         }

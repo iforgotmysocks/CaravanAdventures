@@ -30,10 +30,7 @@ namespace CaravanAdventures.CaravanItemSelection
                 }
             }
             
-
             bool[] filterResults = null;
-
-            List<object> protectedFromExclusion = new List<object>();
 
             foreach (var filter in filterSet.appliedFilters.OrderBy(x => x.Operation))
             {
@@ -89,6 +86,13 @@ namespace CaravanAdventures.CaravanItemSelection
         {
             var minimumToTransferAmount = trans.GetType().GetMethod("GetMinimumToTransfer").Invoke(trans, null);
             trans.GetType().GetMethod("AdjustTo").Invoke(trans, new object[] { minimumToTransferAmount });
+        }
+
+        internal static void SetAmount(TransferableOneWay trans, int amount)
+        {
+            var maximumToTransferAmount = trans.GetType().GetMethod("GetMaximumToTransfer").Invoke(trans, null);
+            trans.GetType().GetMethod("AdjustTo").Invoke(trans, new object[] { amount <= (int)maximumToTransferAmount ? amount : maximumToTransferAmount});
+
         }
     }
 }
