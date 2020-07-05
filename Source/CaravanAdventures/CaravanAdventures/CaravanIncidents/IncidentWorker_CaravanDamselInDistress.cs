@@ -49,24 +49,71 @@ namespace CaravanAdventures.CaravanIncidents
             }
             CameraJumper.TryJumpAndSelect(caravan);
             DiaNode diaNode = new DiaNode(this.GenerateMessageText(parms.faction, attackers.Count, demands, caravan));
-            DiaOption diaOption = new DiaOption("CaravanDemand_Give".Translate());
+            DiaOption diaOption = new DiaOption("CaravanDamselInDistress_Rescue".Translate());
             diaOption.action = delegate ()
-            {
-                this.ActionGive(caravan, demands, attackers);
-            };
-            diaOption.resolveTree = true;
-            diaNode.options.Add(diaOption);
-            DiaOption diaOption2 = new DiaOption("CaravanDemand_Fight".Translate());
-            diaOption2.action = delegate ()
             {
                 this.ActionFight(caravan, attackers);
             };
+            diaOption.resolveTree = true;
+            diaNode.options.Add(diaOption);
+            diaOption = new DiaOption("CaravanDamselInDistress_Follow".Translate());
+            diaOption.action = delegate ()
+            {
+                this.ActionDialogFollow(caravan, attackers, parms);
+            };
+            diaOption.resolveTree = true;
+            diaNode.options.Add(diaOption);
+            DiaOption diaOption2 = new DiaOption("CaravanDamselInDistress_Leave".Translate());
+            diaOption2.action = delegate ()
+            {
+                this.ActionLeave(caravan, attackers);
+            };
             diaOption2.resolveTree = true;
             diaNode.options.Add(diaOption2);
-            TaggedString taggedString = "CaravanDemandTitle".Translate(parms.faction.Name);
+            TaggedString taggedString = "CaravanDamselInDistressTitle".Translate(parms.faction.Name);
             Find.WindowStack.Add(new Dialog_NodeTreeWithFactionInfo(diaNode, parms.faction, true, false, taggedString));
             Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString, parms.faction));
             return true;
+        }
+
+        private void ActionDialogFollow(Caravan caravan, List<Pawn> attackers, IncidentParms parms)
+        {
+            var diaNode = new DiaNode("CaravanDamselInDistress_Follow_Main".Translate());
+            var option = new DiaOption("CaravanDamselInDistress_Follow_KillAndFreeGirl".Translate());
+            option.action = () => KillAndFreeGirl(caravan, attackers, parms);
+            diaNode.options.Add(option);
+
+            option = new DiaOption("CaravanDamselInDistress_Follow_SneakFreeGirl".Translate());
+            option.action = () => KillAndFreeGirl(caravan, attackers, parms);
+            diaNode.options.Add(option);
+
+            option = new DiaOption("CaravanDamselInDistress_Leave".Translate());
+            option.action = () => ActionLeave(caravan, attackers);
+            diaNode.options.Add(option);
+
+            TaggedString taggedString = "CaravanDamselInDistress_Follow_Title".Translate(parms.faction.Name);
+
+            Find.WindowStack.Add(new Dialog_NodeTreeWithFactionInfo(diaNode, parms.faction, true, false, taggedString));
+            Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString, parms.faction));
+        }
+
+        private void KillAndFreeGirl(Caravan caravan, List<Pawn> attackers, IncidentParms parms)
+        {
+            // todo chance based on skill!
+
+            var diaNode = new DiaNode("CaravanDamselInDistress_Follow_KillSuccess_Main".Translate());
+            var option = new DiaOption("CaravanDamselInDistress_Follow_KillSuccess_Free".Translate());
+            //option.action = () => KillAndFreeGirl(caravan, attackers);
+            diaNode.options.Add(option);
+
+            option = new DiaOption("CaravanDamselInDistress_Follow_KilSuccess_Slave".Translate());
+            //option.action = () => KillAndFreeGirl(caravan, attackers);
+            diaNode.options.Add(option);
+
+            TaggedString taggedString = "CaravanDamselInDistress_Follow_Title".Translate(parms.faction.Name);
+
+            Find.WindowStack.Add(new Dialog_NodeTreeWithFactionInfo(diaNode, parms.faction, true, false, taggedString));
+            Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString, parms.faction));
         }
 
         private List<ThingCount> GenerateDemands(Caravan caravan)
@@ -216,8 +263,9 @@ namespace CaravanAdventures.CaravanIncidents
 
         private string GenerateMessageText(Faction enemyFaction, int attackerCount, List<ThingCount> demands, Caravan caravan)
         {
-            return "CaravanDemand".Translate(caravan.Name, enemyFaction.Name, attackerCount, GenLabel.ThingsLabel(demands, "  - ", false), enemyFaction.def.pawnsPlural).CapitalizeFirst();
+            return "CaravanDamselInDistress".Translate(caravan.Name, enemyFaction.Name, attackerCount, GenLabel.ThingsLabel(demands, "  - ", false), enemyFaction.def.pawnsPlural).CapitalizeFirst();
         }
+
 
         private void TakeFromCaravan(Caravan caravan, List<ThingCount> demands, Faction enemyFaction)
         {
@@ -257,9 +305,9 @@ namespace CaravanAdventures.CaravanIncidents
             }
         }
 
-        private void ActionGive(Caravan caravan, List<ThingCount> demands, List<Pawn> attackers)
+        private void ActionLeave(Caravan caravan, List<Pawn> attackers)
         {
-            this.TakeFromCaravan(caravan, demands, attackers[0].Faction);
+            //this.TakeFromCaravan(caravan, demands, attackers[0].Faction);
             for (int i = 0; i < attackers.Count; i++)
             {
                 Find.WorldPawns.PassToWorld(attackers[i], PawnDiscardDecideMode.Decide);

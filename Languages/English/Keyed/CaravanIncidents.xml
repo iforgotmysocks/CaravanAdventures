@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <CaravanDamselInDistressTitle>Damsel in distress, kidnapped by {0}</CaravanDamselInDistressTitle>
+  <CaravanDamselInDistress>We stumbled over a beautifully stunning and helpless girl held by {2} of {1}'s savages... could we bare the thought to leave her in their grasp?</CaravanDamselInDistress>
+  <CaravanDamselInDistress_Rescue>Rescue her immediately</CaravanDamselInDistress_Rescue>
+  <CaravanDamselInDistress_Follow>Follow them silently until they make camp</CaravanDamselInDistress_Follow>
+  <CaravanDamselInDistress_Leave>Leave her to her fate</CaravanDamselInDistress_Leave>
+
+  <CaravanDamselInDistress_Follow_Title>You followed...</CaravanDamselInDistress_Follow_Title>
+  <CaravanDamselInDistress_Follow_Main>You follow up to their camp and wait till dark, they only have 1 guard which seems rather drunk and would be easy to take. How do you proceed?</CaravanDamselInDistress_Follow_Main>
+  <CaravanDamselInDistress_Follow_KillAndFreeGirl>Kill the bandits in their sleep and free the girl</CaravanDamselInDistress_Follow_KillAndFreeGirl>
+  <CaravanDamselInDistress_Follow_SneakFreeGirl>Sneak in and free the girl</CaravanDamselInDistress_Follow_SneakFreeGirl>
+
+  <CaravanDamselInDistress_Follow_KillSuccess_Title></CaravanDamselInDistress_Follow_KillSuccess_Title>
+  <CaravanDamselInDistress_Follow_KillSuccess_Main>You successfully cut their throughts without them waking up and freed the suprised and hopeful looking girl. What do you want to do with her?</CaravanDamselInDistress_Follow_KillSuccess_Main>
+  <CaravanDamselInDistress_Follow_KillSuccess_Free>Let her be on her way, she's been through enough</CaravanDamselInDistress_Follow_KillSuccess_Free>
+  <CaravanDamselInDistress_Follow_KilSuccess_Slave>She'll make a fine slave</CaravanDamselInDistress_Follow_KilSuccess_Slave>
+</LanguageData>

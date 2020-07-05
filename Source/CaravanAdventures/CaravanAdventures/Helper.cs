@@ -53,7 +53,6 @@ namespace CaravanAdventures
             if (!File.Exists(settingsLocation))
             {
                 // todo maybe throw this out? it's just here to set standard values -> also adjust ExportSettings (updateBeforeExport)
-               
                 ExportSettings(settings, settingsLocation, false);
                 return settings;
             }

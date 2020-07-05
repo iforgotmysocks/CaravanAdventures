@@ -45,7 +45,8 @@ namespace CaravanAdventures.CaravanItemSelection
             packUp.appliedFilters.Add(new Filter(new object[] {
                 ThingCategoryDefOf.ResourcesRaw,
                 ThingCategoryDefOf.StoneBlocks,
-                ThingCategoryDefOf.Buildings })
+                ThingCategoryDefOf.Buildings,
+                DefDatabase<ThingCategoryDef>.GetNamed("BuildingsFurniture")})
             {
                 Name = "BuildMaterials",
                 Connection = FilterConnection.OR,

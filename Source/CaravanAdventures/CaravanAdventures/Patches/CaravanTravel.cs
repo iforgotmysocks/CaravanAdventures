@@ -12,7 +12,6 @@ namespace CaravanAdventures.Patches
 
         public static void ApplyPatches(Harmony harmony)
         {
-            //
             var carTravelOrg = AccessTools.PropertyGetter(typeof(Caravan), nameof(Caravan.NightResting));
             //var carTravelOrg = AccessTools.Method(typeof(Caravan), "get_NightResting");
             var carTravelPost = new HarmonyMethod(typeof(CaravanTravel).GetMethod(nameof(CarTravelPostfix)));

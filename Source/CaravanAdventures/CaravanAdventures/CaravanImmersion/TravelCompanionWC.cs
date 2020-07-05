@@ -25,20 +25,7 @@ namespace CaravanAdventures.CaravanImmersion
             if (ticks > 1200)
             {
                 ApplySocialRelations();
-                //ApplySocialThoughts();
                 ticks = 0;
-
-                //if (!flag)
-                //{
-                //    var allPawns = PawnsFinder.AllMapsAndWorld_Alive.Where(x => x.RaceProps.Humanlike);
-                //    foreach (var pawn in allPawns)
-                //    {
-                //        Log.Message($"Removing relations from pawn: {pawn.Name}");
-                //        var relations = pawn.relations.DirectRelations.Where(x => (x.def.GetModExtension<TravelCompanionModExt>()?.isTravelCompanionRelation ?? false) == true).ToList();
-                //        pawn.relations.DirectRelations.RemoveAll(x => (x.def.GetModExtension<TravelCompanionModExt>()?.isTravelCompanionRelation ?? false) == true);
-                //    }
-                //    flag = !flag;
-                //}
             }
             ticks++;
         }
