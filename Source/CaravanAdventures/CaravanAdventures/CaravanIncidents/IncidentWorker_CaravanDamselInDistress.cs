@@ -16,7 +16,6 @@ namespace CaravanAdventures.CaravanIncidents
             Faction faction;
             return CaravanIncidentUtility.CanFireIncidentWhichWantsToGenerateMapAt(parms.target.Tile) && PawnGroupMakerUtility.TryGetRandomFactionForCombatPawnGroup(parms.points, out faction, null, false, false, false, true);
         }
-
         protected override bool TryExecuteWorker(IncidentParms parms)
         {
             parms.points *= IncidentWorker_CaravanDamselInDistress.IncidentPointsFactorRange.RandomInRange;
@@ -33,6 +32,7 @@ namespace CaravanAdventures.CaravanIncidents
             PawnGroupMakerParms defaultPawnGroupMakerParms = IncidentParmsUtility.GetDefaultPawnGroupMakerParms(PawnGroupKindDefOf.Combat, parms, false);
             defaultPawnGroupMakerParms.generateFightersOnly = true;
             defaultPawnGroupMakerParms.dontUseSingleUseRocketLaunchers = true;
+            defaultPawnGroupMakerParms.raidStrategy = DefDatabase<RaidStrategyDef>.GetNamed("SiegeMechanoid");
             List<Pawn> attackers = PawnGroupMakerUtility.GeneratePawns(defaultPawnGroupMakerParms, true).ToList<Pawn>();
             if (attackers.Count == 0)
             {
@@ -48,73 +48,86 @@ namespace CaravanAdventures.CaravanIncidents
                 return false;
             }
             CameraJumper.TryJumpAndSelect(caravan);
-            DiaNode diaNode = new DiaNode(this.GenerateMessageText(parms.faction, attackers.Count, demands, caravan));
-            DiaOption diaOption = new DiaOption("CaravanDamselInDistress_Rescue".Translate());
-            diaOption.action = delegate ()
-            {
-                this.ActionFight(caravan, attackers);
-            };
-            diaOption.resolveTree = true;
-            diaNode.options.Add(diaOption);
-            diaOption = new DiaOption("CaravanDamselInDistress_Follow".Translate());
-            diaOption.action = delegate ()
-            {
-                this.ActionDialogFollow(caravan, attackers, parms);
-            };
-            diaOption.resolveTree = true;
-            diaNode.options.Add(diaOption);
-            DiaOption diaOption2 = new DiaOption("CaravanDamselInDistress_Leave".Translate());
-            diaOption2.action = delegate ()
-            {
-                this.ActionLeave(caravan, attackers);
-            };
-            diaOption2.resolveTree = true;
-            diaNode.options.Add(diaOption2);
+            
+            // sub dialog
+            var subSubDiaNode = new DiaNode("CaravanDamselInDistress_Follow_KillSuccess_Main".Translate());
+            subSubDiaNode.options.Add(new DiaOption("CaravanDamselInDistress_Follow_KillSuccess_Free".Translate()) { action = () => ActionReward(caravan, attackers), resolveTree = true });
+            subSubDiaNode.options.Add(new DiaOption("CaravanDamselInDistress_Follow_KilSuccess_Slave".Translate()) { action = () => ActionReward(caravan, attackers), resolveTree = true });
+
+            var subSubBadDiaNode = new DiaNode("CaravanDamselInDistress_Follow_KillFail_Main".Translate());
+            subSubBadDiaNode.options.Add(new DiaOption("CaravanDamselInDistress_Follow_KillFail_Leave".Translate()) { resolveTree = true });
+
+            var subDiaNode = new DiaNode("CaravanDamselInDistress_Follow_Main".Translate());
+            subDiaNode.options.Add(new DiaOption("CaravanDamselInDistress_Follow_KillAndFreeGirl".Translate()) { link = ChanceBySkill(caravan, subSubDiaNode, subSubBadDiaNode, SkillDefOf.Melee)});
+            subDiaNode.options.Add(new DiaOption("CaravanDamselInDistress_Follow_SneakFreeGirl".Translate()) { link = ChanceBySkill(caravan, subSubDiaNode, subSubBadDiaNode, SkillDefOf.Melee) });
+            subDiaNode.options.Add(new DiaOption("CaravanDamselInDistress_Leave".Translate()) { action = () => ActionLeave(caravan, attackers), resolveTree = true });
+            
+            var diaNode = new DiaNode(this.GenerateMessageText(parms.faction, attackers.Count, demands, caravan));
+            diaNode.options.Add(new DiaOption("CaravanDamselInDistress_Rescue".Translate()) { action = () => ActionFight(caravan, attackers), resolveTree = true });
+            diaNode.options.Add(new DiaOption("CaravanDamselInDistress_Follow".Translate()) { link = subDiaNode });
+            diaNode.options.Add(new DiaOption("CaravanDamselInDistress_Leave".Translate()) { action = () => ActionLeave(caravan, attackers), resolveTree = true });
+
             TaggedString taggedString = "CaravanDamselInDistressTitle".Translate(parms.faction.Name);
             Find.WindowStack.Add(new Dialog_NodeTreeWithFactionInfo(diaNode, parms.faction, true, false, taggedString));
             Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString, parms.faction));
+
             return true;
         }
 
-        private void ActionDialogFollow(Caravan caravan, List<Pawn> attackers, IncidentParms parms)
+        private DiaNode ChanceBySkill(Caravan caravan, DiaNode subSubDiaNode, DiaNode subSubBadDiaNode, SkillDef skilldef)
         {
-            var diaNode = new DiaNode("CaravanDamselInDistress_Follow_Main".Translate());
-            var option = new DiaOption("CaravanDamselInDistress_Follow_KillAndFreeGirl".Translate());
-            option.action = () => KillAndFreeGirl(caravan, attackers, parms);
-            diaNode.options.Add(option);
-
-            option = new DiaOption("CaravanDamselInDistress_Follow_SneakFreeGirl".Translate());
-            option.action = () => KillAndFreeGirl(caravan, attackers, parms);
-            diaNode.options.Add(option);
-
-            option = new DiaOption("CaravanDamselInDistress_Leave".Translate());
-            option.action = () => ActionLeave(caravan, attackers);
-            diaNode.options.Add(option);
-
-            TaggedString taggedString = "CaravanDamselInDistress_Follow_Title".Translate(parms.faction.Name);
-
-            Find.WindowStack.Add(new Dialog_NodeTreeWithFactionInfo(diaNode, parms.faction, true, false, taggedString));
-            Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString, parms.faction));
+            var huntingSkill = caravan.pawns.InnerListForReading.Where(x => x.RaceProps.Humanlike).Select(x => x.skills.skills.FirstOrDefault(skill => skill.def == skilldef).Level).Average();
+            var chance = Rand.Range(0, (int)huntingSkill);
+            if (chance > 5) return subSubDiaNode;
+            else return subSubBadDiaNode;
         }
 
-        private void KillAndFreeGirl(Caravan caravan, List<Pawn> attackers, IncidentParms parms)
+        private void ActionReward(Caravan caravan, List<Pawn> attackers)
         {
-            // todo chance based on skill!
-
-            var diaNode = new DiaNode("CaravanDamselInDistress_Follow_KillSuccess_Main".Translate());
-            var option = new DiaOption("CaravanDamselInDistress_Follow_KillSuccess_Free".Translate());
-            //option.action = () => KillAndFreeGirl(caravan, attackers);
-            diaNode.options.Add(option);
-
-            option = new DiaOption("CaravanDamselInDistress_Follow_KilSuccess_Slave".Translate());
-            //option.action = () => KillAndFreeGirl(caravan, attackers);
-            diaNode.options.Add(option);
-
-            TaggedString taggedString = "CaravanDamselInDistress_Follow_Title".Translate(parms.faction.Name);
-
-            Find.WindowStack.Add(new Dialog_NodeTreeWithFactionInfo(diaNode, parms.faction, true, false, taggedString));
-            Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString, parms.faction));
+            var amount = Rand.Range(200, 500);
+            for (int i = 0; i < amount; i++)
+            {
+                var silver = ThingMaker.MakeThing(ThingDefOf.Silver);
+                CaravanInventoryUtility.GiveThing(caravan, silver);
+            }
         }
+
+        private void ActionLeave(Caravan caravan, List<Pawn> attackers)
+        {
+            //this.TakeFromCaravan(caravan, demands, attackers[0].Faction);
+            for (int i = 0; i < attackers.Count; i++)
+            {
+                Find.WorldPawns.PassToWorld(attackers[i], PawnDiscardDecideMode.Decide);
+            }
+        }
+
+        private void ActionFight(Caravan caravan, List<Pawn> attackers)
+        {
+            Log.Message("Action is being executed");
+            Faction enemyFaction = attackers[0].Faction;
+            var girl = DamselInDistressUtility.GenerateGirl(caravan.Tile);
+            Log.Message("Before creating mapParent");
+            var damselMapParent = DamselInDistressUtility.NewDamselInDistressMapParent(caravan.Tile, attackers, girl);
+            TaleRecorder.RecordTale(TaleDefOf.CaravanAmbushedByHumanlike, new object[]
+            {
+                caravan.RandomOwner()
+            });
+            LongEventHandler.QueueLongEvent(delegate ()
+            {
+                Map map = DamselInDistressUtility.SetupCaravanAttackMap(damselMapParent, caravan, attackers, true);
+                
+                LordJob_AssaultColony lordJob_AssaultColony = new LordJob_AssaultColony(enemyFaction, true, false, false, false, true);
+                if (lordJob_AssaultColony != null)
+                {
+                    LordMaker.MakeNewLord(enemyFaction, lordJob_AssaultColony, map, attackers);
+                }
+                Find.TickManager.Notify_GeneratedPotentiallyHostileMap();
+                CameraJumper.TryJump(attackers[0]);
+
+            }, "GeneratingMapForNewEncounter", false, null, true);
+        }
+
+        
 
         private List<ThingCount> GenerateDemands(Caravan caravan)
         {
@@ -305,34 +318,7 @@ namespace CaravanAdventures.CaravanIncidents
             }
         }
 
-        private void ActionLeave(Caravan caravan, List<Pawn> attackers)
-        {
-            //this.TakeFromCaravan(caravan, demands, attackers[0].Faction);
-            for (int i = 0; i < attackers.Count; i++)
-            {
-                Find.WorldPawns.PassToWorld(attackers[i], PawnDiscardDecideMode.Decide);
-            }
-        }
-
-        private void ActionFight(Caravan caravan, List<Pawn> attackers)
-        {
-            Faction enemyFaction = attackers[0].Faction;
-            TaleRecorder.RecordTale(TaleDefOf.CaravanAmbushedByHumanlike, new object[]
-            {
-                caravan.RandomOwner()
-            });
-            LongEventHandler.QueueLongEvent(delegate ()
-            {
-                Map map = CaravanIncidentUtility.SetupCaravanAttackMap(caravan, attackers, true);
-                LordJob_AssaultColony lordJob_AssaultColony = new LordJob_AssaultColony(enemyFaction, true, false, false, false, true);
-                if (lordJob_AssaultColony != null)
-                {
-                    LordMaker.MakeNewLord(enemyFaction, lordJob_AssaultColony, map, attackers);
-                }
-                Find.TickManager.Notify_GeneratedPotentiallyHostileMap();
-                CameraJumper.TryJump(attackers[0]);
-            }, "GeneratingMapForNewEncounter", false, null, true);
-        }
+        
 
         private static readonly FloatRange DemandAsPercentageOfCaravan = new FloatRange(0.05f, 0.2f);
 

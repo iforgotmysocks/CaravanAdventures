@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/GenStepDef[defName = "ScatterShrines"]/genStep/countPer10kCellsRange</xpath>
+		<value>
+			<countPer10kCellsRange>
+				<min>0.24</min>
+				<max>0.5</max>
+			</countPer10kCellsRange>
+		</value>
+	</Operation>
+
+</Patch>

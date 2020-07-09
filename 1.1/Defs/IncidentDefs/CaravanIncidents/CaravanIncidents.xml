@@ -13,8 +13,8 @@
     <tale>CaravanDemand</tale>
     <mtbDaysByBiome>
       <!-- todo set temp forest 20 again-->
-      <TemperateForest>0.5</TemperateForest>
-      <BorealForest>0.5</BorealForest>
+      <TemperateForest>20</TemperateForest>
+      <BorealForest>20</BorealForest>
       <TropicalRainforest>20</TropicalRainforest>
       <AridShrubland>20</AridShrubland>
       <Desert>30</Desert>

@@ -36,7 +36,6 @@ namespace CaravanAdventures.Patches
             });
             var postDoWindowContents = new HarmonyMethod(typeof(AutomaticItemSelection).GetMethod(nameof(DoWindowContents_Postfix)));
             harmony.Patch(orgDoWindowContents, null, postDoWindowContents);
-
         }
 
         public static bool OnGUI_Prefix(TransferableOneWayWidget __instance, List<Section> ___sections, out List<Section> __state, Rect inRect, out bool anythingChanged)
@@ -117,7 +116,11 @@ namespace CaravanAdventures.Patches
 
         private static void DoOwnTradeButtons(List<Tradeable> tradeables, ref bool anythingChanged)
         {
-            GUI.BeginGroup(new Rect(550f, 52f, 460f, 27f));
+            // on worldmap
+            //GUI.BeginGroup(new Rect(550f, 52f, 460f, 27f));
+            // on map
+            GUI.BeginGroup(new Rect(550f, 0f, 460f, 27f));
+
             Text.Font = GameFont.Tiny;
             Rect rect = new Rect(0f, 0f, 30f, 27f);
             Text.Anchor = TextAnchor.MiddleLeft;

@@ -112,7 +112,7 @@ namespace CaravanAdventures.CaravanItemSelection
                 ThingDefOf.MealSimple,
                 })
             {
-                Name = "Bedroll",
+                Name = "Meals",
                 Amount = 5,
                 Connection = FilterConnection.OR,
                 Operation = FilterOperation.Include,

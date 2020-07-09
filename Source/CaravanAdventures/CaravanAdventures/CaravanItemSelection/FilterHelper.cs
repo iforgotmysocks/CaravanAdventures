@@ -34,6 +34,9 @@ namespace CaravanAdventures.CaravanItemSelection
                 }
                 if (filter.Operation == FilterOperation.Include)
                 {
+                    if (thing is Apparel apparel && apparel.WornByCorpse) return false;
+                    var biocoded = thing.TryGetComp<CompBiocodable>();
+                    if (biocoded?.Biocoded ?? false) return false;
                     if (filter.ThingDefs.Contains(thingDef)) return true;
                     if (thingDef.thingCategories?.Count == null || thingDef.thingCategories.Count == 0)
                     {
@@ -48,6 +51,9 @@ namespace CaravanAdventures.CaravanItemSelection
                 }
                 else if (filter.Operation == FilterOperation.Exclude)
                 {
+                    if (thing is Apparel apparel && apparel.WornByCorpse) return false;
+                    var biocoded = thing.TryGetComp<CompBiocodable>();
+                    if (biocoded?.Biocoded ?? false) return false;
                     if (filter.ThingDefs.Contains(thingDef)) return false;
                     if (thingDef.thingCategories?.Count == null || thingDef.thingCategories.Count == 0)
                     {

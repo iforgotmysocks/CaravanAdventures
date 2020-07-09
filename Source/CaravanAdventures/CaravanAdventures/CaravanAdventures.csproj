@@ -33,14 +33,15 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="0Harmony">
-      <HintPath>..\..\..\..\..\..\..\workshop\content\294100\2009463077\v1.1\Assemblies\0Harmony.dll</HintPath>
+    <Reference Include="0Harmony, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lib.Harmony.2.0.1\lib\net472\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>..\..\..\..\..\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -58,7 +59,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\RimWorldWin64_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.TextRenderingModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>..\..\..\..\..\RimWorldWin64_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CaravanImmersion\ThoughtWorker_TravelCompanions.cs" />
@@ -68,6 +71,9 @@
     <Compile Include="CaravanImmersion\TravelCompanionWC.cs" />
     <Compile Include="CaravanImprovements\CaravanEnterMapImprovementUtility.cs" />
     <Compile Include="CaravanImprovements\CompCaravanDecisions.cs" />
+    <Compile Include="CaravanIncidents\CaravanIncidentMapParentDefOfs.cs" />
+    <Compile Include="CaravanIncidents\DamselInDistressUtility.cs" />
+    <Compile Include="CaravanIncidents\DamselInDistressMapParent.cs" />
     <Compile Include="CaravanIncidents\IncidentWorker_CaravanDamselInDistress.cs" />
     <Compile Include="CaravanItemSelection\FilterCombs.cs" />
     <Compile Include="CaravanItemSelection\FilterHelper.cs" />
@@ -81,6 +87,9 @@
     <Compile Include="Patches\MainPatcher.cs" />
     <Compile Include="Patches\AutomaticItemSelection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

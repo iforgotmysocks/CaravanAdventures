@@ -49,5 +49,6 @@ namespace CaravanAdventures.CaravanItemSelection
         public List<ThingDef> ThingDefs = new List<ThingDef>();
         public List<ThingCategoryDef> ThingCategoryDefs = new List<ThingCategoryDef>();
         public int Amount { get; set; }
+        public bool AllowTaintedOrBiocoded { get; set; }
     }
 }
