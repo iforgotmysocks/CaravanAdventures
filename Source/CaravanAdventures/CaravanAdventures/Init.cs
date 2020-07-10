@@ -22,6 +22,7 @@ namespace CaravanAdventures
             base.FinalizeInit();
             FilterCombs.InitFilterSets();
             PatchHediffsWhenEnabled();
+
         }
 
         private void PatchHediffsWhenEnabled()
@@ -80,7 +81,6 @@ namespace CaravanAdventures
         {
             base.WorldComponentTick();
             RemoveRuins();
-
 
             removeRuinsTick++;
         }

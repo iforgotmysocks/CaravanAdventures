@@ -11,7 +11,6 @@ namespace CaravanAdventures.CaravanImmersion
 {
     public class TravelCompanionWC : WorldComponent
     {
-        private bool flag = false;
         private int ticks = 1000;
         public TravelCompanionWC(World world) : base(world)
         {
@@ -58,12 +57,12 @@ namespace CaravanAdventures.CaravanImmersion
 
         private TravelCompanionDef CalculateNewRelation(Pawn mainPawn, Pawn pawn)
         {
-            var timeSpentTogether = Math.Abs(Find.TickManager.TicksGame - (Math.Abs(mainPawn.records.GetValue(RecordDefOf.TimeAsColonistOrColonyAnimal) - pawn.records.GetValue(RecordDefOf.TimeAsColonistOrColonyAnimal))));
+            var timeSpentTogether = Math.Min(mainPawn.records.GetValue(RecordDefOf.TimeAsColonistOrColonyAnimal), pawn.records.GetValue(RecordDefOf.TimeAsColonistOrColonyAnimal));
             var companionDefs = DefDatabase<TravelCompanionDef>.AllDefs.OrderByDescending(y => y.thoughtStage).ToList();
 
             foreach (var def in companionDefs)
             {
-                //Log.Message($"compareing time: {timeSpentTogether} with def {def.defName} maxDays: {def.maxDays} on pawns {mainPawn.Name} and {pawn.Name}");
+                //Log.Message($"compareing time: {Math.Round(timeSpentTogether / 60000, 0)} with def {def.defName} maxDays: {def.maxDays} on pawns {mainPawn.Name} and {pawn.Name}");
                 // todo add multiplier to adjust time based on how good or bad a pawn was treated
                 // -> dive into log entries
                 if (timeSpentTogether / 60000f >= def.maxDays) return def;
