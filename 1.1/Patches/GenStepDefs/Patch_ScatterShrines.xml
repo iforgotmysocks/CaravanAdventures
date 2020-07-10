@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Patch>
 
-	<Operation Class="PatchOperationReplace">
+	<!--<Operation Class="PatchOperationReplace">
 		<xpath>/Defs/GenStepDef[defName = "ScatterShrines"]/genStep/countPer10kCellsRange</xpath>
 		<value>
 			<countPer10kCellsRange>
@@ -10,5 +10,12 @@
 			</countPer10kCellsRange>
 		</value>
 	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingSetMakerDef[defName = "MapGen_AncientTempleContents"]/root/options/li[2]/chance</xpath>
+		<value>
+			<chance>1</chance>
+		</value>
+	</Operation>-->
 
 </Patch>

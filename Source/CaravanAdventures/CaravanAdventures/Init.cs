@@ -21,6 +21,36 @@ namespace CaravanAdventures
         {
             base.FinalizeInit();
             FilterCombs.InitFilterSets();
+            PatchHediffsWhenEnabled();
+        }
+
+        private void PatchHediffsWhenEnabled()
+        {
+            // todo ModOptions
+            var scatterShrinesDef = DefDatabase<GenStepDef>.GetNamed("ScatterShrines");
+            var genStep = scatterShrinesDef.genStep as GenStep_ScatterShrines;
+            if (genStep != null) 
+            {
+                genStep.countPer10kCellsRange.min *= 2;
+                genStep.countPer10kCellsRange.max *= 2;
+            }
+
+            var templeContentsDef = DefDatabase<ThingSetMakerDef>.GetNamed("MapGen_AncientTempleContents");
+            var root = templeContentsDef.root as ThingSetMaker_Sum;
+            if (root != null) 
+            {
+                var option = root.options[1];
+                option.chance = 1;
+
+                // todo add new option cat to add another group of special tiems 
+                //root.options.Add(new ThingSetMaker_Sum.Option { chance = 1, thingSetMaker = new ThingSetMaker_Count() { fixedParams = new ThingSetMakerParams() {filter };
+
+                //var thingDefs = option.thingSetMaker.fixedParams.filter.AllowedThingDefs;
+                //foreach (var thingDef in thingDefs)
+                //{
+                //    Log.Message(thingDef.defName);
+                //}
+            }
         }
 
         public override void WorldComponentTick()

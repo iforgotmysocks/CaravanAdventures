@@ -51,10 +51,10 @@ namespace CaravanAdventures.Patches
             DoOwnCaravanFormButtons(___sections, ref anythingChanged);
         }
 
-        public static void DoWindowContents_Postfix(Dialog_Trade __instance, List<Tradeable> ___cachedTradeables, Rect inRect)
+        public static void DoWindowContents_Postfix(Dialog_Trade __instance, bool ___playerIsCaravan, List<Tradeable> ___cachedTradeables, Rect inRect)
         {
             var anythingChanged = false;
-            DoOwnTradeButtons(___cachedTradeables, ref anythingChanged);
+            DoOwnTradeButtons(___cachedTradeables, ___playerIsCaravan, ref anythingChanged);
             if (anythingChanged) Traverse.Create(__instance).Method("CountToTransferChanged").GetValue();
         }
 
@@ -114,12 +114,12 @@ namespace CaravanAdventures.Patches
             GUI.EndGroup();
         }
 
-        private static void DoOwnTradeButtons(List<Tradeable> tradeables, ref bool anythingChanged)
+        private static void DoOwnTradeButtons(List<Tradeable> tradeables, bool playerIsCaravan, ref bool anythingChanged)
         {
             // on worldmap
-            //GUI.BeginGroup(new Rect(550f, 52f, 460f, 27f));
+            if (playerIsCaravan) GUI.BeginGroup(new Rect(550f, 52f, 460f, 27f));
             // on map
-            GUI.BeginGroup(new Rect(550f, 0f, 460f, 27f));
+            else GUI.BeginGroup(new Rect(550f, 0f, 460f, 27f));
 
             Text.Font = GameFont.Tiny;
             Rect rect = new Rect(0f, 0f, 30f, 27f);
