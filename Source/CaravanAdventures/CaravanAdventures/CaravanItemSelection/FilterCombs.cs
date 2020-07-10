@@ -166,13 +166,13 @@ namespace CaravanAdventures.CaravanItemSelection
 
         internal static void ApplyAllTrade(List<Tradeable> tradeables)
         {
-            foreach (var trans in tradeables)
+            foreach (var trans in tradeables.Where(x => x.TraderWillTrade))
                 FilterHelper.SetMinAmount(trans);
         }
 
         internal static void ApplyGoodsTrade(List<Tradeable> tradeables)
         {
-            foreach (var trans in tradeables)
+            foreach (var trans in tradeables.Where(x => x.TraderWillTrade))
             {
                 if (FilterHelper.DoFiltersApply(goods, trans)) FilterHelper.SetMinAmount(trans);
                 else FilterHelper.SetAmount(trans, 0);
