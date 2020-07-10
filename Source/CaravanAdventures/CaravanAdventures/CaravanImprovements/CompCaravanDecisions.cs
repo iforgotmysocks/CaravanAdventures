@@ -33,6 +33,7 @@ namespace CaravanAdventures.CaravanImprovements
             {
                 Map map = newHome.Map;
                 Thing t = caravan.PawnsListForReading[0];
+                // todo use own utility once the new gizmo for dropping items is in
                 CaravanEnterMapUtility.Enter(caravan, map, CaravanEnterMode.Center, CaravanDropInventoryMode.DoNotDrop, false, (IntVec3 x) => x.GetRoom(map, RegionType.Set_Passable).CellCount >= 600);
                 CameraJumper.TryJump(t);
             }, "SpawningColonists", true, new Action<Exception>(GameAndMapInitExceptionHandlers.ErrorWhileGeneratingMap), true);

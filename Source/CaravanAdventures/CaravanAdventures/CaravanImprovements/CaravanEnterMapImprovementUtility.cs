@@ -50,6 +50,8 @@ namespace CaravanAdventures.CaravanImprovements
                     tmpPawns[j].inventory.UnloadEverything = true;
                 }
             }
+            // todo add gizmo to allow unloading later
+
             if (draftColonists)
             {
                 DraftColonists(tmpPawns);
@@ -64,6 +66,8 @@ namespace CaravanAdventures.CaravanImprovements
                     }
                 }
             }
+
+            Find.TickManager.Pause();
             //caravan.RemoveAllPawns();
             //if (!caravan.Destroyed)
             //{

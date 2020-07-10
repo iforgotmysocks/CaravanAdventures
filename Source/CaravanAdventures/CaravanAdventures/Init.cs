@@ -40,16 +40,39 @@ namespace CaravanAdventures
             if (root != null) 
             {
                 var option = root.options[1];
-                option.chance = 1;
+                option.chance = 0.8;
 
                 // todo add new option cat to add another group of special tiems 
-                //root.options.Add(new ThingSetMaker_Sum.Option { chance = 1, thingSetMaker = new ThingSetMaker_Count() { fixedParams = new ThingSetMakerParams() {filter };
 
-                //var thingDefs = option.thingSetMaker.fixedParams.filter.AllowedThingDefs;
-                //foreach (var thingDef in thingDefs)
+                var newOption = option;
+                root.options.Add(newOption);
+
+
+                //var newItems = new ThingDef[]
                 //{
-                //    Log.Message(thingDef.defName);
+                //    DefDatabase<ThingDef>.GetNamed("MechSerumHealer"),
+                //    DefDatabase<ThingDef>.GetNamed("MechSerumResurrector"),
+                //};
+
+                //var newFilter = new ThingFilter();
+                //foreach (var item in newItems)
+                //{
+                //    newFilter.Allows(item);
                 //}
+
+                //root.options.Add(new ThingSetMaker_Sum.Option
+                //{
+                //    chance = 1,
+                //    thingSetMaker = new ThingSetMaker_Count()
+                //    {
+                //        fixedParams = new ThingSetMakerParams()
+                //        {
+                //            filter = newFilter,
+                //        }
+                //    }
+                //});
+
+            
             }
         }
 
