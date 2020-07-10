@@ -40,7 +40,7 @@ namespace CaravanAdventures
             if (root != null) 
             {
                 var option = root.options[1];
-                option.chance = 0.8;
+                option.chance = 0.8f;
 
                 // todo add new option cat to add another group of special tiems 
 
