@@ -28,7 +28,8 @@ namespace CaravanAdventures.CaravanIncidents
 		public static Map SetupCaravanAttackMap(DamselInDistressMapParent mapParent, Caravan caravan, List<Pawn> enemies, bool sendLetterIfRelatedPawns)
 		{
 			var num = CaravanIncidentUtility.CalculateIncidentMapSize(caravan.PawnsListForReading, enemies);
-			var map = MapGenerator.GenerateMap(new IntVec3(num, 1, num), mapParent, mapParent.MapGeneratorDef, mapParent.ExtraGenStepDefs, null);
+            var map = GetOrGenerateMapForIncident(caravan, new IntVec3(num, 1, num), CaravanIncidentMapParentDefOfs.DamselInDistressMapParent);
+            //var map = MapGenerator.GenerateMap(new IntVec3(num, 1, num), mapParent, mapParent.MapGeneratorDef, mapParent.ExtraGenStepDefs, null);
 
 			IntVec3 playerStartingSpot;
 			IntVec3 root;
@@ -48,6 +49,18 @@ namespace CaravanAdventures.CaravanIncidents
 			return map;
 		}
 
+		public static Map GetOrGenerateMapForIncident(Caravan caravan, IntVec3 size, WorldObjectDef suggestedMapParentDef)
+		{
+			int tile = caravan.Tile;
+			bool flag = Current.Game.FindMap(tile) == null;
+			Map orGenerateMap = GetOrGenerateMapUtility.GetOrGenerateMap(tile, size, suggestedMapParentDef);
+			if (flag && orGenerateMap != null)
+			{
+				orGenerateMap.retainedCaravanData.Notify_GeneratedTempIncidentMapFor(caravan);
+			}
+			return orGenerateMap;
+		}
+
 		public static Pawn GenerateGirl(int tile)
 		{
 			Pawn pawn = PawnGenerator.GeneratePawn(new PawnGenerationRequest(PawnKindDefOf.SpaceRefugee, DownedRefugeeQuestUtility.GetRandomFactionForRefugee(), PawnGenerationContext.NonPlayer, tile, false, false, false, false, true, false, 20f, true, true, true, true, false, false, false, false, 0f, null, 1f, null, null, null, null, new float?(0.2f), null, null, Gender.Female, null, null, null, null));
@@ -59,6 +72,12 @@ namespace CaravanAdventures.CaravanIncidents
 			return pawn;
 		}
 
-	
+		public static void GirlJoins(List<Pawn> pawns, Pawn girl)
+		{
+			var faction = pawns.FirstOrDefault()?.Faction;
+			girl.SetFaction(faction);
+		}
+
+
 	}
 }

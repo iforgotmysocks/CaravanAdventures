@@ -9,7 +9,7 @@ using Verse;
 
 namespace CaravanAdventures.CaravanIncidents
 {
-    public class DamselInDistressMapParent : MapParent
+    public class DamselInDistressMapParent : CaravansBattlefield
     {
         public Pawn girl = null;
         public List<Pawn> attackers = new List<Pawn>();
@@ -23,7 +23,7 @@ namespace CaravanAdventures.CaravanIncidents
             {
                 var pawns = this.Map.mapPawns.FreeColonists.ToList();
                 if (attackers == null) return;
-                if (Find.TickManager.TicksGame % 60 == 0 && attackers.Where(x => !x.ThreatDisabled(null)).ToList().Count == 0)
+                if (Find.TickManager.TicksGame % 60 == 0 && IsDefeated(Map, attackers[0].Faction))
                 {
                     if (!diaFlags[0] && pawns.Any(pawn => pawn.Position.DistanceTo(girl.Position) > joinDiaRange))
                     {
@@ -35,7 +35,7 @@ namespace CaravanAdventures.CaravanIncidents
                     else if (!diaFlags[1] && pawns.Any(pawn => pawn.Position.DistanceTo(girl.Position) <= joinDiaRange))
                     {
                         var diaNode = new DiaNode("CaravanDamselInDistress_AsksToJoin".Translate());
-                        diaNode.options.Add(new DiaOption("CaravanDamselInDistress_JoinAllow".Translate()) { action = () => GirlJoins(pawns), resolveTree = true });
+                        diaNode.options.Add(new DiaOption("CaravanDamselInDistress_JoinAllow".Translate()) { action = () => DamselInDistressUtility.GirlJoins(pawns, girl), resolveTree = true });
                         diaNode.options.Add(new DiaOption("CaravanDamselInDistress_JoinDeny".Translate()) { resolveTree = true });
                         Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, "CaravanDamselInDistress_AsksToJoinTitle".Translate(girl.NameShortColored)));
                         diaFlags[1] = true;
@@ -44,16 +44,37 @@ namespace CaravanAdventures.CaravanIncidents
             }
         }
 
-        private void GirlJoins(List<Pawn> pawns)
+        private static bool IsDefeated(Map map, Faction faction)
         {
-            var faction = pawns.FirstOrDefault()?.Faction;
-            girl.SetFaction(faction);
+            List<Pawn> list = map.mapPawns.SpawnedPawnsInFaction(faction);
+            for (int i = 0; i < list.Count; i++)
+            {
+                Pawn pawn = list[i];
+                if (GenHostility.IsActiveThreatToPlayer(pawn))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
+
+        //public override bool ShouldRemoveMapNow(out bool alsoRemoveWorldObject)
+        //{
+        //    if (!base.Map.mapPawns.AnyPawnBlockingMapRemoval)
+        //    {
+        //        alsoRemoveWorldObject = true;
+        //        return true;
+        //    }
+        //    alsoRemoveWorldObject = false;
+        //    return false;
+        //}
+
+
 
         public override void ExposeData()
         {
             base.ExposeData();
-            //Scribe_Values.Look<bool>(ref this.startedCountdown, "startedCountdown", false, false);
+            Scribe_Values.Look(ref diaFlags, "diaFlags", null, false);
         }
     }
 }

@@ -7,6 +7,8 @@ using Verse;
 using Verse.AI.Group;
 using RimWorld;
 
+// todo cleanup, should prolly remove pawns when leaving early or not killing everyone!
+
 namespace CaravanAdventures.CaravanIncidents
 {
     public class IncidentWorker_CaravanDamselInDistress : IncidentWorker
@@ -24,16 +26,14 @@ namespace CaravanAdventures.CaravanIncidents
             {
                 return false;
             }
-            List<ThingCount> demands = this.GenerateDemands(caravan);
-            if (demands.NullOrEmpty<ThingCount>())
-            {
-                return false;
-            }
+
             PawnGroupMakerParms defaultPawnGroupMakerParms = IncidentParmsUtility.GetDefaultPawnGroupMakerParms(PawnGroupKindDefOf.Combat, parms, false);
             defaultPawnGroupMakerParms.generateFightersOnly = true;
             defaultPawnGroupMakerParms.dontUseSingleUseRocketLaunchers = true;
             defaultPawnGroupMakerParms.raidStrategy = DefDatabase<RaidStrategyDef>.GetNamed("SiegeMechanoid");
             List<Pawn> attackers = PawnGroupMakerUtility.GeneratePawns(defaultPawnGroupMakerParms, true).ToList<Pawn>();
+            var girl = DamselInDistressUtility.GenerateGirl(caravan.Tile);
+
             if (attackers.Count == 0)
             {
                 Log.Error(string.Concat(new object[]
@@ -48,24 +48,27 @@ namespace CaravanAdventures.CaravanIncidents
                 return false;
             }
             CameraJumper.TryJumpAndSelect(caravan);
-            
-            // sub dialog
+
+            var joinDiaNode = new DiaNode("CaravanDamselInDistress_AsksToJoin".Translate());
+            joinDiaNode.options.Add(new DiaOption("CaravanDamselInDistress_JoinAllow".Translate()) { action = () => DamselInDistressUtility.GirlJoins(caravan.pawns.InnerListForReading, girl), resolveTree = true });
+            joinDiaNode.options.Add(new DiaOption("CaravanDamselInDistress_JoinDeny".Translate()) { resolveTree = true });
+
             var subSubDiaNode = new DiaNode("CaravanDamselInDistress_Follow_KillSuccess_Main".Translate());
-            subSubDiaNode.options.Add(new DiaOption("CaravanDamselInDistress_Follow_KillSuccess_Free".Translate()) { action = () => ActionReward(caravan, attackers), resolveTree = true });
-            subSubDiaNode.options.Add(new DiaOption("CaravanDamselInDistress_Follow_KilSuccess_Slave".Translate()) { action = () => ActionReward(caravan, attackers), resolveTree = true });
+            subSubDiaNode.options.Add(new DiaOption("CaravanDamselInDistress_Follow_KillSuccess_Free".Translate()) { link = joinDiaNode, resolveTree = true });
+            subSubDiaNode.options.Add(new DiaOption("CaravanDamselInDistress_Follow_KilSuccess_Slave".Translate()) { action = () => ActionRewardPrisoner(caravan, girl), resolveTree = true });
 
             var subSubBadDiaNode = new DiaNode("CaravanDamselInDistress_Follow_KillFail_Main".Translate());
-            subSubBadDiaNode.options.Add(new DiaOption("CaravanDamselInDistress_Follow_KillFail_Leave".Translate()) { resolveTree = true });
+            subSubBadDiaNode.options.Add(new DiaOption("CaravanDamselInDistress_Follow_KillFail_Fight".Translate()) { action = () => ActionFight(caravan, attackers, girl), resolveTree = true });
+            subSubBadDiaNode.options.Add(new DiaOption("CaravanDamselInDistress_Follow_KillFail_Leave".Translate()) { action = () => ActionLeave(caravan, attackers, girl), resolveTree = true });
 
             var subDiaNode = new DiaNode("CaravanDamselInDistress_Follow_Main".Translate());
-            subDiaNode.options.Add(new DiaOption("CaravanDamselInDistress_Follow_KillAndFreeGirl".Translate()) { link = ChanceBySkill(caravan, subSubDiaNode, subSubBadDiaNode, SkillDefOf.Melee)});
-            subDiaNode.options.Add(new DiaOption("CaravanDamselInDistress_Follow_SneakFreeGirl".Translate()) { link = ChanceBySkill(caravan, subSubDiaNode, subSubBadDiaNode, SkillDefOf.Melee) });
-            subDiaNode.options.Add(new DiaOption("CaravanDamselInDistress_Leave".Translate()) { action = () => ActionLeave(caravan, attackers), resolveTree = true });
+            subDiaNode.options.Add(new DiaOption("CaravanDamselInDistress_Follow_SneakFreeGirl".Translate()) { link = ChanceByHuntingSkill(caravan, subSubDiaNode, subSubBadDiaNode) });
+            subDiaNode.options.Add(new DiaOption("CaravanDamselInDistress_Leave".Translate()) { action = () => ActionLeave(caravan, attackers, girl), resolveTree = true });
             
-            var diaNode = new DiaNode(this.GenerateMessageText(parms.faction, attackers.Count, demands, caravan));
-            diaNode.options.Add(new DiaOption("CaravanDamselInDistress_Rescue".Translate()) { action = () => ActionFight(caravan, attackers), resolveTree = true });
+            var diaNode = new DiaNode(this.GenerateMessageText(parms.faction, attackers.Count, caravan));
+            diaNode.options.Add(new DiaOption("CaravanDamselInDistress_Rescue".Translate()) { action = () => ActionFight(caravan, attackers, girl), resolveTree = true });
             diaNode.options.Add(new DiaOption("CaravanDamselInDistress_Follow".Translate()) { link = subDiaNode });
-            diaNode.options.Add(new DiaOption("CaravanDamselInDistress_Leave".Translate()) { action = () => ActionLeave(caravan, attackers), resolveTree = true });
+            diaNode.options.Add(new DiaOption("CaravanDamselInDistress_Leave".Translate()) { action = () => ActionLeave(caravan, attackers, girl), resolveTree = true });
 
             TaggedString taggedString = "CaravanDamselInDistressTitle".Translate(parms.faction.Name);
             Find.WindowStack.Add(new Dialog_NodeTreeWithFactionInfo(diaNode, parms.faction, true, false, taggedString));
@@ -74,11 +77,17 @@ namespace CaravanAdventures.CaravanIncidents
             return true;
         }
 
-        private DiaNode ChanceBySkill(Caravan caravan, DiaNode subSubDiaNode, DiaNode subSubBadDiaNode, SkillDef skilldef)
+        private void ActionRewardPrisoner(Caravan caravan, Pawn girl)
         {
-            var huntingSkill = caravan.pawns.InnerListForReading.Where(x => x.RaceProps.Humanlike).Select(x => x.skills.skills.FirstOrDefault(skill => skill.def == skilldef).Level).Average();
-            var chance = Rand.Range(0, (int)huntingSkill);
-            if (chance > 5) return subSubDiaNode;
+            girl.guest.SetGuestStatus(caravan.pawns.InnerListForReading.FirstOrDefault()?.Faction ?? Faction.OfPlayer, true);
+        }
+
+        private DiaNode ChanceByHuntingSkill(Caravan caravan, DiaNode subSubDiaNode, DiaNode subSubBadDiaNode)
+        {
+            //var huntingSkill = caravan.pawns.InnerListForReading.Where(x => x.RaceProps.Humanlike).Select(x => x.skills.skills.FirstOrDefault(skill => skill.def == skilldef).Level).Average();
+            var huntingSkill = caravan.pawns.InnerListForReading.Where(x => x.RaceProps.Humanlike).Select(x => x.GetStatValue(StatDefOf.HuntingStealth)).Average();
+            var chance = Rand.Chance(huntingSkill);
+            if (Rand.Chance(huntingSkill)) return subSubDiaNode;
             else return subSubBadDiaNode;
         }
 
@@ -92,20 +101,19 @@ namespace CaravanAdventures.CaravanIncidents
             }
         }
 
-        private void ActionLeave(Caravan caravan, List<Pawn> attackers)
+        private void ActionLeave(Caravan caravan, List<Pawn> attackers, Pawn girl)
         {
-            //this.TakeFromCaravan(caravan, demands, attackers[0].Faction);
             for (int i = 0; i < attackers.Count; i++)
             {
                 Find.WorldPawns.PassToWorld(attackers[i], PawnDiscardDecideMode.Decide);
             }
+            Find.WorldPawns.PassToWorld(girl, PawnDiscardDecideMode.Decide);
         }
 
-        private void ActionFight(Caravan caravan, List<Pawn> attackers)
+        private void ActionFight(Caravan caravan, List<Pawn> attackers, Pawn girl)
         {
             Log.Message("Action is being executed");
             Faction enemyFaction = attackers[0].Faction;
-            var girl = DamselInDistressUtility.GenerateGirl(caravan.Tile);
             Log.Message("Before creating mapParent");
             var damselMapParent = DamselInDistressUtility.NewDamselInDistressMapParent(caravan.Tile, attackers, girl);
             TaleRecorder.RecordTale(TaleDefOf.CaravanAmbushedByHumanlike, new object[]
@@ -127,158 +135,10 @@ namespace CaravanAdventures.CaravanIncidents
             }, "GeneratingMapForNewEncounter", false, null, true);
         }
 
-        
-
-        private List<ThingCount> GenerateDemands(Caravan caravan)
+        private string GenerateMessageText(Faction enemyFaction, int attackerCount, Caravan caravan)
         {
-            float num = 1.8f;
-            float num2 = Rand.Value * num;
-            if (num2 < 0.15f)
-            {
-                List<ThingCount> list = this.TryGenerateColonistOrPrisonerDemand(caravan);
-                if (!list.NullOrEmpty<ThingCount>())
-                {
-                    return list;
-                }
-            }
-            if (num2 < 0.3f)
-            {
-                List<ThingCount> list2 = this.TryGenerateAnimalsDemand(caravan);
-                if (!list2.NullOrEmpty<ThingCount>())
-                {
-                    return list2;
-                }
-            }
-            List<ThingCount> list3 = this.TryGenerateItemsDemand(caravan);
-            if (!list3.NullOrEmpty<ThingCount>())
-            {
-                return list3;
-            }
-            if (Rand.Bool)
-            {
-                List<ThingCount> list4 = this.TryGenerateColonistOrPrisonerDemand(caravan);
-                if (!list4.NullOrEmpty<ThingCount>())
-                {
-                    return list4;
-                }
-                List<ThingCount> list5 = this.TryGenerateAnimalsDemand(caravan);
-                if (!list5.NullOrEmpty<ThingCount>())
-                {
-                    return list5;
-                }
-            }
-            else
-            {
-                List<ThingCount> list6 = this.TryGenerateAnimalsDemand(caravan);
-                if (!list6.NullOrEmpty<ThingCount>())
-                {
-                    return list6;
-                }
-                List<ThingCount> list7 = this.TryGenerateColonistOrPrisonerDemand(caravan);
-                if (!list7.NullOrEmpty<ThingCount>())
-                {
-                    return list7;
-                }
-            }
-            return null;
+            return "CaravanDamselInDistress".Translate(caravan.Name, enemyFaction.Name, attackerCount, "", enemyFaction.def.pawnsPlural).CapitalizeFirst();
         }
-
-        private List<ThingCount> TryGenerateColonistOrPrisonerDemand(Caravan caravan)
-        {
-            List<Pawn> list = new List<Pawn>();
-            int num = 0;
-            for (int i = 0; i < caravan.pawns.Count; i++)
-            {
-                if (caravan.IsOwner(caravan.pawns[i]))
-                {
-                    num++;
-                }
-            }
-            if (num >= 2)
-            {
-                for (int j = 0; j < caravan.pawns.Count; j++)
-                {
-                    if (caravan.IsOwner(caravan.pawns[j]))
-                    {
-                        list.Add(caravan.pawns[j]);
-                    }
-                }
-            }
-            for (int k = 0; k < caravan.pawns.Count; k++)
-            {
-                if (caravan.pawns[k].IsPrisoner)
-                {
-                    list.Add(caravan.pawns[k]);
-                }
-            }
-            if (list.Any<Pawn>())
-            {
-                return new List<ThingCount>
-                {
-                    new ThingCount(list.RandomElement<Pawn>(), 1)
-                };
-            }
-            return null;
-        }
-
-        private List<ThingCount> TryGenerateAnimalsDemand(Caravan caravan)
-        {
-            int num = 0;
-            for (int i = 0; i < caravan.pawns.Count; i++)
-            {
-                if (caravan.pawns[i].RaceProps.Animal)
-                {
-                    num++;
-                }
-            }
-            if (num == 0)
-            {
-                return null;
-            }
-            int count = Rand.RangeInclusive(1, (int)Mathf.Max((float)num * 0.6f, 1f));
-            return (from x in (from x in caravan.pawns.InnerListForReading
-                               where x.RaceProps.Animal
-                               orderby x.MarketValue descending
-                               select x).Take(count)
-                    select new ThingCount(x, 1)).ToList<ThingCount>();
-        }
-
-        private List<ThingCount> TryGenerateItemsDemand(Caravan caravan)
-        {
-            List<ThingCount> list = new List<ThingCount>();
-            List<Thing> list2 = new List<Thing>();
-            list2.AddRange(caravan.PawnsListForReading.SelectMany((Pawn x) => ThingOwnerUtility.GetAllThingsRecursively(x, false)));
-            list2.RemoveAll((Thing x) => x.MarketValue * (float)x.stackCount < 50f);
-            list2.RemoveAll((Thing x) => x.ParentHolder is Pawn_ApparelTracker && x.MarketValue < 500f);
-            float num = list2.Sum((Thing x) => x.MarketValue * (float)x.stackCount);
-            float requestedCaravanValue = Mathf.Clamp(IncidentWorker_CaravanDamselInDistress.DemandAsPercentageOfCaravan.RandomInRange * num, 300f, 3500f);
-            Func<Thing, bool> somefunc = null;
-            while (requestedCaravanValue > 50f)
-            {
-                IEnumerable<Thing> source = list2;
-                Func<Thing, bool> predicate;
-                if ((predicate = somefunc) == null)
-				{
-                    predicate = (somefunc = ((Thing x) => x.MarketValue * (float)x.stackCount <= requestedCaravanValue * 2f));
-                }
-                Thing thing;
-                if (!source.Where(predicate).TryRandomElementByWeight((Thing x) => Mathf.Pow(x.MarketValue / x.GetStatValue(StatDefOf.Mass, true), 2f), out thing))
-                {
-                    return null;
-                }
-                int num2 = Mathf.Clamp((int)(requestedCaravanValue / thing.MarketValue), 1, thing.stackCount);
-                requestedCaravanValue -= thing.MarketValue * (float)num2;
-                list.Add(new ThingCount(thing, num2));
-                list2.Remove(thing);
-            }
-            return list;
-        }
-
-        private string GenerateMessageText(Faction enemyFaction, int attackerCount, List<ThingCount> demands, Caravan caravan)
-        {
-            return "CaravanDamselInDistress".Translate(caravan.Name, enemyFaction.Name, attackerCount, GenLabel.ThingsLabel(demands, "  - ", false), enemyFaction.def.pawnsPlural).CapitalizeFirst();
-        }
-
 
         private void TakeFromCaravan(Caravan caravan, List<ThingCount> demands, Faction enemyFaction)
         {
@@ -318,26 +178,7 @@ namespace CaravanAdventures.CaravanIncidents
             }
         }
 
-        
-
-        private static readonly FloatRange DemandAsPercentageOfCaravan = new FloatRange(0.05f, 0.2f);
-
         private static readonly FloatRange IncidentPointsFactorRange = new FloatRange(1f, 1.7f);
 
-        private const float DemandAnimalsWeight = 0.15f;
-
-        private const float DemandColonistOrPrisonerWeight = 0.15f;
-
-        private const float DemandItemsWeight = 1.5f;
-
-        private const float MaxDemandedAnimalsPct = 0.6f;
-
-        private const float MinDemandedMarketValue = 300f;
-
-        private const float MaxDemandedMarketValue = 3500f;
-
-        private const float TrashMarketValueThreshold = 50f;
-
-        private const float IgnoreApparelMarketValueThreshold = 500f;
     }
 }
