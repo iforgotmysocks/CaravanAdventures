@@ -42,9 +42,10 @@ namespace CaravanAdventures.CaravanAbilities
                     if (pawn == pawnToExclude || pawn.Dead) continue;
                     var count = Rand.Range(5, 8);
                     // todo meassure if this causes drops to exclude the waist
-                    foreach (var part in Helper.PickSomeInRandomOrder(pawn.RaceProps.body.AllParts.Where(x => x.def != waist), count))
+                    foreach (var part in Helper.PickSomeInRandomOrder(pawn.RaceProps.body.AllParts, count))
                     {
                         if (pawn == null | pawn.Dead) break;
+                        if (part.def == waist) continue;
 
                         var damage = part.def.GetMaxHealth(pawn) * Rand.Range(0.5f, 0.75f);
                         if (Rand.Chance(pawn.RaceProps.IsMechanoid ? ModSettings.Get().mechanoidDissmemberChance : ModSettings.Get().humanDissmemberChance))

@@ -89,6 +89,8 @@
     <Compile Include="CaravanItemSelection\FilterCombs.cs" />
     <Compile Include="CaravanItemSelection\FilterHelper.cs" />
     <Compile Include="CaravanItemSelection\FilterSet.cs" />
+    <Compile Include="CaravanStory\CompTalk.cs" />
+    <Compile Include="CaravanStory\CompProperties_Talk.cs" />
     <Compile Include="CaravanStory\StoryStart.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Init.cs" />

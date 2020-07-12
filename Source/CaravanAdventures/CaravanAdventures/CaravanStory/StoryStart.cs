@@ -6,12 +6,19 @@ using System.Threading.Tasks;
 using RimWorld;
 using Verse;
 using RimWorld.Planet;
+using Verse.Sound;
 
 namespace CaravanAdventures.CaravanStory
 {
     class StoryStart : MapComponent
     {
-        private bool chosenPawnSelected = false;
+        private Dictionary<string, bool> storyFlags = new Dictionary<string, bool>()
+        {
+            { "Start_InitialTreeWhisper", false },
+            { "Start_MapTreeWhisper", false },
+            { "Start_RechedTree", false }
+        };
+        private Sustainer animaTreeWhipserSustainer;
 
         public StoryStart(Map map) : base(map)
         {
@@ -24,15 +31,57 @@ namespace CaravanAdventures.CaravanStory
 
             // ModLister.RoyaltyInstalled or ModsConfig.RoyaltyActive
 
-            CheckEnsureGiftedAndAssignAbilities();
-            if (chosenPawnSelected) Log.Message("yup, chosen was loaded");
-            chosenPawnSelected = true;
+            //CheckEnsureGiftedAndAssignAbilities();
         }
 
         public override void MapComponentTick()
         {
             base.MapComponentTick();
-            if (Find.TickManager.TicksGame % 60000 == 0) CheckEnsureGiftedAndAssignAbilities();
+            if (Find.TickManager.TicksGame % 2000 == 0)
+            {
+                //CheckEnsureGiftedAndAssignAbilities();
+
+                AddTreeHumming();
+                AddCompToTree();
+                CheckPlayerProximityToInitiateDialog();
+                
+            }
+        }
+
+        private void AddCompToTree()
+        {
+            var tree = map.spawnedThings.FirstOrDefault(x => x.def.defName == "Plant_TreeAnima");
+            if (tree == null)
+            {
+                Log.Message("Tree is null");
+                return;
+            }
+
+            // todo 
+            //var cpTalk = new CompProperties_Talk() { compClass = typeof(CompTalk) };
+            //var cTalk = new CompTalk();
+            //cTalk.SetProps(cpTalk);
+            //if (!tree.def.comps.Contains(cpTalk)) tree.def.comps.Add(cpTalk);
+        }
+
+        private void AddTreeHumming()
+        {
+            if (storyFlags["Start_InitialTreeWhisper"] == true) return;
+            var tree = map.spawnedThings.FirstOrDefault(x => x.def.defName == "Plant_TreeAnima");
+            if (tree == null)
+            {
+                Log.Message("Tree is null");
+                return;
+            }
+            
+            var info = SoundInfo.InMap(tree, MaintenanceType.None);
+
+            animaTreeWhipserSustainer = DefDatabase<SoundDef>.GetNamed("AnimaTreeWhispers").TrySpawnSustainer(info);
+            if (animaTreeWhipserSustainer != null) storyFlags["Start_InitialTreeWhisper"] = true;
+        }
+
+        private void CheckPlayerProximityToInitiateDialog()
+        {
         }
 
         private void CheckEnsureGiftedAndAssignAbilities()
@@ -68,18 +117,19 @@ namespace CaravanAdventures.CaravanStory
             chosen.health.AddHediff(DefDatabase<HediffDef>.AllDefs.FirstOrDefault(x => x.defName == "PsychicAmplifier"), chosen.health.hediffSet.GetBrain());
             chosen.health.AddHediff(DefDatabase<HediffDef>.AllDefs.FirstOrDefault(x => x.defName == "AncientGift"), chosen.health.hediffSet.GetBrain());
 
-            var abilityDef = DefDatabase<AbilityDef>.AllDefs.FirstOrDefault(x => x.defName == "AncientMeditate");
-            chosen.abilities.GainAbility(abilityDef);
-            abilityDef = DefDatabase<AbilityDef>.AllDefs.FirstOrDefault(x => x.defName == "AncientProtectiveAura");
-            chosen.abilities.GainAbility(abilityDef);
-            abilityDef = DefDatabase<AbilityDef>.AllDefs.FirstOrDefault(x => x.defName == "ConjureLight");
-            chosen.abilities.GainAbility(abilityDef);
+            var abilityDefs = DefDatabase<AbilityDef>.AllDefsListForReading.Where(x => x.defName.StartsWith("Ancient"));
+            foreach (var abilityDef in abilityDefs)
+            {
+                chosen.abilities.GainAbility(abilityDef);
+            }
+            var lightAbilityDef = DefDatabase<AbilityDef>.AllDefs.FirstOrDefault(x => x.defName == "ConjureLight");
+            chosen.abilities.GainAbility(lightAbilityDef);
         }
 
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_Values.Look(ref chosenPawnSelected, "chosenPawnSelected", false, false);
+            //Scribe_Values.Look(ref chosenPawnSelected, "chosenPawnSelected", false, false);
         }
 
 
