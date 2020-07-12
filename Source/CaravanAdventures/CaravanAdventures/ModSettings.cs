@@ -16,6 +16,7 @@ namespace CaravanAdventures
         public float additionalBuildingAreaDamageMax = 0.75f;
         public float psyfocusToRestore = 0.3f;
         public float healingPerSecond = 0.05f;
+        public bool stopMentalBreaks = false;
         public float lightDuration = 1200f;
 
         public static ModSettings Get()
@@ -28,6 +29,8 @@ namespace CaravanAdventures
             var options = new Listing_Standard();
             options.Begin(wrect);
 
+
+            // todo move to seperate window!
             options.Label("Ancient thunderbolt:".Colorize(Color.red), 40f);
             options.Label("Mechanoid bodypart dissmember chance: " + Convert.ToInt32(mechanoidDissmemberChance * 100) + "%");
             mechanoidDissmemberChance = options.Slider(mechanoidDissmemberChance, 0f, 1f);
@@ -52,6 +55,7 @@ namespace CaravanAdventures
             options.Label("Ancient protective aura".Colorize(Color.red));
             options.Label($"Damage healed per second: {Math.Round(healingPerSecond, 2)}");
             healingPerSecond = options.Slider(healingPerSecond, 0f, 1f);
+            options.CheckboxLabeled("Can stop mental breaks?", ref stopMentalBreaks);
 
             options.Gap(24f);
 
@@ -72,6 +76,7 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref psyfocusToRestore, "psyfocusToRestore", 0.5f);
 
             Scribe_Values.Look(ref healingPerSecond, "healingPerSecond", 0.05f);
+            Scribe_Values.Look(ref stopMentalBreaks, "stopMentalBreaks", false);
 
             Scribe_Values.Look(ref lightDuration, "lightDuration", 1200f);
         }

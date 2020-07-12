@@ -20,38 +20,39 @@ namespace CaravanAdventures.CaravanImmersion
         public override void WorldComponentTick()
         {
             base.WorldComponentTick();
-
-            if (ticks > 1200)
-            {
-                ApplySocialRelations();
-                ticks = 0;
-            }
+            
+            ApplySocialRelations();
             ticks++;
         }
 
         private void ApplySocialRelations()
         {
-            var playerPawns = PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction.Where(x => x.RaceProps.Humanlike).ToList();
-
-            foreach (var mainPawn in playerPawns)
+            if (ticks > 1200)
             {
-                foreach (var pawn in playerPawns)
+                var playerPawns = PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction.Where(x => x.RaceProps.Humanlike).ToList();
+
+                foreach (var mainPawn in playerPawns)
                 {
-                    if (pawn == mainPawn) continue;
-                    var currentRelation = pawn.relations.DirectRelations.FirstOrDefault(x => (x.def.GetModExtension<TravelCompanionModExt>()?.isTravelCompanionRelation ?? false) == true && x.otherPawn == mainPawn);
-                    var newRelation = CalculateNewRelation(mainPawn, pawn);
-                    if (newRelation == null)
+                    foreach (var pawn in playerPawns)
                     {
-                        Log.Error($"newRelation is null, which should not be happening!!! -> TravelCompanionWC -> ApplySocialRelation -> CalculateNewRelation()");
-                        continue;
+                        if (pawn == mainPawn) continue;
+                        var currentRelation = pawn.relations.DirectRelations.FirstOrDefault(x => (x.def.GetModExtension<TravelCompanionModExt>()?.isTravelCompanionRelation ?? false) == true && x.otherPawn == mainPawn);
+                        var newRelation = CalculateNewRelation(mainPawn, pawn);
+                        if (newRelation == null)
+                        {
+                            Log.Error($"newRelation is null, which should not be happening!!! -> TravelCompanionWC -> ApplySocialRelation -> CalculateNewRelation()");
+                            continue;
+                        }
+                        if (currentRelation != null && currentRelation.def.defName == newRelation.relationDefName) continue;
+                        if (currentRelation != null && currentRelation.def.defName != newRelation.relationDefName)
+                        {
+                            pawn.relations.RemoveDirectRelation(currentRelation.def, mainPawn);
+                        }
+                        pawn.relations.AddDirectRelation(TravelCompanionDefOf.RelationNamed(newRelation.relationDefName), mainPawn);
                     }
-                    if (currentRelation != null && currentRelation.def.defName == newRelation.relationDefName) continue;
-                    if (currentRelation != null && currentRelation.def.defName != newRelation.relationDefName)
-                    {
-                        pawn.relations.RemoveDirectRelation(currentRelation.def, mainPawn);
-                    }
-                    pawn.relations.AddDirectRelation(TravelCompanionDefOf.RelationNamed(newRelation.relationDefName), mainPawn);
                 }
+
+                ticks = 0;
             }
         }
 

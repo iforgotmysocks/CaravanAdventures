@@ -64,6 +64,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CaravanAbilities\CompAbilityEffect_AncientMeditate.cs" />
+    <Compile Include="CaravanAbilities\CompAbilityEffect_AncientThunderBold.cs" />
+    <Compile Include="CaravanAbilities\CompAbilityEffect_GiveToggleableHediff.cs" />
+    <Compile Include="CaravanAbilities\CompProperties_AbilityAncientMeditate.cs" />
+    <Compile Include="CaravanAbilities\CompProperties_AbilityAncientThunderBold.cs" />
+    <Compile Include="CaravanAbilities\CompProperties_GiveToggleableHediff.cs" />
+    <Compile Include="CaravanAbilities\HediffCompProperties_ConjuredLight.cs" />
+    <Compile Include="CaravanAbilities\HediffComp_AncientGift.cs" />
+    <Compile Include="CaravanAbilities\HediffComp_AncientProtectiveAura.cs" />
+    <Compile Include="CaravanAbilities\HediffComp_ConjuredLight.cs" />
+    <Compile Include="CaravanAbilities\HediffComp_DrainNature.cs" />
     <Compile Include="CaravanImmersion\ThoughtWorker_TravelCompanions.cs" />
     <Compile Include="CaravanImmersion\TravelCompanionDef.cs" />
     <Compile Include="CaravanImmersion\TravelCompanionDefOf.cs" />
@@ -78,10 +89,12 @@
     <Compile Include="CaravanItemSelection\FilterCombs.cs" />
     <Compile Include="CaravanItemSelection\FilterHelper.cs" />
     <Compile Include="CaravanItemSelection\FilterSet.cs" />
+    <Compile Include="CaravanStory\StoryStart.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Init.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="ModSettings.cs" />
+    <Compile Include="Patches\AbilityNeurotrainerDefGenerator.cs" />
     <Compile Include="Patches\CaravanTravel.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Patches\MainPatcher.cs" />
@@ -91,6 +104,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

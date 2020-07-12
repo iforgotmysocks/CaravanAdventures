@@ -11,6 +11,7 @@ namespace CaravanAdventures.Patches
             var harmony = new Harmony("iforgotmysocks.CaravanAdventures");
             CaravanTravel.ApplyPatches(harmony);
             AutomaticItemSelection.ApplyPatches(harmony);
+            AbilityNeurotrainerDefGenerator.ApplyPatches(harmony);
         }
     }
 }
