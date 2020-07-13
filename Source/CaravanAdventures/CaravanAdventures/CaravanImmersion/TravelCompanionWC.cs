@@ -12,9 +12,11 @@ namespace CaravanAdventures.CaravanImmersion
     public class TravelCompanionWC : WorldComponent
     {
         private int ticks = 1000;
+        private List<PawnRelationDef> relationShipsWithImpact;
+
         public TravelCompanionWC(World world) : base(world)
         {
-
+            relationShipsWithImpact = DefDatabase<PawnRelationDef>.AllDefsListForReading.Where(x => !x.HasModExtension<TravelCompanionModExt>() && (x.familyByBloodRelation || (x.reflexive && !x.defName.StartsWith("Ex")))).ToList();
         }
 
         public override void WorldComponentTick()
@@ -29,6 +31,8 @@ namespace CaravanAdventures.CaravanImmersion
         {
             if (ticks > 1200)
             {
+                // just debug stuff -> todo figure out why Outsider is used for non player faction pawns!
+                //CleanUpOutsiderRelations();
                 var playerPawns = PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction.Where(x => x.RaceProps.Humanlike).ToList();
 
                 foreach (var mainPawn in playerPawns)
@@ -52,6 +56,7 @@ namespace CaravanAdventures.CaravanImmersion
                     }
                 }
 
+                
                 ticks = 0;
             }
         }
@@ -61,6 +66,8 @@ namespace CaravanAdventures.CaravanImmersion
             var timeSpentTogether = Math.Min(mainPawn.records.GetValue(RecordDefOf.TimeAsColonistOrColonyAnimal), pawn.records.GetValue(RecordDefOf.TimeAsColonistOrColonyAnimal));
             var companionDefs = DefDatabase<TravelCompanionDef>.AllDefs.OrderByDescending(y => y.thoughtStage).ToList();
 
+            if (mainPawn.relations.DirectRelations.Any(x => relationShipsWithImpact.Contains(x.def) && x.otherPawn == pawn)) timeSpentTogether += 60000f * 60;
+            
             foreach (var def in companionDefs)
             {
                 //Log.Message($"compareing time: {Math.Round(timeSpentTogether / 60000, 0)} with def {def.defName} maxDays: {def.maxDays} on pawns {mainPawn.Name} and {pawn.Name}");
@@ -71,6 +78,7 @@ namespace CaravanAdventures.CaravanImmersion
 
             return null;
         }
+
 
         #region shelved stuff
         // currently shelved
@@ -100,6 +108,20 @@ namespace CaravanAdventures.CaravanImmersion
                 }
             }
         }
+
+        /// <summary>
+        /// Just to cleanup Outsider relations that keep appearing -> have yet to figure out why
+        /// </summary>
+        private void CleanUpOutsiderRelations()
+        {
+            var playerPawns = PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction.Where(x => x.RaceProps.Humanlike).ToList();
+
+            foreach (var mainPawn in playerPawns)
+            {
+                mainPawn.relations.DirectRelations.RemoveAll(x => x.def.defName == "OutsiderRelation");
+            }
+        }
+
         #endregion
 
         public override void ExposeData()
