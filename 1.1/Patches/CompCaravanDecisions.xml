@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
+
+<!-- todo - lets see if we can do this code-wise?-->
 <Patch>
   <Operation Class="PatchOperationConditional">
     <xpath>/Defs/WorldObjectDef[defName="Caravan"]/comps</xpath>

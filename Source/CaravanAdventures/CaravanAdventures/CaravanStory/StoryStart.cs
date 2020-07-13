@@ -37,12 +37,12 @@ namespace CaravanAdventures.CaravanStory
         public override void MapComponentTick()
         {
             base.MapComponentTick();
-            if (Find.TickManager.TicksGame % 2000 == 0)
+            if (Find.TickManager.TicksGame % 20000 == 0)
             {
                 //CheckEnsureGiftedAndAssignAbilities();
 
-                AddTreeHumming();
-                AddCompToTree();
+                //AddTreeHumming();
+                //AddCompToTree();
                 CheckPlayerProximityToInitiateDialog();
                 
             }

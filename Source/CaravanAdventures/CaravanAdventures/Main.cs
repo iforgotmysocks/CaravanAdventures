@@ -8,6 +8,7 @@ using Verse;
 using HarmonyLib;
 using System.Reflection;
 using CaravanAdventures.CaravanItemSelection;
+using CaravanAdventures.Patches;
 
 namespace CaravanAdventures
 {
@@ -16,7 +17,7 @@ namespace CaravanAdventures
         public Main(ModContentPack content) : base(content)
         {
             GetSettings<ModSettings>();
-            
+            MainPatcher.Patch();
         }
 
         public override void DoSettingsWindowContents(UnityEngine.Rect inRect)
