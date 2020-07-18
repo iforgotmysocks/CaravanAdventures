@@ -23,10 +23,10 @@
     <stages>
       <li>
         <statOffsets>
-          <ComfyTemperatureMin>-10</ComfyTemperatureMin>
-          <ComfyTemperatureMax>10</ComfyTemperatureMax>
+          <ComfyTemperatureMin>-20</ComfyTemperatureMin>
+          <ComfyTemperatureMax>20</ComfyTemperatureMax>
           <ImmunityGainSpeed>3</ImmunityGainSpeed>
-          <MoveSpeed>1</MoveSpeed>
+          <MoveSpeed>1.5</MoveSpeed>
           <ToxicSensitivity>-0.8</ToxicSensitivity>
           <MentalBreakThreshold>-0.35</MentalBreakThreshold>
         </statOffsets>
@@ -62,10 +62,10 @@
     <stages>
       <li>
         <statOffsets>
-          <ComfyTemperatureMin>-8</ComfyTemperatureMin>
-          <ComfyTemperatureMax>8</ComfyTemperatureMax>
+          <ComfyTemperatureMin>-10</ComfyTemperatureMin>
+          <ComfyTemperatureMax>10</ComfyTemperatureMax>
           <ImmunityGainSpeed>2</ImmunityGainSpeed>
-          <MoveSpeed>0.8</MoveSpeed>
+          <MoveSpeed>1</MoveSpeed>
           <ToxicSensitivity>-0.5</ToxicSensitivity>
           <MentalBreakThreshold>-0.10</MentalBreakThreshold>
         </statOffsets>

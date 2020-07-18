@@ -37,7 +37,7 @@ namespace CaravanAdventures.CaravanImmersion
         public TravelCompanionDef GetCurrentDef(Pawn p)
         {
             if (Current.ProgramState != ProgramState.Playing) return null;
-            if (p.Faction != Faction.OfPlayer || p.IsBorrowedByAnyFaction()) return null;
+            if (p.Faction != Faction.OfPlayer || p.IsBorrowedByAnyFaction() || p.HasExtraMiniFaction() || p.HasExtraHomeFaction()) return null;
 
             var time = p.records.GetValue(RecordDefOf.TimeAsColonistOrColonyAnimal);
             if (Find.TickManager.TicksGame - time < 5000) time += 60000f * 60;

@@ -23,7 +23,6 @@ namespace CaravanAdventures.CaravanImmersion
         {
             base.WorldComponentTick();
             
-            // todo exclude timed pawns that will leave eventually; also in the thought worker
             ApplySocialRelations();
             ticks++;
         }
@@ -38,10 +37,10 @@ namespace CaravanAdventures.CaravanImmersion
 
                 foreach (var mainPawn in playerPawns)
                 {
-                    if (mainPawn.IsBorrowedByAnyFaction()) continue;
+                    if (mainPawn.IsBorrowedByAnyFaction() || mainPawn.Dead || mainPawn.HasExtraMiniFaction() || mainPawn.HasExtraHomeFaction()) continue;
                     foreach (var pawn in playerPawns)
                     {
-                        if (pawn == mainPawn) continue;
+                        if (pawn == mainPawn || pawn.IsBorrowedByAnyFaction() || pawn.Dead || pawn.HasExtraMiniFaction() || pawn.HasExtraHomeFaction()) continue;
                         var currentRelation = pawn.relations.DirectRelations.FirstOrDefault(x => (x.def.GetModExtension<TravelCompanionModExt>()?.isTravelCompanionRelation ?? false) == true && x.otherPawn == mainPawn);
                         var newRelation = CalculateNewRelation(mainPawn, pawn);
                         if (newRelation == null)
@@ -68,9 +67,9 @@ namespace CaravanAdventures.CaravanImmersion
             var timeSpentTogether = Math.Min(mainPawn.records.GetValue(RecordDefOf.TimeAsColonistOrColonyAnimal), pawn.records.GetValue(RecordDefOf.TimeAsColonistOrColonyAnimal));
             var companionDefs = DefDatabase<TravelCompanionDef>.AllDefs.OrderByDescending(y => y.thoughtStage).ToList();
 
-            if (mainPawn.relations.DirectRelations.Any(x => relationShipsWithImpact.Contains(x.def) && x.otherPawn == pawn) || mainPawn.relations.RelatedPawns.Contains(pawn) || BothPawnsStartPawns(mainPawn, pawn)) timeSpentTogether += 60000f * 60;
-            
-            //Log.Message($"{mainPawn.Name} {pawn.Name} : {Math.Round(timeSpentTogether / 60000f)} days, startpawns?: {BothPawnsStartPawns(mainPawn, pawn)} relationship? {mainPawn.relations.DirectRelations.Any(x => relationShipsWithImpact.Contains(x.def) && x.otherPawn == pawn) || mainPawn.relations.RelatedPawns.Contains(pawn)}");
+            if (mainPawn.relations.DirectRelations.Any(x => relationShipsWithImpact.Contains(x.def) && x.otherPawn == pawn) || BothPawnsStartPawns(mainPawn, pawn)) timeSpentTogether += 60000f * 60;
+
+            //Log.Message($"{mainPawn.Name} {pawn.Name} : {Math.Round(timeSpentTogether / 60000f)} days, startpawns?: {BothPawnsStartPawns(mainPawn, pawn)} relationship? {mainPawn.relations.DirectRelations.Any(x => relationShipsWithImpact.Contains(x.def) && x.otherPawn == pawn)} borrowed: {mainPawn.IsBorrowedByAnyFaction()} otherhomefaction: {mainPawn.HasExtraHomeFaction()}");
 
             foreach (var def in companionDefs)
             {
@@ -128,7 +127,7 @@ namespace CaravanAdventures.CaravanImmersion
 
             foreach (var mainPawn in playerPawns)
             {
-                mainPawn.relations.DirectRelations.RemoveAll(x => x.def.defName == "OutsiderRelation");
+                mainPawn.relations.DirectRelations.RemoveAll(x => x.def.HasModExtension<TravelCompanionModExt>());
             }
         }
 
