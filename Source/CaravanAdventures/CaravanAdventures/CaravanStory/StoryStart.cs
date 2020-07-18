@@ -22,7 +22,14 @@ namespace CaravanAdventures.CaravanStory
 
         public StoryStart(Map map) : base(map)
         {
+            
+        }
 
+        public override void FinalizeInit()
+        {
+            base.FinalizeInit();
+           
+            //AddTalkTreeAction();
         }
 
         public override void MapGenerated()
@@ -30,38 +37,36 @@ namespace CaravanAdventures.CaravanStory
             base.MapGenerated();
 
             // ModLister.RoyaltyInstalled or ModsConfig.RoyaltyActive
-
             //CheckEnsureGiftedAndAssignAbilities();
         }
 
         public override void MapComponentTick()
         {
             base.MapComponentTick();
-            if (Find.TickManager.TicksGame % 20000 == 0)
+            if (Find.TickManager.TicksGame % 2000 == 0)
             {
                 //CheckEnsureGiftedAndAssignAbilities();
 
+
                 //AddTreeHumming();
-                //AddCompToTree();
-                CheckPlayerProximityToInitiateDialog();
-                
+                //CheckPlayerProximityToInitiateDialog();
             }
         }
 
-        private void AddCompToTree()
+        private void AddTalkTreeAction()
         {
             var tree = map.spawnedThings.FirstOrDefault(x => x.def.defName == "Plant_TreeAnima");
             if (tree == null)
             {
                 Log.Message("Tree is null");
-                return;
+                return; 
             }
 
             // todo 
-            //var cpTalk = new CompProperties_Talk() { compClass = typeof(CompTalk) };
-            //var cTalk = new CompTalk();
-            //cTalk.SetProps(cpTalk);
-            //if (!tree.def.comps.Contains(cpTalk)) tree.def.comps.Add(cpTalk);
+            Log.Message("adding tree action");
+            var cp = tree.def.comps.FirstOrDefault(x => x is CompProperties_Talk) as CompProperties_Talk;
+            cp.actions.Add(tree, (initiator, addressed) => StoryStartDialog(initiator, addressed));
+            cp.enabled = true;
         }
 
         private void AddTreeHumming()
@@ -93,10 +98,6 @@ namespace CaravanAdventures.CaravanStory
                 Log.Message($"No pawns found, skipping.");
                 return;
             }
-            foreach (var pawn in pawns)
-            {
-                Log.Message($"Pawns found: {pawn?.Name} {pawn?.Faction?.Name}");
-            }
 
             if (pawns.FirstOrDefault(x => x.health.hediffSet.GetFirstHediffOfDef(HediffDef.Named("AncientGift")) != null) != null)
             {
@@ -124,6 +125,11 @@ namespace CaravanAdventures.CaravanStory
             }
             var lightAbilityDef = DefDatabase<AbilityDef>.AllDefs.FirstOrDefault(x => x.defName == "ConjureLight");
             chosen.abilities.GainAbility(lightAbilityDef);
+        }
+
+        public void StoryStartDialog(Pawn initiator, object addressed)
+        {
+            Log.Message($"Story starts initiated by {initiator.Name} and {((Thing)addressed).def.defName}");
         }
 
         public override void ExposeData()

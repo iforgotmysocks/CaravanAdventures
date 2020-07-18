@@ -7,6 +7,7 @@ using RimWorld;
 using Verse;
 using RimWorld.Planet;
 using CaravanAdventures.CaravanItemSelection;
+using CaravanAdventures.CaravanStory;
 
 namespace CaravanAdventures
 {
@@ -21,11 +22,23 @@ namespace CaravanAdventures
         {
             base.FinalizeInit();
             FilterCombs.InitFilterSets();
-            PatchHediffsWhenEnabled();
-
+            PatchAncientShrineDefs();
+            PatchTreeDef();
         }
 
-        private void PatchHediffsWhenEnabled()
+        private void PatchTreeDef()
+        {
+            var tree = DefDatabase<ThingDef>.GetNamed("Plant_TreeAnima");
+            if (tree == null)
+            {
+                Log.Message("Tree is null");
+                return;
+            }
+
+            if (!tree.comps.Any(x => x is CompProperties_Talk)) tree.comps.Add(new CompProperties_Talk() { compClass = typeof(CompTalk) });
+        }
+
+        private void PatchAncientShrineDefs()
         {
             // todo ModOptions
             var scatterShrinesDef = DefDatabase<GenStepDef>.GetNamed("ScatterShrines");

@@ -54,7 +54,7 @@ namespace CaravanAdventures.CaravanAbilities
 
             if (ticks > endTicks)
             {
-                Log.Message("Plantscore: " + totalPlantScore);
+                //Log.Message("Plantscore: " + totalPlantScore);
                 Pawn.health.hediffSet.hediffs.Remove(parent);
                 return;
             }

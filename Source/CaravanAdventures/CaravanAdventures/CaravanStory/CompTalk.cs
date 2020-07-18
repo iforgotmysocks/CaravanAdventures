@@ -20,38 +20,23 @@ namespace CaravanAdventures.CaravanStory
 
 		public override IEnumerable<FloatMenuOption> CompFloatMenuOptions(Pawn pawn)
 		{
+			if (!Props.enabled) yield break;
+			// todo - test if detecting by object key works for specific pawns
+			var action = Props.actions.FirstOrDefault(x => this.parent == x.Key).Value;
 			if (pawn.Dead || pawn.Drafted)
 			{
 				yield break;
 			}
 			string text = "CA_Start_Begin".Translate();
-			Log.Message("About to check if we can talk");
 			AcceptanceReport acceptanceReport = this.CanPsylink(pawn, null);
 			if (!acceptanceReport.Accepted && !string.IsNullOrWhiteSpace(acceptanceReport.Reason))
 			{
 				text = text + ": " + acceptanceReport.Reason;
 			}
-			Action action = null;
+			
 			yield return new FloatMenuOption(text, delegate ()
 			{
-				TaggedString psylinkAffectedByTraitsNegativelyWarning = RoyalTitleUtility.GetPsylinkAffectedByTraitsNegativelyWarning(pawn);
-				if (psylinkAffectedByTraitsNegativelyWarning != null)
-				{
-					WindowStack windowStack = Find.WindowStack;
-					TaggedString text2 = psylinkAffectedByTraitsNegativelyWarning;
-					string buttonAText = "Confirm".Translate();
-					Action buttonAAction;
-					if ((buttonAAction = action) == null)
-					{
-						buttonAAction = (action = delegate ()
-						{
-							this.StartQuest(pawn);
-						});
-					}
-					windowStack.Add(new Dialog_MessageBox(text2, buttonAText, buttonAAction, "GoBack".Translate(), null, null, false, null, null));
-					return;
-				}
-				this.StartQuest(pawn);
+				action.Invoke(pawn, this.parent);
 			}, MenuOptionPriority.Default, null, null, 0f, null, null)
 			{
 				Disabled = !acceptanceReport.Accepted
@@ -61,8 +46,25 @@ namespace CaravanAdventures.CaravanStory
 
         private void StartQuest(Pawn pawn)
         {
-            throw new NotImplementedException();
-        }
+			Action action = null;
+			TaggedString psylinkAffectedByTraitsNegativelyWarning = RoyalTitleUtility.GetPsylinkAffectedByTraitsNegativelyWarning(pawn);
+			if (psylinkAffectedByTraitsNegativelyWarning != null)
+			{
+				WindowStack windowStack = Find.WindowStack;
+				TaggedString text2 = psylinkAffectedByTraitsNegativelyWarning;
+				string buttonAText = "Confirm".Translate();
+				Action buttonAAction;
+				if ((buttonAAction = action) == null)
+				{
+					buttonAAction = (action = delegate ()
+					{
+						this.StartQuest(pawn);
+					});
+				}
+				windowStack.Add(new Dialog_MessageBox(text2, buttonAText, buttonAAction, "GoBack".Translate(), null, null, false, null, null));
+				return;
+			}
+		}
 
         public AcceptanceReport CanPsylink(Pawn pawn, LocalTargetInfo? knownSpot = null)
 		{

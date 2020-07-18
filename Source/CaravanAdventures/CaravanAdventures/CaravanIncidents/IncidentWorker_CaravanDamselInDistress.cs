@@ -112,9 +112,7 @@ namespace CaravanAdventures.CaravanIncidents
 
         private void ActionFight(Caravan caravan, List<Pawn> attackers, Pawn girl)
         {
-            Log.Message("Action is being executed");
             Faction enemyFaction = attackers[0].Faction;
-            Log.Message("Before creating mapParent");
             var damselMapParent = DamselInDistressUtility.NewDamselInDistressMapParent(caravan.Tile, attackers, girl);
             TaleRecorder.RecordTale(TaleDefOf.CaravanAmbushedByHumanlike, new object[]
             {
