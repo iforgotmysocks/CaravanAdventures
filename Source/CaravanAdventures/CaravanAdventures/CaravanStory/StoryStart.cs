@@ -45,7 +45,7 @@ namespace CaravanAdventures.CaravanStory
             base.MapComponentTick();
             if (Find.TickManager.TicksGame % 2000 == 0)
             {
-                //CheckEnsureGiftedAndAssignAbilities();
+                CheckEnsureGiftedAndAssignAbilities();
 
 
                 //AddTreeHumming();
@@ -92,7 +92,7 @@ namespace CaravanAdventures.CaravanStory
         private void CheckEnsureGiftedAndAssignAbilities()
         {
             // todo IsColonistPlayerControlled doesn't work here, when pawn is breaking it won't be playercontrolled anymore
-            var pawns = PawnsFinder.AllMapsAndWorld_Alive.Where(x => x.RaceProps.Humanlike && x?.Faction?.def == FactionDefOf.PlayerColony);
+            var pawns = PawnsFinder.AllMapsAndWorld_Alive.Where(x => x.RaceProps.Humanlike && x.Faction.IsPlayer);
             if (pawns == null || pawns?.Count() == 0)
             {
                 Log.Message($"No pawns found, skipping.");

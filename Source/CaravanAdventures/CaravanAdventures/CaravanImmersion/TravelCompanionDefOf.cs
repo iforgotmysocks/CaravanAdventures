@@ -8,14 +8,8 @@ using Verse;
 
 namespace CaravanAdventures.CaravanImmersion
 {
-    [DefOf]
     public static class TravelCompanionDefOf
     {
-        static TravelCompanionDefOf()
-        {
-            DefOfHelper.EnsureInitializedInCtor(typeof(TravelCompanionDefOf));
-        }
-
         public static PawnRelationDef RelationNamed(string defName)
         {
             return DefDatabase<PawnRelationDef>.GetNamed(defName, true);
@@ -25,6 +19,5 @@ namespace CaravanAdventures.CaravanImmersion
         {
             return DefDatabase<ThoughtDef>.GetNamed(defName, true);
         }
-
     }
 }

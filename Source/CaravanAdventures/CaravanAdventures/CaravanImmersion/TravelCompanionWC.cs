@@ -23,6 +23,7 @@ namespace CaravanAdventures.CaravanImmersion
         {
             base.WorldComponentTick();
             
+            // todo exclude timed pawns that will leave eventually; also in the thought worker
             ApplySocialRelations();
             ticks++;
         }
@@ -37,6 +38,7 @@ namespace CaravanAdventures.CaravanImmersion
 
                 foreach (var mainPawn in playerPawns)
                 {
+                    if (mainPawn.IsBorrowedByAnyFaction()) continue;
                     foreach (var pawn in playerPawns)
                     {
                         if (pawn == mainPawn) continue;
@@ -66,8 +68,10 @@ namespace CaravanAdventures.CaravanImmersion
             var timeSpentTogether = Math.Min(mainPawn.records.GetValue(RecordDefOf.TimeAsColonistOrColonyAnimal), pawn.records.GetValue(RecordDefOf.TimeAsColonistOrColonyAnimal));
             var companionDefs = DefDatabase<TravelCompanionDef>.AllDefs.OrderByDescending(y => y.thoughtStage).ToList();
 
-            if (mainPawn.relations.DirectRelations.Any(x => relationShipsWithImpact.Contains(x.def) && x.otherPawn == pawn)) timeSpentTogether += 60000f * 60;
+            if (mainPawn.relations.DirectRelations.Any(x => relationShipsWithImpact.Contains(x.def) && x.otherPawn == pawn) || mainPawn.relations.RelatedPawns.Contains(pawn) || BothPawnsStartPawns(mainPawn, pawn)) timeSpentTogether += 60000f * 60;
             
+            //Log.Message($"{mainPawn.Name} {pawn.Name} : {Math.Round(timeSpentTogether / 60000f)} days, startpawns?: {BothPawnsStartPawns(mainPawn, pawn)} relationship? {mainPawn.relations.DirectRelations.Any(x => relationShipsWithImpact.Contains(x.def) && x.otherPawn == pawn) || mainPawn.relations.RelatedPawns.Contains(pawn)}");
+
             foreach (var def in companionDefs)
             {
                 //Log.Message($"compareing time: {Math.Round(timeSpentTogether / 60000, 0)} with def {def.defName} maxDays: {def.maxDays} on pawns {mainPawn.Name} and {pawn.Name}");
@@ -77,6 +81,12 @@ namespace CaravanAdventures.CaravanImmersion
             }
 
             return null;
+        }
+
+        private bool BothPawnsStartPawns(Pawn mainPawn, Pawn pawn)
+        {
+            if ((Find.TickManager.TicksGame - mainPawn.records.GetValue(RecordDefOf.TimeAsColonistOrColonyAnimal)) < 5000f && (Find.TickManager.TicksGame - pawn.records.GetValue(RecordDefOf.TimeAsColonistOrColonyAnimal)) < 5000f) return true;
+            return false;
         }
 
 
