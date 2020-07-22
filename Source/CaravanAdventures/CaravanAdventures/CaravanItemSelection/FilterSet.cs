@@ -13,7 +13,7 @@ namespace CaravanAdventures.CaravanItemSelection
         public List<Filter> appliedFilters = new List<Filter>();
     }
 
-    // check what actually makes sense here
+    // todo check what actually makes sense here
     public enum FilterConnection
     {
         AND, OR, XOR, NEG

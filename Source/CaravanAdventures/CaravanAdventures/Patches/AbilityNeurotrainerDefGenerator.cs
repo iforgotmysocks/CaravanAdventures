@@ -11,10 +11,8 @@ namespace CaravanAdventures.Patches
 {
     class AbilityNeurotrainerDefGenerator
     {
-
         public static void ApplyPatches(Harmony harmony)
         {
-            // todo figure out why this patch isn't working at fucking ALL!!!!
             var org = AccessTools.Method(typeof(NeurotrainerDefGenerator), "ImpliedThingDefs");
             var post = new HarmonyMethod(typeof(Patches.AbilityNeurotrainerDefGenerator), nameof(ImpliedThingDefs_Postfix));
             harmony.Patch(org, null, post);

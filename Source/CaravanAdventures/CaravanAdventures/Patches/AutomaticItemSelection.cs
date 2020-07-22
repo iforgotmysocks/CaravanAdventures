@@ -83,7 +83,6 @@ namespace CaravanAdventures.Patches
             Rect rect2 = new Rect(rect.xMax + 10f, 0f, 40f, 27f);
             if (Widgets.ButtonText(rect2, "All", true, true, true))
             {
-                // todo create filter for things that make sense - or rather which don't
                 FilterCombs.ApplyAll(sections);
                 anythingChanged = true;
             }
