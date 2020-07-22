@@ -83,6 +83,15 @@ namespace CaravanAdventures.CaravanItemSelection
                 Operation = FilterOperation.Include,
                 MaxQuality = QualityCategory.Excellent,
             });
+            goods.appliedFilters.Add(new Filter(new object[]
+            {
+                DefDatabase<ThingCategoryDef>.GetNamedSilentFail("ApparelUtility")
+            })
+            {
+                Name = "ExcludedSellableGoods",
+                Connection = FilterConnection.OR,
+                Operation = FilterOperation.Exclude
+            });
 
             // fix NEG being used in a different context as AND / OR
             journey.appliedFilters.Add(new Filter(new object[]

@@ -2,25 +2,25 @@
 
 <!-- todo - lets see if we can do this code-wise?-->
 <Patch>
-  <Operation Class="PatchOperationConditional">
-    <xpath>/Defs/WorldObjectDef[defName="Caravan"]/comps</xpath>
-    <nomatch Class="PatchOperationAdd">
-      <xpath>/Defs/WorldObjectDef[defName="Caravan"]</xpath>
-      <value>
-        <comps>
-          <li>
-            <compClass>CaravanAdventures.CaravanImprovements.CompCaravanDecisions</compClass>
-          </li>
-        </comps>
-      </value>
-    </nomatch>
-    <match Class="PatchOperationAdd">
-      <xpath>/Defs/WorldObjectDef[defName="Caravan"]/comps</xpath>
-      <value>
+<Operation Class="PatchOperationConditional">
+  <xpath>/Defs/WorldObjectDef[defName="Caravan"]/comps</xpath>
+  <nomatch Class="PatchOperationAdd">
+    <xpath>/Defs/WorldObjectDef[defName="Caravan"]</xpath>
+    <value>
+      <comps>
         <li>
           <compClass>CaravanAdventures.CaravanImprovements.CompCaravanDecisions</compClass>
         </li>
-      </value>
-    </match>
-  </Operation>
+      </comps>
+    </value>
+  </nomatch>
+  <match Class="PatchOperationAdd">
+    <xpath>/Defs/WorldObjectDef[defName="Caravan"]/comps</xpath>
+    <value>
+      <li>
+        <compClass>CaravanAdventures.CaravanImprovements.CompCaravanDecisions</compClass>
+      </li>
+    </value>
+  </match>
+</Operation>
 </Patch>

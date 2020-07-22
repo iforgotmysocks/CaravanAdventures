@@ -6,7 +6,7 @@ using RimWorld.Planet;
 
 namespace CaravanAdventures.CaravanImprovements
 {
-    public static class CaravanEnterMapImrpvementUtility
+    public static class CaravanEnterMapImprovementUtility
     {
         private static List<Pawn> tmpPawns = new List<Pawn>();
 

@@ -16,7 +16,7 @@ namespace CaravanAdventures.CaravanImprovements
         public bool allowNightTravel = false;
         private static StringBuilder tmpSettleFailReason = new StringBuilder();
 
-        public static void SettleWithoutDroppingGear(Caravan caravan)
+        private static void SettleWithoutDroppingGear(Caravan caravan)
         {
             Faction faction = caravan.Faction;
             if (faction != Faction.OfPlayer)
@@ -41,9 +41,7 @@ namespace CaravanAdventures.CaravanImprovements
 
         public override IEnumerable<Gizmo> GetCaravanGizmos(Caravan caravan)
         {
-            var gizmos = base.GetCaravanGizmos(caravan).ToList();
-            // todo check and change
-            if (this.parent != null && this.parent.Faction != null && this.parent.Faction == Faction.OfPlayerSilentFail || true)
+            if (Find.WorldSelector.SingleSelectedObject == this.parent && this.parent != null && this.parent.Faction != null && this.parent.Faction == Faction.OfPlayerSilentFail)
             {
                 var settleCommand = new Command_Settle
                 {
@@ -51,12 +49,10 @@ namespace CaravanAdventures.CaravanImprovements
                     defaultDesc = "SettleWithoutUnloadingDesc".Translate(),
                     order = 198f,
                     icon = ContentFinder<Texture2D>.Get("UI/Icons/Settle", true),
-                    action = (() => {
-                        Action settleAction = (delegate () {
-                            SettleWithoutDroppingGear(caravan);
-                        });
+                    action = () => {
+                        Action settleAction = () => SettleWithoutDroppingGear(caravan);
                         SettlementProximityGoodwillUtility.CheckConfirmSettle(caravan.Tile, settleAction);
-                    })
+                    }
                 };
                 tmpSettleFailReason.Length = 0;
                 if (!TileFinder.IsValidTileForNewSettlement(caravan.Tile, tmpSettleFailReason))
@@ -65,30 +61,23 @@ namespace CaravanAdventures.CaravanImprovements
                 }
                 else if (SettleUtility.PlayerSettlementsCountLimitReached)
                 {
-                    if (Prefs.MaxNumberOfPlayerSettlements > 1)
-                    {
-                        settleCommand.Disable("CommandSettleFailReachedMaximumNumberOfBases".Translate());
-                    }
-                    else
-                    {
-                        settleCommand.Disable("CommandSettleFailAlreadyHaveBase".Translate());
-                    }
+                    if (Prefs.MaxNumberOfPlayerSettlements > 1) settleCommand.Disable("CommandSettleFailReachedMaximumNumberOfBases".Translate());
+                    else settleCommand.Disable("CommandSettleFailAlreadyHaveBase".Translate());
                 }
-
-                gizmos.Add(settleCommand);
+                yield return settleCommand;
 
                 var command = new Command_Toggle
                 {
+                    isActive = () => allowNightTravel,
+                    toggleAction = () => allowNightTravel = !allowNightTravel,
                     defaultLabel = "AllowNightTravel".Translate(),
                     defaultDesc = "AllowNightTravelDesc".Translate(),
                     order = 199f,
                     icon = ContentFinder<Texture2D>.Get("UI/Icons/Settle", true),
-                    isActive = (() => this.allowNightTravel),
-                    toggleAction = (() => this.allowNightTravel = !this.allowNightTravel)
                 };
-                gizmos.Add(command);
+                yield return command;
             }
-            return gizmos;
+            yield break;
         }
 
         public override void PostExposeData()
