@@ -22,11 +22,11 @@ namespace CaravanAdventures
         {
             base.FinalizeInit();
             FilterCombs.InitFilterSets();
-            PatchAncientShrineDefs();
-            PatchTreeDef();
+            PatchAncientShrineDefs_MoreShrinesAndBetterRewards();
+            PatchTreeDef_AddTalkOption();
         }
 
-        private void PatchTreeDef()
+        private void PatchTreeDef_AddTalkOption()
         {
             var tree = DefDatabase<ThingDef>.GetNamed("Plant_TreeAnima");
             if (tree == null)
@@ -38,7 +38,7 @@ namespace CaravanAdventures
             if (!tree.comps.Any(x => x is CompProperties_Talk)) tree.comps.Add(new CompProperties_Talk() { compClass = typeof(CompTalk) });
         }
 
-        private void PatchAncientShrineDefs()
+        private void PatchAncientShrineDefs_MoreShrinesAndBetterRewards()
         {
             // todo ModOptions
             var scatterShrinesDef = DefDatabase<GenStepDef>.GetNamed("ScatterShrines");

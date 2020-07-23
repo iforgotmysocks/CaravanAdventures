@@ -12,11 +12,13 @@ namespace CaravanAdventures.CaravanStory
 {
     class StoryStart : MapComponent
     {
+        public bool Debug { get; set; } = true;
         private Dictionary<string, bool> storyFlags = new Dictionary<string, bool>()
         {
             { "Start_InitialTreeWhisper", false },
             { "Start_MapTreeWhisper", false },
-            { "Start_RechedTree", false }
+            { "Start_RechedTree", false },
+            { "Start_ReceivedGift", false }
         };
         private Sustainer animaTreeWhipserSustainer;
 
@@ -28,8 +30,7 @@ namespace CaravanAdventures.CaravanStory
         public override void FinalizeInit()
         {
             base.FinalizeInit();
-           
-            //AddTalkTreeAction();
+            AddTalkTreeAction();
         }
 
         public override void MapGenerated()
@@ -37,7 +38,6 @@ namespace CaravanAdventures.CaravanStory
             base.MapGenerated();
 
             // ModLister.RoyaltyInstalled or ModsConfig.RoyaltyActive
-            //CheckEnsureGiftedAndAssignAbilities();
         }
 
         public override void MapComponentTick()
@@ -45,11 +45,9 @@ namespace CaravanAdventures.CaravanStory
             base.MapComponentTick();
             if (Find.TickManager.TicksGame % 2000 == 0)
             {
-                CheckEnsureGiftedAndAssignAbilities();
-
-
-                //AddTreeHumming();
-                //CheckPlayerProximityToInitiateDialog();
+                AddTreeHumming();
+                CheckPlayerProximityToInitiateDialog();
+                CheckEnsureGifted();
             }
         }
 
@@ -89,8 +87,22 @@ namespace CaravanAdventures.CaravanStory
         {
         }
 
-        private void CheckEnsureGiftedAndAssignAbilities()
+        public void StoryStartDialog(Pawn initiator, object addressed)
         {
+            Log.Message($"Story starts initiated by {initiator.Name} and {((Thing)addressed).def.defName}");
+            storyFlags["Start_ReceivedGift"] = true;
+
+            var diaNode = new DiaNode("Story_Start_Dia1".Translate());
+            diaNode.options.Add(new DiaOption("Story_Start_Dia1_GuessMe".Translate()) { action = () => { }, resolveTree = true }); ;
+
+            TaggedString taggedString = "Story_Start_Dia1_Title".Translate();
+            Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
+            Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
+        }
+
+        private void CheckEnsureGifted()
+        {
+            if (!storyFlags["Start_ReceivedGift"]) return;
             // todo IsColonistPlayerControlled doesn't work here, when pawn is breaking it won't be playercontrolled anymore
             var pawns = PawnsFinder.AllMapsAndWorld_Alive.Where(x => x.RaceProps.Humanlike && x.Faction.IsPlayer);
             if (pawns == null || pawns?.Count() == 0)
@@ -118,6 +130,12 @@ namespace CaravanAdventures.CaravanStory
             chosen.health.AddHediff(DefDatabase<HediffDef>.AllDefs.FirstOrDefault(x => x.defName == "PsychicAmplifier"), chosen.health.hediffSet.GetBrain());
             chosen.health.AddHediff(DefDatabase<HediffDef>.AllDefs.FirstOrDefault(x => x.defName == "AncientGift"), chosen.health.hediffSet.GetBrain());
 
+            if (Debug) DebugAddAllAbilities(chosen);
+        }
+
+        
+        private void DebugAddAllAbilities(Pawn chosen)
+        {
             var abilityDefs = DefDatabase<AbilityDef>.AllDefsListForReading.Where(x => x.defName.StartsWith("Ancient"));
             foreach (var abilityDef in abilityDefs)
             {
@@ -127,10 +145,7 @@ namespace CaravanAdventures.CaravanStory
             chosen.abilities.GainAbility(lightAbilityDef);
         }
 
-        public void StoryStartDialog(Pawn initiator, object addressed)
-        {
-            Log.Message($"Story starts initiated by {initiator.Name} and {((Thing)addressed).def.defName}");
-        }
+
 
         public override void ExposeData()
         {

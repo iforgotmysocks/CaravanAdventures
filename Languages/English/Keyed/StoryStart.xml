@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
-	<CA_Start_Begin>Talk</CA_Start_Begin>
+	<CA_Start_Begin>Talk...</CA_Start_Begin>
+	<Story_Start_Dia1_Title>The tree talks</Story_Start_Dia1_Title>
+	<Story_Start_Dia1>The ancient creature awoke... we may all perish unless we empore a saviour to gather the ancient spells in order to battle the creature when it appears.</Story_Start_Dia1>
+	<Story_Start_Dia1_GuessMe>Lemme guess... u're talking about me?</Story_Start_Dia1_GuessMe>
 </LanguageData>

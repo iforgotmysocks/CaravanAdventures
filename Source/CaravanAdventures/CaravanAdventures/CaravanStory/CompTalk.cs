@@ -12,23 +12,34 @@ namespace CaravanAdventures.CaravanStory
     public class CompTalk : ThingComp
     {
         public new CompProperties_Talk Props => (CompProperties_Talk)props;
+		private Pawn approachingPawn = null;
+		private bool talkedTo = false;
 
 		public void SetProps(CompProperties_Talk props)
         {
 			this.props = props;
         }
 
-		public override IEnumerable<FloatMenuOption> CompFloatMenuOptions(Pawn pawn)
+        public override void CompTick()
+        {
+            base.CompTick();
+			if (talkedTo == false && approachingPawn != null && this.parent.Position.DistanceTo(approachingPawn.Position) < 5)
+			{
+				talkedTo = true;
+				Props.actions.FirstOrDefault(x => this.parent == x.Key).Value.Invoke(approachingPawn, this.parent);
+			}
+        }
+
+        public override IEnumerable<FloatMenuOption> CompFloatMenuOptions(Pawn pawn)
 		{
 			if (!Props.enabled) yield break;
 			// todo - test if detecting by object key works for specific pawns
-			var action = Props.actions.FirstOrDefault(x => this.parent == x.Key).Value;
 			if (pawn.Dead || pawn.Drafted)
 			{
 				yield break;
 			}
 			string text = "CA_Start_Begin".Translate();
-			AcceptanceReport acceptanceReport = this.CanPsylink(pawn, null);
+			AcceptanceReport acceptanceReport = this.CanTalkTo(pawn, null);
 			if (!acceptanceReport.Accepted && !string.IsNullOrWhiteSpace(acceptanceReport.Reason))
 			{
 				text = text + ": " + acceptanceReport.Reason;
@@ -36,7 +47,7 @@ namespace CaravanAdventures.CaravanStory
 			
 			yield return new FloatMenuOption(text, delegate ()
 			{
-				action.Invoke(pawn, this.parent);
+				ApproachDesiredThing(pawn);
 			}, MenuOptionPriority.Default, null, null, 0f, null, null)
 			{
 				Disabled = !acceptanceReport.Accepted
@@ -44,29 +55,15 @@ namespace CaravanAdventures.CaravanStory
 			yield break;
 		}
 
-        private void StartQuest(Pawn pawn)
-        {
-			Action action = null;
-			TaggedString psylinkAffectedByTraitsNegativelyWarning = RoyalTitleUtility.GetPsylinkAffectedByTraitsNegativelyWarning(pawn);
-			if (psylinkAffectedByTraitsNegativelyWarning != null)
-			{
-				WindowStack windowStack = Find.WindowStack;
-				TaggedString text2 = psylinkAffectedByTraitsNegativelyWarning;
-				string buttonAText = "Confirm".Translate();
-				Action buttonAAction;
-				if ((buttonAAction = action) == null)
-				{
-					buttonAAction = (action = delegate ()
-					{
-						this.StartQuest(pawn);
-					});
-				}
-				windowStack.Add(new Dialog_MessageBox(text2, buttonAText, buttonAAction, "GoBack".Translate(), null, null, false, null, null));
-				return;
-			}
+		private void ApproachDesiredThing(Pawn pawn)
+		{
+			talkedTo = false;
+			Job job = JobMaker.MakeJob(JobDefOf.Goto, pawn, this.parent);
+			pawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
+			this.approachingPawn = pawn;
 		}
 
-        public AcceptanceReport CanPsylink(Pawn pawn, LocalTargetInfo? knownSpot = null)
+        public AcceptanceReport CanTalkTo(Pawn pawn, LocalTargetInfo? knownSpot = null)
 		{
 			if (pawn.Dead || pawn.Faction != Faction.OfPlayer)
 			{
@@ -84,10 +81,6 @@ namespace CaravanAdventures.CaravanStory
 				{
 					return new AcceptanceReport("BeginLinkingRitualNeedLinkSpot".Translate());
 				}
-			}
-			else if (!this.TryFindLinkSpot(pawn, out localTargetInfo))
-			{
-				return new AcceptanceReport("BeginLinkingRitualNeedLinkSpot".Translate());
 			}
 			return AcceptanceReport.WasAccepted;
 		}

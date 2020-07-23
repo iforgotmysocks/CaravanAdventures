@@ -17,11 +17,11 @@
   </CaravanAdventures.CaravanImmersion.TravelCompanionDef>
 
   <CaravanAdventures.CaravanImmersion.TravelCompanionDef>
-    <defName>FamiliarFool</defName>
-    <label>Familiar fool</label>
+    <defName>FamiliarCompanion</defName>
+    <label>Familiar companion</label>
     <thoughtStage>2</thoughtStage>
     <maxDays>60</maxDays>
-    <relationDefName>FamiliarFoolRelation</relationDefName>
+    <relationDefName>FamiliarCompanionRelation</relationDefName>
   </CaravanAdventures.CaravanImmersion.TravelCompanionDef>
 
   <CaravanAdventures.CaravanImmersion.TravelCompanionDef>
@@ -79,9 +79,9 @@
   </PawnRelationDef>
 
   <PawnRelationDef>
-    <defName>FamiliarFoolRelation</defName>
-    <label>Familiar fool</label>
-    <labelFemale>Familiar fool</labelFemale>
+    <defName>FamiliarCompanionRelation</defName>
+    <label>Familiar companion</label>
+    <labelFemale>Familiar companion</labelFemale>
     <!--<importance>90</importance>-->
     <opinionOffset>10</opinionOffset>
     <implied>false</implied>
@@ -181,7 +181,7 @@
   </ThoughtDef>
 
   <ThoughtDef>
-    <defName>FamiliarFoolRelation</defName>
+    <defName>FamiliarCompanionRelation</defName>
     <thoughtClass>Thought_MemorySocial</thoughtClass>
     <stackLimit>300</stackLimit>
     <nullifyingTraits>
@@ -189,7 +189,7 @@
     </nullifyingTraits>
     <stages>
       <li>
-        <label>Familiar fool</label>
+        <label>Familiar companion</label>
         <baseOpinionOffset>5</baseOpinionOffset>
       </li>
     </stages>
