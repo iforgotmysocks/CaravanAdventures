@@ -11,23 +11,39 @@ namespace CaravanAdventures.CaravanStory
 {
     public class CompTalk : ThingComp
     {
-        public new CompProperties_Talk Props => (CompProperties_Talk)props;
+        public CompProperties_Talk Props => (CompProperties_Talk)props;
 		private Pawn approachingPawn = null;
 		private bool talkedTo = false;
-
-		public void SetProps(CompProperties_Talk props)
-        {
-			this.props = props;
-        }
+		private int ticks = 0;
+		private int ticksLong = 0;
 
         public override void CompTick()
         {
-            base.CompTick();
-			if (talkedTo == false && approachingPawn != null && this.parent.Position.DistanceTo(approachingPawn.Position) < 5)
+			base.CompTick();
+			if (ticks >= 25)
 			{
-				talkedTo = true;
-				Props.actions.FirstOrDefault(x => this.parent == x.Key).Value.Invoke(approachingPawn, this.parent);
+				Log.Message($"talkedto: {talkedTo} pawn null? {approachingPawn == null} distance: {(approachingPawn != null ? this.parent.Position.DistanceTo(approachingPawn.Position).ToString() : "pawn null")}");
+				if (talkedTo == false && approachingPawn != null && this.parent.Position.DistanceTo(approachingPawn.Position) < 5)
+				{
+					talkedTo = true;
+					Props.actions.FirstOrDefault(x => this.parent == x.Key).Value.Invoke(approachingPawn, this.parent);
+				}
+
+				ticks = 0;
 			}
+			if (ticksLong >= 2000)
+			{
+				this.parent.TickLong();
+				ticksLong = 0;
+			}
+			ticks++;
+			ticksLong++;
+        }
+
+        public override void CompTickLong()
+        {
+            base.CompTickLong();
+			Log.Message("Long tick still happening");
         }
 
         public override IEnumerable<FloatMenuOption> CompFloatMenuOptions(Pawn pawn)
@@ -57,8 +73,9 @@ namespace CaravanAdventures.CaravanStory
 
 		private void ApproachDesiredThing(Pawn pawn)
 		{
+			Log.Message("Should approach thing now");
 			talkedTo = false;
-			Job job = JobMaker.MakeJob(JobDefOf.Goto, pawn, this.parent);
+			Job job = JobMaker.MakeJob(JobDefOf.Goto, this.parent);
 			pawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
 			this.approachingPawn = pawn;
 		}
@@ -113,5 +130,12 @@ namespace CaravanAdventures.CaravanStory
 			return cell.DistanceTo(this.parent.Position) <= 3.9f && cell.Standable(this.parent.Map) && GenSight.LineOfSight(cell, this.parent.Position, this.parent.Map, false, null, 0, 0) && pawn.CanReach(spot, PathEndMode.OnCell, Danger.Deadly, false, TraverseMode.ByPawn);
 		}
 
-	}
+        public override void PostExposeData()
+        {
+            base.PostExposeData();
+			Scribe_Values.Look(ref ticks, "ticks", 0);
+			Scribe_Values.Look(ref ticksLong, "ticksLong", 0);
+        }
+
+    }
 }

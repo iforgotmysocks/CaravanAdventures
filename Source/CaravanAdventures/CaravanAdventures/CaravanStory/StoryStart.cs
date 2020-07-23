@@ -16,8 +16,10 @@ namespace CaravanAdventures.CaravanStory
         private Dictionary<string, bool> storyFlags = new Dictionary<string, bool>()
         {
             { "Start_InitialTreeWhisper", false },
+            { "Start_InitialTreeAddTalkOption", false },
             { "Start_MapTreeWhisper", false },
             { "Start_RechedTree", false },
+            { "Start_CanReceiveGift", false },
             { "Start_ReceivedGift", false }
         };
         private Sustainer animaTreeWhipserSustainer;
@@ -30,7 +32,7 @@ namespace CaravanAdventures.CaravanStory
         public override void FinalizeInit()
         {
             base.FinalizeInit();
-            AddTalkTreeAction();
+            
         }
 
         public override void MapGenerated()
@@ -43,16 +45,18 @@ namespace CaravanAdventures.CaravanStory
         public override void MapComponentTick()
         {
             base.MapComponentTick();
+            // todo get rid of modulu
             if (Find.TickManager.TicksGame % 2000 == 0)
             {
-                AddTreeHumming();
-                CheckPlayerProximityToInitiateDialog();
+                AddTalkTreeAction();
+                AddTreeWhisper();
                 CheckEnsureGifted();
             }
         }
 
         private void AddTalkTreeAction()
         {
+            if (storyFlags["Start_InitialTreeAddTalkOption"]) return;
             var tree = map.spawnedThings.FirstOrDefault(x => x.def.defName == "Plant_TreeAnima");
             if (tree == null)
             {
@@ -65,9 +69,10 @@ namespace CaravanAdventures.CaravanStory
             var cp = tree.def.comps.FirstOrDefault(x => x is CompProperties_Talk) as CompProperties_Talk;
             cp.actions.Add(tree, (initiator, addressed) => StoryStartDialog(initiator, addressed));
             cp.enabled = true;
+            storyFlags["Start_InitialTreeAddTalkOption"] = true;
         }
 
-        private void AddTreeHumming()
+        private void AddTreeWhisper()
         {
             if (storyFlags["Start_InitialTreeWhisper"] == true) return;
             var tree = map.spawnedThings.FirstOrDefault(x => x.def.defName == "Plant_TreeAnima");
@@ -83,26 +88,29 @@ namespace CaravanAdventures.CaravanStory
             if (animaTreeWhipserSustainer != null) storyFlags["Start_InitialTreeWhisper"] = true;
         }
 
-        private void CheckPlayerProximityToInitiateDialog()
-        {
-        }
-
         public void StoryStartDialog(Pawn initiator, object addressed)
         {
             Log.Message($"Story starts initiated by {initiator.Name} and {((Thing)addressed).def.defName}");
-            storyFlags["Start_ReceivedGift"] = true;
-
+            
             var diaNode = new DiaNode("Story_Start_Dia1".Translate());
-            diaNode.options.Add(new DiaOption("Story_Start_Dia1_GuessMe".Translate()) { action = () => { }, resolveTree = true }); ;
+            diaNode.options.Add(new DiaOption("Story_Start_Dia1_GuessMe".Translate()) { action = () => GrantAncientGift(initiator, addressed), resolveTree = true }); ;
 
             TaggedString taggedString = "Story_Start_Dia1_Title".Translate();
             Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
             Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
         }
 
+        private void GrantAncientGift(Pawn initiator, object addressed)
+        {
+            storyFlags["Start_CanReceiveGift"] = true;
+            CheckEnsureGifted();
+            if (animaTreeWhipserSustainer != null && !animaTreeWhipserSustainer.Ended) animaTreeWhipserSustainer.End();
+            storyFlags["Start_ReceivedGift"] = true;
+        }
+
         private void CheckEnsureGifted()
         {
-            if (!storyFlags["Start_ReceivedGift"]) return;
+            if (!storyFlags["Start_CanReceiveGift"]) return;
             // todo IsColonistPlayerControlled doesn't work here, when pawn is breaking it won't be playercontrolled anymore
             var pawns = PawnsFinder.AllMapsAndWorld_Alive.Where(x => x.RaceProps.Humanlike && x.Faction.IsPlayer);
             if (pawns == null || pawns?.Count() == 0)
@@ -145,12 +153,11 @@ namespace CaravanAdventures.CaravanStory
             chosen.abilities.GainAbility(lightAbilityDef);
         }
 
-
-
         public override void ExposeData()
         {
             base.ExposeData();
             //Scribe_Values.Look(ref chosenPawnSelected, "chosenPawnSelected", false, false);
+            Scribe_Values.Look(ref storyFlags, "storyFlags", null);
         }
 
 

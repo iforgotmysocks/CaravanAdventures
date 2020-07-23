@@ -35,6 +35,7 @@ namespace CaravanAdventures
                 return;
             }
 
+            tree.tickerType = TickerType.Normal;
             if (!tree.comps.Any(x => x is CompProperties_Talk)) tree.comps.Add(new CompProperties_Talk() { compClass = typeof(CompTalk) });
         }
 
