@@ -7,22 +7,24 @@ using RimWorld;
 using Verse;
 using RimWorld.Planet;
 using Verse.Sound;
+using HarmonyLib;
 
 namespace CaravanAdventures.CaravanStory
 {
     class StoryStart : MapComponent
     {
-        public bool Debug { get; set; } = true;
-        private Dictionary<string, bool> storyFlags = new Dictionary<string, bool>()
-        {
-            { "Start_InitialTreeWhisper", false },
-            { "Start_InitialTreeAddTalkOption", false },
-            { "Start_MapTreeWhisper", false },
-            { "Start_RechedTree", false },
-            { "Start_CanReceiveGift", false },
-            { "Start_ReceivedGift", false }
-        };
+        public bool Debug { get; set; } = false;
+        //private Dictionary<string, bool> StoryManager.storyFlags = new Dictionary<string, bool>()
+        //{
+        //    { "Start_InitialTreeWhisper", false },
+        //    { "Start_InitialTreeAddTalkOption", false },
+        //    { "Start_MapTreeWhisper", false },
+        //    { "Start_RechedTree", false },
+        //    { "Start_CanReceiveGift", false },
+        //    { "Start_ReceivedGift", false }
+        //};
         private Sustainer animaTreeWhipserSustainer;
+        private bool currentStoryTrigger = false;
 
         public StoryStart(Map map) : base(map)
         {
@@ -32,14 +34,18 @@ namespace CaravanAdventures.CaravanStory
         public override void FinalizeInit()
         {
             base.FinalizeInit();
-            
         }
 
         public override void MapGenerated()
         {
             base.MapGenerated();
 
+
             // ModLister.RoyaltyInstalled or ModsConfig.RoyaltyActive
+            if (StoryWC.storyFlags["Start_InitialTreeAddTalkOption"])
+            {
+
+            }
         }
 
         public override void MapComponentTick()
@@ -56,7 +62,7 @@ namespace CaravanAdventures.CaravanStory
 
         private void AddTalkTreeAction()
         {
-            if (storyFlags["Start_InitialTreeAddTalkOption"]) return;
+            if (StoryWC.storyFlags["Start_InitialTreeAddTalkOption"]) return;
             var tree = map.spawnedThings.FirstOrDefault(x => x.def.defName == "Plant_TreeAnima");
             if (tree == null)
             {
@@ -65,16 +71,29 @@ namespace CaravanAdventures.CaravanStory
             }
 
             // todo 
+            currentStoryTrigger = true;
             Log.Message("adding tree action");
-            var cp = tree.def.comps.FirstOrDefault(x => x is CompProperties_Talk) as CompProperties_Talk;
-            cp.actions.Add(tree, (initiator, addressed) => StoryStartDialog(initiator, addressed));
-            cp.enabled = true;
-            storyFlags["Start_InitialTreeAddTalkOption"] = true;
+            var comp = tree.TryGetComp<CompTalk>();
+            comp.actions.Add(tree, (initiator, addressed) => StoryStartDialog(initiator, addressed));
+            comp.Enabled = true;
+            StoryWC.storyFlags["Start_InitialTreeAddTalkOption"] = true;
+        }
+
+        private void DisableTreeTalkAction()
+        {
+            var tree = map.spawnedThings.FirstOrDefault(x => x.def.defName == "Plant_TreeAnima");
+            if (tree == null)
+            {
+                Log.Message("Tree is null");
+                return;
+            }
+
+            var comp = tree.TryGetComp<CompTalk>();
         }
 
         private void AddTreeWhisper()
         {
-            if (storyFlags["Start_InitialTreeWhisper"] == true) return;
+            if (StoryWC.storyFlags["Start_InitialTreeWhisper"] == true) return;
             var tree = map.spawnedThings.FirstOrDefault(x => x.def.defName == "Plant_TreeAnima");
             if (tree == null)
             {
@@ -85,16 +104,33 @@ namespace CaravanAdventures.CaravanStory
             var info = SoundInfo.InMap(tree, MaintenanceType.None);
 
             animaTreeWhipserSustainer = DefDatabase<SoundDef>.GetNamed("AnimaTreeWhispers").TrySpawnSustainer(info);
-            if (animaTreeWhipserSustainer != null) storyFlags["Start_InitialTreeWhisper"] = true;
+            if (animaTreeWhipserSustainer != null) StoryWC.storyFlags["Start_InitialTreeWhisper"] = true;
         }
 
         public void StoryStartDialog(Pawn initiator, object addressed)
         {
             Log.Message($"Story starts initiated by {initiator.Name} and {((Thing)addressed).def.defName}");
-            
-            var diaNode = new DiaNode("Story_Start_Dia1".Translate());
-            diaNode.options.Add(new DiaOption("Story_Start_Dia1_GuessMe".Translate()) { action = () => GrantAncientGift(initiator, addressed), resolveTree = true }); ;
+            DiaNode diaNode = null;
+            if (!StoryWC.storyFlags["Start_CanReceiveGift"])
+            {
+                var endDiaNodeAccepted = new DiaNode("Story_Start_Dia1_Me_End_Accepted".Translate());
+                endDiaNodeAccepted.options.Add(new DiaOption("Story_Start_Dia1_Me_End_Bye".Translate()) { action = () => GrantAncientGift(initiator, addressed), resolveTree = true });
 
+                var endDiaNodeDenied = new DiaNode("Story_Start_Dia1_Me_End_Denied".Translate());
+                endDiaNodeDenied.options.Add(new DiaOption("Story_Start_Dia1_Me_End_Bye".Translate()) { resolveTree = true });
+
+                var subDiaNode = new DiaNode("Story_Start_Dia1_Me".Translate());
+                subDiaNode.options.Add(new DiaOption("Story_Start_Dia1_Me_NoChoice".Translate()) { link = endDiaNodeAccepted });
+                subDiaNode.options.Add(new DiaOption("Story_Start_Dia1_Me_SomeoneBetter".Translate()) { link = endDiaNodeDenied });
+
+                diaNode = new DiaNode("Story_Start_Dia1".Translate());
+                diaNode.options.Add(new DiaOption("Story_Start_Dia1_GuessMe".Translate()) { link = subDiaNode }); ;
+            }
+            else
+            {
+                diaNode = new DiaNode("Story_Start_Dia1_Me_End_GiftAlreadyRecieved".Translate());
+                diaNode.options.Add(new DiaOption("Story_Start_Dia1_Me_End_Bye".Translate()) { resolveTree = true }); ;
+            }
             TaggedString taggedString = "Story_Start_Dia1_Title".Translate();
             Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
             Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
@@ -102,22 +138,36 @@ namespace CaravanAdventures.CaravanStory
 
         private void GrantAncientGift(Pawn initiator, object addressed)
         {
-            storyFlags["Start_CanReceiveGift"] = true;
-            CheckEnsureGifted();
+            StoryWC.storyFlags["Start_CanReceiveGift"] = true;
+            CheckEnsureGifted(initiator);
+            AddAdditionalSpells(initiator);
             if (animaTreeWhipserSustainer != null && !animaTreeWhipserSustainer.Ended) animaTreeWhipserSustainer.End();
-            storyFlags["Start_ReceivedGift"] = true;
+            StoryWC.storyFlags["Start_ReceivedGift"] = true;
         }
 
-        private void CheckEnsureGifted()
+        private void AddAdditionalSpells(Pawn chosen)
         {
-            if (!storyFlags["Start_CanReceiveGift"]) return;
-            // todo IsColonistPlayerControlled doesn't work here, when pawn is breaking it won't be playercontrolled anymore
-            var pawns = PawnsFinder.AllMapsAndWorld_Alive.Where(x => x.RaceProps.Humanlike && x.Faction.IsPlayer);
-            if (pawns == null || pawns?.Count() == 0)
+            foreach (var abilityDef in DefDatabase<AbilityDef>.AllDefsListForReading.Where(x => x.level == 1).InRandomOrder().Take(2))
             {
-                Log.Message($"No pawns found, skipping.");
-                return;
+                chosen.abilities.GainAbility(abilityDef);
             }
+        }
+
+        private void CheckEnsureGifted(Pawn pawn = null)
+        {
+            if (!StoryWC.storyFlags["Start_CanReceiveGift"]) return;
+            IEnumerable<Pawn> pawns = new List<Pawn>();
+            // todo IsColonistPlayerControlled doesn't work here, when pawn is breaking it won't be playercontrolled anymore
+            if (pawn == null)
+            {
+                pawns = PawnsFinder.AllMapsAndWorld_Alive.Where(x => x.RaceProps.Humanlike && x.Faction.IsPlayer);
+                if (pawns == null || pawns?.Count() == 0)
+                {
+                    Log.Message($"No pawns found, skipping.");
+                    return;
+                }
+            }
+            else pawns.AddItem(pawn);
 
             if (pawns.FirstOrDefault(x => x.health.hediffSet.GetFirstHediffOfDef(HediffDef.Named("AncientGift")) != null) != null)
             {
@@ -126,7 +176,7 @@ namespace CaravanAdventures.CaravanStory
             }
 
             // todo make sure the pawn isn't psychially unsensitive.
-            var chosen = pawns.FirstOrDefault(x => x.Name.ToString().ToLower().Contains("kay")) ?? pawns.FirstOrDefault();
+            var chosen = pawn ?? pawns.FirstOrDefault();
             if (chosen == null)
             {
                 Log.Message("Couldn't find pawn, skipping");
@@ -153,11 +203,25 @@ namespace CaravanAdventures.CaravanStory
             chosen.abilities.GainAbility(lightAbilityDef);
         }
 
+        public override void MapRemoved()
+        {
+            base.MapRemoved();
+            // todo reset certain storyFlags if required so story can be triggered or continued on another tile?
+            if (currentStoryTrigger && !StoryWC.storyFlags["Start_ReceivedGift"])
+            {
+                foreach (var key in StoryWC.storyFlags.Keys.ToList())
+                {
+                    StoryWC.storyFlags[key] = false;
+                }
+            }
+        }
+
         public override void ExposeData()
         {
             base.ExposeData();
             //Scribe_Values.Look(ref chosenPawnSelected, "chosenPawnSelected", false, false);
-            Scribe_Values.Look(ref storyFlags, "storyFlags", null);
+            //Scribe_Values.Look(ref StoryManager.storyFlags, "StoryManager.storyFlags", null);
+            Scribe_Values.Look(ref currentStoryTrigger, "currentStoryTrigger", false);
         }
 
 

@@ -72,10 +72,12 @@ namespace CaravanAdventures.CaravanIncidents
 			return pawn;
 		}
 
-		public static void GirlJoins(List<Pawn> pawns, Pawn girl)
+		public static void GirlJoins(List<Pawn> pawns, Pawn girl, Caravan caravan = null)
 		{
 			var faction = pawns.FirstOrDefault()?.Faction;
 			girl.SetFaction(faction);
+
+			if (caravan != null) caravan.AddPawn(girl, true);
 		}
 
 

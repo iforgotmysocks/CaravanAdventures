@@ -18,7 +18,7 @@
     </IncidentTargetTags>
     <comps>
       <li Class="WorldObjectCompProperties_FormCaravan" />
-      <li Class="WorldObjectCompProperties_TimedForcedExit" />
+			<li Class="WorldObjectCompProperties_TimedDetectionRaids" />
     </comps>
   </WorldObjectDef>
 

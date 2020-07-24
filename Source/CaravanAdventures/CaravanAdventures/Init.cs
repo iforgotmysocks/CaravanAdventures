@@ -29,14 +29,19 @@ namespace CaravanAdventures
         private void PatchTreeDef_AddTalkOption()
         {
             var tree = DefDatabase<ThingDef>.GetNamed("Plant_TreeAnima");
+            
             if (tree == null)
             {
                 Log.Message("Tree is null");
                 return;
             }
-
-            tree.tickerType = TickerType.Normal;
-            if (!tree.comps.Any(x => x is CompProperties_Talk)) tree.comps.Add(new CompProperties_Talk() { compClass = typeof(CompTalk) });
+            var compProp = new CompProperties_Talk() { compClass = typeof(CompTalk) };
+            if (tree.tickerType != TickerType.Normal)
+            {
+                compProp.orgTickerType = tree.tickerType;
+                tree.tickerType = TickerType.Normal;
+            }
+            if (!tree.comps.Any(x => x is CompProperties_Talk)) tree.comps.Add(compProp);
         }
 
         private void PatchAncientShrineDefs_MoreShrinesAndBetterRewards()

@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
 	<CA_Start_Begin>Talk...</CA_Start_Begin>
-	<Story_Start_Dia1_Title>The tree talks</Story_Start_Dia1_Title>
-	<Story_Start_Dia1>The ancient creature awoke... we may all perish unless we empore a saviour to gather the ancient spells in order to battle the creature when it appears.</Story_Start_Dia1>
-	<Story_Start_Dia1_GuessMe>Lemme guess... u're talking about me?</Story_Start_Dia1_GuessMe>
+	<Story_Start_Dia1_Title>The magic tree speaks...</Story_Start_Dia1_Title>
+	<Story_Start_Dia1>Listen human, the ancient creature awoke. We may all perish unless we empower a saviour to gather the ancient spells in order to battle the creature when it is ready to strike.</Story_Start_Dia1>
+	<Story_Start_Dia1_GuessMe>Wha... me?</Story_Start_Dia1_GuessMe>
+	<Story_Start_Dia1_Me>Yes, you have the potential that is required to whield the power of the ancient scrolls. Start the journey, aquire the spells and save this planet from doom. Do you accept the Ancient Gift?</Story_Start_Dia1_Me>
+	<Story_Start_Dia1_Me_NoChoice>Guess i don't have much of a choice, i accept.</Story_Start_Dia1_Me_NoChoice>
+	<Story_Start_Dia1_Me_SomeoneBetter>Sorry, i can't, but there may be someone better suited...</Story_Start_Dia1_Me_SomeoneBetter>
+	<Story_Start_Dia1_Me_End_Accepted>The location of the first spell will reveal itself to you soon. Good luck on your journey, chosen one.</Story_Start_Dia1_Me_End_Accepted>
+	<Story_Start_Dia1_Me_End_Denied>We hope you are right.</Story_Start_Dia1_Me_End_Denied>
+	<Story_Start_Dia1_Me_End_Bye>Bye.</Story_Start_Dia1_Me_End_Bye>
+	<Story_Start_Dia1_Me_End_GiftAlreadyRecieved>The ancient gift was already granted, don't desturb me any longer.</Story_Start_Dia1_Me_End_GiftAlreadyRecieved>
 </LanguageData>
+

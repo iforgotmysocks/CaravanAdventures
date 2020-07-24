@@ -15,7 +15,7 @@ namespace CaravanAdventures.CaravanStory
             this.compClass = typeof(CompTalk);
         }
 
-        public bool enabled = false;
-        public Dictionary<object, Action<Pawn, object>> actions = new Dictionary<object, Action<Pawn, object>>();
+        //public bool enabled = false;
+        public TickerType orgTickerType;
     }
 }

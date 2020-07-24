@@ -89,7 +89,7 @@
   <HediffDef ParentName = "AncientPsycastHediffBase">
     <defName>AncientGift</defName>
     <label>Ancient Gift</label>
-    <description>The only one left having roots to a quite powerful ancestor, this pawn is especially gifted the psy arts and is even able to learn the ancient long forgotten casts.</description>
+    <description>The Ancient Gift, a power to access long forgotten potential which enables the gifted to cast ancient spells. Slow psyfocus recovery even without meditation is spoken about in stories aswell.</description>
     <isBad>false</isBad>
     <everCurableByItem>false</everCurableByItem>
     <defaultLabelColor>(0, 255, 255)</defaultLabelColor>

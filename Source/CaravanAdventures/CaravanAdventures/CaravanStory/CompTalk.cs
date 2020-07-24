@@ -16,39 +16,41 @@ namespace CaravanAdventures.CaravanStory
 		private bool talkedTo = false;
 		private int ticks = 0;
 		private int ticksLong = 0;
+		private IntVec3 targetPosition = default;
+		public Dictionary<object, Action<Pawn, object>> actions = new Dictionary<object, Action<Pawn, object>>();
+		public bool Enabled = false;
 
         public override void CompTick()
         {
 			base.CompTick();
 			if (ticks >= 25)
 			{
-				Log.Message($"talkedto: {talkedTo} pawn null? {approachingPawn == null} distance: {(approachingPawn != null ? this.parent.Position.DistanceTo(approachingPawn.Position).ToString() : "pawn null")}");
-				if (talkedTo == false && approachingPawn != null && this.parent.Position.DistanceTo(approachingPawn.Position) < 5)
+				//Log.Message($"talkedto: {talkedTo} pawn null? {approachingPawn == null} distance: {(approachingPawn != null ? this.parent.Position.DistanceTo(approachingPawn.Position).ToString() : "pawn null")}");
+				if (talkedTo == false && approachingPawn != null && targetPosition == approachingPawn.Position)
 				{
 					talkedTo = true;
-					Props.actions.FirstOrDefault(x => this.parent == x.Key).Value.Invoke(approachingPawn, this.parent);
+					actions.FirstOrDefault(x => this.parent == x.Key).Value.Invoke(approachingPawn, this.parent);
 				}
 
 				ticks = 0;
 			}
-			if (ticksLong >= 2000)
+			if (Props.orgTickerType == TickerType.Long && ticksLong >= 2000)
 			{
 				this.parent.TickLong();
 				ticksLong = 0;
 			}
+			else if (Props.orgTickerType == TickerType.Rare && ticksLong >= 2000 / 8)
+            {
+				this.parent.TickRare();
+				ticksLong = 0;
+            }
 			ticks++;
 			ticksLong++;
         }
 
-        public override void CompTickLong()
-        {
-            base.CompTickLong();
-			Log.Message("Long tick still happening");
-        }
-
         public override IEnumerable<FloatMenuOption> CompFloatMenuOptions(Pawn pawn)
 		{
-			if (!Props.enabled) yield break;
+			if (!Enabled) yield break;
 			// todo - test if detecting by object key works for specific pawns
 			if (pawn.Dead || pawn.Drafted)
 			{
@@ -73,11 +75,32 @@ namespace CaravanAdventures.CaravanStory
 
 		private void ApproachDesiredThing(Pawn pawn)
 		{
-			Log.Message("Should approach thing now");
+			targetPosition = CalculateTargetSpot(pawn);
+			if (targetPosition == default)
+			{
+				Log.Message("Couldn't calc position");
+				targetPosition = this.parent.Position;
+			}
 			talkedTo = false;
-			Job job = JobMaker.MakeJob(JobDefOf.Goto, this.parent);
+			Job job = JobMaker.MakeJob(JobDefOf.Goto, targetPosition);
 			pawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
 			this.approachingPawn = pawn;
+		}
+
+        private IntVec3 CalculateTargetSpot(Pawn pawn)
+        {
+			int num = GenRadial.NumCellsInRadius(2.9f);
+			int num2 = GenRadial.NumCellsInRadius(3.9f);
+			for (int i = num; i < num2; i++)
+			{
+				IntVec3 c = this.parent.Position + GenRadial.RadialPattern[i];
+				if (this.CanUseSpot(pawn, c))
+				{
+					Log.Message("Found spot");
+					return c;
+				}
+			}
+			return default;
 		}
 
         public AcceptanceReport CanTalkTo(Pawn pawn, LocalTargetInfo? knownSpot = null)

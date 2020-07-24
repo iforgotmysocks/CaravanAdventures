@@ -7,6 +7,7 @@ using Verse;
 using Verse.AI.Group;
 using RimWorld;
 
+// todo update broke quest... check out what happend.
 // todo cleanup, should prolly remove pawns when leaving early or not killing everyone!
 
 namespace CaravanAdventures.CaravanIncidents
@@ -50,11 +51,11 @@ namespace CaravanAdventures.CaravanIncidents
             CameraJumper.TryJumpAndSelect(caravan);
 
             var joinDiaNode = new DiaNode("CaravanDamselInDistress_AsksToJoin".Translate());
-            joinDiaNode.options.Add(new DiaOption("CaravanDamselInDistress_JoinAllow".Translate()) { action = () => DamselInDistressUtility.GirlJoins(caravan.pawns.InnerListForReading, girl), resolveTree = true });
+            joinDiaNode.options.Add(new DiaOption("CaravanDamselInDistress_JoinAllow".Translate()) { action = () => DamselInDistressUtility.GirlJoins(caravan.pawns.InnerListForReading, girl, caravan), resolveTree = true });
             joinDiaNode.options.Add(new DiaOption("CaravanDamselInDistress_JoinDeny".Translate()) { resolveTree = true });
 
             var subSubDiaNode = new DiaNode("CaravanDamselInDistress_Follow_KillSuccess_Main".Translate());
-            subSubDiaNode.options.Add(new DiaOption("CaravanDamselInDistress_Follow_KillSuccess_Free".Translate()) { link = joinDiaNode, resolveTree = true });
+            subSubDiaNode.options.Add(new DiaOption("CaravanDamselInDistress_Follow_KillSuccess_Free".Translate()) { link = joinDiaNode });
             subSubDiaNode.options.Add(new DiaOption("CaravanDamselInDistress_Follow_KilSuccess_Slave".Translate()) { action = () => ActionRewardPrisoner(caravan, girl), resolveTree = true });
 
             var subSubBadDiaNode = new DiaNode("CaravanDamselInDistress_Follow_KillFail_Main".Translate());
