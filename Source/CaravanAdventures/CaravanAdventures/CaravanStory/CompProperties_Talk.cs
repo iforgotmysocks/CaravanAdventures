@@ -16,6 +16,6 @@ namespace CaravanAdventures.CaravanStory
         }
 
         //public bool enabled = false;
-        public TickerType orgTickerType;
+        public Dictionary<Def, TickerType> orgTickerTypeDict = new Dictionary<Def, TickerType>();
     }
 }

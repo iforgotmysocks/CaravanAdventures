@@ -36,9 +36,9 @@ namespace CaravanAdventures
                 return;
             }
             var compProp = new CompProperties_Talk() { compClass = typeof(CompTalk) };
-            if (tree.tickerType != TickerType.Normal)
+            if (tree.tickerType != TickerType.Normal && !compProp.orgTickerTypeDict.Keys.Contains(tree))
             {
-                compProp.orgTickerType = tree.tickerType;
+                compProp.orgTickerTypeDict.Add(tree, tree.tickerType);
                 tree.tickerType = TickerType.Normal;
             }
             if (!tree.comps.Any(x => x is CompProperties_Talk)) tree.comps.Add(compProp);

@@ -20,7 +20,7 @@ namespace CaravanAdventures.CaravanStory
 		public Dictionary<object, Action<Pawn, object>> actions = new Dictionary<object, Action<Pawn, object>>();
 		public bool Enabled = false;
 
-        public override void CompTick()
+		public override void CompTick()
         {
 			base.CompTick();
 			if (ticks >= 25)
@@ -34,12 +34,12 @@ namespace CaravanAdventures.CaravanStory
 
 				ticks = 0;
 			}
-			if (Props.orgTickerType == TickerType.Long && ticksLong >= 2000)
+			if (Props.orgTickerTypeDict.TryGetValue(this.parent.def, out var result) && result == TickerType.Long && ticksLong >= 2000)
 			{
 				this.parent.TickLong();
 				ticksLong = 0;
 			}
-			else if (Props.orgTickerType == TickerType.Rare && ticksLong >= 2000 / 8)
+			else if (Props.orgTickerTypeDict.TryGetValue(this.parent.def, out result) && result == TickerType.Rare && ticksLong >= 2000 / 8)
             {
 				this.parent.TickRare();
 				ticksLong = 0;
