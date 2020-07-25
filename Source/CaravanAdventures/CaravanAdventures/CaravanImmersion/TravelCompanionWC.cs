@@ -137,7 +137,6 @@ namespace CaravanAdventures.CaravanImmersion
         {
             base.ExposeData();
             Scribe_Values.Look(ref ticks, "ticks", 0);
-
         }
     }
 }

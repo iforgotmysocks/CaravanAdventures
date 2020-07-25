@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+	
+	<Story_Shrine1_NewShrineDetectedLetterLabel>Hints of a dangerous shrine</Story_Shrine1_NewShrineDetectedLetterLabel>
+	<Story_Shrine1_NewShrineDetectedLetterMessage>Tales of a dangerous shrine reached you, they say noone ever returned who dared to pilgrimage there.</Story_Shrine1_NewShrineDetectedLetterMessage>
+	<VisitAncientMasterShrine>Visit ancient master shrine</VisitAncientMasterShrine>
+	<Story_Shrine1_EnemyEncounterLetterLabel>Enemies encountered</Story_Shrine1_EnemyEncounterLetterLabel>
+	<Story_Shrine1_EnemyEncounterLetterMessage>Looks like we're not alone here.</Story_Shrine1_EnemyEncounterLetterMessage>
+</LanguageData>
+

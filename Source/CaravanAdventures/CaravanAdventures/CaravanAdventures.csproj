@@ -89,8 +89,13 @@
     <Compile Include="CaravanItemSelection\FilterCombs.cs" />
     <Compile Include="CaravanItemSelection\FilterHelper.cs" />
     <Compile Include="CaravanItemSelection\FilterSet.cs" />
+    <Compile Include="CaravanStory\AncientMasterShrineMP.cs" />
+    <Compile Include="CaravanStory\AncientMasterShrineWO.cs" />
+    <Compile Include="CaravanStory\CaravanArrivalAction_AncientMasterShrineWO.cs" />
+    <Compile Include="CaravanStory\CaravanStorySiteDefOf.cs" />
     <Compile Include="CaravanStory\CompTalk.cs" />
     <Compile Include="CaravanStory\CompProperties_Talk.cs" />
+    <Compile Include="CaravanStory\GenStep_ScatterMasterShrines.cs" />
     <Compile Include="CaravanStory\StoryWC.cs" />
     <Compile Include="CaravanStory\StoryStart.cs" />
     <Compile Include="Helper.cs" />

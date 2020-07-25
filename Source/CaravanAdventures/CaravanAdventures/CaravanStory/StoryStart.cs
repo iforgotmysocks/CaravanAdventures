@@ -14,15 +14,7 @@ namespace CaravanAdventures.CaravanStory
     class StoryStart : MapComponent
     {
         public bool Debug { get; set; } = false;
-        //private Dictionary<string, bool> StoryManager.storyFlags = new Dictionary<string, bool>()
-        //{
-        //    { "Start_InitialTreeWhisper", false },
-        //    { "Start_InitialTreeAddTalkOption", false },
-        //    { "Start_MapTreeWhisper", false },
-        //    { "Start_RechedTree", false },
-        //    { "Start_CanReceiveGift", false },
-        //    { "Start_ReceivedGift", false }
-        //};
+       
         private Sustainer animaTreeWhipserSustainer;
         private bool currentStoryTrigger = false;
 
@@ -39,13 +31,7 @@ namespace CaravanAdventures.CaravanStory
         public override void MapGenerated()
         {
             base.MapGenerated();
-
-
             // ModLister.RoyaltyInstalled or ModsConfig.RoyaltyActive
-            if (StoryWC.storyFlags["Start_InitialTreeAddTalkOption"])
-            {
-
-            }
         }
 
         public override void MapComponentTick()
@@ -93,7 +79,7 @@ namespace CaravanAdventures.CaravanStory
 
         private void AddTreeWhisper()
         {
-            if (StoryWC.storyFlags["Start_InitialTreeWhisper"] == true) return;
+            if (StoryWC.storyFlags["Start_InitialTreeWhisper"]) return;
             var tree = map.spawnedThings.FirstOrDefault(x => x.def.defName == "Plant_TreeAnima");
             if (tree == null)
             {
@@ -155,6 +141,7 @@ namespace CaravanAdventures.CaravanStory
 
         private void CheckEnsureGifted(Pawn pawn = null)
         {
+            Log.Message($"Can receive gift flag: {StoryWC.storyFlags["Start_CanReceiveGift"]}");
             if (!StoryWC.storyFlags["Start_CanReceiveGift"]) return;
             IEnumerable<Pawn> pawns = new List<Pawn>();
             // todo IsColonistPlayerControlled doesn't work here, when pawn is breaking it won't be playercontrolled anymore
@@ -171,7 +158,7 @@ namespace CaravanAdventures.CaravanStory
 
             if (pawns.FirstOrDefault(x => x.health.hediffSet.GetFirstHediffOfDef(HediffDef.Named("AncientGift")) != null) != null)
             {
-                Log.Message($"A gifted char already exists, skipping");
+                //Log.Message($"A gifted char already exists, skipping");
                 return;
             }
 

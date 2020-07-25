@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+  <WorldObjectDef>
+    <defName>AncientMasterShrine</defName>
+    <label>Ancient Master Shrine</label>
+    <description>a dangerous and long forgotten shrine</description>
+    <worldObjectClass>CaravanAdventures.CaravanStory.AncientMasterShrineWO</worldObjectClass>
+    <texture>World/WorldObjects/Ambush</texture>
+    <expandingIcon>true</expandingIcon>
+    <expandingIconTexture>World/WorldObjects/Expanding/Ambush</expandingIconTexture>
+    <expandingIconPriority>80</expandingIconPriority>
+    <expandMore>true</expandMore>
+    <blockExitGridUntilBattleIsWon>false</blockExitGridUntilBattleIsWon>
+    <isTempIncidentMapOwner>true</isTempIncidentMapOwner>
+    <IncidentTargetTags>
+      <li>Map_Misc</li>
+    </IncidentTargetTags>
+    <comps>
+      <!--<li Class="WorldObjectCompProperties_FormCaravan" />-->
+			<!--<li Class="WorldObjectCompProperties_TimedDetectionRaids" />-->
+			<!--<li Class="WorldObjectCompProperties_Timeout" />-->
+    </comps>
+  </WorldObjectDef>
+
+	<WorldObjectDef>
+		<defName>AncientMasterShrineMP</defName>
+		<label>Ancient Master Shrine</label>
+		<description>a dangerous and long forgotten shrine</description>
+		<worldObjectClass>CaravanAdventures.CaravanStory.AncientMasterShrineMP</worldObjectClass>
+		<texture>World/WorldObjects/Ambush</texture>
+		<expandingIcon>true</expandingIcon>
+		<expandingIconTexture>World/WorldObjects/Expanding/Ambush</expandingIconTexture>
+		<expandingIconPriority>80</expandingIconPriority>
+		<expandMore>true</expandMore>
+		<blockExitGridUntilBattleIsWon>false</blockExitGridUntilBattleIsWon>
+		<isTempIncidentMapOwner>true</isTempIncidentMapOwner>
+		<IncidentTargetTags>
+			<li>Map_Misc</li>
+		</IncidentTargetTags>
+		<comps>
+			<li Class="WorldObjectCompProperties_FormCaravan" />
+			<!--<li Class="WorldObjectCompProperties_TimedDetectionRaids" />-->
+			<!--<li Class="WorldObjectCompProperties_Timeout" />-->
+		</comps>
+	</WorldObjectDef>
+
+</Defs>

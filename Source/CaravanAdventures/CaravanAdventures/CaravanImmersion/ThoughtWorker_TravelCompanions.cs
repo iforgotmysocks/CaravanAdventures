@@ -15,7 +15,6 @@ namespace CaravanAdventures.CaravanImmersion
         {
             companionDefs = DefDatabase<TravelCompanionDef>.AllDefs.OrderByDescending(y => y.thoughtStage).ToList();
         }
-        //private List<TravelCompanionDef> companionDefs;
         protected override ThoughtState CurrentStateInternal(Pawn p)
         {
             TravelCompanionDef companionDef = GetCurrentDef(p);
@@ -23,15 +22,8 @@ namespace CaravanAdventures.CaravanImmersion
             {
                 return ThoughtState.Inactive;
             }
-            //var adjustedThoughtStage = ApplySocialBonds(p, companionDef);
 
             return ThoughtState.ActiveAtStage(companionDef.thoughtStage);
-        }
-
-        private TravelCompanionDef ApplySocialBonds(Pawn p, TravelCompanionDef companionDef)
-        {
-            // todo
-            return companionDef;
         }
 
         public TravelCompanionDef GetCurrentDef(Pawn p)

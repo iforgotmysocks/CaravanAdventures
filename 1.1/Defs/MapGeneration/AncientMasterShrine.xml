@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<MapGeneratorDef ParentName="MapCommonBase">
+		<defName>AncientMasterShrineMG</defName>
+		<genSteps>
+			<li>RocksFromGrid</li>
+			<li>ScatterMoreShrines</li>
+			<li>ScatterMasterShrines</li>
+			<li>CaveHives</li>
+			<li MayRequire="Ludeon.RimWorld.Royalty">AnimaTrees</li>
+		</genSteps>
+	</MapGeneratorDef>
+
+	<!-- Ancient shrines -->
+	<GenStepDef>
+		<defName>ScatterMoreShrines</defName>
+		<order>400</order>
+		<genStep Class="GenStep_ScatterShrines">
+			<allowInWaterBiome>true</allowInWaterBiome>
+			<!--<countPer10kCellsRange><min>0.12</min><max>0.25</max></countPer10kCellsRange>-->
+			<countPer10kCellsRange>
+				<min>40</min>
+				<max>50</max>
+			</countPer10kCellsRange>
+		</genStep>
+	</GenStepDef>
+
+	<GenStepDef>
+		<defName>ScatterMasterShrines</defName>
+		<order>350</order>
+		<genStep Class="CaravanAdventures.CaravanStory.GenStep_ScatterMasterShrines">
+			<allowInWaterBiome>true</allowInWaterBiome>
+			<countPer10kCellsRange>
+				<min>1</min>
+				<max>1</max>
+			</countPer10kCellsRange>
+		</genStep>
+	</GenStepDef>
+
+	<!-- Cave hives -->
+	<GenStepDef>
+		<defName>CaveHives</defName>
+		<order>1100</order>
+		<genStep Class="GenStep_CaveHives"/>
+	</GenStepDef>
+
+</Defs>
