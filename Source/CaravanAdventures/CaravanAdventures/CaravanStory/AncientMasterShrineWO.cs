@@ -31,46 +31,72 @@ namespace CaravanAdventures.CaravanStory
 		{
 			LongEventHandler.QueueLongEvent(delegate ()
 			{
-				
-				IncidentParms incidentParms = StorytellerUtility.DefaultParmsNow(IncidentCategoryDefOf.ThreatBig, caravan);
-				if (incidentParms.points < 400f)
-				{
-					incidentParms.points = 400f;
-				}
-				incidentParms.faction = Find.FactionManager.RandomEnemyFaction(false, false, true, TechLevel.Undefined);
-				PawnGroupMakerParms defaultPawnGroupMakerParms = IncidentParmsUtility.GetDefaultPawnGroupMakerParms(PawnGroupKindDefOf.Combat, incidentParms, true);
-				defaultPawnGroupMakerParms.generateFightersOnly = true;
-				generatedBandits = PawnGroupMakerUtility.GeneratePawns(defaultPawnGroupMakerParms, true).ToList<Pawn>();
-				Map map = SetupCaravanAttackMap(caravan, generatedBandits, false);
+				Map map = CaravanIncidentUtility.GetOrGenerateMapForIncident(caravan, Find.World.info.initialMapSize, CaravanStorySiteDefOf.AncientMasterShrineMP);
 				mainRoom = GetAncientShrineRooms(map).FirstOrDefault();
-				if (generatedBandits.Any<Pawn>())
-				{
-					LordMaker.MakeNewLord(incidentParms.faction, new LordJob_AssaultColony(incidentParms.faction, true, true, false, false, true), map, generatedBandits);
-				}
-				var stateBackup = Current.ProgramState;
-				Current.ProgramState = ProgramState.MapInitializing;
+			
 				AddEnemiesToRooms(map, caravan);
-				AddBoss(map, caravan, mainRoom);
-				Current.ProgramState = stateBackup;
+				
+				if (mainRoom.CellCount > 1500) AddBoss(map, caravan, mainRoom);
+				else AddBandits(map, caravan);
+
+				//(Pawn x) => CellFinder.RandomSpawnCellForPawnNear(playerStartingSpot, map, 4)
+				CaravanEnterMapUtility.Enter(caravan, map, CaravanEnterMode.Edge, CaravanDropInventoryMode.DoNotDrop, true);
 				Find.TickManager.CurTimeSpeed = TimeSpeed.Paused;
-				GlobalTargetInfo target = (!generatedBandits.Any<Pawn>()) ? GlobalTargetInfo.Invalid : new GlobalTargetInfo(generatedBandits[0].Position, map, false);
-				Find.LetterStack.ReceiveLetter("Story_Shrine1_EnemyEncounterLetterLabel".Translate(), "Story_Shrine1_EnemyEncounterLetterMessage".Translate(), LetterDefOf.ThreatBig, target, null, null, null, null);
 			}, "GeneratingMapForNewEncounter", false, null, true);
 		}
 
-        private void AddBoss(Map map, Caravan caravan, Room mainRoom)
+        private void AddBandits(Map map, Caravan caravan, bool sendLetterIfRelatedPawns = true)
+        {
+			// todo add notification about this being an ambush and not the real thing.
+
+			IncidentParms incidentParms = StorytellerUtility.DefaultParmsNow(IncidentCategoryDefOf.ThreatBig, caravan);
+			if (incidentParms.points < 400f)
+			{
+				incidentParms.points = 400f;
+			}
+			incidentParms.faction = Find.FactionManager.RandomEnemyFaction(false, false, true, TechLevel.Undefined);
+			PawnGroupMakerParms defaultPawnGroupMakerParms = IncidentParmsUtility.GetDefaultPawnGroupMakerParms(PawnGroupKindDefOf.Combat, incidentParms, true);
+			defaultPawnGroupMakerParms.generateFightersOnly = true;
+			generatedBandits = PawnGroupMakerUtility.GeneratePawns(defaultPawnGroupMakerParms, true).ToList<Pawn>();
+
+			IntVec3 playerStartingSpot;
+			IntVec3 root;
+
+			MultipleCaravansCellFinder.FindStartingCellsFor2Groups(map, out playerStartingSpot, out root);
+			for (int i = 0; i < generatedBandits.Count; i++)
+			{
+				IntVec3 loc = CellFinder.RandomSpawnCellForPawnNear(root, map, 4);
+				GenSpawn.Spawn(generatedBandits[i], loc, map, Rot4.Random, WipeMode.Vanish, false);
+			}
+			if (sendLetterIfRelatedPawns)
+			{
+				PawnRelationUtility.Notify_PawnsSeenByPlayer_Letter_Send(generatedBandits, "LetterRelatedPawnsGroupGeneric".Translate(Faction.OfPlayer.def.pawnsPlural), LetterDefOf.NeutralEvent, true, true);
+			}
+
+			if (generatedBandits.Any()) LordMaker.MakeNewLord(incidentParms.faction, new LordJob_AssaultColony(incidentParms.faction, true, true, false, false, true), map, generatedBandits);
+			GlobalTargetInfo target = (!generatedBandits.Any<Pawn>()) ? GlobalTargetInfo.Invalid : new GlobalTargetInfo(generatedBandits[0].Position, map, false);
+			Find.LetterStack.ReceiveLetter("Story_Shrine1_EnemyEncounterLetterLabel".Translate(), "Story_Shrine1_EnemyEncounterLetterMessage".Translate(), LetterDefOf.ThreatBig, target, null, null, null, null);
+
+		}
+
+		private void AddBoss(Map map, Caravan caravan, Room mainRoom)
         {
             //throw new NotImplementedException();
         }
 
         private void AddEnemiesToRooms(Map map, Caravan caravan)
         {
-            foreach (var room in GetAncientShrineRooms(map))
+			var stateBackup = Current.ProgramState;
+			Current.ProgramState = ProgramState.MapInitializing;
+			
+			foreach (var room in GetAncientShrineRooms(map))
             {
 				AddSpacers(room, map, caravan);
 				AddMechanoidsToRoom(room, map, caravan);
             }
-        }
+			
+			Current.ProgramState = stateBackup;
+		}
 
         private void AddSpacers(Room room, Map map, Caravan caravan)
         {
@@ -80,16 +106,21 @@ namespace CaravanAdventures.CaravanStory
 			else if (room.CellCount > 180) casketCount = 2;
 			else return;
 
-			var rectForCasketsDiag = new CellRect(0, 0, 4, casketCount * 2 + 2);
-			var rectForCasketsHoriz = new CellRect(0, 0, casketCount * 2 + 2, 4);
-
 			CellRect rect;
-			if (FindEmptyRectInRoom(room, rectForCasketsDiag.Width, rectForCasketsDiag.Height, out rect) ||
-				FindEmptyRectInRoom(room, rectForCasketsHoriz.Width, rectForCasketsHoriz.Height, out rect))
+			if (FindEmptyRectInRoom(room, 4, casketCount * 2 + 2, out rect) ||
+				FindEmptyRectInRoom(room, casketCount * 2 + 2, 4, out rect))
 			{
 				CreateCasketsInRect(rect, room, map, caravan);
 			}
-        }
+
+			if (room.CellCount < 1500) return;
+
+			if (FindEmptyRectInRoom(room, casketCount * 2 + 2, 4, out rect) ||
+				FindEmptyRectInRoom(room, 4, casketCount * 2 + 2, out rect))
+			{
+				CreateCasketsInRect(rect, room, map, caravan);
+			}
+		}
 
 		private void CreateCasketsInRect(CellRect rect, Room room, Map map, Caravan caravan)
 		{
@@ -106,7 +137,7 @@ namespace CaravanAdventures.CaravanStory
 
 						if (leftMargin != 0 && leftMargin % 2 == 0 && bottomMargin == 1)
 						{
-							SpawnCasketAt(curCell, map, caravan, Rot4.North);
+							SpawnCasketAt(curCell, map, caravan, Rot4.South);
 						}
 						//else GenDebugTorch(curCell, map);
 
@@ -240,28 +271,6 @@ namespace CaravanAdventures.CaravanStory
 			if (generatedMechs.Any()) LordMaker.MakeNewLord(incidentParms.faction, new LordJob_SleepThenAssaultColony(incidentParms.faction), map, generatedMechs);
 			GenStep_SleepingMechanoids.SendMechanoidsToSleepImmediately(generatedMechs);
         }
-
-		public static Map SetupCaravanAttackMap(Caravan caravan, List<Pawn> enemies, bool sendLetterIfRelatedPawns)
-		{
-            int num = CaravanIncidentUtility.CalculateIncidentMapSize(caravan.PawnsListForReading, enemies);
-			var size = new IntVec3(300, 0, 300);
-			// Find.World.info.initialMapSize
-			Map map = CaravanIncidentUtility.GetOrGenerateMapForIncident(caravan, Find.World.info.initialMapSize, CaravanStorySiteDefOf.AncientMasterShrineMP);
-            IntVec3 playerStartingSpot;
-			IntVec3 root;
-			MultipleCaravansCellFinder.FindStartingCellsFor2Groups(map, out playerStartingSpot, out root);
-			CaravanEnterMapUtility.Enter(caravan, map, (Pawn x) => CellFinder.RandomSpawnCellForPawnNear(playerStartingSpot, map, 4), CaravanDropInventoryMode.DoNotDrop, true);
-			for (int i = 0; i < enemies.Count; i++)
-			{
-				IntVec3 loc = CellFinder.RandomSpawnCellForPawnNear(root, map, 4);
-				//GenSpawn.Spawn(enemies[i], loc, map, Rot4.Random, WipeMode.Vanish, false);
-			}
-			if (sendLetterIfRelatedPawns)
-			{
-				PawnRelationUtility.Notify_PawnsSeenByPlayer_Letter_Send(enemies, "LetterRelatedPawnsGroupGeneric".Translate(Faction.OfPlayer.def.pawnsPlural), LetterDefOf.NeutralEvent, true, true);
-			}
-			return map;
-		}
 
 		public override IEnumerable<FloatMenuOption> GetFloatMenuOptions(Caravan caravan)
         {

@@ -12,8 +12,7 @@ namespace CaravanAdventures.CaravanStory
 {
     class StoryWC : WorldComponent
     {
-        public StoryWC(World world) : base(world)
-        { }
+
 
         // todo 60000 * 2
         private float baseDelayNextShrineReveal = 600f * 2f;
@@ -23,17 +22,30 @@ namespace CaravanAdventures.CaravanStory
         private static readonly IntRange timeoutDaysRange = new IntRange(10, 12);
         private static readonly IntRange shrineDistance = new IntRange(2, 4); // 40,50
 
+        public static Dictionary<string, bool> debugFlags = new Dictionary<string, bool>()
+        {
+            {"StoryStartDone", true },
+            { "ShrinesDisabled", false }
+        };
+
         public static Dictionary<string, bool> storyFlags = new Dictionary<string, bool>()
         {
-            { "Start_InitialTreeWhisper", true },
-            { "Start_InitialTreeAddTalkOption", true },
-            { "Start_CanReceiveGift", true },
-            { "Start_ReceivedGift", true },
+            { "Start_InitialTreeWhisper", false },
+            { "Start_InitialTreeAddTalkOption", false },
+            { "Start_CanReceiveGift", false },
+            { "Start_ReceivedGift", false },
 
             { "Shrine1_InitCountDownStarted", false },
             { "Shrine1_Created", false },
             { "Shrine1_Completed", false }
         };
+
+        public StoryWC(World world) : base(world)
+        {
+            if (debugFlags["StoryStartDone"])
+                foreach (var flag in storyFlags.Where(x => x.Key.StartsWith("Start_")).ToList())
+                    storyFlags[flag.Key] = true;
+        }
 
         public override void WorldComponentTick()
         {
@@ -41,7 +53,7 @@ namespace CaravanAdventures.CaravanStory
 
             if (ticks >= 60)
             {
-                if (CheckCanStartCountDownOnNewShrine())
+                if (CheckCanStartCountDownOnNewShrine() && !debugFlags["ShrinesDisabled"])
                 {
                     shrineRevealCounter = baseDelayNextShrineReveal * (countShrinesCompleted + 1f) * 0.5f;
                     storyFlags[BuildCurrentShrinePrefix() + "InitCountDownStarted"] = true;

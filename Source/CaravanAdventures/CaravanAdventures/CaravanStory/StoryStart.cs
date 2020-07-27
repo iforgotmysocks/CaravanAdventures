@@ -13,11 +13,11 @@ namespace CaravanAdventures.CaravanStory
 {
     class StoryStart : MapComponent
     {
-        public bool Debug { get; set; } = false;
+        public bool debugAllAbilities { get; set; } = true;
        
         private Sustainer animaTreeWhipserSustainer;
         private bool currentStoryTrigger = false;
-
+        
         public StoryStart(Map map) : base(map)
         {
             
@@ -175,7 +175,7 @@ namespace CaravanAdventures.CaravanStory
             chosen.health.AddHediff(DefDatabase<HediffDef>.AllDefs.FirstOrDefault(x => x.defName == "PsychicAmplifier"), chosen.health.hediffSet.GetBrain());
             chosen.health.AddHediff(DefDatabase<HediffDef>.AllDefs.FirstOrDefault(x => x.defName == "AncientGift"), chosen.health.hediffSet.GetBrain());
 
-            if (Debug) DebugAddAllAbilities(chosen);
+            if (debugAllAbilities) DebugAddAllAbilities(chosen);
         }
 
         

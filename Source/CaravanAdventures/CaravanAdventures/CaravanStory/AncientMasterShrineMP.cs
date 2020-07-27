@@ -65,6 +65,8 @@ namespace CaravanAdventures.CaravanStory
 				return;
 			}
 			//string forceExitAndRemoveMapCountdownTimeLeftString = TimedForcedExit.GetForceExitAndRemoveMapCountdownTimeLeftString(60000);
+			
+			
 			Find.LetterStack.ReceiveLetter("MasterShrineVictoryLetterLabel".Translate(), "MasterShrineVictoryLetterMessage".Translate(), LetterDefOf.PositiveEvent, this, null, null, null, null);
 			TaleRecorder.RecordTale(TaleDefOf.CaravanAmbushDefeated, new object[]
 			{
