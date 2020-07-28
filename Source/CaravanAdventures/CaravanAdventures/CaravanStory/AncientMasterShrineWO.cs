@@ -81,7 +81,8 @@ namespace CaravanAdventures.CaravanStory
 
 		private void AddBoss(Map map, Caravan caravan, Room mainRoom)
         {
-            //throw new NotImplementedException();
+			// todo add notification about this being the real thing
+			// todo add Boss?
         }
 
         private void AddEnemiesToRooms(Map map, Caravan caravan)
@@ -102,15 +103,19 @@ namespace CaravanAdventures.CaravanStory
         {
 			var casketCount = 0;
 			if (room.CellCount > 1500) casketCount = 6;
-			else if (room.CellCount > 750) casketCount = 4;
-			else if (room.CellCount > 180) casketCount = 2;
+			else if (room.CellCount > 240) casketCount = 4;
+			else if (room.CellCount > 120) casketCount = 2;
 			else return;
+
+			var casketGroupId = SetAndReturnCasketGroupId(room);
+
+			Log.Message($"Casket id {casketGroupId} for room id {room.ID}");
 
 			CellRect rect;
 			if (FindEmptyRectInRoom(room, 4, casketCount * 2 + 2, out rect) ||
 				FindEmptyRectInRoom(room, casketCount * 2 + 2, 4, out rect))
 			{
-				CreateCasketsInRect(rect, room, map, caravan);
+				CreateCasketsInRect(rect, room, map, caravan, casketGroupId);
 			}
 
 			if (room.CellCount < 1500) return;
@@ -118,11 +123,24 @@ namespace CaravanAdventures.CaravanStory
 			if (FindEmptyRectInRoom(room, casketCount * 2 + 2, 4, out rect) ||
 				FindEmptyRectInRoom(room, 4, casketCount * 2 + 2, out rect))
 			{
-				CreateCasketsInRect(rect, room, map, caravan);
+				CreateCasketsInRect(rect, room, map, caravan, casketGroupId);
 			}
 		}
 
-		private void CreateCasketsInRect(CellRect rect, Room room, Map map, Caravan caravan)
+        private int SetAndReturnCasketGroupId(Room room)
+        {
+			var id = Rand.Range(1, Int32.MaxValue - 1);
+			var caskets = room.ContainedThings(ThingDefOf.AncientCryptosleepCasket);
+			foreach (var casket in caskets)
+			{
+				var casketBuilding = casket as Building_AncientCryptosleepCasket;
+				casketBuilding.groupID = id;
+				Log.Message($"Setting casket to id: {id}");
+			}
+			return id;
+		}
+
+		private void CreateCasketsInRect(CellRect rect, Room room, Map map, Caravan caravan, int casketGroupId)
 		{
 
 			if (rect.Width > rect.Height)
@@ -137,7 +155,7 @@ namespace CaravanAdventures.CaravanStory
 
 						if (leftMargin != 0 && leftMargin % 2 == 0 && bottomMargin == 1)
 						{
-							SpawnCasketAt(curCell, map, caravan, Rot4.South);
+							SpawnCasketAt(curCell, map, caravan, Rot4.South, casketGroupId);
 						}
 						//else GenDebugTorch(curCell, map);
 
@@ -159,7 +177,7 @@ namespace CaravanAdventures.CaravanStory
 
 						if (bottomMargin != 0 && bottomMargin % 2 == 0 && leftMargin == 1)
 						{
-							SpawnCasketAt(curCell, map, caravan, Rot4.East);
+							SpawnCasketAt(curCell, map, caravan, Rot4.East, casketGroupId);
 						}
 						//else GenDebugTorch(curCell, map);
 
@@ -190,11 +208,13 @@ namespace CaravanAdventures.CaravanStory
 			}
 		}
 
-        private void SpawnCasketAt(IntVec3 curCell, Map map, Caravan caravan, Rot4 rotation)
+        private void SpawnCasketAt(IntVec3 curCell, Map map, Caravan caravan, Rot4 rotation, int casketGroupId)
         {
             try
             {
+				// todo if casket is opend, all caskets need to trigger!
 				var casket = (Building_AncientCryptosleepCasket)ThingMaker.MakeThing(ThingDefOf.AncientCryptosleepCasket);
+				casket.groupID = casketGroupId;
 				GenSpawn.Spawn(casket, curCell, map, rotation, WipeMode.Vanish);
 				var pawn = PawnGenerator.GeneratePawn(new PawnGenerationRequest(PawnKindDefOf.AncientSoldier, Faction.OfAncientsHostile));
 				generatedSoldiers.Add(pawn);
@@ -253,7 +273,7 @@ namespace CaravanAdventures.CaravanStory
 				groupKind = PawnGroupKindDefOf.Combat,
 				tile = map.Tile,
 				faction = Faction.OfMechanoids,
-				points = Convert.ToInt32(defaultPawnGroupMakerParms.points * new IntRange(1, 1).RandomInRange * (room.CellCount / 100f))
+				points = Math.Max(120, Convert.ToInt32(defaultPawnGroupMakerParms.points * new IntRange(1, 1).RandomInRange * (room.CellCount / 100f)))
 			};
 			
 			Log.Message($"Points after: {mechPawnGroupMakerParams.points}");
