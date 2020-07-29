@@ -109,8 +109,6 @@ namespace CaravanAdventures.CaravanStory
 
 			var casketGroupId = SetAndReturnCasketGroupId(room);
 
-			Log.Message($"Casket id {casketGroupId} for room id {room.ID}");
-
 			CellRect rect;
 			if (FindEmptyRectInRoom(room, 4, casketCount * 2 + 2, out rect) ||
 				FindEmptyRectInRoom(room, casketCount * 2 + 2, 4, out rect))
@@ -135,7 +133,6 @@ namespace CaravanAdventures.CaravanStory
 			{
 				var casketBuilding = casket as Building_AncientCryptosleepCasket;
 				casketBuilding.groupID = id;
-				Log.Message($"Setting casket to id: {id}");
 			}
 			return id;
 		}
@@ -157,8 +154,6 @@ namespace CaravanAdventures.CaravanStory
 						{
 							SpawnCasketAt(curCell, map, caravan, Rot4.South, casketGroupId);
 						}
-						//else GenDebugTorch(curCell, map);
-
 						bottomMargin++;
 					}
 					leftMargin++;
@@ -179,53 +174,24 @@ namespace CaravanAdventures.CaravanStory
 						{
 							SpawnCasketAt(curCell, map, caravan, Rot4.East, casketGroupId);
 						}
-						//else GenDebugTorch(curCell, map);
-
 						leftMargin++;
 					}
 					bottomMargin++;
 					leftMargin = 0;
 				}
-
-				//foreach (var cell in rect.Cells)
-				//{
-				//	GenDebugTorch(cell, map);
-				//}
 			}
 		}
 
-        private void GenDebugTorch(IntVec3 cell, Map map)
-        {
-			try
-			{
-				var thing = ThingMaker.MakeThing(ThingDefOf.TorchLamp);
-				GenSpawn.Spawn(thing, cell, map, WipeMode.Vanish);
-			}
-			catch (Exception e)
-			{
-				// todo figure out what's throwing the error.
-				Log.Warning(e.ToString());
-			}
+		private void SpawnCasketAt(IntVec3 curCell, Map map, Caravan caravan, Rot4 rotation, int casketGroupId)
+		{
+			// todo if casket is opend, all caskets need to trigger!
+			var casket = (Building_AncientCryptosleepCasket)ThingMaker.MakeThing(ThingDefOf.AncientCryptosleepCasket);
+			casket.groupID = casketGroupId;
+			GenSpawn.Spawn(casket, curCell, map, rotation, WipeMode.Vanish);
+			var pawn = PawnGenerator.GeneratePawn(new PawnGenerationRequest(PawnKindDefOf.AncientSoldier, Faction.OfAncientsHostile));
+			generatedSoldiers.Add(pawn);
+			casket.GetDirectlyHeldThings().TryAdd(pawn, true);
 		}
-
-        private void SpawnCasketAt(IntVec3 curCell, Map map, Caravan caravan, Rot4 rotation, int casketGroupId)
-        {
-            try
-            {
-				// todo if casket is opend, all caskets need to trigger!
-				var casket = (Building_AncientCryptosleepCasket)ThingMaker.MakeThing(ThingDefOf.AncientCryptosleepCasket);
-				casket.groupID = casketGroupId;
-				GenSpawn.Spawn(casket, curCell, map, rotation, WipeMode.Vanish);
-				var pawn = PawnGenerator.GeneratePawn(new PawnGenerationRequest(PawnKindDefOf.AncientSoldier, Faction.OfAncientsHostile));
-				generatedSoldiers.Add(pawn);
-				var addedPawn = casket.GetDirectlyHeldThings().TryAdd(pawn, true);
-				Log.Message($"Was able to add pawn to casket: {addedPawn}");
-			}
-			catch (Exception e)
-            {
-				Log.Warning(e.ToString());
-            }
-        }
 
         private bool FindEmptyRectInRoom(Room room, int width, int height, out CellRect rect)
         {
