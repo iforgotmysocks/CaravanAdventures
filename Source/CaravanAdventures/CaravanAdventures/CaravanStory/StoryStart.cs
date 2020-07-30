@@ -143,12 +143,12 @@ namespace CaravanAdventures.CaravanStory
         {
             Log.Message($"Can receive gift flag: {StoryWC.storyFlags["Start_CanReceiveGift"]}");
             if (!StoryWC.storyFlags["Start_CanReceiveGift"]) return;
-            IEnumerable<Pawn> pawns = new List<Pawn>();
+            var pawns = new List<Pawn>();
             // todo IsColonistPlayerControlled doesn't work here, when pawn is breaking it won't be playercontrolled anymore
             if (pawn == null)
             {
-                pawns = PawnsFinder.AllMapsAndWorld_Alive.Where(x => x.RaceProps.Humanlike && x.Faction.IsPlayer);
-                if (pawns == null || pawns?.Count() == 0)
+                pawns = PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction?.Where(x => x?.RaceProps?.Humanlike ?? false).ToList();
+                if (pawns == null || pawns?.Count == 0)
                 {
                     Log.Message($"No pawns found, skipping.");
                     return;
@@ -156,9 +156,9 @@ namespace CaravanAdventures.CaravanStory
             }
             else pawns.AddItem(pawn);
 
-            if (pawns.FirstOrDefault(x => x.health.hediffSet.GetFirstHediffOfDef(HediffDef.Named("AncientGift")) != null) != null)
+            if (pawns.Any(x => x.health.hediffSet.GetFirstHediffOfDef(HediffDef.Named("AncientGift")) != null))
             {
-                //Log.Message($"A gifted char already exists, skipping");
+                Log.Message($"A gifted char already exists, skipping");
                 return;
             }
 

@@ -41,6 +41,7 @@ namespace CaravanAdventures.CaravanAbilities
                 if (Pawn.psychicEntropy.CurrentPsyfocus == 0f) this.Pawn.health.hediffSet.hediffs.Remove(this.parent);
                 ExtinguishFire();
                 CureMentalBreaks();
+                CureIllnesses();
                 ticksSinceStatusCheck = 0;
                 if (noInjuries) noInjuries = false;
             }
@@ -65,6 +66,12 @@ namespace CaravanAdventures.CaravanAbilities
             //else if (debugString != "") Log.Message(debugString + $" time: {stopwatch.ElapsedMilliseconds} ms");
         }
 
+        private void CureIllnesses()
+        {
+            var diseases = Pawn.health.hediffSet.hediffs.Where(x => new List<string> { "FoodPoisoning", "CatatonicBreakdown", "PsychicVertigo", "HeartAttack", "MuscleParasites", "SensoryMechanites", "FibrousMechanites", "GutWorms" }.Contains(x.def.defName));
+            if (diseases != null && diseases.Count() != 0) Pawn.health.hediffSet.hediffs.RemoveAll(x => diseases.Contains(x));
+        }
+        
         private void Heal(bool skip = false)
         {
             if (noInjuries) return;
