@@ -24,8 +24,8 @@ namespace CaravanAdventures.CaravanStory
 
         public static Dictionary<string, bool> debugFlags = new Dictionary<string, bool>()
         {
-            {"StoryStartDone", true },
-            { "ShrinesDisabled", false }
+            {"StoryStartDone", false },
+            { "ShrinesDisabled", true }
         };
 
         public static Dictionary<string, bool> storyFlags = new Dictionary<string, bool>()
