@@ -81,7 +81,7 @@ namespace CaravanAdventures.CaravanAbilities
             else
             {
                 if (sortedInjuries.Length < ticksSortedArray || sortedInjuries[ticksSortedArray - 1] == null) return;
-                var healAmount = isGifted ? ModSettings.Get().healingPerSecond : (ModSettings.Get().healingPerSecond / 2f);
+                var healAmount = isGifted ? ModSettings.Get().healingPerSecond : (ModSettings.Get().healingPerSecond / 1.5f);
                 if (sortedInjuries[ticksSortedArray - 1].Severity - healAmount > 0f) sortedInjuries[ticksSortedArray - 1].Severity -= healAmount;
                 else Pawn.health.RemoveHediff(sortedInjuries[ticksSortedArray - 1]);
 
