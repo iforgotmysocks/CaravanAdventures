@@ -16,6 +16,11 @@ namespace CaravanAdventures.CaravanImmersion
 
         public TravelCompanionWC(World world) : base(world)
         {
+        }
+
+        public override void FinalizeInit()
+        {
+            base.FinalizeInit();
             relationShipsWithImpact = DefDatabase<PawnRelationDef>.AllDefsListForReading.Where(x => !x.HasModExtension<TravelCompanionModExt>() && (x.familyByBloodRelation || (x.reflexive && !x.defName.StartsWith("Ex")))).ToList();
         }
 

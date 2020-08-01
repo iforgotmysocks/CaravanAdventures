@@ -11,13 +11,13 @@ namespace CaravanAdventures.CaravanStory
 {
 	public class AncientMasterShrineMP : MapParent
 	{
-		public bool WonBattle
-		{
-			get
-			{
-				return this.wonBattle;
-			}
-		}
+		public bool WonBattle => this.WonBattle;
+		private bool wonBattle;
+
+		public List<Pawn> generatedSoldiers = new List<Pawn>();
+		public List<Pawn> generatedMechs = new List<Pawn>();
+		public List<Pawn> generatedBandits = new List<Pawn>();
+		public Pawn boss = null;
 
 		public override MapGeneratorDef MapGeneratorDef => CaravanStorySiteDefOf.AncientMasterShrineMG;
 
@@ -27,17 +27,19 @@ namespace CaravanAdventures.CaravanStory
 			Scribe_Values.Look<bool>(ref this.wonBattle, "wonBattle", false, false);
 		}
 
-		public override void PostMapGenerate()
-		{
-			base.PostMapGenerate();
+		public void Init()
+        {
+			boss = FindBoss();
+			Log.Message($"Map has boss: {boss != null}");
+
+			StoryWC.storyFlags[StoryWC.BuildCurrentShrinePrefix() + "Created"] = true;
 		}
 
         public override bool ShouldRemoveMapNow(out bool alsoRemoveWorldObject)
 		{
-			alsoRemoveWorldObject = false;
-			return false;
-			if (!base.Map.mapPawns.AnyPawnBlockingMapRemoval)
+			if (!base.Map.mapPawns.AnyPawnBlockingMapRemoval && boss == null || !base.Map.mapPawns.AnyPawnBlockingMapRemoval && boss != null && boss.Dead)
 			{
+				Cleanup();
 				alsoRemoveWorldObject = true;
 				return true;
 			}
@@ -45,7 +47,7 @@ namespace CaravanAdventures.CaravanStory
 			return false;
 		}
 
-		public override void Tick()
+        public override void Tick()
 		{
 			base.Tick();
 			if (base.HasMap)
@@ -60,14 +62,22 @@ namespace CaravanAdventures.CaravanStory
 			{
 				return;
 			}
+			if (boss != null && !boss.Dead) return;
 			if (GenHostility.AnyHostileActiveThreatToPlayer(base.Map, false))
 			{
 				return;
 			}
 			//string forceExitAndRemoveMapCountdownTimeLeftString = TimedForcedExit.GetForceExitAndRemoveMapCountdownTimeLeftString(60000);
-			
-			
-			Find.LetterStack.ReceiveLetter("MasterShrineVictoryLetterLabel".Translate(), "MasterShrineVictoryLetterMessage".Translate(), LetterDefOf.PositiveEvent, this, null, null, null, null);
+
+			if (boss != null && boss.Dead)
+			{
+				Find.LetterStack.ReceiveLetter("MasterShrineVictoryBossLetterLabel".Translate(boss.Name.ToStringFull), "MasterShrineVictoryBossLetterMessage".Translate(boss.Name, "abilitynametodo"), LetterDefOf.PositiveEvent, this, null, null, null, null);
+				StoryWC.storyFlags[StoryWC.BuildCurrentShrinePrefix() + "Completed"] = true;
+				StoryWC.IncreaseShrineCompleteCounter();
+			}
+
+			else Find.LetterStack.ReceiveLetter("MasterShrineVictoryLetterLabel".Translate(), "MasterShrineVictoryLetterMessage".Translate(), LetterDefOf.PositiveEvent, this, null, null, null, null);
+			// todo new tale
 			TaleRecorder.RecordTale(TaleDefOf.CaravanAmbushDefeated, new object[]
 			{
 				base.Map.mapPawns.FreeColonists.RandomElement<Pawn>()
@@ -75,6 +85,22 @@ namespace CaravanAdventures.CaravanStory
 			this.wonBattle = true;
 		}
 
-		private bool wonBattle;
+		private void Cleanup()
+		{
+			if (boss == null) StoryWC.ResetCurrentShrineFlags();
+            
+			foreach (var coll in new List<List<Pawn>> {generatedBandits, generatedMechs, generatedSoldiers})
+            {
+				foreach (var pawn in coll.Reverse<Pawn>())
+                {
+				// todo send to world if relationship
+					pawn.Destroy();
+                }
+            }
+
+			if (boss != null) boss.Destroy();
+		}
+
+		private Pawn FindBoss() => this?.Map?.spawnedThings?.FirstOrDefault(x => x is Pawn pawn && StoryWC.GetBossDefNames().Contains(pawn.def.defName)) as Pawn ?? null;
 	}
 }

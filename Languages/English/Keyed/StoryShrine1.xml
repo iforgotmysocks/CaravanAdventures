@@ -6,5 +6,14 @@
 	<VisitAncientMasterShrine>Visit ancient master shrine</VisitAncientMasterShrine>
 	<Story_Shrine1_EnemyEncounterLetterLabel>Enemies encountered</Story_Shrine1_EnemyEncounterLetterLabel>
 	<Story_Shrine1_EnemyEncounterLetterMessage>Looks like we're not alone here.</Story_Shrine1_EnemyEncounterLetterMessage>
+	<VisitAncientMasterShrine>Visit Shrine test</VisitAncientMasterShrine>
+
+	<GiveUpOnClueLabel>Give up on clue</GiveUpOnClueLabel>
+	<GiveUpOnClueDesc>Give up on this clue, you'll hear about another one soon.</GiveUpOnClueDesc>
+
+	<MasterShrineVictoryLetterLabel>Bandits defeated</MasterShrineVictoryLetterLabel>
+	<MasterShrineVictoryLetterMessage>The bandits setting a trap at the shrine were defeated.</MasterShrineVictoryLetterMessage>
+	<MasterShrineVictoryBossLetterLabel>Defeated {0}</MasterShrineVictoryBossLetterLabel>
+	<MasterShrineVictoryBossLetterMessage>Defeated {0}, the ancient harbinger of destruction. The shrine awarded you with {1}</MasterShrineVictoryBossLetterMessage>
 </LanguageData>
 

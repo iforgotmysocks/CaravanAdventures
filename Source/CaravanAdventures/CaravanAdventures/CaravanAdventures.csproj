@@ -90,6 +90,7 @@
     <Compile Include="CaravanItemSelection\FilterHelper.cs" />
     <Compile Include="CaravanItemSelection\FilterSet.cs" />
     <Compile Include="CaravanStory\AncientMasterShrineMP.cs" />
+    <Compile Include="CaravanStory\AncientMasterShrineUtility.cs" />
     <Compile Include="CaravanStory\AncientMasterShrineWO.cs" />
     <Compile Include="CaravanStory\CaravanArrivalAction_AncientMasterShrineWO.cs" />
     <Compile Include="CaravanStory\CaravanStorySiteDefOf.cs" />

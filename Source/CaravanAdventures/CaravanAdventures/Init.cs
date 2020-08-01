@@ -24,6 +24,16 @@ namespace CaravanAdventures
             FilterCombs.InitFilterSets();
             PatchAncientShrineDefs_MoreShrinesAndBetterRewards();
             PatchTreeDef_AddTalkOption();
+            PatchRemovePenaltyForBeingRoyal();
+        }
+
+        private void PatchRemovePenaltyForBeingRoyal()
+        {
+            var defNames = new string[] { "TitleApparelRequirementNotMet", "TitleApparelMinQualityNotMet", "TitleNoThroneRoom", "TitleNoPersonalBedroom", "TitleThroneroomRequirementsNotMet", "TitleBedroomRequirementsNotMet"};
+            foreach (var def in DefDatabase<ThoughtDef>.AllDefsListForReading.Where(x => defNames.Contains(x.defName)))
+            {
+                def.stages.First().baseMoodEffect = 0;
+            }
         }
 
         private void PatchTreeDef_AddTalkOption()
