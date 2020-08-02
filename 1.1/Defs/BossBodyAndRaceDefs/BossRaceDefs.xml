@@ -52,8 +52,8 @@
 	<PawnKindDef ParentName="BaseMechanoidKind">
 		<defName>CADevourer</defName>
 		<label>Devourer</label>
-		<race>Mech_Centipede</race>
-		<combatPower>400</combatPower>
+		<race>CADevourer</race>
+		<combatPower>40000</combatPower>
 		<lifeStages>
 			<li>
 				<bodyGraphicData>

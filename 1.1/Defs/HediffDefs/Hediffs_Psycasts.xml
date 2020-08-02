@@ -25,6 +25,7 @@
         <statOffsets>
           <ComfyTemperatureMin>-20</ComfyTemperatureMin>
           <ComfyTemperatureMax>20</ComfyTemperatureMax>
+          <ArmorRating_Heat>2.00</ArmorRating_Heat>
           <ImmunityGainSpeed>3</ImmunityGainSpeed>
           <MoveSpeed>1.5</MoveSpeed>
           <ToxicSensitivity>-0.8</ToxicSensitivity>
@@ -64,6 +65,7 @@
         <statOffsets>
           <ComfyTemperatureMin>-10</ComfyTemperatureMin>
           <ComfyTemperatureMax>10</ComfyTemperatureMax>
+					<ArmorRating_Heat>1.50</ArmorRating_Heat>
           <ImmunityGainSpeed>2</ImmunityGainSpeed>
           <MoveSpeed>1</MoveSpeed>
           <ToxicSensitivity>-0.5</ToxicSensitivity>

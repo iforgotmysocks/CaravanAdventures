@@ -13,14 +13,11 @@ namespace CaravanAdventures.CaravanStory
 {
     class StoryStart : MapComponent
     {
-        public bool debugAllAbilities { get; set; } = true;
-       
         private Sustainer animaTreeWhipserSustainer;
         private bool currentStoryTrigger = false;
         
         public StoryStart(Map map) : base(map)
-        {
-            
+        { 
         }
 
         public override void FinalizeInit()
@@ -139,7 +136,7 @@ namespace CaravanAdventures.CaravanStory
             }
         }
 
-        private void CheckEnsureGifted(Pawn pawn = null)
+        public void CheckEnsureGifted(Pawn pawn = null)
         {
             //Log.Message($"Can receive gift flag: {StoryWC.storyFlags["Start_CanReceiveGift"]}");
             if (!StoryWC.storyFlags["Start_CanReceiveGift"]) return;
@@ -162,6 +159,7 @@ namespace CaravanAdventures.CaravanStory
                 return;
             }
 
+            // todo choose best candidate
             // todo make sure the pawn isn't psychially unsensitive.
             var chosen = pawn ?? pawns.FirstOrDefault();
             if (chosen == null)
@@ -175,13 +173,15 @@ namespace CaravanAdventures.CaravanStory
             chosen.health.AddHediff(DefDatabase<HediffDef>.AllDefs.FirstOrDefault(x => x.defName == "PsychicAmplifier"), chosen.health.hediffSet.GetBrain());
             chosen.health.AddHediff(DefDatabase<HediffDef>.AllDefs.FirstOrDefault(x => x.defName == "AncientGift"), chosen.health.hediffSet.GetBrain());
 
-            if (debugAllAbilities) DebugAddAllAbilities(chosen);
+            AddUnlockedAbilities(chosen);
         }
-
         
-        private void DebugAddAllAbilities(Pawn chosen)
+        private void AddUnlockedAbilities(Pawn chosen)
         {
-            var abilityDefs = DefDatabase<AbilityDef>.AllDefsListForReading.Where(x => x.defName.StartsWith("Ancient"));
+            var abilityDefs = StoryWC.debugFlags["DebugAllAbilities"] 
+                ? DefDatabase<AbilityDef>.AllDefsListForReading.Where(x => x.defName.StartsWith("Ancient"))
+                : StoryWC.GetUnlockedSpells();
+           
             foreach (var abilityDef in abilityDefs)
             {
                 chosen.abilities.GainAbility(abilityDef);
@@ -206,8 +206,6 @@ namespace CaravanAdventures.CaravanStory
         public override void ExposeData()
         {
             base.ExposeData();
-            //Scribe_Values.Look(ref chosenPawnSelected, "chosenPawnSelected", false, false);
-            //Scribe_Values.Look(ref StoryManager.storyFlags, "StoryManager.storyFlags", null);
             Scribe_Values.Look(ref currentStoryTrigger, "currentStoryTrigger", false);
         }
 

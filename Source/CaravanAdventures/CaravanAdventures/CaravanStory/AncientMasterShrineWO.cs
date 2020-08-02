@@ -35,12 +35,10 @@ namespace CaravanAdventures.CaravanStory
 				mp = map.Parent as AncientMasterShrineMP;
 				mainRoom = GetAncientShrineRooms(map).FirstOrDefault();
 
-				if (mainRoom.CellCount > 1500) AddBoss(map, caravan, mainRoom);
+				if (mainRoom.CellCount > 1500) mp.boss = AddBoss(map, caravan, mainRoom);
 				else AddBandits(map, caravan);
 
-				AddEnemiesToRooms(map, caravan);
-
-		
+				AddEnemiesToRooms(map, caravan, mp.boss);
 
 				//(Pawn x) => CellFinder.RandomSpawnCellForPawnNear(playerStartingSpot, map, 4)
 				CaravanEnterMapUtility.Enter(caravan, map, CaravanEnterMode.Edge, CaravanDropInventoryMode.DoNotDrop, true);
@@ -83,19 +81,20 @@ namespace CaravanAdventures.CaravanStory
 			Find.LetterStack.ReceiveLetter("Story_Shrine1_EnemyEncounterLetterLabel".Translate(), "Story_Shrine1_EnemyEncounterLetterMessage".Translate(), LetterDefOf.ThreatBig, target, null, null, null, null);
 		}
 
-		private void AddBoss(Map map, Caravan caravan, Room mainRoom)
+		private Pawn AddBoss(Map map, Caravan caravan, Room mainRoom)
 		{
 			// todo add notification about this being the real thing
 
 			// todo boss not attackign with group -> find error
+			// todo map gen can also fail on just not spawning caskets and therefore no mechs, if that happens, the boss can't be spawned!
+			IntVec3 pos = default;
+			if (!StoryUtility.CanSpawnSpotCloseToCaskets(mainRoom, map, out pos)) return null;
 			var boss = PawnGenerator.GeneratePawn(DefDatabase<PawnKindDef>.GetNamedSilentFail("CADevourer"), Faction.OfMechanoids);
-			var pos = AncientMasterShrineUtility.GetSpawnSpotCloseToCaskets(mainRoom, map);
-
 			GenSpawn.Spawn(boss, pos, map, WipeMode.Vanish);
 			var compDormant = boss.TryGetComp<CompWakeUpDormant>();
 			if (compDormant != null) compDormant.wakeUpIfColonistClose = true;
 			//GenStep_SleepingMechanoids.SendMechanoidsToSleepImmediately(new List<Pawn> { boss });
-			mp.boss = boss;
+			return boss;
 		}
 
 		private void AddEnemiesToRooms(Map map, Caravan caravan, Pawn boss = null)
@@ -256,23 +255,27 @@ namespace CaravanAdventures.CaravanStory
 			};
 
 			Log.Message($"Points after: {mechPawnGroupMakerParams.points}");
-			mp.generatedMechs = PawnGroupMakerUtility.GeneratePawns(mechPawnGroupMakerParams, true).ToList();
-
+			var spawnedMechs = PawnGroupMakerUtility.GeneratePawns(mechPawnGroupMakerParams, true).ToList();
+			if (!spawnedMechs.Any()) return;
+			mp.generatedMechs.AddRange(spawnedMechs);
 			var emptyCells = room.Cells.Where(x => x.Standable(map) && !x.Filled(map));
 			var idx = 0;
-			foreach (var cell in emptyCells.InRandomOrder().Take(mp.generatedMechs.Count))
+			foreach (var cell in emptyCells.InRandomOrder().Take(spawnedMechs.Count))
 			{
-				var mech = mp.generatedMechs[idx++];
+				var mech = spawnedMechs[idx++];
 				GenSpawn.Spawn(mech, cell, map, WipeMode.Vanish);
 				var compDormant = mech.TryGetComp<CompWakeUpDormant>();
 				if (compDormant != null) compDormant.wakeUpIfColonistClose = true;
 			}
-			if (!mp.generatedMechs.Any()) return;
+			
 			// LordJob_SleepThenMechanoidsDefend
-			var mechs = mp.generatedMechs.ToList();
-			if (boss != null) mechs.Add(boss); 
-			LordMaker.MakeNewLord(incidentParms.faction, new LordJob_SleepThenAssaultColony(incidentParms.faction), map, mechs);
-			GenStep_SleepingMechanoids.SendMechanoidsToSleepImmediately(mechs);
+			if (boss != null && room == mainRoom)
+			{
+				spawnedMechs.Add(boss);
+				Log.Message($"Adding boss to list");
+			}
+			LordMaker.MakeNewLord(incidentParms.faction, new LordJob_SleepThenAssaultColony(incidentParms.faction), map, spawnedMechs);
+			GenStep_SleepingMechanoids.SendMechanoidsToSleepImmediately(spawnedMechs);
 		}
 
 		public override IEnumerable<FloatMenuOption> GetFloatMenuOptions(Caravan caravan)
@@ -307,9 +310,9 @@ namespace CaravanAdventures.CaravanStory
 					action = () =>
 					{
 						// todo cleanup + notify story to tick on
-						this.Destroy();
 						SoundDefOf.Click.PlayOneShot(null);
 						StoryWC.ResetCurrentShrineFlags();
+						this.Destroy();
 					}
 				};
 

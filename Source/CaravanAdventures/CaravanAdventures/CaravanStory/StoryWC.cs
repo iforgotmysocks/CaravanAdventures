@@ -13,17 +13,19 @@ namespace CaravanAdventures.CaravanStory
     class StoryWC : WorldComponent
     {
         // todo 60000 * 2
-        private float baseDelayNextShrineReveal = 600f * 2f;
+        private static float baseDelayNextShrineReveal = 600f * 2f;
         private static float shrineRevealCounter = -1f;
         private int ticks = -1;
         private static float countShrinesCompleted = 0f;
         private static readonly IntRange timeoutDaysRange = new IntRange(10, 12);
         private static readonly IntRange shrineDistance = new IntRange(2, 4); // 40,50
+        private static List<AbilityDef> unlockedSpells = new List<AbilityDef>();
 
         public static Dictionary<string, bool> debugFlags = new Dictionary<string, bool>()
         {
             {"StoryStartDone", true },
-            { "ShrinesDisabled", false }
+            { "ShrinesDisabled", false },
+            { "DebugAllAbilities", false }
         };
 
         public static Dictionary<string, bool> storyFlags = new Dictionary<string, bool>()
@@ -37,6 +39,9 @@ namespace CaravanAdventures.CaravanStory
         public override void FinalizeInit()
         {
             base.FinalizeInit();
+
+            // todo remove, should just be needed to update
+            if (unlockedSpells == null) unlockedSpells = new List<AbilityDef>();
 
             if (ticks == -1)
             {
@@ -67,8 +72,7 @@ namespace CaravanAdventures.CaravanStory
         public override void WorldComponentTick()
         {
             base.WorldComponentTick();
-
-            if (ticks >= 60)
+            if (ticks > 60)
             {
                 if (CheckCanStartCountDownOnNewShrine() && !debugFlags["ShrinesDisabled"])
                 {
@@ -116,10 +120,12 @@ namespace CaravanAdventures.CaravanStory
         public static void ResetCurrentShrineFlags() => storyFlags.Keys.Where(x => x.StartsWith(BuildCurrentShrinePrefix())).ToList().ForEach(key => storyFlags[key] = false);
 
         public static string BuildCurrentShrinePrefix() => "Shrine" + (countShrinesCompleted + 1) + "_";
+
+        public static List<AbilityDef> GetUnlockedSpells() => unlockedSpells;
+        
         private bool CheckCanStartCountDownOnNewShrine() => 
             !storyFlags.Any(x => x.Key.StartsWith("Start_") && x.Value == false) 
-            && countShrinesCompleted == 0 && !storyFlags.Any(x => x.Key == BuildCurrentShrinePrefix() + "InitCountDownStarted" 
-            && x.Value == true)
+            && countShrinesCompleted == 0 && !storyFlags.Any(x => x.Key == BuildCurrentShrinePrefix() + "InitCountDownStarted" && x.Value == true)
             || !storyFlags.Any(x => x.Key.StartsWith("Start_") && x.Value == false) 
             && !storyFlags.Any(x => x.Key == BuildCurrentShrinePrefix() + "Completed" && x.Value == false) 
             && !storyFlags.Any(x => x.Key == BuildCurrentShrinePrefix() + "InitCountDownStarted" && x.Value == true);
@@ -128,7 +134,10 @@ namespace CaravanAdventures.CaravanStory
         {
             base.ExposeData();
             Scribe_Collections.Look(ref storyFlags, "storyFlags", LookMode.Value);
+            Scribe_Collections.Look(ref unlockedSpells, "unlockedSpells", LookMode.Value);
             Scribe_Values.Look(ref ticks, "ticks");
+            Scribe_Values.Look(ref shrineRevealCounter, "shrineRevealCounter");
+            Scribe_Values.Look(ref countShrinesCompleted, "countShrinesCompleted");
         }
 
 
