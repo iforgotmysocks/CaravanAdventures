@@ -29,6 +29,8 @@ namespace CaravanAdventures.CaravanStory
 				if (talkedTo == false && approachingPawn != null && targetPosition == approachingPawn.Position)
 				{
 					talkedTo = true;
+					// todo check if we can use the promise-ish system used for bestower quest, cause this solution sucks
+					approachingPawn.rotationTracker.FaceTarget(this.parent);
 					actions.FirstOrDefault(x => this.parent == x.Key).Value.Invoke(approachingPawn, this.parent);
 				}
 

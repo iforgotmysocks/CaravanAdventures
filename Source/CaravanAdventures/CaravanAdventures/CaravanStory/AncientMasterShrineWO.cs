@@ -19,7 +19,6 @@ namespace CaravanAdventures.CaravanStory
 		// todo cleanup -> especially mechs 
 		private Room mainRoom = null;
 		private AncientMasterShrineMP mp = null;
-		private int bossMissedCounter = 0;
 
 		public void Notify_CaravanArrived(Caravan caravan)
 		{

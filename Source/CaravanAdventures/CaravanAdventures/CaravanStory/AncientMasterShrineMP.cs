@@ -5,7 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 using Verse;
+using Verse.Noise;
 
 namespace CaravanAdventures.CaravanStory
 {
@@ -19,31 +21,28 @@ namespace CaravanAdventures.CaravanStory
 		public List<Pawn> generatedBandits = new List<Pawn>();
 		public Pawn boss = null;
         private bool bossDefeatedAndRewardsGiven;
+		private int constTicks = -1;
 
-        public override MapGeneratorDef MapGeneratorDef => CaravanStorySiteDefOf.AncientMasterShrineMG;
+		public override MapGeneratorDef MapGeneratorDef => CaravanStorySiteDefOf.AncientMasterShrineMG;
 
         public override void ExposeData()
 		{
 			base.ExposeData();
 			Scribe_Values.Look<bool>(ref this.wonBattle, "wonBattle", false, false);
 			Scribe_Values.Look(ref bossDefeatedAndRewardsGiven, "bossDefeatedAndRewardsGiven");
-			Scribe_Values.Look(ref boss, "boss");
+			Scribe_References.Look(ref boss, "boss");
 		}
 
 		public void Init()
         {
-			//boss = FindBossNew();
-
+			// debug
 			Log.Message($"compare mechs. mapPawns: {Map.mapPawns.AllPawns.Where(x => x.RaceProps.IsMechanoid).Count()} ourlist: {generatedMechs.Count}");
-			
 			foreach (var pawn in Map.mapPawns.AllPawns.Where(x => x.RaceProps.IsMechanoid))
             {
 				Log.Message($"defname: {pawn.def.defName} kind: {pawn.kindDef.defName} other: {pawn.def.label} kindlabel: {pawn.kindDef.label}");
             }
-
 			var notMatching = generatedMechs.Where(x => !Map.mapPawns.AllPawns.Where(y => y.RaceProps.IsMechanoid).Any(z => z.ThingID == x.ThingID));
 			Log.Message($"Not matching count: {notMatching.Count()}");
-
 			Log.Message($"Map has boss: {boss != null}");
 
 			StoryWC.storyFlags[StoryWC.BuildCurrentShrinePrefix() + "Created"] = true;
@@ -69,24 +68,88 @@ namespace CaravanAdventures.CaravanStory
 				CheckBossDefeated();
 				this.CheckWonBattle();
 			}
+
+			if (constTicks == 2400)
+			{
+				if (boss != null)
+                {
+					StoryUtility.EnsureSacrilegHunters();
+					CreateShrineDialog();
+					GetAssistanceFromAlliedFaction();
+				}
+				
+			}
+
+			constTicks++;
 		}
 
-        private void CheckBossDefeated()
+		private void CreateShrineDialog()
+		{
+			//var endDiaNodeAccepted = new DiaNode("Story_Start_Dia1_Me_End_Accepted".Translate());
+			//endDiaNodeAccepted.options.Add(new DiaOption("Story_Start_Dia1_Me_End_Bye".Translate()) { action = () => GrantAncientGift(initiator, addressed), resolveTree = true });
+
+			//var endDiaNodeDenied = new DiaNode("Story_Start_Dia1_Me_End_Denied".Translate());
+			//endDiaNodeDenied.options.Add(new DiaOption("Story_Start_Dia1_Me_End_Bye".Translate()) { resolveTree = true });
+
+			//var subDiaNode = new DiaNode("Story_Start_Dia1_Me".Translate());
+			//subDiaNode.options.Add(new DiaOption("Story_Start_Dia1_Me_NoChoice".Translate()) { link = endDiaNodeAccepted });
+			//subDiaNode.options.Add(new DiaOption("Story_Start_Dia1_Me_SomeoneBetter".Translate()) { link = endDiaNodeDenied });
+
+			var diaNode = new DiaNode("Story_Shrine1_SacrilegHunters_Dia1_1".Translate());
+			diaNode.options.Add(new DiaOption("Story_Shrine1_SacrilegHunters_Dia1_1_Option1".Translate()) { resolveTree = true }); ;
+
+			TaggedString taggedString = "Story_Shrine1_SacrilegHunters_DiaTitle".Translate();
+			Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
+			Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
+		}
+
+        private void GetAssistanceFromAlliedFaction()
+		{
+			IncidentParms incidentParms = new IncidentParms();
+			incidentParms.target = this.Map;
+			incidentParms.faction = StoryUtility.EnsureSacrilegHunters();
+			incidentParms.raidArrivalModeForQuickMilitaryAid = true;
+			// todo by wealth, the richer, the less help
+			incidentParms.points = Rand.Range(7500, 8000);  // DiplomacyTuning.RequestedMilitaryAidPointsRange.RandomInRange;
+			incidentParms.raidNeverFleeIndividual = true;
+			incidentParms.spawnCenter = Map.mapPawns.FreeColonists.RandomElement().Position;
+			IncidentDefOf.RaidFriendly.Worker.TryExecute(incidentParms);
+		}
+
+		private void CheckBossDefeated()
         {
 			if (boss == null || boss != null && !boss.Dead || bossDefeatedAndRewardsGiven) return;
 			// todo popup window doing some story dialog bla
 
 			var gifted = StoryUtility.GetGiftedPawn();
 			if (gifted == null) Log.Warning("gifted pawn was null, which shouldn't happen. Spell was stored for when another gifted pawn awakes");
+
 			var spell = DefDatabase<AbilityDef>.AllDefsListForReading.Where(x => x.defName.StartsWith("Ancient") && !StoryWC.GetUnlockedSpells().Contains(x)).InRandomOrder().FirstOrDefault();
 			if (spell == null) return;
 			else Log.Message($"Got spell");
 			StoryWC.GetUnlockedSpells().Add(spell);
 			if (gifted != null) gifted.abilities.GainAbility(spell);
-			// todo info about spell? Letter?
 
-			WakeAllMechanoids();
+			StoryWC.SetShrineSF("Completed");
+			StoryWC.IncreaseShrineCompleteCounter();
+
+			BossDefeatedDialog(gifted, boss, spell);
 			bossDefeatedAndRewardsGiven = true;
+		}
+
+        private void BossDefeatedDialog(Pawn gifted, Pawn boss, AbilityDef spell)
+        {
+			var diaNode2 = new DiaNode("Story_Shrine1_BossDefeated_Dia1_2".Translate(boss.def.label));
+			diaNode2.options.Add(new DiaOption("Story_Shrine1_BossDefeated_Dia1_1_Option2".Translate()) { resolveTree = true, action = () => WakeAllMechanoids() });
+
+			var diaNode = new DiaNode("Story_Shrine1_BossDefeated_Dia1_1".Translate(boss.def.label, gifted.Name.ToStringShort, spell.label));
+			diaNode.options.Add(new DiaOption("Story_Shrine1_BossDefeated_Dia1_1_Option1".Translate()) { link = diaNode2 });
+
+			TaggedString taggedString = "Story_Shrine1_BossDefeated_Dia1Title".Translate(gifted.Name.ToStringShort);
+			Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
+			Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
+
+			// todo gifted null
 		}
 
         private void WakeAllMechanoids()
@@ -96,6 +159,7 @@ namespace CaravanAdventures.CaravanStory
 
         private void CheckWonBattle()
 		{
+			// todo - completely redo battle won, we don't really need it.
 			if (this.wonBattle)
 			{
 				return;
@@ -111,7 +175,7 @@ namespace CaravanAdventures.CaravanStory
 			{
 				Find.LetterStack.ReceiveLetter("MasterShrineVictoryBossLetterLabel".Translate(boss.Name), "MasterShrineVictoryBossLetterMessage".Translate(boss.Name, "abilitynametodo"), LetterDefOf.PositiveEvent, this, null, null, null, null);
 				StoryWC.storyFlags[StoryWC.BuildCurrentShrinePrefix() + "Completed"] = true;
-				StoryWC.IncreaseShrineCompleteCounter();
+				//StoryWC.IncreaseShrineCompleteCounter();
 			}
 
 			else Find.LetterStack.ReceiveLetter("MasterShrineVictoryLetterLabel".Translate(), "MasterShrineVictoryLetterMessage".Translate(), LetterDefOf.PositiveEvent, this, null, null, null, null);

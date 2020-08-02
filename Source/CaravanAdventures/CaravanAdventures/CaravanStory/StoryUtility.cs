@@ -36,5 +36,17 @@ namespace CaravanAdventures.CaravanStory
 		}
 
         internal static Pawn GetGiftedPawn() => PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction?.FirstOrDefault(x => (x?.RaceProps?.Humanlike ?? false) && x.health.hediffSet.GetFirstHediffOfDef(HediffDef.Named("AncientGift")) != null);
+
+		public static Faction EnsureSacrilegHunters()
+        {
+			var sacrilegHunters = Find.FactionManager.AllFactions.FirstOrDefault(x => x.def.defName == "SacrilegHunters");
+			if (sacrilegHunters == null)
+			{
+				sacrilegHunters = FactionGenerator.NewGeneratedFaction(DefDatabase<FactionDef>.GetNamedSilentFail("SacrilegHunters"));
+				Find.FactionManager.Add(sacrilegHunters);
+			}
+
+			return sacrilegHunters;
+		}
     }
 }

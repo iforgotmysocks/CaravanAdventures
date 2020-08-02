@@ -8,6 +8,8 @@ using Verse;
 using RimWorld.Planet;
 using Verse.Sound;
 using HarmonyLib;
+using Verse.AI;
+using UnityEngine;
 
 namespace CaravanAdventures.CaravanStory
 {
@@ -15,7 +17,9 @@ namespace CaravanAdventures.CaravanStory
     {
         private Sustainer animaTreeWhipserSustainer;
         private bool currentStoryTrigger = false;
-        
+        private Mote mote;
+        private Sustainer sound;
+
         public StoryStart(Map map) : base(map)
         { 
         }
@@ -121,6 +125,28 @@ namespace CaravanAdventures.CaravanStory
 
         private void GrantAncientGift(Pawn initiator, object addressed)
         {
+            //Toil waitToil = Toils_General.Wait(471, TargetIndex.None);
+            //waitToil.tickAction = delegate ()
+            //{
+            //    if (this.mote == null || this.mote.Destroyed)
+            //    {
+            //        Vector3 loc = initiator.TrueCenter();
+            //        this.mote = MoteMaker.MakeStaticMote(loc, initiator.Map, ThingDefOf.Mote_Bestow, 1f);
+            //    }
+            //    this.mote.Maintain();
+            //    if ((this.sound == null || this.sound.Ended) && waitToil.actor.jobs.curDriver.ticksLeftThisToil <= 307)
+            //    {
+            //        this.sound = SoundDefOf.Bestowing_Warmup.TrySpawnSustainer(SoundInfo.InMap(new TargetInfo(initiator.Position, initiator.Map, false), MaintenanceType.PerTick));
+            //    }
+            //    if (this.sound != null)
+            //    {
+            //        this.sound.Maintain();
+            //    }
+            //};
+            Vector3 loc = initiator.TrueCenter();
+            this.mote = MoteMaker.MakeStaticMote(loc, initiator.Map, ThingDefOf.Mote_Bestow, 1f);
+            this.sound = SoundDefOf.Bestowing_Warmup.TrySpawnSustainer(SoundInfo.InMap(new TargetInfo(initiator.Position, initiator.Map, false), MaintenanceType.PerTick));
+
             StoryWC.storyFlags["Start_CanReceiveGift"] = true;
             CheckEnsureGifted(initiator);
             AddAdditionalSpells(initiator);
