@@ -45,7 +45,11 @@ namespace CaravanAdventures.CaravanStory
 			Log.Message($"Not matching count: {notMatching.Count()}");
 			Log.Message($"Map has boss: {boss != null}");
 
+			if (boss != null) wonBattle = true;
+
 			StoryWC.storyFlags[StoryWC.BuildCurrentShrinePrefix() + "Created"] = true;
+
+			// todo maybe grab detection comp and increase raidpoints?
 		}
 
         public override bool ShouldRemoveMapNow(out bool alsoRemoveWorldObject)
@@ -72,16 +76,22 @@ namespace CaravanAdventures.CaravanStory
 			if (constTicks == 2400)
 			{
 				if (boss != null)
-                {
+				{
 					StoryUtility.EnsureSacrilegHunters();
+					
+					// todo different dialogs for other shrines, maybe they betray the player the 3rd or 4th shrine.
 					CreateShrineDialog();
 					GetAssistanceFromAlliedFaction();
 				}
+				else LetterNoMasterShrine();
 				
 			}
 
 			constTicks++;
 		}
+
+        private void LetterNoMasterShrine() => Find.LetterStack.ReceiveLetter("MasterShrineVictoryLetterLabel".Translate(), "MasterShrineVictoryLetterMessage".Translate(), LetterDefOf.PositiveEvent, this, null, null, null, null);
+
 
 		private void CreateShrineDialog()
 		{
@@ -149,10 +159,16 @@ namespace CaravanAdventures.CaravanStory
 			Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
 			Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
 
+			// todo new tale
+			//TaleRecorder.RecordTale(TaleDefOf.CaravanAmbushDefeated, new object[]
+			//{
+			//	base.Map.mapPawns.FreeColonists.RandomElement<Pawn>()
+			//});
+
 			// todo gifted null
 		}
 
-        private void WakeAllMechanoids()
+		private void WakeAllMechanoids()
         {
 			Map.mapPawns.AllPawns.Where(x => x.RaceProps.IsMechanoid && !x.Dead).ToList().ForEach(mech => mech.TryGetComp<CompWakeUpDormant>().Activate());
         }
@@ -171,14 +187,11 @@ namespace CaravanAdventures.CaravanStory
 			}
 			//string forceExitAndRemoveMapCountdownTimeLeftString = TimedForcedExit.GetForceExitAndRemoveMapCountdownTimeLeftString(60000);
 
-			if (boss != null && boss.Dead)
+			else
 			{
-				Find.LetterStack.ReceiveLetter("MasterShrineVictoryBossLetterLabel".Translate(boss.Name), "MasterShrineVictoryBossLetterMessage".Translate(boss.Name, "abilitynametodo"), LetterDefOf.PositiveEvent, this, null, null, null, null);
-				StoryWC.storyFlags[StoryWC.BuildCurrentShrinePrefix() + "Completed"] = true;
-				//StoryWC.IncreaseShrineCompleteCounter();
+				Find.LetterStack.ReceiveLetter("MasterShrineVictoryLetterLabel".Translate(), "MasterShrineVictoryLetterMessage".Translate(), LetterDefOf.PositiveEvent, this, null, null, null, null);
+				Find.LetterStack.ReceiveLetter("NoMasterShrineLetterLabel".Translate(), "NoMasterShrineLetterMessage".Translate(), LetterDefOf.NegativeEvent, this, null, null, null, null);
 			}
-
-			else Find.LetterStack.ReceiveLetter("MasterShrineVictoryLetterLabel".Translate(), "MasterShrineVictoryLetterMessage".Translate(), LetterDefOf.PositiveEvent, this, null, null, null, null);
 			// todo new tale
 			//TaleRecorder.RecordTale(TaleDefOf.CaravanAmbushDefeated, new object[]
 			//{

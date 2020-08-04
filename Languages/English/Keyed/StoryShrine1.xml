@@ -12,7 +12,9 @@
 	<GiveUpOnClueDesc>Give up on this clue, you'll hear about another one soon.</GiveUpOnClueDesc>
 
 	<MasterShrineVictoryLetterLabel>Bandits defeated</MasterShrineVictoryLetterLabel>
-	<MasterShrineVictoryLetterMessage>The bandits setting a trap at the shrine were defeated.</MasterShrineVictoryLetterMessage>
+	<MasterShrineVictoryLetterMessage>The bandits setting a trap at the shrine were defeated. </MasterShrineVictoryLetterMessage>
+	<NoMasterShrineLetterLabel>No luck.</NoMasterShrineLetterLabel>
+	<NoMasterShrineLetterMessage>While this place may harbour treasures, it doesn't look like the place you're searching for.</NoMasterShrineLetterMessage>
 	<MasterShrineVictoryBossLetterLabel>Defeated {0}</MasterShrineVictoryBossLetterLabel>
 	<MasterShrineVictoryBossLetterMessage>Defeated {0}, the ancient harbinger of destruction. The shrine awarded you with {1}</MasterShrineVictoryBossLetterMessage>
 
@@ -28,6 +30,8 @@
 	<Story_Shrine1_BossDefeated_Dia1_1_Option1>Asthonishing...</Story_Shrine1_BossDefeated_Dia1_1_Option1>
 	<Story_Shrine1_BossDefeated_Dia1_2>When {0}'s mechanical boddy came to rest, loud scratching starts to hollow around the ruins... something woke up.</Story_Shrine1_BossDefeated_Dia1_2>
 	<Story_Shrine1_BossDefeated_Dia1_1_Option2>We better get out of here...</Story_Shrine1_BossDefeated_Dia1_1_Option2>
+
+	<Story_Shrine1_NoMasterShrineLetterTitle></Story_Shrine1_NoMasterShrineLetterTitle>
 </LanguageData>
 
 

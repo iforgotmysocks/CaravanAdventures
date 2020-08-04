@@ -44,7 +44,12 @@ namespace CaravanAdventures.CaravanStory
 			{
 				sacrilegHunters = FactionGenerator.NewGeneratedFaction(DefDatabase<FactionDef>.GetNamedSilentFail("SacrilegHunters"));
 				Find.FactionManager.Add(sacrilegHunters);
-			}
+				var empireDef = FactionDefOf.Empire;
+				empireDef.permanentEnemyToEveryoneExcept.Add(sacrilegHunters.def);
+                Faction.Empire.TrySetNotHostileTo(sacrilegHunters);
+            }
+			// todo test relation being set correctly
+			if (sacrilegHunters != null && Faction.OfPlayerSilentFail != null && sacrilegHunters.HostileTo(Faction.OfPlayerSilentFail)) sacrilegHunters.SetRelation(new FactionRelation() { kind = FactionRelationKind.Ally, goodwill = 100, other = Faction.OfPlayer });
 
 			return sacrilegHunters;
 		}

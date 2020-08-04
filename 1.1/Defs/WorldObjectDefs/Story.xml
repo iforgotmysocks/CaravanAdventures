@@ -40,7 +40,7 @@
 		</IncidentTargetTags>
 		<comps>
 			<li Class="WorldObjectCompProperties_FormCaravan" />
-			<!--<li Class="WorldObjectCompProperties_TimedDetectionRaids" />-->
+			<li Class="WorldObjectCompProperties_TimedDetectionRaids" />
 			<!--<li Class="WorldObjectCompProperties_Timeout" />-->
 		</comps>
 	</WorldObjectDef>

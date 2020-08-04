@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
+using System.IO;
 
 namespace CaravanAdventures
 {
@@ -32,6 +33,18 @@ namespace CaravanAdventures
                 propertyInfo.SetValue(x, value, null);
             }
             return (T)x;
+        }
+
+        public static T DeepClone<T>(this T a)
+        {
+            using (var stream = new MemoryStream())
+            {
+                var serializer = new System.Xml.Serialization.XmlSerializer(typeof(T));
+
+                serializer.Serialize(stream, a);
+                stream.Position = 0;
+                return (T)serializer.Deserialize(stream);
+            }
         }
     }
 }

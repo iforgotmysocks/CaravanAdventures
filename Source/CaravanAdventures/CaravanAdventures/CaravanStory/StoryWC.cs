@@ -59,8 +59,6 @@ namespace CaravanAdventures.CaravanStory
                 foreach (var flag in storyFlags.Where(x => x.Key.StartsWith("Start_")).ToList())
                     storyFlags[flag.Key] = true;
 
-
-            StoryUtility.EnsureSacrilegHunters();
         }
 
         public StoryWC(World world) : base(world)
