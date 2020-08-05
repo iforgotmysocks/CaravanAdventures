@@ -40,8 +40,11 @@
 		</IncidentTargetTags>
 		<comps>
 			<li Class="WorldObjectCompProperties_FormCaravan" />
-			<li Class="WorldObjectCompProperties_TimedDetectionRaids" />
-			<!--<li Class="WorldObjectCompProperties_Timeout" />-->
+			<!--<li Class="CaravanAdventures.CaravanStory.WorldObjectCompProperties_TimedDetectionPatrols" />-->
+			<li><compClass>CaravanAdventures.CaravanStory.TimedDetectionPatrols</compClass></li>
+			<!--<li>
+				<compClass>TimedDetectionRaids</compClass>
+			</li>-->
 		</comps>
 	</WorldObjectDef>
 

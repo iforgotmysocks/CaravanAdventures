@@ -31,10 +31,16 @@ namespace CaravanAdventures.CaravanStory
 			Scribe_Values.Look<bool>(ref this.wonBattle, "wonBattle", false, false);
 			Scribe_Values.Look(ref bossDefeatedAndRewardsGiven, "bossDefeatedAndRewardsGiven");
 			Scribe_References.Look(ref boss, "boss");
+			Scribe_Values.Look(ref constTicks, "constTicks");
+			Scribe_Values.Look(ref bossDefeatedAndRewardsGiven, "bossDefeatedAndRewardsGiven");
+
+			// todo are mechs enough? Need them for comparison later
+			Scribe_Collections.Look(ref generatedMechs, "generatedMechs", LookMode.Reference);
 		}
 
 		public void Init()
         {
+			
 			// debug
 			Log.Message($"compare mechs. mapPawns: {Map.mapPawns.AllPawns.Where(x => x.RaceProps.IsMechanoid).Count()} ourlist: {generatedMechs.Count}");
 			foreach (var pawn in Map.mapPawns.AllPawns.Where(x => x.RaceProps.IsMechanoid))
@@ -45,8 +51,16 @@ namespace CaravanAdventures.CaravanStory
 			Log.Message($"Not matching count: {notMatching.Count()}");
 			Log.Message($"Map has boss: {boss != null}");
 
-			if (boss != null) wonBattle = true;
+			if (boss != null)
+			{
+				wonBattle = true;
 
+				GetComponent<TimedDetectionPatrols>().StartDetectionCountdown(4000, -1);
+				//GetComponent<TimedDetectionPatrols>().SetNotifiedSilently();
+				//GetComponent<TimedDetectionPatrols>().StartDetectionCountdown(60000, -1);
+			}
+
+			//GetComponent<TimedDetectionRaids>().StartDetectionCountdown(4000, -1);
 			StoryWC.storyFlags[StoryWC.BuildCurrentShrinePrefix() + "Created"] = true;
 
 			// todo maybe grab detection comp and increase raidpoints?
@@ -83,8 +97,6 @@ namespace CaravanAdventures.CaravanStory
 					CreateShrineDialog();
 					GetAssistanceFromAlliedFaction();
 				}
-				else LetterNoMasterShrine();
-				
 			}
 
 			constTicks++;
@@ -119,8 +131,8 @@ namespace CaravanAdventures.CaravanStory
 			incidentParms.target = this.Map;
 			incidentParms.faction = StoryUtility.EnsureSacrilegHunters();
 			incidentParms.raidArrivalModeForQuickMilitaryAid = true;
-			// todo by wealth, the richer, the less help
-			incidentParms.points = Rand.Range(7500, 8000);  // DiplomacyTuning.RequestedMilitaryAidPointsRange.RandomInRange;
+			// todo by wealth, the richer, the less help // 7500 - 8000
+			incidentParms.points = Rand.Range(4000, 5000);  // DiplomacyTuning.RequestedMilitaryAidPointsRange.RandomInRange;
 			incidentParms.raidNeverFleeIndividual = true;
 			incidentParms.spawnCenter = Map.mapPawns.FreeColonists.RandomElement().Position;
 			IncidentDefOf.RaidFriendly.Worker.TryExecute(incidentParms);

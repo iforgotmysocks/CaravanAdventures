@@ -99,6 +99,7 @@
     <Compile Include="CaravanStory\GenStep_ScatterMasterShrines.cs" />
     <Compile Include="CaravanStory\StoryWC.cs" />
     <Compile Include="CaravanStory\StoryStart.cs" />
+    <Compile Include="CaravanStory\TimedDetectionPatrols.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Init.cs" />
     <Compile Include="Main.cs" />
