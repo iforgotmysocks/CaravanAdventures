@@ -55,6 +55,7 @@ namespace CaravanAdventures.CaravanStory
 			{
 				wonBattle = true;
 
+				GetComponent<TimedDetectionPatrols>().Init();
 				GetComponent<TimedDetectionPatrols>().StartDetectionCountdown(4000, -1);
 				//GetComponent<TimedDetectionPatrols>().SetNotifiedSilently();
 				//GetComponent<TimedDetectionPatrols>().StartDetectionCountdown(60000, -1);
@@ -84,7 +85,7 @@ namespace CaravanAdventures.CaravanStory
 			if (base.HasMap)
 			{
 				CheckBossDefeated();
-				this.CheckWonBattle();
+				CheckWonBattle();
 			}
 
 			if (constTicks == 2400)
