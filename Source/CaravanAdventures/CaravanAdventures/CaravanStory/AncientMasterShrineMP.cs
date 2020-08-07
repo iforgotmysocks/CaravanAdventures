@@ -40,31 +40,24 @@ namespace CaravanAdventures.CaravanStory
 
 		public void Init()
         {
-			
 			// debug
-			Log.Message($"compare mechs. mapPawns: {Map.mapPawns.AllPawns.Where(x => x.RaceProps.IsMechanoid).Count()} ourlist: {generatedMechs.Count}");
-			foreach (var pawn in Map.mapPawns.AllPawns.Where(x => x.RaceProps.IsMechanoid))
-            {
-				Log.Message($"defname: {pawn.def.defName} kind: {pawn.kindDef.defName} other: {pawn.def.label} kindlabel: {pawn.kindDef.label}");
-            }
-			var notMatching = generatedMechs.Where(x => !Map.mapPawns.AllPawns.Where(y => y.RaceProps.IsMechanoid).Any(z => z.ThingID == x.ThingID));
-			Log.Message($"Not matching count: {notMatching.Count()}");
-			Log.Message($"Map has boss: {boss != null}");
+			//Log.Message($"compare mechs. mapPawns: {Map.mapPawns.AllPawns.Where(x => x.RaceProps.IsMechanoid).Count()} ourlist: {generatedMechs.Count}");
+			//foreach (var pawn in Map.mapPawns.AllPawns.Where(x => x.RaceProps.IsMechanoid))
+   //         {
+			//	Log.Message($"defname: {pawn.def.defName} kind: {pawn.kindDef.defName} other: {pawn.def.label} kindlabel: {pawn.kindDef.label}");
+   //         }
+			//var notMatching = generatedMechs.Where(x => !Map.mapPawns.AllPawns.Where(y => y.RaceProps.IsMechanoid).Any(z => z.ThingID == x.ThingID));
+			//Log.Message($"Not matching count: {notMatching.Count()}");
+			//Log.Message($"Map has boss: {boss != null}");
 
 			if (boss != null)
 			{
 				wonBattle = true;
 
 				GetComponent<TimedDetectionPatrols>().Init();
-				GetComponent<TimedDetectionPatrols>().StartDetectionCountdown(4000, -1);
-				//GetComponent<TimedDetectionPatrols>().SetNotifiedSilently();
-				//GetComponent<TimedDetectionPatrols>().StartDetectionCountdown(60000, -1);
-			}
-
-			//GetComponent<TimedDetectionRaids>().StartDetectionCountdown(4000, -1);
+                GetComponent<TimedDetectionPatrols>().StartDetectionCountdown(60000, -1);
+            }
 			StoryWC.storyFlags[StoryWC.BuildCurrentShrinePrefix() + "Created"] = true;
-
-			// todo maybe grab detection comp and increase raidpoints?
 		}
 
         public override bool ShouldRemoveMapNow(out bool alsoRemoveWorldObject)
@@ -188,7 +181,7 @@ namespace CaravanAdventures.CaravanStory
 
         private void CheckWonBattle()
 		{
-			// todo - completely redo battle won, we don't really need it.
+			// todo - completely redo battle won, we don't really need it. (currently it's being set to wonBattle = true upon killing the boss)
 			if (this.wonBattle)
 			{
 				return;

@@ -105,8 +105,6 @@ namespace CaravanAdventures.CaravanStory
 
 		public override void CompTick()
 		{
-			// todo add timer to check for mechs not part of the generated list (and not asleep) and send them off map to die, when they don't have anything to fight
-
 			var mapParent = (AncientMasterShrineMP)this.parent;
 			if (mapParent.HasMap)
 			{
@@ -133,7 +131,6 @@ namespace CaravanAdventures.CaravanStory
 						IncidentDefOf.RaidEnemy.Worker.TryExecute(incidentParms);
                         this.ticksLeftToSendRaid = (int)(Rand.Range(18f, 24f) * 2500f);
                         ticksLeftTillLeaveIfNoEnemies = defaultTicksTillLeave; 
-						Log.Message($"ticksTillLeave: {ticksLeftTillLeaveIfNoEnemies}");
 						Messages.Message("MessageCaravanDetectedRaidArrived".Translate(incidentParms.faction.def.pawnsPlural, incidentParms.faction, this.ticksLeftToSendRaid.ToStringTicksToDays("F1")), MessageTypeDefOf.ThreatBig, true);
 						return;
 					}
@@ -141,7 +138,6 @@ namespace CaravanAdventures.CaravanStory
 				}
 				if (ticksLeftTillLeaveIfNoEnemies > 0)
                 {
-					if (ticksLeftTillLeaveIfNoEnemies % 100 == 0) Log.Message($"Check if mechs will leave {ticksLeftTillLeaveIfNoEnemies}");
 					ticksLeftTillLeaveIfNoEnemies--;
 					if (ticksLeftTillLeaveIfNoEnemies == 0)
                     {
@@ -173,7 +169,7 @@ namespace CaravanAdventures.CaravanStory
 
 		private void NotifyPlayer()
 		{
-			Find.LetterStack.ReceiveLetter("LetterLabelSiteCountdownStarted".Translate(), "LetterTextSiteCountdownStarted".Translate(this.ticksLeftToSendRaid.ToStringTicksToDays("F1"), this.RaidFaction.def.pawnsPlural, this.RaidFaction), LetterDefOf.ThreatBig, this.parent, null, null, null, null);
+			Find.LetterStack.ReceiveLetter("LetterLabelSiteCountdownStarted".Translate(), "Story_Shrine1_ArrivalTimeShownLetterMessage".Translate(this.ticksLeftToSendRaid.ToStringTicksToDays("F1"), this.RaidFaction.def.pawnsPlural, this.RaidFaction), LetterDefOf.ThreatBig, this.parent, null, null, null, null);
 		}
 
 		public static string GetDetectionCountdownTimeLeftString(int ticksLeft)
