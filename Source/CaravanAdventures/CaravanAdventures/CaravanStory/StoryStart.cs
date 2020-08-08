@@ -144,8 +144,10 @@ namespace CaravanAdventures.CaravanStory
             //    }
             //};
             Vector3 loc = initiator.TrueCenter();
-            this.mote = MoteMaker.MakeStaticMote(loc, initiator.Map, ThingDefOf.Mote_Bestow, 1f);
-            this.sound = SoundDefOf.Bestowing_Warmup.TrySpawnSustainer(SoundInfo.InMap(new TargetInfo(initiator.Position, initiator.Map, false), MaintenanceType.PerTick));
+            //this.mote = MoteMaker.MakeStaticMote(loc, initiator.Map, ThingDefOf.Mote_Bestow, 1f);
+            MoteMaker.MakeStaticMote(initiator.Position, initiator.Map, ThingDefOf.Mote_PsycastAreaEffect, 10f);
+            SoundDefOf.PsycastPsychicPulse.PlayOneShot(new TargetInfo(initiator));
+            //this.sound = SoundDefOf.Bestowing_Warmup.TrySpawnSustainer(SoundInfo.InMap(new TargetInfo(initiator.Position, initiator.Map, false), MaintenanceType.PerTick));
 
             StoryWC.storyFlags["Start_CanReceiveGift"] = true;
             CheckEnsureGifted(initiator);

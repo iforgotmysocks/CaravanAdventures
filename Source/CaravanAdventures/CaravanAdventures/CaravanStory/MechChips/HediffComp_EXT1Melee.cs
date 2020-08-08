@@ -12,12 +12,12 @@ using Verse.Sound;
 
 namespace CaravanAdventures.CaravanStory.MechChips
 {
-    public class HediffComp_EXT1Basic : HediffComp
+    public class HediffComp_EXT1Melee : HediffComp
     {
         private int ticks = 0;
         private List<Pawn> producedMechs;
 
-        public new HediffCompProperties_EXT1Basic Props => (HediffCompProperties_EXT1Basic)props;
+        public new HediffCompProperties_EXT1Melee Props => (HediffCompProperties_EXT1Melee)props;
 
         public override void CompPostMake()
         {
@@ -32,22 +32,22 @@ namespace CaravanAdventures.CaravanStory.MechChips
             if (!Pawn.Awake()) return;
             if (ticks % 300 == 0)
             {
-                ManufactureScyther();
+                SliceEnemiesInfront();
             }
 
             if (ticks % 1250 == 0)
             {
-                ExpanseBurningSteam();
+                SliceSurroundingEnemies();
             }
             
             if (ticks >= 2500)
             {
-                if (LaunchBombardmentOnCurrentTarget()) ticks = 0;
+                if (JumpToTarget()) ticks = 0;
             }
             ticks++;
         }
 
-        protected void ManufactureScyther()
+        protected void SliceEnemiesInfront()
         {
             if (GenHostility.AnyHostileActiveThreatTo(Pawn.Map, Pawn.Faction))
             {
@@ -62,7 +62,7 @@ namespace CaravanAdventures.CaravanStory.MechChips
             }
         }
 
-        protected bool LaunchBombardmentOnCurrentTarget()
+        protected bool JumpToTarget()
         {
             // todo get all targets in the desired range that are in sight, calculate the one with the most bystanding enemies
             if (Pawn?.TargetCurrentlyAimingAt != null && Pawn.TargetCurrentlyAimingAt != LocalTargetInfo.Invalid && Pawn.TargetCurrentlyAimingAt.Cell.DistanceTo(Pawn.Position) >= 10f)
@@ -78,7 +78,7 @@ namespace CaravanAdventures.CaravanStory.MechChips
             return false;
         }
 
-        protected void ExpanseBurningSteam()
+        protected void SliceSurroundingEnemies()
         {
             var cells = GenRadial.RadialCellsAround(Pawn.Position, 6, false).Where(cell => cell.Standable(Pawn.Map));
             var pawns = cells.SelectMany(cell => cell.GetThingList(Pawn.Map).OfType<Pawn>().Where(pawn => !pawn.RaceProps.IsMechanoid)).ToList();
