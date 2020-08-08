@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Verse;
+using Verse.Sound;
 
 namespace CaravanAdventures.CaravanStory
 {
@@ -53,5 +54,18 @@ namespace CaravanAdventures.CaravanStory
 
 			return sacrilegHunters;
 		}
-    }
+
+        internal static void CallBombardment(IntVec3 position, Map map, Pawn instigator)
+        {
+			Bombardment bombardment = (Bombardment)GenSpawn.Spawn(ThingDefOf.Bombardment, position, map, WipeMode.Vanish);
+			bombardment.impactAreaRadius = 7.9f;
+			bombardment.explosionRadiusRange = new FloatRange(5.9f, 5.9f);
+			bombardment.bombIntervalTicks = 60;
+			bombardment.randomFireRadius = 1;
+			bombardment.explosionCount = 6;
+			bombardment.warmupTicks = 60;
+			bombardment.instigator = instigator;
+			SoundDefOf.OrbitalStrike_Ordered.PlayOneShotOnCamera(null);
+		}
+	}
 }

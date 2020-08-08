@@ -82,13 +82,15 @@ namespace CaravanAdventures.CaravanStory
 
 		private Pawn AddBoss(Map map, Caravan caravan, Room mainRoom)
 		{
-			// todo add notification about this being the real thing
 
 			// todo boss not attackign with group -> find error
 			// todo map gen can also fail on just not spawning caskets and therefore no mechs, if that happens, the boss can't be spawned!
 			IntVec3 pos = default;
 			if (!StoryUtility.CanSpawnSpotCloseToCaskets(mainRoom, map, out pos)) return null;
+			
+			// todo get random boss def with fitting implant
 			var boss = PawnGenerator.GeneratePawn(DefDatabase<PawnKindDef>.GetNamedSilentFail("CADevourer"), Faction.OfMechanoids);
+			boss.health.AddHediff(HediffDef.Named("EXT1Basic"), boss.health.hediffSet.GetBrain());
 			GenSpawn.Spawn(boss, pos, map, WipeMode.Vanish);
 			var compDormant = boss.TryGetComp<CompWakeUpDormant>();
 			if (compDormant != null) compDormant.wakeUpIfColonistClose = true;

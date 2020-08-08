@@ -15,7 +15,7 @@ namespace CaravanAdventures.CaravanStory
 		private int ticksLeftTillNotifyPlayer = -1;
 		private int ticksLeftTillLeaveIfNoEnemies = -1;
         private const int defaultTicksTillLeave = 5000;
-		private List<Pawn> mechsToExcludeFromRaidLogic = null;
+		private List<Lord> lordsToExcludeFromRaidLogic = null;
 
 		public bool NextRaidCountdownActiveAndVisible
 		{
@@ -29,8 +29,10 @@ namespace CaravanAdventures.CaravanStory
         {
 			var mapParent = (AncientMasterShrineMP)this.parent;
 			if (!mapParent.HasMap) return;
-			if (mechsToExcludeFromRaidLogic == null) mechsToExcludeFromRaidLogic = mapParent.Map.mapPawns.PawnsInFaction(Faction.OfMechanoids);
+			lordsToExcludeFromRaidLogic = mapParent.Map.lordManager.lords.Where(lord => lord.faction == Faction.OfMechanoids).ToList();
 		}
+
+
 
 		public string DetectionCountdownTimeLeftString
 		{
@@ -74,7 +76,7 @@ namespace CaravanAdventures.CaravanStory
 			Scribe_Values.Look<int>(ref this.ticksLeftToSendRaid, "ticksLeftToForceExitAndRemoveMap", -1, false);
 			Scribe_Values.Look<int>(ref this.ticksLeftTillNotifyPlayer, "ticksLeftTillNotifyPlayer", -1, false);
 			Scribe_Values.Look(ref ticksLeftTillLeaveIfNoEnemies, "ticksLeftTillLeaveIfNoEnemies", -1, false);
-			Scribe_Collections.Look(ref mechsToExcludeFromRaidLogic, "mechsToExcludeFromRaidLogic", LookMode.Reference);
+			Scribe_Collections.Look(ref lordsToExcludeFromRaidLogic, "lordsToExcludeFromRaidLogic", LookMode.Reference);
 		}
 
 		public override string CompInspectStringExtra()
@@ -99,7 +101,6 @@ namespace CaravanAdventures.CaravanStory
 			{
 				text = text.TrimEndNewlines();
 			}
-			Log.Message($"returning: {text}");
 			return text;
 		}
 
@@ -129,37 +130,35 @@ namespace CaravanAdventures.CaravanStory
 						incidentParms.faction = this.RaidFaction;
 						incidentParms.raidArrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn;
 						IncidentDefOf.RaidEnemy.Worker.TryExecute(incidentParms);
-                        this.ticksLeftToSendRaid = (int)(Rand.Range(18f, 24f) * 2500f);
-                        ticksLeftTillLeaveIfNoEnemies = defaultTicksTillLeave; 
+						this.ticksLeftToSendRaid = (int)(Rand.Range(18f, 24f) * 2500f);
+						ticksLeftTillLeaveIfNoEnemies = defaultTicksTillLeave;
 						Messages.Message("MessageCaravanDetectedRaidArrived".Translate(incidentParms.faction.def.pawnsPlural, incidentParms.faction, this.ticksLeftToSendRaid.ToStringTicksToDays("F1")), MessageTypeDefOf.ThreatBig, true);
 						return;
 					}
 					else if (ticksLeftToSendRaid % 7500 == 0) Messages.Message(new Message("Story_Shrine1_NextPatrolWarning".Translate(GetDetectionCountdownTimeLeftString(ticksLeftToSendRaid)), MessageTypeDefOf.ThreatBig), false);
 				}
 				if (ticksLeftTillLeaveIfNoEnemies > 0)
-                {
+				{
 					ticksLeftTillLeaveIfNoEnemies--;
 					if (ticksLeftTillLeaveIfNoEnemies == 0)
-                    {
-						var raidMechs = mapParent.Map.mapPawns.SpawnedPawnsInFaction(Faction.OfMechanoids).Where(mech => !mechsToExcludeFromRaidLogic.Contains(mech) && mech != mapParent.boss && mech.Awake());
-						if (raidMechs.Count() == 0) ticksLeftTillLeaveIfNoEnemies = -1;
+					{
+						var raidLords = mapParent.Map.lordManager.lords.Where(lord => lord.faction == Faction.OfMechanoids && !lordsToExcludeFromRaidLogic.Contains(lord));
+						Log.Message($"raid mechs: {raidLords.Select(lord => lord.ownedPawns).Count()}");
+						if (!raidLords.Any(lord => lord.AnyActivePawn)) ticksLeftTillLeaveIfNoEnemies = -1;
 						else if (GenHostility.AnyHostileActiveThreatTo(mapParent.Map, Faction.OfMechanoids)) ticksLeftTillLeaveIfNoEnemies = 1000;
 						else
 						{
-							var lords = raidMechs?.Select(mech => mech.GetLord()).GroupBy(mech => mech.loadID).Select(group => group.First());
-							if (lords != null && lords.Count() != 0)
-                            {
-								foreach (var lord in lords)
-                                {
-									var pawnsToReassign = lord.ownedPawns;
-									lord.lordManager.RemoveLord(lord);
-									LordMaker.MakeNewLord(Faction.OfMechanoids, new LordJob_ExitMapBest(Verse.AI.LocomotionUrgency.Walk, true, true), pawnsToReassign.First().Map, pawnsToReassign);
-								}
+							foreach (var lord in raidLords.Reverse())
+							{
+								var pawnsToReassign = lord.ownedPawns;
+								lord.lordManager.RemoveLord(lord);
+								LordMaker.MakeNewLord(Faction.OfMechanoids, new LordJob_ExitMapBest(Verse.AI.LocomotionUrgency.Jog, true, true), pawnsToReassign.First().Map, pawnsToReassign);
 							}
 							ticksLeftTillLeaveIfNoEnemies = -1;
 						}
-                    }
-                }
+						
+					}
+				}
 			}
 			else
 			{
