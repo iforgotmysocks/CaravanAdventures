@@ -32,6 +32,8 @@ namespace CaravanAdventures.CaravanImprovements
             LongEventHandler.QueueLongEvent(delegate ()
             {
                 Map map = newHome.Map;
+                var unloadComp = map.GetComponent<CompUnloadItems>();
+                if (unloadComp != null) unloadComp.Unload = true;
                 Thing t = caravan.PawnsListForReading[0];
                 // todo use own utility once the new gizmo for dropping items is in
                 CaravanEnterMapUtility.Enter(caravan, map, CaravanEnterMode.Center, CaravanDropInventoryMode.DoNotDrop, false, (IntVec3 x) => x.GetRoom(map, RegionType.Set_Passable).CellCount >= 600);

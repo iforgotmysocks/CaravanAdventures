@@ -82,6 +82,8 @@
     <Compile Include="CaravanImmersion\TravelCompanionWC.cs" />
     <Compile Include="CaravanImprovements\CaravanEnterMapImprovementUtility.cs" />
     <Compile Include="CaravanImprovements\CompCaravanDecisions.cs" />
+    <Compile Include="CaravanImprovements\UnloadItemsAlert.cs" />
+    <Compile Include="CaravanImprovements\CompUnloadItems.cs" />
     <Compile Include="CaravanIncidents\CaravanIncidentMapParentDefOfs.cs" />
     <Compile Include="CaravanIncidents\DamselInDistressUtility.cs" />
     <Compile Include="CaravanIncidents\DamselInDistressMapParent.cs" />

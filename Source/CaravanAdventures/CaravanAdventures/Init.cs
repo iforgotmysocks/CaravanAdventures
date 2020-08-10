@@ -11,6 +11,7 @@ using CaravanAdventures.CaravanStory;
 
 namespace CaravanAdventures
 {
+    // todo GameComponent??? 
     class Init : WorldComponent
     {
         private int removeRuinsTick = 0;
