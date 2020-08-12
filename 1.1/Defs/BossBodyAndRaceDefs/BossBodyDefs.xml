@@ -2,7 +2,7 @@
 
 <Defs>
 	<BodyDef>
-		<defName>CADevourerBody</defName>
+		<defName>CABossMechDevourerBody</defName>
 		<label>Devourer</label>
 		<corePart>
 			<def>MechanicalCentipedeBodyFirstRing</def>

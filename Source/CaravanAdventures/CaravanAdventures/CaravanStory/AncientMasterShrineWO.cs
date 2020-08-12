@@ -89,8 +89,9 @@ namespace CaravanAdventures.CaravanStory
 			if (!StoryUtility.CanSpawnSpotCloseToCaskets(mainRoom, map, out pos)) return null;
 			
 			// todo get random boss def with fitting implant
-			var boss = PawnGenerator.GeneratePawn(DefDatabase<PawnKindDef>.GetNamedSilentFail("CADevourer"), Faction.OfMechanoids);
-			boss.health.AddHediff(HediffDef.Named("EXT1Basic"), boss.health.hediffSet.GetBrain());
+			//var boss = PawnGenerator.GeneratePawn(DefDatabase<PawnKindDef>.GetNamedSilentFail("CABossMechDevourer"), Faction.OfMechanoids);
+			//boss.health.AddHediff(HediffDef.Named("EXT1Basic"), boss.health.hediffSet.GetBrain());
+			var boss = StoryUtility.GetFittingMechBoss();
 			GenSpawn.Spawn(boss, pos, map, WipeMode.Vanish);
 			var compDormant = boss.TryGetComp<CompWakeUpDormant>();
 			if (compDormant != null) compDormant.wakeUpIfColonistClose = true;

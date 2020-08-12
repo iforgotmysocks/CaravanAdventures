@@ -22,6 +22,8 @@ namespace CaravanAdventures.CaravanStory
         private static List<AbilityDef> unlockedSpells = new List<AbilityDef>();
         private int bossMissedCounter = 0;
 
+        public static Dictionary<string, int> mechBossKillCounters = new Dictionary<string, int>();
+
         public static Dictionary<string, bool> debugFlags = new Dictionary<string, bool>()
         {
             { "StoryStartDone", false },
@@ -36,6 +38,22 @@ namespace CaravanAdventures.CaravanStory
             { "Start_CanReceiveGift", false },
             { "Start_ReceivedGift", false },
         };
+
+        public override void ExposeData()
+        {
+            base.ExposeData();
+            Scribe_Collections.Look(ref storyFlags, "storyFlags", LookMode.Value);
+            Scribe_Collections.Look(ref unlockedSpells, "unlockedSpells", LookMode.Def);
+            Scribe_Collections.Look(ref mechBossKillCounters, "mechBossKillCounters", LookMode.Value);
+            Scribe_Values.Look(ref ticks, "ticks");
+            Scribe_Values.Look(ref shrineRevealCounter, "shrineRevealCounter");
+            Scribe_Values.Look(ref countShrinesCompleted, "countShrinesCompleted");
+            Scribe_Values.Look(ref bossMissedCounter, "bossMissedCounter");
+        }
+
+        public StoryWC(World world) : base(world)
+        {
+        }
 
         public override void FinalizeInit()
         {
@@ -61,16 +79,6 @@ namespace CaravanAdventures.CaravanStory
 
         }
 
-        public StoryWC(World world) : base(world)
-        {
-        }
-
-        //public override void FinalizeInit()
-        //{
-        //    base.FinalizeInit();
-        //    Log.Message($"StoryWC FinallizeInit was called");
-        //}
-
         public override void WorldComponentTick()
         {
             base.WorldComponentTick();
@@ -94,7 +102,7 @@ namespace CaravanAdventures.CaravanStory
             shrineRevealCounter--;
         }
 
-        public static string[] GetBossDefNames() => new string[] { "CACristalScythe", "CADevourer" };
+        public static string[] GetBossDefNames() => new string[] { "CACristalScythe", "CABossMechDevourer" };
 
         public static void IncreaseShrineCompleteCounter() => countShrinesCompleted++;
 
@@ -134,16 +142,7 @@ namespace CaravanAdventures.CaravanStory
             && !storyFlags.Any(x => x.Key == BuildCurrentShrinePrefix() + "Completed" && x.Value == true)
             && !storyFlags.Any(x => x.Key == BuildCurrentShrinePrefix() + "InitCountDownStarted" && x.Value == true);
 
-        public override void ExposeData()
-        {
-            base.ExposeData();
-            Scribe_Collections.Look(ref storyFlags, "storyFlags", LookMode.Value);
-            Scribe_Collections.Look(ref unlockedSpells, "unlockedSpells", LookMode.Def);
-            Scribe_Values.Look(ref ticks, "ticks");
-            Scribe_Values.Look(ref shrineRevealCounter, "shrineRevealCounter");
-            Scribe_Values.Look(ref countShrinesCompleted, "countShrinesCompleted");
-            Scribe_Values.Look(ref bossMissedCounter, "bossMissedCounter");
-        }
+       
     }
 }
 

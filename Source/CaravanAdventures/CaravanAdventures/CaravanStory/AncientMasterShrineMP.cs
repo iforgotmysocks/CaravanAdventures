@@ -148,6 +148,7 @@ namespace CaravanAdventures.CaravanStory
 
 			StoryWC.SetShrineSF("Completed");
 			StoryWC.IncreaseShrineCompleteCounter();
+			StoryWC.mechBossKillCounters[boss.def.defName] = StoryWC.mechBossKillCounters.TryGetValue(boss.def.defName, out var result) ? result + 1 : 0;
 
 			BossDefeatedDialog(gifted, boss, spell);
 			bossDefeatedAndRewardsGiven = true;

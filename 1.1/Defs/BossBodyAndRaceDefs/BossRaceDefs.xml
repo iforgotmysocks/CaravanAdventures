@@ -2,7 +2,7 @@
 
 <Defs>
 	<ThingDef ParentName="BaseMechanoid">
-		<defName>CADevourer</defName>
+		<defName>CABossMechDevourer</defName>
 		<label>Devourer</label>
 		<description>Heavy combat mechanoids that glide on dozens of tiny legs. Their thick carpace and firepower makes them very effective against bunched-up static defenders. They are somewhat vulnerable to mobile hit-and-run tactics.</description>
 		<statBases>
@@ -47,12 +47,17 @@
 			<Steel>30</Steel>
 			<Plasteel>10</Plasteel>
 		</butcherProducts>
+		<modExtensions>
+			<li Class="CaravanAdventures.CaravanStory.MechChips.MechChipModExt">
+				<mechChipDefName>EXT1Basic</mechChipDefName>
+			</li>
+		</modExtensions>
 	</ThingDef>
 
 	<PawnKindDef ParentName="BaseMechanoidKind">
-		<defName>CADevourer</defName>
+		<defName>CABossMechDevourer</defName>
 		<label>Devourer</label>
-		<race>CADevourer</race>
+		<race>CABossMechDevourer</race>
 		<combatPower>40000</combatPower>
 		<lifeStages>
 			<li>
@@ -74,7 +79,7 @@
 	
 	
 	<!-- CACrystalScythe -->
-
+	
 	<ThingDef ParentName="BaseMechanoidWalker">
 		<defName>CACrystalScythe</defName>
 		<label>Crystal scythe</label>
@@ -121,10 +126,15 @@
 			<soundMeleeHitBuilding>Pawn_Melee_MechanoidSlash_HitBuilding</soundMeleeHitBuilding>
 			<soundMeleeMiss>Pawn_Melee_MechanoidSlash_Miss</soundMeleeMiss>
 		</race>
+		<modExtensions>
+			<li Class="CaravanAdventures.CaravanStory.MechChips.MechChipModExt">
+				<mechChipDefName>EXT1Melee</mechChipDefName>
+			</li>
+		</modExtensions>
 	</ThingDef>
 
 	<PawnKindDef ParentName="BaseMechanoidKind">
-		<defName>CACrystalScythe</defName>
+		<defName>CABossMechCrystalScythe</defName>
 		<label>Crystal scythe</label>
 		<race>CACrystalScythe</race>
 		<combatPower>38000</combatPower>
@@ -144,6 +154,7 @@
 		<defendPointRadius>0</defendPointRadius>
 		<weaponTags>
 		</weaponTags>
+	
 	</PawnKindDef>
 	
 </Defs>

@@ -126,8 +126,6 @@ namespace CaravanAdventures.CaravanItemSelection
                 Connection = FilterConnection.OR,
                 Operation = FilterOperation.Include,
             });
-
-
         }
 
         public static void ApplyAll(List<Patches.Section> sections)

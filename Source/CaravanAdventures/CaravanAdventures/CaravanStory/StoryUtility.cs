@@ -1,4 +1,5 @@
-﻿using RimWorld;
+﻿using CaravanAdventures.CaravanStory.MechChips;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -67,5 +68,14 @@ namespace CaravanAdventures.CaravanStory
 			bombardment.instigator = instigator;
 			SoundDefOf.OrbitalStrike_Ordered.PlayOneShotOnCamera(null);
 		}
-	}
+
+        internal static Pawn GetFittingMechBoss()
+        {
+			var possibleBosses = DefDatabase<PawnKindDef>.AllDefsListForReading.Where(x => x.RaceProps.IsMechanoid && x.defName.ToLower().StartsWith("cabossmech"));
+			var selected = possibleBosses.FirstOrDefault(boss => !StoryWC.mechBossKillCounters.Keys.ToList().Contains(boss.defName)) ?? possibleBosses.RandomElement();
+			var bossPawn = PawnGenerator.GeneratePawn(selected, Faction.OfMechanoids);
+			bossPawn.health.AddHediff(DefDatabase<HediffDef>.GetNamed(bossPawn.def.GetModExtension<MechChipModExt>().mechChipDefName));
+			return bossPawn;
+		}
+    }
 }

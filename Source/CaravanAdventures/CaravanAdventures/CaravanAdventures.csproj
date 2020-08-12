@@ -96,6 +96,7 @@
     <Compile Include="CaravanStory\MechChips\HediffCompProperties_EXT1Basic.cs" />
     <Compile Include="CaravanStory\MechChips\HediffComp_EXT1Melee.cs" />
     <Compile Include="CaravanStory\MechChips\HediffComp_EXT1Basic.cs" />
+    <Compile Include="CaravanStory\MechChips\MechChipModExt.cs" />
     <Compile Include="CaravanStory\StoryUtility.cs" />
     <Compile Include="CaravanStory\AncientMasterShrineWO.cs" />
     <Compile Include="CaravanStory\CaravanArrivalAction_AncientMasterShrineWO.cs" />
