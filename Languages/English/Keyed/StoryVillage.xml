@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+	<StoryVillageEnterMapMessage>Entering {0}...</StoryVillageEnterMapMessage>
+	<StoryVillageArrivedLetterTitle>Entered {0}</StoryVillageArrivedLetterTitle>
+	<StoryVillageArrivedLetterMessage>Your caravan arrived at {0}. Seems to be a nice place.</StoryVillageArrivedLetterMessage>
+	</LanguageData>
+

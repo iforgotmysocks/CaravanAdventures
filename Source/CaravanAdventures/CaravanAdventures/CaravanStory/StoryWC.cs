@@ -18,7 +18,7 @@ namespace CaravanAdventures.CaravanStory
         private int ticks = -1;
         private static float countShrinesCompleted = 0f;
         private static readonly IntRange timeoutDaysRange = new IntRange(10, 12);
-        private static readonly IntRange shrineDistance = new IntRange(2, 4); // 40,50
+        private static readonly IntRange shrineDistance = new IntRange(2, 4); // 40,50 todo
         private static List<AbilityDef> unlockedSpells = new List<AbilityDef>();
         private int bossMissedCounter = 0;
 
@@ -33,6 +33,12 @@ namespace CaravanAdventures.CaravanStory
 
         public static Dictionary<string, bool> storyFlags = new Dictionary<string, bool>()
         {
+            { "IntroVillage_WOCreated", false },
+            { "IntroVillage_Entered", false },
+            { "IntroVillage_TalkedToFriend", false },
+            { "IntroVillage_MechsArrived", false },
+            { "IntroVillage_Finished", false },
+
             { "Start_InitialTreeWhisper", false },
             { "Start_InitialTreeAddTalkOption", false },
             { "Start_CanReceiveGift", false },
@@ -76,14 +82,16 @@ namespace CaravanAdventures.CaravanStory
             if (debugFlags["StoryStartDone"])
                 foreach (var flag in storyFlags.Where(x => x.Key.StartsWith("Start_")).ToList())
                     storyFlags[flag.Key] = true;
-
         }
 
         public override void WorldComponentTick()
         {
             base.WorldComponentTick();
+
             if (ticks > 600)
             {
+                StoryUtility.GenerateFriendlyVillage();
+
                 if (CheckCanStartCountDownOnNewShrine() && !debugFlags["ShrinesDisabled"])
                 {
                     shrineRevealCounter = baseDelayNextShrineReveal * (countShrinesCompleted + 1f) * 0.5f;

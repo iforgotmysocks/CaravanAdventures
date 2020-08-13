@@ -282,9 +282,9 @@ namespace CaravanAdventures.CaravanStory
 
 		public override IEnumerable<FloatMenuOption> GetFloatMenuOptions(Caravan caravan)
 		{
-			foreach (var o in base.GetFloatMenuOptions(caravan))
+			foreach (var baseOption in base.GetFloatMenuOptions(caravan))
 			{
-				yield return o;
+				yield return baseOption;
 			}
 
 			foreach (var own in CaravanArrivalAction_AncientMasterShrineWO.GetFloatMenuOptions(caravan, this))

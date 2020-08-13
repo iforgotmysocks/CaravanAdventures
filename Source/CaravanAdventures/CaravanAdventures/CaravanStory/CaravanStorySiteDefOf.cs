@@ -1,4 +1,5 @@
-﻿using RimWorld;
+﻿using CaravanAdventures.CaravanIncidents;
+using RimWorld;
 using RimWorld.Planet;
 using System;
 using System.Collections.Generic;
@@ -15,5 +16,7 @@ namespace CaravanAdventures.CaravanStory
         public static WorldObjectDef AncientMasterShrine;
         public static WorldObjectDef AncientMasterShrineMP;
         public static MapGeneratorDef AncientMasterShrineMG;
+        public static WorldObjectDef StoryVillageMP;
+        public static MapGeneratorDef StoryVillageMG;
     }
 }

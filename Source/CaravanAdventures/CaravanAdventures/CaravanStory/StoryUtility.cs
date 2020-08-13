@@ -1,5 +1,6 @@
 ﻿using CaravanAdventures.CaravanStory.MechChips;
 using RimWorld;
+using RimWorld.Planet;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +38,35 @@ namespace CaravanAdventures.CaravanStory
 			return false;
 		}
 
+        internal static void GenerateFriendlyVillage()
+        {
+			if (StoryWC.storyFlags.TryGetValue("IntroVillage_WOCreated", out var res) && res) return;
+			int tile;
+			if (!StoryUtility.TryGenerateDistantTile(out tile, 6, 15)) Log.Message($"No tile was generated");
+			StoryVillageMP settlement = (StoryVillageMP)WorldObjectMaker.MakeWorldObject(CaravanStorySiteDefOf.StoryVillageMP);
+			settlement.SetFaction(EnsureSacrilegHunters());
+			//settlement.AllComps.Add(new CompStoryVillage());
+			settlement.Tile = tile;
+			settlement.Name = SettlementNameGenerator.GenerateSettlementName(settlement, null);
+			Find.WorldObjects.Add(settlement);
+			StoryWC.SetSF("IntroVillage_WOCreated");
+		}
+
+        public static bool TryGenerateDistantTile(out int newTile, int minDist, int maxDist)
+        {
+			int startTile = -1;
+			Caravan caravan;
+			if (Find.AnyPlayerHomeMap == null)
+			{
+				Log.Message($"Caravan count: {Find.WorldObjects.Caravans.Count}");
+				caravan = Find.WorldObjects.Caravans.Where(x => x.Faction == Faction.OfPlayer).ToList().OrderByDescending(x => x.PawnsListForReading.Count).FirstOrDefault();
+				if (caravan != null) startTile = caravan.Tile;
+				else Log.Message($"caraavn is null");
+			}
+			Log.Message($"StartTile before calling vanilla method: {startTile}");
+			return TileFinder.TryFindNewSiteTile(out newTile, minDist, maxDist, false, false, startTile);
+        }
+
         internal static Pawn GetGiftedPawn() => PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction?.FirstOrDefault(x => (x?.RaceProps?.Humanlike ?? false) && x.health.hediffSet.GetFirstHediffOfDef(HediffDef.Named("AncientGift")) != null);
 
 		public static Faction EnsureSacrilegHunters()
@@ -72,9 +102,9 @@ namespace CaravanAdventures.CaravanStory
         internal static Pawn GetFittingMechBoss()
         {
 			var possibleBosses = DefDatabase<PawnKindDef>.AllDefsListForReading.Where(x => x.RaceProps.IsMechanoid && x.defName.ToLower().StartsWith("cabossmech"));
-			var selected = possibleBosses.FirstOrDefault(boss => !StoryWC.mechBossKillCounters.Keys.ToList().Contains(boss.defName)) ?? possibleBosses.RandomElement();
+			var selected = possibleBosses.FirstOrDefault(boss => !StoryWC.mechBossKillCounters?.Keys?.ToList()?.Contains(boss.defName) ?? false) ?? possibleBosses.RandomElement();
 			var bossPawn = PawnGenerator.GeneratePawn(selected, Faction.OfMechanoids);
-			bossPawn.health.AddHediff(DefDatabase<HediffDef>.GetNamed(bossPawn.def.GetModExtension<MechChipModExt>().mechChipDefName));
+			if (bossPawn != null) bossPawn.health.AddHediff(DefDatabase<HediffDef>.GetNamed(bossPawn.def.GetModExtension<MechChipModExt>().mechChipDefName));
 			return bossPawn;
 		}
     }

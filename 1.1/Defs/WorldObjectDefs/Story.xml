@@ -48,4 +48,32 @@
 		</comps>
 	</WorldObjectDef>
 
+	<WorldObjectDef>
+		<defName>StoryVillageMP</defName>
+		<label>Friend's Village</label>
+		<description>The village of an old friend of your's.</description>
+		<worldObjectClass>CaravanAdventures.CaravanStory.StoryVillageMP</worldObjectClass>
+		<!--<texture>World/WorldObjects/Ambush</texture>-->
+		<expandingIcon>true</expandingIcon>
+		<!--<expandingIconTexture>World/WorldObjects/Expanding/Ambush</expandingIconTexture>-->
+		<expandingIconPriority>10</expandingIconPriority>
+		<!--<blockExitGridUntilBattleIsWon>false</blockExitGridUntilBattleIsWon>
+		<isTempIncidentMapOwner>true</isTempIncidentMapOwner>
+		<IncidentTargetTags>
+			<li>Map_Misc</li>
+		</IncidentTargetTags>-->
+		<comps>
+			<li Class="WorldObjectCompProperties_FormCaravan" />
+			<!--<li Class="CaravanAdventures.CaravanStory.WorldObjectCompProperties_TimedDetectionPatrols" />-->
+			<!--<li>
+				<compClass>CaravanAdventures.CaravanStory.TimedDetectionPatrols</compClass>
+			</li>-->
+			<!--<li>
+				<compClass>TimedDetectionRaids</compClass>
+			</li>-->
+		</comps>
+	</WorldObjectDef>
+	
+	
+
 </Defs>
