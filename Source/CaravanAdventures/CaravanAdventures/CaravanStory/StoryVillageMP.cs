@@ -25,8 +25,8 @@ namespace CaravanAdventures.CaravanStory
 			LongEventHandler.QueueLongEvent(delegate ()
 			{
 				Map orGenerateMap = GetOrGenerateMapUtility.GetOrGenerateMap(this.Tile, null);
-				TaggedString label = "StoryVillageArrivedLetterTitle".Translate(Label.ApplyTag(TagType.Settlement, Faction.GetUniqueLoadID()));
-				TaggedString text = "StoryVillageArrivedLetterMessage".Translate(Label.ApplyTag(TagType.Settlement, Faction.GetUniqueLoadID())).CapitalizeFirst();
+				var label = "StoryVillageArrivedLetterTitle".Translate(Label.ApplyTag(TagType.Settlement, Faction.GetUniqueLoadID()));
+				var text = "StoryVillageArrivedLetterMessage".Translate(Label.ApplyTag(TagType.Settlement, Faction.GetUniqueLoadID())).CapitalizeFirst();
 			
 				Find.LetterStack.ReceiveLetter(label, text, LetterDefOf.NeutralEvent, caravan.PawnsListForReading, Faction, null, null, null);
 				CaravanEnterMapUtility.Enter(caravan, orGenerateMap, CaravanEnterMode.Edge, CaravanDropInventoryMode.DoNotDrop, true, null);
@@ -43,7 +43,7 @@ namespace CaravanAdventures.CaravanStory
 				//Find.TickManager.CurTimeSpeed = TimeSpeed.Paused;
 
 				//mp.Init();
-			}, "StoryVillageEnterMapMessage", false, null, true);
+			}, "StoryVillageEnterMapMessage".Translate(Label.ApplyTag(TagType.Settlement, Faction.GetUniqueLoadID())), false, null, true);
 
 			// GeneratingMapForNewEncounter
 		}

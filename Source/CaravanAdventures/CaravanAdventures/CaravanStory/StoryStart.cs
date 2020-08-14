@@ -61,7 +61,8 @@ namespace CaravanAdventures.CaravanStory
             currentStoryTrigger = true;
             Log.Message("adding tree action");
             var comp = tree.TryGetComp<CompTalk>();
-            comp.actions.Add(tree, (initiator, addressed) => StoryStartDialog(initiator, addressed));
+            comp.actions_old.Add(tree, (initiator, addressed) => StoryStartDialog(initiator, addressed));
+            comp.actions.Add(new TalkSet() {Id = "StoryStart_TreeDialog", Addressed = tree, Initiator = null, Action = (initiator, addressed) => StoryStartDialog(initiator, addressed), Repeatable = true });
             comp.Enabled = true;
             StoryWC.storyFlags["Start_InitialTreeAddTalkOption"] = true;
         }

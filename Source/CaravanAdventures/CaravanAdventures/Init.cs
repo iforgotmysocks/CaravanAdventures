@@ -25,6 +25,7 @@ namespace CaravanAdventures
             FilterCombs.InitFilterSets();
             PatchAncientShrineDefs_MoreShrinesAndBetterRewards();
             PatchTreeDef_AddTalkOption();
+            PatchHumanDef_AddTalkOption();
             PatchRemovePenaltyForBeingRoyal();
         }
 
@@ -47,12 +48,21 @@ namespace CaravanAdventures
                 return;
             }
             var compProp = new CompProperties_Talk() { compClass = typeof(CompTalk) };
-            if (tree.tickerType != TickerType.Normal && !compProp.orgTickerTypeDict.Keys.Contains(tree))
-            {
-                compProp.orgTickerTypeDict.Add(tree, tree.tickerType);
-                tree.tickerType = TickerType.Normal;
-            }
             if (!tree.comps.Any(x => x is CompProperties_Talk)) tree.comps.Add(compProp);
+        }
+
+        private void PatchHumanDef_AddTalkOption()
+        {
+            var humanDef = DefDatabase<ThingDef>.GetNamed("Human");
+
+            if (humanDef == null)
+            {
+                Log.Message("HumanDef is null");
+                return;
+            }
+            var compProp = new CompProperties_Talk() { compClass = typeof(CompTalk) };
+            if (!humanDef.comps.Any(x => x is CompProperties_Talk)) humanDef.comps.Add(compProp);
+
         }
 
         private void PatchAncientShrineDefs_MoreShrinesAndBetterRewards()

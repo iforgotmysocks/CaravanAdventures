@@ -14,8 +14,5 @@ namespace CaravanAdventures.CaravanStory
         {
             this.compClass = typeof(CompTalk);
         }
-
-        //public bool enabled = false;
-        public Dictionary<Def, TickerType> orgTickerTypeDict = new Dictionary<Def, TickerType>();
     }
 }

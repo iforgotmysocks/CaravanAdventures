@@ -9,50 +9,30 @@ using Verse.AI;
 
 namespace CaravanAdventures.CaravanStory
 {
+	public class TalkSet
+    {
+		public string Id { get; set; }
+        public Pawn Initiator { get; set; }
+        public Thing Addressed { get; set; }
+        public Action<Pawn, Thing> Action { get; set; }
+        public bool Finished { get; set; }
+		public bool Repeatable { get; set; }
+    }
+
+	// todo find out if we can add a exclamation here for questgiver
     public class CompTalk : ThingComp
     {
         public CompProperties_Talk Props => (CompProperties_Talk)props;
 		private Pawn approachingPawn = null;
-		private bool talkedTo = false;
-		private int ticks = 0;
-		private int ticksLong = 0;
-		private IntVec3 targetPosition = default;
-		public Dictionary<object, Action<Pawn, object>> actions = new Dictionary<object, Action<Pawn, object>>();
+		public bool talkedTo = false;
+		public Dictionary<object, Action<Pawn, object>> actions_old = new Dictionary<object, Action<Pawn, object>>();
+		public List<TalkSet> actions = new List<TalkSet>();
 		public bool Enabled = false;
-
-		public override void CompTick()
-        {
-			base.CompTick();
-			if (ticks >= 25)
-			{
-				//Log.Message($"talkedto: {talkedTo} pawn null? {approachingPawn == null} distance: {(approachingPawn != null ? this.parent.Position.DistanceTo(approachingPawn.Position).ToString() : "pawn null")}");
-				if (talkedTo == false && approachingPawn != null && targetPosition == approachingPawn.Position)
-				{
-					talkedTo = true;
-					// todo check if we can use the promise-ish system used for bestower quest, cause this solution sucks
-					approachingPawn.rotationTracker.FaceTarget(this.parent);
-					actions.FirstOrDefault(x => this.parent == x.Key).Value.Invoke(approachingPawn, this.parent);
-				}
-
-				ticks = 0;
-			}
-			if (Props.orgTickerTypeDict.TryGetValue(this.parent.def, out var result) && result == TickerType.Long && ticksLong >= 2000)
-			{
-				this.parent.TickLong();
-				ticksLong = 0;
-			}
-			else if (Props.orgTickerTypeDict.TryGetValue(this.parent.def, out result) && result == TickerType.Rare && ticksLong >= 2000 / 8)
-            {
-				this.parent.TickRare();
-				ticksLong = 0;
-            }
-			ticks++;
-			ticksLong++;
-        }
 
         public override IEnumerable<FloatMenuOption> CompFloatMenuOptions(Pawn pawn)
 		{
 			if (!Enabled) yield break;
+			if (!actions.Any(x => !x.Finished || x.Repeatable)) yield break;
 			// todo - test if detecting by object key works for specific pawns
 			if (pawn.Dead || pawn.Drafted)
 			{
@@ -77,32 +57,8 @@ namespace CaravanAdventures.CaravanStory
 
 		private void ApproachDesiredThing(Pawn pawn)
 		{
-			targetPosition = CalculateTargetSpot(pawn);
-			if (targetPosition == default)
-			{
-				Log.Message("Couldn't calc position");
-				targetPosition = this.parent.Position;
-			}
-			talkedTo = false;
-			Job job = JobMaker.MakeJob(JobDefOf.Goto, targetPosition);
+			Job job = JobMaker.MakeJob(JobDefOf.CATalk, this.parent);
 			pawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
-			this.approachingPawn = pawn;
-		}
-
-        private IntVec3 CalculateTargetSpot(Pawn pawn)
-        {
-			int num = GenRadial.NumCellsInRadius(2.9f);
-			int num2 = GenRadial.NumCellsInRadius(3.9f);
-			for (int i = num; i < num2; i++)
-			{
-				IntVec3 c = this.parent.Position + GenRadial.RadialPattern[i];
-				if (this.CanUseSpot(pawn, c))
-				{
-					Log.Message("Found spot");
-					return c;
-				}
-			}
-			return default;
 		}
 
         public AcceptanceReport CanTalkTo(Pawn pawn, LocalTargetInfo? knownSpot = null)
@@ -127,28 +83,6 @@ namespace CaravanAdventures.CaravanStory
 			return AcceptanceReport.WasAccepted;
 		}
 
-		public bool TryFindLinkSpot(Pawn pawn, out LocalTargetInfo spot)
-		{
-			spot = MeditationUtility.FindMeditationSpot(pawn).spot;
-			if (this.CanUseSpot(pawn, spot))
-			{
-				return true;
-			}
-			int num = GenRadial.NumCellsInRadius(2.9f);
-			int num2 = GenRadial.NumCellsInRadius(3.9f);
-			for (int i = num; i < num2; i++)
-			{
-				IntVec3 c = this.parent.Position + GenRadial.RadialPattern[i];
-				if (this.CanUseSpot(pawn, c))
-				{
-					spot = c;
-					return true;
-				}
-			}
-			spot = IntVec3.Zero;
-			return false;
-		}
-
 		private bool CanUseSpot(Pawn pawn, LocalTargetInfo spot)
 		{
 			IntVec3 cell = spot.Cell;
@@ -158,8 +92,7 @@ namespace CaravanAdventures.CaravanStory
         public override void PostExposeData()
         {
             base.PostExposeData();
-			Scribe_Values.Look(ref ticks, "ticks", 0);
-			Scribe_Values.Look(ref ticksLong, "ticksLong", 0);
+			Scribe_Collections.Look(ref actions, "actions", LookMode.Value);
         }
 
     }
