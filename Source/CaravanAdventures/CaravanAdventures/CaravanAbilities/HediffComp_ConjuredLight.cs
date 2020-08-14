@@ -14,7 +14,7 @@ namespace CaravanAdventures.CaravanAbilities
         private int ticksToDisappear = 0;
         private Thing light;
 
-        public new HediffCompProperties_ConjuredLight Props => (HediffCompProperties_ConjuredLight)props;
+        public HediffCompProperties_ConjuredLight Props => (HediffCompProperties_ConjuredLight)props;
 
         public override void CompPostPostAdd(DamageInfo? dinfo)
         {

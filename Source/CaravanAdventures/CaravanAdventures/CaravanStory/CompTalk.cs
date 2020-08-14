@@ -23,9 +23,6 @@ namespace CaravanAdventures.CaravanStory
     public class CompTalk : ThingComp
     {
         public CompProperties_Talk Props => (CompProperties_Talk)props;
-		private Pawn approachingPawn = null;
-		public bool talkedTo = false;
-		public Dictionary<object, Action<Pawn, object>> actions_old = new Dictionary<object, Action<Pawn, object>>();
 		public List<TalkSet> actions = new List<TalkSet>();
 		public bool Enabled = false;
 
@@ -61,6 +58,8 @@ namespace CaravanAdventures.CaravanStory
 			pawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
 		}
 
+		public bool TalkedTo() => actions.Any(action => action.Finished);
+
         public AcceptanceReport CanTalkTo(Pawn pawn, LocalTargetInfo? knownSpot = null)
 		{
 			if (pawn.Dead || pawn.Faction != Faction.OfPlayer)
@@ -72,7 +71,6 @@ namespace CaravanAdventures.CaravanStory
 				Pawn pawn2 = pawn.Map.reservationManager.FirstRespectedReserver(this.parent, pawn);
 				return new AcceptanceReport((pawn2 == null) ? "Reserved".Translate() : "ReservedBy".Translate(pawn.LabelShort, pawn2));
 			}
-			LocalTargetInfo localTargetInfo;
 			if (knownSpot != null)
 			{
 				if (!this.CanUseSpot(pawn, knownSpot.Value))

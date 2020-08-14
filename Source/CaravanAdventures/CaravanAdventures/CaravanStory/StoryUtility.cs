@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Verse;
 using Verse.Sound;
 
@@ -41,8 +40,7 @@ namespace CaravanAdventures.CaravanStory
         internal static void GenerateFriendlyVillage()
         {
 			if (StoryWC.storyFlags.TryGetValue("IntroVillage_WOCreated", out var res) && res) return;
-			int tile;
-			if (!StoryUtility.TryGenerateDistantTile(out tile, 6, 15)) Log.Message($"No tile was generated");
+			if (!StoryUtility.TryGenerateDistantTile(out var tile, 6, 15)) Log.Message($"No tile was generated");
 			StoryVillageMP settlement = (StoryVillageMP)WorldObjectMaker.MakeWorldObject(CaravanStorySiteDefOf.StoryVillageMP);
 			settlement.SetFaction(EnsureSacrilegHunters());
 			//settlement.AllComps.Add(new CompStoryVillage());

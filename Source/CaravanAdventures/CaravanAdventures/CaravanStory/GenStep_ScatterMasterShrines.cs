@@ -56,7 +56,7 @@ namespace CaravanAdventures.CaravanStory
 			{
 				return;
 			}
-			ResolveParams resolveParams = default(ResolveParams);
+			ResolveParams resolveParams = default;
 			resolveParams.rect = rect;
 			resolveParams.disableSinglePawn = new bool?(true);
 			resolveParams.disableHives = true;

@@ -11,11 +11,12 @@ using CaravanAdventures.CaravanStory;
 
 namespace CaravanAdventures
 {
-    // todo GameComponent??? 
-    class Init : GameComponent
+    // todo GameComponent??? -> compprops applied to defs within a gamecomp somehow lead to missing comps on the object of the def which doesn't happen with world comps
+    class Init : WorldComponent
     {
         private int removeRuinsTick = 0;
-        public Init(Game game)
+
+        public Init(World world) : base(world)
         {
         }
 
@@ -116,15 +117,12 @@ namespace CaravanAdventures
                 //        }
                 //    }
                 //});
-
-            
             }
         }
 
-        public override void GameComponentTick()
+        public override void WorldComponentTick()
         {
-            base.GameComponentTick();
-
+            base.WorldComponentTick();
             RemoveRuins();
             removeRuinsTick++;
         }

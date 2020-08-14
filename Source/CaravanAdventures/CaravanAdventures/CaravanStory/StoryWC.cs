@@ -13,7 +13,7 @@ namespace CaravanAdventures.CaravanStory
     class StoryWC : WorldComponent
     {
         // todo 60000 * 2
-        private static float baseDelayNextShrineReveal = 600f * 2f;
+        private static readonly float baseDelayNextShrineReveal = 600f * 2f;
         private static float shrineRevealCounter = -1f;
         private int ticks = -1;
         private static float countShrinesCompleted = 0f;
@@ -116,10 +116,9 @@ namespace CaravanAdventures.CaravanStory
 
         private void TryCreateNewShrine()
         {
-            int tile;
             // todo Create own find method that keeps the same distance from bases and caravans
             // -> after an unsuccesfull attempt, select tile that supports it for sure.
-            if (!TileFinder.TryFindNewSiteTile(out tile, shrineDistance.min, shrineDistance.max))
+            if (!TileFinder.TryFindNewSiteTile(out var tile, shrineDistance.min, shrineDistance.max))
             {
                 shrineRevealCounter = 60f;
                 Log.Message("Couldn't find tile to create a new shrine");

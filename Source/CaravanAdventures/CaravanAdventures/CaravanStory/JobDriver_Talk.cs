@@ -34,7 +34,6 @@ namespace CaravanAdventures.CaravanStory
                     return;
                 }
 
-                //talkComp.actions_old.FirstOrDefault(x => Target == x.Key).Value.Invoke(pawn, Target);
                 var specificAction = talkComp.actions.FirstOrDefault(x => x.Addressed == Target && x.Initiator == pawn && (!x.Finished || x.Repeatable))
                 ?? talkComp.actions.FirstOrDefault(x => Target == x.Addressed && x.Initiator == null && (!x.Finished || x.Repeatable));
                 if (specificAction == null)
@@ -43,8 +42,6 @@ namespace CaravanAdventures.CaravanStory
                     this.FailOn(() => true);
                     return;
                 }
-                // todo do we still need talkedTo? Don't think so.
-                talkComp.talkedTo = true;
                 specificAction.Action.Invoke(pawn, Target);
                 specificAction.Finished = true;
             };

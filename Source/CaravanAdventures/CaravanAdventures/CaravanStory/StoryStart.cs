@@ -17,8 +17,6 @@ namespace CaravanAdventures.CaravanStory
     {
         private Sustainer animaTreeWhipserSustainer;
         private bool currentStoryTrigger = false;
-        private Mote mote;
-        private Sustainer sound;
 
         public StoryStart(Map map) : base(map)
         { 
@@ -61,7 +59,7 @@ namespace CaravanAdventures.CaravanStory
             currentStoryTrigger = true;
             Log.Message("adding tree action");
             var comp = tree.TryGetComp<CompTalk>();
-            comp.actions_old.Add(tree, (initiator, addressed) => StoryStartDialog(initiator, addressed));
+            if (comp == null) Log.Message("Tree comp is null");
             comp.actions.Add(new TalkSet() {Id = "StoryStart_TreeDialog", Addressed = tree, Initiator = null, Action = (initiator, addressed) => StoryStartDialog(initiator, addressed), Repeatable = true });
             comp.Enabled = true;
             StoryWC.storyFlags["Start_InitialTreeAddTalkOption"] = true;
@@ -126,29 +124,8 @@ namespace CaravanAdventures.CaravanStory
 
         private void GrantAncientGift(Pawn initiator, object addressed)
         {
-            //Toil waitToil = Toils_General.Wait(471, TargetIndex.None);
-            //waitToil.tickAction = delegate ()
-            //{
-            //    if (this.mote == null || this.mote.Destroyed)
-            //    {
-            //        Vector3 loc = initiator.TrueCenter();
-            //        this.mote = MoteMaker.MakeStaticMote(loc, initiator.Map, ThingDefOf.Mote_Bestow, 1f);
-            //    }
-            //    this.mote.Maintain();
-            //    if ((this.sound == null || this.sound.Ended) && waitToil.actor.jobs.curDriver.ticksLeftThisToil <= 307)
-            //    {
-            //        this.sound = SoundDefOf.Bestowing_Warmup.TrySpawnSustainer(SoundInfo.InMap(new TargetInfo(initiator.Position, initiator.Map, false), MaintenanceType.PerTick));
-            //    }
-            //    if (this.sound != null)
-            //    {
-            //        this.sound.Maintain();
-            //    }
-            //};
-            Vector3 loc = initiator.TrueCenter();
-            //this.mote = MoteMaker.MakeStaticMote(loc, initiator.Map, ThingDefOf.Mote_Bestow, 1f);
             MoteMaker.MakeStaticMote(initiator.Position, initiator.Map, ThingDefOf.Mote_PsycastAreaEffect, 10f);
             SoundDefOf.PsycastPsychicPulse.PlayOneShot(new TargetInfo(initiator));
-            //this.sound = SoundDefOf.Bestowing_Warmup.TrySpawnSustainer(SoundInfo.InMap(new TargetInfo(initiator.Position, initiator.Map, false), MaintenanceType.PerTick));
 
             StoryWC.storyFlags["Start_CanReceiveGift"] = true;
             CheckEnsureGifted(initiator);

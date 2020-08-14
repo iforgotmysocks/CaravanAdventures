@@ -17,7 +17,7 @@ namespace CaravanAdventures.CaravanStory.MechChips
         private int ticks = 0;
         private List<Pawn> producedMechs;
 
-        public new HediffCompProperties_EXT1Melee Props => (HediffCompProperties_EXT1Melee)props;
+        public HediffCompProperties_EXT1Melee Props => (HediffCompProperties_EXT1Melee)props;
 
         public override void CompPostMake()
         {

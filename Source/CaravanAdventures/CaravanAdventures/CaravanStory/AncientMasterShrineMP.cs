@@ -98,7 +98,6 @@ namespace CaravanAdventures.CaravanStory
 
         private void LetterNoMasterShrine() => Find.LetterStack.ReceiveLetter("MasterShrineVictoryLetterLabel".Translate(), "MasterShrineVictoryLetterMessage".Translate(), LetterDefOf.PositiveEvent, this, null, null, null, null);
 
-
 		private void CreateShrineDialog()
 		{
 			//var endDiaNodeAccepted = new DiaNode("Story_Start_Dia1_Me_End_Accepted".Translate());
@@ -121,15 +120,17 @@ namespace CaravanAdventures.CaravanStory
 
         private void GetAssistanceFromAlliedFaction()
 		{
-			IncidentParms incidentParms = new IncidentParms();
-			incidentParms.target = this.Map;
-			incidentParms.faction = StoryUtility.EnsureSacrilegHunters();
-			incidentParms.raidArrivalModeForQuickMilitaryAid = true;
-			// todo by wealth, the richer, the less help // 7500 - 8000
-			incidentParms.points = Rand.Range(4000, 5000);  // DiplomacyTuning.RequestedMilitaryAidPointsRange.RandomInRange;
-			incidentParms.raidNeverFleeIndividual = true;
-			incidentParms.spawnCenter = Map.mapPawns.FreeColonists.RandomElement().Position;
-			IncidentDefOf.RaidFriendly.Worker.TryExecute(incidentParms);
+            var incidentParms = new IncidentParms
+            {
+                target = this.Map,
+                faction = StoryUtility.EnsureSacrilegHunters(),
+                raidArrivalModeForQuickMilitaryAid = true,
+                // todo by wealth, the richer, the less help // 7500 - 8000
+                points = Rand.Range(4000, 5000),  // DiplomacyTuning.RequestedMilitaryAidPointsRange.RandomInRange;
+                raidNeverFleeIndividual = true,
+                spawnCenter = Map.mapPawns.FreeColonists.RandomElement().Position
+            };
+            IncidentDefOf.RaidFriendly.Worker.TryExecute(incidentParms);
 		}
 
 		private void CheckBossDefeated()

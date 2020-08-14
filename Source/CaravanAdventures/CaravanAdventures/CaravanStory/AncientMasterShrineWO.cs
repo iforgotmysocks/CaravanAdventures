@@ -60,11 +60,7 @@ namespace CaravanAdventures.CaravanStory
 			PawnGroupMakerParms defaultPawnGroupMakerParms = IncidentParmsUtility.GetDefaultPawnGroupMakerParms(PawnGroupKindDefOf.Combat, incidentParms, true);
 			defaultPawnGroupMakerParms.generateFightersOnly = true;
 			mp.generatedBandits = PawnGroupMakerUtility.GeneratePawns(defaultPawnGroupMakerParms, true).ToList<Pawn>();
-
-			IntVec3 playerStartingSpot;
-			IntVec3 root;
-
-			MultipleCaravansCellFinder.FindStartingCellsFor2Groups(map, out playerStartingSpot, out root);
+            MultipleCaravansCellFinder.FindStartingCellsFor2Groups(map, out _, out var root);
 			for (int i = 0; i < mp.generatedBandits.Count; i++)
 			{
 				IntVec3 loc = CellFinder.RandomSpawnCellForPawnNear(root, map, 4);

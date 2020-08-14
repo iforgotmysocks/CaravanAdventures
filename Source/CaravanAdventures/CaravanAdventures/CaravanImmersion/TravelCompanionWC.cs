@@ -9,13 +9,19 @@ using Verse;
 
 namespace CaravanAdventures.CaravanImmersion
 {
-    public class TravelCompanionGC : GameComponent
+    public class TravelCompanionWC : WorldComponent
     {
         private int ticks = 1000;
         private List<PawnRelationDef> relationShipsWithImpact;
 
-        public TravelCompanionGC(Game game)
+        public TravelCompanionWC(World world) : base(world)
         {
+        }
+
+        public override void ExposeData()
+        {
+            base.ExposeData();
+            Scribe_Values.Look(ref ticks, "ticks", 0);
         }
 
         public override void FinalizeInit()
@@ -24,9 +30,9 @@ namespace CaravanAdventures.CaravanImmersion
             relationShipsWithImpact = DefDatabase<PawnRelationDef>.AllDefsListForReading.Where(x => !x.HasModExtension<TravelCompanionModExt>() && (x.familyByBloodRelation || (x.reflexive && !x.defName.StartsWith("Ex")))).ToList();
         }
 
-        public override void GameComponentTick()
+        public override void WorldComponentTick()
         {
-            base.GameComponentTick();
+            base.WorldComponentTick();
 
             ApplySocialRelations();
             ticks++;
@@ -61,7 +67,6 @@ namespace CaravanAdventures.CaravanImmersion
                         pawn.relations.AddDirectRelation(TravelCompanionDefOf.RelationNamed(newRelation.relationDefName), mainPawn);
                     }
                 }
-
                 
                 ticks = 0;
             }
@@ -135,13 +140,7 @@ namespace CaravanAdventures.CaravanImmersion
                 mainPawn.relations.DirectRelations.RemoveAll(x => x.def.HasModExtension<TravelCompanionModExt>());
             }
         }
-
         #endregion
 
-        public override void ExposeData()
-        {
-            base.ExposeData();
-            Scribe_Values.Look(ref ticks, "ticks", 0);
-        }
     }
 }

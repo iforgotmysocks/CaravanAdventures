@@ -122,13 +122,15 @@ namespace CaravanAdventures.CaravanStory
 					this.ticksLeftToSendRaid--;
 					if (this.ticksLeftToSendRaid == 0)
 					{
-						IncidentParms incidentParms = new IncidentParms();
-						incidentParms.target = mapParent.Map;
-						//incidentParms.points = StorytellerUtility.DefaultThreatPointsNow(incidentParms.target) * 2.5f;
-						Log.Message($"Default threat points: {StorytellerUtility.DefaultThreatPointsNow(incidentParms.target)}");
-						incidentParms.points = 8000;
-						incidentParms.faction = this.RaidFaction;
-						incidentParms.raidArrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn;
+                        var incidentParms = new IncidentParms
+                        {
+                            target = mapParent.Map,
+                            //incidentParms.points = StorytellerUtility.DefaultThreatPointsNow(incidentParms.target) * 2.5f;
+                            points = 8000,
+                            faction = this.RaidFaction,
+                            raidArrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn
+                        };
+                        Log.Message($"Default threat points: {StorytellerUtility.DefaultThreatPointsNow(incidentParms.target)}");
 						IncidentDefOf.RaidEnemy.Worker.TryExecute(incidentParms);
 						this.ticksLeftToSendRaid = (int)(Rand.Range(18f, 24f) * 2500f);
 						ticksLeftTillLeaveIfNoEnemies = defaultTicksTillLeave;
