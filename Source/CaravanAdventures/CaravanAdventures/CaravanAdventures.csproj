@@ -79,7 +79,7 @@
     <Compile Include="CaravanImmersion\TravelCompanionDef.cs" />
     <Compile Include="CaravanImmersion\TravelCompanionDefOf.cs" />
     <Compile Include="CaravanImmersion\TravelCompanionModExt.cs" />
-    <Compile Include="CaravanImmersion\TravelCompanionWC.cs" />
+    <Compile Include="CaravanImmersion\TravelCompanionGC.cs" />
     <Compile Include="CaravanImprovements\CaravanEnterMapImprovementUtility.cs" />
     <Compile Include="CaravanImprovements\CompCaravanDecisions.cs" />
     <Compile Include="CaravanImprovements\UnloadItemsAlert.cs" />

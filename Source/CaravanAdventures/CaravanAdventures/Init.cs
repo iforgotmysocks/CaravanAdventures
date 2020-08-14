@@ -12,10 +12,10 @@ using CaravanAdventures.CaravanStory;
 namespace CaravanAdventures
 {
     // todo GameComponent??? 
-    class Init : WorldComponent
+    class Init : GameComponent
     {
         private int removeRuinsTick = 0;
-        public Init(World world) : base(world)
+        public Init(Game game)
         {
         }
 
@@ -121,11 +121,11 @@ namespace CaravanAdventures
             }
         }
 
-        public override void WorldComponentTick()
+        public override void GameComponentTick()
         {
-            base.WorldComponentTick();
-            RemoveRuins();
+            base.GameComponentTick();
 
+            RemoveRuins();
             removeRuinsTick++;
         }
 

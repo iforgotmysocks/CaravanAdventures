@@ -9,12 +9,12 @@ using Verse;
 
 namespace CaravanAdventures.CaravanImmersion
 {
-    public class TravelCompanionWC : WorldComponent
+    public class TravelCompanionGC : GameComponent
     {
         private int ticks = 1000;
         private List<PawnRelationDef> relationShipsWithImpact;
 
-        public TravelCompanionWC(World world) : base(world)
+        public TravelCompanionGC(Game game)
         {
         }
 
@@ -24,10 +24,10 @@ namespace CaravanAdventures.CaravanImmersion
             relationShipsWithImpact = DefDatabase<PawnRelationDef>.AllDefsListForReading.Where(x => !x.HasModExtension<TravelCompanionModExt>() && (x.familyByBloodRelation || (x.reflexive && !x.defName.StartsWith("Ex")))).ToList();
         }
 
-        public override void WorldComponentTick()
+        public override void GameComponentTick()
         {
-            base.WorldComponentTick();
-            
+            base.GameComponentTick();
+
             ApplySocialRelations();
             ticks++;
         }
