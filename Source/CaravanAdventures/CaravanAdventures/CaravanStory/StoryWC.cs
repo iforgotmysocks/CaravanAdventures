@@ -12,13 +12,12 @@ namespace CaravanAdventures.CaravanStory
 {
     class StoryWC : WorldComponent
     {
-        // todo 60000 * 2
-        private static readonly float baseDelayNextShrineReveal = 600f * 2f;
+        private static readonly float baseDelayNextShrineReveal = Helper.Debug() ? 1800f : 60000f * 2f;
         private static float shrineRevealCounter = -1f;
         private int ticks = -1;
         private static float countShrinesCompleted = 0f;
         private static readonly IntRange timeoutDaysRange = new IntRange(10, 12);
-        private static readonly IntRange shrineDistance = new IntRange(2, 4); // 40,50 todo
+        private static readonly IntRange shrineDistance = Helper.Debug() ? new IntRange(2, 4) : new IntRange(40, 60);
         private static List<AbilityDef> unlockedSpells = new List<AbilityDef>();
         private int bossMissedCounter = 0;
 

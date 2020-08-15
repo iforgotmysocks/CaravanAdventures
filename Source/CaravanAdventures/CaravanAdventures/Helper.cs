@@ -11,6 +11,7 @@ namespace CaravanAdventures
 {
     class Helper
     {
+        public static bool Debug() => ModSettings.Get().debug;
         public static IEnumerable<T> PickSomeInRandomOrder<T>(IEnumerable<T> items, int count)
         {
             var random = new System.Random(DateTime.Now.Millisecond);

@@ -18,10 +18,28 @@ namespace CaravanAdventures
         public float healingPerSecond = 0.05f;
         public bool stopMentalBreaks = false;
         public float lightDuration = 1200f;
+        public bool debug = false;
 
         public static ModSettings Get()
         {
             return LoadedModManager.GetMod<CaravanAdventures.Main>().GetSettings<ModSettings>();
+        }
+
+        public override void ExposeData()
+        {
+            Scribe_Values.Look(ref mechanoidDissmemberChance, "mechanoidDissmemberChance", 0.5f);
+            Scribe_Values.Look(ref humanDissmemberChance, "humanDissmemberChance", 0.3f);
+            Scribe_Values.Look(ref additionalBuildingAreaDamageMin, "additionalBuildingAreaDamageMin", 0.5f);
+            Scribe_Values.Look(ref additionalBuildingAreaDamageMax, "additionalBuildingAreaDamageMax", 0.75f);
+
+            Scribe_Values.Look(ref psyfocusToRestore, "psyfocusToRestore", 0.5f);
+
+            Scribe_Values.Look(ref healingPerSecond, "healingPerSecond", 0.05f);
+            Scribe_Values.Look(ref stopMentalBreaks, "stopMentalBreaks", false);
+
+            Scribe_Values.Look(ref lightDuration, "lightDuration", 1200f);
+
+            Scribe_Values.Look(ref debug, "debug");
         }
 
         public void DoWindowContents(Rect wrect)
@@ -29,13 +47,18 @@ namespace CaravanAdventures
             var options = new Listing_Standard();
             options.Begin(wrect);
 
+            options.CheckboxLabeled("Debug mode", ref debug);
 
+            // todo figure out scroll views
+            //Rect viewRect = new Rect(0, 0, 500, 3000);
+            //Vector2 vec = new Vector2(0, 0);
+            //options.BeginScrollView(wrect, ref vec, ref viewRect);
             // todo move to seperate window!
             options.Label("Ancient thunderbolt:".Colorize(Color.red), 40f);
             options.Label("Mechanoid bodypart dissmember chance: " + Convert.ToInt32(mechanoidDissmemberChance * 100) + "%");
             mechanoidDissmemberChance = options.Slider(mechanoidDissmemberChance, 0f, 1f);
             options.Gap();
-            options.Label("Humand bodypart dissmember chance: " + Convert.ToInt32(humanDissmemberChance * 100) + "%");
+            options.Label("Human bodypart dissmember chance: " + Convert.ToInt32(humanDissmemberChance * 100) + "%");
             humanDissmemberChance = options.Slider(humanDissmemberChance, 0f, 1f);
             options.Gap();
             options.Label("Additional minimum damage to buildings: " + Convert.ToInt32(additionalBuildingAreaDamageMin * 100) + "%");
@@ -63,22 +86,12 @@ namespace CaravanAdventures
             options.Label($"Duration in seconds: {Math.Round(lightDuration / 60, 0)}");
             lightDuration = options.Slider(lightDuration, 60f, 14400f);
 
+
+
+            //options.EndScrollView(ref viewRect);
             options.End();
         }
 
-        public override void ExposeData()
-        {
-            Scribe_Values.Look(ref mechanoidDissmemberChance, "mechanoidDissmemberChance", 0.5f);
-            Scribe_Values.Look(ref humanDissmemberChance, "humanDissmemberChance", 0.3f);
-            Scribe_Values.Look(ref additionalBuildingAreaDamageMin, "additionalBuildingAreaDamageMin", 0.5f);
-            Scribe_Values.Look(ref additionalBuildingAreaDamageMax, "additionalBuildingAreaDamageMax", 0.75f);
-
-            Scribe_Values.Look(ref psyfocusToRestore, "psyfocusToRestore", 0.5f);
-
-            Scribe_Values.Look(ref healingPerSecond, "healingPerSecond", 0.05f);
-            Scribe_Values.Look(ref stopMentalBreaks, "stopMentalBreaks", false);
-
-            Scribe_Values.Look(ref lightDuration, "lightDuration", 1200f);
-        }
+       
     }
 }
