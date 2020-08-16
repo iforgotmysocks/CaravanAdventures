@@ -159,7 +159,7 @@ namespace CaravanAdventures.CaravanItemSelection
                 foreach (var trans in section.cachedTransferables)
                 {
                     if (FilterHelper.DoFiltersApply(goods, trans)) FilterHelper.SetMaxAmount(trans);
-                    else FilterHelper.SetMinAmount(trans);
+                    //else FilterHelper.SetMinAmount(trans);
                 }
             }
         }

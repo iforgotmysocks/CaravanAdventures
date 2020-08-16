@@ -65,16 +65,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CaravanAbilities\CompAbilityEffect_AncientMeditate.cs" />
+    <Compile Include="CaravanAbilities\CompAbilityEffect_AncientMechSignal.cs" />
     <Compile Include="CaravanAbilities\CompAbilityEffect_AncientThunderBold.cs" />
     <Compile Include="CaravanAbilities\CompAbilityEffect_GiveToggleableHediff.cs" />
     <Compile Include="CaravanAbilities\CompProperties_AbilityAncientMeditate.cs" />
+    <Compile Include="CaravanAbilities\CompProperties_AbilityAncientMechSignal.cs" />
     <Compile Include="CaravanAbilities\CompProperties_AbilityAncientThunderBold.cs" />
     <Compile Include="CaravanAbilities\CompProperties_GiveToggleableHediff.cs" />
+    <Compile Include="CaravanAbilities\HediffCompProperties_OverheatingBrain.cs" />
     <Compile Include="CaravanAbilities\HediffCompProperties_ConjuredLight.cs" />
+    <Compile Include="CaravanAbilities\HediffComp_OverheatingBrain.cs" />
     <Compile Include="CaravanAbilities\HediffComp_AncientGift.cs" />
     <Compile Include="CaravanAbilities\HediffComp_AncientProtectiveAura.cs" />
     <Compile Include="CaravanAbilities\HediffComp_ConjuredLight.cs" />
     <Compile Include="CaravanAbilities\HediffComp_DrainNature.cs" />
+    <Compile Include="CaravanCamp\CampBuilder.cs" />
     <Compile Include="CaravanImmersion\ThoughtWorker_TravelCompanions.cs" />
     <Compile Include="CaravanImmersion\TravelCompanionDef.cs" />
     <Compile Include="CaravanImmersion\TravelCompanionDefOf.cs" />

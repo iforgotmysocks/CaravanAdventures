@@ -1,160 +1,175 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
-  <HediffDef Name="AncientPsycastHediffBase" Abstract = "True">
-    <hediffClass>HediffWithComps</hediffClass>
-    <comps>
-      <li Class="HediffCompProperties_DisappearsOnDeath"/>
-    </comps>
-  </HediffDef>
+	<HediffDef Name="AncientPsycastHediffBase" Abstract = "True">
+		<hediffClass>HediffWithComps</hediffClass>
+		<comps>
+			<li Class="HediffCompProperties_DisappearsOnDeath"/>
+		</comps>
+	</HediffDef>
 
-  <HediffDef ParentName = "AncientPsycastHediffBase">
-    <defName>AncientProtectiveAura</defName>
-    <label>ancient protective aura</label>
-    <isBad>false</isBad>
-    <everCurableByItem>false</everCurableByItem>
-    <defaultLabelColor>(0, 255, 255)</defaultLabelColor>
-    <description>Protects the target from a large part of incoming damage, fire and heals wounds over time (even permanent ones when active long enough). Remains active until cast again reduces the overall heat a pawn can handle and accelerates psyfocus drain by 2% / day while active.</description>
-    <comps>
-      <li Class="HediffCompProperties">
-        <compClass>CaravanAdventures.CaravanAbilities.HediffComp_AncientProtectiveAura</compClass>
-      </li>
-    </comps>
-    <stages>
-      <li>
-        <statOffsets>
-          <ComfyTemperatureMin>-20</ComfyTemperatureMin>
-          <ComfyTemperatureMax>20</ComfyTemperatureMax>
-          <ArmorRating_Heat>2.00</ArmorRating_Heat>
-          <ImmunityGainSpeed>3</ImmunityGainSpeed>
-          <MoveSpeed>1.5</MoveSpeed>
-          <ToxicSensitivity>-0.8</ToxicSensitivity>
-          <MentalBreakThreshold>-0.35</MentalBreakThreshold>
-        </statOffsets>
-        <statFactors>
-          <PsychicEntropyMax>0.9</PsychicEntropyMax>
-          <IncomingDamageFactor>0.3</IncomingDamageFactor>
-        </statFactors>
-        <capMods>
-          <li>
-            <capacity>Consciousness</capacity>
-            <offset>0.3</offset>
-          </li>
-        </capMods>
-        <painFactor>0.3</painFactor>
-        <totalBleedFactor>0.3</totalBleedFactor>
-        <restFallFactor>0.3</restFallFactor>
-      </li>
-    </stages>
-  </HediffDef>
+	<HediffDef ParentName = "AncientPsycastHediffBase">
+		<defName>AncientProtectiveAura</defName>
+		<label>ancient protective aura</label>
+		<isBad>false</isBad>
+		<everCurableByItem>false</everCurableByItem>
+		<defaultLabelColor>(0, 255, 255)</defaultLabelColor>
+		<description>Protects the target from a large part of incoming damage, fire and heals wounds over time (even permanent ones when active long enough). Remains active until cast again reduces the overall heat a pawn can handle and accelerates psyfocus drain by 2% / day while active.</description>
+		<comps>
+			<li Class="HediffCompProperties">
+				<compClass>CaravanAdventures.CaravanAbilities.HediffComp_AncientProtectiveAura</compClass>
+			</li>
+		</comps>
+		<stages>
+			<li>
+				<statOffsets>
+					<ComfyTemperatureMin>-20</ComfyTemperatureMin>
+					<ComfyTemperatureMax>20</ComfyTemperatureMax>
+					<ArmorRating_Heat>2.00</ArmorRating_Heat>
+					<ImmunityGainSpeed>3</ImmunityGainSpeed>
+					<MoveSpeed>1.5</MoveSpeed>
+					<ToxicSensitivity>-0.8</ToxicSensitivity>
+					<MentalBreakThreshold>-0.35</MentalBreakThreshold>
+				</statOffsets>
+				<statFactors>
+					<PsychicEntropyMax>0.9</PsychicEntropyMax>
+					<IncomingDamageFactor>0.3</IncomingDamageFactor>
+				</statFactors>
+				<capMods>
+					<li>
+						<capacity>Consciousness</capacity>
+						<offset>0.3</offset>
+					</li>
+				</capMods>
+				<painFactor>0.3</painFactor>
+				<totalBleedFactor>0.3</totalBleedFactor>
+				<restFallFactor>0.3</restFallFactor>
+			</li>
+		</stages>
+	</HediffDef>
 
-  <HediffDef ParentName = "AncientPsycastHediffBase">
-    <defName>AncientProtectiveAuraWeak</defName>
-    <label>ancient protective aura (weak)</label>
-    <isBad>false</isBad>
-    <everCurableByItem>false</everCurableByItem>
-    <defaultLabelColor>(0, 255, 255)</defaultLabelColor>
-    <description>Protects the target from a large part of incoming damage, fire and heals wounds over time (even permanent ones when active long enough). Remains active until cast again reduces the overall heat a pawn can handle and accelerates psyfocus drain by 2% / day while active.</description>
-    <comps>
-      <li Class="HediffCompProperties">
-        <compClass>CaravanAdventures.CaravanAbilities.HediffComp_AncientProtectiveAura</compClass>
-      </li>
-    </comps>
-    <stages>
-      <li>
-        <statOffsets>
-          <ComfyTemperatureMin>-10</ComfyTemperatureMin>
-          <ComfyTemperatureMax>10</ComfyTemperatureMax>
+	<HediffDef ParentName = "AncientPsycastHediffBase">
+		<defName>AncientProtectiveAuraWeak</defName>
+		<label>ancient protective aura (weak)</label>
+		<isBad>false</isBad>
+		<everCurableByItem>false</everCurableByItem>
+		<defaultLabelColor>(0, 255, 255)</defaultLabelColor>
+		<description>Protects the target from a large part of incoming damage, fire and heals wounds over time (even permanent ones when active long enough). Remains active until cast again reduces the overall heat a pawn can handle and accelerates psyfocus drain by 2% / day while active.</description>
+		<comps>
+			<li Class="HediffCompProperties">
+				<compClass>CaravanAdventures.CaravanAbilities.HediffComp_AncientProtectiveAura</compClass>
+			</li>
+		</comps>
+		<stages>
+			<li>
+				<statOffsets>
+					<ComfyTemperatureMin>-10</ComfyTemperatureMin>
+					<ComfyTemperatureMax>10</ComfyTemperatureMax>
 					<ArmorRating_Heat>1.50</ArmorRating_Heat>
-          <ImmunityGainSpeed>2</ImmunityGainSpeed>
-          <MoveSpeed>1</MoveSpeed>
-          <ToxicSensitivity>-0.5</ToxicSensitivity>
-          <MentalBreakThreshold>-0.10</MentalBreakThreshold>
-        </statOffsets>
-        <statFactors>
-          <PsychicEntropyMax>0.9</PsychicEntropyMax>
-          <IncomingDamageFactor>0.5</IncomingDamageFactor>
-        </statFactors>
-        <capMods>
-          <li>
-            <capacity>Consciousness</capacity>
-            <offset>0.1</offset>
-          </li>
-        </capMods>
-        <painFactor>0.5</painFactor>
-        <totalBleedFactor>0.5</totalBleedFactor>
-        <restFallFactor>0.5</restFallFactor>
-      </li>
-    </stages>
-  </HediffDef>
+					<ImmunityGainSpeed>2</ImmunityGainSpeed>
+					<MoveSpeed>1</MoveSpeed>
+					<ToxicSensitivity>-0.5</ToxicSensitivity>
+					<MentalBreakThreshold>-0.10</MentalBreakThreshold>
+				</statOffsets>
+				<statFactors>
+					<PsychicEntropyMax>0.9</PsychicEntropyMax>
+					<IncomingDamageFactor>0.5</IncomingDamageFactor>
+				</statFactors>
+				<capMods>
+					<li>
+						<capacity>Consciousness</capacity>
+						<offset>0.1</offset>
+					</li>
+				</capMods>
+				<painFactor>0.5</painFactor>
+				<totalBleedFactor>0.5</totalBleedFactor>
+				<restFallFactor>0.5</restFallFactor>
+			</li>
+		</stages>
+	</HediffDef>
 
-  <HediffDef ParentName = "AncientPsycastHediffBase">
-    <defName>AncientGift</defName>
-    <label>Ancient Gift</label>
-    <description>The Ancient Gift, a power to access long forgotten potential which enables the gifted to cast ancient spells. Slow psyfocus recovery even without meditation is spoken about in stories aswell.</description>
-    <isBad>false</isBad>
-    <everCurableByItem>false</everCurableByItem>
-    <defaultLabelColor>(0, 255, 255)</defaultLabelColor>
-    <stages>
-      <li>
-        <statOffsets>
-          <PsychicEntropyRecoveryRate>1.5</PsychicEntropyRecoveryRate>
-        </statOffsets>
-        <statFactors>
-          <MeditationFocusGain>2</MeditationFocusGain>
-          <PsychicEntropyMax>1.5</PsychicEntropyMax>
-        </statFactors>
-      </li>
-    </stages>
-    <comps>
-      <li Class="HediffCompProperties">
-        <compClass>CaravanAdventures.CaravanAbilities.HediffComp_AncientGift</compClass>
-      </li>
-    </comps>
-  </HediffDef>
+	<HediffDef ParentName = "AncientPsycastHediffBase">
+		<defName>AncientGift</defName>
+		<label>Ancient Gift</label>
+		<description>The Ancient Gift, a power to access long forgotten potential which enables the gifted to cast ancient spells. Slow psyfocus recovery even without meditation is spoken about in stories aswell.</description>
+		<isBad>false</isBad>
+		<everCurableByItem>false</everCurableByItem>
+		<defaultLabelColor>(0, 255, 255)</defaultLabelColor>
+		<stages>
+			<li>
+				<statOffsets>
+					<PsychicEntropyRecoveryRate>1.5</PsychicEntropyRecoveryRate>
+				</statOffsets>
+				<statFactors>
+					<MeditationFocusGain>2</MeditationFocusGain>
+					<PsychicEntropyMax>1.5</PsychicEntropyMax>
+				</statFactors>
+			</li>
+		</stages>
+		<comps>
+			<li Class="HediffCompProperties">
+				<compClass>CaravanAdventures.CaravanAbilities.HediffComp_AncientGift</compClass>
+			</li>
+		</comps>
+	</HediffDef>
 
-  <ThoughtDef>
-    <defName>AncientGiftDestiny</defName>
-    <workerClass>ThoughtWorker_Hediff</workerClass>
-    <hediff>AncientGift</hediff>
-    <validWhileDespawned>true</validWhileDespawned>
-    <stages>
-      <li>
-        <label>Ancient Destiny</label>
-        <description>I am destant to accomplish great things!</description>
-        <baseMoodEffect>12</baseMoodEffect>
-      </li>
-    </stages>
-  </ThoughtDef>
+	<ThoughtDef>
+		<defName>AncientGiftDestiny</defName>
+		<workerClass>ThoughtWorker_Hediff</workerClass>
+		<hediff>AncientGift</hediff>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>Ancient Destiny</label>
+				<description>I am destant to accomplish great things!</description>
+				<baseMoodEffect>12</baseMoodEffect>
+			</li>
+		</stages>
+	</ThoughtDef>
 
-  <HediffDef ParentName = "AncientPsycastHediffBase">
-    <defName>DrainNature</defName>
-    <label>Draining nature</label>
-    <description>A powerful being is draining the power from nearby plants.</description>
-    <isBad>false</isBad>
-    <everCurableByItem>false</everCurableByItem>
-    <defaultLabelColor>(255, 0, 0)</defaultLabelColor>
-    <comps>
-      <li Class="HediffCompProperties">
-        <compClass>CaravanAdventures.CaravanAbilities.HediffComp_DrainNature</compClass>
-      </li>
-    </comps>
-  </HediffDef>
+	<HediffDef ParentName = "AncientPsycastHediffBase">
+		<defName>DrainNature</defName>
+		<label>Draining nature</label>
+		<description>A powerful being is draining the power from nearby plants.</description>
+		<isBad>false</isBad>
+		<everCurableByItem>false</everCurableByItem>
+		<defaultLabelColor>(255, 0, 0)</defaultLabelColor>
+		<comps>
+			<li Class="HediffCompProperties">
+				<compClass>CaravanAdventures.CaravanAbilities.HediffComp_DrainNature</compClass>
+			</li>
+		</comps>
+	</HediffDef>
 
 
-  <HediffDef ParentName = "AncientPsycastHediffBase">
-    <defName>ConjuredLight</defName>
-    <label>conjured light</label>
-    <description>A conjured light brighting up the area which follows pawn it was cast for.</description>
-    <isBad>false</isBad>
-    <everCurableByItem>false</everCurableByItem>
-    <defaultLabelColor>(255, 0, 0)</defaultLabelColor>
-    <comps>
-      <li Class="CaravanAdventures.CaravanAbilities.HediffCompProperties_ConjuredLight"/>
-    </comps>
-  </HediffDef>
+	<HediffDef ParentName = "AncientPsycastHediffBase">
+		<defName>ConjuredLight</defName>
+		<label>conjured light</label>
+		<description>A conjured light brighting up the area which follows pawn it was cast for.</description>
+		<isBad>false</isBad>
+		<everCurableByItem>false</everCurableByItem>
+		<defaultLabelColor>(255, 0, 0)</defaultLabelColor>
+		<comps>
+			<li Class="CaravanAdventures.CaravanAbilities.HediffCompProperties_ConjuredLight"/>
+		</comps>
+	</HediffDef>
 
-  <!--
+	<HediffDef ParentName = "AncientPsycastHediffBase">
+		<defName>OverheatingBrain</defName>
+		<label>Overheating brain</label>
+		<description>Due to unnatural programming or production of the unit and it's components, the brain is overheating due to the expenentially growing errors occuring which can't be resolved.</description>
+		<isBad>false</isBad>
+		<everCurableByItem>false</everCurableByItem>
+		<defaultLabelColor>(255, 0, 0)</defaultLabelColor>
+		<comps>
+			<li Class="CaravanAdventures.CaravanAbilities.HediffCompProperties_OverheatingBrain">
+				<compClass>CaravanAdventures.CaravanAbilities.HediffComp_OverheatingBrain</compClass>
+				<lifeTimeInSeconds>120~140</lifeTimeInSeconds>
+			</li>
+		</comps>
+	</HediffDef>
+
+	<!--
   <ThingDef>
     <defName>PsychicAmplifier</defName>
     <label>psylink neuroformer</label>

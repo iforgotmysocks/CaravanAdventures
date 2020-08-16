@@ -57,6 +57,34 @@
       </li>
     </comps>
   </AbilityDef>
+	
+	<AbilityDef ParentName="PsycastBase">
+    <defName>AncientMechSignal</defName>
+    <label>ancient mech signal</label>
+    <description>Summons a group of mechanoid scythers to the casters aid.</description>
+    <level>0</level>
+    <iconPath>UI/Abilities/Flashstorm</iconPath>
+    <canUseAoeToGetTargets>False</canUseAoeToGetTargets>
+    <statBases>
+      <Ability_EntropyGain>30</Ability_EntropyGain>
+      <Ability_PsyfocusCost>0.10</Ability_PsyfocusCost>
+      <Ability_EffectRadius>2</Ability_EffectRadius>
+      <!--<Ability_Duration>3</Ability_Duration>-->
+    </statBases>
+    <verbProperties>
+      <warmupTime>0.25</warmupTime>
+      <range>29.9</range>
+      <targetParams>
+        <canTargetPawns>False</canTargetPawns>
+        <canTargetLocations>True</canTargetLocations>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="CaravanAdventures.CaravanAbilities.CompProperties_AbilityAncientMechSignal">
+        <goodwillImpact>-35</goodwillImpact>
+      </li>
+    </comps>
+  </AbilityDef>
 
   <AbilityDef ParentName="PsycastBase">
     <defName>AncientInvisibility</defName>
