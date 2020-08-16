@@ -55,6 +55,7 @@ namespace CaravanAdventures.CaravanStory.MechChips
                 if (spawnPos != null)
                 {
                     var scyther = PawnGenerator.GeneratePawn(PawnKindDef.Named("Mech_Scyther"), Faction.OfMechanoids);
+                    scyther.health.AddHediff(HediffDef.Named("OverheatingBrain"), scyther.health.hediffSet.GetBrain());
                     GenSpawn.Spawn(scyther, spawnPos, Pawn.Map, WipeMode.Vanish);
                     Pawn.GetLord().AddPawn(scyther);
                     producedMechs.Add(scyther);

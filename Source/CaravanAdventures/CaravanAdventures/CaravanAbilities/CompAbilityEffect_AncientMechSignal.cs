@@ -22,11 +22,10 @@ namespace CaravanAdventures.CaravanAbilities
             var map = this.parent.pawn.Map;
             var scythers = new List<Pawn>();
             var faction = StoryUtility.CreateOrGetFriendlyMechFaction();
-            foreach (IntVec3 intVec in this.AffectedCells(target, map))
-            {
-                //this.ApplyDamage(intVec.GetThingList(map), this.parent.pawn);
-                if (Rand.Bool && intVec.Standable(parent.pawn.Map)) scythers.Add(SpawnScyther(intVec, parent.pawn, faction));
-            }
+
+            AffectedCells(target, map).Where(x => x.Standable(map))
+                .InRandomOrder().Take(Rand.RangeInclusive(5, 7)).ToList()
+                .ForEach(cell => scythers.Add(SpawnScyther(cell, parent.pawn, faction)));
 
             LordMaker.MakeNewLord(parent.pawn.Faction, new LordJob_AssistColony(parent.pawn.Faction, dest.Cell), map, scythers);
             this.ApplyGoodwillImpact(target, Mathf.RoundToInt(this.parent.def.EffectRadius));
@@ -37,7 +36,6 @@ namespace CaravanAdventures.CaravanAbilities
             var scyther = PawnGenerator.GeneratePawn(PawnKindDef.Named("Mech_Scyther"), faction);
             scyther.health.AddHediff(HediffDef.Named("OverheatingBrain"), scyther.health.hediffSet.GetBrain());
             GenSpawn.Spawn(scyther, intVec, pawn.Map, WipeMode.Vanish);
-            // todo add comp to destroy after x minutes => add that to mech producing boss too
             this.parent.AddEffecterToMaintain(EffecterDefOf.Skip_ExitNoDelay.Spawn(intVec, pawn.Map, 1f), intVec, 60);
             GenClamor.DoClamor(pawn, intVec, 2f, ClamorDefOf.Ability);
             return scyther;

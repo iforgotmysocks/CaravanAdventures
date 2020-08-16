@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
-	<HediffDef Name="AncientPsycastHediffBase" Abstract = "True">
+	<HediffDef Name="AncientPsycastHediffBase" Abstract="True">
 		<hediffClass>HediffWithComps</hediffClass>
 		<comps>
 			<li Class="HediffCompProperties_DisappearsOnDeath"/>
 		</comps>
 	</HediffDef>
 
-	<HediffDef ParentName = "AncientPsycastHediffBase">
+	<HediffDef ParentName="AncientPsycastHediffBase">
 		<defName>AncientProtectiveAura</defName>
 		<label>ancient protective aura</label>
 		<isBad>false</isBad>
@@ -48,7 +48,7 @@
 		</stages>
 	</HediffDef>
 
-	<HediffDef ParentName = "AncientPsycastHediffBase">
+	<HediffDef ParentName="AncientPsycastHediffBase">
 		<defName>AncientProtectiveAuraWeak</defName>
 		<label>ancient protective aura (weak)</label>
 		<isBad>false</isBad>
@@ -88,7 +88,7 @@
 		</stages>
 	</HediffDef>
 
-	<HediffDef ParentName = "AncientPsycastHediffBase">
+	<HediffDef ParentName="AncientPsycastHediffBase">
 		<defName>AncientGift</defName>
 		<label>Ancient Gift</label>
 		<description>The Ancient Gift, a power to access long forgotten potential which enables the gifted to cast ancient spells. Slow psyfocus recovery even without meditation is spoken about in stories aswell.</description>
@@ -127,7 +127,7 @@
 		</stages>
 	</ThoughtDef>
 
-	<HediffDef ParentName = "AncientPsycastHediffBase">
+	<HediffDef ParentName="AncientPsycastHediffBase">
 		<defName>DrainNature</defName>
 		<label>Draining nature</label>
 		<description>A powerful being is draining the power from nearby plants.</description>
@@ -142,7 +142,7 @@
 	</HediffDef>
 
 
-	<HediffDef ParentName = "AncientPsycastHediffBase">
+	<HediffDef ParentName="AncientPsycastHediffBase">
 		<defName>ConjuredLight</defName>
 		<label>conjured light</label>
 		<description>A conjured light brighting up the area which follows pawn it was cast for.</description>
@@ -154,7 +154,7 @@
 		</comps>
 	</HediffDef>
 
-	<HediffDef ParentName = "AncientPsycastHediffBase">
+	<HediffDef ParentName="AncientPsycastHediffBase">
 		<defName>OverheatingBrain</defName>
 		<label>Overheating brain</label>
 		<description>Due to unnatural programming or production of the unit and it's components, the brain is overheating due to the expenentially growing errors occuring which can't be resolved.</description>
