@@ -40,7 +40,11 @@ namespace CaravanAdventures.CaravanStory
         internal static void GenerateFriendlyVillage()
         {
             if (StoryWC.storyFlags.TryGetValue("IntroVillage_WOCreated", out var res) && res) return;
-            if (!StoryUtility.TryGenerateDistantTile(out var tile, 6, 15)) Log.Message($"No tile was generated");
+            if (!StoryUtility.TryGenerateDistantTile(out var tile, 6, 15))
+            {
+                Log.Message($"No tile was generated");
+                return;
+            }
             StoryVillageMP settlement = (StoryVillageMP)WorldObjectMaker.MakeWorldObject(CaravanStorySiteDefOf.StoryVillageMP);
             settlement.SetFaction(EnsureSacrilegHunters());
             //settlement.AllComps.Add(new CompStoryVillage());
@@ -96,7 +100,6 @@ namespace CaravanAdventures.CaravanStory
                 if (caravan != null) startTile = caravan.Tile;
                 else Log.Message($"caraavn is null");
             }
-            Log.Message($"StartTile before calling vanilla method: {startTile}");
             return TileFinder.TryFindNewSiteTile(out newTile, minDist, maxDist, false, false, startTile);
         }
 
@@ -113,6 +116,7 @@ namespace CaravanAdventures.CaravanStory
                 empireDef.permanentEnemyToEveryoneExcept.Add(sacrilegHunters.def);
                 Faction.Empire.TrySetNotHostileTo(sacrilegHunters);
             }
+            if (sacrilegHunters.leader == null || sacrilegHunters.leader.Dead) sacrilegHunters.TryGenerateNewLeader();
             // todo test relation being set correctly
             if (sacrilegHunters != null && Faction.OfPlayerSilentFail != null && sacrilegHunters.HostileTo(Faction.OfPlayerSilentFail)) sacrilegHunters.SetRelation(new FactionRelation() { kind = FactionRelationKind.Ally, goodwill = 100, other = Faction.OfPlayer });
 

@@ -10,6 +10,7 @@ using Verse;
 
 namespace CaravanAdventures.CaravanStory
 {
+    // todo https://fluffy-mods.github.io//2020/08/13/debugging-rimworld/
     class StoryWC : WorldComponent
     {
         private static readonly float baseDelayNextShrineReveal = Helper.Debug() ? 1800f : 60000f * 2f;
@@ -20,16 +21,13 @@ namespace CaravanAdventures.CaravanStory
         private static readonly IntRange shrineDistance = Helper.Debug() ? new IntRange(2, 4) : new IntRange(40, 60);
         private static List<AbilityDef> unlockedSpells = new List<AbilityDef>();
         private int bossMissedCounter = 0;
-
         public static Dictionary<string, int> mechBossKillCounters = new Dictionary<string, int>();
-
         public static Dictionary<string, bool> debugFlags = new Dictionary<string, bool>()
         {
             { "StoryStartDone", false },
             { "ShrinesDisabled", false },
             { "DebugAllAbilities", false }
         };
-
         public static Dictionary<string, bool> storyFlags = new Dictionary<string, bool>()
         {
             { "IntroVillage_WOCreated", false },
@@ -87,7 +85,7 @@ namespace CaravanAdventures.CaravanStory
         {
             base.WorldComponentTick();
 
-            if (ticks > 600)
+            if (ticks > 1200)
             {
                 StoryUtility.GenerateFriendlyVillage();
 
