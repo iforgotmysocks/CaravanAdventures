@@ -146,7 +146,6 @@ namespace CaravanAdventures.CaravanStory
             && !storyFlags.Any(x => x.Key == BuildCurrentShrinePrefix() + "Completed" && x.Value == true)
             && !storyFlags.Any(x => x.Key == BuildCurrentShrinePrefix() + "InitCountDownStarted" && x.Value == true);
 
-       
     }
 }
 

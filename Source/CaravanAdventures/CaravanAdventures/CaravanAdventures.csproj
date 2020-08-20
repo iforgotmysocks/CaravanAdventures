@@ -100,6 +100,7 @@
     <Compile Include="CaravanStory\CaravanArrivalAction_StoryVillageMP.cs" />
     <Compile Include="CaravanStory\JobDefOf.cs" />
     <Compile Include="CaravanStory\JobDriver_Talk.cs" />
+    <Compile Include="CaravanStory\Quests\QuestNode_Root_StoryVillage.cs" />
     <Compile Include="CaravanStory\StoryVillageMP.cs" />
     <Compile Include="CaravanStory\MechChips\HediffCompProperties_EXT1Melee.cs" />
     <Compile Include="CaravanStory\MechChips\HediffCompProperties_EXT1Basic.cs" />
