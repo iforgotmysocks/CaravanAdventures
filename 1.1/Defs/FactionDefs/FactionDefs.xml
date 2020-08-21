@@ -6,8 +6,8 @@
 		<pawnsPlural>Sacrileg Hunters</pawnsPlural>
 		<categoryTag>Outlander</categoryTag>
 		<listOrderPriority>30</listOrderPriority>
-		<settlementGenerationWeight>0</settlementGenerationWeight>
-		<requiredCountAtGameStart>0</requiredCountAtGameStart>
+		<settlementGenerationWeight>0.1</settlementGenerationWeight>
+		<requiredCountAtGameStart>1</requiredCountAtGameStart>
 		<canMakeRandomly>true</canMakeRandomly>
 		<canSiege>false</canSiege>
 		<hidden>false</hidden>
@@ -65,12 +65,14 @@
 				<kindDef>Combat</kindDef>
 				<options>
 					<!--<Villager>5</Villager>-->
-					<!--<Town_Guard>10</Town_Guard>-->
-					<Grenadier_Destructive>1.5</Grenadier_Destructive>
-					<Mercenary_Slasher>7</Mercenary_Slasher>
-					<Mercenary_Gunner>10</Mercenary_Gunner>
-					<Mercenary_Elite>10</Mercenary_Elite>
+					<!--<Town_Guard>5</Town_Guard>-->
+					<!--<Grenadier_Destructive>2</Grenadier_Destructive>
+					<Mercenary_Slasher>1</Mercenary_Slasher>
+					<Mercenary_Gunner>1</Mercenary_Gunner>
+					<Mercenary_Elite>33</Mercenary_Elite>-->
 					<!--<Town_Councilman>10</Town_Councilman>-->
+					<SacrilegHunters_Town_Councilman>1</SacrilegHunters_Town_Councilman>
+					<SacrilegHunters_ExperiencedHunter>20</SacrilegHunters_ExperiencedHunter>
 				</options>
 			</li>
 			<li>
@@ -105,12 +107,14 @@
 				<kindDef>Settlement</kindDef>
 				<options>
 					<Villager>10</Villager>
-					<Town_Guard>10</Town_Guard>
-					<Grenadier_Destructive>1.5</Grenadier_Destructive>
-					<Mercenary_Slasher>7</Mercenary_Slasher>
-					<Mercenary_Gunner>10</Mercenary_Gunner>
-					<Mercenary_Elite>10</Mercenary_Elite>
-					<Town_Councilman>10</Town_Councilman>
+					<!--<Town_Guard>10</Town_Guard>-->
+					<!--<Grenadier_Destructive>2</Grenadier_Destructive>
+					<Mercenary_Slasher>1</Mercenary_Slasher>
+					<Mercenary_Gunner>1</Mercenary_Gunner>
+					<Mercenary_Elite>33</Mercenary_Elite>-->
+					<!--<Town_Councilman>10</Town_Councilman>-->
+					<SacrilegHunters_Town_Councilman>1</SacrilegHunters_Town_Councilman>
+					<SacrilegHunters_ExperiencedHunterVillage>20</SacrilegHunters_ExperiencedHunterVillage>
 				</options>
 			</li>
 		</pawnGroupMakers>

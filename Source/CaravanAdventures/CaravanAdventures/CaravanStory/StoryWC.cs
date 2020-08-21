@@ -40,6 +40,8 @@ namespace CaravanAdventures.CaravanStory
             { "Start_InitialTreeAddTalkOption", false },
             { "Start_CanReceiveGift", false },
             { "Start_ReceivedGift", false },
+
+            { "SacrilegHuntersBetrayal", false },
         };
 
         public override void ExposeData()
@@ -79,6 +81,9 @@ namespace CaravanAdventures.CaravanStory
             if (debugFlags["StoryStartDone"])
                 foreach (var flag in storyFlags.Where(x => x.Key.StartsWith("Start_")).ToList())
                     storyFlags[flag.Key] = true;
+
+            // debug
+            Log.Message($"does leader exist now? {StoryUtility.EnsureSacrilegHunters().leader == null}");
         }
 
         public override void WorldComponentTick()
