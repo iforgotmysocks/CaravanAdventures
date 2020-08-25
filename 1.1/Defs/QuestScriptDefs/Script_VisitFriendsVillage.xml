@@ -8,12 +8,12 @@
     <!--<expireDaysRange>10</expireDaysRange>-->
     <questNameRules>
       <rulesStrings>
-        <li>questName->[pawn_definite]'s [newTitle] ceremony</li>
+        <li>questName->Caravan Adventures - Visit a friend</li>
       </rulesStrings>
     </questNameRules>
     <questDescriptionRules>
       <rulesStrings>
-        <li>questDescription->[faction_name] is ready to grant [pawn_definite] the title of [newTitle] and the power of a level [psylinkLevel] psylink in a bestowing ceremony.\n\nThe bestower will arrive by shuttle and perform the ceremony.\n\nThe bestower will only give a title if any throneroom requirements are satisfied.\n\nYou can betray the bestower to steal psylink neuroformers, but this will make [faction_name] your enemy.\n\nIf you miss or fail this ceremony, there will be another opportunity later.</li>
+        <li>questDescription->[pawn_definite] invited you to visit her in the nearest [faction_name]'s village. \nShe greatly enjoyed her stack back when at your colony and can't wait to see the gang again.</li>
       </rulesStrings>
     </questDescriptionRules>
     <root Class="CaravanAdventures.CaravanStory.Quests.QuestNode_Root_StoryVillage" />

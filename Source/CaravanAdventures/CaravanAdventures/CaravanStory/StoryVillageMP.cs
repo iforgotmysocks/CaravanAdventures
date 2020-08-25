@@ -31,8 +31,13 @@ namespace CaravanAdventures.CaravanStory
 				Find.LetterStack.ReceiveLetter(label, text, LetterDefOf.NeutralEvent, caravan.PawnsListForReading, Faction, null, null, null);
 				CaravanEnterMapUtility.Enter(caravan, orGenerateMap, CaravanEnterMode.Edge, CaravanDropInventoryMode.DoNotDrop, true, null);
 
+
 				// todo generate settlement
 				// todo generate girl -> or maybe even do that when creating the quest?
+
+				// todo test quest stuff
+				Find.SignalManager.SendSignal(new Signal("village.Arrived"));
+
 
 				//Map map = StoryUtility.GenerateFriendlyVillage(caravan, Find.World.info.initialMapSize, CaravanStorySiteDefOf.AncientMasterShrineMP);
 				//mp = map.Parent as AncientMasterShrineMP;

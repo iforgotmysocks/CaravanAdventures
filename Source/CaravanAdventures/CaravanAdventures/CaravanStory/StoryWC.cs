@@ -69,21 +69,22 @@ namespace CaravanAdventures.CaravanStory
 
             if (ticks == -1)
             {
-                Log.Message($"Init story shrine flags");
                 for (int i = 1; i < 6; i++)
                 {
                     storyFlags["Shrine" + i + "_InitCountDownStarted"] = false;
                     storyFlags["Shrine" + i + "_Created"] = false;
                     storyFlags["Shrine" + i + "_Completed"] = false;
                 }
+
+                StoryUtility.EnsureSacrilegHunters();
             }
 
             if (debugFlags["StoryStartDone"])
                 foreach (var flag in storyFlags.Where(x => x.Key.StartsWith("Start_")).ToList())
                     storyFlags[flag.Key] = true;
 
-            // debug
-            Log.Message($"does leader exist now? {StoryUtility.EnsureSacrilegHunters().leader == null}");
+            // todo debug, delete
+            //StoryWC.ResetSFsStartingWith("IntroVillage");
         }
 
         public override void WorldComponentTick()
@@ -139,7 +140,7 @@ namespace CaravanAdventures.CaravanStory
         public static void SetSF(string key) => storyFlags[key] = true;
         public static void SetShrineSF(string postFix) => storyFlags[storyFlags.Keys.FirstOrDefault(x => x.StartsWith(BuildCurrentShrinePrefix() + postFix))] = true;
         public static void ResetCurrentShrineFlags() => storyFlags.Keys.Where(x => x.StartsWith(BuildCurrentShrinePrefix())).ToList().ForEach(key => storyFlags[key] = false);
-
+        public static void ResetSFsStartingWith(string start) => storyFlags.Keys.Where(x => x.StartsWith(start)).ToList().ForEach(key => storyFlags[key] = false);
         public static string BuildCurrentShrinePrefix() => "Shrine" + (countShrinesCompleted + 1) + "_";
 
         public static List<AbilityDef> GetUnlockedSpells() => unlockedSpells;

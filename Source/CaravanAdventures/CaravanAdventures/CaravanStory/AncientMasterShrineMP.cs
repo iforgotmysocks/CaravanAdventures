@@ -123,7 +123,7 @@ namespace CaravanAdventures.CaravanStory
             var incidentParms = new IncidentParms
             {
                 target = this.Map,
-                faction = StoryUtility.EnsureSacrilegHunters(),
+                faction = StoryUtility.EnsureSacrilegHunters(FactionRelationKind.Ally),
                 raidArrivalModeForQuickMilitaryAid = true,
                 // todo by wealth, the richer, the less help // 7500 - 8000
                 points = Rand.Range(4000, 5000),  // DiplomacyTuning.RequestedMilitaryAidPointsRange.RandomInRange;

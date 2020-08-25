@@ -59,8 +59,6 @@ namespace CaravanAdventures.CaravanStory
             StoryWC.SetSF("IntroVillage_WOCreated");
         }
 
-       
-
         internal static Faction CreateOrGetFriendlyMechFaction()
         {
             var relations = new List<FactionRelation>();
@@ -112,24 +110,35 @@ namespace CaravanAdventures.CaravanStory
 
         internal static Pawn GetGiftedPawn() => PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction?.FirstOrDefault(x => (x?.RaceProps?.Humanlike ?? false) && x.health.hediffSet.GetFirstHediffOfDef(HediffDef.Named("AncientGift")) != null);
 
-        public static Faction EnsureSacrilegHunters(bool fixRelationsTowardsPlayer = true)
+        public static Faction EnsureSacrilegHunters(FactionRelationKind relationKind = FactionRelationKind.Neutral, bool ignoreBetrayal = false)
         {
             var sacrilegHunters = Find.FactionManager.AllFactions.FirstOrDefault(x => x.def.defName == "SacrilegHunters");
             if (sacrilegHunters == null)
             {
-                Log.Message($"Didn't find sac hunters, creating them");
                 sacrilegHunters = FactionGenerator.NewGeneratedFaction(DefDatabase<FactionDef>.GetNamedSilentFail("SacrilegHunters"));
                 Find.FactionManager.Add(sacrilegHunters);
                 var empireDef = FactionDefOf.Empire;
                 empireDef.permanentEnemyToEveryoneExcept.Add(sacrilegHunters.def);
                 Faction.Empire.TrySetNotHostileTo(sacrilegHunters);
             }
-            // todo find out why this isn't working when faction is being added after a new game's start
-            if (sacrilegHunters.leader == null || sacrilegHunters.leader.Dead) sacrilegHunters.TryGenerateNewLeader();
-
+            if (sacrilegHunters.leader == null || sacrilegHunters.leader.Dead || sacrilegHunters.leader.Destroyed) sacrilegHunters.TryGenerateNewLeader();
             if (Faction.OfPlayerSilentFail != null && sacrilegHunters.RelationWith(Faction.OfPlayer, true) == null) sacrilegHunters.TryMakeInitialRelationsWith(Faction.OfPlayer);
-            if (!StoryWC.storyFlags["SacrilegHuntersBetrayal"] && sacrilegHunters != null && Faction.OfPlayerSilentFail != null && sacrilegHunters.HostileTo(Faction.OfPlayerSilentFail)) sacrilegHunters.SetRelation(new FactionRelation() { kind = FactionRelationKind.Ally, goodwill = 100, other = Faction.OfPlayer });
-            
+            if (sacrilegHunters != null && Faction.OfPlayerSilentFail != null)
+            {
+                if ((!StoryWC.storyFlags["SacrilegHuntersBetrayal"] || ignoreBetrayal) && sacrilegHunters.HostileTo(Faction.OfPlayerSilentFail))
+                {
+                    switch (relationKind)
+                    {
+                        case FactionRelationKind.Ally:
+                            sacrilegHunters.SetRelation(new FactionRelation() { kind = FactionRelationKind.Ally, goodwill = 100, other = Faction.OfPlayer });
+                            break;
+                        case FactionRelationKind.Neutral:
+                            sacrilegHunters.SetRelation(new FactionRelation() { kind = FactionRelationKind.Neutral, goodwill = 0, other = Faction.OfPlayer });
+                            break;
+                    }
+                }
+                else sacrilegHunters.SetRelation(new FactionRelation() { kind = FactionRelationKind.Hostile, goodwill = -100, other = Faction.OfPlayer });
+            }
             return sacrilegHunters;
         }
 
