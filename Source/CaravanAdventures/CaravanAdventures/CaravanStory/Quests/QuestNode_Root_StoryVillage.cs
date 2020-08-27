@@ -12,6 +12,7 @@ namespace CaravanAdventures.CaravanStory.Quests
 {
     class QuestNode_Root_StoryVillage : QuestNode
     {
+        public const string questTag = "StoryVillage";
 
         protected override void RunInt()
         {
@@ -51,8 +52,10 @@ namespace CaravanAdventures.CaravanStory.Quests
             var questPart_StoryVillage_Arrived = new QuestPart_StoryVillage_Arrived() { Girl = questGirl, QuestTag = questTag };
             questPart_StoryVillage_Arrived.inSignal_Arrived = QuestGenUtility.HardcodedSignalWithQuestID("village.Arrived");
             quest.AddPart(questPart_StoryVillage_Arrived);
+
         }
 
+        // todo move to storyutil; just create a new quest for each step, fuck this
         private Pawn GenerateQuestGirl()
         {
             var girl = PawnGenerator.GeneratePawn(new PawnGenerationRequest()
@@ -81,14 +84,12 @@ namespace CaravanAdventures.CaravanStory.Quests
             return Find.TickManager.TicksGame > 1200;
         }
 
-        private void UpdateArrived()
-        {
-            
-        }
 
         protected override bool TestRunInt(Slate slate)
         {
             return true;
         }
+
+        
     }
 }
