@@ -40,26 +40,31 @@ namespace CaravanAdventures.CaravanStory
 		}
 	}
 
-	// todo find out if we can add a exclamation here for questgiver
 	public class CompTalk : ThingComp
 	{
-		public CompProperties_Talk Props => (CompProperties_Talk)props;
 		public List<TalkSet> actions = new List<TalkSet>();
 		private bool enabled = false;
-		public bool Enabled { get => enabled; set => enabled = value; }
+		private bool showQuestionMark;
+		public bool Enabled { get => (parent is Pawn pawn && !pawn.Dead || !(parent is Pawn)) && enabled; set => enabled = value; }
+        public bool ShowQuestionMark { 
+			get => Enabled && (IgnoreQuestionMarkLogic ? showQuestionMark : HasUnfinishedDialogs());
+			set => showQuestionMark = value; 
+		}
+        public bool IgnoreQuestionMarkLogic { get; set; }
+        public CompProperties_Talk Props => (CompProperties_Talk)props;
 
 		public override void PostExposeData()
 		{
 			base.PostExposeData();
 			Scribe_Collections.Look(ref actions, "actions", LookMode.Deep);
 			Scribe_Values.Look(ref enabled, "enabled");
+			Scribe_Values.Look(ref showQuestionMark, "showQuestionMark");
 		}
 
 		public override IEnumerable<FloatMenuOption> CompFloatMenuOptions(Pawn pawn)
 		{
 			if (!Enabled) yield break;
 			if (!actions.Any(x => !x.Finished || x.Repeatable)) yield break;
-			// todo - test if detecting by object key works for specific pawns
 			if (pawn.Dead || pawn.Drafted)
 			{
 				yield break;
@@ -88,6 +93,7 @@ namespace CaravanAdventures.CaravanStory
 		}
 
 		public bool TalkedTo() => actions.Any(action => action.Finished);
+		public bool HasUnfinishedDialogs() => actions.Any(action => !action.Finished);
 
 		public AcceptanceReport CanTalkTo(Pawn pawn, LocalTargetInfo? knownSpot = null)
 		{

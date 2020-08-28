@@ -130,6 +130,7 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="Patches\MainPatcher.cs" />
     <Compile Include="Patches\AutomaticItemSelection.cs" />
+    <Compile Include="Patches\TalkPawnGUIOverlay.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

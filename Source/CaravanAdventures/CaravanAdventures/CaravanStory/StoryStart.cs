@@ -18,9 +18,19 @@ namespace CaravanAdventures.CaravanStory
     {
         private Sustainer animaTreeWhipserSustainer;
         private bool currentStoryTrigger = false;
+        private Thing theTree;
 
         public StoryStart(Map map) : base(map)
-        { 
+        {
+        }
+
+        public override void ExposeData()
+        {
+            base.ExposeData();
+            Scribe_Values.Look(ref currentStoryTrigger, "currentStoryTrigger", false);
+            Scribe_References.Look(ref theTree, "theTree");
+            // todo save the sustainer?
+            //Scribe_Deep.Look(ref animaTreeWhipserSustainer, "animaTreeWhipserSustainer");
         }
 
         public override void FinalizeInit()
@@ -37,6 +47,8 @@ namespace CaravanAdventures.CaravanStory
         public override void MapComponentTick()
         {
             base.MapComponentTick();
+            DrawTreeQuestionMark();
+
             // todo get rid of modulu
             if (Find.TickManager.TicksGame % 2000 == 0)
             {
@@ -44,11 +56,15 @@ namespace CaravanAdventures.CaravanStory
                 AddTreeWhisper();
                 CheckEnsureGifted();
             }
+
         }
+
+        private void DrawTreeQuestionMark() { if (theTree != null && theTree.TryGetComp<CompTalk>().ShowQuestionMark) theTree.Map.overlayDrawer.DrawOverlay(theTree, OverlayTypes.QuestionMark); }
 
         private void AddTalkTreeAction()
         {
             if (StoryWC.storyFlags["Start_InitialTreeAddTalkOption"]) return;
+
             var tree = map.spawnedThings.FirstOrDefault(x => x.def.defName == "Plant_TreeAnima");
             if (tree == null)
             {
@@ -56,7 +72,8 @@ namespace CaravanAdventures.CaravanStory
                 return;
             }
 
-            // todo 
+            theTree = tree;
+
             currentStoryTrigger = true;
             Log.Message("adding tree action");
             var comp = tree.TryGetComp<CompTalk>();
@@ -72,6 +89,26 @@ namespace CaravanAdventures.CaravanStory
             });
             comp.Enabled = true;
             StoryWC.storyFlags["Start_InitialTreeAddTalkOption"] = true;
+        }
+
+        private void DebugStuff()
+        {
+            // todo remove this and debugTree
+            PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_FreeColonists.ToList().ForEach(pawn => {
+                var comp = pawn.GetComp<CompTalk>();
+                comp.actions.Add(new TalkSet()
+                {
+                    Id = "StoryStart_PawnDia",
+                    Addressed = pawn,
+                    Initiator = null,
+                    ClassName = this.GetType().ToString(),
+                    MethodName = "StoryStartDialog",
+                    Repeatable = true,
+                });
+                comp.ShowQuestionMark = true;
+                comp.Enabled = true;
+            });
+            //if (debugTree != null) this.debugTree.Map.overlayDrawer.DrawOverlay(debugTree, OverlayTypes.QuestionMark);
         }
 
         private void DisableTreeTalkAction()
@@ -95,9 +132,8 @@ namespace CaravanAdventures.CaravanStory
                 Log.Message("Tree is null");
                 return;
             }
-            
-            var info = SoundInfo.InMap(tree, MaintenanceType.None);
 
+            var info = SoundInfo.InMap(tree, MaintenanceType.None);
             animaTreeWhipserSustainer = DefDatabase<SoundDef>.GetNamed("AnimaTreeWhispers").TrySpawnSustainer(info);
             if (animaTreeWhipserSustainer != null) StoryWC.storyFlags["Start_InitialTreeWhisper"] = true;
         }
@@ -218,13 +254,7 @@ namespace CaravanAdventures.CaravanStory
             }
         }
 
-        public override void ExposeData()
-        {
-            base.ExposeData();
-            Scribe_Values.Look(ref currentStoryTrigger, "currentStoryTrigger", false);
-            // todo save the sustainer?
-            //Scribe_Deep.Look(ref animaTreeWhipserSustainer, "animaTreeWhipserSustainer");
-        }
+     
 
 
     }

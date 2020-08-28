@@ -12,18 +12,15 @@ namespace CaravanAdventures.CaravanStory.Quests
 {
     class QuestNode_StoryVillage_Arrival : QuestNode
     {
-        public const string questTag = "StoryVillage";
-
         protected override void RunInt()
         {
             //var quest = QuestGen.quest;
             //var slate = QuestGen.slate;
             if (!StartQuest()) return;
 
-            var questGirl = StoryWC.StoryContact;
-            List<Rule> rules = new List<Rule>();
-            rules.Add(new Rule_String("faction_name", questGirl.Faction.Name.ToString()));
-            rules.AddRange(GrammarUtility.RulesForPawn("pawn", questGirl, null, true, true));
+            var rules = new List<Rule>();
+            rules.Add(new Rule_String("faction_name", StoryWC.StoryContact.Faction.Name.ToString()));
+            rules.AddRange(GrammarUtility.RulesForPawn("pawn", StoryWC.StoryContact, null, true, true));
             QuestGen.AddQuestDescriptionRules(rules);
         }
 

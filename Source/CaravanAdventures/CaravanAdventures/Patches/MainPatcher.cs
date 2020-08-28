@@ -17,6 +17,7 @@ namespace CaravanAdventures.Patches
             CaravanTravel.ApplyPatches(harmony);
             AutomaticItemSelection.ApplyPatches(harmony);
             AbilityNeurotrainerDefGenerator.ApplyPatches(harmony);
+            TalkPawnGUIOverlay.ApplyPatches(harmony);
         }
     }
 }
