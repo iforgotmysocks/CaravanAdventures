@@ -42,12 +42,23 @@ namespace CaravanAdventures.CaravanStory
                     this.FailOn(() => true);
                     return;
                 }
-                specificAction.Action.Invoke(pawn, Target);
+                var instance = FindComponentWithName(specificAction.ClassName);
+                var methodInfo = instance.GetType().GetMethod(specificAction.MethodName);
+                methodInfo.Invoke(instance, new object[] { pawn, Target });
                 specificAction.Finished = true;
             };
             yield return TalkTo;
             yield break;
         }
 
+        private object FindComponentWithName(string className)
+        {
+            object component = null;
+            component = Current.Game.GetComponent(Type.GetType(className));
+            if (component == null) component = Find.World.GetComponent(Type.GetType(className));
+            if (component == null) component = Find.Maps.Where(x => x.Parent != null && x.Parent.GetComponent(Type.GetType(className)) != null).Select(map => map.Parent).FirstOrDefault();
+            if (component == null) component = Find.Maps.Where(x => x.GetComponent(Type.GetType(className)) != null).Select(map => map.GetComponent(Type.GetType(className))).FirstOrDefault();
+            return component;
+        }
     }
 }

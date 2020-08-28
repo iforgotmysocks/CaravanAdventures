@@ -10,6 +10,7 @@ using Verse.Sound;
 using HarmonyLib;
 using Verse.AI;
 using UnityEngine;
+using System.Reflection;
 
 namespace CaravanAdventures.CaravanStory
 {
@@ -52,7 +53,7 @@ namespace CaravanAdventures.CaravanStory
             if (tree == null)
             {
                 Log.Message("Tree is null");
-                return; 
+                return;
             }
 
             // todo 
@@ -60,7 +61,15 @@ namespace CaravanAdventures.CaravanStory
             Log.Message("adding tree action");
             var comp = tree.TryGetComp<CompTalk>();
             if (comp == null) Log.Message("Tree comp is null");
-            comp.actions.Add(new TalkSet() {Id = "StoryStart_TreeDialog", Addressed = tree, Initiator = null, Action = (initiator, addressed) => StoryStartDialog(initiator, addressed), Repeatable = true });
+            comp.actions.Add(new TalkSet()
+            {
+                Id = "StoryStart_TreeDialog",
+                Addressed = tree,
+                Initiator = null,
+                ClassName = this.GetType().ToString(),
+                MethodName = "StoryStartDialog",
+                Repeatable = true
+            });
             comp.Enabled = true;
             StoryWC.storyFlags["Start_InitialTreeAddTalkOption"] = true;
         }

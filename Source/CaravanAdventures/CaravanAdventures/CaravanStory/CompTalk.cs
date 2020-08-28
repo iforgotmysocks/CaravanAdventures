@@ -4,29 +4,58 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RimWorld;
+using RimWorld.Planet;
 using Verse;
 using Verse.AI;
 
 namespace CaravanAdventures.CaravanStory
 {
-	public class TalkSet
-    {
-		public string Id { get; set; }
-        public Pawn Initiator { get; set; }
-        public Thing Addressed { get; set; }
-        public Action<Pawn, Thing> Action { get; set; }
-        public bool Finished { get; set; }
-		public bool Repeatable { get; set; }
-    }
+	public class TalkSet : IExposable
+	{
+		private string id;
+		private Pawn initiator;
+		private Thing addressed;
+		private bool finished;
+		private bool repeatable;
+		private string className;
+		private string methodName;
+
+		public string Id { get => id; set => id = value; }
+		public Pawn Initiator { get => initiator; set => initiator = value; }
+		public Thing Addressed { get => addressed; set => addressed = value; }
+		public bool Finished { get => finished; set => finished = value; }
+		public bool Repeatable { get => repeatable; set => repeatable = value; }
+        public string ClassName { get => className; set => className = value; }
+        public string MethodName { get => methodName; set => methodName = value; }
+
+        public void ExposeData()
+		{
+			Scribe_Values.Look(ref id, "id");
+			Scribe_References.Look(ref initiator, "initiator");
+			Scribe_References.Look(ref addressed, "addressed");
+			Scribe_Values.Look(ref finished, "finished");
+			Scribe_Values.Look(ref repeatable, "repeatable");
+			Scribe_Values.Look(ref className, "className");
+			Scribe_Values.Look(ref methodName, "methodName");
+		}
+	}
 
 	// todo find out if we can add a exclamation here for questgiver
-    public class CompTalk : ThingComp
-    {
-        public CompProperties_Talk Props => (CompProperties_Talk)props;
+	public class CompTalk : ThingComp
+	{
+		public CompProperties_Talk Props => (CompProperties_Talk)props;
 		public List<TalkSet> actions = new List<TalkSet>();
-		public bool Enabled = false;
+		private bool enabled = false;
+		public bool Enabled { get => enabled; set => enabled = value; }
 
-        public override IEnumerable<FloatMenuOption> CompFloatMenuOptions(Pawn pawn)
+		public override void PostExposeData()
+		{
+			base.PostExposeData();
+			Scribe_Collections.Look(ref actions, "actions", LookMode.Deep);
+			Scribe_Values.Look(ref enabled, "enabled");
+		}
+
+		public override IEnumerable<FloatMenuOption> CompFloatMenuOptions(Pawn pawn)
 		{
 			if (!Enabled) yield break;
 			if (!actions.Any(x => !x.Finished || x.Repeatable)) yield break;
@@ -41,7 +70,7 @@ namespace CaravanAdventures.CaravanStory
 			{
 				text = text + ": " + acceptanceReport.Reason;
 			}
-			
+
 			yield return new FloatMenuOption(text, delegate ()
 			{
 				ApproachDesiredThing(pawn);
@@ -60,7 +89,7 @@ namespace CaravanAdventures.CaravanStory
 
 		public bool TalkedTo() => actions.Any(action => action.Finished);
 
-        public AcceptanceReport CanTalkTo(Pawn pawn, LocalTargetInfo? knownSpot = null)
+		public AcceptanceReport CanTalkTo(Pawn pawn, LocalTargetInfo? knownSpot = null)
 		{
 			if (pawn.Dead || pawn.Faction != Faction.OfPlayer)
 			{
@@ -87,11 +116,7 @@ namespace CaravanAdventures.CaravanStory
 			return cell.DistanceTo(this.parent.Position) <= 3.9f && cell.Standable(this.parent.Map) && GenSight.LineOfSight(cell, this.parent.Position, this.parent.Map, false, null, 0, 0) && pawn.CanReach(spot, PathEndMode.OnCell, Danger.Deadly, false, TraverseMode.ByPawn);
 		}
 
-        public override void PostExposeData()
-        {
-            base.PostExposeData();
-			Scribe_Collections.Look(ref actions, "actions", LookMode.Value);
-        }
 
-    }
+
+	}
 }
