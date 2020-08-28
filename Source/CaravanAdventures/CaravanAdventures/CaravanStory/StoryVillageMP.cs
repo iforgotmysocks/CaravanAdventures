@@ -1,5 +1,7 @@
-﻿using RimWorld;
+﻿using CaravanAdventures.CaravanStory.Quests;
+using RimWorld;
 using RimWorld.Planet;
+using RimWorld.QuestGen;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,12 +17,22 @@ namespace CaravanAdventures.CaravanStory
 {
 	class StoryVillageMP : Settlement
 	{
+
+		private bool temporaryDeleteTalkedToContactPawn = true;
+		private int ticks;
+
 		public StoryVillageMP()
         {
 
         }
 
-		public void Notify_CaravanArrived(Caravan caravan)
+        public override void ExposeData()
+        {
+            base.ExposeData();
+			Scribe_Values.Look(ref ticks, "ticks");
+        }
+
+        public void Notify_CaravanArrived(Caravan caravan)
 		{
 			LongEventHandler.QueueLongEvent(delegate ()
 			{
@@ -36,7 +48,7 @@ namespace CaravanAdventures.CaravanStory
 				// todo generate girl -> or maybe even do that when creating the quest?
 
 				// todo test quest stuff
-				Find.SignalManager.SendSignal(new Signal("village.Arrived"));
+				
 
 
 				//Map map = StoryUtility.GenerateFriendlyVillage(caravan, Find.World.info.initialMapSize, CaravanStorySiteDefOf.AncientMasterShrineMP);
@@ -60,16 +72,31 @@ namespace CaravanAdventures.CaravanStory
 
         public override MapGeneratorDef MapGeneratorDef => CaravanStorySiteDefOf.StoryVillageMG;
 
-        public override void Tick()
-        {
+		public override void Tick()
+		{
+			// todo remove true
+			if (base.HasMap || true)
+			{
+				if (ticks >= 1200)
+				{
+					if (temporaryDeleteTalkedToContactPawn)
+					{
+						Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "\n\n alskdjflaksf");
+						Quests.QuestUtility.CompleteQuest(StoryQuestDefOf.CA_StoryVillage_Arrival);
+					}
+					ticks = 0;
+				}
 
-        }
+				ticks++;
+			}
+		}
+
+
 
         protected void CreateMap(Caravan caravan)
 		{
 			
 		}
-
 
 		public override IEnumerable<FloatMenuOption> GetFloatMenuOptions(Caravan caravan)
 		{

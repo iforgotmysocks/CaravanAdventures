@@ -3,6 +3,7 @@ using RimWorld.Planet;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -21,6 +22,8 @@ namespace CaravanAdventures.CaravanStory
         private static readonly IntRange shrineDistance = Helper.Debug() ? new IntRange(2, 4) : new IntRange(40, 60);
         private static List<AbilityDef> unlockedSpells = new List<AbilityDef>();
         private int bossMissedCounter = 0;
+        private static Pawn storyContact;
+        public static Pawn StoryContact{ get => storyContact; set => storyContact = value; }
         public static Dictionary<string, int> mechBossKillCounters = new Dictionary<string, int>();
         public static Dictionary<string, bool> debugFlags = new Dictionary<string, bool>()
         {
@@ -30,7 +33,7 @@ namespace CaravanAdventures.CaravanStory
         };
         public static Dictionary<string, bool> storyFlags = new Dictionary<string, bool>()
         {
-            { "IntroVillage_WOCreated", false },
+            { "IntroVillage_Created", false },
             { "IntroVillage_Entered", false },
             { "IntroVillage_TalkedToFriend", false },
             { "IntroVillage_MechsArrived", false },
@@ -54,6 +57,7 @@ namespace CaravanAdventures.CaravanStory
             Scribe_Values.Look(ref shrineRevealCounter, "shrineRevealCounter");
             Scribe_Values.Look(ref countShrinesCompleted, "countShrinesCompleted");
             Scribe_Values.Look(ref bossMissedCounter, "bossMissedCounter");
+            Scribe_Deep.Look(ref storyContact, "storyContact");
         }
 
         public StoryWC(World world) : base(world)
@@ -93,6 +97,7 @@ namespace CaravanAdventures.CaravanStory
 
             if (ticks > 1200)
             {
+                StoryUtility.GenerateStoryContact();
                 StoryUtility.GenerateFriendlyVillage();
 
                 if (CheckCanStartCountDownOnNewShrine() && !debugFlags["ShrinesDisabled"])

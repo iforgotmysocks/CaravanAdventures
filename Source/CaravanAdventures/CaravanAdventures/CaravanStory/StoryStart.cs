@@ -213,6 +213,8 @@ namespace CaravanAdventures.CaravanStory
         {
             base.ExposeData();
             Scribe_Values.Look(ref currentStoryTrigger, "currentStoryTrigger", false);
+            // todo save the sustainer?
+            //Scribe_Deep.Look(ref animaTreeWhipserSustainer, "animaTreeWhipserSustainer");
         }
 
 

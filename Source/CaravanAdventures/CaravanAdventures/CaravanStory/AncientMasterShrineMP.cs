@@ -79,21 +79,21 @@ namespace CaravanAdventures.CaravanStory
 			{
 				CheckBossDefeated();
 				CheckWonBattle();
-			}
 
-			if (constTicks == 2400)
-			{
-				if (boss != null)
+				if (constTicks == 2400)
 				{
-					StoryUtility.EnsureSacrilegHunters();
-					
-					// todo different dialogs for other shrines, maybe they betray the player the 3rd or 4th shrine.
-					CreateShrineDialog();
-					GetAssistanceFromAlliedFaction();
-				}
-			}
+					if (boss != null)
+					{
+						StoryUtility.EnsureSacrilegHunters();
 
-			constTicks++;
+						// todo different dialogs for other shrines, maybe they betray the player the 3rd or 4th shrine.
+						CreateShrineDialog();
+						GetAssistanceFromAlliedFaction();
+					}
+				}
+
+				constTicks++;
+			}
 		}
 
         private void LetterNoMasterShrine() => Find.LetterStack.ReceiveLetter("MasterShrineVictoryLetterLabel".Translate(), "MasterShrineVictoryLetterMessage".Translate(), LetterDefOf.PositiveEvent, this, null, null, null, null);

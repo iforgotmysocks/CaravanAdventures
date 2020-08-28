@@ -40,7 +40,7 @@ namespace CaravanAdventures.CaravanStory
 
         internal static void GenerateFriendlyVillage()
         {
-            if (StoryWC.storyFlags.TryGetValue("IntroVillage_WOCreated", out var res) && res) return;
+            if (StoryWC.storyFlags.TryGetValue("IntroVillage_Created", out var res) && res) return;
             if (!StoryUtility.TryGenerateDistantTile(out var tile, 6, 15))
             {
                 Log.Message($"No tile was generated");
@@ -54,9 +54,10 @@ namespace CaravanAdventures.CaravanStory
             Find.WorldObjects.Add(settlement);
 
             var pawn = PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_FreeColonists.FirstOrDefault();
-            Quests.QuestUtility.GenerateStoryVillageQuest(pawn, pawn.Faction);
+            //Quests.QuestUtility.GenerateStoryVillageQuest(pawn, pawn.Faction);
+            Quests.QuestUtility.GenerateStoryQuest(StoryQuestDefOf.CA_StoryVillage_Arrival);
 
-            StoryWC.SetSF("IntroVillage_WOCreated");
+            StoryWC.SetSF("IntroVillage_Created");
         }
 
         internal static Faction CreateOrGetFriendlyMechFaction()
@@ -108,6 +109,30 @@ namespace CaravanAdventures.CaravanStory
             return TileFinder.TryFindNewSiteTile(out newTile, minDist, maxDist, false, false, startTile);
         }
 
+        internal static void GenerateStoryContact()
+        {
+            if (StoryWC.StoryContact != null && !StoryWC.StoryContact.Dead) return;
+            var girl = PawnGenerator.GeneratePawn(new PawnGenerationRequest()
+            {
+                FixedBiologicalAge = 22,
+                FixedChronologicalAge = 3022,
+                FixedGender = Gender.Female,
+                AllowAddictions = false,
+                AllowGay = false,
+                AllowDead = false,
+                Faction = StoryUtility.EnsureSacrilegHunters(FactionRelationKind.Ally),
+                KindDef = PawnKindDefOf.Villager,
+            });
+
+            // todo looks?
+            //girl.story.hairDef = 
+
+            girl.story.traits.allTraits.RemoveAll(x => x.def == TraitDefOf.Beauty);
+            girl.story.traits.GainTrait(new Trait(TraitDefOf.Beauty, 2));
+
+            StoryWC.StoryContact = girl;
+        }
+
         internal static Pawn GetGiftedPawn() => PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction?.FirstOrDefault(x => (x?.RaceProps?.Humanlike ?? false) && x.health.hediffSet.GetFirstHediffOfDef(HediffDef.Named("AncientGift")) != null);
 
         public static Faction EnsureSacrilegHunters(FactionRelationKind relationKind = FactionRelationKind.Neutral, bool ignoreBetrayal = false)
@@ -125,19 +150,25 @@ namespace CaravanAdventures.CaravanStory
             if (Faction.OfPlayerSilentFail != null && sacrilegHunters.RelationWith(Faction.OfPlayer, true) == null) sacrilegHunters.TryMakeInitialRelationsWith(Faction.OfPlayer);
             if (sacrilegHunters != null && Faction.OfPlayerSilentFail != null)
             {
-                if ((!StoryWC.storyFlags["SacrilegHuntersBetrayal"] || ignoreBetrayal) && sacrilegHunters.HostileTo(Faction.OfPlayerSilentFail))
+                if ((!StoryWC.storyFlags["SacrilegHuntersBetrayal"] || ignoreBetrayal))
                 {
-                    switch (relationKind)
+                    if (sacrilegHunters.RelationKindWith(Faction.OfPlayerSilentFail) != relationKind)
                     {
-                        case FactionRelationKind.Ally:
-                            sacrilegHunters.SetRelation(new FactionRelation() { kind = FactionRelationKind.Ally, goodwill = 100, other = Faction.OfPlayer });
-                            break;
-                        case FactionRelationKind.Neutral:
-                            sacrilegHunters.SetRelation(new FactionRelation() { kind = FactionRelationKind.Neutral, goodwill = 0, other = Faction.OfPlayer });
-                            break;
+                        switch (relationKind)
+                        {
+                            case FactionRelationKind.Ally:
+                                sacrilegHunters.SetRelation(new FactionRelation() { kind = FactionRelationKind.Ally, goodwill = 100, other = Faction.OfPlayer });
+                                break;
+                            case FactionRelationKind.Neutral:
+                                sacrilegHunters.SetRelation(new FactionRelation() { kind = FactionRelationKind.Neutral, goodwill = 0, other = Faction.OfPlayer });
+                                break;
+                            case FactionRelationKind.Hostile:
+                                sacrilegHunters.SetRelation(new FactionRelation() { kind = FactionRelationKind.Hostile, goodwill = -100, other = Faction.OfPlayer });
+                                break;
+                        }
                     }
                 }
-                else sacrilegHunters.SetRelation(new FactionRelation() { kind = FactionRelationKind.Hostile, goodwill = -100, other = Faction.OfPlayer });
+                else if (sacrilegHunters.RelationKindWith(Faction.OfPlayerSilentFail) != FactionRelationKind.Hostile) sacrilegHunters.SetRelation(new FactionRelation() { kind = FactionRelationKind.Hostile, goodwill = -100, other = Faction.OfPlayer });
             }
             return sacrilegHunters;
         }
