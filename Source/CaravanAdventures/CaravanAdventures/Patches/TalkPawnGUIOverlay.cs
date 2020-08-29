@@ -21,8 +21,8 @@ namespace CaravanAdventures.Patches
 
         public static void DrawPawnGUIOverlayPostfix(Pawn ___pawn)
         {
-            var compTalk = ___pawn.GetComp<CompTalk>();
-            if (compTalk != null && compTalk.ShowQuestionMark) ___pawn.Map.overlayDrawer.DrawOverlay(___pawn, OverlayTypes.QuestionMark);
+            var compTalk = ___pawn.TryGetComp<CompTalk>();
+            if (compTalk != null && compTalk.Enabled && compTalk.ShowQuestionMark) ___pawn.Map.overlayDrawer.DrawOverlay(___pawn, OverlayTypes.QuestionMark);
         }
 
     }

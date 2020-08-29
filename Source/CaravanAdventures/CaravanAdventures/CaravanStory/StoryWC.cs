@@ -24,6 +24,7 @@ namespace CaravanAdventures.CaravanStory
         private int bossMissedCounter = 0;
         private static Pawn storyContact;
         public static Pawn StoryContact{ get => storyContact; set => storyContact = value; }
+
         public static Dictionary<string, int> mechBossKillCounters = new Dictionary<string, int>();
         public static Dictionary<string, bool> debugFlags = new Dictionary<string, bool>()
         {
@@ -88,7 +89,8 @@ namespace CaravanAdventures.CaravanStory
                     storyFlags[flag.Key] = true;
 
             // todo debug, delete
-            //StoryWC.ResetSFsStartingWith("IntroVillage");
+            storyFlags["IntroVillage_Created"] = false;
+            StoryWC.ResetSFsStartingWith("IntroVillage");
         }
 
         public override void WorldComponentTick()

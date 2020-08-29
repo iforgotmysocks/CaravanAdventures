@@ -75,14 +75,14 @@ namespace CaravanAdventures.CaravanStory
 		public override void Tick()
 		{
 			// todo remove true
-			if (base.HasMap || true)
+			if (base.HasMap)
 			{
 				if (ticks >= 1200)
 				{
 					if (temporaryDeleteTalkedToContactPawn)
 					{
-						Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "\n\n alskdjflaksf");
-						Quests.QuestUtility.CompleteQuest(StoryQuestDefOf.CA_StoryVillage_Arrival);
+						//Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "\n\n alskdjflaksf");
+						//Quests.QuestUtility.CompleteQuest(StoryQuestDefOf.CA_StoryVillage_Arrival);
 					}
 					ticks = 0;
 				}

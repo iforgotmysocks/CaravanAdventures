@@ -22,12 +22,14 @@ namespace CaravanAdventures.CaravanStory.Quests
             }
         }
 
-        public static void GenerateStoryQuest(QuestScriptDef questDef)
+        public static void GenerateStoryQuest(QuestScriptDef questDef, bool directlyAccept = true)
         {
             Slate slate = new Slate();
             if (questDef.CanRun(slate))
             {
-                RimWorld.QuestUtility.SendLetterQuestAvailable(RimWorld.QuestUtility.GenerateQuestAndMakeAvailable(questDef, slate));
+                var quest = RimWorld.QuestUtility.GenerateQuestAndMakeAvailable(questDef, slate);
+                RimWorld.QuestUtility.SendLetterQuestAvailable(quest);
+                if (directlyAccept) quest.Accept(null);
             }
         }
 

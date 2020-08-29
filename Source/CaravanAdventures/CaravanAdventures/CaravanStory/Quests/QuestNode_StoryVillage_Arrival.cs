@@ -19,6 +19,7 @@ namespace CaravanAdventures.CaravanStory.Quests
             if (!StartQuest()) return;
 
             var rules = new List<Rule>();
+            Log.Message($"Storycontact name: {StoryWC.StoryContact.Name}");
             rules.Add(new Rule_String("faction_name", StoryWC.StoryContact.Faction.Name.ToString()));
             rules.AddRange(GrammarUtility.RulesForPawn("pawn", StoryWC.StoryContact, null, true, true));
             QuestGen.AddQuestDescriptionRules(rules);
