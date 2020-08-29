@@ -42,10 +42,15 @@ namespace CaravanAdventures.CaravanStory
 			
 				Find.LetterStack.ReceiveLetter(label, text, LetterDefOf.NeutralEvent, caravan.PawnsListForReading, Faction, null, null, null);
 				CaravanEnterMapUtility.Enter(caravan, orGenerateMap, CaravanEnterMode.Edge, CaravanDropInventoryMode.DoNotDrop, true, null);
+				Log.Message($"Got here, must be spawn cell related");
 				var storyContactCell = CellFinder.RandomNotEdgeCell(Math.Min(orGenerateMap.Size.x / 2 - (orGenerateMap.Size.x / 6), orGenerateMap.Size.y / 2 - (orGenerateMap.Size.y / 6)), Map);
+				
 				GenSpawn.Spawn(QuestCont.Village.StoryContact, storyContactCell, orGenerateMap);
-				orGenerateMap.mapPawns.AllPawnsSpawned.Where(x => x.Faction == StoryUtility.EnsureSacrilegHunters()).FirstOrDefault().GetLord().AddPawn(QuestCont.Village.StoryContact);
 
+				Log.Message($"Got here before crash");
+				orGenerateMap.mapPawns.AllPawnsSpawned.Where(x => x.Faction == StoryUtility.EnsureSacrilegHunters() && x.GetLord().LordJob.GetType() == typeof(LordJob_DefendBase)).FirstOrDefault().GetLord().AddPawn(QuestCont.Village.StoryContact);
+
+				StoryWC.SetSF("IntroVillage_Entered");
 				// todo generate settlement
 				// todo generate girl -> or maybe even do that when creating the quest?
 				
@@ -72,9 +77,28 @@ namespace CaravanAdventures.CaravanStory
            
         }
 
-		public void ConversationFinished(Pawn pawn, Thing target)
+		public void ConversationFinished(Pawn initiator, Pawn addressed)
+		{
+			Log.Message($"Story starts initiated by {initiator.Name} and {addressed.def.defName}");
+			DiaNode diaNode = null;
+			var endDiaNodeAccepted = new DiaNode("StoryVillage_Dia1_3".Translate());
+			endDiaNodeAccepted.options.Add(new DiaOption("StoryVillage_Dia1_3_Option1".Translate()) { action = () => SpawnMechArmy(initiator, addressed), resolveTree = true });
+
+			var subDiaNode = new DiaNode("StoryVillage_Dia1_2".Translate());
+			subDiaNode.options.Add(new DiaOption("StoryVillage_Dia1_2_Option1".Translate()) { link = endDiaNodeAccepted });
+			subDiaNode.options.Add(new DiaOption("StoryVillage_Dia1_2_Option2".Translate()) { link = endDiaNodeAccepted });
+
+			diaNode = new DiaNode("StoryVillage_Dia1_1".Translate(initiator.NameShortColored));
+			diaNode.options.Add(new DiaOption("StoryVillage_Dia1_1_Option1".Translate()) { link = subDiaNode }); ;
+			
+			TaggedString taggedString = "StoryVillage_Dia1_DiaTitle".Translate(addressed.NameShortColored);
+			Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
+			Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
+		}
+
+        private void SpawnMechArmy(Pawn initiator, Pawn addressed)
         {
-			Log.Message($"Conversation with {QuestCont.Village.StoryContact} is finished");
+            
         }
 
         public override MapGeneratorDef MapGeneratorDef => CaravanStorySiteDefOf.StoryVillageMG;
@@ -97,8 +121,6 @@ namespace CaravanAdventures.CaravanStory
 				ticks++;
 			}
 		}
-
-
 
         protected void CreateMap(Caravan caravan)
 		{

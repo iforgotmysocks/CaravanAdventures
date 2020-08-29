@@ -40,7 +40,7 @@ namespace CaravanAdventures.CaravanStory
 
         internal static void GenerateFriendlyVillage()
         {
-            if (StoryWC.storyFlags.TryGetValue("IntroVillage_Created", out var res) && res) return;
+            if (StoryWC.storyFlags["IntroVillage_Created"]) return;
             if (!StoryUtility.TryGenerateDistantTile(out var tile, 6, 15))
             {
                 Log.Message($"No tile was generated");
@@ -55,7 +55,7 @@ namespace CaravanAdventures.CaravanStory
             QuestCont.Village.Settlement = settlement;
 
             Quests.QuestUtility.GenerateStoryQuest(StoryQuestDefOf.CA_StoryVillage_Arrival);
-
+            StoryUtility.AssignVillageDialog();
             StoryWC.SetSF("IntroVillage_Created");
         }
 
@@ -108,6 +108,22 @@ namespace CaravanAdventures.CaravanStory
             return TileFinder.TryFindNewSiteTile(out newTile, minDist, maxDist, false, false, startTile);
         }
 
+        internal static void AssignVillageDialog()
+        {
+            var comp = QuestCont.Village.StoryContact.TryGetComp<CompTalk>();
+            comp.actions.Add(new TalkSet()
+            {
+                Id = "StoryStart_PawnDia",
+                Addressed = QuestCont.Village.StoryContact,
+                Initiator = null,
+                ClassName = typeof(StoryVillageMP).ToString(),
+                MethodName = "ConversationFinished",
+                Repeatable = false,
+            });
+            comp.ShowQuestionMark = true;
+            comp.Enabled = true;
+        }
+
         internal static void GenerateStoryContact()
         {
             if (QuestCont.Village.StoryContact != null && !QuestCont.Village.StoryContact.Dead) return;
@@ -125,29 +141,17 @@ namespace CaravanAdventures.CaravanStory
 
             // todo looks?
             //girl.story.hairDef = 
+            Log.Message("Generated main quest pawn");
 
             girl.story.traits.allTraits.RemoveAll(x => x.def == TraitDefOf.Beauty);
             girl.story.traits.GainTrait(new Trait(TraitDefOf.Beauty, 2));
-
-            var comp = girl.TryGetComp<CompTalk>();
-            comp.actions.Add(new TalkSet()
-            {
-                Id = "StoryStart_PawnDia",
-                Addressed = girl,
-                Initiator = null,
-                ClassName = typeof(StoryVillageMP).ToString(),
-                MethodName = "ConversationFinished",
-                Repeatable = false,
-            });
-            comp.ShowQuestionMark = true;
-            comp.Enabled = true;
 
             QuestCont.Village.StoryContact = girl;
         }
 
         internal static Pawn GetGiftedPawn() => PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction?.FirstOrDefault(x => (x?.RaceProps?.Humanlike ?? false) && x.health.hediffSet.GetFirstHediffOfDef(HediffDef.Named("AncientGift")) != null);
 
-        public static Faction EnsureSacrilegHunters(FactionRelationKind relationKind = FactionRelationKind.Neutral, bool ignoreBetrayal = false)
+        public static Faction EnsureSacrilegHunters(FactionRelationKind relationKind = FactionRelationKind.Neutral, bool ignoreBetrayal = false, bool skipLeaderGeneration = false)
         {
             var sacrilegHunters = Find.FactionManager.AllFactions.FirstOrDefault(x => x.def.defName == "SacrilegHunters");
             if (sacrilegHunters == null)
@@ -158,7 +162,17 @@ namespace CaravanAdventures.CaravanStory
                 empireDef.permanentEnemyToEveryoneExcept.Add(sacrilegHunters.def);
                 Faction.Empire.TrySetNotHostileTo(sacrilegHunters);
             }
-            if (sacrilegHunters.leader == null || sacrilegHunters.leader.Dead || sacrilegHunters.leader.Destroyed) sacrilegHunters.TryGenerateNewLeader();
+            if ((sacrilegHunters.leader == null || sacrilegHunters.leader.Dead || sacrilegHunters.leader.Destroyed) && !skipLeaderGeneration)
+            {
+                try
+                {
+                    sacrilegHunters.TryGenerateNewLeader();
+                }
+                catch (Exception e)
+                {
+                    Log.Error(e.ToString());
+                }
+            }
             if (Faction.OfPlayerSilentFail != null && sacrilegHunters.RelationWith(Faction.OfPlayer, true) == null) sacrilegHunters.TryMakeInitialRelationsWith(Faction.OfPlayer);
             if (sacrilegHunters != null && Faction.OfPlayerSilentFail != null)
             {
@@ -183,6 +197,21 @@ namespace CaravanAdventures.CaravanStory
                 else if (sacrilegHunters.RelationKindWith(Faction.OfPlayerSilentFail) != FactionRelationKind.Hostile) sacrilegHunters.SetRelation(new FactionRelation() { kind = FactionRelationKind.Hostile, goodwill = -100, other = Faction.OfPlayer });
             }
             return sacrilegHunters;
+        }
+
+        internal static void RemoveExistingQuestFriendlyVillages()
+        {
+            var settlements = Find.WorldObjects.Settlements.Where(x => x?.Faction?.def?.defName == "SacrilegHunters");
+            Log.Message($"settlement count: {settlements.Count()}");
+            foreach (var settlement in settlements.Reverse())
+            {
+                Log.Message($"Trying to destroy settlement {settlement.Name}");
+                Log.Message($"settlement mp: {settlement.def.defName}");
+                if (settlement.def.defName != "StoryVillageMP") continue;
+                settlement.forceRemoveWorldObjectWhenMapRemoved = true;
+                settlement.Destroy();
+                settlement.CheckRemoveMapNow();
+            }
         }
 
         internal static void CallBombardment(IntVec3 position, Map map, Pawn instigator)

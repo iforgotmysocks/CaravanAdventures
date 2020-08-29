@@ -118,9 +118,9 @@ namespace CaravanAdventures.CaravanStory
             if (animaTreeWhipserSustainer != null) StoryWC.storyFlags["Start_InitialTreeWhisper"] = true;
         }
 
-        public void StoryStartDialog(Pawn initiator, object addressed)
+        public void StoryStartDialog(Pawn initiator, Thing addressed)
         {
-            Log.Message($"Story starts initiated by {initiator.Name} and {((Thing)addressed).def.defName}");
+            Log.Message($"Story starts initiated by {initiator.Name} and {addressed.def.defName}");
             DiaNode diaNode = null;
             if (!StoryWC.storyFlags["Start_CanReceiveGift"])
             {

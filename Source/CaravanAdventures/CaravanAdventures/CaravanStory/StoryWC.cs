@@ -23,8 +23,6 @@ namespace CaravanAdventures.CaravanStory
         private static readonly IntRange shrineDistance = Helper.Debug() ? new IntRange(2, 4) : new IntRange(40, 60);
         private static List<AbilityDef> unlockedSpells = new List<AbilityDef>();
         private int bossMissedCounter = 0;
-        
-
         public static Dictionary<string, int> mechBossKillCounters = new Dictionary<string, int>();
         public static Dictionary<string, bool> debugFlags = new Dictionary<string, bool>()
         {
@@ -32,20 +30,21 @@ namespace CaravanAdventures.CaravanStory
             { "ShrinesDisabled", false },
             { "DebugAllAbilities", false }
         };
-        public static Dictionary<string, bool> storyFlags = new Dictionary<string, bool>()
+        public static Dictionary<string, bool> storyFlags;
+        private List<string> flagsToAdd = new List<string>
         {
-            { "IntroVillage_Created", false },
-            { "IntroVillage_Entered", false },
-            { "IntroVillage_TalkedToFriend", false },
-            { "IntroVillage_MechsArrived", false },
-            { "IntroVillage_Finished", false },
+            "IntroVillage_Created",
+            "IntroVillage_Entered",
+            "IntroVillage_TalkedToFriend",
+            "IntroVillage_MechsArrived",
+            "IntroVillage_Finished",
 
-            { "Start_InitialTreeWhisper", false },
-            { "Start_InitialTreeAddTalkOption", false },
-            { "Start_CanReceiveGift", false },
-            { "Start_ReceivedGift", false },
+            "Start_InitialTreeWhisper",
+            "Start_InitialTreeAddTalkOption",
+            "Start_CanReceiveGift",
+            "Start_ReceivedGift",
 
-            { "SacrilegHuntersBetrayal", false },
+            "SacrilegHuntersBetrayal",
         };
 
         public override void ExposeData()
@@ -68,30 +67,35 @@ namespace CaravanAdventures.CaravanStory
         {
             base.FinalizeInit();
 
-            // todo remove, should just be needed to update
-            if (unlockedSpells == null) unlockedSpells = new List<AbilityDef>();
-
-            if (ticks == -1)
-            {
-                for (int i = 1; i < 6; i++)
-                {
-                    storyFlags["Shrine" + i + "_InitCountDownStarted"] = false;
-                    storyFlags["Shrine" + i + "_Created"] = false;
-                    storyFlags["Shrine" + i + "_Completed"] = false;
-                }
-
-                StoryUtility.EnsureSacrilegHunters();
-            }
-
-            QuestCont.Village = new QuestCont_Village();
+            InitializeStoryFlags();
+            InitializeQuestCont();
 
             if (debugFlags["StoryStartDone"])
                 foreach (var flag in storyFlags.Where(x => x.Key.StartsWith("Start_")).ToList())
                     storyFlags[flag.Key] = true;
 
-            // todo debug, delete
-            storyFlags["IntroVillage_Created"] = false;
-            StoryWC.ResetSFsStartingWith("IntroVillage");
+            StoryUtility.EnsureSacrilegHunters();
+        }
+
+        private void InitializeStoryFlags()
+        {
+            if (storyFlags == null) storyFlags = new Dictionary<string, bool>();
+            for (int i = 1; i < 6; i++)
+            {
+                flagsToAdd.Add("Shrine" + i + "_InitCountDownStarted");
+                flagsToAdd.Add("Shrine" + i + "_Created");
+                flagsToAdd.Add("Shrine" + i + "_Completed");
+            }
+
+            foreach (var flag in flagsToAdd)
+            {
+                if (!storyFlags.ContainsKey(flag)) storyFlags[flag] = false;
+            }
+        }
+
+        private void InitializeQuestCont()
+        {
+            if (QuestCont.Village == null) QuestCont.Village = new QuestCont_Village();
         }
 
         public override void WorldComponentTick()
