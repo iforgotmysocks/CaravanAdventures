@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace CaravanAdventures.CaravanStory.Quests
 {
-    abstract class QuestCont
+    static class QuestCont
     {
+        private static QuestCont_Village village;
+        internal static QuestCont_Village Village { get => village; set => village = value; }
     }
 }

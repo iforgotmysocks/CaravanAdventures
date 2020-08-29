@@ -137,7 +137,9 @@ namespace CaravanAdventures.CaravanStory
 
 		private int SetAndReturnCasketGroupId(Room room)
 		{
-			var id = Rand.Range(1, Int32.MaxValue - 1);
+			// todo test id
+			//var id = Rand.Range(1, Int32.MaxValue - 1);
+			var id = Find.UniqueIDsManager.GetNextAncientCryptosleepCasketGroupID();
 			var caskets = room.ContainedThings(ThingDefOf.AncientCryptosleepCasket);
 			foreach (var casket in caskets)
 			{

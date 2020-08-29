@@ -7,8 +7,14 @@ using Verse;
 
 namespace CaravanAdventures.CaravanStory.Quests
 {
-    class QuestCont_Village : QuestCont, IExposable
+    class QuestCont_Village : IExposable
     {
+        private Pawn storyContact;
+        private StoryVillageMP settlement;
+
+        public Pawn StoryContact { get => storyContact; set => storyContact = value; }
+        public StoryVillageMP Settlement { get => settlement; internal set => settlement = value; }
+
         public QuestCont_Village()
         {
 
@@ -16,7 +22,8 @@ namespace CaravanAdventures.CaravanStory.Quests
 
         public void ExposeData()
         {
-            throw new NotImplementedException();
+            Scribe_Deep.Look(ref storyContact, "storyContact");
+            Scribe_References.Look(ref settlement, "settlement");
         }
     }
 }

@@ -14,14 +14,15 @@ namespace CaravanAdventures.CaravanStory.Quests
     {
         protected override void RunInt()
         {
-            //var quest = QuestGen.quest;
+            var quest = QuestGen.quest;
             //var slate = QuestGen.slate;
             if (!StartQuest()) return;
 
             var rules = new List<Rule>();
-            Log.Message($"Storycontact name: {StoryWC.StoryContact.Name}");
-            rules.Add(new Rule_String("faction_name", StoryWC.StoryContact.Faction.Name.ToString()));
-            rules.AddRange(GrammarUtility.RulesForPawn("pawn", StoryWC.StoryContact, null, true, true));
+            Log.Message($"Storycontact name: {QuestCont.Village.StoryContact.Name}");
+            rules.Add(new Rule_String("faction_name", QuestCont.Village.StoryContact.Faction.Name.ToString()));
+            rules.Add(new Rule_String("settlement_name", QuestCont.Village.Settlement.Name.Colorize(UnityEngine.Color.cyan)));
+            rules.AddRange(GrammarUtility.RulesForPawn("pawn", QuestCont.Village.StoryContact, null, true, true));
             QuestGen.AddQuestDescriptionRules(rules);
         }
 

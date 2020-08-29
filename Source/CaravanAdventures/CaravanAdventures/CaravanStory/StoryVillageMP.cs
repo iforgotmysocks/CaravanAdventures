@@ -42,11 +42,13 @@ namespace CaravanAdventures.CaravanStory
 			
 				Find.LetterStack.ReceiveLetter(label, text, LetterDefOf.NeutralEvent, caravan.PawnsListForReading, Faction, null, null, null);
 				CaravanEnterMapUtility.Enter(caravan, orGenerateMap, CaravanEnterMode.Edge, CaravanDropInventoryMode.DoNotDrop, true, null);
-
+				var storyContactCell = CellFinder.RandomNotEdgeCell(Math.Min(orGenerateMap.Size.x / 2 - (orGenerateMap.Size.x / 6), orGenerateMap.Size.y / 2 - (orGenerateMap.Size.y / 6)), Map);
+				GenSpawn.Spawn(QuestCont.Village.StoryContact, storyContactCell, orGenerateMap);
+				orGenerateMap.mapPawns.AllPawnsSpawned.Where(x => x.Faction == StoryUtility.EnsureSacrilegHunters()).FirstOrDefault().GetLord().AddPawn(QuestCont.Village.StoryContact);
 
 				// todo generate settlement
 				// todo generate girl -> or maybe even do that when creating the quest?
-
+				
 				// todo test quest stuff
 				
 
@@ -68,6 +70,11 @@ namespace CaravanAdventures.CaravanStory
 		public override void PostMapGenerate()
         {
            
+        }
+
+		public void ConversationFinished(Pawn pawn, Thing target)
+        {
+			Log.Message($"Conversation with {QuestCont.Village.StoryContact} is finished");
         }
 
         public override MapGeneratorDef MapGeneratorDef => CaravanStorySiteDefOf.StoryVillageMG;

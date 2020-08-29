@@ -67,7 +67,7 @@ namespace CaravanAdventures.CaravanStory
 			if (!actions.Any(x => !x.Finished || x.Repeatable)) yield break;
 			if (pawn.Dead || pawn.Drafted) yield break;
 			string text = "CA_Start_Begin".Translate();
-			AcceptanceReport acceptanceReport = this.CanTalkTo(pawn, null);
+            AcceptanceReport acceptanceReport = this.CanTalkTo(pawn, null);
 			if (!acceptanceReport.Accepted && !string.IsNullOrWhiteSpace(acceptanceReport.Reason))
 			{
 				text = text + ": " + acceptanceReport.Reason;
@@ -78,7 +78,8 @@ namespace CaravanAdventures.CaravanStory
 				ApproachDesiredThing(pawn);
 			}, MenuOptionPriority.Default, null, null, 0f, null, null)
 			{
-				Disabled = !acceptanceReport.Accepted
+				Disabled = !acceptanceReport.Accepted,
+				revalidateClickTarget = this.parent,
 			};
 			yield break;
 		}
@@ -94,22 +95,20 @@ namespace CaravanAdventures.CaravanStory
 
 		public AcceptanceReport CanTalkTo(Pawn pawn, LocalTargetInfo? knownSpot = null)
 		{
-			if (pawn.Dead || pawn.Faction != Faction.OfPlayer)
-			{
-				return false;
-			}
-			if (!pawn.Map.reservationManager.CanReserve(pawn, this.parent, 1, -1, null, false))
-			{
-				Pawn pawn2 = pawn.Map.reservationManager.FirstRespectedReserver(this.parent, pawn);
-				return new AcceptanceReport((pawn2 == null) ? "Reserved".Translate() : "ReservedBy".Translate(pawn.LabelShort, pawn2));
-			}
-			if (knownSpot != null)
-			{
-				if (!this.CanUseSpot(pawn, knownSpot.Value))
-				{
-					return new AcceptanceReport("BeginLinkingRitualNeedLinkSpot".Translate());
-				}
-			}
+			if (pawn.Dead || pawn.Faction != Faction.OfPlayer) return false;
+			if (!pawn.CanReach(this.parent, PathEndMode.Touch, Danger.Deadly, false, TraverseMode.ByPawn)) return false;
+			//if (!pawn.Map.reservationManager.CanReserve(pawn, this.parent, 1, -1, null, false))
+			//{
+			//	Pawn pawn2 = pawn.Map.reservationManager.FirstRespectedReserver(this.parent, pawn);
+			//	return new AcceptanceReport((pawn2 == null) ? "Reserved".Translate() : "ReservedBy".Translate(pawn.LabelShort, pawn2));
+			//}
+			//if (knownSpot != null)
+			//{
+			//	if (!this.CanUseSpot(pawn, knownSpot.Value))
+			//	{
+			//		return new AcceptanceReport("BeginLinkingRitualNeedLinkSpot".Translate());
+			//	}
+			//}
 			return AcceptanceReport.WasAccepted;
 		}
 

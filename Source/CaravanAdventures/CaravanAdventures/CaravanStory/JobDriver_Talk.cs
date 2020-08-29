@@ -56,7 +56,7 @@ namespace CaravanAdventures.CaravanStory
             object component = null;
             component = Current.Game.GetComponent(Type.GetType(className));
             if (component == null) component = Find.World.GetComponent(Type.GetType(className));
-            if (component == null) component = Find.Maps.Where(x => x.Parent != null && x.Parent.GetComponent(Type.GetType(className)) != null).Select(map => map.Parent).FirstOrDefault();
+            if (component == null) component = Find.Maps.Where(x => x.Parent != null && x.Parent.GetType() == Type.GetType(className)).Select(map => map.Parent).FirstOrDefault();
             if (component == null) component = Find.Maps.Where(x => x.GetComponent(Type.GetType(className)) != null).Select(map => map.GetComponent(Type.GetType(className))).FirstOrDefault();
             return component;
         }

@@ -52,9 +52,8 @@ namespace CaravanAdventures.CaravanStory
             settlement.Tile = tile;
             settlement.Name = SettlementNameGenerator.GenerateSettlementName(settlement, null);
             Find.WorldObjects.Add(settlement);
+            QuestCont.Village.Settlement = settlement;
 
-            var pawn = PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_FreeColonists.FirstOrDefault();
-            //Quests.QuestUtility.GenerateStoryVillageQuest(pawn, pawn.Faction);
             Quests.QuestUtility.GenerateStoryQuest(StoryQuestDefOf.CA_StoryVillage_Arrival);
 
             StoryWC.SetSF("IntroVillage_Created");
@@ -111,7 +110,7 @@ namespace CaravanAdventures.CaravanStory
 
         internal static void GenerateStoryContact()
         {
-            if (StoryWC.StoryContact != null && !StoryWC.StoryContact.Dead) return;
+            if (QuestCont.Village.StoryContact != null && !QuestCont.Village.StoryContact.Dead) return;
             var girl = PawnGenerator.GeneratePawn(new PawnGenerationRequest()
             {
                 FixedBiologicalAge = 22,
@@ -130,7 +129,20 @@ namespace CaravanAdventures.CaravanStory
             girl.story.traits.allTraits.RemoveAll(x => x.def == TraitDefOf.Beauty);
             girl.story.traits.GainTrait(new Trait(TraitDefOf.Beauty, 2));
 
-            StoryWC.StoryContact = girl;
+            var comp = girl.TryGetComp<CompTalk>();
+            comp.actions.Add(new TalkSet()
+            {
+                Id = "StoryStart_PawnDia",
+                Addressed = girl,
+                Initiator = null,
+                ClassName = typeof(StoryVillageMP).ToString(),
+                MethodName = "ConversationFinished",
+                Repeatable = false,
+            });
+            comp.ShowQuestionMark = true;
+            comp.Enabled = true;
+
+            QuestCont.Village.StoryContact = girl;
         }
 
         internal static Pawn GetGiftedPawn() => PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction?.FirstOrDefault(x => (x?.RaceProps?.Humanlike ?? false) && x.health.hediffSet.GetFirstHediffOfDef(HediffDef.Named("AncientGift")) != null);

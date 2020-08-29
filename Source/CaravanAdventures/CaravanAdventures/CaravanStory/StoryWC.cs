@@ -1,4 +1,5 @@
-﻿using RimWorld;
+﻿using CaravanAdventures.CaravanStory.Quests;
+using RimWorld;
 using RimWorld.Planet;
 using System;
 using System.Collections.Generic;
@@ -22,8 +23,7 @@ namespace CaravanAdventures.CaravanStory
         private static readonly IntRange shrineDistance = Helper.Debug() ? new IntRange(2, 4) : new IntRange(40, 60);
         private static List<AbilityDef> unlockedSpells = new List<AbilityDef>();
         private int bossMissedCounter = 0;
-        private static Pawn storyContact;
-        public static Pawn StoryContact{ get => storyContact; set => storyContact = value; }
+        
 
         public static Dictionary<string, int> mechBossKillCounters = new Dictionary<string, int>();
         public static Dictionary<string, bool> debugFlags = new Dictionary<string, bool>()
@@ -58,7 +58,6 @@ namespace CaravanAdventures.CaravanStory
             Scribe_Values.Look(ref shrineRevealCounter, "shrineRevealCounter");
             Scribe_Values.Look(ref countShrinesCompleted, "countShrinesCompleted");
             Scribe_Values.Look(ref bossMissedCounter, "bossMissedCounter");
-            Scribe_Deep.Look(ref storyContact, "storyContact");
         }
 
         public StoryWC(World world) : base(world)
@@ -83,6 +82,8 @@ namespace CaravanAdventures.CaravanStory
 
                 StoryUtility.EnsureSacrilegHunters();
             }
+
+            QuestCont.Village = new QuestCont_Village();
 
             if (debugFlags["StoryStartDone"])
                 foreach (var flag in storyFlags.Where(x => x.Key.StartsWith("Start_")).ToList())

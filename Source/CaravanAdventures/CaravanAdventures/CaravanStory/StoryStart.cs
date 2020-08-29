@@ -91,26 +91,6 @@ namespace CaravanAdventures.CaravanStory
             StoryWC.storyFlags["Start_InitialTreeAddTalkOption"] = true;
         }
 
-        private void DebugStuff()
-        {
-            // todo remove this and debugTree
-            PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_FreeColonists.ToList().ForEach(pawn => {
-                var comp = pawn.GetComp<CompTalk>();
-                comp.actions.Add(new TalkSet()
-                {
-                    Id = "StoryStart_PawnDia",
-                    Addressed = pawn,
-                    Initiator = null,
-                    ClassName = this.GetType().ToString(),
-                    MethodName = "StoryStartDialog",
-                    Repeatable = true,
-                });
-                comp.ShowQuestionMark = true;
-                comp.Enabled = true;
-            });
-            //if (debugTree != null) this.debugTree.Map.overlayDrawer.DrawOverlay(debugTree, OverlayTypes.QuestionMark);
-        }
-
         private void DisableTreeTalkAction()
         {
             var tree = map.spawnedThings.FirstOrDefault(x => x.def.defName == "Plant_TreeAnima");
