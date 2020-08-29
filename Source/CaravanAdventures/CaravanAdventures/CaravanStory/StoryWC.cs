@@ -73,8 +73,6 @@ namespace CaravanAdventures.CaravanStory
             if (debugFlags["StoryStartDone"])
                 foreach (var flag in storyFlags.Where(x => x.Key.StartsWith("Start_")).ToList())
                     storyFlags[flag.Key] = true;
-
-            StoryUtility.EnsureSacrilegHunters();
         }
 
         private void InitializeStoryFlags()
@@ -95,12 +93,17 @@ namespace CaravanAdventures.CaravanStory
 
         private void InitializeQuestCont()
         {
-            if (QuestCont.Village == null) QuestCont.Village = new QuestCont_Village();
+            if (QuestCont.Village == null)
+            {
+                Log.Message($"QuestComp Village was null");
+                QuestCont.Village = new QuestCont_Village();
+            }
         }
 
         public override void WorldComponentTick()
         {
             base.WorldComponentTick();
+            if (ticks == -1) StoryUtility.EnsureSacrilegHunters();
 
             if (ticks > 1200)
             {

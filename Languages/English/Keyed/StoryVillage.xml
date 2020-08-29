@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
+	<VisitStoryVillageLabel>Visit {0}</VisitStoryVillageLabel>
 	<StoryVillageEnterMapMessage>Entering {0}</StoryVillageEnterMapMessage>
 	<StoryVillageArrivedLetterTitle>Entered {0}</StoryVillageArrivedLetterTitle>
 	<StoryVillageArrivedLetterMessage>Your caravan arrived at {0}. Seems to be a nice place.</StoryVillageArrivedLetterMessage>
-
+	
 	<StoryVillage_Dia1_DiaTitle>{0} embraces you</StoryVillage_Dia1_DiaTitle>
 	<StoryVillage_Dia1_1>Oh, hey {0}, i didn't expect a visit from you, at least not in these times...</StoryVillage_Dia1_1>
 	<StoryVillage_Dia1_1_Option1>That's quite the warm welcome...</StoryVillage_Dia1_1_Option1>
 	<StoryVillage_Dia1_2>Uh, no, you got me wrong here. I'm glad you are here, but we've been under constant attacks by mechs from a nearby site.
-	\n\nAnother attack is immenent and we may have to flee and give up the village. Our forward outlooks described a huge army lead by some mechanical nightmare!
-	\n\nYou should leave, you're in danger here.</StoryVillage_Dia1_2>
+	\nAnother attack is immenent and we may have to flee and give up the village. Our forward outlooks described a huge army lead by some mechanical nightmare!
+	\nYou should leave, you're in danger here.</StoryVillage_Dia1_2>
 	<StoryVillage_Dia1_2_Option1>Nah, don't give up so fast, we'll save the village together</StoryVillage_Dia1_2_Option1>
 	<StoryVillage_Dia1_2_Option2>Alright, we're outa here, wish you the best</StoryVillage_Dia1_2_Option2>
 	<StoryVillage_Dia1_3>Oh look, there they come, take covert!\n\n...What the hell is that thing???</StoryVillage_Dia1_3>
 	<StoryVillage_Dia1_3_Option1>Our death if we stay...</StoryVillage_Dia1_3_Option1>
-	</LanguageData>
+
+	<StoryVillage_QuestUpdate_MechsArrived>Either help {0} to defend their base or make a run for it, tho they would make good allies in the battles to come</StoryVillage_QuestUpdate_MechsArrived>
+</LanguageData>
 

@@ -98,6 +98,7 @@
     <Compile Include="CaravanItemSelection\FilterSet.cs" />
     <Compile Include="CaravanStory\AncientMasterShrineMP.cs" />
     <Compile Include="CaravanStory\CaravanArrivalAction_StoryVillageMP.cs" />
+    <Compile Include="CaravanStory\IncidentWorker_MechsWithBoss.cs" />
     <Compile Include="CaravanStory\JobDefOf.cs" />
     <Compile Include="CaravanStory\JobDriver_Talk.cs" />
     <Compile Include="CaravanStory\Quests\QuestCont.cs" />

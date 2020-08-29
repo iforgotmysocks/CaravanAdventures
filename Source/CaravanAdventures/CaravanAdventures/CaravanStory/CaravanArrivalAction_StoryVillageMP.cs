@@ -7,7 +7,7 @@ namespace CaravanAdventures.CaravanStory
 {
     class CaravanArrivalAction_StoryVillageMP : CaravanArrivalAction
     {
-		public override string Label => "VisitAncientMasterShrine".Translate(storyVillageMP.Label);
+		public override string Label => "VisitStoryVillageLabel".Translate(storyVillageMP.Label);
 		public override string ReportString => "CaravanVisiting".Translate(storyVillageMP.Label);
 		private StoryVillageMP storyVillageMP;
 
@@ -15,14 +15,14 @@ namespace CaravanAdventures.CaravanStory
 		{
 		}
 
-		public CaravanArrivalAction_StoryVillageMP(StoryVillageMP ancientMasterShrine)
+		public CaravanArrivalAction_StoryVillageMP(StoryVillageMP storyVillageMP)
 		{
-			this.storyVillageMP = ancientMasterShrine;
+			this.storyVillageMP = storyVillageMP;
 		}
 
-		public static FloatMenuAcceptanceReport CanVisit(Caravan caravan, StoryVillageMP ancientMasterShrine)
+		public static FloatMenuAcceptanceReport CanVisit(Caravan caravan, StoryVillageMP storyVillageMP)
 		{
-			return ancientMasterShrine != null && ancientMasterShrine.Spawned;
+			return storyVillageMP != null && storyVillageMP.Spawned;
 		}
 
 		public override FloatMenuAcceptanceReport StillValid(Caravan caravan, int destinationTile)
@@ -47,15 +47,15 @@ namespace CaravanAdventures.CaravanStory
 		public override void ExposeData()
 		{
 			base.ExposeData();
-			Scribe_References.Look(ref storyVillageMP, "ancientMasterShrine", false);
+			Scribe_References.Look(ref storyVillageMP, "storyVillageMP", false);
 		}
 
-		public static IEnumerable<FloatMenuOption> GetFloatMenuOptions(Caravan caravan, StoryVillageMP ancientMasterShrine)
+		public static IEnumerable<FloatMenuOption> GetFloatMenuOptions(Caravan caravan, StoryVillageMP storyVillage)
 		{
 			return CaravanArrivalActionUtility.GetFloatMenuOptions(() 
-				=> CanVisit(caravan, ancientMasterShrine), 
-				() => new CaravanArrivalAction_StoryVillageMP(ancientMasterShrine), "VisitAncientMasterShrine".Translate(ancientMasterShrine.Label), 
-				caravan, ancientMasterShrine.Tile, ancientMasterShrine, null);
+				=> CanVisit(caravan, storyVillage), 
+				() => new CaravanArrivalAction_StoryVillageMP(storyVillage), "VisitStoryVillageLabel".Translate(storyVillage.Label), 
+				caravan, storyVillage.Tile, storyVillage, null);
 		}
 
 

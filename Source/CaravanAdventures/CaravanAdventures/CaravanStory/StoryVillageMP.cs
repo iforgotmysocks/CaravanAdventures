@@ -17,8 +17,6 @@ namespace CaravanAdventures.CaravanStory
 {
 	class StoryVillageMP : Settlement
 	{
-
-		private bool temporaryDeleteTalkedToContactPawn = true;
 		private int ticks;
 
 		public StoryVillageMP()
@@ -47,29 +45,11 @@ namespace CaravanAdventures.CaravanStory
 				
 				GenSpawn.Spawn(QuestCont.Village.StoryContact, storyContactCell, orGenerateMap);
 
-				Log.Message($"Got here before crash");
+				Log.Message($"Spawning {QuestCont.Village.StoryContact.NameShortColored} comp active? {QuestCont.Village.StoryContact.TryGetComp<CompTalk>().Enabled} with active action? {QuestCont.Village.StoryContact.TryGetComp<CompTalk>().actions.FirstOrDefault(x => !x.Finished) != null}");
 				orGenerateMap.mapPawns.AllPawnsSpawned.Where(x => x.Faction == StoryUtility.EnsureSacrilegHunters() && x.GetLord().LordJob.GetType() == typeof(LordJob_DefendBase)).FirstOrDefault().GetLord().AddPawn(QuestCont.Village.StoryContact);
 
 				StoryWC.SetSF("IntroVillage_Entered");
-				// todo generate settlement
-				// todo generate girl -> or maybe even do that when creating the quest?
-				
-				// todo test quest stuff
-				
-
-
-				//Map map = StoryUtility.GenerateFriendlyVillage(caravan, Find.World.info.initialMapSize, CaravanStorySiteDefOf.AncientMasterShrineMP);
-				//mp = map.Parent as AncientMasterShrineMP;
-
-
-
-				// CaravanEnterMapUtility.Enter(caravan, map, CaravanEnterMode.Edge, CaravanDropInventoryMode.DoNotDrop, true);
-				//Find.TickManager.CurTimeSpeed = TimeSpeed.Paused;
-
-				//mp.Init();
 			}, "StoryVillageEnterMapMessage".Translate(Label.ApplyTag(TagType.Settlement, Faction.GetUniqueLoadID())), false, null, true);
-
-			// GeneratingMapForNewEncounter
 		}
 
 		public override void PostMapGenerate()
@@ -98,23 +78,30 @@ namespace CaravanAdventures.CaravanStory
 
         private void SpawnMechArmy(Pawn initiator, Pawn addressed)
         {
-            
-        }
+			StoryWC.SetSF("IntroVillage_TalkedToFriend");
+			Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillage_QuestUpdate_MechsArrived".Translate(addressed.NameShortColored));
+
+			var incidentParms = new IncidentParms
+			{
+				target = Map,
+				//incidentParms.points = StorytellerUtility.DefaultThreatPointsNow(incidentParms.target) * 2.5f;
+				points = 32000,
+				faction = Faction.OfMechanoids,
+				raidArrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn
+			};
+			Log.Message($"Default threat points: {StorytellerUtility.DefaultThreatPointsNow(incidentParms.target)}");
+			IncidentDefOf.RaidEnemy.Worker.TryExecute(incidentParms);
+		}
 
         public override MapGeneratorDef MapGeneratorDef => CaravanStorySiteDefOf.StoryVillageMG;
 
 		public override void Tick()
 		{
-			// todo remove true
 			if (base.HasMap)
 			{
 				if (ticks >= 1200)
 				{
-					if (temporaryDeleteTalkedToContactPawn)
-					{
-						//Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "\n\n alskdjflaksf");
-						//Quests.QuestUtility.CompleteQuest(StoryQuestDefOf.CA_StoryVillage_Arrival);
-					}
+
 					ticks = 0;
 				}
 

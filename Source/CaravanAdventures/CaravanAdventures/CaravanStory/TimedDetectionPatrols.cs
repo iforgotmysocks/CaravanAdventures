@@ -32,8 +32,6 @@ namespace CaravanAdventures.CaravanStory
 			lordsToExcludeFromRaidLogic = mapParent.Map.lordManager.lords.Where(lord => lord.faction == Faction.OfMechanoids).ToList();
 		}
 
-
-
 		public string DetectionCountdownTimeLeftString
 		{
 			get
