@@ -23,6 +23,7 @@ namespace CaravanAdventures.CaravanStory
         private static readonly IntRange shrineDistance = Helper.Debug() ? new IntRange(2, 4) : new IntRange(40, 60);
         private static List<AbilityDef> unlockedSpells = new List<AbilityDef>();
         private int bossMissedCounter = 0;
+
         public static Dictionary<string, int> mechBossKillCounters = new Dictionary<string, int>();
         public static Dictionary<string, bool> debugFlags = new Dictionary<string, bool>()
         {
@@ -47,6 +48,8 @@ namespace CaravanAdventures.CaravanStory
             "SacrilegHuntersBetrayal",
         };
 
+        public QuestCont questCont;
+
         public override void ExposeData()
         {
             base.ExposeData();
@@ -57,6 +60,7 @@ namespace CaravanAdventures.CaravanStory
             Scribe_Values.Look(ref shrineRevealCounter, "shrineRevealCounter");
             Scribe_Values.Look(ref countShrinesCompleted, "countShrinesCompleted");
             Scribe_Values.Look(ref bossMissedCounter, "bossMissedCounter");
+            Scribe_Deep.Look(ref questCont, "questCont");
         }
 
         public StoryWC(World world) : base(world)
@@ -73,6 +77,7 @@ namespace CaravanAdventures.CaravanStory
             if (debugFlags["StoryStartDone"])
                 foreach (var flag in storyFlags.Where(x => x.Key.StartsWith("Start_")).ToList())
                     storyFlags[flag.Key] = true;
+
         }
 
         private void InitializeStoryFlags()
@@ -93,10 +98,12 @@ namespace CaravanAdventures.CaravanStory
 
         private void InitializeQuestCont()
         {
-            if (QuestCont.Village == null)
+            // todo check if saving the main girl here is responsible for the comp to not be available after load
+            if (questCont == null) questCont = new QuestCont();
+            if (questCont.Village == null)
             {
                 Log.Message($"QuestComp Village was null");
-                QuestCont.Village = new QuestCont_Village();
+                questCont.Village = new QuestCont_Village();
             }
         }
 

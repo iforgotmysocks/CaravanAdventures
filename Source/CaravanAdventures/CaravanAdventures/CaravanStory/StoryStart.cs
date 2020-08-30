@@ -88,6 +88,7 @@ namespace CaravanAdventures.CaravanStory
                 Repeatable = true
             });
             comp.Enabled = true;
+            comp.ShowQuestionMark = true;
             StoryWC.storyFlags["Start_InitialTreeAddTalkOption"] = true;
         }
 

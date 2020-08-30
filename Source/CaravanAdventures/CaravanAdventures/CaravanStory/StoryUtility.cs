@@ -52,11 +52,15 @@ namespace CaravanAdventures.CaravanStory
             settlement.Tile = tile;
             settlement.Name = SettlementNameGenerator.GenerateSettlementName(settlement, null);
             Find.WorldObjects.Add(settlement);
-            QuestCont.Village.Settlement = settlement;
-
+            StoryUtility.GetSWC().questCont.Village.Settlement = settlement;
             Quests.QuestUtility.GenerateStoryQuest(StoryQuestDefOf.CA_StoryVillage_Arrival);
-            StoryUtility.AssignVillageDialog();
+
             StoryWC.SetSF("IntroVillage_Created");
+        }
+
+        internal static StoryWC GetSWC()
+        {
+            return Find.World.GetComponent<StoryWC>();
         }
 
         internal static Faction CreateOrGetFriendlyMechFaction()
@@ -110,11 +114,22 @@ namespace CaravanAdventures.CaravanStory
 
         internal static void AssignVillageDialog()
         {
-            var comp = QuestCont.Village.StoryContact.TryGetComp<CompTalk>();
+            if (StoryUtility.GetSWC().questCont.Village.StoryContact == null)
+            {
+                Log.Message("Skipping, pawn doesn't exist");
+                return;
+            }
+            var comp = StoryUtility.GetSWC().questCont.Village.StoryContact.TryGetComp<CompTalk>();
+            if (comp == null)
+            {
+                Log.Warning($"CompTalk on pawn {StoryUtility.GetSWC().questCont?.Village?.StoryContact?.Name} is null, which shouldn't happen");
+                comp = new CompTalk();
+                StoryUtility.GetSWC().questCont.Village.StoryContact.AllComps.Add(comp);
+            }
             comp.actions.Add(new TalkSet()
             {
                 Id = "StoryStart_PawnDia",
-                Addressed = QuestCont.Village.StoryContact,
+                Addressed = StoryUtility.GetSWC().questCont.Village.StoryContact,
                 Initiator = null,
                 ClassName = typeof(StoryVillageMP).ToString(),
                 MethodName = "ConversationFinished",
@@ -126,7 +141,7 @@ namespace CaravanAdventures.CaravanStory
 
         internal static void GenerateStoryContact()
         {
-            if (QuestCont.Village.StoryContact != null && !QuestCont.Village.StoryContact.Dead) return;
+            if (StoryUtility.GetSWC().questCont.Village.StoryContact != null && !StoryUtility.GetSWC().questCont.Village.StoryContact.Dead) return;
             var girl = PawnGenerator.GeneratePawn(new PawnGenerationRequest()
             {
                 FixedBiologicalAge = 22,
@@ -146,7 +161,8 @@ namespace CaravanAdventures.CaravanStory
             girl.story.traits.allTraits.RemoveAll(x => x.def == TraitDefOf.Beauty);
             girl.story.traits.GainTrait(new Trait(TraitDefOf.Beauty, 2));
 
-            QuestCont.Village.StoryContact = girl;
+            if (!Find.WorldPawns.Contains(girl)) Find.WorldPawns.PassToWorld(girl, PawnDiscardDecideMode.KeepForever);
+            StoryUtility.GetSWC().questCont.Village.StoryContact = girl;
         }
 
         internal static Pawn GetGiftedPawn() => PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction?.FirstOrDefault(x => (x?.RaceProps?.Humanlike ?? false) && x.health.hediffSet.GetFirstHediffOfDef(HediffDef.Named("AncientGift")) != null);

@@ -11,6 +11,8 @@ using CaravanAdventures.CaravanStory;
 
 namespace CaravanAdventures
 {
+    // todo make own defend base lord job, the current one only checks for the player as attacker
+    // todo starting a new game without restarting the game may not reset all the flags -> check it
     // todo GameComponent??? -> compprops applied to defs within a gamecomp somehow lead to missing comps on the object of the def which doesn't happen with world comps
     class Init : WorldComponent
     {
@@ -61,9 +63,9 @@ namespace CaravanAdventures
                 Log.Message("HumanDef is null");
                 return;
             }
-            var compProp = new CompProperties_Talk() { compClass = typeof(CompTalk) };
+            // todo reenable?
+            var compProp = new CompProperties_Talk();/* { compClass = typeof(CompTalk) };*/
             if (!humanDef.comps.Any(x => x is CompProperties_Talk)) humanDef.comps.Add(compProp);
-
         }
 
         private void PatchAncientShrineDefs_MoreShrinesAndBetterRewards()

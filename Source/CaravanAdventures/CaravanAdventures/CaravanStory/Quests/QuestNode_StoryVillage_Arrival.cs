@@ -19,10 +19,10 @@ namespace CaravanAdventures.CaravanStory.Quests
             if (!StartQuest()) return;
 
             var rules = new List<Rule>();
-            Log.Message($"Storycontact name: {QuestCont.Village.StoryContact.Name}");
-            rules.Add(new Rule_String("faction_name", QuestCont.Village.StoryContact.Faction.Name.ToString()));
-            rules.Add(new Rule_String("settlement_name", QuestCont.Village.Settlement.Name.Colorize(UnityEngine.Color.cyan)));
-            rules.AddRange(GrammarUtility.RulesForPawn("pawn", QuestCont.Village.StoryContact, null, true, true));
+            Log.Message($"Storycontact name: {StoryUtility.GetSWC().questCont.Village.StoryContact.Name}");
+            rules.Add(new Rule_String("faction_name", StoryUtility.GetSWC().questCont.Village.StoryContact.Faction.Name.ToString()));
+            rules.Add(new Rule_String("settlement_name", StoryUtility.GetSWC().questCont.Village.Settlement.Name.Colorize(UnityEngine.Color.cyan)));
+            rules.AddRange(GrammarUtility.RulesForPawn("pawn", StoryUtility.GetSWC().questCont.Village.StoryContact, null, true, true));
             QuestGen.AddQuestDescriptionRules(rules);
         }
 
