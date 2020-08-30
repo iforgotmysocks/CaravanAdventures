@@ -50,7 +50,7 @@ namespace CaravanAdventures
                 Log.Message("Tree is null");
                 return;
             }
-            var compProp = new CompProperties_Talk() { compClass = typeof(CompTalk) };
+            var compProp = new CompProperties_Talk();
             if (!tree.comps.Any(x => x is CompProperties_Talk)) tree.comps.Add(compProp);
         }
 
@@ -64,7 +64,7 @@ namespace CaravanAdventures
                 return;
             }
             // todo reenable?
-            var compProp = new CompProperties_Talk();/* { compClass = typeof(CompTalk) };*/
+            var compProp = new CompProperties_Talk();
             if (!humanDef.comps.Any(x => x is CompProperties_Talk)) humanDef.comps.Add(compProp);
         }
 

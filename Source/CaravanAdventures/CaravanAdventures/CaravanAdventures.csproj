@@ -101,6 +101,8 @@
     <Compile Include="CaravanStory\IncidentWorker_MechsWithBoss.cs" />
     <Compile Include="CaravanStory\JobDefOf.cs" />
     <Compile Include="CaravanStory\JobDriver_Talk.cs" />
+    <Compile Include="CaravanStory\Lords\LordJob_DefendBaseAgaintHostiles.cs" />
+    <Compile Include="CaravanStory\Lords\Trigger_ChanceOnMechHarmNPCBuilding.cs" />
     <Compile Include="CaravanStory\Quests\QuestCont.cs" />
     <Compile Include="CaravanStory\Quests\QuestCont_Village.cs" />
     <Compile Include="CaravanStory\Quests\QuestNode_StoryVillage_Arrival.cs" />

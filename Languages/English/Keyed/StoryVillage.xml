@@ -16,6 +16,7 @@
 	<StoryVillage_Dia1_3>Oh look, there they come, take covert!\n\n...What the hell is that thing???</StoryVillage_Dia1_3>
 	<StoryVillage_Dia1_3_Option1>Our death if we stay...</StoryVillage_Dia1_3_Option1>
 
-	<StoryVillage_QuestUpdate_MechsArrived>Either help {0} to defend their base or make a run for it, tho they would make good allies in the battles to come</StoryVillage_QuestUpdate_MechsArrived>
+	<StoryVillage_QuestUpdate_MechsArrived>\n\nEither help {0} to defend their base or make a run for it, tho they would make good allies in the battles to come</StoryVillage_QuestUpdate_MechsArrived>
+	<VillageAttackMechsMessage>{0} are attacking {2}</VillageAttackMechsMessage>
 </LanguageData>
 

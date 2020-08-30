@@ -63,6 +63,30 @@ namespace CaravanAdventures.CaravanStory
             return Find.World.GetComponent<StoryWC>();
         }
 
+        internal static IntVec3 GetCenterOfSettlementBase(Map map)
+        {
+            var coords = new List<IntVec3>();
+            // todo improve, doesn't quite find the middle yet - maybe use map size and just calculate middle?
+            map.regionGrid.allRooms
+                .Where(room => !room.Regions
+                .Any(region => region.DangerFor(map.mapPawns.AllPawnsSpawned
+                .Where(x => x.Faction.def.defName == "SacrilegHunters").FirstOrDefault()) == Danger.Deadly))
+                .ToList()
+                .ForEach(room => coords
+                .Add(new IntVec3(
+                    room.Cells.Select(cell => cell.x).Max() - ((room.Cells.Select(cell => cell.x).Max() - room.Cells.Select(cell => cell.x).Min()) / 2),
+                    0,
+                    room.Cells.Select(cell => cell.z).Max() - ((room.Cells.Select(cell => cell.z).Max() - room.Cells.Select(cell => cell.z).Min()) / 2)
+                ))
+            );
+            coords.ForEach(coord => Log.Message($"Coord: {coord.x} / {coord.z}"));
+
+            var centerPoint = new IntVec3(Convert.ToInt32(coords.Select(coord => coord.x).Average()), 0, Convert.ToInt32(coords.Select(coord => coord.z).Average()));
+            Log.Message($"Center: {centerPoint.x} / {centerPoint.z}");
+
+            return centerPoint;
+        }
+
         internal static Faction CreateOrGetFriendlyMechFaction()
         {
             var relations = new List<FactionRelation>();

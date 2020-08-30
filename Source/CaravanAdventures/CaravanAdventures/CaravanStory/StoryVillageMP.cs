@@ -1,5 +1,7 @@
-﻿using CaravanAdventures.CaravanStory.Quests;
+﻿using CaravanAdventures.CaravanStory.Lords;
+using CaravanAdventures.CaravanStory.Quests;
 using RimWorld;
+using RimWorld.BaseGen;
 using RimWorld.Planet;
 using RimWorld.QuestGen;
 using System;
@@ -10,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using Verse;
+using Verse.AI;
 using Verse.AI.Group;
 using Verse.Sound;
 
@@ -33,21 +36,37 @@ namespace CaravanAdventures.CaravanStory
         {
             LongEventHandler.QueueLongEvent(delegate ()
             {
+                var storyChar = StoryUtility.GetSWC().questCont.Village.StoryContact;
                 Map orGenerateMap = GetOrGenerateMapUtility.GetOrGenerateMap(this.Tile, null);
                 var label = "StoryVillageArrivedLetterTitle".Translate(Label.ApplyTag(TagType.Settlement, Faction.GetUniqueLoadID()));
                 var text = "StoryVillageArrivedLetterMessage".Translate(Label.ApplyTag(TagType.Settlement, Faction.GetUniqueLoadID())).CapitalizeFirst();
 
                 Find.LetterStack.ReceiveLetter(label, text, LetterDefOf.NeutralEvent, caravan.PawnsListForReading, Faction, null, null, null);
                 CaravanEnterMapUtility.Enter(caravan, orGenerateMap, CaravanEnterMode.Edge, CaravanDropInventoryMode.DoNotDrop, true, null);
-                Log.Message($"Got here, must be spawn cell related");
                 //var storyContactCell = CellFinder.RandomNotEdgeCell(Math.Min(orGenerateMap.Size.x / 2 - (orGenerateMap.Size.x / 6), orGenerateMap.Size.z / 2 - (orGenerateMap.Size.y / 6)), Map);
                 CellFinder.TryFindRandomSpawnCellForPawnNear_NewTmp(new IntVec3(orGenerateMap.Size.x / 2, 0, orGenerateMap.Size.z / 2), orGenerateMap, out var storyContactCell);
                 // todo handle case if no position was found!!!
-                GenSpawn.Spawn(StoryUtility.GetSWC().questCont.Village.StoryContact, storyContactCell, orGenerateMap);
+                /*if (storyChar?.Map != orGenerateMap)*/ GenSpawn.Spawn(storyChar, storyContactCell, orGenerateMap);
                 StoryUtility.AssignVillageDialog();
 
+                // todo centerpoint is still off -> only calculate rooms that belong to sac hunters
+                var centerPoint = StoryUtility.GetCenterOfSettlementBase(Map);
+                
+                var raidLords = Map.lordManager.lords.Where(lord => lord.faction.def.defName == "SacrilegHunters");
+                Log.Message($"hunter lords: {raidLords.Select(lord => lord.ownedPawns).Count()}");
+
+
+                foreach (var lord in raidLords.Reverse())
+                {
+                    var pawnsToReassign = lord.ownedPawns;
+                    lord.lordManager.RemoveLord(lord);
+                    LordMaker.MakeNewLord(Faction, new LordJob_DefendBaseAgaintHostiles(Faction, centerPoint), Map, pawnsToReassign);
+                }
+
+                if (!raidLords.Any(lord => lord == storyChar?.GetLord())) raidLords.OrderByDescending(x => x.ownedPawns.Count).FirstOrDefault().ownedPawns.Add(storyChar);
+
                 // todo error when adding to lord in case of it being a motar job? - which shouldn't happen anyway
-                orGenerateMap.mapPawns.AllPawnsSpawned.Where(x => x.Faction == StoryUtility.EnsureSacrilegHunters() && x.GetLord().LordJob.GetType() == typeof(LordJob_DefendBase)).FirstOrDefault().GetLord().AddPawn(StoryUtility.GetSWC().questCont.Village.StoryContact);
+                //orGenerateMap.mapPawns.AllPawnsSpawned.Where(x => x.Faction == StoryUtility.EnsureSacrilegHunters() && x.GetLord().LordJob.GetType() == typeof(LordJob_DefendBaseAgaintHostiles)).FirstOrDefault().GetLord().AddPawn(StoryUtility.GetSWC().questCont.Village.StoryContact);
 
                 StoryWC.SetSF("IntroVillage_Entered");
             }, "StoryVillageEnterMapMessage".Translate(Label.ApplyTag(TagType.Settlement, Faction.GetUniqueLoadID())), false, null, true);
