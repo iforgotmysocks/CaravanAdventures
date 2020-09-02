@@ -88,7 +88,7 @@ namespace CaravanAdventures.CaravanStory
 
 						// todo different dialogs for other shrines, maybe they betray the player the 3rd or 4th shrine.
 						CreateShrineDialog();
-						GetAssistanceFromAlliedFaction();
+						StoryUtility.GetAssistanceFromAlliedFaction(StoryUtility.FactionOfSacrilegHunters, Map);
 					}
 				}
 
@@ -118,20 +118,7 @@ namespace CaravanAdventures.CaravanStory
 			Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
 		}
 
-        private void GetAssistanceFromAlliedFaction()
-		{
-            var incidentParms = new IncidentParms
-            {
-                target = this.Map,
-                faction = StoryUtility.EnsureSacrilegHunters(FactionRelationKind.Ally),
-                raidArrivalModeForQuickMilitaryAid = true,
-                // todo by wealth, the richer, the less help // 7500 - 8000
-                points = Rand.Range(4000, 5000),  // DiplomacyTuning.RequestedMilitaryAidPointsRange.RandomInRange;
-                raidNeverFleeIndividual = true,
-                spawnCenter = Map.mapPawns.FreeColonists.RandomElement().Position
-            };
-            IncidentDefOf.RaidFriendly.Worker.TryExecute(incidentParms);
-		}
+    
 
 		private void CheckBossDefeated()
         {

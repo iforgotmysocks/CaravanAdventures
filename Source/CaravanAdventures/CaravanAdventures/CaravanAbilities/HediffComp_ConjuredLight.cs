@@ -16,11 +16,6 @@ namespace CaravanAdventures.CaravanAbilities
 
         public HediffCompProperties_ConjuredLight Props => (HediffCompProperties_ConjuredLight)props;
 
-        public override void CompPostPostAdd(DamageInfo? dinfo)
-        {
-            base.CompPostPostAdd(dinfo);
-        }
-
         public override void CompPostPostRemoved()
         {
             base.CompPostPostRemoved();

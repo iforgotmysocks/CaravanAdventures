@@ -11,9 +11,10 @@ using CaravanAdventures.CaravanStory;
 
 namespace CaravanAdventures
 {
-    // todo make own defend base lord job, the current one only checks for the player as attacker
+    // todo https://fluffy-mods.github.io//2020/08/13/debugging-rimworld/
     // todo starting a new game without restarting the game may not reset all the flags -> check it
     // todo GameComponent??? -> compprops applied to defs within a gamecomp somehow lead to missing comps on the object of the def which doesn't happen with world comps
+    // todo check all defnames before release and make sure they're unique enough!
     class Init : WorldComponent
     {
         private int removeRuinsTick = 0;

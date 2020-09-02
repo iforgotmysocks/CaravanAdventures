@@ -12,7 +12,9 @@ using Verse;
 
 namespace CaravanAdventures.CaravanStory
 {
-    // todo https://fluffy-mods.github.io//2020/08/13/debugging-rimworld/
+
+    // todo make own defend base lord job, the current one only checks for the player as attacker
+
     class StoryWC : WorldComponent
     {
         private static readonly float baseDelayNextShrineReveal = Helper.Debug() ? 1800f : 60000f * 2f;

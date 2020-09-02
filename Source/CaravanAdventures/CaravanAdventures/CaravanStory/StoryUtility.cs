@@ -38,6 +38,23 @@ namespace CaravanAdventures.CaravanStory
             return false;
         }
 
+        public static void GetAssistanceFromAlliedFaction(Faction faction, Map map, int pointsMin = 4000, int pointsMax = 5000, IntVec3? spawnSpot = null)
+        {
+            var incidentParms = new IncidentParms
+            {
+                target = map,
+                faction = faction,
+                raidArrivalModeForQuickMilitaryAid = true,
+                // todo by wealth, the richer, the less help // 7500 - 8000
+                points = Rand.Range(4000, 5000),  // DiplomacyTuning.RequestedMilitaryAidPointsRange.RandomInRange;
+                raidNeverFleeIndividual = true,
+                spawnCenter = spawnSpot ?? map.mapPawns.FreeColonists.RandomElement().Position,
+                // todo test how not to create a letter
+                customLetterDef = null,
+            };
+            IncidentDefOf.RaidFriendly.Worker.TryExecute(incidentParms);
+        }
+
         internal static void GenerateFriendlyVillage()
         {
             if (StoryWC.storyFlags["IntroVillage_Created"]) return;
@@ -63,14 +80,14 @@ namespace CaravanAdventures.CaravanStory
             return Find.World.GetComponent<StoryWC>();
         }
 
-        internal static IntVec3 GetCenterOfSettlementBase(Map map)
+        internal static IntVec3 GetCenterOfSettlementBase(Map map, Faction faction)
         {
             var coords = new List<IntVec3>();
             // todo improve, doesn't quite find the middle yet - maybe use map size and just calculate middle?
             map.regionGrid.allRooms
                 .Where(room => !room.Regions
                 .Any(region => region.DangerFor(map.mapPawns.AllPawnsSpawned
-                .Where(x => x.Faction.def.defName == "SacrilegHunters").FirstOrDefault()) == Danger.Deadly))
+                .Where(x => x.Faction == faction).FirstOrDefault()) == Danger.Deadly))
                 .ToList()
                 .ForEach(room => coords
                 .Add(new IntVec3(
@@ -275,5 +292,7 @@ namespace CaravanAdventures.CaravanStory
             if (bossPawn != null) bossPawn.health.AddHediff(DefDatabase<HediffDef>.GetNamed(bossPawn.def.GetModExtension<MechChipModExt>().mechChipDefName));
             return bossPawn;
         }
+
+        internal static Faction FactionOfSacrilegHunters { get => Find.FactionManager.FirstFactionOfDef(StoryDefOf.SacrilegHunters); private set => FactionOfSacrilegHunters = value; }
     }
 }

@@ -73,6 +73,8 @@ namespace CaravanAdventures.CaravanStory
 				text = text + ": " + acceptanceReport.Reason;
 			}
 
+			Log.Message($"repot: {acceptanceReport.Accepted} {acceptanceReport.Reason} {acceptanceReport}");
+
 			yield return new FloatMenuOption(text, delegate ()
 			{
 				ApproachDesiredThing(pawn);
@@ -96,20 +98,24 @@ namespace CaravanAdventures.CaravanStory
 		public AcceptanceReport CanTalkTo(Pawn pawn, LocalTargetInfo? knownSpot = null)
 		{
 			if (pawn.Dead || pawn.Faction != Faction.OfPlayer) return false;
-			if (!pawn.CanReach(this.parent, PathEndMode.Touch, Danger.Deadly, false, TraverseMode.ByPawn)) return false;
-			//if (!pawn.Map.reservationManager.CanReserve(pawn, this.parent, 1, -1, null, false))
-			//{
-			//	Pawn pawn2 = pawn.Map.reservationManager.FirstRespectedReserver(this.parent, pawn);
-			//	return new AcceptanceReport((pawn2 == null) ? "Reserved".Translate() : "ReservedBy".Translate(pawn.LabelShort, pawn2));
-			//}
-			//if (knownSpot != null)
-			//{
-			//	if (!this.CanUseSpot(pawn, knownSpot.Value))
-			//	{
-			//		return new AcceptanceReport("BeginLinkingRitualNeedLinkSpot".Translate());
-			//	}
-			//}
-			return AcceptanceReport.WasAccepted;
+
+            // todo somehow canreach is buggy and will disallow without any reason to...
+            if (!pawn.CanReach(this.parent, PathEndMode.Touch, Danger.Deadly, false, TraverseMode.ByPawn)) return new AcceptanceReport("can't reach");
+
+            // todo do we need reserving? If not, delete
+            if (!pawn.Map.reservationManager.CanReserve(pawn, this.parent, 1, -1, null, false))
+            {
+                Pawn pawn2 = pawn.Map.reservationManager.FirstRespectedReserver(this.parent, pawn);
+                return new AcceptanceReport((pawn2 == null) ? "Reserved".Translate() : "ReservedBy".Translate(pawn.LabelShort, pawn2));
+            }
+            //if (knownSpot != null)
+            //{
+            //	if (!this.CanUseSpot(pawn, knownSpot.Value))
+            //	{
+            //		return new AcceptanceReport("BeginLinkingRitualNeedLinkSpot".Translate());
+            //	}
+            //}
+            return AcceptanceReport.WasAccepted;
 		}
 
 		private bool CanUseSpot(Pawn pawn, LocalTargetInfo spot)

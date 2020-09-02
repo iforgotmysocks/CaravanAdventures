@@ -109,6 +109,7 @@
     <Compile Include="CaravanStory\Quests\QuestPart_StoryVillage_Arrived.cs" />
     <Compile Include="CaravanStory\Quests\QuestUtility.cs" />
     <Compile Include="CaravanStory\Quests\StoryQuestDefOf.cs" />
+    <Compile Include="CaravanStory\StoryDefOf.cs" />
     <Compile Include="CaravanStory\StoryVillageMP.cs" />
     <Compile Include="CaravanStory\MechChips\HediffCompProperties_EXT1Melee.cs" />
     <Compile Include="CaravanStory\MechChips\HediffCompProperties_EXT1Basic.cs" />
