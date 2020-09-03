@@ -78,7 +78,7 @@ namespace CaravanAdventures.CaravanStory
             Log.Message("adding tree action");
             var comp = tree.TryGetComp<CompTalk>();
             if (comp == null) Log.Message("Tree comp is null");
-            comp.actions.Add(new TalkSet()
+            comp.actionsCt.Add(new TalkSet()
             {
                 Id = "StoryStart_TreeDialog",
                 Addressed = tree,

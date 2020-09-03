@@ -40,6 +40,7 @@ namespace CaravanAdventures.CaravanStory
             "IntroVillage_Entered",
             "IntroVillage_TalkedToFriend",
             "IntroVillage_MechsArrived",
+            "IntroVillage_ReinforcementsArrived",
             "IntroVillage_Finished",
 
             "Start_InitialTreeWhisper",

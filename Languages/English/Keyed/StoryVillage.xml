@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
-	<VisitStoryVillageLabel>Visit {0}</VisitStoryVillageLabel>
+	<VisitStoryVillageLabel>Enter {0}</VisitStoryVillageLabel>
 	<StoryVillageEnterMapMessage>Entering village</StoryVillageEnterMapMessage>
 	<StoryVillageArrivedLetterTitle>Entered {0}</StoryVillageArrivedLetterTitle>
 	<StoryVillageArrivedLetterMessage>Your caravan arrived at {0}. Seems to be a nice place.</StoryVillageArrivedLetterMessage>
@@ -13,14 +13,21 @@
 	\nYou should leave, you're in danger here.</StoryVillage_Dia1_2>
 	<StoryVillage_Dia1_2_Option1>Nah, don't give up so fast, we'll save the village together</StoryVillage_Dia1_2_Option1>
 	<StoryVillage_Dia1_2_Option2>Alright, we're outa here, wish you the best</StoryVillage_Dia1_2_Option2>
-	<StoryVillage_Dia1_3>Oh look, there they come, take cover!\n\n... Oh my god, what a horde...</StoryVillage_Dia1_3>
-	<StoryVillage_Dia1_3_Option1>It's been nice knowing ya...</StoryVillage_Dia1_3_Option1>
+	<StoryVillage_Dia1_3>Oh look, there they come, take cover!\n\nMy god, what a horde...</StoryVillage_Dia1_3>
+	<StoryVillage_Dia1_3_Option1>Are you really sure you want to fight this?</StoryVillage_Dia1_3_Option1>
 
 	<StoryVillage_QuestUpdate_MechsArrived>\n\nEither help {0} to defend their base or make a run for it, tho they would make good allies in the battles to come</StoryVillage_QuestUpdate_MechsArrived>
 	<VillageAttackMechsMessage>{0} are attacking {2}</VillageAttackMechsMessage>
 
 	<StoryVillage_Dia2_Title>{0} shouts loudly...</StoryVillage_Dia2_Title>
-	<StoryVillage_Dia2_1>Lets go guys, give them hell!</StoryVillage_Dia2_1>
+	<StoryVillage_Dia2_1>Ey, our reinforcements are here, lets go guys, give them hell!</StoryVillage_Dia2_1>
 	<StoryVillage_Dia2_1_Option1>This isn't gonna end well...</StoryVillage_Dia2_1_Option1>
+
+	<StoryVillage_Dia3_Title>{0} calls out to you...</StoryVillage_Dia3_Title>
+	<StoryVillage_Dia3_1_Alive>I got out alive, this is horrible. I'll have to meet up with our expert hunters and come up with a plan how to defeat these things.\nWe need to act fast or all is lost.\nI'll contact you when we know more, good luck.\n... and thanks. I won't forget that you fought for us.</StoryVillage_Dia3_1_Alive>
+	<StoryVillage_Dia3_1_Dying>Save... urself...\nThis battle... is lost...\nSomeone will reach... out to... you...</StoryVillage_Dia3_1_Dying>
+	<StoryVillage_Dia3_1_Option1>Lets move on</StoryVillage_Dia3_1_Option1>
+	<StoryVillage_SacHunters_Fleeing>Story Hunters are fleeing.</StoryVillage_SacHunters_Fleeing>
+
 </LanguageData>
 

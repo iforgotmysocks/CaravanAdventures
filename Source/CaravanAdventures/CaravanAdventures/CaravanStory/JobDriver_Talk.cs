@@ -34,8 +34,8 @@ namespace CaravanAdventures.CaravanStory
                     return;
                 }
 
-                var specificAction = talkComp.actions.FirstOrDefault(x => x.Addressed == Target && x.Initiator == pawn && (!x.Finished || x.Repeatable))
-                ?? talkComp.actions.FirstOrDefault(x => Target == x.Addressed && x.Initiator == null && (!x.Finished || x.Repeatable));
+                var specificAction = talkComp.actionsCt.FirstOrDefault(x => x.Addressed == Target && x.Initiator == pawn && (!x.Finished || x.Repeatable))
+                ?? talkComp.actionsCt.FirstOrDefault(x => Target == x.Addressed && x.Initiator == null && (!x.Finished || x.Repeatable));
                 if (specificAction == null)
                 {
                     Log.Message("Specific Action was null");

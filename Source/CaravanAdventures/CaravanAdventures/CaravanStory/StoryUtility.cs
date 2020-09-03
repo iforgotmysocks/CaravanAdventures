@@ -87,7 +87,8 @@ namespace CaravanAdventures.CaravanStory
             map.regionGrid.allRooms
                 .Where(room => !room.Regions
                 .Any(region => region.DangerFor(map.mapPawns.AllPawnsSpawned
-                .Where(x => x.Faction == faction).FirstOrDefault()) == Danger.Deadly))
+                .Where(x => x.Faction == faction).FirstOrDefault()) == Danger.Deadly) 
+                && !room.UsesOutdoorTemperature)
                 .ToList()
                 .ForEach(room => coords
                 .Add(new IntVec3(
@@ -168,7 +169,7 @@ namespace CaravanAdventures.CaravanStory
                 comp.parent = StoryUtility.GetSWC().questCont.Village.StoryContact;
                 StoryUtility.GetSWC().questCont.Village.StoryContact.AllComps.Add(comp);
             }
-            comp.actions.Add(new TalkSet()
+            comp.actionsCt.Add(new TalkSet()
             {
                 Id = "StoryStart_PawnDia",
                 Addressed = StoryUtility.GetSWC().questCont.Village.StoryContact,

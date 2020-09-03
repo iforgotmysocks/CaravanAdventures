@@ -22,6 +22,9 @@ namespace CaravanAdventures.CaravanStory
     {
         private int ticks;
         private int ticksTillReinforcements = -1;
+        private bool sacHuntersFleeing;
+        private bool mainCharLeftOrDied;
+        private IntVec3 centerPoint;
 
         public StoryVillageMP()
         {
@@ -31,35 +34,58 @@ namespace CaravanAdventures.CaravanStory
         {
             base.ExposeData();
             Scribe_Values.Look(ref ticks, "ticks");
+            Scribe_Values.Look(ref sacHuntersFleeing, "sacHuntersFleeing");
+            Scribe_Values.Look(ref mainCharLeftOrDied, "mainCharLeftOrDied");
         }
 
         public void Notify_CaravanArrived(Caravan caravan)
         {
             LongEventHandler.QueueLongEvent(delegate ()
             {
-                var storyChar = StoryUtility.GetSWC().questCont.Village.StoryContact;
-                Map orGenerateMap = GetOrGenerateMapUtility.GetOrGenerateMap(this.Tile, null);
-                var label = "StoryVillageArrivedLetterTitle".Translate(Label.ApplyTag(TagType.Settlement, Faction.GetUniqueLoadID()));
-                var text = "StoryVillageArrivedLetterMessage".Translate(Label.ApplyTag(TagType.Settlement, Faction.GetUniqueLoadID())).CapitalizeFirst();
+                GetOrGenerateMapUtility.GetOrGenerateMap(this.Tile, null);
+            }, "GeneratingMap", false, new Action<Exception>(GameAndMapInitExceptionHandlers.ErrorWhileGeneratingMap), true);
+            LongEventHandler.QueueLongEvent(delegate ()
+            {
+                try
+                {
+                    var storyChar = StoryUtility.GetSWC().questCont.Village.StoryContact;
+                    //var orGenerateMap = GetOrGenerateMapUtility.GetOrGenerateMap(this.Tile, null);
+                    var label = "StoryVillageArrivedLetterTitle".Translate(Label.ApplyTag(TagType.Settlement, Faction.GetUniqueLoadID()));
+                    var text = "StoryVillageArrivedLetterMessage".Translate(Label.ApplyTag(TagType.Settlement, Faction.GetUniqueLoadID())).CapitalizeFirst();
 
-                Find.LetterStack.ReceiveLetter(label, text, LetterDefOf.NeutralEvent, caravan.PawnsListForReading, Faction, null, null, null);
-                CaravanEnterMapUtility.Enter(caravan, orGenerateMap, CaravanEnterMode.Edge, CaravanDropInventoryMode.DoNotDrop, true, null);
-                //var storyContactCell = CellFinder.RandomNotEdgeCell(Math.Min(orGenerateMap.Size.x / 2 - (orGenerateMap.Size.x / 6), orGenerateMap.Size.z / 2 - (orGenerateMap.Size.y / 6)), Map);
-                CellFinder.TryFindRandomSpawnCellForPawnNear_NewTmp(new IntVec3(orGenerateMap.Size.x / 2, 0, orGenerateMap.Size.z / 2), orGenerateMap, out var storyContactCell);
-                // todo handle case if no position was found!!!
-                /*if (storyChar?.Map != orGenerateMap)*/ GenSpawn.Spawn(storyChar, storyContactCell, orGenerateMap);
-                
-                StoryUtility.AssignVillageDialog();
-                AddNewLordAndAssignStoryChar(storyChar);
+                    //var storyContactCell = CellFinder.RandomNotEdgeCell(Math.Min(orGenerateMap.Size.x / 2 - (orGenerateMap.Size.x / 6), orGenerateMap.Size.z / 2 - (orGenerateMap.Size.y / 6)), Map);
 
-                StoryWC.SetSF("IntroVillage_Entered");
-            }, "StoryVillageEnterMapMessage", false, null, true);
+
+                    Find.LetterStack.ReceiveLetter(label, text, LetterDefOf.NeutralEvent, caravan.PawnsListForReading, Faction, null, null, null);
+                    CaravanEnterMapUtility.Enter(caravan, Map, CaravanEnterMode.Edge, CaravanDropInventoryMode.DoNotDrop, true, null);
+
+                    if (!CellFinder.TryFindRandomSpawnCellForPawnNear_NewTmp(new IntVec3(Map.Size.x / 2, 0, Map.Size.z / 2), Map, out var storyContactCell))
+                    {
+                        Log.Error("Couldn't find a cell to spawn pawn");
+                    }
+                    // todo handle case if no position was found!!!
+                    /*if (storyChar?.Map != orGenerateMap)*/
+                    GenSpawn.Spawn(storyChar, storyContactCell, Map);
+
+                    StoryUtility.AssignVillageDialog();
+                    AddNewLordAndAssignStoryChar(storyChar);
+
+                    Find.TickManager.CurTimeSpeed = TimeSpeed.Normal;
+
+                    StoryWC.SetSF("IntroVillage_Entered");
+                }
+                catch (Exception e)
+                {
+                    Log.Error(e.ToString());
+                }
+
+            }, "StoryVillageEnterMapMessage", false, new Action<Exception>(GameAndMapInitExceptionHandlers.ErrorWhileGeneratingMap), true);
         }
 
         private void AddNewLordAndAssignStoryChar(Pawn storyChar)
         {
             // todo centerpoint is still off -> only calculate rooms that belong to sac hunters
-            var centerPoint = StoryUtility.GetCenterOfSettlementBase(Map, StoryUtility.FactionOfSacrilegHunters);
+            centerPoint = StoryUtility.GetCenterOfSettlementBase(Map, StoryUtility.FactionOfSacrilegHunters);
             var raidLords = Map.lordManager.lords.Where(lord => lord.faction == StoryUtility.FactionOfSacrilegHunters);
             Log.Message($"hunter lords: {raidLords.Select(lord => lord.ownedPawns).Count()}");
 
@@ -128,19 +154,16 @@ namespace CaravanAdventures.CaravanStory
             {
                 if (ticks >= 60)
                 {
-                    CheckPlayerLeft();
                     CheckShouldSacHuntersFlee();
                     CheckMainStoryCharDiedOrLeft();
+                    CheckPlayerLeftAndAbandon();
                     ticks = 0;
                 }
                 if (ticksTillReinforcements == 0)
                 {
-                    // todo do reinforcements
-                    var hunters = Map.mapPawns.AllPawnsSpawned.Where(x => x.Faction == StoryUtility.FactionOfSacrilegHunters);
-                    StoryUtility.GetAssistanceFromAlliedFaction(StoryUtility.FactionOfSacrilegHunters, Map, 10000, 11000, hunters?.InRandomOrder()?.FirstOrDefault()?.Position);
-                  
+                    StoryUtility.GetAssistanceFromAlliedFaction(StoryUtility.FactionOfSacrilegHunters, Map, 11000, 12000, centerPoint);
+                    StoryWC.SetSF("IntroVillage_ReinforcementsArrived");
                     ReinforcementConvo();
-                    SendHuntersToAttack();
                 }
 
                 ticks++;
@@ -150,15 +173,26 @@ namespace CaravanAdventures.CaravanStory
 
         private void CheckMainStoryCharDiedOrLeft()
         {
+            if (mainCharLeftOrDied) return;
             var storyChar = StoryUtility.GetSWC().questCont.Village.StoryContact;
             if (!StoryWC.storyFlags["IntroVillage_MechsArrived"]) return;
-            if (Map.mapPawns.AllPawnsSpawned.Contains(storyChar)) return;
+            if (Map.mapPawns.AllPawnsSpawned.Contains(storyChar) && !storyChar.Dead && !storyChar.Downed) return;
 
-            // todo StoryChar died Dialog
+            // todo StoryChar died / left Dialog
+
+            DiaNode diaNode = null;
+            diaNode = new DiaNode(storyChar.Dead ? "StoryVillage_Dia3_1_Dying".Translate() : "StoryVillage_Dia3_1_Alive".Translate());
+            diaNode.options.Add(new DiaOption("StoryVillage_Dia3_1_Option1".Translate()) { resolveTree = true }); ;
+
+            TaggedString taggedString = "StoryVillage_Dia3_Title".Translate(storyChar.NameShortColored);
+            Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
+            Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
+            mainCharLeftOrDied = true;
         }
 
         private void CheckShouldSacHuntersFlee()
         {
+            if (sacHuntersFleeing || !HasMap) return;
             var huntersAll = Map.mapPawns.AllPawnsSpawned.Where(x => x.Faction == StoryUtility.FactionOfSacrilegHunters);
             var deadOrDowned = huntersAll.Where(x => x.Dead || x.Downed).Count();
             if (deadOrDowned < huntersAll.Count() * 0.8) return;
@@ -170,34 +204,41 @@ namespace CaravanAdventures.CaravanStory
                 hunters.AddRange(lord.ownedPawns);
                 lord.lordManager.RemoveLord(lord);
             }
+            Log.Message($"Sac Hunters are fleeing");
+            // todo remove
+            Messages.Message(new Message("Debug: Hunters are fleeing", MessageTypeDefOf.NegativeEvent));
 
+            Messages.Message(new Message("StoryVillage_SacHunters_Fleeing".Translate(), MessageTypeDefOf.NegativeEvent));
             LordMaker.MakeNewLord(Faction, new LordJob_ExitMapBest(LocomotionUrgency.Sprint, false, false), Map, hunters);
+            sacHuntersFleeing = true;
         }
 
-        private void CheckPlayerLeft()
+        private void CheckPlayerLeftAndAbandon()
         {
-            if (!StoryWC.storyFlags["IntroVillage_MechsArrived"]) return;
+            if (!StoryWC.storyFlags["IntroVillage_MechsArrived"] || !HasMap) return;
             if (Map.mapPawns.FreeColonists.Any(x => !x.Dead)) return;
 
             // todo dialog escaped
             // todo keep and just remove the enter ability in case the player should win the fight?
+
+
+            Current.Game.DeinitAndRemoveMap(Map);
             this.Destroy();
+            WorldObject worldObject = WorldObjectMaker.MakeWorldObject(WorldObjectDefOf.DestroyedSettlement);
+            worldObject.Tile = this.Tile;
+            worldObject.SetFaction(this.Faction);
+            Find.WorldObjects.Add(worldObject);
+
+            StoryWC.SetSF("IntroVillage_Finished");
         }
 
-        private void SendHuntersToAttack()
-        {
-            var raidLords = Map.lordManager.lords.Where(lord => lord.faction == StoryUtility.FactionOfSacrilegHunters);
-            var hunters = new List<Pawn>();
-            foreach (var lord in raidLords.Reverse())
-            {
-                hunters.AddRange(lord.ownedPawns);
-                lord.lordManager.RemoveLord(lord);
-            }
-
-            hunters.Remove(StoryUtility.GetSWC().questCont.Village.StoryContact);
-            //var hunters = Map.mapPawns.AllPawnsSpawned.Where(x => x.Faction == StoryUtility.FactionOfSacrilegHunters && x != StoryUtility.GetSWC().questCont.Village.StoryContact);
-            LordMaker.MakeNewLord(Faction, new LordJob_AssaultColony(Faction, false, false, false, false, false), Map, hunters);
-        }
+        //public override bool ShouldRemoveMapNow(out bool alsoRemoveWorldObject)
+        //{
+        //    alsoRemoveWorldObject = true;
+        //    if (!StoryWC.storyFlags["IntroVillage_MechsArrived"] || !HasMap) return false;
+        //    if (Map.mapPawns.FreeColonists.Any(x => !x.Dead)) return false;
+        //    return true;
+        //}
 
         public void ReinforcementConvo()
         {

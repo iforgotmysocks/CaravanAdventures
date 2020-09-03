@@ -42,13 +42,13 @@ namespace CaravanAdventures.CaravanStory
 
 	public class CompTalk : ThingComp
 	{
-		public List<TalkSet> actions = new List<TalkSet>();
-		private bool enabled = false;
-		private bool showQuestionMark;
-        public bool Enabled { get => (parent is Pawn pawn && !pawn.Dead || !(parent is Pawn)) && enabled; set => enabled = value; }
+		public List<TalkSet> actionsCt = new List<TalkSet>();
+		private bool enabledCt = false;
+		private bool showQuestionMarkCt;
+        public bool Enabled { get => (parent is Pawn pawn && !pawn.Dead || !(parent is Pawn)) && enabledCt; set => enabledCt = value; }
         public bool ShowQuestionMark { 
-			get => Enabled && (IgnoreQuestionMarkLogic ? showQuestionMark : HasUnfinishedDialogs());
-			set => showQuestionMark = value; 
+			get => Enabled && (IgnoreQuestionMarkLogic ? showQuestionMarkCt : HasUnfinishedDialogs());
+			set => showQuestionMarkCt = value; 
 		}
         public bool IgnoreQuestionMarkLogic { get; set; }
         public CompProperties_Talk Props => (CompProperties_Talk)props;
@@ -56,9 +56,9 @@ namespace CaravanAdventures.CaravanStory
 		public override void PostExposeData()
 		{
 			base.PostExposeData();
-			Scribe_Collections.Look(ref actions, "actions", LookMode.Deep);
-			Scribe_Values.Look(ref enabled, "enabled");
-			Scribe_Values.Look(ref showQuestionMark, "showQuestionMark");
+			Scribe_Collections.Look(ref actionsCt, "actionsCt", LookMode.Deep);
+			Scribe_Values.Look(ref enabledCt, "enabledCt");
+			Scribe_Values.Look(ref showQuestionMarkCt, "showQuestionMarkCt");
 		}
 
 		public override IEnumerable<FloatMenuOption> CompFloatMenuOptions(Pawn pawn)
@@ -68,8 +68,8 @@ namespace CaravanAdventures.CaravanStory
 				Log.Error($"CompTalk parent is null...");
 				yield break;
 			}
-			if (!Enabled || actions == null || actions.Count == 0) yield break;
-			if (!actions.Any(x => !x.Finished || x.Repeatable)) yield break;
+			if (!Enabled || actionsCt == null || actionsCt.Count == 0) yield break;
+			if (!actionsCt.Any(x => !x.Finished || x.Repeatable)) yield break;
 			if (pawn.Dead || pawn.Drafted) yield break;
 			string text = "CA_Start_Begin".Translate();
             AcceptanceReport acceptanceReport = this.CanTalkTo(pawn, null);
@@ -95,8 +95,8 @@ namespace CaravanAdventures.CaravanStory
 			pawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
 		}
 
-		public bool TalkedTo() => actions.Any(action => action.Finished);
-		public bool HasUnfinishedDialogs() => actions.Any(action => !action.Finished && !action.Repeatable);
+		public bool TalkedTo() => actionsCt.Any(action => action.Finished);
+		public bool HasUnfinishedDialogs() => actionsCt.Any(action => !action.Finished && !action.Repeatable);
 
 		public AcceptanceReport CanTalkTo(Pawn pawn, LocalTargetInfo? knownSpot = null)
 		{

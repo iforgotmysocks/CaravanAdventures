@@ -46,10 +46,11 @@ namespace CaravanAdventures.CaravanStory.Lords
 			transition3.AddTrigger(new Trigger_FractionPawnsLost(0.2f));
 			transition3.AddTrigger(new Trigger_PawnHarmed(0.4f, false, null));
 			// todo wait for random attack until mechs show up and add trigger for when mechs are close
-			transition3.AddTrigger(new Trigger_ChanceOnTickInteval(2500, 0.03f));
+			//transition3.AddTrigger(new Trigger_ChanceOnTickInteval(2500, 0.03f));
 			//transition3.AddTrigger(new Trigger_TicksPassed(251999));
 			//transition3.AddTrigger(new Trigger_UrgentlyHungry());
 			transition3.AddTrigger(new Trigger_ChanceOnMechHarmNPCBuilding(0.4f));
+			transition3.AddTrigger(new Trigger_AttackWithReinforcements());
 			//transition3.AddTrigger(new Trigger_OnClamor(ClamorDefOf.Ability));
 			transition3.AddPostAction(new TransitionAction_WakeAll());
 			TaggedString taggedString = "VillageAttackMechsMessage".Translate(this.faction.def.pawnsPlural, this.faction.Name, Faction.OfMechanoids.def.pawnsPlural).CapitalizeFirst();
