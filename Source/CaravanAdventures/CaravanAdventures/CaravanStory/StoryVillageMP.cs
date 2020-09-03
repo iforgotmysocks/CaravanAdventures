@@ -48,13 +48,11 @@ namespace CaravanAdventures.CaravanStory
                 CellFinder.TryFindRandomSpawnCellForPawnNear_NewTmp(new IntVec3(orGenerateMap.Size.x / 2, 0, orGenerateMap.Size.z / 2), orGenerateMap, out var storyContactCell);
                 // todo handle case if no position was found!!!
                 /*if (storyChar?.Map != orGenerateMap)*/ GenSpawn.Spawn(storyChar, storyContactCell, orGenerateMap);
+                
                 StoryUtility.AssignVillageDialog();
-
                 AddNewLordAndAssignStoryChar(storyChar);
 
                 StoryWC.SetSF("IntroVillage_Entered");
-
-            //}, "StoryVillageEnterMapMessage".Translate(Label.ApplyTag(TagType.Settlement, Faction.GetUniqueLoadID())), false, null, true);
             }, "StoryVillageEnterMapMessage", false, null, true);
         }
 
@@ -69,7 +67,6 @@ namespace CaravanAdventures.CaravanStory
             {
                 var pawnsToReassign = lord.ownedPawns;
                 lord.lordManager.RemoveLord(lord);
-                // todo - figure out why pawns start to wander off with new lord
                 LordMaker.MakeNewLord(Faction, new LordJob_DefendBaseAgaintHostiles(Faction, centerPoint), Map, pawnsToReassign);
             }
 

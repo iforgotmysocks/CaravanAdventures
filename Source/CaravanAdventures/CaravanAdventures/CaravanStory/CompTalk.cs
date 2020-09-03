@@ -63,6 +63,11 @@ namespace CaravanAdventures.CaravanStory
 
 		public override IEnumerable<FloatMenuOption> CompFloatMenuOptions(Pawn pawn)
 		{
+			if (this.parent == null)
+			{
+				Log.Error($"CompTalk parent is null...");
+				yield break;
+			}
 			if (!Enabled || actions == null || actions.Count == 0) yield break;
 			if (!actions.Any(x => !x.Finished || x.Repeatable)) yield break;
 			if (pawn.Dead || pawn.Drafted) yield break;
@@ -72,8 +77,6 @@ namespace CaravanAdventures.CaravanStory
 			{
 				text = text + ": " + acceptanceReport.Reason;
 			}
-
-			Log.Message($"repot: {acceptanceReport.Accepted} {acceptanceReport.Reason} {acceptanceReport}");
 
 			yield return new FloatMenuOption(text, delegate ()
 			{
@@ -98,11 +101,7 @@ namespace CaravanAdventures.CaravanStory
 		public AcceptanceReport CanTalkTo(Pawn pawn, LocalTargetInfo? knownSpot = null)
 		{
 			if (pawn.Dead || pawn.Faction != Faction.OfPlayer) return false;
-
-            // todo somehow canreach is buggy and will disallow without any reason to...
             if (!pawn.CanReach(this.parent, PathEndMode.Touch, Danger.Deadly, false, TraverseMode.ByPawn)) return new AcceptanceReport("can't reach");
-
-            // todo do we need reserving? If not, delete
             if (!pawn.Map.reservationManager.CanReserve(pawn, this.parent, 1, -1, null, false))
             {
                 Pawn pawn2 = pawn.Map.reservationManager.FirstRespectedReserver(this.parent, pawn);

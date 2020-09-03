@@ -165,6 +165,7 @@ namespace CaravanAdventures.CaravanStory
             {
                 Log.Warning($"CompTalk on pawn {StoryUtility.GetSWC().questCont?.Village?.StoryContact?.Name} is null, which shouldn't happen");
                 comp = new CompTalk();
+                comp.parent = StoryUtility.GetSWC().questCont.Village.StoryContact;
                 StoryUtility.GetSWC().questCont.Village.StoryContact.AllComps.Add(comp);
             }
             comp.actions.Add(new TalkSet()
