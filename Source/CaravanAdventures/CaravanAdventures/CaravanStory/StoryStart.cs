@@ -19,6 +19,7 @@ namespace CaravanAdventures.CaravanStory
         private Sustainer animaTreeWhipserSustainer;
         private bool currentStoryTrigger = false;
         private Thing theTree;
+        private int ticks;
 
         public StoryStart(Map map) : base(map)
         {
@@ -49,14 +50,18 @@ namespace CaravanAdventures.CaravanStory
             base.MapComponentTick();
             DrawTreeQuestionMark();
 
-            // todo get rid of modulu
-            if (Find.TickManager.TicksGame % 2000 == 0)
+            if (ticks >= 2000 && StoryWC.storyFlags["IntroVillage_Finished"])
             {
                 AddTalkTreeAction();
                 AddTreeWhisper();
+
+                // todo maybe run on a WC, so the gift can be past on without a map present
                 CheckEnsureGifted();
+
+                ticks = 0;
             }
 
+            ticks++;
         }
 
         private void DrawTreeQuestionMark() { if (theTree != null && theTree.TryGetComp<CompTalk>().ShowQuestionMark) theTree.Map.overlayDrawer.DrawOverlay(theTree, OverlayTypes.QuestionMark); }
@@ -170,35 +175,21 @@ namespace CaravanAdventures.CaravanStory
 
         public void CheckEnsureGifted(Pawn pawn = null)
         {
-            //Log.Message($"Can receive gift flag: {StoryWC.storyFlags["Start_CanReceiveGift"]}");
             if (!StoryWC.storyFlags["Start_CanReceiveGift"]) return;
             var pawns = new List<Pawn>();
-            // todo IsColonistPlayerControlled doesn't work here, when pawn is breaking it won't be playercontrolled anymore
             if (pawn == null)
             {
                 pawns = PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction?.Where(x => x?.RaceProps?.Humanlike ?? false).ToList();
-                if (pawns == null || pawns?.Count == 0)
-                {
-                    //Log.Message($"No pawns found, skipping.");
-                    return;
-                }
+                if (pawns == null || pawns?.Count == 0) return;
             }
             else pawns.AddItem(pawn);
 
-            if (pawns.Any(x => x.health.hediffSet.GetFirstHediffOfDef(HediffDef.Named("AncientGift")) != null))
-            {
-                //Log.Message($"A gifted char already exists, skipping");
-                return;
-            }
+            if (pawns.Any(x => x.health.hediffSet.GetFirstHediffOfDef(HediffDef.Named("AncientGift")) != null)) return;
 
             // todo choose best candidate
             // todo make sure the pawn isn't psychially unsensitive.
             var chosen = pawn ?? pawns.FirstOrDefault();
-            if (chosen == null)
-            {
-                //Log.Message("Couldn't find pawn, skipping");
-                return;
-            }
+            if (chosen == null) return;
 
             Log.Message(chosen.Name + " " + chosen.NameFullColored);
 
@@ -234,8 +225,6 @@ namespace CaravanAdventures.CaravanStory
                 }
             }
         }
-
-     
 
 
     }

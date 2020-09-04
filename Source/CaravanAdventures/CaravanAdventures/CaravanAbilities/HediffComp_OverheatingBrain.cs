@@ -29,7 +29,6 @@ namespace CaravanAdventures.CaravanAbilities
         {
             base.CompPostMake();
             this.ticksToOverheat = Props.lifeTimeInSeconds.RandomInRange * 60;
-
         }
 
         public override void CompPostTick(ref float severityAdjustment)

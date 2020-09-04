@@ -46,38 +46,31 @@ namespace CaravanAdventures.CaravanStory
             }, "GeneratingMap", false, new Action<Exception>(GameAndMapInitExceptionHandlers.ErrorWhileGeneratingMap), true);
             LongEventHandler.QueueLongEvent(delegate ()
             {
-                try
+                var storyChar = StoryUtility.GetSWC().questCont.Village.StoryContact;
+                //var orGenerateMap = GetOrGenerateMapUtility.GetOrGenerateMap(this.Tile, null);
+                var label = "StoryVillageArrivedLetterTitle".Translate(Label.ApplyTag(TagType.Settlement, Faction.GetUniqueLoadID()));
+                var text = "StoryVillageArrivedLetterMessage".Translate(Label.ApplyTag(TagType.Settlement, Faction.GetUniqueLoadID())).CapitalizeFirst();
+
+                //var storyContactCell = CellFinder.RandomNotEdgeCell(Math.Min(orGenerateMap.Size.x / 2 - (orGenerateMap.Size.x / 6), orGenerateMap.Size.z / 2 - (orGenerateMap.Size.y / 6)), Map);
+
+
+                Find.LetterStack.ReceiveLetter(label, text, LetterDefOf.NeutralEvent, caravan.PawnsListForReading, Faction, null, null, null);
+                CaravanEnterMapUtility.Enter(caravan, Map, CaravanEnterMode.Edge, CaravanDropInventoryMode.DoNotDrop, true, null);
+
+                if (!CellFinder.TryFindRandomSpawnCellForPawnNear_NewTmp(new IntVec3(Map.Size.x / 2, 0, Map.Size.z / 2), Map, out var storyContactCell))
                 {
-                    var storyChar = StoryUtility.GetSWC().questCont.Village.StoryContact;
-                    //var orGenerateMap = GetOrGenerateMapUtility.GetOrGenerateMap(this.Tile, null);
-                    var label = "StoryVillageArrivedLetterTitle".Translate(Label.ApplyTag(TagType.Settlement, Faction.GetUniqueLoadID()));
-                    var text = "StoryVillageArrivedLetterMessage".Translate(Label.ApplyTag(TagType.Settlement, Faction.GetUniqueLoadID())).CapitalizeFirst();
-
-                    //var storyContactCell = CellFinder.RandomNotEdgeCell(Math.Min(orGenerateMap.Size.x / 2 - (orGenerateMap.Size.x / 6), orGenerateMap.Size.z / 2 - (orGenerateMap.Size.y / 6)), Map);
-
-
-                    Find.LetterStack.ReceiveLetter(label, text, LetterDefOf.NeutralEvent, caravan.PawnsListForReading, Faction, null, null, null);
-                    CaravanEnterMapUtility.Enter(caravan, Map, CaravanEnterMode.Edge, CaravanDropInventoryMode.DoNotDrop, true, null);
-
-                    if (!CellFinder.TryFindRandomSpawnCellForPawnNear_NewTmp(new IntVec3(Map.Size.x / 2, 0, Map.Size.z / 2), Map, out var storyContactCell))
-                    {
-                        Log.Error("Couldn't find a cell to spawn pawn");
-                    }
-                    // todo handle case if no position was found!!!
-                    /*if (storyChar?.Map != orGenerateMap)*/
-                    GenSpawn.Spawn(storyChar, storyContactCell, Map);
-
-                    StoryUtility.AssignVillageDialog();
-                    AddNewLordAndAssignStoryChar(storyChar);
-
-                    Find.TickManager.CurTimeSpeed = TimeSpeed.Normal;
-
-                    StoryWC.SetSF("IntroVillage_Entered");
+                    Log.Error("Couldn't find a cell to spawn pawn");
                 }
-                catch (Exception e)
-                {
-                    Log.Error(e.ToString());
-                }
+                // todo handle case if no position was found!!!
+                /*if (storyChar?.Map != orGenerateMap)*/
+                GenSpawn.Spawn(storyChar, storyContactCell, Map);
+
+                StoryUtility.AssignVillageDialog();
+                AddNewLordAndAssignStoryChar(storyChar);
+
+                Find.TickManager.CurTimeSpeed = TimeSpeed.Normal;
+
+                StoryWC.SetSF("IntroVillage_Entered");
 
             }, "StoryVillageEnterMapMessage", false, new Action<Exception>(GameAndMapInitExceptionHandlers.ErrorWhileGeneratingMap), true);
         }

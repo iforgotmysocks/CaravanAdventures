@@ -156,7 +156,7 @@ namespace CaravanAdventures.CaravanStory
 
         internal static void AssignVillageDialog()
         {
-            if (StoryUtility.GetSWC().questCont.Village.StoryContact == null)
+            if (StoryUtility.GetSWC().questCont?.Village?.StoryContact == null)
             {
                 Log.Message("Skipping, pawn doesn't exist");
                 return;

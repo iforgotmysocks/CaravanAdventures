@@ -59,6 +59,11 @@ namespace CaravanAdventures.CaravanStory
 			Scribe_Collections.Look(ref actionsCt, "actionsCt", LookMode.Deep);
 			Scribe_Values.Look(ref enabledCt, "enabledCt");
 			Scribe_Values.Look(ref showQuestionMarkCt, "showQuestionMarkCt");
+
+			if (Scribe.mode == LoadSaveMode.PostLoadInit)
+			{
+				if (this.parent != null && actionsCt == null) actionsCt = new List<TalkSet>();
+			}
 		}
 
 		public override IEnumerable<FloatMenuOption> CompFloatMenuOptions(Pawn pawn)
