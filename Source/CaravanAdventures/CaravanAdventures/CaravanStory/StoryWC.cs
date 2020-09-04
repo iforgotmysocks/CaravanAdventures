@@ -31,7 +31,9 @@ namespace CaravanAdventures.CaravanStory
         {
             { "StoryStartDone", false },
             { "ShrinesDisabled", false },
-            { "DebugAllAbilities", false }
+            { "DebugAllAbilities", false },
+            { "ShowDebugInfo", true },
+            { "DebugResetVillages", true }
         };
         public static Dictionary<string, bool> storyFlags;
         private List<string> flagsToAdd = new List<string>
@@ -41,6 +43,7 @@ namespace CaravanAdventures.CaravanStory
             "IntroVillage_TalkedToFriend",
             "IntroVillage_MechsArrived",
             "IntroVillage_ReinforcementsArrived",
+            "IntroVillage_PlayerWon",
             "IntroVillage_Finished",
 
             "Start_InitialTreeWhisper",
@@ -81,6 +84,8 @@ namespace CaravanAdventures.CaravanStory
                 foreach (var flag in storyFlags.Where(x => x.Key.StartsWith("Start_")).ToList())
                     storyFlags[flag.Key] = true;
 
+            if (debugFlags["ShowDebugInfo"]) storyFlags.ToList().ForEach(flag => Log.Message($"{flag.Key} {flag.Value}"));
+   
         }
 
         private void InitializeStoryFlags()
@@ -110,6 +115,8 @@ namespace CaravanAdventures.CaravanStory
             }
         }
 
+        // todo debug remove
+        private bool runOnce;
         public override void WorldComponentTick()
         {
             base.WorldComponentTick();
@@ -117,6 +124,14 @@ namespace CaravanAdventures.CaravanStory
 
             if (ticks > 1200)
             {
+                debugFlags.TryGetValue("DebugResetVillages", out var result);
+                if (!runOnce && result)
+                {
+                    StoryUtility.RemoveExistingQuestFriendlyVillages();
+                    ResetSFsStartingWith("IntroVillage");
+                    runOnce = true;
+                }
+
                 StoryUtility.GenerateStoryContact();
                 StoryUtility.GenerateFriendlyVillage();
 
@@ -162,6 +177,7 @@ namespace CaravanAdventures.CaravanStory
             }
         }
 
+        public static bool Dg => debugFlags["ShowDebugInfo"];
         public static void SetSF(string key) => storyFlags[key] = true;
         public static void SetShrineSF(string postFix) => storyFlags[storyFlags.Keys.FirstOrDefault(x => x.StartsWith(BuildCurrentShrinePrefix() + postFix))] = true;
         public static void ResetCurrentShrineFlags() => storyFlags.Keys.Where(x => x.StartsWith(BuildCurrentShrinePrefix())).ToList().ForEach(key => storyFlags[key] = false);

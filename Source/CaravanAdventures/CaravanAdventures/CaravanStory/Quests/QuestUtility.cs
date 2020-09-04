@@ -41,6 +41,14 @@ namespace CaravanAdventures.CaravanStory.Quests
             if (quest != null) quest.End(outcome, sendLetter);
         }
 
+        public static void DeleteQuest(QuestScriptDef questDef, QuestEndOutcome outcome = QuestEndOutcome.Success, QuestState state = QuestState.Ongoing, bool ignoreStateCompleteAnyway = true, bool sendLetter = true)
+        {
+            Log.Message($"Deleting quest");
+            var quest = Find.QuestManager.QuestsListForReading.FirstOrDefault(x => x.root == questDef
+            && (x.State == state || ignoreStateCompleteAnyway));
+            if (quest != null) Find.QuestManager.Remove(quest);
+        }
+
         public static void AppendQuestDescription(QuestScriptDef questDef, TaggedString text)
         {
             var quest = Find.QuestManager.QuestsListForReading.FirstOrDefault(x => x.root == questDef);

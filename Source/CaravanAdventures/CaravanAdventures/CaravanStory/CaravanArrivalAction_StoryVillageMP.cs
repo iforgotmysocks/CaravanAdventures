@@ -22,20 +22,15 @@ namespace CaravanAdventures.CaravanStory
 
 		public static FloatMenuAcceptanceReport CanVisit(Caravan caravan, StoryVillageMP storyVillageMP)
 		{
+			if (StoryWC.storyFlags["IntroVillage_PlayerWon"]) return false;
 			return storyVillageMP != null && storyVillageMP.Spawned;
 		}
 
 		public override FloatMenuAcceptanceReport StillValid(Caravan caravan, int destinationTile)
 		{
 			FloatMenuAcceptanceReport floatMenuAcceptanceReport = base.StillValid(caravan, destinationTile);
-			if (!floatMenuAcceptanceReport)
-			{
-				return floatMenuAcceptanceReport;
-			}
-			if (this.storyVillageMP != null && storyVillageMP.Tile != destinationTile)
-			{
-				return false;
-			}
+			if (!floatMenuAcceptanceReport) return floatMenuAcceptanceReport;
+			if (this.storyVillageMP != null && storyVillageMP.Tile != destinationTile) return false;
 			return CanVisit(caravan, storyVillageMP);
 		}
 

@@ -53,25 +53,25 @@ namespace CaravanAdventures.CaravanStory
 
                 //var storyContactCell = CellFinder.RandomNotEdgeCell(Math.Min(orGenerateMap.Size.x / 2 - (orGenerateMap.Size.x / 6), orGenerateMap.Size.z / 2 - (orGenerateMap.Size.y / 6)), Map);
 
-
                 Find.LetterStack.ReceiveLetter(label, text, LetterDefOf.NeutralEvent, caravan.PawnsListForReading, Faction, null, null, null);
                 CaravanEnterMapUtility.Enter(caravan, Map, CaravanEnterMode.Edge, CaravanDropInventoryMode.DoNotDrop, true, null);
-
-                if (!CellFinder.TryFindRandomSpawnCellForPawnNear_NewTmp(new IntVec3(Map.Size.x / 2, 0, Map.Size.z / 2), Map, out var storyContactCell))
-                {
-                    Log.Error("Couldn't find a cell to spawn pawn");
-                }
-                // todo handle case if no position was found!!!
-                /*if (storyChar?.Map != orGenerateMap)*/
-                GenSpawn.Spawn(storyChar, storyContactCell, Map);
-
-                StoryUtility.AssignVillageDialog();
-                AddNewLordAndAssignStoryChar(storyChar);
-
                 Find.TickManager.CurTimeSpeed = TimeSpeed.Normal;
 
-                StoryWC.SetSF("IntroVillage_Entered");
+                if (!StoryWC.storyFlags["IntroVillage_Entered"])
+                {
+                    if (!CellFinder.TryFindRandomSpawnCellForPawnNear_NewTmp(new IntVec3(Map.Size.x / 2, 0, Map.Size.z / 2), Map, out var storyContactCell))
+                    {
+                        Log.Error("Couldn't find a cell to spawn pawn");
+                    }
+                    // todo handle case if no position was found!!!
+                    /*if (storyChar?.Map != orGenerateMap)*/
+                    GenSpawn.Spawn(storyChar, storyContactCell, Map);
 
+                    StoryUtility.AssignVillageDialog();
+                    AddNewLordAndAssignStoryChar(storyChar);
+
+                    StoryWC.SetSF("IntroVillage_Entered");
+                }
             }, "StoryVillageEnterMapMessage", false, new Action<Exception>(GameAndMapInitExceptionHandlers.ErrorWhileGeneratingMap), true);
         }
 
@@ -137,6 +137,9 @@ namespace CaravanAdventures.CaravanStory
 
             ticksTillReinforcements = 60 * 15;
             StoryWC.SetSF("IntroVillage_MechsArrived");
+
+            GetComponent<TimedDetectionPatrols>().Init();
+            GetComponent<TimedDetectionPatrols>().StartDetectionCountdown(60000, -1);
         }
 
         public override MapGeneratorDef MapGeneratorDef => CaravanStorySiteDefOf.StoryVillageMG;
@@ -208,30 +211,41 @@ namespace CaravanAdventures.CaravanStory
 
         private void CheckPlayerLeftAndAbandon()
         {
-            if (!StoryWC.storyFlags["IntroVillage_MechsArrived"] || !HasMap) return;
-            if (Map.mapPawns.FreeColonists.Any(x => !x.Dead)) return;
+            Log.Message($"{Map.mapPawns.FreeColonistsSpawned?.Where(x => !x.Dead)?.Count()}");
 
+            if (!StoryWC.storyFlags["IntroVillage_MechsArrived"] || !HasMap) return;
+            if (Map.mapPawns.FreeColonistsSpawned.Any(x => !x.Dead)) return;
+
+            Log.Message($"Should set player won flag");
+
+            if (!Map.mapPawns.AllPawnsSpawned.Any(x => x.Faction == Faction.OfMechanoids && !x.Dead && !x.Downed))
+            {
+                Log.Message($"Setting player won flag");
+                StoryWC.SetSF("IntroVillage_PlayerWon");
+            }
             // todo dialog escaped
             // todo keep and just remove the enter ability in case the player should win the fight?
 
-
             Current.Game.DeinitAndRemoveMap(Map);
-            this.Destroy();
-            WorldObject worldObject = WorldObjectMaker.MakeWorldObject(WorldObjectDefOf.DestroyedSettlement);
-            worldObject.Tile = this.Tile;
-            worldObject.SetFaction(this.Faction);
-            Find.WorldObjects.Add(worldObject);
+            
+            if (!StoryWC.storyFlags["IntroVillage_PlayerWon"])
+            {
+                this.Destroy();
+                WorldObject worldObject = WorldObjectMaker.MakeWorldObject(WorldObjectDefOf.DestroyedSettlement);
+                worldObject.Tile = this.Tile;
+                worldObject.SetFaction(this.Faction);
+                Find.WorldObjects.Add(worldObject);
+            }
 
             StoryWC.SetSF("IntroVillage_Finished");
         }
 
-        //public override bool ShouldRemoveMapNow(out bool alsoRemoveWorldObject)
-        //{
-        //    alsoRemoveWorldObject = true;
-        //    if (!StoryWC.storyFlags["IntroVillage_MechsArrived"] || !HasMap) return false;
-        //    if (Map.mapPawns.FreeColonists.Any(x => !x.Dead)) return false;
-        //    return true;
-        //}
+        public override bool ShouldRemoveMapNow(out bool alsoRemoveWorldObject)
+        {
+            // -> handled in CheckPlayerLeftAndAbandon()
+            alsoRemoveWorldObject = false;
+            return false;
+        }
 
         public void ReinforcementConvo()
         {
@@ -242,11 +256,6 @@ namespace CaravanAdventures.CaravanStory
             TaggedString taggedString = "StoryVillage_Dia2_Title".Translate(StoryUtility.GetSWC().questCont.Village.StoryContact.NameShortColored);
             Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
             Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
-        }
-
-        protected void CreateMap(Caravan caravan)
-        {
-
         }
 
         public override IEnumerable<FloatMenuOption> GetFloatMenuOptions(Caravan caravan)

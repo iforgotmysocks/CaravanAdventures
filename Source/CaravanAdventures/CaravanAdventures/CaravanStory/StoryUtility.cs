@@ -46,11 +46,9 @@ namespace CaravanAdventures.CaravanStory
                 faction = faction,
                 raidArrivalModeForQuickMilitaryAid = true,
                 // todo by wealth, the richer, the less help // 7500 - 8000
-                points = Rand.Range(4000, 5000),  // DiplomacyTuning.RequestedMilitaryAidPointsRange.RandomInRange;
+                points = Rand.Range(pointsMin, pointsMax),  // DiplomacyTuning.RequestedMilitaryAidPointsRange.RandomInRange;
                 raidNeverFleeIndividual = true,
                 spawnCenter = spawnSpot ?? map.mapPawns.FreeColonists.RandomElement().Position,
-                // todo test how not to create a letter
-                customLetterDef = null,
             };
             IncidentDefOf.RaidFriendly.Worker.TryExecute(incidentParms);
         }
@@ -271,6 +269,7 @@ namespace CaravanAdventures.CaravanStory
                 settlement.Destroy();
                 settlement.CheckRemoveMapNow();
             }
+            Quests.QuestUtility.DeleteQuest(StoryQuestDefOf.CA_StoryVillage_Arrival);
         }
 
         internal static void CallBombardment(IntVec3 position, Map map, Pawn instigator)

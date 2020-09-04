@@ -65,9 +65,9 @@
 		<comps>
 			<li Class="WorldObjectCompProperties_FormCaravan" />
 			<!--<li Class="CaravanAdventures.CaravanStory.WorldObjectCompProperties_TimedDetectionPatrols" />-->
-			<!--<li>
+			<li>
 				<compClass>CaravanAdventures.CaravanStory.TimedDetectionPatrols</compClass>
-			</li>-->
+			</li>
 			<!--<li>
 				<compClass>TimedDetectionRaids</compClass>
 			</li>-->

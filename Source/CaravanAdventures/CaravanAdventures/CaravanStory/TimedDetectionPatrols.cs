@@ -27,7 +27,8 @@ namespace CaravanAdventures.CaravanStory
 
 		public void Init()
         {
-			var mapParent = (AncientMasterShrineMP)this.parent;
+			// todo changed from AncientShrineMP to generall MP, check if shrine still works!
+			var mapParent = (MapParent)this.parent;
 			if (!mapParent.HasMap) return;
 			lordsToExcludeFromRaidLogic = mapParent.Map.lordManager.lords.Where(lord => lord.faction == Faction.OfMechanoids).ToList();
 		}
