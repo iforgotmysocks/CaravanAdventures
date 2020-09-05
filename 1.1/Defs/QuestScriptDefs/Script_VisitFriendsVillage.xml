@@ -13,7 +13,7 @@
     </questNameRules>
     <questDescriptionRules>
       <rulesStrings>
-        <li>questDescription->[pawn_definite] invited you to visit her in the nearest [faction_name]'s village [settlement_name]. \nShe greatly enjoyed her stack back when at your colony and can't wait to see the gang again.</li>
+        <li>questDescription->[pawn_definite] invited you to visit her in the nearest [faction_name]'s village [settlement_name]. \nShe greatly enjoyed her stay back when at your colony and can't wait to see the gang again.</li>
       </rulesStrings>
     </questDescriptionRules>
     <root Class="CaravanAdventures.CaravanStory.Quests.QuestNode_StoryVillage_Arrival" />

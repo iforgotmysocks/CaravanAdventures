@@ -25,6 +25,7 @@ namespace CaravanAdventures.CaravanStory
         private static readonly IntRange shrineDistance = Helper.Debug() ? new IntRange(2, 4) : new IntRange(40, 60);
         private static List<AbilityDef> unlockedSpells = new List<AbilityDef>();
         private int bossMissedCounter = 0;
+        private bool ranDebugActionsOnceAtStartUp;
 
         public static Dictionary<string, int> mechBossKillCounters = new Dictionary<string, int>();
         public static Dictionary<string, bool> debugFlags = new Dictionary<string, bool>()
@@ -33,7 +34,8 @@ namespace CaravanAdventures.CaravanStory
             { "ShrinesDisabled", false },
             { "DebugAllAbilities", false },
             { "ShowDebugInfo", true },
-            { "DebugResetVillages", true }
+            { "VillageFinished", false },
+            { "DebugResetVillagesAndShrines", false },
         };
         public static Dictionary<string, bool> storyFlags;
         private List<string> flagsToAdd = new List<string>
@@ -115,28 +117,20 @@ namespace CaravanAdventures.CaravanStory
             }
         }
 
-        // todo debug remove
-        private bool runOnce;
         public override void WorldComponentTick()
         {
             base.WorldComponentTick();
+            RunDebugActionsOnceAtStartUp();
             if (ticks == -1) StoryUtility.EnsureSacrilegHunters();
 
             if (ticks > 1200)
             {
-                debugFlags.TryGetValue("DebugResetVillages", out var result);
-                if (!runOnce && result)
-                {
-                    StoryUtility.RemoveExistingQuestFriendlyVillages();
-                    ResetSFsStartingWith("IntroVillage");
-                    runOnce = true;
-                }
-
                 StoryUtility.GenerateStoryContact();
                 StoryUtility.GenerateFriendlyVillage();
 
                 if (CheckCanStartCountDownOnNewShrine() && !debugFlags["ShrinesDisabled"])
                 {
+                    if (Dg) Log.Message("Shrine counter running" + shrineRevealCounter);
                     shrineRevealCounter = baseDelayNextShrineReveal * (countShrinesCompleted + 1f) * 0.5f;
                     SetShrineSF("InitCountDownStarted");
                 }
@@ -151,6 +145,17 @@ namespace CaravanAdventures.CaravanStory
 
             ticks++;
             shrineRevealCounter--;
+        }
+
+        private void RunDebugActionsOnceAtStartUp()
+        {
+            if (ranDebugActionsOnceAtStartUp || !debugFlags["DebugResetVillagesAndShrines"]) return;
+            StoryUtility.RemoveExistingQuestFriendlyVillages();
+            StoryUtility.RemoveMapParentsOfDef(CaravanStorySiteDefOf.AncientMasterShrineMP);
+            StoryUtility.RemoveMapParentsOfDef(CaravanStorySiteDefOf.AncientMasterShrineWO);
+            ResetCurrentShrineFlags();
+            ResetSFsStartingWith("IntroVillage");
+            ranDebugActionsOnceAtStartUp = true;
         }
 
         public static string[] GetBossDefNames() => new string[] { "CACristalScythe", "CABossMechDevourer" };
@@ -168,7 +173,7 @@ namespace CaravanAdventures.CaravanStory
             }
             else
             {
-                var ancientMasterShrineWO = (AncientMasterShrineWO)WorldObjectMaker.MakeWorldObject(CaravanStorySiteDefOf.AncientMasterShrine);
+                var ancientMasterShrineWO = (AncientMasterShrineWO)WorldObjectMaker.MakeWorldObject(CaravanStorySiteDefOf.AncientMasterShrineWO);
                 ancientMasterShrineWO.Tile = tile;
                 //ancientMasterShrineWO.GetComponent<TimeoutComp>().StartTimeout(timeoutDaysRange.RandomInRange * 60000);
                 Find.WorldObjects.Add(ancientMasterShrineWO);

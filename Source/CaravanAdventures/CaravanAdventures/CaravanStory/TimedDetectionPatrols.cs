@@ -8,6 +8,7 @@ using Verse.AI.Group;
 
 namespace CaravanAdventures.CaravanStory
 {
+	// Todo add map name to the "come through here" message
     public class TimedDetectionPatrols : WorldObjectComp
 	{
 		public const float RaidThreatPointsMultiplier = 2.5f;
@@ -16,6 +17,7 @@ namespace CaravanAdventures.CaravanStory
 		private int ticksLeftTillLeaveIfNoEnemies = -1;
         private const int defaultTicksTillLeave = 5000;
 		private List<Lord> lordsToExcludeFromRaidLogic = null;
+		private int raidPoints = 8000;
 
 		public bool NextRaidCountdownActiveAndVisible
 		{
@@ -25,9 +27,18 @@ namespace CaravanAdventures.CaravanStory
 			}
 		}
 
+		public override void PostExposeData()
+		{
+			base.PostExposeData();
+			Scribe_Values.Look<int>(ref this.ticksLeftToSendRaid, "ticksLeftToForceExitAndRemoveMap", -1, false);
+			Scribe_Values.Look<int>(ref this.ticksLeftTillNotifyPlayer, "ticksLeftTillNotifyPlayer", -1, false);
+			Scribe_Values.Look(ref ticksLeftTillLeaveIfNoEnemies, "ticksLeftTillLeaveIfNoEnemies", -1, false);
+			Scribe_Collections.Look(ref lordsToExcludeFromRaidLogic, "lordsToExcludeFromRaidLogic", LookMode.Reference);
+			Scribe_Values.Look(ref raidPoints, "raidPoints");
+		}
+
 		public void Init()
         {
-			// todo changed from AncientShrineMP to generall MP, check if shrine still works!
 			var mapParent = (MapParent)this.parent;
 			if (!mapParent.HasMap) return;
 			lordsToExcludeFromRaidLogic = mapParent.Map.lordManager.lords.Where(lord => lord.faction == Faction.OfMechanoids).ToList();
@@ -53,10 +64,11 @@ namespace CaravanAdventures.CaravanStory
 			}
 		}
 
-		public void StartDetectionCountdown(int ticks, int notifyTicks = -1)
+		public void StartDetectionCountdown(int ticks, int notifyTicks = -1, int raidPoints = 8000)
 		{
 			this.ticksLeftToSendRaid = ticks;
 			this.ticksLeftTillNotifyPlayer = ((notifyTicks == -1) ? Mathf.Min((int)(60000f * Rand.Range(1.2f, 1.4f)), ticks / 2) : notifyTicks);
+			this.raidPoints = raidPoints;
 		}
 
 		public void ResetCountdown()
@@ -67,15 +79,6 @@ namespace CaravanAdventures.CaravanStory
 		public void SetNotifiedSilently()
 		{
 			this.ticksLeftTillNotifyPlayer = 0;
-		}
-
-		public override void PostExposeData()
-		{
-			base.PostExposeData();
-			Scribe_Values.Look<int>(ref this.ticksLeftToSendRaid, "ticksLeftToForceExitAndRemoveMap", -1, false);
-			Scribe_Values.Look<int>(ref this.ticksLeftTillNotifyPlayer, "ticksLeftTillNotifyPlayer", -1, false);
-			Scribe_Values.Look(ref ticksLeftTillLeaveIfNoEnemies, "ticksLeftTillLeaveIfNoEnemies", -1, false);
-			Scribe_Collections.Look(ref lordsToExcludeFromRaidLogic, "lordsToExcludeFromRaidLogic", LookMode.Reference);
 		}
 
 		public override string CompInspectStringExtra()
@@ -105,7 +108,10 @@ namespace CaravanAdventures.CaravanStory
 
 		public override void CompTick()
 		{
-			var mapParent = (AncientMasterShrineMP)this.parent;
+			if(ModSettings.Get().debug) if (ticksLeftToSendRaid % 100 == 0) Log.Message($"{this.parent.Label}: notify / raid {ticksLeftTillNotifyPlayer} / {ticksLeftToSendRaid}");
+
+			// todo changed from AncientShrineMP to generall MP, check if shrine still works!
+			var mapParent = (MapParent)this.parent;
 			if (mapParent.HasMap)
 			{
 				if (this.ticksLeftTillNotifyPlayer > 0)
@@ -125,7 +131,7 @@ namespace CaravanAdventures.CaravanStory
                         {
                             target = mapParent.Map,
                             //incidentParms.points = StorytellerUtility.DefaultThreatPointsNow(incidentParms.target) * 2.5f;
-                            points = 8000,
+                            points = raidPoints,
                             faction = this.RaidFaction,
                             raidArrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn
                         };
@@ -136,7 +142,7 @@ namespace CaravanAdventures.CaravanStory
 						Messages.Message("MessageCaravanDetectedRaidArrived".Translate(incidentParms.faction.def.pawnsPlural, incidentParms.faction, this.ticksLeftToSendRaid.ToStringTicksToDays("F1")), MessageTypeDefOf.ThreatBig, true);
 						return;
 					}
-					else if (ticksLeftToSendRaid % 7500 == 0) Messages.Message(new Message("Story_Shrine1_NextPatrolWarning".Translate(GetDetectionCountdownTimeLeftString(ticksLeftToSendRaid)), MessageTypeDefOf.ThreatBig), false);
+					else if (ticksLeftToSendRaid % 7500 == 0) Messages.Message(new Message("Story_Shrine1_NextPatrolWarning".Translate(this.parent.Label, GetDetectionCountdownTimeLeftString(ticksLeftToSendRaid)), MessageTypeDefOf.ThreatBig), false);
 				}
 				if (ticksLeftTillLeaveIfNoEnemies > 0)
 				{

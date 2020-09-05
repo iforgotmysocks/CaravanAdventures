@@ -77,7 +77,6 @@ namespace CaravanAdventures.CaravanStory
 
         private void AddNewLordAndAssignStoryChar(Pawn storyChar)
         {
-            // todo centerpoint is still off -> only calculate rooms that belong to sac hunters
             centerPoint = StoryUtility.GetCenterOfSettlementBase(Map, StoryUtility.FactionOfSacrilegHunters);
             var raidLords = Map.lordManager.lords.Where(lord => lord.faction == StoryUtility.FactionOfSacrilegHunters);
             Log.Message($"hunter lords: {raidLords.Select(lord => lord.ownedPawns).Count()}");
@@ -139,18 +138,23 @@ namespace CaravanAdventures.CaravanStory
             StoryWC.SetSF("IntroVillage_MechsArrived");
 
             GetComponent<TimedDetectionPatrols>().Init();
-            GetComponent<TimedDetectionPatrols>().StartDetectionCountdown(60000, -1);
+            GetComponent<TimedDetectionPatrols>().StartDetectionCountdown(30000, -1);
         }
 
         public override MapGeneratorDef MapGeneratorDef => CaravanStorySiteDefOf.StoryVillageMG;
 
         public override void Tick()
         {
+            for (int i = 0; i < AllComps.Count; i++)
+            {
+                AllComps[i].CompTick();
+            }
+
             if (base.HasMap)
             {
                 if (ticks >= 60)
                 {
-                    CheckShouldSacHuntersFlee();
+                    //CheckShouldSacHuntersFlee();
                     CheckMainStoryCharDiedOrLeft();
                     CheckPlayerLeftAndAbandon();
                     ticks = 0;
@@ -165,6 +169,8 @@ namespace CaravanAdventures.CaravanStory
                 ticks++;
                 ticksTillReinforcements--;
             }
+
+           
         }
 
         private void CheckMainStoryCharDiedOrLeft()
@@ -173,8 +179,6 @@ namespace CaravanAdventures.CaravanStory
             var storyChar = StoryUtility.GetSWC().questCont.Village.StoryContact;
             if (!StoryWC.storyFlags["IntroVillage_MechsArrived"]) return;
             if (Map.mapPawns.AllPawnsSpawned.Contains(storyChar) && !storyChar.Dead && !storyChar.Downed) return;
-
-            // todo StoryChar died / left Dialog
 
             DiaNode diaNode = null;
             diaNode = new DiaNode(storyChar.Dead ? "StoryVillage_Dia3_1_Dying".Translate() : "StoryVillage_Dia3_1_Alive".Translate());
@@ -188,6 +192,7 @@ namespace CaravanAdventures.CaravanStory
 
         private void CheckShouldSacHuntersFlee()
         {
+            // currently disabled as hunters flee on their own, also didn't work correctly yet, hunters tried to leave at... weird times (when all were dead for example)
             if (sacHuntersFleeing || !HasMap) return;
             var huntersAll = Map.mapPawns.AllPawnsSpawned.Where(x => x.Faction == StoryUtility.FactionOfSacrilegHunters);
             var deadOrDowned = huntersAll.Where(x => x.Dead || x.Downed).Count();
@@ -200,9 +205,6 @@ namespace CaravanAdventures.CaravanStory
                 hunters.AddRange(lord.ownedPawns);
                 lord.lordManager.RemoveLord(lord);
             }
-            Log.Message($"Sac Hunters are fleeing");
-            // todo remove
-            Messages.Message(new Message("Debug: Hunters are fleeing", MessageTypeDefOf.NegativeEvent));
 
             Messages.Message(new Message("StoryVillage_SacHunters_Fleeing".Translate(), MessageTypeDefOf.NegativeEvent));
             LordMaker.MakeNewLord(Faction, new LordJob_ExitMapBest(LocomotionUrgency.Sprint, false, false), Map, hunters);
@@ -211,8 +213,6 @@ namespace CaravanAdventures.CaravanStory
 
         private void CheckPlayerLeftAndAbandon()
         {
-            Log.Message($"{Map.mapPawns.FreeColonistsSpawned?.Where(x => !x.Dead)?.Count()}");
-
             if (!StoryWC.storyFlags["IntroVillage_MechsArrived"] || !HasMap) return;
             if (Map.mapPawns.FreeColonistsSpawned.Any(x => !x.Dead)) return;
 

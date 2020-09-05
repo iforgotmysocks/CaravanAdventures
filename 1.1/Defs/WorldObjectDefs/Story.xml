@@ -2,7 +2,7 @@
 
 <Defs>
   <WorldObjectDef>
-    <defName>AncientMasterShrine</defName>
+    <defName>AncientMasterShrineWO</defName>
     <label>Ancient Master Shrine</label>
     <description>a dangerous and long forgotten shrine</description>
     <worldObjectClass>CaravanAdventures.CaravanStory.AncientMasterShrineWO</worldObjectClass>
@@ -57,20 +57,17 @@
 		<expandingIcon>true</expandingIcon>
 		<!--<expandingIconTexture>World/WorldObjects/Expanding/Ambush</expandingIconTexture>-->
 		<expandingIconPriority>10</expandingIconPriority>
-		<!--<blockExitGridUntilBattleIsWon>false</blockExitGridUntilBattleIsWon>
+		<!--<blockExitGridUntilBattleIsWon>false</blockExitGridUntilBattleIsWon>-->
 		<isTempIncidentMapOwner>true</isTempIncidentMapOwner>
 		<IncidentTargetTags>
 			<li>Map_Misc</li>
-		</IncidentTargetTags>-->
+		</IncidentTargetTags>
 		<comps>
 			<li Class="WorldObjectCompProperties_FormCaravan" />
 			<!--<li Class="CaravanAdventures.CaravanStory.WorldObjectCompProperties_TimedDetectionPatrols" />-->
 			<li>
 				<compClass>CaravanAdventures.CaravanStory.TimedDetectionPatrols</compClass>
 			</li>
-			<!--<li>
-				<compClass>TimedDetectionRaids</compClass>
-			</li>-->
 		</comps>
 	</WorldObjectDef>
 	

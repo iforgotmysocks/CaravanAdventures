@@ -18,7 +18,7 @@
 	<MasterShrineVictoryBossLetterLabel>Defeated {0}</MasterShrineVictoryBossLetterLabel>
 	<MasterShrineVictoryBossLetterMessage>Defeated {0}, the ancient harbinger of destruction. The shrine awarded you with {1}</MasterShrineVictoryBossLetterMessage>
 
-	<Story_Shrine1_NextPatrolWarning>A mech patrol will come through here in about {0}.</Story_Shrine1_NextPatrolWarning>
+	<Story_Shrine1_NextPatrolWarning>A mech patrol will come through {0} in about {1}.</Story_Shrine1_NextPatrolWarning>
 	
 	<Story_Shrine1_SacrilegHunters_DiaTitle>Someone is contacting us...</Story_Shrine1_SacrilegHunters_DiaTitle>
 	<Story_Shrine1_SacrilegHunters_Dia1_1>You did it! You finally found a master shrine!\n

@@ -265,11 +265,21 @@ namespace CaravanAdventures.CaravanStory
                 Log.Message($"Trying to destroy settlement {settlement.Name}");
                 Log.Message($"settlement mp: {settlement.def.defName}");
                 if (settlement.def.defName != "StoryVillageMP") continue;
-                settlement.forceRemoveWorldObjectWhenMapRemoved = true;
+                if (settlement.HasMap) Current.Game.DeinitAndRemoveMap(settlement.Map);
                 settlement.Destroy();
-                settlement.CheckRemoveMapNow();
             }
             Quests.QuestUtility.DeleteQuest(StoryQuestDefOf.CA_StoryVillage_Arrival);
+        }
+
+        internal static void RemoveMapParentsOfDef(WorldObjectDef def)
+        {
+            var sites = Find.WorldObjects.AllWorldObjects.Where(x => x.def == def) as List<MapParent>;
+            if (sites == null) return;
+            foreach (var site in sites.Reverse<MapParent>())
+            {
+                if (site.HasMap) Current.Game.DeinitAndRemoveMap(site.Map);
+                site.Destroy();
+            }
         }
 
         internal static void CallBombardment(IntVec3 position, Map map, Pawn instigator)

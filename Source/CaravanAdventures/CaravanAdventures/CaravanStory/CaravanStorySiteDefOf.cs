@@ -14,7 +14,7 @@ namespace CaravanAdventures.CaravanStory
     class CaravanStorySiteDefOf
     {
 #pragma warning disable CS0649
-        public static WorldObjectDef AncientMasterShrine;
+        public static WorldObjectDef AncientMasterShrineWO;
         public static WorldObjectDef AncientMasterShrineMP;
         public static MapGeneratorDef AncientMasterShrineMG;
         public static WorldObjectDef StoryVillageMP;
