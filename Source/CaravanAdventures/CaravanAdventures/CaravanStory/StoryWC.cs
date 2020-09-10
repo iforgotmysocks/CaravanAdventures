@@ -18,16 +18,16 @@ namespace CaravanAdventures.CaravanStory
     class StoryWC : WorldComponent
     {
         private static readonly float baseDelayNextShrineReveal = Helper.Debug() ? 1800f : 60000f * 2f;
-        private static float shrineRevealCounter = -1f;
+        private float shrineRevealCounter = -1f;
         private int ticks = -1;
         private static float countShrinesCompleted = 0f;
         private static readonly IntRange timeoutDaysRange = new IntRange(10, 12);
         private static readonly IntRange shrineDistance = Helper.Debug() ? new IntRange(2, 4) : new IntRange(40, 60);
-        private static List<AbilityDef> unlockedSpells = new List<AbilityDef>();
+        private List<AbilityDef> unlockedSpells = new List<AbilityDef>();
         private int bossMissedCounter = 0;
         private bool ranDebugActionsOnceAtStartUp;
 
-        public static Dictionary<string, int> mechBossKillCounters = new Dictionary<string, int>();
+        public Dictionary<string, int> mechBossKillCounters = new Dictionary<string, int>();
         public static Dictionary<string, bool> debugFlags = new Dictionary<string, bool>()
         {
             { "ShowDebugInfo", true },
@@ -81,7 +81,7 @@ namespace CaravanAdventures.CaravanStory
         {
             base.FinalizeInit();
 
-            CheckResetWC();
+            CheckResetStaticWCFields();
             InitializeStoryFlags();
             InitializeQuestCont();
 
@@ -92,19 +92,10 @@ namespace CaravanAdventures.CaravanStory
             if (debugFlags["ShowDebugInfo"]) storyFlags.ToList().ForEach(flag => Log.Message($"{flag.Key} {flag.Value}"));
         }
 
-        private void CheckResetWC()
+        private void CheckResetStaticWCFields()
         {
-            Log.Message($"Checking to reset CompData");
             if (Find.TickManager.TicksGame > 0) return;
-            Log.Message($"resetting storyWC");
-            var comp = Find.World.GetComponent<StoryWC>();
-            Log.Message($"Check same comp {this == comp}");
-            comp = null;
-
-            var idx = Find.World.components.IndexOf(this);
-            Find.World.components[idx] = null;
-            Find.World.components[idx] = new StoryWC(world);
-            //comp = new StoryWC(world);
+            storyFlags = null;
         }
 
         private void InitializeStoryFlags()
@@ -216,7 +207,7 @@ namespace CaravanAdventures.CaravanStory
         public static void ResetSFsStartingWith(string start) => storyFlags.Keys.Where(x => x.StartsWith(start)).ToList().ForEach(key => storyFlags[key] = false);
         public static string BuildCurrentShrinePrefix() => "Shrine" + (countShrinesCompleted + 1) + "_";
 
-        public static List<AbilityDef> GetUnlockedSpells() => unlockedSpells;
+        public List<AbilityDef> GetUnlockedSpells() => unlockedSpells;
 
         private bool CheckCanStartCountDownOnNewShrine() =>
             !storyFlags.Any(x => x.Key.StartsWith("Start_") && x.Value == false)

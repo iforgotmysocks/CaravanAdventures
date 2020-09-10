@@ -203,7 +203,7 @@ namespace CaravanAdventures.CaravanStory
         {
             var abilityDefs = StoryWC.debugFlags["DebugAllAbilities"] 
                 ? DefDatabase<AbilityDef>.AllDefsListForReading.Where(x => x.defName.StartsWith("Ancient"))
-                : StoryWC.GetUnlockedSpells();
+                : StoryUtility.GetSWC().GetUnlockedSpells();
            
             foreach (var abilityDef in abilityDefs)
             {

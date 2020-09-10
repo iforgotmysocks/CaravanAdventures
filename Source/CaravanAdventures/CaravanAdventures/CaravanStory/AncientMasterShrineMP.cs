@@ -128,15 +128,15 @@ namespace CaravanAdventures.CaravanStory
 			var gifted = StoryUtility.GetGiftedPawn();
 			if (gifted == null) Log.Warning("gifted pawn was null, which shouldn't happen. Spell was stored for when another gifted pawn awakes");
 
-			var spell = DefDatabase<AbilityDef>.AllDefsListForReading.Where(x => x.defName.StartsWith("Ancient") && !StoryWC.GetUnlockedSpells().Contains(x)).InRandomOrder().FirstOrDefault();
+			var spell = DefDatabase<AbilityDef>.AllDefsListForReading.Where(x => x.defName.StartsWith("Ancient") && !StoryUtility.GetSWC().GetUnlockedSpells().Contains(x)).InRandomOrder().FirstOrDefault();
 			if (spell == null) return;
 			else Log.Message($"Got spell");
-			StoryWC.GetUnlockedSpells().Add(spell);
+			StoryUtility.GetSWC().GetUnlockedSpells().Add(spell);
 			if (gifted != null) gifted.abilities.GainAbility(spell);
 
 			StoryWC.SetShrineSF("Completed");
 			StoryWC.IncreaseShrineCompleteCounter();
-			StoryWC.mechBossKillCounters[boss.def.defName] = StoryWC.mechBossKillCounters.TryGetValue(boss.def.defName, out var result) ? result + 1 : 0;
+			StoryUtility.GetSWC().mechBossKillCounters[boss.def.defName] = StoryUtility.GetSWC().mechBossKillCounters.TryGetValue(boss.def.defName, out var result) ? result + 1 : 0;
 
 			BossDefeatedDialog(gifted, boss, spell);
 			bossDefeatedAndRewardsGiven = true;
