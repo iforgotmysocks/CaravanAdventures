@@ -30,12 +30,13 @@ namespace CaravanAdventures.CaravanStory
         public static Dictionary<string, int> mechBossKillCounters = new Dictionary<string, int>();
         public static Dictionary<string, bool> debugFlags = new Dictionary<string, bool>()
         {
+            { "ShowDebugInfo", true },
             { "StoryStartDone", false },
             { "ShrinesDisabled", false },
             { "DebugAllAbilities", false },
-            { "ShowDebugInfo", true },
             { "VillageFinished", false },
             { "DebugResetVillagesAndShrines", false },
+            { "showTicks", true },
         };
         public static Dictionary<string, bool> storyFlags;
         private List<string> flagsToAdd = new List<string>
@@ -61,6 +62,7 @@ namespace CaravanAdventures.CaravanStory
         public override void ExposeData()
         {
             base.ExposeData();
+            Log.Message($"in ExposeData() with state {Scribe.mode}");
             Scribe_Collections.Look(ref storyFlags, "storyFlags", LookMode.Value);
             Scribe_Collections.Look(ref unlockedSpells, "unlockedSpells", LookMode.Def);
             Scribe_Collections.Look(ref mechBossKillCounters, "mechBossKillCounters", LookMode.Value);
@@ -79,6 +81,7 @@ namespace CaravanAdventures.CaravanStory
         {
             base.FinalizeInit();
 
+            CheckResetWC();
             InitializeStoryFlags();
             InitializeQuestCont();
 
@@ -87,7 +90,21 @@ namespace CaravanAdventures.CaravanStory
                     storyFlags[flag.Key] = true;
 
             if (debugFlags["ShowDebugInfo"]) storyFlags.ToList().ForEach(flag => Log.Message($"{flag.Key} {flag.Value}"));
-   
+        }
+
+        private void CheckResetWC()
+        {
+            Log.Message($"Checking to reset CompData");
+            if (Find.TickManager.TicksGame > 0) return;
+            Log.Message($"resetting storyWC");
+            var comp = Find.World.GetComponent<StoryWC>();
+            Log.Message($"Check same comp {this == comp}");
+            comp = null;
+
+            var idx = Find.World.components.IndexOf(this);
+            Find.World.components[idx] = null;
+            Find.World.components[idx] = new StoryWC(world);
+            //comp = new StoryWC(world);
         }
 
         private void InitializeStoryFlags()
@@ -149,12 +166,22 @@ namespace CaravanAdventures.CaravanStory
 
         private void RunDebugActionsOnceAtStartUp()
         {
-            if (ranDebugActionsOnceAtStartUp || !debugFlags["DebugResetVillagesAndShrines"]) return;
-            StoryUtility.RemoveExistingQuestFriendlyVillages();
-            StoryUtility.RemoveMapParentsOfDef(CaravanStorySiteDefOf.AncientMasterShrineMP);
-            StoryUtility.RemoveMapParentsOfDef(CaravanStorySiteDefOf.AncientMasterShrineWO);
-            ResetCurrentShrineFlags();
-            ResetSFsStartingWith("IntroVillage");
+            if (ranDebugActionsOnceAtStartUp) return; 
+            
+            if (debugFlags["showTicks"])
+            {
+                Log.Message($"ticks: {ticks.ToString()}");
+            }
+
+            if (debugFlags["DebugResetVillagesAndShrines"])
+            {
+                StoryUtility.RemoveExistingQuestFriendlyVillages();
+                StoryUtility.RemoveMapParentsOfDef(CaravanStorySiteDefOf.AncientMasterShrineMP);
+                StoryUtility.RemoveMapParentsOfDef(CaravanStorySiteDefOf.AncientMasterShrineWO);
+                ResetCurrentShrineFlags();
+                ResetSFsStartingWith("IntroVillage");
+            }
+
             ranDebugActionsOnceAtStartUp = true;
         }
 

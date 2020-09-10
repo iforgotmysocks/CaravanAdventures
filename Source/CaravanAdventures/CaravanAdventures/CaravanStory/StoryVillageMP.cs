@@ -238,6 +238,8 @@ namespace CaravanAdventures.CaravanStory
             }
 
             StoryWC.SetSF("IntroVillage_Finished");
+            Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "\n\nYou survivded and made it out alive. But where did all those mechs come from? Best to watch out for more clues...");
+            Quests.QuestUtility.CompleteQuest(StoryQuestDefOf.CA_StoryVillage_Arrival);
         }
 
         public override bool ShouldRemoveMapNow(out bool alsoRemoveWorldObject)
