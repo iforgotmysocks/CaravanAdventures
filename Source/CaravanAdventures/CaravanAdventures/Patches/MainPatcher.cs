@@ -6,11 +6,6 @@ namespace CaravanAdventures.Patches
     [StaticConstructorOnStartup]
     static class MainPatcher
     {
-        static MainPatcher()
-        {
-            
-        }
-
         public static void Patch()
         {
             var harmony = new Harmony("iforgotmysocks.CaravanAdventures");
