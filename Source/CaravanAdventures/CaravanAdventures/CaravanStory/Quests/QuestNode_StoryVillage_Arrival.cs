@@ -28,7 +28,7 @@ namespace CaravanAdventures.CaravanStory.Quests
 
         private bool StartQuest()
         {
-            return !StoryWC.storyFlags["IntroVillage_Created"];
+            return !CompCache.StoryWC.storyFlags["IntroVillage_Created"];
         }
 
         protected override bool TestRunInt(Slate slate)

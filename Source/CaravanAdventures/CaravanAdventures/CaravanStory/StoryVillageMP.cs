@@ -57,7 +57,7 @@ namespace CaravanAdventures.CaravanStory
                 CaravanEnterMapUtility.Enter(caravan, Map, CaravanEnterMode.Edge, CaravanDropInventoryMode.DoNotDrop, true, null);
                 Find.TickManager.CurTimeSpeed = TimeSpeed.Normal;
 
-                if (!StoryWC.storyFlags["IntroVillage_Entered"])
+                if (!CompCache.StoryWC.storyFlags["IntroVillage_Entered"])
                 {
                     if (!CellFinder.TryFindRandomSpawnCellForPawnNear_NewTmp(new IntVec3(Map.Size.x / 2, 0, Map.Size.z / 2), Map, out var storyContactCell))
                     {
@@ -70,7 +70,7 @@ namespace CaravanAdventures.CaravanStory
                     StoryUtility.AssignVillageDialog();
                     AddNewLordAndAssignStoryChar(storyChar);
 
-                    StoryWC.SetSF("IntroVillage_Entered");
+                   CompCache.StoryWC.SetSF("IntroVillage_Entered");
                 }
             }, "StoryVillageEnterMapMessage", false, new Action<Exception>(GameAndMapInitExceptionHandlers.ErrorWhileGeneratingMap), true);
         }
@@ -119,7 +119,7 @@ namespace CaravanAdventures.CaravanStory
 
         private void SpawnMechArmy(Pawn initiator, Pawn addressed)
         {
-            StoryWC.SetSF("IntroVillage_TalkedToFriend");
+           CompCache.StoryWC.SetSF("IntroVillage_TalkedToFriend");
             Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillage_QuestUpdate_MechsArrived".Translate(addressed.NameShortColored));
 
             var incidentParms = new IncidentParms
@@ -135,7 +135,7 @@ namespace CaravanAdventures.CaravanStory
             IncidentDefOf.RaidEnemy.Worker.TryExecute(incidentParms);
 
             ticksTillReinforcements = 60 * 15;
-            StoryWC.SetSF("IntroVillage_MechsArrived");
+           CompCache.StoryWC.SetSF("IntroVillage_MechsArrived");
 
             GetComponent<TimedDetectionPatrols>().Init();
             GetComponent<TimedDetectionPatrols>().StartDetectionCountdown(30000, -1);
@@ -162,7 +162,7 @@ namespace CaravanAdventures.CaravanStory
                 if (ticksTillReinforcements == 0)
                 {
                     StoryUtility.GetAssistanceFromAlliedFaction(StoryUtility.FactionOfSacrilegHunters, Map, 11000, 12000, centerPoint);
-                    StoryWC.SetSF("IntroVillage_ReinforcementsArrived");
+                   CompCache.StoryWC.SetSF("IntroVillage_ReinforcementsArrived");
                     ReinforcementConvo();
                 }
 
@@ -177,7 +177,7 @@ namespace CaravanAdventures.CaravanStory
         {
             if (mainCharLeftOrDied) return;
             var storyChar = StoryUtility.GetSWC().questCont.Village.StoryContact;
-            if (!StoryWC.storyFlags["IntroVillage_MechsArrived"]) return;
+            if (!CompCache.StoryWC.storyFlags["IntroVillage_MechsArrived"]) return;
             if (Map.mapPawns.AllPawnsSpawned.Contains(storyChar) && !storyChar.Dead && !storyChar.Downed) return;
 
             DiaNode diaNode = null;
@@ -213,7 +213,7 @@ namespace CaravanAdventures.CaravanStory
 
         private void CheckPlayerLeftAndAbandon()
         {
-            if (!StoryWC.storyFlags["IntroVillage_MechsArrived"] || !HasMap) return;
+            if (!CompCache.StoryWC.storyFlags["IntroVillage_MechsArrived"] || !HasMap) return;
             if (Map.mapPawns.FreeColonistsSpawned.Any(x => !x.Dead)) return;
 
             Log.Message($"Should set player won flag");
@@ -221,14 +221,14 @@ namespace CaravanAdventures.CaravanStory
             if (!Map.mapPawns.AllPawnsSpawned.Any(x => x.Faction == Faction.OfMechanoids && !x.Dead && !x.Downed))
             {
                 Log.Message($"Setting player won flag");
-                StoryWC.SetSF("IntroVillage_PlayerWon");
+               CompCache.StoryWC.SetSF("IntroVillage_PlayerWon");
             }
             // todo dialog escaped
             // todo keep and just remove the enter ability in case the player should win the fight?
 
             Current.Game.DeinitAndRemoveMap(Map);
             
-            if (!StoryWC.storyFlags["IntroVillage_PlayerWon"])
+            if (!CompCache.StoryWC.storyFlags["IntroVillage_PlayerWon"])
             {
                 this.Destroy();
                 WorldObject worldObject = WorldObjectMaker.MakeWorldObject(WorldObjectDefOf.DestroyedSettlement);
@@ -237,7 +237,7 @@ namespace CaravanAdventures.CaravanStory
                 Find.WorldObjects.Add(worldObject);
             }
 
-            StoryWC.SetSF("IntroVillage_Finished");
+           CompCache.StoryWC.SetSF("IntroVillage_Finished");
             Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "\n\nYou survivded and made it out alive. But where did all those mechs come from? Best to watch out for more clues...");
             Quests.QuestUtility.CompleteQuest(StoryQuestDefOf.CA_StoryVillage_Arrival);
         }

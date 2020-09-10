@@ -78,7 +78,6 @@ namespace CaravanAdventures.CaravanStory
 
 		private Pawn AddBoss(Map map, Caravan caravan, Room mainRoom)
 		{
-
 			// todo boss not attackign with group -> find error
 			// todo map gen can also fail on just not spawning caskets and therefore no mechs, if that happens, the boss can't be spawned!
 			IntVec3 pos = default;
@@ -311,7 +310,7 @@ namespace CaravanAdventures.CaravanStory
 					{
 						// todo cleanup + notify story to tick on
 						SoundDefOf.Click.PlayOneShot(null);
-						StoryWC.ResetCurrentShrineFlags();
+						CompCache.StoryWC.ResetCurrentShrineFlags();
 						this.Destroy();
 					}
 				};

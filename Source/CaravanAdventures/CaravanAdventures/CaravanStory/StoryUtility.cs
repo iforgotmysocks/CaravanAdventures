@@ -55,7 +55,7 @@ namespace CaravanAdventures.CaravanStory
 
         internal static void GenerateFriendlyVillage()
         {
-            if (StoryWC.storyFlags["IntroVillage_Created"]) return;
+            if (CompCache.StoryWC.storyFlags["IntroVillage_Created"]) return;
             if (!StoryUtility.TryGenerateDistantTile(out var tile, 6, 15))
             {
                 Log.Message($"No tile was generated");
@@ -70,7 +70,7 @@ namespace CaravanAdventures.CaravanStory
             StoryUtility.GetSWC().questCont.Village.Settlement = settlement;
             Quests.QuestUtility.GenerateStoryQuest(StoryQuestDefOf.CA_StoryVillage_Arrival);
 
-            StoryWC.SetSF("IntroVillage_Created");
+           CompCache.StoryWC.SetSF("IntroVillage_Created");
         }
 
         internal static StoryWC GetSWC()
@@ -136,6 +136,11 @@ namespace CaravanAdventures.CaravanStory
             }
 
             return faction;
+        }
+
+        internal static void CreateTradeCaravan()
+        {
+           
         }
 
         public static bool TryGenerateDistantTile(out int newTile, int minDist, int maxDist)
@@ -233,7 +238,7 @@ namespace CaravanAdventures.CaravanStory
             if (Faction.OfPlayerSilentFail != null && sacrilegHunters.RelationWith(Faction.OfPlayer, true) == null) sacrilegHunters.TryMakeInitialRelationsWith(Faction.OfPlayer);
             if (sacrilegHunters != null && Faction.OfPlayerSilentFail != null)
             {
-                if ((!StoryWC.storyFlags["SacrilegHuntersBetrayal"] || ignoreBetrayal))
+                if ((!CompCache.StoryWC.storyFlags["SacrilegHuntersBetrayal"] || ignoreBetrayal))
                 {
                     if (sacrilegHunters.RelationKindWith(Faction.OfPlayerSilentFail) != relationKind)
                     {
@@ -284,7 +289,7 @@ namespace CaravanAdventures.CaravanStory
 
         internal static void CallBombardment(IntVec3 position, Map map, Pawn instigator)
         {
-            Bombardment bombardment = (Bombardment)GenSpawn.Spawn(ThingDefOf.Bombardment, position, map, WipeMode.Vanish);
+            var bombardment = (Bombardment)GenSpawn.Spawn(ThingDefOf.Bombardment, position, map, WipeMode.Vanish);
             bombardment.impactAreaRadius = 7.9f;
             bombardment.explosionRadiusRange = new FloatRange(5.9f, 5.9f);
             bombardment.bombIntervalTicks = 60;

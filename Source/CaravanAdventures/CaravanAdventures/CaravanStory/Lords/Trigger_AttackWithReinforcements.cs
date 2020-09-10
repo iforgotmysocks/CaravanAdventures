@@ -17,7 +17,7 @@ namespace CaravanAdventures.CaravanStory.Lords
 
 		public override bool ActivateOn(Lord lord, TriggerSignal signal)
 		{
-			return StoryWC.storyFlags["IntroVillage_ReinforcementsArrived"];
+			return CompCache.StoryWC.storyFlags["IntroVillage_ReinforcementsArrived"];
 		}
 	}
 }

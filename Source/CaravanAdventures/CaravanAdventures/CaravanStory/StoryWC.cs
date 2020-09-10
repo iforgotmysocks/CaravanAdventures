@@ -12,23 +12,20 @@ using Verse;
 
 namespace CaravanAdventures.CaravanStory
 {
-
-    // todo make own defend base lord job, the current one only checks for the player as attacker
-
     class StoryWC : WorldComponent
     {
-        private static readonly float baseDelayNextShrineReveal = Helper.Debug() ? 1800f : 60000f * 2f;
+        private readonly float baseDelayNextShrineReveal = Helper.Debug() ? 1800f : 60000f * 2f;
         private float shrineRevealCounter = -1f;
         private int ticks = -1;
-        private static float countShrinesCompleted = 0f;
-        private static readonly IntRange timeoutDaysRange = new IntRange(10, 12);
-        private static readonly IntRange shrineDistance = Helper.Debug() ? new IntRange(2, 4) : new IntRange(40, 60);
+        private float countShrinesCompleted = 0f;
+        private readonly IntRange timeoutDaysRange = new IntRange(10, 12);
+        private readonly IntRange shrineDistance = Helper.Debug() ? new IntRange(2, 4) : new IntRange(40, 60);
         private List<AbilityDef> unlockedSpells = new List<AbilityDef>();
         private int bossMissedCounter = 0;
         private bool ranDebugActionsOnceAtStartUp;
 
         public Dictionary<string, int> mechBossKillCounters = new Dictionary<string, int>();
-        public static Dictionary<string, bool> debugFlags = new Dictionary<string, bool>()
+        public Dictionary<string, bool> debugFlags = new Dictionary<string, bool>()
         {
             { "ShowDebugInfo", true },
             { "StoryStartDone", false },
@@ -36,11 +33,13 @@ namespace CaravanAdventures.CaravanStory
             { "DebugAllAbilities", false },
             { "VillageFinished", false },
             { "DebugResetVillagesAndShrines", false },
-            { "showTicks", true },
         };
-        public static Dictionary<string, bool> storyFlags;
+        public Dictionary<string, bool> storyFlags;
         private List<string> flagsToAdd = new List<string>
         {
+            "TradeCaravan_Arrived",
+            "TradeCaravan_DialogFinished",
+
             "IntroVillage_Created",
             "IntroVillage_Entered",
             "IntroVillage_TalkedToFriend",
@@ -62,7 +61,6 @@ namespace CaravanAdventures.CaravanStory
         public override void ExposeData()
         {
             base.ExposeData();
-            Log.Message($"in ExposeData() with state {Scribe.mode}");
             Scribe_Collections.Look(ref storyFlags, "storyFlags", LookMode.Value);
             Scribe_Collections.Look(ref unlockedSpells, "unlockedSpells", LookMode.Def);
             Scribe_Collections.Look(ref mechBossKillCounters, "mechBossKillCounters", LookMode.Value);
@@ -80,8 +78,7 @@ namespace CaravanAdventures.CaravanStory
         public override void FinalizeInit()
         {
             base.FinalizeInit();
-
-            CheckResetStaticWCFields();
+            CompCache.StoryWC = null;
             InitializeStoryFlags();
             InitializeQuestCont();
 
@@ -90,12 +87,6 @@ namespace CaravanAdventures.CaravanStory
                     storyFlags[flag.Key] = true;
 
             if (debugFlags["ShowDebugInfo"]) storyFlags.ToList().ForEach(flag => Log.Message($"{flag.Key} {flag.Value}"));
-        }
-
-        private void CheckResetStaticWCFields()
-        {
-            if (Find.TickManager.TicksGame > 0) return;
-            storyFlags = null;
         }
 
         private void InitializeStoryFlags()
@@ -134,6 +125,7 @@ namespace CaravanAdventures.CaravanStory
             if (ticks > 1200)
             {
                 StoryUtility.GenerateStoryContact();
+                StoryUtility.CreateTradeCaravan();
                 StoryUtility.GenerateFriendlyVillage();
 
                 if (CheckCanStartCountDownOnNewShrine() && !debugFlags["ShrinesDisabled"])
@@ -158,11 +150,6 @@ namespace CaravanAdventures.CaravanStory
         private void RunDebugActionsOnceAtStartUp()
         {
             if (ranDebugActionsOnceAtStartUp) return; 
-            
-            if (debugFlags["showTicks"])
-            {
-                Log.Message($"ticks: {ticks.ToString()}");
-            }
 
             if (debugFlags["DebugResetVillagesAndShrines"])
             {
@@ -176,9 +163,9 @@ namespace CaravanAdventures.CaravanStory
             ranDebugActionsOnceAtStartUp = true;
         }
 
-        public static string[] GetBossDefNames() => new string[] { "CACristalScythe", "CABossMechDevourer" };
+        public string[] GetBossDefNames() => new string[] { "CACristalScythe", "CABossMechDevourer" };
 
-        public static void IncreaseShrineCompleteCounter() => countShrinesCompleted++;
+        public void IncreaseShrineCompleteCounter() => countShrinesCompleted++;
 
         private void TryCreateNewShrine()
         {
@@ -200,12 +187,13 @@ namespace CaravanAdventures.CaravanStory
             }
         }
 
-        public static bool Dg => debugFlags["ShowDebugInfo"];
-        public static void SetSF(string key) => storyFlags[key] = true;
-        public static void SetShrineSF(string postFix) => storyFlags[storyFlags.Keys.FirstOrDefault(x => x.StartsWith(BuildCurrentShrinePrefix() + postFix))] = true;
-        public static void ResetCurrentShrineFlags() => storyFlags.Keys.Where(x => x.StartsWith(BuildCurrentShrinePrefix())).ToList().ForEach(key => storyFlags[key] = false);
-        public static void ResetSFsStartingWith(string start) => storyFlags.Keys.Where(x => x.StartsWith(start)).ToList().ForEach(key => storyFlags[key] = false);
-        public static string BuildCurrentShrinePrefix() => "Shrine" + (countShrinesCompleted + 1) + "_";
+        // SF helper methods used to be static, if the CompCache doesn't work out, turn access to the SFs static again
+        public bool Dg => debugFlags["ShowDebugInfo"];
+        public void SetSF(string key) => storyFlags[key] = true;
+        public void SetShrineSF(string postFix) => storyFlags[storyFlags.Keys.FirstOrDefault(x => x.StartsWith(BuildCurrentShrinePrefix() + postFix))] = true;
+        public void ResetCurrentShrineFlags() => storyFlags.Keys.Where(x => x.StartsWith(BuildCurrentShrinePrefix())).ToList().ForEach(key => storyFlags[key] = false);
+        public void ResetSFsStartingWith(string start) => storyFlags.Keys.Where(x => x.StartsWith(start)).ToList().ForEach(key => storyFlags[key] = false);
+        public string BuildCurrentShrinePrefix() => "Shrine" + (countShrinesCompleted + 1) + "_";
 
         public List<AbilityDef> GetUnlockedSpells() => unlockedSpells;
 

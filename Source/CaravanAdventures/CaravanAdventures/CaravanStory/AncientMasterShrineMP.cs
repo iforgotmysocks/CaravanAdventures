@@ -57,14 +57,14 @@ namespace CaravanAdventures.CaravanStory
 				GetComponent<TimedDetectionPatrols>().Init();
                 GetComponent<TimedDetectionPatrols>().StartDetectionCountdown(60000, -1);
             }
-			StoryWC.storyFlags[StoryWC.BuildCurrentShrinePrefix() + "Created"] = true;
+			CompCache.StoryWC.storyFlags[CompCache.StoryWC.BuildCurrentShrinePrefix() + "Created"] = true;
 		}
 
         public override bool ShouldRemoveMapNow(out bool alsoRemoveWorldObject)
 		{
 			if (!base.Map.mapPawns.AnyPawnBlockingMapRemoval && boss == null || !base.Map.mapPawns.AnyPawnBlockingMapRemoval && boss != null && boss.Dead)
 			{
-				if (boss == null) StoryWC.ResetCurrentShrineFlags();
+				if (boss == null) CompCache.StoryWC.ResetCurrentShrineFlags();
 				alsoRemoveWorldObject = true;
 				return true;
 			}
@@ -134,8 +134,8 @@ namespace CaravanAdventures.CaravanStory
 			StoryUtility.GetSWC().GetUnlockedSpells().Add(spell);
 			if (gifted != null) gifted.abilities.GainAbility(spell);
 
-			StoryWC.SetShrineSF("Completed");
-			StoryWC.IncreaseShrineCompleteCounter();
+			CompCache.StoryWC.SetShrineSF("Completed");
+			CompCache.StoryWC.IncreaseShrineCompleteCounter();
 			StoryUtility.GetSWC().mechBossKillCounters[boss.def.defName] = StoryUtility.GetSWC().mechBossKillCounters.TryGetValue(boss.def.defName, out var result) ? result + 1 : 0;
 
 			BossDefeatedDialog(gifted, boss, spell);
@@ -195,7 +195,7 @@ namespace CaravanAdventures.CaravanStory
 			this.wonBattle = true;
 		}
 
-		private Pawn FindBossNew() => Map.mapPawns.AllPawns.FirstOrDefault(x => StoryWC.GetBossDefNames().Contains(x.def.defName));
-		private Pawn FindBoss() => this?.Map?.spawnedThings?.FirstOrDefault(x => x is Pawn pawn && StoryWC.GetBossDefNames().Contains(pawn.def.defName)) as Pawn ?? null;
+		private Pawn FindBossNew() => Map.mapPawns.AllPawns.FirstOrDefault(x => CompCache.StoryWC.GetBossDefNames().Contains(x.def.defName));
+		private Pawn FindBoss() => this?.Map?.spawnedThings?.FirstOrDefault(x => x is Pawn pawn && CompCache.StoryWC.GetBossDefNames().Contains(pawn.def.defName)) as Pawn ?? null;
 	}
 }

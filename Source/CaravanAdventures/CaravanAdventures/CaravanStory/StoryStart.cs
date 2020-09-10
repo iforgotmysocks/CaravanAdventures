@@ -50,7 +50,7 @@ namespace CaravanAdventures.CaravanStory
             base.MapComponentTick();
             DrawTreeQuestionMark();
 
-            if (ticks >= 2000 && StoryWC.storyFlags["IntroVillage_Finished"] || StoryWC.debugFlags["VillageFinished"])
+            if (ticks >= 2000 &&CompCache.StoryWC.storyFlags["IntroVillage_Finished"] ||CompCache.StoryWC.debugFlags["VillageFinished"])
             {
                 AddTalkTreeAction();
                 AddTreeWhisper();
@@ -68,7 +68,7 @@ namespace CaravanAdventures.CaravanStory
 
         private void AddTalkTreeAction()
         {
-            if (StoryWC.storyFlags["Start_InitialTreeAddTalkOption"]) return;
+            if (CompCache.StoryWC.storyFlags["Start_InitialTreeAddTalkOption"]) return;
 
             var tree = map.spawnedThings.FirstOrDefault(x => x.def.defName == "Plant_TreeAnima");
             if (tree == null)
@@ -94,7 +94,7 @@ namespace CaravanAdventures.CaravanStory
             });
             comp.Enabled = true;
             comp.ShowQuestionMark = true;
-            StoryWC.storyFlags["Start_InitialTreeAddTalkOption"] = true;
+           CompCache.StoryWC.storyFlags["Start_InitialTreeAddTalkOption"] = true;
         }
 
         private void DisableTreeTalkAction()
@@ -111,7 +111,7 @@ namespace CaravanAdventures.CaravanStory
 
         private void AddTreeWhisper()
         {
-            if (StoryWC.storyFlags["Start_InitialTreeWhisper"]) return;
+            if (CompCache.StoryWC.storyFlags["Start_InitialTreeWhisper"]) return;
             var tree = map.spawnedThings.FirstOrDefault(x => x.def.defName == "Plant_TreeAnima");
             if (tree == null)
             {
@@ -121,14 +121,14 @@ namespace CaravanAdventures.CaravanStory
 
             var info = SoundInfo.InMap(tree, MaintenanceType.None);
             animaTreeWhipserSustainer = DefDatabase<SoundDef>.GetNamed("AnimaTreeWhispers").TrySpawnSustainer(info);
-            if (animaTreeWhipserSustainer != null) StoryWC.storyFlags["Start_InitialTreeWhisper"] = true;
+            if (animaTreeWhipserSustainer != null)CompCache.StoryWC.storyFlags["Start_InitialTreeWhisper"] = true;
         }
 
         public void StoryStartDialog(Pawn initiator, Thing addressed)
         {
             Log.Message($"Story starts initiated by {initiator.Name} and {addressed.def.defName}");
             DiaNode diaNode = null;
-            if (!StoryWC.storyFlags["Start_CanReceiveGift"])
+            if (!CompCache.StoryWC.storyFlags["Start_CanReceiveGift"])
             {
                 var endDiaNodeAccepted = new DiaNode("Story_Start_Dia1_Me_End_Accepted".Translate());
                 endDiaNodeAccepted.options.Add(new DiaOption("Story_Start_Dia1_Me_End_Bye".Translate()) { action = () => GrantAncientGift(initiator, addressed), resolveTree = true });
@@ -158,11 +158,11 @@ namespace CaravanAdventures.CaravanStory
             MoteMaker.MakeStaticMote(initiator.Position, initiator.Map, ThingDefOf.Mote_PsycastAreaEffect, 10f);
             SoundDefOf.PsycastPsychicPulse.PlayOneShot(new TargetInfo(initiator));
 
-            StoryWC.storyFlags["Start_CanReceiveGift"] = true;
+           CompCache.StoryWC.storyFlags["Start_CanReceiveGift"] = true;
             CheckEnsureGifted(initiator);
             AddAdditionalSpells(initiator);
             if (animaTreeWhipserSustainer != null && !animaTreeWhipserSustainer.Ended) animaTreeWhipserSustainer.End();
-            StoryWC.storyFlags["Start_ReceivedGift"] = true;
+           CompCache.StoryWC.storyFlags["Start_ReceivedGift"] = true;
         }
 
         private void AddAdditionalSpells(Pawn chosen)
@@ -175,7 +175,7 @@ namespace CaravanAdventures.CaravanStory
 
         public void CheckEnsureGifted(Pawn pawn = null)
         {
-            if (!StoryWC.storyFlags["Start_CanReceiveGift"]) return;
+            if (!CompCache.StoryWC.storyFlags["Start_CanReceiveGift"]) return;
             var pawns = new List<Pawn>();
             if (pawn == null)
             {
@@ -201,7 +201,7 @@ namespace CaravanAdventures.CaravanStory
         
         private void AddUnlockedAbilities(Pawn chosen)
         {
-            var abilityDefs = StoryWC.debugFlags["DebugAllAbilities"] 
+            var abilityDefs =CompCache.StoryWC.debugFlags["DebugAllAbilities"] 
                 ? DefDatabase<AbilityDef>.AllDefsListForReading.Where(x => x.defName.StartsWith("Ancient"))
                 : StoryUtility.GetSWC().GetUnlockedSpells();
            
@@ -217,11 +217,11 @@ namespace CaravanAdventures.CaravanStory
         {
             base.MapRemoved();
             // todo reset certain storyFlags if required so story can be triggered or continued on another tile?
-            if (currentStoryTrigger && !StoryWC.storyFlags["Start_ReceivedGift"])
+            if (currentStoryTrigger && !CompCache.StoryWC.storyFlags["Start_ReceivedGift"])
             {
-                foreach (var key in StoryWC.storyFlags.Keys.ToList())
+                foreach (var key in CompCache.StoryWC.storyFlags.Keys.ToList())
                 {
-                    StoryWC.storyFlags[key] = false;
+                   CompCache.StoryWC.storyFlags[key] = false;
                 }
             }
         }
