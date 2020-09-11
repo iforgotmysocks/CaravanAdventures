@@ -11,10 +11,14 @@ namespace CaravanAdventures.CaravanStory.Quests
     {
         private  QuestCont_Village village;
         internal  QuestCont_Village Village { get => village; set => village = value; }
+        private QuestCont_FriendlyCaravan friendlyCaravan;
+        internal QuestCont_FriendlyCaravan FriendlyCaravan { get => friendlyCaravan; set => friendlyCaravan = value; }
+
 
         public void ExposeData()
         {
             Scribe_Deep.Look(ref village, "village");
+            Scribe_Deep.Look(ref friendlyCaravan, "friendlyCaravan");
         }
     }
 }

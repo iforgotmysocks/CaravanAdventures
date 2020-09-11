@@ -94,7 +94,7 @@ namespace CaravanAdventures.CaravanStory
             });
             comp.Enabled = true;
             comp.ShowQuestionMark = true;
-           CompCache.StoryWC.storyFlags["Start_InitialTreeAddTalkOption"] = true;
+            CompCache.StoryWC.storyFlags["Start_InitialTreeAddTalkOption"] = true;
         }
 
         private void DisableTreeTalkAction()
@@ -203,7 +203,7 @@ namespace CaravanAdventures.CaravanStory
         {
             var abilityDefs =CompCache.StoryWC.debugFlags["DebugAllAbilities"] 
                 ? DefDatabase<AbilityDef>.AllDefsListForReading.Where(x => x.defName.StartsWith("Ancient"))
-                : StoryUtility.GetSWC().GetUnlockedSpells();
+                : CompCache.StoryWC.GetUnlockedSpells();
            
             foreach (var abilityDef in abilityDefs)
             {

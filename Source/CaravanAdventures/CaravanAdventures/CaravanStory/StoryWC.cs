@@ -125,7 +125,7 @@ namespace CaravanAdventures.CaravanStory
             if (ticks > 1200)
             {
                 StoryUtility.GenerateStoryContact();
-                StoryUtility.CreateTradeCaravan();
+                StoryUtility.CheckCreateTradeCaravan();
                 StoryUtility.GenerateFriendlyVillage();
 
                 if (CheckCanStartCountDownOnNewShrine() && !debugFlags["ShrinesDisabled"])

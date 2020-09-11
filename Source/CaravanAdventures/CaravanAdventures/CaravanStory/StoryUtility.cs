@@ -67,7 +67,7 @@ namespace CaravanAdventures.CaravanStory
             settlement.Tile = tile;
             settlement.Name = SettlementNameGenerator.GenerateSettlementName(settlement, null);
             Find.WorldObjects.Add(settlement);
-            StoryUtility.GetSWC().questCont.Village.Settlement = settlement;
+            CompCache.StoryWC.questCont.Village.Settlement = settlement;
             Quests.QuestUtility.GenerateStoryQuest(StoryQuestDefOf.CA_StoryVillage_Arrival);
 
            CompCache.StoryWC.SetSF("IntroVillage_Created");
@@ -138,9 +138,11 @@ namespace CaravanAdventures.CaravanStory
             return faction;
         }
 
-        internal static void CreateTradeCaravan()
+        internal static void CheckCreateTradeCaravan()
         {
-           
+            // todo check if caravan should be created ... time, player has map and base etc..
+
+            //CompCache.StoryWC.questCont.FriendlyCaravan.CreateFriendlyCaravan(map);
         }
 
         public static bool TryGenerateDistantTile(out int newTile, int minDist, int maxDist)
@@ -159,23 +161,23 @@ namespace CaravanAdventures.CaravanStory
 
         internal static void AssignVillageDialog()
         {
-            if (StoryUtility.GetSWC().questCont?.Village?.StoryContact == null)
+            if (CompCache.StoryWC.questCont?.Village?.StoryContact == null)
             {
                 Log.Message("Skipping, pawn doesn't exist");
                 return;
             }
-            var comp = StoryUtility.GetSWC().questCont.Village.StoryContact.TryGetComp<CompTalk>();
+            var comp = CompCache.StoryWC.questCont.Village.StoryContact.TryGetComp<CompTalk>();
             if (comp == null)
             {
-                Log.Warning($"CompTalk on pawn {StoryUtility.GetSWC().questCont?.Village?.StoryContact?.Name} is null, which shouldn't happen");
+                Log.Warning($"CompTalk on pawn {CompCache.StoryWC.questCont?.Village?.StoryContact?.Name} is null, which shouldn't happen");
                 comp = new CompTalk();
-                comp.parent = StoryUtility.GetSWC().questCont.Village.StoryContact;
-                StoryUtility.GetSWC().questCont.Village.StoryContact.AllComps.Add(comp);
+                comp.parent = CompCache.StoryWC.questCont.Village.StoryContact;
+                CompCache.StoryWC.questCont.Village.StoryContact.AllComps.Add(comp);
             }
             comp.actionsCt.Add(new TalkSet()
             {
                 Id = "StoryStart_PawnDia",
-                Addressed = StoryUtility.GetSWC().questCont.Village.StoryContact,
+                Addressed = CompCache.StoryWC.questCont.Village.StoryContact,
                 Initiator = null,
                 ClassName = typeof(StoryVillageMP).ToString(),
                 MethodName = "ConversationFinished",
@@ -187,7 +189,7 @@ namespace CaravanAdventures.CaravanStory
 
         internal static void GenerateStoryContact()
         {
-            if (StoryUtility.GetSWC().questCont.Village.StoryContact != null && !StoryUtility.GetSWC().questCont.Village.StoryContact.Dead) return;
+            if (CompCache.StoryWC.questCont.Village.StoryContact != null && !CompCache.StoryWC.questCont.Village.StoryContact.Dead) return;
             var girl = PawnGenerator.GeneratePawn(new PawnGenerationRequest()
             {
                 FixedBiologicalAge = 22,
@@ -208,7 +210,7 @@ namespace CaravanAdventures.CaravanStory
             girl.story.traits.GainTrait(new Trait(TraitDefOf.Beauty, 2));
 
             if (!Find.WorldPawns.Contains(girl)) Find.WorldPawns.PassToWorld(girl, PawnDiscardDecideMode.KeepForever);
-            StoryUtility.GetSWC().questCont.Village.StoryContact = girl;
+            CompCache.StoryWC.questCont.Village.StoryContact = girl;
         }
 
         internal static Pawn GetGiftedPawn() => PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction?.FirstOrDefault(x => (x?.RaceProps?.Humanlike ?? false) && x.health.hediffSet.GetFirstHediffOfDef(HediffDef.Named("AncientGift")) != null);
@@ -303,7 +305,7 @@ namespace CaravanAdventures.CaravanStory
         internal static Pawn GetFittingMechBoss()
         {
             var possibleBosses = DefDatabase<PawnKindDef>.AllDefsListForReading.Where(x => x.RaceProps.IsMechanoid && x.defName.ToLower().StartsWith("cabossmech"));
-            var selected = possibleBosses.FirstOrDefault(boss => !StoryUtility.GetSWC().mechBossKillCounters?.Keys?.ToList()?.Contains(boss.defName) ?? false) ?? possibleBosses.RandomElement();
+            var selected = possibleBosses.FirstOrDefault(boss => !CompCache.StoryWC.mechBossKillCounters?.Keys?.ToList()?.Contains(boss.defName) ?? false) ?? possibleBosses.RandomElement();
             var bossPawn = PawnGenerator.GeneratePawn(selected, Faction.OfMechanoids);
             if (bossPawn != null) bossPawn.health.AddHediff(DefDatabase<HediffDef>.GetNamed(bossPawn.def.GetModExtension<MechChipModExt>().mechChipDefName));
             return bossPawn;

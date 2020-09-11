@@ -46,7 +46,7 @@ namespace CaravanAdventures.CaravanStory
             }, "GeneratingMap", false, new Action<Exception>(GameAndMapInitExceptionHandlers.ErrorWhileGeneratingMap), true);
             LongEventHandler.QueueLongEvent(delegate ()
             {
-                var storyChar = StoryUtility.GetSWC().questCont.Village.StoryContact;
+                var storyChar = CompCache.StoryWC.questCont.Village.StoryContact;
                 //var orGenerateMap = GetOrGenerateMapUtility.GetOrGenerateMap(this.Tile, null);
                 var label = "StoryVillageArrivedLetterTitle".Translate(Label.ApplyTag(TagType.Settlement, Faction.GetUniqueLoadID()));
                 var text = "StoryVillageArrivedLetterMessage".Translate(Label.ApplyTag(TagType.Settlement, Faction.GetUniqueLoadID())).CapitalizeFirst();
@@ -176,7 +176,7 @@ namespace CaravanAdventures.CaravanStory
         private void CheckMainStoryCharDiedOrLeft()
         {
             if (mainCharLeftOrDied) return;
-            var storyChar = StoryUtility.GetSWC().questCont.Village.StoryContact;
+            var storyChar = CompCache.StoryWC.questCont.Village.StoryContact;
             if (!CompCache.StoryWC.storyFlags["IntroVillage_MechsArrived"]) return;
             if (Map.mapPawns.AllPawnsSpawned.Contains(storyChar) && !storyChar.Dead && !storyChar.Downed) return;
 
@@ -255,7 +255,7 @@ namespace CaravanAdventures.CaravanStory
             diaNode = new DiaNode("StoryVillage_Dia2_1".Translate());
             diaNode.options.Add(new DiaOption("StoryVillage_Dia2_1_Option1".Translate()) { resolveTree = true });
 
-            TaggedString taggedString = "StoryVillage_Dia2_Title".Translate(StoryUtility.GetSWC().questCont.Village.StoryContact.NameShortColored);
+            TaggedString taggedString = "StoryVillage_Dia2_Title".Translate(CompCache.StoryWC.questCont.Village.StoryContact.NameShortColored);
             Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
             Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
         }

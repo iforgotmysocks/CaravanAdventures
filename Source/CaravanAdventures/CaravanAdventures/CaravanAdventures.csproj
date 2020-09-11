@@ -106,6 +106,7 @@
     <Compile Include="CaravanStory\Lords\Trigger_AttackWithReinforcements.cs" />
     <Compile Include="CaravanStory\Lords\Trigger_ChanceOnMechHarmNPCBuilding.cs" />
     <Compile Include="CaravanStory\Quests\QuestCont.cs" />
+    <Compile Include="CaravanStory\Quests\QuestCont_FriendlyCaravan.cs" />
     <Compile Include="CaravanStory\Quests\QuestCont_Village.cs" />
     <Compile Include="CaravanStory\Quests\QuestNode_StoryVillage_Arrival.cs" />
     <Compile Include="CaravanStory\Quests\QuestPart_StoryVillage_Arrived.cs" />

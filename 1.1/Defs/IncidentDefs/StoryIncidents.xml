@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+  <IncidentDef>
+    <defName>CAFriendlyCaravan</defName>
+    <label>damsel in distress</label>
+    <category>ThreatSmall</category>
+    <targetTags>
+      <li>Caravan</li>
+    </targetTags>
+    <workerClass>CaravanAdventures.CaravanStory.IncidentWorker_FriendlyCaravanVisit</workerClass>
+    <pointsScaleable>true</pointsScaleable>
+    <tale>CaravanDemand</tale>
+    <mtbDaysByBiome>
+      <!-- todo set temp forest 20 again-->
+      <TemperateForest>20</TemperateForest>
+      <BorealForest>20</BorealForest>
+      <TropicalRainforest>20</TropicalRainforest>
+      <AridShrubland>20</AridShrubland>
+      <Desert>30</Desert>
+      <Tundra>30</Tundra>
+      <TropicalSwamp>30</TropicalSwamp>
+      <TemperateSwamp>30</TemperateSwamp>
+      <ColdBog>35</ColdBog>
+      <ExtremeDesert>35</ExtremeDesert>
+      <IceSheet>40</IceSheet>
+      <SeaIce>60</SeaIce>
+    </mtbDaysByBiome>
+  </IncidentDef>
+
+</Defs>

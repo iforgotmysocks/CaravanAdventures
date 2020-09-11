@@ -15,5 +15,6 @@ namespace CaravanAdventures.CaravanStory
     {
 #pragma warning disable CS0649
         public static FactionDef SacrilegHunters;
+        public static IncidentDef CAFriendlyCaravan;
     }
 }
