@@ -138,13 +138,6 @@ namespace CaravanAdventures.CaravanStory
             return faction;
         }
 
-        internal static void CheckCreateTradeCaravan()
-        {
-            // todo check if caravan should be created ... time, player has map and base etc..
-
-            //CompCache.StoryWC.questCont.FriendlyCaravan.CreateFriendlyCaravan(map);
-        }
-
         public static bool TryGenerateDistantTile(out int newTile, int minDist, int maxDist)
         {
             int startTile = -1;

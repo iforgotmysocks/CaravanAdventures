@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CaravanAdventures.CaravanStory.Quests;
 using RimWorld;
 using Verse;
 using Verse.AI;
@@ -42,13 +43,22 @@ namespace CaravanAdventures.CaravanStory
                     this.FailOn(() => true);
                     return;
                 }
-                var instance = FindComponentWithName(specificAction.ClassName);
+                var instance = specificAction.ClassName.Contains("QuestCont_") 
+                    ? GetQuestCont(specificAction.ClassName) 
+                    : FindComponentWithName(specificAction.ClassName);
                 var methodInfo = instance.GetType().GetMethod(specificAction.MethodName);
                 methodInfo.Invoke(instance, new object[] { pawn, Target });
                 specificAction.Finished = true;
             };
             yield return TalkTo;
             yield break;
+        }
+
+        private object GetQuestCont(string className)
+        {
+            object questCont = null;
+            questCont = typeof(QuestCont).GetProperty(className.Split('_').LastOrDefault())?.GetValue(CompCache.StoryWC.questCont);
+            return questCont;
         }
 
         private object FindComponentWithName(string className)

@@ -14,7 +14,9 @@ namespace CaravanAdventures.CaravanStory
 {
     class StoryWC : WorldComponent
     {
-        private readonly float baseDelayNextShrineReveal = Helper.Debug() ? 1800f : 60000f * 2f;
+        private readonly float baseDelayFriendlyCaravan = Helper.Debug() ? 1000f : 60000f * 5f;
+        private float friendlyCaravanCounter = -1f;
+        private readonly float baseDelayNextShrineReveal = Helper.Debug() ? 1800f : 60000f * 3f;
         private float shrineRevealCounter = -1f;
         private int ticks = -1;
         private float countShrinesCompleted = 0f;
@@ -29,6 +31,7 @@ namespace CaravanAdventures.CaravanStory
         {
             { "ShowDebugInfo", true },
             { "StoryStartDone", false },
+            { "FriendlyCaravanDisabled", false },
             { "ShrinesDisabled", false },
             { "DebugAllAbilities", false },
             { "VillageFinished", false },
@@ -37,6 +40,7 @@ namespace CaravanAdventures.CaravanStory
         public Dictionary<string, bool> storyFlags;
         private List<string> flagsToAdd = new List<string>
         {
+            "TradeCaravan_InitCountDownStarted",
             "TradeCaravan_Arrived",
             "TradeCaravan_DialogFinished",
 
@@ -64,15 +68,17 @@ namespace CaravanAdventures.CaravanStory
             Scribe_Collections.Look(ref storyFlags, "storyFlags", LookMode.Value);
             Scribe_Collections.Look(ref unlockedSpells, "unlockedSpells", LookMode.Def);
             Scribe_Collections.Look(ref mechBossKillCounters, "mechBossKillCounters", LookMode.Value);
-            Scribe_Values.Look(ref ticks, "ticks");
-            Scribe_Values.Look(ref shrineRevealCounter, "shrineRevealCounter");
-            Scribe_Values.Look(ref countShrinesCompleted, "countShrinesCompleted");
-            Scribe_Values.Look(ref bossMissedCounter, "bossMissedCounter");
+            Scribe_Values.Look(ref ticks, "ticks", -1);
+            Scribe_Values.Look(ref friendlyCaravanCounter, "friendlyCaravanCounter", -1);
+            Scribe_Values.Look(ref shrineRevealCounter, "shrineRevealCounter", -1);
+            Scribe_Values.Look(ref countShrinesCompleted, "countShrinesCompleted", 0);
+            Scribe_Values.Look(ref bossMissedCounter, "bossMissedCounter", 0);
             Scribe_Deep.Look(ref questCont, "questCont");
         }
 
         public StoryWC(World world) : base(world)
         {
+            baseDelayFriendlyCaravan = Helper.Debug() ? 1000f : 60000f * 5f;
         }
 
         public override void FinalizeInit()
@@ -114,6 +120,11 @@ namespace CaravanAdventures.CaravanStory
                 Log.Message($"QuestComp Village was null");
                 questCont.Village = new QuestCont_Village();
             }
+            if (questCont.FriendlyCaravan == null)
+            {
+                Log.Message($"QuestComp FriendlyCaravan was null");
+                questCont.FriendlyCaravan = new QuestCont_FriendlyCaravan();
+            }
         }
 
         public override void WorldComponentTick()
@@ -125,7 +136,13 @@ namespace CaravanAdventures.CaravanStory
             if (ticks > 1200)
             {
                 StoryUtility.GenerateStoryContact();
-                StoryUtility.CheckCreateTradeCaravan();
+                if (CheckCanStartFriendlyCaravanCounter() && !debugFlags["FriendlyCaravanDisabled"])
+                {
+                    if (Dg) Log.Message("friendlycaravan counter running" + friendlyCaravanCounter);
+                    friendlyCaravanCounter = baseDelayFriendlyCaravan;
+                    SetSF("TradeCaravan_InitCountDownStarted");
+                }
+
                 StoryUtility.GenerateFriendlyVillage();
 
                 if (CheckCanStartCountDownOnNewShrine() && !debugFlags["ShrinesDisabled"])
@@ -137,13 +154,11 @@ namespace CaravanAdventures.CaravanStory
 
                 ticks = 0;
             }
-
-            if (shrineRevealCounter == 0)
-            {
-                TryCreateNewShrine();
-            }
-
+            if (friendlyCaravanCounter == 0) CompCache.StoryWC.questCont.FriendlyCaravan.TryCreateFriendlyCaravan(ref friendlyCaravanCounter);
+            if (shrineRevealCounter == 0) TryCreateNewShrine(ref shrineRevealCounter);
+            
             ticks++;
+            friendlyCaravanCounter--;
             shrineRevealCounter--;
         }
 
@@ -167,7 +182,7 @@ namespace CaravanAdventures.CaravanStory
 
         public void IncreaseShrineCompleteCounter() => countShrinesCompleted++;
 
-        private void TryCreateNewShrine()
+        private void TryCreateNewShrine(ref float shrineRevealCounter)
         {
             // todo Create own find method that keeps the same distance from bases and caravans
             // -> after an unsuccesfull attempt, select tile that supports it for sure.
@@ -194,15 +209,20 @@ namespace CaravanAdventures.CaravanStory
         public void ResetCurrentShrineFlags() => storyFlags.Keys.Where(x => x.StartsWith(BuildCurrentShrinePrefix())).ToList().ForEach(key => storyFlags[key] = false);
         public void ResetSFsStartingWith(string start) => storyFlags.Keys.Where(x => x.StartsWith(start)).ToList().ForEach(key => storyFlags[key] = false);
         public string BuildCurrentShrinePrefix() => "Shrine" + (countShrinesCompleted + 1) + "_";
-
         public List<AbilityDef> GetUnlockedSpells() => unlockedSpells;
-
+        
+        // todo added !storyFlags.Any(x => x.Key.StartsWith("TradeCaravan_") && x.Value == false) && to both sides of the condition, check if that works alright
         private bool CheckCanStartCountDownOnNewShrine() =>
-            !storyFlags.Any(x => x.Key.StartsWith("Start_") && x.Value == false)
+            !storyFlags.Any(x => x.Key.StartsWith("TradeCaravan_") && x.Value == false)
+            && !storyFlags.Any(x => x.Key.StartsWith("Start_") && x.Value == false)
             && countShrinesCompleted == 0 && !storyFlags.Any(x => x.Key == BuildCurrentShrinePrefix() + "InitCountDownStarted" && x.Value == true)
-            || !storyFlags.Any(x => x.Key.StartsWith("Start_") && x.Value == false)
+            || !storyFlags.Any(x => x.Key.StartsWith("TradeCaravan_") && x.Value == false)
+            && !storyFlags.Any(x => x.Key.StartsWith("Start_") && x.Value == false)
             && !storyFlags.Any(x => x.Key == BuildCurrentShrinePrefix() + "Completed" && x.Value == true)
             && !storyFlags.Any(x => x.Key == BuildCurrentShrinePrefix() + "InitCountDownStarted" && x.Value == true);
+
+        // todo - incomplete
+        private bool CheckCanStartFriendlyCaravanCounter() => !storyFlags["TradeCaravan_InitCountDownStarted"];
 
     }
 }

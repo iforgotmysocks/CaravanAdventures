@@ -48,7 +48,7 @@ namespace CaravanAdventures.CaravanStory.Quests
             Log.Message($"Story starts initiated by {initiator.Name} and {addressed.def.defName}");
             DiaNode diaNode = null;
             var endDiaNodeAccepted = new DiaNode("StoryVillage_Dia1_3".Translate());
-            endDiaNodeAccepted.options.Add(new DiaOption("StoryVillage_Dia1_3_Option1".Translate()) { action = () => Log.Message("todo"), resolveTree = true });
+            endDiaNodeAccepted.options.Add(new DiaOption("StoryVillage_Dia1_3_Option1".Translate()) { action = () => ConversationFinished(), resolveTree = true });
 
             var subDiaNode = new DiaNode("StoryVillage_Dia1_2".Translate());
             subDiaNode.options.Add(new DiaOption("StoryVillage_Dia1_2_Option1".Translate()) { link = endDiaNodeAccepted });
@@ -62,24 +62,41 @@ namespace CaravanAdventures.CaravanStory.Quests
             Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
         }
 
-        public void CreateFriendlyCaravan(Map map)
+        private void ConversationFinished()
         {
-            CompCache.StoryWC.SetSF("IntroVillage_TalkedToFriend");
+            // todo maybe get lord and have them leave early?
+            Log.Message($"Conversation finished");
+        }
+
+        public void TryCreateFriendlyCaravan(ref float friendlyCaravanCounter, Map map = null)
+        {
+            Log.Message($"creating caravan");
+            var selectedMap = map ?? Find.Maps.Where(cmap => cmap.ParentFaction == Faction.OfPlayerSilentFail)?.OrderByDescending(cmap => cmap.wealthWatcher.WealthItems)?.FirstOrDefault();
+            if (selectedMap == null)
+            {
+                Log.Message($"Story caravan couldn't be created, no player map found");
+                friendlyCaravanCounter = 1000;
+                return;
+            }
+
+            StoryUtility.EnsureSacrilegHunters(FactionRelationKind.Ally);
+
+            //CompCache.StoryWC.SetSF("IntroVillage_TalkedToFriend");
             //Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillage_QuestUpdate_MechsArrived".Translate(addressed.NameShortColored));
 
             var incidentParms = new IncidentParms
             {
-                target = map,
+                target = selectedMap,
                 //incidentParms.points = StorytellerUtility.DefaultThreatPointsNow(incidentParms.target) * 2.5f;
-                points = 32000,
-                faction = Faction.OfMechanoids,
+                points = 10000,
+                faction = StoryUtility.FactionOfSacrilegHunters,
                 // todo - find out how to ensure mixed pawngroupmakerkinds
                 raidArrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn
             };
-            Log.Message($"Default threat points: {StorytellerUtility.DefaultThreatPointsNow(incidentParms.target)}");
-            IncidentDefOf.RaidEnemy.Worker.TryExecute(incidentParms);
+            
+            StoryDefOf.CAFriendlyCaravan.Worker.TryExecute(incidentParms);
 
-            CompCache.StoryWC.SetSF("IntroVillage_MechsArrived");
+            CompCache.StoryWC.SetSF("TradeCaravan_Arrived");
         }
 
         public void ExposeData()
