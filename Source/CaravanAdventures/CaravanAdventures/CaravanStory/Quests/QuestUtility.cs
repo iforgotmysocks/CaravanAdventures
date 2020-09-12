@@ -13,8 +13,13 @@ namespace CaravanAdventures.CaravanStory.Quests
 {
     class QuestUtility
     {
-        public static void GenerateStoryQuest(QuestScriptDef questDef, bool directlyAccept = true, string questName = "", object[] questNameParms = null, string questDescription = "", object[] questDescriptionParms = null)
+        public static void GenerateStoryQuest(QuestScriptDef questDef, bool directlyAccept = true, string questName = "", object[] questNameParms = null, string questDescription = "", object[] questDescriptionParms = null, bool ignoreOneQuestPerTypeLimit = false)
         {
+            if (Find.QuestManager.QuestsListForReading.Any(quest => quest.root == questDef) && !ignoreOneQuestPerTypeLimit)
+            {
+                Log.Warning($"Tried to start Quest {questDef.defName} despite it already exists. Skipping...");
+                return;
+            }
             Slate slate = new Slate();
             if (questDef.CanRun(slate))
             {
@@ -106,7 +111,7 @@ namespace CaravanAdventures.CaravanStory.Quests
         public static void AppendQuestDescription(QuestScriptDef questDef, TaggedString text, bool avoidAdditionalSpaceFormatting = false)
         {
             var quest = Find.QuestManager.QuestsListForReading.FirstOrDefault(x => x.root == questDef);
-            if (!avoidAdditionalSpaceFormatting) text += "\n\n";
+            if (!avoidAdditionalSpaceFormatting) text = "\n\n" + text;
             if (quest != null) quest.description += text;
         }
     }

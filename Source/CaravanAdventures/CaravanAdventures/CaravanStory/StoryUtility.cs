@@ -120,10 +120,10 @@ namespace CaravanAdventures.CaravanStory
         public static void FreshenUpPawn(Pawn pawn)
         {
             HealthUtility.HealNonPermanentInjuriesAndRestoreLegs(pawn);
-            pawn.needs.food.CurLevel = pawn.needs.food.MaxLevel;
-            pawn.needs.joy.CurLevel = pawn.needs.joy.MaxLevel;
-            pawn.needs.rest.CurLevel = pawn.needs.rest.MaxLevel;
-            pawn.needs.comfort.CurLevel = pawn.needs.comfort.MaxLevel;
+            if (pawn?.needs?.food != null) pawn.needs.food.CurLevel = pawn.needs.food.MaxLevel;
+            if (pawn?.needs?.joy != null) pawn.needs.joy.CurLevel = pawn.needs.joy.MaxLevel;
+            if (pawn?.needs?.rest != null) pawn.needs.rest.CurLevel = pawn.needs.rest.MaxLevel;
+            if (pawn?.needs?.comfort != null) pawn.needs.comfort.CurLevel = pawn.needs.comfort.MaxLevel;
         }
 
         public static StoryWC GetSWC()
@@ -216,7 +216,7 @@ namespace CaravanAdventures.CaravanStory
                 AllowAddictions = false,
                 AllowGay = false,
                 AllowDead = false,
-                Faction = StoryUtility.EnsureSacrilegHunters(FactionRelationKind.Ally),
+                Faction = StoryUtility.EnsureSacrilegHunters(),
                 KindDef = PawnKindDefOf.Villager,
             });
 

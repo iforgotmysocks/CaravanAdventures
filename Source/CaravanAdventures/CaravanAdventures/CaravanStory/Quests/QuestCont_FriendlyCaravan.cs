@@ -104,24 +104,20 @@ namespace CaravanAdventures.CaravanStory.Quests
                 return;
             }
 
-            if (!CompCache.StoryWC.storyFlags["TradeCaravan_Arrived"])
-            {
-                QuestUtility.GenerateStoryQuest(StoryQuestDefOf.CA_TradeCaravan, true, "TradeCaravanQuestName", null, "TradeCaravanQuestDesc");
-                StoryUtility.AssignDialog("FriendlyCaravan_Conversation",
-                    CompCache.StoryWC.questCont.Village.StoryContact,
-                    typeof(QuestCont_FriendlyCaravan).GetType().ToString(),
-                    "FriendlyCaravan_Conversation");
-
-                Log.Message($"added conv to mainpawn {CompCache.StoryWC.questCont.Village.StoryContact.Name}");
-            }
+            if (!CompCache.StoryWC.storyFlags["TradeCaravan_Arrived"]) QuestUtility.GenerateStoryQuest(StoryQuestDefOf.CA_TradeCaravan, true, "TradeCaravanQuestName", null, "TradeCaravanQuestDesc");
             StoryUtility.EnsureSacrilegHunters(FactionRelationKind.Ally);
+            StoryUtility.AssignDialog("FriendlyCaravan_Conversation",
+               CompCache.StoryWC.questCont.Village.StoryContact,
+               typeof(QuestCont_FriendlyCaravan).ToString(),
+               "FriendlyCaravan_Conversation");
+            Log.Message($"added conv to mainpawn {CompCache.StoryWC.questCont.Village.StoryContact.Name}");
 
             //Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillage_QuestUpdate_MechsArrived".Translate(addressed.NameShortColored));
 
             var incidentParms = new IncidentParms
             {
                 target = selectedMap,
-                points = 14000,
+                points = 3000,
                 faction = StoryUtility.FactionOfSacrilegHunters,
                 raidArrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn
             };
