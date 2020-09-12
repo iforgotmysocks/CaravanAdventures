@@ -69,12 +69,18 @@ namespace CaravanAdventures.CaravanStory
             var mainPawn = CompCache.StoryWC.questCont.Village.StoryContact;
             
             list.Add(mainPawn);
+            StoryUtility.FreshenUpPawn(mainPawn);
             foreach (Thing newThing in list)
             {
                 IntVec3 loc = CellFinder.RandomClosewalkCellNear(parms.spawnCenter, map, 5, null);
                 GenSpawn.Spawn(newThing, loc, map, WipeMode.Vanish);
             }
             return list;
+        }
+
+        protected override void ResolveParmsPoints(IncidentParms parms)
+        {
+            if (parms.points < 1000) base.ResolveParmsPoints(parms);
         }
     }
 }

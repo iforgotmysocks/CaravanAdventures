@@ -87,7 +87,7 @@ namespace CaravanAdventures.CaravanStory
             }
         }
 
-        internal static void GenerateFriendlyVillage()
+        public static void GenerateFriendlyVillage()
         {
             if (!CompCache.StoryWC.storyFlags["TradeCaravan_DialogFinished"] || CompCache.StoryWC.storyFlags["IntroVillage_Created"]) return;
             if (!StoryUtility.TryGenerateDistantTile(out var tile, 6, 15))
@@ -112,21 +112,28 @@ namespace CaravanAdventures.CaravanStory
                     CompCache.StoryWC.questCont.Village.StoryContact.NameShortColored,
                     CompCache.StoryWC.questCont.Village.StoryContact.Faction.Name,
                     CompCache.StoryWC.questCont.Village.Settlement.Name.Colorize(UnityEngine.Color.cyan)
-                }
-                );
+                });
 
            CompCache.StoryWC.SetSF("IntroVillage_Created");
         }
 
-        internal static StoryWC GetSWC()
+        public static void FreshenUpPawn(Pawn pawn)
+        {
+            HealthUtility.HealNonPermanentInjuriesAndRestoreLegs(pawn);
+            pawn.needs.food.CurLevel = pawn.needs.food.MaxLevel;
+            pawn.needs.joy.CurLevel = pawn.needs.joy.MaxLevel;
+            pawn.needs.rest.CurLevel = pawn.needs.rest.MaxLevel;
+            pawn.needs.comfort.CurLevel = pawn.needs.comfort.MaxLevel;
+        }
+
+        public static StoryWC GetSWC()
         {
             return Find.World.GetComponent<StoryWC>();
         }
 
-        internal static IntVec3 GetCenterOfSettlementBase(Map map, Faction faction)
+        public static IntVec3 GetCenterOfSettlementBase(Map map, Faction faction)
         {
             var coords = new List<IntVec3>();
-            // todo improve, doesn't quite find the middle yet - maybe use map size and just calculate middle?
             map.regionGrid.allRooms
                 .Where(room => !room.Regions
                 .Any(region => region.DangerFor(map.mapPawns.AllPawnsSpawned
@@ -134,11 +141,12 @@ namespace CaravanAdventures.CaravanStory
                 && !room.UsesOutdoorTemperature)
                 .ToList()
                 .ForEach(room => coords
-                .Add(new IntVec3(
-                    room.Cells.Select(cell => cell.x).Max() - ((room.Cells.Select(cell => cell.x).Max() - room.Cells.Select(cell => cell.x).Min()) / 2),
-                    0,
-                    room.Cells.Select(cell => cell.z).Max() - ((room.Cells.Select(cell => cell.z).Max() - room.Cells.Select(cell => cell.z).Min()) / 2)
-                ))
+                    .Add(new IntVec3(
+                        room.Cells.Select(cell => cell.x).Max() - ((room.Cells.Select(cell => cell.x).Max() - room.Cells.Select(cell => cell.x).Min()) / 2),
+                        0,
+                        room.Cells.Select(cell => cell.z).Max() - ((room.Cells.Select(cell => cell.z).Max() - room.Cells.Select(cell => cell.z).Min()) / 2)
+                    )
+                )
             );
             coords.ForEach(coord => Log.Message($"Coord: {coord.x} / {coord.z}"));
 
@@ -148,7 +156,7 @@ namespace CaravanAdventures.CaravanStory
             return centerPoint;
         }
 
-        internal static Faction CreateOrGetFriendlyMechFaction()
+        public static Faction CreateOrGetFriendlyMechFaction()
         {
             var relations = new List<FactionRelation>();
             foreach (var curFaction in Find.FactionManager.AllFactionsListForReading)
@@ -197,12 +205,12 @@ namespace CaravanAdventures.CaravanStory
             return TileFinder.TryFindNewSiteTile(out newTile, minDist, maxDist, false, false, startTile);
         }
 
-        internal static void GenerateStoryContact()
+        public static void GenerateStoryContact()
         {
             if (CompCache.StoryWC.questCont.Village.StoryContact != null && !CompCache.StoryWC.questCont.Village.StoryContact.Dead) return;
             var girl = PawnGenerator.GeneratePawn(new PawnGenerationRequest()
             {
-                FixedBiologicalAge = 22,
+                FixedBiologicalAge = 19,
                 FixedChronologicalAge = 3022,
                 FixedGender = Gender.Female,
                 AllowAddictions = false,
@@ -223,7 +231,7 @@ namespace CaravanAdventures.CaravanStory
             CompCache.StoryWC.questCont.Village.StoryContact = girl;
         }
 
-        internal static Pawn GetGiftedPawn() => PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction?.FirstOrDefault(x => (x?.RaceProps?.Humanlike ?? false) && x.health.hediffSet.GetFirstHediffOfDef(HediffDef.Named("AncientGift")) != null);
+        public static Pawn GetGiftedPawn() => PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction?.FirstOrDefault(x => (x?.RaceProps?.Humanlike ?? false) && x.health.hediffSet.GetFirstHediffOfDef(HediffDef.Named("AncientGift")) != null);
 
         public static Faction EnsureSacrilegHunters(FactionRelationKind relationKind = FactionRelationKind.Neutral, bool ignoreBetrayal = false, bool skipLeaderGeneration = false)
         {
@@ -273,7 +281,7 @@ namespace CaravanAdventures.CaravanStory
             return sacrilegHunters;
         }
 
-        internal static void RemoveExistingQuestFriendlyVillages()
+        public static void RemoveExistingQuestFriendlyVillages()
         {
             var settlements = Find.WorldObjects.Settlements.Where(x => x?.Faction?.def?.defName == "SacrilegHunters");
             Log.Message($"settlement count: {settlements.Count()}");
@@ -288,7 +296,7 @@ namespace CaravanAdventures.CaravanStory
             Quests.QuestUtility.DeleteQuest(StoryQuestDefOf.CA_StoryVillage_Arrival);
         }
 
-        internal static void RemoveMapParentsOfDef(WorldObjectDef def)
+        public static void RemoveMapParentsOfDef(WorldObjectDef def)
         {
             var sites = Find.WorldObjects.AllWorldObjects.Where(x => x.def == def) as List<MapParent>;
             if (sites == null) return;
@@ -299,7 +307,7 @@ namespace CaravanAdventures.CaravanStory
             }
         }
 
-        internal static void CallBombardment(IntVec3 position, Map map, Pawn instigator)
+        public static void CallBombardment(IntVec3 position, Map map, Pawn instigator)
         {
             var bombardment = (Bombardment)GenSpawn.Spawn(ThingDefOf.Bombardment, position, map, WipeMode.Vanish);
             bombardment.impactAreaRadius = 7.9f;
@@ -312,7 +320,7 @@ namespace CaravanAdventures.CaravanStory
             SoundDefOf.OrbitalStrike_Ordered.PlayOneShotOnCamera(null);
         }
 
-        internal static Pawn GetFittingMechBoss()
+        public static Pawn GetFittingMechBoss()
         {
             var possibleBosses = DefDatabase<PawnKindDef>.AllDefsListForReading.Where(x => x.RaceProps.IsMechanoid && x.defName.ToLower().StartsWith("cabossmech"));
             var selected = possibleBosses.FirstOrDefault(boss => !CompCache.StoryWC.mechBossKillCounters?.Keys?.ToList()?.Contains(boss.defName) ?? false) ?? possibleBosses.RandomElement();
@@ -321,6 +329,6 @@ namespace CaravanAdventures.CaravanStory
             return bossPawn;
         }
 
-        internal static Faction FactionOfSacrilegHunters { get => Find.FactionManager.FirstFactionOfDef(StoryDefOf.SacrilegHunters); private set => FactionOfSacrilegHunters = value; }
+        public static Faction FactionOfSacrilegHunters { get => Find.FactionManager.FirstFactionOfDef(StoryDefOf.SacrilegHunters); private set => FactionOfSacrilegHunters = value; }
     }
 }

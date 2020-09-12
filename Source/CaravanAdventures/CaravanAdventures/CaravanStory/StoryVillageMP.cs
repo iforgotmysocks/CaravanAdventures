@@ -66,6 +66,7 @@ namespace CaravanAdventures.CaravanStory
                     }
                     // todo handle case if no position was found!!!
                     /*if (storyChar?.Map != orGenerateMap)*/
+                    StoryUtility.FreshenUpPawn(storyChar);
                     GenSpawn.Spawn(storyChar, storyContactCell, Map);
                     StoryUtility.AssignDialog("StoryVillage_Conversation", storyChar, GetType().ToString(), "ConversationFinished");
                     AddNewLordAndAssignStoryChar(storyChar);
