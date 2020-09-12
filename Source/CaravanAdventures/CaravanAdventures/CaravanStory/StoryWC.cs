@@ -14,8 +14,6 @@ namespace CaravanAdventures.CaravanStory
 {
     class StoryWC : WorldComponent
     {
-        private readonly float baseDelayFriendlyCaravan = Helper.Debug() ? 1000f : 60000f * 5f;
-        private float friendlyCaravanCounter = -1f;
         private readonly float baseDelayNextShrineReveal = Helper.Debug() ? 1800f : 60000f * 3f;
         private float shrineRevealCounter = -1f;
         private int ticks = -1;
@@ -69,7 +67,6 @@ namespace CaravanAdventures.CaravanStory
             Scribe_Collections.Look(ref unlockedSpells, "unlockedSpells", LookMode.Def);
             Scribe_Collections.Look(ref mechBossKillCounters, "mechBossKillCounters", LookMode.Value);
             Scribe_Values.Look(ref ticks, "ticks", -1);
-            Scribe_Values.Look(ref friendlyCaravanCounter, "friendlyCaravanCounter", -1);
             Scribe_Values.Look(ref shrineRevealCounter, "shrineRevealCounter", -1);
             Scribe_Values.Look(ref countShrinesCompleted, "countShrinesCompleted", 0);
             Scribe_Values.Look(ref bossMissedCounter, "bossMissedCounter", 0);
@@ -137,8 +134,8 @@ namespace CaravanAdventures.CaravanStory
                 StoryUtility.GenerateStoryContact();
                 if (CheckCanStartFriendlyCaravanCounter() && !debugFlags["FriendlyCaravanDisabled"])
                 {
-                    if (Dg) Log.Message("friendlycaravan counter running" + friendlyCaravanCounter);
-                    friendlyCaravanCounter = baseDelayFriendlyCaravan;
+                    if (Dg) Log.Message("friendlycaravan counter running" + questCont.FriendlyCaravan.friendlyCaravanCounter);
+                    questCont.FriendlyCaravan.friendlyCaravanCounter = questCont.FriendlyCaravan.baseDelayFriendlyCaravan;
                     SetSF("TradeCaravan_InitCountDownStarted");
                 }
 
@@ -153,11 +150,11 @@ namespace CaravanAdventures.CaravanStory
 
                 ticks = 0;
             }
-            if (friendlyCaravanCounter == 0) CompCache.StoryWC.questCont.FriendlyCaravan.TryCreateFriendlyCaravan(ref friendlyCaravanCounter);
+            if (questCont.FriendlyCaravan.friendlyCaravanCounter == 0) CompCache.StoryWC.questCont.FriendlyCaravan.TryCreateFriendlyCaravan(ref questCont.FriendlyCaravan.friendlyCaravanCounter);
             if (shrineRevealCounter == 0) TryCreateNewShrine(ref shrineRevealCounter);
             
             ticks++;
-            friendlyCaravanCounter--;
+            questCont.FriendlyCaravan.friendlyCaravanCounter--;
             shrineRevealCounter--;
         }
 

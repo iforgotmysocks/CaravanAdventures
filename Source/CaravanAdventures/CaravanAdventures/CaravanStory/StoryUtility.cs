@@ -53,6 +53,40 @@ namespace CaravanAdventures.CaravanStory
             IncidentDefOf.RaidFriendly.Worker.TryExecute(incidentParms);
         }
 
+        public static void AssignDialog(string id, ThingWithComps addressed, string className, string methodName, bool repeatable = false, bool showQuestionMark = true, bool enabled = true, Pawn initiator = null)
+        {
+            if (addressed == null)
+            {
+                Log.Warning("Skipping AssignDialog, addressed doesn't exist");
+                return;
+            }
+            var comp = addressed.TryGetComp<CompTalk>();
+            if (comp == null)
+            {
+                Log.Warning($"CompTalk on pawn {CompCache.StoryWC.questCont?.Village?.StoryContact?.Name} is null, which shouldn't happen");
+                comp = new CompTalk();
+                comp.parent = addressed;
+                addressed.AllComps.Add(comp);
+            }
+            var talkSetToAdd = new TalkSet()
+            {
+                Id = id,
+                Addressed = addressed,
+                Initiator = initiator,
+                // typeof(QuestCont_FriendlyCaravan).ToString()
+                ClassName = className,
+                MethodName = methodName,
+                Repeatable = repeatable,
+            };
+            if (comp.actionsCt.Any(action => action.Id == talkSetToAdd.Id)) Log.Warning($"CompTalk dialog id: {talkSetToAdd.Id} already exists");
+            else
+            {
+                comp.actionsCt.Add(talkSetToAdd);
+                comp.ShowQuestionMark = showQuestionMark;
+                comp.Enabled = enabled;
+            }
+        }
+
         internal static void GenerateFriendlyVillage()
         {
             if (!CompCache.StoryWC.storyFlags["TradeCaravan_DialogFinished"] || CompCache.StoryWC.storyFlags["IntroVillage_Created"]) return;
@@ -161,34 +195,6 @@ namespace CaravanAdventures.CaravanStory
                 else Log.Message($"caraavn is null");
             }
             return TileFinder.TryFindNewSiteTile(out newTile, minDist, maxDist, false, false, startTile);
-        }
-
-        internal static void AssignVillageDialog()
-        {
-            if (CompCache.StoryWC.questCont?.Village?.StoryContact == null)
-            {
-                Log.Message("Skipping, pawn doesn't exist");
-                return;
-            }
-            var comp = CompCache.StoryWC.questCont.Village.StoryContact.TryGetComp<CompTalk>();
-            if (comp == null)
-            {
-                Log.Warning($"CompTalk on pawn {CompCache.StoryWC.questCont?.Village?.StoryContact?.Name} is null, which shouldn't happen");
-                comp = new CompTalk();
-                comp.parent = CompCache.StoryWC.questCont.Village.StoryContact;
-                CompCache.StoryWC.questCont.Village.StoryContact.AllComps.Add(comp);
-            }
-            comp.actionsCt.Add(new TalkSet()
-            {
-                Id = "StoryStart_PawnDia",
-                Addressed = CompCache.StoryWC.questCont.Village.StoryContact,
-                Initiator = null,
-                ClassName = typeof(StoryVillageMP).ToString(),
-                MethodName = "ConversationFinished",
-                Repeatable = false,
-            });
-            comp.ShowQuestionMark = true;
-            comp.Enabled = true;
         }
 
         internal static void GenerateStoryContact()

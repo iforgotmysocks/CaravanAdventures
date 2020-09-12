@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
 	<TradeCaravanQuestName>Caravan Adventures - Trade Caravan</TradeCaravanQuestName>
-	<TradeCaravanQuestDesc>A Sacrileg Hunters caravan is approaching and it seems rather well equipped. Might be worth checking out what they're doing here.</TradeCaravanQuestDesc>
+	<TradeCaravanQuestDesc>A Sacrileg Hunters caravan is approaching and it seems rather well equipped. Might be worth checking out what they're doing here.\n\nIf you miss this chance you can wait for another one of their caravans.</TradeCaravanQuestDesc>
 	<TradeCaravanQuestInfoTalkedTo>You had a really nice chat with {0}, keeping in touch may provide great opportunities.</TradeCaravanQuestInfoTalkedTo>
 
 </LanguageData>

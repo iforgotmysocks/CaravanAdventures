@@ -67,8 +67,7 @@ namespace CaravanAdventures.CaravanStory
             Map map = (Map)parms.target;
             List<Pawn> list = PawnGroupMakerUtility.GeneratePawns(IncidentParmsUtility.GetDefaultPawnGroupMakerParms(this.PawnGroupKindDef, parms, true), false).ToList<Pawn>();
             var mainPawn = CompCache.StoryWC.questCont.Village.StoryContact;
-            CompCache.StoryWC.questCont.FriendlyCaravan.AssignCaravanDialog();
-            Log.Message($"added conv to mainpawn {mainPawn.Name}");
+            
             list.Add(mainPawn);
             foreach (Thing newThing in list)
             {

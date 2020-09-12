@@ -10,6 +10,15 @@ namespace CaravanAdventures.CaravanStory.Quests
 {
     class QuestCont_FriendlyCaravan : IExposable
     {
+        public readonly float baseDelayFriendlyCaravan = Helper.Debug() ? 1000f : 60000f * 5f;
+        public readonly float baseDelayFurtherFriendlyCaravan = Helper.Debug() ? 60000f * 3f : 60000f * 10f;
+        public float friendlyCaravanCounter = -1f;
+
+        public void ExposeData()
+        {
+            Scribe_Values.Look(ref friendlyCaravanCounter, "friendlyCaravanCounter", -1);
+        }
+
         public QuestCont_FriendlyCaravan()
         {
 
@@ -19,7 +28,7 @@ namespace CaravanAdventures.CaravanStory.Quests
         {
             if (CompCache.StoryWC.questCont?.Village?.StoryContact == null)
             {
-                Log.Message("Skipping, pawn doesn't exist");
+                Log.Warning("Skipping AssignCaravanDialog, pawn doesn't exist");
                 return;
             }
             var comp = CompCache.StoryWC.questCont.Village.StoryContact.TryGetComp<CompTalk>();
@@ -30,7 +39,7 @@ namespace CaravanAdventures.CaravanStory.Quests
                 comp.parent = CompCache.StoryWC.questCont.Village.StoryContact;
                 CompCache.StoryWC.questCont.Village.StoryContact.AllComps.Add(comp);
             }
-            comp.actionsCt.Add(new TalkSet()
+            var talkSetToAdd = new TalkSet()
             {
                 Id = "FriendlyCaravan_PawnDia",
                 Addressed = CompCache.StoryWC.questCont.Village.StoryContact,
@@ -38,12 +47,17 @@ namespace CaravanAdventures.CaravanStory.Quests
                 ClassName = typeof(QuestCont_FriendlyCaravan).ToString(),
                 MethodName = "StoryCharDialog",
                 Repeatable = false,
-            });
-            comp.ShowQuestionMark = true;
-            comp.Enabled = true;
+            };
+            if (comp.actionsCt.Any(action => action.Id == talkSetToAdd.Id)) Log.Warning($"CompTalk dialog id: {talkSetToAdd.Id} already exists");
+            else
+            {
+                comp.actionsCt.Add(talkSetToAdd);
+                comp.ShowQuestionMark = true;
+                comp.Enabled = true;
+            }
         }
 
-        public void StoryCharDialog(Pawn initiator, Pawn addressed)
+        public void FriendlyCaravan_Conversation(Pawn initiator, Pawn addressed)
         {
             // dialog ideas: 
             // -> currently constructing village nearby
@@ -79,8 +93,8 @@ namespace CaravanAdventures.CaravanStory.Quests
 
         public void TryCreateFriendlyCaravan(ref float friendlyCaravanCounter, Map map = null)
         {
-            QuestUtility.GenerateStoryQuest(StoryQuestDefOf.CA_TradeCaravan, true, "TradeCaravanQuestName", null, "TradeCaravanQuestDesc");
-            
+            if (CompCache.StoryWC.storyFlags["TradeCaravan_DialogFinished"]) return;
+             
             Log.Message($"creating caravan");
             var selectedMap = map ?? Find.Maps.Where(cmap => cmap.ParentFaction == Faction.OfPlayerSilentFail)?.OrderByDescending(cmap => cmap.wealthWatcher.WealthItems)?.FirstOrDefault();
             if (selectedMap == null)
@@ -90,6 +104,16 @@ namespace CaravanAdventures.CaravanStory.Quests
                 return;
             }
 
+            if (!CompCache.StoryWC.storyFlags["TradeCaravan_Arrived"])
+            {
+                QuestUtility.GenerateStoryQuest(StoryQuestDefOf.CA_TradeCaravan, true, "TradeCaravanQuestName", null, "TradeCaravanQuestDesc");
+                StoryUtility.AssignDialog("FriendlyCaravan_Conversation",
+                    CompCache.StoryWC.questCont.Village.StoryContact,
+                    typeof(QuestCont_FriendlyCaravan).GetType().ToString(),
+                    "FriendlyCaravan_Conversation");
+
+                Log.Message($"added conv to mainpawn {CompCache.StoryWC.questCont.Village.StoryContact.Name}");
+            }
             StoryUtility.EnsureSacrilegHunters(FactionRelationKind.Ally);
 
             //Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillage_QuestUpdate_MechsArrived".Translate(addressed.NameShortColored));
@@ -101,14 +125,12 @@ namespace CaravanAdventures.CaravanStory.Quests
                 faction = StoryUtility.FactionOfSacrilegHunters,
                 raidArrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn
             };
-            
+
             StoryDefOf.CAFriendlyCaravan.Worker.TryExecute(incidentParms);
             CompCache.StoryWC.SetSF("TradeCaravan_Arrived");
+            friendlyCaravanCounter = baseDelayFurtherFriendlyCaravan;
         }
 
-        public void ExposeData()
-        {
-
-        }
+    
     }
 }
