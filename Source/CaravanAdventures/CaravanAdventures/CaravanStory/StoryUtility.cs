@@ -55,7 +55,7 @@ namespace CaravanAdventures.CaravanStory
 
         internal static void GenerateFriendlyVillage()
         {
-            if (CompCache.StoryWC.storyFlags["IntroVillage_Created"]) return;
+            if (!CompCache.StoryWC.storyFlags["TradeCaravan_DialogFinished"] || CompCache.StoryWC.storyFlags["IntroVillage_Created"]) return;
             if (!StoryUtility.TryGenerateDistantTile(out var tile, 6, 15))
             {
                 Log.Message($"No tile was generated");
@@ -68,7 +68,18 @@ namespace CaravanAdventures.CaravanStory
             settlement.Name = SettlementNameGenerator.GenerateSettlementName(settlement, null);
             Find.WorldObjects.Add(settlement);
             CompCache.StoryWC.questCont.Village.Settlement = settlement;
-            Quests.QuestUtility.GenerateStoryQuest(StoryQuestDefOf.CA_StoryVillage_Arrival);
+            //Quests.QuestUtility.GenerateStoryQuest(StoryQuestDefOf.CA_StoryVillage_Arrival);
+            Quests.QuestUtility.GenerateStoryQuest(StoryQuestDefOf.CA_StoryVillage_Arrival,
+                true,
+                "StoryVillageQuestName",
+                null,
+                "StoryVillageQuestDesc",
+                new object[] {
+                    CompCache.StoryWC.questCont.Village.StoryContact.NameShortColored,
+                    CompCache.StoryWC.questCont.Village.StoryContact.Faction.Name,
+                    CompCache.StoryWC.questCont.Village.Settlement.Name.Colorize(UnityEngine.Color.cyan)
+                }
+                );
 
            CompCache.StoryWC.SetSF("IntroVillage_Created");
         }

@@ -78,7 +78,6 @@ namespace CaravanAdventures.CaravanStory
 
         public StoryWC(World world) : base(world)
         {
-            baseDelayFriendlyCaravan = Helper.Debug() ? 1000f : 60000f * 5f;
         }
 
         public override void FinalizeInit()
@@ -113,8 +112,8 @@ namespace CaravanAdventures.CaravanStory
 
         private void InitializeQuestCont()
         {
-            // todo check if saving the main girl here is responsible for the comp to not be available after load
             if (questCont == null) questCont = new QuestCont();
+            // todo -> reflection, this is fugly
             if (questCont.Village == null)
             {
                 Log.Message($"QuestComp Village was null");
@@ -211,13 +210,15 @@ namespace CaravanAdventures.CaravanStory
         public string BuildCurrentShrinePrefix() => "Shrine" + (countShrinesCompleted + 1) + "_";
         public List<AbilityDef> GetUnlockedSpells() => unlockedSpells;
         
+        // todo check if we even need TradeCaravan here... village would have to be successfull before
         // todo added !storyFlags.Any(x => x.Key.StartsWith("TradeCaravan_") && x.Value == false) && to both sides of the condition, check if that works alright
         private bool CheckCanStartCountDownOnNewShrine() =>
-            !storyFlags.Any(x => x.Key.StartsWith("TradeCaravan_") && x.Value == false)
-            && !storyFlags.Any(x => x.Key.StartsWith("Start_") && x.Value == false)
+            //!storyFlags.Any(x => x.Key.StartsWith("TradeCaravan_") && x.Value == false) &&
+            !storyFlags.Any(x => x.Key.StartsWith("Start_") && x.Value == false)
             && countShrinesCompleted == 0 && !storyFlags.Any(x => x.Key == BuildCurrentShrinePrefix() + "InitCountDownStarted" && x.Value == true)
-            || !storyFlags.Any(x => x.Key.StartsWith("TradeCaravan_") && x.Value == false)
-            && !storyFlags.Any(x => x.Key.StartsWith("Start_") && x.Value == false)
+            || 
+            //!storyFlags.Any(x => x.Key.StartsWith("TradeCaravan_") && x.Value == false) && 
+            !storyFlags.Any(x => x.Key.StartsWith("Start_") && x.Value == false)
             && !storyFlags.Any(x => x.Key == BuildCurrentShrinePrefix() + "Completed" && x.Value == true)
             && !storyFlags.Any(x => x.Key == BuildCurrentShrinePrefix() + "InitCountDownStarted" && x.Value == true);
 

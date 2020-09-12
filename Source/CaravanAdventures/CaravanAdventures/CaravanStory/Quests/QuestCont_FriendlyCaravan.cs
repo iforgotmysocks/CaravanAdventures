@@ -45,10 +45,17 @@ namespace CaravanAdventures.CaravanStory.Quests
 
         public void StoryCharDialog(Pawn initiator, Pawn addressed)
         {
-            Log.Message($"Story starts initiated by {initiator.Name} and {addressed.def.defName}");
+            // dialog ideas: 
+            // -> currently constructing village nearby
+            // -> looking for allies to help explore
+            // -> missing her homeworld, lost her husband
+            // -> mechs seem to be very aggressive 
+
+            // -> maybe turn next quest into a help call instead of a "visit"
+
             DiaNode diaNode = null;
             var endDiaNodeAccepted = new DiaNode("StoryVillage_Dia1_3".Translate());
-            endDiaNodeAccepted.options.Add(new DiaOption("StoryVillage_Dia1_3_Option1".Translate()) { action = () => ConversationFinished(), resolveTree = true });
+            endDiaNodeAccepted.options.Add(new DiaOption("StoryVillage_Dia1_3_Option1".Translate()) { action = () => ConversationFinished(initiator, addressed), resolveTree = true });
 
             var subDiaNode = new DiaNode("StoryVillage_Dia1_2".Translate());
             subDiaNode.options.Add(new DiaOption("StoryVillage_Dia1_2_Option1".Translate()) { link = endDiaNodeAccepted });
@@ -62,14 +69,18 @@ namespace CaravanAdventures.CaravanStory.Quests
             Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
         }
 
-        private void ConversationFinished()
+        private void ConversationFinished(Pawn initiator, Pawn addressed)
         {
             // todo maybe get lord and have them leave early?
-            Log.Message($"Conversation finished");
+            CompCache.StoryWC.SetSF("TradeCaravan_DialogFinished");
+            Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_TradeCaravan, "TradeCaravanQuestInfoTalkedTo".Translate(addressed.NameShortColored));
+            Quests.QuestUtility.CompleteQuest(StoryQuestDefOf.CA_TradeCaravan);
         }
 
         public void TryCreateFriendlyCaravan(ref float friendlyCaravanCounter, Map map = null)
         {
+            QuestUtility.GenerateStoryQuest(StoryQuestDefOf.CA_TradeCaravan, true, "TradeCaravanQuestName", null, "TradeCaravanQuestDesc");
+            
             Log.Message($"creating caravan");
             var selectedMap = map ?? Find.Maps.Where(cmap => cmap.ParentFaction == Faction.OfPlayerSilentFail)?.OrderByDescending(cmap => cmap.wealthWatcher.WealthItems)?.FirstOrDefault();
             if (selectedMap == null)
@@ -81,21 +92,17 @@ namespace CaravanAdventures.CaravanStory.Quests
 
             StoryUtility.EnsureSacrilegHunters(FactionRelationKind.Ally);
 
-            //CompCache.StoryWC.SetSF("IntroVillage_TalkedToFriend");
             //Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillage_QuestUpdate_MechsArrived".Translate(addressed.NameShortColored));
 
             var incidentParms = new IncidentParms
             {
                 target = selectedMap,
-                //incidentParms.points = StorytellerUtility.DefaultThreatPointsNow(incidentParms.target) * 2.5f;
-                points = 10000,
+                points = 14000,
                 faction = StoryUtility.FactionOfSacrilegHunters,
-                // todo - find out how to ensure mixed pawngroupmakerkinds
                 raidArrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn
             };
             
             StoryDefOf.CAFriendlyCaravan.Worker.TryExecute(incidentParms);
-
             CompCache.StoryWC.SetSF("TradeCaravan_Arrived");
         }
 

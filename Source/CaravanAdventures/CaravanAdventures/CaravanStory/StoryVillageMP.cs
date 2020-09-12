@@ -59,6 +59,7 @@ namespace CaravanAdventures.CaravanStory
 
                 if (!CompCache.StoryWC.storyFlags["IntroVillage_Entered"])
                 {
+                    // todo - sometimes selects non-walkable cells, figure out why / improve
                     if (!CellFinder.TryFindRandomSpawnCellForPawnNear_NewTmp(new IntVec3(Map.Size.x / 2, 0, Map.Size.z / 2), Map, out var storyContactCell))
                     {
                         Log.Error("Couldn't find a cell to spawn pawn");
@@ -221,7 +222,7 @@ namespace CaravanAdventures.CaravanStory
             if (!Map.mapPawns.AllPawnsSpawned.Any(x => x.Faction == Faction.OfMechanoids && !x.Dead && !x.Downed))
             {
                 Log.Message($"Setting player won flag");
-               CompCache.StoryWC.SetSF("IntroVillage_PlayerWon");
+                CompCache.StoryWC.SetSF("IntroVillage_PlayerWon");
             }
             // todo dialog escaped
             // todo keep and just remove the enter ability in case the player should win the fight?
@@ -237,8 +238,8 @@ namespace CaravanAdventures.CaravanStory
                 Find.WorldObjects.Add(worldObject);
             }
 
-           CompCache.StoryWC.SetSF("IntroVillage_Finished");
-            Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "\n\nYou survivded and made it out alive. But where did all those mechs come from? Best to watch out for more clues...");
+            CompCache.StoryWC.SetSF("IntroVillage_Finished");
+            Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillage_QuestUpdate_Survived".Translate());
             Quests.QuestUtility.CompleteQuest(StoryQuestDefOf.CA_StoryVillage_Arrival);
         }
 
