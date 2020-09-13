@@ -132,8 +132,11 @@ namespace CaravanAdventures.CaravanStory
 			if (spell == null) return;
 			else Log.Message($"Got spell");
 			CompCache.StoryWC.GetUnlockedSpells().Add(spell);
-			if (gifted != null) gifted.abilities.GainAbility(spell);
-
+			if (gifted != null)
+			{
+				gifted.abilities.GainAbility(spell);
+				Find.LetterStack.ReceiveLetter("Story_Shrine1_AbilityGainedLetterTitle".Translate(), "Story_Shrine1_AbilityGainedLetterDesc".Translate(boss.Label, gifted.NameShortColored, spell.label.Colorize(UnityEngine.Color.cyan)), LetterDefOf.PositiveEvent);
+			}
 			CompCache.StoryWC.SetShrineSF("Completed");
 			CompCache.StoryWC.IncreaseShrineCompleteCounter();
 			CompCache.StoryWC.mechBossKillCounters[boss.def.defName] = CompCache.StoryWC.mechBossKillCounters.TryGetValue(boss.def.defName, out var result) ? result + 1 : 0;

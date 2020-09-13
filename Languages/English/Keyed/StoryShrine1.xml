@@ -32,7 +32,8 @@
 	<Story_Shrine1_BossDefeated_Dia1_1_Option1>Asthonishing...</Story_Shrine1_BossDefeated_Dia1_1_Option1>
 	<Story_Shrine1_BossDefeated_Dia1_2>When {0}'s mechanical boddy came to rest, loud scratching starts to hollow around the ruins... something woke up.</Story_Shrine1_BossDefeated_Dia1_2>
 	<Story_Shrine1_BossDefeated_Dia1_1_Option2>We better get out of here...</Story_Shrine1_BossDefeated_Dia1_1_Option2>
-
+	<Story_Shrine1_AbilityGainedLetterTitle>Ancient ability gained: {0}</Story_Shrine1_AbilityGainedLetterTitle>
+	<Story_Shrine1_AbilityGainedLetterDesc>By defeating {0} and with the power of the Ancient Gift, {1} received the sacret knowledge of the spell: {2}</Story_Shrine1_AbilityGainedLetterDesc>
   <Story_Shrine1_ArrivalTimeShownLetterMessage>Your caravan has been detected. In {0}, reinforcing {1} from {2} will begin arriving in the area.\n\nReform your caravan and begin moving to avoid the {1}. You can return once they moved on. You'll be notified about their arrival every 3 hours.</Story_Shrine1_ArrivalTimeShownLetterMessage>
 </LanguageData>
 

@@ -64,7 +64,10 @@ namespace CaravanAdventures.CaravanStory
             ticks++;
         }
 
-        private void DrawTreeQuestionMark() { if (theTree != null && theTree.TryGetComp<CompTalk>().ShowQuestionMark) theTree.Map.overlayDrawer.DrawOverlay(theTree, OverlayTypes.QuestionMark); }
+        private void DrawTreeQuestionMark()
+        {
+            if (theTree != null && theTree.TryGetComp<CompTalk>() != null && theTree.TryGetComp<CompTalk>().ShowQuestionMark) theTree.Map.overlayDrawer.DrawOverlay(theTree, OverlayTypes.QuestionMark);
+        }
 
         private void AddTalkTreeAction()
         {
@@ -90,7 +93,7 @@ namespace CaravanAdventures.CaravanStory
                 Initiator = null,
                 ClassName = this.GetType().ToString(),
                 MethodName = "StoryStartDialog",
-                Repeatable = true
+                Repeatable = true,
             });
             comp.Enabled = true;
             comp.ShowQuestionMark = true;

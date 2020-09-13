@@ -103,7 +103,7 @@ namespace CaravanAdventures.CaravanStory
 		}
 
 		public bool TalkedTo() => actionsCt.Any(action => action.Finished);
-		public bool HasUnfinishedDialogs() => actionsCt.Any(action => !action.Finished && !action.Repeatable);
+		public bool HasUnfinishedDialogs(bool includeRepeatable = false) => includeRepeatable ? actionsCt.Any(action => !action.Finished || action.Repeatable) : actionsCt.Any(action => !action.Finished);
 
 		public AcceptanceReport CanTalkTo(Pawn pawn, LocalTargetInfo? knownSpot = null)
 		{

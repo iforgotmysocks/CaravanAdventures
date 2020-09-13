@@ -10,6 +10,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using Verse;
 
+// todo create function to reset the entire story and add to debug settings as button
+// add mod option to regain the gift at the anima tree instead of passing it on to someone else
+// todo wake up shrine mechs if other factions pawns come close or best when wall breaks
+
+// todoancient shrines
+// -> letter and quest info when spell is gained!
+// -> when boss dies, reduce min spawn time of reinforcements
 namespace CaravanAdventures.CaravanStory
 {
     class StoryWC : WorldComponent

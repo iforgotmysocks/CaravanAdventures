@@ -119,7 +119,7 @@
   <AbilityDef ParentName="PsycastBase">
     <defName>AncientProtectiveAura</defName>
     <label>ancient protective aura</label>
-    <description>Protects the target from a large part of incoming damage, fire and heals wounds over time (even permanent ones when active long enough). Remains active until cast again reduces the overall heat a pawn can handle and accelerates psyfocus drain by 2% / day while active.</description>
+    <description>Protects the target from a large part of incoming damage, fire and heals wounds over time (even permanent ones when active long enough). \n\nReduces the overall heat a pawn can handle and accelerates psyfocus drain by 2% / day while active. The effect of this spell disappears if it is cast a second time on the target or if the targetted pawn runs out of psyfocus. \n\nThe effect is weaker and drains more psyfocus when cast on pawns without the ancient gift.</description>
     <level>0</level>
     <iconPath>UI/Abilities/Painblock</iconPath>
     <hotKey>Misc12</hotKey>
