@@ -30,8 +30,6 @@ namespace CaravanAdventures.CaravanStory
             base.ExposeData();
             Scribe_Values.Look(ref currentStoryTrigger, "currentStoryTrigger", false);
             Scribe_References.Look(ref theTree, "theTree");
-            // todo save the sustainer?
-            //Scribe_Deep.Look(ref animaTreeWhipserSustainer, "animaTreeWhipserSustainer");
         }
 
         public override void FinalizeInit()
@@ -72,31 +70,15 @@ namespace CaravanAdventures.CaravanStory
         private void AddTalkTreeAction()
         {
             if (CompCache.StoryWC.storyFlags["Start_InitialTreeAddTalkOption"]) return;
-
-            var tree = map.spawnedThings.FirstOrDefault(x => x.def.defName == "Plant_TreeAnima");
+            var tree = map.spawnedThings.FirstOrDefault(x => x.def.defName == "Plant_TreeAnima") as ThingWithComps;
             if (tree == null)
             {
                 Log.Message("Tree is null");
                 return;
             }
-
             theTree = tree;
-
             currentStoryTrigger = true;
-            Log.Message("adding tree action");
-            var comp = tree.TryGetComp<CompTalk>();
-            if (comp == null) Log.Message("Tree comp is null");
-            comp.actionsCt.Add(new TalkSet()
-            {
-                Id = "StoryStart_TreeDialog",
-                Addressed = tree,
-                Initiator = null,
-                ClassName = this.GetType().ToString(),
-                MethodName = "StoryStartDialog",
-                Repeatable = true,
-            });
-            comp.Enabled = true;
-            comp.ShowQuestionMark = true;
+            StoryUtility.AssignDialog("StoryStart_TreeDialog", tree, this.GetType().ToString(), "StoryStartDialog", true);
             CompCache.StoryWC.storyFlags["Start_InitialTreeAddTalkOption"] = true;
         }
 
@@ -114,17 +96,20 @@ namespace CaravanAdventures.CaravanStory
 
         private void AddTreeWhisper()
         {
-            if (CompCache.StoryWC.storyFlags["Start_InitialTreeWhisper"]) return;
+            if (CompCache.StoryWC.storyFlags["Start_ReceivedGift"] 
+                || CompCache.StoryWC.storyFlags["Start_InitialTreeWhisper"] 
+                && animaTreeWhipserSustainer != null) return;
+            
             var tree = map.spawnedThings.FirstOrDefault(x => x.def.defName == "Plant_TreeAnima");
             if (tree == null)
             {
-                Log.Message("Tree is null");
+                Log.Message("Tree is null in AddTreeWisper");
                 return;
             }
 
             var info = SoundInfo.InMap(tree, MaintenanceType.None);
             animaTreeWhipserSustainer = DefDatabase<SoundDef>.GetNamed("AnimaTreeWhispers").TrySpawnSustainer(info);
-            if (animaTreeWhipserSustainer != null)CompCache.StoryWC.storyFlags["Start_InitialTreeWhisper"] = true;
+            if (animaTreeWhipserSustainer != null) CompCache.StoryWC.storyFlags["Start_InitialTreeWhisper"] = true;
         }
 
         public void StoryStartDialog(Pawn initiator, Thing addressed)
@@ -219,13 +204,11 @@ namespace CaravanAdventures.CaravanStory
         public override void MapRemoved()
         {
             base.MapRemoved();
-            // todo reset certain storyFlags if required so story can be triggered or continued on another tile?
+            // todo is currentStoryTrigger really needed??
+            Log.Message($"StoryStart Map removed, resetting StoryStart Flags.");
             if (currentStoryTrigger && !CompCache.StoryWC.storyFlags["Start_ReceivedGift"])
             {
-                foreach (var key in CompCache.StoryWC.storyFlags.Keys.ToList())
-                {
-                   CompCache.StoryWC.storyFlags[key] = false;
-                }
+                CompCache.StoryWC.ResetSFsStartingWith("Start_");
             }
         }
 

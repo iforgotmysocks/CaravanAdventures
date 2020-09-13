@@ -14,8 +14,11 @@ using Verse;
 // add mod option to regain the gift at the anima tree instead of passing it on to someone else
 // todo wake up shrine mechs if other factions pawns come close or best when wall breaks
 
+// todo story start
+// -> reinit tree voice sustainer upon savegame load
+// -> trying to save the sustainer is dumb, just recreate it
+
 // todoancient shrines
-// -> letter and quest info when spell is gained!
 // -> when boss dies, reduce min spawn time of reinforcements
 namespace CaravanAdventures.CaravanStory
 {
