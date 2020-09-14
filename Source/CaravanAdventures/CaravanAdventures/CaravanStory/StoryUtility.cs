@@ -87,6 +87,17 @@ namespace CaravanAdventures.CaravanStory
             }
         }
 
+        internal static void RestartStory()
+        {
+            CompCache.StoryWC.questCont.Village.StoryContact.Destroy();
+            CompCache.StoryWC.questCont.Village.StoryContact = null;
+            CompCache.StoryWC.ResetStoryVars();
+            StoryUtility.RemoveExistingQuestFriendlyVillages();
+            StoryUtility.RemoveMapParentsOfDef(CaravanStorySiteDefOf.AncientMasterShrineMP);
+            StoryUtility.RemoveMapParentsOfDef(CaravanStorySiteDefOf.AncientMasterShrineWO);
+            Log.Message($"Story reset complete");
+        }
+
         public static void GenerateFriendlyVillage()
         {
             if (!CompCache.StoryWC.storyFlags["TradeCaravan_DialogFinished"] || CompCache.StoryWC.storyFlags["IntroVillage_Created"]) return;
@@ -102,7 +113,6 @@ namespace CaravanAdventures.CaravanStory
             settlement.Name = SettlementNameGenerator.GenerateSettlementName(settlement, null);
             Find.WorldObjects.Add(settlement);
             CompCache.StoryWC.questCont.Village.Settlement = settlement;
-            //Quests.QuestUtility.GenerateStoryQuest(StoryQuestDefOf.CA_StoryVillage_Arrival);
             Quests.QuestUtility.GenerateStoryQuest(StoryQuestDefOf.CA_StoryVillage_Arrival,
                 true,
                 "StoryVillageQuestName",
@@ -283,16 +293,25 @@ namespace CaravanAdventures.CaravanStory
 
         public static void RemoveExistingQuestFriendlyVillages()
         {
-            var settlements = Find.WorldObjects.Settlements.Where(x => x?.Faction?.def?.defName == "SacrilegHunters");
-            Log.Message($"settlement count: {settlements.Count()}");
-            foreach (var settlement in settlements.Reverse())
-            {
-                Log.Message($"Trying to destroy settlement {settlement.Name}");
-                Log.Message($"settlement mp: {settlement.def.defName}");
-                if (settlement.def.defName != "StoryVillageMP") continue;
-                if (settlement.HasMap) Current.Game.DeinitAndRemoveMap(settlement.Map);
-                settlement.Destroy();
-            }
+            //var settlements = Find.WorldObjects.Settlements.Where(x => x?.Faction?.def?.defName == "SacrilegHunters");
+            //Log.Message($"settlement count: {settlements.Count()}");
+            //foreach (var settlement in settlements.Reverse())
+            //{
+            //    Log.Message($"Trying to destroy settlement {settlement.Name}");
+            //    Log.Message($"settlement mp: {settlement.def.defName}");
+            //    if (settlement.def.defName != "StoryVillageMP") continue;
+            //    if (settlement.HasMap) Current.Game.DeinitAndRemoveMap(settlement.Map);
+            //    settlement.Destroy();
+            //}
+
+            var settlement = CompCache.StoryWC.questCont.Village.Settlement;
+            Log.Message($"Trying to destroy settlement {settlement.Name}");
+            Log.Message($"settlement mp: {settlement.def.defName}");
+            if (settlement.def.defName != "StoryVillageMP") return;
+            if (settlement.HasMap) Current.Game.DeinitAndRemoveMap(settlement.Map);
+            settlement.Destroy();
+
+            Quests.QuestUtility.DeleteQuest(StoryQuestDefOf.CA_TradeCaravan);
             Quests.QuestUtility.DeleteQuest(StoryQuestDefOf.CA_StoryVillage_Arrival);
         }
 

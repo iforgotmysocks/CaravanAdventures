@@ -14,8 +14,6 @@ using Verse;
 // add mod option to regain the gift at the anima tree instead of passing it on to someone else
 // todo wake up shrine mechs if other factions pawns come close or best when wall breaks
 
-// todoancient shrines
-// -> when boss dies, reduce min spawn time of reinforcements
 namespace CaravanAdventures.CaravanStory
 {
     class StoryWC : WorldComponent
@@ -231,6 +229,19 @@ namespace CaravanAdventures.CaravanStory
 
         // todo - incomplete
         private bool CheckCanStartFriendlyCaravanCounter() => !storyFlags["TradeCaravan_InitCountDownStarted"];
+
+        public void ResetStoryVars()
+        {
+            storyFlags.Keys.ToList().ForEach(key => storyFlags[key] = false);
+            mechBossKillCounters.Keys.ToList().ForEach(key => mechBossKillCounters[key] = 0);
+
+            shrineRevealCounter = -1;
+            ticks = -1;
+            countShrinesCompleted = 0;
+            bossMissedCounter = 0;
+            unlockedSpells = new List<AbilityDef>();
+        }
+
 
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CaravanAdventures.CaravanStory;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -50,7 +51,7 @@ namespace CaravanAdventures
             options.Begin(wrect);
 
             options.CheckboxLabeled("Debug mode", ref debug);
-
+            if (options.ButtonText("Reset full story")) StoryUtility.RestartStory();
             // todo figure out scroll views
             //Rect viewRect = new Rect(0, 0, 500, 3000);
             //Vector2 vec = new Vector2(0, 0);
