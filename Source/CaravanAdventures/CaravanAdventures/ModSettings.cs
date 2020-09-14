@@ -16,6 +16,7 @@ namespace CaravanAdventures
         public float additionalBuildingAreaDamageMax = 0.75f;
         public float psyfocusToRestore = 0.3f;
         public float healingPerSecond = 0.05f;
+        public bool onlyHealPermWhenGifted = false;
         public bool stopMentalBreaks = false;
         public float lightDuration = 1200f;
         public bool debug = false;
@@ -36,6 +37,7 @@ namespace CaravanAdventures
 
             Scribe_Values.Look(ref healingPerSecond, "healingPerSecond", 0.05f);
             Scribe_Values.Look(ref stopMentalBreaks, "stopMentalBreaks", false);
+            Scribe_Values.Look(ref onlyHealPermWhenGifted, "onlyHealPermWhenGifted", false);
 
             Scribe_Values.Look(ref lightDuration, "lightDuration", 1200f);
 
@@ -79,6 +81,7 @@ namespace CaravanAdventures
             options.Label($"Damage healed per second: {Math.Round(healingPerSecond, 2)}");
             healingPerSecond = options.Slider(healingPerSecond, 0f, 1f);
             options.CheckboxLabeled("Can stop mental breaks?", ref stopMentalBreaks);
+            options.CheckboxLabeled("Only heal permanent wounds when pawn has ancient gift?", ref onlyHealPermWhenGifted);
 
             options.Gap(24f);
 

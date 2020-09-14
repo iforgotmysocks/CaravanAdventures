@@ -8,6 +8,8 @@
     <level>0</level>
     <iconPath>UI/Abilities/Stun</iconPath>
     <canUseAoeToGetTargets>False</canUseAoeToGetTargets>
+		<displayGizmoWhileUndrafted>True</displayGizmoWhileUndrafted>
+		<disableGizmoWhileUndrafted>False</disableGizmoWhileUndrafted>
     <statBases>
       <Ability_EntropyGain>60</Ability_EntropyGain>
       <Ability_PsyfocusCost>0</Ability_PsyfocusCost>
@@ -121,6 +123,8 @@
     <label>ancient protective aura</label>
     <description>Protects the target from a large part of incoming damage, fire and heals wounds over time (even permanent ones when active long enough). \n\nReduces the overall heat a pawn can handle and accelerates psyfocus drain by 2% / day while active. The effect of this spell disappears if it is cast a second time on the target or if the targetted pawn runs out of psyfocus. \n\nThe effect is weaker and drains more psyfocus when cast on pawns without the ancient gift.</description>
     <level>0</level>
+		<displayGizmoWhileUndrafted>True</displayGizmoWhileUndrafted>
+		<disableGizmoWhileUndrafted>False</disableGizmoWhileUndrafted>
     <iconPath>UI/Abilities/Painblock</iconPath>
     <hotKey>Misc12</hotKey>
     <statBases>
@@ -153,6 +157,8 @@
     <level>1</level>
     <iconPath>UI/Abilities/Invisibility</iconPath>
     <hotKey>Misc12</hotKey>
+		<displayGizmoWhileUndrafted>True</displayGizmoWhileUndrafted>
+		<disableGizmoWhileUndrafted>False</disableGizmoWhileUndrafted>
     <statBases>
       <Ability_EntropyGain>5</Ability_EntropyGain>
       <Ability_PsyfocusCost>0.005</Ability_PsyfocusCost>

@@ -53,7 +53,7 @@ namespace CaravanAdventures.CaravanAbilities
             }
             if (ticksSincePermHeal > 60001)
             {
-                if (isGifted) HealPermanent();
+                if (!ModSettings.Get().onlyHealPermWhenGifted || ModSettings.Get().onlyHealPermWhenGifted && isGifted) HealPermanent();
                 ticksSincePermHeal = 0;
             }
 

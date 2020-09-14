@@ -14,10 +14,6 @@ using Verse;
 // add mod option to regain the gift at the anima tree instead of passing it on to someone else
 // todo wake up shrine mechs if other factions pawns come close or best when wall breaks
 
-// todo story start
-// -> reinit tree voice sustainer upon savegame load
-// -> trying to save the sustainer is dumb, just recreate it
-
 // todoancient shrines
 // -> when boss dies, reduce min spawn time of reinforcements
 namespace CaravanAdventures.CaravanStory
@@ -119,8 +115,12 @@ namespace CaravanAdventures.CaravanStory
 
         private void InitializeQuestCont()
         {
-            if (questCont == null) questCont = new QuestCont();
-            // todo -> reflection, this is fugly
+            if (questCont == null)
+            {
+                questCont = new QuestCont();
+                Log.Message($"QuestCont was null");
+            }
+            // todo -> possibly move to QuestCont constructor if loading always results in the questcont and additionally the fields being null, otherwise reflection, cause this is fugly
             if (questCont.Village == null)
             {
                 Log.Message($"QuestComp Village was null");
