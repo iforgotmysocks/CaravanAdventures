@@ -14,6 +14,12 @@ using Verse;
 // add mod option to regain the gift at the anima tree instead of passing it on to someone else
 // todo wake up shrine mechs if other factions pawns come close or best when wall breaks
 
+// add a weather condition that freezes or heats the world until the main boss is defeated. -> must be disableable in the options
+
+// create mech bosses after horsemen traits
+// add quote to each horsemen type when entering the shrine
+// credits to horsemen idea to Shakesthespeare
+
 namespace CaravanAdventures.CaravanStory
 {
     class StoryWC : WorldComponent
