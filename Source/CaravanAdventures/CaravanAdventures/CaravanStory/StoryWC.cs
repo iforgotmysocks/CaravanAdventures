@@ -20,6 +20,8 @@ using Verse;
 // add quote to each horsemen type when entering the shrine
 // credits to horsemen idea to Shakesthespeare
 
+// todo - consider dropping the ancients improvements ideas, wouldn't fit with the story evolving around the relationship with the sacrileg hunters character
+
 namespace CaravanAdventures.CaravanStory
 {
     class StoryWC : WorldComponent
