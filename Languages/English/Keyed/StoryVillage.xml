@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
 	<StoryVillageQuestName>Caravan Adventures - Visit a friend</StoryVillageQuestName>
-	<StoryVillageQuestDesc>{0} invited you to visit her in the nearest {1}'s village {2}. \nShe greatly enjoyed her stay back when at your colony and can't wait to see the gang again.</StoryVillageQuestDesc>
+	<StoryVillageQuestDesc_delete>{0} invited you to visit her in the nearest {1}'s village {2}. \nShe greatly enjoyed her stay back when at your colony and can't wait to see the gang again.</StoryVillageQuestDesc_delete>
+	<StoryVillageQuestDesc>{0} sent a letter requesting help urgently. The letter reads:\n</StoryVillageQuestDesc>
+	<StoryVillageQuestLetterContent>Dear {0},\n\nI really hope u get this letter in time, or we might all be dead. We came across a large shrine and as we cracked it open masses of mechanoids streamed out. We got away, but eversince huge hordes of mechanoids keep attacking our village.\nI'm sending this letter in hope that you can make it here in time to assist us. We're preparing an escape, but we have to wait for our reinforcements to stand any chance of escaping with our lifes.\n\nPlease help us in those dark times, we'd never forget this great deed.</StoryVillageQuestLetterContent>
+	<StoryVillageQuestLetterContentPS>PS: I hope you guys are doing well, i really miss talking to you, i had such a great time when we met. I hope to see you soon, aiding us again.</StoryVillageQuestLetterContentPS>
+	<StoryVillageQuestLetterContentEnding>Your's sincerly,\n\n{0}\n</StoryVillageQuestLetterContentEnding>
 	<VisitStoryVillageLabel>Enter {0}</VisitStoryVillageLabel>
 	<StoryVillageEnterMapMessage>Entering village</StoryVillageEnterMapMessage>
 	<StoryVillageArrivedLetterTitle>Entered {0}</StoryVillageArrivedLetterTitle>

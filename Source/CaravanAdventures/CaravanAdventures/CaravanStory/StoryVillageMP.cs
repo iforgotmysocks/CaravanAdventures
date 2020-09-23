@@ -71,7 +71,7 @@ namespace CaravanAdventures.CaravanStory
                     StoryUtility.AssignDialog("StoryVillage_Conversation", storyChar, GetType().ToString(), "ConversationFinished");
                     AddNewLordAndAssignStoryChar(storyChar);
 
-                   CompCache.StoryWC.SetSF("IntroVillage_Entered");
+                    CompCache.StoryWC.SetSF("IntroVillage_Entered");
                 }
             }, "StoryVillageEnterMapMessage", false, new Action<Exception>(GameAndMapInitExceptionHandlers.ErrorWhileGeneratingMap), true);
         }
@@ -120,7 +120,7 @@ namespace CaravanAdventures.CaravanStory
 
         private void SpawnMechArmy(Pawn initiator, Pawn addressed)
         {
-           CompCache.StoryWC.SetSF("IntroVillage_TalkedToFriend");
+            CompCache.StoryWC.SetSF("IntroVillage_TalkedToFriend");
             Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillage_QuestUpdate_MechsArrived".Translate(addressed.NameShortColored));
 
             var incidentParms = new IncidentParms
@@ -136,7 +136,7 @@ namespace CaravanAdventures.CaravanStory
             IncidentDefOf.RaidEnemy.Worker.TryExecute(incidentParms);
 
             ticksTillReinforcements = 60 * 15;
-           CompCache.StoryWC.SetSF("IntroVillage_MechsArrived");
+            CompCache.StoryWC.SetSF("IntroVillage_MechsArrived");
 
             GetComponent<TimedDetectionPatrols>().Init();
             GetComponent<TimedDetectionPatrols>().StartDetectionCountdown(30000, -1);
@@ -163,15 +163,13 @@ namespace CaravanAdventures.CaravanStory
                 if (ticksTillReinforcements == 0)
                 {
                     StoryUtility.GetAssistanceFromAlliedFaction(StoryUtility.FactionOfSacrilegHunters, Map, 11000, 12000, centerPoint);
-                   CompCache.StoryWC.SetSF("IntroVillage_ReinforcementsArrived");
+                    CompCache.StoryWC.SetSF("IntroVillage_ReinforcementsArrived");
                     ReinforcementConvo();
                 }
 
                 ticks++;
                 ticksTillReinforcements--;
             }
-
-           
         }
 
         private void CheckMainStoryCharDiedOrLeft()
@@ -232,10 +230,11 @@ namespace CaravanAdventures.CaravanStory
             if (!CompCache.StoryWC.storyFlags["IntroVillage_PlayerWon"])
             {
                 this.Destroy();
-                WorldObject worldObject = WorldObjectMaker.MakeWorldObject(WorldObjectDefOf.DestroyedSettlement);
+                var worldObject = WorldObjectMaker.MakeWorldObject(WorldObjectDefOf.DestroyedSettlement) as MapParent;
                 worldObject.Tile = this.Tile;
                 worldObject.SetFaction(this.Faction);
                 Find.WorldObjects.Add(worldObject);
+                CompCache.StoryWC.questCont.Village.DestroyedSettlement = worldObject;
             }
 
             CompCache.StoryWC.SetSF("IntroVillage_Finished");

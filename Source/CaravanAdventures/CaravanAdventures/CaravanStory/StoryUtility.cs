@@ -89,8 +89,9 @@ namespace CaravanAdventures.CaravanStory
 
         internal static void RestartStory()
         {
-            CompCache.StoryWC.questCont.Village.StoryContact.Destroy();
+            if (CompCache.StoryWC.questCont.Village.StoryContact != null) CompCache.StoryWC.questCont.Village.StoryContact.Destroy();
             CompCache.StoryWC.questCont.Village.StoryContact = null;
+            CompCache.StoryWC.questCont.FriendlyCaravan.storyContactBondedPawn = null;
             CompCache.StoryWC.ResetStoryVars();
             StoryUtility.RemoveExistingQuestFriendlyVillages();
             StoryUtility.RemoveMapParentsOfDef(CaravanStorySiteDefOf.AncientMasterShrineMP);
@@ -124,7 +125,12 @@ namespace CaravanAdventures.CaravanStory
                     CompCache.StoryWC.questCont.Village.Settlement.Name.Colorize(UnityEngine.Color.cyan)
                 });
 
-           CompCache.StoryWC.SetSF("IntroVillage_Created");
+            var storyContactBondedPerson = CompCache.StoryWC.questCont.FriendlyCaravan?.storyContactBondedPawn;
+            Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillageQuestLetterContent".Translate(storyContactBondedPerson.NameShortColored).ToString().HtmlFormatting("614027", true, 17));
+            if (storyContactBondedPerson != null) Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillageQuestLetterContentPS".Translate().ToString().HtmlFormatting("ffa500", true, 12));
+            Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillageQuestLetterContentEnding".Translate(CompCache.StoryWC.questCont.Village.StoryContact.NameShortColored).ToString().HtmlFormatting("fc6f03", true, 17));
+
+            CompCache.StoryWC.SetSF("IntroVillage_Created");
         }
 
         public static void FreshenUpPawn(Pawn pawn)
@@ -305,11 +311,23 @@ namespace CaravanAdventures.CaravanStory
             //}
 
             var settlement = CompCache.StoryWC.questCont.Village.Settlement;
-            Log.Message($"Trying to destroy settlement {settlement.Name}");
-            Log.Message($"settlement mp: {settlement.def.defName}");
-            if (settlement.def.defName != "StoryVillageMP") return;
-            if (settlement.HasMap) Current.Game.DeinitAndRemoveMap(settlement.Map);
-            settlement.Destroy();
+            if (settlement != null)
+            {
+                Log.Message($"Trying to destroy settlement {settlement.Name}");
+                Log.Message($"settlement mp: {settlement.def.defName}");
+                if (settlement.def.defName != "StoryVillageMP") return;
+                if (settlement.HasMap) Current.Game.DeinitAndRemoveMap(settlement.Map);
+                settlement.Destroy();
+            }
+            var destroyedSettlement = CompCache.StoryWC.questCont.Village.DestroyedSettlement;
+            if (destroyedSettlement != null)
+            {
+                Log.Message($"Trying to destroy destroyed settlement");
+                Log.Message($"destroyed settlement mp: {destroyedSettlement.def.defName}");
+                if (destroyedSettlement.def != WorldObjectDefOf.DestroyedSettlement) return;
+                if (destroyedSettlement.HasMap) Current.Game.DeinitAndRemoveMap(destroyedSettlement.Map);
+                destroyedSettlement.Destroy();
+            }
 
             Quests.QuestUtility.DeleteQuest(StoryQuestDefOf.CA_TradeCaravan);
             Quests.QuestUtility.DeleteQuest(StoryQuestDefOf.CA_StoryVillage_Arrival);

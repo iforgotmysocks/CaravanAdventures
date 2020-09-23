@@ -13,10 +13,12 @@ namespace CaravanAdventures.CaravanStory.Quests
         public readonly float baseDelayFriendlyCaravan = Helper.Debug() ? 1000f : 60000f * 5f;
         public readonly float baseDelayFurtherFriendlyCaravan = Helper.Debug() ? 60000f * 3f : 60000f * 10f;
         public float friendlyCaravanCounter = -1f;
+        public Pawn storyContactBondedPawn;
 
         public void ExposeData()
         {
             Scribe_Values.Look(ref friendlyCaravanCounter, "friendlyCaravanCounter", -1);
+            Scribe_References.Look(ref storyContactBondedPawn, "storyContactBondedPawn");
         }
 
         public QuestCont_FriendlyCaravan()
@@ -67,27 +69,52 @@ namespace CaravanAdventures.CaravanStory.Quests
 
             // -> maybe turn next quest into a help call instead of a "visit"
 
+            // todo give main char good equipment
+
             DiaNode diaNode = null;
-            var endDiaNodeAccepted = new DiaNode("StoryVillage_Dia1_3".Translate());
-            endDiaNodeAccepted.options.Add(new DiaOption("StoryVillage_Dia1_3_Option1".Translate()) { action = () => ConversationFinished(initiator, addressed), resolveTree = true });
 
-            var subDiaNode = new DiaNode("StoryVillage_Dia1_2".Translate());
-            subDiaNode.options.Add(new DiaOption("StoryVillage_Dia1_2_Option1".Translate()) { link = endDiaNodeAccepted });
-            subDiaNode.options.Add(new DiaOption("StoryVillage_Dia1_2_Option2".Translate()) { link = endDiaNodeAccepted });
+            var diaNode6_1 = new DiaNode("TradeCaravan_Dia1_6_1".Translate(addressed.NameShortColored, ThingDefOf.VanometricPowerCell.LabelCap.ToString().Colorize(UnityEngine.Color.green)));
+            diaNode6_1.options.Add(new DiaOption("TradeCaravan_Dia1_6_1_Option1".Translate()) { action = () => ConversationFinished(initiator, addressed, true), resolveTree = true });
+            var diaNode6_2 = new DiaNode("TradeCaravan_Dia1_6_2".Translate(addressed.NameShortColored));
+            diaNode6_2.options.Add(new DiaOption("TradeCaravan_Dia1_6_2_Option1".Translate()) { action = () => ConversationFinished(initiator, addressed), resolveTree = true });
 
-            diaNode = new DiaNode("StoryVillage_Dia1_1".Translate(initiator.NameShortColored));
-            diaNode.options.Add(new DiaOption("StoryVillage_Dia1_1_Option1".Translate()) { link = subDiaNode }); ;
+            var diaNode5 = new DiaNode("TradeCaravan_Dia1_5".Translate(addressed.NameShortColored));
+            diaNode5.options.Add(new DiaOption("TradeCaravan_Dia1_5_Option1".Translate()) { action = () => StoryUtility.EnsureSacrilegHunters(FactionRelationKind.Ally), link = diaNode6_1 });
+            diaNode5.options.Add(new DiaOption("TradeCaravan_Dia1_5_Option2".Translate()) { link = diaNode6_2 });
 
-            TaggedString taggedString = "StoryVillage_Dia1_DiaTitle".Translate(addressed.NameShortColored);
+            var diaNode4 = new DiaNode("TradeCaravan_Dia1_4".Translate(addressed.NameShortColored));
+            diaNode4.options.Add(new DiaOption("TradeCaravan_Dia1_4_Option1".Translate(addressed.NameShortColored, initiator.NameShortColored)) { link = diaNode5 });
+
+            var diaNode3 = new DiaNode("TradeCaravan_Dia1_3".Translate(addressed.NameShortColored));
+            diaNode3.options.Add(new DiaOption("TradeCaravan_Dia1_3_Option1".Translate()) { link = diaNode4 });
+            diaNode3.options.Add(new DiaOption("TradeCaravan_Dia1_3_Option2".Translate()) { action = () => ConversationFinished(initiator, addressed), resolveTree = true });
+
+            var diaNode2 = new DiaNode("TradeCaravan_Dia1_2".Translate(addressed.NameShortColored));
+            diaNode2.options.Add(new DiaOption("TradeCaravan_Dia1_2_Option1".Translate()) { link = diaNode3 });
+
+            diaNode = new DiaNode("TradeCaravan_Dia1_1".Translate(addressed.NameShortColored));
+            diaNode.options.Add(new DiaOption("TradeCaravan_Dia1_1_Option1".Translate()) { link = diaNode2 }); ;
+
+            TaggedString taggedString = "TradeCaravan_Dia1_DiaTitle".Translate(addressed.NameShortColored);
             Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
             Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
         }
 
-        private void ConversationFinished(Pawn initiator, Pawn addressed)
+        private void ConversationFinished(Pawn initiator, Pawn addressed, bool reward = false)
         {
             // todo maybe get lord and have them leave early?
+
+            CompCache.StoryWC.questCont.FriendlyCaravan.storyContactBondedPawn = initiator;
             CompCache.StoryWC.SetSF("TradeCaravan_DialogFinished");
             Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_TradeCaravan, "TradeCaravanQuestInfoTalkedTo".Translate(addressed.NameShortColored));
+            if (reward)
+            {
+                var cell = ThingMaker.MakeThing(ThingDefOf.VanometricPowerCell);
+                cell.SetFaction(Faction.OfPlayer);
+                cell = cell.TryMakeMinified();
+                GenSpawn.Spawn(cell, addressed.Position, addressed.Map, WipeMode.VanishOrMoveAside);
+                Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_TradeCaravan, "TradeCaravanQuestInfoTalkedToReward".Translate(addressed.NameShortColored, ThingDefOf.VanometricPowerCell.LabelCap.ToString().Colorize(UnityEngine.Color.green)));
+            }
             Quests.QuestUtility.CompleteQuest(StoryQuestDefOf.CA_TradeCaravan);
         }
 

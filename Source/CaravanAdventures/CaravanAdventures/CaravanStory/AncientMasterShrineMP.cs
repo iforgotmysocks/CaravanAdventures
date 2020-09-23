@@ -34,7 +34,7 @@ namespace CaravanAdventures.CaravanStory
 			Scribe_Values.Look(ref constTicks, "constTicks");
 			Scribe_Values.Look(ref bossDefeatedAndRewardsGiven, "bossDefeatedAndRewardsGiven");
 
-			// todo are mechs enough? Need them for comparison later
+			// todo are mechs enough? Need them for comparison later - dont think so, i should drop them
 			Scribe_Collections.Look(ref generatedMechs, "generatedMechs", LookMode.Reference);
 		}
 
@@ -118,19 +118,19 @@ namespace CaravanAdventures.CaravanStory
 			Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
 		}
 
-    
-
 		private void CheckBossDefeated()
         {
 			if (boss == null || boss != null && !boss.Dead || bossDefeatedAndRewardsGiven) return;
-			// todo popup window doing some story dialog bla
 
 			var gifted = StoryUtility.GetGiftedPawn();
 			if (gifted == null) Log.Warning("gifted pawn was null, which shouldn't happen. Spell was stored for when another gifted pawn awakes");
 
 			var spell = DefDatabase<AbilityDef>.AllDefsListForReading.Where(x => x.defName.StartsWith("Ancient") && !CompCache.StoryWC.GetUnlockedSpells().Contains(x)).InRandomOrder().FirstOrDefault();
-			if (spell == null) return;
-			else Log.Message($"Got spell");
+			if (spell == null)
+			{
+				Log.Message($"Got no spell from boss. -> CheckBossDefeated()");
+				return;
+			}
 			CompCache.StoryWC.GetUnlockedSpells().Add(spell);
 			if (gifted != null)
 			{

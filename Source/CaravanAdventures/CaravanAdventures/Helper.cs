@@ -9,7 +9,7 @@ using Verse;
 
 namespace CaravanAdventures
 {
-    class Helper
+    static class Helper
     {
         public static bool Debug() => ModSettings.Get().debug;
         public static IEnumerable<T> PickSomeInRandomOrder<T>(IEnumerable<T> items, int count)
@@ -68,6 +68,15 @@ namespace CaravanAdventures
 
                 return (ModSettings)importedObj;
             }
+        }
+
+        public static string HtmlFormatting(this string s, string code, bool italic = false, int size = 0, bool bolt = false)
+        {
+            var buildString = string.Format("<color=#{0}>{1}</color>", code, s);
+            if (size != 0) buildString = string.Format("<size={0}>{1}</size>", size, buildString);
+            if (italic) buildString = "<i>" + buildString + "</i>";
+            if (bolt) buildString = "<b>" + buildString + "</b>";
+            return buildString;
         }
     }
 }

@@ -22,13 +22,11 @@ namespace CaravanAdventures
         public float lightDuration = 1200f;
         public bool debug = false;
 
-        public static ModSettings Get()
-        {
-            return LoadedModManager.GetMod<CaravanAdventures.Main>().GetSettings<ModSettings>();
-        }
+        public static ModSettings Get() => LoadedModManager.GetMod<CaravanAdventures.Main>().GetSettings<ModSettings>();
 
         public override void ExposeData()
         {
+            base.ExposeData();
             Scribe_Values.Look(ref mechanoidDissmemberChance, "mechanoidDissmemberChance", 0.5f);
             Scribe_Values.Look(ref humanDissmemberChance, "humanDissmemberChance", 0.3f);
             Scribe_Values.Look(ref additionalBuildingAreaDamageMin, "additionalBuildingAreaDamageMin", 0.5f);

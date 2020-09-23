@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RimWorld.Planet;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,9 +12,11 @@ namespace CaravanAdventures.CaravanStory.Quests
     {
         private Pawn storyContact;
         private StoryVillageMP settlement;
+        private MapParent destroyedSettlement;
 
         public Pawn StoryContact { get => storyContact; set => storyContact = value; }
         public StoryVillageMP Settlement { get => settlement; internal set => settlement = value; }
+        public MapParent DestroyedSettlement { get => destroyedSettlement; internal set => destroyedSettlement = value; }
 
         public QuestCont_Village()
         {
@@ -25,6 +28,7 @@ namespace CaravanAdventures.CaravanStory.Quests
             // todo - deep or ref? - what keeps the comp?
             Scribe_References.Look(ref storyContact, "storyContact");
             Scribe_References.Look(ref settlement, "settlement");
+            Scribe_References.Look(ref destroyedSettlement, "destroyedSettlement");
         }
     }
 }
