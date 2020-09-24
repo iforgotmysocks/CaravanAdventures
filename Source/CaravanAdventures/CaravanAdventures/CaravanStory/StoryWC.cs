@@ -10,7 +10,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Verse;
 
-// todo create function to reset the entire story and add to debug settings as button
 // add mod option to regain the gift at the anima tree instead of passing it on to someone else
 // todo wake up shrine mechs if other factions pawns come close or best when wall breaks
 
@@ -20,7 +19,10 @@ using Verse;
 // add quote to each horsemen type when entering the shrine
 // credits to horsemen idea to Shakesthespeare
 
-// todo - consider dropping the ancients improvements ideas, wouldn't fit with the story evolving around the relationship with the sacrileg hunters character
+// todo -> collect player responses and use them to determine the support strength for troups at shrines
+// todo -> balance village hunter strenght depending on player character wealth
+
+// todo -> sac hunters were chosen as attack type for reinforcements on the village? dafuq?
 
 namespace CaravanAdventures.CaravanStory
 {

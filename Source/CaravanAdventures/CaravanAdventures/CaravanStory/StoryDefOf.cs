@@ -16,5 +16,10 @@ namespace CaravanAdventures.CaravanStory
 #pragma warning disable CS0649
         public static FactionDef SacrilegHunters;
         public static IncidentDef CAFriendlyCaravan;
+
+        public static PawnKindDef SacrilegHunters_Town_Councilman;
+        public static PawnKindDef SacrilegHunters_Villager;
+        public static PawnKindDef SacrilegHunters_ExperiencedHunter;
+        public static PawnKindDef SacrilegHunters_ExperiencedHunterVillage;
     }
 }

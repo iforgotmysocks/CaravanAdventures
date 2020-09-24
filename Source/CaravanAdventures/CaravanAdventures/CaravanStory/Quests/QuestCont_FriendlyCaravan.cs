@@ -79,7 +79,7 @@ namespace CaravanAdventures.CaravanStory.Quests
             diaNode6_2.options.Add(new DiaOption("TradeCaravan_Dia1_6_2_Option1".Translate()) { action = () => ConversationFinished(initiator, addressed), resolveTree = true });
 
             var diaNode5 = new DiaNode("TradeCaravan_Dia1_5".Translate(addressed.NameShortColored));
-            diaNode5.options.Add(new DiaOption("TradeCaravan_Dia1_5_Option1".Translate()) { action = () => StoryUtility.EnsureSacrilegHunters(FactionRelationKind.Ally), link = diaNode6_1 });
+            diaNode5.options.Add(new DiaOption("TradeCaravan_Dia1_5_Option1".Translate()) { action = () => SetSacsAllies(), link = diaNode6_1 });
             diaNode5.options.Add(new DiaOption("TradeCaravan_Dia1_5_Option2".Translate()) { link = diaNode6_2 });
 
             var diaNode4 = new DiaNode("TradeCaravan_Dia1_4".Translate(addressed.NameShortColored));
@@ -98,6 +98,12 @@ namespace CaravanAdventures.CaravanStory.Quests
             TaggedString taggedString = "TradeCaravan_Dia1_DiaTitle".Translate(addressed.NameShortColored);
             Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
             Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
+        }
+
+        private void SetSacsAllies()
+        {
+            Log.Message($"trying to set sacs allies");
+            StoryUtility.EnsureSacrilegHunters(FactionRelationKind.Ally);
         }
 
         private void ConversationFinished(Pawn initiator, Pawn addressed, bool reward = false)

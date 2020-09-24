@@ -15,7 +15,6 @@ namespace CaravanAdventures.CaravanStory
         protected override bool CanFireNowSub(IncidentParms parms)
         {
             return false;
-            return base.CanFireNowSub(parms);
         }
 
         protected override bool TryExecuteWorker(IncidentParms parms)

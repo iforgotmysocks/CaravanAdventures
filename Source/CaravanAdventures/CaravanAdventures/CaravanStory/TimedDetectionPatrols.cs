@@ -18,6 +18,7 @@ namespace CaravanAdventures.CaravanStory
         private const int defaultTicksTillLeave = 5000;
 		private List<Lord> lordsToExcludeFromRaidLogic = null;
 		private int raidPoints = 8000;
+		private Faction forcedFaction = null;
 
 		public bool NextRaidCountdownActiveAndVisible
 		{
@@ -35,13 +36,16 @@ namespace CaravanAdventures.CaravanStory
 			Scribe_Values.Look(ref ticksLeftTillLeaveIfNoEnemies, "ticksLeftTillLeaveIfNoEnemies", -1, false);
 			Scribe_Collections.Look(ref lordsToExcludeFromRaidLogic, "lordsToExcludeFromRaidLogic", LookMode.Reference);
 			Scribe_Values.Look(ref raidPoints, "raidPoints");
+			Scribe_Values.Look(ref forcedFaction, "forcedFaction");
 		}
 
-		public void Init()
+		public void Init(Faction forcedFaction = null)
         {
+
+			this.forcedFaction = forcedFaction;
 			var mapParent = (MapParent)this.parent;
 			if (!mapParent.HasMap) return;
-			lordsToExcludeFromRaidLogic = mapParent.Map.lordManager.lords.Where(lord => lord.faction == Faction.OfMechanoids).ToList();
+			lordsToExcludeFromRaidLogic = mapParent.Map.lordManager.lords.Where(lord => lord.faction == (forcedFaction ?? this.parent.Faction ?? Faction.OfMechanoids)).ToList();
 		}
 
 		public string DetectionCountdownTimeLeftString
@@ -60,7 +64,7 @@ namespace CaravanAdventures.CaravanStory
 		{
 			get
 			{
-				return this.parent.Faction ?? Faction.OfMechanoids;
+				return forcedFaction ?? this.parent.Faction ?? Faction.OfMechanoids;
 			}
 		}
 

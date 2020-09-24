@@ -11,7 +11,7 @@
 
 	<PawnKindDef Name="SacrilegHunters_ExperiencedHunterBase" ParentName="SacrilegHuntersBase" Abstract="True">
 		<label>Experienced Hunter</label>
-		<combatPower>75</combatPower>
+		<combatPower>85</combatPower>
 		<isFighter>true</isFighter>
 		<baseRecruitDifficulty>0.30</baseRecruitDifficulty>
 		<defaultFactionType>SacrilegHunters</defaultFactionType>
@@ -48,7 +48,7 @@
 		<techHediffsChance>1</techHediffsChance>
 		<combatEnhancingDrugsChance>0.5</combatEnhancingDrugsChance>
 		<combatEnhancingDrugsCount>1~2</combatEnhancingDrugsCount>
-		<biocodeWeaponChance>0.2</biocodeWeaponChance>
+		<biocodeWeaponChance>0.8</biocodeWeaponChance>
 		<requiredWorkTags>
 			<li>Violent</li>
 		</requiredWorkTags>
@@ -146,9 +146,9 @@
     <gearHealthRange>0.2~2.0</gearHealthRange>
     <weaponTags>
       <li>Gun</li>
-      <li>MedievalMeleeBasic</li>
+      <!--<li>MedievalMeleeBasic</li>-->
     </weaponTags>
-    <weaponMoney>65~250</weaponMoney>
+		<weaponMoney>250~400</weaponMoney>
     <apparelMoney>200~400</apparelMoney>
     <apparelAllowHeadgearChance>0.4</apparelAllowHeadgearChance>
     <techHediffsChance>0.06</techHediffsChance>

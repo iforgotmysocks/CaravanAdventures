@@ -23,6 +23,7 @@ namespace CaravanAdventures.CaravanStory
         private int ticks;
         private int ticksTillReinforcements = -1;
         private bool sacHuntersFleeing;
+        private bool sacHuntersCiviliansFleeing;
         private bool mainCharLeftOrDied;
         private IntVec3 centerPoint;
 
@@ -35,6 +36,7 @@ namespace CaravanAdventures.CaravanStory
             base.ExposeData();
             Scribe_Values.Look(ref ticks, "ticks");
             Scribe_Values.Look(ref sacHuntersFleeing, "sacHuntersFleeing");
+            Scribe_Values.Look(ref sacHuntersCiviliansFleeing, "sacHuntersCiviliansFleeing");
             Scribe_Values.Look(ref mainCharLeftOrDied, "mainCharLeftOrDied");
         }
 
@@ -66,7 +68,10 @@ namespace CaravanAdventures.CaravanStory
                     }
                     // todo handle case if no position was found!!!
                     /*if (storyChar?.Map != orGenerateMap)*/
+
+                    if (storyChar.Spawned) storyChar.DeSpawn();
                     StoryUtility.FreshenUpPawn(storyChar);
+                    // todo create method that re-creates the gear of the pawn
                     GenSpawn.Spawn(storyChar, storyContactCell, Map);
                     StoryUtility.AssignDialog("StoryVillage_Conversation", storyChar, GetType().ToString(), "ConversationFinished");
                     AddNewLordAndAssignStoryChar(storyChar);
@@ -86,12 +91,15 @@ namespace CaravanAdventures.CaravanStory
             {
                 var pawnsToReassign = lord.ownedPawns;
                 lord.lordManager.RemoveLord(lord);
-                LordMaker.MakeNewLord(Faction, new LordJob_DefendBaseAgaintHostiles(Faction, centerPoint), Map, pawnsToReassign);
+                var genLord = LordMaker.MakeNewLord(Faction, new LordJob_DefendBaseAgaintHostiles(Faction, centerPoint), Map, pawnsToReassign);
+                Log.Message($"Created lord with id {genLord.loadID}");
             }
 
             var selLord = raidLords.OrderByDescending(x => x.ownedPawns.Count).FirstOrDefault();
             if (storyChar.GetLord() != null && storyChar.GetLord() != selLord) storyChar.GetLord().ownedPawns.Remove(storyChar);
             if (storyChar.GetLord() == null) selLord.AddPawn(storyChar);
+
+            Log.Message($"After applying lord, story char has lord with id: {storyChar.GetLord().loadID}");
         }
 
         public override void PostMapGenerate()
@@ -103,15 +111,18 @@ namespace CaravanAdventures.CaravanStory
         {
             Log.Message($"Story starts initiated by {initiator.Name} and {addressed.def.defName}");
             DiaNode diaNode = null;
-            var endDiaNodeAccepted = new DiaNode("StoryVillage_Dia1_3".Translate());
-            endDiaNodeAccepted.options.Add(new DiaOption("StoryVillage_Dia1_3_Option1".Translate()) { action = () => SpawnMechArmy(initiator, addressed), resolveTree = true });
+            var diaNode4 = new DiaNode("StoryVillage_Dia1_4".Translate(addressed.NameShortColored));
+            diaNode4.options.Add(new DiaOption("StoryVillage_Dia1_4_Option1".Translate()) { action = () => SpawnMechArmy(initiator, addressed), resolveTree = true });
 
-            var subDiaNode = new DiaNode("StoryVillage_Dia1_2".Translate());
-            subDiaNode.options.Add(new DiaOption("StoryVillage_Dia1_2_Option1".Translate()) { link = endDiaNodeAccepted });
-            subDiaNode.options.Add(new DiaOption("StoryVillage_Dia1_2_Option2".Translate()) { link = endDiaNodeAccepted });
+            var diaNode3 = new DiaNode("StoryVillage_Dia1_3".Translate(addressed.NameShortColored));
+            diaNode3.options.Add(new DiaOption("StoryVillage_Dia1_3_Option1".Translate()) { link = diaNode4 });
+
+            var diaNode2 = new DiaNode("StoryVillage_Dia1_2".Translate(addressed.NameShortColored));
+            diaNode2.options.Add(new DiaOption("StoryVillage_Dia1_2_Option1".Translate()) { link = diaNode3 });
+            diaNode2.options.Add(new DiaOption("StoryVillage_Dia1_2_Option2".Translate()) { link = diaNode3 });
 
             diaNode = new DiaNode("StoryVillage_Dia1_1".Translate(initiator.NameShortColored));
-            diaNode.options.Add(new DiaOption("StoryVillage_Dia1_1_Option1".Translate()) { link = subDiaNode }); ;
+            diaNode.options.Add(new DiaOption("StoryVillage_Dia1_1_Option1".Translate()) { link = diaNode2 }); ;
 
             TaggedString taggedString = "StoryVillage_Dia1_DiaTitle".Translate(addressed.NameShortColored);
             Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
@@ -138,7 +149,7 @@ namespace CaravanAdventures.CaravanStory
             ticksTillReinforcements = 60 * 15;
             CompCache.StoryWC.SetSF("IntroVillage_MechsArrived");
 
-            GetComponent<TimedDetectionPatrols>().Init();
+            GetComponent<TimedDetectionPatrols>().Init(Faction.OfMechanoids);
             GetComponent<TimedDetectionPatrols>().StartDetectionCountdown(30000, -1);
         }
 
@@ -162,9 +173,10 @@ namespace CaravanAdventures.CaravanStory
                 }
                 if (ticksTillReinforcements == 0)
                 {
-                    StoryUtility.GetAssistanceFromAlliedFaction(StoryUtility.FactionOfSacrilegHunters, Map, 11000, 12000, centerPoint);
+                    StoryUtility.GetAssistanceFromAlliedFaction(StoryUtility.FactionOfSacrilegHunters, Map, 10000, 11000, centerPoint);
                     CompCache.StoryWC.SetSF("IntroVillage_ReinforcementsArrived");
                     ReinforcementConvo();
+                    CheckShouldCiviliansFlee();
                 }
 
                 ticks++;
@@ -208,6 +220,24 @@ namespace CaravanAdventures.CaravanStory
             Messages.Message(new Message("StoryVillage_SacHunters_Fleeing".Translate(), MessageTypeDefOf.NegativeEvent));
             LordMaker.MakeNewLord(Faction, new LordJob_ExitMapBest(LocomotionUrgency.Sprint, false, false), Map, hunters);
             sacHuntersFleeing = true;
+        }
+
+        private void CheckShouldCiviliansFlee()
+        {
+            if (sacHuntersCiviliansFleeing || !HasMap) return;
+            var civs = Map.mapPawns.AllPawnsSpawned.Where(x => x.Faction == StoryUtility.FactionOfSacrilegHunters 
+                && (x.kindDef != StoryDefOf.SacrilegHunters_ExperiencedHunter
+                && x.kindDef != StoryDefOf.SacrilegHunters_ExperiencedHunterVillage
+                    || x == CompCache.StoryWC.questCont.Village.StoryContact));
+
+            foreach (var civ in civs)
+            {
+                civ.GetLord().ownedPawns.Remove(civ);
+            }
+
+            Messages.Message(new Message("StoryVillage_SacHuntersCivs_Fleeing".Translate(), MessageTypeDefOf.NegativeEvent));
+            LordMaker.MakeNewLord(Faction, new LordJob_ExitMapBest(LocomotionUrgency.Jog, false, false), Map, civs);
+            sacHuntersCiviliansFleeing = true;
         }
 
         private void CheckPlayerLeftAndAbandon()

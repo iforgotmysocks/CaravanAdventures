@@ -126,9 +126,11 @@ namespace CaravanAdventures.CaravanStory
                 });
 
             var storyContactBondedPerson = CompCache.StoryWC.questCont.FriendlyCaravan?.storyContactBondedPawn;
-            Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillageQuestLetterContent".Translate(storyContactBondedPerson.NameShortColored).ToString().HtmlFormatting("614027", true, 17));
-            if (storyContactBondedPerson != null) Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillageQuestLetterContentPS".Translate().ToString().HtmlFormatting("ffa500", true, 12));
-            Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillageQuestLetterContentEnding".Translate(CompCache.StoryWC.questCont.Village.StoryContact.NameShortColored).ToString().HtmlFormatting("fc6f03", true, 17));
+            Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillageQuestLetterContent".Translate(storyContactBondedPerson.NameShortColored, CompCache.StoryWC.questCont.Village.Settlement.Label).ToString().HtmlFormatting("add8e6ff", true, 15));
+            if (storyContactBondedPerson != null) Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillageQuestLetterContentPS".Translate().ToString().HtmlFormatting("add8e6ff", true, 13));
+            Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillageQuestLetterContentEnding".Translate(CompCache.StoryWC.questCont.Village.StoryContact.NameShortColored).ToString().HtmlFormatting("add8e6ff", true, 15));
+
+            Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillageQuestDesc2".Translate(StoryUtility.FactionOfSacrilegHunters.Name.HtmlFormatting("008080"), CompCache.StoryWC.questCont.Village.Settlement.Name.HtmlFormatting("008080"), CompCache.StoryWC.questCont.Village.StoryContact.NameShortColored));
 
             CompCache.StoryWC.SetSF("IntroVillage_Created");
         }
@@ -226,6 +228,7 @@ namespace CaravanAdventures.CaravanStory
             if (CompCache.StoryWC.questCont.Village.StoryContact != null && !CompCache.StoryWC.questCont.Village.StoryContact.Dead) return;
             var girl = PawnGenerator.GeneratePawn(new PawnGenerationRequest()
             {
+                Context = PawnGenerationContext.NonPlayer,
                 FixedBiologicalAge = 19,
                 FixedChronologicalAge = 3022,
                 FixedGender = Gender.Female,
@@ -233,7 +236,8 @@ namespace CaravanAdventures.CaravanStory
                 AllowGay = false,
                 AllowDead = false,
                 Faction = StoryUtility.EnsureSacrilegHunters(),
-                KindDef = PawnKindDefOf.Villager,
+                KindDef = StoryDefOf.SacrilegHunters_ExperiencedHunter,
+                ProhibitedTraits = new List<TraitDef> { TraitDef.Named("Violent"), TraitDef.Named("Wimp") }
             });
 
             // todo looks?
@@ -249,7 +253,7 @@ namespace CaravanAdventures.CaravanStory
 
         public static Pawn GetGiftedPawn() => PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction?.FirstOrDefault(x => (x?.RaceProps?.Humanlike ?? false) && x.health.hediffSet.GetFirstHediffOfDef(HediffDef.Named("AncientGift")) != null);
 
-        public static Faction EnsureSacrilegHunters(FactionRelationKind relationKind = FactionRelationKind.Neutral, bool ignoreBetrayal = false, bool skipLeaderGeneration = false)
+        public static Faction EnsureSacrilegHunters(FactionRelationKind? relationKind = null, bool ignoreBetrayal = false, bool skipLeaderGeneration = false)
         {
             var sacrilegHunters = Find.FactionManager.AllFactions.FirstOrDefault(x => x.def.defName == "SacrilegHunters");
             if (sacrilegHunters == null)
@@ -276,7 +280,7 @@ namespace CaravanAdventures.CaravanStory
             {
                 if ((!CompCache.StoryWC.storyFlags["SacrilegHuntersBetrayal"] || ignoreBetrayal))
                 {
-                    if (sacrilegHunters.RelationKindWith(Faction.OfPlayerSilentFail) != relationKind)
+                    if (relationKind != null && sacrilegHunters.RelationKindWith(Faction.OfPlayerSilentFail) != relationKind)
                     {
                         switch (relationKind)
                         {
@@ -335,11 +339,18 @@ namespace CaravanAdventures.CaravanStory
 
         public static void RemoveMapParentsOfDef(WorldObjectDef def)
         {
-            var sites = Find.WorldObjects.AllWorldObjects.Where(x => x.def == def) as List<MapParent>;
+            var sites = Find.WorldObjects.AllWorldObjects.Where(x => x.def == def);
             if (sites == null) return;
-            foreach (var site in sites.Reverse<MapParent>())
+            foreach (var site in sites.Reverse<WorldObject>())
             {
-                if (site.HasMap) Current.Game.DeinitAndRemoveMap(site.Map);
+                Log.Message($"Destroying site {site.def.label}");
+                var mapParent = site as MapParent;
+                if (mapParent != null)
+                {
+                    if (mapParent.HasMap) Current.Game.DeinitAndRemoveMap(mapParent.Map);
+                    else Log.Warning($"Didn't have a map to remove: {site.Label} {site.def.defName}");
+                }
+                else Log.Warning($"Couldn't convert site to MapParent and check for a map to remove: {site.Label} {site.def.defName}");
                 site.Destroy();
             }
         }
