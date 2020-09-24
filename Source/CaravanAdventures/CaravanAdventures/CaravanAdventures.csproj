@@ -98,6 +98,7 @@
     <Compile Include="CaravanItemSelection\FilterSet.cs" />
     <Compile Include="CaravanStory\AncientMasterShrineMP.cs" />
     <Compile Include="CaravanStory\CaravanArrivalAction_StoryVillageMP.cs" />
+    <Compile Include="CaravanStory\GameCondition_Apocalypse.cs" />
     <Compile Include="CaravanStory\IncidentWorker_FriendlyCaravanVisit.cs" />
     <Compile Include="CaravanStory\IncidentWorker_MechsWithBoss.cs" />
     <Compile Include="CaravanStory\JobDefOf.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="CaravanStory\Lords\Trigger_ChanceOnMechHarmNPCBuilding.cs" />
     <Compile Include="CaravanStory\Quests\QuestCont.cs" />
     <Compile Include="CaravanStory\Quests\QuestCont_FriendlyCaravan.cs" />
+    <Compile Include="CaravanStory\Quests\QuestCont_LastJudgment.cs" />
     <Compile Include="CaravanStory\Quests\QuestCont_Village.cs" />
     <Compile Include="CaravanStory\Quests\QuestNode_StoryVillage_Arrival.cs" />
     <Compile Include="CaravanStory\Quests\QuestNode_Temp.cs" />

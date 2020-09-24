@@ -243,7 +243,8 @@ namespace CaravanAdventures.CaravanStory
                 AllowDead = false,
                 Faction = StoryUtility.EnsureSacrilegHunters(),
                 KindDef = StoryDefOf.SacrilegHunters_ExperiencedHunter,
-                ProhibitedTraits = new List<TraitDef> { TraitDef.Named("Violent"), TraitDef.Named("Wimp") }
+                ProhibitedTraits = new List<TraitDef> { TraitDef.Named("Wimp") },
+                MustBeCapableOfViolence = true,
             });
 
             // todo looks?

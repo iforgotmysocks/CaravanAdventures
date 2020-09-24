@@ -21,6 +21,7 @@ namespace CaravanAdventures
         public bool stopMentalBreaks = false;
         public float lightDuration = 1200f;
         public bool debug = false;
+        public bool apocalypseEnabled = true;
 
         public static ModSettings Get() => LoadedModManager.GetMod<CaravanAdventures.Main>().GetSettings<ModSettings>();
 
@@ -41,6 +42,8 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref lightDuration, "lightDuration", 1200f);
 
             Scribe_Values.Look(ref debug, "debug");
+
+            Scribe_Values.Look(ref apocalypseEnabled, "apocalypseEndabled");
         }
 
         public void DoWindowContents(Rect wrect)
@@ -50,6 +53,7 @@ namespace CaravanAdventures
 
             options.CheckboxLabeled("Debug mode", ref debug);
             if (options.ButtonText("Reset full story")) StoryUtility.RestartStory();
+            options.CheckboxLabeled("Apocalypse enabled", ref apocalypseEnabled);
             // todo figure out scroll views
             //Rect viewRect = new Rect(0, 0, 500, 3000);
             //Vector2 vec = new Vector2(0, 0);

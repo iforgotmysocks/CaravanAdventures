@@ -22,8 +22,6 @@ using Verse;
 // todo -> collect player responses and use them to determine the support strength for troups at shrines
 // todo -> balance village hunter strenght depending on player character wealth
 
-// todo -> sac hunters were chosen as attack type for reinforcements on the village? dafuq?
-
 // todo -> export shrine stuff to seperate questCont
 
 namespace CaravanAdventures.CaravanStory
@@ -48,6 +46,7 @@ namespace CaravanAdventures.CaravanStory
             { "FriendlyCaravanDisabled", false },
             { "ShrinesDisabled", false },
             { "DebugAllAbilities", false },
+            { "VillageDisabled", false },
             { "VillageFinished", false },
             { "DebugResetVillagesAndShrines", false },
         };
@@ -73,6 +72,8 @@ namespace CaravanAdventures.CaravanStory
             "Start_ReceivedGift",
 
             "SacrilegHuntersBetrayal",
+
+            "Judgment_ApocalypseStarted",
         };
 
         public QuestCont questCont;
@@ -126,22 +127,8 @@ namespace CaravanAdventures.CaravanStory
 
         private void InitializeQuestCont()
         {
-            if (questCont == null)
-            {
-                questCont = new QuestCont();
-                Log.Message($"QuestCont was null");
-            }
-            // todo -> possibly move to QuestCont constructor if loading always results in the questcont and additionally the fields being null, otherwise reflection, cause this is fugly
-            if (questCont.Village == null)
-            {
-                Log.Message($"QuestComp Village was null");
-                questCont.Village = new QuestCont_Village();
-            }
-            if (questCont.FriendlyCaravan == null)
-            {
-                Log.Message($"QuestComp FriendlyCaravan was null");
-                questCont.FriendlyCaravan = new QuestCont_FriendlyCaravan();
-            }
+            questCont = questCont ?? new QuestCont();
+            questCont.EnsureFieldsInitialized();
         }
 
         public override void WorldComponentTick()
@@ -174,6 +161,9 @@ namespace CaravanAdventures.CaravanStory
                     SetShrineSF("InitCountDownStarted");
                 }
 
+                questCont.LastJudgment.StartApocalypse(-50, -10);
+                if (CheckCanStartApocalypse()) questCont.LastJudgment.StartApocalypse(-50, -10);
+
                 ticks = 0;
             }
             if (questCont.FriendlyCaravan.friendlyCaravanCounter == 0) CompCache.StoryWC.questCont.FriendlyCaravan.TryCreateFriendlyCaravan(ref questCont.FriendlyCaravan.friendlyCaravanCounter);
@@ -185,6 +175,7 @@ namespace CaravanAdventures.CaravanStory
             shrineRevealCounter--;
         }
 
+        
         private void RunDebugActionsOnceAtStartUp()
         {
             if (ranDebugActionsOnceAtStartUp) return; 
@@ -253,6 +244,7 @@ namespace CaravanAdventures.CaravanStory
         // todo - incomplete
         private bool CheckCanStartFriendlyCaravanCounter() => !storyFlags["TradeCaravan_InitCountDownStarted"];
         private bool CheckCanStartVillageGenerationCounter() => storyFlags["TradeCaravan_DialogFinished"] && !storyFlags["IntroVillage_InitCountDownStarted"];
+        private bool CheckCanStartApocalypse() => storyFlags["Shrine1_Completed"] && ModSettings.Get().apocalypseEnabled && !storyFlags["Judgment_ApocalypseStarted"];
 
         public void ResetStoryVars()
         {
