@@ -14,6 +14,9 @@ namespace CaravanAdventures.CaravanStory.Quests
         private StoryVillageMP settlement;
         private MapParent destroyedSettlement;
 
+        public readonly float baseDelayVillageGeneration = Helper.Debug() ? 1000f : 60000f * 5f;
+        public float villageGenerationCounter = -1f;
+
         public Pawn StoryContact { get => storyContact; set => storyContact = value; }
         public StoryVillageMP Settlement { get => settlement; internal set => settlement = value; }
         public MapParent DestroyedSettlement { get => destroyedSettlement; internal set => destroyedSettlement = value; }
@@ -29,6 +32,7 @@ namespace CaravanAdventures.CaravanStory.Quests
             Scribe_References.Look(ref storyContact, "storyContact");
             Scribe_References.Look(ref settlement, "settlement");
             Scribe_References.Look(ref destroyedSettlement, "destroyedSettlement");
+            Scribe_Values.Look(ref villageGenerationCounter, "villageGenerationCounter");
         }
     }
 }

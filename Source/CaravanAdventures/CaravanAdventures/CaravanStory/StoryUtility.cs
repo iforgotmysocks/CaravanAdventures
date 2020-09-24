@@ -99,12 +99,18 @@ namespace CaravanAdventures.CaravanStory
             Log.Message($"Story reset complete");
         }
 
-        public static void GenerateFriendlyVillage()
+        public static void GenerateFriendlyVillage(ref float villageGenerationCounter)
         {
             if (!CompCache.StoryWC.storyFlags["TradeCaravan_DialogFinished"] || CompCache.StoryWC.storyFlags["IntroVillage_Created"]) return;
             if (!StoryUtility.TryGenerateDistantTile(out var tile, 6, 15))
             {
                 Log.Message($"No tile was generated");
+                return;
+            }
+            if (Faction.OfPlayer.HostileTo(StoryUtility.FactionOfSacrilegHunters))
+            {
+                Log.Message($"Skipping village generation, Sac hunters are hostile.");
+                villageGenerationCounter = 20000;
                 return;
             }
             StoryVillageMP settlement = (StoryVillageMP)WorldObjectMaker.MakeWorldObject(CaravanStorySiteDefOf.StoryVillageMP);

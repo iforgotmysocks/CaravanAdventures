@@ -129,6 +129,12 @@ namespace CaravanAdventures.CaravanStory.Quests
             if (CompCache.StoryWC.storyFlags["TradeCaravan_DialogFinished"]) return;
              
             Log.Message($"creating caravan");
+            if (Faction.OfPlayer.HostileTo(StoryUtility.FactionOfSacrilegHunters))
+            {
+                Log.Message($"Skipping, Sac hunters are hostile.");
+                friendlyCaravanCounter = 20000;
+                return;
+            }
             var selectedMap = map ?? Find.Maps.Where(cmap => cmap.ParentFaction == Faction.OfPlayerSilentFail)?.OrderByDescending(cmap => cmap.wealthWatcher.WealthItems)?.FirstOrDefault();
             if (selectedMap == null)
             {

@@ -24,6 +24,8 @@ using Verse;
 
 // todo -> sac hunters were chosen as attack type for reinforcements on the village? dafuq?
 
+// todo -> export shrine stuff to seperate questCont
+
 namespace CaravanAdventures.CaravanStory
 {
     class StoryWC : WorldComponent
@@ -56,6 +58,7 @@ namespace CaravanAdventures.CaravanStory
             "TradeCaravan_Arrived",
             "TradeCaravan_DialogFinished",
 
+            "IntroVillage_InitCountDownStarted",
             "IntroVillage_Created",
             "IntroVillage_Entered",
             "IntroVillage_TalkedToFriend",
@@ -157,7 +160,12 @@ namespace CaravanAdventures.CaravanStory
                     SetSF("TradeCaravan_InitCountDownStarted");
                 }
 
-                StoryUtility.GenerateFriendlyVillage();
+                if (CheckCanStartVillageGenerationCounter() && !debugFlags["VillageDisabled"])
+                {
+                    if (Dg) Log.Message("village gen counter running" + questCont.FriendlyCaravan.friendlyCaravanCounter);
+                    questCont.Village.villageGenerationCounter = questCont.Village.baseDelayVillageGeneration;
+                    SetSF("IntroVillage_InitCountDownStarted");
+                }
 
                 if (CheckCanStartCountDownOnNewShrine() && !debugFlags["ShrinesDisabled"])
                 {
@@ -169,6 +177,7 @@ namespace CaravanAdventures.CaravanStory
                 ticks = 0;
             }
             if (questCont.FriendlyCaravan.friendlyCaravanCounter == 0) CompCache.StoryWC.questCont.FriendlyCaravan.TryCreateFriendlyCaravan(ref questCont.FriendlyCaravan.friendlyCaravanCounter);
+            if (questCont.Village.villageGenerationCounter == 0) StoryUtility.GenerateFriendlyVillage(ref questCont.Village.villageGenerationCounter);
             if (shrineRevealCounter == 0) TryCreateNewShrine(ref shrineRevealCounter);
             
             ticks++;
@@ -202,18 +211,22 @@ namespace CaravanAdventures.CaravanStory
             // -> after an unsuccesfull attempt, select tile that supports it for sure.
             if (!TileFinder.TryFindNewSiteTile(out var tile, shrineDistance.min, shrineDistance.max))
             {
-                shrineRevealCounter = 60f;
                 Log.Message("Couldn't find tile to create a new shrine");
+                shrineRevealCounter = 60f;
+                return;
             }
-            else
+            if (Faction.OfPlayer.HostileTo(StoryUtility.FactionOfSacrilegHunters))
             {
-                var ancientMasterShrineWO = (AncientMasterShrineWO)WorldObjectMaker.MakeWorldObject(CaravanStorySiteDefOf.AncientMasterShrineWO);
-                ancientMasterShrineWO.Tile = tile;
-                //ancientMasterShrineWO.GetComponent<TimeoutComp>().StartTimeout(timeoutDaysRange.RandomInRange * 60000);
-                Find.WorldObjects.Add(ancientMasterShrineWO);
-                Find.LetterStack.ReceiveLetter("Story_Shrine1_NewShrineDetectedLetterLabel".Translate(), "Story_Shrine1_NewShrineDetectedLetterMessage".Translate(), LetterDefOf.PositiveEvent, ancientMasterShrineWO);
-                SetShrineSF("Created");
+                Log.Message($"Skipping shrine revealation, Sac hunters are hostile.");
+                shrineRevealCounter = 20000;
+                return;
             }
+            var ancientMasterShrineWO = (AncientMasterShrineWO)WorldObjectMaker.MakeWorldObject(CaravanStorySiteDefOf.AncientMasterShrineWO);
+            ancientMasterShrineWO.Tile = tile;
+            //ancientMasterShrineWO.GetComponent<TimeoutComp>().StartTimeout(timeoutDaysRange.RandomInRange * 60000);
+            Find.WorldObjects.Add(ancientMasterShrineWO);
+            Find.LetterStack.ReceiveLetter("Story_Shrine1_NewShrineDetectedLetterLabel".Translate(), "Story_Shrine1_NewShrineDetectedLetterMessage".Translate(), LetterDefOf.PositiveEvent, ancientMasterShrineWO);
+            SetShrineSF("Created");
         }
 
         // SF helper methods used to be static, if the CompCache doesn't work out, turn access to the SFs static again
@@ -239,6 +252,7 @@ namespace CaravanAdventures.CaravanStory
 
         // todo - incomplete
         private bool CheckCanStartFriendlyCaravanCounter() => !storyFlags["TradeCaravan_InitCountDownStarted"];
+        private bool CheckCanStartVillageGenerationCounter() => storyFlags["TradeCaravan_DialogFinished"] && !storyFlags["IntroVillage_InitCountDownStarted"];
 
         public void ResetStoryVars()
         {
