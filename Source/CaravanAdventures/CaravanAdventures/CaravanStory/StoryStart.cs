@@ -108,7 +108,7 @@ namespace CaravanAdventures.CaravanStory
             }
 
             var info = SoundInfo.InMap(tree, MaintenanceType.None);
-            animaTreeWhipserSustainer = DefDatabase<SoundDef>.GetNamed("AnimaTreeWhispers").TrySpawnSustainer(info);
+            animaTreeWhipserSustainer = DefDatabase<SoundDef>.GetNamed("CAAnimaTreeWhispers").TrySpawnSustainer(info);
             if (animaTreeWhipserSustainer != null) CompCache.StoryWC.storyFlags["Start_InitialTreeWhisper"] = true;
         }
 
@@ -172,7 +172,7 @@ namespace CaravanAdventures.CaravanStory
             }
             else pawns.AddItem(pawn);
 
-            if (pawns.Any(x => x.health.hediffSet.GetFirstHediffOfDef(HediffDef.Named("AncientGift")) != null)) return;
+            if (pawns.Any(x => x.health.hediffSet.GetFirstHediffOfDef(HediffDef.Named("CAAncientGift")) != null)) return;
 
             // todo choose best candidate
             // todo make sure the pawn isn't psychially unsensitive.
@@ -182,7 +182,7 @@ namespace CaravanAdventures.CaravanStory
             Log.Message(chosen.Name + " " + chosen.NameFullColored);
 
             chosen.health.AddHediff(DefDatabase<HediffDef>.AllDefs.FirstOrDefault(x => x.defName == "PsychicAmplifier"), chosen.health.hediffSet.GetBrain());
-            chosen.health.AddHediff(DefDatabase<HediffDef>.AllDefs.FirstOrDefault(x => x.defName == "AncientGift"), chosen.health.hediffSet.GetBrain());
+            chosen.health.AddHediff(DefDatabase<HediffDef>.AllDefs.FirstOrDefault(x => x.defName == "CAAncientGift"), chosen.health.hediffSet.GetBrain());
 
             AddUnlockedAbilities(chosen);
         }
@@ -190,14 +190,14 @@ namespace CaravanAdventures.CaravanStory
         private void AddUnlockedAbilities(Pawn chosen)
         {
             var abilityDefs =CompCache.StoryWC.debugFlags["DebugAllAbilities"] 
-                ? DefDatabase<AbilityDef>.AllDefsListForReading.Where(x => x.defName.StartsWith("Ancient"))
+                ? DefDatabase<AbilityDef>.AllDefsListForReading.Where(x => x.defName.StartsWith("CAAncient"))
                 : CompCache.StoryWC.GetUnlockedSpells();
            
             foreach (var abilityDef in abilityDefs)
             {
                 chosen.abilities.GainAbility(abilityDef);
             }
-            var lightAbilityDef = DefDatabase<AbilityDef>.AllDefs.FirstOrDefault(x => x.defName == "ConjureLight");
+            var lightAbilityDef = DefDatabase<AbilityDef>.AllDefs.FirstOrDefault(x => x.defName == "CAConjureLight");
             chosen.abilities.GainAbility(lightAbilityDef);
         }
 

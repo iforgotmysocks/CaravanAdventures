@@ -2,19 +2,19 @@
 <Defs>
 
 	<MapGeneratorDef ParentName="MapCommonBase">
-		<defName>AncientMasterShrineMG</defName>
+		<defName>CAAncientMasterShrineMG</defName>
 		<genSteps>
 			<li>RocksFromGrid</li>
-			<li>ScatterMoreShrines</li>
-			<li>ScatterMasterShrines</li>
-			<li>CaveHives</li>
+			<li>CAScatterMoreShrines</li>
+			<li>CAScatterMasterShrines</li>
+			<li>CACaveHives</li>
 			<li MayRequire="Ludeon.RimWorld.Royalty">AnimaTrees</li>
 		</genSteps>
 	</MapGeneratorDef>
 
 	<!-- Ancient shrines -->
 	<GenStepDef>
-		<defName>ScatterMoreShrines</defName>
+		<defName>CAScatterMoreShrines</defName>
 		<order>400</order>
 		<genStep Class="GenStep_ScatterShrines">
 			<allowInWaterBiome>true</allowInWaterBiome>
@@ -27,7 +27,7 @@
 	</GenStepDef>
 
 	<GenStepDef>
-		<defName>ScatterMasterShrines</defName>
+		<defName>CAScatterMasterShrines</defName>
 		<order>350</order>
 		<genStep Class="CaravanAdventures.CaravanStory.GenStep_ScatterMasterShrines">
 			<allowInWaterBiome>true</allowInWaterBiome>
@@ -39,8 +39,9 @@
 	</GenStepDef>
 
 	<!-- Cave hives -->
+	<!-- todo maybe remove them here? -->
 	<GenStepDef>
-		<defName>CaveHives</defName>
+		<defName>CACaveHives</defName>
 		<order>1100</order>
 		<genStep Class="GenStep_CaveHives"/>
 	</GenStepDef>

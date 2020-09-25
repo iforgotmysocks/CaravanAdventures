@@ -94,8 +94,8 @@ namespace CaravanAdventures.CaravanStory
             CompCache.StoryWC.questCont.FriendlyCaravan.storyContactBondedPawn = null;
             CompCache.StoryWC.ResetStoryVars();
             StoryUtility.RemoveExistingQuestFriendlyVillages();
-            StoryUtility.RemoveMapParentsOfDef(CaravanStorySiteDefOf.AncientMasterShrineMP);
-            StoryUtility.RemoveMapParentsOfDef(CaravanStorySiteDefOf.AncientMasterShrineWO);
+            StoryUtility.RemoveMapParentsOfDef(CaravanStorySiteDefOf.CAAncientMasterShrineMP);
+            StoryUtility.RemoveMapParentsOfDef(CaravanStorySiteDefOf.CAAncientMasterShrineWO);
             Log.Message($"Story reset complete");
         }
 
@@ -113,7 +113,7 @@ namespace CaravanAdventures.CaravanStory
                 villageGenerationCounter = 20000;
                 return;
             }
-            StoryVillageMP settlement = (StoryVillageMP)WorldObjectMaker.MakeWorldObject(CaravanStorySiteDefOf.StoryVillageMP);
+            StoryVillageMP settlement = (StoryVillageMP)WorldObjectMaker.MakeWorldObject(CaravanStorySiteDefOf.CAStoryVillageMP);
             settlement.SetFaction(EnsureSacrilegHunters());
             //settlement.AllComps.Add(new CompStoryVillage());
             settlement.Tile = tile;
@@ -194,10 +194,10 @@ namespace CaravanAdventures.CaravanStory
                 });
             }
 
-            var faction = Find.FactionManager.AllFactionsListForReading.FirstOrDefault(x => x.def.defName == "FriendlyMechanoid");
+            var faction = Find.FactionManager.AllFactionsListForReading.FirstOrDefault(x => x.def.defName == "CAFriendlyMechanoid");
             if (faction == null)
             {
-                faction = FactionGenerator.NewGeneratedFactionWithRelations(FactionDef.Named("FriendlyMechanoid"), relations);
+                faction = FactionGenerator.NewGeneratedFactionWithRelations(FactionDef.Named("CAFriendlyMechanoid"), relations);
                 faction.hidden = new bool?(true);
                 faction.temporary = true;
                 faction.hostileFromMemberCapture = false;
@@ -242,7 +242,7 @@ namespace CaravanAdventures.CaravanStory
                 AllowGay = false,
                 AllowDead = false,
                 Faction = StoryUtility.EnsureSacrilegHunters(),
-                KindDef = StoryDefOf.SacrilegHunters_ExperiencedHunter,
+                KindDef = StoryDefOf.CASacrilegHunters_ExperiencedHunter,
                 ProhibitedTraits = new List<TraitDef> { TraitDef.Named("Wimp") },
                 MustBeCapableOfViolence = true,
             });
@@ -258,14 +258,14 @@ namespace CaravanAdventures.CaravanStory
             CompCache.StoryWC.questCont.Village.StoryContact = girl;
         }
 
-        public static Pawn GetGiftedPawn() => PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction?.FirstOrDefault(x => (x?.RaceProps?.Humanlike ?? false) && x.health.hediffSet.GetFirstHediffOfDef(HediffDef.Named("AncientGift")) != null);
+        public static Pawn GetGiftedPawn() => PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction?.FirstOrDefault(x => (x?.RaceProps?.Humanlike ?? false) && x.health.hediffSet.GetFirstHediffOfDef(HediffDef.Named("CAAncientGift")) != null);
 
         public static Faction EnsureSacrilegHunters(FactionRelationKind? relationKind = null, bool ignoreBetrayal = false, bool skipLeaderGeneration = false)
         {
-            var sacrilegHunters = Find.FactionManager.AllFactions.FirstOrDefault(x => x.def.defName == "SacrilegHunters");
+            var sacrilegHunters = Find.FactionManager.AllFactions.FirstOrDefault(x => x.def.defName == "CASacrilegHunters");
             if (sacrilegHunters == null)
             {
-                sacrilegHunters = FactionGenerator.NewGeneratedFaction(DefDatabase<FactionDef>.GetNamedSilentFail("SacrilegHunters"));
+                sacrilegHunters = FactionGenerator.NewGeneratedFaction(DefDatabase<FactionDef>.GetNamedSilentFail("CASacrilegHunters"));
                 Find.FactionManager.Add(sacrilegHunters);
                 var empireDef = FactionDefOf.Empire;
                 empireDef.permanentEnemyToEveryoneExcept.Add(sacrilegHunters.def);
@@ -384,6 +384,6 @@ namespace CaravanAdventures.CaravanStory
             return bossPawn;
         }
 
-        public static Faction FactionOfSacrilegHunters { get => Find.FactionManager.FirstFactionOfDef(StoryDefOf.SacrilegHunters); private set => FactionOfSacrilegHunters = value; }
+        public static Faction FactionOfSacrilegHunters { get => Find.FactionManager.FirstFactionOfDef(StoryDefOf.CASacrilegHunters); private set => FactionOfSacrilegHunters = value; }
     }
 }

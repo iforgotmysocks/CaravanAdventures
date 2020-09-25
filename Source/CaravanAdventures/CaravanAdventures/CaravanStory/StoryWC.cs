@@ -183,8 +183,8 @@ namespace CaravanAdventures.CaravanStory
             if (debugFlags["DebugResetVillagesAndShrines"])
             {
                 StoryUtility.RemoveExistingQuestFriendlyVillages();
-                StoryUtility.RemoveMapParentsOfDef(CaravanStorySiteDefOf.AncientMasterShrineMP);
-                StoryUtility.RemoveMapParentsOfDef(CaravanStorySiteDefOf.AncientMasterShrineWO);
+                StoryUtility.RemoveMapParentsOfDef(CaravanStorySiteDefOf.CAAncientMasterShrineMP);
+                StoryUtility.RemoveMapParentsOfDef(CaravanStorySiteDefOf.CAAncientMasterShrineWO);
                 ResetCurrentShrineFlags();
                 ResetSFsStartingWith("IntroVillage");
             }
@@ -212,7 +212,7 @@ namespace CaravanAdventures.CaravanStory
                 shrineRevealCounter = 20000;
                 return;
             }
-            var ancientMasterShrineWO = (AncientMasterShrineWO)WorldObjectMaker.MakeWorldObject(CaravanStorySiteDefOf.AncientMasterShrineWO);
+            var ancientMasterShrineWO = (AncientMasterShrineWO)WorldObjectMaker.MakeWorldObject(CaravanStorySiteDefOf.CAAncientMasterShrineWO);
             ancientMasterShrineWO.Tile = tile;
             //ancientMasterShrineWO.GetComponent<TimeoutComp>().StartTimeout(timeoutDaysRange.RandomInRange * 60000);
             Find.WorldObjects.Add(ancientMasterShrineWO);

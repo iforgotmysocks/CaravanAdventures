@@ -2,7 +2,7 @@
 <Defs>
 
 	<MapGeneratorDef ParentName="MapCommonBase">
-		<defName>StoryVillageMG</defName>
+		<defName>CAStoryVillageMG</defName>
 		<genSteps>
 			<li>RocksFromGrid</li>
 			<li>Settlement</li>

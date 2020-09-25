@@ -9,7 +9,7 @@
   </HediffDef>
 
   <HediffDef ParentName = "MechChipHediffBase">
-    <defName>EXT1Basic</defName>
+    <defName>CAEXT1Basic</defName>
     <label>EXT1 Basic</label>
     <isBad>false</isBad>
     <everCurableByItem>false</everCurableByItem>
@@ -35,7 +35,7 @@
   </HediffDef>
 	
   <HediffDef ParentName = "MechChipHediffBase">
-    <defName>EXT1Melee</defName>
+    <defName>CAEXT1Melee</defName>
     <label>EXT1 Melee</label>
     <isBad>false</isBad>
     <everCurableByItem>false</everCurableByItem>

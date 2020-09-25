@@ -16,7 +16,7 @@ namespace CaravanAdventures.CaravanIncidents
 
 		public static DamselInDistressMapParent NewDamselInDistressMapParent(int tile, List<Pawn> attackers, Pawn girl)
         {
-			var damselMapParent = (DamselInDistressMapParent)WorldObjectMaker.MakeWorldObject(CaravanIncidentMapParentDefOfs.DamselInDistressMapParent);
+			var damselMapParent = (DamselInDistressMapParent)WorldObjectMaker.MakeWorldObject(CaravanIncidentMapParentDefOfs.CADamselInDistressMapParent);
 			damselMapParent.Tile = tile;
             damselMapParent.attackers = attackers;
             damselMapParent.girl = girl;
@@ -28,7 +28,7 @@ namespace CaravanAdventures.CaravanIncidents
 		public static Map SetupCaravanAttackMap(DamselInDistressMapParent mapParent, Caravan caravan, List<Pawn> enemies, bool sendLetterIfRelatedPawns)
 		{
 			var num = CaravanIncidentUtility.CalculateIncidentMapSize(caravan.PawnsListForReading, enemies);
-            var map = GetOrGenerateMapForIncident(caravan, new IntVec3(num, 1, num), CaravanIncidentMapParentDefOfs.DamselInDistressMapParent);
+            var map = GetOrGenerateMapForIncident(caravan, new IntVec3(num, 1, num), CaravanIncidentMapParentDefOfs.CADamselInDistressMapParent);
             //var map = MapGenerator.GenerateMap(new IntVec3(num, 1, num), mapParent, mapParent.MapGeneratorDef, mapParent.ExtraGenStepDefs, null);
 
 			IntVec3 playerStartingSpot;

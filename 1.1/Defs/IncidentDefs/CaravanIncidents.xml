@@ -2,7 +2,7 @@
 
 <Defs>
   <IncidentDef>
-    <defName>CaravanDamselInDistress</defName>
+    <defName>CACaravanDamselInDistress</defName>
     <label>damsel in distress</label>
     <category>ThreatSmall</category>
     <targetTags>

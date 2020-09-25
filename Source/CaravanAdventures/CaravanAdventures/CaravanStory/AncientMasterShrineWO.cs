@@ -30,7 +30,7 @@ namespace CaravanAdventures.CaravanStory
 		{
 			LongEventHandler.QueueLongEvent(delegate ()
 			{
-				Map map = CaravanIncidentUtility.GetOrGenerateMapForIncident(caravan, Find.World.info.initialMapSize, CaravanStorySiteDefOf.AncientMasterShrineMP);
+				Map map = CaravanIncidentUtility.GetOrGenerateMapForIncident(caravan, Find.World.info.initialMapSize, CaravanStorySiteDefOf.CAAncientMasterShrineMP);
 				mp = map.Parent as AncientMasterShrineMP;
 				mainRoom = GetAncientShrineRooms(map).FirstOrDefault();
 

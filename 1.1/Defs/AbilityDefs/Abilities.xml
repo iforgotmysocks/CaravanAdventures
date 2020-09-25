@@ -2,7 +2,7 @@
 <Defs>
 
   <AbilityDef ParentName="PsycastBase">
-    <defName>AncientMeditate</defName>
+    <defName>CAAncientMeditate</defName>
     <label>ancient meditation</label>
     <description>Absorbs psychic energy from the surroundings and restores a portion for the user.</description>
     <level>0</level>
@@ -26,14 +26,14 @@
     <comps>
       <li Class = "CompProperties_AbilityGiveHediff">
         <compClass>CaravanAdventures.CaravanAbilities.CompAbilityEffect_AncientMeditate</compClass>
-        <hediffDef>DrainNature</hediffDef>
+        <hediffDef>CADrainNature</hediffDef>
         <psychic>True</psychic>
       </li>
     </comps>
   </AbilityDef>
 
   <AbilityDef ParentName="PsycastBase">
-    <defName>AncientThunderBolt</defName>
+    <defName>CAAncientThunderBolt</defName>
     <label>ancient thunder bolt</label>
     <description>Targettet thunder blast with area damage.</description>
     <level>0</level>
@@ -61,7 +61,7 @@
   </AbilityDef>
 	
 	<AbilityDef ParentName="PsycastBase">
-    <defName>AncientMechSignal</defName>
+    <defName>CAAncientMechSignal</defName>
     <label>ancient mech signal</label>
     <description>Summons a group of mechanoid scythers to the casters aid.</description>
     <level>0</level>
@@ -89,7 +89,7 @@
   </AbilityDef>
 
   <AbilityDef ParentName="PsycastBase">
-    <defName>AncientInvisibility</defName>
+    <defName>CAAncientInvisibility</defName>
     <label>ancient invisibility</label>
     <description>Psychically manipulate the visual centers of everyone nearby, rendering them unable to perceive a particular individual for a short time.</description>
     <level>0</level>
@@ -119,7 +119,7 @@
   </AbilityDef>
 
   <AbilityDef ParentName="PsycastBase">
-    <defName>AncientProtectiveAura</defName>
+    <defName>CAAncientProtectiveAura</defName>
     <label>ancient protective aura</label>
     <description>Protects the target from a large part of incoming damage, fire and heals wounds over time (even permanent ones when active long enough). \n\nReduces the overall heat a pawn can handle and accelerates psyfocus drain by 2% / day while active. The effect of this spell disappears if it is cast a second time on the target or if the targetted pawn runs out of psyfocus. \n\nThe effect is weaker and drains more psyfocus when cast on pawns without the ancient gift.</description>
     <level>0</level>
@@ -143,15 +143,15 @@
     <comps>
       <li Class = "CaravanAdventures.CaravanAbilities.CompProperties_GiveToggleableHediff">
         <compClass>CaravanAdventures.CaravanAbilities.CompAbilityEffect_GiveToggleableHediff</compClass>
-        <hediffDef>AncientProtectiveAura</hediffDef>
-        <hediffDefWeak>AncientProtectiveAuraWeak</hediffDefWeak>
+        <hediffDef>CAAncientProtectiveAura</hediffDef>
+        <hediffDefWeak>CAAncientProtectiveAuraWeak</hediffDefWeak>
         <psychic>True</psychic>
       </li>
     </comps>
   </AbilityDef>
 
   <AbilityDef ParentName="PsycastBase">
-    <defName>ConjureLight</defName>
+    <defName>CAConjureLight</defName>
     <label>conjure light</label>
     <description>Conjures a light brighting up the area which follows pawn it was cast for.</description>
     <level>1</level>
@@ -177,7 +177,7 @@
       <li Class = "CompProperties_AbilityGiveHediff">
         <compClass>CompAbilityEffect_GiveHediff</compClass>
         <!--<compClass>CaravanAdventures.CaravanAbilities.CompAbilityEffect_GiveToggleableHediff</compClass>-->
-        <hediffDef>ConjuredLight</hediffDef>
+        <hediffDef>CAConjuredLight</hediffDef>
         <psychic>True</psychic>
       </li>
     </comps>

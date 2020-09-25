@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
-	<HediffDef Name="AncientPsycastHediffBase" Abstract="True">
+	<HediffDef Name="CAAncientPsycastHediffBase" Abstract="True">
 		<hediffClass>HediffWithComps</hediffClass>
 		<comps>
 			<li Class="HediffCompProperties_DisappearsOnDeath"/>
 		</comps>
 	</HediffDef>
 
-	<HediffDef ParentName="AncientPsycastHediffBase">
-		<defName>AncientProtectiveAura</defName>
+	<HediffDef ParentName="CAAncientPsycastHediffBase">
+		<defName>CAAncientProtectiveAura</defName>
 		<label>ancient protective aura</label>
 		<isBad>false</isBad>
 		<everCurableByItem>false</everCurableByItem>
@@ -48,8 +48,8 @@
 		</stages>
 	</HediffDef>
 
-	<HediffDef ParentName="AncientPsycastHediffBase">
-		<defName>AncientProtectiveAuraWeak</defName>
+	<HediffDef ParentName="CAAncientPsycastHediffBase">
+		<defName>CAAncientProtectiveAuraWeak</defName>
 		<label>ancient protective aura (weak)</label>
 		<isBad>false</isBad>
 		<everCurableByItem>false</everCurableByItem>
@@ -88,8 +88,8 @@
 		</stages>
 	</HediffDef>
 
-	<HediffDef ParentName="AncientPsycastHediffBase">
-		<defName>AncientGift</defName>
+	<HediffDef ParentName="CAAncientPsycastHediffBase">
+		<defName>CAAncientGift</defName>
 		<label>Ancient Gift</label>
 		<description>The Ancient Gift, a power to access long forgotten potential which enables the gifted to cast ancient spells. Slow psyfocus recovery even without meditation is spoken about in stories aswell.</description>
 		<isBad>false</isBad>
@@ -114,9 +114,9 @@
 	</HediffDef>
 
 	<ThoughtDef>
-		<defName>AncientGiftDestiny</defName>
+		<defName>CAAncientGiftDestiny</defName>
 		<workerClass>ThoughtWorker_Hediff</workerClass>
-		<hediff>AncientGift</hediff>
+		<hediff>CAAncientGift</hediff>
 		<validWhileDespawned>true</validWhileDespawned>
 		<stages>
 			<li>
@@ -127,8 +127,8 @@
 		</stages>
 	</ThoughtDef>
 
-	<HediffDef ParentName="AncientPsycastHediffBase">
-		<defName>DrainNature</defName>
+	<HediffDef ParentName="CAAncientPsycastHediffBase">
+		<defName>CADrainNature</defName>
 		<label>Draining nature</label>
 		<description>A powerful being is draining the power from nearby plants.</description>
 		<isBad>false</isBad>
@@ -142,8 +142,8 @@
 	</HediffDef>
 
 
-	<HediffDef ParentName="AncientPsycastHediffBase">
-		<defName>ConjuredLight</defName>
+	<HediffDef ParentName="CAAncientPsycastHediffBase">
+		<defName>CAConjuredLight</defName>
 		<label>conjured light</label>
 		<description>A conjured light brighting up the area which follows pawn it was cast for.</description>
 		<isBad>false</isBad>
@@ -154,8 +154,8 @@
 		</comps>
 	</HediffDef>
 
-	<HediffDef ParentName="AncientPsycastHediffBase">
-		<defName>OverheatingBrain</defName>
+	<HediffDef ParentName="CAAncientPsycastHediffBase">
+		<defName>CAOverheatingBrain</defName>
 		<label>Overheating brain</label>
 		<description>Due to unnatural programming or production of the unit and it's components, the brain is overheating due to the expenentially growing errors occuring which can't be resolved.</description>
 		<isBad>false</isBad>

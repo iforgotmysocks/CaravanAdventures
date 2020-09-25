@@ -1,20 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
-  <PawnKindDef Name="SacrilegHuntersBase" Abstract="True">
+  <PawnKindDef Name="CASacrilegHuntersBase" Abstract="True">
     <race>Human</race>
-    <defaultFactionType>SacrilegHunters</defaultFactionType>
+    <defaultFactionType>CASacrilegHunters</defaultFactionType>
     <chemicalAddictionChance>0.05</chemicalAddictionChance>
     <backstoryCryptosleepCommonality>0.05</backstoryCryptosleepCommonality>
     <invNutrition>2.55</invNutrition>
   </PawnKindDef>
 
-	<PawnKindDef Name="SacrilegHunters_ExperiencedHunterBase" ParentName="SacrilegHuntersBase" Abstract="True">
+	<PawnKindDef Name="CASacrilegHunters_ExperiencedHunterBase" ParentName="CASacrilegHuntersBase" Abstract="True">
 		<label>Experienced Hunter</label>
 		<combatPower>85</combatPower>
 		<isFighter>true</isFighter>
 		<baseRecruitDifficulty>0.30</baseRecruitDifficulty>
-		<defaultFactionType>SacrilegHunters</defaultFactionType>
 		<gearHealthRange>1~1</gearHealthRange>
 		<itemQuality>Good</itemQuality>
 		<apparelMoney>3800~4800</apparelMoney>
@@ -65,18 +64,18 @@
 		</skills>
 	</PawnKindDef>
 
-	<PawnKindDef ParentName="SacrilegHunters_ExperiencedHunterBase">
-		<defName>SacrilegHunters_ExperiencedHunterVillage</defName>
+	<PawnKindDef ParentName="CASacrilegHunters_ExperiencedHunterBase">
+		<defName>CASacrilegHunters_ExperiencedHunterVillage</defName>
 		<apparelAllowHeadgearChance>0</apparelAllowHeadgearChance>
 	</PawnKindDef>
 
-	<PawnKindDef ParentName="SacrilegHunters_ExperiencedHunterBase">
-		<defName>SacrilegHunters_ExperiencedHunter</defName>
+	<PawnKindDef ParentName="CASacrilegHunters_ExperiencedHunterBase">
+		<defName>CASacrilegHunters_ExperiencedHunter</defName>
 		<apparelAllowHeadgearChance>100</apparelAllowHeadgearChance>
 	</PawnKindDef>
 
-	<PawnKindDef ParentName="SacrilegHuntersBase">
-		<defName>SacrilegHunters_Town_Councilman</defName>
+	<PawnKindDef ParentName="CASacrilegHuntersBase">
+		<defName>CASacrilegHunters_Town_Councilman</defName>
 		<label>town councilman</label>
 		<labelPlural>town councilmen</labelPlural>
 		<combatPower>40</combatPower>
@@ -106,8 +105,8 @@
 		</techHediffsTags>
 	</PawnKindDef>
 
-	<PawnKindDef ParentName="SacrilegHuntersBase">
-		<defName>SacrilegHunters_Town_Trader</defName>
+	<PawnKindDef ParentName="CASacrilegHuntersBase">
+		<defName>CASacrilegHunters_Town_Trader</defName>
 		<label>town trader</label>
 		<trader>true</trader>
 		<combatPower>40</combatPower>
@@ -137,8 +136,8 @@
 		</techHediffsTags>
 	</PawnKindDef>
 
-  <PawnKindDef ParentName="SacrilegHuntersBase">
-    <defName>SacrilegHunters_Villager</defName>
+  <PawnKindDef ParentName="CASacrilegHuntersBase">
+    <defName>CASacrilegHunters_Villager</defName>
     <label>villager</label>
     <combatPower>35</combatPower>
     <itemQuality>Poor</itemQuality>
@@ -160,8 +159,8 @@
     </techHediffsTags>
   </PawnKindDef>
 
-	<PawnKindDef ParentName="SacrilegHuntersBase">
-		<defName>SacrilegHunters_Town_Guard</defName>
+	<PawnKindDef ParentName="CASacrilegHuntersBase">
+		<defName>CASacrilegHunters_Town_Guard</defName>
 		<label>town guard</label>
 		<combatPower>55</combatPower>
 		<isFighter>true</isFighter>

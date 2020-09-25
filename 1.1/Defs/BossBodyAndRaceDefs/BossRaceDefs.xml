@@ -49,7 +49,7 @@
 		</butcherProducts>
 		<modExtensions>
 			<li Class="CaravanAdventures.CaravanStory.MechChips.MechChipModExt">
-				<mechChipDefName>EXT1Basic</mechChipDefName>
+				<mechChipDefName>CAEXT1Basic</mechChipDefName>
 			</li>
 		</modExtensions>
 	</ThingDef>
@@ -128,7 +128,7 @@
 		</race>
 		<modExtensions>
 			<li Class="CaravanAdventures.CaravanStory.MechChips.MechChipModExt">
-				<mechChipDefName>EXT1Melee</mechChipDefName>
+				<mechChipDefName>CAEXT1Melee</mechChipDefName>
 			</li>
 		</modExtensions>
 	</ThingDef>

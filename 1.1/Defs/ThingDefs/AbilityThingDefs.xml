@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
   <ThingDef ParentName="BuildingBase">
-    <defName>MagicLight</defName>
+    <defName>CAMagicLight</defName>
     <label>magical light</label>
     <description>Magical light.</description>
     <graphicData>

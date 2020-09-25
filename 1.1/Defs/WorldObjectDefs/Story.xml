@@ -2,7 +2,7 @@
 
 <Defs>
   <WorldObjectDef>
-    <defName>AncientMasterShrineWO</defName>
+    <defName>CAAncientMasterShrineWO</defName>
     <label>Ancient Master Shrine</label>
     <description>a dangerous and long forgotten shrine</description>
     <worldObjectClass>CaravanAdventures.CaravanStory.AncientMasterShrineWO</worldObjectClass>
@@ -24,7 +24,7 @@
   </WorldObjectDef>
 
 	<WorldObjectDef>
-		<defName>AncientMasterShrineMP</defName>
+		<defName>CAAncientMasterShrineMP</defName>
 		<label>Ancient Master Shrine</label>
 		<description>a dangerous and long forgotten shrine</description>
 		<worldObjectClass>CaravanAdventures.CaravanStory.AncientMasterShrineMP</worldObjectClass>
@@ -49,7 +49,7 @@
 	</WorldObjectDef>
 
 	<WorldObjectDef>
-		<defName>StoryVillageMP</defName>
+		<defName>CAStoryVillageMP</defName>
 		<label>Friend's Village</label>
 		<description>The village of an old friend of your's.</description>
 		<worldObjectClass>CaravanAdventures.CaravanStory.StoryVillageMP</worldObjectClass>

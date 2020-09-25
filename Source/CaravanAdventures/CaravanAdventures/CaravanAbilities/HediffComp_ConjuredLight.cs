@@ -30,7 +30,7 @@ namespace CaravanAdventures.CaravanAbilities
             if (ticks >= 10 && light?.Position != Pawn.Position)
             {
                 if (light != null) light.Destroy();
-                light = GenSpawn.Spawn(ThingDef.Named("MagicLight"), Pawn.Position, Pawn.Map);
+                light = GenSpawn.Spawn(ThingDef.Named("CAMagicLight"), Pawn.Position, Pawn.Map);
                 ticks = 0;
             }
             ticks++;

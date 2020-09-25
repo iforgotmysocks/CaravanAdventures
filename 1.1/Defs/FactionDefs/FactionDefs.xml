@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
 <Defs>
-	<FactionDef ParentName="HumanFactionBase" Name="SacrilegHuntersFactionBase" Abstract="True">
+	<FactionDef ParentName="HumanFactionBase" Name="CASacrilegHuntersFactionBase" Abstract="True">
 		<pawnSingular>Sacrileg Hunter</pawnSingular>
 		<pawnsPlural>Sacrileg Hunters</pawnsPlural>
 		<categoryTag>Outlander</categoryTag>
@@ -15,7 +15,7 @@
 		<leaderTitle>prime councilor</leaderTitle>
 		<factionIconPath>World/WorldObjects/Expanding/Town</factionIconPath>
 		<!--<factionNameMaker>NamerFactionOutlander</factionNameMaker>-->
-		<factionNameMaker>NamerFactionSacrilegHunters</factionNameMaker>
+		<factionNameMaker>CANamerFactionSacrilegHunters</factionNameMaker>
 		<settlementNameMaker>NamerSettlementOutlander</settlementNameMaker>
 		<techLevel>Ultra</techLevel>
 		<backstoryFilters>
@@ -49,7 +49,7 @@
 			<li>Base_Outlander_Standard</li>
 		</baseTraderKinds>
 		<allowedArrivalTemperatureRange>-40~45</allowedArrivalTemperatureRange>
-		<raidLootMaker>SacrilegHuntersRaidLootMaker</raidLootMaker>
+		<raidLootMaker>CASacrilegHuntersRaidLootMaker</raidLootMaker>
 		<maxPawnCostPerTotalPointsCurve>
 			<points>
 				<li>(0,35)</li>
@@ -71,17 +71,17 @@
 					<Mercenary_Gunner>1</Mercenary_Gunner>
 					<Mercenary_Elite>33</Mercenary_Elite>-->
 					<!--<Town_Councilman>10</Town_Councilman>-->
-					<SacrilegHunters_Town_Councilman>1</SacrilegHunters_Town_Councilman>
-					<SacrilegHunters_ExperiencedHunter>20</SacrilegHunters_ExperiencedHunter>
+					<CASacrilegHunters_Town_Councilman>1</CASacrilegHunters_Town_Councilman>
+					<CASacrilegHunters_ExperiencedHunter>20</CASacrilegHunters_ExperiencedHunter>
 				</options>
 			</li>
 			<li>
 				<kindDef>Peaceful</kindDef>
 				<options>
-					<SacrilegHunters_Villager>10</SacrilegHunters_Villager>
-					<SacrilegHunters_ExperiencedHunter>10</SacrilegHunters_ExperiencedHunter>
-					<SacrilegHunters_Town_Guard>10</SacrilegHunters_Town_Guard>
-					<SacrilegHunters_Town_Councilman>10</SacrilegHunters_Town_Councilman>
+					<CASacrilegHunters_Villager>10</CASacrilegHunters_Villager>
+					<CASacrilegHunters_ExperiencedHunter>10</CASacrilegHunters_ExperiencedHunter>
+					<CASacrilegHunters_Town_Guard>10</CASacrilegHunters_Town_Guard>
+					<CASacrilegHunters_Town_Councilman>10</CASacrilegHunters_Town_Councilman>
 				</options>
 			</li>
 			<li>
@@ -96,9 +96,9 @@
 					<Elephant>1</Elephant>
 				</carriers>
 				<guards>
-					<SacrilegHunters_Villager>3</SacrilegHunters_Villager>
+					<CASacrilegHunters_Villager>3</CASacrilegHunters_Villager>
 					<!--<Town_Guard>10</Town_Guard>-->
-					<SacrilegHunters_ExperiencedHunter>10</SacrilegHunters_ExperiencedHunter>
+					<CASacrilegHunters_ExperiencedHunter>10</CASacrilegHunters_ExperiencedHunter>
 					<Grenadier_Destructive>1.5</Grenadier_Destructive>
 					<Mercenary_Slasher>7</Mercenary_Slasher>
 					<Mercenary_Gunner>10</Mercenary_Gunner>
@@ -108,15 +108,15 @@
 			<li>
 				<kindDef>Settlement</kindDef>
 				<options>
-					<SacrilegHunters_Villager>10</SacrilegHunters_Villager>
+					<CASacrilegHunters_Villager>10</CASacrilegHunters_Villager>
 					<!--<Town_Guard>10</Town_Guard>-->
 					<!--<Grenadier_Destructive>2</Grenadier_Destructive>
 					<Mercenary_Slasher>1</Mercenary_Slasher>
 					<Mercenary_Gunner>1</Mercenary_Gunner>
 					<Mercenary_Elite>33</Mercenary_Elite>-->
 					<!--<Town_Councilman>10</Town_Councilman>-->
-					<SacrilegHunters_Town_Councilman>1</SacrilegHunters_Town_Councilman>
-					<SacrilegHunters_ExperiencedHunterVillage>20</SacrilegHunters_ExperiencedHunterVillage>
+					<CASacrilegHunters_Town_Councilman>1</CASacrilegHunters_Town_Councilman>
+					<CASacrilegHunters_ExperiencedHunterVillage>20</CASacrilegHunters_ExperiencedHunterVillage>
 				</options>
 			</li>
 		</pawnGroupMakers>
@@ -124,7 +124,7 @@
 	</FactionDef>
 
 	<ThingSetMakerDef>
-		<defName>SacrilegHuntersRaidLootMaker</defName>
+		<defName>CASacrilegHuntersRaidLootMaker</defName>
 		<root Class="ThingSetMaker_MarketValue">
 			<fixedParams>
 				<filter>
@@ -140,8 +140,8 @@
 		</root>
 	</ThingSetMakerDef>
 
-	<FactionDef ParentName="SacrilegHuntersFactionBase">
-		<defName>SacrilegHunters</defName>
+	<FactionDef ParentName="CASacrilegHuntersFactionBase">
+		<defName>CASacrilegHunters</defName>
 		<label>Sacrileg Hunters</label>
 		<description>These people have lived here for decades or centuries, and have lost most of the technology that brought them to this world. They usually work with simple machinery and defend themselves with advanced gunpowder weapons.\n\nThey are concerned with the practical matters of trade, trust, and survival.\n\nThis particular group holds civil behavior in high regard.</description>
 		<!--<colorSpectrum>
@@ -160,7 +160,7 @@
 	</FactionDef>
 
 	<RulePackDef>
-		<defName>NamerFactionSacrilegHunters</defName>
+		<defName>CANamerFactionSacrilegHunters</defName>
 		<include>
 			<li>EmpireNameUtility</li>
 		</include>
@@ -174,7 +174,7 @@
 
 
 	<FactionDef ParentName="FactionBase">
-		<defName>FriendlyMechanoid</defName>
+		<defName>CAFriendlyMechanoid</defName>
 		<label>mechanoid hive</label>
 		<pawnSingular>mechanoid</pawnSingular>
 		<pawnsPlural>mechanoids</pawnsPlural>

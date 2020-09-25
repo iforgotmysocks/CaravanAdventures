@@ -14,12 +14,12 @@ namespace CaravanAdventures.CaravanStory
     class StoryDefOf
     {
 #pragma warning disable CS0649
-        public static FactionDef SacrilegHunters;
+        public static FactionDef CASacrilegHunters;
         public static IncidentDef CAFriendlyCaravan;
 
-        public static PawnKindDef SacrilegHunters_Town_Councilman;
-        public static PawnKindDef SacrilegHunters_Villager;
-        public static PawnKindDef SacrilegHunters_ExperiencedHunter;
-        public static PawnKindDef SacrilegHunters_ExperiencedHunterVillage;
+        public static PawnKindDef CASacrilegHunters_Town_Councilman;
+        public static PawnKindDef CASacrilegHunters_Villager;
+        public static PawnKindDef CASacrilegHunters_ExperiencedHunter;
+        public static PawnKindDef CASacrilegHunters_ExperiencedHunterVillage;
     }
 }

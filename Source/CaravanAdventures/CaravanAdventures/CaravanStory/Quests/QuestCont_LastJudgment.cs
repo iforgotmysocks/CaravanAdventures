@@ -19,18 +19,13 @@ namespace CaravanAdventures.CaravanStory.Quests
         
         }
 
-        public void StartApocalypse(float minTemp, float anualIncrease)
+        public void StartApocalypse(float minTemp, float annualIncrease)
         {
-            if (!ModSettings.Get().apocalypseEnabled || CompCache.StoryWC.storyFlags["Judgment_ApocalypseStarted"]) return;
-
-                Log.Message($"Starting apocalypse");
             apocalypse = apocalypse ?? new GameCondition_Apocalypse();
             apocalypse.TempOffset = minTemp;
             apocalypse.Permanent = true;
             apocalypse.startTick = Find.TickManager.TicksGame;
-            apocalypse.AnualIncrease = anualIncrease;
-
-            CompCache.StoryWC.SetSF("Judgment_ApocalypseStarted");
+            apocalypse.AnualIncrease = annualIncrease;
         }
 
 

@@ -153,7 +153,7 @@ namespace CaravanAdventures.CaravanStory
             GetComponent<TimedDetectionPatrols>().StartDetectionCountdown(30000, -1);
         }
 
-        public override MapGeneratorDef MapGeneratorDef => CaravanStorySiteDefOf.StoryVillageMG;
+        public override MapGeneratorDef MapGeneratorDef => CaravanStorySiteDefOf.CAStoryVillageMG;
 
         public override void Tick()
         {
@@ -226,8 +226,8 @@ namespace CaravanAdventures.CaravanStory
         {
             if (sacHuntersCiviliansFleeing || !HasMap) return;
             var civs = Map.mapPawns.AllPawnsSpawned.Where(x => x.Faction == StoryUtility.FactionOfSacrilegHunters 
-                && (x.kindDef != StoryDefOf.SacrilegHunters_ExperiencedHunter
-                && x.kindDef != StoryDefOf.SacrilegHunters_ExperiencedHunterVillage
+                && (x.kindDef != StoryDefOf.CASacrilegHunters_ExperiencedHunter
+                && x.kindDef != StoryDefOf.CASacrilegHunters_ExperiencedHunterVillage
                     || x == CompCache.StoryWC.questCont.Village.StoryContact));
 
             foreach (var civ in civs)

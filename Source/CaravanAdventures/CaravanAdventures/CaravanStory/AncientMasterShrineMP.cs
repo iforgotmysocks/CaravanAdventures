@@ -23,7 +23,7 @@ namespace CaravanAdventures.CaravanStory
         private bool bossDefeatedAndRewardsGiven;
 		private int constTicks = -1;
 
-		public override MapGeneratorDef MapGeneratorDef => CaravanStorySiteDefOf.AncientMasterShrineMG;
+		public override MapGeneratorDef MapGeneratorDef => CaravanStorySiteDefOf.CAAncientMasterShrineMG;
 
         public override void ExposeData()
 		{

@@ -16,6 +16,6 @@ namespace CaravanAdventures.CaravanIncidents
             DefOfHelper.EnsureInitializedInCtor(typeof(CaravanIncidentMapParentDefOfs));
         }
 
-        public static WorldObjectDef DamselInDistressMapParent;
+        public static WorldObjectDef CADamselInDistressMapParent;
     }
 }

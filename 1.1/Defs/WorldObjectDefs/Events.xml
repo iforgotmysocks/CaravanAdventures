@@ -2,7 +2,7 @@
 
 <Defs>
   <WorldObjectDef>
-    <defName>DamselInDistressMapParent</defName>
+    <defName>CADamselInDistressMapParent</defName>
     <label>Damsel in distress</label>
     <description>A damsel in distress</description>
     <worldObjectClass>CaravanAdventures.CaravanIncidents.DamselInDistressMapParent</worldObjectClass>
