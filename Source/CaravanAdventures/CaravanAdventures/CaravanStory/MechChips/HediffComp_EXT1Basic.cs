@@ -19,6 +19,13 @@ namespace CaravanAdventures.CaravanStory.MechChips
 
         public HediffCompProperties_EXT1Basic Props => (HediffCompProperties_EXT1Basic)props;
 
+        public override void CompExposeData()
+        {
+            base.CompExposeData();
+            Scribe_Values.Look(ref ticks, "ticks", 0);
+            Scribe_Collections.Look(ref producedMechs, "producedMechs", LookMode.Reference);
+        }
+
         public override void CompPostMake()
         {
             base.CompPostMake();
@@ -117,10 +124,6 @@ namespace CaravanAdventures.CaravanStory.MechChips
             }
         }
 
-        public override void CompExposeData()
-        {
-            base.CompExposeData();
-            Scribe_Values.Look(ref ticks, "ticks", 0);
-        }
+       
     }
 }

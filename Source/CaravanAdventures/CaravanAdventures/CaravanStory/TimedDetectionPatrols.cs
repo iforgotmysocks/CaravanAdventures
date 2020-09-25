@@ -36,7 +36,7 @@ namespace CaravanAdventures.CaravanStory
 			Scribe_Values.Look(ref ticksLeftTillLeaveIfNoEnemies, "ticksLeftTillLeaveIfNoEnemies", -1, false);
 			Scribe_Collections.Look(ref lordsToExcludeFromRaidLogic, "lordsToExcludeFromRaidLogic", LookMode.Reference);
 			Scribe_Values.Look(ref raidPoints, "raidPoints");
-			Scribe_Values.Look(ref forcedFaction, "forcedFaction");
+			Scribe_References.Look(ref forcedFaction, "forcedFaction");
 		}
 
 		public void Init(Faction forcedFaction = null)

@@ -29,6 +29,8 @@
 	<Story_Shrine1_BossDefeated_Dia1Title>Pure pain explodes in {0}'s head</Story_Shrine1_BossDefeated_Dia1Title>
 	<Story_Shrine1_BossDefeated_Dia1_1>While the {0} dies, memories start rushing back to the surface... altho not {1}'s memories.
 	\n{1} can't make sense of it, but {1} seems to recall a long forgotten spell named {2}.</Story_Shrine1_BossDefeated_Dia1_1>
+	<Story_Shrine1_BossDefeated_Dia1_1_NoSpell>
+		The huge metal body of {0} crashes on the ground.</Story_Shrine1_BossDefeated_Dia1_1_NoSpell>
 	<Story_Shrine1_BossDefeated_Dia1_1_Option1>Asthonishing...</Story_Shrine1_BossDefeated_Dia1_1_Option1>
 	<Story_Shrine1_BossDefeated_Dia1_2>When {0}'s mechanical boddy came to rest, loud scratching starts to hollow around the ruins... something woke up.</Story_Shrine1_BossDefeated_Dia1_2>
 	<Story_Shrine1_BossDefeated_Dia1_1_Option2>We better get out of here...</Story_Shrine1_BossDefeated_Dia1_1_Option2>

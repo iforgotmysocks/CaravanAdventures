@@ -242,7 +242,7 @@ namespace CaravanAdventures.CaravanStory
                 AllowGay = false,
                 AllowDead = false,
                 Faction = StoryUtility.EnsureSacrilegHunters(),
-                KindDef = StoryDefOf.CASacrilegHunters_ExperiencedHunter,
+                KindDef = StoryDefOf.CASacrilegHunters_ExperiencedHunterVillage,
                 ProhibitedTraits = new List<TraitDef> { TraitDef.Named("Wimp") },
                 MustBeCapableOfViolence = true,
             });

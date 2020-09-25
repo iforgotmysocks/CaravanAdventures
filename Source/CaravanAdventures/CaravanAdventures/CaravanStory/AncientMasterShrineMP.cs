@@ -125,18 +125,19 @@ namespace CaravanAdventures.CaravanStory
 			var gifted = StoryUtility.GetGiftedPawn();
 			if (gifted == null) Log.Warning("gifted pawn was null, which shouldn't happen. Spell was stored for when another gifted pawn awakes");
 
-			var spell = DefDatabase<AbilityDef>.AllDefsListForReading.Where(x => x.defName.StartsWith("Ancient") && !CompCache.StoryWC.GetUnlockedSpells().Contains(x)).InRandomOrder().FirstOrDefault();
-			if (spell == null)
-			{
-				Log.Message($"Got no spell from boss. -> CheckBossDefeated()");
-				return;
+			AbilityDef spell = null;
+			if (CompCache.StoryWC.GetUnlockedSpells().Count < DefDatabase<AbilityDef>.AllDefsListForReading.Where(x => x.defName.StartsWith("CAAncient")).Count())
+            {
+				spell = DefDatabase<AbilityDef>.AllDefsListForReading.Where(x => x.defName.StartsWith("CAAncient") && !CompCache.StoryWC.GetUnlockedSpells().Contains(x)).InRandomOrder().FirstOrDefault();
+				if (spell == null) Log.Error($"Got no spell from boss. -> CheckBossDefeated()");
+				CompCache.StoryWC.GetUnlockedSpells().Add(spell);
+				if (gifted != null)
+				{
+					gifted.abilities.GainAbility(spell);
+					Find.LetterStack.ReceiveLetter("Story_Shrine1_AbilityGainedLetterTitle".Translate(spell.LabelCap), "Story_Shrine1_AbilityGainedLetterDesc".Translate(boss.Label, gifted.NameShortColored, spell.label.Colorize(UnityEngine.Color.cyan)), LetterDefOf.PositiveEvent);
+				}
 			}
-			CompCache.StoryWC.GetUnlockedSpells().Add(spell);
-			if (gifted != null)
-			{
-				gifted.abilities.GainAbility(spell);
-				Find.LetterStack.ReceiveLetter("Story_Shrine1_AbilityGainedLetterTitle".Translate(), "Story_Shrine1_AbilityGainedLetterDesc".Translate(boss.Label, gifted.NameShortColored, spell.label.Colorize(UnityEngine.Color.cyan)), LetterDefOf.PositiveEvent);
-			}
+			
 			CompCache.StoryWC.SetShrineSF("Completed");
 			CompCache.StoryWC.IncreaseShrineCompleteCounter();
 			CompCache.StoryWC.mechBossKillCounters[boss.def.defName] = CompCache.StoryWC.mechBossKillCounters.TryGetValue(boss.def.defName, out var result) ? result + 1 : 0;
@@ -147,10 +148,11 @@ namespace CaravanAdventures.CaravanStory
 
         private void BossDefeatedDialog(Pawn gifted, Pawn boss, AbilityDef spell)
         {
+			// todo adjust dialog for the case of no spell learned.
 			var diaNode2 = new DiaNode("Story_Shrine1_BossDefeated_Dia1_2".Translate(boss.def.label));
 			diaNode2.options.Add(new DiaOption("Story_Shrine1_BossDefeated_Dia1_1_Option2".Translate()) { resolveTree = true, action = () => WakeAllMechanoids() });
 
-			var diaNode = new DiaNode("Story_Shrine1_BossDefeated_Dia1_1".Translate(boss.def.label, gifted.Name.ToStringShort, spell.label));
+			var diaNode = new DiaNode(spell == null ? "Story_Shrine1_BossDefeated_Dia1_1_NoSpell".Translate(boss.def.LabelCap.ToString().HtmlFormatting("ff0000")) : "Story_Shrine1_BossDefeated_Dia1_1".Translate(boss.def.LabelCap.ToString().HtmlFormatting("ff0000"), gifted.NameShortColored, spell.LabelCap.ToString().HtmlFormatting("008080")));
 			diaNode.options.Add(new DiaOption("Story_Shrine1_BossDefeated_Dia1_1_Option1".Translate()) { link = diaNode2 });
 
 			TaggedString taggedString = "Story_Shrine1_BossDefeated_Dia1Title".Translate(gifted.Name.ToStringShort);

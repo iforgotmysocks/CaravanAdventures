@@ -173,7 +173,7 @@ namespace CaravanAdventures.CaravanStory
                 }
                 if (ticksTillReinforcements == 0)
                 {
-                    StoryUtility.GetAssistanceFromAlliedFaction(StoryUtility.FactionOfSacrilegHunters, Map, 10000, 11000, centerPoint);
+                    StoryUtility.GetAssistanceFromAlliedFaction(StoryUtility.FactionOfSacrilegHunters, Map, 12000, 13000, centerPoint);
                     CompCache.StoryWC.SetSF("IntroVillage_ReinforcementsArrived");
                     ReinforcementConvo();
                     CheckShouldCiviliansFlee();
@@ -192,7 +192,7 @@ namespace CaravanAdventures.CaravanStory
             if (Map.mapPawns.AllPawnsSpawned.Contains(storyChar) && !storyChar.Dead && !storyChar.Downed) return;
 
             DiaNode diaNode = null;
-            diaNode = new DiaNode(storyChar.Dead ? "StoryVillage_Dia3_1_Dying".Translate() : "StoryVillage_Dia3_1_Alive".Translate());
+            diaNode = new DiaNode(storyChar.Dead || storyChar.Downed ? "StoryVillage_Dia3_1_Dying".Translate() : "StoryVillage_Dia3_1_Alive".Translate());
             diaNode.options.Add(new DiaOption("StoryVillage_Dia3_1_Option1".Translate()) { resolveTree = true }); ;
 
             TaggedString taggedString = "StoryVillage_Dia3_Title".Translate(storyChar.NameShortColored);
