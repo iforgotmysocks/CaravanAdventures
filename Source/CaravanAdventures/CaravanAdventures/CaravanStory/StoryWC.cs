@@ -161,8 +161,8 @@ namespace CaravanAdventures.CaravanStory
                     SetShrineSF("InitCountDownStarted");
                 }
 
-                questCont.LastJudgment.StartApocalypse(-50, -10);
-                if (CheckCanStartApocalypse()) questCont.LastJudgment.StartApocalypse(-50, -10);
+                //questCont.LastJudgment.StartApocalypse(-50, -10);
+                //if (CheckCanStartApocalypse()) questCont.LastJudgment.StartApocalypse(-50, -10);
 
                 ticks = 0;
             }
@@ -172,6 +172,7 @@ namespace CaravanAdventures.CaravanStory
             
             ticks++;
             questCont.FriendlyCaravan.friendlyCaravanCounter--;
+            questCont.Village.villageGenerationCounter--;
             shrineRevealCounter--;
         }
 
