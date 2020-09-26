@@ -34,7 +34,9 @@ namespace CaravanAdventures.CaravanStory
 				mp = map.Parent as AncientMasterShrineMP;
 				mainRoom = GetAncientShrineRooms(map).FirstOrDefault();
 
-				if (mainRoom.CellCount > 1500) mp.boss = AddBoss(map, caravan, mainRoom);
+                // todo check mainroom size depending on map size?
+                if (mainRoom.CellCount > 1500) mp.boss = AddBoss(map, caravan, mainRoom);
+                //if (mainRoom.CellCount > 1000) mp.boss = AddBoss(map, caravan, mainRoom);
 				else AddBandits(map, caravan);
 
 				AddEnemiesToRooms(map, caravan, mp.boss);

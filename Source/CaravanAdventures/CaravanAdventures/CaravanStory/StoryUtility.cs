@@ -180,6 +180,14 @@ namespace CaravanAdventures.CaravanStory
             return centerPoint;
         }
 
+        internal static void FindUnfoggedMechsAndWakeUp(Map map)
+        {
+            map.mapPawns.SpawnedPawnsInFaction(Faction.OfMechanoids)
+                .Where(mech => !mech.Awake() && !mech.GetRoom().Fogged)
+                .ToList()
+                .ForEach(mech => mech.TryGetComp<CompCanBeDormant>().WakeUp());
+        }
+
         public static Faction CreateOrGetFriendlyMechFaction()
         {
             var relations = new List<FactionRelation>();
@@ -258,7 +266,7 @@ namespace CaravanAdventures.CaravanStory
             CompCache.StoryWC.questCont.Village.StoryContact = girl;
         }
 
-        public static Pawn GetGiftedPawn() => PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction?.FirstOrDefault(x => (x?.RaceProps?.Humanlike ?? false) && x.health.hediffSet.GetFirstHediffOfDef(HediffDef.Named("CAAncientGift")) != null);
+        public static Pawn GetGiftedPawn() => CompCache.StoryWC.questCont.StoryStart.Gifted; // ?? PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction?.FirstOrDefault(x => (x?.RaceProps?.Humanlike ?? false) && x.health.hediffSet.GetFirstHediffOfDef(HediffDef.Named("CAAncientGift")) != null);
 
         public static Faction EnsureSacrilegHunters(FactionRelationKind? relationKind = null, bool ignoreBetrayal = false, bool skipLeaderGeneration = false)
         {

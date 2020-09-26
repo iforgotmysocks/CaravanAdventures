@@ -22,8 +22,9 @@ namespace CaravanAdventures.CaravanStory
 		public Pawn boss = null;
         private bool bossDefeatedAndRewardsGiven;
 		private int constTicks = -1;
+        private int checkDormantTicks = 0;
 
-		public override MapGeneratorDef MapGeneratorDef => CaravanStorySiteDefOf.CAAncientMasterShrineMG;
+        public override MapGeneratorDef MapGeneratorDef => CaravanStorySiteDefOf.CAAncientMasterShrineMG;
 
         public override void ExposeData()
 		{
@@ -31,11 +32,14 @@ namespace CaravanAdventures.CaravanStory
 			Scribe_Values.Look<bool>(ref this.wonBattle, "wonBattle", false, false);
 			Scribe_Values.Look(ref bossDefeatedAndRewardsGiven, "bossDefeatedAndRewardsGiven");
 			Scribe_References.Look(ref boss, "boss");
-			Scribe_Values.Look(ref constTicks, "constTicks");
+			Scribe_Values.Look(ref constTicks, "constTicks", -1);
 			Scribe_Values.Look(ref bossDefeatedAndRewardsGiven, "bossDefeatedAndRewardsGiven");
+			Scribe_Values.Look(ref checkDormantTicks, "checkDormantTicks", 0);
 
 			// todo are mechs enough? Need them for comparison later - dont think so, i should drop them
 			Scribe_Collections.Look(ref generatedMechs, "generatedMechs", LookMode.Reference);
+
+
 		}
 
 		public void Init()
@@ -80,6 +84,12 @@ namespace CaravanAdventures.CaravanStory
 				CheckBossDefeated();
 				CheckWonBattle();
 
+				if (checkDormantTicks == 240)
+                {
+					StoryUtility.FindUnfoggedMechsAndWakeUp(Map);
+					checkDormantTicks = 0;
+                }
+
 				if (constTicks == 2400)
 				{
 					if (boss != null)
@@ -93,6 +103,7 @@ namespace CaravanAdventures.CaravanStory
 				}
 
 				constTicks++;
+				checkDormantTicks++;
 			}
 		}
 

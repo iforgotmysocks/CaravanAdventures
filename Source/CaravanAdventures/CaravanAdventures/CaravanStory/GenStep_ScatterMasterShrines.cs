@@ -33,6 +33,10 @@ namespace CaravanAdventures.CaravanStory
 
 		protected override void ScatterAt(IntVec3 loc, Map map, GenStepParams parms, int stackCount = 1)
 		{
+			// todo - do
+			//int randomInRange = GenStep_ScatterMasterShrines.SizeRangeDependingOnMapSize().RandomInRange;
+			//int randomInRange2 = GenStep_ScatterMasterShrines.SizeRangeDependingOnMapSize().RandomInRange;
+
 			int randomInRange = GenStep_ScatterMasterShrines.SizeRange.RandomInRange;
 			int randomInRange2 = GenStep_ScatterMasterShrines.SizeRange.RandomInRange;
 			CellRect rect = new CellRect(loc.x, loc.z, randomInRange, randomInRange2);
@@ -52,8 +56,10 @@ namespace CaravanAdventures.CaravanStory
 					}
 				}
 			}
-			if (!base.CanPlaceAncientBuildingInRange(rect, map))
-			{
+            // todo - CanPlaceAncientBuildingInRangeAfterAdjustingGround() see if we cant make that work?
+            if (!base.CanPlaceAncientBuildingInRange(rect, map))
+            //if (!CanPlaceAncientBuildingInRangeAfterAdjustingGround(rect, map))
+            {
 				return;
 			}
 			ResolveParams resolveParams = default;
@@ -67,5 +73,74 @@ namespace CaravanAdventures.CaravanStory
 		}
 
 		private static readonly IntRange SizeRange = new IntRange(60, 80);
+
+		private static IntRange SizeRangeDependingOnMapSize()
+		{
+			var mapSize = Find.World.info.initialMapSize;
+			Log.Message($"map size: {mapSize}");
+			var sizeValue = mapSize.x * mapSize.z;
+			var endSize = Convert.ToInt32(Math.Round(sizeValue * 0.0008, 0));
+			var offset = Convert.ToInt32(Math.Round(sizeValue * 0.00008, 0));
+			Log.Message($"calc size: {endSize - offset} / {endSize + offset}  -   base: {endSize} offset: {offset}");
+			return new IntRange(endSize - offset, endSize + offset);
+		}
+
+		private static bool CanPlaceAncientBuildingInRangeAfterAdjustingGround(CellRect rect, Map map)
+		{
+			foreach (IntVec3 c in rect.Cells)
+			{
+				if (c.InBounds(map))
+				{
+					TerrainDef terrainDef = map.terrainGrid.TerrainAt(c);
+					//if (terrainDef.HasTag("River") || terrainDef.HasTag("Road"))
+					if (terrainDef.HasTag("River"))
+					{
+						return false;
+					}
+					if (!CanBuildOnAdjustedTerrain(ThingDefOf.Wall, c, map, Rot4.North, null, null))
+					{
+						return false;
+					}
+				}
+			}
+			return true;
+		}
+
+		public static bool CanBuildOnAdjustedTerrain(BuildableDef entDef, IntVec3 c, Map map, Rot4 rot, Thing thingToIgnore = null, ThingDef stuffDef = null)
+		{
+			if (entDef is TerrainDef && !c.GetTerrain(map).changeable)
+			{
+				return false;
+			}
+			TerrainAffordanceDef terrainAffordanceNeed = entDef.GetTerrainAffordanceNeed(stuffDef);
+			if (terrainAffordanceNeed != null)
+			{
+				CellRect cellRect = GenAdj.OccupiedRect(c, rot, entDef.Size);
+				cellRect.ClipInsideMap(map);
+				foreach (IntVec3 c2 in cellRect)
+				{
+					if (!map.terrainGrid.TerrainAt(c2).affordances.Contains(terrainAffordanceNeed))
+					{
+						if (map.terrainGrid.TerrainAt(c2).affordances.Contains(TerrainAffordanceDefOf.Bridgeable)) map.terrainGrid.SetTerrain(c2, TerrainDefOf.Concrete);
+						else return false;
+					}
+					List<Thing> thingList = c2.GetThingList(map);
+					for (int i = 0; i < thingList.Count; i++)
+					{
+						if (thingList[i] != thingToIgnore)
+						{
+							TerrainDef terrainDef = thingList[i].def.entityDefToBuild as TerrainDef;
+							if (terrainDef != null && !terrainDef.affordances.Contains(terrainAffordanceNeed))
+							{
+								return false;
+							}
+						}
+					}
+				}
+				return true;
+			}
+			return true;
+		}
+
 	}
 }

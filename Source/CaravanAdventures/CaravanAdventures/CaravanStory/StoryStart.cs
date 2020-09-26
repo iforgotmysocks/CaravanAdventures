@@ -48,7 +48,7 @@ namespace CaravanAdventures.CaravanStory
             base.MapComponentTick();
             DrawTreeQuestionMark();
 
-            if (ticks >= 2000 &&CompCache.StoryWC.storyFlags["IntroVillage_Finished"] ||CompCache.StoryWC.debugFlags["VillageFinished"])
+            if (ticks >= 200 && (CompCache.StoryWC.storyFlags["IntroVillage_Finished"] || CompCache.StoryWC.debugFlags["VillageFinished"]))
             {
                 AddTalkTreeAction();
                 AddTreeWhisper();
@@ -133,8 +133,15 @@ namespace CaravanAdventures.CaravanStory
             }
             else
             {
+                var gifted = StoryUtility.GetGiftedPawn();
+
+                var subDiaNode = new DiaNode("Story_Start_Dia1_2_Neg".Translate());
+                subDiaNode.options.Add(new DiaOption("Story_Start_Dia1_2_Neg_Option1".Translate()) { resolveTree = true, action = () => CheckEnsureGifted(initiator, true) });
+
                 diaNode = new DiaNode("Story_Start_Dia1_Me_End_GiftAlreadyRecieved".Translate());
                 diaNode.options.Add(new DiaOption("Story_Start_Dia1_Me_End_Bye".Translate()) { resolveTree = true }); ;
+                diaNode.options.Add(new DiaOption("Story_Start_Dia1_1_Neg_Option2".Translate(gifted.NameShortColored)) { link = subDiaNode }); ;
+
             }
             TaggedString taggedString = "Story_Start_Dia1_Title".Translate();
             Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
@@ -143,14 +150,11 @@ namespace CaravanAdventures.CaravanStory
 
         private void GrantAncientGift(Pawn initiator, object addressed)
         {
-            MoteMaker.MakeStaticMote(initiator.Position, initiator.Map, ThingDefOf.Mote_PsycastAreaEffect, 10f);
-            SoundDefOf.PsycastPsychicPulse.PlayOneShot(new TargetInfo(initiator));
-
-           CompCache.StoryWC.storyFlags["Start_CanReceiveGift"] = true;
+            CompCache.StoryWC.storyFlags["Start_CanReceiveGift"] = true;
             CheckEnsureGifted(initiator);
             AddAdditionalSpells(initiator);
             if (animaTreeWhipserSustainer != null && !animaTreeWhipserSustainer.Ended) animaTreeWhipserSustainer.End();
-           CompCache.StoryWC.storyFlags["Start_ReceivedGift"] = true;
+            CompCache.StoryWC.storyFlags["Start_ReceivedGift"] = true;
         }
 
         private void AddAdditionalSpells(Pawn chosen)
@@ -161,30 +165,40 @@ namespace CaravanAdventures.CaravanStory
             }
         }
 
-        public void CheckEnsureGifted(Pawn pawn = null)
+        public void CheckEnsureGifted(Pawn pawn = null, bool forceStrip = false)
         {
             if (!CompCache.StoryWC.storyFlags["Start_CanReceiveGift"]) return;
-            var pawns = new List<Pawn>();
-            if (pawn == null)
+            var gifted = CompCache.StoryWC.questCont.StoryStart.Gifted;
+            if (gifted != null && !gifted.Dead && !forceStrip) return;
+            else if (gifted != null && (gifted.Dead || forceStrip))
             {
-                pawns = PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction?.Where(x => x?.RaceProps?.Humanlike ?? false).ToList();
-                if (pawns == null || pawns?.Count == 0) return;
+                gifted.health.hediffSet.hediffs.Remove(gifted.health.hediffSet.hediffs.FirstOrDefault(x => x.def.defName == "CAAncientGift"));
+                foreach (var ability in gifted.abilities.abilities.Where(x => x.def.defName.StartsWith("CAAncient")).Reverse())
+                {
+                    gifted.abilities.RemoveAbility(ability.def);
+                }
             }
-            else pawns.AddItem(pawn);
-
-            if (pawns.Any(x => x.health.hediffSet.GetFirstHediffOfDef(HediffDef.Named("CAAncientGift")) != null)) return;
 
             // todo choose best candidate
             // todo make sure the pawn isn't psychially unsensitive.
-            var chosen = pawn ?? pawns.FirstOrDefault();
-            if (chosen == null) return;
+            gifted = pawn ?? PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction?.FirstOrDefault(x => x?.RaceProps?.Humanlike ?? false);
 
-            Log.Message(chosen.Name + " " + chosen.NameFullColored);
+            if (gifted == null)
+            {
+                Log.Warning($"Gifted pawn couldn't be found, this shouldn't happen.");
+                return;
+            }
 
-            chosen.health.AddHediff(DefDatabase<HediffDef>.AllDefs.FirstOrDefault(x => x.defName == "PsychicAmplifier"), chosen.health.hediffSet.GetBrain());
-            chosen.health.AddHediff(DefDatabase<HediffDef>.AllDefs.FirstOrDefault(x => x.defName == "CAAncientGift"), chosen.health.hediffSet.GetBrain());
+            Log.Message(gifted.Name + " " + gifted.NameFullColored);
 
-            AddUnlockedAbilities(chosen);
+            MoteMaker.MakeStaticMote(gifted.Position, gifted.Map, ThingDefOf.Mote_PsycastAreaEffect, 10f);
+            SoundDefOf.PsycastPsychicPulse.PlayOneShot(new TargetInfo(gifted));
+
+            gifted.health.AddHediff(DefDatabase<HediffDef>.AllDefs.FirstOrDefault(x => x.defName == "PsychicAmplifier"), gifted.health.hediffSet.GetBrain());
+            gifted.health.AddHediff(DefDatabase<HediffDef>.AllDefs.FirstOrDefault(x => x.defName == "CAAncientGift"), gifted.health.hediffSet.GetBrain());
+
+            AddUnlockedAbilities(gifted);
+            CompCache.StoryWC.questCont.StoryStart.Gifted = gifted;
         }
         
         private void AddUnlockedAbilities(Pawn chosen)

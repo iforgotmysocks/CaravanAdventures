@@ -10,19 +10,23 @@ using System.Threading;
 using System.Threading.Tasks;
 using Verse;
 
-// add mod option to regain the gift at the anima tree instead of passing it on to someone else
-// todo wake up shrine mechs if other factions pawns come close or best when wall breaks
+// high prio:
+// - wake up shrine mechs if other factions pawns come close or best when wall breaks
+// - add a weather condition that freezes or heats the world until the main boss is defeated. -> must be disableable in the options
 
-// add a weather condition that freezes or heats the world until the main boss is defeated. -> must be disableable in the options
+// med prio:
+// - create mech bosses after horsemen traits
+// -- add quote to each horsemen type when entering the shrine
+// -- credits to horsemen idea to Shakesthespeare
+// - shrine generation issues
+// -- pick good biome after failure
+// -- test smaller map sizes and quest generation
+// -- maybe reduce size depending on map size if possible
 
-// create mech bosses after horsemen traits
-// add quote to each horsemen type when entering the shrine
-// credits to horsemen idea to Shakesthespeare
-
-// todo -> collect player responses and use them to determine the support strength for troups at shrines
-// todo -> balance village hunter strenght depending on player character wealth
-
-// todo -> export shrine stuff to seperate questCont
+// low prio:
+// - collect player responses and use them to determine the support strength for troups at shrines
+// - balance village hunter strenght depending on player character wealth
+// - export shrine stuff to seperate questCont
 
 namespace CaravanAdventures.CaravanStory
 {
@@ -43,11 +47,11 @@ namespace CaravanAdventures.CaravanStory
         {
             { "ShowDebugInfo", true },
             { "StoryStartDone", false },
-            { "FriendlyCaravanDisabled", false },
+            { "FriendlyCaravanDisabled", true },
+            { "VillageDisabled", true },
             { "ShrinesDisabled", false },
             { "DebugAllAbilities", false },
-            { "VillageDisabled", false },
-            { "VillageFinished", false },
+            { "VillageFinished", true },
             { "DebugResetVillagesAndShrines", false },
         };
         public Dictionary<string, bool> storyFlags;
