@@ -203,10 +203,15 @@ namespace CaravanAdventures.CaravanStory
         
         private void AddUnlockedAbilities(Pawn chosen)
         {
-            var abilityDefs =CompCache.StoryWC.debugFlags["DebugAllAbilities"] 
-                ? DefDatabase<AbilityDef>.AllDefsListForReading.Where(x => x.defName.StartsWith("CAAncient"))
-                : CompCache.StoryWC.GetUnlockedSpells();
-           
+            if (CompCache.StoryWC.debugFlags["DebugAllAbilities"]) DefDatabase<AbilityDef>.AllDefsListForReading
+                   .Where(x => x.defName.StartsWith("CAAncient"))
+                   .ToList()
+                   .ForEach(spell => {
+                       if (!CompCache.StoryWC.GetUnlockedSpells().Contains(spell)) CompCache.StoryWC.GetUnlockedSpells().Add(spell);
+                   });
+
+            var abilityDefs = CompCache.StoryWC.GetUnlockedSpells();
+
             foreach (var abilityDef in abilityDefs)
             {
                 chosen.abilities.GainAbility(abilityDef);

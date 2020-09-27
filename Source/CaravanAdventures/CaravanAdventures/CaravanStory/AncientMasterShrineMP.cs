@@ -38,8 +38,6 @@ namespace CaravanAdventures.CaravanStory
 
 			// todo are mechs enough? Need them for comparison later - dont think so, i should drop them
 			Scribe_Collections.Look(ref generatedMechs, "generatedMechs", LookMode.Reference);
-
-
 		}
 
 		public void Init()
@@ -131,12 +129,13 @@ namespace CaravanAdventures.CaravanStory
 
 		private void CheckBossDefeated()
         {
-			if (boss == null || boss != null && !boss.Dead || bossDefeatedAndRewardsGiven) return;
+			if (boss != null && !boss.Dead || boss == null && CompCache.StoryWC.storyFlags[CompCache.StoryWC.BuildCurrentShrinePrefix() + "_Created"] && bossDefeatedAndRewardsGiven) return;
 
 			var gifted = StoryUtility.GetGiftedPawn();
 			if (gifted == null) Log.Warning("gifted pawn was null, which shouldn't happen. Spell was stored for when another gifted pawn awakes");
 
 			AbilityDef spell = null;
+			//Log.Message($"Unlocked spellcount: {CompCache.StoryWC.GetUnlockedSpells().Count} Database count: {DefDatabase<AbilityDef>.AllDefsListForReading.Where(x => x.defName.StartsWith("CAAncient")).Count()}");
 			if (CompCache.StoryWC.GetUnlockedSpells().Count < DefDatabase<AbilityDef>.AllDefsListForReading.Where(x => x.defName.StartsWith("CAAncient")).Count())
             {
 				spell = DefDatabase<AbilityDef>.AllDefsListForReading.Where(x => x.defName.StartsWith("CAAncient") && !CompCache.StoryWC.GetUnlockedSpells().Contains(x)).InRandomOrder().FirstOrDefault();

@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using Verse;
 
 // high prio:
-// - wake up shrine mechs if other factions pawns come close or best when wall breaks
 // - add a weather condition that freezes or heats the world until the main boss is defeated. -> must be disableable in the options
 
 // med prio:
@@ -50,7 +49,7 @@ namespace CaravanAdventures.CaravanStory
             { "FriendlyCaravanDisabled", true },
             { "VillageDisabled", true },
             { "ShrinesDisabled", false },
-            { "DebugAllAbilities", false },
+            { "DebugAllAbilities", true },
             { "VillageFinished", true },
             { "DebugResetVillagesAndShrines", false },
         };

@@ -99,6 +99,7 @@
     <Compile Include="CaravanStory\AncientMasterShrineMP.cs" />
     <Compile Include="CaravanStory\CaravanArrivalAction_StoryVillageMP.cs" />
     <Compile Include="CaravanStory\GameCondition_Apocalypse.cs" />
+    <Compile Include="CaravanStory\GenStep_ScatterMasterShrines_Old.cs" />
     <Compile Include="CaravanStory\IncidentWorker_FriendlyCaravanVisit.cs" />
     <Compile Include="CaravanStory\IncidentWorker_MechsWithBoss.cs" />
     <Compile Include="CaravanStory\JobDefOf.cs" />
@@ -144,6 +145,7 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="Patches\MainPatcher.cs" />
     <Compile Include="Patches\AutomaticItemSelection.cs" />
+    <Compile Include="Patches\ScatterShrinesWithoutRocks.cs" />
     <Compile Include="Patches\TalkPawnGUIOverlay.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

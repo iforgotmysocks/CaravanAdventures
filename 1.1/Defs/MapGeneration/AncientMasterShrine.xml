@@ -20,19 +20,19 @@
 			<allowInWaterBiome>true</allowInWaterBiome>
 			<!--<countPer10kCellsRange><min>0.12</min><max>0.25</max></countPer10kCellsRange>-->
 			<countPer10kCellsRange>
-				<min>40</min>
-				<max>50</max>
+				<min>10</min>
+				<max>12</max>
 			</countPer10kCellsRange>
 		</genStep>
 	</GenStepDef>
 
 	<GenStepDef>
 		<defName>CAScatterMasterShrines</defName>
-		<order>350</order>
+		<order>299</order>
 		<genStep Class="CaravanAdventures.CaravanStory.GenStep_ScatterMasterShrines">
 			<allowInWaterBiome>true</allowInWaterBiome>
 			<countPer10kCellsRange>
-				<min>1</min>
+				<min>0.25</min>
 				<max>1</max>
 			</countPer10kCellsRange>
 		</genStep>

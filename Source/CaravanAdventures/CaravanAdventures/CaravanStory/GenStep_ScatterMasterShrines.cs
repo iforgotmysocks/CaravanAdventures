@@ -13,6 +13,10 @@ namespace CaravanAdventures.CaravanStory
 {
     class GenStep_ScatterMasterShrines : GenStep_ScatterRuinsSimple
 	{
+		private static int calcSize = 0;
+		private static int calcSize2 = 0;
+		private static readonly IntRange SizeRange = new IntRange(100, 120); // 60, 80
+
 		public override int SeedPart
 		{
 			get
@@ -23,28 +27,58 @@ namespace CaravanAdventures.CaravanStory
 
 		protected override bool CanScatterAt(IntVec3 c, Map map)
 		{
-			if (!base.CanScatterAt(c, map))
+			if (!CanScatterAtAdjusted(c, map))
 			{
 				return false;
 			}
+
+			return true;
 			Building edifice = c.GetEdifice(map);
 			return edifice != null && edifice.def.building.isNaturalRock;
 		}
 
+		protected override bool TryFindScatterCell(Map map, out IntVec3 result)
+		{
+			calcSize = SizeRangeDependingOnMapSize(true).RandomInRange;
+			calcSize2 = SizeRangeDependingOnMapSize(true).RandomInRange;
+			return base.TryFindScatterCell(map, out result);
+		}
+
+		protected bool CanScatterAtAdjusted(IntVec3 c, Map map)
+		{
+			if (!SupportsAdjustedStructureType(c, map, TerrainAffordanceDefOf.Heavy))
+			{
+				return false;
+			}
+			CellRect rect = new CellRect(c.x, c.z, calcSize, calcSize2).ClipInsideMap(map);
+			return CanPlaceAncientBuildingInRangeAfterAdjustingGround(rect, map, true);
+		}
+
+		public static bool SupportsAdjustedStructureType(IntVec3 c, Map map, TerrainAffordanceDef surfaceType)
+		{
+			var terrain = c.GetTerrain(map);
+			if (terrain.affordances.Contains(surfaceType)) return true;
+			else if (terrain.affordances.Contains(TerrainAffordanceDefOf.Bridgeable) || terrain.affordances.Contains(TerrainAffordanceDefOf.Diggable))
+			{
+				//map.terrainGrid.SetTerrain(c, TerrainDefOf.FlagstoneSandstone);
+				return true;
+			}
+			else
+			{
+				Log.Message($"Failing affordance");
+				return false;
+			}
+		}
+
 		protected override void ScatterAt(IntVec3 loc, Map map, GenStepParams parms, int stackCount = 1)
 		{
-			// todo - do
-			//int randomInRange = GenStep_ScatterMasterShrines.SizeRangeDependingOnMapSize().RandomInRange;
-			//int randomInRange2 = GenStep_ScatterMasterShrines.SizeRangeDependingOnMapSize().RandomInRange;
-
-			int randomInRange = GenStep_ScatterMasterShrines.SizeRange.RandomInRange;
-			int randomInRange2 = GenStep_ScatterMasterShrines.SizeRange.RandomInRange;
-			CellRect rect = new CellRect(loc.x, loc.z, randomInRange, randomInRange2);
+			CellRect rect = new CellRect(loc.x, loc.z, calcSize, calcSize2);
 			rect.ClipInsideMap(map);
-			if (rect.Width != randomInRange || rect.Height != randomInRange2)
+			if (rect.Width != calcSize || rect.Height != calcSize2)
 			{
-				return;
-			}
+				Log.Message($"Scattering failed duo to not fitting sizes");
+                return;
+            }
 			foreach (IntVec3 c in rect.Cells)
 			{
 				List<Thing> list = map.thingGrid.ThingsListAt(c);
@@ -52,14 +86,16 @@ namespace CaravanAdventures.CaravanStory
 				{
 					if (list[i].def == ThingDefOf.AncientCryptosleepCasket)
 					{
+						Log.Message($"Canceling because of existing shrine");
 						return;
 					}
 				}
 			}
-            // todo - CanPlaceAncientBuildingInRangeAfterAdjustingGround() see if we cant make that work?
-            if (!base.CanPlaceAncientBuildingInRange(rect, map))
-            //if (!CanPlaceAncientBuildingInRangeAfterAdjustingGround(rect, map))
-            {
+			// todo - CanPlaceAncientBuildingInRangeAfterAdjustingGround() see if we cant make that work?
+			//if (!base.CanPlaceAncientBuildingInRange(rect, map))
+			if (!CanPlaceAncientBuildingInRangeAfterAdjustingGround(rect, map))
+			{
+				Log.Message($"CanPlaceAncientBuildingInRangeAfterAdjustingGround");
 				return;
 			}
 			ResolveParams resolveParams = default;
@@ -72,10 +108,10 @@ namespace CaravanAdventures.CaravanStory
 			BaseGen.Generate();
 		}
 
-		private static readonly IntRange SizeRange = new IntRange(60, 80);
 
-		private static IntRange SizeRangeDependingOnMapSize()
+		private static IntRange SizeRangeDependingOnMapSize(bool overrideWithSetSize = false)
 		{
+			if (overrideWithSetSize) return SizeRange;
 			var mapSize = Find.World.info.initialMapSize;
 			Log.Message($"map size: {mapSize}");
 			var sizeValue = mapSize.x * mapSize.z;
@@ -85,8 +121,9 @@ namespace CaravanAdventures.CaravanStory
 			return new IntRange(endSize - offset, endSize + offset);
 		}
 
-		private static bool CanPlaceAncientBuildingInRangeAfterAdjustingGround(CellRect rect, Map map)
+		private static bool CanPlaceAncientBuildingInRangeAfterAdjustingGround(CellRect rect, Map map, bool fakeTerrainReplacement = false)
 		{
+			var newTerrainCells = new List<IntVec3>();
 			foreach (IntVec3 c in rect.Cells)
 			{
 				if (c.InBounds(map))
@@ -97,21 +134,35 @@ namespace CaravanAdventures.CaravanStory
 					{
 						return false;
 					}
-					if (!CanBuildOnAdjustedTerrain(ThingDefOf.Wall, c, map, Rot4.North, null, null))
+					if (!CanBuildOnAdjustedTerrain(ThingDefOf.Wall, c, map, Rot4.North, newTerrainCells, null, null))
 					{
+						Log.Message($"Canceling duo to terrain");
 						return false;
 					}
 				}
 			}
+
+			if (!fakeTerrainReplacement)
+			{
+				foreach (var terrain in newTerrainCells)
+				{
+					//map.terrainGrid.SetTerrain(terrain, GenStep_RocksFromGrid.RockDefAt(terrain).building.naturalTerrain);
+					var newTerrain = TerrainThreshold.TerrainAtValue(map.Biome.terrainsByFertility, 0.7f);
+					map.terrainGrid.SetTerrain(terrain, newTerrain);
+				}
+			}
+			
 			return true;
 		}
 
-		public static bool CanBuildOnAdjustedTerrain(BuildableDef entDef, IntVec3 c, Map map, Rot4 rot, Thing thingToIgnore = null, ThingDef stuffDef = null)
+		public static bool CanBuildOnAdjustedTerrain(BuildableDef entDef, IntVec3 c, Map map, Rot4 rot, List<IntVec3> newTerrainCells, Thing thingToIgnore = null, ThingDef stuffDef = null)
 		{
 			if (entDef is TerrainDef && !c.GetTerrain(map).changeable)
 			{
+				Log.Message($"Terrain not changeable: {c.GetTerrain(map).defName}");
 				return false;
 			}
+			// todo collect failing cells and replace terrain afterwards
 			TerrainAffordanceDef terrainAffordanceNeed = entDef.GetTerrainAffordanceNeed(stuffDef);
 			if (terrainAffordanceNeed != null)
 			{
@@ -121,8 +172,12 @@ namespace CaravanAdventures.CaravanStory
 				{
 					if (!map.terrainGrid.TerrainAt(c2).affordances.Contains(terrainAffordanceNeed))
 					{
-						if (map.terrainGrid.TerrainAt(c2).affordances.Contains(TerrainAffordanceDefOf.Bridgeable)) map.terrainGrid.SetTerrain(c2, TerrainDefOf.Concrete);
-						else return false;
+						if (map.terrainGrid.TerrainAt(c2).affordances.Contains(TerrainAffordanceDefOf.Bridgeable) || map.terrainGrid.TerrainAt(c2).affordances.Contains(TerrainAffordanceDefOf.Diggable)) newTerrainCells.Add(c2);
+						else
+						{
+							Log.Message($"Failing affordance");
+							return false;
+						}
 					}
 					List<Thing> thingList = c2.GetThingList(map);
 					for (int i = 0; i < thingList.Count; i++)
@@ -132,11 +187,18 @@ namespace CaravanAdventures.CaravanStory
 							TerrainDef terrainDef = thingList[i].def.entityDefToBuild as TerrainDef;
 							if (terrainDef != null && !terrainDef.affordances.Contains(terrainAffordanceNeed))
 							{
-								return false;
+								if (!terrainDef.affordances.Contains(TerrainAffordanceDefOf.Bridgeable) && !terrainDef.affordances.Contains(TerrainAffordanceDefOf.Diggable))
+								{
+									Log.Message($"thinglist affordinace failed");
+									return false;
+								}
+								//return false;
 							}
 						}
 					}
 				}
+
+			
 				return true;
 			}
 			return true;
