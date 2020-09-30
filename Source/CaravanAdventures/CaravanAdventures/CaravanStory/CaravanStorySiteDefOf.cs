@@ -19,5 +19,7 @@ namespace CaravanAdventures.CaravanStory
         public static MapGeneratorDef CAAncientMasterShrineMG;
         public static WorldObjectDef CAStoryVillageMP;
         public static MapGeneratorDef CAStoryVillageMG;
+        public static WorldObjectDef CALastJudgmentMP;
+        public static MapGeneratorDef CALastJudgmentMG;
     }
 }

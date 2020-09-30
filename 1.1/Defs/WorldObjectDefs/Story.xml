@@ -40,11 +40,7 @@
 		</IncidentTargetTags>
 		<comps>
 			<li Class="WorldObjectCompProperties_FormCaravan" />
-			<!--<li Class="CaravanAdventures.CaravanStory.WorldObjectCompProperties_TimedDetectionPatrols" />-->
 			<li><compClass>CaravanAdventures.CaravanStory.TimedDetectionPatrols</compClass></li>
-			<!--<li>
-				<compClass>TimedDetectionRaids</compClass>
-			</li>-->
 		</comps>
 	</WorldObjectDef>
 
@@ -64,10 +60,33 @@
 		</IncidentTargetTags>
 		<comps>
 			<li Class="WorldObjectCompProperties_FormCaravan" />
-			<!--<li Class="CaravanAdventures.CaravanStory.WorldObjectCompProperties_TimedDetectionPatrols" />-->
 			<li>
 				<compClass>CaravanAdventures.CaravanStory.TimedDetectionPatrols</compClass>
 			</li>
+		</comps>
+	</WorldObjectDef>
+
+	<WorldObjectDef>
+		<defName>CALastJudgmentMP</defName>
+		<label>Ancient Last Judgment</label>
+		<description>a dangerous and long forgotten shrine</description>
+		<worldObjectClass>CaravanAdventures.CaravanStory.LastJudgmentMP</worldObjectClass>
+		<!--<worldObjectClass>CaravanAdventures.CaravanStory.StoryVillageMP</worldObjectClass>-->
+		<texture>World/WorldObjects/Ambush</texture>
+		<expandingIcon>true</expandingIcon>
+		<expandingIconTexture>World/WorldObjects/Expanding/Ambush</expandingIconTexture>
+		<expandingIconPriority>80</expandingIconPriority>
+		<expandMore>true</expandMore>
+		<blockExitGridUntilBattleIsWon>true</blockExitGridUntilBattleIsWon>
+		<isTempIncidentMapOwner>true</isTempIncidentMapOwner>
+		<IncidentTargetTags>
+			<li>Map_Misc</li>
+		</IncidentTargetTags>
+		<comps>
+			<!--<li Class="WorldObjectCompProperties_FormCaravan" />
+			<li>
+				<compClass>CaravanAdventures.CaravanStory.TimedDetectionPatrols</compClass>
+			</li>-->
 		</comps>
 	</WorldObjectDef>
 	

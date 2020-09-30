@@ -24,6 +24,12 @@ namespace CaravanAdventures.CaravanStory
 		private int constTicks = -1;
         private int checkDormantTicks = 0;
 
+		private LastJudgmentMP lastJudgmentMP;
+		public Thing lastJudgmentEntrance;
+        private int checkRangeForJudgmentTicks = 0;
+        private IntVec3 giftedCellarSpawnPoint = new IntVec3(25, 0, 3);
+        private bool bossWasSpawned;
+
         public override MapGeneratorDef MapGeneratorDef => CaravanStorySiteDefOf.CAAncientMasterShrineMG;
 
         public override void ExposeData()
@@ -35,34 +41,40 @@ namespace CaravanAdventures.CaravanStory
 			Scribe_Values.Look(ref constTicks, "constTicks", -1);
 			Scribe_Values.Look(ref bossDefeatedAndRewardsGiven, "bossDefeatedAndRewardsGiven");
 			Scribe_Values.Look(ref checkDormantTicks, "checkDormantTicks", 0);
-
+			Scribe_Values.Look(ref checkRangeForJudgmentTicks, "checkRangeForJudgmentTicks", 0);
+			Scribe_Values.Look(ref bossWasSpawned, "bossWasSpawned", false);
 			// todo are mechs enough? Need them for comparison later - dont think so, i should drop them
 			Scribe_Collections.Look(ref generatedMechs, "generatedMechs", LookMode.Reference);
+
+			Scribe_References.Look(ref lastJudgmentEntrance, "lastJudgmentEntrance");
+			Scribe_References.Look(ref lastJudgmentMP, "lastJudgmentMap");
 		}
 
 		public void Init()
-        {
+		{
 			// debug
 			//Log.Message($"compare mechs. mapPawns: {Map.mapPawns.AllPawns.Where(x => x.RaceProps.IsMechanoid).Count()} ourlist: {generatedMechs.Count}");
 			//foreach (var pawn in Map.mapPawns.AllPawns.Where(x => x.RaceProps.IsMechanoid))
-   //         {
+			//         {
 			//	Log.Message($"defname: {pawn.def.defName} kind: {pawn.kindDef.defName} other: {pawn.def.label} kindlabel: {pawn.kindDef.label}");
-   //         }
+			//         }
 			//var notMatching = generatedMechs.Where(x => !Map.mapPawns.AllPawns.Where(y => y.RaceProps.IsMechanoid).Any(z => z.ThingID == x.ThingID));
 			//Log.Message($"Not matching count: {notMatching.Count()}");
 			//Log.Message($"Map has boss: {boss != null}");
 
-			if (boss != null)
+			if (boss != null || lastJudgmentEntrance != null)
 			{
 				wonBattle = true;
 
 				GetComponent<TimedDetectionPatrols>().Init();
-                GetComponent<TimedDetectionPatrols>().StartDetectionCountdown(60000, -1);
-            }
+				GetComponent<TimedDetectionPatrols>().StartDetectionCountdown(60000, -1);
+
+				if (boss != null) bossWasSpawned = true;
+			}
 			CompCache.StoryWC.storyFlags[CompCache.StoryWC.BuildCurrentShrinePrefix() + "Created"] = true;
 		}
 
-        public override bool ShouldRemoveMapNow(out bool alsoRemoveWorldObject)
+		public override bool ShouldRemoveMapNow(out bool alsoRemoveWorldObject)
 		{
 			if (!base.Map.mapPawns.AnyPawnBlockingMapRemoval && boss == null || !base.Map.mapPawns.AnyPawnBlockingMapRemoval && boss != null && boss.Dead)
 			{
@@ -76,11 +88,17 @@ namespace CaravanAdventures.CaravanStory
 
         public override void Tick()
 		{
-			base.Tick();
+			//base.Tick();
 			if (base.HasMap)
 			{
 				CheckBossDefeated();
 				CheckWonBattle();
+
+				if (lastJudgmentEntrance != null && checkRangeForJudgmentTicks >= 60)
+                {
+					CheckGenerateAndEnterLastJudgment();
+					checkRangeForJudgmentTicks = 0;
+                }
 
 				if (checkDormantTicks == 240)
                 {
@@ -90,7 +108,7 @@ namespace CaravanAdventures.CaravanStory
 
 				if (constTicks == 2400)
 				{
-					if (boss != null)
+					if (boss != null || lastJudgmentEntrance != null)
 					{
 						StoryUtility.EnsureSacrilegHunters();
 
@@ -101,8 +119,30 @@ namespace CaravanAdventures.CaravanStory
 				}
 
 				constTicks++;
+				checkRangeForJudgmentTicks++;
 				checkDormantTicks++;
 			}
+		}
+
+		private void CheckGenerateAndEnterLastJudgment()
+		{
+			if (lastJudgmentMP != null) return;
+			var triggerCells = GenRadial.RadialCellsAround(lastJudgmentEntrance.Position, 1, true);
+			if (!triggerCells.Any(cell => cell.GetFirstPawn(Map) == CompCache.StoryWC.questCont.StoryStart.Gifted)) return;
+
+			LongEventHandler.QueueLongEvent(delegate ()
+			{
+				CompCache.StoryWC.questCont.LastJudgment.CreateLastJudgmentMP(ref lastJudgmentMP, Tile);
+			}, "GeneratingMapForNewEncounter", false, null, true);
+            LongEventHandler.QueueLongEvent(delegate ()
+			{
+                var gifted = CompCache.StoryWC.questCont.StoryStart.Gifted;
+                if (gifted.Spawned) gifted.DeSpawn();
+                GenSpawn.Spawn(gifted, giftedCellarSpawnPoint, lastJudgmentMP.Map);
+                gifted.drafter.Drafted = true;
+                Find.TickManager.CurTimeSpeed = TimeSpeed.Paused;
+                lastJudgmentMP.Init();
+            }, "GeneratingMapForNewEncounter", false, null, true);
 		}
 
         private void LetterNoMasterShrine() => Find.LetterStack.ReceiveLetter("MasterShrineVictoryLetterLabel".Translate(), "MasterShrineVictoryLetterMessage".Translate(), LetterDefOf.PositiveEvent, this, null, null, null, null);
@@ -129,7 +169,7 @@ namespace CaravanAdventures.CaravanStory
 
 		private void CheckBossDefeated()
         {
-			if (boss != null && !boss.Dead || boss == null && CompCache.StoryWC.storyFlags[CompCache.StoryWC.BuildCurrentShrinePrefix() + "_Created"] && bossDefeatedAndRewardsGiven) return;
+			if ((boss != null && !boss.Dead) || (!bossWasSpawned && boss == null && CompCache.StoryWC.storyFlags[CompCache.StoryWC.BuildCurrentShrinePrefix() + "Created"]) || bossDefeatedAndRewardsGiven) return;
 
 			var gifted = StoryUtility.GetGiftedPawn();
 			if (gifted == null) Log.Warning("gifted pawn was null, which shouldn't happen. Spell was stored for when another gifted pawn awakes");

@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Verse;
+using Verse.Noise;
 
 // high prio:
 // - add a weather condition that freezes or heats the world until the main boss is defeated. -> must be disableable in the options
@@ -34,7 +35,8 @@ namespace CaravanAdventures.CaravanStory
         private readonly float baseDelayNextShrineReveal = Helper.Debug() ? 1800f : 60000f * 3f;
         private float shrineRevealCounter = -1f;
         private int ticks = -1;
-        private float countShrinesCompleted = 0f;
+        private int countShrinesCompleted = 0;
+        private int shrineMaximum = 5;
         private readonly IntRange timeoutDaysRange = new IntRange(10, 12);
         private readonly IntRange shrineDistance = Helper.Debug() ? new IntRange(2, 4) : new IntRange(40, 60);
         private List<AbilityDef> unlockedSpells = new List<AbilityDef>();
@@ -45,10 +47,11 @@ namespace CaravanAdventures.CaravanStory
         public Dictionary<string, bool> debugFlags = new Dictionary<string, bool>()
         {
             { "ShowDebugInfo", true },
-            { "StoryStartDone", false },
+            { "StoryStartDone", true },
             { "FriendlyCaravanDisabled", true },
             { "VillageDisabled", true },
             { "ShrinesDisabled", false },
+            { "ForwardToLastShrine", true },
             { "DebugAllAbilities", true },
             { "VillageFinished", true },
             { "DebugResetVillagesAndShrines", false },
@@ -81,6 +84,7 @@ namespace CaravanAdventures.CaravanStory
 
         public QuestCont questCont;
 
+
         public override void ExposeData()
         {
             base.ExposeData();
@@ -108,14 +112,25 @@ namespace CaravanAdventures.CaravanStory
             if (debugFlags["StoryStartDone"])
                 foreach (var flag in storyFlags.Where(x => x.Key.StartsWith("Start_")).ToList())
                     storyFlags[flag.Key] = true;
+         
+            if (debugFlags["ForwardToLastShrine"])
+            {
+                countShrinesCompleted = 4;
+                foreach (var flag in storyFlags.Where(x => x.Key.StartsWith("Shrine") && !x.Key.StartsWith("Shrine5_")).ToList())
+                    storyFlags[flag.Key] = true;
+            }
+
 
             if (debugFlags["ShowDebugInfo"]) storyFlags.ToList().ForEach(flag => Log.Message($"{flag.Key} {flag.Value}"));
+
+
+            Log.Message($"current prefix: {CompCache.StoryWC.BuildCurrentShrinePrefix()}");
         }
 
         private void InitializeStoryFlags()
         {
             if (storyFlags == null) storyFlags = new Dictionary<string, bool>();
-            for (int i = 1; i < 6; i++)
+            for (int i = 1; i < shrineMaximum + 1; i++)
             {
                 flagsToAdd.Add("Shrine" + i + "_InitCountDownStarted");
                 flagsToAdd.Add("Shrine" + i + "_Created");
@@ -230,7 +245,7 @@ namespace CaravanAdventures.CaravanStory
         public void SetShrineSF(string postFix) => storyFlags[storyFlags.Keys.FirstOrDefault(x => x.StartsWith(BuildCurrentShrinePrefix() + postFix))] = true;
         public void ResetCurrentShrineFlags() => storyFlags.Keys.Where(x => x.StartsWith(BuildCurrentShrinePrefix())).ToList().ForEach(key => storyFlags[key] = false);
         public void ResetSFsStartingWith(string start) => storyFlags.Keys.Where(x => x.StartsWith(start)).ToList().ForEach(key => storyFlags[key] = false);
-        public string BuildCurrentShrinePrefix() => "Shrine" + (countShrinesCompleted + 1) + "_";
+        public string BuildCurrentShrinePrefix() => "Shrine" + (countShrinesCompleted < shrineMaximum ? countShrinesCompleted + 1 : shrineMaximum) + "_";
         public List<AbilityDef> GetUnlockedSpells() => unlockedSpells;
         
         // todo check if we even need TradeCaravan here... village would have to be successfull before
@@ -243,7 +258,8 @@ namespace CaravanAdventures.CaravanStory
             //!storyFlags.Any(x => x.Key.StartsWith("TradeCaravan_") && x.Value == false) && 
             !storyFlags.Any(x => x.Key.StartsWith("Start_") && x.Value == false)
             && !storyFlags.Any(x => x.Key == BuildCurrentShrinePrefix() + "Completed" && x.Value == true)
-            && !storyFlags.Any(x => x.Key == BuildCurrentShrinePrefix() + "InitCountDownStarted" && x.Value == true);
+            && !storyFlags.Any(x => x.Key == BuildCurrentShrinePrefix() + "InitCountDownStarted" && x.Value == true)
+            && countShrinesCompleted < shrineMaximum;
 
         // todo - incomplete
         private bool CheckCanStartFriendlyCaravanCounter() => !storyFlags["TradeCaravan_InitCountDownStarted"];

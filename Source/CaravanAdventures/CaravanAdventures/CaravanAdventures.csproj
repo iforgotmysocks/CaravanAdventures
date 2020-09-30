@@ -104,6 +104,7 @@
     <Compile Include="CaravanStory\IncidentWorker_MechsWithBoss.cs" />
     <Compile Include="CaravanStory\JobDefOf.cs" />
     <Compile Include="CaravanStory\JobDriver_Talk.cs" />
+    <Compile Include="CaravanStory\LastJudgmentMP.cs" />
     <Compile Include="CaravanStory\Lords\LordJob_DefendBaseAgaintHostiles.cs" />
     <Compile Include="CaravanStory\Lords\Trigger_AttackWithReinforcements.cs" />
     <Compile Include="CaravanStory\Lords\Trigger_ChanceOnMechHarmNPCBuilding.cs" />
@@ -145,7 +146,6 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="Patches\MainPatcher.cs" />
     <Compile Include="Patches\AutomaticItemSelection.cs" />
-    <Compile Include="Patches\ScatterShrinesWithoutRocks.cs" />
     <Compile Include="Patches\TalkPawnGUIOverlay.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
