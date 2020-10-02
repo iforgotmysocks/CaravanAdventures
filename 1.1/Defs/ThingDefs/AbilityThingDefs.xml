@@ -5,7 +5,7 @@
 		<label>magical light</label>
 		<description>Magical light.</description>
 		<graphicData>
-			<texPath>Things/Building/Misc/Empty</texPath>
+			<texPath>Things/Buildings/Misc/Empty</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 		</graphicData>
 		<selectable>false</selectable>

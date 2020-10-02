@@ -15,6 +15,7 @@ namespace CaravanAdventures.CaravanStory
         private int ticks;
         private float anualIncrease;
         public float AnualIncrease { get => anualIncrease; set => anualIncrease = value; }
+        private bool active = false;
 
         public override void ExposeData()
         {
@@ -22,15 +23,14 @@ namespace CaravanAdventures.CaravanStory
             Scribe_Values.Look(ref tempOffset, "tempOffset", 0);
             Scribe_Values.Look(ref ticks, "ticks");
             Scribe_Values.Look(ref anualIncrease, "anualIncrease");
+            Scribe_Values.Look(ref active, "active", false);
         }
 
         public override void GameConditionTick()
         {
             base.GameConditionTick();
 
-            if (ticks % 2000 == 0) 
-
-            if (ticks >= 60000 * (Helper.Debug() ? 0.1 : 60))
+            if (ticks >= 60000 * 60)
             {
                 TempOffset += AnualIncrease;
                 ticks = 0;

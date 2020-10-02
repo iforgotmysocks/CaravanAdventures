@@ -12,7 +12,11 @@ namespace CaravanAdventures.CaravanStory
     class LastJudgmentMP : MapParent
     {
         public override MapGeneratorDef MapGeneratorDef => CaravanStorySiteDefOf.CALastJudgmentMG;
-        public bool WonBattle
+		private Pawn endBoss;
+		private Thing portalHome;
+		private AncientMasterShrineMP ancientShrineMP;
+
+		public bool WonBattle
 		{
 			get
 			{
@@ -24,11 +28,18 @@ namespace CaravanAdventures.CaravanStory
 		{
 			base.ExposeData();
 			Scribe_Values.Look<bool>(ref this.wonBattle, "wonBattle", false, false);
+			Scribe_References.Look(ref endBoss, "endboss");
+			Scribe_References.Look(ref portalHome, "portalHome");
+			Scribe_References.Look(ref ancientShrineMP, "mapParentParent");
 		}
 
-		public void Init()
+		public void Init(AncientMasterShrineMP mapParent)
 		{
+			this.ancientShrineMP = mapParent;
 			this.Map.exitMapGrid.Grid.Clear();
+			endBoss = StoryUtility.GetFittingMechBoss(true);
+			GenSpawn.Spawn(endBoss, new IntVec3(25, 0, 42), Map);
+			CompCache.StoryWC.SetSF("Judgment_Created");
 		}
 
         public override bool ShouldRemoveMapNow(out bool alsoRemoveWorldObject)
@@ -48,7 +59,42 @@ namespace CaravanAdventures.CaravanStory
 			if (base.HasMap)
 			{
 				this.CheckWonBattle();
+				// todo replace with better check for boss dead
+				if (wonBattle)
+				{
+					CheckStoryOverDialogAndDisableApocalypse();
+					CheckSpawnPortalAndBringHome();
+				}
 			}
+		}
+
+        private void CheckStoryOverDialogAndDisableApocalypse()
+        {
+			if (CompCache.StoryWC.storyFlags["Judgment_StoryOverDialog"]) return;
+
+			// todo dialog
+			CompCache.StoryWC.questCont.LastJudgment.Apocalypse.End();
+			CompCache.StoryWC.SetSF("Judgment_StoryOverDialog");
+		}
+
+        private void CheckSpawnPortalAndBringHome()
+        {
+            if (portalHome == null)
+            {
+				var portal = ThingMaker.MakeThing(StoryDefOf.CAShrinePortal);
+				portalHome = GenSpawn.Spawn(portal, ancientShrineMP.portalSpawnPosition, Map, WipeMode.Vanish);
+			}
+
+			var triggerCells = new IntVec3[] { portalHome.Position }; // GenRadial.RadialCellsAround(lastJudgmentEntrance.Position, 1, true);
+			if (!triggerCells.Any(cell => cell.GetFirstPawn(Map) == CompCache.StoryWC.questCont.StoryStart.Gifted)) return;
+
+			var gifted = CompCache.StoryWC.questCont.StoryStart.Gifted;
+			if (gifted.Spawned) gifted.DeSpawn();
+			GenSpawn.Spawn(gifted, ancientShrineMP.lastJudgmentEntrance.Position, ancientShrineMP.Map);
+			gifted.drafter.Drafted = true;
+			Find.TickManager.CurTimeSpeed = TimeSpeed.Paused;
+			CompCache.StoryWC.SetSF("Judgment_Completed");
+			ancientShrineMP.lastJudgmentEntrance.Destroy();
 		}
 
 		public override void PostMapGenerate()
@@ -63,18 +109,17 @@ namespace CaravanAdventures.CaravanStory
 			{
 				return;
 			}
-			return;
 			if (GenHostility.AnyHostileActiveThreatToPlayer(base.Map, false))
 			{
 				return;
 			}
-			//TimedDetectionRaids component = base.GetComponent<TimedDetectionRaids>();
-			//component.SetNotifiedSilently();
-			//string detectionCountdownTimeLeftString = component.DetectionCountdownTimeLeftString;
-			TaleRecorder.RecordTale(TaleDefOf.CaravanAmbushDefeated, new object[]
-			{
-				base.Map.mapPawns.FreeColonists.RandomElement<Pawn>()
-			});
+
+
+
+			//TaleRecorder.RecordTale(TaleDefOf.CaravanAmbushDefeated, new object[]
+			//{
+			//	base.Map.mapPawns.FreeColonists.RandomElement<Pawn>()
+			//});
 			this.wonBattle = true;
 		}
 

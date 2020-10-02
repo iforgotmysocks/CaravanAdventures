@@ -80,6 +80,9 @@ namespace CaravanAdventures.CaravanStory
             "SacrilegHuntersBetrayal",
 
             "Judgment_ApocalypseStarted",
+            "Judgment_Created",
+            "Judgment_StoryOverDialog",
+            "Judgment_Completed",
         };
 
         public QuestCont questCont;
@@ -179,8 +182,8 @@ namespace CaravanAdventures.CaravanStory
                     SetShrineSF("InitCountDownStarted");
                 }
 
-                //questCont.LastJudgment.StartApocalypse(-50, -10);
-                //if (CheckCanStartApocalypse()) questCont.LastJudgment.StartApocalypse(-50, -10);
+                // todo add mod setting and ability to disable
+                if (CanDoApocalypse()) questCont.LastJudgment.StartApocalypse(-10, -5);
 
                 ticks = 0;
             }
@@ -246,6 +249,9 @@ namespace CaravanAdventures.CaravanStory
         public void ResetCurrentShrineFlags() => storyFlags.Keys.Where(x => x.StartsWith(BuildCurrentShrinePrefix())).ToList().ForEach(key => storyFlags[key] = false);
         public void ResetSFsStartingWith(string start) => storyFlags.Keys.Where(x => x.StartsWith(start)).ToList().ForEach(key => storyFlags[key] = false);
         public string BuildCurrentShrinePrefix() => "Shrine" + (countShrinesCompleted < shrineMaximum ? countShrinesCompleted + 1 : shrineMaximum) + "_";
+        public string BuildMaxShrinePrefix() => "Shrine" + shrineMaximum + "_";
+        public int GetCurrentShrineCounter => countShrinesCompleted < shrineMaximum ? countShrinesCompleted + 1 : shrineMaximum;
+        public int GetShrineMaxiumum => shrineMaximum;
         public List<AbilityDef> GetUnlockedSpells() => unlockedSpells;
         
         // todo check if we even need TradeCaravan here... village would have to be successfull before
@@ -264,7 +270,7 @@ namespace CaravanAdventures.CaravanStory
         // todo - incomplete
         private bool CheckCanStartFriendlyCaravanCounter() => !storyFlags["TradeCaravan_InitCountDownStarted"];
         private bool CheckCanStartVillageGenerationCounter() => storyFlags["TradeCaravan_DialogFinished"] && !storyFlags["IntroVillage_InitCountDownStarted"];
-        private bool CheckCanStartApocalypse() => storyFlags["Shrine1_Completed"] && ModSettings.Get().apocalypseEnabled && !storyFlags["Judgment_ApocalypseStarted"];
+        private bool CanDoApocalypse() => storyFlags["Shrine1_Completed"] && !storyFlags[BuildMaxShrinePrefix() + "Completed"] && ModSettings.Get().apocalypseEnabled && !storyFlags["Judgment_ApocalypseStarted"];
 
         public void ResetStoryVars()
         {

@@ -34,15 +34,13 @@ namespace CaravanAdventures.CaravanStory
 				mp = map.Parent as AncientMasterShrineMP;
 				mainRoom = GetAncientShrineRooms(map).FirstOrDefault();
 
-                if (CompCache.StoryWC.BuildCurrentShrinePrefix() != "Shrine5_")
+				if (mainRoom.CellCount > 1500)
                 {
-					if (mainRoom.CellCount > 1500) mp.boss = AddBoss(map, caravan, mainRoom);
-					else AddBandits(map, caravan);
+					if (CompCache.StoryWC.BuildCurrentShrinePrefix() != "Shrine5_") mp.boss = AddBoss(map, caravan, mainRoom);
+					else mp.lastJudgmentEntrance = InitCellarEntrace(map);
 				}
-				else
-                {
-					mp.lastJudgmentEntrance = InitCellarEntrace(map);
-				}
+				else AddBandits(map, caravan);
+				
 				AddEnemiesToRooms(map, caravan, mp.boss);
 
 				//(Pawn x) => CellFinder.RandomSpawnCellForPawnNear(playerStartingSpot, map, 4)
@@ -96,6 +94,7 @@ namespace CaravanAdventures.CaravanStory
 			GenSpawn.Spawn(boss, pos, map, WipeMode.Vanish);
 			var compDormant = boss.TryGetComp<CompWakeUpDormant>();
 			if (compDormant != null) compDormant.wakeUpIfColonistClose = true;
+
 			//GenStep_SleepingMechanoids.SendMechanoidsToSleepImmediately(new List<Pawn> { boss });
 			return boss;
 		}
@@ -328,20 +327,15 @@ namespace CaravanAdventures.CaravanStory
 
 		private Thing InitCellarEntrace(Map map)
 		{
-		
-			IntVec3 pos = default;
-			if (!StoryUtility.CanSpawnSpotCloseToCaskets(mainRoom, map, out pos)) return null;
+            if (!StoryUtility.CanSpawnSpotCloseToCaskets(mainRoom, map, out var pos)) return null;
 
-			// todo only enable map initializing stuff when needed
 			var stateBackup = Current.ProgramState;
 			Current.ProgramState = ProgramState.MapInitializing;
 
-			var light = ThingMaker.MakeThing(ThingDef.Named("CAEntranceLight"));
+			var light = ThingMaker.MakeThing(StoryDefOf.CAShrinePortal);
 			var entrance = GenSpawn.Spawn(light, pos, map, WipeMode.Vanish);
 
-            // todo only enable map initializing stuff when needed
             Current.ProgramState = stateBackup;
-
 			return entrance;
         }
 

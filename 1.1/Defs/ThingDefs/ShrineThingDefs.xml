@@ -2,19 +2,19 @@
 <Defs>
 
 	<ThingDef ParentName="BuildingBase">
-		<defName>CAEntranceLight</defName>
-		<label>Entrance lighting</label>
-		<description>Entrance lighting</description>
+		<defName>CAShrinePortal</defName>
+		<label>Mechanoid Portal</label>
+		<description>A portal constructed by mechanoids. It seems to lead somewhere. The encryptions conclude that only someone with the ancient gift can use it.</description>
 		<graphicData>
-			<texPath>Things/Building/Misc/Empty</texPath>
+			<texPath>Things/Buildings/Shrine/Portal</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 		</graphicData>
-		<selectable>false</selectable>
+		<selectable>true</selectable>
 		<comps>
-			<li Class="CompProperties_Glower">
-				<glowRadius>2</glowRadius>
-				<glowColor>(0,0,255,0)</glowColor>
-			</li>
+			<!--<li Class="CompProperties_Glower">
+				<glowRadius>3</glowRadius>
+				<glowColor>(255,0,0,0)</glowColor>
+			</li>-->
 			<li Class="CompProperties_HeatPusher">
 				<compClass>CompHeatPusherPowered</compClass>
 				<heatPerSecond>3.5</heatPerSecond>
@@ -25,6 +25,7 @@
 			<isInert>true</isInert>
 			<isEdifice>false</isEdifice>
 			<deconstructible>false</deconstructible>
+			<claimable>false</claimable>
 		</building>
 	</ThingDef>
 
@@ -33,7 +34,7 @@
 		<label>Red light</label>
 		<description>Red lighting</description>
 		<graphicData>
-			<texPath>Things/Building/Misc/Empty</texPath>
+			<texPath>Things/Buildings/Misc/Empty</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 		</graphicData>
 		<selectable>false</selectable>

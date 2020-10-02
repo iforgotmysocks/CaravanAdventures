@@ -49,7 +49,7 @@
 
 	<MapGeneratorDef Name="MapCellar" Abstract="True">
 		<genSteps>
-			<li>ElevationFertility</li>
+			<!--<li>ElevationFertility</li>-->
 			<!--<li>Caves</li>-->
 			<li>Terrain</li>
 			<!--<li>CavesTerrain</li>-->

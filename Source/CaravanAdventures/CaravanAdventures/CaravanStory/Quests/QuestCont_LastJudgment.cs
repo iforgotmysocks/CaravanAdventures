@@ -13,28 +13,50 @@ namespace CaravanAdventures.CaravanStory.Quests
     {
 
         private GameCondition_Apocalypse apocalypse;
+		public GameCondition_Apocalypse Apocalypse => apocalypse;
 
-        public QuestCont_LastJudgment()
+		public QuestCont_LastJudgment()
         {
-        
         }
 
-        public void StartApocalypse(float minTemp, float annualIncrease)
-        {
-            apocalypse = apocalypse ?? new GameCondition_Apocalypse();
-            apocalypse.TempOffset = minTemp;
-            apocalypse.Permanent = true;
-            apocalypse.startTick = Find.TickManager.TicksGame;
-            apocalypse.AnualIncrease = annualIncrease;
-        }
+		public void ExposeData()
+		{
+			Scribe_References.Look(ref apocalypse, "apocalypse");
+		}
 
+		public void StartApocalypse(float minTemp, float annualIncrease)
+		{
+			if (apocalypse != null) { } // RegisterApocalypseOnAllMaps();
+			else
+			{
+				apocalypse = (GameCondition_Apocalypse)GameConditionMaker.MakeConditionPermanent(StoryDefOf.CAGameCondition_Apocalypse);
+				apocalypse.TempOffset = minTemp;
+				apocalypse.Permanent = true;
+                //apocalypse.startTick = Find.TickManager.TicksGame;
+                apocalypse.AnualIncrease = annualIncrease;
+                //RegisterApocalypseOnAllMaps();
+				Find.World.gameConditionManager.RegisterCondition(apocalypse);
+            }
+		}
 
-        public void ExposeData()
-        {
-            Scribe_References.Look(ref apocalypse, "apocalypse");
-        }
+		public void RegisterApocalypseOnAllMaps()
+		{
+			return;
+			foreach (var map in Find.Maps)
+			{
+				if (map.gameConditionManager.GetActiveCondition(StoryDefOf.CAGameCondition_Apocalypse) == null) map.gameConditionManager.RegisterCondition(apocalypse);
+			}
+		}
 
-        internal void CreateLastJudgmentMP(ref LastJudgmentMP lastJudgmentMP, int tile)
+		public void RemoveApocalypseFromAllMaps()
+		{
+			foreach (var map in Find.Maps)
+			{
+				if (map.gameConditionManager.GetActiveCondition(GameConditionDef.Named("CAGameCondition_Apocalypse")) == null) map.gameConditionManager.ActiveConditions.Remove(apocalypse);
+			}
+		}
+
+        internal void CreateLastJudgment(ref LastJudgmentMP lastJudgmentMP, int tile)
         {
 			lastJudgmentMP = (LastJudgmentMP)WorldObjectMaker.MakeWorldObject(CaravanStorySiteDefOf.CALastJudgmentMP);
 			lastJudgmentMP.SetFaction(StoryUtility.EnsureSacrilegHunters());
@@ -49,7 +71,6 @@ namespace CaravanAdventures.CaravanStory.Quests
 
 			foreach (var cell in map.AllCells)
 			{
-				Log.Message($"{cell} {cell.y}");
 				map.terrainGrid.SetTerrain(cell, TerrainDefOf.MetalTile);
 				map.terrainGrid.SetUnderTerrain(cell, TerrainDefOf.Gravel);
 			}
@@ -76,11 +97,7 @@ namespace CaravanAdventures.CaravanStory.Quests
 				map.roofGrid.SetRoof(cell, RoofDefOf.RoofConstructed);
 			}
 
-			//map.terrainGrid.Drawer.SetDirty();
-			//map.terrainGrid.Drawer.CellBoolDrawerUpdate();
-
 			Current.ProgramState = stateBackup; 
-			
 		}
     }
 }

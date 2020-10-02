@@ -27,7 +27,7 @@ namespace CaravanAdventures.CaravanStory
 		private LastJudgmentMP lastJudgmentMP;
 		public Thing lastJudgmentEntrance;
         private int checkRangeForJudgmentTicks = 0;
-        private IntVec3 giftedCellarSpawnPoint = new IntVec3(25, 0, 3);
+        public IntVec3 portalSpawnPosition = new IntVec3(25, 0, 3);
         private bool bossWasSpawned;
 
         public override MapGeneratorDef MapGeneratorDef => CaravanStorySiteDefOf.CAAncientMasterShrineMG;
@@ -71,14 +71,17 @@ namespace CaravanAdventures.CaravanStory
 
 				if (boss != null) bossWasSpawned = true;
 			}
-			CompCache.StoryWC.storyFlags[CompCache.StoryWC.BuildCurrentShrinePrefix() + "Created"] = true;
+			CompCache.StoryWC.SetShrineSF("Created");
 		}
 
 		public override bool ShouldRemoveMapNow(out bool alsoRemoveWorldObject)
 		{
-			if (!base.Map.mapPawns.AnyPawnBlockingMapRemoval && boss == null || !base.Map.mapPawns.AnyPawnBlockingMapRemoval && boss != null && boss.Dead)
+			// todo add scenatio of keeping map until last judgement is completed and left, 
+			if (!base.Map.mapPawns.AnyPawnBlockingMapRemoval && boss == null && (CompCache.StoryWC.GetCurrentShrineCounter != CompCache.StoryWC.GetShrineMaxiumum || CompCache.StoryWC.storyFlags["Judgment_Completed"])
+				|| !base.Map.mapPawns.AnyPawnBlockingMapRemoval && boss != null && boss.Dead && (CompCache.StoryWC.GetCurrentShrineCounter != CompCache.StoryWC.GetShrineMaxiumum || CompCache.StoryWC.storyFlags["Judgment_Completed"]))
 			{
-				if (boss == null) CompCache.StoryWC.ResetCurrentShrineFlags();
+				// why is this here? why did i want to reset the current shrine flags when the map was removed? => just debugging stuff?
+				//if (boss == null) CompCache.StoryWC.ResetCurrentShrineFlags();
 				alsoRemoveWorldObject = true;
 				return true;
 			}
@@ -94,8 +97,8 @@ namespace CaravanAdventures.CaravanStory
 				CheckBossDefeated();
 				CheckWonBattle();
 
-				if (lastJudgmentEntrance != null && checkRangeForJudgmentTicks >= 60)
-                {
+				if (!CompCache.StoryWC.storyFlags["Judgment_Completed"] && lastJudgmentEntrance != null && checkRangeForJudgmentTicks >= 60)
+				{
 					CheckGenerateAndEnterLastJudgment();
 					checkRangeForJudgmentTicks = 0;
                 }
@@ -126,22 +129,24 @@ namespace CaravanAdventures.CaravanStory
 
 		private void CheckGenerateAndEnterLastJudgment()
 		{
-			if (lastJudgmentMP != null) return;
-			var triggerCells = GenRadial.RadialCellsAround(lastJudgmentEntrance.Position, 1, true);
+
+			var triggerCells = new IntVec3[] { lastJudgmentEntrance.Position }; // GenRadial.RadialCellsAround(lastJudgmentEntrance.Position, 1, true);
 			if (!triggerCells.Any(cell => cell.GetFirstPawn(Map) == CompCache.StoryWC.questCont.StoryStart.Gifted)) return;
 
+			if (lastJudgmentMP == null) {
+				LongEventHandler.QueueLongEvent(delegate ()
+				{
+					CompCache.StoryWC.questCont.LastJudgment.CreateLastJudgment(ref lastJudgmentMP, Tile);
+				}, "GeneratingMapForNewEncounter", false, null, true);
+			}
 			LongEventHandler.QueueLongEvent(delegate ()
-			{
-				CompCache.StoryWC.questCont.LastJudgment.CreateLastJudgmentMP(ref lastJudgmentMP, Tile);
-			}, "GeneratingMapForNewEncounter", false, null, true);
-            LongEventHandler.QueueLongEvent(delegate ()
 			{
                 var gifted = CompCache.StoryWC.questCont.StoryStart.Gifted;
                 if (gifted.Spawned) gifted.DeSpawn();
-                GenSpawn.Spawn(gifted, giftedCellarSpawnPoint, lastJudgmentMP.Map);
+                GenSpawn.Spawn(gifted, portalSpawnPosition, lastJudgmentMP.Map);
                 gifted.drafter.Drafted = true;
                 Find.TickManager.CurTimeSpeed = TimeSpeed.Paused;
-                lastJudgmentMP.Init();
+                lastJudgmentMP.Init(this);
             }, "GeneratingMapForNewEncounter", false, null, true);
 		}
 

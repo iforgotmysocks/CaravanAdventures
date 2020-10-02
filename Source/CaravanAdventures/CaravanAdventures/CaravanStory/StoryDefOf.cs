@@ -21,5 +21,11 @@ namespace CaravanAdventures.CaravanStory
         public static PawnKindDef CASacrilegHunters_Villager;
         public static PawnKindDef CASacrilegHunters_ExperiencedHunter;
         public static PawnKindDef CASacrilegHunters_ExperiencedHunterVillage;
+
+        public static GameConditionDef CAGameCondition_Apocalypse;
+
+        public static ThingDef CAShrinePortal;
+
+        public static PawnKindDef CAEndBossMech;
     }
 }
