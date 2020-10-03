@@ -24,7 +24,7 @@ namespace CaravanAdventures.CaravanStory.Quests
 			Scribe_References.Look(ref apocalypse, "apocalypse");
 		}
 
-		public void StartApocalypse(float minTemp, float annualIncrease)
+		public void StartApocalypse(float minTemp, float increasingAmount)
 		{
 			if (apocalypse != null) { } // RegisterApocalypseOnAllMaps();
 			else
@@ -33,7 +33,7 @@ namespace CaravanAdventures.CaravanStory.Quests
 				apocalypse.TempOffset = minTemp;
 				apocalypse.Permanent = true;
                 //apocalypse.startTick = Find.TickManager.TicksGame;
-                apocalypse.AnualIncrease = annualIncrease;
+                apocalypse.InreasingAmount = increasingAmount;
                 //RegisterApocalypseOnAllMaps();
 				Find.World.gameConditionManager.RegisterCondition(apocalypse);
             }

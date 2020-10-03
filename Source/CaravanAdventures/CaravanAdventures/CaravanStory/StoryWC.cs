@@ -12,16 +12,12 @@ using Verse;
 using Verse.Noise;
 
 // high prio:
-// - add a weather condition that freezes or heats the world until the main boss is defeated. -> must be disableable in the options
+// - add and rework dialogs from shrines onwards
 
 // med prio:
 // - create mech bosses after horsemen traits
 // -- add quote to each horsemen type when entering the shrine
 // -- credits to horsemen idea to Shakesthespeare
-// - shrine generation issues
-// -- pick good biome after failure
-// -- test smaller map sizes and quest generation
-// -- maybe reduce size depending on map size if possible
 
 // low prio:
 // - collect player responses and use them to determine the support strength for troups at shrines
@@ -47,14 +43,14 @@ namespace CaravanAdventures.CaravanStory
         public Dictionary<string, bool> debugFlags = new Dictionary<string, bool>()
         {
             { "ShowDebugInfo", true },
-            { "StoryStartDone", true },
-            { "FriendlyCaravanDisabled", true },
-            { "VillageDisabled", true },
-            { "ShrinesDisabled", false },
-            { "ForwardToLastShrine", true },
-            { "DebugAllAbilities", true },
-            { "VillageFinished", true },
             { "DebugResetVillagesAndShrines", false },
+            { "DebugAllAbilities", false },
+
+            { "FriendlyCaravanDone", false },
+            { "VillageDone", false },
+            { "StoryStartDone", false },
+            { "ForwardToLastShrine", false },
+            { "ShrinesDone", false },
         };
         public Dictionary<string, bool> storyFlags;
         private List<string> flagsToAdd = new List<string>
@@ -86,7 +82,6 @@ namespace CaravanAdventures.CaravanStory
         };
 
         public QuestCont questCont;
-
 
         public override void ExposeData()
         {
@@ -123,11 +118,7 @@ namespace CaravanAdventures.CaravanStory
                     storyFlags[flag.Key] = true;
             }
 
-
             if (debugFlags["ShowDebugInfo"]) storyFlags.ToList().ForEach(flag => Log.Message($"{flag.Key} {flag.Value}"));
-
-
-            Log.Message($"current prefix: {CompCache.StoryWC.BuildCurrentShrinePrefix()}");
         }
 
         private void InitializeStoryFlags()
@@ -161,21 +152,21 @@ namespace CaravanAdventures.CaravanStory
             if (ticks > 1200)
             {
                 StoryUtility.GenerateStoryContact();
-                if (CheckCanStartFriendlyCaravanCounter() && !debugFlags["FriendlyCaravanDisabled"])
+                if (CheckCanStartFriendlyCaravanCounter() && !debugFlags["FriendlyCaravanDone"])
                 {
                     questCont.FriendlyCaravan.friendlyCaravanCounter = questCont.FriendlyCaravan.baseDelayFriendlyCaravan;
                     if (Dg) Log.Message("friendlycaravan counter running " + questCont.FriendlyCaravan.friendlyCaravanCounter);
                     SetSF("TradeCaravan_InitCountDownStarted");
                 }
 
-                if (CheckCanStartVillageGenerationCounter() && !debugFlags["VillageDisabled"])
+                if (CheckCanStartVillageGenerationCounter() && !debugFlags["VillageDone"])
                 {
                     questCont.Village.villageGenerationCounter = questCont.Village.baseDelayVillageGeneration;
                     if (Dg) Log.Message("village gen counter running " + questCont.Village.villageGenerationCounter);
                     SetSF("IntroVillage_InitCountDownStarted");
                 }
 
-                if (CheckCanStartCountDownOnNewShrine() && !debugFlags["ShrinesDisabled"])
+                if (CheckCanStartCountDownOnNewShrine() && !debugFlags["ShrinesDone"])
                 {
                     shrineRevealCounter = baseDelayNextShrineReveal * (countShrinesCompleted + 1f) * 0.5f;
                     if (Dg) Log.Message("Shrine counter running " + shrineRevealCounter);
@@ -183,7 +174,7 @@ namespace CaravanAdventures.CaravanStory
                 }
 
                 // todo add mod setting and ability to disable
-                if (CanDoApocalypse()) questCont.LastJudgment.StartApocalypse(-10, -5);
+                if (CanDoApocalypse()) questCont.LastJudgment.StartApocalypse(-10, -1 / 12);
 
                 ticks = 0;
             }
@@ -254,14 +245,10 @@ namespace CaravanAdventures.CaravanStory
         public int GetShrineMaxiumum => shrineMaximum;
         public List<AbilityDef> GetUnlockedSpells() => unlockedSpells;
         
-        // todo check if we even need TradeCaravan here... village would have to be successfull before
-        // todo added !storyFlags.Any(x => x.Key.StartsWith("TradeCaravan_") && x.Value == false) && to both sides of the condition, check if that works alright
         private bool CheckCanStartCountDownOnNewShrine() =>
-            //!storyFlags.Any(x => x.Key.StartsWith("TradeCaravan_") && x.Value == false) &&
             !storyFlags.Any(x => x.Key.StartsWith("Start_") && x.Value == false)
             && countShrinesCompleted == 0 && !storyFlags.Any(x => x.Key == BuildCurrentShrinePrefix() + "InitCountDownStarted" && x.Value == true)
             || 
-            //!storyFlags.Any(x => x.Key.StartsWith("TradeCaravan_") && x.Value == false) && 
             !storyFlags.Any(x => x.Key.StartsWith("Start_") && x.Value == false)
             && !storyFlags.Any(x => x.Key == BuildCurrentShrinePrefix() + "Completed" && x.Value == true)
             && !storyFlags.Any(x => x.Key == BuildCurrentShrinePrefix() + "InitCountDownStarted" && x.Value == true)
@@ -270,7 +257,10 @@ namespace CaravanAdventures.CaravanStory
         // todo - incomplete
         private bool CheckCanStartFriendlyCaravanCounter() => !storyFlags["TradeCaravan_InitCountDownStarted"];
         private bool CheckCanStartVillageGenerationCounter() => storyFlags["TradeCaravan_DialogFinished"] && !storyFlags["IntroVillage_InitCountDownStarted"];
-        private bool CanDoApocalypse() => storyFlags["Shrine1_Completed"] && !storyFlags[BuildMaxShrinePrefix() + "Completed"] && ModSettings.Get().apocalypseEnabled && !storyFlags["Judgment_ApocalypseStarted"];
+        private bool CanDoApocalypse() => storyFlags["Shrine1_Completed"] 
+            && !storyFlags[BuildMaxShrinePrefix() + "Completed"] 
+            && ModSettings.Get().apocalypseEnabled 
+            && !storyFlags["Judgment_ApocalypseStarted"];
 
         public void ResetStoryVars()
         {

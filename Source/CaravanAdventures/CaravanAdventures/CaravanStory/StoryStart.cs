@@ -48,7 +48,7 @@ namespace CaravanAdventures.CaravanStory
             base.MapComponentTick();
             DrawTreeQuestionMark();
 
-            if (ticks >= 200 && (CompCache.StoryWC.storyFlags["IntroVillage_Finished"] || CompCache.StoryWC.debugFlags["VillageFinished"]))
+            if (ticks >= 200 && (CompCache.StoryWC.storyFlags["IntroVillage_Finished"] || CompCache.StoryWC.debugFlags["VillageDone"]))
             {
                 AddTalkTreeAction();
                 AddTreeWhisper();

@@ -20,8 +20,8 @@
 			<allowInWaterBiome>true</allowInWaterBiome>
 			<!--<countPer10kCellsRange><min>0.12</min><max>0.25</max></countPer10kCellsRange>-->
 			<countPer10kCellsRange>
-				<min>40</min>
-				<max>50</max>
+				<min>20</min>
+				<max>30</max>
 			</countPer10kCellsRange>
 		</genStep>
 	</GenStepDef>

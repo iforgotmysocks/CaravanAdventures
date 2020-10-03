@@ -1,6 +1,6 @@
 
 Textuers: 
-(Portal.png)- Portal in Ancient master shrine by gecko-kobold
+(Portal.png) - Portal in Ancient master shrine by gecko-kobold
 
 
 Sounds:

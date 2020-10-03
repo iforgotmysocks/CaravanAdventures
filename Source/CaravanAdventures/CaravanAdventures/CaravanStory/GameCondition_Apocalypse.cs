@@ -13,8 +13,8 @@ namespace CaravanAdventures.CaravanStory
         private float tempOffset;
         public float TempOffset { get => tempOffset; set => tempOffset = value; }
         private int ticks;
-        private float anualIncrease;
-        public float AnualIncrease { get => anualIncrease; set => anualIncrease = value; }
+        private float increasingAmount;
+        public float InreasingAmount { get => increasingAmount; set => increasingAmount = value; }
         private bool active = false;
 
         public override void ExposeData()
@@ -22,33 +22,41 @@ namespace CaravanAdventures.CaravanStory
             base.ExposeData();
             Scribe_Values.Look(ref tempOffset, "tempOffset", 0);
             Scribe_Values.Look(ref ticks, "ticks");
-            Scribe_Values.Look(ref anualIncrease, "anualIncrease");
+            Scribe_Values.Look(ref increasingAmount, "quarterlyIncrease");
             Scribe_Values.Look(ref active, "active", false);
         }
+
+        public override string TooltipString
+        {
+			get
+			{
+				string text = this.def.LabelCap;
+				if (this.Permanent)
+				{
+					text += "\n" + "Permanent".Translate().CapitalizeFirst();
+				}
+				
+				text += "\n";
+				text = text + "\n" + string.Format(this.Description, Math.Round(tempOffset, 1));
+				return text;
+			}
+		}
 
         public override void GameConditionTick()
         {
             base.GameConditionTick();
 
-            if (ticks >= 60000 * 60)
+            if (ticks >= 60000)
             {
-                TempOffset += AnualIncrease;
+                TempOffset += InreasingAmount;
                 ticks = 0;
             }
             ticks++;
         }
 
-        public override int TransitionTicks
-        {
-            get
-            {
-                return 12000;
-            }
-        }
-
         public override float TemperatureOffset()
         {
-            return GameConditionUtility.LerpInOutValue(this, (float)this.TransitionTicks, TempOffset);
+            return TempOffset;
         }
 
     }
