@@ -79,7 +79,17 @@
     <Compile Include="CaravanAbilities\HediffComp_AncientProtectiveAura.cs" />
     <Compile Include="CaravanAbilities\HediffComp_ConjuredLight.cs" />
     <Compile Include="CaravanAbilities\HediffComp_DrainNature.cs" />
+    <Compile Include="CaravanCamp\CampArea.cs" />
     <Compile Include="CaravanCamp\CampBuilder.cs" />
+    <Compile Include="CaravanCamp\CampHelper.cs" />
+    <Compile Include="CaravanCamp\CenterArea.cs" />
+    <Compile Include="CaravanCamp\EmptyTent.cs" />
+    <Compile Include="CaravanCamp\FoodTent.cs" />
+    <Compile Include="CaravanCamp\MedicalTent.cs" />
+    <Compile Include="CaravanCamp\PrisonerTent.cs" />
+    <Compile Include="CaravanCamp\ProductionTent.cs" />
+    <Compile Include="CaravanCamp\RestTent.cs" />
+    <Compile Include="CaravanCamp\Tent.cs" />
     <Compile Include="CaravanImmersion\ThoughtWorker_TravelCompanions.cs" />
     <Compile Include="CaravanImmersion\TravelCompanionDef.cs" />
     <Compile Include="CaravanImmersion\TravelCompanionDefOf.cs" />

@@ -95,6 +95,7 @@ namespace CaravanAdventures.CaravanStory
 			Find.TickManager.CurTimeSpeed = TimeSpeed.Paused;
 			CompCache.StoryWC.SetSF("Judgment_Completed");
 			ancientShrineMP.lastJudgmentEntrance.Destroy();
+			CameraJumper.TryJump(gifted);
 		}
 
 		public override void PostMapGenerate()

@@ -36,7 +36,7 @@ namespace CaravanAdventures.CaravanImprovements
             LongEventHandler.QueueLongEvent(delegate ()
             {
                 var map = GetOrGenerateMapUtility.GetOrGenerateMap(caravan.Tile, Find.World.info.initialMapSize, null);
-                if (createCamp) CampBuilder.GenerateCamp(caravan, map);
+                if (createCamp) new CampBuilder(caravan, map).GenerateCamp();
             }, "GeneratingMap", true, new Action<Exception>(GameAndMapInitExceptionHandlers.ErrorWhileGeneratingMap), true);
             LongEventHandler.QueueLongEvent(delegate ()
             {

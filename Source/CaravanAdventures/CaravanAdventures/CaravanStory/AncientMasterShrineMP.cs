@@ -147,7 +147,8 @@ namespace CaravanAdventures.CaravanStory
                 gifted.drafter.Drafted = true;
                 Find.TickManager.CurTimeSpeed = TimeSpeed.Paused;
                 lastJudgmentMP.Init(this);
-            }, "GeneratingMapForNewEncounter", false, null, true);
+				CameraJumper.TryJump(gifted);
+			}, "GeneratingMapForNewEncounter", false, null, true);
 		}
 
         private void LetterNoMasterShrine() => Find.LetterStack.ReceiveLetter("MasterShrineVictoryLetterLabel".Translate(), "MasterShrineVictoryLetterMessage".Translate(), LetterDefOf.PositiveEvent, this, null, null, null, null);
