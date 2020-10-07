@@ -14,6 +14,7 @@ namespace CaravanAdventures
     {
         public static IEnumerable<Pawn> ContainedMechs(this Room room, bool onlyAsleep = false)
         {
+            // likely very slow, better find mechs over spawnedPawns
             foreach (var region in room.Regions)
             {
                 foreach (var thing in region.ListerThings.AllThings)

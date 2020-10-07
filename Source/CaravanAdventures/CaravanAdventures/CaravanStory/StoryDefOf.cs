@@ -8,12 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Verse;
 
+#pragma warning disable CS0649
 namespace CaravanAdventures.CaravanStory
 {
     [DefOf]
     class StoryDefOf
     {
-#pragma warning disable CS0649
         public static FactionDef CASacrilegHunters;
         public static IncidentDef CAFriendlyCaravan;
 

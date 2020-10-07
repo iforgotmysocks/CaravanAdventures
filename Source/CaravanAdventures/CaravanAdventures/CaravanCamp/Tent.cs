@@ -13,13 +13,13 @@ namespace CaravanAdventures.CaravanCamp
         public override void Build(Map map)
         {
             var entranceCell = CellRect.EdgeCells.OrderBy(cell => cell.z).FirstOrDefault(cell => cell.x == CellRect.minX + Convert.ToInt32(CellRect.Width / 2));
-            var thing = ThingMaker.MakeThing(ThingDefOf.Door, ThingDefOf.WoodLog);
+            var thing = ThingMaker.MakeThing(RimWorld.ThingDefOf.Door, RimWorld.ThingDefOf.WoodLog);
             GenSpawn.Spawn(thing, entranceCell, map, Rot4.South);
 
             foreach (var edgeCell in CellRect.EdgeCells)
             {
                 if (edgeCell == entranceCell) continue;
-                thing = ThingMaker.MakeThing(ThingDefOf.Wall, ThingDefOf.WoodLog);
+                thing = ThingMaker.MakeThing(RimWorld.ThingDefOf.Wall, RimWorld.ThingDefOf.WoodLog);
                 GenSpawn.Spawn(thing, edgeCell, map);
             }
 

@@ -1,6 +1,7 @@
 ﻿using RimWorld;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,11 +26,6 @@ namespace CaravanAdventures.CaravanCamp
             var otherLover = lover != null ? LovePartnerRelationUtility.ExistingLovePartner(lover) : null;
             var cellSpots = CellRect.Cells.Where(cell => !CellRect.EdgeCells.Contains(cell) && cell.z == CellRect.maxZ - 1).ToArray();
 
-            //Occupants.ForEach(occ =>
-            //{
-            //    if (occ.ownership.OwnedBed != null) occ.ownership.OwnedBed.holdingOwner.Remove(occ);
-            //});
-
             for (int i = 0; i < cellSpots.Length; i++)
             {
                 if (lover != null && i == 0) continue;
@@ -40,8 +36,6 @@ namespace CaravanAdventures.CaravanCamp
                     doubleBed.SetFaction(Faction.OfPlayer);
                     lover.ownership.ClaimBedIfNonMedical((Building_Bed)doubleBed);
                     otherLover.ownership.ClaimBedIfNonMedical((Building_Bed)doubleBed);
-                    //doubleBed.holdingOwner.TryAdd(lover);
-                    //doubleBed.holdingOwner.TryAdd(otherLover);
                 }
                 else
                 {
@@ -52,6 +46,13 @@ namespace CaravanAdventures.CaravanCamp
                     if (pawnInNeedOfBed != null) pawnInNeedOfBed.ownership.ClaimBedIfNonMedical((Building_Bed)bed);
                 }
             }
+
+            var caheaterPos = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 1 && cell.z == CellRect.minZ + 1);
+            var caheater = GenSpawn.Spawn(CampThingDefOf.CAAirConditioningHeater, caheaterPos, map);
+            caheater.SetFaction(Faction.OfPlayer);
+            var refuelComp = caheater.TryGetComp<CompRefuelable>();
+            // todo check if caravan has fuel
+            if (refuelComp != null) refuelComp.Refuel(refuelComp.GetFuelCountToFullyRefuel());
         }
     }
 }

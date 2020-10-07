@@ -12,11 +12,11 @@ namespace CaravanAdventures.CaravanCamp
     {
         public override void Build(Map map)
         {
-            GenSpawn.Spawn(ThingDefOf.Campfire, this.CellRect.CenterCell, map);
+            GenSpawn.Spawn(RimWorld.ThingDefOf.Campfire, this.CellRect.CenterCell, map);
 
             foreach (var cornerCell in CellRect.Corners)
             {
-                var thing = ThingMaker.MakeThing(ThingDefOf.TorchLamp);
+                var thing = ThingMaker.MakeThing(RimWorld.ThingDefOf.TorchLamp);
                 GenSpawn.Spawn(thing, cornerCell, map, Rot4.South);
             }
         }

@@ -38,8 +38,8 @@ namespace CaravanAdventures.CaravanCamp
 		private IntVec3 campCenterSpot;
 
 		// todo move to camp config settings
-		private bool hasMedicalTent = false;
-		private bool hasStorageTent = false;
+		private bool hasMedicalTent = true;
+		private bool hasStorageTent = true;
 		private bool hasProductionTent = false;
 
 		private CellRect coordSystem;
@@ -71,7 +71,7 @@ namespace CaravanAdventures.CaravanCamp
 			campParts.Add(new FoodTent());
 			if (hasMedicalTent) campParts.Add(new MedicalTent());
 			if (hasProductionTent) campParts.Add(new ProductionTent());
-			if (hasStorageTent) campParts.Add(new EmptyTent());
+			if (hasStorageTent) campParts.Add(new StorageTent());
 
 			List<List<Pawn>> colonistRelationShipPairs = GetRelationShipPairs(colonists, hasMedicalTent);
 			colonistRelationShipPairs.ForEach(couple =>
@@ -85,7 +85,7 @@ namespace CaravanAdventures.CaravanCamp
 				.ToList()
 				.ForEach(col =>
 				{
-					var tentWithSpace = campParts?.OfType<RestTent>()?.FirstOrDefault(tent => tent.Occupants.Count < 3);
+					var tentWithSpace = campParts?.OfType<RestTent>()?.FirstOrDefault(tent => tent.Occupants.Count < 3 && !(tent is MedicalTent));
 					if (tentWithSpace == null)
 					{
 						tentWithSpace = new RestTent();
@@ -160,9 +160,24 @@ namespace CaravanAdventures.CaravanCamp
         private CellRect CalculateRect(CampArea part)
         {
 			// todo combine multiple coords to combined rect
-			var newCenterX = campCenterSpot.x + part.Coords.FirstOrDefault().x * (tentSize.x + spacer);
-			var newCenterZ = campCenterSpot.z + part.Coords.FirstOrDefault().z * (tentSize.z + spacer);
-			var rect = CellRect.CenteredOn(new IntVec3(newCenterX, 0, newCenterZ), tentSize.x, tentSize.z);
+			CellRect rect = default;
+			if (part.CoordSize == 1)
+			{
+				var newCenterX = campCenterSpot.x + part.Coords.FirstOrDefault().x * (tentSize.x + spacer);
+				var newCenterZ = campCenterSpot.z + part.Coords.FirstOrDefault().z * (tentSize.z + spacer);
+				rect = CellRect.CenteredOn(new IntVec3(newCenterX, 0, newCenterZ), tentSize.x, tentSize.z);
+			}
+			else
+			{
+				var rects = new List<CellRect>();
+				foreach (var coordinate in part.Coords)
+                {
+					var newCenterX = campCenterSpot.x + coordinate.x * (tentSize.x + spacer);
+					var newCenterZ = campCenterSpot.z + coordinate.z * (tentSize.z + spacer);
+					rects.Add(CellRect.CenteredOn(new IntVec3(newCenterX, 0, newCenterZ), tentSize.x, tentSize.z));
+				}
+				rect = new CellRect(rects.Min(cr => cr.minX), rects.Min(cr => cr.minZ), rects.Max(cr => cr.maxX) - rects.Min(cr => cr.minX) + 1, rects.Max(cr => cr.maxZ) - rects.Min(cr => cr.minZ) + 1);
+			}
 			return rect;
 		}
 
@@ -173,20 +188,46 @@ namespace CaravanAdventures.CaravanCamp
 			if (FindFreeCoords().Count() == 0) coordSystem = coordSystem.ExpandedBy(1);
 			var free = FindFreeCoords().OrderBy(coord => coord.DistanceTo(center));
 
-            // todo find adjacent cells with size of CoordSize
-            //var adjacents = free.Where(c =>
-            //{
-            //	var neighbours = GenRadial.RadialCellsAround(c, 1, false).Where(r => free.Contains(r));
+			if (part.CoordSize > 1)
+			{
+				for (; ;)
+                {
+					foreach (var cell in free)
+					{
+						var cells = GetNeigbourCells(cell, free, part.CoordSize);
+						if (cells != null) placementCells = cells;
+						break;
+					}
+					if (placementCells.Count != 0) break;
+					coordSystem = coordSystem.ExpandedBy(1);
+					free = FindFreeCoords().OrderBy(coord => coord.DistanceTo(center));
+				}
+			}
+			else
+            {
+				var selected = free.FirstOrDefault();
+				placementCells.Add(selected);
+			}
 
-            //		return true;
-            //});
-
-			var selected = free.FirstOrDefault();
-			Log.Message($"Selected: {selected.x} {selected.z} for {part.GetType()}");
-
-			placementCells.Add(selected);
+			placementCells.ForEach(selected => Log.Message($"Selected: {selected.x} {selected.z} for {part.GetType()}"));
+		
 			return placementCells;
 		}
+
+		public List<IntVec3> GetNeigbourCells(IntVec3 cell, IOrderedEnumerable<IntVec3> source, int limit = 0)
+        {
+			var result = new List<IntVec3>() { cell };
+
+			for(; ; )
+            {
+				var neighbour = source.FirstOrDefault(cur => result.Any(res => cur.AdjacentToCardinal(res) && !result.Contains(cur)));
+				if (neighbour == null || limit != 0 && result.Count == limit) break;
+				result.Add(neighbour);
+			}
+
+			if (limit != 0 && result.Count < limit) return null;
+			return result;
+        }
 
         private IEnumerable<IntVec3> FindFreeCoords()
         {
@@ -231,10 +272,15 @@ namespace CaravanAdventures.CaravanCamp
 				part.Build(map);
 			}
 
-			foreach (var c in campSiteRect.EdgeCells)
+			//foreach (var c in campSiteRect.EdgeCells)
+   //         {
+   //             GenSpawn.Spawn(RimWorld.ThingDefOf.TorchLamp, c, map);
+   //         }
+
+            for (int i = 0; i < campSiteRect.EdgeCells.Count(); i++)
             {
-				GenSpawn.Spawn(ThingDefOf.TorchLamp, c, map);
-            }
+				if (i % 5 == 0) GenSpawn.Spawn(RimWorld.ThingDefOf.TorchLamp, campSiteRect.EdgeCells.ToArray()[i], map);
+			}
 
             Current.ProgramState = stateBackup;
         }
