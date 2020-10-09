@@ -12,7 +12,7 @@ namespace CaravanAdventures.CaravanCamp
     {
         public MedicalTent()
         {
-            this.CoordSize = 1;
+            this.CoordSize = 2;
         }
 
         public override void Build(Map map)

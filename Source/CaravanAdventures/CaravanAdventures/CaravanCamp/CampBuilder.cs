@@ -152,14 +152,13 @@ namespace CaravanAdventures.CaravanCamp
 			var height = campParts.Max(p => p.CellRect.maxZ) - campParts.Min(p => p.CellRect.minZ);
 			return new CellRect(campParts.Min(p => p.CellRect.minX) - 1 - spacer, 
 				campParts.Min(p => p.CellRect.minZ) - 1 - spacer, 
-				// todo: +1 for center valid?
 				width + (1 + spacer) * 2 + 1, 
 				height + (1 + spacer) * 2 + 1);
         }
 
         private CellRect CalculateRect(CampArea part)
         {
-			// todo combine multiple coords to combined rect
+			// todo merge
 			CellRect rect = default;
 			if (part.CoordSize == 1)
 			{
@@ -187,14 +186,14 @@ namespace CaravanAdventures.CaravanCamp
 			var center = new IntVec3(0, 0, 0);
 			if (FindFreeCoords().Count() == 0) coordSystem = coordSystem.ExpandedBy(1);
 			var free = FindFreeCoords().OrderBy(coord => coord.DistanceTo(center));
-
+			// todo add forced sides to the x and y selection in GetNeighbourCells for specific building types
 			if (part.CoordSize > 1)
 			{
 				for (; ;)
                 {
 					foreach (var cell in free)
 					{
-						var cells = GetNeigbourCells(cell, free, part.CoordSize);
+						var cells = GetNeigbourCells(cell, free, part.CoordSize); // add part.direction
 						if (cells != null) placementCells = cells;
 						break;
 					}
@@ -217,11 +216,10 @@ namespace CaravanAdventures.CaravanCamp
 		public List<IntVec3> GetNeigbourCells(IntVec3 cell, IOrderedEnumerable<IntVec3> source, int limit = 0)
         {
 			var result = new List<IntVec3>() { cell };
-
 			for(; ; )
             {
-				var neighbour = source.FirstOrDefault(cur => result.Any(res => cur.AdjacentToCardinal(res) && !result.Contains(cur)));
-				if (neighbour == null || limit != 0 && result.Count == limit) break;
+				var neighbour = source.FirstOrDefault(cur => result.Any(res => cur.AdjacentToCardinal(res) && !result.Contains(cur)) && result.All(res =>(cur.x == res.x || cur.z == res.z)));
+				if (neighbour == default || limit != 0 && result.Count == limit) break;
 				result.Add(neighbour);
 			}
 
@@ -277,7 +275,7 @@ namespace CaravanAdventures.CaravanCamp
    //             GenSpawn.Spawn(RimWorld.ThingDefOf.TorchLamp, c, map);
    //         }
 
-            for (int i = 0; i < campSiteRect.EdgeCells.Count(); i++)
+            for (int i = 0; i < campSiteRect.EdgeCells.Count() - 4; i++)
             {
 				if (i % 5 == 0) GenSpawn.Spawn(RimWorld.ThingDefOf.TorchLamp, campSiteRect.EdgeCells.ToArray()[i], map);
 			}
