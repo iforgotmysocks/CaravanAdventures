@@ -13,6 +13,7 @@ namespace CaravanAdventures.CaravanCamp
         public MedicalTent()
         {
             this.CoordSize = 2;
+            ForcedTentDirection = ForcedTentDirection.Horizontal;
         }
 
         public override void Build(Map map)

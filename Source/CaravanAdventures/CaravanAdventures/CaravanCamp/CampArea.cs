@@ -7,6 +7,7 @@ using Verse;
 
 namespace CaravanAdventures.CaravanCamp
 {
+    public enum ForcedTentDirection { Horizontal, Vertical, None }
     abstract class CampArea
     {
         public int CoordSize { get; set; }
@@ -15,6 +16,7 @@ namespace CaravanAdventures.CaravanCamp
         public int Width { get; set; }
         public int Height { get; set; }
         public CellRect CellRect { get; set; }
+        public ForcedTentDirection ForcedTentDirection { get; set; }
 
         public CampArea()
         {
@@ -22,6 +24,7 @@ namespace CaravanAdventures.CaravanCamp
             Height = 5;
             CoordSize = 1;
             Coords = new List<IntVec3>();
+            ForcedTentDirection = ForcedTentDirection.None;
         }
 
         public abstract void Build(Map map);

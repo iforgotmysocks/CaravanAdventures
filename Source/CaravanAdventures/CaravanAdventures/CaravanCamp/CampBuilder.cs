@@ -69,6 +69,7 @@ namespace CaravanAdventures.CaravanCamp
 
 			campParts.Add(new CampCenter());
 			campParts.Add(new FoodTent());
+			// todo change to configurable number including auto (-1)
 			if (hasMedicalTent) campParts.Add(new MedicalTent());
 			if (hasProductionTent) campParts.Add(new ProductionTent());
 			if (hasStorageTent) campParts.Add(new StorageTent());
@@ -142,6 +143,7 @@ namespace CaravanAdventures.CaravanCamp
 				if (!terrain.affordances.Any(x => (new[] { TerrainAffordanceDefOf.Bridgeable, TerrainAffordanceDefOf.Diggable, TerrainAffordanceDefOf.Light }).Contains(x))) map.terrainGrid.SetTerrain(c, TerrainDefOf.Gravel);
 				else if (terrain.affordances.Contains(TerrainAffordanceDefOf.Bridgeable) && !terrain.affordances.Contains(TerrainAffordanceDefOf.Light)) map.terrainGrid.SetTerrain(c, TerrainDefOf.Bridge);
 			}
+			campSiteRect.ExpandedBy(1).EdgeCells.ToList().ForEach(cell => map.fogGrid.Unfog(cell));
 
 			Current.ProgramState = stateBackup;
 		}
@@ -175,7 +177,10 @@ namespace CaravanAdventures.CaravanCamp
 					var newCenterZ = campCenterSpot.z + coordinate.z * (tentSize.z + spacer);
 					rects.Add(CellRect.CenteredOn(new IntVec3(newCenterX, 0, newCenterZ), tentSize.x, tentSize.z));
 				}
-				rect = new CellRect(rects.Min(cr => cr.minX), rects.Min(cr => cr.minZ), rects.Max(cr => cr.maxX) - rects.Min(cr => cr.minX) + 1, rects.Max(cr => cr.maxZ) - rects.Min(cr => cr.minZ) + 1);
+				rect = new CellRect(rects.Min(cr => cr.minX), 
+					rects.Min(cr => cr.minZ), 
+					rects.Max(cr => cr.maxX) - rects.Min(cr => cr.minX) + 1, 
+					rects.Max(cr => cr.maxZ) - rects.Min(cr => cr.minZ) + 1);
 			}
 			return rect;
 		}
@@ -193,7 +198,7 @@ namespace CaravanAdventures.CaravanCamp
                 {
 					foreach (var cell in free)
 					{
-						var cells = GetNeigbourCells(cell, free, part.CoordSize); // add part.direction
+						var cells = GetNeigbourCells(cell, free, part.CoordSize, part.ForcedTentDirection); // add part.direction
 						if (cells != null) placementCells = cells;
 						break;
 					}
@@ -209,16 +214,20 @@ namespace CaravanAdventures.CaravanCamp
 			}
 
 			placementCells.ForEach(selected => Log.Message($"Selected: {selected.x} {selected.z} for {part.GetType()}"));
-		
 			return placementCells;
 		}
 
-		public List<IntVec3> GetNeigbourCells(IntVec3 cell, IOrderedEnumerable<IntVec3> source, int limit = 0)
+		public List<IntVec3> GetNeigbourCells(IntVec3 cell, IOrderedEnumerable<IntVec3> source, int limit = 0, ForcedTentDirection tentDirection = ForcedTentDirection.None)
         {
 			var result = new List<IntVec3>() { cell };
-			for(; ; )
+			for(; ;)
             {
-				var neighbour = source.FirstOrDefault(cur => result.Any(res => cur.AdjacentToCardinal(res) && !result.Contains(cur)) && result.All(res =>(cur.x == res.x || cur.z == res.z)));
+				var neighbour = source.FirstOrDefault(cur => 
+					result.Any(res => cur.AdjacentToCardinal(res) && !result.Contains(cur)) 
+					&& result.All(res => tentDirection == ForcedTentDirection.None 
+						? (cur.x == res.x || cur.z == res.z) 
+						: tentDirection == ForcedTentDirection.Horizontal 
+						? cur.z == res.z : cur.x == res.x));
 				if (neighbour == default || limit != 0 && result.Count == limit) break;
 				result.Add(neighbour);
 			}
@@ -270,10 +279,10 @@ namespace CaravanAdventures.CaravanCamp
 				part.Build(map);
 			}
 
-			//foreach (var c in campSiteRect.EdgeCells)
-   //         {
-   //             GenSpawn.Spawn(RimWorld.ThingDefOf.TorchLamp, c, map);
-   //         }
+            //foreach (var c in campSiteRect.EdgeCells)
+            //{
+            //    GenSpawn.Spawn(RimWorld.ThingDefOf.TorchLamp, c, map);
+            //}
 
             for (int i = 0; i < campSiteRect.EdgeCells.Count() - 4; i++)
             {
