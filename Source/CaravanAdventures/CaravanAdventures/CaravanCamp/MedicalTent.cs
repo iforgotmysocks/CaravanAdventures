@@ -21,7 +21,7 @@ namespace CaravanAdventures.CaravanCamp
             base.Build(map);
             // todo maybe just add a bed list to parent
             var beds = CellRect.Cells.Select(cell => cell.GetFirstThing<Building_Bed>(map));
-            foreach(var bed in beds)
+            foreach (var bed in beds)
             {
                 if (bed == null) continue;
                 bed.Medical = true;

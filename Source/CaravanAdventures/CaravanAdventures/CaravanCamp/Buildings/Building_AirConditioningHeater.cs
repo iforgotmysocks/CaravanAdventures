@@ -10,44 +10,44 @@ using UnityEngine;
 namespace CaravanAdventures.CaravanCamp.Buildings
 {
     class Building_AirConditioningHeater : Building_TempControl
-	{
-		public override void TickRare()
-		{
-			if (this.compPowerTrader.PowerOn)
-			{
-				float ambientTemperature = base.AmbientTemperature;
-				float num;
-				if (ambientTemperature < this.compTempControl.targetTemperature)
-				{
-					num = 1f;
-				}
-				else if (ambientTemperature > this.compTempControl.targetTemperature)
-				{
-					num = -1f;
-				}
-				else
-				{
-					num = 0;
-				}
-				float energyLimit = this.compTempControl.Props.energyPerSecond * num * 4.16666651f;
-				float num2 = GenTemperature.ControlTemperatureTempChange(base.Position, base.Map, energyLimit, this.compTempControl.targetTemperature);
-				bool flag = !Mathf.Approximately(num2, 0f);
-				Log.Message($"elmit: {energyLimit} num2: {num2} flag: {flag}");
-				CompProperties_Power props = this.compPowerTrader.Props;
-				var highPower = this.GetRoomGroup().Temperature < 20 || this.GetRoomGroup().Temperature > 22 ? true : false;
-				if (flag)
-				{
-					this.GetRoomGroup().Temperature += num2;
-					this.compPowerTrader.PowerOutput = -props.basePowerConsumption;
-				}
-				else
-				{
-					this.compPowerTrader.PowerOutput = -props.basePowerConsumption * this.compTempControl.Props.lowPowerConsumptionFactor;
-				}
-				
-				this.compTempControl.operatingAtHighPower = flag;
-			}
-		}
+    {
+        public override void TickRare()
+        {
+            if (this.compPowerTrader.PowerOn)
+            {
+                float ambientTemperature = base.AmbientTemperature;
+                float num;
+                if (ambientTemperature < this.compTempControl.targetTemperature)
+                {
+                    num = 1f;
+                }
+                else if (ambientTemperature > this.compTempControl.targetTemperature)
+                {
+                    num = -1f;
+                }
+                else
+                {
+                    num = 0;
+                }
+                float energyLimit = this.compTempControl.Props.energyPerSecond * num * 4.16666651f;
+                float num2 = GenTemperature.ControlTemperatureTempChange(base.Position, base.Map, energyLimit, this.compTempControl.targetTemperature);
+                bool flag = !Mathf.Approximately(num2, 0f);
+                Log.Message($"elmit: {energyLimit} num2: {num2} flag: {flag}");
+                CompProperties_Power props = this.compPowerTrader.Props;
+                var highPower = this.GetRoomGroup().Temperature < 20 || this.GetRoomGroup().Temperature > 22 ? true : false;
+                if (flag)
+                {
+                    this.GetRoomGroup().Temperature += num2;
+                    this.compPowerTrader.PowerOutput = -props.basePowerConsumption;
+                }
+                else
+                {
+                    this.compPowerTrader.PowerOutput = -props.basePowerConsumption * this.compTempControl.Props.lowPowerConsumptionFactor;
+                }
 
-	}
+                this.compTempControl.operatingAtHighPower = flag;
+            }
+        }
+
+    }
 }
