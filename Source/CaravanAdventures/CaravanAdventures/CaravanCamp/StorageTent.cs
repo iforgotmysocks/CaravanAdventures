@@ -1,4 +1,6 @@
-﻿using System;
+﻿using RimWorld;
+using RimWorld.Planet;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +9,7 @@ using Verse;
 
 namespace CaravanAdventures.CaravanCamp
 {
-    class StorageTent : Tent
+    class StorageTent : Tent, IZoneTent
     {
         public StorageTent()
         {
@@ -17,6 +19,20 @@ namespace CaravanAdventures.CaravanCamp
         public override void Build(Map map)
         {
             base.Build(map);
+        }
+
+        public virtual void CreateZone(Map map)
+        {
+            var zone = new Zone_Stockpile();
+            zone.settings.SetFromPreset(StorageSettingsPreset.DefaultStockpile);
+            Log.Message($"settings null {zone?.settings == null} filter null {zone?.settings?.filter == null}");
+            CellRect.Cells.Where(cell => !CellRect.EdgeCells.Contains(cell)).ToList().ForEach(cell => zone.AddCell(cell));
+            zone.zoneManager.RegisterZone(zone);
+        }
+
+        public void ApplyInventory(Map map, Caravan caravan)
+        {
+
         }
     }
 }

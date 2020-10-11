@@ -1,4 +1,5 @@
 ﻿using RimWorld;
+using RimWorld.Planet;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using Verse;
 
 namespace CaravanAdventures.CaravanCamp
 {
-    class FoodTent : Tent
+    class FoodTent : Tent, IZoneTent
     {
         public FoodTent()
         {
@@ -24,6 +25,24 @@ namespace CaravanAdventures.CaravanCamp
             var refuelComp = cacooler.TryGetComp<CompRefuelable>();
             // todo check if caravan has fuel
             if (refuelComp != null) refuelComp.Refuel(refuelComp.GetFuelCountToFullyRefuel());
+        }
+
+        public virtual void CreateZone(Map map)
+        {
+            var zone = new Zone_Stockpile();
+            zone.settings.SetFromPreset(StorageSettingsPreset.DefaultStockpile);
+            zone.settings.filter = new ThingFilter();
+            zone.settings.filter.SetAllow(ThingCategoryDefOf.Foods, true);
+            zone.settings.Priority = StoragePriority.Preferred;
+            // todo translate
+            zone.label = "Food".Translate();
+            CellRect.Cells.Where(cell => !CellRect.EdgeCells.Contains(cell)).ToList().ForEach(cell => zone.AddCell(cell));
+            zone.zoneManager.RegisterZone(zone);
+        }
+
+        public void ApplyInventory(Map map, Caravan caravan)
+        {
+
         }
     }
 }

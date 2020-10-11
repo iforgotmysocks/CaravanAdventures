@@ -26,6 +26,18 @@ namespace CaravanAdventures.CaravanCamp
                 if (bed == null) continue;
                 bed.Medical = true;
             }
+            var cellSpotShelf = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 1 && cell.z == CellRect.maxZ - 2);
+            var cellRemoveBed = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 2 && cell.z == CellRect.maxZ - 2);
+            if (CoordSize > 1) map.thingGrid.ThingAt(cellRemoveBed, ThingCategory.Building).Destroy();
+            map.thingGrid.ThingAt(cellSpotShelf, ThingCategory.Building).Destroy();
+
+            var shelf = (Building_Storage)ThingMaker.MakeThing(ThingDef.Named("Shelf"), ThingDefOf.WoodLog);
+            shelf.SetFaction(Faction.OfPlayer);
+            shelf.GetStoreSettings().filter = new ThingFilter();
+            shelf.GetStoreSettings().filter.SetAllow(ThingDefOf.MedicineHerbal, true);
+            shelf.GetStoreSettings().filter.SetAllow(ThingDefOf.MedicineIndustrial, true);
+            shelf.GetStoreSettings().filter.SetAllow(ThingDefOf.MedicineUltratech, true);
+            GenSpawn.Spawn(shelf, cellSpotShelf, map, Rot4.West, WipeMode.Vanish);
         }
     }
 }

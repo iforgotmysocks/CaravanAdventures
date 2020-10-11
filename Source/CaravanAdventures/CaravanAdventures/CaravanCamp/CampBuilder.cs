@@ -68,17 +68,25 @@ namespace CaravanAdventures.CaravanCamp
             var stateBackup = Current.ProgramState;
             Current.ProgramState = ProgramState.MapInitializing;
 
+            CalculateTentSizes();
             CalculateTentNumbersAndAssignPawnsToTents();
             AssignCampLayout();
             TransformTerrain();
             GenerateBuildings();
             UpdateAreas();
+            ApplyZonesAndInventory();
 
             Current.ProgramState = stateBackup;
             return true;
         }
 
-        public void CalculateTentNumbersAndAssignPawnsToTents()
+        protected void CalculateTentSizes()
+        {
+            // based on colonists, settings and inventory
+            // TODO!
+        }
+
+        protected void CalculateTentNumbersAndAssignPawnsToTents()
         {
             var colonists = caravan.PawnsListForReading.Where(col => col.IsFreeColonist).ToList();
             var sickColonists = caravan.PawnsListForReading.Where(col => col.IsFreeColonist && col.health.hediffSet.HasNaturallyHealingInjury()).ToList();
@@ -137,7 +145,7 @@ namespace CaravanAdventures.CaravanCamp
                 });
         }
 
-        private void AssignCampLayout()
+        protected void AssignCampLayout()
         {
             // todo new steps 
             // -> Create base rect around center spot
@@ -168,7 +176,7 @@ namespace CaravanAdventures.CaravanCamp
             campSiteRect = CalcCampSiteRect();
         }
 
-        private void TransformTerrain()
+        protected void TransformTerrain()
         {
             foreach (var c in campSiteRect.Cells)
             {
@@ -182,7 +190,7 @@ namespace CaravanAdventures.CaravanCamp
             campSiteRect.ExpandedBy(1).EdgeCells.ToList().ForEach(cell => map.fogGrid.Unfog(cell));
         }
 
-        private CellRect CalcCampSiteRect()
+        protected CellRect CalcCampSiteRect()
         {
             var width = campParts.Max(p => p.CellRect.maxX) - campParts.Min(p => p.CellRect.minX);
             var height = campParts.Max(p => p.CellRect.maxZ) - campParts.Min(p => p.CellRect.minZ);
@@ -192,7 +200,7 @@ namespace CaravanAdventures.CaravanCamp
                 height + (1 + spacer) * 2 + 1);
         }
 
-        private CellRect CalculateRect(CampArea part)
+        protected CellRect CalculateRect(CampArea part)
         {
             // todo merge
             CellRect rect = default;
@@ -219,7 +227,7 @@ namespace CaravanAdventures.CaravanCamp
             return rect;
         }
 
-        private List<IntVec3> FindPlacement(CampArea part)
+        protected List<IntVec3> FindPlacement(CampArea part)
         {
             var placementCells = new List<IntVec3>();
             var center = new IntVec3(0, 0, 0);
@@ -251,7 +259,7 @@ namespace CaravanAdventures.CaravanCamp
             return placementCells;
         }
 
-        public List<IntVec3> GetNeigbourCells(IntVec3 cell, IOrderedEnumerable<IntVec3> source, int limit = 0, ForcedTentDirection tentDirection = ForcedTentDirection.None)
+        protected List<IntVec3> GetNeigbourCells(IntVec3 cell, IOrderedEnumerable<IntVec3> source, int limit = 0, ForcedTentDirection tentDirection = ForcedTentDirection.None)
         {
             var result = new List<IntVec3>() { cell };
             for (; ; )
@@ -270,7 +278,7 @@ namespace CaravanAdventures.CaravanCamp
             return result;
         }
 
-        private IEnumerable<IntVec3> FindFreeCoords()
+        protected IEnumerable<IntVec3> FindFreeCoords()
         {
             for (int z = coordSystem.Max(cell => cell.z); z >= coordSystem.Min(cell => cell.z); z--)
             {
@@ -281,7 +289,7 @@ namespace CaravanAdventures.CaravanCamp
             }
         }
 
-        private List<List<Pawn>> GetRelationShipPairs(List<Pawn> colonists)
+        protected List<List<Pawn>> GetRelationShipPairs(List<Pawn> colonists)
         {
             var pairList = new List<List<Pawn>>();
             var prodColList = colonists.ToList();
@@ -302,7 +310,7 @@ namespace CaravanAdventures.CaravanCamp
             return pairList;
         }
 
-        public void GenerateBuildings()
+        protected void GenerateBuildings()
         {
             foreach (var part in campParts)
             {
@@ -321,7 +329,7 @@ namespace CaravanAdventures.CaravanCamp
 
         }
 
-        private void UpdateAreas()
+        protected void UpdateAreas()
         {
             //map.areaManager.AreaManagerUpdate();
             //todo add to settings
@@ -330,6 +338,15 @@ namespace CaravanAdventures.CaravanCamp
                 map.areaManager.Home[cell] = true;
                 // todo add to settings
                 if (!cell.Roofed(map)) map.areaManager.SnowClear[cell] = true;
+            }
+        }
+
+        protected void ApplyZonesAndInventory()
+        {
+            foreach (var zoneTent in campParts.OfType<IZoneTent>())
+            {
+                zoneTent.CreateZone(map);
+                zoneTent.ApplyInventory(map, caravan);
             }
         }
 
