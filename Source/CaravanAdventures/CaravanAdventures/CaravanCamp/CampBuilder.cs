@@ -12,14 +12,24 @@ using Verse;
 namespace CaravanAdventures.CaravanCamp
 {
     // todos
+    // build costs: 
+    // -- fixed amount per colonists
+    // -- high quality camping supplies for hq camp
+    // -- normal lether and stuff low lq camp
+    // -- make deconstructing items not give anything
+    // -- resources are gained back by dismanteling the camp via the option of the camp fire
+
     // Find fabric and leather used to build buildings
     // find rect in middle of map large enough to fit tents for x pawns
     // build bridges on non compatible ground
     // generate buildings 
     // create small versions of generators etc 
-    // buildings:
-    // - small generator
-    // - small one way climataion unit (a/c & heat, requires some fuel)
+
+    // zones
+    // -- home zone
+    // -- food zone
+    // -- medicine shelfs -> rework medicine tent design
+    // -- storage zones
 
     // functionality: 
     // - add right click option to campfire that turns all camping stuff back into resources
@@ -33,14 +43,14 @@ namespace CaravanAdventures.CaravanCamp
 
         private IntVec3 tentSize = new IntVec3(5, 0, 5);
         //private IntVec3 campSize = new IntVec3(21, 0, 21);
-        private int spacer = 1;
+        private int spacer = 2;
         private List<CampArea> campParts;
         private IntVec3 campCenterSpot;
 
         // todo move to camp config settings
         private bool hasMedicalTent = true;
         private bool hasStorageTent = true;
-        private bool hasProductionTent = false;
+        private bool hasProductionTent = true;
 
         private CellRect coordSystem;
         private CellRect campSiteRect;
@@ -55,29 +65,60 @@ namespace CaravanAdventures.CaravanCamp
 
         public bool GenerateCamp(bool tribal = false)
         {
+            var stateBackup = Current.ProgramState;
+            Current.ProgramState = ProgramState.MapInitializing;
+
             CalculateTentNumbersAndAssignPawnsToTents();
             AssignCampLayout();
             TransformTerrain();
             GenerateBuildings();
+            UpdateAreas();
+
+            Current.ProgramState = stateBackup;
             return true;
         }
 
         public void CalculateTentNumbersAndAssignPawnsToTents()
         {
             var colonists = caravan.PawnsListForReading.Where(col => col.IsFreeColonist).ToList();
+            var sickColonists = caravan.PawnsListForReading.Where(col => col.IsFreeColonist && col.health.hediffSet.HasNaturallyHealingInjury()).ToList();
             var prisoners = caravan.PawnsListForReading.Where(col => col.IsPrisoner).ToList();
 
             campParts.Add(new CampCenter());
             campParts.Add(new FoodTent());
             // todo change to configurable number including auto (-1)
-            if (hasMedicalTent) campParts.Add(new MedicalTent());
             if (hasProductionTent) campParts.Add(new ProductionTent());
             if (hasStorageTent) campParts.Add(new StorageTent());
 
-            List<List<Pawn>> colonistRelationShipPairs = GetRelationShipPairs(colonists, hasMedicalTent);
+            List<List<Pawn>> colonistRelationShipPairs = GetRelationShipPairs(colonists);
             colonistRelationShipPairs.ForEach(couple =>
             {
                 campParts.Add(new RestTent() { Occupants = new List<Pawn>() { couple[0], couple[1] } });
+            });
+
+            if (hasMedicalTent)
+            {
+                sickColonists.ForEach(sick =>
+                {
+                    var tentWithSpace = campParts?.OfType<MedicalTent>()?.FirstOrDefault(tent => tent.Occupants.Count < (tentSize.x * tent.CoordSize - 2));
+                    if (tentWithSpace == null)
+                    {
+                        tentWithSpace = new MedicalTent();
+                        campParts.Add(tentWithSpace);
+                    }
+                    tentWithSpace.Occupants.Add(sick);
+                });
+            }
+
+            prisoners.ForEach(pris =>
+            {
+                var tentWithSpace = campParts?.OfType<PrisonerTent>()?.FirstOrDefault(tent => tent.Occupants.Count < (tentSize.x * tent.CoordSize - 2));
+                if (tentWithSpace == null)
+                {
+                    tentWithSpace = new PrisonerTent();
+                    campParts.Add(tentWithSpace);
+                }
+                tentWithSpace.Occupants.Add(pris);
             });
 
             colonists.Where(col => !colonistRelationShipPairs
@@ -86,7 +127,7 @@ namespace CaravanAdventures.CaravanCamp
                 .ToList()
                 .ForEach(col =>
                 {
-                    var tentWithSpace = campParts?.OfType<RestTent>()?.FirstOrDefault(tent => tent.Occupants.Count < 3 && !(tent is MedicalTent));
+                    var tentWithSpace = campParts?.OfType<RestTent>()?.FirstOrDefault(tent => tent.Occupants.Count < (tentSize.x * tent.CoordSize - 2) && !(tent is MedicalTent) && !(tent is PrisonerTent));
                     if (tentWithSpace == null)
                     {
                         tentWithSpace = new RestTent();
@@ -94,8 +135,6 @@ namespace CaravanAdventures.CaravanCamp
                     }
                     tentWithSpace.Occupants.Add(col);
                 });
-
-            // todo prisoners
         }
 
         private void AssignCampLayout()
@@ -131,9 +170,6 @@ namespace CaravanAdventures.CaravanCamp
 
         private void TransformTerrain()
         {
-            var stateBackup = Current.ProgramState;
-            Current.ProgramState = ProgramState.MapInitializing;
-
             foreach (var c in campSiteRect.Cells)
             {
                 foreach (var thing in map.thingGrid.ThingsListAt(c).Reverse<Thing>()) thing.Destroy();
@@ -144,8 +180,6 @@ namespace CaravanAdventures.CaravanCamp
                 else if (terrain.affordances.Contains(TerrainAffordanceDefOf.Bridgeable) && !terrain.affordances.Contains(TerrainAffordanceDefOf.Light)) map.terrainGrid.SetTerrain(c, TerrainDefOf.Bridge);
             }
             campSiteRect.ExpandedBy(1).EdgeCells.ToList().ForEach(cell => map.fogGrid.Unfog(cell));
-
-            Current.ProgramState = stateBackup;
         }
 
         private CellRect CalcCampSiteRect()
@@ -247,14 +281,13 @@ namespace CaravanAdventures.CaravanCamp
             }
         }
 
-        private List<List<Pawn>> GetRelationShipPairs(List<Pawn> colonists, bool skipInjured)
+        private List<List<Pawn>> GetRelationShipPairs(List<Pawn> colonists)
         {
             var pairList = new List<List<Pawn>>();
             var prodColList = colonists.ToList();
             for (; ; )
             {
-                var selCol = prodColList.FirstOrDefault(col => (skipInjured ? !col.health.hediffSet.HasNaturallyHealingInjury() : true)
-                    && prodColList.Any(otherCol => otherCol != col && (new[] {
+                var selCol = prodColList.FirstOrDefault(col => prodColList.Any(otherCol => otherCol != col && (new[] {
                         col.relations.GetFirstDirectRelationPawn(PawnRelationDefOf.Lover),
                         col.relations.GetFirstDirectRelationPawn(PawnRelationDefOf.Spouse),
                         col.relations.GetFirstDirectRelationPawn(PawnRelationDefOf.Fiance)}).Contains(otherCol)));
@@ -271,9 +304,6 @@ namespace CaravanAdventures.CaravanCamp
 
         public void GenerateBuildings()
         {
-            var stateBackup = Current.ProgramState;
-            Current.ProgramState = ProgramState.MapInitializing;
-
             foreach (var part in campParts)
             {
                 part.Build(map);
@@ -289,14 +319,19 @@ namespace CaravanAdventures.CaravanCamp
                 if (i % 5 == 0) GenSpawn.Spawn(RimWorld.ThingDefOf.TorchLamp, campSiteRect.EdgeCells.ToArray()[i], map);
             }
 
-            Current.ProgramState = stateBackup;
         }
 
-        public void GenerateFoodTent()
+        private void UpdateAreas()
         {
-            // todo add eatable foods and when non tribal, cool
+            //map.areaManager.AreaManagerUpdate();
+            //todo add to settings
+            foreach (var cell in campSiteRect)
+            {
+                map.areaManager.Home[cell] = true;
+                // todo add to settings
+                if (!cell.Roofed(map)) map.areaManager.SnowClear[cell] = true;
+            }
         }
-
 
     }
 }

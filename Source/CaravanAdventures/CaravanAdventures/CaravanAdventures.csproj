@@ -83,6 +83,7 @@
     <Compile Include="CaravanCamp\CampArea.cs" />
     <Compile Include="CaravanCamp\CampBuilder.cs" />
     <Compile Include="CaravanCamp\CampCenter.cs" />
+    <Compile Include="CaravanCamp\CampDefOf.cs" />
     <Compile Include="CaravanCamp\CampHelper.cs" />
     <Compile Include="CaravanCamp\CampThingDefOf.cs" />
     <Compile Include="CaravanCamp\StorageTent.cs" />

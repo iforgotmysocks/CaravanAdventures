@@ -11,7 +11,7 @@ namespace CaravanAdventures.CaravanCamp
     {
         public StorageTent()
         {
-            this.CoordSize = 4;
+            this.CoordSize = 2;
         }
 
         public override void Build(Map map)

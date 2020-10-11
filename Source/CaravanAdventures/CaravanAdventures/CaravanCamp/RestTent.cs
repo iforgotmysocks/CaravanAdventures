@@ -15,6 +15,7 @@ namespace CaravanAdventures.CaravanCamp
 
         public RestTent()
         {
+            ForcedTentDirection = ForcedTentDirection.Horizontal;
             Occupants = new List<Pawn>();
         }
 

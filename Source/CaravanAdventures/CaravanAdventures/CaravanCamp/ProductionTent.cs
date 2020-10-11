@@ -8,5 +8,9 @@ namespace CaravanAdventures.CaravanCamp
 {
     class ProductionTent : Tent
     {
+        public ProductionTent()
+        {
+            CoordSize = 3;
+        }
     }
 }
