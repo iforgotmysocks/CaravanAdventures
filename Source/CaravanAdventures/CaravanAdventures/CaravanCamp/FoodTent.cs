@@ -29,6 +29,7 @@ namespace CaravanAdventures.CaravanCamp
 
         public virtual void CreateZone(Map map)
         {
+            
             var zone = new Zone_Stockpile();
             zone.settings.SetFromPreset(StorageSettingsPreset.DefaultStockpile);
             zone.settings.filter = new ThingFilter();
@@ -36,8 +37,17 @@ namespace CaravanAdventures.CaravanCamp
             zone.settings.Priority = StoragePriority.Preferred;
             // todo translate
             zone.label = "Food".Translate();
-            CellRect.Cells.Where(cell => !CellRect.EdgeCells.Contains(cell)).ToList().ForEach(cell => zone.AddCell(cell));
-            zone.zoneManager.RegisterZone(zone);
+            CellRect.Cells.Where(cell => cell != null && !CellRect.EdgeCells.Contains(cell)).ToList().ForEach(cell => zone.AddCell(cell));
+            map.zoneManager.RegisterZone(zone);
+            
+
+            //var zone = new Zone_Stockpile(StorageSettingsPreset.DefaultStockpile, null);
+            //zone.settings.filter = new ThingFilter();
+            //zone.settings.filter.SetAllow(ThingCategoryDefOf.Foods, true);
+            //zone.settings.Priority = StoragePriority.Preferred;
+            //zone.label = "Food".Translate();
+            //CellRect.Cells.Where(cell => cell != null && !CellRect.EdgeCells.Contains(cell)).ToList().ForEach(cell => zone.AddCell(cell));
+            //map.zoneManager.RegisterZone(zone);
         }
 
         public void ApplyInventory(Map map, Caravan caravan)

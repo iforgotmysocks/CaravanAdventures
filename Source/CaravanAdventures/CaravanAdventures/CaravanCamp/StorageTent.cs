@@ -27,7 +27,7 @@ namespace CaravanAdventures.CaravanCamp
             zone.settings.SetFromPreset(StorageSettingsPreset.DefaultStockpile);
             Log.Message($"settings null {zone?.settings == null} filter null {zone?.settings?.filter == null}");
             CellRect.Cells.Where(cell => !CellRect.EdgeCells.Contains(cell)).ToList().ForEach(cell => zone.AddCell(cell));
-            zone.zoneManager.RegisterZone(zone);
+            map.zoneManager.RegisterZone(zone);
         }
 
         public void ApplyInventory(Map map, Caravan caravan)

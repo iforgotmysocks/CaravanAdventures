@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
 <Defs>
-	<ThingDef ParentName="BuildingBase">
+  <ThingDef Name="CATentBase" ParentName="BuildingBase" Abstract="True">
+    <killedLeavings/>
+    <costList/>
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+  </ThingDef>
+  
+	<ThingDef ParentName="CATentBase">
 		<defName>CAAirConditioningHeater</defName>
 		<label>One-way A/C and Heater</label>
 		<description>A device that converts electricity into heat, but is also able to cool the room to a certain degree.</description>
@@ -39,10 +45,6 @@
 			<Flammability>0.5</Flammability>
 		</statBases>
 		<tickerType>Normal</tickerType>
-		<costList>
-			<Steel>50</Steel>
-			<ComponentIndustrial>1</ComponentIndustrial>
-		</costList>
 		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
 		<placeWorkers>
 			<li>PlaceWorker_Heater</li>
@@ -100,7 +102,7 @@
 			<li Class="CompProperties_Breakdownable"/>
 			-->
 		</comps>
-		<designationCategory>Temperature</designationCategory>
+		<!--<designationCategory>Temperature</designationCategory>-->
 		<designationHotKey>Misc3</designationHotKey>
 		<researchPrerequisites>
 			<li>Electricity</li>
@@ -108,7 +110,7 @@
 		<constructionSkillPrerequisite>5</constructionSkillPrerequisite>
 	</ThingDef>
 
-	<ThingDef ParentName="BuildingBase">
+	<ThingDef ParentName="CATentBase">
 		<defName>CACooler</defName>
 		<label>One-way Cooler</label>
 		<description>A device that cools down the room temperature.</description>
@@ -147,10 +149,6 @@
 			<Flammability>0.5</Flammability>
 		</statBases>
 		<tickerType>Normal</tickerType>
-		<costList>
-			<Steel>50</Steel>
-			<ComponentIndustrial>1</ComponentIndustrial>
-		</costList>
 		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
 		<placeWorkers>
 			<li>PlaceWorker_Heater</li>
@@ -185,15 +183,13 @@
 				<heatPushMinTemperature>-9</heatPushMinTemperature>
 			</li>
 		</comps>
-		<designationCategory>Temperature</designationCategory>
-		<designationHotKey>Misc3</designationHotKey>
+		<!--<designationCategory>Temperature</designationCategory>-->
 		<researchPrerequisites>
 			<li>Electricity</li>
 		</researchPrerequisites>
-		<constructionSkillPrerequisite>5</constructionSkillPrerequisite>
 	</ThingDef>
 
-  <TerrainDef Name="CATentFloorBase" Abstract="True">
+  <TerrainDef Name="CATentFloorBase" Parent="CATentBase" Abstract="True">
     <layerable>true</layerable>
     <affordances>
       <li>Light</li>
@@ -219,12 +215,9 @@
     <statBases>
       <WorkToBuild>10</WorkToBuild>
     </statBases>
-    <costList>
-      <Steel>2</Steel>
-    </costList>
   </TerrainDef>
 
-  <ThingDef ParentName="BuildingBase" Name="Wall">
+  <ThingDef ParentName="CATentBase">
     <defName>CATentWall</defName>
     <label>Tent Wall</label>
     <description>Fabric for putting up tents quickly.</description>
@@ -308,10 +301,10 @@
     </graphicData>
     <statBases>
       <MaxHitPoints>200</MaxHitPoints>
-      <MarketValue>9</MarketValue>
-      <Mass>0.038</Mass>
-      <Flammability>0.4</Flammability>
-      <DeteriorationRate>1.0</DeteriorationRate>
+      <MarketValue>20</MarketValue>
+      <Mass>0.001</Mass>
+      <Flammability>0.1</Flammability>
+      <DeteriorationRate>0</DeteriorationRate>
       <StuffPower_Armor_Sharp>2.00</StuffPower_Armor_Sharp>
       <StuffPower_Armor_Blunt>0.54</StuffPower_Armor_Blunt>
       <StuffPower_Armor_Heat>2.88</StuffPower_Armor_Heat>
@@ -320,18 +313,18 @@
     </statBases>
     <burnableByRecipe>true</burnableByRecipe>
     <healthAffectsPrice>false</healthAffectsPrice>
-    <minRewardCount>30</minRewardCount>
+    <!--<minRewardCount>30</minRewardCount>-->
     <stuffProps>
       <categories>
         <li>Fabric</li>
       </categories>
-      <commonality>0.10</commonality>
+      <commonality>0</commonality>
       <!--<color>(0,106,126)</color>-->
       <color>(255, 155, 41)</color>
       <statFactors>
         <Flammability>0.1</Flammability>
-        <MaxHitPoints>2.4</MaxHitPoints>
-        <Beauty>5.5</Beauty>
+        <MaxHitPoints>4</MaxHitPoints>
+        <Beauty>6.5</Beauty>
       </statFactors>
     </stuffProps>
     <thingCategories>
