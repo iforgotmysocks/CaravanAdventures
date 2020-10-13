@@ -33,6 +33,7 @@ namespace CaravanAdventures.CaravanCamp
 
     // functionality: 
     // - add right click option to campfire that turns all camping stuff back into resources
+    // - maybe add ability to build new tents from camp supplies
 
     // add another field rect
 
@@ -147,20 +148,12 @@ namespace CaravanAdventures.CaravanCamp
 
         protected void AssignCampLayout()
         {
-            // todo new steps 
-            // -> Create base rect around center spot
-            // -> check if still space in current rect, if not increase rect size to second level all around 1 -> 9 -> 27
-            // -> check vertical and horizontal first, then fill empty rect places around
-
             campCenterSpot = CampHelper.FindCenterCell(map, (IntVec3 x) => x.GetRoom(map, RegionType.Set_Passable).CellCount >= 600);
             var campCenter = campParts.OfType<CampCenter>().FirstOrDefault();
             campCenter.Coords.Add(new IntVec3(0, 0, 0));
 
             var coords = new List<IntVec3>();
-
             coordSystem = new CellRect(0, 0, 1, 1);
-            //campParts.ForEach(campPart => size += campPart.CoordSize);
-            //while (coordSystem.Cells.Count() < size) coordSystem.ExpandedBy(1);
 
             foreach (var part in campParts)
             {
@@ -233,14 +226,13 @@ namespace CaravanAdventures.CaravanCamp
             var center = new IntVec3(0, 0, 0);
             if (FindFreeCoords().Count() == 0) coordSystem = coordSystem.ExpandedBy(1);
             var free = FindFreeCoords().OrderBy(coord => coord.DistanceTo(center));
-            // todo add forced sides to the x and y selection in GetNeighbourCells for specific building types
             if (part.CoordSize > 1)
             {
                 for (; ; )
                 {
                     foreach (var cell in free)
                     {
-                        var cells = GetNeigbourCells(cell, free, part.CoordSize, part.ForcedTentDirection); // add part.direction
+                        var cells = GetNeigbourCells(cell, free, part.CoordSize, part.ForcedTentDirection);
                         if (cells != null) placementCells = cells;
                         break;
                     }
@@ -317,21 +309,14 @@ namespace CaravanAdventures.CaravanCamp
                 part.Build(map);
             }
 
-            //foreach (var c in campSiteRect.EdgeCells)
-            //{
-            //    GenSpawn.Spawn(RimWorld.ThingDefOf.TorchLamp, c, map);
-            //}
-
             for (int i = 0; i < campSiteRect.EdgeCells.Count() - 4; i++)
             {
                 if (i % 5 == 0) GenSpawn.Spawn(RimWorld.ThingDefOf.TorchLamp, campSiteRect.EdgeCells.ToArray()[i], map);
             }
-
         }
 
         protected void UpdateAreas()
         {
-            //map.areaManager.AreaManagerUpdate();
             //todo add to settings
             foreach (var cell in campSiteRect)
             {

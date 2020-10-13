@@ -23,11 +23,8 @@ namespace CaravanAdventures.CaravanCamp
 
         public virtual void CreateZone(Map map)
         {
-            var zone = new Zone_Stockpile();
-            zone.settings.SetFromPreset(StorageSettingsPreset.DefaultStockpile);
-            Log.Message($"settings null {zone?.settings == null} filter null {zone?.settings?.filter == null}");
-            CellRect.Cells.Where(cell => !CellRect.EdgeCells.Contains(cell)).ToList().ForEach(cell => zone.AddCell(cell));
-            map.zoneManager.RegisterZone(zone);
+            var zone = new Zone_Stockpile(StorageSettingsPreset.DefaultStockpile, map.zoneManager);
+            CellRect.Cells.Where(cell => cell != null && !CellRect.EdgeCells.Contains(cell)).ToList().ForEach(cell => zone.AddCell(cell));
         }
 
         public void ApplyInventory(Map map, Caravan caravan)
