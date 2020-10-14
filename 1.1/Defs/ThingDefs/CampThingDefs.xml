@@ -4,6 +4,7 @@
   <ThingDef Name="CATentBase" ParentName="BuildingBase" Abstract="True">
     <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
     <resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+		<tradeability>None</tradeability>
   </ThingDef>
   
 	<ThingDef ParentName="CATentBase">
@@ -242,7 +243,7 @@
     </graphicData>
     <uiIconPath>Things/Building/Linked/WallSmooth_MenuIcon</uiIconPath>
     <statBases>
-      <MaxHitPoints>100</MaxHitPoints>
+      <MaxHitPoints>150</MaxHitPoints>
       <WorkToBuild>20</WorkToBuild>
       <Flammability>0.1</Flammability>
     </statBases>
@@ -302,11 +303,11 @@
       <Mass>0.001</Mass>
       <Flammability>0.1</Flammability>
       <DeteriorationRate>0</DeteriorationRate>
-      <StuffPower_Armor_Sharp>2.00</StuffPower_Armor_Sharp>
+      <!--<StuffPower_Armor_Sharp>2.00</StuffPower_Armor_Sharp>
       <StuffPower_Armor_Blunt>0.54</StuffPower_Armor_Blunt>
       <StuffPower_Armor_Heat>2.88</StuffPower_Armor_Heat>
       <StuffPower_Insulation_Cold>26</StuffPower_Insulation_Cold>
-      <StuffPower_Insulation_Heat>26</StuffPower_Insulation_Heat>
+      <StuffPower_Insulation_Heat>26</StuffPower_Insulation_Heat>-->
     </statBases>
     <burnableByRecipe>true</burnableByRecipe>
     <healthAffectsPrice>false</healthAffectsPrice>
@@ -320,13 +321,13 @@
       <color>(255, 155, 41)</color>
       <statFactors>
         <Flammability>0.1</Flammability>
-        <MaxHitPoints>4</MaxHitPoints>
-        <Beauty>6.5</Beauty>
+        <MaxHitPoints>2</MaxHitPoints>
+        <Beauty>3</Beauty>
       </statFactors>
     </stuffProps>
-    <thingCategories>
+    <!--<thingCategories>
       <li>Textiles</li>
-    </thingCategories>
+    </thingCategories>-->
   </ThingDef>
 
 </Defs>

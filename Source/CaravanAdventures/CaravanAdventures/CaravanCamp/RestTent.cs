@@ -17,6 +17,7 @@ namespace CaravanAdventures.CaravanCamp
         {
             ForcedTentDirection = ForcedTentDirection.Horizontal;
             Occupants = new List<Pawn>();
+            SupplyCost = 3;
         }
 
         public override void Build(Map map)

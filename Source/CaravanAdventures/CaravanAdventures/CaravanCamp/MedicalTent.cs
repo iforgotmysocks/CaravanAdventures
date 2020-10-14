@@ -14,6 +14,7 @@ namespace CaravanAdventures.CaravanCamp
         {
             this.CoordSize = 2;
             ForcedTentDirection = ForcedTentDirection.Horizontal;
+            SupplyCost = 4;
         }
 
         public override void Build(Map map)

@@ -17,6 +17,7 @@ namespace CaravanAdventures.CaravanCamp
         public int Height { get; set; }
         public CellRect CellRect { get; set; }
         public ForcedTentDirection ForcedTentDirection { get; set; }
+        public int SupplyCost { get; set; }
 
         public CampArea()
         {
@@ -25,6 +26,7 @@ namespace CaravanAdventures.CaravanCamp
             CoordSize = 1;
             Coords = new List<IntVec3>();
             ForcedTentDirection = ForcedTentDirection.None;
+            SupplyCost = 0;
         }
 
         public abstract void Build(Map map);

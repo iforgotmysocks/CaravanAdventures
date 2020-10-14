@@ -6,7 +6,7 @@
     <defName>CAMakeshiftTentFloor</defName>
     <label>Tent Floor</label>
     <renderPrecedence>230</renderPrecedence>
-    <description>Concrete tiles. Cheap, but neutral in terms of looks and slow to build.</description>
+    <description>Makeshift tent floor.</description>
     <texturePath>Terrain/Surfaces/Carpet</texturePath>
     <color>(255, 155, 41)</color>
     <statBases>
@@ -42,9 +42,9 @@
     </graphicData>
     <uiIconPath>Things/Building/Linked/WallSmooth_MenuIcon</uiIconPath>
     <statBases>
-      <MaxHitPoints>100</MaxHitPoints>
+      <MaxHitPoints>80</MaxHitPoints>
       <WorkToBuild>20</WorkToBuild>
-      <Flammability>0.1</Flammability>
+      <Flammability>1</Flammability>
     </statBases>
     <costStuffCount>5</costStuffCount>
     <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
@@ -109,18 +109,17 @@
       <StuffPower_Insulation_Cold>16</StuffPower_Insulation_Cold>
       <StuffPower_Insulation_Heat>16</StuffPower_Insulation_Heat>
     </statBases>
-    <thingCategories>
+    <!--<thingCategories>
       <li>Leathers</li>
-    </thingCategories>
+    </thingCategories>-->
     <burnableByRecipe>true</burnableByRecipe>
     <healthAffectsPrice>false</healthAffectsPrice>
-    <minRewardCount>30</minRewardCount>
     <stuffProps>
       <color>(112,82,65)</color>
       <commonality>0</commonality>
       <statFactors>
-        <Beauty>1.9</Beauty>
-        <MaxHitPoints>1.3</MaxHitPoints>
+        <Beauty>1.5</Beauty>
+        <MaxHitPoints>1</MaxHitPoints>
       </statFactors>
       <categories>
         <li>Leathery</li>

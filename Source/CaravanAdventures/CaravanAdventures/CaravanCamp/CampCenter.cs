@@ -10,6 +10,11 @@ namespace CaravanAdventures.CaravanCamp
 {
     class CampCenter : CampArea
     {
+        public CampCenter()
+        {
+            SupplyCost = 1;
+        }
+
         public override void Build(Map map)
         {
             GenSpawn.Spawn(RimWorld.ThingDefOf.Campfire, this.CellRect.CenterCell, map);

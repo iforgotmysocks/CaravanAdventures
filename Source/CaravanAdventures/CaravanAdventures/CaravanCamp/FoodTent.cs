@@ -14,6 +14,7 @@ namespace CaravanAdventures.CaravanCamp
         public FoodTent()
         {
             this.CoordSize = 2;
+            SupplyCost = 3;
         }
 
         public override void Build(Map map)

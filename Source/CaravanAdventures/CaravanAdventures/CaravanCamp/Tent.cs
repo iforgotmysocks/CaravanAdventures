@@ -10,6 +10,10 @@ namespace CaravanAdventures.CaravanCamp
 {
     abstract class Tent : CampArea
     {
+        public Tent()
+        {
+            SupplyCost = 2;
+        }
         public override void Build(Map map)
         {
             var entranceCells = CellRect.EdgeCells.Where(cell => {
