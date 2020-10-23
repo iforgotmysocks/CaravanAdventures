@@ -13,6 +13,7 @@ using Verse.Noise;
 
 // high prio:
 // - add and rework dialogs from shrines onwards
+// - add system that allows inclusion or exclusion for other races to relation
 
 // med prio:
 // - create mech bosses after horsemen traits
@@ -20,6 +21,7 @@ using Verse.Noise;
 // -- credits to horsemen idea to Shakesthespeare
 
 // low prio:
+// - make configurable if sacrileg hunters are hostile towards the empire
 // - collect player responses and use them to determine the support strength for troups at shrines
 // - balance village hunter strenght depending on player character wealth
 // - export shrine stuff to seperate questCont

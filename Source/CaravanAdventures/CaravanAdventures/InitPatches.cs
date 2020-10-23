@@ -3,47 +3,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RimWorld;
-using Verse;
-using RimWorld.Planet;
 using CaravanAdventures.CaravanItemSelection;
 using CaravanAdventures.CaravanStory;
+using RimWorld;
+using Verse;
 
 namespace CaravanAdventures
 {
-    // todo https://fluffy-mods.github.io//2020/08/13/debugging-rimworld/
-    // todo GameComponent??? -> compprops applied to defs within a gamecomp somehow lead to missing comps on the object of the def which doesn't happen with world comps
-    class Init : WorldComponent
+    [StaticConstructorOnStartup]
+    static class InitPatches
     {
-        private int removeRuinsTick = 0;
-
-        public Init(World world) : base(world)
+        static InitPatches()
         {
-        }
-
-        public override void FinalizeInit()
-        {
-            base.FinalizeInit();
             FilterCombs.InitFilterSets();
             PatchAncientShrineDefs_MoreShrinesAndBetterRewards();
             PatchTreeDef_AddTalkOption();
             PatchHumanDef_AddTalkOption();
-            PatchRemovePenaltyForBeingRoyal();
+            PatchRemoveRoyalTitleRequirements();
         }
 
-        private void PatchRemovePenaltyForBeingRoyal()
+        private static void PatchRemoveRoyalTitleRequirements()
         {
-            var defNames = new string[] { "TitleApparelRequirementNotMet", "TitleApparelMinQualityNotMet", "TitleNoThroneRoom", "TitleNoPersonalBedroom", "TitleThroneroomRequirementsNotMet", "TitleBedroomRequirementsNotMet"};
-            foreach (var def in DefDatabase<ThoughtDef>.AllDefsListForReading.Where(x => defNames.Contains(x.defName)))
+            foreach (var def in DefDatabase<RoyalTitleDef>.AllDefsListForReading)
             {
-                def.stages.First().baseMoodEffect = 0;
+                def.disabledJoyKinds = new List<JoyKindDef>();
+                def.disabledWorkTags = WorkTags.None;
+                def.requiredApparel = new List<RoyalTitleDef.ApparelRequirement>();
+                def.bedroomRequirements = new List<RoomRequirement>();
+                def.foodRequirement = default;
+                def.throneRoomRequirements = new List<RoomRequirement>();
+                def.requiredMinimumApparelQuality = QualityCategory.Awful;
             }
         }
 
-        private void PatchTreeDef_AddTalkOption()
+        private static void PatchTreeDef_AddTalkOption()
         {
             var tree = DefDatabase<ThingDef>.GetNamed("Plant_TreeAnima");
-            
+
             if (tree == null)
             {
                 Log.Message("Tree is null");
@@ -53,7 +49,7 @@ namespace CaravanAdventures
             if (!tree.comps.Any(x => x is CompProperties_Talk)) tree.comps.Add(compProp);
         }
 
-        private void PatchHumanDef_AddTalkOption()
+        private static void PatchHumanDef_AddTalkOption()
         {
             var humanDef = DefDatabase<ThingDef>.GetNamed("Human");
 
@@ -67,12 +63,12 @@ namespace CaravanAdventures
             if (!humanDef.comps.Any(x => x is CompProperties_Talk)) humanDef.comps.Add(compProp);
         }
 
-        private void PatchAncientShrineDefs_MoreShrinesAndBetterRewards()
+        private static void PatchAncientShrineDefs_MoreShrinesAndBetterRewards()
         {
             // todo ModOptions
             var scatterShrinesDef = DefDatabase<GenStepDef>.GetNamed("ScatterShrines");
             var genStep = scatterShrinesDef.genStep as GenStep_ScatterShrines;
-            if (genStep != null) 
+            if (genStep != null)
             {
                 genStep.countPer10kCellsRange.min *= 2;
                 genStep.countPer10kCellsRange.max *= 2;
@@ -80,7 +76,7 @@ namespace CaravanAdventures
 
             var templeContentsDef = DefDatabase<ThingSetMakerDef>.GetNamed("MapGen_AncientTempleContents");
             var root = templeContentsDef.root as ThingSetMaker_Sum;
-            if (root != null) 
+            if (root != null)
             {
                 var option = root.options[1];
                 option.chance = 0.8f;
@@ -120,35 +116,5 @@ namespace CaravanAdventures
                 //});
             }
         }
-
-        public override void WorldComponentTick()
-        {
-            base.WorldComponentTick();
-            RemoveRuins();
-            removeRuinsTick++;
-        }
-
-        private void RemoveRuins()
-        {
-            if (removeRuinsTick > 60000)
-            {
-                var settlements = Find.WorldObjects.AllWorldObjects.Where(settlement => settlement.def == WorldObjectDefOf.AbandonedSettlement && settlement.Faction.IsPlayer);
-                Log.Message($"Trying to remove {settlements.Count()} settlements");
-
-                foreach (var settlement in settlements.Reverse())
-                {
-                    Find.WorldObjects.Remove(settlement);
-                }
-                removeRuinsTick = 0;
-            }
-        }
-
-        public override void ExposeData()
-        {
-            base.ExposeData();
-            Scribe_Values.Look(ref removeRuinsTick, "removeRuinsTick", 0);
-        }
-
-
     }
 }

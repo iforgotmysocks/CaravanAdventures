@@ -21,7 +21,7 @@ namespace CaravanAdventures.Patches
         public static void ImpliedThingDefs_Postfix(ref IEnumerable<ThingDef> __result)
         {
             var newList = __result.ToList();
-            newList.RemoveAll(x => x.defName.ToLower().StartsWith("psytrainer_ancient"));
+            newList.RemoveAll(x => x.defName.ToLower().StartsWith("psytrainer_caancient"));
             __result = newList;
         }
     }

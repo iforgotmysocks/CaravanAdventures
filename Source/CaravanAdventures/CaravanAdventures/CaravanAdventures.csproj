@@ -85,6 +85,7 @@
     <Compile Include="CaravanCamp\CampCenter.cs" />
     <Compile Include="CaravanCamp\CampDefOf.cs" />
     <Compile Include="CaravanCamp\CampHelper.cs" />
+    <Compile Include="CaravanCamp\CompCampControl.cs" />
     <Compile Include="CaravanCamp\CampThingDefOf.cs" />
     <Compile Include="CaravanCamp\IZoneTent.cs" />
     <Compile Include="CaravanCamp\StorageTent.cs" />
@@ -152,7 +153,8 @@
     <Compile Include="CaravanStory\TimedDetectionPatrols.cs" />
     <Compile Include="CompCache.cs" />
     <Compile Include="Helper.cs" />
-    <Compile Include="Init.cs" />
+    <Compile Include="InitGC.cs" />
+    <Compile Include="InitPatches.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="ModSettings.cs" />
     <Compile Include="Patches\AbilityNeurotrainerDefGenerator.cs" />
