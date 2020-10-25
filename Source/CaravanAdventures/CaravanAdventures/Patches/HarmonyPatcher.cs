@@ -4,9 +4,9 @@ using Verse;
 namespace CaravanAdventures.Patches
 {
     [StaticConstructorOnStartup]
-    static class MainPatcher
+    static class HarmonyPatcher
     {
-        public static void Patch()
+        static HarmonyPatcher()
         {
             var harmony = new Harmony("iforgotmysocks.CaravanAdventures");
             CaravanTravel.ApplyPatches(harmony);

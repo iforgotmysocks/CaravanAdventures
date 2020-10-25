@@ -160,7 +160,7 @@
     <Compile Include="Patches\AbilityNeurotrainerDefGenerator.cs" />
     <Compile Include="Patches\CaravanTravel.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="Patches\MainPatcher.cs" />
+    <Compile Include="Patches\HarmonyPatcher.cs" />
     <Compile Include="Patches\AutomaticItemSelection.cs" />
     <Compile Include="Patches\TalkPawnGUIOverlay.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

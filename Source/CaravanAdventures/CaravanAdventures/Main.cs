@@ -17,7 +17,6 @@ namespace CaravanAdventures
         public Main(ModContentPack content) : base(content)
         {
             GetSettings<ModSettings>();
-            MainPatcher.Patch();
         }
 
         public override void DoSettingsWindowContents(UnityEngine.Rect inRect)
