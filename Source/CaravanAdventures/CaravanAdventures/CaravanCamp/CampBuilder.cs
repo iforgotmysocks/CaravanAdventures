@@ -30,6 +30,7 @@ namespace CaravanAdventures.CaravanCamp
     // -- food zone
     // -- medicine shelfs -> rework medicine tent design
     // -- storage zones
+    // -- animal zone?
 
     // functionality: 
     // - add right click option to campfire that turns all camping stuff back into resources
@@ -52,6 +53,7 @@ namespace CaravanAdventures.CaravanCamp
         private bool hasMedicalTent = true;
         private bool hasStorageTent = true;
         private bool hasProductionTent = true;
+        private bool hasAnimalArea = true;
 
         private CellRect coordSystem;
         private CellRect campSiteRect;
@@ -98,6 +100,8 @@ namespace CaravanAdventures.CaravanCamp
             // todo change to configurable number including auto (-1)
             if (hasProductionTent) campParts.Add(new ProductionTent());
             if (hasStorageTent) campParts.Add(new StorageTent());
+            if (hasMedicalTent && sickColonists.Count == 0) campParts.Add(new MedicalTent());
+            if (hasAnimalArea && caravan.PawnsListForReading.Any(pawn => pawn.RaceProps.Animal)) campParts.Add(new AnimalArea());
 
             List<List<Pawn>> colonistRelationShipPairs = GetRelationShipPairs(colonists);
             colonistRelationShipPairs.ForEach(couple =>
@@ -173,7 +177,14 @@ namespace CaravanAdventures.CaravanCamp
         {
             foreach (var c in campSiteRect.Cells)
             {
-                foreach (var thing in map.thingGrid.ThingsListAt(c).Reverse<Thing>()) thing.Destroy();
+                var room = c.GetRoom(map);
+                if (room != null && room.CellCount < 500 && room.ContainsThing(ThingDefOf.AncientCryptosleepCasket))
+                {
+                    Log.Message($"cell has room");
+                    foreach (var roomCell in room.Cells)
+                        foreach (var thing in map.thingGrid.ThingsListAt(roomCell).Reverse<Thing>()) thing.Destroy();
+                }
+                else foreach (var thing in map.thingGrid.ThingsListAt(c).Reverse<Thing>()) thing.Destroy();
                 map.roofGrid.SetRoof(c, null);
                 map.fogGrid.Unfog(c);
                 var terrain = map.terrainGrid.TerrainAt(c);
@@ -332,6 +343,17 @@ namespace CaravanAdventures.CaravanCamp
             {
                 zoneTent.CreateZone(map);
                 zoneTent.ApplyInventory(map, caravan);
+            }
+
+            foreach (var shelfTent in campParts.OfType<IShelfTent>())
+            {
+                shelfTent.FillShelfs(map, caravan);
+            }
+
+            foreach (var areaRestriction in campParts.OfType<IAreaRestrictionTent>())
+            {
+                areaRestriction.CreateNewRestrictionArea(map, caravan);
+                areaRestriction.AssignPawnsToAreas(map, caravan);
             }
         }
 

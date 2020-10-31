@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Verse;
 
 namespace CaravanAdventures.CaravanCamp
 {
@@ -10,7 +11,16 @@ namespace CaravanAdventures.CaravanCamp
     {
         public ProductionTent()
         {
-            CoordSize = 3;
+            CoordSize = 2;
+            ForcedTentDirection = ForcedTentDirection.Horizontal;
+            SupplyCost = 4;
+        }
+
+        public override void Build(Map map)
+        {
+            base.Build(map);
+
+
         }
     }
 }

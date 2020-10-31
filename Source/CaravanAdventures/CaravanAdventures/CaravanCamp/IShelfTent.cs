@@ -8,10 +8,8 @@ using Verse;
 
 namespace CaravanAdventures.CaravanCamp
 {
-    interface IZoneTent
+    interface IShelfTent
     {
-        Zone GetZone();
-        void CreateZone(Map map);
-        void ApplyInventory(Map map, Caravan caravan);
+        void FillShelfs(Map map, Caravan caravan);
     }
 }

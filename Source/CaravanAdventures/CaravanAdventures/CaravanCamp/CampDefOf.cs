@@ -12,5 +12,6 @@ namespace CaravanAdventures.CaravanCamp
         public static ThingDef CASpacerTentFabric;
 
         public static ThingDef CATentWall;
+        public static ThingDef CAFencePost;
     }
 }

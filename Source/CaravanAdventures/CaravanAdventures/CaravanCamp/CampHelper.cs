@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Verse;
 using RimWorld;
+using RimWorld.Planet;
 
 namespace CaravanAdventures.CaravanCamp
 {
@@ -26,6 +27,17 @@ namespace CaravanAdventures.CaravanCamp
             }
             Log.Warning("Could not find any valid cell.", false);
             return CellFinder.RandomCell(map);
+        }
+
+        public static Thing GetFirstOrderedThingOfCategoryFromCaravan(Caravan caravan, ThingCategoryDef[] validCategories)
+        {
+            Thing selected = null;
+            foreach (var category in validCategories)
+            {
+                selected = caravan.AllThings.FirstOrDefault(x => x?.def?.thingCategories != null && x.def.thingCategories.Contains(category));
+                if (selected != null) return selected;
+            }
+            return selected;
         }
     }
 }

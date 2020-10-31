@@ -11,12 +11,16 @@ namespace CaravanAdventures.CaravanCamp
 {
     class FoodTent : Tent, IZoneTent
     {
+        private Zone_Stockpile zone;
+        private ThingCategoryDef[] validFoods = new[] { ThingCategoryDefOf.FoodMeals, ThingCategoryDefOf.Foods, ThingCategoryDefOf.MeatRaw };
+
         public FoodTent()
         {
             this.CoordSize = 2;
             SupplyCost = 3;
         }
 
+        public Zone GetZone() => zone;
         public override void Build(Map map)
         {
             base.Build(map);
@@ -30,7 +34,7 @@ namespace CaravanAdventures.CaravanCamp
 
         public virtual void CreateZone(Map map)
         {
-            var zone = new Zone_Stockpile(StorageSettingsPreset.DefaultStockpile, map.zoneManager);
+            zone = new Zone_Stockpile(StorageSettingsPreset.DefaultStockpile, map.zoneManager);
             map.zoneManager.RegisterZone(zone);
             zone.settings.filter = new ThingFilter();
             zone.settings.filter.SetAllow(ThingCategoryDefOf.Foods, true);
@@ -43,7 +47,13 @@ namespace CaravanAdventures.CaravanCamp
 
         public void ApplyInventory(Map map, Caravan caravan)
         {
-
+            foreach (var cell in zone.Cells)
+            {
+                var stack = CampHelper.GetFirstOrderedThingOfCategoryFromCaravan(caravan, validFoods);
+                if (stack == null) break;
+                if (!cell.Filled(map)) GenDrop.TryDropSpawn_NewTmp(stack, cell, map, ThingPlaceMode.Direct, out var result);
+            }
         }
+
     }
 }

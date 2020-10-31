@@ -11,10 +11,12 @@ namespace CaravanAdventures.CaravanCamp
 {
     class StorageTent : Tent, IZoneTent
     {
+        private Zone_Stockpile zone;
         public StorageTent()
         {
             CoordSize = 2;
         }
+        public Zone GetZone() => zone;
 
         public override void Build(Map map)
         {
@@ -23,7 +25,7 @@ namespace CaravanAdventures.CaravanCamp
 
         public virtual void CreateZone(Map map)
         {
-            var zone = new Zone_Stockpile(StorageSettingsPreset.DefaultStockpile, map.zoneManager);
+            zone = new Zone_Stockpile(StorageSettingsPreset.DefaultStockpile, map.zoneManager);
             map.zoneManager.RegisterZone(zone);
             CellRect.Cells.Where(cell => cell != null && !CellRect.EdgeCells.Contains(cell)).ToList().ForEach(cell => zone.AddCell(cell));
         }

@@ -70,7 +70,7 @@
 				<showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
 			</li>
 			<li Class="CompProperties_Glower">
-				<glowRadius>9</glowRadius>
+				<glowRadius>13</glowRadius>
 				<glowColor>(150,150,180,0)</glowColor>
 			</li>
 			<li Class="CompProperties_HeatPusher">
@@ -172,7 +172,7 @@
 				<showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
 			</li>
 			<li Class="CompProperties_Glower">
-				<glowRadius>9</glowRadius>
+				<glowRadius>13</glowRadius>
 				<glowColor>(150,150,180,0)</glowColor>
 			</li>
 			<li Class="CompProperties_HeatPusher">
@@ -328,6 +328,49 @@
     <!--<thingCategories>
       <li>Textiles</li>
     </thingCategories>-->
+  </ThingDef>
+
+  <ThingDef ParentName="CATentBase">
+    <defName>CAFencePost</defName>
+    <label>Animal fence post</label>
+    <description>An animal fence post</description>
+    <category>Building</category>
+    <graphicData>
+      <texPath>Things/Building/Misc/TorchLamp</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawRotated>false</drawRotated>
+      <damageData>
+        <rect>(0.35,0.35,0.3,0.3)</rect>
+      </damageData>
+    </graphicData>
+    <uiIconPath>Things/Building/Misc/TorchLamp_MenuIcon</uiIconPath>
+    <uiIconScale>0.85</uiIconScale>
+    <rotatable>false</rotatable>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>14</pathCost>
+    <constructEffect>ConstructWood</constructEffect>
+    <tickerType>Never</tickerType>
+    <!--<drawerType>RealtimeOnly</drawerType>-->
+    <fillPercent>0.15</fillPercent>
+    <statBases>
+      <MaxHitPoints>75</MaxHitPoints>
+      <WorkToBuild>100</WorkToBuild>
+      <Flammability>0</Flammability>
+      <MeditationFocusStrength>0.0</MeditationFocusStrength>
+    </statBases>
+    <selectable>true</selectable>
+    <costList>
+      <WoodLog>5</WoodLog>
+    </costList>
+    <building>
+      <!--<artificialForMeditationPurposes>false</artificialForMeditationPurposes>-->
+    </building>
+    <soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+    <placeWorkers>
+    </placeWorkers>
+    <comps>
+    </comps>
   </ThingDef>
 
 </Defs>
