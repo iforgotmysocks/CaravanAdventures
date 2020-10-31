@@ -31,12 +31,14 @@ namespace CaravanAdventures.CaravanCamp
         public virtual void CreateZone(Map map)
         {
             var zone = new Zone_Stockpile(StorageSettingsPreset.DefaultStockpile, map.zoneManager);
+            map.zoneManager.RegisterZone(zone);
             zone.settings.filter = new ThingFilter();
             zone.settings.filter.SetAllow(ThingCategoryDefOf.Foods, true);
             zone.settings.Priority = StoragePriority.Preferred;
             // todo translate
             zone.label = "Food".Translate();
             CellRect.Cells.Where(cell => cell != null && !CellRect.EdgeCells.Contains(cell)).ToList().ForEach(cell => zone.AddCell(cell));
+            //zone.CheckContiguous();
         }
 
         public void ApplyInventory(Map map, Caravan caravan)

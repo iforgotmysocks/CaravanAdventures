@@ -24,6 +24,7 @@ namespace CaravanAdventures.CaravanCamp
         public virtual void CreateZone(Map map)
         {
             var zone = new Zone_Stockpile(StorageSettingsPreset.DefaultStockpile, map.zoneManager);
+            map.zoneManager.RegisterZone(zone);
             CellRect.Cells.Where(cell => cell != null && !CellRect.EdgeCells.Contains(cell)).ToList().ForEach(cell => zone.AddCell(cell));
         }
 

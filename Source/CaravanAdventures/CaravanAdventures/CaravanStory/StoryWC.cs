@@ -26,6 +26,9 @@ using Verse.Noise;
 // - balance village hunter strenght depending on player character wealth
 // - export shrine stuff to seperate questCont
 
+// etc: 
+// {PAWN_pronoun} in text possible?
+
 namespace CaravanAdventures.CaravanStory
 {
     class StoryWC : WorldComponent
@@ -189,7 +192,6 @@ namespace CaravanAdventures.CaravanStory
             questCont.Village.villageGenerationCounter--;
             shrineRevealCounter--;
         }
-
         
         private void RunDebugActionsOnceAtStartUp()
         {
