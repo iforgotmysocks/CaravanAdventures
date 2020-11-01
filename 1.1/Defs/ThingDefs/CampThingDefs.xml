@@ -5,6 +5,34 @@
     <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
     <resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
 		<tradeability>None</tradeability>
+    <modExtensions>
+      <li Class="CaravanAdventures.CaravanCamp.CampModExt"></li>
+    </modExtensions>
+  </ThingDef>
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>CACampControl</defName>
+    <label>Camp control</label>
+    <description>Camp control</description>
+    <graphicData>
+      <texPath>Things/Buildings/Misc/Empty</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <selectable>false</selectable>
+    <comps>
+      <li Class="CompProperties_Glower">
+        <glowRadius>3</glowRadius>
+        <glowColor>(252,187,113,0)</glowColor>
+      </li>
+      <li>
+        <compClass>CaravanAdventures.CaravanCamp.CompCampControl</compClass>
+      </li>
+    </comps>
+    <building>
+      <isInert>true</isInert>
+      <isEdifice>false</isEdifice>
+      <deconstructible>false</deconstructible>
+    </building>
   </ThingDef>
   
 	<ThingDef ParentName="CATentBase">
@@ -372,5 +400,7 @@
     <comps>
     </comps>
   </ThingDef>
+  
+  <!-- todo add own bedrolls so they can be destroyed -->
 
 </Defs>

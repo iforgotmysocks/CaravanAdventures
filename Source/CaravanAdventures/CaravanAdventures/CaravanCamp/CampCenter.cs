@@ -17,7 +17,8 @@ namespace CaravanAdventures.CaravanCamp
 
         public override void Build(Map map)
         {
-            GenSpawn.Spawn(RimWorld.ThingDefOf.Campfire, this.CellRect.CenterCell, map);
+            GenSpawn.Spawn(CampDefOf.CACampControl, this.CellRect.CenterCell, map);
+            GenSpawn.Spawn(ThingDefOf.Campfire, this.CellRect.CenterCell, map);
 
             foreach (var cornerCell in CellRect.Corners)
             {
