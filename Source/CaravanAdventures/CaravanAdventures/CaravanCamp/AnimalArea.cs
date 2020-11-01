@@ -13,6 +13,8 @@ namespace CaravanAdventures.CaravanCamp
     class AnimalArea : CampArea, IAreaRestrictionTent, IZoneTent
     {
         private Area_Allowed animalArea;
+        private Zone_Stockpile zone;
+
         public AnimalArea()
         {
             CoordSize = 2;
@@ -46,19 +48,35 @@ namespace CaravanAdventures.CaravanCamp
             foreach (var animal in caravan.PawnsListForReading.Where(pawn => pawn.RaceProps.Animal)) animal.playerSettings.AreaRestriction = animalArea;
         }
 
-        public Zone GetZone()
-        {
-            throw new NotImplementedException();
-        }
+        public Zone GetZone() => zone;
 
         public void CreateZone(Map map)
         {
-            throw new NotImplementedException();
+            var zoneCells = CellRect.Height > CellRect.Width 
+                ? CellRect.Cells.Where(cell => cell.z == CellRect.maxZ - 1 && !CellRect.EdgeCells.Contains(cell)) 
+                : CellRect.Cells.Where(cell => cell.x == CellRect.maxX - 1 && !CellRect.EdgeCells.Contains(cell));
+
+            zone = new Zone_Stockpile(StorageSettingsPreset.DefaultStockpile, map.zoneManager);
+            map.zoneManager.RegisterZone(zone);
+            zone.settings.filter = new ThingFilter();
+            zone.settings.filter.SetAllow(ThingCategoryDefOf.PlantFoodRaw, true);
+            zone.settings.filter.SetAllow(ThingDefOf.Hay, true);
+            zone.settings.filter.SetAllow(ThingDefOf.Kibble, true);
+            zone.settings.Priority = StoragePriority.Preferred;
+            zone.label = "CAAnimalFoodZoneLabel".Translate();
+            zoneCells.ToList().ForEach(cell => zone.AddCell(cell));
         }
 
         public void ApplyInventory(Map map, Caravan caravan)
         {
-            throw new NotImplementedException();
+            foreach (var cell in zone.Cells)
+            {
+                var stack = caravan.AllThings.FirstOrDefault(x => x.def == ThingDefOf.Kibble) 
+                    ?? caravan.AllThings.FirstOrDefault(x => x.def == ThingDefOf.Hay) 
+                    ?? CampHelper.GetFirstOrderedThingOfCategoryFromCaravan(caravan, new [] { ThingCategoryDefOf.PlantFoodRaw });
+                if (stack == null) break;
+                if (!cell.Filled(map)) GenDrop.TryDropSpawn_NewTmp(stack, cell, map, ThingPlaceMode.Direct, out var result);
+            }
         }
     }
 }

@@ -39,8 +39,7 @@ namespace CaravanAdventures.CaravanCamp
             zone.settings.filter = new ThingFilter();
             zone.settings.filter.SetAllow(ThingCategoryDefOf.Foods, true);
             zone.settings.Priority = StoragePriority.Preferred;
-            // todo translate
-            zone.label = "Food".Translate();
+            zone.label = "CAFoodZoneLabel".Translate();
             CellRect.Cells.Where(cell => cell != null && !CellRect.EdgeCells.Contains(cell)).ToList().ForEach(cell => zone.AddCell(cell));
             //zone.CheckContiguous();
         }
