@@ -21,11 +21,12 @@ namespace CaravanAdventures.CaravanCamp
         }
 
         public Zone GetZone() => zone;
-        public override void Build(Map map)
+        public override void Build(Map map, List<Thing> campAssetListRef)
         {
-            base.Build(map);
+            base.Build(map, campAssetListRef);
             var cacoolerPos = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 1 && cell.z == CellRect.minZ + 1);
             var cacooler = GenSpawn.Spawn(CampThingDefOf.CACooler, cacoolerPos, map);
+            campAssetListRef.Add(cacooler);
             cacooler.SetFaction(Faction.OfPlayer);
             var refuelComp = cacooler.TryGetComp<CompRefuelable>();
             // todo check if caravan has fuel

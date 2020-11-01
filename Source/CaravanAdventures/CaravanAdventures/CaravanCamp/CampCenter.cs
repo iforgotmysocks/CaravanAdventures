@@ -10,20 +10,23 @@ namespace CaravanAdventures.CaravanCamp
 {
     class CampCenter : CampArea
     {
+        private ThingWithComps control;
+        public ThingWithComps Control { get => control; private set => control = value; }
         public CampCenter()
         {
             SupplyCost = 1;
         }
 
-        public override void Build(Map map)
+        public override void Build(Map map, List<Thing> campAssetListRef)
         {
-            GenSpawn.Spawn(CampDefOf.CACampControl, this.CellRect.CenterCell, map);
-            GenSpawn.Spawn(ThingDefOf.Campfire, this.CellRect.CenterCell, map);
+            control = GenSpawn.Spawn(CampDefOf.CACampControl, this.CellRect.CenterCell, map) as ThingWithComps;
+            campAssetListRef.Add(control);
+            campAssetListRef.Add(GenSpawn.Spawn(ThingDefOf.Campfire, this.CellRect.CenterCell, map));
 
             foreach (var cornerCell in CellRect.Corners)
             {
                 var thing = ThingMaker.MakeThing(RimWorld.ThingDefOf.TorchLamp);
-                GenSpawn.Spawn(thing, cornerCell, map, Rot4.South);
+                campAssetListRef.Add(GenSpawn.Spawn(thing, cornerCell, map, Rot4.South));
             }
         }
     }

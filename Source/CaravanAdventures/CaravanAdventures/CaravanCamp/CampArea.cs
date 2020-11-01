@@ -29,6 +29,6 @@ namespace CaravanAdventures.CaravanCamp
             SupplyCost = 0;
         }
 
-        public abstract void Build(Map map);
+        public abstract void Build(Map map, List<Thing> campAssetListRef);
     }
 }

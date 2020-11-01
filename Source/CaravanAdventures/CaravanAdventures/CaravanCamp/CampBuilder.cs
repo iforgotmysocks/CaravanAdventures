@@ -58,6 +58,8 @@ namespace CaravanAdventures.CaravanCamp
         private CellRect coordSystem;
         private CellRect campSiteRect;
 
+        private List<Thing> campAssetListRef;
+
         public CampBuilder(Caravan caravan, Map map)
         {
             this.caravan = caravan;
@@ -182,9 +184,9 @@ namespace CaravanAdventures.CaravanCamp
                 {
                     Log.Message($"cell has room");
                     foreach (var roomCell in room.Cells)
-                        foreach (var thing in map.thingGrid.ThingsListAt(roomCell).Reverse<Thing>()) thing.Destroy();
+                        foreach (var thing in map.thingGrid.ThingsListAt(roomCell).Reverse<Thing>()) if (thing.def.destroyable) thing.Destroy();
                 }
-                else foreach (var thing in map.thingGrid.ThingsListAt(c).Reverse<Thing>()) thing.Destroy();
+                else foreach (var thing in map.thingGrid.ThingsListAt(c).Reverse<Thing>()) if (thing.def.destroyable) thing.Destroy();
                 map.roofGrid.SetRoof(c, null);
                 map.fogGrid.Unfog(c);
                 var terrain = map.terrainGrid.TerrainAt(c);
@@ -315,15 +317,22 @@ namespace CaravanAdventures.CaravanCamp
 
         protected void GenerateBuildings()
         {
+            // todo figure out how best to pass the reference from the comp to the builder
+            campAssetListRef = new List<Thing>();
             foreach (var part in campParts)
             {
-                part.Build(map);
+                part.Build(map, campAssetListRef);
             }
 
             for (int i = 0; i < campSiteRect.EdgeCells.Count() - 4; i++)
             {
                 if (i % 5 == 0) GenSpawn.Spawn(RimWorld.ThingDefOf.TorchLamp, campSiteRect.EdgeCells.ToArray()[i], map);
             }
+
+            var center = campParts.FirstOrDefault(part => part is CampCenter) as CampCenter;
+            center.Control.TryGetComp<CompCampControl>().CampRects = campParts.Select(part => part.CellRect).ToList();
+            center.Control.TryGetComp<CompCampControl>().CampAssets = campAssetListRef;
+            Log.Message($"camp assets: {campAssetListRef.Count} comp assets: {center.Control.TryGetComp<CompCampControl>().CampAssets.Count}");
         }
 
         protected void UpdateAreas()

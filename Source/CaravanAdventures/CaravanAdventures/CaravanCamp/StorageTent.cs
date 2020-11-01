@@ -18,9 +18,9 @@ namespace CaravanAdventures.CaravanCamp
         }
         public Zone GetZone() => zone;
 
-        public override void Build(Map map)
+        public override void Build(Map map, List<Thing> campAssetListRef)
         {
-            base.Build(map);
+            base.Build(map, campAssetListRef);
         }
 
         public virtual void CreateZone(Map map)

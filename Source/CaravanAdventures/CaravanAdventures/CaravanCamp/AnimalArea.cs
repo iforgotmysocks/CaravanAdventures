@@ -21,16 +21,16 @@ namespace CaravanAdventures.CaravanCamp
             SupplyCost = 1;
         }
 
-        public override void Build(Map map)
+        public override void Build(Map map, List<Thing> campAssetListRef)
         {
-            var entranceCells = CellRect.EdgeCells.Where(cell =>  cell.z == CellRect.minZ && cell.x == CellRect.minX + Convert.ToInt32(CellRect.Width / 2));
+            var entranceCells = CellRect.EdgeCells.Where(cell => cell.z == CellRect.minZ && cell.x == CellRect.minX + Convert.ToInt32(CellRect.Width / 2));
 
             foreach (var edgeCell in CellRect.EdgeCells)
             {
                 if (entranceCells.Contains(edgeCell)) continue;
                 var thing = ThingMaker.MakeThing(CampDefOf.CAFencePost);
                 thing.SetFaction(Faction.OfPlayer);
-                GenSpawn.Spawn(thing, edgeCell, map);
+                campAssetListRef.Add(GenSpawn.Spawn(thing, edgeCell, map));
             }
         }
 
@@ -52,8 +52,8 @@ namespace CaravanAdventures.CaravanCamp
 
         public void CreateZone(Map map)
         {
-            var zoneCells = CellRect.Height > CellRect.Width 
-                ? CellRect.Cells.Where(cell => cell.z == CellRect.maxZ - 1 && !CellRect.EdgeCells.Contains(cell)) 
+            var zoneCells = CellRect.Height > CellRect.Width
+                ? CellRect.Cells.Where(cell => cell.z == CellRect.maxZ - 1 && !CellRect.EdgeCells.Contains(cell))
                 : CellRect.Cells.Where(cell => cell.x == CellRect.maxX - 1 && !CellRect.EdgeCells.Contains(cell));
 
             zone = new Zone_Stockpile(StorageSettingsPreset.DefaultStockpile, map.zoneManager);
@@ -71,11 +71,24 @@ namespace CaravanAdventures.CaravanCamp
         {
             foreach (var cell in zone.Cells)
             {
-                var stack = caravan.AllThings.FirstOrDefault(x => x.def == ThingDefOf.Kibble) 
-                    ?? caravan.AllThings.FirstOrDefault(x => x.def == ThingDefOf.Hay) 
-                    ?? CampHelper.GetFirstOrderedThingOfCategoryFromCaravan(caravan, new [] { ThingCategoryDefOf.PlantFoodRaw });
+                var stack = caravan.AllThings.FirstOrDefault(x => x.def == ThingDefOf.Kibble)
+                    ?? caravan.AllThings.FirstOrDefault(x => x.def == ThingDefOf.Hay)
+                    ?? CampHelper.GetFirstOrderedThingOfCategoryFromCaravan(caravan, new[] { ThingCategoryDefOf.PlantFoodRaw });
+
+                if (stack == null) stack = map.zoneManager.AllZones.OfType<Zone_Stockpile>()
+                    .FirstOrDefault(zone => zone != this.zone && zone.AllContainedThings.Any(thing => (new List<ThingDef> { ThingDefOf.Kibble, ThingDefOf.Hay }).Contains(thing?.def)))
+                    ?.AllContainedThings?.FirstOrDefault(thing => (new List<ThingDef> { ThingDefOf.Kibble, ThingDefOf.Hay }).Contains(thing?.def));
+
                 if (stack == null) break;
-                if (!cell.Filled(map)) GenDrop.TryDropSpawn_NewTmp(stack, cell, map, ThingPlaceMode.Direct, out var result);
+                if (!cell.Filled(map))
+                {
+                    if (!stack.Spawned) GenDrop.TryDropSpawn_NewTmp(stack, cell, map, ThingPlaceMode.Direct, out var result);
+                    else
+                    {
+                        stack.DeSpawn();
+                        GenPlace.TryPlaceThing(stack, cell, map, ThingPlaceMode.Direct);
+                    }
+                }
             }
         }
     }

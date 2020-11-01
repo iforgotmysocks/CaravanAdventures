@@ -20,10 +20,9 @@ namespace CaravanAdventures.CaravanCamp
             SupplyCost = 4;
         }
 
-        public override void Build(Map map)
+        public override void Build(Map map, List<Thing> campAssetListRef)
         {
-            base.Build(map);
-            // todo maybe just add a bed list to parent
+            base.Build(map, campAssetListRef);
             var beds = CellRect.Cells.Select(cell => cell.GetFirstThing<Building_Bed>(map));
             foreach (var bed in beds)
             {
@@ -41,7 +40,7 @@ namespace CaravanAdventures.CaravanCamp
             shelf.GetStoreSettings().filter.SetAllow(ThingDefOf.MedicineHerbal, true);
             shelf.GetStoreSettings().filter.SetAllow(ThingDefOf.MedicineIndustrial, true);
             shelf.GetStoreSettings().filter.SetAllow(ThingDefOf.MedicineUltratech, true);
-            GenSpawn.Spawn(shelf, cellSpotShelf, map, Rot4.West, WipeMode.Vanish);
+            campAssetListRef.Add(GenSpawn.Spawn(shelf, cellSpotShelf, map, Rot4.West, WipeMode.Vanish));
         }
 
         public virtual void FillShelfs(Map map, Caravan caravan)

@@ -16,9 +16,9 @@ namespace CaravanAdventures.CaravanCamp
             SupplyCost = 4;
         }
 
-        public override void Build(Map map)
+        public override void Build(Map map, List<Thing> campAssetListRef)
         {
-            base.Build(map);
+            base.Build(map, campAssetListRef);
 
 
         }

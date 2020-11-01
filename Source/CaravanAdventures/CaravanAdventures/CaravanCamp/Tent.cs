@@ -14,7 +14,7 @@ namespace CaravanAdventures.CaravanCamp
         {
             SupplyCost = 2;
         }
-        public override void Build(Map map)
+        public override void Build(Map map, List<Thing> campAssetListRef)
         {
             var entranceCells = CellRect.EdgeCells.Where(cell => {
                 if (CoordSize == 1) return cell.z == CellRect.minZ && cell.x == CellRect.minX + Convert.ToInt32(CellRect.Width / 2);
@@ -30,7 +30,7 @@ namespace CaravanAdventures.CaravanCamp
             {
                 var door = ThingMaker.MakeThing(ThingDefOf.Door, RimWorld.ThingDefOf.WoodLog);
                 door.SetFaction(Faction.OfPlayer);
-                GenSpawn.Spawn(door, cell, map);
+                campAssetListRef.Add(GenSpawn.Spawn(door, cell, map));
             }
 
             foreach (var edgeCell in CellRect.EdgeCells)
@@ -38,7 +38,7 @@ namespace CaravanAdventures.CaravanCamp
                 if (entranceCells.Contains(edgeCell)) continue;
                 var thing = ThingMaker.MakeThing(CampDefOf.CATentWall, CampDefOf.CASpacerTentFabric);
                 thing.SetFaction(Faction.OfPlayer);
-                GenSpawn.Spawn(thing, edgeCell, map);
+                campAssetListRef.Add(GenSpawn.Spawn(thing, edgeCell, map));
             }
 
             foreach (var cell in CellRect.Cells)

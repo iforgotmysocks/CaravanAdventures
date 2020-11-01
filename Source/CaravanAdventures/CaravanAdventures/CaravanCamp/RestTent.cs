@@ -20,9 +20,9 @@ namespace CaravanAdventures.CaravanCamp
             SupplyCost = 3;
         }
 
-        public override void Build(Map map)
+        public override void Build(Map map, List<Thing> campAssetListRef)
         {
-            base.Build(map);
+            base.Build(map, campAssetListRef);
             var lover = Occupants.FirstOrDefault(col => col != null && LovePartnerRelationUtility.ExistingLovePartner(col) != null
                 && Occupants.Contains(LovePartnerRelationUtility.ExistingLovePartner(col)));
             var otherLover = lover != null ? LovePartnerRelationUtility.ExistingLovePartner(lover) : null;
@@ -36,6 +36,7 @@ namespace CaravanAdventures.CaravanCamp
                     var dbThing = ThingMaker.MakeThing(ThingDef.Named("BedrollDouble"), ThingDefOf.Cloth);
                     var doubleBed = GenSpawn.Spawn(dbThing, cellSpots[i], map, Rot4.South);
                     doubleBed.SetFaction(Faction.OfPlayer);
+                    campAssetListRef.Add(doubleBed);
                     lover.ownership.ClaimBedIfNonMedical((Building_Bed)doubleBed);
                     otherLover.ownership.ClaimBedIfNonMedical((Building_Bed)doubleBed);
                 }
@@ -44,6 +45,7 @@ namespace CaravanAdventures.CaravanCamp
                     var thing = ThingMaker.MakeThing(ThingDefOf.Bedroll, ThingDefOf.Cloth);
                     var bed = GenSpawn.Spawn(thing, cellSpots[i], map, Rot4.South);
                     bed.SetFaction(Faction.OfPlayer);
+                    campAssetListRef.Add(bed);
                     var pawnInNeedOfBed = Occupants.FirstOrDefault(occ => occ != null && occ != lover && occ != otherLover && occ.ownership.OwnedBed == null);
                     if (pawnInNeedOfBed != null) pawnInNeedOfBed.ownership.ClaimBedIfNonMedical((Building_Bed)bed);
                 }
@@ -52,6 +54,7 @@ namespace CaravanAdventures.CaravanCamp
             var caheaterPos = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 1 && cell.z == CellRect.minZ + 1);
             var caheater = GenSpawn.Spawn(CampThingDefOf.CAAirConditioningHeater, caheaterPos, map);
             caheater.SetFaction(Faction.OfPlayer);
+            campAssetListRef.Add(caheater);
             var refuelComp = caheater.TryGetComp<CompRefuelable>();
             // todo check if caravan has fuel
             if (refuelComp != null) refuelComp.Refuel(refuelComp.GetFuelCountToFullyRefuel());
