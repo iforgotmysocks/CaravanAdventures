@@ -54,6 +54,7 @@ namespace CaravanAdventures.CaravanCamp
         private bool hasStorageTent = true;
         private bool hasProductionTent = true;
         private bool hasAnimalArea = true;
+        private bool clearSnow = false;
 
         private CellRect coordSystem;
         private CellRect campSiteRect;
@@ -342,7 +343,7 @@ namespace CaravanAdventures.CaravanCamp
             {
                 map.areaManager.Home[cell] = true;
                 // todo add to settings
-                if (!cell.Roofed(map)) map.areaManager.SnowClear[cell] = true;
+                if (clearSnow) if (!cell.Roofed(map)) map.areaManager.SnowClear[cell] = true;
             }
         }
 

@@ -14,5 +14,9 @@ namespace CaravanAdventures.CaravanCamp
         public static ThingDef CATentWall;
         public static ThingDef CAFencePost;
         public static ThingDef CACampControl;
+
+        public static JobDef CACampInformPackingUp;
+
+        public static SoundDef CAPackUpTent;
     }
 }

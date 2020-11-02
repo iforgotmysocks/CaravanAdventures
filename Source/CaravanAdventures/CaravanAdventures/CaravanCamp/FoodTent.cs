@@ -13,7 +13,7 @@ namespace CaravanAdventures.CaravanCamp
     {
         private Zone_Stockpile zone;
         private ThingCategoryDef[] validFoods = new[] { ThingCategoryDefOf.FoodMeals, ThingCategoryDefOf.Foods, ThingCategoryDefOf.MeatRaw };
-
+        private ThingDef[] unvalidFoods = new[] { ThingDefOf.Kibble, ThingDefOf.Hay };
         public FoodTent()
         {
             this.CoordSize = 2;
@@ -39,6 +39,8 @@ namespace CaravanAdventures.CaravanCamp
             map.zoneManager.RegisterZone(zone);
             zone.settings.filter = new ThingFilter();
             zone.settings.filter.SetAllow(ThingCategoryDefOf.Foods, true);
+            zone.settings.filter.SetAllow(ThingDefOf.Kibble, false);
+            zone.settings.filter.SetAllow(ThingDefOf.Hay, false);
             zone.settings.Priority = StoragePriority.Preferred;
             zone.label = "CAFoodZoneLabel".Translate();
             CellRect.Cells.Where(cell => cell != null && !CellRect.EdgeCells.Contains(cell)).ToList().ForEach(cell => zone.AddCell(cell));
@@ -49,7 +51,7 @@ namespace CaravanAdventures.CaravanCamp
         {
             foreach (var cell in zone.Cells)
             {
-                var stack = CampHelper.GetFirstOrderedThingOfCategoryFromCaravan(caravan, validFoods);
+                var stack = CampHelper.GetFirstOrderedThingOfCategoryFromCaravan(caravan, validFoods, unvalidFoods);
                 if (stack == null) break;
                 if (!cell.Filled(map)) GenDrop.TryDropSpawn_NewTmp(stack, cell, map, ThingPlaceMode.Direct, out var result);
             }

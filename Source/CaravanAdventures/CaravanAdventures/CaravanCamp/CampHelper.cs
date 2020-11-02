@@ -29,12 +29,16 @@ namespace CaravanAdventures.CaravanCamp
             return CellFinder.RandomCell(map);
         }
 
-        public static Thing GetFirstOrderedThingOfCategoryFromCaravan(Caravan caravan, ThingCategoryDef[] validCategories)
+        public static Thing GetFirstOrderedThingOfCategoryFromCaravan(Caravan caravan, ThingCategoryDef[] validCategories, ThingDef[] unvalidThings = null)
         {
             Thing selected = null;
             foreach (var category in validCategories)
             {
-                selected = caravan.AllThings.FirstOrDefault(x => x?.def?.thingCategories != null && x.def.thingCategories.Contains(category));
+                selected = caravan.AllThings.Where(x => x?.def?.thingCategories != null 
+                    && x.def.thingCategories.Contains(category) 
+                    && ((unvalidThings == null || unvalidThings.Length == 0) || Array.IndexOf(unvalidThings, x.def) == -1))
+                    .OrderByDescending(x => x.stackCount).FirstOrDefault();
+
                 if (selected != null) return selected;
             }
             return selected;

@@ -71,13 +71,13 @@ namespace CaravanAdventures.CaravanCamp
         {
             foreach (var cell in zone.Cells)
             {
-                var stack = caravan.AllThings.FirstOrDefault(x => x.def == ThingDefOf.Kibble)
-                    ?? caravan.AllThings.FirstOrDefault(x => x.def == ThingDefOf.Hay)
+                var stack = caravan.AllThings.Where(x => x.def == ThingDefOf.Kibble).OrderByDescending(x => x.stackCount).FirstOrDefault()
+                    ?? caravan.AllThings.Where(x => x.def == ThingDefOf.Hay).OrderByDescending(x => x.stackCount).FirstOrDefault()
                     ?? CampHelper.GetFirstOrderedThingOfCategoryFromCaravan(caravan, new[] { ThingCategoryDefOf.PlantFoodRaw });
 
                 if (stack == null) stack = map.zoneManager.AllZones.OfType<Zone_Stockpile>()
                     .FirstOrDefault(zone => zone != this.zone && zone.AllContainedThings.Any(thing => (new List<ThingDef> { ThingDefOf.Kibble, ThingDefOf.Hay }).Contains(thing?.def)))
-                    ?.AllContainedThings?.FirstOrDefault(thing => (new List<ThingDef> { ThingDefOf.Kibble, ThingDefOf.Hay }).Contains(thing?.def));
+                    ?.AllContainedThings?.Where(thing => (new List<ThingDef> { ThingDefOf.Kibble, ThingDefOf.Hay }).Contains(thing?.def)).OrderByDescending(x => x.stackCount).FirstOrDefault();
 
                 if (stack == null) break;
                 if (!cell.Filled(map))
