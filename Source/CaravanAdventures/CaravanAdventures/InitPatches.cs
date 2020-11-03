@@ -17,6 +17,8 @@ namespace CaravanAdventures
         {
             FilterCombs.InitFilterSets();
             PatchAncientShrineDefs_MoreShrinesAndBetterRewards();
+
+            // todo -> check for royalty
             PatchTreeDef_AddTalkOption();
             PatchHumanDef_AddTalkOption();
             PatchRemoveRoyalTitleRequirements();

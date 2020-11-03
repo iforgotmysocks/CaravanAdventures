@@ -153,13 +153,16 @@ namespace CaravanAdventures.CaravanStory
             CompCache.StoryWC.storyFlags["Start_CanReceiveGift"] = true;
             CheckEnsureGifted(initiator);
             AddAdditionalSpells(initiator);
+            Find.LetterStack.ReceiveLetter("CA_Story_ReceivedGiftLetterTitle".Translate(), "CA_Story_ReceivedGiftLetterDesc".Translate(initiator.NameShortColored), LetterDefOf.PositiveEvent);
             if (animaTreeWhipserSustainer != null && !animaTreeWhipserSustainer.Ended) animaTreeWhipserSustainer.End();
             CompCache.StoryWC.storyFlags["Start_ReceivedGift"] = true;
         }
 
         private void AddAdditionalSpells(Pawn chosen)
         {
-            foreach (var abilityDef in DefDatabase<AbilityDef>.AllDefsListForReading.Where(x => x.level == 1).InRandomOrder().Take(2))
+            foreach (var abilityDef in DefDatabase<AbilityDef>.AllDefsListForReading
+                .Where(x => !chosen.abilities.abilities.Select(ab => ab.def).Contains(x))
+                .OrderBy(ab => ab.level).ThenBy(x => Guid.NewGuid()).Take(2))
             {
                 chosen.abilities.GainAbility(abilityDef);
             }

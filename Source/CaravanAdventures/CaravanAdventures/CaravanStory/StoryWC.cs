@@ -24,8 +24,6 @@ using Verse.Noise;
 //Verse.Root:Update()
 //Verse.Root_Play:Update()
 
-
-
 // med prio:
 // - create mech bosses after horsemen traits
 // -- add quote to each horsemen type when entering the shrine
@@ -49,8 +47,11 @@ namespace CaravanAdventures.CaravanStory
         private int ticks = -1;
         private int countShrinesCompleted = 0;
         private int shrineMaximum = 5;
+
         private readonly IntRange timeoutDaysRange = new IntRange(10, 12);
-        private readonly IntRange shrineDistance = Helper.Debug() ? new IntRange(2, 4) : new IntRange(40, 60);
+        // todo move baseDelayNextShrineReveal and shrineDistance to settings?
+        private readonly IntRange shrineDistance = Helper.Debug() ? new IntRange(2, 4) : new IntRange(300, 500);
+        private int shrineTileUnsuccessfulCounter = 0;
         private List<AbilityDef> unlockedSpells = new List<AbilityDef>();
         private int bossMissedCounter = 0;
         private bool ranDebugActionsOnceAtStartUp;
@@ -110,6 +111,7 @@ namespace CaravanAdventures.CaravanStory
             Scribe_Values.Look(ref countShrinesCompleted, "countShrinesCompleted", 0);
             Scribe_Values.Look(ref bossMissedCounter, "bossMissedCounter", 0);
             Scribe_Deep.Look(ref questCont, "questCont");
+            Scribe_Values.Look(ref shrineTileUnsuccessfulCounter, "shrineTileUnsuccessfulCounter", 0);
         }
 
         public StoryWC(World world) : base(world)
@@ -228,12 +230,15 @@ namespace CaravanAdventures.CaravanStory
         {
             // todo Create own find method that keeps the same distance from bases and caravans
             // -> after an unsuccesfull attempt, select tile that supports it for sure.
-            if (!TileFinder.TryFindNewSiteTile(out var tile, shrineDistance.min, shrineDistance.max))
+            var newRange = new IntRange(shrineDistance.min / (shrineTileUnsuccessfulCounter + 1), shrineDistance.max / (shrineTileUnsuccessfulCounter + 1));
+            if (!TileFinder.TryFindNewSiteTile(out var tile, newRange.min, newRange.max))
             {
+                shrineTileUnsuccessfulCounter++;
                 Log.Message("Couldn't find tile to create a new shrine");
                 shrineRevealCounter = 60f;
                 return;
             }
+            shrineTileUnsuccessfulCounter = 0;
             if (Faction.OfPlayer.HostileTo(StoryUtility.FactionOfSacrilegHunters))
             {
                 Log.Message($"Skipping shrine revealation, Sac hunters are hostile.");
