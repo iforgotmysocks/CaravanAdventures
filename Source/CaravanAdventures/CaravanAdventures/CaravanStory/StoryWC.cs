@@ -14,6 +14,17 @@ using Verse.Noise;
 // high prio:
 // - add and rework dialogs from shrines onwards
 // - add system that allows inclusion or exclusion for other races to relation
+// - add a quest update when main char managed to escape the village, so the player knows that he can leave now
+// - village still throws an error sometimes, when story char is being spawned on a unwalkable cell: 
+//Couldn't find a cell to spawn pawn
+//Verse.Log:Error(String, Boolean)
+//CaravanAdventures.CaravanStory.<> c__DisplayClass8_0:< Notify_CaravanArrived > b__1()
+//Verse.LongEventHandler:UpdateCurrentSynchronousEvent(Boolean &)
+//Verse.LongEventHandler:LongEventsUpdate(Boolean &)
+//Verse.Root:Update()
+//Verse.Root_Play:Update()
+
+
 
 // med prio:
 // - create mech bosses after horsemen traits
@@ -115,7 +126,7 @@ namespace CaravanAdventures.CaravanStory
             if (debugFlags["StoryStartDone"])
                 foreach (var flag in storyFlags.Where(x => x.Key.StartsWith("Start_")).ToList())
                     storyFlags[flag.Key] = true;
-         
+
             if (debugFlags["ForwardToLastShrine"])
             {
                 countShrinesCompleted = 4;
@@ -195,7 +206,7 @@ namespace CaravanAdventures.CaravanStory
         
         private void RunDebugActionsOnceAtStartUp()
         {
-            if (ranDebugActionsOnceAtStartUp) return; 
+            if (ranDebugActionsOnceAtStartUp) return;
 
             if (debugFlags["DebugResetVillagesAndShrines"])
             {

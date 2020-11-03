@@ -21,7 +21,10 @@ namespace CaravanAdventures.CaravanCamp
         {
             control = GenSpawn.Spawn(CampDefOf.CACampControl, this.CellRect.CenterCell, map) as ThingWithComps;
             campAssetListRef.Add(control);
-            campAssetListRef.Add(GenSpawn.Spawn(ThingDefOf.Campfire, this.CellRect.CenterCell, map));
+            var campFire = GenSpawn.Spawn(ThingDefOf.Campfire, this.CellRect.CenterCell, map);
+            var gatherSpotComp = campFire?.TryGetComp<CompGatherSpot>();
+            if (gatherSpotComp != null) gatherSpotComp.Active = true;
+            campAssetListRef.Add(campFire);
 
             foreach (var cornerCell in CellRect.Corners)
             {

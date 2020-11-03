@@ -97,8 +97,8 @@ namespace CaravanAdventures.CaravanStory
         private void AddTreeWhisper()
         {
             if (CompCache.StoryWC.storyFlags["Start_ReceivedGift"] 
-                || CompCache.StoryWC.storyFlags["Start_InitialTreeWhisper"] 
-                && animaTreeWhipserSustainer != null) return;
+                || CompCache.StoryWC.storyFlags["Start_InitialTreeWhisper"] && animaTreeWhipserSustainer != null
+                || CompCache.StoryWC.storyFlags["Start_InitialTreeWhisper"] && !currentStoryTrigger) return;
             
             var tree = map.spawnedThings.FirstOrDefault(x => x.def.defName == "Plant_TreeAnima");
             if (tree == null)
@@ -223,7 +223,7 @@ namespace CaravanAdventures.CaravanStory
         public override void MapRemoved()
         {
             base.MapRemoved();
-            // todo is currentStoryTrigger really needed??
+            // todo is currentStoryTrigger really needed?? -> currently used to limit the tree dialog to only one tree, yould prolly allow for all trees with extra checks, needs testing.
             Log.Message($"StoryStart Map removed, resetting StoryStart Flags.");
             if (currentStoryTrigger && !CompCache.StoryWC.storyFlags["Start_ReceivedGift"])
             {

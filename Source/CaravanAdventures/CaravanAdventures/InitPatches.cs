@@ -45,8 +45,7 @@ namespace CaravanAdventures
                 Log.Message("Tree is null");
                 return;
             }
-            var compProp = new CompProperties_Talk();
-            if (!tree.comps.Any(x => x is CompProperties_Talk)) tree.comps.Add(compProp);
+            if (!tree.comps.Any(x => x is CompProperties_Talk)) tree.comps.Add(new CompProperties_Talk());
         }
 
         private static void PatchHumanDef_AddTalkOption()
