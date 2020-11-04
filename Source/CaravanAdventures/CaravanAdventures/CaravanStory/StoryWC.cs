@@ -15,14 +15,16 @@ using Verse.Noise;
 // - add and rework dialogs from shrines onwards
 // - add system that allows inclusion or exclusion for other races to relation
 // - add a quest update when main char managed to escape the village, so the player knows that he can leave now
+// - turn letter for new shrine location into quest
+// --> figure out how to append location links into quest
 // - village still throws an error sometimes, when story char is being spawned on a unwalkable cell: 
-//Couldn't find a cell to spawn pawn
-//Verse.Log:Error(String, Boolean)
-//CaravanAdventures.CaravanStory.<> c__DisplayClass8_0:< Notify_CaravanArrived > b__1()
-//Verse.LongEventHandler:UpdateCurrentSynchronousEvent(Boolean &)
-//Verse.LongEventHandler:LongEventsUpdate(Boolean &)
-//Verse.Root:Update()
-//Verse.Root_Play:Update()
+    //Couldn't find a cell to spawn pawn
+    //Verse.Log:Error(String, Boolean)
+    //CaravanAdventures.CaravanStory.<> c__DisplayClass8_0:< Notify_CaravanArrived > b__1()
+    //Verse.LongEventHandler:UpdateCurrentSynchronousEvent(Boolean &)
+    //Verse.LongEventHandler:LongEventsUpdate(Boolean &)
+    //Verse.Root:Update()
+    //Verse.Root_Play:Update()
 
 // med prio:
 // - create mech bosses after horsemen traits
@@ -249,7 +251,10 @@ namespace CaravanAdventures.CaravanStory
             ancientMasterShrineWO.Tile = tile;
             //ancientMasterShrineWO.GetComponent<TimeoutComp>().StartTimeout(timeoutDaysRange.RandomInRange * 60000);
             Find.WorldObjects.Add(ancientMasterShrineWO);
-            Find.LetterStack.ReceiveLetter("Story_Shrine1_NewShrineDetectedLetterLabel".Translate(), "Story_Shrine1_NewShrineDetectedLetterMessage".Translate(), LetterDefOf.PositiveEvent, ancientMasterShrineWO);
+
+            // todo turn into quest
+            // todo figure out how to append location links into quest
+            Find.LetterStack.ReceiveLetter("Story_Shrine1_NewShrineDetectedLetterLabel".Translate(), "Story_Shrine1_NewShrineDetectedLetterMessage".Translate(CompCache.StoryWC.questCont.Village.StoryContact.NameShortColored), LetterDefOf.PositiveEvent, ancientMasterShrineWO);
             SetShrineSF("Created");
         }
 

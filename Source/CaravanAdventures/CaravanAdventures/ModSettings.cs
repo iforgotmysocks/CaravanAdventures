@@ -24,6 +24,7 @@ namespace CaravanAdventures
         public bool apocalypseEnabled = true;
 
         public static ModSettings Get() => LoadedModManager.GetMod<CaravanAdventures.Main>().GetSettings<ModSettings>();
+        private Vector2 scrollPos = Vector2.zero;
 
         public override void ExposeData()
         {
@@ -50,10 +51,17 @@ namespace CaravanAdventures
         {
             var options = new Listing_Standard();
             options.Begin(wrect);
+            //GUI.BeginGroup(wrect);
+            //Widgets.BeginScrollView(wrect, ref this.scrollPos, new Rect(0f, 0f, wrect.width, 700f));
+
+            var viewRect = new Rect(0f, 0f, wrect.width, wrect.height);
+            options.BeginScrollView(wrect, ref this.scrollPos, ref viewRect);
+
 
             options.CheckboxLabeled("Debug mode", ref debug);
             if (options.ButtonText("Reset full story")) StoryUtility.RestartStory();
             options.CheckboxLabeled("Apocalypse enabled", ref apocalypseEnabled);
+         
             // todo figure out scroll views
             //Rect viewRect = new Rect(0, 0, 500, 3000);
             //Vector2 vec = new Vector2(0, 0);
@@ -94,8 +102,11 @@ namespace CaravanAdventures
 
 
 
-            //options.EndScrollView(ref viewRect);
+            options.EndScrollView(ref viewRect);
+            //Widgets.EndScrollView();
+            //GUI.EndGroup();
             options.End();
+            this.Write();
         }
 
        
