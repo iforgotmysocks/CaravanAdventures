@@ -255,6 +255,8 @@ namespace CaravanAdventures.CaravanStory
             // todo turn into quest
             // todo figure out how to append location links into quest
             Find.LetterStack.ReceiveLetter("Story_Shrine1_NewShrineDetectedLetterLabel".Translate(), "Story_Shrine1_NewShrineDetectedLetterMessage".Translate(CompCache.StoryWC.questCont.Village.StoryContact.NameShortColored), LetterDefOf.PositiveEvent, ancientMasterShrineWO);
+            Quests.QuestUtility.GenerateStoryQuest(StoryQuestDefOf.CA_FindAncientShrine, true, "Story_Shrine1_QuestName", null, "Story_Shrine1_QuestDesc", new object[] { CompCache.StoryWC.questCont.Village.StoryContact.NameShortColored });
+            Quests.QuestUtility.UpdateQuestLocation(StoryQuestDefOf.CA_FindAncientShrine, ancientMasterShrineWO);
             SetShrineSF("Created");
         }
 

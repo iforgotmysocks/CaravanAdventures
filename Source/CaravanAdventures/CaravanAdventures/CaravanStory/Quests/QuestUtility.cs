@@ -1,4 +1,5 @@
 ﻿using RimWorld;
+using RimWorld.Planet;
 using RimWorld.QuestGen;
 using System;
 using System.Collections.Generic;
@@ -113,6 +114,21 @@ namespace CaravanAdventures.CaravanStory.Quests
             var quest = Find.QuestManager.QuestsListForReading.FirstOrDefault(x => x.root == questDef);
             if (!avoidAdditionalSpaceFormatting) text = "\n\n" + text;
             if (quest != null) quest.description += text;
+        }
+
+        public static void UpdateQuestLocation(QuestScriptDef questDef, WorldObject location, bool clearExistingLocations = true)
+        {
+            var quest = Find.QuestManager.QuestsListForReading.FirstOrDefault(x => x.root == questDef);
+            if (quest == null) return;
+
+            var locationPart = quest.PartsListForReading.OfType<QuestPart_AddLocations>().FirstOrDefault();
+            if (locationPart == null) {
+                //quest.RemovePart(locationLink);
+                locationPart = new QuestPart_AddLocations();
+                quest.AddPart(locationPart);
+            }
+            if (clearExistingLocations) locationPart.Locations.Clear();
+            locationPart.Locations.Add(location);
         }
     }
 }
