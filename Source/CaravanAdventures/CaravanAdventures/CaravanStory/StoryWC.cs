@@ -17,6 +17,7 @@ using Verse.Noise;
 // - add a quest update when main char managed to escape the village, so the player knows that he can leave now
 // - turn letter for new shrine location into quest
 // --> figure out how to append location links into quest
+// - suddenly yellow save error for the sacrileg hunter faction appeared and the story char was generated anew -> fix!!
 // - village still throws an error sometimes, when story char is being spawned on a unwalkable cell: 
     //Couldn't find a cell to spawn pawn
     //Verse.Log:Error(String, Boolean)

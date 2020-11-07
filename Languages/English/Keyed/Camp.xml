@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
   <CAAnimalAreaLabel>Animal area</CAAnimalAreaLabel>
+  <CAAnimalNoFoodAreaLabel>Animal free</CAAnimalNoFoodAreaLabel>
   <CAFoodZoneLabel>Food</CAFoodZoneLabel>
   <CAAnimalFoodZoneLabel>Animal food</CAAnimalFoodZoneLabel>
   <CADeconstructCamp>Pack up the camp</CADeconstructCamp>

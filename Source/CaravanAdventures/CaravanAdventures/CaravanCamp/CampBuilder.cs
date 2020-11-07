@@ -178,16 +178,25 @@ namespace CaravanAdventures.CaravanCamp
 
         protected void TransformTerrain()
         {
-            foreach (var c in campSiteRect.Cells)
+            foreach (var c in campSiteRect.ExpandedBy(1).Cells)
             {
                 var room = c.GetRoom(map);
-                if (room != null && room.CellCount < 500 && room.ContainsThing(ThingDefOf.AncientCryptosleepCasket))
+
+                if (room != null && room.CellCount < 700 && room.ContainsThing(ThingDefOf.AncientCryptosleepCasket))
                 {
-                    Log.Message($"cell has room");
-                    foreach (var roomCell in room.Cells)
+                   foreach (var roomCell in room.Cells)
+                    {
                         foreach (var thing in map.thingGrid.ThingsListAt(roomCell).Reverse<Thing>()) if (thing.def.destroyable) thing.Destroy();
+                    }
+
+                    var roomRect = CellRect.FromLimits(room.Cells.MinBy(cell => cell.x + cell.z), room.Cells.MaxBy(cell => cell.x + cell.z));
+                    foreach (var cell in roomRect.ExpandedBy(1).Cells) map.fogGrid.Unfog(cell);
                 }
-                else foreach (var thing in map.thingGrid.ThingsListAt(c).Reverse<Thing>()) if (thing.def.destroyable) thing.Destroy();
+            }
+
+            foreach (var c in campSiteRect.Cells)
+            {
+                foreach (var thing in map.thingGrid.ThingsListAt(c).Reverse<Thing>()) if (thing.def.destroyable) thing.Destroy();
                 map.roofGrid.SetRoof(c, null);
                 map.fogGrid.Unfog(c);
                 var terrain = map.terrainGrid.TerrainAt(c);
@@ -327,7 +336,9 @@ namespace CaravanAdventures.CaravanCamp
 
             for (int i = 0; i < campSiteRect.EdgeCells.Count() - 4; i++)
             {
-                if (i % 5 == 0) GenSpawn.Spawn(RimWorld.ThingDefOf.TorchLamp, campSiteRect.EdgeCells.ToArray()[i], map);
+                if (i % 5 != 0) continue; 
+                var lamp = GenSpawn.Spawn(RimWorld.ThingDefOf.TorchLamp, campSiteRect.EdgeCells.ToArray()[i], map);
+                lamp.SetFaction(Faction.OfPlayer);
             }
 
             var center = campParts.FirstOrDefault(part => part is CampCenter) as CampCenter;
@@ -365,6 +376,8 @@ namespace CaravanAdventures.CaravanCamp
                 areaRestriction.CreateNewRestrictionArea(map, caravan);
                 areaRestriction.AssignPawnsToAreas(map, caravan);
             }
+
+            CampHelper.AddAnimalFreeAreaRestriction(campParts.OfType<IZoneTent>().Where(part => part is FoodTent), map);
         }
 
     }

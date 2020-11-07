@@ -18,7 +18,8 @@ namespace CaravanAdventures.CaravanStory.Quests
         public void ExposeData()
         {
             Scribe_Values.Look(ref friendlyCaravanCounter, "friendlyCaravanCounter", -1);
-            Scribe_References.Look(ref storyContactBondedPawn, "storyContactBondedPawn");
+            // todo maybe revert to reference when it's clear dafuq is going on
+            Scribe_Deep.Look(ref storyContactBondedPawn, "storyContactBondedPawn");
         }
 
         public QuestCont_FriendlyCaravan()

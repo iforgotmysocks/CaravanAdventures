@@ -43,5 +43,15 @@ namespace CaravanAdventures.CaravanCamp
             }
             return selected;
         }
+
+        internal static void AddAnimalFreeAreaRestriction(IEnumerable<IZoneTent> parts, Map map)
+        {
+            var animalArea = new Area_Allowed(map.areaManager);
+            map.areaManager.AllAreas.Add(animalArea);
+            animalArea.SetLabel("CAAnimalNoFoodAreaLabel".Translate());
+            map.AllCells.ToList().ForEach(cell => animalArea[cell] = true);
+            parts.Select(part => part.GetZone()).ToList().ForEach(zone => zone.Cells.ForEach(cell => animalArea[cell] = false));
+            animalArea.AreaUpdate();
+        }
     }
 }

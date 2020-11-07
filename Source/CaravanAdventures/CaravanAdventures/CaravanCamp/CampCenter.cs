@@ -22,6 +22,7 @@ namespace CaravanAdventures.CaravanCamp
             control = GenSpawn.Spawn(CampDefOf.CACampControl, this.CellRect.CenterCell, map) as ThingWithComps;
             campAssetListRef.Add(control);
             var campFire = GenSpawn.Spawn(ThingDefOf.Campfire, this.CellRect.CenterCell, map);
+            campFire.SetFaction(Faction.OfPlayer);
             var gatherSpotComp = campFire?.TryGetComp<CompGatherSpot>();
             if (gatherSpotComp != null) gatherSpotComp.Active = true;
             campAssetListRef.Add(campFire);
@@ -29,6 +30,7 @@ namespace CaravanAdventures.CaravanCamp
             foreach (var cornerCell in CellRect.Corners)
             {
                 var thing = ThingMaker.MakeThing(RimWorld.ThingDefOf.TorchLamp);
+                thing.SetFaction(Faction.OfPlayer);
                 campAssetListRef.Add(GenSpawn.Spawn(thing, cornerCell, map, Rot4.South));
             }
         }

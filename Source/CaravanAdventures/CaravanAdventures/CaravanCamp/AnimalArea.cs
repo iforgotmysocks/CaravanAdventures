@@ -36,6 +36,7 @@ namespace CaravanAdventures.CaravanCamp
 
         public void CreateNewRestrictionArea(Map map, Caravan caravan)
         {
+            // only works with 1 animal area right now!
             animalArea = new Area_Allowed(map.areaManager);
             map.areaManager.AllAreas.Add(animalArea);
             animalArea.SetLabel("CAAnimalAreaLabel".Translate());
