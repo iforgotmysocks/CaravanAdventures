@@ -184,7 +184,7 @@ namespace CaravanAdventures.CaravanCamp
 
                 if (room != null && room.CellCount < 700 && room.ContainsThing(ThingDefOf.AncientCryptosleepCasket))
                 {
-                   foreach (var roomCell in room.Cells)
+                    foreach (var roomCell in room.Cells)
                     {
                         foreach (var thing in map.thingGrid.ThingsListAt(roomCell).Reverse<Thing>()) if (thing.def.destroyable) thing.Destroy();
                     }
@@ -196,7 +196,7 @@ namespace CaravanAdventures.CaravanCamp
 
             foreach (var c in campSiteRect.Cells)
             {
-                foreach (var thing in map.thingGrid.ThingsListAt(c).Reverse<Thing>()) if (thing.def.destroyable) thing.Destroy();
+                foreach (var thing in map.thingGrid.ThingsListAt(c).Reverse<Thing>()) if (thing.def.destroyable && thing.def?.category != ThingCategory.Plant && thing.def?.altitudeLayer != AltitudeLayer.LowPlant) thing.Destroy();
                 map.roofGrid.SetRoof(c, null);
                 map.fogGrid.Unfog(c);
                 var terrain = map.terrainGrid.TerrainAt(c);
@@ -256,8 +256,11 @@ namespace CaravanAdventures.CaravanCamp
                     foreach (var cell in free)
                     {
                         var cells = GetNeigbourCells(cell, free, part.CoordSize, part.ForcedTentDirection);
-                        if (cells != null) placementCells = cells;
-                        break;
+                        if (cells != null)
+                        {
+                            placementCells = cells;
+                            break;
+                        }
                     }
                     if (placementCells.Count != 0) break;
                     coordSystem = coordSystem.ExpandedBy(1);
@@ -336,7 +339,7 @@ namespace CaravanAdventures.CaravanCamp
 
             for (int i = 0; i < campSiteRect.EdgeCells.Count() - 4; i++)
             {
-                if (i % 5 != 0) continue; 
+                if (i % 5 != 0) continue;
                 var lamp = GenSpawn.Spawn(RimWorld.ThingDefOf.TorchLamp, campSiteRect.EdgeCells.ToArray()[i], map);
                 lamp.SetFaction(Faction.OfPlayer);
             }

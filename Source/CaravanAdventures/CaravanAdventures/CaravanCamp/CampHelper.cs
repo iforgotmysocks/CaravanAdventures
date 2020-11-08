@@ -11,10 +11,9 @@ namespace CaravanAdventures.CaravanCamp
 {
     class CampHelper
     {
-
         public static IntVec3 FindCenterCell(Map map, Predicate<IntVec3> extraCellValidator)
         {
-            TraverseParms traverseParms = TraverseParms.For(TraverseMode.NoPassClosedDoors, Danger.Deadly, false);
+            var traverseParms = TraverseParms.For(TraverseMode.NoPassClosedDoors, Danger.Deadly, false);
             Predicate<IntVec3> baseValidator = (IntVec3 x) => x.Standable(map) && !x.Fogged(map) && map.reachability.CanReachMapEdge(x, traverseParms);
             IntVec3 result;
             if (extraCellValidator != null && RCellFinder.TryFindRandomCellNearTheCenterOfTheMapWith((IntVec3 x) => baseValidator(x) && extraCellValidator(x), map, out result))
@@ -27,6 +26,21 @@ namespace CaravanAdventures.CaravanCamp
             }
             Log.Warning("Could not find any valid cell.", false);
             return CellFinder.RandomCell(map);
+        }
+
+        internal static Thing PrepAndGenerateThing(object objThing, IntVec3 cell, Map map, Rot4 rot, List<Thing> campAssetListRef, bool skipFaction = false)
+        {
+            
+            var spawnedThing = objThing is Thing thing ? GenSpawn.Spawn(thing, cell, map, rot) 
+                : objThing is ThingDef thingDef ? GenSpawn.Spawn(thingDef, cell, map) : null;
+            if (spawnedThing == null)
+            {
+                Log.Warning($"Failed to spawn thing that should have been spawned in camp setup");
+                return null;
+            }
+            if (!skipFaction) spawnedThing.SetFaction(Faction.OfPlayer);
+            campAssetListRef.Add(spawnedThing);
+            return spawnedThing;
         }
 
         public static Thing GetFirstOrderedThingOfCategoryFromCaravan(Caravan caravan, ThingCategoryDef[] validCategories, ThingDef[] unvalidThings = null)
