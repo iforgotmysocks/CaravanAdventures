@@ -342,12 +342,13 @@ namespace CaravanAdventures.CaravanCamp
                 if (i % 5 != 0) continue;
                 var lamp = GenSpawn.Spawn(RimWorld.ThingDefOf.TorchLamp, campSiteRect.EdgeCells.ToArray()[i], map);
                 lamp.SetFaction(Faction.OfPlayer);
+                var fuelComp = lamp.TryGetComp<CompRefuelable>();
+                if (fuelComp != null) fuelComp.allowAutoRefuel = false;
             }
 
             var center = campParts.FirstOrDefault(part => part is CampCenter) as CampCenter;
             center.Control.TryGetComp<CompCampControl>().CampRects = campParts.Select(part => part.CellRect).ToList();
             center.Control.TryGetComp<CompCampControl>().CampAssets = campAssetListRef;
-            Log.Message($"camp assets: {campAssetListRef.Count} comp assets: {center.Control.TryGetComp<CompCampControl>().CampAssets.Count}");
         }
 
         protected void UpdateAreas()
