@@ -14,7 +14,7 @@ namespace CaravanAdventures.CaravanImprovements
     public class UnloadItemsAlert : Alert
     {
         protected override Color BGColor => new Color(0.1f, 1f, 0.1f, 0.1f);
-        
+
         public UnloadItemsAlert()
         {
             defaultLabel = "DropItemAlert".Translate();

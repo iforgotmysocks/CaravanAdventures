@@ -227,9 +227,10 @@ namespace CaravanAdventures.CaravanStory
         {
             base.MapRemoved();
             // todo is currentStoryTrigger really needed?? -> currently used to limit the tree dialog to only one tree, yould prolly allow for all trees with extra checks, needs testing.
-            Log.Message($"StoryStart Map removed, resetting StoryStart Flags.");
+           
             if (currentStoryTrigger && !CompCache.StoryWC.storyFlags["Start_ReceivedGift"])
             {
+                Log.Message($"StoryStart Map removed, resetting StoryStart Flags.");
                 CompCache.StoryWC.ResetSFsStartingWith("Start_");
             }
         }

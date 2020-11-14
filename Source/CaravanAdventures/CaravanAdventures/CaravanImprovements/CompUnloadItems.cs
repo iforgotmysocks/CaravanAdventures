@@ -10,7 +10,7 @@ namespace CaravanAdventures.CaravanImprovements
     class CompUnloadItems : MapComponent
     {
         private bool unload = false;
-        public bool Unload { get; set; }
+        public bool Unload { get => unload; set => unload = value; }
         public CompUnloadItems(Map map) : base(map)
         {
         }

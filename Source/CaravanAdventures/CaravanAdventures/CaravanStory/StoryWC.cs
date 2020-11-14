@@ -31,6 +31,7 @@ using Verse.Noise;
 // - create mech bosses after horsemen traits
 // -- add quote to each horsemen type when entering the shrine
 // -- credits to horsemen idea to Shakesthespeare
+// -- caravan unload option disappears after saving and loading a savegame
 
 // low prio:
 // - make configurable if sacrileg hunters are hostile towards the empire

@@ -81,6 +81,7 @@ namespace CaravanAdventures.CaravanCamp
             GenerateBuildings();
             UpdateAreas();
             ApplyZonesAndInventory();
+            GenerateRecipes();
 
             Current.ProgramState = stateBackup;
             return true;
@@ -382,6 +383,11 @@ namespace CaravanAdventures.CaravanCamp
             }
 
             CampHelper.AddAnimalFreeAreaRestriction(campParts.OfType<IZoneTent>().Where(part => part is FoodTent), map);
+        }
+
+        public void GenerateRecipes()
+        {
+            foreach (var recipeHolder in campParts.OfType<IRecipeHolder>()) recipeHolder.ApplyRecipes(caravan);
         }
 
     }

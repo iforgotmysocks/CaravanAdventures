@@ -90,6 +90,7 @@
     <Compile Include="CaravanCamp\CompCampControl.cs" />
     <Compile Include="CaravanCamp\CampThingDefOf.cs" />
     <Compile Include="CaravanCamp\IAreaRestrictionTent.cs" />
+    <Compile Include="CaravanCamp\IRecipeHolder.cs" />
     <Compile Include="CaravanCamp\IShelfTent.cs" />
     <Compile Include="CaravanCamp\IZoneTent.cs" />
     <Compile Include="CaravanCamp\JobDriver_StartPackingUp.cs" />
