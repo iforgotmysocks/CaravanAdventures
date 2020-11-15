@@ -18,6 +18,7 @@ namespace CaravanAdventures.CaravanCamp
     // -- normal lether and stuff low lq camp
     // -- make deconstructing items not give anything
     // -- resources are gained back by dismanteling the camp via the option of the camp fire
+    // -- solo lovers without their partner don't seem to get a place in a rest tent
 
     // Find fabric and leather used to build buildings
     // find rect in middle of map large enough to fit tents for x pawns
