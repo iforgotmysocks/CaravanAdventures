@@ -163,22 +163,27 @@ namespace CaravanAdventures.CaravanCamp
 
         private void CalculateCostAndDetermineType(bool tribal = false)
         {
-            //var center = campParts.FirstOrDefault(part => part is CampCenter) as CampCenter;
-            //if (tribal)
-            //{
-            //    this.tribal = tribal;
-            //    center.Control.TryGetComp<CompCampControl>().Tribal = tribal;
-            //    return;
-            //}
-            //campParts.ForEach(part => campCost += part.SupplyCost);
-            //var amount = caravan.AllThings?.Where(thing => thing.def == CampThingDefOf.CASpacerTentSupplies)?.Select(thing => thing.stackCount)?.Sum();
-            //if (amount == null || amount == 0 || campCost > amount)
-            //{
-            //    tribal = true;
-            //    center.Control.TryGetComp<CompCampControl>().Tribal = tribal;
-            //    return;
-            //}
-            //center.Control.TryGetComp<CompCampControl>().ResourceCount = (int)amount;
+            if (tribal)
+            {
+                this.tribal = true;
+                return;
+            }
+            campParts.ForEach(part => campCost += part.SupplyCost);
+            var amount = caravan.AllThings?.Where(thing => thing.def == CampThingDefOf.CASpacerTentSupplies)?.Select(thing => thing?.stackCount)?.Sum();
+            if (amount == null || amount == 0 || campCost > amount)
+            {
+                this.tribal = true;
+                return;
+            }
+            var remaining = Convert.ToInt32(campCost);
+            var materials = CaravanInventoryUtility.TakeThings(caravan, delegate(Thing thing)
+            {
+                if (thing.def != CampThingDefOf.CASpacerTentSupplies) return 0;
+                var taken = Mathf.Min(remaining, thing.stackCount);
+                remaining -= taken;
+                return taken;
+            });
+            foreach (var mat in materials.Reverse<Thing>()) mat.Destroy(); 
         }
 
         protected void AssignCampLayout()
@@ -367,7 +372,7 @@ namespace CaravanAdventures.CaravanCamp
 
             for (int i = 0; i < campSiteRect.EdgeCells.Count() - 4; i++)
             {
-                if (i % 5 != 0) continue;
+                if ((tribal ? (i % 5) : (i % 10)) != 0) continue;
                 var lamp = GenSpawn.Spawn(RimWorld.ThingDefOf.TorchLamp, campSiteRect.EdgeCells.ToArray()[i], map);
                 lamp.SetFaction(Faction.OfPlayer);
                 var fuelComp = lamp.TryGetComp<CompRefuelable>();
@@ -375,8 +380,11 @@ namespace CaravanAdventures.CaravanCamp
             }
 
             var center = campParts.FirstOrDefault(part => part is CampCenter) as CampCenter;
-            center.Control.TryGetComp<CompCampControl>().CampRects = campParts.Select(part => part.CellRect).ToList();
-            center.Control.TryGetComp<CompCampControl>().CampAssets = campAssetListRef;
+            var comp = center.Control.TryGetComp<CompCampControl>();
+            comp.CampRects = campParts.Select(part => part.CellRect).ToList();
+            comp.CampAssets = campAssetListRef;
+            comp.ResourceCount = Convert.ToInt32(campCost);
+            comp.Tribal = tribal;
         }
 
         protected void UpdateAreas()

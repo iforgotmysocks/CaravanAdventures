@@ -64,6 +64,21 @@ namespace CaravanAdventures.CaravanCamp
         public void FinishPackingReainingTentsAndControl()
         {
             foreach (var rect in CampRects) PackUpTent(rect);
+            
+            if (!tribal)
+            {
+                var count = Convert.ToInt32(Math.Ceiling((double)CampThingDefOf.CASpacerTentSupplies.stackLimit / (double)resourceCount));
+                var remaining = resourceCount;
+                for (var i = 0; i < count; i++)
+                {
+                    var thing = ThingMaker.MakeThing(CampThingDefOf.CASpacerTentSupplies);
+                    var substact = Math.Min(remaining, thing.def.stackLimit);
+                    remaining -= substact;
+                    thing.stackCount = substact;
+                    GenPlace.TryPlaceThing(thing, parent.Position, parent.Map, ThingPlaceMode.Near);
+                }
+            }
+
             RemoveControl();
         }
 
