@@ -163,22 +163,22 @@ namespace CaravanAdventures.CaravanCamp
 
         private void CalculateCostAndDetermineType(bool tribal = false)
         {
-            var center = campParts.FirstOrDefault(part => part is CampCenter) as CampCenter;
-            if (tribal)
-            {
-                this.tribal = tribal;
-                center.Control.TryGetComp<CompCampControl>().Tribal = tribal;
-                return;
-            }
-            campParts.ForEach(part => campCost += part.SupplyCost);
-            var amount = caravan.AllThings?.Where(thing => thing.def == CampThingDefOf.CASpacerTentSupplies)?.Select(thing => thing.stackCount)?.Sum();
-            if (amount == null || amount == 0 || campCost > amount)
-            {
-                tribal = true;
-                center.Control.TryGetComp<CompCampControl>().Tribal = tribal;
-                return;
-            }
-            center.Control.TryGetComp<CompCampControl>().ResourceCount = (int)amount;
+            //var center = campParts.FirstOrDefault(part => part is CampCenter) as CampCenter;
+            //if (tribal)
+            //{
+            //    this.tribal = tribal;
+            //    center.Control.TryGetComp<CompCampControl>().Tribal = tribal;
+            //    return;
+            //}
+            //campParts.ForEach(part => campCost += part.SupplyCost);
+            //var amount = caravan.AllThings?.Where(thing => thing.def == CampThingDefOf.CASpacerTentSupplies)?.Select(thing => thing.stackCount)?.Sum();
+            //if (amount == null || amount == 0 || campCost > amount)
+            //{
+            //    tribal = true;
+            //    center.Control.TryGetComp<CompCampControl>().Tribal = tribal;
+            //    return;
+            //}
+            //center.Control.TryGetComp<CompCampControl>().ResourceCount = (int)amount;
         }
 
         protected void AssignCampLayout()

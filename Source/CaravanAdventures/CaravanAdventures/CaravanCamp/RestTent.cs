@@ -28,6 +28,8 @@ namespace CaravanAdventures.CaravanCamp
             var otherLover = lover != null ? LovePartnerRelationUtility.ExistingLovePartner(lover) : null;
             var cellSpots = CellRect.Cells.Where(cell => !CellRect.EdgeCells.Contains(cell) && cell.z == CellRect.maxZ - 1).ToArray();
 
+            Log.Message($"lover is null? {lover == null} {otherLover == null}");
+
             for (int i = 0; i < cellSpots.Length; i++)
             {
                 if (lover != null && i == 0) continue;
@@ -46,7 +48,8 @@ namespace CaravanAdventures.CaravanCamp
                     var bed = GenSpawn.Spawn(thing, cellSpots[i], map, Rot4.South);
                     bed.SetFaction(Faction.OfPlayer);
                     campAssetListRef.Add(bed);
-                    var pawnInNeedOfBed = Occupants.FirstOrDefault(occ => occ != null && occ != lover && occ != otherLover && occ.ownership.OwnedBed == null);
+                    var pawnInNeedOfBed = Occupants.FirstOrDefault(occ => occ != null && occ != lover && occ != otherLover && (occ.ownership.OwnedBed == null || occ.ownership.OwnedBed.Map != map));
+                    if (pawnInNeedOfBed != null) Log.Message($"found pawn in need of bed {pawnInNeedOfBed.NameShortColored}");
                     if (pawnInNeedOfBed != null) pawnInNeedOfBed.ownership.ClaimBedIfNonMedical((Building_Bed)bed);
                 }
             }
