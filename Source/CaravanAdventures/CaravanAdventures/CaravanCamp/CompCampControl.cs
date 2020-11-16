@@ -18,6 +18,7 @@ namespace CaravanAdventures.CaravanCamp
 
         private List<CellRect> campRects;
         private int resourceCount;
+        private int waste;
         private bool tribal;
         private List<Thing> campAssets;
 
@@ -27,12 +28,14 @@ namespace CaravanAdventures.CaravanCamp
             Scribe_Values.Look(ref resourceCount, "resourceCount", 0);
             Scribe_Values.Look(ref tribal, "tribal", true);
             Scribe_Collections.Look(ref campAssets, "campAssets", LookMode.Reference);
+            Scribe_Values.Look(ref waste, "waste", 0);
         }
 
         public List<CellRect> CampRects { get => campRects; set => campRects = value; }
         public int ResourceCount { get => resourceCount; set => resourceCount = value; }
         public bool Tribal { get => tribal; set => tribal = value; }
         public List<Thing> CampAssets { get => campAssets; set => campAssets = value; }
+        public int Waste { get => waste; set => waste = value; }
 
         public override IEnumerable<FloatMenuOption> CompFloatMenuOptions(Pawn selPawn)
         {
@@ -68,7 +71,8 @@ namespace CaravanAdventures.CaravanCamp
             if (!tribal)
             {
                 var count = Convert.ToInt32(Math.Ceiling((double)CampThingDefOf.CASpacerTentSupplies.stackLimit / (double)resourceCount));
-                var remaining = resourceCount;
+                var remaining = resourceCount - waste;
+                Log.Message($"Refunding {remaining} of {ResourceCount} resources");
                 for (var i = 0; i < count; i++)
                 {
                     var thing = ThingMaker.MakeThing(CampThingDefOf.CASpacerTentSupplies);

@@ -65,6 +65,7 @@ namespace CaravanAdventures.CaravanCamp
         private List<Thing> campAssetListRef;
         private float campCost = 0;
         private bool tribal = false;
+        private int waste;
 
         public CampBuilder(Caravan caravan, Map map)
         {
@@ -175,6 +176,7 @@ namespace CaravanAdventures.CaravanCamp
                 this.tribal = true;
                 return;
             }
+            waste = campParts.Where(part => part is RestTent || part is ProductionTent).ToList().Count;
             var remaining = Convert.ToInt32(campCost);
             var materials = CaravanInventoryUtility.TakeThings(caravan, delegate(Thing thing)
             {
@@ -385,6 +387,7 @@ namespace CaravanAdventures.CaravanCamp
             comp.CampAssets = campAssetListRef;
             comp.ResourceCount = Convert.ToInt32(campCost);
             comp.Tribal = tribal;
+            comp.Waste = waste;
         }
 
         protected void UpdateAreas()
