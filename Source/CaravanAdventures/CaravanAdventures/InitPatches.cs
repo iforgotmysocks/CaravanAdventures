@@ -22,7 +22,9 @@ namespace CaravanAdventures
             PatchTreeDef_AddTalkOption();
             PatchHumanDef_AddTalkOption();
             PatchRemoveRoyalTitleRequirements();
+            PatchAddPsychiteTeaToCampFire();
         }
+
 
         private static void PatchRemoveRoyalTitleRequirements()
         {
@@ -117,5 +119,15 @@ namespace CaravanAdventures
                 //});
             }
         }
+
+        private static void PatchAddPsychiteTeaToCampFire()
+        {
+            var campFire = DefDatabase<ThingDef>.GetNamed(CaravanCamp.CampThingDefOf.CACampfireRoast.defName);
+            if (campFire == null) return;
+            var recipes = new[] { DefDatabase<RecipeDef>.GetNamed("Make_PsychiteTea"), DefDatabase<RecipeDef>.GetNamed("Make_PsychiteTeaBulk") };
+            if (recipes.All(x => x == null)) return;
+            foreach (var recipe in recipes) if (recipe != null) campFire.recipes.Add(recipe);
+        }
+
     }
 }

@@ -12,7 +12,7 @@ namespace CaravanAdventures.CaravanCamp
     {
         public PrisonerTent()
         {
-            this.CoordSize = 2;
+            this.CoordSize = 1;
             ForcedTentDirection = ForcedTentDirection.Horizontal;
         }
 

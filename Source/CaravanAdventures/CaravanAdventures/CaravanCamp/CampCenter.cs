@@ -22,7 +22,7 @@ namespace CaravanAdventures.CaravanCamp
         public override void Build(Map map, List<Thing> campAssetListRef)
         {
             control = CampHelper.PrepAndGenerateThing(CampDefOf.CACampControl, this.CellRect.CenterCell, map, default, campAssetListRef) as ThingWithComps;
-            campFire = CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDefOf.Campfire), this.CellRect.CenterCell, map, Rot4.South, campAssetListRef) as Building_WorkTable;
+            campFire = CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(CampThingDefOf.CACampfireRoast), this.CellRect.CenterCell, map, Rot4.South, campAssetListRef) as Building_WorkTable;
             var gatherSpotComp = campFire?.TryGetComp<CompGatherSpot>();
             if (gatherSpotComp != null) gatherSpotComp.Active = true;
 

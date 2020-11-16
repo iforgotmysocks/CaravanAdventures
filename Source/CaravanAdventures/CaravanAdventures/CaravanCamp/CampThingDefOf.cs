@@ -14,5 +14,6 @@ namespace CaravanAdventures.CaravanCamp
     {
         public static ThingDef CAAirConditioningHeater;
         public static ThingDef CACooler;
+        public static ThingDef CACampfireRoast;
     }
 }

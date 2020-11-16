@@ -19,6 +19,7 @@ namespace CaravanAdventures.CaravanCamp
     // -- make deconstructing items not give anything
     // -- resources are gained back by dismanteling the camp via the option of the camp fire
     // -- solo lovers without their partner don't seem to get a place in a rest tent
+    // -- leave prisoner camp standing
 
     // Find fabric and leather used to build buildings
     // find rect in middle of map large enough to fit tents for x pawns
@@ -55,6 +56,7 @@ namespace CaravanAdventures.CaravanCamp
         private bool hasStorageTent = true;
         private bool hasProductionTent = true;
         private bool hasAnimalArea = true;
+        private bool hasPrisonTent = true;
         private bool clearSnow = false;
 
         private CellRect coordSystem;
@@ -107,6 +109,7 @@ namespace CaravanAdventures.CaravanCamp
             if (hasStorageTent) campParts.Add(new StorageTent());
             if (hasMedicalTent && sickColonists.Count == 0) campParts.Add(new MedicalTent());
             if (hasAnimalArea && caravan.PawnsListForReading.Any(pawn => pawn.RaceProps.Animal)) campParts.Add(new AnimalArea());
+            if (hasPrisonTent && prisoners.Count == 0) campParts.Add(new PrisonerTent());
 
             List<List<Pawn>> colonistRelationShipPairs = GetRelationShipPairs(colonists);
             colonistRelationShipPairs.ForEach(couple =>

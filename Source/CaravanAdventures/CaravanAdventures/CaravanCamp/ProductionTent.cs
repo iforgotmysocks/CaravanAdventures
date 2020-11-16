@@ -8,8 +8,8 @@ namespace CaravanAdventures.CaravanCamp
 {
     class ProductionTent : Tent, IRecipeHolder
     {
-
         private Building_WorkTable tableButcher;
+        private Building_WorkTable handTailoringBench;
 
         public ProductionTent()
         {
@@ -37,7 +37,7 @@ namespace CaravanAdventures.CaravanCamp
             CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("HandTailoringBench"), ThingDefOf.WoodLog), location, map, Rot4.East, campAssetListRef);
 
             location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 1 && cell.z == CellRect.minZ + 2);
-            CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("HandTailoringBench"), ThingDefOf.WoodLog), location, map, Rot4.East, campAssetListRef);
+            handTailoringBench = CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("HandTailoringBench"), ThingDefOf.WoodLog), location, map, Rot4.East, campAssetListRef) as Building_WorkTable;
 
             location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.minX + 5 && cell.z == CellRect.minZ + 1);
             var heater = CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(CampThingDefOf.CAAirConditioningHeater), location, map, default, campAssetListRef);
@@ -56,6 +56,18 @@ namespace CaravanAdventures.CaravanCamp
             var bill = new Bill_Production(DefDatabase<RecipeDef>.GetNamed("ButcherCorpseFlesh")) { repeatMode = BillRepeatModeDefOf.Forever };
             //bill.recipe.defaultIngredientFilter.SetAllow(ThingCategoryDefOf.CorpsesInsect, false);
             tableButcher.BillStack.AddBill(bill);
+
+            // todo check in modsettings 
+            // if (doApperalRecipes) 
+         
+            var pantsBill = new Bill_Production(DefDatabase<RecipeDef>.GetNamed("Make_Apparel_Pants")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 1, hpRange = new FloatRange(0.9f, 1f), includeTainted = false, qualityRange = new QualityRange(QualityCategory.Normal, QualityCategory.Legendary) };
+            handTailoringBench.BillStack.AddBill(pantsBill);
+
+            var shirtBill = new Bill_Production(DefDatabase<RecipeDef>.GetNamed("Make_Apparel_CollarShirt")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 1, hpRange = new FloatRange(0.9f, 1f), includeTainted = false, qualityRange = new QualityRange(QualityCategory.Normal, QualityCategory.Legendary) };
+            handTailoringBench.BillStack.AddBill(shirtBill);
+
+            var dusterBill = new Bill_Production(DefDatabase<RecipeDef>.GetNamed("Make_Apparel_Duster")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 1, hpRange = new FloatRange(0.9f, 1f), includeTainted = false, qualityRange = new QualityRange(QualityCategory.Normal, QualityCategory.Legendary) };
+            handTailoringBench.BillStack.AddBill(dusterBill);
         }
     }
 }
