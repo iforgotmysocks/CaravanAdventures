@@ -63,6 +63,8 @@ namespace CaravanAdventures.CaravanCamp
         private CellRect campSiteRect;
 
         private List<Thing> campAssetListRef;
+        private float campCost = 0;
+        private bool tribal = false;
 
         public CampBuilder(Caravan caravan, Map map)
         {
@@ -79,6 +81,7 @@ namespace CaravanAdventures.CaravanCamp
 
             CalculateTentSizes();
             CalculateTentNumbersAndAssignPawnsToTents();
+            CalculateCostAndDetermineType(tribal);
             AssignCampLayout();
             TransformTerrain();
             GenerateBuildings();
@@ -156,6 +159,26 @@ namespace CaravanAdventures.CaravanCamp
                     }
                     tentWithSpace.Occupants.Add(col);
                 });
+        }
+
+        private void CalculateCostAndDetermineType(bool tribal = false)
+        {
+            var center = campParts.FirstOrDefault(part => part is CampCenter) as CampCenter;
+            if (tribal)
+            {
+                this.tribal = tribal;
+                center.Control.TryGetComp<CompCampControl>().Tribal = tribal;
+                return;
+            }
+            campParts.ForEach(part => campCost += part.SupplyCost);
+            var amount = caravan.AllThings?.Where(thing => thing.def == CampThingDefOf.CASpacerTentSupplies)?.Select(thing => thing.stackCount)?.Sum();
+            if (amount == null || amount == 0 || campCost > amount)
+            {
+                tribal = true;
+                center.Control.TryGetComp<CompCampControl>().Tribal = tribal;
+                return;
+            }
+            center.Control.TryGetComp<CompCampControl>().ResourceCount = (int)amount;
         }
 
         protected void AssignCampLayout()
