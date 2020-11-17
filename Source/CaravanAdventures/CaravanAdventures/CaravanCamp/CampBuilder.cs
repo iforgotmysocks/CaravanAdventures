@@ -12,32 +12,14 @@ using Verse;
 namespace CaravanAdventures.CaravanCamp
 {
     // todos
-    // build costs: 
-    // -- fixed amount per colonists
-    // -- high quality camping supplies for hq camp
-    // -- normal lether and stuff low lq camp
-    // -- make deconstructing items not give anything
-    // -- resources are gained back by dismanteling the camp via the option of the camp fire
-    // -- solo lovers without their partner don't seem to get a place in a rest tent
     // -- leave prisoner camp standing
-
-    // Find fabric and leather used to build buildings
-    // find rect in middle of map large enough to fit tents for x pawns
-    // build bridges on non compatible ground
-    // generate buildings 
-    // create small versions of generators etc 
+    // -- tribal stuff
 
     // zones
-    // -- home zone
-    // -- food zone
-    // -- medicine shelfs -> rework medicine tent design
-    // -- storage zones
-    // -- animal zone?
+    // disable rotten stuff in food section
 
     // functionality: 
-    // - add right click option to campfire that turns all camping stuff back into resources
     // - maybe add ability to build new tents from camp supplies
-
     // add another field rect
 
     class CampBuilder
@@ -111,9 +93,9 @@ namespace CaravanAdventures.CaravanCamp
             // todo change to configurable number including auto (-1)
             if (hasProductionTent) campParts.Add(new ProductionTent());
             if (hasStorageTent) campParts.Add(new StorageTent());
-            if (hasMedicalTent && sickColonists.Count == 0) campParts.Add(new MedicalTent());
-            if (hasAnimalArea && caravan.PawnsListForReading.Any(pawn => pawn.RaceProps.Animal)) campParts.Add(new AnimalArea());
-            if (hasPrisonTent && prisoners.Count == 0) campParts.Add(new PrisonerTent());
+            if (hasMedicalTent) campParts.Add(new MedicalTent());
+            if (hasAnimalArea) campParts.Add(new AnimalArea());
+            if (hasPrisonTent) campParts.Add(new PrisonerTent());
 
             List<List<Pawn>> colonistRelationShipPairs = GetRelationShipPairs(colonists);
             colonistRelationShipPairs.ForEach(couple =>
