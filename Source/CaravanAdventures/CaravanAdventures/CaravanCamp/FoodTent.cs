@@ -38,6 +38,7 @@ namespace CaravanAdventures.CaravanCamp
             zone = new Zone_Stockpile(StorageSettingsPreset.DefaultStockpile, map.zoneManager);
             map.zoneManager.RegisterZone(zone);
             zone.settings.filter = new ThingFilter();
+            zone.settings.filter.SetAllow(SpecialThingFilterDef.Named("AllowRotten"), false);
             zone.settings.filter.SetAllow(ThingCategoryDefOf.Foods, true);
             zone.settings.filter.SetAllow(ThingDefOf.Kibble, false);
             zone.settings.filter.SetAllow(ThingDefOf.Hay, false);
