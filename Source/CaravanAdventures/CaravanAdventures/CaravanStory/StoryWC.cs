@@ -12,6 +12,7 @@ using Verse;
 using Verse.Noise;
 
 // high prio:
+// - crystal scythe appeared in normal ancient shrine
 // - add and rework dialogs from shrines onwards
 // - add system that allows inclusion or exclusion for other races to relation
 // - add a quest update when main char managed to escape the village, so the player knows that he can leave now

@@ -23,8 +23,22 @@ namespace CaravanAdventures
             PatchHumanDef_AddTalkOption();
             PatchRemoveRoyalTitleRequirements();
             PatchAddPsychiteTeaToCampFire();
+            PatchIncreaseBaseWealthAndFood();
         }
 
+        private static void PatchIncreaseBaseWealthAndFood()
+        {
+            var bases = DefDatabase<TraderKindDef>.AllDefsListForReading.Where(def => def.defName.ToLower().StartsWith("base_"));
+            foreach (var curBase in bases)
+            {
+                Log.Message($"adjusting base {curBase.defName}");
+                var silverGen = curBase.stockGenerators.FirstOrDefault(gen => gen.HandlesThingDef(ThingDefOf.Silver));
+                if (silverGen != null) silverGen.countRange = new IntRange(silverGen.countRange.min * 3, silverGen.countRange.max * 2);
+
+                var foodGen = curBase.stockGenerators.FirstOrDefault(gen => gen.HandlesThingDef(ThingDefOf.MealSimple));
+                if (foodGen != null) foodGen.countRange = new IntRange(foodGen.countRange.min * 2, Convert.ToInt32(foodGen.countRange.max * 1.5));
+            }
+        }
 
         private static void PatchRemoveRoyalTitleRequirements()
         {

@@ -61,12 +61,20 @@ namespace CaravanAdventures
             options.CheckboxLabeled("Debug mode", ref debug);
             if (options.ButtonText("Reset full story")) StoryUtility.RestartStory();
             options.CheckboxLabeled("Apocalypse enabled", ref apocalypseEnabled);
-         
+
             // todo figure out scroll views
             //Rect viewRect = new Rect(0, 0, 500, 3000);
             //Vector2 vec = new Vector2(0, 0);
             //options.BeginScrollView(wrect, ref vec, ref viewRect);
             // todo move to seperate window!
+
+            options.Label("Settlement price adjustments");
+            options.Label("Multiplies the current money for settlements with less then 3k silver by 3, and those with more by 2");
+            if (options.ButtonTextLabeled("Increase Settlement money", "Increase")) Helper.AdjustSettlementPrices();
+            // todo add min and max multiplier used in the def patch for settlement money
+            options.Gap();
+
+
             options.Label("Ancient thunderbolt:".Colorize(Color.red), 40f);
             options.Label("Mechanoid bodypart dissmember chance: " + Convert.ToInt32(mechanoidDissmemberChance * 100) + "%");
             mechanoidDissmemberChance = options.Slider(mechanoidDissmemberChance, 0f, 1f);

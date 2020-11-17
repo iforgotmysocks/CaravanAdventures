@@ -1,4 +1,6 @@
-﻿using System;
+﻿using RimWorld;
+using RimWorld.Planet;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,6 +14,28 @@ namespace CaravanAdventures
     static class Helper
     {
         public static bool Debug() => ModSettings.Get().debug;
+
+        public static void AdjustSettlementPrices()
+        {
+            if (Find.World != null)
+            {
+                var npcSettlements = Find.WorldObjects.AllWorldObjects.Where(settlement => settlement.def == WorldObjectDefOf.Settlement && !settlement.Faction.IsPlayer);
+                foreach (var settlement in npcSettlements.OfType<Settlement>())
+                {
+                    var silverStacks = settlement.trader.StockListForReading.Where(def => def.def == ThingDefOf.Silver);
+                    foreach (var stack in silverStacks)
+                    {
+                        var before = stack.stackCount;
+                        if (stack.stackCount < 3000) stack.stackCount *= 3;
+                        else stack.stackCount *= 2;
+
+                        Log.Message($"Settlement: {settlement.Name} of {settlement.Faction} increased silver from {before} to {stack.stackCount}");
+                    }
+                }
+
+            }
+        }
+
         public static IEnumerable<T> PickSomeInRandomOrder<T>(IEnumerable<T> items, int count)
         {
             var random = new System.Random(DateTime.Now.Millisecond);
