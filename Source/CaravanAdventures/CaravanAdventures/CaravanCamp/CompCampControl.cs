@@ -68,7 +68,7 @@ namespace CaravanAdventures.CaravanCamp
         {
             foreach (var rect in CampRects) PackUpTent(rect);
             
-            if (!tribal)
+            if (!tribal && resourceCount != 0)
             {
                 var count = Convert.ToInt32(Math.Ceiling((double)CampThingDefOf.CASpacerTentSupplies.stackLimit / (double)resourceCount));
                 var remaining = resourceCount - waste;

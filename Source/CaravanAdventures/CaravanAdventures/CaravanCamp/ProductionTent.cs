@@ -6,10 +6,11 @@ using Verse;
 
 namespace CaravanAdventures.CaravanCamp
 {
-    class ProductionTent : Tent, IRecipeHolder
+    class ProductionTent : Tent, IRecipeHolder, IShelfTent
     {
         private Building_WorkTable tableButcher;
         private Building_WorkTable handTailoringBench;
+        private Building_Storage shelf;
 
         public ProductionTent()
         {
@@ -31,6 +32,12 @@ namespace CaravanAdventures.CaravanCamp
             tableButcher = CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("TableButcher"), ThingDefOf.WoodLog), location, map, Rot4.North, campAssetListRef) as Building_WorkTable;
 
             location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 3 && cell.z == CellRect.minZ + 1);
+            shelf = CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("Shelf"), ThingDefOf.WoodLog), location, map, Rot4.South, campAssetListRef) as Building_Storage;
+            shelf.GetStoreSettings().filter = new ThingFilter();
+            shelf.GetStoreSettings().filter.SetAllow(ThingCategoryDefOf.Leathers, true);
+            shelf.GetStoreSettings().filter.SetAllow(ThingCategoryDef.Named("Textiles"), true);
+
+            location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.minX + 4 && cell.z == CellRect.minZ + 1);
             CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("ToolCabinet")), location, map, Rot4.South, campAssetListRef);
 
             location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 1 && cell.z == CellRect.minZ + 2);
@@ -60,14 +67,25 @@ namespace CaravanAdventures.CaravanCamp
             // todo check in modsettings 
             // if (doApperalRecipes) 
          
-            var pantsBill = new Bill_Production(DefDatabase<RecipeDef>.GetNamed("Make_Apparel_Pants")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 1, hpRange = new FloatRange(0.9f, 1f), includeTainted = false, qualityRange = new QualityRange(QualityCategory.Normal, QualityCategory.Legendary) };
+            
+            var pantsBill = new Bill_ProductionWithUft(DefDatabase<RecipeDef>.GetNamed("Make_Apparel_Pants")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 1, hpRange = new FloatRange(0.9f, 1f), includeTainted = false, qualityRange = new QualityRange(QualityCategory.Normal, QualityCategory.Legendary) };
             handTailoringBench.BillStack.AddBill(pantsBill);
 
-            var shirtBill = new Bill_Production(DefDatabase<RecipeDef>.GetNamed("Make_Apparel_CollarShirt")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 1, hpRange = new FloatRange(0.9f, 1f), includeTainted = false, qualityRange = new QualityRange(QualityCategory.Normal, QualityCategory.Legendary) };
+            var shirtBill = new Bill_ProductionWithUft(DefDatabase<RecipeDef>.GetNamed("Make_Apparel_CollarShirt")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 1, hpRange = new FloatRange(0.9f, 1f), includeTainted = false, qualityRange = new QualityRange(QualityCategory.Normal, QualityCategory.Legendary) };
             handTailoringBench.BillStack.AddBill(shirtBill);
 
-            var dusterBill = new Bill_Production(DefDatabase<RecipeDef>.GetNamed("Make_Apparel_Duster")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 1, hpRange = new FloatRange(0.9f, 1f), includeTainted = false, qualityRange = new QualityRange(QualityCategory.Normal, QualityCategory.Legendary) };
+            var dusterBill = new Bill_ProductionWithUft(DefDatabase<RecipeDef>.GetNamed("Make_Apparel_Duster")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 1, hpRange = new FloatRange(0.9f, 1f), includeTainted = false, qualityRange = new QualityRange(QualityCategory.Normal, QualityCategory.Legendary) };
             handTailoringBench.BillStack.AddBill(dusterBill);
+        }
+
+        public void FillShelfs(Map map, Caravan caravan)
+        {
+            foreach (var cell in shelf.AllSlotCells())
+            {
+                var stuff = CampHelper.GetFirstOrderedThingOfCategoryFromCaravan(caravan, new[] { ThingCategoryDefOf.Leathers, ThingCategoryDef.Named("Textiles") }, new[] { ThingDef.Named("Leather_Thrumbo") });
+                if (stuff == null) break;
+                if (!cell.Filled(map)) GenDrop.TryDropSpawn_NewTmp(stuff, cell, map, ThingPlaceMode.Direct, out var result);
+            }
         }
     }
 }
