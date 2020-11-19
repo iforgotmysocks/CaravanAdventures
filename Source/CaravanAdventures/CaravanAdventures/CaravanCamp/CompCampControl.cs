@@ -88,33 +88,52 @@ namespace CaravanAdventures.CaravanCamp
 
         private void PackUpTent(CellRect rect)
         {
-            foreach (var cell in rect)
+            try
             {
-                if (parent.Map.roofGrid.Roofed(cell)) parent.Map.roofGrid.SetRoof(cell, null);
-                if (parent.Map.terrainGrid.TerrainAt(cell) == CampDefOf.CATentFloor 
-                    || parent.Map.terrainGrid.TerrainAt(cell) == CampDefOf.CAMakeshiftTentFloor) 
-                    parent.Map.terrainGrid.RemoveTopLayer(cell);
+                var prison = rect.Cells.Any(cell => cell.GetFirstBuilding(parent.Map) is Building_Bed bed && bed.ForPrisoners) && rect.Cells.Any(cell => { var pawn = cell.GetFirstPawn(parent.Map); return pawn != null && pawn.IsPrisoner; });
 
-                var assetsAtCell = campAssets.Where(asset => asset?.Position == cell);
-                foreach (var asset in assetsAtCell.Reverse<Thing>())
+                foreach (var cell in rect)
                 {
-                    if (asset == null || asset == parent || asset.Destroyed) continue;
+                    if (parent.Map.roofGrid.Roofed(cell)) parent.Map.roofGrid.SetRoof(cell, null);
+                    if (parent.Map.terrainGrid.TerrainAt(cell) == CampDefOf.CATentFloor
+                        || parent.Map.terrainGrid.TerrainAt(cell) == CampDefOf.CAMakeshiftTentFloor)
+                        parent.Map.terrainGrid.RemoveTopLayer(cell);
 
-                    if (asset is Building_Storage storageBuilding)
+                    var assetsAtCell = campAssets.Where(asset => asset?.Position == cell);
+                    foreach (var asset in assetsAtCell.Reverse<Thing>())
                     {
-                        var storedThings = storageBuilding.AllSlotCellsList().Where(slot => slot.GetFirstItem(parent.Map) != null)?.Select(slot => slot.GetFirstItem(parent.Map));
-                        if (storedThings != null && storedThings.Count() != 0)
+                        if (asset == null || asset == parent || asset.Destroyed) continue;
+
+                        if (asset is Building_Storage storageBuilding)
                         {
-                            foreach (var thing in storedThings.Reverse())
+                            var storedThings = storageBuilding.AllSlotCellsList().Where(slot => slot.GetFirstItem(parent.Map) != null)?.Select(slot => slot.GetFirstItem(parent.Map));
+                            if (storedThings != null && storedThings.Count() != 0)
                             {
-                                var pos = new IntVec3(thing.Position.x - 1, thing.Position.y, thing.Position.z);
-                                thing.DeSpawn();
-                                GenPlace.TryPlaceThing(thing, pos, parent.Map, ThingPlaceMode.Near, out var result);
+                                foreach (var thing in storedThings.Reverse())
+                                {
+                                    var pos = new IntVec3(thing.Position.x - 1, thing.Position.y, thing.Position.z);
+                                    thing.DeSpawn();
+                                    GenPlace.TryPlaceThing(thing, pos, parent.Map, ThingPlaceMode.Near, out var result);
+                                }
                             }
                         }
+
+                        if (prison && (asset.def == CampDefOf.CATentWall || asset.def == CampDefOf.CATentDoor && asset.Stuff == CampDefOf.CASpacerTentFabric))
+                        {
+                            asset.Destroy();
+                            var wall = asset.def == CampDefOf.CATentDoor ? ThingMaker.MakeThing(CampDefOf.CATentDoor, CampDefOf.CAMakeshiftTentLeather) : ThingMaker.MakeThing(CampDefOf.CAMakeshiftTentWall, CampDefOf.CAMakeshiftTentLeather);
+                            wall.SetFaction(Faction.OfPlayer);
+                            GenSpawn.Spawn(wall, asset.Position, parent.Map);
+                            continue;
+                        }
+                        else if (prison && (asset.def == CampDefOf.CAMakeshiftTentWall || asset.def == CampDefOf.CATentDoor)) continue;
+                        asset.Destroy();
                     }
-                    asset.Destroy();
                 }
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.ToString());
             }
         }
 

@@ -4,7 +4,7 @@
 
   <TerrainDef ParentName="CATentFloorBase">
     <defName>CAMakeshiftTentFloor</defName>
-    <label>Tent Floor</label>
+    <label>tent floor</label>
     <renderPrecedence>230</renderPrecedence>
     <description>Makeshift tent floor.</description>
     <texturePath>Terrain/Surfaces/Carpet</texturePath>
@@ -16,7 +16,7 @@
 
   <ThingDef ParentName="CATentBase">
     <defName>CAMakeshiftTentWall</defName>
-    <label>Tent Wall</label>
+    <label>tent wall</label>
     <description>Fabric for putting up tents quickly.</description>
     <thingClass>Building</thingClass>
     <!--<category>Building</category>-->
@@ -90,7 +90,7 @@
 
   <ThingDef ParentName="ResourceBase">
     <defName>CAMakeshiftTentLeather</defName>
-    <label>Makeshift tent leather</label>
+    <label>Makeshift leather</label>
     <description>Makeshift tent leather stitched together by all sorts of leathers</description>
     <graphicData>
       <texPath>Things/Item/Resource/Leather</texPath>
@@ -130,7 +130,7 @@
   <!-- bedrolls  -->
   <ThingDef ParentName="CABedBase">
     <defName>CAMakeshiftBedroll</defName>
-    <label>Makeshift bedroll</label>
+    <label>makeshift bedroll</label>
     <description>A simple bed that lays on the floor, usually made of cloth or leather, often lined with fur. It is lightweight and can be rolled up for easy transport, but it is not quite as comfortable as a typical bed. Caravans can use bedrolls while traveling for better sleep.</description>
     <graphicData>
       <texPath>Things/Building/Furniture/Bed/Bedroll</texPath>
@@ -175,7 +175,7 @@
 
   <ThingDef ParentName="CABedBase">
     <defName>CAMakeshiftBedrollDouble</defName>
-    <label>Makeshift double bedroll</label>
+    <label>makeshift double bedroll</label>
     <description>A simple double-wide bed that lays on the floor, usually made of cloth or leather, often lined with fur. It is lightweight and can be rolled up for easy transport, but it is not quite as comfortable as a typical bed. Caravans can use bedrolls while traveling for better sleep.</description>
     <graphicData>
       <texPath>Things/Building/Furniture/Bed/BedrollDouble</texPath>

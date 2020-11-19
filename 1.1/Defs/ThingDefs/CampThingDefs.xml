@@ -44,7 +44,6 @@
 
   <ThingDef ParentName="CATentBase" Name="CATentDoorBase" Abstract="True">
     <thingClass>Building_Door</thingClass>
-    <category>Building</category>
     <altitudeLayer>DoorMoveable</altitudeLayer>
     <fillPercent>1</fillPercent>
     <useHitPoints>true</useHitPoints>
@@ -489,7 +488,7 @@
   <!-- wall -->
   <ThingDef ParentName="CATentBase">
     <defName>CATentWall</defName>
-    <label>Tent Wall</label>
+    <label>tent wall</label>
     <description>High tech tent walls.</description>
     <thingClass>Building</thingClass>
     <!--<category>Building</category>-->
@@ -606,7 +605,7 @@
   <!-- fence -->
   <ThingDef ParentName="CATentBase">
     <defName>CAFencePost</defName>
-    <label>Animal fence post</label>
+    <label>animal fence post</label>
     <description>An animal fence post</description>
     <category>Building</category>
     <graphicData>

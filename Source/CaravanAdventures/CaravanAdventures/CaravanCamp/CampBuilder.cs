@@ -13,10 +13,6 @@ namespace CaravanAdventures.CaravanCamp
 {
     // todos
     // -- leave prisoner camp standing
-    // -- tribal stuff
-    // -- create bedrolls that can't be dismanteled
-
-    // zones
 
     // functionality: 
     // - maybe add ability to build new tents from camp supplies
