@@ -30,7 +30,7 @@ namespace CaravanAdventures.CaravanCamp
             var entranceCells = GetEntraceCells();
             foreach (var cell in entranceCells)
             {
-                var door = ThingMaker.MakeThing(ThingDefOf.Door, RimWorld.ThingDefOf.WoodLog);
+                var door = ThingMaker.MakeThing(CampDefOf.CATentDoor, CampDefOf.CASpacerTentFabric);
                 door.SetFaction(Faction.OfPlayer);
                 campAssetListRef.Add(GenSpawn.Spawn(door, cell, map));
             }
@@ -55,7 +55,7 @@ namespace CaravanAdventures.CaravanCamp
             var entranceCells = GetEntraceCells();
             foreach (var cell in entranceCells)
             {
-                var door = ThingMaker.MakeThing(ThingDefOf.Door, RimWorld.ThingDefOf.WoodLog);
+                var door = ThingMaker.MakeThing(CampDefOf.CATentDoor, CampDefOf.CAMakeshiftTentLeather);
                 door.SetFaction(Faction.OfPlayer);
                 campAssetListRef.Add(GenSpawn.Spawn(door, cell, map));
             }

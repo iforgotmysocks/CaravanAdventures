@@ -27,6 +27,7 @@ namespace CaravanAdventures.CaravanCamp
         public static ThingDef CACampfireRoast;
         public static ThingDef CASpacerBedroll;
         public static ThingDef CASpacerBedrollDouble;
+        public static ThingDef CATentDoor;
 
         public static ThingDef CAMakeshiftBedroll;
         public static ThingDef CAMakeshiftBedrollDouble;
