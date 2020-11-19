@@ -43,10 +43,7 @@ namespace CaravanAdventures.CaravanCamp
 
             yield return new FloatMenuOption("CADeconstructCamp".Translate(), () =>
             {
-                // todo start and move to destruction job
-                // todo destroy everything but only stuff that was spawned and regain resources
-                // best create a list of all thingdefs belonging to the camp and kill those
-                Messages.Message(new Message($"destroying camp", MessageTypeDefOf.NeutralEvent));
+                Messages.Message(new Message($"Packing up the camp", MessageTypeDefOf.NeutralEvent));
 
                 var job = JobMaker.MakeJob(CampDefOf.CACampInformPackingUp, parent);
                 job.count = 1;

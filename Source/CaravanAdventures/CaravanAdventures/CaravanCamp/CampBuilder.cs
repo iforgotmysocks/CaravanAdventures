@@ -352,7 +352,7 @@ namespace CaravanAdventures.CaravanCamp
 
             for (int i = 0; i < campSiteRect.EdgeCells.Count() - 4; i++)
             {
-                if ((tribal ? (i % 5) : (i % 10)) != 0) continue;
+                if (i % 10 != 0) continue;
                 var lamp = GenSpawn.Spawn(RimWorld.ThingDefOf.TorchLamp, campSiteRect.EdgeCells.ToArray()[i], map);
                 lamp.SetFaction(Faction.OfPlayer);
                 var fuelComp = lamp.TryGetComp<CompRefuelable>();
