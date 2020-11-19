@@ -10,14 +10,37 @@
     </modExtensions>
   </ThingDef>
 
-  <ThingDef Name="CABedBase" ParentName="BedWithQualityBase" Abstract="True">
+  <ThingDef Name="CABedBase" ParentName="BuildingBase" Abstract="True">
     <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
     <resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
     <tradeability>None</tradeability>
     <modExtensions>
       <li Class="CaravanAdventures.CaravanCamp.CampModExt"></li>
     </modExtensions>
-    <designationCategory/>
+
+    <thingClass>Building_Bed</thingClass>
+    <altitudeLayer>Building</altitudeLayer>
+    <comps>
+      <li Class="CompProperties_AssignableToPawn">
+        <drawAssignmentOverlay>false</drawAssignmentOverlay>
+        <compClass>CompAssignableToPawn_Bed</compClass>
+      </li>
+      <li>
+        <compClass>CompQuality</compClass>
+      </li>
+    </comps>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <canOverlapZones>false</canOverlapZones>
+    <placeWorkers>
+      <li>PlaceWorker_ShowFacilitiesConnections</li>
+    </placeWorkers>
+    <passability>PassThroughOnly</passability>
+    <defaultPlacingRot>South</defaultPlacingRot>
+    <building>
+      <buildingTags>
+        <li>Bed</li>
+      </buildingTags>
+    </building>
   </ThingDef>
 
   <!-- supplies -->
@@ -476,7 +499,7 @@
   <!-- fabric -->
   <ThingDef ParentName="ResourceBase">
     <defName>CASpacerTentFabric</defName>
-    <label>Spacer Tent Fabric</label>
+    <label>spacer fabric</label>
     <description>Nano-fibers woven into sheets molecule-by-molecule using specialized production mechanites. While it flexes freely most of the time, it stiffens to absorb blows as they land, and is incredibly difficult to break. The secrets of its production are known only to the most advanced glitterworld cultures.</description>
     <graphicData>
       <texPath>Things/Item/Resource/Hyperweave</texPath>
@@ -508,7 +531,6 @@
         <Flammability>0.1</Flammability>
         <MaxHitPoints>2</MaxHitPoints>
         <Beauty>3</Beauty>
-        <BedRestEffectiveness>1.3</BedRestEffectiveness>
       </statFactors>
     </stuffProps>
     <!--<thingCategories>
@@ -641,7 +663,7 @@
     <costStuffCount>85</costStuffCount>
     <building>
       <bed_showSleeperBody>false</bed_showSleeperBody>
-      <bed_healPerDay>4</bed_healPerDay>
+      <bed_healPerDay>6</bed_healPerDay>
       <bed_caravansCanUse>true</bed_caravansCanUse>
       <destroySound>BuildingDestroyed_Soft_Medium</destroySound>
       <destroyShakeAmount>0</destroyShakeAmount>

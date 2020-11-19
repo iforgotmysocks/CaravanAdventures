@@ -71,7 +71,7 @@ namespace CaravanAdventures.CaravanCamp
             handTailoringBench = CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("CraftingSpot")), location, map, Rot4.East, campAssetListRef) as Building_WorkTable;
 
             location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.minX + 5 && cell.z == CellRect.minZ + 1);
-            var heater = CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDefOf.TorchLamp), location, map, default, campAssetListRef);
+            CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDefOf.TorchLamp), location, map, default, campAssetListRef);
 
             var passiveCoolerPos = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 1 && cell.z == CellRect.minZ + 1);
             var cooler = CampHelper.PrepAndGenerateThing(ThingDefOf.PassiveCooler, passiveCoolerPos, map, default, campAssetListRef);

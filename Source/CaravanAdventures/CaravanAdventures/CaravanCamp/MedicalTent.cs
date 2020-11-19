@@ -57,6 +57,15 @@ namespace CaravanAdventures.CaravanCamp
             var cellRemoveBed = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 2 && cell.z == CellRect.maxZ - 2);
             if (CoordSize > 1) map.thingGrid.ThingAt(cellRemoveBed, ThingCategory.Building).Destroy();
             map.thingGrid.ThingAt(cellSpotShelf, ThingCategory.Building).Destroy();
+
+            if (CoordSize > 1)
+            {
+                var cellSpotTorch = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 1 && cell.z == CellRect.minZ + 1);
+                map.thingGrid.ThingAt(cellSpotTorch, ThingCategory.Building).Destroy();
+
+                var location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.minX + 5 && cell.z == CellRect.minZ + 1);
+                CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDefOf.TorchLamp), location, map, default, campAssetListRef);
+            }
         }
 
         public virtual void FillShelfs(Map map, Caravan caravan)
