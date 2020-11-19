@@ -29,9 +29,14 @@ namespace CaravanAdventures.CaravanCamp
             {
                 if (entranceCells.Contains(edgeCell)) continue;
                 var thing = ThingMaker.MakeThing(CampDefOf.CAFencePost);
-                thing.SetFaction(Faction.OfPlayer);
+                thing.SetFaction(Faction.OfPlayer); 
                 campAssetListRef.Add(GenSpawn.Spawn(thing, edgeCell, map));
             }
+        }
+
+        public override void BuildTribal(Map map, List<Thing> campAssetListRef)
+        {
+            Build(map, campAssetListRef);
         }
 
         public void CreateNewRestrictionArea(Map map, Caravan caravan)

@@ -30,5 +30,7 @@ namespace CaravanAdventures.CaravanCamp
         }
 
         public abstract void Build(Map map, List<Thing> campAssetListRef);
+
+        public abstract void BuildTribal(Map map, List<Thing> campAssetListRef);
     }
 }

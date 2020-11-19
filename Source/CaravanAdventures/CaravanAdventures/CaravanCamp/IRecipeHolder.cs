@@ -10,5 +10,7 @@ namespace CaravanAdventures.CaravanCamp
     interface IRecipeHolder
     {
         void ApplyRecipes(Caravan caravan);
+
+        void ApplyRecipesTribal(Caravan caravan);
     }
 }

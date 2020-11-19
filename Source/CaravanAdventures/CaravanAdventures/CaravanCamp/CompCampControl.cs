@@ -70,12 +70,12 @@ namespace CaravanAdventures.CaravanCamp
             
             if (!tribal && resourceCount != 0)
             {
-                var count = Convert.ToInt32(Math.Ceiling((double)CampThingDefOf.CASpacerTentSupplies.stackLimit / (double)resourceCount));
+                var count = Convert.ToInt32(Math.Ceiling((double)CampDefOf.CASpacerTentSupplies.stackLimit / (double)resourceCount));
                 var remaining = resourceCount - waste;
                 Log.Message($"Refunding {remaining} of {ResourceCount} resources");
                 for (var i = 0; i < count; i++)
                 {
-                    var thing = ThingMaker.MakeThing(CampThingDefOf.CASpacerTentSupplies);
+                    var thing = ThingMaker.MakeThing(CampDefOf.CASpacerTentSupplies);
                     var substact = Math.Min(remaining, thing.def.stackLimit);
                     remaining -= substact;
                     thing.stackCount = substact;
@@ -91,7 +91,9 @@ namespace CaravanAdventures.CaravanCamp
             foreach (var cell in rect)
             {
                 if (parent.Map.roofGrid.Roofed(cell)) parent.Map.roofGrid.SetRoof(cell, null);
-                if (parent.Map.terrainGrid.TerrainAt(cell) == CampDefOf.CATentFloor) parent.Map.terrainGrid.RemoveTopLayer(cell);
+                if (parent.Map.terrainGrid.TerrainAt(cell) == CampDefOf.CATentFloor 
+                    || parent.Map.terrainGrid.TerrainAt(cell) == CampDefOf.CAMakeshiftTentFloor) 
+                    parent.Map.terrainGrid.RemoveTopLayer(cell);
 
                 var assetsAtCell = campAssets.Where(asset => asset?.Position == cell);
                 foreach (var asset in assetsAtCell.Reverse<Thing>())

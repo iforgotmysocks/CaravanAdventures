@@ -8,15 +8,24 @@ namespace CaravanAdventures.CaravanCamp
     class CampDefOf
     {
         public static TerrainDef CATentFloor;
+        public static TerrainDef CAMakeshiftTentFloor;
 
         public static ThingDef CASpacerTentFabric;
+        public static ThingDef CAMakeshiftTentLeather;
 
         public static ThingDef CATentWall;
         public static ThingDef CAFencePost;
         public static ThingDef CACampControl;
 
-        public static JobDef CACampInformPackingUp;
+        public static ThingDef CAMakeshiftTentWall;
 
+        public static JobDef CACampInformPackingUp;
         public static SoundDef CAPackUpTent;
+
+        public static ThingDef CAAirConditioningHeater;
+        public static ThingDef CACooler;
+        public static ThingDef CACampfireRoast;
+
+        public static ThingDef CASpacerTentSupplies;
     }
 }

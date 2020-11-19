@@ -64,7 +64,7 @@ namespace CaravanAdventures.CaravanCamp
             map.areaManager.AllAreas.Add(animalArea);
             animalArea.SetLabel("CAAnimalNoFoodAreaLabel".Translate());
             map.AllCells.ToList().ForEach(cell => animalArea[cell] = true);
-            parts.Select(part => part.GetZone()).ToList().ForEach(zone => zone.Cells.ForEach(cell => animalArea[cell] = false));
+            parts.Where(part => part.GetZone() != null).Select(part => part.GetZone()).ToList().ForEach(zone => zone.Cells.ForEach(cell => animalArea[cell] = false));
             animalArea.AreaUpdate();
         }
     }

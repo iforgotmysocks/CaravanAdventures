@@ -1,4 +1,5 @@
-﻿using RimWorld.Planet;
+﻿using RimWorld;
+using RimWorld.Planet;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,7 @@ namespace CaravanAdventures.CaravanCamp
     interface IShelfTent
     {
         void FillShelfs(Map map, Caravan caravan);
+
+        Building_Storage GetShelf();
     }
 }

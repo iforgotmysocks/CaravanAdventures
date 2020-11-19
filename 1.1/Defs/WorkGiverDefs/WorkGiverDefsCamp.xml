@@ -2,7 +2,7 @@
 
 <Defs>
   <WorkGiverDef>
-    <defName>DoBillsCookCampfire</defName>
+    <defName>CADoBillsCookCampfireRoast</defName>
     <label>cook meals at campfire</label>
     <giverClass>WorkGiver_DoBill</giverClass>
     <workType>Cooking</workType>

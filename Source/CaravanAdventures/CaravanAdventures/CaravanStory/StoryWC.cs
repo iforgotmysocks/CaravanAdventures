@@ -12,6 +12,7 @@ using Verse;
 using Verse.Noise;
 
 // high prio:
+// - pack up inventory option selects dead bodies...
 // - crystal scythe appeared in normal ancient shrine
 // - add and rework dialogs from shrines onwards
 // - add system that allows inclusion or exclusion for other races to relation

@@ -136,7 +136,7 @@ namespace CaravanAdventures
 
         private static void PatchAddPsychiteTeaToCampFire()
         {
-            var campFire = DefDatabase<ThingDef>.GetNamed(CaravanCamp.CampThingDefOf.CACampfireRoast.defName);
+            var campFire = DefDatabase<ThingDef>.GetNamed(CaravanCamp.CampDefOf.CACampfireRoast.defName);
             if (campFire == null) return;
             var recipes = new[] { DefDatabase<RecipeDef>.GetNamed("Make_PsychiteTea"), DefDatabase<RecipeDef>.GetNamed("Make_PsychiteTeaBulk") };
             if (recipes.All(x => x == null)) return;

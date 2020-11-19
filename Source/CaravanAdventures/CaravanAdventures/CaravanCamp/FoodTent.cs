@@ -25,12 +25,24 @@ namespace CaravanAdventures.CaravanCamp
         {
             base.Build(map, campAssetListRef);
             var cacoolerPos = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 1 && cell.z == CellRect.minZ + 1);
-            var cacooler = GenSpawn.Spawn(CampThingDefOf.CACooler, cacoolerPos, map);
+            var cacooler = GenSpawn.Spawn(CampDefOf.CACooler, cacoolerPos, map);
             campAssetListRef.Add(cacooler);
             cacooler.SetFaction(Faction.OfPlayer);
             var refuelComp = cacooler.TryGetComp<CompRefuelable>();
-            // todo check if caravan has fuel
             if (refuelComp != null) refuelComp.Refuel(refuelComp.GetFuelCountToFullyRefuel());
+        }
+
+        public override void BuildTribal(Map map, List<Thing> campAssetListRef)
+        {
+            base.BuildTribal(map, campAssetListRef);
+
+            // todo tribal cooler solution?
+            //var cacoolerPos = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 1 && cell.z == CellRect.minZ + 1);
+            //var cacooler = GenSpawn.Spawn(CampThingDefOf.CACooler, cacoolerPos, map);
+            //campAssetListRef.Add(cacooler);
+            //cacooler.SetFaction(Faction.OfPlayer);
+            //var refuelComp = cacooler.TryGetComp<CompRefuelable>();
+            //if (refuelComp != null) refuelComp.Refuel(refuelComp.GetFuelCountToFullyRefuel());
         }
 
         public virtual void CreateZone(Map map)

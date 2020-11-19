@@ -14,9 +14,9 @@ namespace CaravanAdventures.CaravanCamp
     // todos
     // -- leave prisoner camp standing
     // -- tribal stuff
+    // -- create bedrolls that can't be dismanteled
 
     // zones
-    // disable rotten stuff in food section
 
     // functionality: 
     // - maybe add ability to build new tents from camp supplies
@@ -57,7 +57,7 @@ namespace CaravanAdventures.CaravanCamp
             campParts = new List<CampArea>();
         }
 
-        public bool GenerateCamp(bool tribal = false)
+        public virtual bool GenerateCamp(bool tribal = false)
         {
             var stateBackup = Current.ProgramState;
             Current.ProgramState = ProgramState.MapInitializing;
@@ -144,7 +144,7 @@ namespace CaravanAdventures.CaravanCamp
                 });
         }
 
-        private void CalculateCostAndDetermineType(bool tribal = false)
+        protected void CalculateCostAndDetermineType(bool tribal = false)
         {
             if (tribal)
             {
@@ -152,7 +152,7 @@ namespace CaravanAdventures.CaravanCamp
                 return;
             }
             campParts.ForEach(part => campCost += part.SupplyCost);
-            var amount = caravan.AllThings?.Where(thing => thing.def == CampThingDefOf.CASpacerTentSupplies)?.Select(thing => thing?.stackCount)?.Sum();
+            var amount = caravan.AllThings?.Where(thing => thing.def == CampDefOf.CASpacerTentSupplies)?.Select(thing => thing?.stackCount)?.Sum();
             if (amount == null || amount == 0 || campCost > amount)
             {
                 this.tribal = true;
@@ -160,9 +160,9 @@ namespace CaravanAdventures.CaravanCamp
             }
             waste = campParts.Where(part => part is RestTent || part is ProductionTent).ToList().Count;
             var remaining = Convert.ToInt32(campCost);
-            var materials = CaravanInventoryUtility.TakeThings(caravan, delegate(Thing thing)
+            var materials = CaravanInventoryUtility.TakeThings(caravan, (Func<Thing, int>)delegate (Thing thing)
             {
-                if (thing.def != CampThingDefOf.CASpacerTentSupplies) return 0;
+                if (thing.def != CampDefOf.CASpacerTentSupplies) return 0;
                 var taken = Mathf.Min(remaining, thing.stackCount);
                 remaining -= taken;
                 return taken;
@@ -347,11 +347,11 @@ namespace CaravanAdventures.CaravanCamp
 
         protected void GenerateBuildings()
         {
-            // todo figure out how best to pass the reference from the comp to the builder
             campAssetListRef = new List<Thing>();
             foreach (var part in campParts)
             {
-                part.Build(map, campAssetListRef);
+                if (tribal) part.BuildTribal(map, campAssetListRef);
+                else part.Build(map, campAssetListRef);
             }
 
             for (int i = 0; i < campSiteRect.EdgeCells.Count() - 4; i++)
@@ -393,21 +393,26 @@ namespace CaravanAdventures.CaravanCamp
 
             foreach (var shelfTent in campParts.OfType<IShelfTent>())
             {
+                if (tribal) break;
                 shelfTent.FillShelfs(map, caravan);
             }
 
-            foreach (var areaRestriction in campParts.OfType<IAreaRestrictionTent>())
+            foreach (var areaRestrictionTent in campParts.OfType<IAreaRestrictionTent>())
             {
-                areaRestriction.CreateNewRestrictionArea(map, caravan);
-                areaRestriction.AssignPawnsToAreas(map, caravan);
+                areaRestrictionTent.CreateNewRestrictionArea(map, caravan);
+                areaRestrictionTent.AssignPawnsToAreas(map, caravan);
             }
 
             CampHelper.AddAnimalFreeAreaRestriction(campParts.OfType<IZoneTent>().Where(part => part is FoodTent), map);
         }
 
-        public void GenerateRecipes()
+        protected void GenerateRecipes()
         {
-            foreach (var recipeHolder in campParts.OfType<IRecipeHolder>()) recipeHolder.ApplyRecipes(caravan);
+            foreach (var recipeHolder in campParts.OfType<IRecipeHolder>())
+            {
+                if (tribal) recipeHolder.ApplyRecipesTribal(caravan);
+                else recipeHolder.ApplyRecipes(caravan);
+            }
         }
 
     }

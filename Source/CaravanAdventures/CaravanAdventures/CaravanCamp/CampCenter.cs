@@ -22,22 +22,19 @@ namespace CaravanAdventures.CaravanCamp
         public override void Build(Map map, List<Thing> campAssetListRef)
         {
             control = CampHelper.PrepAndGenerateThing(CampDefOf.CACampControl, this.CellRect.CenterCell, map, default, campAssetListRef) as ThingWithComps;
-            campFire = CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(CampThingDefOf.CACampfireRoast), this.CellRect.CenterCell, map, Rot4.South, campAssetListRef) as Building_WorkTable;
+
+            campFire = CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(CampDefOf.CACampfireRoast), this.CellRect.CenterCell, map, Rot4.South, campAssetListRef) as Building_WorkTable;
             var gatherSpotComp = campFire?.TryGetComp<CompGatherSpot>();
             if (gatherSpotComp != null) gatherSpotComp.Active = true;
-
-            //foreach (var cornerCell in CellRect.Corners)
-            //{
-            //    var thing = ThingMaker.MakeThing(RimWorld.ThingDefOf.TorchLamp);
-            //    thing.SetFaction(Faction.OfPlayer);
-            //    campAssetListRef.Add(GenSpawn.Spawn(thing, cornerCell, map, Rot4.South));
-            //}
 
             var location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.minX && cell.z == CellRect.minZ);
             CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("Table1x2c"), ThingDefOf.WoodLog), location, map, Rot4.East, campAssetListRef);
 
             location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.minX + 2 && cell.z == CellRect.minZ);
             CampHelper.PrepAndGenerateThing(ThingDefOf.TorchLamp, location, map, default, campAssetListRef);
+
+            location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.minX + 2 && cell.z == CellRect.maxZ - 2);
+            CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDefOf.Stool, ThingDefOf.WoodLog), location, map, default, campAssetListRef);
 
             location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.minX + 3 && cell.z == CellRect.minZ);
             CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("Table1x2c"), ThingDefOf.WoodLog), location, map, Rot4.East, campAssetListRef);
@@ -63,11 +60,35 @@ namespace CaravanAdventures.CaravanCamp
             foreach (var cell in CellRect.Cells) map.roofGrid.SetRoof(cell, RoofDefOf.RoofConstructed);
         }
 
+        public override void BuildTribal(Map map, List<Thing> campAssetListRef)
+        {
+            control = CampHelper.PrepAndGenerateThing(CampDefOf.CACampControl, this.CellRect.CenterCell, map, default, campAssetListRef) as ThingWithComps;
+
+            campFire = CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDefOf.Campfire), this.CellRect.CenterCell, map, Rot4.South, campAssetListRef) as Building_WorkTable;
+            var gatherSpotComp = campFire?.TryGetComp<CompGatherSpot>();
+            if (gatherSpotComp != null) gatherSpotComp.Active = true;
+
+            var location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.minX + 2 && cell.z == CellRect.maxZ);
+            CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("HorseshoesPin"), ThingDefOf.WoodLog), location, map, default, campAssetListRef);
+
+            foreach (var cornerCell in CellRect.Corners)
+            {
+                var thing = ThingMaker.MakeThing(RimWorld.ThingDefOf.TorchLamp);
+                thing.SetFaction(Faction.OfPlayer);
+                campAssetListRef.Add(GenSpawn.Spawn(thing, cornerCell, map, Rot4.South));
+            }
+        }
+
         public void ApplyRecipes(Caravan caravan)
         {
             var colonists = caravan.PawnsListForReading.Where(col => col.IsFreeColonist).ToList();
             var bill = new Bill_Production(DefDatabase<RecipeDef>.GetNamed("CookMealSimpleBulk")) { targetCount = colonists.Count != 0 ? colonists.Count * 2 : 12, repeatMode = BillRepeatModeDefOf.TargetCount };
             campFire.BillStack.AddBill(bill);
+        }
+
+        public void ApplyRecipesTribal(Caravan caravan)
+        {
+            ApplyRecipes(caravan);
         }
     }
 }

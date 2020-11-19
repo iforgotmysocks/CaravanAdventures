@@ -8,7 +8,7 @@
     <renderPrecedence>230</renderPrecedence>
     <description>Makeshift tent floor.</description>
     <texturePath>Terrain/Surfaces/Carpet</texturePath>
-    <color>(255, 155, 41)</color>
+    <color>(62,37,22)</color>
     <statBases>
       <WorkToBuild>10</WorkToBuild>
     </statBases>
@@ -38,7 +38,7 @@
         <edgeLeft>Damage/Edge</edgeLeft>
         <edgeRight>Damage/Edge</edgeRight>
       </damageData>
-      <color>(255, 155, 41)</color>
+      <color>(62,37,22)</color>
     </graphicData>
     <uiIconPath>Things/Building/Linked/WallSmooth_MenuIcon</uiIconPath>
     <statBases>
@@ -63,7 +63,7 @@
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
     <!-- Best affordance needed for stone -->
     <holdsRoof>true</holdsRoof>
-    <designationCategory>Structure</designationCategory>
+    <!--<designationCategory>Structure</designationCategory>-->
     <staticSunShadowHeight>1.0</staticSunShadowHeight>
     <blockLight>true</blockLight>
     <canOverlapZones>false</canOverlapZones>
@@ -90,12 +90,12 @@
 
   <ThingDef ParentName="ResourceBase">
     <defName>CAMakeshiftTentLeather</defName>
-    <label>Makeshit tent leather</label>
+    <label>Makeshift tent leather</label>
     <description>Makeshift tent leather stitched together by all sorts of leathers</description>
     <graphicData>
       <texPath>Things/Item/Resource/Leather</texPath>
       <graphicClass>Graphic_StackCount</graphicClass>
-      <color>(112,82,65)</color>
+      <color>(62,37,22)</color>
     </graphicData>
     <statBases>
       <MaxHitPoints>60</MaxHitPoints>
@@ -115,7 +115,7 @@
     <burnableByRecipe>true</burnableByRecipe>
     <healthAffectsPrice>false</healthAffectsPrice>
     <stuffProps>
-      <color>(112,82,65)</color>
+      <color>(62,37,22)</color>
       <commonality>0</commonality>
       <statFactors>
         <Beauty>1.5</Beauty>

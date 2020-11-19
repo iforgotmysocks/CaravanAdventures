@@ -19,7 +19,17 @@ namespace CaravanAdventures.CaravanCamp
         public override void Build(Map map, List<Thing> campAssetListRef)
         {
             base.Build(map, campAssetListRef);
-            // todo maybe just add a bed list to parent
+            var beds = CellRect.Cells.Select(cell => cell.GetFirstThing<Building_Bed>(map));
+            foreach (var bed in beds)
+            {
+                if (bed == null) continue;
+                bed.ForPrisoners = true;
+            }
+        }
+
+        public override void BuildTribal(Map map, List<Thing> campAssetListRef)
+        {
+            base.BuildTribal(map, campAssetListRef);
             var beds = CellRect.Cells.Select(cell => cell.GetFirstThing<Building_Bed>(map));
             foreach (var bed in beds)
             {
