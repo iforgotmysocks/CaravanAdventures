@@ -23,12 +23,13 @@
 
 	<Story_Shrine1_NextPatrolWarning>A mech patrol will come through {0} in about {1}.</Story_Shrine1_NextPatrolWarning>
 	
-	<Story_Shrine1_SacrilegHunters_DiaTitle>Someone is contacting us...</Story_Shrine1_SacrilegHunters_DiaTitle>
-	<Story_Shrine1_SacrilegHunters_Dia1_1>You did it! You finally found a master shrine!\n
-	\nBut where are my manners, we're Sacrileg Hunters. We lost alot of brothers and sisters in pursuit of the treasures lying here.\n
-		\nI hope you don't mind us keeping track of your progress, we're impressed and would like to offer our assistance.\n\nOur troops will arrive shortly!</Story_Shrine1_SacrilegHunters_Dia1_1>
-	<Story_Shrine1_SacrilegHunters_Dia1_1_Option1>Hm...</Story_Shrine1_SacrilegHunters_Dia1_1_Option1>
-
+	<Story_Shrine1_SacrilegHunters_DiaTitle>{0} is contacting you via comms...</Story_Shrine1_SacrilegHunters_DiaTitle>
+	<Story_Shrine1_SacrilegHunters_Dia1_1>You did it! You found a master shrine!
+	\nTake care when exploring, as i told you before, we lost brothers and sisters when we came accross our first shrine of this kind and escaped just barely.
+		\nWe'll send you some additional help, maybe another disaster can be avoided if we work together.\nGood luck... [{0} pauses shortly] and be careful.</Story_Shrine1_SacrilegHunters_Dia1_1>
+	<Story_Shrine1_SacrilegHunters_Dia1_1_Option1>Thank you, from the looks of this place, we may need them.</Story_Shrine1_SacrilegHunters_Dia1_1_Option1>
+  <Story_Shrine1_SacrilegHunters_Dia1_1_Option2>(Not recommended) No need, we can handle it ourselfs.</Story_Shrine1_SacrilegHunters_Dia1_1_Option2>
+  
 	<Story_Shrine1_BossDefeated_Dia1Title>Pure pain explodes in {0}'s head</Story_Shrine1_BossDefeated_Dia1Title>
 	<Story_Shrine1_BossDefeated_Dia1_1>While the {0} dies, memories start rushing back to the surface... altho not {1}'s memories.
 	\n{1} can't make sense of it, but {1} seems to recall a long forgotten spell named {2}.</Story_Shrine1_BossDefeated_Dia1_1>

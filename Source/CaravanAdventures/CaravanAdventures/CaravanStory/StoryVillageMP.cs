@@ -38,6 +38,7 @@ namespace CaravanAdventures.CaravanStory
             Scribe_Values.Look(ref sacHuntersFleeing, "sacHuntersFleeing");
             Scribe_Values.Look(ref sacHuntersCiviliansFleeing, "sacHuntersCiviliansFleeing");
             Scribe_Values.Look(ref mainCharLeftOrDied, "mainCharLeftOrDied");
+            Scribe_Values.Look(ref centerPoint, "centerPoint");
         }
 
         public void Notify_CaravanArrived(Caravan caravan)

@@ -38,7 +38,7 @@ namespace CaravanAdventures.CaravanStory
             return false;
         }
 
-        public static void GetAssistanceFromAlliedFaction(Faction faction, Map map, int pointsMin = 4000, int pointsMax = 5000, IntVec3? spawnSpot = null)
+        public static void GetAssistanceFromAlliedFaction(Faction faction, Map map, int pointsMin = 4000, int pointsMax = 5000, IntVec3 spawnSpot = default)
         {
             var incidentParms = new IncidentParms
             {
@@ -48,7 +48,7 @@ namespace CaravanAdventures.CaravanStory
                 // todo by wealth, the richer, the less help // 7500 - 8000
                 points = Rand.Range(pointsMin, pointsMax),  // DiplomacyTuning.RequestedMilitaryAidPointsRange.RandomInRange;
                 raidNeverFleeIndividual = true,
-                spawnCenter = spawnSpot ?? map.mapPawns.FreeColonists.RandomElement().Position,
+                spawnCenter = spawnSpot != default ? spawnSpot : map.mapPawns.FreeColonists.Where(col => col.Spawned).RandomElement().Position,
             };
             IncidentDefOf.RaidFriendly.Worker.TryExecute(incidentParms);
         }
@@ -105,6 +105,7 @@ namespace CaravanAdventures.CaravanStory
             if (!StoryUtility.TryGenerateDistantTile(out var tile, 6, 15))
             {
                 Log.Message($"No tile was generated");
+                villageGenerationCounter = 120;
                 return;
             }
             if (Faction.OfPlayer.HostileTo(StoryUtility.FactionOfSacrilegHunters))
@@ -132,12 +133,11 @@ namespace CaravanAdventures.CaravanStory
                 });
 
             var storyContactBondedPerson = CompCache.StoryWC.questCont.FriendlyCaravan?.storyContactBondedPawn;
-            Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillageQuestLetterContent".Translate(storyContactBondedPerson.NameShortColored, CompCache.StoryWC.questCont.Village.Settlement.Label).ToString().HtmlFormatting("add8e6ff", true, 15));
+            Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillageQuestLetterContent".Translate(storyContactBondedPerson != null ? storyContactBondedPerson.NameShortColored : Faction.OfPlayer.NameColored, CompCache.StoryWC.questCont.Village.Settlement.Label).ToString().HtmlFormatting("add8e6ff", true, 15));
             if (storyContactBondedPerson != null) Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillageQuestLetterContentPS".Translate().ToString().HtmlFormatting("add8e6ff", true, 13));
             Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillageQuestLetterContentEnding".Translate(CompCache.StoryWC.questCont.Village.StoryContact.NameShortColored).ToString().HtmlFormatting("add8e6ff", true, 15));
-
             Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillageQuestDesc2".Translate(StoryUtility.FactionOfSacrilegHunters.Name.HtmlFormatting("008080"), CompCache.StoryWC.questCont.Village.Settlement.Name.HtmlFormatting("008080"), CompCache.StoryWC.questCont.Village.StoryContact.NameShortColored));
-
+            Quests.QuestUtility.UpdateQuestLocation(StoryQuestDefOf.CA_StoryVillage_Arrival, CompCache.StoryWC.questCont.Village.Settlement);
             CompCache.StoryWC.SetSF("IntroVillage_Created");
         }
 

@@ -116,8 +116,7 @@ namespace CaravanAdventures.CaravanStory
 						StoryUtility.EnsureSacrilegHunters();
 
 						// todo different dialogs for other shrines, maybe they betray the player the 3rd or 4th shrine.
-						CreateShrineDialog();
-						StoryUtility.GetAssistanceFromAlliedFaction(StoryUtility.FactionOfSacrilegHunters, Map);
+						HunterAssistanceDialog(); 
 					}
 				}
 
@@ -153,7 +152,7 @@ namespace CaravanAdventures.CaravanStory
 
         private void LetterNoMasterShrine() => Find.LetterStack.ReceiveLetter("MasterShrineVictoryLetterLabel".Translate(), "MasterShrineVictoryLetterMessage".Translate(), LetterDefOf.PositiveEvent, this, null, null, null, null);
 
-		private void CreateShrineDialog()
+		private void HunterAssistanceDialog()
 		{
 			//var endDiaNodeAccepted = new DiaNode("Story_Start_Dia1_Me_End_Accepted".Translate());
 			//endDiaNodeAccepted.options.Add(new DiaOption("Story_Start_Dia1_Me_End_Bye".Translate()) { action = () => GrantAncientGift(initiator, addressed), resolveTree = true });
@@ -165,10 +164,13 @@ namespace CaravanAdventures.CaravanStory
 			//subDiaNode.options.Add(new DiaOption("Story_Start_Dia1_Me_NoChoice".Translate()) { link = endDiaNodeAccepted });
 			//subDiaNode.options.Add(new DiaOption("Story_Start_Dia1_Me_SomeoneBetter".Translate()) { link = endDiaNodeDenied });
 
-			var diaNode = new DiaNode("Story_Shrine1_SacrilegHunters_Dia1_1".Translate());
-			diaNode.options.Add(new DiaOption("Story_Shrine1_SacrilegHunters_Dia1_1_Option1".Translate()) { resolveTree = true }); ;
+			var storyChar = CompCache.StoryWC.questCont.Village.StoryContact;
 
-			TaggedString taggedString = "Story_Shrine1_SacrilegHunters_DiaTitle".Translate();
+			var diaNode = new DiaNode("Story_Shrine1_SacrilegHunters_Dia1_1".Translate(storyChar.NameShortColored));
+			diaNode.options.Add(new DiaOption("Story_Shrine1_SacrilegHunters_Dia1_1_Option1".Translate()) { resolveTree = true, action = () => StoryUtility.GetAssistanceFromAlliedFaction(StoryUtility.FactionOfSacrilegHunters, Map) });
+			diaNode.options.Add(new DiaOption("Story_Shrine1_SacrilegHunters_Dia1_1_Option2".Translate()) { resolveTree = true });
+
+			TaggedString taggedString = "Story_Shrine1_SacrilegHunters_DiaTitle".Translate(storyChar.NameShortColored);
 			Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
 			Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
 		}

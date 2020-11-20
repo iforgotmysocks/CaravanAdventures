@@ -18,8 +18,8 @@ namespace CaravanAdventures.CaravanStory.Quests
         public void ExposeData()
         {
             Scribe_Values.Look(ref friendlyCaravanCounter, "friendlyCaravanCounter", -1);
-            // todo maybe revert to reference when it's clear dafuq is going on
-            Scribe_Deep.Look(ref storyContactBondedPawn, "storyContactBondedPawn");
+            // todo used to be deep saved due to reference causing errors now reverted back to reference - maybe revert to reference when it's clear dafuq is going on
+            Scribe_References.Look(ref storyContactBondedPawn, "storyContactBondedPawn");
         }
 
         public QuestCont_FriendlyCaravan()
@@ -121,6 +121,7 @@ namespace CaravanAdventures.CaravanStory.Quests
                 cell = cell.TryMakeMinified();
                 GenSpawn.Spawn(cell, addressed.Position, addressed.Map, WipeMode.VanishOrMoveAside);
                 Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_TradeCaravan, "TradeCaravanQuestInfoTalkedToReward".Translate(addressed.NameShortColored, ThingDefOf.VanometricPowerCell.LabelCap.ToString().Colorize(UnityEngine.Color.green)));
+
             }
             Quests.QuestUtility.CompleteQuest(StoryQuestDefOf.CA_TradeCaravan);
         }
