@@ -67,7 +67,7 @@ namespace CaravanAdventures.CaravanStory
             List<Pawn> list = PawnGroupMakerUtility.GeneratePawns(IncidentParmsUtility.GetDefaultPawnGroupMakerParms(this.PawnGroupKindDef, parms, true), false).ToList<Pawn>();
             var mainPawn = CompCache.StoryWC.questCont.Village.StoryContact;
             
-            list.Add(mainPawn);
+            if (!list.Contains(mainPawn)) list.Add(mainPawn);
             StoryUtility.FreshenUpPawn(mainPawn);
             foreach (Thing newThing in list)
             {

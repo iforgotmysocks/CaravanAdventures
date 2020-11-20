@@ -42,7 +42,7 @@ using Verse.Noise;
 // - export shrine stuff to seperate questCont
 
 // etc: 
-// {PAWN_pronoun} in text possible?
+// {PAWN_pronoun} in text possible? -> GenderUtility.GetPronoun()
 
 namespace CaravanAdventures.CaravanStory
 {

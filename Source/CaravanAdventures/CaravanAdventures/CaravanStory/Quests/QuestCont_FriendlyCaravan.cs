@@ -74,23 +74,23 @@ namespace CaravanAdventures.CaravanStory.Quests
 
             DiaNode diaNode = null;
 
-            var diaNode6_1 = new DiaNode("TradeCaravan_Dia1_6_1".Translate(addressed.NameShortColored, ThingDefOf.VanometricPowerCell.LabelCap.ToString().Colorize(UnityEngine.Color.green)));
+            var diaNode6_1 = new DiaNode("TradeCaravan_Dia1_6_1".Translate(addressed.NameShortColored, ThingDefOf.VanometricPowerCell.LabelCap.ToString().Colorize(UnityEngine.Color.green), GenderUtility.GetPossessive(addressed.gender)));
             diaNode6_1.options.Add(new DiaOption("TradeCaravan_Dia1_6_1_Option1".Translate()) { action = () => ConversationFinished(initiator, addressed, true), resolveTree = true });
             var diaNode6_2 = new DiaNode("TradeCaravan_Dia1_6_2".Translate(addressed.NameShortColored));
             diaNode6_2.options.Add(new DiaOption("TradeCaravan_Dia1_6_2_Option1".Translate()) { action = () => ConversationFinished(initiator, addressed), resolveTree = true });
 
-            var diaNode5 = new DiaNode("TradeCaravan_Dia1_5".Translate(addressed.NameShortColored));
+            var diaNode5 = new DiaNode("TradeCaravan_Dia1_5".Translate(addressed.NameShortColored, GenderUtility.GetPossessive(addressed.gender)));
             diaNode5.options.Add(new DiaOption("TradeCaravan_Dia1_5_Option1".Translate()) { action = () => SetSacsAllies(), link = diaNode6_1 });
             diaNode5.options.Add(new DiaOption("TradeCaravan_Dia1_5_Option2".Translate()) { link = diaNode6_2 });
 
-            var diaNode4 = new DiaNode("TradeCaravan_Dia1_4".Translate(addressed.NameShortColored));
+            var diaNode4 = new DiaNode("TradeCaravan_Dia1_4".Translate(addressed.NameShortColored, GenderUtility.GetPossessive(addressed.gender)));
             diaNode4.options.Add(new DiaOption("TradeCaravan_Dia1_4_Option1".Translate(addressed.NameShortColored, initiator.NameShortColored)) { link = diaNode5 });
 
             var diaNode3 = new DiaNode("TradeCaravan_Dia1_3".Translate(addressed.NameShortColored));
             diaNode3.options.Add(new DiaOption("TradeCaravan_Dia1_3_Option1".Translate()) { link = diaNode4 });
             diaNode3.options.Add(new DiaOption("TradeCaravan_Dia1_3_Option2".Translate()) { action = () => ConversationFinished(initiator, addressed), resolveTree = true });
 
-            var diaNode2 = new DiaNode("TradeCaravan_Dia1_2".Translate(addressed.NameShortColored));
+            var diaNode2 = new DiaNode("TradeCaravan_Dia1_2".Translate(addressed.NameShortColored, GenderUtility.GetPossessive(addressed.gender)));
             diaNode2.options.Add(new DiaOption("TradeCaravan_Dia1_2_Option1".Translate()) { link = diaNode3 });
 
             diaNode = new DiaNode("TradeCaravan_Dia1_1".Translate(addressed.NameShortColored));

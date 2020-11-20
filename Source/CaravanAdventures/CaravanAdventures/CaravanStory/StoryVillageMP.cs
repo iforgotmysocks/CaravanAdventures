@@ -132,7 +132,7 @@ namespace CaravanAdventures.CaravanStory
         private void SpawnMechArmy(Pawn initiator, Pawn addressed)
         {
             CompCache.StoryWC.SetSF("IntroVillage_TalkedToFriend");
-            Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillage_QuestUpdate_MechsArrived".Translate(addressed.NameShortColored));
+            Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillage_QuestUpdate_MechsArrived".Translate(addressed.NameShortColored, GenderUtility.GetPossessive(addressed.gender)));
 
             var incidentParms = new IncidentParms
             {
