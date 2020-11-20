@@ -91,8 +91,8 @@ namespace CaravanAdventures.CaravanStory
 
         public override void Tick()
 		{
-			//base.Tick();
-			if (base.HasMap)
+            base.Tick();
+            if (base.HasMap)
 			{
 				CheckBossDefeated();
 				CheckWonBattle();
