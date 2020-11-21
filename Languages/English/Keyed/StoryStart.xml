@@ -11,7 +11,7 @@
 	<Story_Start_Dia1_Me_End_Denied>We hope you are right.</Story_Start_Dia1_Me_End_Denied>
 	<Story_Start_Dia1_Me_End_Bye>Bye.</Story_Start_Dia1_Me_End_Bye>
 	<Story_Start_Dia1_Me_End_GiftAlreadyRecieved>The ancient gift was already granted, don't desturb me any longer.</Story_Start_Dia1_Me_End_GiftAlreadyRecieved>
-	<Story_Start_Dia1_1_Neg_Option2>{0} can't fulfill his duty, that's why i would like to take on the gift.</Story_Start_Dia1_1_Neg_Option2>
+	<Story_Start_Dia1_1_Neg_Option2>{0} can't fulfill {1} duty, that's why i would like to take on the gift.</Story_Start_Dia1_1_Neg_Option2>
 	<Story_Start_Dia1_2_Neg>So be it. Now leave.</Story_Start_Dia1_2_Neg>
 	<Story_Start_Dia1_2_Neg_Option1>Thank you!</Story_Start_Dia1_2_Neg_Option1>
 

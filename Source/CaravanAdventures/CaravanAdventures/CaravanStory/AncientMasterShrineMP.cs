@@ -231,7 +231,7 @@ namespace CaravanAdventures.CaravanStory
 			BossDefeatedDialog(gifted, boss, spell);
 			bossDefeatedAndRewardsGiven = true;
 
-			Quests.QuestUtility.AppendQuestDescription(Quests.StoryQuestDefOf.CA_FindAncientShrine, "Story_Shrine1_QuestRewardUpdate_1".Translate(gifted.NameShortColored, boss.Label, CompCache.StoryWC.GetCurrentShrineCounter - 1, spell.label.Colorize(Color.cyan)));
+			Quests.QuestUtility.AppendQuestDescription(Quests.StoryQuestDefOf.CA_FindAncientShrine, "Story_Shrine1_QuestRewardUpdate_1".Translate(GenDate.DateFullStringAt((long)GenDate.TickGameToAbs(Find.TickManager.TicksGame), Find.WorldGrid.LongLatOf(Tile)), gifted.NameShortColored, boss.LabelCap, CompCache.StoryWC.GetCurrentShrineCounter - 1, spell.label.CapitalizeFirst().Colorize(Color.cyan)));
 		}
 
 		private void BossDefeatedDialog(Pawn gifted, Pawn boss, AbilityDef spell)

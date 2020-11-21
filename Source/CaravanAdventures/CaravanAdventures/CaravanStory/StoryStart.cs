@@ -48,7 +48,7 @@ namespace CaravanAdventures.CaravanStory
             base.MapComponentTick();
             DrawTreeQuestionMark();
 
-            if (ticks >= 200 && (CompCache.StoryWC.storyFlags["IntroVillage_Finished"] || CompCache.StoryWC.debugFlags["VillageDone"]))
+            if (ticks >= 300 && (CompCache.StoryWC.storyFlags["IntroVillage_Finished"] || CompCache.StoryWC.debugFlags["VillageDone"]))
             {
                 AddTalkTreeAction();
                 AddTreeWhisper();
@@ -64,12 +64,15 @@ namespace CaravanAdventures.CaravanStory
 
         private void DrawTreeQuestionMark()
         {
-            if (theTree != null && theTree.TryGetComp<CompTalk>() != null && theTree.TryGetComp<CompTalk>().ShowQuestionMark) theTree.Map.overlayDrawer.DrawOverlay(theTree, OverlayTypes.QuestionMark);
+            if (theTree != null 
+                && theTree.TryGetComp<CompTalk>() != null 
+                && theTree.TryGetComp<CompTalk>().ShowQuestionMark
+                && !CompCache.StoryWC.storyFlags["Start_ReceivedGift"]) theTree.Map.overlayDrawer.DrawOverlay(theTree, OverlayTypes.QuestionMark);
         }
 
         private void AddTalkTreeAction()
         {
-            if (CompCache.StoryWC.storyFlags["Start_InitialTreeAddTalkOption"]) return;
+            //if (CompCache.StoryWC.storyFlags["Start_InitialTreeAddTalkOption"]) return;
             var tree = map.spawnedThings.FirstOrDefault(x => x.def.defName == "Plant_TreeAnima") as ThingWithComps;
             if (tree == null)
             {
@@ -140,7 +143,7 @@ namespace CaravanAdventures.CaravanStory
 
                 diaNode = new DiaNode("Story_Start_Dia1_Me_End_GiftAlreadyRecieved".Translate());
                 diaNode.options.Add(new DiaOption("Story_Start_Dia1_Me_End_Bye".Translate()) { resolveTree = true }); ;
-                diaNode.options.Add(new DiaOption("Story_Start_Dia1_1_Neg_Option2".Translate(gifted.NameShortColored)) { link = subDiaNode }); ;
+                diaNode.options.Add(new DiaOption("Story_Start_Dia1_1_Neg_Option2".Translate(gifted.NameShortColored, GenderUtility.GetPossessive(gifted.gender))) { link = subDiaNode });
 
             }
             TaggedString taggedString = "Story_Start_Dia1_Title".Translate();
@@ -172,8 +175,8 @@ namespace CaravanAdventures.CaravanStory
         {
             if (!CompCache.StoryWC.storyFlags["Start_CanReceiveGift"]) return;
             var gifted = CompCache.StoryWC.questCont.StoryStart.Gifted;
-            if (gifted != null && !gifted.Dead && !forceStrip) return;
-            else if (gifted != null && (gifted.Dead || forceStrip))
+            if (gifted != null && !gifted.Dead && !gifted.Destroyed && gifted.Faction == Faction.OfPlayer && !forceStrip) return;
+            else if (gifted != null && (gifted.Dead || gifted.Faction != Faction.OfPlayer || forceStrip))
             {
                 gifted.health.hediffSet.hediffs.Remove(gifted.health.hediffSet.hediffs.FirstOrDefault(x => x.def.defName == "CAAncientGift"));
                 foreach (var ability in gifted.abilities.abilities.Where(x => x.def.defName.StartsWith("CAAncient")).Reverse())
