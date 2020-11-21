@@ -28,7 +28,6 @@ namespace CaravanAdventures.CaravanStory.Quests
 
         public void ExposeData()
         {
-            // todo - deep or ref? - what keeps the comp?
             Scribe_References.Look(ref storyContact, "storyContact");
             Scribe_References.Look(ref settlement, "settlement");
             Scribe_References.Look(ref destroyedSettlement, "destroyedSettlement");

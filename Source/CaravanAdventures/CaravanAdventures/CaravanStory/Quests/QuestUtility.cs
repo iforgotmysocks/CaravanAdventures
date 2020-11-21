@@ -109,11 +109,12 @@ namespace CaravanAdventures.CaravanStory.Quests
             if (quest != null) Find.QuestManager.Remove(quest);
         }
 
-        public static void AppendQuestDescription(QuestScriptDef questDef, TaggedString text, bool avoidAdditionalSpaceFormatting = false)
+        public static void AppendQuestDescription(QuestScriptDef questDef, TaggedString text, bool avoidAdditionalSpaceFormatting = false, bool sendUpdateInfoLetter = false)
         {
             var quest = Find.QuestManager.QuestsListForReading.FirstOrDefault(x => x.root == questDef);
             if (!avoidAdditionalSpaceFormatting) text = "\n\n" + text;
             if (quest != null) quest.description += text;
+            if (sendUpdateInfoLetter) Find.LetterStack.ReceiveLetter("CALetterQuestOngoingUpdatedInfo".Translate(), "CALetterQuestOngoingUpdatedInfoText".Translate(quest.name.CapitalizeFirst()), LetterDefOf.NeutralEvent, null, null, quest, null, null);
         }
 
         public static void UpdateQuestLocation(QuestScriptDef questDef, WorldObject location, bool clearExistingLocations = true)

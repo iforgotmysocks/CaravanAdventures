@@ -1,48 +1,61 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
-	<Story_Shrine1_NewShrineDetectedLetterLabel>Hints of a dangerous shrine</Story_Shrine1_NewShrineDetectedLetterLabel>
-	<Story_Shrine1_NewShrineDetectedLetterMessage>{0} sent you a message with vague hints regarding tales of a dangerous shrine. The people providing the hint weren't very credible, so take care, as they also said that noone ever returned who dared to pilgrimage there.</Story_Shrine1_NewShrineDetectedLetterMessage>
+  <Story_Shrine1_NewShrineDetectedLetterLabel>Hints of a dangerous shrine</Story_Shrine1_NewShrineDetectedLetterLabel>
+  <Story_Shrine1_NewShrineDetectedLetterMessage>{0} sent you a message with vague hints regarding tales of a dangerous shrine. The people providing the hint weren't very credible, so take care, as they also said that noone ever returned who dared to pilgrimage there.</Story_Shrine1_NewShrineDetectedLetterMessage>
 
   <Story_Shrine1_QuestName>Caravan Adventures - Secrets of the Shrines</Story_Shrine1_QuestName>
   <Story_Shrine1_QuestDesc>Explore possible master shrines to reveal their secrets and to determine the mechanoid armada threat.\nTake your time to prepare, this may be a long journey and the enemy won't be easily defeated!</Story_Shrine1_QuestDesc>
 
   <VisitAncientMasterShrine>Visit ancient master shrine</VisitAncientMasterShrine>
-	<Story_Shrine1_EnemyEncounterLetterLabel>Enemies encountered</Story_Shrine1_EnemyEncounterLetterLabel>
-	<Story_Shrine1_EnemyEncounterLetterMessage>Looks like we're not alone here.</Story_Shrine1_EnemyEncounterLetterMessage>
-	<VisitAncientMasterShrine>Visit Shrine test</VisitAncientMasterShrine>
+  <Story_Shrine1_EnemyEncounterLetterLabel>Enemies encountered</Story_Shrine1_EnemyEncounterLetterLabel>
+  <Story_Shrine1_EnemyEncounterLetterMessage>Looks like we're not alone here.</Story_Shrine1_EnemyEncounterLetterMessage>
+  <VisitAncientMasterShrine>Visit Shrine test</VisitAncientMasterShrine>
 
-	<GiveUpOnClueLabel>Give up on clue</GiveUpOnClueLabel>
-	<GiveUpOnClueDesc>Give up on this clue, you'll hear about another one soon.</GiveUpOnClueDesc>
+  <GiveUpOnClueLabel>Give up on clue</GiveUpOnClueLabel>
+  <GiveUpOnClueDesc>Give up on this clue, you'll hear about another one soon.</GiveUpOnClueDesc>
 
-	<MasterShrineVictoryLetterLabel>Bandits defeated</MasterShrineVictoryLetterLabel>
-	<MasterShrineVictoryLetterMessage>The bandits setting a trap at the shrine were defeated. </MasterShrineVictoryLetterMessage>
-	<NoMasterShrineLetterLabel>No luck.</NoMasterShrineLetterLabel>
-	<NoMasterShrineLetterMessage>While this place may harbour treasures, it doesn't look like the place you're searching for.</NoMasterShrineLetterMessage>
-	<MasterShrineVictoryBossLetterLabel>Defeated {0}</MasterShrineVictoryBossLetterLabel>
-	<MasterShrineVictoryBossLetterMessage>Defeated {0}, the ancient harbinger of destruction. The shrine awarded you with {1}</MasterShrineVictoryBossLetterMessage>
+  <MasterShrineVictoryLetterLabel>Bandits defeated</MasterShrineVictoryLetterLabel>
+  <MasterShrineVictoryLetterMessage>The bandits setting a trap at the shrine were defeated. </MasterShrineVictoryLetterMessage>
+  <NoMasterShrineLetterLabel>No luck.</NoMasterShrineLetterLabel>
+  <NoMasterShrineLetterMessage>While this place may harbour treasures, it doesn't look like the place you're searching for.</NoMasterShrineLetterMessage>
+  <MasterShrineVictoryBossLetterLabel>Defeated {0}</MasterShrineVictoryBossLetterLabel>
+  <MasterShrineVictoryBossLetterMessage>Defeated {0}, the ancient harbinger of destruction. The shrine awarded you with {1}</MasterShrineVictoryBossLetterMessage>
 
-	<Story_Shrine1_NextPatrolWarning>A mech patrol will come through {0} in about {1}.</Story_Shrine1_NextPatrolWarning>
-	
-	<Story_Shrine1_SacrilegHunters_DiaTitle>{0} is contacting you via comms...</Story_Shrine1_SacrilegHunters_DiaTitle>
-	<Story_Shrine1_SacrilegHunters_Dia1_1>You did it! You found a master shrine!
-	\nTake care when exploring, as i told you before, we lost brothers and sisters when we came accross our first shrine of this kind and escaped just barely.
-		\nWe'll send you some additional help, maybe another disaster can be avoided if we work together.\nGood luck... [{0} pauses shortly] and be careful.</Story_Shrine1_SacrilegHunters_Dia1_1>
-	<Story_Shrine1_SacrilegHunters_Dia1_1_Option1>Thank you, from the looks of this place, we may need them.</Story_Shrine1_SacrilegHunters_Dia1_1_Option1>
-  <Story_Shrine1_SacrilegHunters_Dia1_1_Option2>(Not recommended) No need, we can handle it ourselfs.</Story_Shrine1_SacrilegHunters_Dia1_1_Option2>
-  
-	<Story_Shrine1_BossDefeated_Dia1Title>Pure pain explodes in {0}'s head</Story_Shrine1_BossDefeated_Dia1Title>
-	<Story_Shrine1_BossDefeated_Dia1_1>While the {0} dies, memories start rushing back to the surface... altho not {1}'s memories.
-	\n{1} can't make sense of it, but {1} seems to recall a long forgotten spell named {2}.</Story_Shrine1_BossDefeated_Dia1_1>
-	<Story_Shrine1_BossDefeated_Dia1_1_NoSpell>
-		The huge metal body of {0} crashes on the ground.</Story_Shrine1_BossDefeated_Dia1_1_NoSpell>
-	<Story_Shrine1_BossDefeated_Dia1_1_Option1>Asthonishing...</Story_Shrine1_BossDefeated_Dia1_1_Option1>
-	<Story_Shrine1_BossDefeated_Dia1_2>When {0}'s mechanical boddy came to rest, loud scratching starts to hollow around the ruins... something woke up.</Story_Shrine1_BossDefeated_Dia1_2>
-	<Story_Shrine1_BossDefeated_Dia1_1_Option2>We better get out of here...</Story_Shrine1_BossDefeated_Dia1_1_Option2>
-	<Story_Shrine1_AbilityGainedLetterTitle>Ancient ability gained: {0}</Story_Shrine1_AbilityGainedLetterTitle>
-	<Story_Shrine1_AbilityGainedLetterDesc>By defeating {0} and with the power of the Ancient Gift, {1} received the sacret knowledge of the spell: {2}</Story_Shrine1_AbilityGainedLetterDesc>
+  <Story_Shrine1_NextPatrolWarning>A mech patrol will come through {0} in about {1}.</Story_Shrine1_NextPatrolWarning>
+
+  <Story_Shrine1_BossDefeated_Dia1Title>Pure pain explodes in {0}'s head</Story_Shrine1_BossDefeated_Dia1Title>
+  <Story_Shrine1_BossDefeated_Dia1_1>
+    While the {0} dies, memories start rushing back to the surface... altho not {1}'s memories.
+    \n{1} can't make sense of it, but {1} seems to recall a long forgotten spell named {2}.
+  </Story_Shrine1_BossDefeated_Dia1_1>
+  <Story_Shrine1_BossDefeated_Dia1_1_NoSpell>
+    The huge metal body of {0} crashes on the ground.
+  </Story_Shrine1_BossDefeated_Dia1_1_NoSpell>
+  <Story_Shrine1_BossDefeated_Dia1_1_Option1>Asthonishing...</Story_Shrine1_BossDefeated_Dia1_1_Option1>
+  <Story_Shrine1_BossDefeated_Dia1_2>When {0}'s mechanical boddy came to rest, loud scratching starts to hollow around the ruins... something woke up.</Story_Shrine1_BossDefeated_Dia1_2>
+  <Story_Shrine1_BossDefeated_Dia1_1_Option2>We better get out of here...</Story_Shrine1_BossDefeated_Dia1_1_Option2>
+  <Story_Shrine1_AbilityGainedLetterTitle>Ancient ability gained: {0}</Story_Shrine1_AbilityGainedLetterTitle>
+  <Story_Shrine1_AbilityGainedLetterDesc>By defeating {0} and with the power of the Ancient Gift, {1} received the sacret knowledge of the spell: {2}</Story_Shrine1_AbilityGainedLetterDesc>
   <Story_Shrine1_ArrivalTimeShownLetterMessage>Your caravan has been detected. In {0}, reinforcing {1} from {2} will begin arriving in the area.\n\nReform your caravan and begin moving to avoid the {1}. You can return once they moved on. You'll be notified about their arrival every 3 hours.</Story_Shrine1_ArrivalTimeShownLetterMessage>
+
+  <Story_Shrine1_QuestRewardUpdate_1>{0} defeated {1} at the {2} shrine and received the ancient spell {3}.</Story_Shrine1_QuestRewardUpdate_1>
+  
+  <Story_Shrine1_SacrilegHunters_DiaTitle>{0} is contacting you via comms...</Story_Shrine1_SacrilegHunters_DiaTitle>
+  <Story_Shrine1_SacrilegHunters_Dia1_1>
+    You did it! You found a master shrine!
+    \nTake care when exploring, as i told you before, we lost brothers and sisters when we came accross our first shrine of this kind and escaped just barely.
+    \nWe'll send you some additional help, maybe another disaster can be avoided if we work together.\nGood luck... [{0} pauses shortly] and be careful.
+  </Story_Shrine1_SacrilegHunters_Dia1_1>
+  <Story_Shrine1_SacrilegHunters_Dia1_1_Option1>Thank you, from the looks of this place, we may need them.</Story_Shrine1_SacrilegHunters_Dia1_1_Option1>
+  <Story_Shrine1_SacrilegHunters_Dia1_1_Option2>(Not recommended) No need, we can handle it ourselfs.</Story_Shrine1_SacrilegHunters_Dia1_1_Option2>
+
+  <Story_Shrine1_Apocalypse_Dia1Title>{0} is contacting you via comms...</Story_Shrine1_Apocalypse_Dia1Title>
+  <Story_Shrine1_Apocalypse_Dia1_1>[{0}, out of breath and shocked] My god, did you guys get out alive?\nWhat happend there? When that abomination died? You screamt like you'd die. Are you alright?</Story_Shrine1_Apocalypse_Dia1_1>
+  <Story_Shrine1_Apocalypse_Dia1_1_Option1>I remembered something, but i'm not clear what yet, some sort of power... the tree...\nThis is a bad idea over comms...</Story_Shrine1_Apocalypse_Dia1_1_Option1>
+  <Story_Shrine1_Apocalypse_Dia1_2>Aaah, okay... Well, what ever the death of that monster and the following earthquake caused, it's bad, and it wasn't natural.\nOur scientists are going crazy. Something very old under the planet's surface was activated. Our scientists believe it started to cool down the planet's core.\nWhile the process seems to be slow, it will mean certain death if we can't find out how to stop it!</Story_Shrine1_Apocalypse_Dia1_2>
+  <Story_Shrine1_Apocalypse_Dia1_2_Option1>Let's find more of those shrines and see if we can't find more clues \nas to what we're dealing with.</Story_Shrine1_Apocalypse_Dia1_2_Option1>
+  <Story_Shrine1_Apocalypse_Dia1_3>Ya, we'll message you when we can find more shrines. \n[{0}'s voice turning to a worried tone] And stay save until then, i have a really bad feeling about this.</Story_Shrine1_Apocalypse_Dia1_3>
+  <Story_Shrine1_Apocalypse_Dia1_3_Option1>We will, take care as well. Bye!</Story_Shrine1_Apocalypse_Dia1_3_Option1>
+
+  <Story_Shrine1_QuestUpdate_1>Defeating the mechanical monstrosity activated old unknown machinery deep below the planet's surface that started to cool down the planet's core. This will slowly render the planet inhabitable and the cause needs to be found. You should seek out more shrines to get answers.</Story_Shrine1_QuestUpdate_1>
 </LanguageData>
-
-
-
-

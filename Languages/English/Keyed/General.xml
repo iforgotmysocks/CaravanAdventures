@@ -3,6 +3,8 @@
 	<LetterQuestConcludedLabelWithUpdateInfo>Quest concluded (Quest info updated)</LetterQuestConcludedLabelWithUpdateInfo>
 	<LetterQuestCompletedLabelWithUpdateInfo>Quest completed (Quest info updated)</LetterQuestCompletedLabelWithUpdateInfo>
 		<LetterQuestFailedLabelWithUpdateInfo>Quest failed (Quest info updated)</LetterQuestFailedLabelWithUpdateInfo>
-	
+
+  <CALetterQuestOngoingUpdatedInfo>Quest updated</CALetterQuestOngoingUpdatedInfo>
+  <CALetterQuestOngoingUpdatedInfoText>The quest "{0}" was updated.</CALetterQuestOngoingUpdatedInfoText>
 </LanguageData>
 

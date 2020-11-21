@@ -82,11 +82,39 @@ namespace CaravanAdventures.CaravanStory
 			{
 				// why is this here? why did i want to reset the current shrine flags when the map was removed? => just debugging stuff?
 				//if (boss == null) CompCache.StoryWC.ResetCurrentShrineFlags();
+
 				alsoRemoveWorldObject = true;
 				return true;
 			}
 			alsoRemoveWorldObject = false;
 			return false;
+		}
+
+        public override void PostRemove()
+        {
+            base.PostRemove();
+			if (CompCache.StoryWC.GetCurrentShrineCounter == 2)
+			{
+				Quests.QuestUtility.AppendQuestDescription(Quests.StoryQuestDefOf.CA_FindAncientShrine, Helper.HtmlFormatting("Story_Shrine1_QuestUpdate_1".Translate(), "f59b42"), false, true);
+				WarningAboutApocalypseDialog();
+			}
+        }
+
+        private void WarningAboutApocalypseDialog()
+        {
+			var storyChar = CompCache.StoryWC.questCont.Village.StoryContact;
+			var diaNode3 = new DiaNode("Story_Shrine1_Apocalypse_Dia1_3".Translate(storyChar.NameShortColored));
+			diaNode3.options.Add(new DiaOption("Story_Shrine1_Apocalypse_Dia1_3_Option1".Translate()) { resolveTree = true });
+
+			var diaNode2 = new DiaNode("Story_Shrine1_Apocalypse_Dia1_2".Translate(storyChar.NameShortColored));
+			diaNode2.options.Add(new DiaOption("Story_Shrine1_Apocalypse_Dia1_2_Option1".Translate()) { link = diaNode3 });
+
+			var diaNode = new DiaNode("Story_Shrine1_Apocalypse_Dia1_1".Translate(storyChar.NameShortColored));
+			diaNode.options.Add(new DiaOption("Story_Shrine1_Apocalypse_Dia1_1_Option1".Translate()) { link = diaNode2 });
+
+			TaggedString taggedString = "Story_Shrine1_Apocalypse_Dia1Title".Translate(storyChar.NameShortColored);
+			Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
+			Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
 		}
 
         public override void Tick()
@@ -202,11 +230,12 @@ namespace CaravanAdventures.CaravanStory
 
 			BossDefeatedDialog(gifted, boss, spell);
 			bossDefeatedAndRewardsGiven = true;
+
+			Quests.QuestUtility.AppendQuestDescription(Quests.StoryQuestDefOf.CA_FindAncientShrine, "Story_Shrine1_QuestRewardUpdate_1".Translate(gifted.NameShortColored, boss.Label, CompCache.StoryWC.GetCurrentShrineCounter - 1, spell.label.Colorize(Color.cyan)));
 		}
 
-        private void BossDefeatedDialog(Pawn gifted, Pawn boss, AbilityDef spell)
+		private void BossDefeatedDialog(Pawn gifted, Pawn boss, AbilityDef spell)
         {
-			// todo adjust dialog for the case of no spell learned.
 			var diaNode2 = new DiaNode("Story_Shrine1_BossDefeated_Dia1_2".Translate(boss.def.label));
 			diaNode2.options.Add(new DiaOption("Story_Shrine1_BossDefeated_Dia1_1_Option2".Translate()) { resolveTree = true, action = () => WakeAllMechanoids() });
 
