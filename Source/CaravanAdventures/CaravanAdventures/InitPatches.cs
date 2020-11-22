@@ -24,6 +24,8 @@ namespace CaravanAdventures
             PatchRemoveRoyalTitleRequirements();
             PatchAddPsychiteTeaToCampFire();
             PatchIncreaseBaseWealthAndFood();
+
+            CompatibilityPatches.ExecuteCompatibilityPatches();
         }
 
         private static void PatchIncreaseBaseWealthAndFood()
