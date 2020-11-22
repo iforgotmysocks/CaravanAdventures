@@ -200,6 +200,8 @@ namespace CaravanAdventures.CaravanStory
             Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
             Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
             mainCharLeftOrDied = true;
+
+            Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, storyChar.Dead || storyChar.Downed ? "StoryVillage_QuestUpdate_CanLeaveFailed".Translate() : "StoryVillage_QuestUpdate_CanLeaveSuccess".Translate(), false, true);
         }
 
         private void CheckShouldSacHuntersFlee()
