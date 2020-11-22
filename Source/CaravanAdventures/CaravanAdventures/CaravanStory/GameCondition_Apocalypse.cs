@@ -13,8 +13,6 @@ namespace CaravanAdventures.CaravanStory
         private float tempOffset;
         public float TempOffset { get => tempOffset; set => tempOffset = value; }
         private int ticks;
-        private float increasingAmount;
-        public float InreasingAmount { get => increasingAmount; set => increasingAmount = value; }
         private bool active = false;
 
         public override void ExposeData()
@@ -22,7 +20,6 @@ namespace CaravanAdventures.CaravanStory
             base.ExposeData();
             Scribe_Values.Look(ref tempOffset, "tempOffset", 0);
             Scribe_Values.Look(ref ticks, "ticks");
-            Scribe_Values.Look(ref increasingAmount, "quarterlyIncrease");
             Scribe_Values.Look(ref active, "active", false);
         }
 
@@ -48,7 +45,7 @@ namespace CaravanAdventures.CaravanStory
 
             if (ticks >= 60000)
             {
-                TempOffset += InreasingAmount;
+                TempOffset += ModSettings.apocalypseTemperatureChangePerDay;
                 ticks = 0;
             }
             ticks++;

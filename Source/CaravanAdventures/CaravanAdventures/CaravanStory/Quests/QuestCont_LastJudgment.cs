@@ -24,7 +24,7 @@ namespace CaravanAdventures.CaravanStory.Quests
 			Scribe_References.Look(ref apocalypse, "apocalypse");
 		}
 
-		public void StartApocalypse(float minTemp, float increasingAmount)
+		public void StartApocalypse(float minTemp)
 		{
 			if (apocalypse != null) { } // RegisterApocalypseOnAllMaps();
 			else
@@ -33,7 +33,6 @@ namespace CaravanAdventures.CaravanStory.Quests
 				apocalypse.TempOffset = minTemp;
 				apocalypse.Permanent = true;
                 //apocalypse.startTick = Find.TickManager.TicksGame;
-                apocalypse.InreasingAmount = increasingAmount;
                 //RegisterApocalypseOnAllMaps();
 				Find.World.gameConditionManager.RegisterCondition(apocalypse);
             }
@@ -55,6 +54,13 @@ namespace CaravanAdventures.CaravanStory.Quests
 				if (map.gameConditionManager.GetActiveCondition(GameConditionDef.Named("CAGameCondition_Apocalypse")) == null) map.gameConditionManager.ActiveConditions.Remove(apocalypse);
 			}
 		}
+
+		public void ResetApocalypse(float minTemp)
+        {
+			apocalypse.End();
+			apocalypse = null;
+			StartApocalypse(minTemp);
+        }
 
         internal void CreateLastJudgment(ref LastJudgmentMP lastJudgmentMP, int tile)
         {

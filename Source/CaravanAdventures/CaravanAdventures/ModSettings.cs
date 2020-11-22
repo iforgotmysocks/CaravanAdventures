@@ -21,7 +21,9 @@ namespace CaravanAdventures
         public bool stopMentalBreaks = false;
         public float lightDuration = 1200f;
         public bool debug = false;
+
         public bool apocalypseEnabled = true;
+        public static float apocalypseTemperatureChangePerDay = -0.084f;
 
         public static ModSettings Get() => LoadedModManager.GetMod<CaravanAdventures.Main>().GetSettings<ModSettings>();
         private Vector2 scrollPos = Vector2.zero;
@@ -45,6 +47,7 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref debug, "debug");
 
             Scribe_Values.Look(ref apocalypseEnabled, "apocalypseEndabled");
+            Scribe_Values.Look(ref apocalypseTemperatureChangePerDay, "apocalypseTemperatureChangePerDay", -0.084f);
         }
 
         public void DoWindowContents(Rect wrect)
@@ -54,13 +57,16 @@ namespace CaravanAdventures
             //GUI.BeginGroup(wrect);
             //Widgets.BeginScrollView(wrect, ref this.scrollPos, new Rect(0f, 0f, wrect.width, 700f));
 
-            var viewRect = new Rect(0f, 0f, wrect.width, wrect.height);
+            var viewRect = new Rect(0f, 0f, wrect.width, 700);
             options.BeginScrollView(wrect, ref this.scrollPos, ref viewRect);
 
 
             options.CheckboxLabeled("Debug mode", ref debug);
             if (options.ButtonText("Reset full story")) StoryUtility.RestartStory();
             options.CheckboxLabeled("Apocalypse enabled", ref apocalypseEnabled);
+            options.Label($"Apocalypse temperature change per day: {Math.Round(apocalypseTemperatureChangePerDay, 4)}  (Default: -0.084)");
+            apocalypseTemperatureChangePerDay = options.Slider(apocalypseTemperatureChangePerDay, 0f, -0.5f);
+            options.Gap();
 
             // todo figure out scroll views
             //Rect viewRect = new Rect(0, 0, 500, 3000);
@@ -74,6 +80,7 @@ namespace CaravanAdventures
             // todo add min and max multiplier used in the def patch for settlement money
             options.Gap();
 
+           
 
             options.Label("Ancient thunderbolt:".Colorize(Color.red), 40f);
             options.Label("Mechanoid bodypart dissmember chance: " + Convert.ToInt32(mechanoidDissmemberChance * 100) + "%");

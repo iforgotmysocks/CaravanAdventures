@@ -162,6 +162,7 @@
     <Compile Include="InitPatches.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="ModSettings.cs" />
+    <Compile Include="CompatibilityPatches.cs" />
     <Compile Include="Patches\AbilityNeurotrainerDefGenerator.cs" />
     <Compile Include="Patches\CaravanTravel.cs" />
     <Compile Include="Extensions.cs" />
