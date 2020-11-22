@@ -12,13 +12,11 @@ using Verse;
 using Verse.Noise;
 
 // high prio:
+// - fix just melee mech raids, by adding a new pawngroupmaker to the faction def that isn't called combat and use that
 // - pack up inventory option selects dead bodies...
 // - crystal scythe appeared in normal ancient shrine
 // - add and rework dialogs from shrines onwards
 // - add system that allows inclusion or exclusion for other races to relation
-// - add a quest update when main char managed to escape the village, so the player knows that he can leave now
-// - turn letter for new shrine location into quest
-// --> figure out how to append location links into quest
 // - suddenly yellow save error for the sacrileg hunter faction appeared and the story char was generated anew -> fix!!
 // - village still throws an error sometimes, when story char is being spawned on a unwalkable cell: 
     //Couldn't find a cell to spawn pawn
@@ -74,6 +72,7 @@ namespace CaravanAdventures.CaravanStory
             { "StoryStartDone", false },
             { "ForwardToLastShrine", false },
             { "ShrinesDone", false },
+            { "ResetApocalypse", false },
         };
         public Dictionary<string, bool> storyFlags;
         private List<string> flagsToAdd = new List<string>
@@ -198,7 +197,7 @@ namespace CaravanAdventures.CaravanStory
                 }
 
                 // todo add mod setting and ability to disable
-                if (CanDoApocalypse()) questCont.LastJudgment.StartApocalypse(-10, -1 / 12);
+                if (CanDoApocalypse()) questCont.LastJudgment.StartApocalypse(-10f);
 
                 ticks = 0;
             }
@@ -224,6 +223,8 @@ namespace CaravanAdventures.CaravanStory
                 ResetCurrentShrineFlags();
                 ResetSFsStartingWith("IntroVillage");
             }
+
+            if (debugFlags["ResetApocalypse"]) questCont.LastJudgment.ResetApocalypse(-10f);
 
             ranDebugActionsOnceAtStartUp = true;
         }
@@ -288,10 +289,10 @@ namespace CaravanAdventures.CaravanStory
         // todo - incomplete
         private bool CheckCanStartFriendlyCaravanCounter() => !storyFlags["TradeCaravan_InitCountDownStarted"];
         private bool CheckCanStartVillageGenerationCounter() => storyFlags["TradeCaravan_DialogFinished"] && !storyFlags["IntroVillage_InitCountDownStarted"];
-        private bool CanDoApocalypse() => storyFlags["Shrine1_Completed"] 
+        private bool CanDoApocalypse() => !storyFlags["Judgment_ApocalypseStarted"] 
+            && storyFlags["Shrine1_Completed"] 
             && !storyFlags[BuildMaxShrinePrefix() + "Completed"] 
-            && ModSettings.Get().apocalypseEnabled 
-            && !storyFlags["Judgment_ApocalypseStarted"];
+            && ModSettings.Get().apocalypseEnabled;
 
         public void ResetStoryVars()
         {
