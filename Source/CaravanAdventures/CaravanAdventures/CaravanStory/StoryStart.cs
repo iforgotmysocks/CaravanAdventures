@@ -64,10 +64,11 @@ namespace CaravanAdventures.CaravanStory
 
         private void DrawTreeQuestionMark()
         {
-            if (theTree != null 
+            if (theTree != null
+                && !CompCache.StoryWC.storyFlags["Start_ReceivedGift"]
                 && theTree.TryGetComp<CompTalk>() != null 
-                && theTree.TryGetComp<CompTalk>().ShowQuestionMark
-                && !CompCache.StoryWC.storyFlags["Start_ReceivedGift"]) theTree.Map.overlayDrawer.DrawOverlay(theTree, OverlayTypes.QuestionMark);
+                && theTree.TryGetComp<CompTalk>().ShowQuestionMark) 
+                theTree.Map.overlayDrawer.DrawOverlay(theTree, OverlayTypes.QuestionMark);
         }
 
         private void AddTalkTreeAction()
@@ -81,7 +82,7 @@ namespace CaravanAdventures.CaravanStory
             }
             theTree = tree;
             currentStoryTrigger = true;
-            StoryUtility.AssignDialog("StoryStart_TreeDialog", tree, this.GetType().ToString(), "StoryStartDialog", true);
+            StoryUtility.AssignDialog("StoryStart_TreeDialog", tree, this.GetType().ToString(), "StoryStartDialog", true, true, true, null, true);
             CompCache.StoryWC.storyFlags["Start_InitialTreeAddTalkOption"] = true;
         }
 

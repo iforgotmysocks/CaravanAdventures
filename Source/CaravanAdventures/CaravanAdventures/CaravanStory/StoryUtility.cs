@@ -53,7 +53,7 @@ namespace CaravanAdventures.CaravanStory
             IncidentDefOf.RaidFriendly.Worker.TryExecute(incidentParms);
         }
 
-        public static void AssignDialog(string id, ThingWithComps addressed, string className, string methodName, bool repeatable = false, bool showQuestionMark = true, bool enabled = true, Pawn initiator = null)
+        public static void AssignDialog(string id, ThingWithComps addressed, string className, string methodName, bool repeatable = false, bool showQuestionMark = true, bool enabled = true, Pawn initiator = null, bool skipAlreadyExistsWarning = false)
         {
             if (addressed == null)
             {
@@ -78,7 +78,10 @@ namespace CaravanAdventures.CaravanStory
                 MethodName = methodName,
                 Repeatable = repeatable,
             };
-            if (comp.actionsCt.Any(action => action.Id == talkSetToAdd.Id)) Log.Warning($"CompTalk dialog id: {talkSetToAdd.Id} already exists");
+            if (comp.actionsCt.Any(action => action.Id == talkSetToAdd.Id))
+            {
+                if (!skipAlreadyExistsWarning) Log.Warning($"CompTalk dialog id: {talkSetToAdd.Id} already exists");
+            }
             else
             {
                 comp.actionsCt.Add(talkSetToAdd);
