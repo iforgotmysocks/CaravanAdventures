@@ -391,7 +391,7 @@ namespace CaravanAdventures.CaravanCamp
             foreach (var zoneTent in campParts.OfType<IZoneTent>())
             {
                 zoneTent.CreateZone(map);
-                zoneTent.ApplyInventory(map, caravan);
+                if (!(zoneTent is StorageTent)) zoneTent.ApplyInventory(map, caravan);
             }
 
             foreach (var shelfTent in campParts.OfType<IShelfTent>())
@@ -399,6 +399,8 @@ namespace CaravanAdventures.CaravanCamp
                 if (tribal) break;
                 shelfTent.FillShelfs(map, caravan);
             }
+
+            foreach (var storageTent in campParts.OfType<StorageTent>()) storageTent.ApplyInventory(map, caravan);
 
             foreach (var areaRestrictionTent in campParts.OfType<IAreaRestrictionTent>())
             {
