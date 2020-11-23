@@ -34,5 +34,8 @@ namespace CaravanAdventures.CaravanCamp
 
 
         public static ThingDef CASpacerTentSupplies;
+
+        public static RecipeDef CAGrillSnack;
+        public static RecipeDef CAGrillSnackBulk;
     }
 }

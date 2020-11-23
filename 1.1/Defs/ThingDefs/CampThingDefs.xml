@@ -254,6 +254,8 @@
     <hasInteractionCell>True</hasInteractionCell>
     <interactionCellOffset>(0,0,-1)</interactionCellOffset>
     <recipes>
+      <li>CACookGrillSnack</li>
+      <li>CACookGrillSnackBulk</li>
       <li>CookMealSimple</li>
       <li>CookMealSimpleBulk</li>
       <li>CookMealSurvival</li>
@@ -273,6 +275,28 @@
       <artificialForMeditationPurposes>false</artificialForMeditationPurposes>
       <destroySound>BuildingDestroyed_Wood_Small</destroySound>
     </building>
+  </ThingDef>
+
+  <ThingDef ParentName="MealCooked">
+    <defName>CAGrillSnack</defName>
+    <label>grill snack</label>
+    <description>A tasty grill snack, not as nutritious as a simple meal, but doesn't cause food poisoning.</description>
+    <graphicData>
+      <texPath>Things/Item/Meal/GrillSnack</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+    <statBases>
+      <MarketValue>12</MarketValue>
+      <WorkToMake>250</WorkToMake>
+      <Nutrition>0.8</Nutrition>
+      <FoodPoisonChanceFixedHuman>0</FoodPoisonChanceFixedHuman>
+    </statBases>
+    <ingestible>
+      <preferability>MealSimple</preferability>
+      <ingestEffect>EatVegetarian</ingestEffect>
+      <ingestSound>Meal_Eat</ingestSound>
+    </ingestible>
+    <tradeability>None</tradeability>
   </ThingDef>
   
   <!-- oc -->

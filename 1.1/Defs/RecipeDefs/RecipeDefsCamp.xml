@@ -49,4 +49,60 @@
     <workSkill>Crafting</workSkill>
   </RecipeDef>
 
+  <RecipeDef ParentName="CookMealBase">
+    <defName>CACookGrillSnack</defName>
+    <label>cook a grill snack</label>
+    <description>Cook a grill snack.</description>
+    <jobString>Cooking grill snack.</jobString>
+    <workAmount>250</workAmount>
+    <workSpeedStat>CookSpeed</workSpeedStat>
+    <requiredGiverWorkType>Cooking</requiredGiverWorkType>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_CookMeal</soundWorking>
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>FoodRaw</li>
+          </categories>
+        </filter>
+        <count>0.5</count>
+      </li>
+    </ingredients>
+    <products>
+      <CAGrillSnack>1</CAGrillSnack>
+    </products>
+    <workSkill>Cooking</workSkill>
+  </RecipeDef>
+
+  <RecipeDef ParentName="CookMealBase">
+    <defName>CACookGrillSnackBulk</defName>
+    <label>cook a grill snack x4</label>
+    <description>Cook 4 grill snacks.</description>
+    <jobString>Cooking 4 grill snacks.</jobString>
+    <workAmount>1000</workAmount>
+    <workSpeedStat>CookSpeed</workSpeedStat>
+    <requiredGiverWorkType>Cooking</requiredGiverWorkType>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_CookMeal</soundWorking>
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>FoodRaw</li>
+          </categories>
+        </filter>
+        <count>2.0</count>
+      </li>
+    </ingredients>
+    <products>
+      <CAGrillSnack>4</CAGrillSnack>
+    </products>
+    <workSkill>Cooking</workSkill>
+  </RecipeDef>
+
 </Defs>
