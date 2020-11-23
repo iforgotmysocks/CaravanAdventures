@@ -92,6 +92,13 @@ namespace CaravanAdventures.CaravanCamp
             if (hasMedicalTent) campParts.Add(new MedicalTent());
             if (hasAnimalArea) campParts.Add(new AnimalArea());
             if (hasPrisonTent) campParts.Add(new PrisonerTent());
+            if (ModSettings.generateStorageForAllInventory)
+            {
+                var tent = new StorageTent();
+                var cellsPerTent = (tent.CoordSize * tentSize.x) * (tentSize.z - 2);
+                var tentsAmount = CaravanInventoryUtility.AllInventoryItems(caravan).Count / cellsPerTent;
+                for (int i = 0; i < tentsAmount; i++) campParts.Add(new StorageTent());
+            }
 
             List<List<Pawn>> colonistRelationShipPairs = GetRelationShipPairs(colonists);
             colonistRelationShipPairs.ForEach(couple =>

@@ -636,14 +636,14 @@
     <costList>
       <WoodLog>5</WoodLog>
     </costList>
+    <comps>
+    </comps>
     <building>
       <!--<artificialForMeditationPurposes>false</artificialForMeditationPurposes>-->
     </building>
     <soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
     <placeWorkers>
     </placeWorkers>
-    <comps>
-    </comps>
   </ThingDef>
   
   <!-- bedrolls  -->

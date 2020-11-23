@@ -25,6 +25,8 @@ namespace CaravanAdventures
         public bool apocalypseEnabled = true;
         public static float apocalypseTemperatureChangePerDay = -0.084f;
 
+        public static bool generateStorageForAllInventory = true;
+
         public static ModSettings Get() => LoadedModManager.GetMod<CaravanAdventures.Main>().GetSettings<ModSettings>();
         private Vector2 scrollPos = Vector2.zero;
 
@@ -48,6 +50,8 @@ namespace CaravanAdventures
 
             Scribe_Values.Look(ref apocalypseEnabled, "apocalypseEndabled");
             Scribe_Values.Look(ref apocalypseTemperatureChangePerDay, "apocalypseTemperatureChangePerDay", -0.084f);
+
+            Scribe_Values.Look(ref generateStorageForAllInventory, "generateStorageForAllInventory", false);
         }
 
         public void DoWindowContents(Rect wrect)
@@ -57,7 +61,7 @@ namespace CaravanAdventures
             //GUI.BeginGroup(wrect);
             //Widgets.BeginScrollView(wrect, ref this.scrollPos, new Rect(0f, 0f, wrect.width, 700f));
 
-            var viewRect = new Rect(0f, 0f, wrect.width, 700);
+            var viewRect = new Rect(0f, 0f, wrect.width, 1200);
             options.BeginScrollView(wrect, ref this.scrollPos, ref viewRect);
 
 
@@ -115,7 +119,8 @@ namespace CaravanAdventures
             options.Label($"Duration in seconds: {Math.Round(lightDuration / 60, 0)}");
             lightDuration = options.Slider(lightDuration, 60f, 14400f);
 
-
+            options.Gap();
+            options.CheckboxLabeled("Generate storage tents for all items and unload", ref generateStorageForAllInventory);
 
             options.EndScrollView(ref viewRect);
             //Widgets.EndScrollView();

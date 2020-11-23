@@ -130,7 +130,7 @@
   <!-- bedrolls  -->
   <ThingDef ParentName="CABedBase">
     <defName>CAMakeshiftBedroll</defName>
-    <label>makeshift bedroll</label>
+    <label>bedroll</label>
     <description>A simple bed that lays on the floor, usually made of cloth or leather, often lined with fur. It is lightweight and can be rolled up for easy transport, but it is not quite as comfortable as a typical bed. Caravans can use bedrolls while traveling for better sleep.</description>
     <graphicData>
       <texPath>Things/Building/Furniture/Bed/Bedroll</texPath>
@@ -175,7 +175,7 @@
 
   <ThingDef ParentName="CABedBase">
     <defName>CAMakeshiftBedrollDouble</defName>
-    <label>makeshift double bedroll</label>
+    <label>double bedroll</label>
     <description>A simple double-wide bed that lays on the floor, usually made of cloth or leather, often lined with fur. It is lightweight and can be rolled up for easy transport, but it is not quite as comfortable as a typical bed. Caravans can use bedrolls while traveling for better sleep.</description>
     <graphicData>
       <texPath>Things/Building/Furniture/Bed/BedrollDouble</texPath>

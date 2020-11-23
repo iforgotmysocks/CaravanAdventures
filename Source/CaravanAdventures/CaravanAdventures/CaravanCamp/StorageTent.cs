@@ -32,6 +32,14 @@ namespace CaravanAdventures.CaravanCamp
 
         public void ApplyInventory(Map map, Caravan caravan)
         {
+            if (!ModSettings.generateStorageForAllInventory) return;
+
+            foreach (var cell in zone.Cells)
+            {
+                var stack = CaravanInventoryUtility.AllInventoryItems(caravan).FirstOrDefault();
+                if (stack == null) break;
+                if (!cell.Filled(map)) GenDrop.TryDropSpawn_NewTmp(stack, cell, map, ThingPlaceMode.Direct, out var result);
+            }
 
         }
     }
