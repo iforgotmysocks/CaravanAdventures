@@ -17,7 +17,7 @@ namespace CaravanAdventures.CaravanAbilities
 
             if (ticks >= 600)
             {
-                Pawn.psychicEntropy.OffsetPsyfocusDirectly(0.003f);
+                Pawn.psychicEntropy.OffsetPsyfocusDirectly(0.0035f);
                 ticks = 0;
             }
             ticks++;
