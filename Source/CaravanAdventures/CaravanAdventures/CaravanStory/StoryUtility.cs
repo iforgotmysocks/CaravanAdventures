@@ -277,11 +277,12 @@ namespace CaravanAdventures.CaravanStory
             if (sacrilegHunters == null)
             {
                 sacrilegHunters = FactionGenerator.NewGeneratedFaction(DefDatabase<FactionDef>.GetNamedSilentFail("CASacrilegHunters"));
+                
                 Find.FactionManager.Add(sacrilegHunters);
                 var empireDef = FactionDefOf.Empire;
-                empireDef.permanentEnemyToEveryoneExcept.Add(sacrilegHunters.def);
-                Faction.Empire.TrySetNotHostileTo(sacrilegHunters);
+                if (!empireDef.permanentEnemyToEveryoneExcept.Contains(sacrilegHunters.def)) empireDef.permanentEnemyToEveryoneExcept.Add(sacrilegHunters.def);
             }
+            SetSacNeutralToPossibleFactions(sacrilegHunters);
             if ((sacrilegHunters.leader == null || sacrilegHunters.leader.Dead || sacrilegHunters.leader.Destroyed) && !skipLeaderGeneration)
             {
                 try
@@ -317,6 +318,15 @@ namespace CaravanAdventures.CaravanStory
                 else if (sacrilegHunters.RelationKindWith(Faction.OfPlayerSilentFail) != FactionRelationKind.Hostile) sacrilegHunters.SetRelation(new FactionRelation() { kind = FactionRelationKind.Hostile, goodwill = -100, other = Faction.OfPlayer });
             }
             return sacrilegHunters;
+        }
+
+        private static void SetSacNeutralToPossibleFactions(Faction sacrilegHunters)
+        {
+            foreach (var faction in Find.FactionManager.AllFactionsListForReading)
+            {
+                if (faction == Faction.OfPlayer || faction.def.permanentEnemy || faction == sacrilegHunters) continue;
+                faction.SetRelationDirect(sacrilegHunters, FactionRelationKind.Neutral);
+            }
         }
 
         public static void RemoveExistingQuestFriendlyVillages()

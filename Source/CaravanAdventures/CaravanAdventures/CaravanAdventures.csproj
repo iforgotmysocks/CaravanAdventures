@@ -64,6 +64,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CaravanAbilities\AbilityDefOf.cs" />
     <Compile Include="CaravanAbilities\CompAbilityEffect_AncientMeditate.cs" />
     <Compile Include="CaravanAbilities\CompAbilityEffect_AncientMechSignal.cs" />
     <Compile Include="CaravanAbilities\CompAbilityEffect_AncientThunderBold.cs" />
