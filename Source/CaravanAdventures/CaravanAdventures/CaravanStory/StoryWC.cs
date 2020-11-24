@@ -12,26 +12,30 @@ using Verse;
 using Verse.Noise;
 
 // high prio:
+// - second shrine was removed before the boss died and the ability dialog came up
+// - shrine location link disappears from quest after loading -> shrine WO becomes MP -> update location when player enters shrine
 // - fix just melee mech raids, by adding a new pawngroupmaker to the faction def that isn't called combat and use that
-// - pack up inventory option selects dead bodies...
 // - crystal scythe appeared in normal ancient shrine
 // - add and rework dialogs from shrines onwards
 // - add system that allows inclusion or exclusion for other races to relation
 // - suddenly yellow save error for the sacrileg hunter faction appeared and the story char was generated anew -> fix!!
 // - village still throws an error sometimes, when story char is being spawned on a unwalkable cell: 
-    //Couldn't find a cell to spawn pawn
-    //Verse.Log:Error(String, Boolean)
-    //CaravanAdventures.CaravanStory.<> c__DisplayClass8_0:< Notify_CaravanArrived > b__1()
-    //Verse.LongEventHandler:UpdateCurrentSynchronousEvent(Boolean &)
-    //Verse.LongEventHandler:LongEventsUpdate(Boolean &)
-    //Verse.Root:Update()
-    //Verse.Root_Play:Update()
+//Couldn't find a cell to spawn pawn
+//Verse.Log:Error(String, Boolean)
+//CaravanAdventures.CaravanStory.<> c__DisplayClass8_0:< Notify_CaravanArrived > b__1()
+//Verse.LongEventHandler:UpdateCurrentSynchronousEvent(Boolean &)
+//Verse.LongEventHandler:LongEventsUpdate(Boolean &)
+//Verse.Root:Update()
+//Verse.Root_Play:Update()
+
+// - when opening shrine melee boss lost hediff: Exception ticking hediff (CAEXT1Melee ticksSinceCreation=16562) for pawn CACrystalScythe1940405. Removing hediff... Exception: System.NullReferenceException: Object reference not set to an instance of an object
+//  at CaravanAdventures.CaravanStory.MechChips.HediffComp_EXT1Melee.SliceEnemiesInfront() [0x0007d] in < 99426a04c3a6469ba1a83bb53a1f6277 >:0
+//  at CaravanAdventures.CaravanStory.MechChips.HediffComp_EXT1Melee.CompPostTick(System.Single& severityAdjustment) [0x00031] in < 99426a04c3a6469ba1a83bb53a1f6277 >:0
+//  at Verse.HediffWithComps.PostTick() [0x00024] in < d72310b4d8f64d25aee502792b58549f >:0
+//  at Verse.Pawn_HealthTracker.HealthTick() [0x00039] in < d72310b4d8f64d25aee502792b58549f >:0
+
 
 // med prio:
-// - create mech bosses after horsemen traits
-// -- add quote to each horsemen type when entering the shrine
-// -- credits to horsemen idea to Shakesthespeare
-// -- caravan unload option disappears after saving and loading a savegame
 
 // low prio:
 // - make configurable if sacrileg hunters are hostile towards the empire

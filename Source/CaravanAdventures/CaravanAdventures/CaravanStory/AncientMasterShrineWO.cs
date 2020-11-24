@@ -255,7 +255,15 @@ namespace CaravanAdventures.CaravanStory
 				groupKind = PawnGroupKindDefOf.Combat,
 				tile = map.Tile,
 				faction = Faction.OfMechanoids,
-				points = Math.Max(120, Convert.ToInt32(defaultPawnGroupMakerParms.points * new IntRange(1, 1).RandomInRange * (room.CellCount / 100f)))
+				// todo cap points at max value 
+				// with bigger shrine: 
+				// --> Points before: 611.5728 roomcells: 5806
+				// --> Points after: 35508
+				// --
+				// new formula: points * shrinecounter * (roomcells / 1000)
+
+				// todo make scaling beyond max shrine counter optional
+				points = Math.Max(room == mainRoom ? 2000 : 120, Convert.ToInt32(defaultPawnGroupMakerParms.points * Math.Min(CompCache.StoryWC.GetCurrentShrineCounter + 1, CompCache.StoryWC.GetShrineMaxiumum + 1) * ((room == mainRoom ? Math.Max(room.CellCount, 3000) : room.CellCount) / 1000f)))
 			};
 
 			Log.Message($"Points after: {mechPawnGroupMakerParams.points}");

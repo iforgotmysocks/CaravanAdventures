@@ -72,13 +72,14 @@ namespace CaravanAdventures.CaravanStory
 				if (boss != null) bossWasSpawned = true;
 			}
 			CompCache.StoryWC.SetShrineSF("Created");
+			Quests.QuestUtility.UpdateQuestLocation(Quests.StoryQuestDefOf.CA_FindAncientShrine, this);
 		}
 
 		public override bool ShouldRemoveMapNow(out bool alsoRemoveWorldObject)
 		{
 			// todo add scenatio of keeping map until last judgement is completed and left, 
 			if (!base.Map.mapPawns.AnyPawnBlockingMapRemoval && boss == null && (CompCache.StoryWC.GetCurrentShrineCounter != CompCache.StoryWC.GetShrineMaxiumum || CompCache.StoryWC.storyFlags["Judgment_Completed"])
-				|| !base.Map.mapPawns.AnyPawnBlockingMapRemoval && boss != null && boss.Dead && (CompCache.StoryWC.GetCurrentShrineCounter != CompCache.StoryWC.GetShrineMaxiumum || CompCache.StoryWC.storyFlags["Judgment_Completed"]))
+				|| !base.Map.mapPawns.AnyPawnBlockingMapRemoval && bossDefeatedAndRewardsGiven && (CompCache.StoryWC.GetCurrentShrineCounter != CompCache.StoryWC.GetShrineMaxiumum || CompCache.StoryWC.storyFlags["Judgment_Completed"]))
 			{
 				// why is this here? why did i want to reset the current shrine flags when the map was removed? => just debugging stuff?
 				//if (boss == null) CompCache.StoryWC.ResetCurrentShrineFlags();
