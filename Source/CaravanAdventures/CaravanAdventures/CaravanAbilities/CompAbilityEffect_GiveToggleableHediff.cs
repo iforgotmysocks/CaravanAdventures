@@ -26,7 +26,7 @@ namespace CaravanAdventures.CaravanAbilities
         {
             if (target != null)
             {
-                var isGifted = target.health.hediffSet.hediffs.FirstOrDefault(x => x.def.defName == "AncientGift") != null;
+                var isGifted = target.health.hediffSet.hediffs.FirstOrDefault(x => x.def == AbilityDefOf.CAAncientGift) != null;
                 var selectedHediffDef = isGifted ? this.Props.hediffDef : this.Props.hediffDefWeak; 
                 var firstHediffOfDef = target.health.hediffSet.GetFirstHediffOfDef(selectedHediffDef, false);
                 

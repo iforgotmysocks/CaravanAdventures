@@ -26,7 +26,7 @@ namespace CaravanAdventures.CaravanAbilities
         public override void CompPostPostAdd(DamageInfo? dinfo)
         {
             base.CompPostPostAdd(dinfo);
-            var gift = Pawn.health.hediffSet.hediffs.FirstOrDefault(x => x.def.defName == "AncientGift");
+            var gift = Pawn.health.hediffSet.hediffs.FirstOrDefault(x => x.def == AbilityDefOf.CAAncientProtectiveAura);
             if (gift != null) isGifted = true;
         }
 
