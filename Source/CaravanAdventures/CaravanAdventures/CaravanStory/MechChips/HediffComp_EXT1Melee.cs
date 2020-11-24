@@ -19,6 +19,13 @@ namespace CaravanAdventures.CaravanStory.MechChips
 
         public HediffCompProperties_EXT1Melee Props => (HediffCompProperties_EXT1Melee)props;
 
+        public override void CompExposeData()
+        {
+            base.CompExposeData();
+            Scribe_Values.Look(ref ticks, "ticks", 0);
+            Scribe_Collections.Look(ref producedMechs, "producedMechs", LookMode.Reference);
+        }
+
         public override void CompPostMake()
         {
             base.CompPostMake();
@@ -52,7 +59,7 @@ namespace CaravanAdventures.CaravanStory.MechChips
             if (GenHostility.AnyHostileActiveThreatTo(Pawn.Map, Pawn.Faction))
             {
                 var spawnPos = GetMinionSpawnPosition(Pawn.Position, Pawn.Map);
-                if (spawnPos != null)
+                if (spawnPos != default)
                 {
                     var scyther = PawnGenerator.GeneratePawn(PawnKindDef.Named("Mech_Scyther"), Faction.OfMechanoids);
                     GenSpawn.Spawn(scyther, spawnPos, Pawn.Map, WipeMode.Vanish);
@@ -116,10 +123,6 @@ namespace CaravanAdventures.CaravanStory.MechChips
             }
         }
 
-        public override void CompExposeData()
-        {
-            base.CompExposeData();
-            Scribe_Values.Look(ref ticks, "ticks", 0);
-        }
+
     }
 }
