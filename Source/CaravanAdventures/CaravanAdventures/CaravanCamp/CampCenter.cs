@@ -85,7 +85,7 @@ namespace CaravanAdventures.CaravanCamp
         public void ApplyRecipes(Caravan caravan)
         {
             var colonists = caravan.PawnsListForReading.Where(col => col.IsFreeColonist).ToList();
-            var bill = new Bill_Production(CampDefOf.CAGrillSnackBulk) { targetCount = colonists.Count != 0 ? colonists.Count * 2 : 12, repeatMode = BillRepeatModeDefOf.TargetCount };
+            var bill = new Bill_Production(CampDefOf.CACookGrillSnackBulk) { targetCount = colonists.Count != 0 ? colonists.Count * 2 : 12, repeatMode = BillRepeatModeDefOf.TargetCount };
             campFire.BillStack.AddBill(bill);
         }
 

@@ -87,7 +87,7 @@ namespace CaravanAdventures.CaravanCamp
         public void ApplyRecipes(Caravan caravan)
         {
             var bill = new Bill_Production(DefDatabase<RecipeDef>.GetNamed("ButcherCorpseFlesh")) { repeatMode = BillRepeatModeDefOf.Forever };
-            //bill.recipe.defaultIngredientFilter.SetAllow(ThingCategoryDefOf.CorpsesInsect, false);
+            bill.ingredientFilter.SetAllow(ThingCategoryDefOf.CorpsesInsect, false);
             tableButcher.BillStack.AddBill(bill);
 
             // todo check in modsettings 
