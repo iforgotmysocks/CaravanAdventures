@@ -68,7 +68,7 @@ namespace CaravanAdventures.CaravanAbilities
 
         private void CureIllnesses()
         {
-            var diseases = Pawn.health.hediffSet.hediffs.Where(x => new List<string> { "FoodPoisoning", "CatatonicBreakdown", "PsychicVertigo", "HeartAttack", "MuscleParasites", "SensoryMechanites", "FibrousMechanites", "GutWorms" }.Contains(x.def.defName));
+            var diseases = Pawn.health.hediffSet.hediffs.Where(x => new List<string> { "HeartAttack", "Carcinoma", "FoodPoisoning", "CatatonicBreakdown", "PsychicVertigo", "HeartAttack", "MuscleParasites", "SensoryMechanites", "FibrousMechanites", "GutWorms" }.Contains(x.def.defName));
             if (diseases != null && diseases.Count() != 0) Pawn.health.hediffSet.hediffs.RemoveAll(x => diseases.Contains(x));
         }
         
