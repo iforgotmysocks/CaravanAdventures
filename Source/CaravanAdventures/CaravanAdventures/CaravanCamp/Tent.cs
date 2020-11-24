@@ -47,6 +47,7 @@ namespace CaravanAdventures.CaravanCamp
             {
                 map.terrainGrid.SetTerrain(cell, CampDefOf.CATentFloor);
                 map.roofGrid.SetRoof(cell, RoofDefOf.RoofConstructed);
+                map.areaManager.BuildRoof[cell] = true;
             }
         }
 
