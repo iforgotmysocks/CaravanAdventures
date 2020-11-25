@@ -69,7 +69,6 @@ namespace CaravanAdventures.CaravanCamp
         public override void BuildTribal(Map map, List<Thing> campAssetListRef)
         {
             base.BuildTribal(map, campAssetListRef);
-            // todo finish
             var lover = Occupants.FirstOrDefault(col => col != null && LovePartnerRelationUtility.ExistingLovePartner(col) != null
                && Occupants.Contains(LovePartnerRelationUtility.ExistingLovePartner(col)));
             var otherLover = lover != null ? LovePartnerRelationUtility.ExistingLovePartner(lover) : null;

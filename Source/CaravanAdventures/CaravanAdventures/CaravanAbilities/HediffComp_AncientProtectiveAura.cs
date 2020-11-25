@@ -51,7 +51,7 @@ namespace CaravanAdventures.CaravanAbilities
                 Pawn.psychicEntropy.OffsetPsyfocusDirectly(isGifted ? -0.002f : -0.01f);
                 ticksSincePsyCost = 0;
             }
-            if (ticksSincePermHeal > 60001)
+            if (ticksSincePermHeal > 30001)
             {
                 if (!ModSettings.Get().onlyHealPermWhenGifted || ModSettings.Get().onlyHealPermWhenGifted && isGifted) HealPermanent();
                 ticksSincePermHeal = 0;

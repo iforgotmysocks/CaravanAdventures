@@ -12,7 +12,6 @@ using Verse;
 namespace CaravanAdventures.CaravanCamp
 {
     // todos
-    // -- leave prisoner camp standing
 
     // functionality: 
     // - maybe add ability to build new tents from camp supplies
@@ -383,6 +382,17 @@ namespace CaravanAdventures.CaravanCamp
                 map.areaManager.Home[cell] = true;
                 // todo add to settings
                 if (clearSnow) if (!cell.Roofed(map)) map.areaManager.SnowClear[cell] = true;
+            }
+
+            foreach (var tent in campParts.OfType<Tent>())
+            {
+                if (tent is RestTent) CampHelper.BringToNormalizedTemp(tent.CellRect, map);
+
+                foreach (var cell in tent.CellRect.Cells)
+                {
+                    map.areaManager.BuildRoof[cell] = true;
+                    map.areaManager.NoRoof[cell] = false;
+                }
             }
         }
 

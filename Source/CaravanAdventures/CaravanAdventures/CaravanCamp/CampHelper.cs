@@ -58,6 +58,13 @@ namespace CaravanAdventures.CaravanCamp
             return selected;
         }
 
+        internal static void BringToNormalizedTemp(CellRect cellRect, Map map)
+        {
+            var roomGroup = cellRect.CenterCell.GetRoomGroup(map);
+            var remainingTemp = 22 - roomGroup.Temperature;
+            roomGroup.PushHeat(remainingTemp * cellRect.Cells.Where(curCell => !cellRect.EdgeCells.Contains(curCell)).Count());
+        }
+
         internal static void AddAnimalFreeAreaRestriction(IEnumerable<IZoneTent> parts, Map map)
         {
             var animalArea = new Area_Allowed(map.areaManager);
