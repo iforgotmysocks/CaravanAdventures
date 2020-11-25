@@ -17,6 +17,8 @@ namespace CaravanAdventures.CaravanAbilities
         private bool isGifted;
         private Hediff_Injury[] sortedInjuries;
         private bool noInjuries = false;
+        private string[] sicknessesToBeHealed = new[] { "HeartAttack", "FoodPoisoning", "CatatonicBreakdown", "PsychicVertigo", "HeartAttack", "MuscleParasites", "SensoryMechanites", "FibrousMechanites", "GutWorms" };
+        private string[] permanentToBeHealed = new[] { "Carcinoma", "ChemicalDamageModerate", "ChemicalDamageSevere", "Cirrhosis", "TraumaSavant" };
 
         public HediffComp_AncientProtectiveAura()
         {
@@ -68,7 +70,7 @@ namespace CaravanAdventures.CaravanAbilities
 
         private void CureIllnesses()
         {
-            var diseases = Pawn.health.hediffSet.hediffs.Where(x => new List<string> { "HeartAttack", "Carcinoma", "FoodPoisoning", "CatatonicBreakdown", "PsychicVertigo", "HeartAttack", "MuscleParasites", "SensoryMechanites", "FibrousMechanites", "GutWorms" }.Contains(x.def.defName));
+            var diseases = Pawn.health.hediffSet.hediffs.Where(x => sicknessesToBeHealed.Contains(x.def.defName));
             if (diseases != null && diseases.Count() != 0) Pawn.health.hediffSet.hediffs.RemoveAll(x => diseases.Contains(x));
         }
         
@@ -124,7 +126,7 @@ namespace CaravanAdventures.CaravanAbilities
             var wound = Pawn.health.hediffSet.hediffs.FirstOrDefault(x =>
             x.IsPermanent() ||
             x.def.chronic ||
-            new List<string> { "ChemicalDamageModerate", "ChemicalDamageSevere", "Cirrhosis", "TraumaSavant" }
+            permanentToBeHealed
             .Contains(x.def.defName));
 
             if (wound == null) return;
