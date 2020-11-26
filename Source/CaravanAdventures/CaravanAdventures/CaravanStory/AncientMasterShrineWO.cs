@@ -104,16 +104,26 @@ namespace CaravanAdventures.CaravanStory
 			var stateBackup = Current.ProgramState;
 			Current.ProgramState = ProgramState.MapInitializing;
 
+			int dHives = 0;
+			int dInsects = 0;
 			foreach (var room in GetAncientShrineRooms(map))
 			{
 				AddSpacers(room, map, caravan);
+				// todo integrate remove hives into add mechs and spawn more mechs when hives are being removed
 				AddMechanoidsToRoom(room, map, caravan, boss);
+				if (ModSettings.removeHivesFromMasterShrines) RemoveHives(map, ref dHives, ref dInsects);
 			}
-
+			Log.Message($"Destroyed {dHives} hives and {dInsects} inects");
 			Current.ProgramState = stateBackup;
 		}
 
-		private void AddSpacers(Room room, Map map, Caravan caravan)
+        private void RemoveHives(Map map, ref int dHives, ref int dInsects)
+        {
+			foreach (var hive in map.spawnedThings.Where(hive => hive.def == ThingDefOf.Hive).Reverse()) { hive.Destroy(); dHives++; };
+			foreach (var insect in map.mapPawns.AllPawnsSpawned.Where(x => x.Faction == Faction.OfInsects).Reverse()) { insect.Destroy(); dInsects++; };
+        }
+
+        private void AddSpacers(Room room, Map map, Caravan caravan)
 		{
 			var casketCount = 0;
 			if (room.CellCount > 1500) casketCount = 6;
