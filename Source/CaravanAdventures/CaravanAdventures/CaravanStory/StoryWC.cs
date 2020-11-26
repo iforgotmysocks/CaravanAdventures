@@ -12,11 +12,23 @@ using Verse;
 using Verse.Noise;
 
 // high prio:
+// - change rewards
+// --> maybe remove additional reward generation for shrines for a bounty system
+// --> integrate point system with buyable items into the comm station dialog
+// --> remove rewards from small shrines on mastershrine map
+
+// - unlag
+// --> remove additional ancient caskets from small shrines on master shrine map
+// --> maybe decrease small shrines and make them not depend on spawning on a rock
+
+// - better map generation control for small shrines
+// --> create own GenStepDef for small shrines (currently using vanilla) and remove the CanScatterAt natural rock limitation
+// --> rebalance min/max accordingly
+
 // - kill all walls on a master shrine when the boss dies -> solves the letter issue
 // - second shrine was removed before the boss died and the ability dialog came up
-// - shrine location link disappears from quest after loading -> shrine WO becomes MP -> update location when player enters shrine
 // - fix just melee mech raids, by adding a new pawngroupmaker to the faction def that isn't called combat and use that
-// - crystal scythe appeared in normal ancient shrine
+// - crystal scythe appeared in normal ancient shrine -> may have been fixed by recent point changes
 // - add and rework dialogs from shrines onwards
 // - add system that allows inclusion or exclusion for other races to relation
 // - suddenly yellow save error for the sacrileg hunter faction appeared and the story char was generated anew -> fix!!
@@ -28,13 +40,6 @@ using Verse.Noise;
 //Verse.LongEventHandler:LongEventsUpdate(Boolean &)
 //Verse.Root:Update()
 //Verse.Root_Play:Update()
-
-// - when opening shrine melee boss lost hediff: Exception ticking hediff (CAEXT1Melee ticksSinceCreation=16562) for pawn CACrystalScythe1940405. Removing hediff... Exception: System.NullReferenceException: Object reference not set to an instance of an object
-//  at CaravanAdventures.CaravanStory.MechChips.HediffComp_EXT1Melee.SliceEnemiesInfront() [0x0007d] in < 99426a04c3a6469ba1a83bb53a1f6277 >:0
-//  at CaravanAdventures.CaravanStory.MechChips.HediffComp_EXT1Melee.CompPostTick(System.Single& severityAdjustment) [0x00031] in < 99426a04c3a6469ba1a83bb53a1f6277 >:0
-//  at Verse.HediffWithComps.PostTick() [0x00024] in < d72310b4d8f64d25aee502792b58549f >:0
-//  at Verse.Pawn_HealthTracker.HealthTick() [0x00039] in < d72310b4d8f64d25aee502792b58549f >:0
-
 
 // med prio:
 

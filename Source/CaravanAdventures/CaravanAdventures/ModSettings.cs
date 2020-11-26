@@ -11,6 +11,13 @@ namespace CaravanAdventures
 {
     class ModSettings : Verse.ModSettings
     {
+        // general
+        public bool debug = false;
+
+        // camp
+        public static bool generateStorageForAllInventory = true;
+
+        // story - ancient psycasts
         public float mechanoidDissmemberChance = 0.6f;
         public float humanDissmemberChance = 0.3f;
         public float additionalBuildingAreaDamageMin = 0.5f;
@@ -20,12 +27,15 @@ namespace CaravanAdventures
         public bool onlyHealPermWhenGifted = false;
         public bool stopMentalBreaks = false;
         public float lightDuration = 1200f;
-        public bool debug = false;
-
+        
+        // story story
+        // todo remove the ability to disable the apoc? Can always set the increase to 0
         public bool apocalypseEnabled = true;
         public static float apocalypseTemperatureChangePerDay = -0.084f;
 
-        public static bool generateStorageForAllInventory = true;
+        // story shrines
+        // todo setting
+        internal static bool removeHivesFromMasterShrines = true;
 
         public static ModSettings Get() => LoadedModManager.GetMod<CaravanAdventures.Main>().GetSettings<ModSettings>();
         private Vector2 scrollPos = Vector2.zero;
