@@ -136,7 +136,7 @@ namespace CaravanAdventures.CaravanAbilities
             if (wound.Severity - dmgToHeal <= 0f)
             {
                 if (wound.IsPermanent()) wound.Severity = 0f;
-                else Pawn.health.RemoveHediff(wound);
+                else HealthUtility.CureHediff(wound);
                 if (PawnUtility.ShouldSendNotificationAbout(base.Pawn)) Messages.Message("MessagePermanentWoundHealed".Translate(this.parent.LabelCap, base.Pawn.LabelShort, wound.Label, base.Pawn.Named("PAWN")), base.Pawn, MessageTypeDefOf.PositiveEvent, true);
             }
             else wound.Severity -= dmgToHeal;
