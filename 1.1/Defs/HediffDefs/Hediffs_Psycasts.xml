@@ -101,7 +101,7 @@
 					<PsychicEntropyRecoveryRate>1.5</PsychicEntropyRecoveryRate>
 				</statOffsets>
 				<statFactors>
-					<MeditationFocusGain>2</MeditationFocusGain>
+					<MeditationFocusGain>3</MeditationFocusGain>
 					<PsychicEntropyMax>1.5</PsychicEntropyMax>
 				</statFactors>
 			</li>

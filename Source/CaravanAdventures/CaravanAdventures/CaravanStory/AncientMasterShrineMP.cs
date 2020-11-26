@@ -259,7 +259,24 @@ namespace CaravanAdventures.CaravanStory
 		private void WakeAllMechanoids()
         {
 			Map.mapPawns.AllPawns.Where(x => x.RaceProps.IsMechanoid && !x.Dead).ToList().ForEach(mech => mech.TryGetComp<CompWakeUpDormant>().Activate());
-        }
+			FreeAllMechsOnMap();
+		}
+
+		private void FreeAllMechsOnMap()
+		{
+			foreach (var room in Map.regionGrid.allRooms.Where(room => room.ContainsThing(ThingDefOf.AncientCryptosleepCasket) && room.Fogged))
+			{
+				if (room.ContainedMechs().Count() > 0)
+				{
+					for (; ; )
+					{
+						var wallToBreak = room.BorderCells.Where(x => x.GetFirstBuilding(Map)?.def == ThingDefOf.Wall).InRandomOrder().Select(x => x.GetFirstBuilding(Map)).FirstOrDefault();
+						if (wallToBreak == null || !room.Fogged) break;
+						wallToBreak.Destroy();
+					}
+				}
+			}
+		}
 
         private void CheckWonBattle()
 		{
