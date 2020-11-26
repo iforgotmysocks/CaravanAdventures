@@ -11,21 +11,21 @@ using Verse.Noise;
 
 namespace CaravanAdventures.CaravanStory
 {
-	public class AncientMasterShrineMP : MapParent
-	{
-		public bool WonBattle => this.WonBattle;
-		private bool wonBattle;
+    public class AncientMasterShrineMP : MapParent
+    {
+        public bool WonBattle => this.WonBattle;
+        private bool wonBattle;
 
-		public List<Pawn> generatedSoldiers = new List<Pawn>();
-		public List<Pawn> generatedMechs = new List<Pawn>();
-		public List<Pawn> generatedBandits = new List<Pawn>();
-		public Pawn boss = null;
+        public List<Pawn> generatedSoldiers = new List<Pawn>();
+        public List<Pawn> generatedMechs = new List<Pawn>();
+        public List<Pawn> generatedBandits = new List<Pawn>();
+        public Pawn boss = null;
         private bool bossDefeatedAndRewardsGiven;
-		private int constTicks = -1;
+        private int constTicks = -1;
         private int checkDormantTicks = 0;
 
-		private LastJudgmentMP lastJudgmentMP;
-		public Thing lastJudgmentEntrance;
+        private LastJudgmentMP lastJudgmentMP;
+        public Thing lastJudgmentEntrance;
         private int checkRangeForJudgmentTicks = 0;
         public IntVec3 portalSpawnPosition = new IntVec3(25, 0, 3);
         private bool bossWasSpawned;
@@ -33,279 +33,282 @@ namespace CaravanAdventures.CaravanStory
         public override MapGeneratorDef MapGeneratorDef => CaravanStorySiteDefOf.CAAncientMasterShrineMG;
 
         public override void ExposeData()
-		{
-			base.ExposeData();
-			Scribe_Values.Look<bool>(ref this.wonBattle, "wonBattle", false, false);
-			Scribe_Values.Look(ref bossDefeatedAndRewardsGiven, "bossDefeatedAndRewardsGiven");
-			Scribe_References.Look(ref boss, "boss");
-			Scribe_Values.Look(ref constTicks, "constTicks", -1);
-			Scribe_Values.Look(ref bossDefeatedAndRewardsGiven, "bossDefeatedAndRewardsGiven");
-			Scribe_Values.Look(ref checkDormantTicks, "checkDormantTicks", 0);
-			Scribe_Values.Look(ref checkRangeForJudgmentTicks, "checkRangeForJudgmentTicks", 0);
-			Scribe_Values.Look(ref bossWasSpawned, "bossWasSpawned", false);
-			// todo are mechs enough? Need them for comparison later - dont think so, i should drop them
-			Scribe_Collections.Look(ref generatedMechs, "generatedMechs", LookMode.Reference);
+        {
+            base.ExposeData();
+            Scribe_Values.Look<bool>(ref this.wonBattle, "wonBattle", false, false);
+            Scribe_Values.Look(ref bossDefeatedAndRewardsGiven, "bossDefeatedAndRewardsGiven");
+            Scribe_References.Look(ref boss, "boss");
+            Scribe_Values.Look(ref constTicks, "constTicks", -1);
+            Scribe_Values.Look(ref bossDefeatedAndRewardsGiven, "bossDefeatedAndRewardsGiven");
+            Scribe_Values.Look(ref checkDormantTicks, "checkDormantTicks", 0);
+            Scribe_Values.Look(ref checkRangeForJudgmentTicks, "checkRangeForJudgmentTicks", 0);
+            Scribe_Values.Look(ref bossWasSpawned, "bossWasSpawned", false);
+            // todo are mechs enough? Need them for comparison later - dont think so, i should drop them
+            Scribe_Collections.Look(ref generatedMechs, "generatedMechs", LookMode.Reference);
 
-			Scribe_References.Look(ref lastJudgmentEntrance, "lastJudgmentEntrance");
-			Scribe_References.Look(ref lastJudgmentMP, "lastJudgmentMap");
-		}
+            Scribe_References.Look(ref lastJudgmentEntrance, "lastJudgmentEntrance");
+            Scribe_References.Look(ref lastJudgmentMP, "lastJudgmentMap");
+        }
 
-		public void Init()
-		{
-			// debug
-			//Log.Message($"compare mechs. mapPawns: {Map.mapPawns.AllPawns.Where(x => x.RaceProps.IsMechanoid).Count()} ourlist: {generatedMechs.Count}");
-			//foreach (var pawn in Map.mapPawns.AllPawns.Where(x => x.RaceProps.IsMechanoid))
-			//         {
-			//	Log.Message($"defname: {pawn.def.defName} kind: {pawn.kindDef.defName} other: {pawn.def.label} kindlabel: {pawn.kindDef.label}");
-			//         }
-			//var notMatching = generatedMechs.Where(x => !Map.mapPawns.AllPawns.Where(y => y.RaceProps.IsMechanoid).Any(z => z.ThingID == x.ThingID));
-			//Log.Message($"Not matching count: {notMatching.Count()}");
-			//Log.Message($"Map has boss: {boss != null}");
+        public void Init()
+        {
+            // debug
+            //Log.Message($"compare mechs. mapPawns: {Map.mapPawns.AllPawns.Where(x => x.RaceProps.IsMechanoid).Count()} ourlist: {generatedMechs.Count}");
+            //foreach (var pawn in Map.mapPawns.AllPawns.Where(x => x.RaceProps.IsMechanoid))
+            //         {
+            //	Log.Message($"defname: {pawn.def.defName} kind: {pawn.kindDef.defName} other: {pawn.def.label} kindlabel: {pawn.kindDef.label}");
+            //         }
+            //var notMatching = generatedMechs.Where(x => !Map.mapPawns.AllPawns.Where(y => y.RaceProps.IsMechanoid).Any(z => z.ThingID == x.ThingID));
+            //Log.Message($"Not matching count: {notMatching.Count()}");
+            //Log.Message($"Map has boss: {boss != null}");
 
-			if (boss != null || lastJudgmentEntrance != null)
-			{
-				wonBattle = true;
+            if (boss != null || lastJudgmentEntrance != null)
+            {
+                wonBattle = true;
 
-				GetComponent<TimedDetectionPatrols>().Init();
-				GetComponent<TimedDetectionPatrols>().StartDetectionCountdown(60000, -1);
+                GetComponent<TimedDetectionPatrols>().Init();
+                GetComponent<TimedDetectionPatrols>().StartDetectionCountdown(60000, -1);
 
-				if (boss != null) bossWasSpawned = true;
-			}
-			CompCache.StoryWC.SetShrineSF("Created");
-			Quests.QuestUtility.UpdateQuestLocation(Quests.StoryQuestDefOf.CA_FindAncientShrine, this);
-		}
+                if (boss != null) bossWasSpawned = true;
+            }
+            CompCache.StoryWC.SetShrineSF("Created");
+            Quests.QuestUtility.UpdateQuestLocation(Quests.StoryQuestDefOf.CA_FindAncientShrine, this);
+        }
 
-		public override bool ShouldRemoveMapNow(out bool alsoRemoveWorldObject)
-		{
-			// todo add scenatio of keeping map until last judgement is completed and left, 
-			if (!base.Map.mapPawns.AnyPawnBlockingMapRemoval && boss == null && (CompCache.StoryWC.GetCurrentShrineCounter != CompCache.StoryWC.GetShrineMaxiumum || CompCache.StoryWC.storyFlags["Judgment_Completed"])
-				|| !base.Map.mapPawns.AnyPawnBlockingMapRemoval && bossDefeatedAndRewardsGiven && (CompCache.StoryWC.GetCurrentShrineCounter != CompCache.StoryWC.GetShrineMaxiumum || CompCache.StoryWC.storyFlags["Judgment_Completed"]))
-			{
-				// why is this here? why did i want to reset the current shrine flags when the map was removed? => just debugging stuff?
-				//if (boss == null) CompCache.StoryWC.ResetCurrentShrineFlags();
+        public override bool ShouldRemoveMapNow(out bool alsoRemoveWorldObject)
+        {
+            // todo add scenatio of keeping map until last judgement is completed and left, 
+            if (!base.Map.mapPawns.AnyPawnBlockingMapRemoval && boss == null && (CompCache.StoryWC.GetCurrentShrineCounter != CompCache.StoryWC.GetShrineMaxiumum || CompCache.StoryWC.storyFlags["Judgment_Completed"])
+                || !base.Map.mapPawns.AnyPawnBlockingMapRemoval && bossDefeatedAndRewardsGiven && (CompCache.StoryWC.GetCurrentShrineCounter != CompCache.StoryWC.GetShrineMaxiumum || CompCache.StoryWC.storyFlags["Judgment_Completed"]))
+            {
+                // why is this here? why did i want to reset the current shrine flags when the map was removed? => just debugging stuff?
+                //if (boss == null) CompCache.StoryWC.ResetCurrentShrineFlags();
 
-				alsoRemoveWorldObject = true;
-				return true;
-			}
-			alsoRemoveWorldObject = false;
-			return false;
-		}
+                alsoRemoveWorldObject = true;
+                return true;
+            }
+            alsoRemoveWorldObject = false;
+            return false;
+        }
 
         public override void PostRemove()
         {
             base.PostRemove();
-			if (CompCache.StoryWC.GetCurrentShrineCounter == 2)
-			{
-				Quests.QuestUtility.AppendQuestDescription(Quests.StoryQuestDefOf.CA_FindAncientShrine, Helper.HtmlFormatting("Story_Shrine1_QuestUpdate_1".Translate(), "f59b42"), false, true);
-				WarningAboutApocalypseDialog();
-			}
+            if (CompCache.StoryWC.GetCurrentShrineCounter == 2)
+            {
+                Quests.QuestUtility.AppendQuestDescription(Quests.StoryQuestDefOf.CA_FindAncientShrine, Helper.HtmlFormatting("Story_Shrine1_QuestUpdate_1".Translate(), "f59b42"), false, true);
+                WarningAboutApocalypseDialog();
+            }
         }
 
         private void WarningAboutApocalypseDialog()
         {
-			var storyChar = CompCache.StoryWC.questCont.Village.StoryContact;
-			var diaNode3 = new DiaNode("Story_Shrine1_Apocalypse_Dia1_3".Translate(storyChar.NameShortColored));
-			diaNode3.options.Add(new DiaOption("Story_Shrine1_Apocalypse_Dia1_3_Option1".Translate()) { resolveTree = true });
+            var storyChar = CompCache.StoryWC.questCont.Village.StoryContact;
+            var diaNode3 = new DiaNode("Story_Shrine1_Apocalypse_Dia1_3".Translate(storyChar.NameShortColored));
+            diaNode3.options.Add(new DiaOption("Story_Shrine1_Apocalypse_Dia1_3_Option1".Translate()) { resolveTree = true });
 
-			var diaNode2 = new DiaNode("Story_Shrine1_Apocalypse_Dia1_2".Translate(storyChar.NameShortColored));
-			diaNode2.options.Add(new DiaOption("Story_Shrine1_Apocalypse_Dia1_2_Option1".Translate()) { link = diaNode3 });
+            var diaNode2 = new DiaNode("Story_Shrine1_Apocalypse_Dia1_2".Translate(storyChar.NameShortColored));
+            diaNode2.options.Add(new DiaOption("Story_Shrine1_Apocalypse_Dia1_2_Option1".Translate()) { link = diaNode3 });
 
-			var diaNode = new DiaNode("Story_Shrine1_Apocalypse_Dia1_1".Translate(storyChar.NameShortColored));
-			diaNode.options.Add(new DiaOption("Story_Shrine1_Apocalypse_Dia1_1_Option1".Translate()) { link = diaNode2 });
+            var diaNode = new DiaNode("Story_Shrine1_Apocalypse_Dia1_1".Translate(storyChar.NameShortColored));
+            diaNode.options.Add(new DiaOption("Story_Shrine1_Apocalypse_Dia1_1_Option1".Translate()) { link = diaNode2 });
 
-			TaggedString taggedString = "Story_Shrine1_Apocalypse_Dia1Title".Translate(storyChar.NameShortColored);
-			Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
-			Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
-		}
+            TaggedString taggedString = "Story_Shrine1_Apocalypse_Dia1Title".Translate(storyChar.NameShortColored);
+            Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
+            Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
+        }
 
         public override void Tick()
-		{
+        {
             base.Tick();
             if (base.HasMap)
-			{
-				CheckBossDefeated();
-				CheckWonBattle();
+            {
+                CheckBossDefeated();
+                CheckWonBattle();
 
-				if (!CompCache.StoryWC.storyFlags["Judgment_Completed"] && lastJudgmentEntrance != null && checkRangeForJudgmentTicks >= 60)
-				{
-					CheckGenerateAndEnterLastJudgment();
-					checkRangeForJudgmentTicks = 0;
-                }
-
-				if (checkDormantTicks == 240)
+                if (!CompCache.StoryWC.storyFlags["Judgment_Completed"] && lastJudgmentEntrance != null && checkRangeForJudgmentTicks >= 60)
                 {
-					StoryUtility.FindUnfoggedMechsAndWakeUp(Map);
-					checkDormantTicks = 0;
+                    CheckGenerateAndEnterLastJudgment();
+                    checkRangeForJudgmentTicks = 0;
                 }
 
-				if (constTicks == 2400)
-				{
-					if (boss != null || lastJudgmentEntrance != null)
-					{
-						StoryUtility.EnsureSacrilegHunters();
+                if (checkDormantTicks == 240)
+                {
+                    StoryUtility.FindUnfoggedMechsAndWakeUp(Map);
+                    checkDormantTicks = 0;
+                }
 
-						// todo different dialogs for other shrines, maybe they betray the player the 3rd or 4th shrine.
-						HunterAssistanceDialog(); 
-					}
-				}
+                if (constTicks == 2400)
+                {
+                    if (boss != null || lastJudgmentEntrance != null)
+                    {
+                        StoryUtility.EnsureSacrilegHunters();
 
-				constTicks++;
-				checkRangeForJudgmentTicks++;
-				checkDormantTicks++;
-			}
-		}
+                        // todo different dialogs for other shrines, maybe they betray the player the 3rd or 4th shrine.
+                        HunterAssistanceDialog();
+                    }
+                }
 
-		private void CheckGenerateAndEnterLastJudgment()
-		{
+                constTicks++;
+                checkRangeForJudgmentTicks++;
+                checkDormantTicks++;
+            }
+        }
 
-			var triggerCells = new IntVec3[] { lastJudgmentEntrance.Position }; // GenRadial.RadialCellsAround(lastJudgmentEntrance.Position, 1, true);
-			if (!triggerCells.Any(cell => cell.GetFirstPawn(Map) == CompCache.StoryWC.questCont.StoryStart.Gifted)) return;
+        private void CheckGenerateAndEnterLastJudgment()
+        {
 
-			if (lastJudgmentMP == null) {
-				LongEventHandler.QueueLongEvent(delegate ()
-				{
-					CompCache.StoryWC.questCont.LastJudgment.CreateLastJudgment(ref lastJudgmentMP, Tile);
-				}, "GeneratingMapForNewEncounter", false, null, true);
-			}
-			LongEventHandler.QueueLongEvent(delegate ()
-			{
+            var triggerCells = new IntVec3[] { lastJudgmentEntrance.Position }; // GenRadial.RadialCellsAround(lastJudgmentEntrance.Position, 1, true);
+            if (!triggerCells.Any(cell => cell.GetFirstPawn(Map) == CompCache.StoryWC.questCont.StoryStart.Gifted)) return;
+
+            if (lastJudgmentMP == null)
+            {
+                LongEventHandler.QueueLongEvent(delegate ()
+                {
+                    CompCache.StoryWC.questCont.LastJudgment.CreateLastJudgment(ref lastJudgmentMP, Tile);
+                }, "GeneratingMapForNewEncounter", false, null, true);
+            }
+            LongEventHandler.QueueLongEvent(delegate ()
+            {
                 var gifted = CompCache.StoryWC.questCont.StoryStart.Gifted;
                 if (gifted.Spawned) gifted.DeSpawn();
                 GenSpawn.Spawn(gifted, portalSpawnPosition, lastJudgmentMP.Map);
                 gifted.drafter.Drafted = true;
                 Find.TickManager.CurTimeSpeed = TimeSpeed.Paused;
                 lastJudgmentMP.Init(this);
-				CameraJumper.TryJump(gifted);
-			}, "GeneratingMapForNewEncounter", false, null, true);
-		}
+                CameraJumper.TryJump(gifted);
+            }, "GeneratingMapForNewEncounter", false, null, true);
+        }
 
         private void LetterNoMasterShrine() => Find.LetterStack.ReceiveLetter("MasterShrineVictoryLetterLabel".Translate(), "MasterShrineVictoryLetterMessage".Translate(), LetterDefOf.PositiveEvent, this, null, null, null, null);
 
-		private void HunterAssistanceDialog()
-		{
-			//var endDiaNodeAccepted = new DiaNode("Story_Start_Dia1_Me_End_Accepted".Translate());
-			//endDiaNodeAccepted.options.Add(new DiaOption("Story_Start_Dia1_Me_End_Bye".Translate()) { action = () => GrantAncientGift(initiator, addressed), resolveTree = true });
-
-			//var endDiaNodeDenied = new DiaNode("Story_Start_Dia1_Me_End_Denied".Translate());
-			//endDiaNodeDenied.options.Add(new DiaOption("Story_Start_Dia1_Me_End_Bye".Translate()) { resolveTree = true });
-
-			//var subDiaNode = new DiaNode("Story_Start_Dia1_Me".Translate());
-			//subDiaNode.options.Add(new DiaOption("Story_Start_Dia1_Me_NoChoice".Translate()) { link = endDiaNodeAccepted });
-			//subDiaNode.options.Add(new DiaOption("Story_Start_Dia1_Me_SomeoneBetter".Translate()) { link = endDiaNodeDenied });
-
-			var storyChar = CompCache.StoryWC.questCont.Village.StoryContact;
-
-			var diaNode = new DiaNode("Story_Shrine1_SacrilegHunters_Dia1_1".Translate(storyChar.NameShortColored));
-			diaNode.options.Add(new DiaOption("Story_Shrine1_SacrilegHunters_Dia1_1_Option1".Translate()) { resolveTree = true, action = () => StoryUtility.GetAssistanceFromAlliedFaction(StoryUtility.FactionOfSacrilegHunters, Map) });
-			diaNode.options.Add(new DiaOption("Story_Shrine1_SacrilegHunters_Dia1_1_Option2".Translate()) { resolveTree = true });
-
-			TaggedString taggedString = "Story_Shrine1_SacrilegHunters_DiaTitle".Translate(storyChar.NameShortColored);
-			Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
-			Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
-		}
-
-		private void CheckBossDefeated()
+        private void HunterAssistanceDialog()
         {
-			if ((boss != null && !boss.Dead) || (!bossWasSpawned && boss == null && CompCache.StoryWC.storyFlags[CompCache.StoryWC.BuildCurrentShrinePrefix() + "Created"]) || bossDefeatedAndRewardsGiven) return;
+            //var endDiaNodeAccepted = new DiaNode("Story_Start_Dia1_Me_End_Accepted".Translate());
+            //endDiaNodeAccepted.options.Add(new DiaOption("Story_Start_Dia1_Me_End_Bye".Translate()) { action = () => GrantAncientGift(initiator, addressed), resolveTree = true });
 
-			var gifted = StoryUtility.GetGiftedPawn();
-			if (gifted == null) Log.Warning("gifted pawn was null, which shouldn't happen. Spell was stored for when another gifted pawn awakes");
+            //var endDiaNodeDenied = new DiaNode("Story_Start_Dia1_Me_End_Denied".Translate());
+            //endDiaNodeDenied.options.Add(new DiaOption("Story_Start_Dia1_Me_End_Bye".Translate()) { resolveTree = true });
 
-			AbilityDef spell = null;
-			//Log.Message($"Unlocked spellcount: {CompCache.StoryWC.GetUnlockedSpells().Count} Database count: {DefDatabase<AbilityDef>.AllDefsListForReading.Where(x => x.defName.StartsWith("CAAncient")).Count()}");
-			if (CompCache.StoryWC.GetUnlockedSpells().Count < DefDatabase<AbilityDef>.AllDefsListForReading.Where(x => x.defName.StartsWith("CAAncient")).Count())
+            //var subDiaNode = new DiaNode("Story_Start_Dia1_Me".Translate());
+            //subDiaNode.options.Add(new DiaOption("Story_Start_Dia1_Me_NoChoice".Translate()) { link = endDiaNodeAccepted });
+            //subDiaNode.options.Add(new DiaOption("Story_Start_Dia1_Me_SomeoneBetter".Translate()) { link = endDiaNodeDenied });
+
+            var storyChar = CompCache.StoryWC.questCont.Village.StoryContact;
+
+            var diaNode = new DiaNode("Story_Shrine1_SacrilegHunters_Dia1_1".Translate(storyChar.NameShortColored));
+            diaNode.options.Add(new DiaOption("Story_Shrine1_SacrilegHunters_Dia1_1_Option1".Translate()) { resolveTree = true, action = () => StoryUtility.GetAssistanceFromAlliedFaction(StoryUtility.FactionOfSacrilegHunters, Map) });
+            diaNode.options.Add(new DiaOption("Story_Shrine1_SacrilegHunters_Dia1_1_Option2".Translate()) { resolveTree = true });
+
+            TaggedString taggedString = "Story_Shrine1_SacrilegHunters_DiaTitle".Translate(storyChar.NameShortColored);
+            Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
+            Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
+        }
+
+        private void CheckBossDefeated()
+        {
+            // todo - added !boss.detroyed check, does it work?
+            if ((boss != null && !boss.Dead && !boss.Destroyed) || (!bossWasSpawned && boss == null && CompCache.StoryWC.storyFlags[CompCache.StoryWC.BuildCurrentShrinePrefix() + "Created"]) || bossDefeatedAndRewardsGiven) return;
+
+            var gifted = StoryUtility.GetGiftedPawn();
+            if (gifted == null) Log.Warning("gifted pawn was null, which shouldn't happen. Spell was stored for when another gifted pawn awakes");
+
+            AbilityDef spell = null;
+            //Log.Message($"Unlocked spellcount: {CompCache.StoryWC.GetUnlockedSpells().Count} Database count: {DefDatabase<AbilityDef>.AllDefsListForReading.Where(x => x.defName.StartsWith("CAAncient")).Count()}");
+            if (CompCache.StoryWC.GetUnlockedSpells().Count < DefDatabase<AbilityDef>.AllDefsListForReading.Where(x => x.defName.StartsWith("CAAncient")).Count())
             {
-				spell = DefDatabase<AbilityDef>.AllDefsListForReading.Where(x => x.defName.StartsWith("CAAncient") && !CompCache.StoryWC.GetUnlockedSpells().Contains(x)).InRandomOrder().FirstOrDefault();
-				if (spell == null) Log.Error($"Got no spell from boss. -> CheckBossDefeated()");
-				CompCache.StoryWC.GetUnlockedSpells().Add(spell);
-				if (gifted != null)
-				{
-					gifted.abilities.GainAbility(spell);
-					Find.LetterStack.ReceiveLetter("Story_Shrine1_AbilityGainedLetterTitle".Translate(spell.LabelCap), "Story_Shrine1_AbilityGainedLetterDesc".Translate(boss.Label, gifted.NameShortColored, spell.label.Colorize(UnityEngine.Color.cyan)), LetterDefOf.PositiveEvent);
-				}
-			}
-			
-			CompCache.StoryWC.SetShrineSF("Completed");
-			CompCache.StoryWC.IncreaseShrineCompleteCounter();
-			CompCache.StoryWC.mechBossKillCounters[boss.def.defName] = CompCache.StoryWC.mechBossKillCounters.TryGetValue(boss.def.defName, out var result) ? result + 1 : 0;
+                spell = DefDatabase<AbilityDef>.AllDefsListForReading.Where(x => x.defName.StartsWith("CAAncient") && !CompCache.StoryWC.GetUnlockedSpells().Contains(x)).InRandomOrder().FirstOrDefault();
+                if (spell == null) Log.Error($"Got no spell from boss. -> CheckBossDefeated()");
+                CompCache.StoryWC.GetUnlockedSpells().Add(spell);
+                if (gifted != null)
+                {
+                    gifted.abilities.GainAbility(spell);
+                    Find.LetterStack.ReceiveLetter("Story_Shrine1_AbilityGainedLetterTitle".Translate(spell.LabelCap), "Story_Shrine1_AbilityGainedLetterDesc".Translate(boss.Label, gifted.NameShortColored, spell.label.Colorize(UnityEngine.Color.cyan)), LetterDefOf.PositiveEvent);
+                }
+            }
 
-			BossDefeatedDialog(gifted, boss, spell);
-			bossDefeatedAndRewardsGiven = true;
+            CompCache.StoryWC.SetShrineSF("Completed");
+            CompCache.StoryWC.IncreaseShrineCompleteCounter();
+            CompCache.StoryWC.mechBossKillCounters[boss.def.defName] = CompCache.StoryWC.mechBossKillCounters.TryGetValue(boss.def.defName, out var result) ? result + 1 : 0;
 
-			Quests.QuestUtility.AppendQuestDescription(Quests.StoryQuestDefOf.CA_FindAncientShrine, "Story_Shrine1_QuestRewardUpdate_1".Translate(GenDate.DateFullStringAt((long)GenDate.TickGameToAbs(Find.TickManager.TicksGame), Find.WorldGrid.LongLatOf(Tile)), gifted.NameShortColored, boss.LabelCap, CompCache.StoryWC.GetCurrentShrineCounter - 1, spell.label.CapitalizeFirst().Colorize(Color.cyan)));
-		}
+            BossDefeatedDialog(gifted, boss, spell);
+            bossDefeatedAndRewardsGiven = true;
 
-		private void BossDefeatedDialog(Pawn gifted, Pawn boss, AbilityDef spell)
+            Quests.QuestUtility.AppendQuestDescription(Quests.StoryQuestDefOf.CA_FindAncientShrine, "Story_Shrine1_QuestRewardUpdate_1".Translate(GenDate.DateFullStringAt((long)GenDate.TickGameToAbs(Find.TickManager.TicksGame), Find.WorldGrid.LongLatOf(Tile)), gifted.NameShortColored, boss.LabelCap, CompCache.StoryWC.GetCurrentShrineCounter - 1, spell.label.CapitalizeFirst().Colorize(Color.cyan)));
+        }
+
+        private void BossDefeatedDialog(Pawn gifted, Pawn boss, AbilityDef spell)
         {
-			var diaNode2 = new DiaNode("Story_Shrine1_BossDefeated_Dia1_2".Translate(boss.def.label));
-			diaNode2.options.Add(new DiaOption("Story_Shrine1_BossDefeated_Dia1_1_Option2".Translate()) { resolveTree = true, action = () => WakeAllMechanoids() });
+            var diaNode2 = new DiaNode("Story_Shrine1_BossDefeated_Dia1_2".Translate(boss.def.label));
+            diaNode2.options.Add(new DiaOption("Story_Shrine1_BossDefeated_Dia1_1_Option2".Translate()) { resolveTree = true, action = () => WakeAllMechanoids() });
 
-			var diaNode = new DiaNode(spell == null ? "Story_Shrine1_BossDefeated_Dia1_1_NoSpell".Translate(boss.def.LabelCap.ToString().HtmlFormatting("ff0000")) : "Story_Shrine1_BossDefeated_Dia1_1".Translate(boss.def.LabelCap.ToString().HtmlFormatting("ff0000"), gifted.NameShortColored, spell.LabelCap.ToString().HtmlFormatting("008080")));
-			diaNode.options.Add(new DiaOption("Story_Shrine1_BossDefeated_Dia1_1_Option1".Translate()) { link = diaNode2 });
+            var diaNode = new DiaNode(spell == null ? "Story_Shrine1_BossDefeated_Dia1_1_NoSpell".Translate(boss.def.LabelCap.ToString().HtmlFormatting("ff0000")) : "Story_Shrine1_BossDefeated_Dia1_1".Translate(boss.def.LabelCap.ToString().HtmlFormatting("ff0000"), gifted.NameShortColored, spell.LabelCap.ToString().HtmlFormatting("008080")));
+            diaNode.options.Add(new DiaOption("Story_Shrine1_BossDefeated_Dia1_1_Option1".Translate()) { link = diaNode2 });
 
-			TaggedString taggedString = "Story_Shrine1_BossDefeated_Dia1Title".Translate(gifted.Name.ToStringShort);
-			Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
-			Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
+            TaggedString taggedString = "Story_Shrine1_BossDefeated_Dia1Title".Translate(gifted.Name.ToStringShort);
+            Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
+            Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
 
-			// todo new tale
-			//TaleRecorder.RecordTale(TaleDefOf.CaravanAmbushDefeated, new object[]
-			//{
-			//	base.Map.mapPawns.FreeColonists.RandomElement<Pawn>()
-			//});
+            // todo new tale
+            //TaleRecorder.RecordTale(TaleDefOf.CaravanAmbushDefeated, new object[]
+            //{
+            //	base.Map.mapPawns.FreeColonists.RandomElement<Pawn>()
+            //});
 
-			// todo gifted null
-		}
+            // todo gifted null
+        }
 
-		private void WakeAllMechanoids()
+        private void WakeAllMechanoids()
         {
-			Map.mapPawns.AllPawns.Where(x => x.RaceProps.IsMechanoid && !x.Dead).ToList().ForEach(mech => mech.TryGetComp<CompWakeUpDormant>().Activate());
-			FreeAllMechsOnMap();
-		}
+            Map.mapPawns.AllPawns.Where(x => x.RaceProps.IsMechanoid && !x.Dead).ToList().ForEach(mech => mech.TryGetComp<CompWakeUpDormant>().Activate());
+            FreeAllMechsOnMap();
+        }
 
-		private void FreeAllMechsOnMap()
-		{
-			foreach (var room in Map.regionGrid.allRooms.Where(room => room.ContainsThing(ThingDefOf.AncientCryptosleepCasket) && room.Fogged))
-			{
-				if (room.ContainedMechs().Count() > 0)
-				{
-					for (; ; )
-					{
-						var wallToBreak = room.BorderCells.Where(x => x.GetFirstBuilding(Map)?.def == ThingDefOf.Wall).InRandomOrder().Select(x => x.GetFirstBuilding(Map)).FirstOrDefault();
-						if (wallToBreak == null || !room.Fogged) break;
-						wallToBreak.Destroy();
-					}
-				}
-			}
-		}
+        private void FreeAllMechsOnMap()
+        {
+            var sendLetter = false;
+            foreach (var room in Map.regionGrid.allRooms.Where(room => room.ContainsThing(ThingDefOf.AncientCryptosleepCasket) && room.Fogged).Reverse())
+            {
+                if (!room.Fogged) continue;
+                var cellToStartUnfog = room.Cells.FirstOrDefault(cell => !room.BorderCells.Contains(cell));
+                if (StoryUtility.FloodUnfogAdjacent(room.Map.fogGrid, Map, cellToStartUnfog, true)) sendLetter = true;
+
+                var wallToBreak = room.BorderCells.Where(x => x.GetFirstBuilding(Map)?.def == ThingDefOf.Wall && GenRadial.RadialCellsAround(x, 1, false).Any(y => y.UsesOutdoorTemperature(Map) && y.Walkable(Map))).InRandomOrder().Select(x => x.GetFirstBuilding(Map)).FirstOrDefault();
+                if (wallToBreak != null) wallToBreak.Destroy();
+            }
+
+            if (!sendLetter) return;
+            Find.LetterStack.ReceiveLetter("LetterLabelAreaRevealed".Translate(), "AreaRevealedWithMechanoids".Translate(), LetterDefOf.ThreatBig, null, null, null, null, null);
+        }
 
         private void CheckWonBattle()
-		{
-			// todo - completely redo battle won, we don't really need it. (currently it's being set to wonBattle = true upon killing the boss)
-			if (this.wonBattle)
-			{
-				return;
-			}
-			if (boss != null && !boss.Dead) return;
-			if (GenHostility.AnyHostileActiveThreatToPlayer(base.Map, false))
-			{
-				return;
-			}
-			//string forceExitAndRemoveMapCountdownTimeLeftString = TimedForcedExit.GetForceExitAndRemoveMapCountdownTimeLeftString(60000);
+        {
+            // todo - completely redo battle won, we don't really need it. (currently it's being set to wonBattle = true upon killing the boss)
+            if (this.wonBattle)
+            {
+                return;
+            }
+            if (boss != null && !boss.Dead) return;
+            if (GenHostility.AnyHostileActiveThreatToPlayer(base.Map, false))
+            {
+                return;
+            }
+            //string forceExitAndRemoveMapCountdownTimeLeftString = TimedForcedExit.GetForceExitAndRemoveMapCountdownTimeLeftString(60000);
 
-			else
-			{
-				Find.LetterStack.ReceiveLetter("MasterShrineVictoryLetterLabel".Translate(), "MasterShrineVictoryLetterMessage".Translate(), LetterDefOf.PositiveEvent, this, null, null, null, null);
-				Find.LetterStack.ReceiveLetter("NoMasterShrineLetterLabel".Translate(), "NoMasterShrineLetterMessage".Translate(), LetterDefOf.NegativeEvent, this, null, null, null, null);
-			}
-			// todo new tale
-			//TaleRecorder.RecordTale(TaleDefOf.CaravanAmbushDefeated, new object[]
-			//{
-			//	base.Map.mapPawns.FreeColonists.RandomElement<Pawn>()
-			//});
-			this.wonBattle = true;
-		}
+            else
+            {
+                Find.LetterStack.ReceiveLetter("MasterShrineVictoryLetterLabel".Translate(), "MasterShrineVictoryLetterMessage".Translate(), LetterDefOf.PositiveEvent, this, null, null, null, null);
+                Find.LetterStack.ReceiveLetter("NoMasterShrineLetterLabel".Translate(), "NoMasterShrineLetterMessage".Translate(), LetterDefOf.NegativeEvent, this, null, null, null, null);
+            }
+            // todo new tale
+            //TaleRecorder.RecordTale(TaleDefOf.CaravanAmbushDefeated, new object[]
+            //{
+            //	base.Map.mapPawns.FreeColonists.RandomElement<Pawn>()
+            //});
+            this.wonBattle = true;
+        }
 
-		private Pawn FindBossNew() => Map.mapPawns.AllPawns.FirstOrDefault(x => CompCache.StoryWC.GetBossDefNames().Contains(x.def.defName));
-		private Pawn FindBoss() => this?.Map?.spawnedThings?.FirstOrDefault(x => x is Pawn pawn && CompCache.StoryWC.GetBossDefNames().Contains(pawn.def.defName)) as Pawn ?? null;
-	}
+        private Pawn FindBossNew() => Map.mapPawns.AllPawns.FirstOrDefault(x => CompCache.StoryWC.GetBossDefNames().Contains(x.def.defName));
+        private Pawn FindBoss() => this?.Map?.spawnedThings?.FirstOrDefault(x => x is Pawn pawn && CompCache.StoryWC.GetBossDefNames().Contains(pawn.def.defName)) as Pawn ?? null;
+    }
 }

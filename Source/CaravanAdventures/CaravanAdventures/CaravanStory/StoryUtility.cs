@@ -406,5 +406,55 @@ namespace CaravanAdventures.CaravanStory
         }
 
         public static Faction FactionOfSacrilegHunters { get => Find.FactionManager.FirstFactionOfDef(StoryDefOf.CASacrilegHunters); private set => FactionOfSacrilegHunters = value; }
+
+        public static bool FloodUnfogAdjacent(FogGrid fogGrid, Map map, IntVec3 c, bool suppressMessages = false)
+        {
+            fogGrid.Unfog(c);
+            bool flag = false;
+            FloodUnfogResult floodUnfogResult = default(FloodUnfogResult);
+            for (int i = 0; i < 4; i++)
+            {
+                IntVec3 intVec = c + GenAdj.CardinalDirections[i];
+                if (intVec.InBounds(map) && intVec.Fogged(map))
+                {
+                    Building edifice = intVec.GetEdifice(map);
+                    if (edifice == null || !edifice.def.MakeFog)
+                    {
+                        flag = true;
+                        floodUnfogResult = FloodFillerFog.FloodUnfog(intVec, map);
+                    }
+                    else
+                    {
+                        fogGrid.Unfog(intVec);
+                    }
+                }
+            }
+            for (int j = 0; j < 8; j++)
+            {
+                IntVec3 c2 = c + GenAdj.AdjacentCells[j];
+                if (c2.InBounds(map))
+                {
+                    Building edifice2 = c2.GetEdifice(map);
+                    if (edifice2 != null && edifice2.def.MakeFog)
+                    {
+                        fogGrid.Unfog(c2);
+                    }
+                }
+            }
+            if (flag && !suppressMessages)
+            {
+                if (floodUnfogResult.mechanoidFound)
+                {
+                    Find.LetterStack.ReceiveLetter("LetterLabelAreaRevealed".Translate(), "AreaRevealedWithMechanoids".Translate(), LetterDefOf.ThreatBig, new TargetInfo(c, map, false), null, null, null, null);
+                    return true;
+                }
+                if (!floodUnfogResult.allOnScreen || floodUnfogResult.cellsUnfogged >= 600)
+                {
+                    Find.LetterStack.ReceiveLetter("LetterLabelAreaRevealed".Translate(), "AreaRevealed".Translate(), LetterDefOf.NeutralEvent, new TargetInfo(c, map, false), null, null, null, null);
+                }
+                return true;
+            }
+            return false;
+        }
     }
 }
