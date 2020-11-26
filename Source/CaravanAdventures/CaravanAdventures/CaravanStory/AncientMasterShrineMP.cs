@@ -269,12 +269,19 @@ namespace CaravanAdventures.CaravanStory
             var sendLetter = false;
             foreach (var room in Map.regionGrid.allRooms.Where(room => room.ContainsThing(ThingDefOf.AncientCryptosleepCasket) && room.Fogged).Reverse())
             {
-                if (!room.Fogged) continue;
-                var cellToStartUnfog = room.Cells.FirstOrDefault(cell => !room.BorderCells.Contains(cell));
-                if (StoryUtility.FloodUnfogAdjacent(room.Map.fogGrid, Map, cellToStartUnfog, true)) sendLetter = true;
+                try
+                {
+                    if (!room.Fogged) continue;
+                    var cellToStartUnfog = room.Cells.FirstOrDefault(cell => !room.BorderCells.Contains(cell));
+                    if (StoryUtility.FloodUnfogAdjacent(room.Map.fogGrid, Map, cellToStartUnfog)) sendLetter = true;
 
-                var wallToBreak = room.BorderCells.Where(x => x.GetFirstBuilding(Map)?.def == ThingDefOf.Wall && GenRadial.RadialCellsAround(x, 1, false).Any(y => y.UsesOutdoorTemperature(Map) && y.Walkable(Map))).InRandomOrder().Select(x => x.GetFirstBuilding(Map)).FirstOrDefault();
-                if (wallToBreak != null) wallToBreak.Destroy();
+                    var wallToBreak = room.BorderCells.Where(x => x.GetFirstBuilding(Map)?.def == ThingDefOf.Wall && GenRadial.RadialCellsAround(x, 1, false).Any(y => y.InBounds(Map) && y.UsesOutdoorTemperature(Map) && y.Walkable(Map))).InRandomOrder()?.Select(x => x.GetFirstBuilding(Map))?.FirstOrDefault();
+                    if (wallToBreak != null) wallToBreak.Destroy();
+                }
+                catch (Exception e)
+                {
+                    Log.Error(e.ToString());
+                }
             }
 
             if (!sendLetter) return;
