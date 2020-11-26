@@ -54,7 +54,7 @@
     <label>cook a grill snack</label>
     <description>Cook a grill snack.</description>
     <jobString>Cooking grill snack.</jobString>
-    <workAmount>250</workAmount>
+    <workAmount>220</workAmount>
     <workSpeedStat>CookSpeed</workSpeedStat>
     <requiredGiverWorkType>Cooking</requiredGiverWorkType>
     <effectWorking>Cook</effectWorking>
@@ -68,7 +68,7 @@
             <li>FoodRaw</li>
           </categories>
         </filter>
-        <count>0.5</count>
+        <count>0.4</count>
       </li>
     </ingredients>
     <products>
@@ -82,7 +82,7 @@
     <label>cook a grill snack x4</label>
     <description>Cook 4 grill snacks.</description>
     <jobString>Cooking 4 grill snacks.</jobString>
-    <workAmount>1000</workAmount>
+    <workAmount>880</workAmount>
     <workSpeedStat>CookSpeed</workSpeedStat>
     <requiredGiverWorkType>Cooking</requiredGiverWorkType>
     <effectWorking>Cook</effectWorking>
@@ -96,7 +96,7 @@
             <li>FoodRaw</li>
           </categories>
         </filter>
-        <count>2.0</count>
+        <count>1.6</count>
       </li>
     </ingredients>
     <products>
@@ -105,4 +105,173 @@
     <workSkill>Cooking</workSkill>
   </RecipeDef>
 
+  <RecipeDef>
+    <defName>CABurnApparel</defName>
+    <label>burn apparel</label>
+    <description>Burn unwanted apparel to completely destroy it.</description>
+    <jobString>Burning apparel.</jobString>
+    <workAmount>60</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <requiredGiverWorkType>Hauling</requiredGiverWorkType>
+    <effectWorking>Cremate</effectWorking>
+    <soundWorking>Recipe_Cremate</soundWorking>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>Apparel</li>
+          </categories>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <categories>
+        <li>Apparel</li>
+      </categories>
+      <specialFiltersToDisallow>
+        <li>AllowNonBurnableApparel</li>
+      </specialFiltersToDisallow>
+    </fixedIngredientFilter>
+    <forceHiddenSpecialFilters>
+      <li>AllowBurnableApparel</li>
+      <!--<li>AllowSmeltableApparel</li>-->
+      <!--<li>AllowNonSmeltableApparel</li>-->
+    </forceHiddenSpecialFilters>
+    <defaultIngredientFilter>
+      <categories>
+        <li>Apparel</li>
+      </categories>
+      <disallowedThingDefs>
+        <li>Apparel_ShieldBelt</li>
+        <li>Apparel_SmokepopBelt</li>
+      </disallowedThingDefs>
+    </defaultIngredientFilter>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>CAMake_ChemfuelFromWood</defName>
+    <label>make chemfuel from wood</label>
+    <description>Make a batch of chemfuel by extracting and condensing wood gas from logs.</description>
+    <jobString>Refining chemfuel from wood.</jobString>
+    <effectWorking>Cremate</effectWorking>
+    <soundWorking>Recipe_Cremate</soundWorking>
+    <workAmount>500</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>WoodLog</li>
+          </thingDefs>
+        </filter>
+        <count>20</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>WoodLog</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <Chemfuel>15</Chemfuel>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>CAMake_ChemfuelFromOrganics</defName>
+    <label>make chemfuel from organics</label>
+    <description>Make a batch of chemfuel by extracting biofuel from organic feedstocks.</description>
+    <jobString>Refining chemfuel from organics.</jobString>
+    <effectWorking>Cremate</effectWorking>
+    <soundWorking>Recipe_Cremate</soundWorking>
+    <workAmount>600</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>Foods</li>
+            <li>PlantMatter</li>
+          </categories>
+          <disallowedThingDefs>
+            <li>Hay</li>
+          </disallowedThingDefs>
+          <disallowedCategories>
+            <li>FoodMeals</li>
+          </disallowedCategories>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <categories>
+        <li>Foods</li>
+        <li>PlantMatter</li>
+      </categories>
+      <disallowedThingDefs>
+        <li>Hay</li>
+      </disallowedThingDefs>
+      <disallowedCategories>
+        <li>FoodMeals</li>
+      </disallowedCategories>
+    </fixedIngredientFilter>
+    <defaultIngredientFilter>
+      <categories>
+        <li>FoodRaw</li>
+      </categories>
+      <disallowedCategories>
+        <li>MeatRaw</li>
+        <li>AnimalProductRaw</li>
+      </disallowedCategories>
+    </defaultIngredientFilter>
+    <products>
+      <Chemfuel>15</Chemfuel>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>CAMake_ChemfuelFromCorpses</defName>
+    <label>make chemfuel from corpses</label>
+    <description>Make a batch of chemfuel by extracting biofuel from organic corpses.</description>
+    <jobString>Refining chemfuel from corpses.</jobString>
+    <effectWorking>Cremate</effectWorking>
+    <soundWorking>Recipe_Cremate</soundWorking>
+    <workAmount>600</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>Corpses</li>
+          </categories>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <categories>
+        <li>Corpses</li>
+      </categories>
+      <disallowedCategories>
+        <li>CorpsesMechanoid</li>
+      </disallowedCategories>
+    </fixedIngredientFilter>
+    <defaultIngredientFilter>
+      <thingDefs>
+        <li>Corpse_Human</li>
+      </thingDefs>
+      <specialFiltersToAllow>
+        <li>AllowCorpsesColonist</li>
+        <li>AllowCorpsesStranger</li>
+      </specialFiltersToAllow>
+    </defaultIngredientFilter>
+    <products>
+      <Chemfuel>15</Chemfuel>
+    </products>
+  </RecipeDef>
 </Defs>

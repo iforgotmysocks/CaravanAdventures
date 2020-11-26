@@ -157,6 +157,106 @@
       <deconstructible>false</deconstructible>
     </building>
   </ThingDef>
+  
+  <!-- chem fuel-->
+  <ThingDef Name="CABenchBase" ParentName="CATentBase" Abstract="True">
+    <canOverlapZones>false</canOverlapZones>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+    <thingCategories>
+      <li>BuildingsProduction</li>
+    </thingCategories>
+    <statBases>
+      <Mass>20</Mass>
+    </statBases>
+    <interactionCellIcon>DiningChair</interactionCellIcon>
+    <comps>
+      <li>
+        <compClass>CompReportWorkSpeed</compClass>
+      </li>
+    </comps>
+    <placeWorkers>
+      <li>PlaceWorker_ReportWorkSpeedPenalties</li>
+    </placeWorkers>
+    <building>
+      <buildingTags>
+        <li>Production</li>
+      </buildingTags>
+    </building>
+  </ThingDef>
+  
+  <ThingDef ParentName="CABenchBase">
+    <defName>CASpacerBiofuelRefinery</defName>
+    <label>spacer biofuel refinery</label>
+    <description>Refines biological matter like wood or plant matter into chemfuel.</description>
+    <thingClass>Building_WorkTable</thingClass>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <tickerType>Normal</tickerType>
+    <statBases>
+      <MaxHitPoints>200</MaxHitPoints>
+      <WorkToBuild>2000</WorkToBuild>
+      <Flammability>0.2</Flammability>
+    </statBases>
+    <minifiedDef />
+    <thingCategories Inherit="false" />
+    <size>(2,1)</size>
+    <costList>
+      <Steel>150</Steel>
+      <ComponentIndustrial>3</ComponentIndustrial>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Refuelable">
+        <fuelConsumptionRate>5.0</fuelConsumptionRate>
+        <fuelCapacity>20.0</fuelCapacity>
+        <fuelConsumptionPerTickInRain>0</fuelConsumptionPerTickInRain>
+        <fuelFilter>
+          <thingDefs>
+            <li>WoodLog</li>
+          </thingDefs>
+        </fuelFilter>
+        <initialFuelPercent>1</initialFuelPercent>
+        <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+    </comps>
+    <recipes>
+      <li>CAMake_ChemfuelFromWood</li>
+      <li>CAMake_ChemfuelFromOrganics</li>
+      <li>CAMake_ChemfuelFromCorpses</li>
+    </recipes>
+    <castEdgeShadows>false</castEdgeShadows>
+    <staticSunShadowHeight>0</staticSunShadowHeight>
+    <graphicData>
+      <texPath>Things/Building/Production/Refinery</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(2,1)</drawSize>
+      <shadowData>
+        <volume>(2.22, 0.8, 0.62)</volume>
+        <offset>(0, 0, -0.13)</offset>
+      </shadowData>
+      <damageData>
+        <rect>(0.3,0.1,2.4,1.8)</rect>
+      </damageData>
+    </graphicData>
+    <inspectorTabs>
+      <li>ITab_Bills</li>
+    </inspectorTabs>
+    <building>
+      <spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
+    </building>
+    <fillPercent>0.5</fillPercent>
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+    <hasInteractionCell>true</hasInteractionCell>
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+    <surfaceType>Item</surfaceType>
+    <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
+    <placeWorkers>
+      <li>PlaceWorker_PreventInteractionSpotOverlap</li>
+    </placeWorkers>
+  </ThingDef>
 
   <!-- camp fire roast-->
   <ThingDef ParentName="CATentBase">
@@ -262,7 +362,8 @@
       <li>CookMealSurvivalBulk</li>
       <li>Make_Pemmican</li>
       <li>Make_PemmicanBulk</li>
-      <li>BurnApparel</li>
+      <!--<li>BurnApparel</li>-->
+      <li>CABurnApparel</li>
       <li>BurnWeapon</li>
       <li>BurnDrugs</li>
     </recipes>
