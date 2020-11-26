@@ -12,6 +12,7 @@ using Verse;
 using Verse.Noise;
 
 // high prio:
+// - kill all walls on a master shrine when the boss dies -> solves the letter issue
 // - second shrine was removed before the boss died and the ability dialog came up
 // - shrine location link disappears from quest after loading -> shrine WO becomes MP -> update location when player enters shrine
 // - fix just melee mech raids, by adding a new pawngroupmaker to the faction def that isn't called combat and use that

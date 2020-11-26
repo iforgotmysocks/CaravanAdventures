@@ -18,7 +18,7 @@ namespace CaravanAdventures.CaravanAbilities
         private Hediff_Injury[] sortedInjuries;
         private bool noInjuries = false;
         private string[] sicknessesToBeHealed = new[] { "HeartAttack", "FoodPoisoning", "CatatonicBreakdown", "PsychicVertigo", "HeartAttack", "MuscleParasites", "SensoryMechanites", "FibrousMechanites", "GutWorms" };
-        private string[] permanentToBeHealed = new[] { "Carcinoma", "ChemicalDamageModerate", "ChemicalDamageSevere", "Cirrhosis", "TraumaSavant" };
+        private string[] permanentToBeHealed = new[] { "Abasia", "Carcinoma", "ChemicalDamageModerate", "ChemicalDamageSevere", "Cirrhosis", "TraumaSavant" };
 
         public HediffComp_AncientProtectiveAura()
         {
