@@ -407,7 +407,7 @@ namespace CaravanAdventures.CaravanStory
 
         public static Faction FactionOfSacrilegHunters { get => Find.FactionManager.FirstFactionOfDef(StoryDefOf.CASacrilegHunters); private set => FactionOfSacrilegHunters = value; }
 
-        public static bool FloodUnfogAdjacent(FogGrid fogGrid, Map map, IntVec3 c, bool suppressMessages = false)
+        public static bool FloodUnfogAdjacent(FogGrid fogGrid, Map map, IntVec3 c, bool showMessages = true)
         {
             fogGrid.Unfog(c);
             bool flag = false;
@@ -441,7 +441,7 @@ namespace CaravanAdventures.CaravanStory
                     }
                 }
             }
-            if (flag && !suppressMessages)
+            if (flag && showMessages)
             {
                 if (floodUnfogResult.mechanoidFound)
                 {

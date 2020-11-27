@@ -15,10 +15,9 @@ using Verse.Noise;
 // - change rewards
 // --> maybe remove additional reward generation for shrines for a bounty system
 // --> integrate point system with buyable items into the comm station dialog
-// --> remove rewards from small shrines on mastershrine map
 
 // - unlag
-// --> remove additional ancient caskets from small shrines on master shrine map
+// --> remove additional ancient caskets from small shrines on master shrine map --> lets hold this one and better balance the amount correctly
 // --> maybe decrease small shrines and make them not depend on spawning on a rock
 
 // - better map generation control for small shrines

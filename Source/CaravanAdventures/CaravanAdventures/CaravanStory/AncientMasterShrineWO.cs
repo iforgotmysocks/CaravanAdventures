@@ -41,7 +41,7 @@ namespace CaravanAdventures.CaravanStory
 				}
 				else AddBandits(map, caravan);
 				
-				AddEnemiesToRooms(map, caravan, mp.boss);
+				AdjustAncientShrines(map, caravan, mp.boss);
 
 				//(Pawn x) => CellFinder.RandomSpawnCellForPawnNear(playerStartingSpot, map, 4)
 				CaravanEnterMapUtility.Enter(caravan, map, CaravanEnterMode.Edge, CaravanDropInventoryMode.DoNotDrop, true);
@@ -99,28 +99,57 @@ namespace CaravanAdventures.CaravanStory
 			return boss;
 		}
 
-		private void AddEnemiesToRooms(Map map, Caravan caravan, Pawn boss = null)
+		private void AdjustAncientShrines(Map map, Caravan caravan, Pawn boss = null)
 		{
 			var stateBackup = Current.ProgramState;
 			Current.ProgramState = ProgramState.MapInitializing;
 
-			int dHives = 0;
-			int dInsects = 0;
+			var total = new Stopwatch();
+			var spacer = new Stopwatch();
+			var mechs = new Stopwatch();
+			var items = new Stopwatch();
+
+			total.Start();
 			foreach (var room in GetAncientShrineRooms(map))
 			{
+				spacer.Start();
 				AddSpacers(room, map, caravan);
+				spacer.Stop();
+				mechs.Start();
 				// todo integrate remove hives into add mechs and spawn more mechs when hives are being removed
-				AddMechanoidsToRoom(room, map, caravan, boss);
-				if (ModSettings.removeHivesFromMasterShrines) RemoveHives(map, ref dHives, ref dInsects);
+				AddMechanoidsToRoom(room, map, caravan, boss, RemoveHivesFromRoom(room));
+				mechs.Stop();
+				items.Start();
+				RemoveRewardsFromSmallShrines(room);
+				items.Stop();
 			}
-			Log.Message($"Destroyed {dHives} hives and {dInsects} inects");
+
+			total.Stop();
+			Log.Message($"total time: {total.ElapsedMilliseconds} ms\nspacers: {spacer.ElapsedMilliseconds} ms\nmechs: {mechs.ElapsedMilliseconds} ms\n items: {items.ElapsedMilliseconds} ms");
 			Current.ProgramState = stateBackup;
 		}
 
-        private void RemoveHives(Map map, ref int dHives, ref int dInsects)
+        private bool RemoveHivesFromRoom(Room room)
         {
-			foreach (var hive in map.spawnedThings.Where(hive => hive.def == ThingDefOf.Hive).Reverse()) { hive.Destroy(); dHives++; };
-			foreach (var insect in map.mapPawns.AllPawnsSpawned.Where(x => x.Faction == Faction.OfInsects).Reverse()) { insect.Destroy(); dInsects++; };
+			var found = false;
+			foreach (var thing in room.Regions.SelectMany(region => region.ListerThings.AllThings).Distinct().Reverse())
+            {
+				if (thing.def != ThingDefOf.Hive) continue;
+                thing.Destroy();
+				found = true;
+            }
+			return found;
+        }
+
+        private void RemoveRewardsFromSmallShrines(Room room)
+        {
+			if (room == mainRoom || room.CellCount > 1500) return;
+            foreach (var item in room.Regions.SelectMany(region => region.ListerThings.AllThings).Distinct().Reverse())
+            {
+				if (item.def.category != ThingCategory.Item) continue;
+				Log.Message($"Destroying {item.def.defName} from rood id: {room.ID}");
+				item.Destroy();
+            }
         }
 
         private void AddSpacers(Room room, Map map, Caravan caravan)
@@ -244,41 +273,35 @@ namespace CaravanAdventures.CaravanStory
 
 		private IEnumerable<Room> GetAncientShrineRooms(Map map) => map.spawnedThings.Where(x => x.def.defName == "AncientCryptosleepCasket").GroupBy(casket => casket.GetRoom().ID).Select(r => r.First().GetRoom()).OrderByDescending(order => order.CellCount);
 
-		private void AddMechanoidsToRoom(Room room, Map map, Caravan caravan, Pawn boss = null)
+		private void AddMechanoidsToRoom(Room room, Map map, Caravan caravan, Pawn boss = null, bool removedHives = false)
 		{
-			//todo test this appraoch? 
-			//CellRect around;
-			//IntVec3 near;
-			//if (!SiteGenStepUtility.TryFindRootToSpawnAroundRectOfInterest(out around, out near, map))
-
-			// todo calculte room quaters and generate multiple groups
-
-
-			// todo remove hives and increase points to make up for missing hives
+			// todo check what happens if we assign all to the same lord
 			var incidentParms = StorytellerUtility.DefaultParmsNow(IncidentCategoryDefOf.ThreatBig, caravan);
 			incidentParms.faction = Faction.OfMechanoids;
-			var defaultPawnGroupMakerParms = IncidentParmsUtility.GetDefaultPawnGroupMakerParms(PawnGroupKindDefOf.Combat, incidentParms, true);
 
-			Log.Message($"Points before: {defaultPawnGroupMakerParms.points} roomcells: {room.CellCount}");
-			var mechPawnGroupMakerParams = new PawnGroupMakerParms
-			{
-				groupKind = PawnGroupKindDefOf.Combat,
-				tile = map.Tile,
-				faction = Faction.OfMechanoids,
-				// todo cap points at max value 
-				// with bigger shrine: 
-				// --> Points before: 611.5728 roomcells: 5806
-				// --> Points after: 35508
-				// --
-				// new formula: points * shrinecounter * (roomcells / 1000)
-
-				// todo make scaling beyond max shrine counter optional
-				points = Math.Max(room == mainRoom ? 2000 : 120, Convert.ToInt32(defaultPawnGroupMakerParms.points * Math.Min(CompCache.StoryWC.GetCurrentShrineCounter + 1, CompCache.StoryWC.GetShrineMaxiumum + 1) * ((room == mainRoom ? Math.Max(room.CellCount, 3000) : room.CellCount) / 1000f)))
-			};
-
-			Log.Message($"Points after: {mechPawnGroupMakerParams.points}");
+			var mechPawnGroupMakerParams = CalculateMechPawnGroupMakerParams(room, map, caravan, removedHives, incidentParms);
 			var spawnedMechs = PawnGroupMakerUtility.GeneratePawns(mechPawnGroupMakerParams, true).ToList();
+			
 			if (!spawnedMechs.Any()) return;
+
+			//var existingMechs = room.Regions.SelectMany(region => region.ListerThings.AllThings.OfType<Pawn>().Where(pawn => pawn.Faction == Faction.OfMechanoids));
+			var existingMechs = new List<Pawn>();
+			foreach (var pawn in room.Regions.SelectMany(region => region.ListerThings.AllThings.OfType<Pawn>()))
+			{
+				if (pawn.Faction != Faction.OfMechanoids || existingMechs.Contains(pawn)) continue;
+				var lord = pawn.GetLord();
+				if (lord != null)
+                {
+					lord.ownedPawns.Remove(pawn);
+					if (lord.ownedPawns.Count == 0)
+					{
+						Log.Message($"lord with id {lord.loadID} has 0 owned pawns, removing");
+						map.lordManager.RemoveLord(lord);
+					}
+				}
+				existingMechs.Add(pawn);
+			}
+
 			mp.generatedMechs.AddRange(spawnedMechs);
 			var emptyCells = room.Cells.Where(x => x.Standable(map) && !x.Filled(map));
 			var idx = 0;
@@ -289,18 +312,56 @@ namespace CaravanAdventures.CaravanStory
 				var compDormant = mech.TryGetComp<CompWakeUpDormant>();
 				if (compDormant != null) compDormant.wakeUpIfColonistClose = true;
 			}
+
+			var combinedMechs = spawnedMechs.ToList();
+			combinedMechs.AddRange(existingMechs);
 			
 			// LordJob_SleepThenMechanoidsDefend
 			if (boss != null && room == mainRoom)
 			{
-				spawnedMechs.Add(boss);
+				combinedMechs.Add(boss);
 				Log.Message($"Adding boss to list");
 			}
-			LordMaker.MakeNewLord(incidentParms.faction, new LordJob_SleepThenAssaultColony(incidentParms.faction), map, spawnedMechs);
+			LordMaker.MakeNewLord(incidentParms.faction, new LordJob_SleepThenAssaultColony(incidentParms.faction), map, combinedMechs);
 			GenStep_SleepingMechanoids.SendMechanoidsToSleepImmediately(spawnedMechs);
 		}
 
-		public override IEnumerable<FloatMenuOption> GetFloatMenuOptions(Caravan caravan)
+        private PawnGroupMakerParms CalculateMechPawnGroupMakerParams(Room room, Map map, Caravan caravan, bool removedHives, IncidentParms incidentParms)
+        {
+			// todo remove hives and increase points to make up for missing hives
+
+			var defaultPawnGroupMakerParms = IncidentParmsUtility.GetDefaultPawnGroupMakerParms(PawnGroupKindDefOf.Combat, incidentParms, true);
+
+			Log.Message($"Points before: {defaultPawnGroupMakerParms.points} roomcells: {room.CellCount}");
+			// todo cap points at max value 
+			// with bigger shrine: 
+			// --> Points before: 611.5728 roomcells: 5806
+			// --> Points after: 35508
+			// --
+			// new formula: points * shrinecounter * (roomcells / 1000)
+
+			// todo make scaling beyond max shrine counter optional
+			var calcedFromRoomSize = Convert.ToInt32(defaultPawnGroupMakerParms.points * Math.Min(CompCache.StoryWC.GetCurrentShrineCounter + 1, CompCache.StoryWC.GetShrineMaxiumum + 1) * ((room == mainRoom ? Math.Max(room.CellCount, 3000) : room.CellCount) / 1000f));
+			var minPoints = room == mainRoom ? 2000 : 130;
+
+			Log.Message($"from roomsize: {calcedFromRoomSize} minpoints: {minPoints}");
+			var selected = Math.Max(calcedFromRoomSize, minPoints);
+			if (removedHives) selected += 500;
+
+			var mechPawnGroupMakerParams = new PawnGroupMakerParms
+			{
+				groupKind = PawnGroupKindDefOf.Combat,
+				tile = map.Tile,
+				faction = Faction.OfMechanoids,
+				points = selected
+			};
+
+			Log.Message($"Points after: {mechPawnGroupMakerParams.points}");
+
+			return mechPawnGroupMakerParams;
+		}
+
+        public override IEnumerable<FloatMenuOption> GetFloatMenuOptions(Caravan caravan)
 		{
 			foreach (var baseOption in base.GetFloatMenuOptions(caravan))
 			{
