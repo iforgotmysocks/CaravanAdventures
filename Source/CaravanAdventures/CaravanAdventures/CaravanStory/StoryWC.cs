@@ -41,6 +41,7 @@ using Verse.Noise;
 //Verse.Root_Play:Update()
 
 // med prio:
+// - add check to master shrine location selection, that keeps it away from a player settlement
 
 // low prio:
 // - make configurable if sacrileg hunters are hostile towards the empire

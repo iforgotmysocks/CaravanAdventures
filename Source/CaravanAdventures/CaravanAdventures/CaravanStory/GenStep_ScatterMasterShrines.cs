@@ -44,7 +44,7 @@ namespace CaravanAdventures.CaravanStory
 			return base.TryFindScatterCell(map, out result);
 		}
 
-		protected bool CanScatterAtAdjusted(IntVec3 c, Map map)
+		public static bool CanScatterAtAdjusted(IntVec3 c, Map map)
 		{
 			if (!SupportsAdjustedStructureType(c, map, TerrainAffordanceDefOf.Heavy))
 			{
@@ -121,7 +121,7 @@ namespace CaravanAdventures.CaravanStory
 			return new IntRange(endSize - offset, endSize + offset);
 		}
 
-		private static bool CanPlaceAncientBuildingInRangeAfterAdjustingGround(CellRect rect, Map map, bool fakeTerrainReplacement = false)
+		public static bool CanPlaceAncientBuildingInRangeAfterAdjustingGround(CellRect rect, Map map, bool fakeTerrainReplacement = false)
 		{
 			var newTerrainCells = new List<IntVec3>();
 			foreach (IntVec3 c in rect.Cells)
@@ -148,6 +148,7 @@ namespace CaravanAdventures.CaravanStory
 				{
 					//map.terrainGrid.SetTerrain(terrain, GenStep_RocksFromGrid.RockDefAt(terrain).building.naturalTerrain);
 					var newTerrain = TerrainThreshold.TerrainAtValue(map.Biome.terrainsByFertility, 0.7f);
+					if (newTerrain != TerrainDefOf.Soil) Log.Warning($"Creating new terrain: {newTerrain.defName}");
 					map.terrainGrid.SetTerrain(terrain, newTerrain);
 				}
 			}
@@ -175,7 +176,7 @@ namespace CaravanAdventures.CaravanStory
 						if (map.terrainGrid.TerrainAt(c2).affordances.Contains(TerrainAffordanceDefOf.Bridgeable) || map.terrainGrid.TerrainAt(c2).affordances.Contains(TerrainAffordanceDefOf.Diggable)) newTerrainCells.Add(c2);
 						else
 						{
-							Log.Message($"Failing affordance");
+							Log.Message($"Failing affordance for terrain def: {map.terrainGrid.TerrainAt(c2).defName}");
 							return false;
 						}
 					}

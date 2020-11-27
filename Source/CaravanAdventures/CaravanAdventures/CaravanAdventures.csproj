@@ -121,6 +121,7 @@
     <Compile Include="CaravanStory\CaravanArrivalAction_StoryVillageMP.cs" />
     <Compile Include="CaravanStory\GameCondition_Apocalypse.cs" />
     <Compile Include="CaravanStory\GenStep_ScatterMasterShrines_Old.cs" />
+    <Compile Include="CaravanStory\GenStep_ScatterSmallShrines.cs" />
     <Compile Include="CaravanStory\IncidentWorker_FriendlyCaravanVisit.cs" />
     <Compile Include="CaravanStory\IncidentWorker_MechsWithBoss.cs" />
     <Compile Include="CaravanStory\JobDefOf.cs" />
