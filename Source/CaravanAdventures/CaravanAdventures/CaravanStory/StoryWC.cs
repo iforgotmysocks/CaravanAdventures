@@ -69,6 +69,7 @@ namespace CaravanAdventures.CaravanStory
         private List<AbilityDef> unlockedSpells = new List<AbilityDef>();
         private int bossMissedCounter = 0;
         private bool ranDebugActionsOnceAtStartUp;
+        private float bountyPoints = 0;
 
         public Dictionary<string, int> mechBossKillCounters = new Dictionary<string, int>();
         public Dictionary<string, bool> debugFlags = new Dictionary<string, bool>()
@@ -127,6 +128,7 @@ namespace CaravanAdventures.CaravanStory
             Scribe_Values.Look(ref bossMissedCounter, "bossMissedCounter", 0);
             Scribe_Deep.Look(ref questCont, "questCont");
             Scribe_Values.Look(ref shrineTileUnsuccessfulCounter, "shrineTileUnsuccessfulCounter", 0);
+            Scribe_Values.Look(ref bountyPoints, "bountyPoints", 0f);
         }
 
         public StoryWC(World world) : base(world)
@@ -285,6 +287,8 @@ namespace CaravanAdventures.CaravanStory
         public string BuildMaxShrinePrefix() => "Shrine" + shrineMaximum + "_";
         public int GetCurrentShrineCounter => countShrinesCompleted < shrineMaximum ? countShrinesCompleted + 1 : shrineMaximum;
         public int GetShrineMaxiumum => shrineMaximum;
+        public float BountyPoints { get => bountyPoints; set => bountyPoints = value; }
+
         public List<AbilityDef> GetUnlockedSpells() => unlockedSpells;
         
         private bool CheckCanStartCountDownOnNewShrine() =>

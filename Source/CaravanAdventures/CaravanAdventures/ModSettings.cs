@@ -27,7 +27,8 @@ namespace CaravanAdventures
         public bool onlyHealPermWhenGifted = false;
         public bool stopMentalBreaks = false;
         public float lightDuration = 1200f;
-        
+        public static bool storyEnabled = true;
+
         // story story
         // todo remove the ability to disable the apoc? Can always set the increase to 0
         public bool apocalypseEnabled = true;
@@ -39,6 +40,7 @@ namespace CaravanAdventures
 
         public static ModSettings Get() => LoadedModManager.GetMod<CaravanAdventures.Main>().GetSettings<ModSettings>();
         private Vector2 scrollPos = Vector2.zero;
+
 
         public override void ExposeData()
         {
@@ -62,6 +64,8 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref apocalypseTemperatureChangePerDay, "apocalypseTemperatureChangePerDay", -0.084f);
 
             Scribe_Values.Look(ref generateStorageForAllInventory, "generateStorageForAllInventory", false);
+
+            Scribe_Values.Look(ref storyEnabled, "storyEnabled", true);
         }
 
         public void DoWindowContents(Rect wrect)
