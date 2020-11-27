@@ -58,7 +58,7 @@
     <defName>CABossMechDevourer</defName>
     <label>Devourer</label>
     <race>CABossMechDevourer</race>
-    <combatPower>40000</combatPower>
+    <combatPower>250000</combatPower>
     <lifeStages>
       <li>
         <bodyGraphicData>
@@ -137,7 +137,7 @@
     <defName>CABossMechCrystalScythe</defName>
     <label>Crystal scythe</label>
     <race>CACrystalScythe</race>
-    <combatPower>38000</combatPower>
+    <combatPower>240000</combatPower>
     <lifeStages>
       <li>
         <bodyGraphicData>
