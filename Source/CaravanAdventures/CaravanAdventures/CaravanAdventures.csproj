@@ -154,7 +154,6 @@
     <Compile Include="CaravanStory\CompTalk.cs" />
     <Compile Include="CaravanStory\CompProperties_Talk.cs" />
     <Compile Include="CaravanStory\GenStep_ScatterMasterShrines.cs" />
-    <Compile Include="CaravanStory\CompStoryVillage.cs" />
     <Compile Include="CaravanStory\StoryWC.cs" />
     <Compile Include="CaravanStory\StoryStart.cs" />
     <Compile Include="CaravanStory\TimedDetectionPatrols.cs" />
