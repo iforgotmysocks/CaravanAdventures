@@ -18,6 +18,7 @@ namespace CaravanAdventures.CaravanStory
 		// todo label
 		// todo cleanup -> especially mechs 
 		private Room mainRoom = null;
+		private int minMainRoomSize = 1500;
 		private AncientMasterShrineMP mp = null;
 
 		public void Notify_CaravanArrived(Caravan caravan)
@@ -34,7 +35,7 @@ namespace CaravanAdventures.CaravanStory
 				mp = map.Parent as AncientMasterShrineMP;
 				mainRoom = GetAncientShrineRooms(map).FirstOrDefault();
 
-				if (mainRoom.CellCount > 1500)
+				if (mainRoom.CellCount > minMainRoomSize)
                 {
 					if (CompCache.StoryWC.BuildCurrentShrinePrefix() != "Shrine5_") mp.boss = AddBoss(map, caravan, mainRoom);
 					else mp.lastJudgmentEntrance = InitCellarEntrace(map);
@@ -143,21 +144,27 @@ namespace CaravanAdventures.CaravanStory
 
         private void RemoveRewardsFromSmallShrines(Room room)
         {
-			if (room == mainRoom || room.CellCount > 1500) return;
-            foreach (var item in room.Regions.SelectMany(region => region.ListerThings.AllThings).Distinct().Reverse())
-            {
-				if (item.def.category != ThingCategory.Item) continue;
-				Log.Message($"Destroying {item.def.defName} from rood id: {room.ID}");
+			if (room == mainRoom || room.CellCount > minMainRoomSize) return;
+			var skipIdx = 0;
+			foreach (var item in room.Regions.SelectMany(region => region.ListerThings.AllThings).Distinct().Reverse())
+			{
+				if (item.def.category != ThingCategory.Item || (item.def?.thingCategories != null && item.def.thingCategories.Contains(ThingCategoryDefOf.Chunks))) continue;
+				if (skipIdx == 4)
+				{
+					skipIdx = 0;
+					continue;
+				}
+				skipIdx++;
 				item.Destroy();
-            }
+			}
         }
 
         private void AddSpacers(Room room, Map map, Caravan caravan)
 		{
 			var casketCount = 0;
-			if (room.CellCount > 1500) casketCount = 6;
-			else if (room.CellCount > 240) casketCount = 4;
-			else if (room.CellCount > 120) casketCount = 2;
+			if (room.CellCount > minMainRoomSize) casketCount = 6;
+			//else if (room.CellCount > 240) casketCount = 4;
+			//else if (room.CellCount > 120) casketCount = 2;
 			else return;
 
 			var casketGroupId = SetAndReturnCasketGroupId(room);
@@ -169,7 +176,7 @@ namespace CaravanAdventures.CaravanStory
 				CreateCasketsInRect(rect, room, map, caravan, casketGroupId);
 			}
 
-			if (room.CellCount < 1500) return;
+			if (room.CellCount < minMainRoomSize) return;
 
 			if (FindEmptyRectInRoom(room, casketCount * 2 + 2, 4, out rect) ||
 				FindEmptyRectInRoom(room, 4, casketCount * 2 + 2, out rect))
@@ -315,14 +322,11 @@ namespace CaravanAdventures.CaravanStory
 
 			var combinedMechs = spawnedMechs.ToList();
 			combinedMechs.AddRange(existingMechs);
-			
+
+			var newLord = LordMaker.MakeNewLord(incidentParms.faction, new LordJob_SleepThenAssaultColony(incidentParms.faction), map, combinedMechs);
+
 			// LordJob_SleepThenMechanoidsDefend
-			if (boss != null && room == mainRoom)
-			{
-				combinedMechs.Add(boss);
-				Log.Message($"Adding boss to list");
-			}
-			LordMaker.MakeNewLord(incidentParms.faction, new LordJob_SleepThenAssaultColony(incidentParms.faction), map, combinedMechs);
+			if (boss != null && room == mainRoom && !newLord.ownedPawns.Contains(boss)) newLord.AddPawn(boss);
 			GenStep_SleepingMechanoids.SendMechanoidsToSleepImmediately(spawnedMechs);
 		}
 
@@ -333,15 +337,9 @@ namespace CaravanAdventures.CaravanStory
 			var defaultPawnGroupMakerParms = IncidentParmsUtility.GetDefaultPawnGroupMakerParms(PawnGroupKindDefOf.Combat, incidentParms, true);
 
 			Log.Message($"Points before: {defaultPawnGroupMakerParms.points} roomcells: {room.CellCount}");
-			// todo cap points at max value 
-			// with bigger shrine: 
-			// --> Points before: 611.5728 roomcells: 5806
-			// --> Points after: 35508
-			// --
-			// new formula: points * shrinecounter * (roomcells / 1000)
 
-			// todo make scaling beyond max shrine counter optional
-			var calcedFromRoomSize = Convert.ToInt32(defaultPawnGroupMakerParms.points * Math.Min(CompCache.StoryWC.GetCurrentShrineCounter + 1, CompCache.StoryWC.GetShrineMaxiumum + 1) * ((room == mainRoom ? Math.Max(room.CellCount, 3000) : room.CellCount) / 1000f));
+			// todo make 1.2f a difficulty setting
+			var calcedFromRoomSize = Convert.ToInt32(defaultPawnGroupMakerParms.points * (CompCache.StoryWC.GetCurrentShrineCounter * 1.2f) * ((room == mainRoom ? Math.Max(room.CellCount, 3000) : room.CellCount) / 1000f));
 			var minPoints = room == mainRoom ? 2000 : 130;
 
 			Log.Message($"from roomsize: {calcedFromRoomSize} minpoints: {minPoints}");
