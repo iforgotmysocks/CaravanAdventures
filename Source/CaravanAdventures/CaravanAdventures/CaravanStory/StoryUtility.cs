@@ -40,7 +40,7 @@ namespace CaravanAdventures.CaravanStory
 
         public static void GetAssistanceFromAlliedFaction(Faction faction, Map map, int pointsMin = 4000, int pointsMax = 5000, IntVec3 spawnSpot = default)
         {
-            var incidentParms = new IncidentParms
+             var incidentParms = new IncidentParms
             {
                 target = map,
                 faction = faction,
@@ -48,8 +48,9 @@ namespace CaravanAdventures.CaravanStory
                 // todo by wealth, the richer, the less help // 7500 - 8000
                 points = Rand.Range(pointsMin, pointsMax),  // DiplomacyTuning.RequestedMilitaryAidPointsRange.RandomInRange;
                 raidNeverFleeIndividual = true,
-                spawnCenter = spawnSpot != default ? spawnSpot : map.mapPawns.FreeColonists.Where(col => col.Spawned).RandomElement().Position,
             };
+            if (spawnSpot == default && map.mapPawns.AnyColonistSpawned) spawnSpot = map.mapPawns.FreeColonists.Where(col => col.Spawned).RandomElement().Position;
+            if (spawnSpot != default) incidentParms.spawnCenter = spawnSpot;
             IncidentDefOf.RaidFriendly.Worker.TryExecute(incidentParms);
         }
 
