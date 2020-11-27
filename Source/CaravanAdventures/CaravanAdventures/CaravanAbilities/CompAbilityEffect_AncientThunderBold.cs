@@ -47,7 +47,7 @@ namespace CaravanAdventures.CaravanAbilities
                         if (pawn == null | pawn.Dead) break;
                         if (part.def == waist) continue;
 
-                        var damage = part.def.GetMaxHealth(pawn) * Rand.Range(0.5f, 0.75f);
+                        var damage = part.def.GetMaxHealth(pawn) * (CompCache.StoryWC.GetBossDefNames().Contains(pawn.def.defName) ? 0.2f : Rand.Range(0.5f, 0.75f));
                         if (Rand.Chance(pawn.RaceProps.IsMechanoid ? ModSettings.Get().mechanoidDissmemberChance : ModSettings.Get().humanDissmemberChance))
                         {
                             damage *= 5;
