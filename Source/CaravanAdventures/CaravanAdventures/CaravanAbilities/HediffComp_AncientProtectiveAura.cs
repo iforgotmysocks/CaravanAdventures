@@ -14,11 +14,12 @@ namespace CaravanAdventures.CaravanAbilities
         private int ticksSinceStatusCheck = 0;
         private int ticksSincePsyCost = 0;
         private int ticksSincePermHeal = 0;
+        private int permTickCount = 10000;
         private bool isGifted;
         private Hediff_Injury[] sortedInjuries;
         private bool noInjuries = false;
         private string[] sicknessesToBeHealed = new[] { "WoundInfection", "Flu", "HeartAttack", "FoodPoisoning", "CatatonicBreakdown", "PsychicVertigo", "HeartAttack", "MuscleParasites", "SensoryMechanites", "FibrousMechanites", "GutWorms" };
-        private string[] permanentToBeHealed = new[] { "Abasia", "Carcinoma", "ChemicalDamageModerate", "ChemicalDamageSevere", "Cirrhosis", "TraumaSavant" };
+        private string[] permanentToBeHealed = new[] { "PsychicComa", "Abasia", "Carcinoma", "ChemicalDamageModerate", "ChemicalDamageSevere", "Cirrhosis", "TraumaSavant" };
 
         public HediffComp_AncientProtectiveAura()
         {
@@ -28,8 +29,9 @@ namespace CaravanAdventures.CaravanAbilities
         public override void CompPostPostAdd(DamageInfo? dinfo)
         {
             base.CompPostPostAdd(dinfo);
-            var gift = Pawn.health.hediffSet.hediffs.FirstOrDefault(x => x.def == AbilityDefOf.CAAncientProtectiveAura);
+            var gift = Pawn.health.hediffSet.hediffs.FirstOrDefault(x => x.def == AbilityDefOf.CAAncientGift);
             if (gift != null) isGifted = true;
+            else permTickCount *= 3;
         }
 
         public override void CompPostTick(ref float severityAdjustment)
@@ -53,7 +55,8 @@ namespace CaravanAdventures.CaravanAbilities
                 Pawn.psychicEntropy.OffsetPsyfocusDirectly(isGifted ? -0.002f : -0.01f);
                 ticksSincePsyCost = 0;
             }
-            if (ticksSincePermHeal > 30001)
+
+            if (ticksSincePermHeal > permTickCount)
             {
                 if (!ModSettings.Get().onlyHealPermWhenGifted || ModSettings.Get().onlyHealPermWhenGifted && isGifted) HealPermanent();
                 ticksSincePermHeal = 0;
