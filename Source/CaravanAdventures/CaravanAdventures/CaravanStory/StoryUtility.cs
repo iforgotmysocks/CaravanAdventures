@@ -50,18 +50,18 @@ namespace CaravanAdventures.CaravanStory
 
         public static void GetAssistanceFromAlliedFaction(Faction faction, Map map, int pointsMin = 4000, int pointsMax = 5000, IntVec3 spawnSpot = default)
         {
-             var incidentParms = new IncidentParms
+            var incidentParms = new IncidentParms
             {
                 target = map,
                 faction = faction,
-                //raidArrivalModeForQuickMilitaryAid = true,
+                raidArrivalModeForQuickMilitaryAid = true,
                 // todo by wealth, the richer, the less help // 7500 - 8000
                 points = Rand.Range(pointsMin, pointsMax),  // DiplomacyTuning.RequestedMilitaryAidPointsRange.RandomInRange;
                 raidNeverFleeIndividual = true,
                 raidStrategy = RaidStrategyDefOf.ImmediateAttackFriendly,
                 raidArrivalMode = PawnsArrivalModeDefOf.EdgeDrop
             };
-            Log.Message($"Assistance with {incidentParms.points} points and kind: {incidentParms.pawnKind}");
+            Log.Message($"Assistance with {incidentParms.points} points and kind: {incidentParms.pawnKind}, targetspot default? {spawnSpot == default} if yes, a colonist should be selected as drop spot");
             if (spawnSpot == default && map.mapPawns.AnyColonistSpawned) spawnSpot = map.mapPawns.FreeColonists.Where(col => col.Spawned).RandomElement().Position;
             if (spawnSpot != default) incidentParms.spawnCenter = spawnSpot;
             IncidentDefOf.RaidFriendly.Worker.TryExecute(incidentParms);
@@ -178,7 +178,7 @@ namespace CaravanAdventures.CaravanStory
             map.regionGrid.allRooms
                 .Where(room => !room.Regions
                 .Any(region => region.DangerFor(map.mapPawns.AllPawnsSpawned
-                .Where(x => x.Faction == faction).FirstOrDefault()) == Danger.Deadly) 
+                .Where(x => x.Faction == faction).FirstOrDefault()) == Danger.Deadly)
                 && !room.UsesOutdoorTemperature)
                 .ToList()
                 .ForEach(room => coords
@@ -291,7 +291,7 @@ namespace CaravanAdventures.CaravanStory
             if (sacrilegHunters == null)
             {
                 sacrilegHunters = FactionGenerator.NewGeneratedFaction(DefDatabase<FactionDef>.GetNamedSilentFail("CASacrilegHunters"));
-                
+
                 Find.FactionManager.Add(sacrilegHunters);
                 var empireDef = FactionDefOf.Empire;
                 if (!empireDef.permanentEnemyToEveryoneExcept.Contains(sacrilegHunters.def)) empireDef.permanentEnemyToEveryoneExcept.Add(sacrilegHunters.def);
