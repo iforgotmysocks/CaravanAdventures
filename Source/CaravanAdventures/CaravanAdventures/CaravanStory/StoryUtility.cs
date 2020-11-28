@@ -54,11 +54,14 @@ namespace CaravanAdventures.CaravanStory
             {
                 target = map,
                 faction = faction,
-                raidArrivalModeForQuickMilitaryAid = true,
+                //raidArrivalModeForQuickMilitaryAid = true,
                 // todo by wealth, the richer, the less help // 7500 - 8000
                 points = Rand.Range(pointsMin, pointsMax),  // DiplomacyTuning.RequestedMilitaryAidPointsRange.RandomInRange;
                 raidNeverFleeIndividual = true,
+                raidStrategy = RaidStrategyDefOf.ImmediateAttackFriendly,
+                raidArrivalMode = PawnsArrivalModeDefOf.EdgeDrop
             };
+            Log.Message($"Assistance with {incidentParms.points} points and kind: {incidentParms.pawnKind}");
             if (spawnSpot == default && map.mapPawns.AnyColonistSpawned) spawnSpot = map.mapPawns.FreeColonists.Where(col => col.Spawned).RandomElement().Position;
             if (spawnSpot != default) incidentParms.spawnCenter = spawnSpot;
             IncidentDefOf.RaidFriendly.Worker.TryExecute(incidentParms);
