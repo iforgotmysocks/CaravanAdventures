@@ -51,7 +51,8 @@ namespace CaravanAdventures.Patches
         {
             // todo adjust to non story and selectable faction!
             if (!ModSettings.storyEnabled || faction != CaravanStory.StoryUtility.FactionOfSacrilegHunters) return;
-            __result.options.Insert(0, CaravanMechBounty.BountyManager.CreateInitialDiaMenu(__result, negotiator, faction));
+            var request = new CaravanMechBounty.BountyRequest(__result, negotiator, faction);
+            __result.options.Insert(0, request.CreateInitialDiaMenu());
         }
     }
 }
