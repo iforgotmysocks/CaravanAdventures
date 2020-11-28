@@ -14,6 +14,7 @@ namespace CaravanAdventures.CaravanCamp
     // todos
     // add mini chem fuel production and add to prod tent where the tool thingy is placed rn
     // add a guardening tent with high powered sunlamp thingy
+    // add mini comms console
 
     // functionality: 
     // - maybe add ability to build new tents from camp supplies

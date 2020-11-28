@@ -49,16 +49,9 @@ namespace CaravanAdventures.Patches
 
         public static void FactionDialogMakerFactionDialogForPostfix(ref DiaNode __result, Pawn negotiator, Faction faction)
         {
+            // todo adjust to non story and selectable faction!
             if (!ModSettings.storyEnabled || faction != CaravanStory.StoryUtility.FactionOfSacrilegHunters) return;
-
-            var bountyNode = new DiaNode("CABountyExchangeMain".Translate(CompCache.StoryWC.BountyPoints));
-            bountyNode.options.Add(new DiaOption("CABountyExchangeRequestHelp".Translate()) { action = () => { CompCache.StoryWC.BountyPoints += 100; bountyNode.text = "CABountyExchangeMain".Translate(CompCache.StoryWC.BountyPoints); }, link = bountyNode }) ;
-            bountyNode.options.Add(new DiaOption("CABountyExchangeRequestItem".Translate()) { action = () => CompCache.StoryWC.BountyPoints += 100, link = bountyNode });
-            bountyNode.options.Add(new DiaOption("CABountyBack".Translate()) { link = __result });
-
-            var optionBountyExchange = new DiaOption("CABountyExchangeOpenOption".Translate()) { link = bountyNode };
-
-            __result.options.Insert(0, optionBountyExchange);
+            __result.options.Insert(0, CaravanMechBounty.BountyManager.CreateInitialDiaMenu(__result, negotiator, faction));
         }
     }
 }

@@ -4,5 +4,6 @@
   <CABountyExchangeMain>Current bounty points: {0}\n\n\nBounty for mechanoid kills:\nPikeman - 7\nScyther - 10\nLancer - 15\nCentipede - 45\nSpecial mechs may grand more points</CABountyExchangeMain>
   <CABountyExchangeRequestHelp>Request military assistance</CABountyExchangeRequestHelp>
   <CABountyExchangeRequestItem>Request rare item</CABountyExchangeRequestItem>
+  <CABountyExchangeRequestImprovedRelations>Improve relations (</CABountyExchangeRequestImprovedRelations>
   <CABountyBack>Back</CABountyBack>
 </LanguageData>

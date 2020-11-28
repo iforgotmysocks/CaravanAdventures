@@ -117,6 +117,7 @@
     <Compile Include="CaravanItemSelection\FilterCombs.cs" />
     <Compile Include="CaravanItemSelection\FilterHelper.cs" />
     <Compile Include="CaravanItemSelection\FilterSet.cs" />
+    <Compile Include="CaravanMechBounty\BountyManager.cs" />
     <Compile Include="CaravanStory\AncientMasterShrineMP.cs" />
     <Compile Include="CaravanStory\CaravanArrivalAction_StoryVillageMP.cs" />
     <Compile Include="CaravanStory\GameCondition_Apocalypse.cs" />

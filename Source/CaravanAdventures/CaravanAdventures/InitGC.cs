@@ -12,7 +12,6 @@ using CaravanAdventures.CaravanStory;
 namespace CaravanAdventures
 {
     // todo https://fluffy-mods.github.io//2020/08/13/debugging-rimworld/
-    // todo GameComponent??? -> compprops applied to defs within a gamecomp somehow lead to missing comps on the object of the def which doesn't happen with world comps
     class InitGC : GameComponent
     {
         private int removeRuinsTick = 0;

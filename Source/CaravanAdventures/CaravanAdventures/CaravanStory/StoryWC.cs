@@ -42,6 +42,9 @@ using Verse.Noise;
 
 // med prio:
 // - add check to master shrine location selection, that keeps it away from a player settlement
+// - seperate bounty system from story
+// --> allow to set another faction in settings that offers the bounties
+// --> implement rewards with and without royalty
 
 // low prio:
 // - make configurable if sacrileg hunters are hostile towards the empire
