@@ -49,7 +49,7 @@ namespace CaravanAdventures.CaravanStory
 				Find.TickManager.CurTimeSpeed = TimeSpeed.Paused;
 
 				mp.Init();
-			}, "GeneratingMapForNewEncounter", false, null, true);
+			}, "Story_Shrine1_EnterPossibleShrine", false, null, true);
 		}
 
 		private void AddBandits(Map map, Caravan caravan, bool sendLetterIfRelatedPawns = true)

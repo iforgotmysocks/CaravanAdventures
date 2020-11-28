@@ -126,17 +126,17 @@ namespace CaravanAdventures.CaravanAbilities
 
         private void HealPermanent()
         {
-            var wound = Pawn.health.hediffSet.hediffs.FirstOrDefault(x =>
-            x.IsPermanent() ||
-            x.def.chronic ||
-            permanentToBeHealed
-            .Contains(x.def.defName));
+            var wound = Pawn.health.hediffSet.hediffs.FirstOrDefault(x => 
+                x.IsPermanent() 
+            || x.def.chronic 
+            || permanentToBeHealed.Contains(x.def.defName));
 
             if (wound == null) return;
             //Log.Message($"Healing perm wound {wound.def.defName}", true);
 
-            var dmgToHeal = wound.Part.def.GetMaxHealth(Pawn) / 3f;
-            if (wound.Severity - dmgToHeal <= 0f)
+            // todo - check this, this doesn't make sense... max severity is 1, this willl always heal... until then we just set it to true to always heal
+            var dmgToHeal = wound?.Part == null ? 100 : wound.Part.def.GetMaxHealth(Pawn) / 3f;
+            if (wound.Severity - dmgToHeal <= 0f || true)
             {
                 if (wound.IsPermanent()) wound.Severity = 0f;
                 else HealthUtility.CureHediff(wound);

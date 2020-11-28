@@ -2,7 +2,8 @@
 <LanguageData>
   <Story_Shrine1_NewShrineDetectedLetterLabel>Hints of a dangerous shrine</Story_Shrine1_NewShrineDetectedLetterLabel>
   <Story_Shrine1_NewShrineDetectedLetterMessage>{0} sent you a message with vague hints regarding tales of a dangerous shrine. The people providing the hint weren't very credible, so take care, as they also said that noone ever returned who dared to pilgrimage there.</Story_Shrine1_NewShrineDetectedLetterMessage>
-
+  <Story_Shrine1_EnterPossibleShrine>Discovering mysterious shrine (This might take a while)</Story_Shrine1_EnterPossibleShrine>
+  
   <Story_Shrine1_QuestName>Caravan Adventures - Secrets of the Shrines</Story_Shrine1_QuestName>
   <Story_Shrine1_QuestDesc>Explore possible master shrines to reveal their secrets and to determine the mechanoid armada threat.\nTake your time to prepare, this may be a long journey and the enemy won't be easily defeated!</Story_Shrine1_QuestDesc>
 
