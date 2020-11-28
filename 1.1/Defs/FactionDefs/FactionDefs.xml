@@ -72,15 +72,17 @@
 					<Mercenary_Elite>33</Mercenary_Elite>-->
 					<!--<Town_Councilman>10</Town_Councilman>-->
 					<CASacrilegHunters_Town_Councilman>1</CASacrilegHunters_Town_Councilman>
-					<CASacrilegHunters_ExperiencedHunter>20</CASacrilegHunters_ExperiencedHunter>
+          <CASacrilegHunters_Hunter>10</CASacrilegHunters_Hunter>
+          <CASacrilegHunters_ExperiencedHunter>2</CASacrilegHunters_ExperiencedHunter>
 				</options>
 			</li>
 			<li>
 				<kindDef>Peaceful</kindDef>
 				<options>
 					<CASacrilegHunters_Villager>10</CASacrilegHunters_Villager>
-					<CASacrilegHunters_ExperiencedHunter>10</CASacrilegHunters_ExperiencedHunter>
-					<CASacrilegHunters_Town_Guard>10</CASacrilegHunters_Town_Guard>
+          <CASacrilegHunters_Hunter>15</CASacrilegHunters_Hunter>
+					<CASacrilegHunters_ExperiencedHunter>2</CASacrilegHunters_ExperiencedHunter>
+					<CASacrilegHunters_Town_Guard>1</CASacrilegHunters_Town_Guard>
 					<CASacrilegHunters_Town_Councilman>10</CASacrilegHunters_Town_Councilman>
 				</options>
 			</li>
@@ -98,11 +100,12 @@
 				<guards>
 					<CASacrilegHunters_Villager>3</CASacrilegHunters_Villager>
 					<!--<Town_Guard>10</Town_Guard>-->
-					<CASacrilegHunters_ExperiencedHunter>10</CASacrilegHunters_ExperiencedHunter>
+          <CASacrilegHunters_Hunter>10</CASacrilegHunters_Hunter>
+					<CASacrilegHunters_ExperiencedHunter>2</CASacrilegHunters_ExperiencedHunter>
 					<Grenadier_Destructive>1.5</Grenadier_Destructive>
-					<Mercenary_Slasher>7</Mercenary_Slasher>
-					<Mercenary_Gunner>10</Mercenary_Gunner>
-					<Mercenary_Elite>10</Mercenary_Elite>
+					<!--<Mercenary_Slasher>7</Mercenary_Slasher>-->
+					<!--<Mercenary_Gunner>10</Mercenary_Gunner>-->
+					<!--<Mercenary_Elite>10</Mercenary_Elite>-->
 				</guards>
 			</li>
 			<li>
@@ -116,7 +119,8 @@
 					<Mercenary_Elite>33</Mercenary_Elite>-->
 					<!--<Town_Councilman>10</Town_Councilman>-->
 					<CASacrilegHunters_Town_Councilman>1</CASacrilegHunters_Town_Councilman>
-					<CASacrilegHunters_ExperiencedHunterVillage>20</CASacrilegHunters_ExperiencedHunterVillage>
+          <CASacrilegHunters_HunterVillage>20</CASacrilegHunters_HunterVillage>
+					<CASacrilegHunters_ExperiencedHunterVillage>4</CASacrilegHunters_ExperiencedHunterVillage>
 				</options>
 			</li>
 		</pawnGroupMakers>
