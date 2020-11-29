@@ -52,6 +52,8 @@ namespace CaravanAdventures.CaravanStory
             {
                 AddTalkTreeAction();
                 AddTreeWhisper();
+                StartTreeQuest();
+               
 
                 // todo maybe run on a WC, so the gift can be past on without a map present
                 CheckEnsureGifted();
@@ -60,6 +62,19 @@ namespace CaravanAdventures.CaravanStory
             }
 
             ticks++;
+        }
+
+        private void StartTreeQuest()
+        {
+            if (CompCache.StoryWC.storyFlags["Start_TreeWhisperQuestStarted"]
+                || !CompCache.StoryWC.storyFlags["Start_InitialTreeWhisper"] 
+                || map.mapPawns.FreeColonistsSpawnedCount == 0) return;
+
+            Quests.QuestUtility.GenerateStoryQuest(Quests.StoryQuestDefOf.CA_TheTree,
+                true,
+                "CA_Story_TheTree_QuestName",
+                null,
+                "CA_Story_TheTree_QuestDesc");
         }
 
         private void DrawTreeQuestionMark()
@@ -157,9 +172,12 @@ namespace CaravanAdventures.CaravanStory
             CompCache.StoryWC.storyFlags["Start_CanReceiveGift"] = true;
             CheckEnsureGifted(initiator);
             AddAdditionalSpells(initiator);
-            Find.LetterStack.ReceiveLetter("CA_Story_ReceivedGiftLetterTitle".Translate(), "CA_Story_ReceivedGiftLetterDesc".Translate(initiator.NameShortColored), LetterDefOf.PositiveEvent);
+            Find.LetterStack.ReceiveLetter("CA_Story_ReceivedGiftLetterTitle".Translate(), "CA_Story_ReceivedGiftLetterDesc".Translate(initiator.NameShortColored, GenderUtility.GetPronoun(initiator.gender)), LetterDefOf.PositiveEvent);
             if (animaTreeWhipserSustainer != null && !animaTreeWhipserSustainer.Ended) animaTreeWhipserSustainer.End();
             CompCache.StoryWC.storyFlags["Start_ReceivedGift"] = true;
+
+            Quests.QuestUtility.AppendQuestDescription(Quests.StoryQuestDefOf.CA_TheTree, "CA_Story_ReceivedGiftLetterDesc".Translate(initiator.NameShortColored, GenderUtility.GetPronoun(initiator.gender)));
+            Quests.QuestUtility.CompleteQuest(Quests.StoryQuestDefOf.CA_TheTree);
         }
 
         private void AddAdditionalSpells(Pawn chosen)

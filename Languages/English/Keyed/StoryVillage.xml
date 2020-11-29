@@ -35,8 +35,9 @@
 
 	<StoryVillage_Dia3_Title>{0} contacts you via comms device...</StoryVillage_Dia3_Title>
 	<StoryVillage_Dia3_1_Alive>We got out alive, this is horrible. I'll have to meet up with our expert hunters and come up with a plan how to defeat these things. We need to act fast or all is lost.\n\nI'll contact you when we know more, good luck.\n... and thanks. I won't forget that you fought for us.</StoryVillage_Dia3_1_Alive>
-	<StoryVillage_Dia3_1_Dying>Save... urself...\nThis battle... is lost...\nSomeone will reach... out to... you... i'm... sorry...</StoryVillage_Dia3_1_Dying>
-	<StoryVillage_Dia3_1_Option1>Lets move on</StoryVillage_Dia3_1_Option1>
+  <StoryVillage_Dia3_1_Dying>Save... urself...\nThis battle... is lost...\nSomeone will reach... out to... you... i'm... sorry...</StoryVillage_Dia3_1_Dying>
+  <StoryVillage_Dia3_1_AliveNoHelpFromPlayer>We got out alive, this is horrible. I'll have to meet up with our expert hunters and come up with a plan how to defeat these things. We need to act fast or all is lost.\n\nI'll contact you when we know more, tho i really hope u will help us next time. I was sad to see that you didn't stick around to help.</StoryVillage_Dia3_1_AliveNoHelpFromPlayer>
+  <StoryVillage_Dia3_1_Option1>Lets move on</StoryVillage_Dia3_1_Option1>
 	<StoryVillage_SacHunters_Fleeing>Sacrileg Hunters are fleeing.</StoryVillage_SacHunters_Fleeing>
 	<StoryVillage_SacHuntersCivs_Fleeing>Villagers are escaping as planned.</StoryVillage_SacHuntersCivs_Fleeing>
 

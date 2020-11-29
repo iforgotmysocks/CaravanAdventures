@@ -26,6 +26,10 @@
   </QuestScriptDef>
 
   <QuestScriptDef ParentName="CAQuestScriptDefBase">
+    <defName>CA_TheTree</defName>
+  </QuestScriptDef>
+
+  <QuestScriptDef ParentName="CAQuestScriptDefBase">
     <defName>CA_FindAncientShrine</defName>
   </QuestScriptDef>
 

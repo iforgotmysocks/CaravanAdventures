@@ -13,6 +13,7 @@ namespace CaravanAdventures.CaravanStory.Quests
 #pragma warning disable CS0649
         public static QuestScriptDef CA_StoryVillage_Arrival;
         public static QuestScriptDef CA_TradeCaravan;
+        public static QuestScriptDef CA_TheTree;
         public static QuestScriptDef CA_FindAncientShrine;
     }
 }

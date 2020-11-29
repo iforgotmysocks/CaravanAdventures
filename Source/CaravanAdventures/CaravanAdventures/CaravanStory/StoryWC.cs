@@ -116,6 +116,7 @@ namespace CaravanAdventures.CaravanStory
             "IntroVillage_Finished",
 
             "Start_InitialTreeWhisper",
+            "Start_TreeWhisperQuestStarted",
             "Start_InitialTreeAddTalkOption",
             "Start_CanReceiveGift",
             "Start_ReceivedGift",
