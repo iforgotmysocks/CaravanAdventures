@@ -260,6 +260,8 @@ namespace CaravanAdventures.CaravanStory
             Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
             mainCharLeftOrDied = true;
 
+            if (!storyChar.Dead && !storyChar.Downed) CompCache.StoryWC.SetSF("IntroVillage_PlayerWon");
+
             Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, storyChar.Dead || storyChar.Downed ? "StoryVillage_QuestUpdate_CanLeaveFailed".Translate() : "StoryVillage_QuestUpdate_CanLeaveSuccess".Translate(), false, true);
         }
 
