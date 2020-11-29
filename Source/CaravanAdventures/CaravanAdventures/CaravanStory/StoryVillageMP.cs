@@ -202,10 +202,10 @@ namespace CaravanAdventures.CaravanStory
                     ReinforcementConvo();
                     CheckShouldCiviliansFlee();
                 }
-                if (timerForceStartRaid == 0)
+                if (timerForceStartRaid == 0 && !CompCache.StoryWC.storyFlags["IntroVillage_MechsArrived"])
                 {
                     SpawnMechArmy();
-                    timerTillRemoval = 60 * 60 * 3;
+                    timerTillRemoval = 60 * 60 * 2;
                 }
 
                 ticks++;
@@ -248,7 +248,11 @@ namespace CaravanAdventures.CaravanStory
             if (Map.mapPawns.AllPawnsSpawned.Contains(storyChar) && !storyChar.Dead && !storyChar.Downed) return;
 
             DiaNode diaNode = null;
-            diaNode = new DiaNode(storyChar.Dead || storyChar.Downed ? "StoryVillage_Dia3_1_Dying".Translate() : "StoryVillage_Dia3_1_Alive".Translate());
+            diaNode = new DiaNode(storyChar.Dead || storyChar.Downed 
+                ? "StoryVillage_Dia3_1_Dying".Translate() 
+                : Map.mapPawns.FreeColonistsSpawnedCount != 0 
+                    ? "StoryVillage_Dia3_1_Alive".Translate() 
+                    : "StoryVillage_Dia3_1_AliveNoHelpFromPlayer".Translate());
             diaNode.options.Add(new DiaOption("StoryVillage_Dia3_1_Option1".Translate()) { resolveTree = true }); ;
 
             TaggedString taggedString = "StoryVillage_Dia3_Title".Translate(storyChar.NameShortColored);
