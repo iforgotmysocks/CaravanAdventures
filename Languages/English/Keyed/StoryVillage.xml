@@ -25,7 +25,9 @@
 	<StoryVillage_Dia1_4_Option1>Guess today is as good a day to die as any.</StoryVillage_Dia1_4_Option1>
 	
 	<StoryVillage_QuestUpdate_MechsArrived>Either help {0} to defend {1} base or make a run for it, although Sacrileg Hunters would make good allies in the battles to come.</StoryVillage_QuestUpdate_MechsArrived>
-	<VillageAttackMechsMessage>{0} are attacking {2}</VillageAttackMechsMessage>
+  <StoryVillage_QuestUpdate_MechsArrivedFriendAlreadyDead>{0} died before the hostile mechs arrived. You can still try to defend the base, but it won't be easy.</StoryVillage_QuestUpdate_MechsArrivedFriendAlreadyDead>
+  <StoryVillage_QuestUpdate_MechsArrivedFriendDiedFleeing>{0} had to flee before reinforcements arrived and was killed by mechanoids approaching the village.</StoryVillage_QuestUpdate_MechsArrivedFriendDiedFleeing>
+  <VillageAttackMechsMessage>{0} are attacking {2}</VillageAttackMechsMessage>
 
 	<StoryVillage_Dia2_Title>{0} shouts loudly...</StoryVillage_Dia2_Title>
 	<StoryVillage_Dia2_1>Ey, our reinforcements are here, lets go guys, give them hell!\n\nTowns people and council members, to the escape routes!</StoryVillage_Dia2_1>

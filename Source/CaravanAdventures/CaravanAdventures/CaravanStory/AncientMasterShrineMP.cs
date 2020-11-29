@@ -207,8 +207,8 @@ namespace CaravanAdventures.CaravanStory
 
         private void CheckBossDefeated()
         {
-            // todo - added !boss.detroyed check, does it work?
-            if ((boss != null && !boss.Dead && !boss.Destroyed) || (!bossWasSpawned && boss == null && CompCache.StoryWC.storyFlags[CompCache.StoryWC.BuildCurrentShrinePrefix() + "Created"]) || bossDefeatedAndRewardsGiven) return;
+            // todo - test if .destroyed needs to be added (in case of the body being completely nuked)?
+            if ((boss != null && !boss.Dead) || (!bossWasSpawned && boss == null && CompCache.StoryWC.storyFlags[CompCache.StoryWC.BuildCurrentShrinePrefix() + "Created"]) || bossDefeatedAndRewardsGiven) return;
 
             var gifted = StoryUtility.GetGiftedPawn();
             if (gifted == null) Log.Warning("gifted pawn was null, which shouldn't happen. Spell was stored for when another gifted pawn awakes");

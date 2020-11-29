@@ -109,6 +109,7 @@ namespace CaravanAdventures.CaravanStory
             "IntroVillage_Created",
             "IntroVillage_Entered",
             "IntroVillage_TalkedToFriend",
+            "IntroVillage_FriendAlreadyDeadOrLeft",
             "IntroVillage_MechsArrived",
             "IntroVillage_ReinforcementsArrived",
             "IntroVillage_PlayerWon",

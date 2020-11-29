@@ -22,6 +22,8 @@ namespace CaravanAdventures.CaravanStory
     {
         private int ticks;
         private int ticksTillReinforcements = -1;
+        private int timerTillRemoval = -1;
+        private int timerForceStartRaid = -1;
         private bool sacHuntersFleeing;
         private bool sacHuntersCiviliansFleeing;
         private bool mainCharLeftOrDied;
@@ -39,6 +41,9 @@ namespace CaravanAdventures.CaravanStory
             Scribe_Values.Look(ref sacHuntersCiviliansFleeing, "sacHuntersCiviliansFleeing");
             Scribe_Values.Look(ref mainCharLeftOrDied, "mainCharLeftOrDied");
             Scribe_Values.Look(ref centerPoint, "centerPoint");
+            Scribe_Values.Look(ref timerTillRemoval, "timerTillRemoval", -1);
+            Scribe_Values.Look(ref timerForceStartRaid, "timerForceStartRaid", -1);
+
         }
 
         public void Notify_CaravanArrived(Caravan caravan)
@@ -78,6 +83,7 @@ namespace CaravanAdventures.CaravanStory
                     AddNewLordAndAssignStoryChar(storyChar);
 
                     CompCache.StoryWC.SetSF("IntroVillage_Entered");
+                    timerForceStartRaid = 60000;
                 }
             }, "StoryVillageEnterMapMessage", false, new Action<Exception>(GameAndMapInitExceptionHandlers.ErrorWhileGeneratingMap), true);
         }
@@ -113,7 +119,7 @@ namespace CaravanAdventures.CaravanStory
             Log.Message($"Story starts initiated by {initiator.Name} and {addressed.def.defName}");
             DiaNode diaNode = null;
             var diaNode4 = new DiaNode("StoryVillage_Dia1_4".Translate(addressed.NameShortColored));
-            diaNode4.options.Add(new DiaOption("StoryVillage_Dia1_4_Option1".Translate()) { action = () => SpawnMechArmy(initiator, addressed), resolveTree = true });
+            diaNode4.options.Add(new DiaOption("StoryVillage_Dia1_4_Option1".Translate()) { action = () => SpawnMechArmy(), resolveTree = true });
 
             var diaNode3 = new DiaNode("StoryVillage_Dia1_3".Translate(addressed.NameShortColored));
             diaNode3.options.Add(new DiaOption("StoryVillage_Dia1_3_Option1".Translate()) { link = diaNode4 });
@@ -130,10 +136,28 @@ namespace CaravanAdventures.CaravanStory
             Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
         }
 
-        private void SpawnMechArmy(Pawn initiator, Pawn addressed)
+        private void SpawnMechArmy(bool pawnWasAlreadyDead = false, bool pawnAlreadyLeft = false)
         {
-            CompCache.StoryWC.SetSF("IntroVillage_TalkedToFriend");
-            Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillage_QuestUpdate_MechsArrived".Translate(addressed.NameShortColored, GenderUtility.GetPossessive(addressed.gender)));
+            if (CompCache.StoryWC.storyFlags["IntroVillage_MechsArrived"]) return;
+            var storyChar = CompCache.StoryWC.questCont.Village.StoryContact;
+            if (!pawnWasAlreadyDead && !pawnAlreadyLeft)
+            {
+                CompCache.StoryWC.SetSF("IntroVillage_TalkedToFriend");
+                Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillage_QuestUpdate_MechsArrived".Translate(storyChar.NameShortColored, GenderUtility.GetPossessive(storyChar.gender)));
+                ticksTillReinforcements = 60 * 15;
+            }
+            else if (pawnWasAlreadyDead)
+            {
+                CompCache.StoryWC.SetSF("IntroVillage_FriendAlreadyDeadOrLeft");
+                Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillage_QuestUpdate_MechsArrivedFriendAlreadyDead".Translate(storyChar.NameShortColored, GenderUtility.GetPossessive(storyChar.gender)));
+                timerTillRemoval = 60 * 60 * 3;
+            }
+            else if (pawnAlreadyLeft)
+            {
+                CompCache.StoryWC.SetSF("IntroVillage_FriendAlreadyDeadOrLeft");
+                Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillage_QuestUpdate_MechsArrivedFriendDiedFleeing".Translate(storyChar.NameShortColored, GenderUtility.GetPossessive(storyChar.gender)));
+                timerTillRemoval = 60 * 60 * 3;
+            }
 
             var incidentParms = new IncidentParms
             {
@@ -146,8 +170,7 @@ namespace CaravanAdventures.CaravanStory
             };
             Log.Message($"Default threat points: {StorytellerUtility.DefaultThreatPointsNow(incidentParms.target)}");
             IncidentDefOf.RaidEnemy.Worker.TryExecute(incidentParms);
-
-            ticksTillReinforcements = 60 * 15;
+            
             CompCache.StoryWC.SetSF("IntroVillage_MechsArrived");
 
             GetComponent<TimedDetectionPatrols>().Init(Faction.OfMechanoids);
@@ -174,14 +197,21 @@ namespace CaravanAdventures.CaravanStory
                 }
                 if (ticksTillReinforcements == 0)
                 {
-                    StoryUtility.GetAssistanceFromAlliedFaction(StoryUtility.FactionOfSacrilegHunters, Map, 12000, 13000, centerPoint);
+                    StoryUtility.GetAssistanceFromAlliedFaction(StoryUtility.FactionOfSacrilegHunters, Map, 9000, 10000, centerPoint);
                     CompCache.StoryWC.SetSF("IntroVillage_ReinforcementsArrived");
                     ReinforcementConvo();
                     CheckShouldCiviliansFlee();
                 }
+                if (timerForceStartRaid == 0)
+                {
+                    SpawnMechArmy();
+                    timerTillRemoval = 60 * 60 * 3;
+                }
 
                 ticks++;
                 ticksTillReinforcements--;
+                timerTillRemoval--;
+                timerForceStartRaid--;
             }
         }
 
@@ -189,7 +219,32 @@ namespace CaravanAdventures.CaravanStory
         {
             if (mainCharLeftOrDied) return;
             var storyChar = CompCache.StoryWC.questCont.Village.StoryContact;
+
+            if (storyChar == null)
+            {
+                Log.Error($"story char was null, continueing quest as if the storyChar already died");
+                SpawnMechArmy(true, false);
+                mainCharLeftOrDied = true;
+                return;
+            }
+            else if (!CompCache.StoryWC.storyFlags["IntroVillage_TalkedToFriend"] && storyChar.Dead)
+            {
+                // todo send letter and remove map -> adjust map removal option
+                // todo letter
+                // todo quest update
+                SpawnMechArmy(true, false);
+                mainCharLeftOrDied = true;
+                return;
+            }
+            else if (!CompCache.StoryWC.storyFlags["IntroVillage_TalkedToFriend"] && !Map.mapPawns.AllPawnsSpawned.Contains(storyChar))
+            {
+                SpawnMechArmy(false, true);
+                mainCharLeftOrDied = true;
+                return;
+            }
+
             if (!CompCache.StoryWC.storyFlags["IntroVillage_MechsArrived"]) return;
+            // todo check if i should add .Destroyed or if .Dead is enough if the body is fully removed
             if (Map.mapPawns.AllPawnsSpawned.Contains(storyChar) && !storyChar.Dead && !storyChar.Downed) return;
 
             DiaNode diaNode = null;
@@ -245,7 +300,9 @@ namespace CaravanAdventures.CaravanStory
 
         private void CheckPlayerLeftAndAbandon()
         {
-            if (!CompCache.StoryWC.storyFlags["IntroVillage_MechsArrived"] || !HasMap) return;
+            if (!CompCache.StoryWC.storyFlags["IntroVillage_MechsArrived"] || !HasMap || !mainCharLeftOrDied) return;
+            // change to remove when downed?
+            if (timerTillRemoval > 0) return;
             if (Map.mapPawns.FreeColonistsSpawned.Any(x => !x.Dead)) return;
 
             Log.Message($"Should set player won flag");
@@ -272,7 +329,7 @@ namespace CaravanAdventures.CaravanStory
 
             CompCache.StoryWC.SetSF("IntroVillage_Finished");
             Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillage_QuestUpdate_Survived".Translate());
-            Quests.QuestUtility.CompleteQuest(StoryQuestDefOf.CA_StoryVillage_Arrival);
+            Quests.QuestUtility.CompleteQuest(StoryQuestDefOf.CA_StoryVillage_Arrival, true, CompCache.StoryWC.storyFlags["IntroVillage_PlayerWon"] ? QuestEndOutcome.Success : QuestEndOutcome.Fail);
         }
 
         public override bool ShouldRemoveMapNow(out bool alsoRemoveWorldObject)
