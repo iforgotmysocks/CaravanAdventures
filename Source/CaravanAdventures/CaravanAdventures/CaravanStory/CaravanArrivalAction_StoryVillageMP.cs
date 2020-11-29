@@ -23,6 +23,7 @@ namespace CaravanAdventures.CaravanStory
 		public static FloatMenuAcceptanceReport CanVisit(Caravan caravan, StoryVillageMP storyVillageMP)
 		{
 			if (CompCache.StoryWC.storyFlags["IntroVillage_PlayerWon"]) return false;
+			if (Faction.OfPlayer.HostileTo(StoryUtility.FactionOfSacrilegHunters)) return FloatMenuAcceptanceReport.WithFailMessage("StoryVillageCantArriveHostile".Translate(StoryUtility.FactionOfSacrilegHunters.NameColored));
 			return storyVillageMP != null && storyVillageMP.Spawned;
 		}
 

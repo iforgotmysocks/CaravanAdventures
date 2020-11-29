@@ -104,11 +104,10 @@ namespace CaravanAdventures.CaravanMechBounty
         private DiaNode GetItemOverview(DiaNode bountyNode)
         {
             var node = new DiaNode("CABountyExchangeRequestHelp_StrengthSelection".Translate(CompCache.StoryWC.BountyPoints));
-            //bountyNode.options.Add(new DiaOption("CABountyExchangeRequestHelp".Translate()) { action = () => { SelectTargetForDrop(requestor); bountyNode.text = "CABountyExchangeMain".Translate(CompCache.StoryWC.BountyPoints); }, resolveTree = true });
-            node.options.Add(GenerateItem(250, "CABountyExchangeRequestHelp_StrengthSelection_Few"));
-            node.options.Add(HunterDropRequest(650, "CABountyExchangeRequestHelp_StrengthSelection_Bunch"));
-            node.options.Add(HunterDropRequest(1250, "CABountyExchangeRequestHelp_StrengthSelection_Army"));
-            node.options.Add(new DiaOption("CABountyBack".Translate()) { link = parent });
+            //node.options.Add(GenerateItem(250, "CABountyExchangeRequestHelp_StrengthSelection_Few"));
+            //node.options.Add(HunterDropRequest(650, "CABountyExchangeRequestHelp_StrengthSelection_Bunch"));
+            //node.options.Add(HunterDropRequest(1250, "CABountyExchangeRequestHelp_StrengthSelection_Army"));
+            //node.options.Add(new DiaOption("CABountyBack".Translate()) { link = parent });
 
             return node;
         }

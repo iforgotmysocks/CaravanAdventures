@@ -10,7 +10,9 @@
 	<StoryVillageEnterMapMessage>Entering village</StoryVillageEnterMapMessage>
 	<StoryVillageArrivedLetterTitle>Entered {0}</StoryVillageArrivedLetterTitle>
 	<StoryVillageArrivedLetterMessage>Your caravan arrived at {0}. Seems to be a nice place.</StoryVillageArrivedLetterMessage>
-	
+	<StoryVillageCantArriveHostile>While hostile, you can't help {0}.</StoryVillageCantArriveHostile>
+  
+  
 	<StoryVillage_Dia1_DiaTitle>{0} embraces you</StoryVillage_Dia1_DiaTitle>
 	<StoryVillage_Dia1_1>{0}, you came. Thank god. We barely fended off the last attack and our scouts spotted the next and yet biggest army only a few minutes away.\n\nI hope our reinforcements make it in time. </StoryVillage_Dia1_1>
 	<StoryVillage_Dia1_1_Option1>Good to see you. Any idea why those mechs are after you that bad?\nWe sure get attacked aswell, but nothing as you described.</StoryVillage_Dia1_1_Option1>

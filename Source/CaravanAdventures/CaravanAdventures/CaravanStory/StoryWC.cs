@@ -16,6 +16,16 @@ using Verse.Noise;
 // --> maybe remove additional reward generation for shrines for a bounty system
 // --> integrate point system with buyable items into the comm station dialog
 
+// - bounty system
+// --> finish items
+// --> finish relation haggling
+
+// - story: 
+// --> make sure that sac hunters won't die of starvation and or temperature
+// --> if they flee, what then? fail the quest?
+// --> what to do when they get hostile
+// --> make sure player cant enter village when hostile
+
 // - unlag
 // --> remove additional ancient caskets from small shrines on master shrine map --> lets hold this one and better balance the amount correctly
 // --> maybe decrease small shrines and make them not depend on spawning on a rock
