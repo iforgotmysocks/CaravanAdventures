@@ -234,6 +234,7 @@ namespace CaravanAdventures.CaravanStory
             BossDefeatedDialog(gifted, boss, spell);
             bossDefeatedAndRewardsGiven = true;
 
+            StoryUtility.AdjustGoodWill(75);
             Quests.QuestUtility.AppendQuestDescription(Quests.StoryQuestDefOf.CA_FindAncientShrine, "Story_Shrine1_QuestRewardUpdate_1".Translate(GenDate.DateFullStringAt((long)GenDate.TickGameToAbs(Find.TickManager.TicksGame), Find.WorldGrid.LongLatOf(Tile)), gifted.NameShortColored, boss.LabelCap, CompCache.StoryWC.GetCurrentShrineCounter - 1, spell.label.CapitalizeFirst().Colorize(Color.cyan)));
         }
 

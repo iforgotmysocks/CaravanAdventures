@@ -159,8 +159,8 @@
 			<!--<li>(0.98, 0.75, 0.37)</li>-->
 			<!--<li>(0.97, 0.62, 0.52)</li>-->
 		</colorSpectrum>
-		<startingGoodwill>100</startingGoodwill>
-		<naturalColonyGoodwill>50~100</naturalColonyGoodwill>
+		<startingGoodwill>0</startingGoodwill>
+		<naturalColonyGoodwill>0~100</naturalColonyGoodwill>
 	</FactionDef>
 
 	<RulePackDef>

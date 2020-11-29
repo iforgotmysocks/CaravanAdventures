@@ -104,6 +104,13 @@ namespace CaravanAdventures.CaravanStory
             }
         }
 
+        internal static void AdjustGoodWill(int amount, Faction faction = null)
+        {
+            faction = FactionOfSacrilegHunters ?? null;
+            if (faction == null) return;
+            faction.TryAffectGoodwillWith(Faction.OfPlayer, amount);
+        }
+
         internal static void RestartStory()
         {
             if (CompCache.StoryWC.questCont.Village.StoryContact != null) CompCache.StoryWC.questCont.Village.StoryContact.Destroy();

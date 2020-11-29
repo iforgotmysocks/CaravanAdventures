@@ -80,8 +80,8 @@ namespace CaravanAdventures.CaravanStory.Quests
             diaNode6_2.options.Add(new DiaOption("TradeCaravan_Dia1_6_2_Option1".Translate()) { action = () => ConversationFinished(initiator, addressed), resolveTree = true });
 
             var diaNode5 = new DiaNode("TradeCaravan_Dia1_5".Translate(addressed.NameShortColored, GenderUtility.GetPossessive(addressed.gender)));
-            diaNode5.options.Add(new DiaOption("TradeCaravan_Dia1_5_Option1".Translate()) { action = () => SetSacsAllies(), link = diaNode6_1 });
-            diaNode5.options.Add(new DiaOption("TradeCaravan_Dia1_5_Option2".Translate()) { link = diaNode6_2 });
+            diaNode5.options.Add(new DiaOption("TradeCaravan_Dia1_5_Option1".Translate()) { action = () => StoryUtility.AdjustGoodWill(75), link = diaNode6_1 });
+            diaNode5.options.Add(new DiaOption("TradeCaravan_Dia1_5_Option2".Translate()) { action = () => StoryUtility.AdjustGoodWill(50), link = diaNode6_2 });
 
             var diaNode4 = new DiaNode("TradeCaravan_Dia1_4".Translate(addressed.NameShortColored, GenderUtility.GetPossessive(addressed.gender)));
             diaNode4.options.Add(new DiaOption("TradeCaravan_Dia1_4_Option1".Translate(addressed.NameShortColored, initiator.NameShortColored)) { link = diaNode5 });
@@ -99,12 +99,6 @@ namespace CaravanAdventures.CaravanStory.Quests
             TaggedString taggedString = "TradeCaravan_Dia1_DiaTitle".Translate(addressed.NameShortColored);
             Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
             Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
-        }
-
-        private void SetSacsAllies()
-        {
-            Log.Message($"trying to set sacs allies");
-            StoryUtility.EnsureSacrilegHunters(FactionRelationKind.Ally);
         }
 
         private void ConversationFinished(Pawn initiator, Pawn addressed, bool reward = false)
@@ -146,7 +140,7 @@ namespace CaravanAdventures.CaravanStory.Quests
             }
 
             if (!CompCache.StoryWC.storyFlags["TradeCaravan_Arrived"]) QuestUtility.GenerateStoryQuest(StoryQuestDefOf.CA_TradeCaravan, true, "TradeCaravanQuestName", null, "TradeCaravanQuestDesc");
-            StoryUtility.EnsureSacrilegHunters(FactionRelationKind.Ally);
+            StoryUtility.EnsureSacrilegHunters();
             StoryUtility.AssignDialog("FriendlyCaravan_Conversation",
                CompCache.StoryWC.questCont.Village.StoryContact,
                typeof(QuestCont_FriendlyCaravan).ToString(),

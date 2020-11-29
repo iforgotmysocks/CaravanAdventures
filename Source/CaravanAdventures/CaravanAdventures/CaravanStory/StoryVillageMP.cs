@@ -333,6 +333,7 @@ namespace CaravanAdventures.CaravanStory
                 CompCache.StoryWC.questCont.Village.DestroyedSettlement = worldObject;
             }
 
+            StoryUtility.AdjustGoodWill(75);
             CompCache.StoryWC.SetSF("IntroVillage_Finished");
             Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillage_QuestUpdate_Survived".Translate());
             Quests.QuestUtility.CompleteQuest(StoryQuestDefOf.CA_StoryVillage_Arrival, true, CompCache.StoryWC.storyFlags["IntroVillage_PlayerWon"] ? QuestEndOutcome.Success : QuestEndOutcome.Fail);
