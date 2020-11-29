@@ -14,7 +14,6 @@ namespace CaravanAdventures.CaravanMechBounty
         private Pawn requestor;
         private Faction faction;
         private DiaNode root;
-
         private int creditsSpent = 0;
 
         public BountyRequest(DiaNode result, Pawn negotiator, Faction faction)
@@ -26,26 +25,28 @@ namespace CaravanAdventures.CaravanMechBounty
 
         public DiaOption CreateInitialDiaMenu()
         {
-            var bountyNode = new DiaNode("CABountyExchangeMain".Translate(CompCache.StoryWC.BountyPoints));
-            //bountyNode.options.Add(new DiaOption("CABountyExchangeRequestHelp".Translate()) { action = () => { SelectTargetForDrop(requestor); bountyNode.text = "CABountyExchangeMain".Translate(CompCache.StoryWC.BountyPoints); }, resolveTree = true });
-            bountyNode.options.Add(new DiaOption("CABountyExchangeRequestHelp".Translate()) { link = GetDropAssistanceStrengthVariaties(bountyNode) });
-            bountyNode.options.Add(new DiaOption("CABountyExchangeRequestItem".Translate()) { action = () => CompCache.StoryWC.BountyPoints += 100, link = bountyNode });
-            bountyNode.options.Add(new DiaOption("CABountyExchangeRequestImprovedRelations".Translate()) { action = () => CompCache.StoryWC.BountyPoints += 100, link = bountyNode });
-            bountyNode.options.Add(new DiaOption("CABountyBack".Translate()) { link = root });
+            var hostile = Faction.OfPlayer.HostileTo(faction);
+            var error = "CABountyExchangeHostile".Translate(faction.NameColored);
+            var node = new DiaNode("CABountyExchangeMain".Translate(CompCache.StoryWC.BountyPoints));
+            node.options.Add(new DiaOption("CABountyExchangeRequestHelp".Translate()) { link = GetDropAssistanceStrengthVariaties(node), disabled = hostile, disabledReason = error });
+            node.options.Add(new DiaOption("CABountyExchangeRequestItem".Translate()) { link = GetItemOverview(node), disabled = hostile, disabledReason = error });
+            node.options.Add(new DiaOption("CABountyExchangeRequestImprovedRelations".Translate()) { link = GetRelationHaggleOverview(node) });
+            node.options.Add(new DiaOption("CABountyBack".Translate()) { link = root });
 
-            return new DiaOption("CABountyExchangeOpenOption".Translate()) { link = bountyNode };
+            return new DiaOption("CABountyExchangeOpenOption".Translate()) { link = node };
         }
 
+        #region allied military assistance
         private DiaNode GetDropAssistanceStrengthVariaties(DiaNode parent)
         {
-            var bountyNode = new DiaNode("CABountyExchangeRequestHelp_StrengthSelection".Translate(CompCache.StoryWC.BountyPoints));
+            var node = new DiaNode("CABountyExchangeRequestHelp_StrengthSelection".Translate(CompCache.StoryWC.BountyPoints));
             //bountyNode.options.Add(new DiaOption("CABountyExchangeRequestHelp".Translate()) { action = () => { SelectTargetForDrop(requestor); bountyNode.text = "CABountyExchangeMain".Translate(CompCache.StoryWC.BountyPoints); }, resolveTree = true });
-            bountyNode.options.Add(HunterDropRequest(250, "CABountyExchangeRequestHelp_StrengthSelection_Few"));
-            bountyNode.options.Add(HunterDropRequest(650, "CABountyExchangeRequestHelp_StrengthSelection_Bunch"));
-            bountyNode.options.Add(HunterDropRequest(1250, "CABountyExchangeRequestHelp_StrengthSelection_Army"));
-            bountyNode.options.Add(new DiaOption("CABountyBack".Translate()) { link = parent });
+            node.options.Add(HunterDropRequest(250, "CABountyExchangeRequestHelp_StrengthSelection_Few"));
+            node.options.Add(HunterDropRequest(650, "CABountyExchangeRequestHelp_StrengthSelection_Bunch"));
+            node.options.Add(HunterDropRequest(1250, "CABountyExchangeRequestHelp_StrengthSelection_Army"));
+            node.options.Add(new DiaOption("CABountyBack".Translate()) { link = parent });
 
-            return bountyNode;
+            return node;
         }
 
         private DiaOption HunterDropRequest(int credit, string label)
@@ -60,7 +61,7 @@ namespace CaravanAdventures.CaravanMechBounty
             if (option.disabled) return option;
             option.resolveTree = true;
             option.action = () => {
-                
+
                 creditsSpent = credit;
                 SelectTargetForDrop();
             };
@@ -97,5 +98,31 @@ namespace CaravanAdventures.CaravanMechBounty
         {
             return true;
         }
+        #endregion
+
+        #region ancient item trade
+        private DiaNode GetItemOverview(DiaNode bountyNode)
+        {
+            var node = new DiaNode("CABountyExchangeRequestHelp_StrengthSelection".Translate(CompCache.StoryWC.BountyPoints));
+            //bountyNode.options.Add(new DiaOption("CABountyExchangeRequestHelp".Translate()) { action = () => { SelectTargetForDrop(requestor); bountyNode.text = "CABountyExchangeMain".Translate(CompCache.StoryWC.BountyPoints); }, resolveTree = true });
+            node.options.Add(GenerateItem(250, "CABountyExchangeRequestHelp_StrengthSelection_Few"));
+            node.options.Add(HunterDropRequest(650, "CABountyExchangeRequestHelp_StrengthSelection_Bunch"));
+            node.options.Add(HunterDropRequest(1250, "CABountyExchangeRequestHelp_StrengthSelection_Army"));
+            node.options.Add(new DiaOption("CABountyBack".Translate()) { link = parent });
+
+            return node;
+        }
+
+        #endregion
+
+        #region relation haggling
+        private DiaNode GetRelationHaggleOverview(DiaNode bountyNode)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+
     }
 }

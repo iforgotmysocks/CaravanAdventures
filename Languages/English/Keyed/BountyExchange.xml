@@ -6,10 +6,14 @@
   <CABountyExchangeRequestItem>Request rare item</CABountyExchangeRequestItem>
   <CABountyExchangeRequestImprovedRelations>Improve relations</CABountyExchangeRequestImprovedRelations>
   <CABountyBack>Back</CABountyBack>
-
+  <CABountyExchangeHostile>You are hostile towards {0}</CABountyExchangeHostile>
+  
   <CABountyExchangeRequestHelp_StrengthSelection>Current bounty credits: {0}\n\n\nPlease choose the amount of men you need:</CABountyExchangeRequestHelp_StrengthSelection>
   <CABountyExchangeRequestHelp_StrengthSelection_Few>A few   (~ 6 hunters)  - 250 bounty credit</CABountyExchangeRequestHelp_StrengthSelection_Few>
   <CABountyExchangeRequestHelp_StrengthSelection_Bunch>A bunch (~ 15 hunters) - 650 bounty credit</CABountyExchangeRequestHelp_StrengthSelection_Bunch>
   <CABountyExchangeRequestHelp_StrengthSelection_Army>An army (~ 30 hunters) - 1250 bounty credit</CABountyExchangeRequestHelp_StrengthSelection_Army>
   <CABountyExchangeRequestHelp_StrengthSelection_NotEnoughMoney>Not enough money</CABountyExchangeRequestHelp_StrengthSelection_NotEnoughMoney>
+
+  
+
 </LanguageData>
