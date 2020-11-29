@@ -88,7 +88,7 @@ namespace CaravanAdventures.CaravanStory.Quests
 
             var diaNode3 = new DiaNode("TradeCaravan_Dia1_3".Translate(addressed.NameShortColored));
             diaNode3.options.Add(new DiaOption("TradeCaravan_Dia1_3_Option1".Translate()) { link = diaNode4 });
-            diaNode3.options.Add(new DiaOption("TradeCaravan_Dia1_3_Option2".Translate()) { action = () => ConversationFinished(initiator, addressed), resolveTree = true });
+            diaNode3.options.Add(new DiaOption("TradeCaravan_Dia1_3_Option2".Translate()) { action = () => { ConversationFinished(initiator, addressed); StoryUtility.AdjustGoodWill(30); }, resolveTree = true });
 
             var diaNode2 = new DiaNode("TradeCaravan_Dia1_2".Translate(addressed.NameShortColored, GenderUtility.GetPossessive(addressed.gender)));
             diaNode2.options.Add(new DiaOption("TradeCaravan_Dia1_2_Option1".Translate()) { link = diaNode3 });

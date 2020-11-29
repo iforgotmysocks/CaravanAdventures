@@ -117,7 +117,7 @@ namespace CaravanAdventures.CaravanMechBounty
         #region relation haggling
         private DiaNode GetRelationHaggleOverview(DiaNode bountyNode)
         {
-            throw new NotImplementedException();
+            return new DiaNode("todo");
         }
 
         #endregion

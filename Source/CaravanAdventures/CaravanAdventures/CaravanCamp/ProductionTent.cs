@@ -31,8 +31,13 @@ namespace CaravanAdventures.CaravanCamp
             location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 3 && cell.z == CellRect.minZ + 3);
             tableButcher = CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("TableButcher"), ThingDefOf.WoodLog), location, map, Rot4.North, campAssetListRef) as Building_WorkTable;
 
+            location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 4 && cell.z == CellRect.minZ + 1);
+            var comms = CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(CampDefOf.CAMiniCommsConsole), location, map, Rot4.North, campAssetListRef);
+            var commsComp = comms.TryGetComp<CompRefuelable>();
+            if (commsComp != null) commsComp.Refuel(commsComp.GetFuelCountToFullyRefuel());
+
             location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 3 && cell.z == CellRect.minZ + 1);
-            shelf = CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("Shelf"), ThingDefOf.WoodLog), location, map, Rot4.South, campAssetListRef) as Building_Storage;
+            shelf = CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("Shelf"), ThingDefOf.WoodLog), location, map, Rot4.North, campAssetListRef) as Building_Storage;
             shelf.GetStoreSettings().filter = new ThingFilter();
             shelf.GetStoreSettings().filter.SetAllow(ThingCategoryDefOf.Leathers, true);
             shelf.GetStoreSettings().filter.SetAllow(ThingCategoryDef.Named("Textiles"), true);
@@ -68,13 +73,21 @@ namespace CaravanAdventures.CaravanCamp
             location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 3 && cell.z == CellRect.minZ + 3);
             tableButcher = CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("TableButcher"), ThingDefOf.WoodLog), location, map, Rot4.North, campAssetListRef) as Building_WorkTable;
 
-            location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 1 && cell.z == CellRect.minZ + 2);
-            handTailoringBench = CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("CraftingSpot")), location, map, Rot4.East, campAssetListRef) as Building_WorkTable;
+            if (ResearchProjectDef.Named("ComplexClothing")?.ProgressPercent == 1f)
+            {
+                location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 1 && cell.z == CellRect.minZ + 2);
+                handTailoringBench = CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("HandTailoringBench"), ThingDefOf.WoodLog), location, map, Rot4.East, campAssetListRef) as Building_WorkTable;
+            }
+            else
+            {
+                location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 1 && cell.z == CellRect.minZ + 2);
+                handTailoringBench = CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("CraftingSpot")), location, map, Rot4.East, campAssetListRef) as Building_WorkTable;
+            }
 
             location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.minX + 5 && cell.z == CellRect.minZ + 1);
             CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDefOf.TorchLamp), location, map, default, campAssetListRef);
 
-            var passiveCoolerPos = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 1 && cell.z == CellRect.minZ + 1);
+            var passiveCoolerPos = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 4 && cell.z == CellRect.minZ + 1);
             var cooler = CampHelper.PrepAndGenerateThing(ThingDefOf.PassiveCooler, passiveCoolerPos, map, default, campAssetListRef);
             var refuelComp = cooler.TryGetComp<CompRefuelable>();
             if (refuelComp != null) refuelComp.Refuel(refuelComp.GetFuelCountToFullyRefuel() / 2f);
@@ -110,8 +123,14 @@ namespace CaravanAdventures.CaravanCamp
 
         public void ApplyRecipesTribal(Caravan caravan)
         {
+            if (ResearchProjectDef.Named("ComplexClothing")?.ProgressPercent == 1f)
+            {
+                ApplyRecipes(caravan);
+                return;
+            }
+                
             var bill = new Bill_Production(DefDatabase<RecipeDef>.GetNamed("ButcherCorpseFlesh")) { repeatMode = BillRepeatModeDefOf.Forever };
-            //bill.recipe.defaultIngredientFilter.SetAllow(ThingCategoryDefOf.CorpsesInsect, false);
+            bill.ingredientFilter.SetAllow(ThingCategoryDefOf.CorpsesInsect, false);
             tableButcher.BillStack.AddBill(bill);
 
             var bowBill = new Bill_ProductionWithUft(DefDatabase<RecipeDef>.GetNamed("Make_Bow_Recurve")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 1, hpRange = new FloatRange(0.9f, 1f), includeTainted = false, qualityRange = new QualityRange(QualityCategory.Normal, QualityCategory.Legendary) };
