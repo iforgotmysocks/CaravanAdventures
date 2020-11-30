@@ -21,20 +21,14 @@ using Verse.Noise;
 // --> finish relation haggling
 
 // - story: 
-// --> make sure that sac hunters won't die of starvation and or temperature
-// --> if they flee, what then? fail the quest?
 // --> what to do when they get hostile
-// --> make sure player cant enter village when hostile
 
 // - unlag
 // --> remove additional ancient caskets from small shrines on master shrine map --> lets hold this one and better balance the amount correctly
 // --> maybe decrease small shrines and make them not depend on spawning on a rock
 
 // - better map generation control for small shrines
-// --> create own GenStepDef for small shrines (currently using vanilla) and remove the CanScatterAt natural rock limitation
-// --> rebalance min/max accordingly
 
-// - kill all walls on a master shrine when the boss dies -> solves the letter issue
 // - second shrine was removed before the boss died and the ability dialog came up
 // - fix just melee mech raids, by adding a new pawngroupmaker to the faction def that isn't called combat and use that
 // - crystal scythe appeared in normal ancient shrine -> may have been fixed by recent point changes
@@ -82,7 +76,6 @@ namespace CaravanAdventures.CaravanStory
         private List<AbilityDef> unlockedSpells = new List<AbilityDef>();
         private int bossMissedCounter = 0;
         private bool ranDebugActionsOnceAtStartUp;
-        private float bountyPoints = 0;
 
         public Dictionary<string, int> mechBossKillCounters = new Dictionary<string, int>();
         public Dictionary<string, bool> debugFlags = new Dictionary<string, bool>()
@@ -143,7 +136,6 @@ namespace CaravanAdventures.CaravanStory
             Scribe_Values.Look(ref bossMissedCounter, "bossMissedCounter", 0);
             Scribe_Deep.Look(ref questCont, "questCont");
             Scribe_Values.Look(ref shrineTileUnsuccessfulCounter, "shrineTileUnsuccessfulCounter", 0);
-            Scribe_Values.Look(ref bountyPoints, "bountyPoints", 0f);
         }
 
         public StoryWC(World world) : base(world)
@@ -302,7 +294,7 @@ namespace CaravanAdventures.CaravanStory
         public string BuildMaxShrinePrefix() => "Shrine" + shrineMaximum + "_";
         public int GetCurrentShrineCounter => countShrinesCompleted < shrineMaximum ? countShrinesCompleted + 1 : shrineMaximum;
         public int GetShrineMaxiumum => shrineMaximum;
-        public float BountyPoints { get => bountyPoints; set => bountyPoints = value; }
+
 
         public List<AbilityDef> GetUnlockedSpells() => unlockedSpells;
         

@@ -12,8 +12,14 @@
   <CABountyExchangeRequestHelp_StrengthSelection_Few>A few   (~ 6 hunters)  - 250 bounty credit</CABountyExchangeRequestHelp_StrengthSelection_Few>
   <CABountyExchangeRequestHelp_StrengthSelection_Bunch>A bunch (~ 15 hunters) - 650 bounty credit</CABountyExchangeRequestHelp_StrengthSelection_Bunch>
   <CABountyExchangeRequestHelp_StrengthSelection_Army>An army (~ 30 hunters) - 1250 bounty credit</CABountyExchangeRequestHelp_StrengthSelection_Army>
-  <CABountyExchangeRequestHelp_StrengthSelection_NotEnoughMoney>Not enough money</CABountyExchangeRequestHelp_StrengthSelection_NotEnoughMoney>
+  <CABountyExchangeRequestHelp_StrengthSelection_NotEnoughMoney>Not enough credits</CABountyExchangeRequestHelp_StrengthSelection_NotEnoughMoney>
 
   
+  
+  <CABountyExchangeRelationHaggle>Current bounty credits: {0}\n\n\nYou can trade in bounty to improve relations.\nRelation trades towards us work immediately, but if we should negotiate with other factions on your behalf, it will cost more and also take some time for our envoy to make the trip.\nThe worse the relations are, the more bounty credits are required.</CABountyExchangeRelationHaggle>
+  <CABountyExchangeRelationHaggle_WithYou>Trade {0} credits for {1} goodwill with {2}</CABountyExchangeRelationHaggle_WithYou>
+  <CABountyExchangeRelationHaggle_WithAnotherFaction>Choose another faction</CABountyExchangeRelationHaggle_WithAnotherFaction>
 
+  <CABountyExchangeRelationHaggle_Factions>Current bounty credits: {0}\n\n\nFollowing Factions are available:</CABountyExchangeRelationHaggle_Factions>
+  <CABountyExchangeRelationHaggle_Factions_ListedFaction>{0} ({1})   buy: {2} for: {3} credits</CABountyExchangeRelationHaggle_Factions_ListedFaction>
 </LanguageData>

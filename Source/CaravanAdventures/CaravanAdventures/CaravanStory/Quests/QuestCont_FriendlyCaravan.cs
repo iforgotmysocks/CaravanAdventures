@@ -128,14 +128,14 @@ namespace CaravanAdventures.CaravanStory.Quests
             if (Faction.OfPlayer.HostileTo(StoryUtility.FactionOfSacrilegHunters))
             {
                 Log.Message($"Skipping, Sac hunters are hostile.");
-                friendlyCaravanCounter = 20000;
+                friendlyCaravanCounter = 20000f;
                 return;
             }
             var selectedMap = map ?? Find.Maps.Where(cmap => cmap.ParentFaction == Faction.OfPlayerSilentFail)?.OrderByDescending(cmap => cmap.wealthWatcher.WealthItems)?.FirstOrDefault();
             if (selectedMap == null)
             {
                 Log.Message($"Story caravan couldn't be created, no player map found");
-                friendlyCaravanCounter = 1000;
+                friendlyCaravanCounter = 1000f;
                 return;
             }
 
@@ -152,7 +152,7 @@ namespace CaravanAdventures.CaravanStory.Quests
             var incidentParms = new IncidentParms
             {
                 target = selectedMap,
-                points = 3000,
+                points = 3000f,
                 faction = StoryUtility.FactionOfSacrilegHunters,
                 raidArrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn
             };

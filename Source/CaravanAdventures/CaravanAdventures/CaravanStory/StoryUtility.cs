@@ -40,12 +40,12 @@ namespace CaravanAdventures.CaravanStory
 
         internal static void AddBountyPointsForKilledMech(Pawn mech)
         {
-            if (mech.def == ThingDef.Named("Mech_Pikeman")) CompCache.StoryWC.BountyPoints += 7;
-            else if (mech.def == ThingDef.Named("Mech_Scyther")) CompCache.StoryWC.BountyPoints += 10;
-            else if (mech.def == ThingDef.Named("Mech_Lancer")) CompCache.StoryWC.BountyPoints += 15;
-            else if (mech.def == ThingDef.Named("Mech_Centipede")) CompCache.StoryWC.BountyPoints += 45;
-            else if (CompCache.StoryWC.GetBossDefNames().Contains(mech.def.defName)) CompCache.StoryWC.BountyPoints += 500; // sdt boss
-            //else if (mech.def == ThingDef.Named("Endboss")) CompCache.StoryWC.BountyPoints += 3000; // end boss
+            if (mech.def == ThingDef.Named("Mech_Pikeman")) CompCache.BountyWC.BountyPoints += 7;
+            else if (mech.def == ThingDef.Named("Mech_Scyther")) CompCache.BountyWC.BountyPoints += 10;
+            else if (mech.def == ThingDef.Named("Mech_Lancer")) CompCache.BountyWC.BountyPoints += 15;
+            else if (mech.def == ThingDef.Named("Mech_Centipede")) CompCache.BountyWC.BountyPoints += 45;
+            else if (CompCache.StoryWC.GetBossDefNames().Contains(mech.def.defName)) CompCache.BountyWC.BountyPoints += 500; // sdt boss
+            //else if (mech.def == ThingDef.Named("Endboss")) CompCache.BountyWC.BountyPoints += 3000; // end boss
         }
 
         public static void GetAssistanceFromAlliedFaction(Faction faction, Map map, int pointsMin = 4000, int pointsMax = 5000, IntVec3 spawnSpot = default)

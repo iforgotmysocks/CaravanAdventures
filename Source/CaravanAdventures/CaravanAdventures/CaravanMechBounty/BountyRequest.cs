@@ -9,6 +9,9 @@ using Verse;
 
 namespace CaravanAdventures.CaravanMechBounty
 {
+    // todo relations:
+    // --> add envoy timer -> extract fail reason and disable check into methods that check for money and envoy timer
+
     class BountyRequest
     {
         private Pawn requestor;
@@ -27,7 +30,7 @@ namespace CaravanAdventures.CaravanMechBounty
         {
             var hostile = Faction.OfPlayer.HostileTo(faction);
             var error = "CABountyExchangeHostile".Translate(faction.NameColored);
-            var node = new DiaNode("CABountyExchangeMain".Translate(CompCache.StoryWC.BountyPoints));
+            var node = new DiaNode("CABountyExchangeMain".Translate(CompCache.BountyWC.BountyPoints));
             node.options.Add(new DiaOption("CABountyExchangeRequestHelp".Translate()) { link = GetDropAssistanceStrengthVariaties(node), disabled = hostile, disabledReason = error });
             node.options.Add(new DiaOption("CABountyExchangeRequestItem".Translate()) { link = GetItemOverview(node), disabled = hostile, disabledReason = error });
             node.options.Add(new DiaOption("CABountyExchangeRequestImprovedRelations".Translate()) { link = GetRelationHaggleOverview(node) });
@@ -39,8 +42,8 @@ namespace CaravanAdventures.CaravanMechBounty
         #region allied military assistance
         private DiaNode GetDropAssistanceStrengthVariaties(DiaNode parent)
         {
-            var node = new DiaNode("CABountyExchangeRequestHelp_StrengthSelection".Translate(CompCache.StoryWC.BountyPoints));
-            //bountyNode.options.Add(new DiaOption("CABountyExchangeRequestHelp".Translate()) { action = () => { SelectTargetForDrop(requestor); bountyNode.text = "CABountyExchangeMain".Translate(CompCache.StoryWC.BountyPoints); }, resolveTree = true });
+            var node = new DiaNode("CABountyExchangeRequestHelp_StrengthSelection".Translate(CompCache.BountyWC.BountyPoints));
+            //bountyNode.options.Add(new DiaOption("CABountyExchangeRequestHelp".Translate()) { action = () => { SelectTargetForDrop(requestor); bountyNode.text = "CABountyExchangeMain".Translate(CompCache.BountyWC.BountyPoints); }, resolveTree = true });
             node.options.Add(HunterDropRequest(250, "CABountyExchangeRequestHelp_StrengthSelection_Few"));
             node.options.Add(HunterDropRequest(650, "CABountyExchangeRequestHelp_StrengthSelection_Bunch"));
             node.options.Add(HunterDropRequest(1250, "CABountyExchangeRequestHelp_StrengthSelection_Army"));
@@ -52,7 +55,7 @@ namespace CaravanAdventures.CaravanMechBounty
         private DiaOption HunterDropRequest(int credit, string label)
         {
             var option = new DiaOption(label.Translate());
-            if (CompCache.StoryWC.BountyPoints < credit)
+            if (CompCache.BountyWC.BountyPoints < credit)
             {
                 option.disabled = true;
                 option.disabledReason = "CABountyExchangeRequestHelp_StrengthSelection_NotEnoughMoney".Translate();
@@ -89,7 +92,7 @@ namespace CaravanAdventures.CaravanMechBounty
                 Log.Warning("Calculation of assistance points for bounty failed, selecting lowest option");
                 creditsSpent = 260;
             }
-            CompCache.StoryWC.BountyPoints -= creditsSpent;
+            CompCache.BountyWC.BountyPoints -= creditsSpent;
             CaravanStory.StoryUtility.GetAssistanceFromAlliedFaction(faction, map, creditsSpent * 2, creditsSpent * 2);
             return true;
         }
@@ -103,7 +106,7 @@ namespace CaravanAdventures.CaravanMechBounty
         #region ancient item trade
         private DiaNode GetItemOverview(DiaNode bountyNode)
         {
-            var node = new DiaNode("CABountyExchangeRequestHelp_StrengthSelection".Translate(CompCache.StoryWC.BountyPoints));
+            var node = new DiaNode("CABountyExchangeRequestHelp_StrengthSelection".Translate(CompCache.BountyWC.BountyPoints));
             //node.options.Add(GenerateItem(250, "CABountyExchangeRequestHelp_StrengthSelection_Few"));
             //node.options.Add(HunterDropRequest(650, "CABountyExchangeRequestHelp_StrengthSelection_Bunch"));
             //node.options.Add(HunterDropRequest(1250, "CABountyExchangeRequestHelp_StrengthSelection_Army"));
@@ -115,9 +118,56 @@ namespace CaravanAdventures.CaravanMechBounty
         #endregion
 
         #region relation haggling
-        private DiaNode GetRelationHaggleOverview(DiaNode bountyNode)
+        private DiaNode GetRelationHaggleOverview(DiaNode parent)
         {
-            return new DiaNode("todo");
+            var node = new DiaNode("CABountyExchangeRelationHaggle".Translate(CompCache.BountyWC.BountyPoints));
+            node.options.Add(new DiaOption("CABountyExchangeRelationHaggle_WithYou".Translate(CalculateGoodWillCost(faction, 25), CalcReqGW(faction, 25), faction.NameColored)) { action = () => TradeRelationForBounty(faction, 25), disabled = CompCache.BountyWC.BountyPoints < CalculateGoodWillCost(faction, 25), disabledReason = "CABountyExchangeRequestHelp_StrengthSelection_NotEnoughMoney".Translate() });
+            node.options.Add(new DiaOption("CABountyExchangeRelationHaggle_WithAnotherFaction".Translate()) { link = GetListOfFactions(node, faction, 25) });
+            node.options.Add(new DiaOption("CABountyBack".Translate()) { link = parent });
+
+            return node;
+        }
+
+        private DiaNode GetListOfFactions(DiaNode parent, Faction faction, int v)
+        {
+            var node = new DiaNode("CABountyExchangeRelationHaggle_Factions".Translate(CompCache.BountyWC.BountyPoints));
+            foreach (var curFaction in Find.FactionManager.AllFactions.Where(f => !f.def.permanentEnemy))
+            {
+                if (curFaction == Faction.OfPlayer || curFaction == this.faction) continue;
+                node.options.Add(new DiaOption("CABountyExchangeRelationHaggle_Factions_ListedFaction".Translate(curFaction.NameColored, curFaction.GoodwillWith(Faction.OfPlayer), CalcReqGW(curFaction, 25), CalculateGoodWillCost(curFaction, 25))) { action = () => TradeRelationForBounty(curFaction, 25), disabled = CompCache.BountyWC.BountyPoints < CalculateGoodWillCost(curFaction, 25), disabledReason = "CABountyExchangeRequestHelp_StrengthSelection_NotEnoughMoney".Translate() });
+            }
+            node.options.Add(new DiaOption("CABountyBack".Translate()) { link = parent });
+
+            return node;
+        }
+
+        private int CalcReqGW(Faction curFaction, int goodwill)
+        {
+            var curGW = curFaction.GoodwillWith(Faction.OfPlayer);
+            if (curGW + goodwill > 100) goodwill -= (curGW + goodwill - 100);
+            return goodwill;
+        }
+
+        private void TradeRelationForBounty(Faction faction, int goodwill)
+        {
+            var price = CalculateGoodWillCost(faction, 25);
+            var result = faction.TryAffectGoodwillWith(Faction.OfPlayer, goodwill);
+            if (!result)
+            {
+                Log.Warning($"Buying relations of {goodwill} goodwill for faction {faction.Name} failed");
+                return;
+            }
+            CompCache.BountyWC.BountyPoints -= price;
+        }
+
+        private float CalculateGoodWillCost(Faction faction, int goodwill)
+        {
+            var costPerPoint = 5f;
+            if (faction != this.faction) costPerPoint *= 2;
+            var gwbf = faction.GoodwillWith(Faction.OfPlayer);
+            if (gwbf < 0) costPerPoint += Math.Abs(gwbf) * 0.1f;
+            if (gwbf + goodwill > 100) goodwill -= (gwbf + goodwill - 100);
+            return costPerPoint * goodwill;
         }
 
         #endregion
