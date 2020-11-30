@@ -48,7 +48,7 @@ namespace CaravanAdventures.CaravanAbilities
                         if (part.def == waist) continue;
 
                         var damage = part.def.GetMaxHealth(pawn) * (CompCache.StoryWC.GetBossDefNames().Contains(pawn.def.defName) ? 0.2f : Rand.Range(0.5f, 0.75f));
-                        if (Rand.Chance(pawn.RaceProps.IsMechanoid ? ModSettings.Get().mechanoidDissmemberChance : ModSettings.Get().humanDissmemberChance))
+                        if (Rand.Chance(pawn.RaceProps.IsMechanoid ? ModSettings.mechanoidDissmemberChance : ModSettings.humanDissmemberChance))
                         {
                             damage *= 5;
                         }
@@ -59,7 +59,7 @@ namespace CaravanAdventures.CaravanAbilities
                 else if (thing is Building)
                 {
                     var building = (Building)thing;
-                    if (!building.Destroyed) building.TakeDamage(new DamageInfo(DamageDefOf.Burn, building.MaxHitPoints * Rand.Range(ModSettings.Get().additionalBuildingAreaDamageMin, ModSettings.Get().additionalBuildingAreaDamageMax), 200));
+                    if (!building.Destroyed) building.TakeDamage(new DamageInfo(DamageDefOf.Burn, building.MaxHitPoints * Rand.Range(ModSettings.additionalBuildingAreaDamageMin, ModSettings.additionalBuildingAreaDamageMax), 200));
                 }
             }
         }

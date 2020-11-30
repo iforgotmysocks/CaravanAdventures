@@ -26,7 +26,7 @@ namespace CaravanAdventures.CaravanAbilities
         {
             base.CompPostTick(ref severityAdjustment);
 
-            if (ticksToDisappear > ModSettings.Get().lightDuration) Pawn.health.RemoveHediff(this.parent);
+            if (ticksToDisappear > ModSettings.lightDuration) Pawn.health.RemoveHediff(this.parent);
             if (ticks >= 10 && light?.Position != Pawn.Position)
             {
                 if (light != null) light.Destroy();

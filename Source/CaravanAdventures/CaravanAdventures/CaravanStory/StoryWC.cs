@@ -313,7 +313,7 @@ namespace CaravanAdventures.CaravanStory
         private bool CanDoApocalypse() => !storyFlags["Judgment_ApocalypseStarted"] 
             && storyFlags["Shrine1_Completed"] 
             && !storyFlags[BuildMaxShrinePrefix() + "Completed"] 
-            && ModSettings.Get().apocalypseEnabled;
+            && ModSettings.apocalypseEnabled;
 
         public void ResetStoryVars()
         {

@@ -58,7 +58,7 @@ namespace CaravanAdventures.CaravanAbilities
 
             if (ticksSincePermHeal > permTickCount)
             {
-                if (!ModSettings.Get().onlyHealPermWhenGifted || ModSettings.Get().onlyHealPermWhenGifted && isGifted) HealPermanent();
+                if (!ModSettings.onlyHealPermWhenGifted || ModSettings.onlyHealPermWhenGifted && isGifted) HealPermanent();
                 ticksSincePermHeal = 0;
             }
 
@@ -86,7 +86,7 @@ namespace CaravanAdventures.CaravanAbilities
             else
             {
                 if (sortedInjuries.Length < ticksSortedArray || sortedInjuries[ticksSortedArray - 1] == null) return;
-                var healAmount = isGifted ? ModSettings.Get().healingPerSecond : (ModSettings.Get().healingPerSecond / 1.5f);
+                var healAmount = isGifted ? ModSettings.healingPerSecond : (ModSettings.healingPerSecond / 1.5f);
                 if (sortedInjuries[ticksSortedArray - 1].Severity - healAmount > 0f) sortedInjuries[ticksSortedArray - 1].Severity -= healAmount;
                 else Pawn.health.RemoveHediff(sortedInjuries[ticksSortedArray - 1]);
 
@@ -107,7 +107,7 @@ namespace CaravanAdventures.CaravanAbilities
 
         private void CureMentalBreaks()
         {
-            if (ModSettings.Get().stopMentalBreaks && Pawn.InAggroMentalState)
+            if (ModSettings.stopMentalBreaks && Pawn.InAggroMentalState)
             {
                 Pawn.MentalState.RecoverFromState();
                 // todo add message that aura curred it.

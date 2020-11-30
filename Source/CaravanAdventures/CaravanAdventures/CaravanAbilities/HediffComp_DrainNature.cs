@@ -35,7 +35,7 @@ namespace CaravanAdventures.CaravanAbilities
         public override void CompPostPostAdd(DamageInfo? dinfo)
         {
             base.CompPostPostAdd(dinfo);
-            skillGainPerTick = ModSettings.Get().psyfocusToRestore / (300 - 100);
+            skillGainPerTick = ModSettings.psyfocusToRestore / (300 - 100);
 
              isGifted = IsGifted;
         }

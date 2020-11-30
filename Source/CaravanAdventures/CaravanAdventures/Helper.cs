@@ -13,7 +13,7 @@ namespace CaravanAdventures
 {
     static class Helper
     {
-        public static bool Debug() => ModSettings.Get().debug;
+        public static bool Debug() => ModSettings.debug;
 
         public static void AdjustSettlementPrices()
         {

@@ -112,7 +112,7 @@ namespace CaravanAdventures.CaravanStory
 
 		public override void CompTick()
 		{
-			if(ModSettings.Get().debug) if (ticksLeftToSendRaid % 100 == 0) Log.Message($"{this.parent.Label}: notify / raid {ticksLeftTillNotifyPlayer} / {ticksLeftToSendRaid}");
+			if(ModSettings.debug) if (ticksLeftToSendRaid % 100 == 0) Log.Message($"{this.parent.Label}: notify / raid {ticksLeftTillNotifyPlayer} / {ticksLeftToSendRaid}");
 
 			// todo changed from AncientShrineMP to generall MP, check if shrine still works!
 			var mapParent = (MapParent)this.parent;
