@@ -19,6 +19,8 @@ namespace CaravanAdventures.CaravanStory
 
         public static PawnKindDef CASacrilegHunters_Town_Councilman;
         public static PawnKindDef CASacrilegHunters_Villager;
+        public static PawnKindDef CASacrilegHunters_Hunter;
+        public static PawnKindDef CASacrilegHunters_HunterVillage;
         public static PawnKindDef CASacrilegHunters_ExperiencedHunter;
         public static PawnKindDef CASacrilegHunters_ExperiencedHunterVillage;
 
@@ -27,5 +29,7 @@ namespace CaravanAdventures.CaravanStory
         public static ThingDef CAShrinePortal;
 
         public static PawnKindDef CAEndBossMech;
+
+
     }
 }

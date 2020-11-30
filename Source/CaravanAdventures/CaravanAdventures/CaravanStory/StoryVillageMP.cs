@@ -292,11 +292,15 @@ namespace CaravanAdventures.CaravanStory
             var civs = Map.mapPawns.AllPawnsSpawned.Where(x => x.Faction == StoryUtility.FactionOfSacrilegHunters 
                 && (x.kindDef != StoryDefOf.CASacrilegHunters_ExperiencedHunter
                 && x.kindDef != StoryDefOf.CASacrilegHunters_ExperiencedHunterVillage
-                    || x == CompCache.StoryWC.questCont.Village.StoryContact));
+                && x.kindDef != StoryDefOf.CASacrilegHunters_Hunter
+                && x.kindDef != StoryDefOf.CASacrilegHunters_HunterVillage)
+                || x == CompCache.StoryWC.questCont.Village.StoryContact);
 
             foreach (var civ in civs)
             {
-                civ.GetLord().ownedPawns.Remove(civ);
+                var lord = civ.GetLord();
+                if (lord != null) lord.ownedPawns.Remove(civ);
+                if (lord != null && lord.ownedPawns.Count == 0) Map.lordManager.RemoveLord(lord);
             }
 
             Messages.Message(new Message("StoryVillage_SacHuntersCivs_Fleeing".Translate(), MessageTypeDefOf.NegativeEvent));
