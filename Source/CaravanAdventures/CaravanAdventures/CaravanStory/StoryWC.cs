@@ -245,6 +245,11 @@ namespace CaravanAdventures.CaravanStory
 
             if (debugFlags["ResetApocalypse"]) questCont.LastJudgment.ResetApocalypse(-10f);
 
+            var testedMaxSize = new IntVec3(275, 0, 275);
+            var resultSize = Find.World.info.initialMapSize;
+
+            Log.Message($"current map size {resultSize}");
+
             ranDebugActionsOnceAtStartUp = true;
         }
 

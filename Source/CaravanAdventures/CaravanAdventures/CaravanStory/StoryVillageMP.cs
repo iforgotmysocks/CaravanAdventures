@@ -50,7 +50,7 @@ namespace CaravanAdventures.CaravanStory
         {
             LongEventHandler.QueueLongEvent(delegate ()
             {
-                GetOrGenerateMapUtility.GetOrGenerateMap(this.Tile, null);
+                GetOrGenerateMapUtility.GetOrGenerateMap(this.Tile, StoryUtility.GetAllowedMapSizeConcideringSettings(), null);
             }, "GeneratingMap", false, new Action<Exception>(GameAndMapInitExceptionHandlers.ErrorWhileGeneratingMap), true);
             LongEventHandler.QueueLongEvent(delegate ()
             {

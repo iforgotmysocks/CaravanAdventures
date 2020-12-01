@@ -37,6 +37,7 @@ namespace CaravanAdventures
         // story
         // todo remove the ability to disable the apoc? Can always set the increase to 0
         public static bool storyEnabled = true;
+        public static bool limitLargeMapSizesToTestedSize = true;
         public static bool apocalypseEnabled = true;
         public static float apocalypseTemperatureChangePerDay = -0.084f;
 
@@ -73,6 +74,7 @@ namespace CaravanAdventures
 
             // story
             Scribe_Values.Look(ref storyEnabled, "storyEnabled", true);
+            Scribe_Values.Look(ref limitLargeMapSizesToTestedSize, "limitLargeMapSizesToTestedSize", true);
             Scribe_Values.Look(ref apocalypseEnabled, "apocalypseEndabled");
             Scribe_Values.Look(ref apocalypseTemperatureChangePerDay, "apocalypseTemperatureChangePerDay", -0.084f);
 
@@ -106,6 +108,8 @@ namespace CaravanAdventures
         }
 
         private Rect lastRect = default;
+
+
         private Rect BRect(float x, float y, float width, float height)
         {
             lastRect = new Rect(x, y, width, height);

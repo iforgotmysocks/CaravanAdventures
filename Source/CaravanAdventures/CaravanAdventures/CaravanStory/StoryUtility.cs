@@ -38,6 +38,18 @@ namespace CaravanAdventures.CaravanStory
             return false;
         }
 
+        internal static IntVec3 GetAllowedMapSizeConcideringSettings()
+        {
+            var testedMaxSize = new IntVec3(275, 1, 275);
+            var resultSize = Find.World.info.initialMapSize;
+
+            Log.Message($"current map size in getallowed {resultSize}");
+
+            if (!ModSettings.limitLargeMapSizesToTestedSize) return resultSize;
+            if ((resultSize.x * resultSize.z) > (testedMaxSize.x * testedMaxSize.z)) return testedMaxSize;
+            return resultSize;
+        }
+
         internal static void AddBountyPointsForKilledMech(Pawn mech)
         {
             if (mech.def == ThingDef.Named("Mech_Pikeman")) CompCache.BountyWC.BountyPoints += 7;
