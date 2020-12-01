@@ -183,7 +183,7 @@ namespace CaravanAdventures.CaravanStory
         private void AddAdditionalSpells(Pawn chosen)
         {
             foreach (var abilityDef in DefDatabase<AbilityDef>.AllDefsListForReading
-                .Where(x => !chosen.abilities.abilities.Select(ab => ab.def).Contains(x))
+                .Where(x => !chosen.abilities.abilities.Select(ab => ab.def).Contains(x) && x.level != 0)
                 .OrderBy(ab => ab.level).ThenBy(x => Guid.NewGuid()).Take(2))
             {
                 chosen.abilities.GainAbility(abilityDef);
