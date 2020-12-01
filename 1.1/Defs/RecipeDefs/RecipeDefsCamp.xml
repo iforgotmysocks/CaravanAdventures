@@ -243,6 +243,7 @@
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <allowMixingIngredients>true</allowMixingIngredients>
     <ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass>
+    <autoStripCorpses>false</autoStripCorpses>
     <ingredients>
       <li>
         <filter>
