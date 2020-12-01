@@ -13,6 +13,9 @@ namespace CaravanAdventures.CaravanCamp
 {
     // todos
     // add a guardening tent with high powered sunlamp thingy
+    // fix unfogging in TransformTerrain()
+
+    // find out why burning corpses at the bio chem station removes cloths
 
     // functionality: 
     // add another field rect
@@ -203,13 +206,16 @@ namespace CaravanAdventures.CaravanCamp
 
                 if (room != null && room.CellCount < 700 && room.ContainsThing(ThingDefOf.AncientCryptosleepCasket))
                 {
+                    // todo test if that uncovers better
+                    CaravanStory.StoryUtility.FloodUnfogAdjacent(room.Map.fogGrid, room.Map, room.Cells.FirstOrDefault(cell => !room.BorderCells.Contains(cell)));
+                    
                     foreach (var roomCell in room.Cells)
                     {
                         foreach (var thing in map.thingGrid.ThingsListAt(roomCell).Reverse<Thing>()) if (thing.def.destroyable) thing.Destroy();
                     }
 
                     var roomRect = CellRect.FromLimits(room.Cells.MinBy(cell => cell.x + cell.z), room.Cells.MaxBy(cell => cell.x + cell.z));
-                    foreach (var cell in roomRect.ExpandedBy(1).Cells) map.fogGrid.Unfog(cell);
+                    foreach (var cell in roomRect.ExpandedBy(1).Cells) if (cell.Fogged(map)) map.fogGrid.Unfog(cell);
                 }
             }
 

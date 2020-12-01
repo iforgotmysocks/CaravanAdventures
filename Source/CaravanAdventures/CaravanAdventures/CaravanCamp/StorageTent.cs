@@ -27,6 +27,8 @@ namespace CaravanAdventures.CaravanCamp
         {
             zone = new Zone_Stockpile(StorageSettingsPreset.DefaultStockpile, map.zoneManager);
             map.zoneManager.RegisterZone(zone);
+            zone.settings.filter.SetAllow(SpecialThingFilterDef.Named("AllowBiocodedWeapons"), false);
+            zone.settings.filter.SetAllow(SpecialThingFilterDef.Named("AllowDeadmansApparel"), false);
             CellRect.Cells.Where(cell => cell != null && !CellRect.EdgeCells.Contains(cell)).ToList().ForEach(cell => zone.AddCell(cell));
         }
 
