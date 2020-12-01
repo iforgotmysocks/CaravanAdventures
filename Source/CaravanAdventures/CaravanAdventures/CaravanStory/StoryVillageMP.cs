@@ -21,9 +21,9 @@ namespace CaravanAdventures.CaravanStory
     class StoryVillageMP : Settlement
     {
         private int ticks;
-        private int ticksTillReinforcements = -1;
-        private int timerTillRemoval = -1;
-        private int timerForceStartRaid = -1;
+        private float ticksTillReinforcements = -1f;
+        private float timerTillRemoval = -1f;
+        private float timerForceStartRaid = -1f;
         private bool sacHuntersFleeing;
         private bool sacHuntersCiviliansFleeing;
         private bool mainCharLeftOrDied;
@@ -41,9 +41,9 @@ namespace CaravanAdventures.CaravanStory
             Scribe_Values.Look(ref sacHuntersCiviliansFleeing, "sacHuntersCiviliansFleeing");
             Scribe_Values.Look(ref mainCharLeftOrDied, "mainCharLeftOrDied");
             Scribe_Values.Look(ref centerPoint, "centerPoint");
-            Scribe_Values.Look(ref timerTillRemoval, "timerTillRemoval", -1);
-            Scribe_Values.Look(ref timerForceStartRaid, "timerForceStartRaid", -1);
-
+            Scribe_Values.Look(ref ticksTillReinforcements, "ticksTillReinforcements", -1f);
+            Scribe_Values.Look(ref timerTillRemoval, "timerTillRemoval", -1f);
+            Scribe_Values.Look(ref timerForceStartRaid, "timerForceStartRaid", -1f);
         }
 
         public void Notify_CaravanArrived(Caravan caravan)

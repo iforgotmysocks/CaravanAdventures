@@ -23,11 +23,7 @@ using Verse.Noise;
 // - story: 
 // --> what to do when they get hostile
 
-// - unlag
-// --> remove additional ancient caskets from small shrines on master shrine map --> lets hold this one and better balance the amount correctly
-// --> maybe decrease small shrines and make them not depend on spawning on a rock
 
-// - better map generation control for small shrines
 
 // - second shrine was removed before the boss died and the ability dialog came up
 // - fix just melee mech raids, by adding a new pawngroupmaker to the faction def that isn't called combat and use that
