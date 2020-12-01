@@ -91,7 +91,9 @@ namespace CaravanAdventures.CaravanCamp
 
         public void ApplyRecipesTribal(Caravan caravan)
         {
-            ApplyRecipes(caravan);
+            var colonists = caravan.PawnsListForReading.Where(col => col.IsFreeColonist).ToList();
+            var bill = new Bill_Production(DefDatabase<RecipeDef>.GetNamed("CookMealSimpleBulk")) { targetCount = colonists.Count != 0 ? colonists.Count * 2 : 12, repeatMode = BillRepeatModeDefOf.TargetCount };
+            campFire.BillStack.AddBill(bill);
         }
     }
 }
