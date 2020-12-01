@@ -12,7 +12,9 @@ namespace CaravanAdventures
 {
     class ModSettings : Verse.ModSettings
     {
- 
+        // not saved!
+        private Rect lastRect = default;
+
         // general
         public static bool debug = false;
 
@@ -42,8 +44,9 @@ namespace CaravanAdventures
         public static float apocalypseTemperatureChangePerDay = -0.084f;
 
         // shrines
-        // todo setting
-        internal static bool removeHivesFromMasterShrines = true;
+
+        // bounty
+        public static float envoyDurationTimeForBountyRelationHagglingInDays = 1;
 
         //public static ModSettings Get() => LoadedModManager.GetMod<CaravanAdventures.Main>().GetSettings<ModSettings>();
         private Vector2 scrollPos = Vector2.zero;
@@ -79,11 +82,14 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref apocalypseTemperatureChangePerDay, "apocalypseTemperatureChangePerDay", -0.084f);
 
             // shrines
-            Scribe_Values.Look(ref removeHivesFromMasterShrines, "removeHivesFromMasterShrines", true);
 
+            // bounty
+            Scribe_Values.Look(ref envoyDurationTimeForBountyRelationHagglingInDays, "envoyDurationTimeForBountyRelationHagglingInDays", 1f);
         }
 
         public bool toggleTest = false;
+
+
         public void DoWindowContentsNew(Rect wrect)
         {
             var options = new Listing_Standard();
@@ -98,7 +104,7 @@ namespace CaravanAdventures
 
             Widgets.CheckboxLabeled(BRect(options.ColumnWidth - 400, options.GetRect(Text.LineHeight).y, 200, Text.LineHeight), "Enabled: ", ref toggleTest);
             Widgets.ButtonText(BRect(options.ColumnWidth - 200, lastRect.y, 200, Text.LineHeight), "button");
-           
+
 
             options.Gap();
 
@@ -107,7 +113,6 @@ namespace CaravanAdventures
             this.Write();
         }
 
-        private Rect lastRect = default;
 
 
         private Rect BRect(float x, float y, float width, float height)
@@ -145,7 +150,7 @@ namespace CaravanAdventures
             if (options.ButtonTextLabeled("Increase Settlement money", "Increase")) Helper.AdjustSettlementPrices();
             // todo add min and max multiplier used in the def patch for settlement money
             options.Gap();
-           
+
 
             options.Label("Ancient thunderbolt:".Colorize(Color.red), 40f);
             options.Label("Mechanoid bodypart dissmember chance: " + Convert.ToInt32(mechanoidDissmemberChance * 100) + "%");
@@ -190,8 +195,8 @@ namespace CaravanAdventures
             this.Write();
         }
 
-  
 
-       
+
+
     }
 }

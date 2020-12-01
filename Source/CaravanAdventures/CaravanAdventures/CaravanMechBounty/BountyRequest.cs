@@ -134,11 +134,19 @@ namespace CaravanAdventures.CaravanMechBounty
             foreach (var curFaction in Find.FactionManager.AllFactions.Where(f => !f.def.permanentEnemy))
             {
                 if (curFaction == Faction.OfPlayer || curFaction == this.faction) continue;
-                node.options.Add(new DiaOption("CABountyExchangeRelationHaggle_Factions_ListedFaction".Translate(curFaction.NameColored, curFaction.GoodwillWith(Faction.OfPlayer), CalcReqGW(curFaction, 25), CalculateGoodWillCost(curFaction, 25))) { action = () => TradeRelationForBounty(curFaction, 25), disabled = CompCache.BountyWC.BountyPoints < CalculateGoodWillCost(curFaction, 25), disabledReason = "CABountyExchangeRequestHelp_StrengthSelection_NotEnoughMoney".Translate() });
+                node.options.Add(new DiaOption("CABountyExchangeRelationHaggle_Factions_ListedFaction".Translate(curFaction.NameColored, curFaction.GoodwillWith(Faction.OfPlayer), CalcReqGW(curFaction, 25), CalculateGoodWillCost(curFaction, 25))) { action = () => TradeRelationForBounty(curFaction, 25), disabled = IsHagglingPossible(curFaction), disabledReason = "CABountyExchangeRequestHelp_StrengthSelection_NotEnoughMoney".Translate() });
             }
             node.options.Add(new DiaOption("CABountyBack".Translate()) { link = parent });
 
             return node;
+        }
+
+        private bool IsHagglingPossible(Faction curFaction)
+        {
+            if (CompCache.BountyWC.BountyPoints < CalculateGoodWillCost(curFaction, 25)) return false;
+            if (CompCache.BountyWC.OngoingEnvoyDelay > 0) return false;
+            if (curFaction.GoodwillWith(Faction.OfPlayer) == 100) return false;
+            return true;
         }
 
         private int CalcReqGW(Faction curFaction, int goodwill)
@@ -158,12 +166,13 @@ namespace CaravanAdventures.CaravanMechBounty
                 return;
             }
             CompCache.BountyWC.BountyPoints -= price;
+            CompCache.BountyWC.OngoingEnvoyDelay = ModSettings.envoyDurationTimeForBountyRelationHagglingInDays * 60000f;
         }
 
         private float CalculateGoodWillCost(Faction faction, int goodwill)
         {
             var costPerPoint = 5f;
-            if (faction != this.faction) costPerPoint *= 2;
+            if (faction != this.faction) costPerPoint *= 2f;
             var gwbf = faction.GoodwillWith(Faction.OfPlayer);
             if (gwbf < 0) costPerPoint += Math.Abs(gwbf) * 0.1f;
             if (gwbf + goodwill > 100) goodwill -= (gwbf + goodwill - 100);
