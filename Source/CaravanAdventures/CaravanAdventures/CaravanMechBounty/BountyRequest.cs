@@ -121,7 +121,7 @@ namespace CaravanAdventures.CaravanMechBounty
         private DiaNode GetRelationHaggleOverview(DiaNode parent)
         {
             var node = new DiaNode("CABountyExchangeRelationHaggle".Translate(CompCache.BountyWC.BountyPoints));
-            node.options.Add(new DiaOption("CABountyExchangeRelationHaggle_WithYou".Translate(CalculateGoodWillCost(faction, 25), CalcReqGW(faction, 25), faction.NameColored)) { action = () => TradeRelationForBounty(faction, 25), disabled = CompCache.BountyWC.BountyPoints < CalculateGoodWillCost(faction, 25), disabledReason = "CABountyExchangeRequestHelp_StrengthSelection_NotEnoughMoney".Translate() });
+            node.options.Add(new DiaOption("CABountyExchangeRelationHaggle_WithYou".Translate(CalculateGoodWillCost(faction, 25), CalcReqGW(faction, 25), faction.NameColored)) { action = () => TradeRelationForBounty(faction, 25), disabled = CompCache.BountyWC.BountyPoints < CalculateGoodWillCost(faction, 25) || faction.GoodwillWith(Faction.OfPlayer) == 100, disabledReason = (faction.GoodwillWith(Faction.OfPlayer) == 100) ? "CABountyExchangeRequestHelp_StrengthSelection_AlreadyMax".Translate() : "CABountyExchangeRequestHelp_StrengthSelection_NotEnoughMoney".Translate() });
             node.options.Add(new DiaOption("CABountyExchangeRelationHaggle_WithAnotherFaction".Translate()) { link = GetListOfFactions(node, faction, 25) });
             node.options.Add(new DiaOption("CABountyBack".Translate()) { link = parent });
 
@@ -134,18 +134,31 @@ namespace CaravanAdventures.CaravanMechBounty
             foreach (var curFaction in Find.FactionManager.AllFactions.Where(f => !f.def.permanentEnemy))
             {
                 if (curFaction == Faction.OfPlayer || curFaction == this.faction) continue;
-                node.options.Add(new DiaOption("CABountyExchangeRelationHaggle_Factions_ListedFaction".Translate(curFaction.NameColored, curFaction.GoodwillWith(Faction.OfPlayer), CalcReqGW(curFaction, 25), CalculateGoodWillCost(curFaction, 25))) { action = () => TradeRelationForBounty(curFaction, 25), disabled = IsHagglingPossible(curFaction), disabledReason = "CABountyExchangeRequestHelp_StrengthSelection_NotEnoughMoney".Translate() });
+                node.options.Add(new DiaOption("CABountyExchangeRelationHaggle_Factions_ListedFaction".Translate(curFaction.NameColored, curFaction.GoodwillWith(Faction.OfPlayer), CalcReqGW(curFaction, 25), CalculateGoodWillCost(curFaction, 25))) { action = () => TradeRelationForBounty(curFaction, 25), disabled = !IsHagglingPossible(curFaction, out var reason), disabledReason = reason });
             }
             node.options.Add(new DiaOption("CABountyBack".Translate()) { link = parent });
 
             return node;
         }
 
-        private bool IsHagglingPossible(Faction curFaction)
+        private bool IsHagglingPossible(Faction curFaction, out string reason)
         {
-            if (CompCache.BountyWC.BountyPoints < CalculateGoodWillCost(curFaction, 25)) return false;
-            if (CompCache.BountyWC.OngoingEnvoyDelay > 0) return false;
-            if (curFaction.GoodwillWith(Faction.OfPlayer) == 100) return false;
+            if (CompCache.BountyWC.BountyPoints < CalculateGoodWillCost(curFaction, 25))
+            {
+                reason = "CABountyExchangeRequestHelp_StrengthSelection_NotEnoughMoney".Translate();
+                return false;
+            }
+            if (CompCache.BountyWC.OngoingEnvoyDelay > 0)
+            {
+                reason = "CABountyExchangeRequestHelp_StrengthSelection_EnvoyBusy".Translate();
+                return false;
+            }
+            if (curFaction.GoodwillWith(Faction.OfPlayer) == 100)
+            {
+                reason = "CABountyExchangeRequestHelp_StrengthSelection_AlreadyMax".Translate();
+                return false;
+            }
+            reason = string.Empty;
             return true;
         }
 
