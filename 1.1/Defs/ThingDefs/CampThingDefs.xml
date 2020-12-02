@@ -4,7 +4,7 @@
   <ThingDef Name="CATentBase" ParentName="BuildingBase" Abstract="True">
     <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
     <resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
-		<tradeability>None</tradeability>
+    <tradeability>None</tradeability>
     <modExtensions>
       <li Class="CaravanAdventures.CaravanCamp.CampModExt"></li>
     </modExtensions>
@@ -24,9 +24,9 @@
         <drawAssignmentOverlay>false</drawAssignmentOverlay>
         <compClass>CompAssignableToPawn_Bed</compClass>
       </li>
-      <li>
+      <!--<li>
         <compClass>CompQuality</compClass>
-      </li>
+      </li>-->
     </comps>
     <drawGUIOverlay>true</drawGUIOverlay>
     <canOverlapZones>false</canOverlapZones>
@@ -105,8 +105,8 @@
     <uiIconPath>Things/Building/Door/DoorSimple_MenuIcon</uiIconPath>
     <costStuffCount>25</costStuffCount>
   </ThingDef>
-  
-  
+
+
   <!-- supplies -->
   <ThingDef ParentName="ResourceBase">
     <defName>CASpacerTentSupplies</defName>
@@ -157,7 +157,7 @@
       <deconstructible>false</deconstructible>
     </building>
   </ThingDef>
-  
+
   <!-- chem fuel-->
   <ThingDef Name="CABenchBase" ParentName="CATentBase" Abstract="True">
     <canOverlapZones>false</canOverlapZones>
@@ -184,7 +184,7 @@
       </buildingTags>
     </building>
   </ThingDef>
-  
+
   <ThingDef ParentName="CABenchBase">
     <defName>CASpacerBiofuelRefinery</defName>
     <label>spacer biofuel refinery</label>
@@ -451,7 +451,7 @@
       <MaxHitPoints>50</MaxHitPoints>
       <Flammability>1.0</Flammability>
       <Beauty>0</Beauty>
-      <Mass>0.44</Mass>
+      <Mass>0.25</Mass>
       <DeteriorationRate>10</DeteriorationRate>
     </statBases>
     <altitudeLayer>Item</altitudeLayer>
@@ -502,87 +502,87 @@
     </ingestible>
     <tradeability>None</tradeability>
   </ThingDef>
-  
+
   <!-- oc -->
-	<ThingDef ParentName="CATentBase">
-		<defName>CAAirConditioningHeater</defName>
-		<label>One-way A/C and Heater</label>
-		<description>A device that converts electricity into heat, but is also able to cool the room to a certain degree.</description>
-		<!--<thingClass>CaravanAdventures.CaravanCamp.Buildings.Building_AirConditioningHeater</thingClass>-->
-		<thingClass>Building_WorkTable</thingClass>
-		<graphicData>
-			<texPath>Things/Building/Misc/TempControl/Heater</texPath>
-			<graphicClass>Graphic_Single</graphicClass>
-			<shadowData>
-				<volume>(0.5,0.3,0.7)</volume>
-				<offset>(0,0,-0.15)</offset>
-			</shadowData>
-			<damageData>
-				<rect>(0.234375,0,0.515625,0.984375)</rect>
-				<cornerTL>Damage/Corner</cornerTL>
-				<cornerTR>Damage/Corner</cornerTR>
-				<cornerBL>Damage/Corner</cornerBL>
-				<cornerBR>Damage/Corner</cornerBR>
-			</damageData>
-		</graphicData>
-		<!--<minifiedDef>MinifiedThing</minifiedDef>-->
-		<altitudeLayer>Building</altitudeLayer>
-		<passability>PassThroughOnly</passability>
-		<pathCost>40</pathCost>
-		<blockWind>true</blockWind>
-		<rotatable>false</rotatable>
-		<fillPercent>0.4</fillPercent>
-		<!--<thingCategories>
+  <ThingDef ParentName="CATentBase">
+    <defName>CAAirConditioningHeater</defName>
+    <label>One-way A/C and Heater</label>
+    <description>A device that converts chemfuel into heat, but is also able to cool the room to a certain degree.</description>
+    <!--<thingClass>CaravanAdventures.CaravanCamp.Buildings.Building_AirConditioningHeater</thingClass>-->
+    <thingClass>Building_WorkTable</thingClass>
+    <graphicData>
+      <texPath>Things/Building/Misc/TempControl/Heater</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shadowData>
+        <volume>(0.5,0.3,0.7)</volume>
+        <offset>(0,0,-0.15)</offset>
+      </shadowData>
+      <damageData>
+        <rect>(0.234375,0,0.515625,0.984375)</rect>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+    </graphicData>
+    <!--<minifiedDef>MinifiedThing</minifiedDef>-->
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>40</pathCost>
+    <blockWind>true</blockWind>
+    <rotatable>false</rotatable>
+    <fillPercent>0.4</fillPercent>
+    <!--<thingCategories>
 			<li>BuildingsTemperature</li>
 		</thingCategories>-->
-		<statBases>
-			<WorkToBuild>1000</WorkToBuild>
-			<MaxHitPoints>100</MaxHitPoints>
-			<Mass>6</Mass>
-			<Flammability>0.5</Flammability>
-		</statBases>
-		<tickerType>Normal</tickerType>
-		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
-		<placeWorkers>
-			<li>PlaceWorker_Heater</li>
-		</placeWorkers>
-		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
-		<comps>
-			<!--<li Class="CompProperties_Power">
+    <statBases>
+      <WorkToBuild>1000</WorkToBuild>
+      <MaxHitPoints>100</MaxHitPoints>
+      <Mass>6</Mass>
+      <Flammability>0.5</Flammability>
+    </statBases>
+    <tickerType>Normal</tickerType>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <placeWorkers>
+      <li>PlaceWorker_Heater</li>
+    </placeWorkers>
+    <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+    <comps>
+      <!--<li Class="CompProperties_Power">
 				<compClass>CompPowerPlant</compClass>
 				<basePowerConsumption>-100</basePowerConsumption>
 				<transmitsPower>true</transmitsPower>
 				<soundAmbientProducingPower>ChemfuelFiredGenerator_Ambience</soundAmbientProducingPower>
 			</li>-->
-			
-			<li Class="CompProperties_Flickable" />
-			<li Class="CompProperties_Refuelable">
-				<fuelConsumptionRate>0.5</fuelConsumptionRate>
-				<fuelCapacity>3</fuelCapacity>
-				<fuelFilter>
-					<thingDefs>
-						<li>Chemfuel</li>
-					</thingDefs>
-				</fuelFilter>
-				<showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
-			</li>
-			<li Class="CompProperties_Glower">
-				<glowRadius>13</glowRadius>
-				<glowColor>(150,150,180,0)</glowColor>
-			</li>
-			<li Class="CompProperties_HeatPusher">
-				<compClass>CompHeatPusherPowered</compClass>
-				<heatPerSecond>15</heatPerSecond>
-				<heatPushMaxTemperature>21</heatPushMaxTemperature>
-			</li>
-			<li Class="CompProperties_HeatPusher">
-				<compClass>CompHeatPusherPowered</compClass>
-				<heatPerSecond>-15</heatPerSecond>
-				<heatPushMinTemperature>21</heatPushMinTemperature>
-			</li>
-			
-			
-			<!--
+
+      <li Class="CompProperties_Flickable" />
+      <li Class="CompProperties_Refuelable">
+        <fuelConsumptionRate>0.5</fuelConsumptionRate>
+        <fuelCapacity>3</fuelCapacity>
+        <fuelFilter>
+          <thingDefs>
+            <li>Chemfuel</li>
+          </thingDefs>
+        </fuelFilter>
+        <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>13</glowRadius>
+        <glowColor>(150,150,180,0)</glowColor>
+      </li>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>17</heatPerSecond>
+        <heatPushMaxTemperature>21</heatPushMaxTemperature>
+      </li>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>-15</heatPerSecond>
+        <heatPushMinTemperature>21</heatPushMinTemperature>
+      </li>
+
+
+      <!--
 			<li Class="CompProperties_Power">
 				<compClass>CompPowerTrader</compClass>
 				<basePowerConsumption>75</basePowerConsumption>
@@ -598,92 +598,92 @@
 			</li>
 			<li Class="CompProperties_Breakdownable"/>
 			-->
-		</comps>
-		<!--<designationCategory>Temperature</designationCategory>-->
-		<researchPrerequisites>
-			<li>Electricity</li>
-		</researchPrerequisites>
-	</ThingDef>
+    </comps>
+    <!--<designationCategory>Temperature</designationCategory>-->
+    <researchPrerequisites>
+      <li>Electricity</li>
+    </researchPrerequisites>
+  </ThingDef>
 
   <!-- cooler -->
-	<ThingDef ParentName="CATentBase">
-		<defName>CACooler</defName>
-		<label>One-way Cooler</label>
-		<description>A device that cools down the room temperature.</description>
-		<!--<thingClass>CaravanAdventures.CaravanCamp.Buildings.Building_AirConditioningHeater</thingClass>-->
-		<thingClass>Building_WorkTable</thingClass>
-		<graphicData>
-			<texPath>Things/Building/Misc/TempControl/Cooler</texPath>
-			<graphicClass>Graphic_Multi</graphicClass>
-			<drawSize>0.5,0.5</drawSize>
-			<shadowData>
-				<volume>(0.5,0.3,0.7)</volume>
-				<offset>(0,0,-0.15)</offset>
-			</shadowData>
-			<damageData>
-				<rect>(0.234375,0,0.515625,0.984375)</rect>
-				<cornerTL>Damage/Corner</cornerTL>
-				<cornerTR>Damage/Corner</cornerTR>
-				<cornerBL>Damage/Corner</cornerBL>
-				<cornerBR>Damage/Corner</cornerBR>
-			</damageData>
-		</graphicData>
-		<!--<minifiedDef>MinifiedThing</minifiedDef>-->
-		<altitudeLayer>Building</altitudeLayer>
-		<passability>PassThroughOnly</passability>
-		<pathCost>40</pathCost>
-		<blockWind>true</blockWind>
-		<rotatable>false</rotatable>
-		<fillPercent>0.4</fillPercent>
-		<!--<thingCategories>
+  <ThingDef ParentName="CATentBase">
+    <defName>CACooler</defName>
+    <label>One-way Cooler</label>
+    <description>A device that cools down the room temperature.</description>
+    <!--<thingClass>CaravanAdventures.CaravanCamp.Buildings.Building_AirConditioningHeater</thingClass>-->
+    <thingClass>Building_WorkTable</thingClass>
+    <graphicData>
+      <texPath>Things/Building/Misc/TempControl/Cooler</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>0.5,0.5</drawSize>
+      <shadowData>
+        <volume>(0.5,0.3,0.7)</volume>
+        <offset>(0,0,-0.15)</offset>
+      </shadowData>
+      <damageData>
+        <rect>(0.234375,0,0.515625,0.984375)</rect>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+    </graphicData>
+    <!--<minifiedDef>MinifiedThing</minifiedDef>-->
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>40</pathCost>
+    <blockWind>true</blockWind>
+    <rotatable>false</rotatable>
+    <fillPercent>0.4</fillPercent>
+    <!--<thingCategories>
 			<li>BuildingsTemperature</li>
 		</thingCategories>-->
-		<statBases>
-			<WorkToBuild>1000</WorkToBuild>
-			<MaxHitPoints>100</MaxHitPoints>
-			<Mass>6</Mass>
-			<Flammability>0.5</Flammability>
-		</statBases>
-		<tickerType>Normal</tickerType>
-		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
-		<placeWorkers>
-			<li>PlaceWorker_Heater</li>
-		</placeWorkers>
-		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
-		<comps>
-			<!--<li Class="CompProperties_Power">
+    <statBases>
+      <WorkToBuild>1000</WorkToBuild>
+      <MaxHitPoints>100</MaxHitPoints>
+      <Mass>6</Mass>
+      <Flammability>0.5</Flammability>
+    </statBases>
+    <tickerType>Normal</tickerType>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <placeWorkers>
+      <li>PlaceWorker_Heater</li>
+    </placeWorkers>
+    <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+    <comps>
+      <!--<li Class="CompProperties_Power">
 				<compClass>CompPowerPlant</compClass>
 				<basePowerConsumption>-100</basePowerConsumption>
 				<transmitsPower>true</transmitsPower>
 				<soundAmbientProducingPower>ChemfuelFiredGenerator_Ambience</soundAmbientProducingPower>
 			</li>-->
 
-			<li Class="CompProperties_Flickable" />
-			<li Class="CompProperties_Refuelable">
-				<fuelConsumptionRate>0.5</fuelConsumptionRate>
-				<fuelCapacity>3.0</fuelCapacity>
-				<fuelFilter>
-					<thingDefs>
-						<li>Chemfuel</li>
-					</thingDefs>
-				</fuelFilter>
-				<showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
-			</li>
-			<li Class="CompProperties_Glower">
-				<glowRadius>13</glowRadius>
-				<glowColor>(150,150,180,0)</glowColor>
-			</li>
-			<li Class="CompProperties_HeatPusher">
-				<compClass>CompHeatPusherPowered</compClass>
-				<heatPerSecond>-30</heatPerSecond>
-				<heatPushMinTemperature>-9</heatPushMinTemperature>
-			</li>
-		</comps>
-		<!--<designationCategory>Temperature</designationCategory>-->
-		<researchPrerequisites>
-			<li>Electricity</li>
-		</researchPrerequisites>
-	</ThingDef>
+      <li Class="CompProperties_Flickable" />
+      <li Class="CompProperties_Refuelable">
+        <fuelConsumptionRate>0.5</fuelConsumptionRate>
+        <fuelCapacity>3.0</fuelCapacity>
+        <fuelFilter>
+          <thingDefs>
+            <li>Chemfuel</li>
+          </thingDefs>
+        </fuelFilter>
+        <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>13</glowRadius>
+        <glowColor>(150,150,180,0)</glowColor>
+      </li>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>-30</heatPerSecond>
+        <heatPushMinTemperature>-9</heatPushMinTemperature>
+      </li>
+    </comps>
+    <!--<designationCategory>Temperature</designationCategory>-->
+    <researchPrerequisites>
+      <li>Electricity</li>
+    </researchPrerequisites>
+  </ThingDef>
 
   <TerrainDef Name="CATentFloorBase" Parent="CATentBase" Abstract="True">
     <layerable>true</layerable>
@@ -873,7 +873,7 @@
     <placeWorkers>
     </placeWorkers>
   </ThingDef>
-  
+
   <!-- bedrolls  -->
   <ThingDef ParentName="CABedBase">
     <defName>CASpacerBedroll</defName>
@@ -891,8 +891,8 @@
       <Flammability>0.1</Flammability>
       <Mass>2.5</Mass>
       <BedRestEffectiveness>1.3</BedRestEffectiveness>
-      <ImmunityGainSpeedFactor>1.2</ImmunityGainSpeedFactor>
-       <SurgerySuccessChanceFactor>1.2</SurgerySuccessChanceFactor>
+      <ImmunityGainSpeedFactor>1.25</ImmunityGainSpeedFactor>
+      <SurgerySuccessChanceFactor>1.25</SurgerySuccessChanceFactor>
       <Comfort>0.90</Comfort>
       <WorkToBuild>600</WorkToBuild>
     </statBases>
@@ -935,8 +935,9 @@
     <statBases>
       <Flammability>0.1</Flammability>
       <Mass>4.5</Mass>
-      <BedRestEffectiveness>1.4</BedRestEffectiveness>
-      <ImmunityGainSpeedFactor>1.10</ImmunityGainSpeedFactor>
+      <BedRestEffectiveness>1.3</BedRestEffectiveness>
+      <SurgerySuccessChanceFactor>1.25</SurgerySuccessChanceFactor>
+      <ImmunityGainSpeedFactor>1.25</ImmunityGainSpeedFactor>
       <Comfort>0.90</Comfort>
       <WorkToBuild>1100</WorkToBuild>
     </statBases>

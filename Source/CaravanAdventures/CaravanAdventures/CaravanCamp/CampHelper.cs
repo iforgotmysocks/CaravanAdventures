@@ -74,5 +74,13 @@ namespace CaravanAdventures.CaravanCamp
             parts.Where(part => part.GetZone() != null).Select(part => part.GetZone()).ToList().ForEach(zone => zone.Cells.ForEach(cell => animalArea[cell] = false));
             animalArea.AreaUpdate();
         }
+
+        internal static void AssignQualityReflectiveOfSkill(Building thing, int skillLevel, int lowestSkill = 6)
+        {
+            var compQual = thing.TryGetComp<CompQuality>();
+            if (compQual == null) return;
+            skillLevel = lowestSkill > skillLevel ? lowestSkill : skillLevel;
+            compQual.SetQuality(QualityUtility.GenerateQualityCreatedByPawn(skillLevel, false), ArtGenerationContext.Colony);
+        }
     }
 }
