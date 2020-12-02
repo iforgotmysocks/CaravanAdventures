@@ -75,6 +75,8 @@ namespace CaravanAdventures.CaravanStory
                 "CA_Story_TheTree_QuestName",
                 null,
                 "CA_Story_TheTree_QuestDesc");
+
+            CompCache.StoryWC.SetSF("Start_TreeWhisperQuestStarted");
         }
 
         private void DrawTreeQuestionMark()
