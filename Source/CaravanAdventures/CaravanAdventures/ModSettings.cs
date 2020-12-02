@@ -46,7 +46,9 @@ namespace CaravanAdventures
         // shrines
 
         // bounty
-        public static float envoyDurationTimeForBountyRelationHagglingInDays = 1;
+        public static float envoyDurationTimeForBountyRelationHagglingInDays = 1f;
+        public static float itemRestockDurationInDays = 1f;
+        public static float alliedAssistanceDurationInDays = 1f;
 
         //public static ModSettings Get() => LoadedModManager.GetMod<CaravanAdventures.Main>().GetSettings<ModSettings>();
         private Vector2 scrollPos = Vector2.zero;
@@ -85,6 +87,8 @@ namespace CaravanAdventures
 
             // bounty
             Scribe_Values.Look(ref envoyDurationTimeForBountyRelationHagglingInDays, "envoyDurationTimeForBountyRelationHagglingInDays", 1f);
+            Scribe_Values.Look(ref itemRestockDurationInDays, "itemRestockDurationInDays", 1f);
+            Scribe_Values.Look(ref alliedAssistanceDurationInDays, "alliedAssistanceDurationInDays", 1f);
         }
 
         public bool toggleTest = false;
