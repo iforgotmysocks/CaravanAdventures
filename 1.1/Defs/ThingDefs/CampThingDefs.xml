@@ -266,7 +266,7 @@
     <graphicData>
       <texPath>Things/Building/Misc/CommsConsole</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
-      <drawSize>(1,1)</drawSize>
+      <drawSize>(1.8,1.8)</drawSize>
       <damageData>
         <rect>(0,0,3,1.8)</rect>
         <cornerBL>Damage/Corner</cornerBL>
@@ -695,6 +695,9 @@
     <tags>
       <li>Floor</li>
     </tags>
+    <statBases>
+      <Beauty>1</Beauty>
+    </statBases>
     <!--<designationCategory>Floors</designationCategory>-->
     <fertility>0</fertility>
     <constructEffect>ConstructDirt</constructEffect>
@@ -717,7 +720,7 @@
   <ThingDef ParentName="CATentBase">
     <defName>CATentWall</defName>
     <label>tent wall</label>
-    <description>High tech tent walls.</description>
+    <description>High tech tent wall. Rather good looking, tho topped by the futuristic windows allowing to watch the beautiful outside, but not peeking inside.</description>
     <thingClass>Building</thingClass>
     <!--<category>Building</category>-->
     <graphicData>
@@ -745,6 +748,7 @@
       <MaxHitPoints>100</MaxHitPoints>
       <WorkToBuild>20</WorkToBuild>
       <Flammability>0.1</Flammability>
+      <Beauty>2</Beauty>
     </statBases>
     <costStuffCount>5</costStuffCount>
     <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
@@ -799,7 +803,7 @@
     </graphicData>
     <statBases>
       <MaxHitPoints>200</MaxHitPoints>
-      <MarketValue>20</MarketValue>
+      <MarketValue>12</MarketValue>
       <Mass>0.001</Mass>
       <Flammability>0.1</Flammability>
       <DeteriorationRate>0</DeteriorationRate>
@@ -822,7 +826,7 @@
       <statFactors>
         <Flammability>0.1</Flammability>
         <MaxHitPoints>2</MaxHitPoints>
-        <Beauty>3</Beauty>
+        <Beauty>2</Beauty>
       </statFactors>
     </stuffProps>
     <!--<thingCategories>
@@ -965,5 +969,6 @@
     <pathCost>14</pathCost>
     <passability>Standable</passability>
   </ThingDef>
+ 
 
 </Defs>
