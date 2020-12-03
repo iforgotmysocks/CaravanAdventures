@@ -49,6 +49,7 @@ namespace CaravanAdventures
         public static float envoyDurationTimeForBountyRelationHagglingInDays = 1f;
         public static float itemRestockDurationInDays = 1f;
         public static float alliedAssistanceDurationInDays = 1f;
+        public static float veteranResetTimeInDays = 3f;
 
         //public static ModSettings Get() => LoadedModManager.GetMod<CaravanAdventures.Main>().GetSettings<ModSettings>();
         private Vector2 scrollPos = Vector2.zero;
@@ -89,6 +90,7 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref envoyDurationTimeForBountyRelationHagglingInDays, "envoyDurationTimeForBountyRelationHagglingInDays", 1f);
             Scribe_Values.Look(ref itemRestockDurationInDays, "itemRestockDurationInDays", 1f);
             Scribe_Values.Look(ref alliedAssistanceDurationInDays, "alliedAssistanceDurationInDays", 1f);
+            Scribe_Values.Look(ref veteranResetTimeInDays, "veteranResetTimeInDays", 3f);
         }
 
         public bool toggleTest = false;

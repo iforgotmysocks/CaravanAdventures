@@ -36,7 +36,7 @@ namespace CaravanAdventures.CaravanMechBounty
             node.options.Add(new DiaOption("CABountyExchangeRecruitVeteranHunter".Translate()) { link = GetRecuitmentOverview(node), disabled = hostile, disabledReason = error });
             if (Helper.Debug())
             {
-                node.options.Add(new DiaOption("Debug: + 1000") { action = () => CompCache.BountyWC.BountyPoints += 1000, link = node });
+                node.options.Add(new DiaOption("Debug: + 10000") { action = () => CompCache.BountyWC.BountyPoints += 10000, link = node });
                 node.options.Add(new DiaOption("Debug: - 500") { action = () => CompCache.BountyWC.BountyPoints -= 500, link = node });
             }
 
@@ -186,7 +186,7 @@ namespace CaravanAdventures.CaravanMechBounty
             return value / 2f;
         }
 
-        private void PurchaseAndDropItem(Thing item)
+        private void PurchaseAndDropItem(Thing item, int fixedCredits = 0)
         {
             var things = new List<Thing>() { item };
             if (!things.Any() || item == null)
@@ -206,7 +206,7 @@ namespace CaravanAdventures.CaravanMechBounty
             activeDropPodInfo.innerContainer.TryAddRangeOrTransfer(things, true, false);
             DropPodUtility.MakeDropPodAt(validPosition, requestor.Map, activeDropPodInfo);
             Messages.Message("CABountyExchangeRequestItem_ItemArrived".Translate(this.faction.Named("FACTION")), new LookTargets(validPosition, requestor.Map), MessageTypeDefOf.NeutralEvent, true);
-            CompCache.BountyWC.BountyPoints -= ConvertItemValueToBounty(item);
+            CompCache.BountyWC.BountyPoints -= fixedCredits != 0 ? fixedCredits :  ConvertItemValueToBounty(item);
             CompCache.BountyWC.CurrentTradeItemStock.Remove(item);
         }
 
@@ -321,35 +321,46 @@ namespace CaravanAdventures.CaravanMechBounty
         #region recruit veteran
         private DiaNode GetRecuitmentOverview(DiaNode parent)
         {
-            var node = new DiaNode("CABountyExchangeVeteranRecruitment".Translate(CompCache.BountyWC.BountyPoints, GetVeteranTimeString()));
-            node.options.Add(new DiaOption("CABountyExchangeRequestHelp_StrengthSelection_Few".Translate(5000)) 
+            var node = new DiaNode("CABountyExchangeVeteranRecruitment".Translate(CompCache.BountyWC.BountyPoints, faction.def.LabelCap, GetVeteranTimeString()));
+            node.options.Add(new DiaOption("CABountyExchangeVeteranRecruitment_Enlist".Translate(5000)) 
             { 
-                action = () => EnlistVeteran(), 
+                action = () => EnlistVeteran(5000), 
                 resolveTree = true, 
-                disabled = CompCache.BountyWC.BountyPoints < 5000, 
-                disabledReason = "CABountyExchangeRequestHelp_StrengthSelection_NotEnoughMoney".Translate()
+                disabled = !CanRecruitVeteran(5000, out var reason), 
+                disabledReason = reason
             });
             node.options.Add(new DiaOption("CABountyBack".Translate()) { link = parent });
 
             return node;
         }
 
-        private void EnlistVeteran()
+        private bool CanRecruitVeteran(int cost, out string reason)
         {
-            var genPawnRequest = new PawnGenerationRequest(CaravanStory.StoryDefOf.CASacrilegHunters_ExperiencedHunter, Faction.OfPlayer)
+            if (CompCache.BountyWC.BountyPoints < cost)
             {
-                AllowGay = false,
-                MustBeCapableOfViolence = true,
-                ProhibitedTraits = new TraitDef[] { TraitDef.Named("Wimp") },
-                ForcedTraits = new TraitDef[] { TraitDef.Named("Tough") },
-            };
-            var veteran = PawnGenerator.GeneratePawn(genPawnRequest);
-            veteran.skills.skills.Where(skill => skill.Named())
+                reason = "CABountyExchangeRequestHelp_StrengthSelection_NotEnoughMoney".Translate();
+                return false;
+            }
+            if (CompCache.BountyWC.OngoingVeteranDelay > 0)
+            {
+                reason = "CABountyExchangeVeteranRecruitment_NotAvailable".Translate();
+                return false;
+            }
+           
+            reason = string.Empty;
+            return true;
+        }
+
+        private void EnlistVeteran(int cost)
+        {
+            Pawn vet = BountyUtility.GenerateVeteran();
+            PurchaseAndDropItem(vet, cost);
+            CompCache.BountyWC.OngoingVeteranDelay = ModSettings.veteranResetTimeInDays * 60000;
         }
 
         private string GetVeteranTimeString()
         {
-            if (CompCache.BountyWC.OngoingEnvoyDelay <= 0) return "CABountyExchangeVeteranRecruitment_Available".Translate();
+            if (CompCache.BountyWC.OngoingVeteranDelay <= 0) return "CABountyExchangeVeteranRecruitment_Available".Translate();
             return "CABountyExchangeVeteranRecruitment_Details".Translate(CompCache.BountyWC.GetNextAvailableDateInDays(CompCache.BountyWC.OngoingVeteranDelay));
         }
         #endregion

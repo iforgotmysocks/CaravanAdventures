@@ -20,7 +20,7 @@
   
   <CABountyExchangeRequestItemTitle>Current bounty credits: {0}\n\n\nPlease select the item u'd like to exchange bounty credits for. It will be delivered via drop pod.\n\n{1}</CABountyExchangeRequestItemTitle>
   <CABountyExchangeRequestItem_ItemDetails>{0} for: {1} credits</CABountyExchangeRequestItem_ItemDetails>
-  <CABountyExchangeRequestItem_ItemArrived>Your bounty credit reward item from {0} arrived!</CABountyExchangeRequestItem_ItemArrived>
+  <CABountyExchangeRequestItem_ItemArrived>Your delivery from {0} arrived!</CABountyExchangeRequestItem_ItemArrived>
   <CABountyExchangeRequestItem_ItemRestockNow>Just restocked. </CABountyExchangeRequestItem_ItemRestockNow>
   <CABountyExchangeRequestItem_ItemRestockDetail>Next restock in {0} days</CABountyExchangeRequestItem_ItemRestockDetail>
   
@@ -34,8 +34,9 @@
   <CABountyExchangeRelationHaggle_Factions>Current bounty credits: {0}\n\n\nFollowing Factions are available:\n\n{1}</CABountyExchangeRelationHaggle_Factions>
   <CABountyExchangeRelationHaggle_Factions_ListedFaction>{0} ({1})   buy: {2} for: {3} credits</CABountyExchangeRelationHaggle_Factions_ListedFaction>
 
-  <CABountyExchangeVeteranRecruitment>Current bounty credits: {0}\n\n\nThis rare opportunity allows you to recruit one of {0}'s finest soldiers. A battle hardent veteran who knows exactly how to survive on this planet. However, such a privilage requires amounting a lot of bounty credit.\n\n{1}</CABountyExchangeVeteranRecruitment>
+  <CABountyExchangeVeteranRecruitment>Current bounty credits: {0}\n\n\nThis rare opportunity allows you to recruit one of {1}'s finest soldiers. A battle hardent veteran who knows exactly how to survive on this planet. However, such a privilage requires amounting a lot of bounty credit.\n\n{2}</CABountyExchangeVeteranRecruitment>
   <CABountyExchangeVeteranRecruitment_Available>Veteran available</CABountyExchangeVeteranRecruitment_Available>
   <CABountyExchangeVeteranRecruitment_Details>Next veteran available in {0} days</CABountyExchangeVeteranRecruitment_Details>
-  <CABountyExchangeVeteranRecruitment_Enlist>Enlist top veteran for {1} bounty credits</CABountyExchangeVeteranRecruitment_Enlist>
+  <CABountyExchangeVeteranRecruitment_Enlist>Enlist top veteran for {0} bounty credits</CABountyExchangeVeteranRecruitment_Enlist>
+  <CABountyExchangeVeteranRecruitment_NotAvailable>No veteran availale</CABountyExchangeVeteranRecruitment_NotAvailable>
 </LanguageData>
