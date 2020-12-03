@@ -12,12 +12,20 @@ namespace CaravanAdventures.CaravanMechBounty
     {
         public static Pawn GenerateVeteran()
         {
+            // add weight factor (too lazy)
             var skillTraits = new Dictionary<TraitDef, int>() {
                 { TraitDef.Named("Nimble"), 0},
-                { TraitDefOf.ShootingAccuracy, Rand.Chance(0.5f) ? 1 : -1},
+                { TraitDefOf.SpeedOffset, 2 }, 
+                { TraitDefOf.SpeedOffset, 2 }, 
+                { TraitDefOf.SpeedOffset, 2 }, 
                 { TraitDefOf.SpeedOffset, 2 }
             };
-            var personalityTraits = new[] { TraitDefOf.Cannibal, TraitDefOf.Bloodlust, TraitDefOf.Psychopath, TraitDefOf.Transhumanist, TraitDef.Named("Masochist") };
+            var personalityTraits = new[] { 
+                TraitDefOf.Cannibal, 
+                TraitDefOf.Bloodlust, 
+                TraitDefOf.Psychopath, 
+                TraitDefOf.Transhumanist, 
+                TraitDef.Named("Masochist") };
             var genPawnRequest = new PawnGenerationRequest(CaravanStory.StoryDefOf.CASacrilegHunters_ExperiencedHunter, Faction.OfPlayer)
             {
                 MustBeCapableOfViolence = true,
