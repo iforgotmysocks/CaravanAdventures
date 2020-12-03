@@ -42,7 +42,8 @@
     <techHediffsRequired>
       <li>StoneskinGland</li>
     </techHediffsRequired>
-    <techHediffsChance>1</techHediffsChance>
+    <techHediffsChance>0.3</techHediffsChance>
+    <techHediffsMaxAmount>2</techHediffsMaxAmount>
     <combatEnhancingDrugsChance>1</combatEnhancingDrugsChance>
     <combatEnhancingDrugsCount>1~2</combatEnhancingDrugsCount>
     <biocodeWeaponChance>0.8</biocodeWeaponChance>
@@ -100,7 +101,8 @@
 			<li>BionicEye</li>
 			<li>StoneskinGland</li>
 		</techHediffsRequired>
-		<techHediffsChance>1</techHediffsChance>
+    <techHediffsChance>0.8</techHediffsChance>
+    <techHediffsMaxAmount>4</techHediffsMaxAmount>
 		<combatEnhancingDrugsChance>1</combatEnhancingDrugsChance>
 		<combatEnhancingDrugsCount>2~2</combatEnhancingDrugsCount>
 		<biocodeWeaponChance>0.8</biocodeWeaponChance>
