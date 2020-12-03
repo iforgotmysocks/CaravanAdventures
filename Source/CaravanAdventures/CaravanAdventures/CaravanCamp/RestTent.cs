@@ -59,11 +59,13 @@ namespace CaravanAdventures.CaravanCamp
             if (refuelComp != null) refuelComp.Refuel(refuelComp.GetFuelCountToFullyRefuel());
 
             var plantPos = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.minX + 1 && cell.z == CellRect.minZ + 1);
-            var plant = CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDefOf.PlantPot, ThingDefOf.WoodLog), plantPos, map, default, campAssetListRef) as Building_PlantGrower;
+            CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDefOf.Stool, ThingDefOf.WoodLog), plantPos, map, default, campAssetListRef);
 
-            var realPlant = CampHelper.PrepAndGenerateThing(plant.GetPlantDefToGrow(), plant.Position, map, default, campAssetListRef, true) as Plant;
-            realPlant.Growth = 0f;
-            realPlant.sown = true;
+            //var plant = CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDefOf.PlantPot, ThingDefOf.WoodLog), plantPos, map, default, campAssetListRef) as Building_PlantGrower;
+
+            //var realPlant = CampHelper.PrepAndGenerateThing(plant.GetPlantDefToGrow(), plant.Position, map, default, campAssetListRef, true) as Plant;
+            //realPlant.Growth = 0f;
+            //realPlant.sown = true;
         }
 
         public override void BuildTribal(Map map, List<Thing> campAssetListRef)
