@@ -266,7 +266,7 @@
     <graphicData>
       <texPath>Things/Building/Misc/CommsConsole</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
-      <drawSize>(1.8,1.8)</drawSize>
+      <drawSize>(1.6,1.6)</drawSize>
       <damageData>
         <rect>(0,0,3,1.8)</rect>
         <cornerBL>Damage/Corner</cornerBL>
