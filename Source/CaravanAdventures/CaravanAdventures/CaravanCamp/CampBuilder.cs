@@ -69,6 +69,7 @@ namespace CaravanAdventures.CaravanCamp
             UpdateAreas();
             ApplyZonesAndInventory();
             GenerateRecipes();
+            GiveHappyThoughts();
 
             Current.ProgramState = stateBackup;
             return true;
@@ -435,6 +436,9 @@ namespace CaravanAdventures.CaravanCamp
                 else recipeHolder.ApplyRecipes(caravan);
             }
         }
+
+        private void GiveHappyThoughts() => caravan.PawnsListForReading.Where(pawn => pawn.IsColonist).ToList().ForEach(pawn => pawn.needs.mood.thoughts.memories.TryGainMemory(ThoughtDef.Named("CACamping")));
+
 
     }
 }
