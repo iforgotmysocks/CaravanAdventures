@@ -5,7 +5,7 @@
     <defName>TravelCompanions</defName>
     <workerClass>CaravanAdventures.CaravanImmersion.ThoughtWorker_TravelCompanions</workerClass>
     <nullifyingTraits>
-      <li>Psychopath</li>
+      <!--<li>Psychopath</li>-->
     </nullifyingTraits>
     <stages>
       <li>
