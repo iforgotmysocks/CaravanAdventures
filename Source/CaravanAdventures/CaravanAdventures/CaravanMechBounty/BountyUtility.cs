@@ -10,22 +10,8 @@ namespace CaravanAdventures.CaravanMechBounty
 {
     class BountyUtility
     {
-        public static Pawn GenerateVeteran()
+        public static Pawn GenerateVeteran(TraitDef selPersonality = null, TraitDef selSkill = null)
         {
-            // add weight factor (too lazy)
-            var skillTraits = new Dictionary<TraitDef, int>() {
-                { TraitDef.Named("Nimble"), 0},
-                { TraitDefOf.SpeedOffset, 2 }, 
-                { TraitDefOf.SpeedOffset, 2 }, 
-                { TraitDefOf.SpeedOffset, 2 }, 
-                { TraitDefOf.SpeedOffset, 2 }
-            };
-            var personalityTraits = new[] { 
-                TraitDefOf.Cannibal, 
-                TraitDefOf.Bloodlust, 
-                TraitDefOf.Psychopath, 
-                TraitDefOf.Transhumanist, 
-                TraitDef.Named("Masochist") };
             var genPawnRequest = new PawnGenerationRequest(CaravanStory.StoryDefOf.CASacrilegHunters_ExperiencedHunter, Faction.OfPlayer)
             {
                 MustBeCapableOfViolence = true,
@@ -40,10 +26,8 @@ namespace CaravanAdventures.CaravanMechBounty
             }
             foreach (var trait in veteran.story.traits.allTraits.Reverse<Trait>()) veteran.story.traits.allTraits.Remove(trait);
             veteran.story.traits.GainTrait(new Trait(TraitDefOf.Tough));
-            var skillTrait = skillTraits.RandomElement();
-            veteran.story.traits.GainTrait(new Trait(skillTrait.Key, skillTrait.Value));
-            var personalityTrait = personalityTraits.RandomElement();
-            veteran.story.traits.GainTrait(new Trait(personalityTrait));
+            if (selPersonality != null) veteran.story.traits.GainTrait(new Trait(selPersonality, selPersonality.degreeDatas.OrderByDescending(data => data.degree).FirstOrDefault().degree));
+            if (selSkill != null) veteran.story.traits.GainTrait(new Trait(selSkill, selSkill.degreeDatas.OrderByDescending(data => data.degree).FirstOrDefault().degree));
 
             if (veteran.story.childhood.disallowedTraits == null 
                 || veteran.story.childhood.disallowedTraits.Any()

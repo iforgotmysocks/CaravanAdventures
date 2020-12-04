@@ -39,4 +39,7 @@
   <CABountyExchangeVeteranRecruitment_Details>Next veteran available in {0} days</CABountyExchangeVeteranRecruitment_Details>
   <CABountyExchangeVeteranRecruitment_Enlist>Enlist top veteran for {0} bounty credits</CABountyExchangeVeteranRecruitment_Enlist>
   <CABountyExchangeVeteranRecruitment_NotAvailable>No veteran availale</CABountyExchangeVeteranRecruitment_NotAvailable>
+  <CABountyExchangeVeteranRecruitment_ChoosePersonality>\n\n\nAs the personality is usually important, we try to find a good fit for you.</CABountyExchangeVeteranRecruitment_ChoosePersonality>
+  <CABountyExchangeVeteranRecruitment_ChoosePersonalityNone>Rather none of those</CABountyExchangeVeteranRecruitment_ChoosePersonalityNone>
+  <CABountyExchangeVeteranRecruitment_ChooseSkill>\n\n\nAnd the unique skill?</CABountyExchangeVeteranRecruitment_ChooseSkill>
 </LanguageData>

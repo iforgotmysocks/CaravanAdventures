@@ -183,7 +183,7 @@ namespace CaravanAdventures.CaravanMechBounty
         {
             // todo not finished! -> come up with valid conversion
             var value = thing.MarketValue * thing.stackCount;
-            return value / 2f;
+            return value / 4f;
         }
 
         private void PurchaseAndDropItem(Thing item, int fixedCredits = 0)
@@ -308,7 +308,7 @@ namespace CaravanAdventures.CaravanMechBounty
 
         private float CalculateGoodWillCost(Faction faction, int goodwill)
         {
-            var costPerPoint = 5f;
+            var costPerPoint = 2.5f;
             if (faction != this.faction) costPerPoint *= 2f;
             var gwbf = faction.GoodwillWith(Faction.OfPlayer);
             if (gwbf < 0) costPerPoint += Math.Abs(gwbf) * 0.1f;
@@ -321,13 +321,68 @@ namespace CaravanAdventures.CaravanMechBounty
         #region recruit veteran
         private DiaNode GetRecuitmentOverview(DiaNode parent)
         {
+            var cost = 2000;
             var node = new DiaNode("CABountyExchangeVeteranRecruitment".Translate(CompCache.BountyWC.BountyPoints, faction.def.LabelCap, GetVeteranTimeString()));
-            node.options.Add(new DiaOption("CABountyExchangeVeteranRecruitment_Enlist".Translate(5000)) 
-            { 
-                action = () => EnlistVeteran(5000), 
-                resolveTree = true, 
-                disabled = !CanRecruitVeteran(5000, out var reason), 
+            node.options.Add(new DiaOption("CABountyExchangeVeteranRecruitment_Enlist".Translate(cost))
+            {
+                link = PickVeteranPersonality(node, cost),
+                disabled = !CanRecruitVeteran(cost, out var reason),
                 disabledReason = reason
+            });
+            node.options.Add(new DiaOption("CABountyBack".Translate()) { link = parent });
+
+            return node;
+        }
+
+        private DiaNode PickVeteranPersonality(DiaNode parent, int cost)
+        {
+            var personalityTraits = new[] {
+                TraitDefOf.Cannibal,
+                TraitDefOf.Bloodlust,
+                TraitDefOf.Psychopath,
+                TraitDefOf.Transhumanist,
+                TraitDef.Named("Nerves"),
+                TraitDef.Named("NaturalMood"),
+                TraitDef.Named("Masochist") };
+
+            var node = new DiaNode("CABountyExchangeVeteranRecruitment_ChoosePersonality".Translate());
+            foreach (var personality in personalityTraits)
+            {
+                node.options.Add(new DiaOption(personality.degreeDatas.OrderByDescending(data => data.degree).FirstOrDefault().LabelCap)
+                {
+                    link = PickVeteranSkill(node, cost, personality),
+                });
+            }
+
+            node.options.Add(new DiaOption("CABountyExchangeVeteranRecruitment_ChoosePersonalityNone".Translate())
+            {
+                link = PickVeteranSkill(node, cost, null),
+            });
+            node.options.Add(new DiaOption("CABountyBack".Translate()) { link = parent });
+
+            return node;
+        }
+
+        private DiaNode PickVeteranSkill(DiaNode parent, int cost, TraitDef personality)
+        {
+            var skillTraits = new [] {
+                TraitDef.Named("Nimble"),
+                TraitDefOf.SpeedOffset
+            };
+            var node = new DiaNode("CABountyExchangeVeteranRecruitment_ChooseSkill".Translate());
+            foreach (var skill in skillTraits)
+            {
+                node.options.Add(new DiaOption(skill.degreeDatas.OrderByDescending(data => data.degree).FirstOrDefault().LabelCap)
+                {
+                    action = () => EnlistVeteran(cost, personality, skill),
+                    resolveTree = true,
+                });
+            }
+
+            node.options.Add(new DiaOption("CABountyExchangeVeteranRecruitment_ChoosePersonalityNone".Translate())
+            {
+                action = () => EnlistVeteran(cost, personality, null),
+                resolveTree = true,
             });
             node.options.Add(new DiaOption("CABountyBack".Translate()) { link = parent });
 
@@ -351,9 +406,9 @@ namespace CaravanAdventures.CaravanMechBounty
             return true;
         }
 
-        private void EnlistVeteran(int cost)
+        private void EnlistVeteran(int cost, TraitDef personality, TraitDef skill)
         {
-            Pawn vet = BountyUtility.GenerateVeteran();
+            Pawn vet = BountyUtility.GenerateVeteran(personality, skill);
             PurchaseAndDropItem(vet, cost);
             CompCache.BountyWC.OngoingVeteranDelay = ModSettings.veteranResetTimeInDays * 60000;
         }
