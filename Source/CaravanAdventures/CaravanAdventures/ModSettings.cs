@@ -18,6 +18,9 @@ namespace CaravanAdventures
         // general
         public static bool debug = false;
 
+        // improvements
+        public static bool removeRoyalTitleRequirements = false;
+
         // camp
         public static bool generateStorageForAllInventory = true;
 
@@ -59,6 +62,9 @@ namespace CaravanAdventures
             base.ExposeData();
             // debug
             Scribe_Values.Look(ref debug, "debug");
+
+            // improvements
+            Scribe_Values.Look(ref removeRoyalTitleRequirements, "removeRoyalTitleRequirements", false);
 
             // camp
             Scribe_Values.Look(ref generateStorageForAllInventory, "generateStorageForAllInventory", false);
@@ -119,8 +125,6 @@ namespace CaravanAdventures
             this.Write();
         }
 
-
-
         private Rect BRect(float x, float y, float width, float height)
         {
             lastRect = new Rect(x, y, width, height);
@@ -157,6 +161,9 @@ namespace CaravanAdventures
             // todo add min and max multiplier used in the def patch for settlement money
             options.Gap();
 
+
+            options.CheckboxLabeled("Remove royal title requirements", ref removeRoyalTitleRequirements);
+            options.Gap();
 
             options.Label("Ancient thunderbolt:".Colorize(Color.red), 40f);
             options.Label("Mechanoid bodypart dissmember chance: " + Convert.ToInt32(mechanoidDissmemberChance * 100) + "%");

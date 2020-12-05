@@ -44,6 +44,7 @@ namespace CaravanAdventures
 
         private static void PatchRemoveRoyalTitleRequirements()
         {
+            if (!ModsConfig.RoyaltyActive || !ModSettings.removeRoyalTitleRequirements) return;
             foreach (var def in DefDatabase<RoyalTitleDef>.AllDefsListForReading)
             {
                 def.disabledJoyKinds = new List<JoyKindDef>();
