@@ -42,9 +42,10 @@
     <defName>CADoBillsSpacerRefinery</defName>
     <label>work at refinery</label>
     <giverClass>WorkGiver_DoBill</giverClass>
-    <workType>Crafting</workType>
-    <!-- same as vanilla -->
-    <priorityInType>97</priorityInType> 
+    <workType>Hauling</workType>
+    <!--<priorityInType>89</priorityInType>-->
+    <!-- cremate is 40 -->
+    <priorityInType>39</priorityInType>
     <fixedBillGiverDefs>
       <li>CASpacerBiofuelRefinery</li>
     </fixedBillGiverDefs>

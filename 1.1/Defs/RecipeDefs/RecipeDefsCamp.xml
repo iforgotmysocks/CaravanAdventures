@@ -239,7 +239,7 @@
     <jobString>Refining chemfuel from corpses.</jobString>
     <effectWorking>Cremate</effectWorking>
     <soundWorking>Recipe_Cremate</soundWorking>
-    <workAmount>600</workAmount>
+    <workAmount>250</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <allowMixingIngredients>true</allowMixingIngredients>
     <ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass>
