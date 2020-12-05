@@ -12,7 +12,6 @@
 	<StoryVillageArrivedLetterMessage>Your caravan arrived at {0}. Seems to be a nice place.</StoryVillageArrivedLetterMessage>
 	<StoryVillageCantArriveHostile>While hostile, you can't help {0}.</StoryVillageCantArriveHostile>
   
-  
 	<StoryVillage_Dia1_DiaTitle>{0} embraces you</StoryVillage_Dia1_DiaTitle>
 	<StoryVillage_Dia1_1>{0}, you came. Thank god. We barely fended off the last attack and our scouts spotted the next and yet biggest army only a few minutes away.\n\nI hope our reinforcements make it in time. </StoryVillage_Dia1_1>
 	<StoryVillage_Dia1_1_Option1>Good to see you. Any idea why those mechs are after you that bad?\nWe sure get attacked aswell, but nothing as you described.</StoryVillage_Dia1_1_Option1>
@@ -44,5 +43,8 @@
   <StoryVillage_QuestUpdate_CanLeaveSuccess>The towns folk was able to get to safety, your task is complete.</StoryVillage_QuestUpdate_CanLeaveSuccess>
   <StoryVillage_QuestUpdate_CanLeaveFailed>Sacrileg Hunter's leadership took losses and they will need some time to recover. Your task failed.</StoryVillage_QuestUpdate_CanLeaveFailed>
 	<StoryVillage_QuestUpdate_Survived>You survivded and made it out alive. But where did all those mechs come from? Best to watch out for more clues...</StoryVillage_QuestUpdate_Survived>
+
+  <StoryVillage_Response_BountyInitiatedTitle>Planet-wide bounty announcement</StoryVillage_Response_BountyInitiatedTitle>
+  <StoryVillage_Response_BountyInitiatedDesc>Following the tragic mechanoid attack on one of our settlements we, {0}, hereby place a bounty on {1}.\n\nFor every personal kill, your faction will earn bounty credits which can be traded in for military support, rare items, help with smoothing over relations, and for very ambitios participants, you may get the ability to enlist our top veterans permanently.\n\nSimply contact us via the comms console.\nGood hunt!</StoryVillage_Response_BountyInitiatedDesc>
 </LanguageData>
 

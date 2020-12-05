@@ -292,7 +292,6 @@ namespace CaravanAdventures.CaravanStory
         public int GetCurrentShrineCounter => countShrinesCompleted < shrineMaximum ? countShrinesCompleted + 1 : shrineMaximum;
         public int GetShrineMaxiumum => shrineMaximum;
 
-
         public List<AbilityDef> GetUnlockedSpells() => unlockedSpells;
         
         private bool CheckCanStartCountDownOnNewShrine() =>
@@ -322,6 +321,8 @@ namespace CaravanAdventures.CaravanStory
             countShrinesCompleted = 0;
             bossMissedCounter = 0;
             unlockedSpells = new List<AbilityDef>();
+
+            CompCache.BountyWC.BountyNotificationCounter = -1;
         }
 
 

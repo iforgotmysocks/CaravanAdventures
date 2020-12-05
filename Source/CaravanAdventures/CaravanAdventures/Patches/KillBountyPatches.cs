@@ -31,7 +31,7 @@ namespace CaravanAdventures.Patches
 
         public static void PawnKillPostfix(Pawn __instance, DamageInfo? dinfo, Hediff exactCulprit = null)
         {
-            if (CompCache.StoryWC == null || !ModSettings.storyEnabled || __instance.Faction != Faction.OfMechanoids) return;
+            if (CompCache.StoryWC == null || !ModSettings.storyEnabled || CompCache.BountyWC?.BountyServiceAvailable != true || __instance.Faction != Faction.OfMechanoids) return;
             var instigator = dinfo.Value.Instigator as Pawn;
             if (instigator == null || instigator.Faction != Faction.OfPlayer) return;
             CaravanStory.StoryUtility.AddBountyPointsForKilledMech(__instance);
@@ -50,7 +50,7 @@ namespace CaravanAdventures.Patches
         public static void FactionDialogMakerFactionDialogForPostfix(ref DiaNode __result, Pawn negotiator, Faction faction)
         {
             // todo adjust to non story and selectable faction!
-            if (!ModSettings.storyEnabled || faction != CaravanStory.StoryUtility.FactionOfSacrilegHunters) return;
+            if (!ModSettings.storyEnabled || faction != CaravanStory.StoryUtility.FactionOfSacrilegHunters || CompCache.BountyWC?.BountyServiceAvailable != true) return;
             var request = new CaravanMechBounty.BountyRequest(__result, negotiator, faction);
             __result.options.Insert(0, request.CreateInitialDiaMenu());
         }
