@@ -47,6 +47,7 @@ namespace CaravanAdventures
             if (!ModsConfig.RoyaltyActive || !ModSettings.removeRoyalTitleRequirements) return;
             foreach (var def in DefDatabase<RoyalTitleDef>.AllDefsListForReading)
             {
+                if (ModSettings.removeOnlyAcolyteAndKnightRoyalTitleRequirements && !new[] { RoyalTitleDefOf.Knight, DefDatabase<RoyalTitleDef>.GetNamedSilentFail("Esquire"), DefDatabase<RoyalTitleDef>.GetNamedSilentFail("Acolyte") }.Contains(def)) continue;
                 def.disabledJoyKinds = new List<JoyKindDef>();
                 def.disabledWorkTags = WorkTags.None;
                 def.requiredApparel = new List<RoyalTitleDef.ApparelRequirement>();
