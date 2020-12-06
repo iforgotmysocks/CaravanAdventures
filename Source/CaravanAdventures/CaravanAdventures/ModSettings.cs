@@ -14,12 +14,15 @@ namespace CaravanAdventures
     {
         // not saved!
         private Rect lastRect = default;
+        public bool toggleTest = false;
+
 
         // general
         public static bool debug = false;
 
         // improvements
-        public static bool removeRoyalTitleRequirements = false;
+        public static bool removeRoyalTitleRequirements = true;
+        public static bool removeOnlyAcolyteAndKnightRoyalTitleRequirements = true;
 
         // camp
         public static bool generateStorageForAllInventory = true;
@@ -53,6 +56,7 @@ namespace CaravanAdventures
         public static float itemRestockDurationInDays = 1f;
         public static float alliedAssistanceDurationInDays = 1f;
         public static float veteranResetTimeInDays = 3f;
+        public static bool allowBountyFromBuildingInstigators = true;
 
         //public static ModSettings Get() => LoadedModManager.GetMod<CaravanAdventures.Main>().GetSettings<ModSettings>();
         private Vector2 scrollPos = Vector2.zero;
@@ -64,7 +68,8 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref debug, "debug");
 
             // improvements
-            Scribe_Values.Look(ref removeRoyalTitleRequirements, "removeRoyalTitleRequirements", false);
+            Scribe_Values.Look(ref removeRoyalTitleRequirements, "removeRoyalTitleRequirements", true);
+            Scribe_Values.Look(ref removeOnlyAcolyteAndKnightRoyalTitleRequirements, "removeOnlyAcolyteAndKnightRoyalTitleRequirements", true);
 
             // camp
             Scribe_Values.Look(ref generateStorageForAllInventory, "generateStorageForAllInventory", false);
@@ -97,9 +102,9 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref itemRestockDurationInDays, "itemRestockDurationInDays", 1f);
             Scribe_Values.Look(ref alliedAssistanceDurationInDays, "alliedAssistanceDurationInDays", 1f);
             Scribe_Values.Look(ref veteranResetTimeInDays, "veteranResetTimeInDays", 3f);
+            Scribe_Values.Look(ref allowBountyFromBuildingInstigators, "allowBountyFromBuildingInstigators", true);
         }
 
-        public bool toggleTest = false;
 
 
         public void DoWindowContentsNew(Rect wrect)
@@ -163,6 +168,8 @@ namespace CaravanAdventures
 
 
             options.CheckboxLabeled("Remove royal title requirements", ref removeRoyalTitleRequirements);
+            options.Gap();
+            options.CheckboxLabeled("Only remove Acolyte and Knight title requirements", ref removeOnlyAcolyteAndKnightRoyalTitleRequirements);
             options.Gap();
 
             options.Label("Ancient thunderbolt:".Colorize(Color.red), 40f);

@@ -32,8 +32,8 @@ namespace CaravanAdventures.Patches
         public static void PawnKillPostfix(Pawn __instance, DamageInfo? dinfo, Hediff exactCulprit = null)
         {
             if (CompCache.StoryWC == null || !ModSettings.storyEnabled || CompCache.BountyWC?.BountyServiceAvailable != true || __instance.Faction != Faction.OfMechanoids) return;
-            var instigator = dinfo.Value.Instigator as Pawn;
-            if (instigator == null || instigator.Faction != Faction.OfPlayer) return;
+            var instigator = ModSettings.allowBountyFromBuildingInstigators ? dinfo.Value.Instigator : dinfo.Value.Instigator as Pawn;
+            if (instigator == null || instigator?.Faction != Faction.OfPlayer) return;
             CaravanStory.StoryUtility.AddBountyPointsForKilledMech(__instance);
         }
 
