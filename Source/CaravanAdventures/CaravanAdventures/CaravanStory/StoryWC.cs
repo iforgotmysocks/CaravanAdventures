@@ -22,6 +22,7 @@ using Verse.Noise;
 
 // - story: 
 // --> what to do when they get hostile
+// --> when removing shrines, and all pawns are dead, don't continue the conversation... xD
 
 
 
