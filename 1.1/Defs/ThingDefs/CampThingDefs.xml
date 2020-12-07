@@ -303,8 +303,8 @@
     <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
     <comps>
       <li Class="CompProperties_Refuelable">
-        <fuelConsumptionRate>0.5</fuelConsumptionRate>
-        <fuelCapacity>3</fuelCapacity>
+        <fuelConsumptionRate>3</fuelConsumptionRate>
+        <fuelCapacity>15</fuelCapacity>
         <fuelFilter>
           <thingDefs>
             <li>Chemfuel</li>
@@ -557,8 +557,8 @@
 
       <li Class="CompProperties_Flickable" />
       <li Class="CompProperties_Refuelable">
-        <fuelConsumptionRate>0.5</fuelConsumptionRate>
-        <fuelCapacity>3</fuelCapacity>
+        <fuelConsumptionRate>3</fuelConsumptionRate>
+        <fuelCapacity>15</fuelCapacity>
         <fuelFilter>
           <thingDefs>
             <li>Chemfuel</li>
@@ -660,8 +660,8 @@
 
       <li Class="CompProperties_Flickable" />
       <li Class="CompProperties_Refuelable">
-        <fuelConsumptionRate>0.5</fuelConsumptionRate>
-        <fuelCapacity>3.0</fuelCapacity>
+        <fuelConsumptionRate>3</fuelConsumptionRate>
+        <fuelCapacity>15</fuelCapacity>
         <fuelFilter>
           <thingDefs>
             <li>Chemfuel</li>
@@ -969,6 +969,6 @@
     <pathCost>14</pathCost>
     <passability>Standable</passability>
   </ThingDef>
- 
+
 
 </Defs>
