@@ -20,6 +20,13 @@ namespace CaravanAdventures.CaravanItemSelection
             var thing = t.GetProperty("AnyThing")?.GetValue(trans, null) as Thing;
             var standartResult = true;
 
+            var minifiedThing = thing as MinifiedThing;
+            if (minifiedThing != null)
+            {
+                thing = minifiedThing.InnerThing;
+                thingDef = thing.def;
+            }
+
             foreach (var filter in filterSet.appliedFilters.OrderBy(x => x.Operation))
             {
                 var canUseQuality = false;
