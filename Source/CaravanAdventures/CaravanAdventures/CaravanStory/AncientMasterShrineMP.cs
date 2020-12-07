@@ -316,7 +316,7 @@ namespace CaravanAdventures.CaravanStory
             this.wonBattle = true;
         }
 
-        private Pawn FindBossNew() => Map.mapPawns.AllPawns.FirstOrDefault(x => CompCache.StoryWC.GetBossDefNames().Contains(x.def.defName));
-        private Pawn FindBoss() => this?.Map?.spawnedThings?.FirstOrDefault(x => x is Pawn pawn && CompCache.StoryWC.GetBossDefNames().Contains(pawn.def.defName)) as Pawn ?? null;
+        private Pawn FindBossNew() => Map.mapPawns.AllPawns.FirstOrDefault(x => CompCache.StoryWC.BossDefs().Contains(x.def));
+        private Pawn FindBoss() => this?.Map?.spawnedThings?.FirstOrDefault(x => x is Pawn pawn && CompCache.StoryWC.BossDefs().Contains(pawn.def)) as Pawn ?? null;
     }
 }

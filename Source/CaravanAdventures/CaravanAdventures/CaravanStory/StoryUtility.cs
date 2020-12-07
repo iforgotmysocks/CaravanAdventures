@@ -56,7 +56,7 @@ namespace CaravanAdventures.CaravanStory
             else if (mech.def == ThingDef.Named("Mech_Scyther")) CompCache.BountyWC.BountyPoints += 10;
             else if (mech.def == ThingDef.Named("Mech_Lancer")) CompCache.BountyWC.BountyPoints += 15;
             else if (mech.def == ThingDef.Named("Mech_Centipede")) CompCache.BountyWC.BountyPoints += 45;
-            else if (CompCache.StoryWC.GetBossDefNames().Contains(mech.def.defName)) CompCache.BountyWC.BountyPoints += 500; // sdt boss
+            else if (CompCache.StoryWC.BossDefs().Contains(mech.def)) CompCache.BountyWC.BountyPoints += 500; // sdt boss
             //else if (mech.def == ThingDef.Named("Endboss")) CompCache.BountyWC.BountyPoints += 3000; // end boss
         }
 
@@ -133,6 +133,14 @@ namespace CaravanAdventures.CaravanStory
             StoryUtility.RemoveMapParentsOfDef(CaravanStorySiteDefOf.CAAncientMasterShrineMP);
             StoryUtility.RemoveMapParentsOfDef(CaravanStorySiteDefOf.CAAncientMasterShrineWO);
             Log.Message($"Story reset complete");
+        }
+
+        internal static IEnumerable<ThingDef> ReadBossDefNames()
+        {
+            foreach (var kind in DefDatabase<PawnKindDef>.AllDefsListForReading)
+            {
+                if (kind.GetModExtension<MechChipModExt>() != null) yield return kind.race;
+            }
         }
 
         public static void GenerateFriendlyVillage(ref float villageGenerationCounter)
@@ -434,7 +442,7 @@ namespace CaravanAdventures.CaravanStory
             var possibleBosses = DefDatabase<PawnKindDef>.AllDefsListForReading.Where(x => x.RaceProps.IsMechanoid && x.defName.ToLower().StartsWith("cabossmech"));
             var selected = endboss ? StoryDefOf.CAEndBossMech : possibleBosses.FirstOrDefault(boss => !CompCache.StoryWC.mechBossKillCounters?.Keys?.ToList()?.Contains(boss.defName) ?? false) ?? possibleBosses.RandomElement();
             var bossPawn = PawnGenerator.GeneratePawn(selected, Faction.OfMechanoids);
-            if (bossPawn != null) bossPawn.health.AddHediff(DefDatabase<HediffDef>.GetNamed(bossPawn.def.GetModExtension<MechChipModExt>().mechChipDefName));
+            if (bossPawn != null) bossPawn.health.AddHediff(DefDatabase<HediffDef>.GetNamed(bossPawn.kindDef.GetModExtension<MechChipModExt>().mechChipDefName));
             return bossPawn;
         }
 

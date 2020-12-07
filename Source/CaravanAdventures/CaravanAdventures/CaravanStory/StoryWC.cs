@@ -72,6 +72,7 @@ namespace CaravanAdventures.CaravanStory
         private List<AbilityDef> unlockedSpells = new List<AbilityDef>();
         private int bossMissedCounter = 0;
         private bool ranDebugActionsOnceAtStartUp;
+        private IEnumerable<ThingDef> bossDefs;
 
         public Dictionary<string, int> mechBossKillCounters = new Dictionary<string, int>();
         public Dictionary<string, bool> debugFlags = new Dictionary<string, bool>()
@@ -245,7 +246,7 @@ namespace CaravanAdventures.CaravanStory
             ranDebugActionsOnceAtStartUp = true;
         }
 
-        public string[] GetBossDefNames() => new string[] { "CACristalScythe", "CABossMechDevourer" };
+        public IEnumerable<ThingDef> BossDefs() => bossDefs ?? (bossDefs = StoryUtility.ReadBossDefNames());
 
         public void IncreaseShrineCompleteCounter() => countShrinesCompleted++;
 
