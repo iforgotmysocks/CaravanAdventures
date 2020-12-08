@@ -299,7 +299,7 @@ namespace CaravanAdventures.CaravanCamp
                 placementCells.Add(selected);
             }
 
-            placementCells.ForEach(selected => Log.Message($"Selected: {selected.x} {selected.z} for {part.GetType()}"));
+            placementCells.ForEach(selected => DLog.Message($"Selected: {selected.x} {selected.z} for {part.GetType()}"));
             return placementCells;
         }
 

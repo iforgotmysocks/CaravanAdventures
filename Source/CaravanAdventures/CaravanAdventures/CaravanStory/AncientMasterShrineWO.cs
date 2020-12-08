@@ -295,7 +295,7 @@ namespace CaravanAdventures.CaravanStory
                     lord.ownedPawns.Remove(pawn);
                     if (lord.ownedPawns.Count == 0)
                     {
-                        Log.Message($"lord with id {lord.loadID} has 0 owned pawns, removing");
+                        DLog.Message($"lord with id {lord.loadID} has 0 owned pawns, removing");
                         map.lordManager.RemoveLord(lord);
                     }
                 }
@@ -329,13 +329,13 @@ namespace CaravanAdventures.CaravanStory
 
             var defaultPawnGroupMakerParms = IncidentParmsUtility.GetDefaultPawnGroupMakerParms(PawnGroupKindDefOf.Combat, incidentParms, true);
 
-            Log.Message($"Points before: {defaultPawnGroupMakerParms.points} roomcells: {room.CellCount}");
+            DLog.Message($"Points before: {defaultPawnGroupMakerParms.points} roomcells: {room.CellCount}");
 
             // todo make 1.2f a difficulty setting
             var calcedFromRoomSize = Convert.ToInt32(defaultPawnGroupMakerParms.points * (CompCache.StoryWC.GetCurrentShrineCounter * 1.2f) * ((room == mainRoom ? Math.Max(room.CellCount, 3000) : room.CellCount) / 1000f));
             var minPoints = room == mainRoom ? 2000 : 130;
 
-            Log.Message($"from roomsize: {calcedFromRoomSize} minpoints: {minPoints}");
+            DLog.Message($"from roomsize: {calcedFromRoomSize} minpoints: {minPoints}");
             var selected = Math.Max(calcedFromRoomSize, minPoints);
             if (removedHives) selected += 500;
 
@@ -347,7 +347,7 @@ namespace CaravanAdventures.CaravanStory
                 points = selected
             };
 
-            Log.Message($"Points after: {mechPawnGroupMakerParams.points}");
+            DLog.Message($"Points after: {mechPawnGroupMakerParams.points}");
 
             return mechPawnGroupMakerParams;
         }

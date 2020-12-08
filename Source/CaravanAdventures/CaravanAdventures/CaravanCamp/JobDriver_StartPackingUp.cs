@@ -21,7 +21,6 @@ namespace CaravanAdventures.CaravanCamp
 
         protected override IEnumerable<Toil> MakeNewToils()
         {
-            Log.Message($"making toils");
             comp = ControlSpot.TryGetComp<CompCampControl>();
             yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.ClosestTouch).FailOn(() => this.pawn.Drafted);
             var waitToil = Toils_General.Wait(comp.CampRects.Count * durationForOneTent, TargetIndex.None).FailOnDestroyedNullOrForbidden(TargetIndex.A).FailOnCannotTouch(TargetIndex.A, PathEndMode.Touch).WithProgressBarToilDelay(TargetIndex.A, false, -0.5f).WithEffect(EffecterDefOf.Deflect_Metal_Bullet, TargetIndex.A);

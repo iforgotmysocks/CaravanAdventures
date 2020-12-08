@@ -195,21 +195,21 @@ namespace CaravanAdventures.CaravanStory
                 if (CheckCanStartFriendlyCaravanCounter() && !debugFlags["FriendlyCaravanDone"])
                 {
                     questCont.FriendlyCaravan.friendlyCaravanCounter = questCont.FriendlyCaravan.baseDelayFriendlyCaravan;
-                    if (Dg) Log.Message("friendlycaravan counter running " + questCont.FriendlyCaravan.friendlyCaravanCounter);
+                    DLog.Message("friendlycaravan counter running " + questCont.FriendlyCaravan.friendlyCaravanCounter);
                     SetSF("TradeCaravan_InitCountDownStarted");
                 }
 
                 if (CheckCanStartVillageGenerationCounter() && !debugFlags["VillageDone"])
                 {
                     questCont.Village.villageGenerationCounter = questCont.Village.baseDelayVillageGeneration;
-                    if (Dg) Log.Message("village gen counter running " + questCont.Village.villageGenerationCounter);
+                    DLog.Message("village gen counter running " + questCont.Village.villageGenerationCounter);
                     SetSF("IntroVillage_InitCountDownStarted");
                 }
 
                 if (CheckCanStartCountDownOnNewShrine() && !debugFlags["ShrinesDone"])
                 {
                     shrineRevealCounter = baseDelayNextShrineReveal * (countShrinesCompleted + 1f) * 0.5f;
-                    if (Dg) Log.Message("Shrine counter running " + shrineRevealCounter);
+                    DLog.Message("Shrine counter running " + shrineRevealCounter);
                     SetShrineSF("InitCountDownStarted");
                 }
 
@@ -259,14 +259,14 @@ namespace CaravanAdventures.CaravanStory
             if (!TileFinder.TryFindNewSiteTile(out var tile, newRange.min, newRange.max))
             {
                 shrineTileUnsuccessfulCounter++;
-                Log.Message("Couldn't find tile to create a new shrine");
+                DLog.Message("Couldn't find tile to create a new shrine");
                 shrineRevealCounter = 60f;
                 return;
             }
             shrineTileUnsuccessfulCounter = 0;
             if (Faction.OfPlayer.HostileTo(StoryUtility.FactionOfSacrilegHunters))
             {
-                Log.Message($"Skipping shrine revealation, Sac hunters are hostile.");
+                DLog.Message($"Skipping shrine revealation, Sac hunters are hostile.");
                 shrineRevealCounter = 20000;
                 return;
             }

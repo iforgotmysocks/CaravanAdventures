@@ -65,7 +65,7 @@ namespace CaravanAdventures.CaravanStory
 			}
 			else
 			{
-				Log.Message($"Failing affordance");
+				DLog.Message($"Failing affordance");
 				return false;
 			}
 		}
@@ -76,7 +76,7 @@ namespace CaravanAdventures.CaravanStory
 			rect.ClipInsideMap(map);
 			if (rect.Width != calcSize || rect.Height != calcSize2)
 			{
-				Log.Message($"Scattering failed duo to not fitting sizes");
+				DLog.Message($"Scattering failed duo to not fitting sizes");
                 return;
             }
 			foreach (IntVec3 c in rect.Cells)
@@ -86,7 +86,7 @@ namespace CaravanAdventures.CaravanStory
 				{
 					if (list[i].def == ThingDefOf.AncientCryptosleepCasket)
 					{
-						Log.Message($"Canceling because of existing shrine");
+						DLog.Message($"Canceling because of existing shrine");
 						return;
 					}
 				}
@@ -95,7 +95,7 @@ namespace CaravanAdventures.CaravanStory
 			//if (!base.CanPlaceAncientBuildingInRange(rect, map))
 			if (!CanPlaceAncientBuildingInRangeAfterAdjustingGround(rect, map))
 			{
-				Log.Message($"CanPlaceAncientBuildingInRangeAfterAdjustingGround");
+				DLog.Message($"CanPlaceAncientBuildingInRangeAfterAdjustingGround");
 				return;
 			}
 			ResolveParams resolveParams = default;
@@ -113,11 +113,11 @@ namespace CaravanAdventures.CaravanStory
 		{
 			if (overrideWithSetSize) return SizeRange;
 			var mapSize = Find.World.info.initialMapSize;
-			Log.Message($"map size: {mapSize}");
+			DLog.Message($"map size: {mapSize}");
 			var sizeValue = mapSize.x * mapSize.z;
 			var endSize = Convert.ToInt32(Math.Round(sizeValue * 0.0008, 0));
 			var offset = Convert.ToInt32(Math.Round(sizeValue * 0.00008, 0));
-			Log.Message($"calc size: {endSize - offset} / {endSize + offset}  -   base: {endSize} offset: {offset}");
+			DLog.Message($"calc size: {endSize - offset} / {endSize + offset}  -   base: {endSize} offset: {offset}");
 			return new IntRange(endSize - offset, endSize + offset);
 		}
 
@@ -136,7 +136,7 @@ namespace CaravanAdventures.CaravanStory
 					}
 					if (!CanBuildOnAdjustedTerrain(ThingDefOf.Wall, c, map, Rot4.North, newTerrainCells, null, null))
 					{
-						Log.Message($"Canceling duo to terrain");
+						DLog.Message($"Canceling duo to terrain");
 						return false;
 					}
 				}
@@ -148,7 +148,7 @@ namespace CaravanAdventures.CaravanStory
 				{
 					//map.terrainGrid.SetTerrain(terrain, GenStep_RocksFromGrid.RockDefAt(terrain).building.naturalTerrain);
 					var newTerrain = TerrainThreshold.TerrainAtValue(map.Biome.terrainsByFertility, 0.7f);
-					if (newTerrain != TerrainDefOf.Soil) Log.Warning($"Creating new terrain: {newTerrain.defName}");
+					if (newTerrain != TerrainDefOf.Soil) DLog.Warning($"Creating new terrain: {newTerrain.defName}");
 					map.terrainGrid.SetTerrain(terrain, newTerrain);
 				}
 			}
@@ -160,7 +160,7 @@ namespace CaravanAdventures.CaravanStory
 		{
 			if (entDef is TerrainDef && !c.GetTerrain(map).changeable)
 			{
-				Log.Message($"Terrain not changeable: {c.GetTerrain(map).defName}");
+				DLog.Message($"Terrain not changeable: {c.GetTerrain(map).defName}");
 				return false;
 			}
 			// todo collect failing cells and replace terrain afterwards
@@ -176,7 +176,7 @@ namespace CaravanAdventures.CaravanStory
 						if (map.terrainGrid.TerrainAt(c2).affordances.Contains(TerrainAffordanceDefOf.Bridgeable) || map.terrainGrid.TerrainAt(c2).affordances.Contains(TerrainAffordanceDefOf.Diggable)) newTerrainCells.Add(c2);
 						else
 						{
-							Log.Message($"Failing affordance for terrain def: {map.terrainGrid.TerrainAt(c2).defName}");
+							DLog.Message($"Failing affordance for terrain def: {map.terrainGrid.TerrainAt(c2).defName}");
 							return false;
 						}
 					}
@@ -190,7 +190,7 @@ namespace CaravanAdventures.CaravanStory
 							{
 								if (!terrainDef.affordances.Contains(TerrainAffordanceDefOf.Bridgeable) && !terrainDef.affordances.Contains(TerrainAffordanceDefOf.Diggable))
 								{
-									Log.Message($"thinglist affordinace failed");
+									DLog.Message($"thinglist affordinace failed");
 									return false;
 								}
 								//return false;

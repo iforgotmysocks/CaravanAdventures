@@ -43,7 +43,7 @@ namespace CaravanAdventures.CaravanStory
             var testedMaxSize = new IntVec3(275, 1, 275);
             var resultSize = Find.World.info.initialMapSize;
 
-            Log.Message($"current map size in getallowed {resultSize}");
+            DLog.Message($"current map size in getallowed {resultSize}");
 
             if (!ModSettings.limitLargeMapSizesToTestedSize) return resultSize;
             if ((resultSize.x * resultSize.z) > (testedMaxSize.x * testedMaxSize.z)) return testedMaxSize;
@@ -73,7 +73,7 @@ namespace CaravanAdventures.CaravanStory
                 raidStrategy = RaidStrategyDefOf.ImmediateAttackFriendly,
                 raidArrivalMode = PawnsArrivalModeDefOf.EdgeDrop
             };
-            Log.Message($"Assistance with {incidentParms.points} points and kind: {incidentParms.pawnKind}, targetspot default? {spawnSpot == default} if yes, a colonist should be selected as drop spot");
+            DLog.Message($"Assistance with {incidentParms.points} points and kind: {incidentParms.pawnKind}, targetspot default? {spawnSpot == default} if yes, a colonist should be selected as drop spot");
             if (spawnSpot == default && map.mapPawns.AnyColonistSpawned) spawnSpot = map.mapPawns.FreeColonists.Where(col => col.Spawned).RandomElement().Position;
             if (spawnSpot != default) incidentParms.spawnCenter = spawnSpot;
             IncidentDefOf.RaidFriendly.Worker.TryExecute(incidentParms);
@@ -83,7 +83,7 @@ namespace CaravanAdventures.CaravanStory
         {
             if (addressed == null)
             {
-                Log.Warning("Skipping AssignDialog, addressed doesn't exist");
+                DLog.Warning("Skipping AssignDialog, addressed doesn't exist");
                 return;
             }
             var comp = addressed.TryGetComp<CompTalk>();
@@ -148,13 +148,13 @@ namespace CaravanAdventures.CaravanStory
             if (!CompCache.StoryWC.storyFlags["TradeCaravan_DialogFinished"] || CompCache.StoryWC.storyFlags["IntroVillage_Created"]) return;
             if (!StoryUtility.TryGenerateDistantTile(out var tile, 6, 15))
             {
-                Log.Message($"No tile was generated");
+                DLog.Message($"No tile was generated");
                 villageGenerationCounter = 120;
                 return;
             }
             if (Faction.OfPlayer.HostileTo(StoryUtility.FactionOfSacrilegHunters))
             {
-                Log.Message($"Skipping village generation, Sac hunters are hostile.");
+                DLog.Message($"Skipping village generation, Sac hunters are hostile.");
                 villageGenerationCounter = 20000;
                 return;
             }
@@ -216,10 +216,10 @@ namespace CaravanAdventures.CaravanStory
                     )
                 )
             );
-            coords.ForEach(coord => Log.Message($"Coord: {coord.x} / {coord.z}"));
+            coords.ForEach(coord => DLog.Message($"Coord: {coord.x} / {coord.z}"));
 
             var centerPoint = new IntVec3(Convert.ToInt32(coords.Select(coord => coord.x).Average()), 0, Convert.ToInt32(coords.Select(coord => coord.z).Average()));
-            Log.Message($"Center: {centerPoint.x} / {centerPoint.z}");
+            DLog.Message($"Center: {centerPoint.x} / {centerPoint.z}");
 
             return centerPoint;
         }
@@ -273,10 +273,10 @@ namespace CaravanAdventures.CaravanStory
             Caravan caravan;
             if (Find.AnyPlayerHomeMap == null)
             {
-                Log.Message($"Caravan count: {Find.WorldObjects.Caravans.Count}");
+                DLog.Message($"Caravan count: {Find.WorldObjects.Caravans.Count}");
                 caravan = Find.WorldObjects.Caravans.Where(x => x.Faction == Faction.OfPlayer).ToList().OrderByDescending(x => x.PawnsListForReading.Count).FirstOrDefault();
                 if (caravan != null) startTile = caravan.Tile;
-                else Log.Message($"caraavn is null");
+                else DLog.Message($"caraavn is null");
             }
             return TileFinder.TryFindNewSiteTile(out newTile, minDist, maxDist, false, false, startTile);
         }
@@ -301,7 +301,7 @@ namespace CaravanAdventures.CaravanStory
 
             // todo looks?
             //girl.story.hairDef = 
-            Log.Message("Generated main quest pawn");
+            DLog.Message("Generated main quest pawn");
 
             girl.story.traits.allTraits.RemoveAll(x => x.def == TraitDefOf.Beauty);
             girl.story.traits.GainTrait(new Trait(TraitDefOf.Beauty, 2));
@@ -386,8 +386,8 @@ namespace CaravanAdventures.CaravanStory
             var settlement = CompCache.StoryWC.questCont.Village.Settlement;
             if (settlement != null)
             {
-                Log.Message($"Trying to destroy settlement {settlement.Name}");
-                Log.Message($"settlement mp: {settlement.def.defName}");
+                DLog.Message($"Trying to destroy settlement {settlement.Name}");
+                DLog.Message($"settlement mp: {settlement.def.defName}");
                 if (settlement.def.defName != "StoryVillageMP") return;
                 if (settlement.HasMap) Current.Game.DeinitAndRemoveMap(settlement.Map);
                 settlement.Destroy();
@@ -395,8 +395,8 @@ namespace CaravanAdventures.CaravanStory
             var destroyedSettlement = CompCache.StoryWC.questCont.Village.DestroyedSettlement;
             if (destroyedSettlement != null)
             {
-                Log.Message($"Trying to destroy destroyed settlement");
-                Log.Message($"destroyed settlement mp: {destroyedSettlement.def.defName}");
+                DLog.Message($"Trying to destroy destroyed settlement");
+                DLog.Message($"destroyed settlement mp: {destroyedSettlement.def.defName}");
                 if (destroyedSettlement.def != WorldObjectDefOf.DestroyedSettlement) return;
                 if (destroyedSettlement.HasMap) Current.Game.DeinitAndRemoveMap(destroyedSettlement.Map);
                 destroyedSettlement.Destroy();
@@ -412,14 +412,14 @@ namespace CaravanAdventures.CaravanStory
             if (sites == null) return;
             foreach (var site in sites.Reverse<WorldObject>())
             {
-                Log.Message($"Destroying site {site.def.label}");
+                DLog.Message($"Destroying site {site.def.label}");
                 var mapParent = site as MapParent;
                 if (mapParent != null)
                 {
                     if (mapParent.HasMap) Current.Game.DeinitAndRemoveMap(mapParent.Map);
-                    else Log.Warning($"Didn't have a map to remove: {site.Label} {site.def.defName}");
+                    else DLog.Warning($"Didn't have a map to remove: {site.Label} {site.def.defName}");
                 }
-                else Log.Warning($"Couldn't convert site to MapParent and check for a map to remove: {site.Label} {site.def.defName}");
+                else DLog.Warning($"Couldn't convert site to MapParent and check for a map to remove: {site.Label} {site.def.defName}");
                 site.Destroy();
             }
         }

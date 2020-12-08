@@ -124,17 +124,17 @@ namespace CaravanAdventures.CaravanStory.Quests
         {
             if (CompCache.StoryWC.storyFlags["TradeCaravan_DialogFinished"]) return;
              
-            Log.Message($"creating caravan");
+            DLog.Message($"creating caravan");
             if (Faction.OfPlayer.HostileTo(StoryUtility.FactionOfSacrilegHunters))
             {
-                Log.Message($"Skipping, Sac hunters are hostile.");
+                DLog.Message($"Skipping, Sac hunters are hostile.");
                 friendlyCaravanCounter = 20000f;
                 return;
             }
             var selectedMap = map ?? Find.Maps.Where(cmap => cmap.ParentFaction == Faction.OfPlayerSilentFail)?.OrderByDescending(cmap => cmap.wealthWatcher.WealthItems)?.FirstOrDefault();
             if (selectedMap == null)
             {
-                Log.Message($"Story caravan couldn't be created, no player map found");
+                DLog.Message($"Story caravan couldn't be created, no player map found");
                 friendlyCaravanCounter = 1000f;
                 return;
             }
@@ -145,7 +145,7 @@ namespace CaravanAdventures.CaravanStory.Quests
                CompCache.StoryWC.questCont.Village.StoryContact,
                typeof(QuestCont_FriendlyCaravan).ToString(),
                "FriendlyCaravan_Conversation");
-            Log.Message($"added conv to mainpawn {CompCache.StoryWC.questCont.Village.StoryContact.Name}");
+            DLog.Message($"added conv to mainpawn {CompCache.StoryWC.questCont.Village.StoryContact.Name}");
 
             //Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillage_QuestUpdate_MechsArrived".Translate(addressed.NameShortColored));
 

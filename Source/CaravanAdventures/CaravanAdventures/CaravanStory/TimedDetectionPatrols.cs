@@ -112,7 +112,7 @@ namespace CaravanAdventures.CaravanStory
 
 		public override void CompTick()
 		{
-			if(ModSettings.debug) if (ticksLeftToSendRaid % 100 == 0) Log.Message($"{this.parent.Label}: notify / raid {ticksLeftTillNotifyPlayer} / {ticksLeftToSendRaid}");
+			if(ModSettings.debugMessages) if (ticksLeftToSendRaid % 100 == 0) DLog.Message($"{this.parent.Label}: notify / raid {ticksLeftTillNotifyPlayer} / {ticksLeftToSendRaid}");
 
 			// todo changed from AncientShrineMP to generall MP, check if shrine still works!
 			var mapParent = (MapParent)this.parent;
@@ -139,7 +139,7 @@ namespace CaravanAdventures.CaravanStory
                             faction = this.RaidFaction,
                             raidArrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn
                         };
-                        Log.Message($"Default threat points: {StorytellerUtility.DefaultThreatPointsNow(incidentParms.target)}");
+                        DLog.Message($"Default threat points: {StorytellerUtility.DefaultThreatPointsNow(incidentParms.target)}");
 						IncidentDefOf.RaidEnemy.Worker.TryExecute(incidentParms);
 						this.ticksLeftToSendRaid = (int)(Rand.Range(18f, 24f) * 2500f);
 						ticksLeftTillLeaveIfNoEnemies = defaultTicksTillLeave;
@@ -154,7 +154,7 @@ namespace CaravanAdventures.CaravanStory
 					if (ticksLeftTillLeaveIfNoEnemies == 0)
 					{
 						var raidLords = mapParent.Map.lordManager.lords.Where(lord => lord.faction == Faction.OfMechanoids && !lordsToExcludeFromRaidLogic.Contains(lord));
-						Log.Message($"raid mechs: {raidLords.Select(lord => lord.ownedPawns).Count()}");
+						DLog.Message($"raid mechs: {raidLords.Select(lord => lord.ownedPawns).Count()}");
 						if (!raidLords.Any(lord => lord.AnyActivePawn)) ticksLeftTillLeaveIfNoEnemies = -1;
 						else if (GenHostility.AnyHostileActiveThreatTo(mapParent.Map, Faction.OfMechanoids)) ticksLeftTillLeaveIfNoEnemies = 1000;
 						else

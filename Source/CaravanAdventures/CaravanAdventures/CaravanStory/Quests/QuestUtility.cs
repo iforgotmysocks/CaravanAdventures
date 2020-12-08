@@ -58,7 +58,7 @@ namespace CaravanAdventures.CaravanStory.Quests
 
         public static void CompleteQuest(QuestScriptDef questDef, bool addQuestUpdatedNoticeToLetter = true, QuestEndOutcome outcome = QuestEndOutcome.Success, QuestState state = QuestState.Ongoing, bool ignoreStateCompleteAnyway = false,  bool sendLetter = true)
         {
-            Log.Message($"Signalling to end quest");
+            DLog.Message($"Signalling to end quest");
             var quest = Find.QuestManager.QuestsListForReading.FirstOrDefault(x => x.root == questDef
             && (x.State == state || ignoreStateCompleteAnyway));
             if (quest != null)
@@ -103,7 +103,7 @@ namespace CaravanAdventures.CaravanStory.Quests
 
         public static void DeleteQuest(QuestScriptDef questDef, QuestEndOutcome outcome = QuestEndOutcome.Success, QuestState state = QuestState.Ongoing, bool ignoreStateCompleteAnyway = true, bool sendLetter = true)
         {
-            Log.Message($"Deleting quest");
+            DLog.Message($"Deleting quest");
             var quest = Find.QuestManager.QuestsListForReading.FirstOrDefault(x => x.root == questDef
             && (x.State == state || ignoreStateCompleteAnyway));
             if (quest != null) Find.QuestManager.Remove(quest);

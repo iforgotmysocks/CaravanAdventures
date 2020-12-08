@@ -135,7 +135,7 @@ namespace CaravanAdventures.CaravanStory
 
         public void StoryStartDialog(Pawn initiator, Thing addressed)
         {
-            Log.Message($"Story starts initiated by {initiator.Name} and {addressed.def.defName}");
+            DLog.Message($"Story starts initiated by {initiator.Name} and {addressed.def.defName}");
             DiaNode diaNode = null;
             if (!CompCache.StoryWC.storyFlags["Start_CanReceiveGift"])
             {
@@ -216,7 +216,7 @@ namespace CaravanAdventures.CaravanStory
                 return;
             }
 
-            Log.Message(gifted.Name + " " + gifted.NameFullColored);
+            DLog.Message(gifted.Name + " " + gifted.NameFullColored);
 
             MoteMaker.MakeStaticMote(gifted.Position, gifted.Map, ThingDefOf.Mote_PsycastAreaEffect, 10f);
             SoundDefOf.PsycastPsychicPulse.PlayOneShot(new TargetInfo(gifted));
@@ -254,7 +254,7 @@ namespace CaravanAdventures.CaravanStory
            
             if (currentStoryTrigger && !CompCache.StoryWC.storyFlags["Start_ReceivedGift"])
             {
-                Log.Message($"StoryStart Map removed, resetting StoryStart Flags.");
+                DLog.Message($"StoryStart Map removed, resetting StoryStart Flags.");
                 CompCache.StoryWC.ResetSFsStartingWith("Start_");
             }
         }

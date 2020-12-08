@@ -47,7 +47,7 @@ namespace CaravanAdventures.CaravanCamp
 
                 var job = JobMaker.MakeJob(CampDefOf.CACampInformPackingUp, parent);
                 job.count = 1;
-                Log.Message($"trying to take ordered");
+                DLog.Message($"trying to take ordered");
                 selPawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
             });
         }
@@ -69,7 +69,7 @@ namespace CaravanAdventures.CaravanCamp
             {
                 var count = Convert.ToInt32(Math.Ceiling((double)CampDefOf.CASpacerTentSupplies.stackLimit / (double)resourceCount));
                 var remaining = resourceCount - waste;
-                Log.Message($"Refunding {remaining} of {ResourceCount} resources");
+                DLog.Message($"Refunding {remaining} of {ResourceCount} resources");
                 for (var i = 0; i < count; i++)
                 {
                     var thing = ThingMaker.MakeThing(CampDefOf.CASpacerTentSupplies);

@@ -92,21 +92,21 @@ namespace CaravanAdventures.CaravanStory
         {
             centerPoint = StoryUtility.GetCenterOfSettlementBase(Map, StoryUtility.FactionOfSacrilegHunters);
             var raidLords = Map.lordManager.lords.Where(lord => lord.faction == StoryUtility.FactionOfSacrilegHunters);
-            Log.Message($"hunter lords: {raidLords.Select(lord => lord.ownedPawns).Count()}");
+            DLog.Message($"hunter lords: {raidLords.Select(lord => lord.ownedPawns).Count()}");
 
             foreach (var lord in raidLords.Reverse())
             {
                 var pawnsToReassign = lord.ownedPawns;
                 lord.lordManager.RemoveLord(lord);
                 var genLord = LordMaker.MakeNewLord(Faction, new LordJob_DefendBaseAgaintHostiles(Faction, centerPoint), Map, pawnsToReassign);
-                Log.Message($"Created lord with id {genLord.loadID}");
+                DLog.Message($"Created lord with id {genLord.loadID}");
             }
 
             var selLord = raidLords.OrderByDescending(x => x.ownedPawns.Count).FirstOrDefault();
             if (storyChar.GetLord() != null && storyChar.GetLord() != selLord) storyChar.GetLord().ownedPawns.Remove(storyChar);
             if (storyChar.GetLord() == null) selLord.AddPawn(storyChar);
 
-            Log.Message($"After applying lord, story char has lord with id: {storyChar.GetLord().loadID}");
+            DLog.Message($"After applying lord, story char has lord with id: {storyChar.GetLord().loadID}");
         }
 
         public override void PostMapGenerate()
@@ -116,7 +116,7 @@ namespace CaravanAdventures.CaravanStory
 
         public void ConversationFinished(Pawn initiator, Pawn addressed)
         {
-            Log.Message($"Story starts initiated by {initiator.Name} and {addressed.def.defName}");
+            DLog.Message($"Story starts initiated by {initiator.Name} and {addressed.def.defName}");
             DiaNode diaNode = null;
             var diaNode4 = new DiaNode("StoryVillage_Dia1_4".Translate(addressed.NameShortColored));
             diaNode4.options.Add(new DiaOption("StoryVillage_Dia1_4_Option1".Translate()) { action = () => SpawnMechArmy(), resolveTree = true });
@@ -168,7 +168,7 @@ namespace CaravanAdventures.CaravanStory
                 // todo - find out how to ensure mixed pawngroupmakerkinds
                 raidArrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn
             };
-            Log.Message($"Default threat points: {StorytellerUtility.DefaultThreatPointsNow(incidentParms.target)}");
+            DLog.Message($"Default threat points: {StorytellerUtility.DefaultThreatPointsNow(incidentParms.target)}");
             IncidentDefOf.RaidEnemy.Worker.TryExecute(incidentParms);
             
             CompCache.StoryWC.SetSF("IntroVillage_MechsArrived");
@@ -315,11 +315,11 @@ namespace CaravanAdventures.CaravanStory
             if (timerTillRemoval > 0) return;
             if (Map.mapPawns.FreeColonistsSpawned.Any(x => !x.Dead)) return;
 
-            Log.Message($"Should set player won flag");
+            DLog.Message($"Should set player won flag");
 
             if (!Map.mapPawns.AllPawnsSpawned.Any(x => x.Faction == Faction.OfMechanoids && !x.Dead && !x.Downed))
             {
-                Log.Message($"Setting player won flag");
+                DLog.Message($"Setting player won flag");
                 CompCache.StoryWC.SetSF("IntroVillage_PlayerWon");
             }
             // todo dialog escaped

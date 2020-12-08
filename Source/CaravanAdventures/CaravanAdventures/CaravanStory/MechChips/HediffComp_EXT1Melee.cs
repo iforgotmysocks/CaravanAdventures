@@ -76,7 +76,7 @@ namespace CaravanAdventures.CaravanStory.MechChips
             {
                 if (!GenGrid.InBounds(Pawn.TargetCurrentlyAimingAt.Cell, Pawn.Map))
                 {
-                    Log.Message($"Target cell out of bounds!");
+                    DLog.Message($"Target cell out of bounds!");
                     return false;
                 }
                 StoryUtility.CallBombardment(Pawn.TargetCurrentlyAimingAt.Cell, Pawn.Map, Pawn);

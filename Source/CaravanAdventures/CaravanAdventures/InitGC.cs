@@ -37,7 +37,7 @@ namespace CaravanAdventures
             if (removeRuinsTick > 60000)
             {
                 var settlements = Find.WorldObjects.AllWorldObjects.Where(settlement => settlement.def == WorldObjectDefOf.AbandonedSettlement && settlement.Faction.IsPlayer);
-                Log.Message($"Trying to remove {settlements.Count()} settlements");
+                DLog.Message($"Trying to remove {settlements.Count()} settlements");
 
                 foreach (var settlement in settlements.Reverse())
                 {

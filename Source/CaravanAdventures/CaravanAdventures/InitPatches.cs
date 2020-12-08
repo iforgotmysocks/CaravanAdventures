@@ -33,7 +33,7 @@ namespace CaravanAdventures
             var bases = DefDatabase<TraderKindDef>.AllDefsListForReading.Where(def => def.defName.ToLower().StartsWith("base_"));
             foreach (var curBase in bases)
             {
-                Log.Message($"adjusting base {curBase.defName}");
+                DLog.Message($"adjusting base {curBase.defName}");
                 var silverGen = curBase.stockGenerators.FirstOrDefault(gen => gen.HandlesThingDef(ThingDefOf.Silver));
                 if (silverGen != null) silverGen.countRange = new IntRange(silverGen.countRange.min * 3, silverGen.countRange.max * 2);
 

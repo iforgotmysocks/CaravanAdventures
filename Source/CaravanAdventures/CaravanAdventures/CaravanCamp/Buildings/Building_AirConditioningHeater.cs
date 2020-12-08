@@ -32,7 +32,7 @@ namespace CaravanAdventures.CaravanCamp.Buildings
                 float energyLimit = this.compTempControl.Props.energyPerSecond * num * 4.16666651f;
                 float num2 = GenTemperature.ControlTemperatureTempChange(base.Position, base.Map, energyLimit, this.compTempControl.targetTemperature);
                 bool flag = !Mathf.Approximately(num2, 0f);
-                Log.Message($"elmit: {energyLimit} num2: {num2} flag: {flag}");
+                DLog.Message($"elmit: {energyLimit} num2: {num2} flag: {flag}");
                 CompProperties_Power props = this.compPowerTrader.Props;
                 var highPower = this.GetRoomGroup().Temperature < 20 || this.GetRoomGroup().Temperature > 22 ? true : false;
                 if (flag)
