@@ -19,6 +19,7 @@ namespace CaravanAdventures
 
         // general
         public static bool debug = false;
+        public static bool debugMessages = false;
 
         // improvements
         public static bool removeRoyalTitleRequirements = true;
@@ -65,7 +66,8 @@ namespace CaravanAdventures
         {
             base.ExposeData();
             // debug
-            Scribe_Values.Look(ref debug, "debug");
+            Scribe_Values.Look(ref debug, "debug", false);
+            Scribe_Values.Look(ref debugMessages, "debugMessages", false);
 
             // improvements
             Scribe_Values.Look(ref removeRoyalTitleRequirements, "removeRoyalTitleRequirements", true);
@@ -148,6 +150,7 @@ namespace CaravanAdventures
 
 
             options.CheckboxLabeled("Debug mode", ref debug);
+            options.CheckboxLabeled("Debug messages", ref debugMessages);
             if (options.ButtonText("Reset full story")) StoryUtility.RestartStory();
             options.CheckboxLabeled("Apocalypse enabled", ref apocalypseEnabled);
             options.Label($"Apocalypse temperature change per day: {Math.Round(apocalypseTemperatureChangePerDay, 4)}  (Default: -0.084)");

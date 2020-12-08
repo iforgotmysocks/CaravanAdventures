@@ -161,6 +161,7 @@
     <Compile Include="CaravanStory\StoryStart.cs" />
     <Compile Include="CaravanStory\TimedDetectionPatrols.cs" />
     <Compile Include="CompCache.cs" />
+    <Compile Include="DLog.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="InitGC.cs" />
     <Compile Include="InitPatches.cs" />
