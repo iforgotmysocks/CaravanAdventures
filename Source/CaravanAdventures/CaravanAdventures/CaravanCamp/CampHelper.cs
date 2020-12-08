@@ -65,7 +65,7 @@ namespace CaravanAdventures.CaravanCamp
             roomGroup.PushHeat(remainingTemp * cellRect.Cells.Where(curCell => !cellRect.EdgeCells.Contains(curCell)).Count());
         }
 
-        internal static void AddAnimalFreeAreaRestriction(IEnumerable<IZoneTent> parts, Map map)
+        internal static void AddAnimalFreeAreaRestriction(IEnumerable<IZoneTent> parts, Map map, Caravan caravan, bool assignAnimals = false)
         {
             var animalArea = new Area_Allowed(map.areaManager);
             map.areaManager.AllAreas.Add(animalArea);
@@ -73,6 +73,8 @@ namespace CaravanAdventures.CaravanCamp
             map.AllCells.ToList().ForEach(cell => animalArea[cell] = true);
             parts.Where(part => part.GetZone() != null).Select(part => part.GetZone()).ToList().ForEach(zone => zone.Cells.ForEach(cell => animalArea[cell] = false));
             animalArea.AreaUpdate();
+
+            if (assignAnimals) foreach (var animal in caravan.PawnsListForReading.Where(pawn => pawn.RaceProps.Animal)) animal.playerSettings.AreaRestriction = animalArea;
         }
 
         internal static void AssignQualityReflectiveOfSkill(Building thing, int skillLevel, int lowestSkill = 6)

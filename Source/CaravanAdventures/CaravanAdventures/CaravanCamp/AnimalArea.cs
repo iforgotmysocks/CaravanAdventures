@@ -51,6 +51,7 @@ namespace CaravanAdventures.CaravanCamp
 
         public void AssignPawnsToAreas(Map map, Caravan caravan)
         {
+            if (ModSettings.letAnimalsRunFree) return;
             foreach (var animal in caravan.PawnsListForReading.Where(pawn => pawn.RaceProps.Animal)) animal.playerSettings.AreaRestriction = animalArea;
         }
 

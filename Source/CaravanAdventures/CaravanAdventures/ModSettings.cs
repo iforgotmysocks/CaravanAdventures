@@ -27,6 +27,7 @@ namespace CaravanAdventures
 
         // camp
         public static bool generateStorageForAllInventory = true;
+        public static bool letAnimalsRunFree = false;
 
         // abilities
         // - thunderbolt
@@ -62,6 +63,7 @@ namespace CaravanAdventures
         //public static ModSettings Get() => LoadedModManager.GetMod<CaravanAdventures.Main>().GetSettings<ModSettings>();
         private Vector2 scrollPos = Vector2.zero;
 
+
         public override void ExposeData()
         {
             base.ExposeData();
@@ -75,6 +77,7 @@ namespace CaravanAdventures
 
             // camp
             Scribe_Values.Look(ref generateStorageForAllInventory, "generateStorageForAllInventory", false);
+            Scribe_Values.Look(ref letAnimalsRunFree, "letAnimalsRunFree", false);
 
             // abilities
             // - thunderbolt
@@ -210,6 +213,7 @@ namespace CaravanAdventures
 
             options.Gap();
             options.CheckboxLabeled("Generate storage tents for all items and unload", ref generateStorageForAllInventory);
+            options.CheckboxLabeled("Let animals run free", ref letAnimalsRunFree);
 
             options.EndScrollView(ref viewRect);
             //Widgets.EndScrollView();

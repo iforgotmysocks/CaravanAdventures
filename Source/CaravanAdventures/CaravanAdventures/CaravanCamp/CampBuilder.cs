@@ -424,8 +424,8 @@ namespace CaravanAdventures.CaravanCamp
                 areaRestrictionTent.CreateNewRestrictionArea(map, caravan);
                 areaRestrictionTent.AssignPawnsToAreas(map, caravan);
             }
-
-            CampHelper.AddAnimalFreeAreaRestriction(campParts.OfType<IZoneTent>().Where(part => part is FoodTent), map);
+            
+            CampHelper.AddAnimalFreeAreaRestriction(campParts.OfType<IZoneTent>().Where(part => part is FoodTent), map, caravan, ModSettings.letAnimalsRunFree);
         }
 
         protected void GenerateRecipes()
