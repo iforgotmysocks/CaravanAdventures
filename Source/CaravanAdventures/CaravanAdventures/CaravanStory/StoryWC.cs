@@ -24,6 +24,8 @@ using Verse.Noise;
 // --> what to do when they get hostile
 // --> when removing shrines, and all pawns are dead, don't continue the conversation... xD
 
+// - trade / caravan dialog filters
+// --> try turning them into regular game filters, which would allow the player to set specific items for the options
 
 
 // - second shrine was removed before the boss died and the ability dialog came up
