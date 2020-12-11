@@ -30,6 +30,8 @@ namespace CaravanAdventures
         public static bool letAnimalsRunFree = false;
 
         // abilities
+        // - ancient gift
+        public static float ancientGiftPassivePsyfocusGainPerSec = 0.00035f;
         // - thunderbolt
         public static float mechanoidDissmemberChance = 0.6f;
         public static float humanDissmemberChance = 0.3f;
@@ -80,6 +82,8 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref letAnimalsRunFree, "letAnimalsRunFree", false);
 
             // abilities
+            // - ancient gift
+            Scribe_Values.Look(ref ancientGiftPassivePsyfocusGainPerSec, "ancientGiftPassivePsyfocusGainPerSec", 0.00035f);
             // - thunderbolt
             Scribe_Values.Look(ref mechanoidDissmemberChance, "mechanoidDissmemberChance", 0.6f);
             Scribe_Values.Look(ref humanDissmemberChance, "humanDissmemberChance", 0.3f);
@@ -109,8 +113,6 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref veteranResetTimeInDays, "veteranResetTimeInDays", 3f);
             Scribe_Values.Look(ref allowBountyFromBuildingInstigators, "allowBountyFromBuildingInstigators", true);
         }
-
-
 
         public void DoWindowContentsNew(Rect wrect)
         {
@@ -176,6 +178,11 @@ namespace CaravanAdventures
             options.CheckboxLabeled("Remove royal title requirements", ref removeRoyalTitleRequirements);
             options.Gap();
             options.CheckboxLabeled("Only remove Acolyte and Knight title requirements", ref removeOnlyAcolyteAndKnightRoyalTitleRequirements);
+            options.Gap();
+
+            options.Label("Ancient Gift:".Colorize(Color.red), 40f);
+            options.Label("Passive psyfocus gain per sec: " + Math.Round(ancientGiftPassivePsyfocusGainPerSec * 100, 2) + "%");
+            ancientGiftPassivePsyfocusGainPerSec = options.Slider(ancientGiftPassivePsyfocusGainPerSec, 0.01f, 0.00001f);
             options.Gap();
 
             options.Label("Ancient thunderbolt:".Colorize(Color.red), 40f);

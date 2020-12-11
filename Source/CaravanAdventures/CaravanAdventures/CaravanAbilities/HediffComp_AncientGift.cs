@@ -15,9 +15,9 @@ namespace CaravanAdventures.CaravanAbilities
         {
             base.CompPostTick(ref severityAdjustment);
 
-            if (ticks >= 600)
+            if (ticks >= 60)
             {
-                Pawn.psychicEntropy.OffsetPsyfocusDirectly(0.0035f);
+                Pawn.psychicEntropy.OffsetPsyfocusDirectly(ModSettings.ancientGiftPassivePsyfocusGainPerSec);
                 ticks = 0;
             }
             ticks++;
