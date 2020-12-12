@@ -42,6 +42,12 @@ namespace CaravanAdventures.CaravanMechBounty
             bountyServiceAvailable = false;
         }
 
+        public override void FinalizeInit()
+        {
+            base.FinalizeInit();
+            CompCache.BountyWC = null;
+        }
+
         public override void ExposeData()
         {
             base.ExposeData();

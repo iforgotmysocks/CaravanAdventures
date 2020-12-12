@@ -23,6 +23,7 @@ namespace CaravanAdventures
         public override void FinalizeInit()
         {
             base.FinalizeInit();
+            CompCache.InitGC = null;
         }
 
         public override void GameComponentTick()

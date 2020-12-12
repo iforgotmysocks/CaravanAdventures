@@ -36,7 +36,7 @@ namespace CaravanAdventures.CaravanMechBounty
             node.options.Add(new DiaOption("CABountyExchangeRecruitVeteranHunter".Translate()) { link = GetRecuitmentOverview(node), disabled = hostile, disabledReason = error });
             if (Helper.Debug())
             {
-                node.options.Add(new DiaOption("Debug: + 10000") { action = () => CompCache.BountyWC.BountyPoints += 10000, link = node });
+                node.options.Add(new DiaOption("Debug: + 1000") { action = () => CompCache.BountyWC.BountyPoints += 1000, link = node });
                 node.options.Add(new DiaOption("Debug: - 500") { action = () => CompCache.BountyWC.BountyPoints -= 500, link = node });
             }
 
@@ -206,7 +206,7 @@ namespace CaravanAdventures.CaravanMechBounty
             activeDropPodInfo.innerContainer.TryAddRangeOrTransfer(things, true, false);
             DropPodUtility.MakeDropPodAt(validPosition, requestor.Map, activeDropPodInfo);
             Messages.Message("CABountyExchangeRequestItem_ItemArrived".Translate(this.faction.Named("FACTION")), new LookTargets(validPosition, requestor.Map), MessageTypeDefOf.NeutralEvent, true);
-            CompCache.BountyWC.BountyPoints -= fixedCredits != 0 ? fixedCredits :  ConvertItemValueToBounty(item);
+            CompCache.BountyWC.BountyPoints -= fixedCredits != 0 ? fixedCredits : ConvertItemValueToBounty(item);
             CompCache.BountyWC.CurrentTradeItemStock.Remove(item);
         }
 
