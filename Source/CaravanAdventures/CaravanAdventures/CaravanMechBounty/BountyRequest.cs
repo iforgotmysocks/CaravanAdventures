@@ -124,10 +124,10 @@ namespace CaravanAdventures.CaravanMechBounty
         private DiaNode GetItemOverview(DiaNode parent)
         {
             var node = new DiaNode("CABountyExchangeRequestItemTitle".Translate(CompCache.BountyWC.BountyPoints, GetRestockTimeString()));
-            foreach (var item in GenerateItemStock(5))
+            foreach (var item in GenerateItemStock(4, 1))
             {
                 if (item == null) continue;
-                var link = new Dialog_InfoCard.Hyperlink { thing = item.GetInnerIfMinified(), def = item.def };
+                var link = new Dialog_InfoCard.Hyperlink { thing = item.GetInnerIfMinified(), def = item.GetInnerIfMinified().def };
                 var personaTraitString = string.Empty;
 
                 var comp = item.TryGetComp<CompBladelinkWeapon>();
@@ -167,15 +167,15 @@ namespace CaravanAdventures.CaravanMechBounty
 
         private object[] customRewardsRoyalty = new object[] { ThingCategoryDef.Named("WeaponsMeleeBladelink"), ThingDefOf.AnimusStone };
         private List<object> customRewards = new List<object>() { ThingDefOf.VanometricPowerCell, ThingDefOf.InfiniteChemreactor };
-        private List<Thing> GenerateItemStock(int itemCount)
+        private List<Thing> GenerateItemStock(int itemCount, int customItemCount = 0)
         {
             if (ModsConfig.RoyaltyActive) customRewards.AddRange(customRewardsRoyalty);
 
             if (CompCache.BountyWC.CurrentTradeItemStock == null) CompCache.BountyWC.CurrentTradeItemStock = new List<Thing>();
             if (CompCache.BountyWC.OngoingItemDelay > 0) return CompCache.BountyWC.CurrentTradeItemStock;
             CompCache.BountyWC.CurrentTradeItemStock.Clear();
-            for (int i = 0; i < itemCount - 1; i++) CompCache.BountyWC.CurrentTradeItemStock.Add(GenerateItem(500 * (i + 1), CompCache.BountyWC.CurrentTradeItemStock, null));
-            CompCache.BountyWC.CurrentTradeItemStock.Add(GenerateItem(0, CompCache.BountyWC.CurrentTradeItemStock, customRewards));
+            for (int i = 0; i < itemCount; i++) CompCache.BountyWC.CurrentTradeItemStock.Add(GenerateItem(500 * (i + 1), CompCache.BountyWC.CurrentTradeItemStock, null));
+            for (int i = 0; i < customItemCount; i++) CompCache.BountyWC.CurrentTradeItemStock.Add(GenerateItem(0, CompCache.BountyWC.CurrentTradeItemStock, customRewards));
             CompCache.BountyWC.OngoingItemDelay = ModSettings.itemRestockDurationInDays * 60000;
             return CompCache.BountyWC.CurrentTradeItemStock;
         }
@@ -188,7 +188,10 @@ namespace CaravanAdventures.CaravanMechBounty
             if (customItems != null && customItems?.Count != 0)
             {
                 Thing customReward = null;
-                object picked = customItems.RandomElement();
+                object picked = customItems.RandomElementByWeight(item => {
+                    if (item is ThingCategoryDef catDef && catDef == ThingCategoryDef.Named("WeaponsMeleeBladelink")) return 0.8f;
+                    return 0.3f;
+                });
 
                 if (picked is ThingDef pickedDef) customReward = ThingMaker.MakeThing(pickedDef);
                 else if (picked is ThingCategoryDef pickedCat) customReward = ThingMaker.MakeThing(pickedCat.childThingDefs.RandomElement());
@@ -421,26 +424,6 @@ namespace CaravanAdventures.CaravanMechBounty
                     resolveTree = true,
                 });
             }
-
-            node.options.Add(new DiaOption("CABountyExchangeVeteranRecruitment_ChoosePersonalityNone".Translate())
-            {
-                action = () => EnlistVeteran(cost, personality, null),
-                resolveTree = true,
-            });
-            node.options.Add(new DiaOption("CABountyBack".Translate()) { link = parent });
-
-            return node;
-        }
-
-        private DiaNode PreviewVeteran(DiaNode parent, int cost, TraitDef personality, TraitDef skill)
-        {
-
-            var node = new DiaNode("CABountyExchangeVeteranRecruitment_ChooseSkill".Translate());
-            node.options.Add(new DiaOption(skill.degreeDatas.OrderByDescending(data => data.degree).FirstOrDefault().LabelCap)
-            {
-                action = () => EnlistVeteran(cost, personality, skill),
-                resolveTree = true,
-            });
 
             node.options.Add(new DiaOption("CABountyExchangeVeteranRecruitment_ChoosePersonalityNone".Translate())
             {
