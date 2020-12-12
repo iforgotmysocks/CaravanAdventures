@@ -19,7 +19,7 @@
   <CABountyExchangeRequestHelp_StrengthSelection_TroopDeploymentBusy>Hunters busy</CABountyExchangeRequestHelp_StrengthSelection_TroopDeploymentBusy>
   
   <CABountyExchangeRequestItemTitle>Current bounty credits: {0}\n\n\nPlease select the item u'd like to exchange bounty credits for. It will be delivered via drop pod.\n\n{1}</CABountyExchangeRequestItemTitle>
-  <CABountyExchangeRequestItem_ItemDetails>{0} for: {1} credits</CABountyExchangeRequestItem_ItemDetails>
+  <CABountyExchangeRequestItem_ItemDetails>         buy {0} for: {1} credits</CABountyExchangeRequestItem_ItemDetails>
   <CABountyExchangeRequestItem_ItemArrived>Your delivery from {0} arrived!</CABountyExchangeRequestItem_ItemArrived>
   <CABountyExchangeRequestItem_ItemRestockNow>Just restocked. </CABountyExchangeRequestItem_ItemRestockNow>
   <CABountyExchangeRequestItem_ItemRestockDetail>Next restock in {0} days</CABountyExchangeRequestItem_ItemRestockDetail>
@@ -42,4 +42,5 @@
   <CABountyExchangeVeteranRecruitment_ChoosePersonality>\n\n\nAs the personality is usually important, we try to find a good fit for you.</CABountyExchangeVeteranRecruitment_ChoosePersonality>
   <CABountyExchangeVeteranRecruitment_ChoosePersonalityNone>Rather none of those</CABountyExchangeVeteranRecruitment_ChoosePersonalityNone>
   <CABountyExchangeVeteranRecruitment_ChooseSkill>\n\n\nAnd the unique skill?</CABountyExchangeVeteranRecruitment_ChooseSkill>
+
 </LanguageData>

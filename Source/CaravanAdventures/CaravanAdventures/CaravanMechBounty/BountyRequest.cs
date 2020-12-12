@@ -124,16 +124,33 @@ namespace CaravanAdventures.CaravanMechBounty
         private DiaNode GetItemOverview(DiaNode parent)
         {
             var node = new DiaNode("CABountyExchangeRequestItemTitle".Translate(CompCache.BountyWC.BountyPoints, GetRestockTimeString()));
-            foreach (var item in GenerateItemStock(8))
+            foreach (var item in GenerateItemStock(5))
             {
                 if (item == null) continue;
+                var link = new Dialog_InfoCard.Hyperlink { thing = item.GetInnerIfMinified(), def = item.def };
+                var personaTraitString = string.Empty;
+
+                var comp = item.TryGetComp<CompBladelinkWeapon>();
+                if (comp != null && ModsConfig.RoyaltyActive)
+                {
+                    var names = comp.TraitsListForReading.Count != 0 ? comp.TraitsListForReading.Select(trait => trait.LabelCap) : null;
+                    if (names != null) personaTraitString = " (" + string.Join(", ", names) + ")";
+                }
+
+                node.options.Add(new DiaOption((item.LabelCap + personaTraitString))
+                {
+                    disabled = !CanPurchaseItem(item, out var reason),
+                    disabledReason = reason,
+                    hyperlink = link
+                });
+
                 node.options.Add(new DiaOption("CABountyExchangeRequestItem_ItemDetails".Translate(item.LabelCap,
                     ConvertItemValueToBounty(item)))
                 {
                     action = () => PurchaseAndDropItem(item),
                     resolveTree = true,
-                    disabled = !CanPurchaseWeapon(item, out var reason),
-                    disabledReason = reason
+                    disabled = !CanPurchaseItem(item, out reason),
+                    disabledReason = reason,
                 });
             }
             node.options.Add(new DiaOption("CABountyBack".Translate()) { link = parent });
@@ -141,33 +158,59 @@ namespace CaravanAdventures.CaravanMechBounty
             return node;
         }
 
+
         private string GetRestockTimeString()
         {
             if (CompCache.BountyWC.OngoingItemDelay <= 0) return "CABountyExchangeRequestItem_ItemRestockNow".Translate() + "CABountyExchangeRequestItem_ItemRestockDetail".Translate(Math.Round(ModSettings.itemRestockDurationInDays, 1).ToString());
             return "CABountyExchangeRequestItem_ItemRestockDetail".Translate(CompCache.BountyWC.GetNextAvailableDateInDays(CompCache.BountyWC.OngoingItemDelay));
         }
 
+        private object[] customRewardsRoyalty = new object[] { ThingCategoryDef.Named("WeaponsMeleeBladelink"), ThingDefOf.AnimusStone };
+        private List<object> customRewards = new List<object>() { ThingDefOf.VanometricPowerCell, ThingDefOf.InfiniteChemreactor };
         private List<Thing> GenerateItemStock(int itemCount)
         {
+            if (ModsConfig.RoyaltyActive) customRewards.AddRange(customRewardsRoyalty);
+
             if (CompCache.BountyWC.CurrentTradeItemStock == null) CompCache.BountyWC.CurrentTradeItemStock = new List<Thing>();
             if (CompCache.BountyWC.OngoingItemDelay > 0) return CompCache.BountyWC.CurrentTradeItemStock;
             CompCache.BountyWC.CurrentTradeItemStock.Clear();
-            for (int i = 0; i < itemCount; i++) CompCache.BountyWC.CurrentTradeItemStock.Add(GenerateItem(500 * (i + 1), CompCache.BountyWC.CurrentTradeItemStock));
+            for (int i = 0; i < itemCount - 1; i++) CompCache.BountyWC.CurrentTradeItemStock.Add(GenerateItem(500 * (i + 1), CompCache.BountyWC.CurrentTradeItemStock, null));
+            CompCache.BountyWC.CurrentTradeItemStock.Add(GenerateItem(0, CompCache.BountyWC.CurrentTradeItemStock, customRewards));
             CompCache.BountyWC.OngoingItemDelay = ModSettings.itemRestockDurationInDays * 60000;
             return CompCache.BountyWC.CurrentTradeItemStock;
         }
 
-        private Thing GenerateItem(float credits, List<Thing> itemsToAvoid)
+        private Thing GenerateItem(float credits, List<Thing> itemsToAvoid, List<object> customItems)
         {
             //var rewards = RewardsGenerator.Generate(new RewardsGeneratorParams() { thingRewardItemsOnly = true, minGeneratedRewardValue = credits * 2, disallowedThingDefs = itemsToAvoid.Select(x => x.def).ToList() });
             //var rewardItems = rewards.FirstOrDefault((x) => x is Reward_Items) as Reward_Items;
 
+            if (customItems != null && customItems?.Count != 0)
+            {
+                Thing customReward = null;
+                object picked = customItems.RandomElement();
+
+                if (picked is ThingDef pickedDef) customReward = ThingMaker.MakeThing(pickedDef);
+                else if (picked is ThingCategoryDef pickedCat) customReward = ThingMaker.MakeThing(pickedCat.childThingDefs.RandomElement());
+                if (customReward != null && customReward.TryGetQuality(out var quality))
+                {
+                    quality = (QualityCategory)Rand.RangeInclusive(2, 6);
+                    customReward.TryGetComp<CompQuality>().SetQuality(quality, ArtGenerationContext.Outsider);
+                }
+
+                if (customReward is Building) customReward = customReward.TryMakeMinified();
+
+                return customReward;
+            }
+
             var rewardItems = new Reward_Items();
-            rewardItems.InitFromValue(credits * 2, new RewardsGeneratorParams() { thingRewardItemsOnly = true, minGeneratedRewardValue = credits * 2, disallowedThingDefs = itemsToAvoid.Select(x => x.def).ToList() }, out var usedCredits);
+            rewardItems.InitFromValue(credits * 2, new RewardsGeneratorParams() {thingRewardItemsOnly = true, minGeneratedRewardValue = credits * 2, disallowedThingDefs = itemsToAvoid.Select(x => x.def).ToList() }, out var usedCredits);
             return rewardItems.ItemsListForReading.FirstOrDefault();
         }
 
-        private bool CanPurchaseWeapon(Thing thing, out string reason)
+
+
+        private bool CanPurchaseItem(Thing thing, out string reason)
         {
             var cost = ConvertItemValueToBounty(thing);
             if (CompCache.BountyWC.BountyPoints < cost)
@@ -389,6 +432,26 @@ namespace CaravanAdventures.CaravanMechBounty
             return node;
         }
 
+        private DiaNode PreviewVeteran(DiaNode parent, int cost, TraitDef personality, TraitDef skill)
+        {
+
+            var node = new DiaNode("CABountyExchangeVeteranRecruitment_ChooseSkill".Translate());
+            node.options.Add(new DiaOption(skill.degreeDatas.OrderByDescending(data => data.degree).FirstOrDefault().LabelCap)
+            {
+                action = () => EnlistVeteran(cost, personality, skill),
+                resolveTree = true,
+            });
+
+            node.options.Add(new DiaOption("CABountyExchangeVeteranRecruitment_ChoosePersonalityNone".Translate())
+            {
+                action = () => EnlistVeteran(cost, personality, null),
+                resolveTree = true,
+            });
+            node.options.Add(new DiaOption("CABountyBack".Translate()) { link = parent });
+
+            return node;
+        }
+
         private bool CanRecruitVeteran(int cost, out string reason)
         {
             if (CompCache.BountyWC.BountyPoints < cost)
@@ -406,9 +469,9 @@ namespace CaravanAdventures.CaravanMechBounty
             return true;
         }
 
-        private void EnlistVeteran(int cost, TraitDef personality, TraitDef skill)
+        private void EnlistVeteran(int cost, TraitDef personality, TraitDef skill, Pawn existingVet = null)
         {
-            Pawn vet = BountyUtility.GenerateVeteran(personality, skill);
+            Pawn vet = existingVet ?? BountyUtility.GenerateVeteran(personality, skill);
             if (vet == null)
             {
                 Log.Error($"Creating veteran failed, generated and returned pawn was null");
