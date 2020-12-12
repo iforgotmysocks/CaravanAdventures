@@ -18,6 +18,7 @@ namespace CaravanAdventures.CaravanMechBounty
                 AllowAddictions = false,
             };
             var veteran = PawnGenerator.GeneratePawn(genPawnRequest);
+            if (veteran == null) return null;
             if (veteran.ageTracker.AgeBiologicalYears > 50)
             {
                 var newAge = veteran.ageTracker.AgeBiologicalTicks = 60000 * 60 * Rand.Range(20, 45);
@@ -75,6 +76,9 @@ namespace CaravanAdventures.CaravanMechBounty
 
             var gland = veteran.health.hediffSet.hediffs.FirstOrDefault(hediff => hediff.def == HediffDef.Named("StoneskinGland"));
             if (gland != null && Rand.Chance(0.5f)) veteran.health.hediffSet.hediffs.Remove(gland);
+
+            var joywire = veteran.health.hediffSet.hediffs.FirstOrDefault(hediff => hediff.def == HediffDef.Named("Joywire"));
+            if (joywire != null) veteran.health.hediffSet.hediffs.Remove(joywire);
 
             foreach (var hediff in veteran.health.hediffSet.hediffs.Where(hediff => hediff.def.isBad).Reverse()) HealthUtility.CureHediff(hediff);
 

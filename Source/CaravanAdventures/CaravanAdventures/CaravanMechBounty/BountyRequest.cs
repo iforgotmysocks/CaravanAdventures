@@ -409,6 +409,11 @@ namespace CaravanAdventures.CaravanMechBounty
         private void EnlistVeteran(int cost, TraitDef personality, TraitDef skill)
         {
             Pawn vet = BountyUtility.GenerateVeteran(personality, skill);
+            if (vet == null)
+            {
+                Log.Error($"Creating veteran failed, generated and returned pawn was null");
+                return;
+            }
             PurchaseAndDropItem(vet, cost);
             CompCache.BountyWC.OngoingVeteranDelay = ModSettings.veteranResetTimeInDays * 60000;
         }
