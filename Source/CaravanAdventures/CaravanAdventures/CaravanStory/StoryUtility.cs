@@ -424,15 +424,15 @@ namespace CaravanAdventures.CaravanStory
             }
         }
 
-        public static void CallBombardment(IntVec3 position, Map map, Pawn instigator)
+        public static void CallBombardment(IntVec3 position, Map map, Pawn instigator, float impactRadius = 7.9f, float explosionRangeMin = 5.9f, float explosionRangeMax = 5.9f, int explosionCount = 6, int intervalAndWarmupDuration = 60)
         {
             var bombardment = (Bombardment)GenSpawn.Spawn(ThingDefOf.Bombardment, position, map, WipeMode.Vanish);
-            bombardment.impactAreaRadius = 7.9f;
-            bombardment.explosionRadiusRange = new FloatRange(5.9f, 5.9f);
-            bombardment.bombIntervalTicks = 60;
+            bombardment.impactAreaRadius = impactRadius;
+            bombardment.explosionRadiusRange = new FloatRange(explosionRangeMin, explosionRangeMax);
+            bombardment.bombIntervalTicks = intervalAndWarmupDuration; // 60
             bombardment.randomFireRadius = 1;
-            bombardment.explosionCount = 6;
-            bombardment.warmupTicks = 60;
+            bombardment.explosionCount = explosionCount;
+            bombardment.warmupTicks = intervalAndWarmupDuration; // 60
             bombardment.instigator = instigator;
             SoundDefOf.OrbitalStrike_Ordered.PlayOneShotOnCamera(null);
         }

@@ -37,17 +37,17 @@ namespace CaravanAdventures.CaravanStory.MechChips
             base.CompPostTick(ref severityAdjustment);
 
             if (!Pawn.Awake()) return;
-            if (ticks % 300 == 0)
+            if (ticks % 250 == 0)
             {
                 ManufactureScyther();
             }
 
-            if (ticks % 1250 == 0)
+            if (ticks % 900 == 0)
             {
-                ExpanseBurningSteam();
+                ExpanseBurningSteam(8);
             }
             
-            if (ticks >= 2500)
+            if (ticks >= 1800)
             {
                 if (LaunchBombardmentOnCurrentTarget()) ticks = 0;
             }
@@ -73,22 +73,23 @@ namespace CaravanAdventures.CaravanStory.MechChips
         protected bool LaunchBombardmentOnCurrentTarget()
         {
             // todo get all targets in the desired range that are in sight, calculate the one with the most bystanding enemies
-            if (Pawn?.TargetCurrentlyAimingAt != null && Pawn.TargetCurrentlyAimingAt != LocalTargetInfo.Invalid && Pawn.TargetCurrentlyAimingAt.Cell.DistanceTo(Pawn.Position) >= 10f)
+            if (Pawn?.TargetCurrentlyAimingAt != null && Pawn.TargetCurrentlyAimingAt != LocalTargetInfo.Invalid && Pawn.TargetCurrentlyAimingAt.Cell.DistanceTo(Pawn.Position) >= 8f)
             {
+                // todo choose different target if current is too close
                 if (!GenGrid.InBounds(Pawn.TargetCurrentlyAimingAt.Cell, Pawn.Map))
                 {
                     DLog.Message($"Target cell out of bounds!");
                     return false;
                 }
-                StoryUtility.CallBombardment(Pawn.TargetCurrentlyAimingAt.Cell, Pawn.Map, Pawn);
+                StoryUtility.CallBombardment(Pawn.TargetCurrentlyAimingAt.Cell, Pawn.Map, Pawn, 3, 4, 4, 12, 30);
                 return true;
             }
             return false;
         }
 
-        protected void ExpanseBurningSteam()
+        protected void ExpanseBurningSteam(int rangeInCells = 6)
         {
-            var cells = GenRadial.RadialCellsAround(Pawn.Position, 6, false).Where(cell => cell.Standable(Pawn.Map));
+            var cells = GenRadial.RadialCellsAround(Pawn.Position, rangeInCells, false).Where(cell => cell.Standable(Pawn.Map));
             var pawns = cells.SelectMany(cell => cell.GetThingList(Pawn.Map).OfType<Pawn>().Where(pawn => !pawn.RaceProps.IsMechanoid)).ToList();
             if (pawns != null && pawns.Count() != 0)
             {
