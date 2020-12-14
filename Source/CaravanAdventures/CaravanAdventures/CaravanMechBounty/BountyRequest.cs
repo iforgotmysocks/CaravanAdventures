@@ -140,7 +140,7 @@ namespace CaravanAdventures.CaravanMechBounty
                 node.options.Add(new DiaOption((item.LabelCap + personaTraitString))
                 {
                     disabled = !CanPurchaseItem(item, out var reason),
-                    disabledReason = reason,
+                    disabledReason = string.Empty,
                     hyperlink = link
                 });
 
