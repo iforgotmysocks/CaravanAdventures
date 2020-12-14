@@ -42,12 +42,12 @@ namespace CaravanAdventures.CaravanStory.MechChips
                 ManufactureScyther();
             }
 
-            if (ticks % 900 == 0)
+            if (ticks % 450 == 0)
             {
                 ExpanseBurningSteam(8);
             }
             
-            if (ticks >= 1800)
+            if (ticks >= 900)
             {
                 if (LaunchBombardmentOnCurrentTarget()) ticks = 0;
             }
@@ -81,7 +81,7 @@ namespace CaravanAdventures.CaravanStory.MechChips
                     DLog.Message($"Target cell out of bounds!");
                     return false;
                 }
-                StoryUtility.CallBombardment(Pawn.TargetCurrentlyAimingAt.Cell, Pawn.Map, Pawn, 3, 4, 4, 12, 30);
+                StoryUtility.CallBombardment(Pawn.TargetCurrentlyAimingAt.Cell, Pawn.Map, Pawn, 3, 4, 4, 6, 45);
                 return true;
             }
             return false;
@@ -104,7 +104,7 @@ namespace CaravanAdventures.CaravanStory.MechChips
                     //var cellPawns = cell.GetThingList(Pawn.Map).OfType<Pawn>().ToList();
                     //cellPawns.ForEach(pawn => pawn.TakeDamage(new DamageInfo(DamageDefOf.Burn, 20, 50, -1, Pawn, pawn.health.hediffSet.GetRandomNotMissingPart(DamageDefOf.Burn, BodyPartHeight.Undefined, BodyPartDepth.Outside))));
                 }
-                pawns.ForEach(pawn => Enumerable.Range(0, 3).ToList().ForEach(run => pawn.TakeDamage(new DamageInfo(DamageDefOf.Flame, 20, 0.5f, -1, Pawn, pawn.health.hediffSet.GetRandomNotMissingPart(DamageDefOf.Burn, BodyPartHeight.Undefined, BodyPartDepth.Outside)))));
+                pawns.ForEach(pawn => Enumerable.Range(0, 3).ToList().ForEach(run => pawn.TakeDamage(new DamageInfo(DamageDefOf.Flame, 10, 0.5f, -1, Pawn, pawn.health.hediffSet.GetRandomNotMissingPart(DamageDefOf.Burn, BodyPartHeight.Undefined, BodyPartDepth.Outside)))));
 
                 SoundDef.Named("DropPod_Leaving").PlayOneShot(new TargetInfo(Pawn.Position, Pawn.Map, false));
             }
