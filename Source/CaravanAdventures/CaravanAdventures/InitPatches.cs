@@ -17,6 +17,7 @@ namespace CaravanAdventures
         {
             FilterCombs.InitFilterSets();
             PatchAncientShrineDefs_MoreShrinesAndBetterRewards();
+            PatchAddNewMechanoidPawnGroupMakerDef();
 
             // todo -> check for royalty
             PatchTreeDef_AddTalkOption();
@@ -26,6 +27,23 @@ namespace CaravanAdventures
             PatchIncreaseBaseWealthAndFood();
 
             CompatibilityPatches.ExecuteCompatibilityPatches();
+        }
+
+        private static void PatchAddNewMechanoidPawnGroupMakerDef()
+        {
+            var mechFactionDef = FactionDefOf.Mechanoid;
+            mechFactionDef.pawnGroupMakers.Add(new PawnGroupMaker()
+            {
+                kindDef = CaravanStory.StoryDefOf.CAMechanoidPawnGroupKindCombatMixed,
+                commonality = 100,
+                options = new List<PawnGenOption>() { 
+                    // todo move defs to a modextension or another def to allow mod support
+                    new PawnGenOption() { kind = PawnKindDef.Named("Mech_Centipede"), selectionWeight = 10f },
+                    new PawnGenOption() { kind = PawnKindDef.Named("Mech_Lancer"), selectionWeight = 10f },
+                    new PawnGenOption() { kind = PawnKindDef.Named("Mech_Scyther"), selectionWeight = 10f },
+                    new PawnGenOption() { kind = PawnKindDef.Named("Mech_Pikeman"), selectionWeight = 10f }
+                }
+            });
         }
 
         private static void PatchIncreaseBaseWealthAndFood()

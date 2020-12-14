@@ -325,8 +325,6 @@ namespace CaravanAdventures.CaravanStory
 
         private PawnGroupMakerParms CalculateMechPawnGroupMakerParams(Room room, Map map, Caravan caravan, bool removedHives, IncidentParms incidentParms)
         {
-            // todo remove hives and increase points to make up for missing hives
-
             var defaultPawnGroupMakerParms = IncidentParmsUtility.GetDefaultPawnGroupMakerParms(PawnGroupKindDefOf.Combat, incidentParms, true);
 
             DLog.Message($"Points before: {defaultPawnGroupMakerParms.points} roomcells: {room.CellCount}");
@@ -341,7 +339,7 @@ namespace CaravanAdventures.CaravanStory
 
             var mechPawnGroupMakerParams = new PawnGroupMakerParms
             {
-                groupKind = PawnGroupKindDefOf.Combat,
+                groupKind = CaravanStory.StoryDefOf.CAMechanoidPawnGroupKindCombatMixed,
                 tile = map.Tile,
                 faction = Faction.OfMechanoids,
                 points = selected

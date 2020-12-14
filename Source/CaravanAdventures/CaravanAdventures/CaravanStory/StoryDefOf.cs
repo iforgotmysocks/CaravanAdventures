@@ -30,6 +30,8 @@ namespace CaravanAdventures.CaravanStory
 
         public static PawnKindDef CAEndBossMech;
 
+        public static PawnGroupKindDef CAMechanoidPawnGroupKindCombatMixed;
 
+        public static IncidentDef CAMechRaidMixed;
     }
 }

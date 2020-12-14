@@ -14,4 +14,17 @@
 		<requireColonistsPresent>True</requireColonistsPresent>
 	</IncidentDef>
 
+  <IncidentDef>
+    <defName>CAMechRaidMixed</defName>
+    <label>enemy raid</label>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>CaravanAdventures.CaravanStory.IncidentWorker_MechRaidMixed</workerClass>
+    <baseChance>0</baseChance>
+    <category>ThreatBig</category>
+    <pointsScaleable>true</pointsScaleable>
+    <tale>Raid</tale>
+  </IncidentDef>
+  
 </Defs>

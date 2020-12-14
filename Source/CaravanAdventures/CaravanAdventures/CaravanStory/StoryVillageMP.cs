@@ -169,7 +169,8 @@ namespace CaravanAdventures.CaravanStory
                 raidArrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn
             };
             DLog.Message($"Default threat points: {StorytellerUtility.DefaultThreatPointsNow(incidentParms.target)}");
-            IncidentDefOf.RaidEnemy.Worker.TryExecute(incidentParms);
+            // todo test new def, used to be RaidEnemy! 
+            StoryDefOf.CAMechRaidMixed.Worker.TryExecute(incidentParms);
             
             CompCache.StoryWC.SetSF("IntroVillage_MechsArrived");
 
@@ -197,7 +198,7 @@ namespace CaravanAdventures.CaravanStory
                 }
                 if (ticksTillReinforcements == 0)
                 {
-                    StoryUtility.GetAssistanceFromAlliedFaction(StoryUtility.FactionOfSacrilegHunters, Map, 75000, 8000, centerPoint);
+                    StoryUtility.GetAssistanceFromAlliedFaction(StoryUtility.FactionOfSacrilegHunters, Map, 7500, 8000, centerPoint);
                     CompCache.StoryWC.SetSF("IntroVillage_ReinforcementsArrived");
                     ReinforcementConvo();
                     CheckShouldCiviliansFlee();
