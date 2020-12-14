@@ -40,25 +40,26 @@ namespace CaravanAdventures.CaravanAbilities
                 {
                     var pawn = (Pawn)thing;
                     if (pawn == pawnToExclude || pawn.Dead) continue;
+                    var isBoss = CompCache.StoryWC.BossDefs().Contains(pawn.def);
                     var count = Rand.Range(5, 8);
                     // todo meassure if this causes drops to exclude the waist
-                    foreach (var part in Helper.PickSomeInRandomOrder(pawn.RaceProps.body.AllParts, count))
+                    foreach (var part in Helper.PickSomeInRandomOrder(pawn.RaceProps.body.AllParts.Where(part => part.def != AbilityDefOf.Finger && part.def != AbilityDefOf.Toe), count))
                     {
                         if (pawn == null | pawn.Dead) break;
                         if (part.def == waist) continue;
 
-                        var damage = part.def.GetMaxHealth(pawn) * (CompCache.StoryWC.BossDefs().Contains(pawn.def) ? 0.2f : Rand.Range(0.5f, 0.75f));
+                        var damage = part.def.GetMaxHealth(pawn) * (isBoss ? 0.2f : Rand.Range(0.5f, 0.75f));
                         if (Rand.Chance(pawn.RaceProps.IsMechanoid ? ModSettings.mechanoidDissmemberChance : ModSettings.humanDissmemberChance))
                         {
-                            damage *= 5;
+                            damage *= isBoss ? 3 : 5;
                         }
+
                         //Log.Message($"Calculated {damage} damage for {pawn.Name} with bodypart {part.Label}.");
-                        pawn.TakeDamage(new DamageInfo(DamageDefOf.Burn, damage, 200, -1, null, part));
+                        pawn.TakeDamage(new DamageInfo(DamageDefOf.Burn, damage, 2f, -1, null, part));
                     }
                 }
-                else if (thing is Building)
+                else if (thing is Building building)
                 {
-                    var building = (Building)thing;
                     if (!building.Destroyed) building.TakeDamage(new DamageInfo(DamageDefOf.Burn, building.MaxHitPoints * Rand.Range(ModSettings.additionalBuildingAreaDamageMin, ModSettings.additionalBuildingAreaDamageMax), 200));
                 }
             }
