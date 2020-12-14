@@ -38,6 +38,7 @@ namespace CaravanAdventures.CaravanMechBounty
             ongoingItemDelay = -1f;
             ongoingEnvoyDelay = -1f;
             ongoingVeteranDelay = -1f;
+            bountyNotificationCounter = -1f;
             bountyNotificationCounterStarted = false;
             bountyServiceAvailable = false;
         }
