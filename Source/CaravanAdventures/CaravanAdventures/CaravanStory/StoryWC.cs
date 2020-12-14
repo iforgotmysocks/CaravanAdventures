@@ -14,11 +14,6 @@ using Verse.Noise;
 // high prio:
 // - change rewards
 // --> maybe remove additional reward generation for shrines for a bounty system
-// --> integrate point system with buyable items into the comm station dialog
-
-// - bounty system
-// --> finish items
-// --> finish relation haggling
 
 // - story: 
 // --> what to do when they get hostile
@@ -27,10 +22,7 @@ using Verse.Noise;
 // - trade / caravan dialog filters
 // --> try turning them into regular game filters, which would allow the player to set specific items for the options
 
-
 // - second shrine was removed before the boss died and the ability dialog came up
-// - fix just melee mech raids, by adding a new pawngroupmaker to the faction def that isn't called combat and use that
-// - crystal scythe appeared in normal ancient shrine -> may have been fixed by recent point changes
 // - add and rework dialogs from shrines onwards
 // - add system that allows inclusion or exclusion for other races to relation
 // - suddenly yellow save error for the sacrileg hunter faction appeared and the story char was generated anew -> fix!!
