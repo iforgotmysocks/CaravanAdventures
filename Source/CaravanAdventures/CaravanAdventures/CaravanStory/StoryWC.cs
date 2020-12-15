@@ -22,18 +22,10 @@ using Verse.Noise;
 // - trade / caravan dialog filters
 // --> try turning them into regular game filters, which would allow the player to set specific items for the options
 
-// - second shrine was removed before the boss died and the ability dialog came up
 // - add and rework dialogs from shrines onwards
 // - add system that allows inclusion or exclusion for other races to relation
 // - suddenly yellow save error for the sacrileg hunter faction appeared and the story char was generated anew -> fix!!
-// - village still throws an error sometimes, when story char is being spawned on a unwalkable cell: 
-//Couldn't find a cell to spawn pawn
-//Verse.Log:Error(String, Boolean)
-//CaravanAdventures.CaravanStory.<> c__DisplayClass8_0:< Notify_CaravanArrived > b__1()
-//Verse.LongEventHandler:UpdateCurrentSynchronousEvent(Boolean &)
-//Verse.LongEventHandler:LongEventsUpdate(Boolean &)
-//Verse.Root:Update()
-//Verse.Root_Play:Update()
+// - village still throws an error sometimes, when story char is being spawned on a unwalkable cell
 
 // med prio:
 // - add check to master shrine location selection, that keeps it away from a player settlement

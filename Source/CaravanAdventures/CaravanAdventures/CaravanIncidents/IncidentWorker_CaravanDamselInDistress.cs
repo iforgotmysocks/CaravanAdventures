@@ -87,8 +87,7 @@ namespace CaravanAdventures.CaravanIncidents
         {
             //var huntingSkill = caravan.pawns.InnerListForReading.Where(x => x.RaceProps.Humanlike).Select(x => x.skills.skills.FirstOrDefault(skill => skill.def == skilldef).Level).Average();
             var huntingSkill = caravan.pawns.InnerListForReading.Where(x => x.RaceProps.Humanlike).Select(x => x.GetStatValue(StatDefOf.HuntingStealth)).Average();
-            var chance = Rand.Chance(huntingSkill);
-            if (Rand.Chance(huntingSkill)) return subSubDiaNode;
+            if (Rand.Chance(huntingSkill / 100 * 5)) return subSubDiaNode;
             else return subSubBadDiaNode;
         }
 
