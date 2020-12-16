@@ -80,6 +80,7 @@ namespace CaravanAdventures.CaravanStory
                 // todo do we want a raid here? 
                 GetComponent<TimedDetectionPatrols>().Init();
                 GetComponent<TimedDetectionPatrols>().StartDetectionCountdown(180000, -1, (int)(8000 * (1 + CompCache.StoryWC.GetCurrentShrineCounter / 10)));
+                GetComponent<TimedDetectionPatrols>().ToggleIncreaseStrenthByCounter = true;
             }
             CompCache.StoryWC.SetShrineSF("Created");
             Quests.QuestUtility.UpdateQuestLocation(Quests.StoryQuestDefOf.CA_FindAncientShrine, this);
@@ -277,6 +278,8 @@ namespace CaravanAdventures.CaravanStory
         {
             Map.mapPawns.AllPawns.Where(x => x.RaceProps.IsMechanoid && !x.Dead).ToList().ForEach(mech => mech.TryGetComp<CompWakeUpDormant>().Activate());
             FreeAllMechsOnMap();
+
+            GetComponent<TimedDetectionPatrols>().ToggleIncreaseStrenthByCounter = true;
         }
 
         private void FreeAllMechsOnMap()
