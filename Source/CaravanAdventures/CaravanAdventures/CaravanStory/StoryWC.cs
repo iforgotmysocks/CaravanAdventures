@@ -21,6 +21,7 @@ using Verse.Noise;
 
 // - trade / caravan dialog filters
 // --> try turning them into regular game filters, which would allow the player to set specific items for the options
+// --> disable buildings and only activate special buildings for packing up
 
 // - add and rework dialogs from shrines onwards
 // - add system that allows inclusion or exclusion for other races to relation
@@ -200,7 +201,7 @@ namespace CaravanAdventures.CaravanStory
                 }
 
                 // todo add mod setting and ability to disable
-                if (CanDoApocalypse()) questCont.LastJudgment.StartApocalypse(-10f);
+                if (CanDoApocalypse()) questCont.LastJudgment.StartApocalypse(-0.1f);
 
                 ticks = 0;
             }
@@ -228,7 +229,6 @@ namespace CaravanAdventures.CaravanStory
             }
 
             if (debugFlags["ResetApocalypse"]) questCont.LastJudgment.ResetApocalypse(-10f);
-
 
             ranDebugActionsOnceAtStartUp = true;
         }

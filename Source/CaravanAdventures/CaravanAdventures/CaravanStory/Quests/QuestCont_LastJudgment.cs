@@ -38,23 +38,6 @@ namespace CaravanAdventures.CaravanStory.Quests
             }
 		}
 
-		public void RegisterApocalypseOnAllMaps()
-		{
-			return;
-			foreach (var map in Find.Maps)
-			{
-				if (map.gameConditionManager.GetActiveCondition(StoryDefOf.CAGameCondition_Apocalypse) == null) map.gameConditionManager.RegisterCondition(apocalypse);
-			}
-		}
-
-		public void RemoveApocalypseFromAllMaps()
-		{
-			foreach (var map in Find.Maps)
-			{
-				if (map.gameConditionManager.GetActiveCondition(GameConditionDef.Named("CAGameCondition_Apocalypse")) == null) map.gameConditionManager.ActiveConditions.Remove(apocalypse);
-			}
-		}
-
 		public void ResetApocalypse(float minTemp)
         {
 			apocalypse.End();

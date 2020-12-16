@@ -156,10 +156,14 @@ namespace CaravanAdventures
 
             options.CheckboxLabeled("Debug mode", ref debug);
             options.CheckboxLabeled("Debug messages", ref debugMessages);
+           
+            if (options.ButtonText("Print world pawns")) Helper.PrintWorldPawns();
+
             if (options.ButtonText("Reset full story")) StoryUtility.RestartStory();
             options.CheckboxLabeled("Apocalypse enabled", ref apocalypseEnabled);
             options.Label($"Apocalypse temperature change per day: {Math.Round(apocalypseTemperatureChangePerDay, 4)}  (Default: -0.084)");
             apocalypseTemperatureChangePerDay = options.Slider(apocalypseTemperatureChangePerDay, 0f, -0.5f);
+            if (options.ButtonTextLabeled("Reset apocalypse event", "Reset")) CompCache.StoryWC.questCont.LastJudgment.ResetApocalypse(-0.1f);
             options.Gap();
 
             // todo figure out scroll views
