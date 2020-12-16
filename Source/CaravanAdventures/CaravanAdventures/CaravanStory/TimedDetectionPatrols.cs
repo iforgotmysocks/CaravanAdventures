@@ -15,6 +15,8 @@ namespace CaravanAdventures.CaravanStory
 		private int ticksLeftToSendRaid = -1;
 		private int ticksLeftTillNotifyPlayer = -1;
 		private int ticksLeftTillLeaveIfNoEnemies = -1;
+		private bool toggleIncreaseStrenthByCounter = false;
+		private int increaseStrengthCounter = 0;
         private const int defaultTicksTillLeave = 5000;
 		private List<Lord> lordsToExcludeFromRaidLogic = null;
 		private int raidPoints = 8000;
@@ -28,6 +30,8 @@ namespace CaravanAdventures.CaravanStory
 			}
 		}
 
+		public bool ToggleIncreaseStrenthByCounter { get => toggleIncreaseStrenthByCounter; set => toggleIncreaseStrenthByCounter = value; }
+
 		public override void PostExposeData()
 		{
 			base.PostExposeData();
@@ -37,6 +41,8 @@ namespace CaravanAdventures.CaravanStory
 			Scribe_Collections.Look(ref lordsToExcludeFromRaidLogic, "lordsToExcludeFromRaidLogic", LookMode.Reference);
 			Scribe_Values.Look(ref raidPoints, "raidPoints");
 			Scribe_References.Look(ref forcedFaction, "forcedFaction");
+			Scribe_Values.Look(ref toggleIncreaseStrenthByCounter, "toggleIncreaseStrenthByCounter", false);
+			Scribe_Values.Look(ref increaseStrengthCounter, "increaseStrengthCounter", 0);
 		}
 
 		public void Init(Faction forcedFaction = null)
@@ -68,7 +74,8 @@ namespace CaravanAdventures.CaravanStory
 			}
 		}
 
-		public void StartDetectionCountdown(int ticks, int notifyTicks = -1, int raidPoints = 8000)
+        
+        public void StartDetectionCountdown(int ticks, int notifyTicks = -1, int raidPoints = 8000)
 		{
 			this.ticksLeftToSendRaid = ticks;
 			this.ticksLeftTillNotifyPlayer = ((notifyTicks == -1) ? Mathf.Min((int)(60000f * Rand.Range(1.2f, 1.4f)), ticks / 2) : notifyTicks);
@@ -135,7 +142,7 @@ namespace CaravanAdventures.CaravanStory
                         {
                             target = mapParent.Map,
                             //incidentParms.points = StorytellerUtility.DefaultThreatPointsNow(incidentParms.target) * 2.5f;
-                            points = raidPoints,
+                            points = raidPoints * (1 + increaseStrengthCounter * 0.2f),
                             faction = this.RaidFaction,
                             raidArrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn
                         };
@@ -143,6 +150,7 @@ namespace CaravanAdventures.CaravanStory
 						IncidentDefOf.RaidEnemy.Worker.TryExecute(incidentParms);
 						this.ticksLeftToSendRaid = (int)(Rand.Range(18f, 24f) * 2500f);
 						ticksLeftTillLeaveIfNoEnemies = defaultTicksTillLeave;
+						if (toggleIncreaseStrenthByCounter) increaseStrengthCounter++;
 						Messages.Message("MessageCaravanDetectedRaidArrived".Translate(incidentParms.faction.def.pawnsPlural, incidentParms.faction, this.ticksLeftToSendRaid.ToStringTicksToDays("F1")), MessageTypeDefOf.ThreatBig, true);
 						return;
 					}
