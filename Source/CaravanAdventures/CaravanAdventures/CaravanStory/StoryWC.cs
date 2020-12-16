@@ -66,7 +66,6 @@ namespace CaravanAdventures.CaravanStory
         public Dictionary<string, bool> debugFlags = new Dictionary<string, bool>()
         {
             { "ShowDebugInfo", true },
-            { "DebugResetVillagesAndShrines", false },
             { "DebugAllAbilities", false },
 
             { "FriendlyCaravanDone", false },
@@ -74,7 +73,6 @@ namespace CaravanAdventures.CaravanStory
             { "StoryStartDone", false },
             { "ForwardToLastShrine", false },
             { "ShrinesDone", false },
-            { "ResetApocalypse", false },
         };
         public Dictionary<string, bool> storyFlags;
         private List<string> flagsToAdd = new List<string>
@@ -219,16 +217,6 @@ namespace CaravanAdventures.CaravanStory
         {
             if (ranDebugActionsOnceAtStartUp) return;
 
-            if (debugFlags["DebugResetVillagesAndShrines"])
-            {
-                StoryUtility.RemoveExistingQuestFriendlyVillages();
-                StoryUtility.RemoveMapParentsOfDef(CaravanStorySiteDefOf.CAAncientMasterShrineMP);
-                StoryUtility.RemoveMapParentsOfDef(CaravanStorySiteDefOf.CAAncientMasterShrineWO);
-                ResetCurrentShrineFlags();
-                ResetSFsStartingWith("IntroVillage");
-            }
-
-            if (debugFlags["ResetApocalypse"]) questCont.LastJudgment.ResetApocalypse(-10f);
 
             ranDebugActionsOnceAtStartUp = true;
         }

@@ -29,6 +29,7 @@ namespace CaravanAdventures.CaravanStory
         private int checkRangeForJudgmentTicks = 0;
         public IntVec3 portalSpawnPosition = new IntVec3(25, 0, 3);
         private bool bossWasSpawned;
+        private bool lastJudgementEntraceWasSpawned;
 
         public override MapGeneratorDef MapGeneratorDef => CaravanStorySiteDefOf.CAAncientMasterShrineMG;
 
@@ -43,6 +44,7 @@ namespace CaravanAdventures.CaravanStory
             Scribe_Values.Look(ref checkDormantTicks, "checkDormantTicks", 0);
             Scribe_Values.Look(ref checkRangeForJudgmentTicks, "checkRangeForJudgmentTicks", 0);
             Scribe_Values.Look(ref bossWasSpawned, "bossWasSpawned", false);
+            Scribe_Values.Look(ref lastJudgementEntraceWasSpawned, "lastJudgementEntraceWasSpawned", false);
             // todo are mechs enough? Need them for comparison later - dont think so, i should drop them
             Scribe_Collections.Look(ref generatedMechs, "generatedMechs", LookMode.Reference);
 
@@ -67,9 +69,17 @@ namespace CaravanAdventures.CaravanStory
                 wonBattle = true;
 
                 GetComponent<TimedDetectionPatrols>().Init();
-                GetComponent<TimedDetectionPatrols>().StartDetectionCountdown(60000, -1);
+                // todo balance strenth! maybe include shrine counter
+                GetComponent<TimedDetectionPatrols>().StartDetectionCountdown(60000, -1, (int)(8000 * (1 + CompCache.StoryWC.GetCurrentShrineCounter / 10)));
 
                 if (boss != null) bossWasSpawned = true;
+                if (lastJudgmentEntrance != null) lastJudgementEntraceWasSpawned = true;
+            }
+            else
+            {
+                // todo do we want a raid here? 
+                GetComponent<TimedDetectionPatrols>().Init();
+                GetComponent<TimedDetectionPatrols>().StartDetectionCountdown(180000, -1, (int)(8000 * (1 + CompCache.StoryWC.GetCurrentShrineCounter / 10)));
             }
             CompCache.StoryWC.SetShrineSF("Created");
             Quests.QuestUtility.UpdateQuestLocation(Quests.StoryQuestDefOf.CA_FindAncientShrine, this);
@@ -81,8 +91,12 @@ namespace CaravanAdventures.CaravanStory
             if (!base.Map.mapPawns.AnyPawnBlockingMapRemoval && boss == null && (CompCache.StoryWC.GetCurrentShrineCounter != CompCache.StoryWC.GetShrineMaxiumum || CompCache.StoryWC.storyFlags["Judgment_Completed"])
                 || !base.Map.mapPawns.AnyPawnBlockingMapRemoval && bossDefeatedAndRewardsGiven && (CompCache.StoryWC.GetCurrentShrineCounter != CompCache.StoryWC.GetShrineMaxiumum || CompCache.StoryWC.storyFlags["Judgment_Completed"]))
             {
-                // why is this here? why did i want to reset the current shrine flags when the map was removed? => just debugging stuff?
-                //if (boss == null) CompCache.StoryWC.ResetCurrentShrineFlags();
+                // restting flags here due to shrine map being a bandit map without boss!!
+                if (!bossWasSpawned && !lastJudgementEntraceWasSpawned)
+                {
+                    DLog.Message($"Resetting shrine flags for current shrine: {CompCache.StoryWC.GetCurrentShrineCounter}");
+                    CompCache.StoryWC.ResetCurrentShrineFlags();
+                }
 
                 alsoRemoveWorldObject = true;
                 return true;
@@ -94,7 +108,7 @@ namespace CaravanAdventures.CaravanStory
         public override void PostRemove()
         {
             base.PostRemove();
-            if (CompCache.StoryWC.GetCurrentShrineCounter == 2)
+            if (CompCache.StoryWC.GetCurrentShrineCounter == 2 && bossWasSpawned)
             {
                 Quests.QuestUtility.AppendQuestDescription(Quests.StoryQuestDefOf.CA_FindAncientShrine, Helper.HtmlFormatting("Story_Shrine1_QuestUpdate_1".Translate(), "f59b42"), false, true);
                 WarningAboutApocalypseDialog();
