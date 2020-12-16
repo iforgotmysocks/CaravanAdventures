@@ -76,7 +76,7 @@ namespace CaravanAdventures.CaravanStory
 			rect.ClipInsideMap(map);
 			if (rect.Width != calcSize || rect.Height != calcSize2)
 			{
-				DLog.Message($"Scattering failed duo to not fitting sizes");
+				DLog.Message($"Scattering failed due to not fitting sizes");
                 return;
             }
 			foreach (IntVec3 c in rect.Cells)
@@ -136,7 +136,7 @@ namespace CaravanAdventures.CaravanStory
 					}
 					if (!CanBuildOnAdjustedTerrain(ThingDefOf.Wall, c, map, Rot4.North, newTerrainCells, null, null))
 					{
-						DLog.Message($"Canceling duo to terrain");
+						DLog.Message($"Canceling due to terrain");
 						return false;
 					}
 				}
