@@ -36,8 +36,8 @@ namespace CaravanAdventures.CaravanMechBounty
             node.options.Add(new DiaOption("CABountyExchangeRecruitVeteranHunter".Translate()) { link = GetRecuitmentOverview(node), disabled = hostile, disabledReason = error });
             if (Helper.Debug())
             {
-                node.options.Add(new DiaOption("Debug: + 1000") { action = () => CompCache.BountyWC.BountyPoints += 1000, link = node });
-                node.options.Add(new DiaOption("Debug: - 500") { action = () => CompCache.BountyWC.BountyPoints -= 500, link = node });
+                node.options.Add(new DiaOption("Debug: + 1000") { action = () => CompCache.BountyWC.BountyPoints += 1000, linkLateBind = () => node });
+                node.options.Add(new DiaOption("Debug: - 500") { action = () => CompCache.BountyWC.BountyPoints -= 500, linkLateBind = () => node });
             }
 
             node.options.Add(new DiaOption("CABountyBack".Translate()) { link = root });
@@ -148,7 +148,8 @@ namespace CaravanAdventures.CaravanMechBounty
                     ConvertItemValueToBounty(item)))
                 {
                     action = () => PurchaseAndDropItem(item),
-                    resolveTree = true,
+                    resolveTree = false,
+                    linkLateBind = () => GetItemOverview(parent),
                     disabled = !CanPurchaseItem(item, out reason),
                     disabledReason = reason,
                 });
@@ -265,7 +266,8 @@ namespace CaravanAdventures.CaravanMechBounty
             node.options.Add(new DiaOption("CABountyExchangeRelationHaggle_WithYou".Translate(CalculateGoodWillCost(faction, 25), CalcReqGW(faction, 25), faction.NameColored))
             {
                 action = () => TradeRelationForBounty(faction, 25, false),
-                resolveTree = true,
+                resolveTree = false,
+                linkLateBind = () => GetRelationHaggleOverview(parent),
                 disabled = CompCache.BountyWC.BountyPoints < CalculateGoodWillCost(faction, 25) || faction.GoodwillWith(Faction.OfPlayer) == 100,
                 disabledReason = (faction.GoodwillWith(Faction.OfPlayer) == 100)
                     ? "CABountyExchangeRelationHaggle_AlreadyMax".Translate()
@@ -290,7 +292,8 @@ namespace CaravanAdventures.CaravanMechBounty
                     CalculateGoodWillCost(curFaction, goodwill)))
                 {
                     action = () => TradeRelationForBounty(curFaction, goodwill),
-                    resolveTree = true,
+                    resolveTree = false,
+                    linkLateBind = () => GetListOfFactions(parent, faction, goodwill),
                     disabled = !IsHagglingPossible(curFaction, out var reason),
                     disabledReason = reason
                 });
