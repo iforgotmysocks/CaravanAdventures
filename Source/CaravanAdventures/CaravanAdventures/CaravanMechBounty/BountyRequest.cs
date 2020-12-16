@@ -264,7 +264,7 @@ namespace CaravanAdventures.CaravanMechBounty
             var node = new DiaNode("CABountyExchangeRelationHaggle".Translate(CompCache.BountyWC.BountyPoints));
             node.options.Add(new DiaOption("CABountyExchangeRelationHaggle_WithYou".Translate(CalculateGoodWillCost(faction, 25), CalcReqGW(faction, 25), faction.NameColored))
             {
-                action = () => TradeRelationForBounty(faction, 25),
+                action = () => TradeRelationForBounty(faction, 25, false),
                 resolveTree = true,
                 disabled = CompCache.BountyWC.BountyPoints < CalculateGoodWillCost(faction, 25) || faction.GoodwillWith(Faction.OfPlayer) == 100,
                 disabledReason = (faction.GoodwillWith(Faction.OfPlayer) == 100)
@@ -339,7 +339,7 @@ namespace CaravanAdventures.CaravanMechBounty
             return goodwill;
         }
 
-        private void TradeRelationForBounty(Faction faction, int goodwill)
+        private void TradeRelationForBounty(Faction faction, int goodwill, bool sendEnvoy = true)
         {
             var price = CalculateGoodWillCost(faction, 25);
             var result = faction.TryAffectGoodwillWith(Faction.OfPlayer, goodwill);
@@ -349,7 +349,7 @@ namespace CaravanAdventures.CaravanMechBounty
                 return;
             }
             CompCache.BountyWC.BountyPoints -= price;
-            CompCache.BountyWC.OngoingEnvoyDelay = ModSettings.envoyDurationTimeForBountyRelationHagglingInDays * 60000f;
+            if (sendEnvoy) CompCache.BountyWC.OngoingEnvoyDelay = ModSettings.envoyDurationTimeForBountyRelationHagglingInDays * 60000f;
         }
 
         private float CalculateGoodWillCost(Faction faction, int goodwill)
