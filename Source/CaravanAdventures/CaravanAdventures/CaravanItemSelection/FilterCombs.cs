@@ -46,7 +46,16 @@ namespace CaravanAdventures.CaravanItemSelection
                 ThingCategoryDefOf.ResourcesRaw,
                 ThingCategoryDefOf.StoneBlocks,
                 // needs specific building category for future reference, just general building cat won't do
-                // DefDatabase<ThingCategoryDef>.GetNamed("BuildingsFurniture")
+                //ThingCategoryDef.Named("BuildingsArt"),
+                ThingCategoryDef.Named("BuildingsProduction"),
+                ThingCategoryDef.Named("BuildingsFurniture"),
+                ThingCategoryDef.Named("BuildingsPower"),
+                ThingCategoryDef.Named("BuildingsSecurity"),
+                ThingCategoryDef.Named("BuildingsMisc"),
+                ThingCategoryDef.Named("BuildingsJoy"),
+                ThingCategoryDef.Named("BuildingsTemperature"),
+                //ThingCategoryDef.Named("BuildingsSpecial"),
+
             })
             {
                 Name = "BuildMaterials",

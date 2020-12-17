@@ -14,6 +14,7 @@ namespace CaravanAdventures.CaravanItemSelection
     {
         internal static bool DoFiltersApply<T>(FilterSet filterSet, T trans)
         {
+            // will be replaced with game filters, i know...
             Type t = trans.GetType();
             var thingDef = t.GetProperty("ThingDef")?.GetValue(trans, null) as ThingDef;
             if (thingDef == null) return false;
@@ -72,6 +73,7 @@ namespace CaravanAdventures.CaravanItemSelection
             }
             return standartResult;
         }
+
         internal static void ApplyTravelSupplies(List<Patches.Section> sections, FilterSet journey, List<Pawn> caravanMembers)
         {
             List<object[]> requiredSupplyStatus = new List<object[]>();

@@ -21,7 +21,7 @@ using Verse.Noise;
 
 // - trade / caravan dialog filters
 // --> try turning them into regular game filters, which would allow the player to set specific items for the options
-// --> disable buildings and only activate special buildings for packing up
+// --> turn provisions button into enable/disable auto supplies
 
 // - add and rework dialogs from shrines onwards
 // - add system that allows inclusion or exclusion for other races to relation
