@@ -19,6 +19,9 @@ using Verse.Noise;
 // --> what to do when they get hostile
 // --> when removing shrines, and all pawns are dead, don't continue the conversation... xD
 
+// -- story continuation: 
+// --> upon death of second boss, the story contact informs the player about data they were able to trace to a remote location, but they required more attempts to find the spot
+
 // - trade / caravan dialog filters
 // --> try turning them into regular game filters, which would allow the player to set specific items for the options
 // --> turn provisions button into enable/disable auto supplies
@@ -33,6 +36,12 @@ using Verse.Noise;
 // - seperate bounty system from story
 // --> allow to set another faction in settings that offers the bounties
 // --> implement rewards with and without royalty
+// --> allow abandoning an already existing shrineMP?
+// --> show tips about how to handle a shrine when first entering (and create a "show tips" link in the quest window, 
+//          that opens a window showing tips how to handle shrines: shrines stay, 
+//          shrines can be fled and come back when better equipped, allies can be used...)
+// --> fix mental state: Berserk caused by insanity lance on bosses -> maybe remove them on a timer
+
 
 // low prio:
 // - make configurable if sacrileg hunters are hostile towards the empire

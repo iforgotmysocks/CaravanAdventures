@@ -109,28 +109,48 @@ namespace CaravanAdventures.CaravanStory
         public override void PostRemove()
         {
             base.PostRemove();
-            if (CompCache.StoryWC.GetCurrentShrineCounter == 2 && bossWasSpawned)
+            if (bossWasSpawned)
             {
-                Quests.QuestUtility.AppendQuestDescription(Quests.StoryQuestDefOf.CA_FindAncientShrine, Helper.HtmlFormatting("Story_Shrine1_QuestUpdate_1".Translate(), "f59b42"), false, true);
-                WarningAboutApocalypseDialog();
+                if (CompCache.StoryWC.GetCurrentShrineCounter == 2) Quests.QuestUtility.AppendQuestDescription(Quests.StoryQuestDefOf.CA_FindAncientShrine, Helper.HtmlFormatting("Story_Shrine1_QuestUpdate_1".Translate(), "f59b42"), false, true);
+                LeavingShrineDialog();
             }
         }
 
-        private void WarningAboutApocalypseDialog()
+        private void LeavingShrineDialog()
         {
             var storyChar = CompCache.StoryWC.questCont.Village.StoryContact;
-            var diaNode3 = new DiaNode("Story_Shrine1_Apocalypse_Dia1_3".Translate(storyChar.NameShortColored));
-            diaNode3.options.Add(new DiaOption("Story_Shrine1_Apocalypse_Dia1_3_Option1".Translate()) { resolveTree = true });
+            switch (CompCache.StoryWC.GetCurrentShrineCounter)
+            {
+                case 2:
+                    var diaNode3 = new DiaNode("Story_Shrine1_Apocalypse_Dia1_3".Translate(storyChar.NameShortColored));
+                    diaNode3.options.Add(new DiaOption("Story_Shrine1_Apocalypse_Dia1_3_Option1".Translate()) { resolveTree = true });
 
-            var diaNode2 = new DiaNode("Story_Shrine1_Apocalypse_Dia1_2".Translate(storyChar.NameShortColored));
-            diaNode2.options.Add(new DiaOption("Story_Shrine1_Apocalypse_Dia1_2_Option1".Translate()) { link = diaNode3 });
+                    var diaNode2 = new DiaNode("Story_Shrine1_Apocalypse_Dia1_2".Translate(storyChar.NameShortColored));
+                    diaNode2.options.Add(new DiaOption("Story_Shrine1_Apocalypse_Dia1_2_Option1".Translate()) { link = diaNode3 });
 
-            var diaNode = new DiaNode("Story_Shrine1_Apocalypse_Dia1_1".Translate(storyChar.NameShortColored));
-            diaNode.options.Add(new DiaOption("Story_Shrine1_Apocalypse_Dia1_1_Option1".Translate()) { link = diaNode2 });
+                    var diaNode = new DiaNode("Story_Shrine1_Apocalypse_Dia1_1".Translate(storyChar.NameShortColored));
+                    diaNode.options.Add(new DiaOption("Story_Shrine1_Apocalypse_Dia1_1_Option1".Translate()) { link = diaNode2 });
 
-            TaggedString taggedString = "Story_Shrine1_Apocalypse_Dia1Title".Translate(storyChar.NameShortColored);
-            Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
-            Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
+                    TaggedString taggedString = "Story_Shrine1_Apocalypse_Dia1Title".Translate(storyChar.NameShortColored);
+                    Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
+                    Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
+                    break;
+                case 3:
+                    diaNode3 = new DiaNode("Story_Shrine2_Apocalypse_Dia1_3".Translate(storyChar.NameShortColored));
+                    diaNode3.options.Add(new DiaOption("Story_Shrine1_Apocalypse_Dia1_3_Option1".Translate()) { resolveTree = true });
+
+                    diaNode2 = new DiaNode("Story_Shrine2_Apocalypse_Dia1_2".Translate(storyChar.NameShortColored));
+                    diaNode2.options.Add(new DiaOption("Story_Shrine2_Apocalypse_Dia1_2_Option1".Translate()) { link = diaNode3 });
+
+                    diaNode = new DiaNode("Story_Shrine2_Apocalypse_Dia1_1".Translate(storyChar.NameShortColored));
+                    diaNode.options.Add(new DiaOption("Story_Shrine2_Apocalypse_Dia1_1_Option1".Translate()) { link = diaNode2 });
+
+                    taggedString = "Story_Shrine1_Apocalypse_Dia1Title".Translate(storyChar.NameShortColored);
+                    Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
+                    Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
+                    break;
+            }
+
         }
 
         public override void Tick()
@@ -211,13 +231,26 @@ namespace CaravanAdventures.CaravanStory
 
             var storyChar = CompCache.StoryWC.questCont.Village.StoryContact;
 
-            var diaNode = new DiaNode("Story_Shrine1_SacrilegHunters_Dia1_1".Translate(storyChar.NameShortColored));
-            diaNode.options.Add(new DiaOption("Story_Shrine1_SacrilegHunters_Dia1_1_Option1".Translate()) { resolveTree = true, action = () => StoryUtility.GetAssistanceFromAlliedFaction(StoryUtility.FactionOfSacrilegHunters, Map) });
-            diaNode.options.Add(new DiaOption("Story_Shrine1_SacrilegHunters_Dia1_1_Option2".Translate()) { resolveTree = true });
+            if (CompCache.StoryWC.GetCurrentShrineCounter == 1)
+            {
+                var diaNode = new DiaNode("Story_Shrine1_SacrilegHunters_Dia1_1".Translate(storyChar.NameShortColored));
+                diaNode.options.Add(new DiaOption("Story_Shrine1_SacrilegHunters_Dia1_1_Option1".Translate()) { resolveTree = true, action = () => StoryUtility.GetAssistanceFromAlliedFaction(StoryUtility.FactionOfSacrilegHunters, Map) });
+                diaNode.options.Add(new DiaOption("Story_Shrine1_SacrilegHunters_Dia1_1_Option2".Translate()) { resolveTree = true });
 
-            TaggedString taggedString = "Story_Shrine1_SacrilegHunters_DiaTitle".Translate(storyChar.NameShortColored);
-            Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
-            Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
+                TaggedString taggedString = "Story_Shrine1_SacrilegHunters_DiaTitle".Translate(storyChar.NameShortColored);
+                Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
+                Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
+            }
+            else
+            {
+                var diaNode = new DiaNode("Story_Shrine2_SacrilegHunters_Dia1_1".Translate());
+                diaNode.options.Add(new DiaOption("Story_Shrine2_SacrilegHunters_Dia1_1_Option1".Translate()) { resolveTree = true, action = () => StoryUtility.GetAssistanceFromAlliedFaction(StoryUtility.FactionOfSacrilegHunters, Map) });
+                diaNode.options.Add(new DiaOption("Story_Shrine2_SacrilegHunters_Dia1_1_Option2".Translate()) { resolveTree = true });
+
+                TaggedString taggedString = "Story_Shrine1_SacrilegHunters_DiaTitle".Translate(storyChar.NameShortColored);
+                Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
+                Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
+            }
         }
 
         private void CheckBossDefeated()

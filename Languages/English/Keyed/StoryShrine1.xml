@@ -44,6 +44,11 @@
   <Story_Shrine1_SacrilegHunters_Dia1_1_Option1>Thank you, from the looks of this place, we may need them.</Story_Shrine1_SacrilegHunters_Dia1_1_Option1>
   <Story_Shrine1_SacrilegHunters_Dia1_1_Option2>(Not recommended) No need, we can handle it ourselfs.</Story_Shrine1_SacrilegHunters_Dia1_1_Option2>
 
+  <Story_Shrine2_SacrilegHunters_Dia1_1>Perfect, another shrine, that's great!\nDo you want us to assist you again?</Story_Shrine2_SacrilegHunters_Dia1_1>
+  <Story_Shrine2_SacrilegHunters_Dia1_1_Option1>Not gonna turn down help, those things are dangerous. Thank you!</Story_Shrine2_SacrilegHunters_Dia1_1_Option1>
+  <Story_Shrine2_SacrilegHunters_Dia1_1_Option2>(Not recommended) We'll deal with it ourselfs.</Story_Shrine2_SacrilegHunters_Dia1_1_Option2>
+
+
   <Story_Shrine1_Apocalypse_Dia1Title>{0} is contacting you via comms...</Story_Shrine1_Apocalypse_Dia1Title>
   <Story_Shrine1_Apocalypse_Dia1_1>[{0}, out of breath and shocked] My god, did you guys get out alive?\nWhat happend there? When that abomination died? You screamed like you'd die. Are you alright?</Story_Shrine1_Apocalypse_Dia1_1>
   <Story_Shrine1_Apocalypse_Dia1_1_Option1>I remembered something, but i'm not clear what yet, some sort of power... the tree...\nThis is a bad idea over comms...</Story_Shrine1_Apocalypse_Dia1_1_Option1>
@@ -52,5 +57,14 @@
   <Story_Shrine1_Apocalypse_Dia1_3>Ya, we'll message you when we can find more shrines. \n[{0}'s voice turning to a worried tone] And stay save until then, i have a really bad feeling about this.</Story_Shrine1_Apocalypse_Dia1_3>
   <Story_Shrine1_Apocalypse_Dia1_3_Option1>We will, take care as well. Bye!</Story_Shrine1_Apocalypse_Dia1_3_Option1>
 
+  <Story_Shrine2_Apocalypse_Dia1_1>You did it again! What a fight...\nWe were able to track a transmission, when the monster died. Looks like data was sent to a remote site. We need to find it! That is our best bet in stopping whatever the hell is happening with this RimWorld.</Story_Shrine2_Apocalypse_Dia1_1>
+  <Story_Shrine2_Apocalypse_Dia1_1_Option1>Hmm, how would we go about that?</Story_Shrine2_Apocalypse_Dia1_1_Option1>
+  <Story_Shrine2_Apocalypse_Dia1_2>We managed to get a rough location, but we need more transmissions to get the exact location. Lets hope another one does the trick, if we can find one.</Story_Shrine2_Apocalypse_Dia1_2>
+  <Story_Shrine2_Apocalypse_Dia1_2_Option1>Or survive the encounter, for that matter...</Story_Shrine2_Apocalypse_Dia1_2_Option1>
+  <Story_Shrine2_Apocalypse_Dia1_3>[{0} laughs and answers sarcastically] Yep, but if we don't try, it's gonna be real peaceful and cosy around here soon.</Story_Shrine2_Apocalypse_Dia1_3>
+  <Story_Shrine2_Apocalypse_Dia1_3_Option1>While i do like snow, this shouldn't get out of hand.\nAnyway, let us know when you find another one, take care!</Story_Shrine2_Apocalypse_Dia1_3_Option1>
+
+  
+  
   <Story_Shrine1_QuestUpdate_1>Defeating the mechanical monstrosity activated old unknown machinery deep below the planet's surface that started to cool down the planet's core. This will slowly render the planet inhabitable and the cause needs to be found. You should seek out more shrines to get answers.</Story_Shrine1_QuestUpdate_1>
 </LanguageData>
