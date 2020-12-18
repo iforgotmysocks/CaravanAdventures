@@ -139,7 +139,8 @@ namespace CaravanAdventures.CaravanMechBounty
 
                 node.options.Add(new DiaOption((item.LabelCap + personaTraitString))
                 {
-                    disabled = !CanPurchaseItem(item, out var reason),
+                    //disabled = !CanPurchaseItem(item, out var reason),
+                    disabled = false,
                     disabledReason = string.Empty,
                     hyperlink = link
                 });
@@ -150,7 +151,7 @@ namespace CaravanAdventures.CaravanMechBounty
                     action = () => PurchaseAndDropItem(item),
                     resolveTree = false,
                     linkLateBind = () => GetItemOverview(parent),
-                    disabled = !CanPurchaseItem(item, out reason),
+                    disabled = !CanPurchaseItem(item, out var reason),
                     disabledReason = reason,
                 });
             }
