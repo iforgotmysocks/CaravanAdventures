@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using Verse;
 using Verse.Noise;
+using Verse.Sound;
 
 namespace CaravanAdventures.CaravanStory
 {
@@ -30,6 +31,7 @@ namespace CaravanAdventures.CaravanStory
         public IntVec3 portalSpawnPosition = new IntVec3(25, 0, 3);
         private bool bossWasSpawned;
         private bool lastJudgementEntraceWasSpawned;
+        private bool abandonShrine = false;
 
         public override MapGeneratorDef MapGeneratorDef => CaravanStorySiteDefOf.CAAncientMasterShrineMG;
 
@@ -37,16 +39,16 @@ namespace CaravanAdventures.CaravanStory
         {
             base.ExposeData();
             Scribe_Values.Look<bool>(ref this.wonBattle, "wonBattle", false, false);
-            Scribe_Values.Look(ref bossDefeatedAndRewardsGiven, "bossDefeatedAndRewardsGiven");
             Scribe_References.Look(ref boss, "boss");
             Scribe_Values.Look(ref constTicks, "constTicks", -1);
-            Scribe_Values.Look(ref bossDefeatedAndRewardsGiven, "bossDefeatedAndRewardsGiven");
+            Scribe_Values.Look(ref bossDefeatedAndRewardsGiven, "bossDefeatedAndRewardsGiven", false);
             Scribe_Values.Look(ref checkDormantTicks, "checkDormantTicks", 0);
             Scribe_Values.Look(ref checkRangeForJudgmentTicks, "checkRangeForJudgmentTicks", 0);
             Scribe_Values.Look(ref bossWasSpawned, "bossWasSpawned", false);
             Scribe_Values.Look(ref lastJudgementEntraceWasSpawned, "lastJudgementEntraceWasSpawned", false);
             // todo are mechs enough? Need them for comparison later - dont think so, i should drop them
             Scribe_Collections.Look(ref generatedMechs, "generatedMechs", LookMode.Reference);
+            Scribe_Values.Look(ref abandonShrine, "abandonShrine", false);
 
             Scribe_References.Look(ref lastJudgmentEntrance, "lastJudgmentEntrance");
             Scribe_References.Look(ref lastJudgmentMP, "lastJudgmentMap");
@@ -109,6 +111,8 @@ namespace CaravanAdventures.CaravanStory
         public override void PostRemove()
         {
             base.PostRemove();
+            Log.Message($"post remove happening?");
+            if (abandonShrine && !bossDefeatedAndRewardsGiven) return;
             if (bossWasSpawned)
             {
                 if (CompCache.StoryWC.GetCurrentShrineCounter == 2) Quests.QuestUtility.AppendQuestDescription(Quests.StoryQuestDefOf.CA_FindAncientShrine, Helper.HtmlFormatting("Story_Shrine1_QuestUpdate_1".Translate(), "f59b42"), false, true);
@@ -137,7 +141,7 @@ namespace CaravanAdventures.CaravanStory
                     break;
                 case 3:
                     diaNode3 = new DiaNode("Story_Shrine2_Apocalypse_Dia1_3".Translate(storyChar.NameShortColored));
-                    diaNode3.options.Add(new DiaOption("Story_Shrine1_Apocalypse_Dia1_3_Option1".Translate()) { resolveTree = true });
+                    diaNode3.options.Add(new DiaOption("Story_Shrine2_Apocalypse_Dia1_3_Option1".Translate()) { resolveTree = true });
 
                     diaNode2 = new DiaNode("Story_Shrine2_Apocalypse_Dia1_2".Translate(storyChar.NameShortColored));
                     diaNode2.options.Add(new DiaOption("Story_Shrine2_Apocalypse_Dia1_2_Option1".Translate()) { link = diaNode3 });
@@ -364,6 +368,48 @@ namespace CaravanAdventures.CaravanStory
             //	base.Map.mapPawns.FreeColonists.RandomElement<Pawn>()
             //});
             this.wonBattle = true;
+        }
+
+        public override IEnumerable<Gizmo> GetGizmos()
+        {
+            foreach (var baseGiz in base.GetGizmos())
+            {
+                yield return baseGiz;
+            }
+
+            if (Find.WorldSelector.SingleSelectedObject == this)
+            {
+                var giveUpCommand = new Command_Action
+                {
+                    defaultLabel = "Story_Shrine1_GiveUpOnShrineLabel".Translate(),
+                    defaultDesc = "Story_Shrine1_GiveUpOnShrineDesc".Translate(),
+                    order = 198f,
+                    icon = ContentFinder<Texture2D>.Get("UI/commands/AbandonHome", true),
+                    action = () =>
+                    {
+                        if (Map.mapPawns.AnyColonistSpawned)
+                        {
+                            Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation("Story_Shrine_AbandonColonists".Translate(), delegate
+                            {
+                                AbandonShrineAndResetFlags();
+                            }, false, null));
+                        }
+                        else AbandonShrineAndResetFlags();
+                    }
+                };
+
+                yield return giveUpCommand;
+            }
+        }
+
+        public void AbandonShrineAndResetFlags()
+        {
+            // todo cleanup + notify story to tick on
+            SoundDefOf.Click.PlayOneShot(null);
+            if (!bossDefeatedAndRewardsGiven) CompCache.StoryWC.ResetCurrentShrineFlags();
+            this.abandonShrine = true;
+            Current.Game.DeinitAndRemoveMap(Map);
+            this.Destroy();
         }
 
         private Pawn FindBossNew() => Map.mapPawns.AllPawns.FirstOrDefault(x => CompCache.StoryWC.BossDefs().Contains(x.def));

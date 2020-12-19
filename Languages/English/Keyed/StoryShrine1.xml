@@ -15,6 +15,11 @@
   <GiveUpOnClueLabel>Give up on clue</GiveUpOnClueLabel>
   <GiveUpOnClueDesc>Give up on this clue, you'll hear about another one soon.</GiveUpOnClueDesc>
 
+  <Story_Shrine1_GiveUpOnShrineLabel>Give up on shrine</Story_Shrine1_GiveUpOnShrineLabel>
+  <Story_Shrine1_GiveUpOnShrineDesc>Give up on this shrine, u'll hear about another clue soon.</Story_Shrine1_GiveUpOnShrineDesc>
+
+  <Story_Shrine_AbandonColonists>Are you sure you want to abandon ur remaining colonists?</Story_Shrine_AbandonColonists>
+  
   <MasterShrineVictoryLetterLabel>Bandits defeated</MasterShrineVictoryLetterLabel>
   <MasterShrineVictoryLetterMessage>The bandits setting a trap at the shrine were defeated. </MasterShrineVictoryLetterMessage>
   <NoMasterShrineLetterLabel>No luck.</NoMasterShrineLetterLabel>
@@ -61,7 +66,7 @@
   <Story_Shrine2_Apocalypse_Dia1_1_Option1>Hmm, how would we go about that?</Story_Shrine2_Apocalypse_Dia1_1_Option1>
   <Story_Shrine2_Apocalypse_Dia1_2>We managed to get a rough location, but we need more transmissions to get the exact location. Lets hope another one does the trick, if we can find one.</Story_Shrine2_Apocalypse_Dia1_2>
   <Story_Shrine2_Apocalypse_Dia1_2_Option1>Or survive the encounter, for that matter...</Story_Shrine2_Apocalypse_Dia1_2_Option1>
-  <Story_Shrine2_Apocalypse_Dia1_3>[{0} laughs and answers sarcastically] Yep, but if we don't try, it's gonna be real peaceful and cosy around here soon.</Story_Shrine2_Apocalypse_Dia1_3>
+  <Story_Shrine2_Apocalypse_Dia1_3>[{0} laughs and answers sarcastically] Yep, but if we don't try, it's gonna be a little frosty around here soon.</Story_Shrine2_Apocalypse_Dia1_3>
   <Story_Shrine2_Apocalypse_Dia1_3_Option1>While i do like snow, this shouldn't get out of hand.\nAnyway, let us know when you find another one, take care!</Story_Shrine2_Apocalypse_Dia1_3_Option1>
 
   
