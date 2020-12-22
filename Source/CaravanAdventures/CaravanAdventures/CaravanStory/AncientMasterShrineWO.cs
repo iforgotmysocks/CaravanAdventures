@@ -330,7 +330,7 @@ namespace CaravanAdventures.CaravanStory
             DLog.Message($"Points before: {defaultPawnGroupMakerParms.points} roomcells: {room.CellCount}");
 
             // todo make 1.2f a difficulty setting
-            var calcedFromRoomSize = Convert.ToInt32(defaultPawnGroupMakerParms.points * (CompCache.StoryWC.GetCurrentShrineCounter * 1.2f) * ((room == mainRoom ? Math.Max(room.CellCount, 3000) : room.CellCount) / 1000f));
+            var calcedFromRoomSize = Convert.ToInt32(defaultPawnGroupMakerParms.points * (CompCache.StoryWC.GetCurrentShrineCounter * ModSettings.shrineMechDifficultyMultiplier) * ((room == mainRoom ? Math.Max(room.CellCount, 3000) : room.CellCount) / 1000f));
             var minPoints = room == mainRoom ? 2000 : 130;
 
             DLog.Message($"from roomsize: {calcedFromRoomSize} minpoints: {minPoints}");

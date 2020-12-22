@@ -41,6 +41,7 @@ using Verse.Noise;
 //          that opens a window showing tips how to handle shrines: shrines stay, 
 //          shrines can be fled and come back when better equipped, allies can be used...)
 // --> fix mental state: Berserk caused by insanity lance on bosses -> maybe remove them on a timer
+// - allow adjusting the map size in settings for the camping map
 
 
 // low prio:

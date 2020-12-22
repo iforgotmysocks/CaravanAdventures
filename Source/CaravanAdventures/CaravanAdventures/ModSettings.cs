@@ -54,6 +54,7 @@ namespace CaravanAdventures
         public static float apocalypseTemperatureChangePerDay = -0.084f;
 
         // shrines
+        public static float shrineMechDifficultyMultiplier = 1.2f;
 
         // bounty
         public static float envoyDurationTimeForBountyRelationHagglingInDays = 1f;
@@ -64,7 +65,6 @@ namespace CaravanAdventures
 
         //public static ModSettings Get() => LoadedModManager.GetMod<CaravanAdventures.Main>().GetSettings<ModSettings>();
         private Vector2 scrollPos = Vector2.zero;
-
 
         public override void ExposeData()
         {
@@ -105,6 +105,7 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref apocalypseTemperatureChangePerDay, "apocalypseTemperatureChangePerDay", -0.084f);
 
             // shrines
+            Scribe_Values.Look(ref shrineMechDifficultyMultiplier, "shrineMechDifficultyMultiplier", 1.2f);
 
             // bounty
             Scribe_Values.Look(ref envoyDurationTimeForBountyRelationHagglingInDays, "envoyDurationTimeForBountyRelationHagglingInDays", 1f);
@@ -176,6 +177,11 @@ namespace CaravanAdventures
             options.Label("Multiplies the current money for settlements with less then 3k silver by 3, and those with more by 2");
             if (options.ButtonTextLabeled("Increase Settlement money", "Increase")) Helper.AdjustSettlementPrices();
             // todo add min and max multiplier used in the def patch for settlement money
+            options.Gap();
+
+            options.Label("Shrine mech combat point multiplier:".Colorize(Color.red), 40f);
+            options.Label("Multiplier: " + Math.Round(shrineMechDifficultyMultiplier, 2) + "  (default: 1.2)");
+            shrineMechDifficultyMultiplier = options.Slider(shrineMechDifficultyMultiplier, 0.2f, 10f);
             options.Gap();
 
 
