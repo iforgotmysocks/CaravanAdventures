@@ -63,6 +63,17 @@ namespace CaravanAdventures.CaravanItemSelection
                 Operation = FilterOperation.Exclude,
             });
             packUp.appliedFilters.Add(new Filter(new object[] {
+                ThingDefOf.Bedroll,
+                ThingDef.Named("BedrollDouble"),
+                ThingDef.Named("MegascreenTelevision"),
+                ThingDef.Named("AnimusStone"),
+            })
+            {
+                Name = "BuildingsIncluded",
+                Connection = FilterConnection.OR,
+                Operation = FilterOperation.Include,
+            });
+            packUp.appliedFilters.Add(new Filter(new object[] {
                 ThingDefOf.Gold,
                 ThingDefOf.Silver,
                 ThingDefOf.Plasteel})
