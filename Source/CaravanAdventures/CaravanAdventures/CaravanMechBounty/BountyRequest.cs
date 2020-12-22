@@ -59,7 +59,7 @@ namespace CaravanAdventures.CaravanMechBounty
 
         private string GetTroopsTimeString()
         {
-            if (CompCache.BountyWC.OngoingEnvoyDelay <= 0) return "CABountyExchangeRequestHelp_StrengthSelection_TroopDeploymentReady".Translate();
+            if (CompCache.BountyWC.OngoingAlliedAssistanceDelay <= 0) return "CABountyExchangeRequestHelp_StrengthSelection_TroopDeploymentReady".Translate();
             return "CABountyExchangeRequestHelp_StrengthSelection_TroopDeploymentDetail".Translate(CompCache.BountyWC.GetNextAvailableDateInDays(CompCache.BountyWC.OngoingAlliedAssistanceDelay));
         }
 
