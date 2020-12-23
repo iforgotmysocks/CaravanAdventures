@@ -42,7 +42,7 @@ using Verse.Noise;
 //          shrines can be fled and come back when better equipped, allies can be used...)
 // --> fix mental state: Berserk caused by insanity lance on bosses -> maybe remove them on a timer
 // - allow adjusting the map size in settings for the camping map
-
+// - camp: doesn't uncover open zones when rock is removed
 
 // low prio:
 // - make configurable if sacrileg hunters are hostile towards the empire
