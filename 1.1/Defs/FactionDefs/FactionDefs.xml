@@ -6,7 +6,7 @@
 		<pawnsPlural>Sacrileg Hunters</pawnsPlural>
 		<categoryTag>Outlander</categoryTag>
 		<listOrderPriority>30</listOrderPriority>
-		<settlementGenerationWeight>0.1</settlementGenerationWeight>
+		<settlementGenerationWeight>0.3</settlementGenerationWeight>
 		<requiredCountAtGameStart>1</requiredCountAtGameStart>
 		<canMakeRandomly>true</canMakeRandomly>
 		<canSiege>false</canSiege>
