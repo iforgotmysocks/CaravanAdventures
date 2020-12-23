@@ -58,6 +58,7 @@ namespace CaravanAdventures.CaravanStory
             else if (mech.def == ThingDef.Named("Mech_Centipede")) CompCache.BountyWC.BountyPoints += 45;
             else if (CompCache.StoryWC.BossDefs().Contains(mech.def)) CompCache.BountyWC.BountyPoints += 500; // sdt boss
             //else if (mech.def == ThingDef.Named("Endboss")) CompCache.BountyWC.BountyPoints += 3000; // end boss
+            else CompCache.BountyWC.BountyPoints += 12;
         }
 
         public static void GetAssistanceFromAlliedFaction(Faction faction, Map map, int pointsMin = 4000, int pointsMax = 5000, IntVec3 spawnSpot = default)
