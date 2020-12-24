@@ -17,6 +17,7 @@ namespace CaravanAdventures.CaravanMechBounty
         private Faction faction;
         private DiaNode root;
         private int creditsSpent = 0;
+        private TimeSpeed previousTimeSpeed = TimeSpeed.Paused;
 
         public BountyRequest(DiaNode result, Pawn negotiator, Faction faction)
         {
@@ -94,6 +95,8 @@ namespace CaravanAdventures.CaravanMechBounty
             int tile = requestor.Map.Tile;
             Find.WorldTargeter.BeginTargeting_NewTemp(ChoseWorldTarget, true, CompLaunchable.TargeterMouseAttachment, true, delegate
             {
+                previousTimeSpeed = Find.TickManager.CurTimeSpeed;
+                Find.TickManager.CurTimeSpeed = TimeSpeed.Paused;
                 //GenDraw.DrawWorldRadiusRing(tile, this.MaxLaunchDistance);
             }, (GlobalTargetInfo target) => "Select target tile", ValidateLaunchTarget);
         }
@@ -108,6 +111,7 @@ namespace CaravanAdventures.CaravanMechBounty
                 Log.Warning("Calculation of assistance points for bounty failed, selecting lowest option");
                 creditsSpent = 260;
             }
+            if (previousTimeSpeed != TimeSpeed.Paused) Find.TickManager.CurTimeSpeed = TimeSpeed.Normal;
             CompCache.BountyWC.BountyPoints -= creditsSpent;
             CompCache.BountyWC.OngoingAlliedAssistanceDelay = ModSettings.alliedAssistanceDurationInDays * 60000;
             CaravanStory.StoryUtility.GetAssistanceFromAlliedFaction(faction, map, creditsSpent * 2, creditsSpent * 2);
