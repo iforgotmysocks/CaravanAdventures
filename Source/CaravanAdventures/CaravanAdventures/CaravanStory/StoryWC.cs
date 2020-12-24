@@ -43,6 +43,7 @@ using Verse.Noise;
 // --> fix mental state: Berserk caused by insanity lance on bosses -> maybe remove them on a timer
 // - allow adjusting the map size in settings for the camping map
 // - camp: doesn't uncover open zones when rock is removed
+// - abilities: create a rage power that reduces melee cooldown by alot -> rimsec forest, increases movement, reduces pain, maybe reduces incoming damage
 
 // low prio:
 // - make configurable if sacrileg hunters are hostile towards the empire
