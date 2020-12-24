@@ -93,10 +93,10 @@ namespace CaravanAdventures.CaravanMechBounty
             CameraJumper.TryJump(CameraJumper.GetWorldTarget(requestor.Map.Parent));
             Find.WorldSelector.ClearSelection();
             int tile = requestor.Map.Tile;
+            previousTimeSpeed = Find.TickManager.CurTimeSpeed;
+            Find.TickManager.CurTimeSpeed = TimeSpeed.Paused;
             Find.WorldTargeter.BeginTargeting_NewTemp(ChoseWorldTarget, true, CompLaunchable.TargeterMouseAttachment, true, delegate
             {
-                previousTimeSpeed = Find.TickManager.CurTimeSpeed;
-                Find.TickManager.CurTimeSpeed = TimeSpeed.Paused;
                 //GenDraw.DrawWorldRadiusRing(tile, this.MaxLaunchDistance);
             }, (GlobalTargetInfo target) => "Select target tile", ValidateLaunchTarget);
         }
