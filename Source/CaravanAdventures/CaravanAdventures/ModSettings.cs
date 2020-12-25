@@ -43,6 +43,7 @@ namespace CaravanAdventures
         public static float healingPerSecond = 0.05f;
         public static bool onlyHealPermWhenGifted = false;
         public static bool stopMentalBreaks = false;
+        public static int maxLinkedAuraPawns = 4;
         // - light
         public static float lightDuration = 1200f;
 
@@ -65,6 +66,7 @@ namespace CaravanAdventures
 
         //public static ModSettings Get() => LoadedModManager.GetMod<CaravanAdventures.Main>().GetSettings<ModSettings>();
         private Vector2 scrollPos = Vector2.zero;
+        
 
         public override void ExposeData()
         {

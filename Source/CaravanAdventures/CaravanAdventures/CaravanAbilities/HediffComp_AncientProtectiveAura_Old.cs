@@ -8,7 +8,7 @@ using Verse;
 
 namespace CaravanAdventures.CaravanAbilities
 {
-    public class HediffComp_AncientRage : HediffComp
+    public class HediffComp_AncientProtectiveAura_Old : HediffComp
     {
         private int ticksSortedArray = 0;
         private int ticksSinceStatusCheck = 0;
@@ -20,24 +20,8 @@ namespace CaravanAdventures.CaravanAbilities
         private bool noInjuries = false;
         private string[] sicknessesToBeHealed = new[] { "WoundInfection", "Flu", "HeartAttack", "FoodPoisoning", "CatatonicBreakdown", "PsychicVertigo", "HeartAttack", "MuscleParasites", "SensoryMechanites", "FibrousMechanites", "GutWorms" };
         private string[] permanentToBeHealed = new[] { "PsychicComa", "Abasia", "Carcinoma", "ChemicalDamageModerate", "ChemicalDamageSevere", "Cirrhosis", "TraumaSavant" };
-        private bool linked = false;
 
-        public bool Linked { get => linked; set => linked = value; }
-
-        public override void CompExposeData()
-        {
-            base.CompExposeData();
-            Scribe_Values.Look(ref noInjuries, "noInjuries", true);
-            //Scribe_Values.Look(ref sortedInjuries, "sortedInjuries", null);
-            Scribe_Values.Look(ref ticksSinceStatusCheck, "ticksSinceHeal", 0, false);
-            Scribe_Values.Look(ref ticksSincePsyCost, "ticksSincePsyCost", 0, false);
-            Scribe_Values.Look(ref ticksSincePermHeal, "ticksSincePermHeal", 0, false);
-            Scribe_Values.Look(ref ticksSortedArray, "ticksSortedArray", 0);
-            Scribe_Values.Look(ref isGifted, "isGifted", false, false);
-            Scribe_Values.Look(ref linked, "linked", false);
-        }
-
-        public HediffComp_AncientRage()
+        public HediffComp_AncientProtectiveAura_Old()
         {
            
         }
@@ -58,7 +42,7 @@ namespace CaravanAdventures.CaravanAbilities
 
             if (ticksSinceStatusCheck > 60)
             {
-                if (!linked && Pawn.psychicEntropy.CurrentPsyfocus == 0f) this.Pawn.health.hediffSet.hediffs.Remove(this.parent);
+                if (Pawn.psychicEntropy.CurrentPsyfocus == 0f) this.Pawn.health.hediffSet.hediffs.Remove(this.parent);
                 ExtinguishFire();
                 CureMentalBreaks();
                 CureIllnesses();
@@ -68,7 +52,7 @@ namespace CaravanAdventures.CaravanAbilities
 
             if (ticksSincePsyCost > 603)
             {
-                if (!linked) Pawn.psychicEntropy.OffsetPsyfocusDirectly(isGifted ? -0.002f : -0.01f);
+                Pawn.psychicEntropy.OffsetPsyfocusDirectly(isGifted ? -0.002f : -0.01f);
                 ticksSincePsyCost = 0;
             }
 
@@ -102,7 +86,7 @@ namespace CaravanAdventures.CaravanAbilities
             else
             {
                 if (sortedInjuries.Length < ticksSortedArray || sortedInjuries[ticksSortedArray - 1] == null) return;
-                var healAmount = ModSettings.healingPerSecond;
+                var healAmount = isGifted ? ModSettings.healingPerSecond : (ModSettings.healingPerSecond / 1.5f);
                 if (sortedInjuries[ticksSortedArray - 1].Severity - healAmount > 0f) sortedInjuries[ticksSortedArray - 1].Severity -= healAmount;
                 else Pawn.health.RemoveHediff(sortedInjuries[ticksSortedArray - 1]);
 
@@ -161,7 +145,17 @@ namespace CaravanAdventures.CaravanAbilities
             else wound.Severity -= dmgToHeal;
         }
 
-       
+        public override void CompExposeData()
+        {
+            base.CompExposeData();
+            Scribe_Values.Look(ref noInjuries, "noInjuries", true);
+            //Scribe_Values.Look(ref sortedInjuries, "sortedInjuries", null);
+            Scribe_Values.Look(ref ticksSinceStatusCheck, "ticksSinceHeal", 0, false);
+            Scribe_Values.Look(ref ticksSincePsyCost, "ticksSincePsyCost", 0, false);
+            Scribe_Values.Look(ref ticksSincePermHeal, "ticksSincePermHeal", 0, false);
+            Scribe_Values.Look(ref ticksSortedArray, "ticksSortedArray", 0);
+            Scribe_Values.Look(ref isGifted, "isGifted", false, false);
+        }
 
 
     }

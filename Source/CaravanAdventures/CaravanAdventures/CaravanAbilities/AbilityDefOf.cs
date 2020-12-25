@@ -15,9 +15,8 @@ namespace CaravanAdventures.CaravanAbilities
         public static HediffDef CAAncientProtectiveAura;
         public static HediffDef CAAncientGift;
 
-        public static HediffDef CAAncientRageAnchor;
-        public static HediffDef CAAncientRage;
-        public static HediffDef CAAncientRageLinked;
+        public static HediffDef CAAncientCoordinator;
+        public static HediffDef CAAncientProtectiveAuraLinked;
 
         public static BodyPartDef Finger;
         public static BodyPartDef Toe;

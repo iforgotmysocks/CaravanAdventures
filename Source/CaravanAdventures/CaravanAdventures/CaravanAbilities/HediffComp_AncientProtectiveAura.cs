@@ -15,11 +15,28 @@ namespace CaravanAdventures.CaravanAbilities
         private int ticksSincePsyCost = 0;
         private int ticksSincePermHeal = 0;
         private int permTickCount = 10000;
-        private bool isGifted;
         private Hediff_Injury[] sortedInjuries;
         private bool noInjuries = false;
         private string[] sicknessesToBeHealed = new[] { "WoundInfection", "Flu", "HeartAttack", "FoodPoisoning", "CatatonicBreakdown", "PsychicVertigo", "HeartAttack", "MuscleParasites", "SensoryMechanites", "FibrousMechanites", "GutWorms" };
         private string[] permanentToBeHealed = new[] { "PsychicComa", "Abasia", "Carcinoma", "ChemicalDamageModerate", "ChemicalDamageSevere", "Cirrhosis", "TraumaSavant" };
+        private Pawn connector = null;
+
+        public HediffCompProperties_AncientProtectiveAura Props => (HediffCompProperties_AncientProtectiveAura)props;
+
+        public override void CompExposeData()
+        {
+            base.CompExposeData();
+            Scribe_Values.Look(ref noInjuries, "noInjuries", true);
+            //Scribe_Values.Look(ref sortedInjuries, "sortedInjuries", null);
+            Scribe_Values.Look(ref ticksSinceStatusCheck, "ticksSinceHeal", 0, false);
+            Scribe_Values.Look(ref ticksSincePsyCost, "ticksSincePsyCost", 0, false);
+            Scribe_Values.Look(ref ticksSincePermHeal, "ticksSincePermHeal", 0, false);
+            Scribe_Values.Look(ref ticksSortedArray, "ticksSortedArray", 0);
+            Scribe_References.Look(ref connector, "connector");
+        }
+
+        private bool IsGifted(Pawn pawn) => pawn.health.hediffSet.hediffs.FirstOrDefault(x => x.def == AbilityDefOf.CAAncientGift) != null;
+
 
         public HediffComp_AncientProtectiveAura()
         {
@@ -29,9 +46,6 @@ namespace CaravanAdventures.CaravanAbilities
         public override void CompPostPostAdd(DamageInfo? dinfo)
         {
             base.CompPostPostAdd(dinfo);
-            var gift = Pawn.health.hediffSet.hediffs.FirstOrDefault(x => x.def == AbilityDefOf.CAAncientGift);
-            if (gift != null) isGifted = true;
-            else permTickCount *= 3;
         }
 
         public override void CompPostTick(ref float severityAdjustment)
@@ -42,7 +56,12 @@ namespace CaravanAdventures.CaravanAbilities
 
             if (ticksSinceStatusCheck > 60)
             {
-                if (Pawn.psychicEntropy.CurrentPsyfocus == 0f) this.Pawn.health.hediffSet.hediffs.Remove(this.parent);
+                if (Props.linked && (Pawn.Faction != Faction.OfPlayer || connector == null || connector.Dead || connector.Faction != Faction.OfPlayer || !IsGifted(connector)))
+                {
+                    Pawn.health.RemoveHediff(parent);
+                    return;
+                }
+                if (!this.Props.linked && Pawn.psychicEntropy.CurrentPsyfocus == 0f) this.Pawn.health.hediffSet.hediffs.Remove(this.parent);
                 ExtinguishFire();
                 CureMentalBreaks();
                 CureIllnesses();
@@ -52,13 +71,13 @@ namespace CaravanAdventures.CaravanAbilities
 
             if (ticksSincePsyCost > 603)
             {
-                Pawn.psychicEntropy.OffsetPsyfocusDirectly(isGifted ? -0.002f : -0.01f);
+                if (!this.Props.linked) Pawn.psychicEntropy.OffsetPsyfocusDirectly(-0.002f);
                 ticksSincePsyCost = 0;
             }
 
             if (ticksSincePermHeal > permTickCount)
             {
-                if (!ModSettings.onlyHealPermWhenGifted || ModSettings.onlyHealPermWhenGifted && isGifted) HealPermanent();
+                if (!ModSettings.onlyHealPermWhenGifted || ModSettings.onlyHealPermWhenGifted && IsGifted(Pawn)) HealPermanent();
                 ticksSincePermHeal = 0;
             }
 
@@ -86,7 +105,7 @@ namespace CaravanAdventures.CaravanAbilities
             else
             {
                 if (sortedInjuries.Length < ticksSortedArray || sortedInjuries[ticksSortedArray - 1] == null) return;
-                var healAmount = isGifted ? ModSettings.healingPerSecond : (ModSettings.healingPerSecond / 1.5f);
+                var healAmount = ModSettings.healingPerSecond;
                 if (sortedInjuries[ticksSortedArray - 1].Severity - healAmount > 0f) sortedInjuries[ticksSortedArray - 1].Severity -= healAmount;
                 else Pawn.health.RemoveHediff(sortedInjuries[ticksSortedArray - 1]);
 
@@ -145,17 +164,7 @@ namespace CaravanAdventures.CaravanAbilities
             else wound.Severity -= dmgToHeal;
         }
 
-        public override void CompExposeData()
-        {
-            base.CompExposeData();
-            Scribe_Values.Look(ref noInjuries, "noInjuries", true);
-            //Scribe_Values.Look(ref sortedInjuries, "sortedInjuries", null);
-            Scribe_Values.Look(ref ticksSinceStatusCheck, "ticksSinceHeal", 0, false);
-            Scribe_Values.Look(ref ticksSincePsyCost, "ticksSincePsyCost", 0, false);
-            Scribe_Values.Look(ref ticksSincePermHeal, "ticksSincePermHeal", 0, false);
-            Scribe_Values.Look(ref ticksSortedArray, "ticksSortedArray", 0);
-            Scribe_Values.Look(ref isGifted, "isGifted", false, false);
-        }
+       
 
 
     }

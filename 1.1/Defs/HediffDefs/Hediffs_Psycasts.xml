@@ -9,15 +9,15 @@
 	</HediffDef>
 
   <HediffDef ParentName="CAAncientPsycastHediffBase">
-    <defName>CAAncientRageAnchor</defName>
-    <label>ancient rage anchor</label>
+    <defName>CAAncientCoordinator</defName>
+    <label>ancient coordiantor</label>
     <isBad>false</isBad>
     <everCurableByItem>false</everCurableByItem>
     <defaultLabelColor>(0, 255, 255)</defaultLabelColor>
-    <description>The caster aswell as 4 other colonists are granted the power of the ancient rage without any downsides as long as the caster is alive. However, every other pawn exceeding the limit of 5 will die.</description>
+    <description>The caster aswell as 4 other colonists are granted the power of the ancient protective aura without any downsides as long as the caster is alive. However, every other pawn exceeding the pawn limit will die.</description>
     <comps>
       <li Class="HediffCompProperties">
-        <compClass>CaravanAdventures.CaravanAbilities.HediffComp_AncientProtectiveAura</compClass>
+        <compClass>CaravanAdventures.CaravanAbilities.HediffComp_AncientCoordinator</compClass>
       </li>
     </comps>
     <stages>
@@ -27,67 +27,30 @@
   </HediffDef>
 
   <HediffDef ParentName="CAAncientPsycastHediffBase">
-    <defName>CAAncientRage</defName>
-    <label>ancient rage</label>
+    <defName>CAAncientProtectiveAuraLinked</defName>
+    <label>ancient protective aura (linked)</label>
     <isBad>false</isBad>
     <everCurableByItem>false</everCurableByItem>
     <defaultLabelColor>(0, 255, 255)</defaultLabelColor>
-    <description>Allows the caster to channel psyfocus to directly strenghten the bodies capabilities in almost any humanly possible way. Agility, melee combat, aswell as endurance are highly increased. It also protects the target from a large part of incoming damage, fire , heals wounds over time (even permanent ones when active long enough). \n\nReduces the overall heat a pawn can handle and accelerates psyfocus drain by 2% / day while active. The effect of this spell disappears if it is cast a second time on the target or if the targetted pawn runs out of psyfocus. \n\nThe effect is weaker and drains more psyfocus when cast on pawns without the ancient gift.</description>
+    <description>Protects the target from a large part of incoming damage, fire and heals wounds over time (even permanent ones when active long enough). \n\nReduces the overall heat a pawn can handle and accelerates psyfocus drain by 2% / day while active. The effect of this spell disappears if it is cast a second time on the target or if the targetted pawn runs out of psyfocus. \n\nThe effect is weaker and drains more psyfocus when cast on pawns without the ancient gift.</description>
     <comps>
-      <li Class="HediffCompProperties">
+      <li Class="CaravanAdventures.CaravanAbilities.HediffCompProperties_AncientProtectiveAura">
         <compClass>CaravanAdventures.CaravanAbilities.HediffComp_AncientProtectiveAura</compClass>
+        <linked>true</linked>
       </li>
     </comps>
     <stages>
       <li>
         <statOffsets>
-          <ComfyTemperatureMin>-20</ComfyTemperatureMin>
-          <ComfyTemperatureMax>20</ComfyTemperatureMax>
+          <ComfyTemperatureMin>-30</ComfyTemperatureMin>
+          <ComfyTemperatureMax>30</ComfyTemperatureMax>
           <ArmorRating_Heat>2.00</ArmorRating_Heat>
           <ImmunityGainSpeed>3</ImmunityGainSpeed>
-          <MoveSpeed>1.5</MoveSpeed>
+          <MoveSpeed>2</MoveSpeed>
           <ToxicSensitivity>-0.8</ToxicSensitivity>
           <MentalBreakThreshold>-0.35</MentalBreakThreshold>
-        </statOffsets>
-        <statFactors>
-          <PsychicEntropyMax>0.9</PsychicEntropyMax>
-          <IncomingDamageFactor>0.3</IncomingDamageFactor>
-        </statFactors>
-        <capMods>
-          <li>
-            <capacity>Consciousness</capacity>
-            <offset>0.3</offset>
-          </li>
-        </capMods>
-        <painFactor>0.3</painFactor>
-        <totalBleedFactor>0.3</totalBleedFactor>
-        <restFallFactor>0.3</restFallFactor>
-      </li>
-    </stages>
-  </HediffDef>
-
-  <HediffDef ParentName="CAAncientPsycastHediffBase">
-    <defName>CAAncientRageLinked</defName>
-    <label>ancient rage</label>
-    <isBad>false</isBad>
-    <everCurableByItem>false</everCurableByItem>
-    <defaultLabelColor>(0, 255, 255)</defaultLabelColor>
-    <description>Allows the caster to channel psyfocus to directly strenghten the bodies capabilities in almost any humanly possible way. Agility, melee combat, aswell as endurance are highly increased. It also protects the target from a large part of incoming damage, fire , heals wounds over time (even permanent ones when active long enough). \n\nReduces the overall heat a pawn can handle and accelerates psyfocus drain by 2% / day while active. The effect of this spell disappears if it is cast a second time on the target or if the targetted pawn runs out of psyfocus. \n\nThe effect is weaker and drains more psyfocus when cast on pawns without the ancient gift.</description>
-    <comps>
-      <li Class="HediffCompProperties">
-        <compClass>CaravanAdventures.CaravanAbilities.HediffComp_AncientProtectiveAura</compClass>
-      </li>
-    </comps>
-    <stages>
-      <li>
-        <statOffsets>
-          <ComfyTemperatureMin>-20</ComfyTemperatureMin>
-          <ComfyTemperatureMax>20</ComfyTemperatureMax>
-          <ArmorRating_Heat>2.00</ArmorRating_Heat>
-          <ImmunityGainSpeed>3</ImmunityGainSpeed>
-          <MoveSpeed>1.5</MoveSpeed>
-          <ToxicSensitivity>-0.8</ToxicSensitivity>
-          <MentalBreakThreshold>-0.35</MentalBreakThreshold>
+          <MeleeDodgeChance>30</MeleeDodgeChance>
+          <MeleeHitChance>15</MeleeHitChance>
         </statOffsets>
         <statFactors>
           <IncomingDamageFactor>0.3</IncomingDamageFactor>
@@ -104,7 +67,6 @@
       </li>
     </stages>
   </HediffDef>
-
 
   <HediffDef ParentName="CAAncientPsycastHediffBase">
 		<defName>CAAncientProtectiveAura</defName>
@@ -114,20 +76,23 @@
 		<defaultLabelColor>(0, 255, 255)</defaultLabelColor>
 		<description>Protects the target from a large part of incoming damage, fire and heals wounds over time (even permanent ones when active long enough). \n\nReduces the overall heat a pawn can handle and accelerates psyfocus drain by 2% / day while active. The effect of this spell disappears if it is cast a second time on the target or if the targetted pawn runs out of psyfocus. \n\nThe effect is weaker and drains more psyfocus when cast on pawns without the ancient gift.</description>
 		<comps>
-			<li Class="HediffCompProperties">
-				<compClass>CaravanAdventures.CaravanAbilities.HediffComp_AncientProtectiveAura</compClass>
-			</li>
+      <li Class="CaravanAdventures.CaravanAbilities.HediffCompProperties_AncientProtectiveAura">
+        <compClass>CaravanAdventures.CaravanAbilities.HediffComp_AncientProtectiveAura</compClass>
+        <linked>false</linked>
+      </li>
 		</comps>
 		<stages>
 			<li>
 				<statOffsets>
-					<ComfyTemperatureMin>-20</ComfyTemperatureMin>
-					<ComfyTemperatureMax>20</ComfyTemperatureMax>
+					<ComfyTemperatureMin>-30</ComfyTemperatureMin>
+					<ComfyTemperatureMax>30</ComfyTemperatureMax>
 					<ArmorRating_Heat>2.00</ArmorRating_Heat>
 					<ImmunityGainSpeed>3</ImmunityGainSpeed>
-					<MoveSpeed>1.5</MoveSpeed>
+					<MoveSpeed>2</MoveSpeed>
 					<ToxicSensitivity>-0.8</ToxicSensitivity>
 					<MentalBreakThreshold>-0.35</MentalBreakThreshold>
+          <MeleeDodgeChance>30</MeleeDodgeChance>
+          <MeleeHitChance>15</MeleeHitChance>
 				</statOffsets>
 				<statFactors>
 					<PsychicEntropyMax>0.9</PsychicEntropyMax>
@@ -142,46 +107,6 @@
 				<painFactor>0.3</painFactor>
 				<totalBleedFactor>0.3</totalBleedFactor>
 				<restFallFactor>0.3</restFallFactor>
-			</li>
-		</stages>
-	</HediffDef>
-
-	<HediffDef ParentName="CAAncientPsycastHediffBase">
-		<defName>CAAncientProtectiveAuraWeak</defName>
-		<label>ancient protective aura (weak)</label>
-		<isBad>false</isBad>
-		<everCurableByItem>false</everCurableByItem>
-		<defaultLabelColor>(0, 255, 255)</defaultLabelColor>
-		<description>Protects the target from a large part of incoming damage, fire and heals wounds over time (even permanent ones when active long enough). Remains active until cast again reduces the overall heat a pawn can handle and accelerates psyfocus drain by 2% / day while active.</description>
-		<comps>
-			<li Class="HediffCompProperties">
-				<compClass>CaravanAdventures.CaravanAbilities.HediffComp_AncientProtectiveAura</compClass>
-			</li>
-		</comps>
-		<stages>
-			<li>
-				<statOffsets>
-					<ComfyTemperatureMin>-10</ComfyTemperatureMin>
-					<ComfyTemperatureMax>10</ComfyTemperatureMax>
-					<ArmorRating_Heat>1.50</ArmorRating_Heat>
-					<ImmunityGainSpeed>2</ImmunityGainSpeed>
-					<MoveSpeed>1</MoveSpeed>
-					<ToxicSensitivity>-0.5</ToxicSensitivity>
-					<MentalBreakThreshold>-0.10</MentalBreakThreshold>
-				</statOffsets>
-				<statFactors>
-					<PsychicEntropyMax>0.9</PsychicEntropyMax>
-					<IncomingDamageFactor>0.5</IncomingDamageFactor>
-				</statFactors>
-				<capMods>
-					<li>
-						<capacity>Consciousness</capacity>
-						<offset>0.1</offset>
-					</li>
-				</capMods>
-				<painFactor>0.5</painFactor>
-				<totalBleedFactor>0.5</totalBleedFactor>
-				<restFallFactor>0.5</restFallFactor>
 			</li>
 		</stages>
 	</HediffDef>
