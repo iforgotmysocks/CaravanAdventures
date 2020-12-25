@@ -97,6 +97,7 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref healingPerSecond, "healingPerSecond", 0.05f);
             Scribe_Values.Look(ref stopMentalBreaks, "stopMentalBreaks", false);
             Scribe_Values.Look(ref onlyHealPermWhenGifted, "onlyHealPermWhenGifted", false);
+            Scribe_Values.Look(ref maxLinkedAuraPawns, "maxLinkedAuraPawns", 4);
             // - light
             Scribe_Values.Look(ref lightDuration, "lightDuration", 1200f);
 
@@ -221,6 +222,8 @@ namespace CaravanAdventures
             options.Label("Ancient protective aura".Colorize(Color.red));
             options.Label($"Damage healed per second: {Math.Round(healingPerSecond, 2)}");
             healingPerSecond = options.Slider(healingPerSecond, 0f, 1f);
+            options.Label($"Max allowed linked pawns: {maxLinkedAuraPawns}");
+            maxLinkedAuraPawns = Convert.ToInt32(options.Slider(maxLinkedAuraPawns, 1f, 10f));
             options.CheckboxLabeled("Can stop mental breaks?", ref stopMentalBreaks);
             options.CheckboxLabeled("Only heal permanent wounds when pawn has ancient gift?", ref onlyHealPermWhenGifted);
 

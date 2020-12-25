@@ -23,6 +23,8 @@ namespace CaravanAdventures.CaravanAbilities
 
         public HediffCompProperties_AncientProtectiveAura Props => (HediffCompProperties_AncientProtectiveAura)props;
 
+        public Pawn Connector { get => connector; set => connector = value; }
+
         public override void CompExposeData()
         {
             base.CompExposeData();
@@ -35,17 +37,22 @@ namespace CaravanAdventures.CaravanAbilities
             Scribe_References.Look(ref connector, "connector");
         }
 
-        private bool IsGifted(Pawn pawn) => pawn.health.hediffSet.hediffs.FirstOrDefault(x => x.def == AbilityDefOf.CAAncientGift) != null;
-
+        private bool IsGifted(Pawn pawn) => pawn.health.hediffSet.HasHediff(AbilityDefOf.CAAncientGift);
+        private bool IsCoordinatorActive(Pawn pawn) => pawn.health.hediffSet.HasHediff(AbilityDefOf.CAAncientCoordinator);
 
         public HediffComp_AncientProtectiveAura()
         {
-           
+
         }
 
         public override void CompPostPostAdd(DamageInfo? dinfo)
         {
             base.CompPostPostAdd(dinfo);
+            if (!Props.linked)
+            {
+                var linkedHediff = Pawn?.health?.hediffSet?.hediffs?.FirstOrDefault(x => x.def == AbilityDefOf.CAAncientProtectiveAuraLinked);
+                if (linkedHediff != null) Pawn.health.RemoveHediff(parent);
+            }
         }
 
         public override void CompPostTick(ref float severityAdjustment)
@@ -56,7 +63,7 @@ namespace CaravanAdventures.CaravanAbilities
 
             if (ticksSinceStatusCheck > 60)
             {
-                if (Props.linked && (Pawn.Faction != Faction.OfPlayer || connector == null || connector.Dead || connector.Faction != Faction.OfPlayer || !IsGifted(connector)))
+                if (Props.linked && (Pawn.Faction != Faction.OfPlayer || connector == null || connector.Dead || connector.Faction != Faction.OfPlayer || !IsGifted(connector) || !IsCoordinatorActive(connector)))
                 {
                     Pawn.health.RemoveHediff(parent);
                     return;
@@ -95,7 +102,7 @@ namespace CaravanAdventures.CaravanAbilities
             var diseases = Pawn.health.hediffSet.hediffs.Where(x => sicknessesToBeHealed.Contains(x.def.defName));
             if (diseases != null && diseases.Count() != 0) Pawn.health.hediffSet.hediffs.RemoveAll(x => diseases.Contains(x));
         }
-        
+
         private void Heal(bool skip = false)
         {
             if (noInjuries) return;
@@ -145,9 +152,9 @@ namespace CaravanAdventures.CaravanAbilities
 
         private void HealPermanent()
         {
-            var wound = Pawn.health.hediffSet.hediffs.FirstOrDefault(x => 
-                x.IsPermanent() 
-            || x.def.chronic 
+            var wound = Pawn.health.hediffSet.hediffs.FirstOrDefault(x =>
+                x.IsPermanent()
+            || x.def.chronic
             || permanentToBeHealed.Contains(x.def.defName));
 
             if (wound == null) return;
@@ -164,7 +171,7 @@ namespace CaravanAdventures.CaravanAbilities
             else wound.Severity -= dmgToHeal;
         }
 
-       
+
 
 
     }
