@@ -15,6 +15,6 @@ namespace CaravanAdventures.CaravanAbilities
             this.compClass = typeof(CompAbilityEffect_GiveToggleableHediff);
         }
 
-        public HediffDef hediffDefWeak;
+        public HediffDef hediffSecondary;
     }
 }

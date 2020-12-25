@@ -144,8 +144,81 @@
       <li Class = "CaravanAdventures.CaravanAbilities.CompProperties_GiveToggleableHediff">
         <compClass>CaravanAdventures.CaravanAbilities.CompAbilityEffect_GiveToggleableHediff</compClass>
         <hediffDef>CAAncientProtectiveAura</hediffDef>
-        <hediffDefWeak>CAAncientProtectiveAuraWeak</hediffDefWeak>
+        <hediffSecondary>CAAncientProtectiveAuraWeak</hediffSecondary>
         <psychic>True</psychic>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <AbilityDef ParentName="PsycastBase">
+    <defName>CAAncientRageAnchor</defName>
+    <label>ancient rage anchor</label>
+    <description>The caster aswell as 4 other colonists are granted the power of the ancient rage without any downsides as long as the caster is alive. However, every other pawn exceeding the limit of 5 will die.</description>
+    <level>0</level>
+    <displayGizmoWhileUndrafted>True</displayGizmoWhileUndrafted>
+    <disableGizmoWhileUndrafted>False</disableGizmoWhileUndrafted>
+    <targetRequired>False</targetRequired>
+    <canUseAoeToGetTargets>False</canUseAoeToGetTargets>
+    <!--<showPsycastEffects>False</showPsycastEffects>-->
+    <iconPath>UI/Abilities/Painblock</iconPath>
+    <hotKey>Misc12</hotKey>
+    <statBases>
+      <Ability_EntropyGain>30</Ability_EntropyGain>
+      <Ability_PsyfocusCost>0</Ability_PsyfocusCost>
+    </statBases>
+    <verbProperties>
+      <warmupTime>0</warmupTime>
+      <range>0</range>
+      <drawAimPie>False</drawAimPie>
+      <requireLineOfSight>False</requireLineOfSight>
+      <!--<onlyManualCast>True</onlyManualCast>-->
+      <targetParams>
+        <canTargetSelf>True</canTargetSelf>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class = "CaravanAdventures.CaravanAbilities.CompProperties_GiveToggleableHediff">
+        <compClass>CaravanAdventures.CaravanAbilities.CompAbilityEffect_GiveToggleableHediff</compClass>
+        <hediffDef>CAAncientRageAnchor</hediffDef>
+        <psychic>True</psychic>
+        <onlyApplyToSelf>True</onlyApplyToSelf>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <AbilityDef ParentName="PsycastBase">
+    <defName>CAAncientRage</defName>
+    <label>ancient rage</label>
+    <description>Allows the caster to channel psyfocus to directly strenghten the bodies capabilities in almost any humanly possible way. Agility, melee combat, aswell as endurance are highly increased. It also protects the target from a large part of incoming damage, fire , heals wounds over time (even permanent ones when active long enough). \n\nReduces the overall heat a pawn can handle and accelerates psyfocus drain by 2% / day while active. The effect of this spell disappears if it is cast a second time on the target or if the targetted pawn runs out of psyfocus. \n\nThe effect is weaker and drains more psyfocus when cast on pawns without the ancient gift.</description>
+    <level>0</level>
+    <displayGizmoWhileUndrafted>True</displayGizmoWhileUndrafted>
+    <disableGizmoWhileUndrafted>False</disableGizmoWhileUndrafted>
+    <targetRequired>False</targetRequired>
+    <canUseAoeToGetTargets>False</canUseAoeToGetTargets>
+    <!--<showPsycastEffects>False</showPsycastEffects>-->
+    <iconPath>UI/Abilities/Painblock</iconPath>
+    <hotKey>Misc12</hotKey>
+    <statBases>
+      <Ability_EntropyGain>30</Ability_EntropyGain>
+      <Ability_PsyfocusCost>0</Ability_PsyfocusCost>
+    </statBases>
+    <verbProperties>
+      <warmupTime>0</warmupTime>
+      <range>0</range>
+      <drawAimPie>False</drawAimPie>
+      <requireLineOfSight>False</requireLineOfSight>
+      <!--<onlyManualCast>True</onlyManualCast>-->
+      <targetParams>
+        <canTargetSelf>True</canTargetSelf>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class = "CaravanAdventures.CaravanAbilities.CompProperties_GiveToggleableHediff">
+        <compClass>CaravanAdventures.CaravanAbilities.CompAbilityEffect_GiveToggleableHediff</compClass>
+        <hediffDef>CAAncientRage</hediffDef>
+        <hediffSecondary>CAAncientProtectiveAuraWeak</hediffSecondary>
+        <psychic>True</psychic>
+        <onlyApplyToSelf>True</onlyApplyToSelf>
       </li>
     </comps>
   </AbilityDef>

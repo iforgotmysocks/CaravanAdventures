@@ -75,6 +75,7 @@
     <Compile Include="CaravanAbilities\CompProperties_GiveToggleableHediff.cs" />
     <Compile Include="CaravanAbilities\HediffCompProperties_OverheatingBrain.cs" />
     <Compile Include="CaravanAbilities\HediffCompProperties_ConjuredLight.cs" />
+    <Compile Include="CaravanAbilities\HediffComp_AncientProtectiveAura - Copy.cs" />
     <Compile Include="CaravanAbilities\HediffComp_OverheatingBrain.cs" />
     <Compile Include="CaravanAbilities\HediffComp_AncientGift.cs" />
     <Compile Include="CaravanAbilities\HediffComp_AncientProtectiveAura.cs" />

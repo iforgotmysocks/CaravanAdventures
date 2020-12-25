@@ -15,6 +15,11 @@ namespace CaravanAdventures.CaravanAbilities
         public override void Apply(LocalTargetInfo target, LocalTargetInfo dest)
         {
             base.Apply(target, dest);
+            if (this.Props.onlyApplyToSelf)
+            {
+                this.ApplyInner(this.parent.pawn, null);
+                return;
+            }
             this.ApplyInner(target.Pawn, this.parent.pawn);
             if (this.Props.applyToSelf)
             {
@@ -27,7 +32,7 @@ namespace CaravanAdventures.CaravanAbilities
             if (target != null)
             {
                 var isGifted = target.health.hediffSet.hediffs.FirstOrDefault(x => x.def == AbilityDefOf.CAAncientGift) != null;
-                var selectedHediffDef = isGifted ? this.Props.hediffDef : this.Props.hediffDefWeak; 
+                var selectedHediffDef = isGifted ? this.Props.hediffDef : this.Props.hediffSecondary; 
                 var firstHediffOfDef = target.health.hediffSet.GetFirstHediffOfDef(selectedHediffDef, false);
                 
                 if (firstHediffOfDef != null)
