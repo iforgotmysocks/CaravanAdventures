@@ -184,7 +184,6 @@
         <onlyApplyToSelf>True</onlyApplyToSelf>
       </li>
     </comps>
-    <confirmationDialogText>When casting ancient coordinator, every pawn exceeding the default link limit of 4 (gifted pawn not included) will die.\n.\n\nDo you really want to cast ancient coordinator?</confirmationDialogText>
   </AbilityDef>
 
   <AbilityDef ParentName="PsycastBase">

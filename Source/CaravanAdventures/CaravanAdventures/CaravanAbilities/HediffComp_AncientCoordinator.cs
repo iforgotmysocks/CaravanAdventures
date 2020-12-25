@@ -13,12 +13,14 @@ namespace CaravanAdventures.CaravanAbilities
         private int ticks = 0;
         private List<Pawn> linkedPawns = new List<Pawn>();
         private int ticksCheckHediffPresent = 0;
+        private bool dialogAccepted = false;
 
         public override void CompExposeData()
         {
             base.CompExposeData();
             Scribe_Values.Look(ref ticks, "ticks", 0);
             Scribe_Collections.Look(ref linkedPawns, "linkedPawns", LookMode.Reference);
+            Scribe_Values.Look(ref dialogAccepted, "dialogNotAccepted", false);
         }
 
         public HediffComp_AncientCoordinator()
@@ -31,15 +33,19 @@ namespace CaravanAdventures.CaravanAbilities
         public override void CompPostPostAdd(DamageInfo? dinfo)
         {
             base.CompPostPostAdd(dinfo);
+            var window = Dialog_MessageBox.CreateConfirmation("CAAbilityCoordinatorApprovalText".Translate(), delegate ()
+            {
+                var unlinkedHediff = Pawn?.health?.hediffSet?.hediffs?.FirstOrDefault(x => x.def == AbilityDefOf.CAAncientProtectiveAura);
+                if (unlinkedHediff != null) Pawn.health.RemoveHediff(unlinkedHediff);
 
-            var unlinkedHediff = Pawn?.health?.hediffSet?.hediffs?.FirstOrDefault(x => x.def == AbilityDefOf.CAAncientProtectiveAura);
-            if (unlinkedHediff != null) Pawn.health.RemoveHediff(unlinkedHediff);
+                var hediff = Pawn?.health?.hediffSet?.hediffs?.FirstOrDefault(x => x.def == AbilityDefOf.CAAncientProtectiveAuraLinked);
+                if (hediff != null) return;
 
-            Log.Message($"trying to add to gifted pawn");
-            var hediff = Pawn?.health?.hediffSet?.hediffs?.FirstOrDefault(x => x.def == AbilityDefOf.CAAncientProtectiveAuraLinked);
-            if (hediff != null) return;
+                AddLinkedHediffToPawn(Pawn, Pawn);
+                dialogAccepted = true;
+            }, false, null);
+            Find.WindowStack.Add(window);
 
-            AddLinkedHediffToPawn(Pawn, Pawn);
         }
 
         public override void CompPostPostRemoved()
@@ -62,6 +68,11 @@ namespace CaravanAdventures.CaravanAbilities
             base.CompPostTick(ref severityAdjustment);
 
             if (Pawn == null || Pawn.Dead) return;
+            if (!dialogAccepted)
+            {
+                Pawn.health.RemoveHediff(parent);
+                return;
+            }
 
             if (ticks > 50)
             {

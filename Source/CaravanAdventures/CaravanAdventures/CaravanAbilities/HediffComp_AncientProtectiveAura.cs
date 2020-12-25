@@ -14,12 +14,13 @@ namespace CaravanAdventures.CaravanAbilities
         private int ticksSinceStatusCheck = 0;
         private int ticksSincePsyCost = 0;
         private int ticksSincePermHeal = 0;
-        private int permTickCount = 10000;
+        private int permTickCount = new IntRange(10000, 12000).RandomInRange;
         private Hediff_Injury[] sortedInjuries;
         private bool noInjuries = false;
         private string[] sicknessesToBeHealed = new[] { "WoundInfection", "Flu", "HeartAttack", "FoodPoisoning", "CatatonicBreakdown", "PsychicVertigo", "HeartAttack", "MuscleParasites", "SensoryMechanites", "FibrousMechanites", "GutWorms" };
         private string[] permanentToBeHealed = new[] { "PsychicComa", "Abasia", "Carcinoma", "ChemicalDamageModerate", "ChemicalDamageSevere", "Cirrhosis", "TraumaSavant" };
         private Pawn connector = null;
+        private int statusCheckTickCount = new IntRange(55, 65).RandomInRange;
 
         public HediffCompProperties_AncientProtectiveAura Props => (HediffCompProperties_AncientProtectiveAura)props;
 
@@ -61,7 +62,7 @@ namespace CaravanAdventures.CaravanAbilities
 
             Heal();
 
-            if (ticksSinceStatusCheck > 60)
+            if (ticksSinceStatusCheck > statusCheckTickCount)
             {
                 if (Props.linked && (Pawn.Faction != Faction.OfPlayer || connector == null || connector.Dead || connector.Faction != Faction.OfPlayer || !IsGifted(connector) || !IsCoordinatorActive(connector)))
                 {

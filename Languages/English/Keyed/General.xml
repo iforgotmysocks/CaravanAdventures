@@ -6,5 +6,7 @@
 
   <CALetterQuestOngoingUpdatedInfo>Quest updated</CALetterQuestOngoingUpdatedInfo>
   <CALetterQuestOngoingUpdatedInfoText>The quest "{0}" was updated.</CALetterQuestOngoingUpdatedInfoText>
+
+  <CAAbilityCoordinatorApprovalText>When casting ancient coordinator, every pawn exceeding the default link limit of 4 (gifted pawn not included) will die.\n\n\nDo you really want to cast ancient coordinator?</CAAbilityCoordinatorApprovalText>
 </LanguageData>
 
