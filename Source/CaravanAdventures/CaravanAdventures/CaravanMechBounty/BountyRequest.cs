@@ -375,7 +375,7 @@ namespace CaravanAdventures.CaravanMechBounty
         #region recruit veteran
         private DiaNode GetRecuitmentOverview(DiaNode parent)
         {
-            var cost = 2000;
+            var cost = 4000;
             var node = new DiaNode("CABountyExchangeVeteranRecruitment".Translate(CompCache.BountyWC.BountyPoints, faction.def.LabelCap, GetVeteranTimeString()));
             node.options.Add(new DiaOption("CABountyExchangeVeteranRecruitment_Enlist".Translate(cost))
             {
