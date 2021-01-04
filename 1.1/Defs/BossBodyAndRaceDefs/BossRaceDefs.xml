@@ -224,7 +224,7 @@
 
   <PawnKindDef ParentName="BaseMechanoidKind">
     <defName>CABossMechHarbinger</defName>
-    <label>Crystal scythe</label>
+    <label>Harbinger</label>
     <race>CAHarbinger</race>
     <combatPower>240000</combatPower>
     <lifeStages>
