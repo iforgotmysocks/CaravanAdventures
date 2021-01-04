@@ -91,10 +91,10 @@ namespace CaravanAdventures.CaravanStory
         public override bool ShouldRemoveMapNow(out bool alsoRemoveWorldObject)
         {
             // todo add scenatio of keeping map until last judgement is completed and left, 
-            if (!base.Map.mapPawns.AnyPawnBlockingMapRemoval && boss == null && (CompCache.StoryWC.GetCurrentShrineCounter != CompCache.StoryWC.GetShrineMaxiumum || CompCache.StoryWC.storyFlags["Judgment_Completed"])
-                || !base.Map.mapPawns.AnyPawnBlockingMapRemoval && bossDefeatedAndRewardsGiven && (CompCache.StoryWC.GetCurrentShrineCounter != CompCache.StoryWC.GetShrineMaxiumum || CompCache.StoryWC.storyFlags["Judgment_Completed"]))
+            if (!base.Map.mapPawns.AnyPawnBlockingMapRemoval && boss == null && (CompCache.StoryWC.GetCurrentShrineCounter - 1 != CompCache.StoryWC.GetShrineMaxiumum || CompCache.StoryWC.storyFlags["Judgment_Completed"])
+                || !base.Map.mapPawns.AnyPawnBlockingMapRemoval && bossDefeatedAndRewardsGiven && (CompCache.StoryWC.GetCurrentShrineCounter - 1 != CompCache.StoryWC.GetShrineMaxiumum || CompCache.StoryWC.storyFlags["Judgment_Completed"]))
             {
-                // restting flags here due to shrine map being a bandit map without boss!!
+                // resetting flags here due to shrine map being a bandit map without boss!!
                 if (!bossWasSpawned && !lastJudgementEntraceWasSpawned)
                 {
                     DLog.Message($"Resetting shrine flags for current shrine: {CompCache.StoryWC.GetCurrentShrineCounter}");
@@ -281,7 +281,7 @@ namespace CaravanAdventures.CaravanStory
 
             CompCache.StoryWC.SetShrineSF("Completed");
             CompCache.StoryWC.IncreaseShrineCompleteCounter();
-            CompCache.StoryWC.mechBossKillCounters[boss.def.defName] = CompCache.StoryWC.mechBossKillCounters.TryGetValue(boss.def.defName, out var result) ? result + 1 : 0;
+            CompCache.StoryWC.mechBossKillCounters[boss.kindDef] = CompCache.StoryWC.mechBossKillCounters.TryGetValue(boss.kindDef, out var result) ? result + 1 : 1;
 
             BossDefeatedDialog(gifted, boss, spell);
             bossDefeatedAndRewardsGiven = true;

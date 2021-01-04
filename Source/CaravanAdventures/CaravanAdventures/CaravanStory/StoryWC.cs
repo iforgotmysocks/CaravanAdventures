@@ -74,7 +74,7 @@ namespace CaravanAdventures.CaravanStory
         private bool ranDebugActionsOnceAtStartUp;
         private IEnumerable<ThingDef> bossDefs;
 
-        public Dictionary<string, int> mechBossKillCounters = new Dictionary<string, int>();
+        public Dictionary<PawnKindDef, int> mechBossKillCounters = new Dictionary<PawnKindDef, int>();
         public Dictionary<string, bool> debugFlags = new Dictionary<string, bool>()
         {
             { "ShowDebugInfo", true },
@@ -124,7 +124,7 @@ namespace CaravanAdventures.CaravanStory
             base.ExposeData();
             Scribe_Collections.Look(ref storyFlags, "storyFlags", LookMode.Value);
             Scribe_Collections.Look(ref unlockedSpells, "unlockedSpells", LookMode.Def);
-            Scribe_Collections.Look(ref mechBossKillCounters, "mechBossKillCounters", LookMode.Value);
+            Scribe_Collections.Look(ref mechBossKillCounters, "mechBossKillCounters", LookMode.Def);
             Scribe_Values.Look(ref ticks, "ticks", -1);
             Scribe_Values.Look(ref shrineRevealCounter, "shrineRevealCounter", -1);
             Scribe_Values.Look(ref countShrinesCompleted, "countShrinesCompleted", 0);
