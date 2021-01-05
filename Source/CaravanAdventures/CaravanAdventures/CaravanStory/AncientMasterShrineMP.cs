@@ -153,6 +153,34 @@ namespace CaravanAdventures.CaravanStory
                     Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
                     Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
                     break;
+                case 4:
+                    //diaNode3 = new DiaNode("Story_Shrine3_Apocalypse_Dia1_3".Translate(storyChar.NameShortColored));
+                    //diaNode3.options.Add(new DiaOption("Story_Shrine3_Apocalypse_Dia1_3_Option1".Translate()) { resolveTree = true });
+
+                    //diaNode2 = new DiaNode("Story_Shrine3_Apocalypse_Dia1_2".Translate(storyChar.NameShortColored));
+                    //diaNode2.options.Add(new DiaOption("Story_Shrine3_Apocalypse_Dia1_2_Option1".Translate()) { link = diaNode3 });
+
+                    diaNode = new DiaNode("Story_Shrine3_Apocalypse_Dia1_1".Translate(storyChar.NameShortColored));
+                    diaNode.options.Add(new DiaOption("Story_Shrine3_Apocalypse_Dia1_1_Option1".Translate()) { resolveTree = true });
+
+                    taggedString = "Story_Shrine1_Apocalypse_Dia1Title".Translate(storyChar.NameShortColored);
+                    Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
+                    Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
+                    break;
+                case 5:
+                    diaNode3 = new DiaNode("Story_Shrine4_Apocalypse_Dia1_3".Translate(storyChar.NameShortColored));
+                    diaNode3.options.Add(new DiaOption("Story_Shrine4_Apocalypse_Dia1_3_Option1".Translate()) { resolveTree = true });
+
+                    diaNode2 = new DiaNode("Story_Shrine4_Apocalypse_Dia1_2".Translate(storyChar.NameShortColored));
+                    diaNode2.options.Add(new DiaOption("Story_Shrine4_Apocalypse_Dia1_2_Option1".Translate()) { link = diaNode3 });
+
+                    diaNode = new DiaNode("Story_Shrine4_Apocalypse_Dia1_1".Translate(storyChar.NameShortColored));
+                    diaNode.options.Add(new DiaOption("Story_Shrine4_Apocalypse_Dia1_1_Option1".Translate()) { link = diaNode2 });
+
+                    taggedString = "Story_Shrine1_Apocalypse_Dia1Title".Translate(storyChar.NameShortColored);
+                    Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
+                    Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
+                    break;
             }
 
         }
