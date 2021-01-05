@@ -20,5 +20,10 @@ namespace CaravanAdventures.CaravanAbilities
 
         public static BodyPartDef Finger;
         public static BodyPartDef Toe;
+
+        public static AbilityDef Named(string defName, bool errorOnFail = true)
+        {
+            return DefDatabase<AbilityDef>.GetNamed(defName, errorOnFail);
+        }
     }
 }

@@ -12,12 +12,10 @@ namespace CaravanAdventures.CaravanStory.Quests
     {
         private Pawn gifted;
 
-
         public Pawn Gifted { get => gifted; set => gifted = value; }
 
         public QuestCont_StoryStart()
         {
-
         }
 
         public void ExposeData()

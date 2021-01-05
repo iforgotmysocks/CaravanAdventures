@@ -16,7 +16,6 @@ namespace CaravanAdventures.CaravanStory
     class AncientMasterShrineWO : WorldObject
     {
         // todo label
-        // todo cleanup -> especially mechs 
         private Room mainRoom = null;
         private int minMainRoomSize = 1500;
         private AncientMasterShrineMP mp = null;
@@ -37,7 +36,7 @@ namespace CaravanAdventures.CaravanStory
 
                 if (mainRoom.CellCount > minMainRoomSize)
                 {
-                    if (CompCache.StoryWC.BuildCurrentShrinePrefix() != "Shrine5_") mp.boss = AddBoss(map, caravan, mainRoom);
+                    if (CompCache.StoryWC.GetCurrentShrineCounter() != 5) mp.boss = AddBoss(map, caravan, mainRoom);
                     else mp.lastJudgmentEntrance = InitCellarEntrace(map);
                 }
                 else AddBandits(map, caravan);
@@ -330,7 +329,7 @@ namespace CaravanAdventures.CaravanStory
             DLog.Message($"Points before: {defaultPawnGroupMakerParms.points} roomcells: {room.CellCount}");
 
             // todo make 1.2f a difficulty setting
-            var calcedFromRoomSize = Convert.ToInt32(defaultPawnGroupMakerParms.points * (CompCache.StoryWC.GetCurrentShrineCounter * ModSettings.shrineMechDifficultyMultiplier) * ((room == mainRoom ? Math.Max(room.CellCount, 3000) : room.CellCount) / 1000f));
+            var calcedFromRoomSize = Convert.ToInt32(defaultPawnGroupMakerParms.points * (CompCache.StoryWC.GetCurrentShrineCounter() * ModSettings.shrineMechDifficultyMultiplier) * ((room == mainRoom ? Math.Max(room.CellCount, 3000) : room.CellCount) / 1000f));
             var minPoints = room == mainRoom ? 2000 : 130;
 
             DLog.Message($"from roomsize: {calcedFromRoomSize} minpoints: {minPoints}");

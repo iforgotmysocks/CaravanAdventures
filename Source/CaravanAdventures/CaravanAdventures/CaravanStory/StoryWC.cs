@@ -277,7 +277,7 @@ namespace CaravanAdventures.CaravanStory
         public void ResetSFsStartingWith(string start) => storyFlags.Keys.Where(x => x.StartsWith(start)).ToList().ForEach(key => storyFlags[key] = false);
         public string BuildCurrentShrinePrefix() => "Shrine" + (countShrinesCompleted < shrineMaximum ? countShrinesCompleted + 1 : shrineMaximum) + "_";
         public string BuildMaxShrinePrefix() => "Shrine" + shrineMaximum + "_";
-        public int GetCurrentShrineCounter => countShrinesCompleted < shrineMaximum ? countShrinesCompleted + 1 : shrineMaximum;
+        public int GetCurrentShrineCounter(bool ignoreLimit = false) => ignoreLimit ? countShrinesCompleted + 1 : countShrinesCompleted < shrineMaximum ? countShrinesCompleted + 1 : shrineMaximum;
         public int GetShrineMaxiumum => shrineMaximum;
 
         public List<AbilityDef> GetUnlockedSpells() => unlockedSpells;

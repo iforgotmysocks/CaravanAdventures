@@ -23,7 +23,6 @@ namespace CaravanAdventures.CaravanStory.Quests
 
         public QuestCont_Village()
         {
-
         }
 
         public void ExposeData()

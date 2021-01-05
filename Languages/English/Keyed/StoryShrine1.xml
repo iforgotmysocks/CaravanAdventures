@@ -40,8 +40,9 @@
   <Story_Shrine1_AbilityGainedLetterDesc>By defeating {0} and with the power of the Ancient Gift, {1} received the sacret knowledge of the spell: {2}</Story_Shrine1_AbilityGainedLetterDesc>
   <Story_Shrine1_ArrivalTimeShownLetterMessage>Your caravan has been detected. In {0}, reinforcing {1} from {2} will begin arriving in the area.\n\nReform your caravan and begin moving to avoid the {1}. You can return once they moved on. You'll be notified about their arrival every 3 hours.</Story_Shrine1_ArrivalTimeShownLetterMessage>
 
-  <Story_Shrine1_QuestRewardUpdate_1>{0}: {1} defeated the {2} at the {3} shrine and received the ancient spell {4}.</Story_Shrine1_QuestRewardUpdate_1>
-  
+  <Story_Shrine1_QuestRewardUpdate_1>({1}) {0}: {2} defeated the {3} and received the ancient spell {4}.</Story_Shrine1_QuestRewardUpdate_1>
+  <Story_Shrine1_QuestRewardUpdate_1_WithoutSpell>({1}) {0}: {2} defeated the {3}.</Story_Shrine1_QuestRewardUpdate_1_WithoutSpell>
+
   <Story_Shrine1_SacrilegHunters_DiaTitle>{0} is contacting you via comms...</Story_Shrine1_SacrilegHunters_DiaTitle>
   <Story_Shrine1_SacrilegHunters_Dia1_1>You did it! You found a master shrine!
     \nTake care when exploring, as i told you before, we lost brothers and sisters when we came accross our first shrine of this kind and escaped just barely.\nFocus on the larger buildings, that's what we're looking for.

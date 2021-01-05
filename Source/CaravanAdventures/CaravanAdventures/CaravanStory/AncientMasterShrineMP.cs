@@ -72,7 +72,7 @@ namespace CaravanAdventures.CaravanStory
 
                 GetComponent<TimedDetectionPatrols>().Init();
                 // todo balance strenth! maybe include shrine counter
-                GetComponent<TimedDetectionPatrols>().StartDetectionCountdown(60000, -1, (int)(8000 * (1 + CompCache.StoryWC.GetCurrentShrineCounter / 10)));
+                GetComponent<TimedDetectionPatrols>().StartDetectionCountdown(60000, -1, (int)(8000 * (1 + CompCache.StoryWC.GetCurrentShrineCounter() / 10)));
 
                 if (boss != null) bossWasSpawned = true;
                 if (lastJudgmentEntrance != null) lastJudgementEntraceWasSpawned = true;
@@ -81,7 +81,7 @@ namespace CaravanAdventures.CaravanStory
             {
                 // todo do we want a raid here? 
                 GetComponent<TimedDetectionPatrols>().Init();
-                GetComponent<TimedDetectionPatrols>().StartDetectionCountdown(180000, -1, (int)(8000 * (1 + CompCache.StoryWC.GetCurrentShrineCounter / 10)));
+                GetComponent<TimedDetectionPatrols>().StartDetectionCountdown(180000, -1, (int)(8000 * (1 + CompCache.StoryWC.GetCurrentShrineCounter() / 10)));
                 GetComponent<TimedDetectionPatrols>().ToggleIncreaseStrenthByCounter = true;
             }
             CompCache.StoryWC.SetShrineSF("Created");
@@ -91,13 +91,13 @@ namespace CaravanAdventures.CaravanStory
         public override bool ShouldRemoveMapNow(out bool alsoRemoveWorldObject)
         {
             // todo add scenatio of keeping map until last judgement is completed and left, 
-            if (!base.Map.mapPawns.AnyPawnBlockingMapRemoval && boss == null && (CompCache.StoryWC.GetCurrentShrineCounter - 1 != CompCache.StoryWC.GetShrineMaxiumum || CompCache.StoryWC.storyFlags["Judgment_Completed"])
-                || !base.Map.mapPawns.AnyPawnBlockingMapRemoval && bossDefeatedAndRewardsGiven && (CompCache.StoryWC.GetCurrentShrineCounter - 1 != CompCache.StoryWC.GetShrineMaxiumum || CompCache.StoryWC.storyFlags["Judgment_Completed"]))
+            if (!base.Map.mapPawns.AnyPawnBlockingMapRemoval && boss == null && (CompCache.StoryWC.GetCurrentShrineCounter() - 1 != CompCache.StoryWC.GetShrineMaxiumum || CompCache.StoryWC.storyFlags["Judgment_Completed"])
+                || !base.Map.mapPawns.AnyPawnBlockingMapRemoval && bossDefeatedAndRewardsGiven && (CompCache.StoryWC.GetCurrentShrineCounter() - 1 != CompCache.StoryWC.GetShrineMaxiumum || CompCache.StoryWC.storyFlags["Judgment_Completed"]))
             {
                 // resetting flags here due to shrine map being a bandit map without boss!!
                 if (!bossWasSpawned && !lastJudgementEntraceWasSpawned)
                 {
-                    DLog.Message($"Resetting shrine flags for current shrine: {CompCache.StoryWC.GetCurrentShrineCounter}");
+                    DLog.Message($"Resetting shrine flags for current shrine: {CompCache.StoryWC.GetCurrentShrineCounter()}");
                     CompCache.StoryWC.ResetCurrentShrineFlags();
                 }
 
@@ -115,7 +115,7 @@ namespace CaravanAdventures.CaravanStory
             if (abandonShrine && !bossDefeatedAndRewardsGiven) return;
             if (bossWasSpawned)
             {
-                if (CompCache.StoryWC.GetCurrentShrineCounter == 2) Quests.QuestUtility.AppendQuestDescription(Quests.StoryQuestDefOf.CA_FindAncientShrine, Helper.HtmlFormatting("Story_Shrine1_QuestUpdate_1".Translate(), "f59b42"), false, true);
+                if (CompCache.StoryWC.GetCurrentShrineCounter() == 2) Quests.QuestUtility.AppendQuestDescription(Quests.StoryQuestDefOf.CA_FindAncientShrine, Helper.HtmlFormatting("Story_Shrine1_QuestUpdate_1".Translate(), "f59b42"), false, true);
                 LeavingShrineDialog();
             }
         }
@@ -123,7 +123,7 @@ namespace CaravanAdventures.CaravanStory
         private void LeavingShrineDialog()
         {
             var storyChar = CompCache.StoryWC.questCont.Village.StoryContact;
-            switch (CompCache.StoryWC.GetCurrentShrineCounter)
+            switch (CompCache.StoryWC.GetCurrentShrineCounter())
             {
                 case 2:
                     var diaNode3 = new DiaNode("Story_Shrine1_Apocalypse_Dia1_3".Translate(storyChar.NameShortColored));
@@ -235,7 +235,7 @@ namespace CaravanAdventures.CaravanStory
 
             var storyChar = CompCache.StoryWC.questCont.Village.StoryContact;
 
-            if (CompCache.StoryWC.GetCurrentShrineCounter == 1)
+            if (CompCache.StoryWC.GetCurrentShrineCounter() == 1)
             {
                 var diaNode = new DiaNode("Story_Shrine1_SacrilegHunters_Dia1_1".Translate(storyChar.NameShortColored));
                 diaNode.options.Add(new DiaOption("Story_Shrine1_SacrilegHunters_Dia1_1_Option1".Translate()) { resolveTree = true, action = () => StoryUtility.GetAssistanceFromAlliedFaction(StoryUtility.FactionOfSacrilegHunters, Map) });
@@ -266,17 +266,17 @@ namespace CaravanAdventures.CaravanStory
             if (gifted == null) Log.Warning("gifted pawn was null, which shouldn't happen. Spell was stored for when another gifted pawn awakes");
 
             AbilityDef spell = null;
+            var endSpell = CaravanAbilities.AbilityDefOf.Named("CAAncientCoordinator");
             //Log.Message($"Unlocked spellcount: {CompCache.StoryWC.GetUnlockedSpells().Count} Database count: {DefDatabase<AbilityDef>.AllDefsListForReading.Where(x => x.defName.StartsWith("CAAncient")).Count()}");
-            if (CompCache.StoryWC.GetUnlockedSpells().Count < DefDatabase<AbilityDef>.AllDefsListForReading.Where(x => x.defName.StartsWith("CAAncient")).Count())
+            if (CompCache.StoryWC.GetUnlockedSpells().Count < DefDatabase<AbilityDef>.AllDefsListForReading.Where(x => x.defName.StartsWith("CAAncient") && x != endSpell).Count())
             {
-                spell = DefDatabase<AbilityDef>.AllDefsListForReading.Where(x => x.defName.StartsWith("CAAncient") && !CompCache.StoryWC.GetUnlockedSpells().Contains(x)).InRandomOrder().FirstOrDefault();
-                if (spell == null) Log.Error($"Got no spell from boss. -> CheckBossDefeated()");
-                CompCache.StoryWC.GetUnlockedSpells().Add(spell);
-                if (gifted != null)
-                {
-                    gifted.abilities.GainAbility(spell);
-                    Find.LetterStack.ReceiveLetter("Story_Shrine1_AbilityGainedLetterTitle".Translate(spell.LabelCap), "Story_Shrine1_AbilityGainedLetterDesc".Translate(boss.Label, gifted.NameShortColored, spell.label.Colorize(UnityEngine.Color.cyan)), LetterDefOf.PositiveEvent);
-                }
+                spell = DefDatabase<AbilityDef>.AllDefsListForReading.Where(x => x.defName.StartsWith("CAAncient") && x != endSpell && !CompCache.StoryWC.GetUnlockedSpells().Contains(x)).InRandomOrder().FirstOrDefault();
+                LearnSpell(gifted, spell);
+            }
+            else if (CompCache.StoryWC.GetCurrentShrineCounter() >= CompCache.StoryWC.GetShrineMaxiumum && !CompCache.StoryWC.GetUnlockedSpells().Contains(endSpell))
+            {
+                spell = endSpell;
+                LearnSpell(gifted, spell);
             }
 
             CompCache.StoryWC.SetShrineSF("Completed");
@@ -287,7 +287,36 @@ namespace CaravanAdventures.CaravanStory
             bossDefeatedAndRewardsGiven = true;
 
             StoryUtility.AdjustGoodWill(75);
-            Quests.QuestUtility.AppendQuestDescription(Quests.StoryQuestDefOf.CA_FindAncientShrine, "Story_Shrine1_QuestRewardUpdate_1".Translate(GenDate.DateFullStringAt((long)GenDate.TickGameToAbs(Find.TickManager.TicksGame), Find.WorldGrid.LongLatOf(Tile)), gifted.NameShortColored, boss.LabelCap, CompCache.StoryWC.GetCurrentShrineCounter - 1, spell.label.CapitalizeFirst().Colorize(Color.cyan)));
+            Quests.QuestUtility.AppendQuestDescription(Quests.StoryQuestDefOf.CA_FindAncientShrine,
+                (CompCache.StoryWC.GetCurrentShrineCounter(true) - 1 > CompCache.StoryWC.GetShrineMaxiumum
+                    ? "Story_Shrine1_QuestRewardUpdate_1_WithoutSpell"
+                    : "Story_Shrine1_QuestRewardUpdate_1")
+                .Translate(
+                    GenDate.DateFullStringAt(
+                        (long)GenDate.TickGameToAbs(Find.TickManager.TicksGame),
+                        Find.WorldGrid.LongLatOf(Tile)
+                    ),
+                    CompCache.StoryWC.GetCurrentShrineCounter(true) - 1,
+                    gifted.NameShortColored,
+                    boss.LabelCap,
+                    spell.label.CapitalizeFirst().Colorize(Color.cyan)
+                )
+            );
+        }
+
+        private void LearnSpell(Pawn gifted, AbilityDef spell)
+        {
+            if (spell == null)
+            {
+                Log.Error($"Got no spell from boss. -> CheckBossDefeated()");
+                return;
+            }
+            CompCache.StoryWC.GetUnlockedSpells().Add(spell);
+            if (gifted != null)
+            {
+                gifted.abilities.GainAbility(spell);
+                Find.LetterStack.ReceiveLetter("Story_Shrine1_AbilityGainedLetterTitle".Translate(spell.LabelCap), "Story_Shrine1_AbilityGainedLetterDesc".Translate(boss.Label, gifted.NameShortColored, spell.label.Colorize(UnityEngine.Color.cyan)), LetterDefOf.PositiveEvent);
+            }
         }
 
         private void BossDefeatedDialog(Pawn gifted, Pawn boss, AbilityDef spell)
