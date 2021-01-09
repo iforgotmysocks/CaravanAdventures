@@ -329,7 +329,8 @@
     <thingClass>Building_WorkTable</thingClass>
     <category>Building</category>
     <graphicData>
-      <texPath>Things/Building/Misc/Campfire</texPath>
+      <!--<texPath>Things/Building/Misc/Campfire</texPath>-->
+      <texPath>Things/Buildings/Campfire/campfire</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <drawRotated>false</drawRotated>
       <allowFlip>false</allowFlip>
