@@ -7,6 +7,7 @@ using Verse;
 
 namespace CaravanAdventures
 {
+#pragma warning disable CS0649
     class ExclusionModExt : DefModExtension
     {
         // todo implement

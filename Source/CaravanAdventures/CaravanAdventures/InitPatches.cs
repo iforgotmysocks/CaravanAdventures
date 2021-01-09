@@ -15,16 +15,16 @@ namespace CaravanAdventures
     {
         static InitPatches()
         {
-            FilterCombs.InitFilterSets();
-            PatchAncientShrineDefs_MoreShrinesAndBetterRewards();
-            PatchAddNewMechanoidPawnGroupMakerDef();
+            Helper.RunSavely(FilterCombs.InitFilterSets);
+            Helper.RunSavely(PatchAncientShrineDefs_MoreShrinesAndBetterRewards);
+            Helper.RunSavely(PatchAddNewMechanoidPawnGroupMakerDef);
 
             // todo -> check for royalty
-            PatchTreeDef_AddTalkOption();
-            PatchHumanDef_AddTalkOption();
-            PatchRemoveRoyalTitleRequirements();
-            PatchAddPsychiteTeaToCampFire();
-            PatchIncreaseBaseWealthAndFood();
+            Helper.RunSavely(PatchTreeDef_AddTalkOption);
+            Helper.RunSavely(PatchHumanDef_AddTalkOption);
+            Helper.RunSavely(PatchRemoveRoyalTitleRequirements);
+            Helper.RunSavely(PatchAddPsychiteTeaToCampFire);
+            Helper.RunSavely(PatchIncreaseBaseWealthAndFood);
 
             CompatibilityPatches.ExecuteCompatibilityPatches();
         }

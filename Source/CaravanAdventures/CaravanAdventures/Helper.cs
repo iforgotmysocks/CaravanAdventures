@@ -68,7 +68,7 @@ namespace CaravanAdventures
             }
             catch (Exception e)
             {
-                Log.Message(e.ToString());
+                Log.Error(e.ToString());
             }
         }
 
@@ -108,6 +108,22 @@ namespace CaravanAdventures
             Log.Message($"wp total: {Find.World.worldPawns.AllPawnsAliveOrDead.Count} wp alive: {Find.World.worldPawns.AllPawnsAlive.Count} dead: {Find.World.worldPawns.AllPawnsDead.Count}");
             Log.Message("Faction player:");
             Log.Message($"wp total: {Find.World.worldPawns.AllPawnsAliveOrDead.Where(x => x.Faction == Faction.OfPlayer).Count()} wp alive: {Find.World.worldPawns.AllPawnsAlive.Where(x => x.Faction == Faction.OfPlayer).Count()} dead: {Find.World.worldPawns.AllPawnsDead.Where(x => x.Faction == Faction.OfPlayer).Count()}");
+        }
+
+        public static void RunSavely(Action action) => RunSavely(() => { action(); return 0; });
+
+        public static T RunSavely<T>(Func<T> action)
+        {
+            try
+            {
+                return action();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.ToString());
+            }
+
+            return default(T);
         }
     }
 }
