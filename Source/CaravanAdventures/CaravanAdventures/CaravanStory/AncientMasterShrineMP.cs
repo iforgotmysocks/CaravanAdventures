@@ -111,7 +111,7 @@ namespace CaravanAdventures.CaravanStory
         public override void PostRemove()
         {
             base.PostRemove();
-            Log.Message($"post remove happening?");
+            DLog.Message($"post remove happening?");
             if (abandonShrine && !bossDefeatedAndRewardsGiven) return;
             if (bossWasSpawned)
             {
@@ -268,6 +268,16 @@ namespace CaravanAdventures.CaravanStory
                 var diaNode = new DiaNode("Story_Shrine1_SacrilegHunters_Dia1_1".Translate(storyChar.NameShortColored));
                 diaNode.options.Add(new DiaOption("Story_Shrine1_SacrilegHunters_Dia1_1_Option1".Translate()) { resolveTree = true, action = () => StoryUtility.GetAssistanceFromAlliedFaction(StoryUtility.FactionOfSacrilegHunters, Map) });
                 diaNode.options.Add(new DiaOption("Story_Shrine1_SacrilegHunters_Dia1_1_Option2".Translate()) { resolveTree = true });
+
+                TaggedString taggedString = "Story_Shrine1_SacrilegHunters_DiaTitle".Translate(storyChar.NameShortColored);
+                Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
+                Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
+            }
+            else if (CompCache.StoryWC.GetCurrentShrineCounter() == CompCache.StoryWC.GetShrineMaxiumum)
+            {
+                var diaNode = new DiaNode("Story_Shrine5_SacrilegHunters_Dia1_1".Translate());
+                diaNode.options.Add(new DiaOption("Story_Shrine5_SacrilegHunters_Dia1_1_Option1".Translate()) { resolveTree = true, action = () => StoryUtility.GetAssistanceFromAlliedFaction(StoryUtility.FactionOfSacrilegHunters, Map) });
+                diaNode.options.Add(new DiaOption("Story_Shrine5_SacrilegHunters_Dia1_1_Option2".Translate()) { resolveTree = true });
 
                 TaggedString taggedString = "Story_Shrine1_SacrilegHunters_DiaTitle".Translate(storyChar.NameShortColored);
                 Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
