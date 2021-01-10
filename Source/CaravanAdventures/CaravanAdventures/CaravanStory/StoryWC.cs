@@ -20,6 +20,7 @@ using Verse.Noise;
 // --> when removing shrines, and all pawns are dead, don't continue the conversation... xD
 
 // -- story continuation: 
+// -- add comm device gizmo to the gifted hediff, that is visible, when the player isn't hostile towards hunters -> opens dialog with hunters
 // --> upon death of second boss, the story contact informs the player about data they were able to trace to a remote location, but they required more attempts to find the spot
 
 // - trade / caravan dialog filters
