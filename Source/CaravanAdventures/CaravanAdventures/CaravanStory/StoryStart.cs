@@ -173,8 +173,6 @@ namespace CaravanAdventures.CaravanStory
         {
             CompCache.StoryWC.storyFlags["Start_CanReceiveGift"] = true;
             CheckEnsureGifted(initiator);
-            AddAdditionalSpells(initiator);
-            Find.LetterStack.ReceiveLetter("CA_Story_ReceivedGiftLetterTitle".Translate(), "CA_Story_ReceivedGiftLetterDesc".Translate(initiator.NameShortColored, GenderUtility.GetPronoun(initiator.gender)), LetterDefOf.PositiveEvent);
             if (animaTreeWhipserSustainer != null && !animaTreeWhipserSustainer.Ended) animaTreeWhipserSustainer.End();
             CompCache.StoryWC.storyFlags["Start_ReceivedGift"] = true;
 
@@ -226,8 +224,10 @@ namespace CaravanAdventures.CaravanStory
 
             AddUnlockedAbilities(gifted);
             CompCache.StoryWC.questCont.StoryStart.Gifted = gifted;
+            AddAdditionalSpells(gifted);
+            Find.LetterStack.ReceiveLetter("CA_Story_ReceivedGiftLetterTitle".Translate(), "CA_Story_ReceivedGiftLetterDesc".Translate(gifted.NameShortColored, GenderUtility.GetPronoun(gifted.gender)), LetterDefOf.PositiveEvent);
         }
-        
+
         private void AddUnlockedAbilities(Pawn chosen)
         {
             if (CompCache.StoryWC.debugFlags["DebugAllAbilities"]) DefDatabase<AbilityDef>.AllDefsListForReading
