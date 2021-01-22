@@ -25,8 +25,15 @@ namespace CaravanAdventures.CaravanAbilities
         public override void CompPostTick(ref float severityAdjustment)
         {
             base.CompPostTick(ref severityAdjustment);
+           
 
             if (ticksToDisappear > ModSettings.lightDuration) Pawn.health.RemoveHediff(this.parent);
+            if (Pawn.Map == null)
+            {
+                Pawn.health.RemoveHediff(this.parent);
+                if (light != null) light.Destroy();
+                return;
+            }
             if (ticks >= 10 && light?.Position != Pawn.Position)
             {
                 if (light != null) light.Destroy();
