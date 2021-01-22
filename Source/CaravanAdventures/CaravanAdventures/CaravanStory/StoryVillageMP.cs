@@ -315,21 +315,12 @@ namespace CaravanAdventures.CaravanStory
             // change to remove when downed?
             if (timerTillRemoval > 0) return;
             if (Map.mapPawns.FreeColonistsSpawned.Any(x => !x.Dead)) return;
-
-            DLog.Message($"Should set player won flag");
-
-            if (!Map.mapPawns.AllPawnsSpawned.Any(x => x.Faction == Faction.OfMechanoids && !x.Dead && !x.Downed))
-            {
-                DLog.Message($"Setting player won flag");
-                CompCache.StoryWC.SetSF("IntroVillage_PlayerWon");
-            }
-            // todo dialog escaped
-            // todo keep and just remove the enter ability in case the player should win the fight?
-
+            var killCamp = Map.mapPawns.AllPawnsSpawned.Any(x => x.Faction == Faction.OfMechanoids && !x.Dead && !x.Downed);
             Current.Game.DeinitAndRemoveMap(Map);
             
-            if (!CompCache.StoryWC.storyFlags["IntroVillage_PlayerWon"])
+            if (killCamp)
             {
+                DLog.Message($"camp destroyed");
                 this.Destroy();
                 var worldObject = WorldObjectMaker.MakeWorldObject(WorldObjectDefOf.DestroyedSettlement) as MapParent;
                 worldObject.Tile = this.Tile;
