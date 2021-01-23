@@ -134,7 +134,7 @@ namespace CaravanAdventures.CaravanAbilities
 
         private void CureMentalBreaks()
         {
-            if (ModSettings.stopMentalBreaks && Pawn.InAggroMentalState)
+            if (ModSettings.stopMentalBreaks && Pawn.InMentalState)
             {
                 Pawn.MentalState.RecoverFromState();
                 // todo add message that aura curred it.
