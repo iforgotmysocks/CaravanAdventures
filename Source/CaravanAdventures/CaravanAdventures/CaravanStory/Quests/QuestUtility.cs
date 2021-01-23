@@ -18,7 +18,7 @@ namespace CaravanAdventures.CaravanStory.Quests
         {
             if (Find.QuestManager.QuestsListForReading.Any(quest => quest.root == questDef) && !ignoreOneQuestPerTypeLimit)
             {
-                Log.Warning($"Tried to start Quest {questDef.defName} despite it already exists. Skipping...");
+                DLog.Warning($"Tried to start Quest {questDef.defName} despite it already exists. Skipping...");
                 return;
             }
             Slate slate = new Slate();
