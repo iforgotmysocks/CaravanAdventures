@@ -26,15 +26,8 @@ namespace CaravanAdventures.CaravanAbilities
         {
             base.CompPostTick(ref severityAdjustment);
            
-
             if (ticksToDisappear > ModSettings.lightDuration) Pawn.health.RemoveHediff(this.parent);
-            if (Pawn.Map == null)
-            {
-                Pawn.health.RemoveHediff(this.parent);
-                if (light != null) light.Destroy();
-                return;
-            }
-            if (ticks >= 10 && light?.Position != Pawn.Position)
+            if (ticks >= 10 && light?.Position != Pawn.Position && Pawn?.Map != null)
             {
                 if (light != null) light.Destroy();
                 light = GenSpawn.Spawn(ThingDef.Named("CAMagicLight"), Pawn.Position, Pawn.Map);
