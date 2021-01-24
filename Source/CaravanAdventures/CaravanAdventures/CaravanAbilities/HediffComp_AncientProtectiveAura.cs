@@ -79,7 +79,7 @@ namespace CaravanAdventures.CaravanAbilities
 
             if (ticksSincePsyCost > 603)
             {
-                if (!this.Props.linked) Pawn.psychicEntropy.OffsetPsyfocusDirectly(-0.002f);
+                if (!this.Props.linked) Pawn.psychicEntropy.OffsetPsyfocusDirectly(IsGifted(Pawn) ? -0.002f : -0.02f);
                 ticksSincePsyCost = 0;
             }
 
