@@ -68,7 +68,7 @@ namespace CaravanAdventures.CaravanStory
                 if (!CompCache.StoryWC.storyFlags["IntroVillage_Entered"])
                 {
                     // todo - sometimes selects non-walkable cells, figure out why / improve
-                    if (!CellFinder.TryFindRandomSpawnCellForPawnNear_NewTmp(new IntVec3(Map.Size.x / 2, 0, Map.Size.z / 2), Map, out var storyContactCell))
+                    if (!CellFinder.TryFindRandomSpawnCellForPawnNear_NewTmp(new IntVec3(Map.Size.x / 2, 0, Map.Size.z / 2), Map, out var storyContactCell, 4, x => x.Walkable(Map)))
                     {
                         Log.Error("Couldn't find a cell to spawn pawn");
                     }
