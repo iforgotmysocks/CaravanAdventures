@@ -26,14 +26,16 @@ namespace CaravanAdventures.CaravanMechBounty
             this.faction = faction;
         }
 
-        public DiaOption CreateInitialDiaMenu()
+        public DiaOption CreateInitialDiaMenu() => new DiaOption("CABountyExchangeOpenOption".Translate()) { linkLateBind = () => CreateMainMenuNode() };
+
+        private DiaNode CreateMainMenuNode()
         {
             var hostile = Faction.OfPlayer.HostileTo(faction);
             var error = "CABountyExchangeHostile".Translate(faction.NameColored);
             var node = new DiaNode("CABountyExchangeMain".Translate(CompCache.BountyWC.BountyPoints));
             node.options.Add(new DiaOption("CABountyExchangeRequestHelp".Translate()) { link = GetDropAssistanceStrengthVariaties(node), disabled = hostile, disabledReason = error });
             node.options.Add(new DiaOption("CABountyExchangeRequestItem".Translate()) { link = GetItemOverview(node), disabled = hostile, disabledReason = error });
-            node.options.Add(new DiaOption("CABountyExchangeRequestImprovedRelations".Translate()) { link = GetRelationHaggleOverview(node) });
+            node.options.Add(new DiaOption("CABountyExchangeRequestImprovedRelations".Translate()) { link = GetRelationHaggleOverview() });
             node.options.Add(new DiaOption("CABountyExchangeRecruitVeteranHunter".Translate()) { link = GetRecuitmentOverview(node), disabled = hostile, disabledReason = error });
             if (ModSettings.allowBuyingBountyWithSilver) node.options.Add(new DiaOption("CABountyExchangeBuyBountyWithSilver".Translate()) { link = BuyBountyWithMoneyOverview(node), disabled = hostile, disabledReason = error });
             if (Helper.Debug())
@@ -42,9 +44,8 @@ namespace CaravanAdventures.CaravanMechBounty
                 node.options.Add(new DiaOption("Debug: - 500") { action = () => CompCache.BountyWC.BountyPoints -= 500, linkLateBind = () => node });
             }
 
-            node.options.Add(new DiaOption("CABountyBack".Translate()) { link = root });
-
-            return new DiaOption("CABountyExchangeOpenOption".Translate()) { link = node };
+            node.options.Add(new DiaOption("CABountyBack".Translate()) { linkLateBind = () => root });
+            return node;
         }
 
         #region allied military assistance
@@ -55,7 +56,6 @@ namespace CaravanAdventures.CaravanMechBounty
             node.options.Add(HunterDropRequest(650, "CABountyExchangeRequestHelp_StrengthSelection_Bunch"));
             node.options.Add(HunterDropRequest(1250, "CABountyExchangeRequestHelp_StrengthSelection_Army"));
             node.options.Add(new DiaOption("CABountyBack".Translate()) { link = parent });
-
             return node;
         }
 
@@ -160,11 +160,9 @@ namespace CaravanAdventures.CaravanMechBounty
                     disabledReason = reason,
                 });
             }
-            node.options.Add(new DiaOption("CABountyBack".Translate()) { link = parent });
-
+            node.options.Add(new DiaOption("CABountyBack".Translate()) { linkLateBind = () => CreateMainMenuNode() });
             return node;
         }
-
 
         private string GetRestockTimeString()
         {
@@ -264,22 +262,21 @@ namespace CaravanAdventures.CaravanMechBounty
         #endregion
 
         #region relation haggling
-        private DiaNode GetRelationHaggleOverview(DiaNode parent)
+        private DiaNode GetRelationHaggleOverview()
         {
             var node = new DiaNode("CABountyExchangeRelationHaggle".Translate(CompCache.BountyWC.BountyPoints));
             node.options.Add(new DiaOption("CABountyExchangeRelationHaggle_WithYou".Translate(CalculateGoodWillCost(faction, 25), CalcReqGW(faction, 25), faction.NameColored))
             {
                 action = () => TradeRelationForBounty(faction, 25, false),
                 resolveTree = false,
-                linkLateBind = () => GetRelationHaggleOverview(parent),
+                linkLateBind = () => GetRelationHaggleOverview(),
                 disabled = CompCache.BountyWC.BountyPoints < CalculateGoodWillCost(faction, 25) || faction.GoodwillWith(Faction.OfPlayer) == 100,
                 disabledReason = (faction.GoodwillWith(Faction.OfPlayer) == 100)
                     ? "CABountyExchangeRelationHaggle_AlreadyMax".Translate()
                     : "CABountyExchangeRequestHelp_StrengthSelection_NotEnoughMoney".Translate()
             });
             node.options.Add(new DiaOption("CABountyExchangeRelationHaggle_WithAnotherFaction".Translate()) { link = GetListOfFactions(node, faction, 25) });
-            node.options.Add(new DiaOption("CABountyBack".Translate()) { link = parent });
-
+            node.options.Add(new DiaOption("CABountyBack".Translate()) { linkLateBind = () => CreateMainMenuNode() });
             return node;
         }
 
@@ -302,8 +299,7 @@ namespace CaravanAdventures.CaravanMechBounty
                     disabledReason = reason
                 });
             }
-            node.options.Add(new DiaOption("CABountyBack".Translate()) { link = parent });
-
+            node.options.Add(new DiaOption("CABountyBack".Translate()) { linkLateBind = () => GetRelationHaggleOverview() });
             return node;
         }
 
@@ -383,7 +379,6 @@ namespace CaravanAdventures.CaravanMechBounty
                 disabledReason = reason
             });
             node.options.Add(new DiaOption("CABountyBack".Translate()) { link = parent });
-
             return node;
         }
 
@@ -412,7 +407,6 @@ namespace CaravanAdventures.CaravanMechBounty
                 link = PickVeteranSkill(node, cost, null),
             });
             node.options.Add(new DiaOption("CABountyBack".Translate()) { link = parent });
-
             return node;
         }
 
@@ -438,7 +432,6 @@ namespace CaravanAdventures.CaravanMechBounty
                 resolveTree = true,
             });
             node.options.Add(new DiaOption("CABountyBack".Translate()) { link = parent });
-
             return node;
         }
 
@@ -499,8 +492,7 @@ namespace CaravanAdventures.CaravanMechBounty
                 disabled = !CanAfford(cost2, out reason),
                 disabledReason = reason
             });
-            node.options.Add(new DiaOption("CABountyBack".Translate()) { link = parent });
-
+            node.options.Add(new DiaOption("CABountyBack".Translate()) { linkLateBind = () => parent });
             return node;
         }
 
