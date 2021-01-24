@@ -35,6 +35,7 @@ namespace CaravanAdventures.CaravanMechBounty
             node.options.Add(new DiaOption("CABountyExchangeRequestItem".Translate()) { link = GetItemOverview(node), disabled = hostile, disabledReason = error });
             node.options.Add(new DiaOption("CABountyExchangeRequestImprovedRelations".Translate()) { link = GetRelationHaggleOverview(node) });
             node.options.Add(new DiaOption("CABountyExchangeRecruitVeteranHunter".Translate()) { link = GetRecuitmentOverview(node), disabled = hostile, disabledReason = error });
+            if (ModSettings.allowBuyingBountyWithSilver) node.options.Add(new DiaOption("CABountyExchangeBuyBountyWithSilver".Translate()) { link = BuyBountyWithMoneyOverview(node), disabled = hostile, disabledReason = error });
             if (Helper.Debug())
             {
                 node.options.Add(new DiaOption("Debug: + 1000") { action = () => CompCache.BountyWC.BountyPoints += 1000, linkLateBind = () => node });
@@ -194,7 +195,8 @@ namespace CaravanAdventures.CaravanMechBounty
             if (customItems != null && customItems?.Count != 0)
             {
                 Thing customReward = null;
-                object picked = customItems.RandomElementByWeight(item => {
+                object picked = customItems.RandomElementByWeight(item =>
+                {
                     if (item is ThingCategoryDef catDef && catDef == ThingCategoryDef.Named("WeaponsMeleeBladelink")) return 0.8f;
                     return 0.3f;
                 });
@@ -213,11 +215,9 @@ namespace CaravanAdventures.CaravanMechBounty
             }
 
             var rewardItems = new Reward_Items();
-            rewardItems.InitFromValue(credits * 2, new RewardsGeneratorParams() {thingRewardItemsOnly = true, minGeneratedRewardValue = credits * 2, disallowedThingDefs = itemsToAvoid.Select(x => x.def).ToList() }, out var usedCredits);
+            rewardItems.InitFromValue(credits * 2, new RewardsGeneratorParams() { thingRewardItemsOnly = true, minGeneratedRewardValue = credits * 2, disallowedThingDefs = itemsToAvoid.Select(x => x.def).ToList() }, out var usedCredits);
             return rewardItems.ItemsListForReading.FirstOrDefault();
         }
-
-
 
         private bool CanPurchaseItem(Thing thing, out string reason)
         {
@@ -233,9 +233,8 @@ namespace CaravanAdventures.CaravanMechBounty
 
         private float ConvertItemValueToBounty(Thing thing)
         {
-            // todo not finished! -> come up with valid conversion
             var value = thing.MarketValue * thing.stackCount;
-            return value / 4f;
+            return value * ModSettings.bountyValueMult;
         }
 
         private void PurchaseAndDropItem(Thing item, int fixedCredits = 0)
@@ -419,7 +418,7 @@ namespace CaravanAdventures.CaravanMechBounty
 
         private DiaNode PickVeteranSkill(DiaNode parent, int cost, TraitDef personality)
         {
-            var skillTraits = new [] {
+            var skillTraits = new[] {
                 TraitDef.Named("Nimble"),
                 TraitDefOf.SpeedOffset
             };
@@ -455,7 +454,7 @@ namespace CaravanAdventures.CaravanMechBounty
                 reason = "CABountyExchangeVeteranRecruitment_NotAvailable".Translate();
                 return false;
             }
-           
+
             reason = string.Empty;
             return true;
         }
@@ -479,6 +478,48 @@ namespace CaravanAdventures.CaravanMechBounty
         }
         #endregion
 
+        #region buy bounty with silver
+        private DiaNode BuyBountyWithMoneyOverview(DiaNode parent)
+        {
+            var currentSilver = GetCurrentSilver();
+            var node = new DiaNode("CABountyExchangeSilverForBounty".Translate(CompCache.BountyWC.BountyPoints, currentSilver, faction.def.LabelCap, GetVeteranTimeString()));
+            var cost = 500;
+            node.options.Add(new DiaOption("CABountyExchangeSilverForBountyOption".Translate(cost, Convert.ToInt32(cost * ModSettings.bountyValueMult)))
+            {
+                linkLateBind = () => BuyBountyWithMoneyOverview(parent),
+                action = () => ExchangeSilverForBounty(cost),
+                disabled = !CanAfford(cost, out var reason),
+                disabledReason = reason
+            });
+            var cost2 = 1000;
+            node.options.Add(new DiaOption("CABountyExchangeSilverForBountyOption".Translate(cost2, Convert.ToInt32(cost2 * ModSettings.bountyValueMult)))
+            {
+                linkLateBind = () => BuyBountyWithMoneyOverview(parent),
+                action = () => ExchangeSilverForBounty(cost2),
+                disabled = !CanAfford(cost2, out reason),
+                disabledReason = reason
+            });
+            node.options.Add(new DiaOption("CABountyBack".Translate()) { link = parent });
 
+            return node;
+        }
+
+        private int GetCurrentSilver() => TradeUtility.AllLaunchableThingsForTrade(requestor.Map)
+            .Where(x => x.def == ThingDefOf.Silver)
+            .Sum(x => x.stackCount);
+
+        private bool CanAfford(int cost, out string reason)
+        {
+            var buyable = TradeUtility.ColonyHasEnoughSilver(requestor.Map, cost);
+            reason = buyable ? new TaggedString() : "CABountyExchangeSilverForBountyLackingSilver".Translate();
+            return buyable;
+        }
+
+        private void ExchangeSilverForBounty(int cost)
+        {
+            TradeUtility.LaunchSilver(requestor.Map, cost);
+            CompCache.BountyWC.BountyPoints += Convert.ToInt32(cost * ModSettings.bountyValueMult);
+        }
+        #endregion
     }
 }

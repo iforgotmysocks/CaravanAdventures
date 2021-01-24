@@ -6,6 +6,7 @@
   <CABountyExchangeRequestItem>Request rare item</CABountyExchangeRequestItem>
   <CABountyExchangeRequestImprovedRelations>Improve relations</CABountyExchangeRequestImprovedRelations>
   <CABountyExchangeRecruitVeteranHunter>Recruit veteran soldier</CABountyExchangeRecruitVeteranHunter>
+  <CABountyExchangeBuyBountyWithSilver>Exchange silver for bounty credit</CABountyExchangeBuyBountyWithSilver>
   <CABountyBack>Back</CABountyBack>
   <CABountyExchangeHostile>You are hostile towards {0}</CABountyExchangeHostile>
   
@@ -43,4 +44,7 @@
   <CABountyExchangeVeteranRecruitment_ChoosePersonalityNone>Rather none of those</CABountyExchangeVeteranRecruitment_ChoosePersonalityNone>
   <CABountyExchangeVeteranRecruitment_ChooseSkill>\n\n\nAnd the unique skill?</CABountyExchangeVeteranRecruitment_ChooseSkill>
 
+  <CABountyExchangeSilverForBounty>Current bounty credits: {0}\nCurrent silver: {1}\n\n\nChoose how many bounty credits you want to buy</CABountyExchangeSilverForBounty>
+  <CABountyExchangeSilverForBountyOption>Exchange {0} silver for {1} bounty credit</CABountyExchangeSilverForBountyOption>
+  <CABountyExchangeSilverForBountyLackingSilver>Not enough silver</CABountyExchangeSilverForBountyLackingSilver>
 </LanguageData>

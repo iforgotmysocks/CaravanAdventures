@@ -63,6 +63,8 @@ namespace CaravanAdventures
         public static float alliedAssistanceDurationInDays = 1f;
         public static float veteranResetTimeInDays = 3f;
         public static bool allowBountyFromBuildingInstigators = true;
+        public static bool allowBuyingBountyWithSilver = true;
+        public static float bountyValueMult = 0.25f;
 
         //public static ModSettings Get() => LoadedModManager.GetMod<CaravanAdventures.Main>().GetSettings<ModSettings>();
         private Vector2 scrollPos = Vector2.zero;
@@ -116,6 +118,8 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref alliedAssistanceDurationInDays, "alliedAssistanceDurationInDays", 1f);
             Scribe_Values.Look(ref veteranResetTimeInDays, "veteranResetTimeInDays", 3f);
             Scribe_Values.Look(ref allowBountyFromBuildingInstigators, "allowBountyFromBuildingInstigators", true);
+            Scribe_Values.Look(ref allowBuyingBountyWithSilver, "allowBuyingBountyWithSilver", true);
+            Scribe_Values.Look(ref bountyValueMult, "bountyValueMult", 0.25f);
         }
 
         public void DoWindowContentsNew(Rect wrect)
