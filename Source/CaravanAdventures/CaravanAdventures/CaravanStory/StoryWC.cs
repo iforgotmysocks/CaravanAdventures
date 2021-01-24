@@ -219,13 +219,13 @@ namespace CaravanAdventures.CaravanStory
             if (questCont.FriendlyCaravan.friendlyCaravanCounter == 0) CompCache.StoryWC.questCont.FriendlyCaravan.TryCreateFriendlyCaravan(ref questCont.FriendlyCaravan.friendlyCaravanCounter);
             if (questCont.Village.villageGenerationCounter == 0) StoryUtility.GenerateFriendlyVillage(ref questCont.Village.villageGenerationCounter);
             if (shrineRevealCounter == 0) TryCreateNewShrine(ref shrineRevealCounter);
-            
+
             ticks++;
             questCont.FriendlyCaravan.friendlyCaravanCounter--;
             questCont.Village.villageGenerationCounter--;
             shrineRevealCounter--;
         }
-        
+
         private void RunDebugActionsOnceAtStartUp()
         {
             if (ranDebugActionsOnceAtStartUp) return;
@@ -257,6 +257,7 @@ namespace CaravanAdventures.CaravanStory
                 shrineRevealCounter = 20000;
                 return;
             }
+
             var ancientMasterShrineWO = (AncientMasterShrineWO)WorldObjectMaker.MakeWorldObject(CaravanStorySiteDefOf.CAAncientMasterShrineWO);
             ancientMasterShrineWO.Tile = tile;
             //ancientMasterShrineWO.GetComponent<TimeoutComp>().StartTimeout(timeoutDaysRange.RandomInRange * 60000);
@@ -264,6 +265,8 @@ namespace CaravanAdventures.CaravanStory
 
             // todo turn into quest
             // todo figure out how to append location links into quest
+
+            StoryUtility.GenerateStoryContact();
             Find.LetterStack.ReceiveLetter("Story_Shrine1_NewShrineDetectedLetterLabel".Translate(), "Story_Shrine1_NewShrineDetectedLetterMessage".Translate(CompCache.StoryWC.questCont.Village.StoryContact.NameShortColored), LetterDefOf.PositiveEvent, ancientMasterShrineWO);
             Quests.QuestUtility.GenerateStoryQuest(StoryQuestDefOf.CA_FindAncientShrine, true, "Story_Shrine1_QuestName", null, "Story_Shrine1_QuestDesc", new object[] { CompCache.StoryWC.questCont.Village.StoryContact.NameShortColored });
             Quests.QuestUtility.UpdateQuestLocation(StoryQuestDefOf.CA_FindAncientShrine, ancientMasterShrineWO);
@@ -282,11 +285,11 @@ namespace CaravanAdventures.CaravanStory
         public int GetShrineMaxiumum => shrineMaximum;
 
         public List<AbilityDef> GetUnlockedSpells() => unlockedSpells;
-        
+
         private bool CheckCanStartCountDownOnNewShrine() =>
             !storyFlags.Any(x => x.Key.StartsWith("Start_") && x.Value == false)
             && countShrinesCompleted == 0 && !storyFlags.Any(x => x.Key == BuildCurrentShrinePrefix() + "InitCountDownStarted" && x.Value == true)
-            || 
+            ||
             !storyFlags.Any(x => x.Key.StartsWith("Start_") && x.Value == false)
             && !storyFlags.Any(x => x.Key == BuildCurrentShrinePrefix() + "Completed" && x.Value == true)
             && !storyFlags.Any(x => x.Key == BuildCurrentShrinePrefix() + "InitCountDownStarted" && x.Value == true)
@@ -295,9 +298,9 @@ namespace CaravanAdventures.CaravanStory
         // todo - incomplete
         private bool CheckCanStartFriendlyCaravanCounter() => !storyFlags["TradeCaravan_InitCountDownStarted"];
         private bool CheckCanStartVillageGenerationCounter() => storyFlags["TradeCaravan_DialogFinished"] && !storyFlags["IntroVillage_InitCountDownStarted"];
-        private bool CanDoApocalypse() => !storyFlags["Judgment_ApocalypseStarted"] 
-            && storyFlags["Shrine1_Completed"] 
-            && !storyFlags[BuildMaxShrinePrefix() + "Completed"] 
+        private bool CanDoApocalypse() => !storyFlags["Judgment_ApocalypseStarted"]
+            && storyFlags["Shrine1_Completed"]
+            && !storyFlags[BuildMaxShrinePrefix() + "Completed"]
             && ModSettings.apocalypseEnabled;
 
         public void ResetStoryVars()
