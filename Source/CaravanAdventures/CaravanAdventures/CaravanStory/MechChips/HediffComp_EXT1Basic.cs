@@ -39,7 +39,7 @@ namespace CaravanAdventures.CaravanStory.MechChips
 
             if (ticks % 250 == 0)
             {
-                ManufactureScyther();
+                Helper.RunSavely(ManufactureScyther);
             }
 
             if (ticks % 450 == 0)
@@ -65,7 +65,8 @@ namespace CaravanAdventures.CaravanStory.MechChips
                     var scyther = PawnGenerator.GeneratePawn(PawnKindDef.Named("Mech_Scyther"), Faction.OfMechanoids);
                     scyther.health.AddHediff(HediffDef.Named("CAOverheatingBrain"), scyther.health.hediffSet.GetBrain());
                     GenSpawn.Spawn(scyther, spawnPos, Pawn.Map, WipeMode.Vanish);
-                    Pawn.GetLord().AddPawn(scyther);
+                    var lord = Pawn.GetLord();
+                    if (lord != null) lord.AddPawn(scyther);
                     producedMechs.Add(scyther);
                 }
             }

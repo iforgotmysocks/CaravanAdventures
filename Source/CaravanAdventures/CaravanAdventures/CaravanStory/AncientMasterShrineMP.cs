@@ -91,9 +91,13 @@ namespace CaravanAdventures.CaravanStory
         public override bool ShouldRemoveMapNow(out bool alsoRemoveWorldObject)
         {
             // todo add scenatio of keeping map until last judgement is completed and left, 
-            if (!base.Map.mapPawns.AnyPawnBlockingMapRemoval && boss == null && (CompCache.StoryWC.GetCurrentShrineCounter() - 1 != CompCache.StoryWC.GetShrineMaxiumum || CompCache.StoryWC.storyFlags["Judgment_Completed"])
-                || !base.Map.mapPawns.AnyPawnBlockingMapRemoval && bossDefeatedAndRewardsGiven && (CompCache.StoryWC.GetCurrentShrineCounter() - 1 != CompCache.StoryWC.GetShrineMaxiumum || CompCache.StoryWC.storyFlags["Judgment_Completed"]))
+            //if (!base.Map.mapPawns.AnyPawnBlockingMapRemoval && boss == null && (CompCache.StoryWC.GetCurrentShrineCounter() - 1 != CompCache.StoryWC.GetShrineMaxiumum || CompCache.StoryWC.storyFlags["Judgment_Completed"])
+            //|| !base.Map.mapPawns.AnyPawnBlockingMapRemoval && bossDefeatedAndRewardsGiven && (CompCache.StoryWC.GetCurrentShrineCounter() - 1 != CompCache.StoryWC.GetShrineMaxiumum || CompCache.StoryWC.storyFlags["Judgment_Completed"]))
+            if (!base.Map.mapPawns.AnyPawnBlockingMapRemoval && boss == null && !lastJudgementEntraceWasSpawned
+             || !base.Map.mapPawns.AnyPawnBlockingMapRemoval && bossDefeatedAndRewardsGiven
+             || !base.Map.mapPawns.AnyPawnBlockingMapRemoval && CompCache.StoryWC.GetCurrentShrineCounter(true) - 1 == CompCache.StoryWC.GetShrineMaxiumum && CompCache.StoryWC.storyFlags["Judgment_Completed"])
             {
+                DLog.Message($"Prepping to remove map now current shrine counter {CompCache.StoryWC.GetCurrentShrineCounter() - 1} max counter: {CompCache.StoryWC.GetShrineMaxiumum}");
                 // resetting flags here due to shrine map being a bandit map without boss!!
                 if (!bossWasSpawned && !lastJudgementEntraceWasSpawned)
                 {
@@ -228,7 +232,8 @@ namespace CaravanAdventures.CaravanStory
             var triggerCells = new IntVec3[] { lastJudgmentEntrance.Position }; // GenRadial.RadialCellsAround(lastJudgmentEntrance.Position, 1, true);
             if (!triggerCells.Any(cell => cell.GetFirstPawn(Map) == CompCache.StoryWC.questCont.StoryStart.Gifted)) return;
 
-            if (lastJudgmentMP == null)
+            DLog.Message($"is null {lastJudgmentMP == null} destroyed {(lastJudgmentMP?.Destroyed == true ? "true" : "false")}");
+            if (lastJudgmentMP == null || (lastJudgmentMP != null && lastJudgmentMP.Destroyed))
             {
                 LongEventHandler.QueueLongEvent(delegate ()
                 {

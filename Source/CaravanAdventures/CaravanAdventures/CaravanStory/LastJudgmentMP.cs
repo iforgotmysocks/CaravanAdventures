@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using RimWorld;
 using RimWorld.Planet;
+using UnityEngine;
 using Verse;
+using Verse.AI.Group;
 
 namespace CaravanAdventures.CaravanStory
 {
@@ -39,6 +41,8 @@ namespace CaravanAdventures.CaravanStory
 			this.Map.exitMapGrid.Grid.Clear();
 			endBoss = StoryUtility.GetFittingMechBoss(true);
 			GenSpawn.Spawn(endBoss, new IntVec3(25, 0, 42), Map);
+			var newLord = LordMaker.MakeNewLord(endBoss.Faction, new LordJob_DefendPoint(), Map);
+			if (newLord != null) newLord.AddPawn(endBoss);
 			CompCache.StoryWC.SetSF("Judgment_Created");
 		}
 
@@ -59,25 +63,108 @@ namespace CaravanAdventures.CaravanStory
 			if (base.HasMap)
 			{
 				this.CheckWonBattle();
-				// todo replace with better check for boss dead
-				if (wonBattle)
-				{
-					CheckStoryOverDialogAndDisableApocalypse();
-					CheckSpawnPortalAndBringHome();
-				}
+				CheckBossDefeated();
+				if (wonBattle) CheckSpawnPortalAndBringHome();
 			}
 		}
 
         private void CheckStoryOverDialogAndDisableApocalypse()
         {
-			if (CompCache.StoryWC.storyFlags["Judgment_StoryOverDialog"]) return;
+			
+
 
 			// todo dialog
-			CompCache.StoryWC.questCont.LastJudgment.Apocalypse.End();
-			CompCache.StoryWC.SetSF("Judgment_StoryOverDialog");
+			
 		}
 
-        private void CheckSpawnPortalAndBringHome()
+		private void CheckBossDefeated()
+		{
+			// todo - test if .destroyed needs to be added (in case of the body being completely nuked)?
+			if (endBoss != null && !endBoss.Dead || CompCache.StoryWC.storyFlags["Judgment_StoryOverDialog"]) return;
+
+			var gifted = StoryUtility.GetGiftedPawn();
+			if (gifted == null) Log.Warning("gifted pawn was null, which shouldn't happen. Spell was stored for when another gifted pawn awakes");
+
+			AbilityDef spell = null;
+			var endSpell = CaravanAbilities.AbilityDefOf.Named("CAAncientCoordinator");
+			//Log.Message($"Unlocked spellcount: {CompCache.StoryWC.GetUnlockedSpells().Count} Database count: {DefDatabase<AbilityDef>.AllDefsListForReading.Where(x => x.defName.StartsWith("CAAncient")).Count()}");
+			if (CompCache.StoryWC.GetUnlockedSpells().Count < DefDatabase<AbilityDef>.AllDefsListForReading.Where(x => x.defName.StartsWith("CAAncient") && x != endSpell).Count())
+			{
+				spell = DefDatabase<AbilityDef>.AllDefsListForReading.Where(x => x.defName.StartsWith("CAAncient") && x != endSpell && !CompCache.StoryWC.GetUnlockedSpells().Contains(x)).InRandomOrder().FirstOrDefault();
+				LearnSpell(gifted, spell);
+			}
+			else if (CompCache.StoryWC.GetCurrentShrineCounter() >= CompCache.StoryWC.GetShrineMaxiumum && !CompCache.StoryWC.GetUnlockedSpells().Contains(endSpell))
+			{
+				spell = endSpell;
+				LearnSpell(gifted, spell);
+			}
+
+			CompCache.StoryWC.SetShrineSF("Completed");
+			CompCache.StoryWC.IncreaseShrineCompleteCounter();
+			CompCache.StoryWC.mechBossKillCounters[endBoss.kindDef] = CompCache.StoryWC.mechBossKillCounters.TryGetValue(endBoss.kindDef, out var result) ? result + 1 : 1;
+
+			CompCache.StoryWC.questCont.LastJudgment.Apocalypse.End();
+			CompCache.StoryWC.SetSF("Judgment_StoryOverDialog");
+
+			BossDefeatedDialog(gifted, endBoss, spell);
+
+			CheckStoryOverDialogAndDisableApocalypse();
+
+			StoryUtility.AdjustGoodWill(75);
+			Quests.QuestUtility.AppendQuestDescription(Quests.StoryQuestDefOf.CA_FindAncientShrine,
+				(CompCache.StoryWC.GetCurrentShrineCounter(true) - 1 > CompCache.StoryWC.GetShrineMaxiumum
+					? "Story_Shrine1_QuestRewardUpdate_1_WithoutSpell"
+					: "Story_Shrine1_QuestRewardUpdate_1")
+				.Translate(
+					GenDate.DateFullStringAt(
+						(long)GenDate.TickGameToAbs(Find.TickManager.TicksGame),
+						Find.WorldGrid.LongLatOf(Tile)
+					),
+					CompCache.StoryWC.GetCurrentShrineCounter(true) - 1,
+					gifted.NameShortColored,
+					endBoss.LabelCap,
+					spell.label.CapitalizeFirst().Colorize(Color.cyan)
+				)
+			);
+		}
+
+		private void LearnSpell(Pawn gifted, AbilityDef spell)
+		{
+			if (spell == null)
+			{
+				Log.Error($"Got no spell from boss. -> CheckBossDefeated()");
+				return;
+			}
+			CompCache.StoryWC.GetUnlockedSpells().Add(spell);
+			if (gifted != null)
+			{
+				gifted.abilities.GainAbility(spell);
+				Find.LetterStack.ReceiveLetter("Story_Shrine1_AbilityGainedLetterTitle".Translate(spell.LabelCap), "Story_Shrine1_AbilityGainedLetterDesc".Translate(endBoss.Label, gifted.NameShortColored, spell.label.Colorize(UnityEngine.Color.cyan)), LetterDefOf.PositiveEvent);
+			}
+		}
+
+		private void BossDefeatedDialog(Pawn gifted, Pawn boss, AbilityDef spell)
+		{
+			var diaNode2 = new DiaNode("Story_Shrine1_BossDefeated_Dia1_2".Translate(boss.def.label));
+			diaNode2.options.Add(new DiaOption("Story_Shrine1_BossDefeated_Dia1_1_Option2".Translate()) { resolveTree = true, action = () => {}  });
+
+			var diaNode = new DiaNode(spell == null ? "Story_Shrine1_BossDefeated_Dia1_1_NoSpell".Translate(boss.def.LabelCap.ToString().HtmlFormatting("ff0000")) : "Story_Shrine1_BossDefeated_Dia1_1".Translate(boss.def.LabelCap.ToString().HtmlFormatting("ff0000"), gifted.NameShortColored, spell.LabelCap.ToString().HtmlFormatting("008080")));
+			diaNode.options.Add(new DiaOption("Story_Shrine1_BossDefeated_Dia1_1_Option1".Translate()) { link = diaNode2 });
+
+			TaggedString taggedString = "Story_Shrine1_BossDefeated_Dia1Title".Translate(gifted.Name.ToStringShort);
+			Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
+			Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
+
+			// todo new tale
+			//TaleRecorder.RecordTale(TaleDefOf.CaravanAmbushDefeated, new object[]
+			//{
+			//	base.Map.mapPawns.FreeColonists.RandomElement<Pawn>()
+			//});
+
+			// todo gifted null
+		}
+
+		private void CheckSpawnPortalAndBringHome()
         {
             if (portalHome == null)
             {

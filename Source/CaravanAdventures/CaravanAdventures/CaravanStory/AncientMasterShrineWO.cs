@@ -274,7 +274,6 @@ namespace CaravanAdventures.CaravanStory
 
         private void AddMechanoidsToRoom(Room room, Map map, Caravan caravan, Pawn boss = null, bool removedHives = false)
         {
-            // todo check what happens if we assign all to the same lord
             var incidentParms = StorytellerUtility.DefaultParmsNow(IncidentCategoryDefOf.ThreatBig, caravan);
             incidentParms.faction = Faction.OfMechanoids;
 
@@ -283,7 +282,6 @@ namespace CaravanAdventures.CaravanStory
 
             if (!spawnedMechs.Any()) return;
 
-            //var existingMechs = room.Regions.SelectMany(region => region.ListerThings.AllThings.OfType<Pawn>().Where(pawn => pawn.Faction == Faction.OfMechanoids));
             var existingMechs = new List<Pawn>();
             foreach (var pawn in room.Regions.SelectMany(region => region.ListerThings.AllThings.OfType<Pawn>()))
             {
