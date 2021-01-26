@@ -70,6 +70,7 @@ namespace CaravanAdventures.CaravanCamp
             ApplyZonesAndInventory();
             GenerateRecipes();
             GiveHappyThoughts();
+            MovePrisonersToCells();
 
             Current.ProgramState = stateBackup;
             return true;
@@ -173,7 +174,7 @@ namespace CaravanAdventures.CaravanCamp
                 remaining -= taken;
                 return taken;
             });
-            foreach (var mat in materials.Reverse<Thing>()) mat.Destroy(); 
+            foreach (var mat in materials.Reverse<Thing>()) mat.Destroy();
         }
 
         protected void AssignCampLayout()
@@ -209,7 +210,7 @@ namespace CaravanAdventures.CaravanCamp
                 {
                     // todo test if that uncovers better
                     CaravanStory.StoryUtility.FloodUnfogAdjacent(room.Map.fogGrid, room.Map, room.Cells.FirstOrDefault(cell => !room.BorderCells.Contains(cell)));
-                    
+
                     foreach (var roomCell in room.Cells)
                     {
                         foreach (var thing in map.thingGrid.ThingsListAt(roomCell).Reverse<Thing>()) if (thing.def.destroyable) thing.Destroy();
@@ -424,7 +425,7 @@ namespace CaravanAdventures.CaravanCamp
                 areaRestrictionTent.CreateNewRestrictionArea(map, caravan);
                 areaRestrictionTent.AssignPawnsToAreas(map, caravan);
             }
-            
+
             CampHelper.AddAnimalFreeAreaRestriction(campParts.OfType<IZoneTent>().Where(part => part is FoodTent), map, caravan, ModSettings.letAnimalsRunFree);
         }
 
@@ -438,6 +439,29 @@ namespace CaravanAdventures.CaravanCamp
         }
 
         private void GiveHappyThoughts() => caravan.PawnsListForReading.Where(pawn => pawn.IsColonist).ToList().ForEach(pawn => pawn.needs.mood.thoughts.memories.TryGainMemory(ThoughtDef.Named("CACamping")));
+
+        private void MovePrisonersToCells()
+        {
+            var prisoners = caravan.PawnsListForReading.Where(col => col.IsPrisoner).ToList();
+            var beds = map.listerBuildings.allBuildingsColonist.OfType<Building_Bed>().Where(x => x.ForPrisoners);
+            foreach (var bed in beds)
+            {
+                var prisoner = prisoners.FirstOrDefault();
+                if (prisoner == null) break;
+                GetIntoBed(prisoner, bed);
+                prisoners.Remove(prisoner);
+            }
+        }
+
+        private void GetIntoBed(Pawn pawn, Building_Bed bed)
+        {
+            var pos = RestUtility.GetBedSleepingSlotPosFor(pawn, bed);
+            caravan.RemovePawn(pawn);
+            caravan.Notify_PawnRemoved(pawn);
+            GenSpawn.Spawn(pawn, pos, map);
+            pawn.inventory.DropAllNearPawn(pawn.Position);
+            pawn.jobs.StartJob(JobMaker.MakeJob(JobDefOf.LayDown, bed), Verse.AI.JobCondition.InterruptForced, null, false, true, null, new Verse.AI.JobTag?(Verse.AI.JobTag.TuckedIntoBed), false, false);
+        }
 
 
     }
