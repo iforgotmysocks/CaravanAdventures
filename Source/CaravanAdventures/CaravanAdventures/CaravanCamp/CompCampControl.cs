@@ -59,6 +59,7 @@ namespace CaravanAdventures.CaravanCamp
                 var tile = parent.Map.Tile;
                 Find.WindowStack.Add(new Dialog_FormCaravan(parent.Map, true, () =>
                 {
+                    if (parent.Map.mapPawns.AnyColonistSpawned) return;
                     Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation($"{(tribal ? "CALeaveImmediatelyPackupCampTribal" : "CALeaveImmediatelyPackupCamp")}".Translate(Convert.ToInt32(resourceCount * 0.7)), delegate
                     {
                         var mp = parent.Map.Parent;
