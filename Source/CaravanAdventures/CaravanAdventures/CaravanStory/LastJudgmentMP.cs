@@ -202,14 +202,19 @@ namespace CaravanAdventures.CaravanStory
 				return;
 			}
 
-
-
 			//TaleRecorder.RecordTale(TaleDefOf.CaravanAmbushDefeated, new object[]
 			//{
 			//	base.Map.mapPawns.FreeColonists.RandomElement<Pawn>()
 			//});
 			this.wonBattle = true;
 		}
+
+        public override void PostRemove()
+        {
+            base.PostRemove();
+			if (!endBoss.Destroyed) endBoss.Destroy();
+			if (CompCache.StoryWC.storyFlags["Judgment_StoryOverDialog"] && !CompCache.StoryWC.storyFlags["Judgment_Completed"]) CompCache.StoryWC.SetSF("Judgment_Completed");
+        }
 
         public override IEnumerable<FloatMenuOption> GetFloatMenuOptions(Caravan caravan)
         {

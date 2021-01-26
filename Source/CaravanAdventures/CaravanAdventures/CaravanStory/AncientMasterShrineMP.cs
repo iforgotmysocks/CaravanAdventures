@@ -479,6 +479,12 @@ namespace CaravanAdventures.CaravanStory
             // todo cleanup + notify story to tick on
             SoundDefOf.Click.PlayOneShot(null);
             if (!bossDefeatedAndRewardsGiven) CompCache.StoryWC.ResetCurrentShrineFlags();
+            if (lastJudgmentMP != null && !CompCache.StoryWC.storyFlags["Judgment_StoryOverDialog"])
+            {
+                Current.Game.DeinitAndRemoveMap(lastJudgmentMP.Map);
+                lastJudgmentMP.Destroy();
+                CompCache.StoryWC.ResetSFsStartingWith("Judgment");
+            }
             this.abandonShrine = true;
             Current.Game.DeinitAndRemoveMap(Map);
             this.Destroy();
