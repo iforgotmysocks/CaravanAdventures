@@ -5,6 +5,11 @@
   <CAFoodZoneLabel>Food</CAFoodZoneLabel>
   <CAAnimalFoodZoneLabel>Animal food</CAAnimalFoodZoneLabel>
   <CADeconstructCamp>Pack up the camp</CADeconstructCamp>
+  <CADeconstructCampMessage>Packing up the camp</CADeconstructCampMessage>
   <CAMedicineZone>Medicine</CAMedicineZone>
+
+  <CALeaveImmediately>Leave immediately</CALeaveImmediately>
+  <CALeaveImmediatelyPackupCamp>Do you want to pack up the camp and abandon this place? \n{0} spacer tent supplies will be added to the caravan.</CALeaveImmediatelyPackupCamp>
+  <CALeaveImmediatelyPackupCampTribal>Do you want to pack up the camp and abandon this place?</CALeaveImmediatelyPackupCampTribal>
 </LanguageData>
 

@@ -1,4 +1,5 @@
 ﻿using RimWorld;
+using RimWorld.Planet;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,13 +44,69 @@ namespace CaravanAdventures.CaravanCamp
 
             yield return new FloatMenuOption("CADeconstructCamp".Translate(), () =>
             {
-                Messages.Message(new Message($"Packing up the camp", MessageTypeDefOf.NeutralEvent));
+                Messages.Message(new Message("CADeconstructCampMessage".Translate(), MessageTypeDefOf.NeutralEvent));
 
                 var job = JobMaker.MakeJob(CampDefOf.CACampInformPackingUp, parent);
                 job.count = 1;
                 DLog.Message($"trying to take ordered");
                 selPawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
             });
+
+            yield return new FloatMenuOption("CALeaveImmediately".Translate(), () =>
+            {
+                //Messages.Message(new Message($"Leaving immediately", MessageTypeDefOf.NeutralEvent));
+
+                var tile = parent.Map.Tile;
+                Find.WindowStack.Add(new Dialog_FormCaravan(parent.Map, true, () =>
+                {
+                    Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation($"{(tribal ? "CALeaveImmediatelyPackupCampTribal" : "CALeaveImmediatelyPackupCamp")}".Translate(Convert.ToInt32(resourceCount * 0.7)), delegate
+                    {
+                        var mp = parent.Map.Parent;
+                        Current.Game.DeinitAndRemoveMap(parent.Map);
+                        mp.Destroy();
+
+                        var caravan = Find.WorldObjects.Caravans.FirstOrDefault(x => x.IsPlayerControlled && x.Tile == tile);
+                        if (caravan == null)
+                        {
+                            DLog.Warning($"caravan not found, couldn't add campgear");
+                            return;
+                        }
+                        var supplies = ThingMaker.MakeThing(CampDefOf.CASpacerTentSupplies);
+                        supplies.stackCount = Convert.ToInt32(resourceCount * 0.7);
+                        caravan.AddPawnOrItem(supplies, false);
+                    }, false, null));
+                }, false));
+            });
+
+        }
+
+        private void ForceReform(MapParent mapParent)
+        {
+            var tmpPawns = new List<Pawn>();
+            if (Dialog_FormCaravan.AllSendablePawns(mapParent.Map, true).Any((Pawn x) => x.IsColonist))
+            {
+                Messages.Message("MessageYouHaveToReformCaravanNow".Translate(), new GlobalTargetInfo(mapParent.Tile), MessageTypeDefOf.NeutralEvent, true);
+                Current.Game.CurrentMap = mapParent.Map;
+                Dialog_FormCaravan window = new Dialog_FormCaravan(mapParent.Map, true, delegate ()
+                {
+                    if (mapParent.HasMap)
+                    {
+                        mapParent.Destroy();
+                    }
+                }, false);
+                Find.WindowStack.Add(window);
+                return;
+            }
+            tmpPawns.Clear();
+            tmpPawns.AddRange(from x in mapParent.Map.mapPawns.AllPawns
+                              where x.Faction == Faction.OfPlayer || x.HostFaction == Faction.OfPlayer
+                              select x);
+            if (tmpPawns.Any((Pawn x) => CaravanUtility.IsOwner(x, Faction.OfPlayer)))
+            {
+                CaravanExitMapUtility.ExitMapAndCreateCaravan(tmpPawns, Faction.OfPlayer, mapParent.Tile, mapParent.Tile, -1, true);
+            }
+            tmpPawns.Clear();
+            mapParent.Destroy();
         }
 
         public bool PackUpTentAtRandomRect()
@@ -64,7 +121,7 @@ namespace CaravanAdventures.CaravanCamp
         public void FinishPackingReainingTentsAndControl()
         {
             foreach (var rect in CampRects) PackUpTent(rect);
-            
+
             if (!tribal && resourceCount != 0)
             {
                 var count = Convert.ToInt32(Math.Ceiling((double)CampDefOf.CASpacerTentSupplies.stackLimit / (double)resourceCount));
