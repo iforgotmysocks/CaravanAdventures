@@ -13,12 +13,12 @@ namespace CaravanAdventures
     static class CompCache
     {
         private static InitGC initGC;
-        public static InitGC InitGC { get => initGC ?? (initGC = Current.Game.GetComponent<InitGC>()); set => initGC = value; }
+        public static InitGC InitGC { get => initGC ?? (initGC = Current.Game?.GetComponent<InitGC>()); set => initGC = value; }
 
         private static StoryWC storyWC;
-        public static StoryWC StoryWC { get => storyWC ?? (storyWC = Find.World.GetComponent<StoryWC>()); set => storyWC = value; }
+        public static StoryWC StoryWC { get => storyWC ?? (storyWC = Find.World?.GetComponent<StoryWC>()); set => storyWC = value; }
         
         private static BountyWC bountyWC;
-        public static BountyWC BountyWC { get => bountyWC ?? (bountyWC = Find.World.GetComponent<BountyWC>()); set => bountyWC = value; }
+        public static BountyWC BountyWC { get => bountyWC ?? (bountyWC = Find.World?.GetComponent<BountyWC>()); set => bountyWC = value; }
     }
 }
