@@ -1,5 +1,6 @@
 ﻿using CaravanAdventures.CaravanStory;
 using CaravanAdventures.Settings;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -68,7 +69,6 @@ namespace CaravanAdventures
 
         //public static ModSettings Get() => LoadedModManager.GetMod<CaravanAdventures.Main>().GetSettings<ModSettings>();
         private Vector2 scrollPos = Vector2.zero;
-        
 
         public override void ExposeData()
         {
@@ -158,7 +158,7 @@ namespace CaravanAdventures
             //GUI.BeginGroup(wrect);
             //Widgets.BeginScrollView(wrect, ref this.scrollPos, new Rect(0f, 0f, wrect.width, 700f));
 
-            var viewRect = new Rect(0f, 0f, wrect.width, 1200);
+            var viewRect = new Rect(0f, 0f, wrect.width, 1600);
             options.BeginScrollView(wrect, ref this.scrollPos, ref viewRect);
 
 
@@ -179,6 +179,14 @@ namespace CaravanAdventures
             //Vector2 vec = new Vector2(0, 0);
             //options.BeginScrollView(wrect, ref vec, ref viewRect);
             // todo move to seperate window!
+
+            // todo test remove
+            options.Label("Filtertest:".Colorize(Color.red), 40f);
+            if (options.ButtonTextLabeled("Filter settings", "Open Filters")) Find.WindowStack.Add(new SettingsFilters());
+            Widgets.CheckboxLabeled(BRect(options.ColumnWidth - 400, options.GetRect(Text.LineHeight).y, 200, Text.LineHeight), "Enabled: ", ref toggleTest);
+            Widgets.ButtonText(BRect(options.ColumnWidth - 200, lastRect.y, 200, Text.LineHeight), "button");
+            options.Gap();
+            // end test
 
             options.Label("Settlement price adjustments");
             options.Label("Multiplies the current money for settlements with less then 3k silver by 3, and those with more by 2");

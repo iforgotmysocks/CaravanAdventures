@@ -16,6 +16,8 @@ namespace CaravanAdventures
     {
         private int removeRuinsTick = 0;
 
+        public static ThingFilter packup;
+
         public InitGC(Game game)
         {
         }
@@ -52,6 +54,7 @@ namespace CaravanAdventures
         {
             base.ExposeData();
             Scribe_Values.Look(ref removeRuinsTick, "removeRuinsTick", 0);
+            Scribe_Deep.Look(ref packup, "packup");
         }
 
 
