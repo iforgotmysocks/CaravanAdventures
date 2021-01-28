@@ -17,6 +17,7 @@ namespace CaravanAdventures.CaravanItemSelection
         public static FilterSet goods;
         public static FilterSet journey;
 
+        // FilterSets only used for defaults at this point
         public static void InitFilterSets()
         {
             packUp = new FilterSet();
@@ -114,7 +115,6 @@ namespace CaravanAdventures.CaravanItemSelection
                 Operation = FilterOperation.Exclude
             });
 
-            // fix NEG being used in a different context as AND / OR
             journey.appliedFilters.Add(new Filter(new object[]
             {
                 ThingDefOf.MedicineHerbal,
@@ -162,8 +162,9 @@ namespace CaravanAdventures.CaravanItemSelection
             {
                 foreach (var trans in section.cachedTransferables)
                 {
-                    if (FilterHelper.DoFiltersApply(packUp, trans)) FilterHelper.SetMaxAmount(trans);
-                    else FilterHelper.SetMinAmount(trans);
+                    //if (FilterHelper.DoFiltersApply(packUp, trans)) FilterHelper.SetMaxAmount(trans);
+                    if (FilterHelper.DoesFilterApply(InitGC.packUpFilter, trans)) FilterHelper.SetMaxAmount(trans);
+                    else if (InitGC.packUpExclusive) FilterHelper.SetMinAmount(trans);
                 }
             }
         }
@@ -179,8 +180,23 @@ namespace CaravanAdventures.CaravanItemSelection
             {
                 foreach (var trans in section.cachedTransferables)
                 {
-                    if (FilterHelper.DoFiltersApply(goods, trans)) FilterHelper.SetMaxAmount(trans);
+                    //if (FilterHelper.DoFiltersApply(goods, trans)) FilterHelper.SetMaxAmount(trans);
                     //else FilterHelper.SetMinAmount(trans);
+
+                    if (FilterHelper.DoesFilterApply(InitGC.goodsFilter, trans)) FilterHelper.SetMaxAmount(trans);
+                    else if (InitGC.goodsExclusive) FilterHelper.SetMinAmount(trans);
+                }
+            }
+        }
+
+        public static void ApplyGoods2(List<Patches.Section> sections)
+        {
+            foreach (var section in sections)
+            {
+                foreach (var trans in section.cachedTransferables)
+                {
+                    if (FilterHelper.DoesFilterApply(InitGC.journeyFilter, trans)) FilterHelper.SetMaxAmount(trans);
+                    else if (InitGC.journeyExclusive) FilterHelper.SetMinAmount(trans);
                 }
             }
         }
@@ -202,8 +218,23 @@ namespace CaravanAdventures.CaravanItemSelection
         {
             foreach (var trans in tradeables.Where(x => x.TraderWillTrade))
             {
-                if (FilterHelper.DoFiltersApply(goods, trans)) FilterHelper.SetMinAmount(trans);
-                else FilterHelper.SetAmount(trans, 0);
+                //if (FilterHelper.DoFiltersApply(goods, trans)) FilterHelper.SetMinAmount(trans);
+                //else FilterHelper.SetAmount(trans, 0);
+
+                if (FilterHelper.DoesFilterApply(InitGC.goodsFilter, trans)) FilterHelper.SetMinAmount(trans);
+                else if (InitGC.goodsExclusive) FilterHelper.SetAmount(trans, 0);
+            }
+        }
+
+        public static void ApplyGoodsTrade2(List<Tradeable> tradeables)
+        {
+            foreach (var trans in tradeables.Where(x => x.TraderWillTrade))
+            {
+                //if (FilterHelper.DoFiltersApply(goods, trans)) FilterHelper.SetMinAmount(trans);
+                //else FilterHelper.SetAmount(trans, 0);
+
+                if (FilterHelper.DoesFilterApply(InitGC.journeyFilter, trans)) FilterHelper.SetMinAmount(trans);
+                else if (InitGC.journeyExclusive) FilterHelper.SetAmount(trans, 0);
             }
         }
 

@@ -16,10 +16,33 @@ namespace CaravanAdventures
     {
         private int removeRuinsTick = 0;
 
-        public static ThingFilter packup;
+        public static ThingFilter packUpFilter;
+        public static bool packUpExclusive = true;
+
+        public static ThingFilter goodsFilter;
+        public static bool goodsExclusive = false;
+
+        public static ThingFilter journeyFilter;
+        public static bool journeyExclusive = false;
+        // todo
+        public static bool autoSupplyDisabled;
 
         public InitGC(Game game)
         {
+        }
+
+        public override void ExposeData()
+        {
+            base.ExposeData();
+            Scribe_Values.Look(ref removeRuinsTick, "removeRuinsTick", 0);
+            Scribe_Deep.Look(ref packUpFilter, "packUpFilter");
+            Scribe_Values.Look(ref packUpExclusive, "packUpExclusive", true);
+
+            Scribe_Deep.Look(ref goodsFilter, "goodsFilter");
+            Scribe_Values.Look(ref goodsExclusive, "goodsExclusive", false);
+
+            Scribe_Deep.Look(ref journeyFilter, "journeyFilter");
+            Scribe_Values.Look(ref journeyExclusive, "journeyExclusive", false);
         }
 
         public override void FinalizeInit()
@@ -49,14 +72,6 @@ namespace CaravanAdventures
                 removeRuinsTick = 0;
             }
         }
-
-        public override void ExposeData()
-        {
-            base.ExposeData();
-            Scribe_Values.Look(ref removeRuinsTick, "removeRuinsTick", 0);
-            Scribe_Deep.Look(ref packup, "packup");
-        }
-
 
     }
 }

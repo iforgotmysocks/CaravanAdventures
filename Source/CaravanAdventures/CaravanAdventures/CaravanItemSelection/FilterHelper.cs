@@ -12,13 +12,26 @@ namespace CaravanAdventures.CaravanItemSelection
 {
     static class FilterHelper
     {
-        internal static bool DoFiltersApply<T>(FilterSet filterSet, T trans)
+        public static bool DoesFilterApply<T>(ThingFilter filter, T trans)
         {
-            // will be replaced with game filters, i know...
             Type t = trans.GetType();
             var thingDef = t.GetProperty("ThingDef")?.GetValue(trans, null) as ThingDef;
             if (thingDef == null) return false;
             var thing = t.GetProperty("AnyThing")?.GetValue(trans, null) as Thing;
+
+            var minifiedThing = thing as MinifiedThing;
+            if (minifiedThing != null) thing = minifiedThing.InnerThing;
+            
+            return filter.Allows(thing);
+        }
+
+        public static bool DoFiltersApply<T>(FilterSet filterSet, T trans)
+        {
+            // just using it for defaults
+            Type t = trans.GetType();
+            var thingDef = trans is ThingDef directThingDef ? directThingDef : t.GetProperty("ThingDef")?.GetValue(trans, null) as ThingDef;
+            if (thingDef == null) return false;
+            var thing = trans is ThingDef ? null : t.GetProperty("AnyThing")?.GetValue(trans, null) as Thing;
             var standartResult = true;
 
             var minifiedThing = thing as MinifiedThing;
@@ -74,7 +87,7 @@ namespace CaravanAdventures.CaravanItemSelection
             return standartResult;
         }
 
-        internal static void ApplyTravelSupplies(List<Patches.Section> sections, FilterSet journey, List<Pawn> caravanMembers)
+        public static void ApplyTravelSupplies(List<Patches.Section> sections, FilterSet journey, List<Pawn> caravanMembers)
         {
             List<object[]> requiredSupplyStatus = new List<object[]>();
             var restAmount = 0;
@@ -101,7 +114,7 @@ namespace CaravanAdventures.CaravanItemSelection
             }
         }
 
-        private static bool ThingIsMinifiedButNotBedroll(TransferableOneWay trans)
+        public static bool ThingIsMinifiedButNotBedroll(TransferableOneWay trans)
         {
             if (trans.ThingDef != ThingDefOf.MinifiedThing) return false;
             var unminifiedThing = MinifyUtility.GetInnerIfMinified(trans.AnyThing);
@@ -109,19 +122,19 @@ namespace CaravanAdventures.CaravanItemSelection
             return true;
         }
 
-        internal static void SetMaxAmount<T>(T trans)
+        public static void SetMaxAmount<T>(T trans)
         {
             var maximumToTransferAmount = trans.GetType().GetMethod("GetMaximumToTransfer").Invoke(trans, null);
             trans.GetType().GetMethod("AdjustTo").Invoke(trans, new object[] { maximumToTransferAmount });
         }
 
-        internal static void SetMinAmount<T>(T trans)
+        public static void SetMinAmount<T>(T trans)
         {
             var minimumToTransferAmount = trans.GetType().GetMethod("GetMinimumToTransfer").Invoke(trans, null);
             trans.GetType().GetMethod("AdjustTo").Invoke(trans, new object[] { minimumToTransferAmount });
         }
 
-        internal static void SetAmount<T>(T trans, int amount)
+        public static void SetAmount<T>(T trans, int amount)
         {
             var maximumToTransferAmount = trans.GetType().GetMethod("GetMaximumToTransfer").Invoke(trans, null);
             trans.GetType().GetMethod("AdjustTo").Invoke(trans, new object[] { amount <= (int)maximumToTransferAmount ? amount : maximumToTransferAmount});

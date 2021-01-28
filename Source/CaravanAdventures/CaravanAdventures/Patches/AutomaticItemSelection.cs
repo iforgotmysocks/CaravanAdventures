@@ -40,6 +40,7 @@ namespace CaravanAdventures.Patches
 
         public static bool OnGUI_Prefix(TransferableOneWayWidget __instance, List<Section> ___sections, out List<Section> __state, Rect inRect, out bool anythingChanged)
         {
+            // todo check for cleanup, don't think we need the prefix there.
             __state = new List<Section>(___sections);
             anythingChanged = false;
             return true;
@@ -88,7 +89,6 @@ namespace CaravanAdventures.Patches
             }
             if (Widgets.ButtonText(new Rect(rect2.xMax + 5f, 0f, 70f, 27f), "Pack up", true, true, true))
             {
-
                 FilterCombs.ApplyPackUp(sections);
                 anythingChanged = true;
             }
@@ -99,10 +99,10 @@ namespace CaravanAdventures.Patches
                 anythingChanged = true;
             }
 
-            if (Widgets.ButtonText(new Rect(rect2.xMax + 15f + 140f, 0f, 85f, 27f), "Add supplies", true, true, true))
+            if (Widgets.ButtonText(new Rect(rect2.xMax + 15f + 140f, 0f, 85f, 27f), "Goods2", true, true, true))
             {
-                FilterCombs.ApplyJourney(sections, caravanMembers);
-
+                //FilterCombs.ApplyJourney(sections, caravanMembers);
+                FilterCombs.ApplyGoods2(sections);
                 anythingChanged = true;
             }
             if (Widgets.ButtonText(new Rect(rect2.xMax + 20f + 225f, 0f, 50f, 27f), "Clear", true, true, true))
@@ -110,6 +110,7 @@ namespace CaravanAdventures.Patches
                 FilterCombs.ApplyNone(sections);
                 anythingChanged = true;
             }
+            //Widgets.CheckboxLabeled(new Rect(rect2.xMax + 25f + 295f, 0f, 50f, 27f), "Keep auto supply disabled", ref InitGC.autoSupplyDisabled);
             GUI.EndGroup();
         }
 
@@ -137,8 +138,14 @@ namespace CaravanAdventures.Patches
                 FilterCombs.ApplyGoodsTrade(tradeables);
                 anythingChanged = true;
             }
-           
-            if (Widgets.ButtonText(new Rect(rect2.xMax + 10f + 60, 0f, 50f, 27f), "Reset", true, true, true))
+
+            if (Widgets.ButtonText(new Rect(rect2.xMax + 10f + 60f, 0f, 60f, 27f), "Goods2", true, true, true))
+            {
+                FilterCombs.ApplyGoodsTrade2(tradeables);
+                anythingChanged = true;
+            }
+
+            if (Widgets.ButtonText(new Rect(rect2.xMax + 15f + 120f, 0f, 50f, 27f), "Reset", true, true, true))
             {
                 FilterCombs.ApplyNoneTrade(tradeables);
                 anythingChanged = true;
