@@ -26,7 +26,7 @@ namespace CaravanAdventures.Patches
 
         private static bool CaravanNeedsResting(Caravan caravan)
         {
-            return caravan.pawns.InnerListForReading.Where(x => x?.needs?.rest.CurLevelPercentage != null).Any(x => x?.needs?.rest.CurLevelPercentage <= 0.01);
+            return caravan.pawns.InnerListForReading.Where(x => x?.needs?.rest?.CurLevelPercentage != null).Any(x => x?.needs?.rest.CurLevelPercentage <= 0.01);
         }
     }
 }
