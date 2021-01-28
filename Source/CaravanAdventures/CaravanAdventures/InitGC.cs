@@ -24,8 +24,18 @@ namespace CaravanAdventures
 
         public static ThingFilter journeyFilter;
         public static bool journeyExclusive = false;
+        
         // todo
-        public static bool autoSupplyDisabled;
+        //public static ThingFilter PackUpFilter
+        //{
+        //    get
+        //    {
+        //        if (packUpFilter == null) Settings.SettingsFilters.RestoreFilterDefaults();
+        //        return packUpFilter;
+        //    }
+        //    set => packUpFilter = value;
+        //}
+
 
         public InitGC(Game game)
         {
@@ -49,6 +59,12 @@ namespace CaravanAdventures
         {
             base.FinalizeInit();
             CompCache.InitGC = null;
+            InitFilters();
+        }
+
+        private void InitFilters()
+        {
+            if (packUpFilter == null || goodsFilter == null || journeyFilter == null) Settings.SettingsFilters.RestoreFilterDefaults();
         }
 
         public override void GameComponentTick()

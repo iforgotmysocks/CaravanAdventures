@@ -36,6 +36,15 @@ namespace CaravanAdventures.Patches
             });
             var postDoWindowContents = new HarmonyMethod(typeof(AutomaticItemSelection).GetMethod(nameof(DoWindowContents_Postfix)));
             harmony.Patch(orgDoWindowContents, null, postDoWindowContents);
+
+            var orgDialog_FormCaravan = AccessTools.DeclaredConstructor(typeof(Dialog_FormCaravan), new[] {
+                typeof(Map),
+                typeof(bool),
+                typeof(Action),
+                typeof(bool)
+            });
+            var postDialog_FormCaravan = new HarmonyMethod(typeof(AutomaticItemSelection).GetMethod(nameof(Dialog_FormCaravan_Postfix)));
+            harmony.Patch(orgDialog_FormCaravan, null, postDialog_FormCaravan);
         }
 
         public static bool OnGUI_Prefix(TransferableOneWayWidget __instance, List<Section> ___sections, out List<Section> __state, Rect inRect, out bool anythingChanged)
@@ -59,6 +68,11 @@ namespace CaravanAdventures.Patches
             if (anythingChanged) Traverse.Create(__instance).Method("CountToTransferChanged").GetValue();
         }
 
+        public static void Dialog_FormCaravan_Postfix(ref bool ___autoSelectFoodAndMedicine)
+        {
+            if (ModSettings.autoSupplyDisabled) ___autoSelectFoodAndMedicine = false;
+        }
+
         private static void UpdatePeopleSection(List<Section> ___sections)
         {
             var detectedPeople = ___sections.SelectMany(section => section.cachedTransferables.Where(trans =>
@@ -75,7 +89,7 @@ namespace CaravanAdventures.Patches
 
         private static void DoOwnCaravanFormButtons(List<Section> sections, ref bool anythingChanged)
         {
-            GUI.BeginGroup(new Rect(350f, 0f, 460f, 27f));
+            GUI.BeginGroup(new Rect(350f, 0f, 530f, 27f));
             Text.Font = GameFont.Tiny;
             Rect rect = new Rect(0f, 0f, 60f, 27f);
             Text.Anchor = TextAnchor.MiddleLeft;
@@ -110,7 +124,7 @@ namespace CaravanAdventures.Patches
                 FilterCombs.ApplyNone(sections);
                 anythingChanged = true;
             }
-            //Widgets.CheckboxLabeled(new Rect(rect2.xMax + 25f + 295f, 0f, 50f, 27f), "Keep auto supply disabled", ref InitGC.autoSupplyDisabled);
+            Widgets.CheckboxLabeled(new Rect(rect2.xMax + 25f + 285f, 0f, 77f, 30f), "Supply disabled", ref ModSettings.autoSupplyDisabled);
             GUI.EndGroup();
         }
 

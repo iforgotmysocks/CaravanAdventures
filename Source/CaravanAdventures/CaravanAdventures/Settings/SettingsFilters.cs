@@ -90,7 +90,7 @@ namespace CaravanAdventures.Settings
             options.End();
         }
 
-        private void RestoreFilterDefaults()
+        public static void RestoreFilterDefaults()
         {
             InitGC.packUpFilter = new ThingFilter();
             InitGC.goodsFilter = new ThingFilter();
