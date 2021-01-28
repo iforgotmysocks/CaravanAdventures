@@ -378,7 +378,7 @@ namespace CaravanAdventures.CaravanMechBounty
                 disabled = !CanRecruitVeteran(cost, out var reason),
                 disabledReason = reason
             });
-            node.options.Add(new DiaOption("CABountyBack".Translate()) { link = parent });
+            node.options.Add(new DiaOption("CABountyBack".Translate()) { linkLateBind = () => CreateMainMenuNode() });
             return node;
         }
 
