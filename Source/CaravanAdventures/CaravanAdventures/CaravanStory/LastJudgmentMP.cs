@@ -117,6 +117,7 @@ namespace CaravanAdventures.CaravanStory
 			);
 
 			Quests.QuestUtility.AppendQuestDescription(Quests.StoryQuestDefOf.CA_FindAncientShrine, Helper.HtmlFormatting("Story_Shrine5_QuestUpdate_2".Translate(endBoss.NameShortColored), "b6f542"), false, true);
+			Quests.QuestUtility.AppendQuestDescription(Quests.StoryQuestDefOf.CA_FindAncientShrine, "Story_Shrine5_QuestUpdate_Info_1".Translate(), false, true);
 		}
 
 		private void LearnSpell(Pawn gifted, AbilityDef spell)

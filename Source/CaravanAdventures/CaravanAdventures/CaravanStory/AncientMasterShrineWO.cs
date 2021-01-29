@@ -36,7 +36,7 @@ namespace CaravanAdventures.CaravanStory
 
                 if (mainRoom.CellCount > minMainRoomSize)
                 {
-                    if (CompCache.StoryWC.GetCurrentShrineCounter() != 5) mp.boss = AddBoss(map, caravan, mainRoom);
+                    if (CompCache.StoryWC.GetCurrentShrineCounter() != CompCache.StoryWC.GetShrineMaxiumum) mp.boss = AddBoss(map, caravan, mainRoom);
                     else mp.lastJudgmentEntrance = InitCellarEntrace(map);
                 }
                 else AddBandits(map, caravan);
