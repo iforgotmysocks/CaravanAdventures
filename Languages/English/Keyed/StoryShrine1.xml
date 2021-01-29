@@ -59,7 +59,7 @@
   <Story_Shrine5_SacrilegHunters_Dia1_1_Option1>Ya, lets tear this place down.</Story_Shrine5_SacrilegHunters_Dia1_1_Option1>
   <Story_Shrine5_SacrilegHunters_Dia1_1_Option2>(Not recommended) Gonna take a different approach, trust me, it'll be fine.</Story_Shrine5_SacrilegHunters_Dia1_1_Option2>
 
-  <Story_Shrine5_SacrilegHunters_Portal_Dia1_1>Guys, i'm not getting any readings of another huge mech here. Tho there seems to be a desturbance, some highly bundled particle displacement. \n[{0} suddenly worried] Be careful when checking that out, i have a bad feeling about this...</Story_Shrine5_SacrilegHunters_Portal_Dia1_1>
+  <Story_Shrine5_SacrilegHunters_Portal_Dia1_1>Guys, i'm not getting any readings of another huge mech here. Tho there seems to be a desturbance, some highly bundled particle displacement.\n\n[{0} suddenly worried] Be careful when checking that out, i have a bad feeling about this...</Story_Shrine5_SacrilegHunters_Portal_Dia1_1>
   <Story_Shrine5_SacrilegHunters_Portal_Dia1_1_Option1>Hmm, we'll keep an eye out, thanks.</Story_Shrine5_SacrilegHunters_Portal_Dia1_1_Option1>
 
   <Story_Shrine5_BossDefeated_Dia1_2>When {0}'s mechanical boddy came to rest, the ground started to vibrate stronger, then suddenly came to rest, as the old machinerie deep within the planet came to a hold.</Story_Shrine5_BossDefeated_Dia1_2>
@@ -91,10 +91,10 @@
   <Story_Shrine4_Apocalypse_Dia1_3_Option1>Alright, good luck with those calculations!</Story_Shrine4_Apocalypse_Dia1_3_Option1>
 
   <Story_Shrine5_Apocalypse_Dia1_1>[{0} laughting for joy] Yes, the ancient machines powered down, the planet is heating up again. We did it. You were so great. \n\nWe won't forget what you guys have done for us and the entire world. \n\nHmmm, how about 4000 bounty credits, that you can spent freely. And i really hope u guys stay in touch, especially since i'm not sure this is the last we saw of those damn mechs. The planet is safe for now, but there is plenty more ruins out there. We'll let you know if we find more in case you want to help ridding the planet of them, but for now, go celebrate and enjoy our victory. Wuhuuuuuuu.</Story_Shrine5_Apocalypse_Dia1_1>
-  <Story_Shrine5_Apocalypse_Dia1_1_Option1>Thanks, we couldn't have done it without you, thanks for all that help.\nWe'll come visit. Cya.</Story_Shrine5_Apocalypse_Dia1_1_Option1>
+  <Story_Shrine5_Apocalypse_Dia1_1_Option1>We couldn't have done it without you, thanks for all that help.\nWe'll come visit. Cya.</Story_Shrine5_Apocalypse_Dia1_1_Option1>
   
   <Story_Shrine1_QuestUpdate_1>Defeating the mechanical monstrosity activated old unknown machinery deep below the planet's surface that started to cool down the planet's core. This will slowly render the planet inhabitable and the cause needs to be found. You should seek out more shrines to get answers.</Story_Shrine1_QuestUpdate_1>
-  <Story_Shrine5_QuestUpdate_1>({1}) {0}: {2} entered a shrine not harboring a guardian. {3} mentioned a desturbance, some highly bundled particle displacement. You should find it, it must be hidden away in these ruins. </Story_Shrine5_QuestUpdate_1>
+  <Story_Shrine5_QuestUpdate_1>({1}) {0}: {2} entered a shrine not harboring a guardian.\n{3} mentioned a desturbance, some highly bundled particle displacement.\nYou should find it, it must be hidden away in these ruins. </Story_Shrine5_QuestUpdate_1>
   <Story_Shrine5_QuestUpdate_2>Defeating the {0} disabled the machanoid mechanism responsible for freezing the planet. The catastrophe was avoided, the world will return to normal, but some other shrines may still be out there.</Story_Shrine5_QuestUpdate_2>
 
 </LanguageData>

@@ -241,7 +241,7 @@ namespace CaravanAdventures.CaravanStory
                         (long)GenDate.TickGameToAbs(Find.TickManager.TicksGame),
                         Find.WorldGrid.LongLatOf(Tile)
                     ),
-                    CompCache.StoryWC.GetCurrentShrineCounter(true) - 1,
+                    CompCache.StoryWC.GetCurrentShrineCounter(true),
                     gifted.NameShortColored,
                     storyChar.NameShortColored
                 ));

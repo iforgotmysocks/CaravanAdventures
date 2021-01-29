@@ -99,8 +99,6 @@ namespace CaravanAdventures.CaravanStory
 
 			BossDefeatedDialog(gifted, endBoss, spell);
 
-			CheckStoryOverDialogAndDisableApocalypse();
-
 			StoryUtility.AdjustGoodWill(75);
 			Quests.QuestUtility.AppendQuestDescription(Quests.StoryQuestDefOf.CA_FindAncientShrine,
 				(CompCache.StoryWC.GetCurrentShrineCounter(true) - 1 > CompCache.StoryWC.GetShrineMaxiumum
@@ -118,7 +116,7 @@ namespace CaravanAdventures.CaravanStory
 				)
 			);
 
-			Quests.QuestUtility.AppendQuestDescription(Quests.StoryQuestDefOf.CA_FindAncientShrine, Helper.HtmlFormatting("Story_Shrine5_QuestUpdate_2".Translate(), "b6f542"), false, true);
+			Quests.QuestUtility.AppendQuestDescription(Quests.StoryQuestDefOf.CA_FindAncientShrine, Helper.HtmlFormatting("Story_Shrine5_QuestUpdate_2".Translate(endBoss.NameShortColored), "b6f542"), false, true);
 		}
 
 		private void LearnSpell(Pawn gifted, AbilityDef spell)
@@ -139,7 +137,7 @@ namespace CaravanAdventures.CaravanStory
 		private void BossDefeatedDialog(Pawn gifted, Pawn boss, AbilityDef spell)
 		{
 			var diaNode2 = new DiaNode("Story_Shrine5_BossDefeated_Dia1_2".Translate(boss.def.label));
-			diaNode2.options.Add(new DiaOption("Story_Shrine5_BossDefeated_Dia1_2_Option1".Translate()) { resolveTree = true, action = () => {}  });
+			diaNode2.options.Add(new DiaOption("Story_Shrine5_BossDefeated_Dia1_2_Option1".Translate()) { resolveTree = true, action = () => CheckStoryOverDialogAndDisableApocalypse() });
 
 			var diaNode = new DiaNode(spell == null ? "Story_Shrine1_BossDefeated_Dia1_1_NoSpell".Translate(boss.def.LabelCap.ToString().HtmlFormatting("ff0000")) : "Story_Shrine1_BossDefeated_Dia1_1".Translate(boss.def.LabelCap.ToString().HtmlFormatting("ff0000"), gifted.NameShortColored, spell.LabelCap.ToString().HtmlFormatting("008080")));
 			diaNode.options.Add(new DiaOption("Story_Shrine1_BossDefeated_Dia1_1_Option1".Translate()) { link = diaNode2 });
@@ -161,7 +159,7 @@ namespace CaravanAdventures.CaravanStory
 		{
 			var storyChar = CompCache.StoryWC.questCont.Village.StoryContact;
 
-			var diaNode = new DiaNode("Story_Shrine1_Apocalypse_Dia1_1".Translate(storyChar.NameShortColored));
+			var diaNode = new DiaNode("Story_Shrine5_Apocalypse_Dia1_1".Translate(storyChar.NameShortColored));
 			diaNode.options.Add(new DiaOption("Story_Shrine5_Apocalypse_Dia1_1_Option1".Translate()) { resolveTree = true });
 
 			TaggedString taggedString = "Story_Shrine1_Apocalypse_Dia1Title".Translate(storyChar.NameShortColored, storyChar.Faction.NameColored);
