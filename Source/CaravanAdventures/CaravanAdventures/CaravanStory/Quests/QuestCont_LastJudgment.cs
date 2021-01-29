@@ -45,7 +45,7 @@ namespace CaravanAdventures.CaravanStory.Quests
 			StartApocalypse(minTemp);
         }
 
-        internal void CreateLastJudgment(ref LastJudgmentMP lastJudgmentMP, int tile)
+        public void CreateLastJudgment(ref LastJudgmentMP lastJudgmentMP, int tile)
         {
 			lastJudgmentMP = (LastJudgmentMP)WorldObjectMaker.MakeWorldObject(CaravanStorySiteDefOf.CALastJudgmentMP);
 			lastJudgmentMP.SetFaction(StoryUtility.EnsureSacrilegHunters());

@@ -113,6 +113,7 @@ namespace CaravanAdventures.CaravanStory
             "SacrilegHuntersBetrayal",
 
             "Judgment_ApocalypseStarted",
+            "Judgment_PortalRevealed",
             "Judgment_Created",
             "Judgment_StoryOverDialog",
             "Judgment_Completed",

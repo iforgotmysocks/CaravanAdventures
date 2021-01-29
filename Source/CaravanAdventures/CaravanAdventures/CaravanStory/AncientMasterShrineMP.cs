@@ -97,11 +97,11 @@ namespace CaravanAdventures.CaravanStory
              || !base.Map.mapPawns.AnyPawnBlockingMapRemoval && bossDefeatedAndRewardsGiven
              || !base.Map.mapPawns.AnyPawnBlockingMapRemoval && CompCache.StoryWC.GetCurrentShrineCounter(true) - 1 == CompCache.StoryWC.GetShrineMaxiumum && CompCache.StoryWC.storyFlags["Judgment_Completed"])
             {
-                DLog.Message($"Prepping to remove map now current shrine counter {CompCache.StoryWC.GetCurrentShrineCounter() - 1} max counter: {CompCache.StoryWC.GetShrineMaxiumum}");
+                DLog.Message($"Prepping to remove map now current shrine counter {CompCache.StoryWC.GetCurrentShrineCounter(true) - 1} max counter: {CompCache.StoryWC.GetShrineMaxiumum}");
                 // resetting flags here due to shrine map being a bandit map without boss!!
                 if (!bossWasSpawned && !lastJudgementEntraceWasSpawned)
                 {
-                    DLog.Message($"Resetting shrine flags for current shrine: {CompCache.StoryWC.GetCurrentShrineCounter()}");
+                    DLog.Message($"Resetting shrine flags for current shrine: {CompCache.StoryWC.GetCurrentShrineCounter(true)}");
                     CompCache.StoryWC.ResetCurrentShrineFlags();
                 }
 
@@ -139,7 +139,7 @@ namespace CaravanAdventures.CaravanStory
                     var diaNode = new DiaNode("Story_Shrine1_Apocalypse_Dia1_1".Translate(storyChar.NameShortColored));
                     diaNode.options.Add(new DiaOption("Story_Shrine1_Apocalypse_Dia1_1_Option1".Translate()) { link = diaNode2 });
 
-                    TaggedString taggedString = "Story_Shrine1_Apocalypse_Dia1Title".Translate(storyChar.NameShortColored);
+                    TaggedString taggedString = "Story_Shrine1_Apocalypse_Dia1Title".Translate(storyChar.NameShortColored, storyChar.Faction.NameColored);
                     Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
                     Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
                     break;
@@ -153,7 +153,7 @@ namespace CaravanAdventures.CaravanStory
                     diaNode = new DiaNode("Story_Shrine2_Apocalypse_Dia1_1".Translate(storyChar.NameShortColored));
                     diaNode.options.Add(new DiaOption("Story_Shrine2_Apocalypse_Dia1_1_Option1".Translate()) { link = diaNode2 });
 
-                    taggedString = "Story_Shrine1_Apocalypse_Dia1Title".Translate(storyChar.NameShortColored);
+                    taggedString = "Story_Shrine1_Apocalypse_Dia1Title".Translate(storyChar.NameShortColored, storyChar.Faction.NameColored);
                     Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
                     Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
                     break;
@@ -167,7 +167,7 @@ namespace CaravanAdventures.CaravanStory
                     diaNode = new DiaNode("Story_Shrine3_Apocalypse_Dia1_1".Translate(storyChar.NameShortColored));
                     diaNode.options.Add(new DiaOption("Story_Shrine3_Apocalypse_Dia1_1_Option1".Translate()) { resolveTree = true });
 
-                    taggedString = "Story_Shrine1_Apocalypse_Dia1Title".Translate(storyChar.NameShortColored);
+                    taggedString = "Story_Shrine1_Apocalypse_Dia1Title".Translate(storyChar.NameShortColored, storyChar.Faction.NameColored);
                     Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
                     Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
                     break;
@@ -181,7 +181,7 @@ namespace CaravanAdventures.CaravanStory
                     diaNode = new DiaNode("Story_Shrine4_Apocalypse_Dia1_1".Translate(storyChar.NameShortColored));
                     diaNode.options.Add(new DiaOption("Story_Shrine4_Apocalypse_Dia1_1_Option1".Translate()) { link = diaNode2 });
 
-                    taggedString = "Story_Shrine1_Apocalypse_Dia1Title".Translate(storyChar.NameShortColored);
+                    taggedString = "Story_Shrine1_Apocalypse_Dia1Title".Translate(storyChar.NameShortColored, storyChar.Faction.NameColored);
                     Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
                     Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
                     break;
@@ -209,21 +209,49 @@ namespace CaravanAdventures.CaravanStory
                     checkDormantTicks = 0;
                 }
 
-                if (constTicks == 2400)
+                if (constTicks == 2400 && (boss != null || lastJudgmentEntrance != null))
                 {
-                    if (boss != null || lastJudgmentEntrance != null)
-                    {
-                        StoryUtility.EnsureSacrilegHunters();
+                    StoryUtility.EnsureSacrilegHunters();
+                    HunterAssistanceDialog();
+                }
 
-                        // todo different dialogs for other shrines, maybe they betray the player the 3rd or 4th shrine.
-                        HunterAssistanceDialog();
-                    }
+                if (constTicks == 5000 && lastJudgmentEntrance != null)
+                {
+                    StoryUtility.EnsureSacrilegHunters();
+                    CheckPortalRevealedDialog();
                 }
 
                 constTicks++;
                 checkRangeForJudgmentTicks++;
                 checkDormantTicks++;
             }
+        }
+
+        private void CheckPortalRevealedDialog()
+        {
+            if (CompCache.StoryWC.storyFlags["Judgment_PortalRevealed"]) return;
+
+            var gifted = StoryUtility.GetGiftedPawn();
+            var storyChar = CompCache.StoryWC.questCont.Village.StoryContact;
+            var diaNode = new DiaNode("Story_Shrine5_SacrilegHunters_Portal_Dia1_1".Translate(storyChar.NameShortColored));
+            diaNode.options.Add(new DiaOption("Story_Shrine5_SacrilegHunters_Portal_Dia1_1_Option1".Translate()) { resolveTree = true, action = () => {
+                Quests.QuestUtility.AppendQuestDescription(Quests.StoryQuestDefOf.CA_FindAncientShrine,
+                "Story_Shrine5_QuestUpdate_1".Translate(
+                    GenDate.DateFullStringAt(
+                        (long)GenDate.TickGameToAbs(Find.TickManager.TicksGame),
+                        Find.WorldGrid.LongLatOf(Tile)
+                    ),
+                    CompCache.StoryWC.GetCurrentShrineCounter(true) - 1,
+                    gifted.NameShortColored,
+                    storyChar.NameShortColored
+                ));
+
+                CompCache.StoryWC.SetSF("Judgment_PortalRevealed");
+            } });
+
+            TaggedString taggedString = "Story_Shrine1_SacrilegHunters_DiaTitle".Translate(storyChar.NameShortColored);
+            Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
+            Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
         }
 
         private void CheckGenerateAndEnterLastJudgment()

@@ -68,15 +68,6 @@ namespace CaravanAdventures.CaravanStory
 			}
 		}
 
-        private void CheckStoryOverDialogAndDisableApocalypse()
-        {
-			
-
-
-			// todo dialog
-			
-		}
-
 		private void CheckBossDefeated()
 		{
 			// todo - test if .destroyed needs to be added (in case of the body being completely nuked)?
@@ -126,6 +117,8 @@ namespace CaravanAdventures.CaravanStory
 					spell.label.CapitalizeFirst().Colorize(Color.cyan)
 				)
 			);
+
+			Quests.QuestUtility.AppendQuestDescription(Quests.StoryQuestDefOf.CA_FindAncientShrine, Helper.HtmlFormatting("Story_Shrine5_QuestUpdate_2".Translate(), "b6f542"), false, true);
 		}
 
 		private void LearnSpell(Pawn gifted, AbilityDef spell)
@@ -145,8 +138,8 @@ namespace CaravanAdventures.CaravanStory
 
 		private void BossDefeatedDialog(Pawn gifted, Pawn boss, AbilityDef spell)
 		{
-			var diaNode2 = new DiaNode("Story_Shrine1_BossDefeated_Dia1_2".Translate(boss.def.label));
-			diaNode2.options.Add(new DiaOption("Story_Shrine1_BossDefeated_Dia1_1_Option2".Translate()) { resolveTree = true, action = () => {}  });
+			var diaNode2 = new DiaNode("Story_Shrine5_BossDefeated_Dia1_2".Translate(boss.def.label));
+			diaNode2.options.Add(new DiaOption("Story_Shrine5_BossDefeated_Dia1_2_Option1".Translate()) { resolveTree = true, action = () => {}  });
 
 			var diaNode = new DiaNode(spell == null ? "Story_Shrine1_BossDefeated_Dia1_1_NoSpell".Translate(boss.def.LabelCap.ToString().HtmlFormatting("ff0000")) : "Story_Shrine1_BossDefeated_Dia1_1".Translate(boss.def.LabelCap.ToString().HtmlFormatting("ff0000"), gifted.NameShortColored, spell.LabelCap.ToString().HtmlFormatting("008080")));
 			diaNode.options.Add(new DiaOption("Story_Shrine1_BossDefeated_Dia1_1_Option1".Translate()) { link = diaNode2 });
@@ -162,6 +155,18 @@ namespace CaravanAdventures.CaravanStory
 			//});
 
 			// todo gifted null
+		}
+
+		private void CheckStoryOverDialogAndDisableApocalypse()
+		{
+			var storyChar = CompCache.StoryWC.questCont.Village.StoryContact;
+
+			var diaNode = new DiaNode("Story_Shrine1_Apocalypse_Dia1_1".Translate(storyChar.NameShortColored));
+			diaNode.options.Add(new DiaOption("Story_Shrine5_Apocalypse_Dia1_1_Option1".Translate()) { resolveTree = true });
+
+			TaggedString taggedString = "Story_Shrine1_Apocalypse_Dia1Title".Translate(storyChar.NameShortColored, storyChar.Faction.NameColored);
+			Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
+			Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
 		}
 
 		private void CheckSpawnPortalAndBringHome()
