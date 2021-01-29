@@ -22,6 +22,7 @@ namespace CaravanAdventures
                 var npcSettlements = Find.WorldObjects.AllWorldObjects.Where(settlement => settlement.def == WorldObjectDefOf.Settlement && !settlement.Faction.IsPlayer);
                 foreach (var settlement in npcSettlements.OfType<Settlement>())
                 {
+                    if (!settlement.trader.EverVisited) continue;
                     var silverStacks = settlement.trader.StockListForReading.Where(def => def.def == ThingDefOf.Silver);
                     foreach (var stack in silverStacks)
                     {
