@@ -212,7 +212,7 @@ namespace CaravanAdventures.CaravanStory
         public override void PostRemove()
         {
             base.PostRemove();
-			if (!endBoss.Destroyed) endBoss.Destroy();
+			if (endBoss != null && !endBoss.Destroyed) endBoss.Destroy();
 			if (CompCache.StoryWC.storyFlags["Judgment_StoryOverDialog"] && !CompCache.StoryWC.storyFlags["Judgment_Completed"]) CompCache.StoryWC.SetSF("Judgment_Completed");
         }
 
