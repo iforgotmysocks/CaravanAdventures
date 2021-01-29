@@ -170,6 +170,7 @@ namespace CaravanAdventures
 
             options.CheckboxLabeled("Debug mode", ref debug);
             options.CheckboxLabeled("Debug messages", ref debugMessages);
+            if (options.ButtonText("Reset final shrine flags")) StoryUtility.ResetLastShrineFlags();
            
             if (options.ButtonText("Print world pawns")) Helper.PrintWorldPawns();
 

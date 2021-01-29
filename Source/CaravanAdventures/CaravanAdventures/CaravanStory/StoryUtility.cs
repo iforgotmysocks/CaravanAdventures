@@ -136,6 +136,12 @@ namespace CaravanAdventures.CaravanStory
             Log.Message($"Story reset complete");
         }
 
+        public static void ResetLastShrineFlags()
+        {
+            CompCache.StoryWC.ResetSFsStartingWith("Judgment_");
+            CompCache.StoryWC.ResetSFsStartingWith(CompCache.StoryWC.BuildMaxShrinePrefix());
+        }
+
         internal static IEnumerable<ThingDef> ReadBossDefNames()
         {
             foreach (var kind in DefDatabase<PawnKindDef>.AllDefsListForReading)
