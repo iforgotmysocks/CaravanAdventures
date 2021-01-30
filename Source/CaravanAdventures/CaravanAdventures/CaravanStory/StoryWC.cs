@@ -163,7 +163,7 @@ namespace CaravanAdventures.CaravanStory
         private void InitializeStoryFlags()
         {
             if (storyFlags == null) storyFlags = new Dictionary<string, bool>();
-            for (int i = 1; i < shrineMaximum + 1; i++)
+            for (int i = 1; i < shrineMaximum + 2; i++)
             {
                 flagsToAdd.Add("Shrine" + i + "_InitCountDownStarted");
                 flagsToAdd.Add("Shrine" + i + "_Created");
@@ -280,9 +280,9 @@ namespace CaravanAdventures.CaravanStory
         public void SetShrineSF(string postFix) => storyFlags[storyFlags.Keys.FirstOrDefault(x => x.StartsWith(BuildCurrentShrinePrefix() + postFix))] = true;
         public void ResetCurrentShrineFlags() => storyFlags.Keys.Where(x => x.StartsWith(BuildCurrentShrinePrefix())).ToList().ForEach(key => storyFlags[key] = false);
         public void ResetSFsStartingWith(string start) => storyFlags.Keys.Where(x => x.StartsWith(start)).ToList().ForEach(key => storyFlags[key] = false);
-        public string BuildCurrentShrinePrefix() => "Shrine" + (countShrinesCompleted < shrineMaximum ? countShrinesCompleted + 1 : shrineMaximum) + "_";
+        public string BuildCurrentShrinePrefix(bool ignoreLimit = false) => ignoreLimit ? "Shrine" + countShrinesCompleted + 1 : "Shrine" + (countShrinesCompleted < shrineMaximum + 1 ? countShrinesCompleted + 1 : shrineMaximum + 1) + "_";
         public string BuildMaxShrinePrefix() => "Shrine" + shrineMaximum + "_";
-        public int GetCurrentShrineCounter(bool ignoreLimit = false) => ignoreLimit ? countShrinesCompleted + 1 : countShrinesCompleted < shrineMaximum ? countShrinesCompleted + 1 : shrineMaximum;
+        public int GetCurrentShrineCounter(bool ignoreLimit = false) => ignoreLimit ? countShrinesCompleted + 1 : countShrinesCompleted < shrineMaximum +1 ? countShrinesCompleted + 1 : shrineMaximum + 1;
         public int GetShrineMaxiumum => shrineMaximum;
 
         public List<AbilityDef> GetUnlockedSpells() => unlockedSpells;
@@ -294,7 +294,7 @@ namespace CaravanAdventures.CaravanStory
             !storyFlags.Any(x => x.Key.StartsWith("Start_") && x.Value == false)
             && !storyFlags.Any(x => x.Key == BuildCurrentShrinePrefix() + "Completed" && x.Value == true)
             && !storyFlags.Any(x => x.Key == BuildCurrentShrinePrefix() + "InitCountDownStarted" && x.Value == true)
-            && countShrinesCompleted < shrineMaximum;
+            && (countShrinesCompleted < shrineMaximum || countShrinesCompleted >= shrineMaximum && ModSettings.issueFurtherShrineLocationsAfterStoryEnd);
 
         // todo - incomplete
         private bool CheckCanStartFriendlyCaravanCounter() => !storyFlags["TradeCaravan_InitCountDownStarted"];

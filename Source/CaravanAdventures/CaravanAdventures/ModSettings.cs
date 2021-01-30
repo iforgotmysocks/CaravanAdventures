@@ -55,6 +55,7 @@ namespace CaravanAdventures
         public static bool limitLargeMapSizesToTestedSize = true;
         public static bool apocalypseEnabled = true;
         public static float apocalypseTemperatureChangePerDay = -0.084f;
+        public static bool issueFurtherShrineLocationsAfterStoryEnd = true;
 
         // shrines
         public static float shrineMechDifficultyMultiplier = 1.2f;
@@ -113,6 +114,7 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref limitLargeMapSizesToTestedSize, "limitLargeMapSizesToTestedSize", true);
             Scribe_Values.Look(ref apocalypseEnabled, "apocalypseEndabled");
             Scribe_Values.Look(ref apocalypseTemperatureChangePerDay, "apocalypseTemperatureChangePerDay", -0.084f);
+            Scribe_Values.Look(ref issueFurtherShrineLocationsAfterStoryEnd, "issueFurtherShrineLocationsAfterStoryEnd", true);
 
             // shrines
             Scribe_Values.Look(ref shrineMechDifficultyMultiplier, "shrineMechDifficultyMultiplier", 1.2f);

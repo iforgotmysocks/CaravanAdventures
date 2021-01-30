@@ -373,6 +373,8 @@ namespace CaravanAdventures.CaravanStory
                     spell.label.CapitalizeFirst().Colorize(Color.cyan)
                 )
             );
+
+            if (CompCache.StoryWC.GetCurrentShrineCounter() > CompCache.StoryWC.GetShrineMaxiumum) CompCache.StoryWC.ResetCurrentShrineFlags();
         }
 
         private void LearnSpell(Pawn gifted, AbilityDef spell)
