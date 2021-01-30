@@ -341,12 +341,12 @@ namespace CaravanAdventures.CaravanCamp
             for (; ; )
             {
                 var selCol = prodColList.FirstOrDefault(col => prodColList.Any(otherCol => otherCol != col && (new[] {
-                        col.relations.GetFirstDirectRelationPawn(PawnRelationDefOf.Lover),
                         col.relations.GetFirstDirectRelationPawn(PawnRelationDefOf.Spouse),
+                        col.relations.GetFirstDirectRelationPawn(PawnRelationDefOf.Lover),
                         col.relations.GetFirstDirectRelationPawn(PawnRelationDefOf.Fiance)}).Contains(otherCol)));
 
                 if (selCol == null) break;
-                var otherPawn = LovePartnerRelationUtility.ExistingLovePartner(selCol);
+                var otherPawn = CampHelper.ExistingColonistLovePartner(selCol, colonists);
                 pairList.Add(new List<Pawn> { selCol, otherPawn });
                 prodColList.Remove(selCol);
                 prodColList.Remove(otherPawn);

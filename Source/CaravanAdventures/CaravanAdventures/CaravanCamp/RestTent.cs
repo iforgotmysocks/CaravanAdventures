@@ -23,9 +23,8 @@ namespace CaravanAdventures.CaravanCamp
         public override void Build(Map map, List<Thing> campAssetListRef)
         {
             base.Build(map, campAssetListRef);
-            var lover = Occupants.FirstOrDefault(col => col != null && LovePartnerRelationUtility.ExistingLovePartner(col) != null
-                && Occupants.Contains(LovePartnerRelationUtility.ExistingLovePartner(col)));
-            var otherLover = lover != null ? LovePartnerRelationUtility.ExistingLovePartner(lover) : null;
+            var lover = Occupants.FirstOrDefault(col => col != null && CampHelper.ExistingColonistLovePartner(col, Occupants) != null);
+            var otherLover = lover != null ? CampHelper.ExistingColonistLovePartner(lover, Occupants) : null;
             var cellSpots = CellRect.Cells.Where(cell => !CellRect.EdgeCells.Contains(cell) && cell.z == CellRect.maxZ - 1).ToArray();
 
             for (int i = 0; i < cellSpots.Length; i++)
@@ -71,9 +70,9 @@ namespace CaravanAdventures.CaravanCamp
         public override void BuildTribal(Map map, List<Thing> campAssetListRef)
         {
             base.BuildTribal(map, campAssetListRef);
-            var lover = Occupants.FirstOrDefault(col => col != null && LovePartnerRelationUtility.ExistingLovePartner(col) != null
-               && Occupants.Contains(LovePartnerRelationUtility.ExistingLovePartner(col)));
-            var otherLover = lover != null ? LovePartnerRelationUtility.ExistingLovePartner(lover) : null;
+            var lover = Occupants.FirstOrDefault(col => col != null && CampHelper.ExistingColonistLovePartner(col) != null
+               && Occupants.Contains(CampHelper.ExistingColonistLovePartner(col)));
+            var otherLover = lover != null ? CampHelper.ExistingColonistLovePartner(lover) : null;
             var cellSpots = CellRect.Cells.Where(cell => !CellRect.EdgeCells.Contains(cell) && cell.z == CellRect.maxZ - 1).ToArray();
 
             for (int i = 0; i < cellSpots.Length; i++)

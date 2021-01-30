@@ -84,5 +84,20 @@ namespace CaravanAdventures.CaravanCamp
             skillLevel = lowestSkill > skillLevel ? lowestSkill : skillLevel;
             compQual.SetQuality(QualityUtility.GenerateQualityCreatedByPawn(skillLevel, false), ArtGenerationContext.Colony);
         }
+
+        public static Pawn ExistingColonistLovePartner(Pawn pawn, List<Pawn> group = null)
+        {
+            Predicate<Pawn> predicate = null;
+            if (group == null) predicate = x => x.IsColonist;
+            else predicate = x => group.Contains(x);
+
+            var firstDirectRelationPawn = pawn.relations.GetFirstDirectRelationPawn(PawnRelationDefOf.Spouse, predicate);
+            if (firstDirectRelationPawn != null) return firstDirectRelationPawn;
+            firstDirectRelationPawn = pawn.relations.GetFirstDirectRelationPawn(PawnRelationDefOf.Lover, predicate);
+            if (firstDirectRelationPawn != null) return firstDirectRelationPawn;
+            firstDirectRelationPawn = pawn.relations.GetFirstDirectRelationPawn(PawnRelationDefOf.Fiance, predicate);
+            if (firstDirectRelationPawn != null) return firstDirectRelationPawn;
+            return null;
+        }
     }
 }
