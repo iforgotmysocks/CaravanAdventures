@@ -41,6 +41,12 @@ namespace CaravanAdventures.Settings
             options.Label("Ancient Abilities:".Colorize(Color.red), 40f);
 
             Text.Font = GameFont.Small;
+
+            options.Label("Ancient Gift:".Colorize(Color.green), 24f);
+            options.Label("Passive psyfocus gain per sec: " + Math.Round(ModSettings.ancientGiftPassivePsyfocusGainPerSec * 100, 2) + "%");
+            ModSettings.ancientGiftPassivePsyfocusGainPerSec = options.Slider(ModSettings.ancientGiftPassivePsyfocusGainPerSec, 0.00001f, 0.01f);
+            options.Gap();
+
             options.Label("Ancient thunderbolt:".Colorize(Color.green), 24f);
             options.Label("Mechanoid bodypart dissmember chance: " + Convert.ToInt32(ModSettings.mechanoidDissmemberChance * 100) + "%");
             ModSettings.mechanoidDissmemberChance = options.Slider(ModSettings.mechanoidDissmemberChance, 0f, 1f);
@@ -59,12 +65,15 @@ namespace CaravanAdventures.Settings
             options.Label("Ancient meditation".Colorize(Color.green));
             options.Label($"Psyfocus restored: {Convert.ToInt32(ModSettings.psyfocusToRestore * 100)}% + up to around 25% for drained nature.");
             ModSettings.psyfocusToRestore = options.Slider(ModSettings.psyfocusToRestore, 0f, 1f);
-
+            options.Label($"Psyfocus multiplier from draining nature: {Math.Round(ModSettings.plantScoreMultiplier, 2)}");
+            ModSettings.plantScoreMultiplier = options.Slider(ModSettings.plantScoreMultiplier, 0f, 5f);
             options.Gap(24f);
 
             options.Label("Ancient protective aura".Colorize(Color.green));
             options.Label($"Damage healed per second: {Math.Round(ModSettings.healingPerSecond, 2)}");
             ModSettings.healingPerSecond = options.Slider(ModSettings.healingPerSecond, 0f, 1f);
+            options.Label($"Max allowed linked pawns: {ModSettings.maxLinkedAuraPawns}");
+            ModSettings.maxLinkedAuraPawns = Convert.ToInt32(options.Slider(ModSettings.maxLinkedAuraPawns, 1f, 10f));
             options.CheckboxLabeled("Can stop mental breaks?", ref ModSettings.stopMentalBreaks);
             options.CheckboxLabeled("Only heal permanent wounds when pawn has ancient gift?", ref ModSettings.onlyHealPermWhenGifted);
 

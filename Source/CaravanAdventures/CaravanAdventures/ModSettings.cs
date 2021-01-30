@@ -39,7 +39,8 @@ namespace CaravanAdventures
         public static float additionalBuildingAreaDamageMin = 0.5f;
         public static float additionalBuildingAreaDamageMax = 0.75f;
         // - meditation
-        public static float psyfocusToRestore = 0.3f;
+        public static float psyfocusToRestore = 0.2f;
+        public static float plantScoreMultiplier = 2.0f;
         // - protective aura
         public static float healingPerSecond = 0.05f;
         public static bool onlyHealPermWhenGifted = false;
@@ -97,7 +98,8 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref additionalBuildingAreaDamageMin, "additionalBuildingAreaDamageMin", 0.5f);
             Scribe_Values.Look(ref additionalBuildingAreaDamageMax, "additionalBuildingAreaDamageMax", 0.75f);
             // - meditation
-            Scribe_Values.Look(ref psyfocusToRestore, "psyfocusToRestore", 0.3f);
+            Scribe_Values.Look(ref psyfocusToRestore, "psyfocusToRestore", 0.2f);
+            Scribe_Values.Look(ref plantScoreMultiplier, "plantScoreMultiplier", 2.0f);
             // - protective aura
             Scribe_Values.Look(ref healingPerSecond, "healingPerSecond", 0.05f);
             Scribe_Values.Look(ref stopMentalBreaks, "stopMentalBreaks", false);
@@ -195,6 +197,11 @@ namespace CaravanAdventures
             options.Gap();
             // end test
 
+            options.Label("Ancient abilities:".Colorize(Color.red), 40f);
+            if (options.ButtonTextLabeled("Ancient ability settings", "Open abilities")) Find.WindowStack.Add(new SettingsAbilities());
+            options.Gap();
+
+
             options.Label("Settlement price adjustments");
             options.Label("Multiplies the current money for settlements with less then 3k silver by 3, and those with more by 2");
             if (options.ButtonTextLabeled("Increase Settlement money", "Increase")) Helper.AdjustSettlementPrices();
@@ -217,40 +224,43 @@ namespace CaravanAdventures
             ancientGiftPassivePsyfocusGainPerSec = options.Slider(ancientGiftPassivePsyfocusGainPerSec, 0.01f, 0.00001f);
             options.Gap();
 
-            options.Label("Ancient thunderbolt:".Colorize(Color.red), 40f);
-            options.Label("Mechanoid bodypart dissmember chance: " + Convert.ToInt32(mechanoidDissmemberChance * 100) + "%");
-            mechanoidDissmemberChance = options.Slider(mechanoidDissmemberChance, 0f, 1f);
-            options.Gap();
-            options.Label("Human bodypart dissmember chance: " + Convert.ToInt32(humanDissmemberChance * 100) + "%");
-            humanDissmemberChance = options.Slider(humanDissmemberChance, 0f, 1f);
-            options.Gap();
-            options.Label("Additional minimum damage to buildings: " + Convert.ToInt32(additionalBuildingAreaDamageMin * 100) + "%");
-            additionalBuildingAreaDamageMin = options.Slider(additionalBuildingAreaDamageMin, 0f, 1f);
-            options.Gap();
-            options.Label("Additional maximum damage to buildings: " + Convert.ToInt32(additionalBuildingAreaDamageMax * 100) + "%");
-            additionalBuildingAreaDamageMax = options.Slider(additionalBuildingAreaDamageMax, 0f, 1f);
+            // moved to extra window
+            {
+                //options.Label("Ancient thunderbolt:".Colorize(Color.red), 40f);
+                //options.Label("Mechanoid bodypart dissmember chance: " + Convert.ToInt32(mechanoidDissmemberChance * 100) + "%");
+                //mechanoidDissmemberChance = options.Slider(mechanoidDissmemberChance, 0f, 1f);
+                //options.Gap();
+                //options.Label("Human bodypart dissmember chance: " + Convert.ToInt32(humanDissmemberChance * 100) + "%");
+                //humanDissmemberChance = options.Slider(humanDissmemberChance, 0f, 1f);
+                //options.Gap();
+                //options.Label("Additional minimum damage to buildings: " + Convert.ToInt32(additionalBuildingAreaDamageMin * 100) + "%");
+                //additionalBuildingAreaDamageMin = options.Slider(additionalBuildingAreaDamageMin, 0f, 1f);
+                //options.Gap();
+                //options.Label("Additional maximum damage to buildings: " + Convert.ToInt32(additionalBuildingAreaDamageMax * 100) + "%");
+                //additionalBuildingAreaDamageMax = options.Slider(additionalBuildingAreaDamageMax, 0f, 1f);
 
-            options.Gap(24f);
+                //options.Gap(24f);
 
-            options.Label("Ancient meditation".Colorize(Color.red));
-            options.Label($"Psyfocus restored: {Convert.ToInt32(psyfocusToRestore * 100)}% + up to around 25% for drained nature.");
-            psyfocusToRestore = options.Slider(psyfocusToRestore, 0f, 1f);
+                //options.Label("Ancient meditation".Colorize(Color.red));
+                //options.Label($"Psyfocus restored: {Convert.ToInt32(psyfocusToRestore * 100)}% + up to around 25% for drained nature.");
+                //psyfocusToRestore = options.Slider(psyfocusToRestore, 0f, 1f);
 
-            options.Gap(24f);
+                //options.Gap(24f);
 
-            options.Label("Ancient protective aura".Colorize(Color.red));
-            options.Label($"Damage healed per second: {Math.Round(healingPerSecond, 2)}");
-            healingPerSecond = options.Slider(healingPerSecond, 0f, 1f);
-            options.Label($"Max allowed linked pawns: {maxLinkedAuraPawns}");
-            maxLinkedAuraPawns = Convert.ToInt32(options.Slider(maxLinkedAuraPawns, 1f, 10f));
-            options.CheckboxLabeled("Can stop mental breaks?", ref stopMentalBreaks);
-            options.CheckboxLabeled("Only heal permanent wounds when pawn has ancient gift?", ref onlyHealPermWhenGifted);
+                //options.Label("Ancient protective aura".Colorize(Color.red));
+                //options.Label($"Damage healed per second: {Math.Round(healingPerSecond, 2)}");
+                //healingPerSecond = options.Slider(healingPerSecond, 0f, 1f);
+                //options.Label($"Max allowed linked pawns: {maxLinkedAuraPawns}");
+                //maxLinkedAuraPawns = Convert.ToInt32(options.Slider(maxLinkedAuraPawns, 1f, 10f));
+                //options.CheckboxLabeled("Can stop mental breaks?", ref stopMentalBreaks);
+                //options.CheckboxLabeled("Only heal permanent wounds when pawn has ancient gift?", ref onlyHealPermWhenGifted);
 
-            options.Gap(24f);
+                //options.Gap(24f);
 
-            options.Label("Mystical light".Colorize(Color.red));
-            options.Label($"Duration in seconds: {Math.Round(lightDuration / 60, 0)}");
-            lightDuration = options.Slider(lightDuration, 60f, 14400f);
+                //options.Label("Mystical light".Colorize(Color.red));
+                //options.Label($"Duration in seconds: {Math.Round(lightDuration / 60, 0)}");
+                //lightDuration = options.Slider(lightDuration, 60f, 14400f);
+            }
 
             options.Gap();
             options.CheckboxLabeled("Generate storage tents for all items and unload", ref generateStorageForAllInventory);

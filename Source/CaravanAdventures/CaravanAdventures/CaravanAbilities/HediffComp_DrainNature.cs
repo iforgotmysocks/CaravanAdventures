@@ -17,6 +17,7 @@ namespace CaravanAdventures.CaravanAbilities
         // todo - remove totalPlantScore, was just for debugging purposes
         private float plantScore = 0;
         private float totalPlantScore = 0;
+        private float totalGain = 0f;
         private float skillGainPerTick;
 
         private readonly float leaflessPlantKillChance = 0.05f;
@@ -47,14 +48,19 @@ namespace CaravanAdventures.CaravanAbilities
 
             if (ticks > 100)
             {
-                Pawn.psychicEntropy.OffsetPsyfocusDirectly(isGifted ? (skillGainPerTick + plantScore) : ((skillGainPerTick + plantScore) / 2));
-                totalPlantScore += plantScore;
+                var adjPlantScore = plantScore * ModSettings.plantScoreMultiplier;
+                Pawn.psychicEntropy.OffsetPsyfocusDirectly(isGifted ? (skillGainPerTick + adjPlantScore) : ((skillGainPerTick + adjPlantScore) / 2));
+                totalPlantScore += adjPlantScore;
+                totalGain += adjPlantScore + skillGainPerTick;
                 plantScore = 0;
             }
+
+            if (ticks % 60 == 0) Log.Message($"score raw {plantScore} score mult: {plantScore * ModSettings.plantScoreMultiplier} total: {totalPlantScore}");
 
             if (ticks > endTicks)
             {
                 //Log.Message("Plantscore: " + totalPlantScore);
+                ApplyPsyfocusToSurroundingPawns(10);
                 Pawn.health.hediffSet.hediffs.Remove(parent);
                 return;
             }
@@ -89,7 +95,15 @@ namespace CaravanAdventures.CaravanAbilities
                 }
             }
         }
-    
+
+        private void ApplyPsyfocusToSurroundingPawns(int range)
+        {
+            var psyfocus =  totalGain / 3;
+            var cells = GenRadial.RadialCellsAround(Pawn.Position, range, false).Where(cell => cell.InBounds(Pawn.Map));
+            var pawns = cells.Select(x => x.GetFirstPawn(Pawn.Map)).Where(pawn => pawn?.IsColonist == true).ToList();
+            foreach (var pawn in pawns) pawn.psychicEntropy.OffsetPsyfocusDirectly(psyfocus);
+        }
+
         private void HarmRandomPlantInRadius(float radius)
         {
             IntVec3 c = this.parent.pawn.Position + (Rand.InsideUnitCircleVec3 * radius).ToIntVec3();
@@ -105,19 +119,19 @@ namespace CaravanAdventures.CaravanAbilities
                     if (Rand.Value < leaflessPlantKillChance)
                     {
                         plant.Kill(null, null);
-                        plantScore += 0.0004f;
+                        plantScore += 0.0007f;
                         return;
                     }
                 }
                 else
                 {
                     plant.MakeLeafless(Plant.LeaflessCause.Poison);
-                    plantScore += 0.0002f;
+                    plantScore += 0.00035f;
                 }
             }
         }
 
-        private bool IsGifted => Pawn.health.hediffSet.hediffs.FirstOrDefault(x => x.def.defName == "AncientGift") != null || false;
+        private bool IsGifted => Pawn.health.hediffSet.hediffs.FirstOrDefault(x => x.def == AbilityDefOf.CAAncientGift) != null || false;
 
         public override void CompExposeData()
         {
