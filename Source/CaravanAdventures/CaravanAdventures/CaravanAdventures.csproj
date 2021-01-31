@@ -97,6 +97,7 @@
     <Compile Include="CaravanCamp\IShelfTent.cs" />
     <Compile Include="CaravanCamp\IZoneTent.cs" />
     <Compile Include="CaravanCamp\JobDriver_StartPackingUp.cs" />
+    <Compile Include="CaravanCamp\PlantTent.cs" />
     <Compile Include="CaravanCamp\StorageTent.cs" />
     <Compile Include="CaravanCamp\FoodTent.cs" />
     <Compile Include="CaravanCamp\MedicalTent.cs" />
