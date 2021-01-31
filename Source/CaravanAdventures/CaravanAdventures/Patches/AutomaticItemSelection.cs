@@ -70,7 +70,7 @@ namespace CaravanAdventures.Patches
 
         public static void Dialog_FormCaravan_Postfix(ref bool ___autoSelectFoodAndMedicine)
         {
-            if (ModSettings.autoSupplyDisabled) ___autoSelectFoodAndMedicine = false;
+            if (InitGC.autoSupplyDisabled) ___autoSelectFoodAndMedicine = false;
         }
 
         private static void UpdatePeopleSection(List<Section> ___sections)
@@ -124,7 +124,7 @@ namespace CaravanAdventures.Patches
                 FilterCombs.ApplyNone(sections);
                 anythingChanged = true;
             }
-            Widgets.CheckboxLabeled(new Rect(rect2.xMax + 25f + 285f, 0f, 77f, 30f), "Supply disabled", ref ModSettings.autoSupplyDisabled);
+            Widgets.CheckboxLabeled(new Rect(rect2.xMax + 25f + 285f, 0f, 77f, 30f), "Supply disabled", ref InitGC.autoSupplyDisabled);
             GUI.EndGroup();
         }
 

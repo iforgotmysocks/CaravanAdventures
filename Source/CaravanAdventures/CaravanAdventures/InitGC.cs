@@ -24,7 +24,9 @@ namespace CaravanAdventures
 
         public static ThingFilter journeyFilter;
         public static bool journeyExclusive = false;
-        
+
+        public static bool autoSupplyDisabled = false;
+
         // todo
         //public static ThingFilter PackUpFilter
         //{
@@ -53,6 +55,8 @@ namespace CaravanAdventures
 
             Scribe_Deep.Look(ref journeyFilter, "journeyFilter");
             Scribe_Values.Look(ref journeyExclusive, "journeyExclusive", false);
+
+            Scribe_Values.Look(ref autoSupplyDisabled, "autoSupplyDisabled", false);
         }
 
         public override void FinalizeInit()
