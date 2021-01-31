@@ -601,9 +601,9 @@
 			-->
     </comps>
     <!--<designationCategory>Temperature</designationCategory>-->
-    <researchPrerequisites>
+    <!--<researchPrerequisites>
       <li>Electricity</li>
-    </researchPrerequisites>
+    </researchPrerequisites>-->
   </ThingDef>
 
   <!-- cooler -->
@@ -681,10 +681,77 @@
       </li>
     </comps>
     <!--<designationCategory>Temperature</designationCategory>-->
-    <researchPrerequisites>
+    <!--<researchPrerequisites>
       <li>Electricity</li>
-    </researchPrerequisites>
+    </researchPrerequisites>-->
   </ThingDef>
+  
+  <!-- trade beacon -->
+  <ThingDef ParentName="CATentBase">
+    <defName>CAOrbitalTradeBeacon</defName>
+    <label>orbital trade beacon</label>
+    <description>Required for orbital trading. You can only sell goods to orbital traders if they're near an orbital trade beacon. Can be placed indoors.</description>
+    <thingClass>Building_OrbitalTradeBeacon</thingClass>
+    <graphicData>
+      <texPath>Things/Building/Misc/DropBeacon</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shadowData>
+        <volume>(0.3, 0.2, 0.3)</volume>
+        <offset>(0,0,-0.1)</offset>
+      </shadowData>
+      <damageData>
+        <rect>(0.2,0.2,0.6,0.6)</rect>
+      </damageData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <!--<minifiedDef>MinifiedThing</minifiedDef>-->
+    <!--<thingCategories>
+      <li>BuildingsMisc</li>
+    </thingCategories>-->
+    <statBases>
+      <MaxHitPoints>75</MaxHitPoints>
+      <WorkToBuild>800</WorkToBuild>
+      <Flammability>0.5</Flammability>
+      <Mass>5</Mass>
+    </statBases>
+    <tickerType>Normal</tickerType>
+   <drawerType>MapMeshAndRealTime</drawerType>
+    <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+    <fillPercent>0.15</fillPercent>
+    <costList>
+      <Steel>40</Steel>
+      <ComponentIndustrial>1</ComponentIndustrial>
+    </costList>
+    <building>
+      <destroySound>BuildingDestroyed_Metal_Small</destroySound>
+    </building>
+    <comps>
+      <li Class="CompProperties_Flickable"/>
+      <!--<li Class="CompProperties_Breakdownable"/>-->
+      <li Class="CompProperties_Refuelable">
+        <fuelConsumptionRate>0.2</fuelConsumptionRate>
+        <fuelCapacity>1</fuelCapacity>
+        <fuelFilter>
+          <thingDefs>
+            <li>Chemfuel</li>
+          </thingDefs>
+        </fuelFilter>
+        <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+      </li>
+    </comps>
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <pathCost>14</pathCost>
+    <!--<designationCategory>Misc</designationCategory>-->
+    <rotatable>false</rotatable>
+    <placeWorkers>
+      <li>PlaceWorker_ShowTradeBeaconRadius</li>
+    </placeWorkers>
+    <!--<designationHotKey>Misc2</designationHotKey>-->
+    <!--<researchPrerequisites>
+      <li>MicroelectronicsBasics</li>
+    </researchPrerequisites>-->
+  </ThingDef>
+
 
   <TerrainDef Name="CATentFloorBase" Parent="CATentBase" Abstract="True">
     <layerable>true</layerable>

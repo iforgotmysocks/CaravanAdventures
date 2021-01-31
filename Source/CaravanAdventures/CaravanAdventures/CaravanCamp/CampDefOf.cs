@@ -29,6 +29,7 @@ namespace CaravanAdventures.CaravanCamp
         public static ThingDef CASpacerBedrollDouble;
         public static ThingDef CATentDoor;
         public static ThingDef CAMiniCommsConsole;
+        public static ThingDef CAOrbitalTradeBeacon;
 
         public static ThingDef CAMakeshiftBedroll;
         public static ThingDef CAMakeshiftBedrollDouble;
