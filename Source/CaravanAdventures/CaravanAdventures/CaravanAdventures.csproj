@@ -181,6 +181,7 @@
     <Compile Include="Patches\KillBountyPatches.cs" />
     <Compile Include="Patches\TalkPawnGUIOverlay.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings\SettingsStory.cs" />
     <Compile Include="Settings\SettingsFilters.cs" />
     <Compile Include="Settings\SettingsAbilities.cs" />
   </ItemGroup>

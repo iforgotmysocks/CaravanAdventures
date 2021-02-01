@@ -168,97 +168,34 @@ namespace CaravanAdventures
 
             options.CheckboxLabeled("Debug mode", ref debug);
             options.CheckboxLabeled("Debug messages", ref debugMessages);
+
             if (options.ButtonText("Reset final shrine flags")) StoryUtility.ResetLastShrineFlags();
-           
             if (options.ButtonText("Print world pawns")) Helper.PrintWorldPawns();
-
             if (options.ButtonText("Reset full story")) StoryUtility.RestartStory();
-            options.CheckboxLabeled("Apocalypse enabled", ref apocalypseEnabled);
-            options.Label($"Apocalypse temperature change per day: {Math.Round(apocalypseTemperatureChangePerDay, 4)}  (Default: -0.084)");
-            apocalypseTemperatureChangePerDay = options.Slider(apocalypseTemperatureChangePerDay, 0f, -0.5f);
-            if (options.ButtonTextLabeled("Reset apocalypse event", "Reset")) CompCache.StoryWC.questCont.LastJudgment.ResetApocalypse(-0.1f);
-            options.Gap();
 
-            // todo figure out scroll views
-            //Rect viewRect = new Rect(0, 0, 500, 3000);
-            //Vector2 vec = new Vector2(0, 0);
-            //options.BeginScrollView(wrect, ref vec, ref viewRect);
-            // todo move to seperate window!
-
-            // todo test remove
+            // test
             options.Label("Filtertest:".Colorize(Color.red), 40f);
             if (options.ButtonTextLabeled("Filter settings", "Open Filters")) Find.WindowStack.Add(new SettingsFilters());
             Widgets.CheckboxLabeled(BRect(options.ColumnWidth - 400, options.GetRect(Text.LineHeight).y, 200, Text.LineHeight), "Enabled: ", ref toggleTest);
             Widgets.ButtonText(BRect(options.ColumnWidth - 200, lastRect.y, 200, Text.LineHeight), "button");
             options.Gap();
-            // end test
 
             options.Label("Ancient abilities:".Colorize(Color.red), 40f);
             if (options.ButtonTextLabeled("Ancient ability settings", "Open abilities")) Find.WindowStack.Add(new SettingsAbilities());
             options.Gap();
 
+            options.Label("Story settings:".Colorize(Color.red), 40f);
+            if (options.ButtonTextLabeled("Story settings", "Open story")) Find.WindowStack.Add(new SettingsStory());
+            options.Gap();
 
+            // move to improvement settings -> or rather delete and adjust that via def patch
             options.Label("Settlement price adjustments");
             options.Label("Multiplies the current money for settlements with less then 3k silver by 3, and those with more by 2");
             if (options.ButtonTextLabeled("Increase Settlement money", "Increase")) Helper.AdjustSettlementPrices();
             // todo add min and max multiplier used in the def patch for settlement money
             options.Gap();
 
-            options.Label("Shrine mech combat point multiplier:".Colorize(Color.red), 40f);
-            options.Label("Multiplier: " + Math.Round(shrineMechDifficultyMultiplier, 2) + "  (default: 1.2)");
-            shrineMechDifficultyMultiplier = options.Slider(shrineMechDifficultyMultiplier, 0.2f, 10f);
-            options.Gap();
-
-
-            options.CheckboxLabeled("Remove royal title requirements", ref removeRoyalTitleRequirements);
-            options.Gap();
-            options.CheckboxLabeled("Only remove Acolyte and Knight title requirements", ref removeOnlyAcolyteAndKnightRoyalTitleRequirements);
-            options.Gap();
-
-            options.Label("Ancient Gift:".Colorize(Color.red), 40f);
-            options.Label("Passive psyfocus gain per sec: " + Math.Round(ancientGiftPassivePsyfocusGainPerSec * 100, 2) + "%");
-            ancientGiftPassivePsyfocusGainPerSec = options.Slider(ancientGiftPassivePsyfocusGainPerSec, 0.01f, 0.00001f);
-            options.Gap();
-
-            // moved to extra window
-            {
-                //options.Label("Ancient thunderbolt:".Colorize(Color.red), 40f);
-                //options.Label("Mechanoid bodypart dissmember chance: " + Convert.ToInt32(mechanoidDissmemberChance * 100) + "%");
-                //mechanoidDissmemberChance = options.Slider(mechanoidDissmemberChance, 0f, 1f);
-                //options.Gap();
-                //options.Label("Human bodypart dissmember chance: " + Convert.ToInt32(humanDissmemberChance * 100) + "%");
-                //humanDissmemberChance = options.Slider(humanDissmemberChance, 0f, 1f);
-                //options.Gap();
-                //options.Label("Additional minimum damage to buildings: " + Convert.ToInt32(additionalBuildingAreaDamageMin * 100) + "%");
-                //additionalBuildingAreaDamageMin = options.Slider(additionalBuildingAreaDamageMin, 0f, 1f);
-                //options.Gap();
-                //options.Label("Additional maximum damage to buildings: " + Convert.ToInt32(additionalBuildingAreaDamageMax * 100) + "%");
-                //additionalBuildingAreaDamageMax = options.Slider(additionalBuildingAreaDamageMax, 0f, 1f);
-
-                //options.Gap(24f);
-
-                //options.Label("Ancient meditation".Colorize(Color.red));
-                //options.Label($"Psyfocus restored: {Convert.ToInt32(psyfocusToRestore * 100)}% + up to around 25% for drained nature.");
-                //psyfocusToRestore = options.Slider(psyfocusToRestore, 0f, 1f);
-
-                //options.Gap(24f);
-
-                //options.Label("Ancient protective aura".Colorize(Color.red));
-                //options.Label($"Damage healed per second: {Math.Round(healingPerSecond, 2)}");
-                //healingPerSecond = options.Slider(healingPerSecond, 0f, 1f);
-                //options.Label($"Max allowed linked pawns: {maxLinkedAuraPawns}");
-                //maxLinkedAuraPawns = Convert.ToInt32(options.Slider(maxLinkedAuraPawns, 1f, 10f));
-                //options.CheckboxLabeled("Can stop mental breaks?", ref stopMentalBreaks);
-                //options.CheckboxLabeled("Only heal permanent wounds when pawn has ancient gift?", ref onlyHealPermWhenGifted);
-
-                //options.Gap(24f);
-
-                //options.Label("Mystical light".Colorize(Color.red));
-                //options.Label($"Duration in seconds: {Math.Round(lightDuration / 60, 0)}");
-                //lightDuration = options.Slider(lightDuration, 60f, 14400f);
-            }
-
-            options.Gap();
+            // camp settings
             options.CheckboxLabeled("Generate storage tents for all items and unload", ref generateStorageForAllInventory);
             options.CheckboxLabeled("Let animals run free", ref letAnimalsRunFree);
 
