@@ -37,6 +37,7 @@ namespace CaravanAdventures.CaravanCamp
         private bool hasProductionTent = true;
         private bool hasAnimalArea = true;
         private bool hasPrisonTent = true;
+        private bool hasPlantTent = true;
         private bool clearSnow = false;
 
         private CellRect coordSystem;
@@ -46,6 +47,7 @@ namespace CaravanAdventures.CaravanCamp
         private float campCost = 0;
         private bool tribal = false;
         private int waste;
+
 
         public CampBuilder(Caravan caravan, Map map)
         {
@@ -96,6 +98,7 @@ namespace CaravanAdventures.CaravanCamp
             if (hasMedicalTent) campParts.Add(new MedicalTent());
             if (hasAnimalArea) campParts.Add(new AnimalArea());
             if (hasPrisonTent) campParts.Add(new PrisonerTent());
+            if (hasPlantTent) campParts.Add(new PlantTent());
             if (ModSettings.generateStorageForAllInventory)
             {
                 var tent = new StorageTent();
@@ -426,7 +429,7 @@ namespace CaravanAdventures.CaravanCamp
                 areaRestrictionTent.AssignPawnsToAreas(map, caravan);
             }
 
-            CampHelper.AddAnimalFreeAreaRestriction(campParts.OfType<IZoneTent>().Where(part => part is FoodTent), map, caravan, ModSettings.letAnimalsRunFree);
+            CampHelper.AddAnimalFreeAreaRestriction(campParts.Where(part => part is FoodTent || part is PlantTent), map, caravan, ModSettings.letAnimalsRunFree);
         }
 
         protected void GenerateRecipes()

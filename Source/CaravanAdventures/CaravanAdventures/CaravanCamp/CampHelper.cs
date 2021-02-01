@@ -30,9 +30,9 @@ namespace CaravanAdventures.CaravanCamp
 
         internal static Thing PrepAndGenerateThing(object objThing, IntVec3 cell, Map map, Rot4 rot, List<Thing> campAssetListRef, bool skipFaction = false)
         {
-            
             var spawnedThing = objThing is Thing thing ? GenSpawn.Spawn(thing, cell, map, rot) 
                 : objThing is ThingDef thingDef ? GenSpawn.Spawn(thingDef, cell, map) : null;
+
             if (spawnedThing == null)
             {
                 Log.Warning($"Failed to spawn thing that should have been spawned in camp setup");
@@ -65,13 +65,14 @@ namespace CaravanAdventures.CaravanCamp
             roomGroup.PushHeat(remainingTemp * cellRect.Cells.Where(curCell => !cellRect.EdgeCells.Contains(curCell)).Count());
         }
 
-        internal static void AddAnimalFreeAreaRestriction(IEnumerable<IZoneTent> parts, Map map, Caravan caravan, bool assignAnimals = false)
+        internal static void AddAnimalFreeAreaRestriction(IEnumerable<CampArea> parts, Map map, Caravan caravan, bool assignAnimals = false)
         {
             var animalArea = new Area_Allowed(map.areaManager);
             map.areaManager.AllAreas.Add(animalArea);
             animalArea.SetLabel("CAAnimalNoFoodAreaLabel".Translate());
             map.AllCells.ToList().ForEach(cell => animalArea[cell] = true);
-            parts.Where(part => part.GetZone() != null).Select(part => part.GetZone()).ToList().ForEach(zone => zone.Cells.ForEach(cell => animalArea[cell] = false));
+            parts.OfType<IZoneTent>().Where(part => part.GetZone() != null).Select(part => part.GetZone()).ToList().ForEach(zone => zone.Cells.ForEach(cell => animalArea[cell] = false));
+            parts.OfType<PlantTent>().ToList().ForEach(tent => tent.CellRect.Cells.Where(cell => !tent.CellRect.EdgeCells.Contains(cell)).ToList().ForEach(cell => animalArea[cell] = false));
             animalArea.AreaUpdate();
 
             if (assignAnimals) foreach (var animal in caravan.PawnsListForReading.Where(pawn => pawn.RaceProps.Animal)) animal.playerSettings.AreaRestriction = animalArea;

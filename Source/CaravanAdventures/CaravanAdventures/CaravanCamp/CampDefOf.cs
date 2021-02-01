@@ -31,6 +31,8 @@ namespace CaravanAdventures.CaravanCamp
         public static ThingDef CAMiniCommsConsole;
         public static ThingDef CAOrbitalTradeBeacon;
 
+        public static ThingDef CAChemfuelPoweredGenerator;
+
         public static ThingDef CAMakeshiftBedroll;
         public static ThingDef CAMakeshiftBedrollDouble;
 

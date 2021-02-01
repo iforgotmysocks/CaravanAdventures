@@ -15,7 +15,7 @@ namespace CaravanAdventures.CaravanCamp
         {
             ForcedTentDirection = ForcedTentDirection.Horizontal;
             CoordSize = 2;
-            SupplyCost = 3;
+            SupplyCost = 6;
         }
 
         public override void Build(Map map, List<Thing> campAssetListRef)
@@ -25,15 +25,26 @@ namespace CaravanAdventures.CaravanCamp
 
             for (int i = 0; i < cellSpots.Length; i++)
             {
-                    var dbThing = ThingMaker.MakeThing(ThingDef.Named("HydroponicsBasin"));
-                    CampHelper.PrepAndGenerateThing(dbThing, cellSpots[i], map, Rot4.East, campAssetListRef);
+                var basinThing = ThingMaker.MakeThing(ThingDef.Named("HydroponicsBasin"));
+                var basin = CampHelper.PrepAndGenerateThing(basinThing, cellSpots[i], map, Rot4.East, campAssetListRef);
+
+                foreach (var cell in basin.OccupiedRect().Cells)
+                {
+                    var plant = CampHelper.PrepAndGenerateThing(ThingDef.Named($"Plant_Rice"), cell, map, default, campAssetListRef, true) as Plant;
+                    plant.Growth = 0.1f;
+                    plant.sown = true;
+                }
             }
 
-            var caheaterPos = CellRect.Cells.FirstOrDefault(cell => cell.y == CellRect.CenterCell.y && cell.x == CellRect.CenterCell.x);
-            var caheater = GenSpawn.Spawn(CampDefOf.CAAirConditioningHeater, caheaterPos, map);
-            caheater.SetFaction(Faction.OfPlayer);
-            campAssetListRef.Add(caheater);
-            var refuelComp = caheater.TryGetComp<CompRefuelable>();
+            var sunThingyPos = CellRect.CenterCell;
+            sunThingyPos.x -= 1;
+            CampHelper.PrepAndGenerateThing(ThingDef.Named("SunLamp"), sunThingyPos, map, default, campAssetListRef);
+
+            var generatorPos = CellRect.CenterCell;
+            generatorPos.x -= 1;
+            generatorPos.z -= 1;
+            var generator = CampHelper.PrepAndGenerateThing(CampDefOf.CAChemfuelPoweredGenerator, generatorPos, map, default, campAssetListRef);
+            var refuelComp = generator.TryGetComp<CompRefuelable>();
             if (refuelComp != null) refuelComp.Refuel(refuelComp.GetFuelCountToFullyRefuel());
         }
 
@@ -41,7 +52,7 @@ namespace CaravanAdventures.CaravanCamp
         {
             // todo
             return;
-           
+
         }
     }
 }
