@@ -126,13 +126,17 @@ namespace CaravanAdventures.CaravanStory
 
         internal static void RestartStory()
         {
+            // todo update - needs to remove judgment aswell
             if (CompCache.StoryWC.questCont.Village.StoryContact != null) CompCache.StoryWC.questCont.Village.StoryContact.Destroy();
             CompCache.StoryWC.questCont.Village.StoryContact = null;
             CompCache.StoryWC.questCont.FriendlyCaravan.storyContactBondedPawn = null;
             CompCache.StoryWC.ResetStoryVars();
             StoryUtility.RemoveExistingQuestFriendlyVillages();
+            Quests.QuestUtility.DeleteQuest(StoryQuestDefOf.CA_TheTree);
             StoryUtility.RemoveMapParentsOfDef(CaravanStorySiteDefOf.CAAncientMasterShrineMP);
             StoryUtility.RemoveMapParentsOfDef(CaravanStorySiteDefOf.CAAncientMasterShrineWO);
+            StoryUtility.RemoveMapParentsOfDef(CaravanStorySiteDefOf.CALastJudgmentMP);
+            Quests.QuestUtility.DeleteQuest(StoryQuestDefOf.CA_FindAncientShrine);
             Log.Message($"Story reset complete");
         }
 

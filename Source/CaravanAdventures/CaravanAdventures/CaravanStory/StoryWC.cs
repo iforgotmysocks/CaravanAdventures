@@ -315,6 +315,7 @@ namespace CaravanAdventures.CaravanStory
             bossMissedCounter = 0;
             unlockedSpells = new List<AbilityDef>();
 
+            CompCache.BountyWC.BountyServiceAvailable = false;
             CompCache.BountyWC.BountyNotificationCounter = -1;
         }
 
