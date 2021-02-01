@@ -27,18 +27,6 @@ namespace CaravanAdventures
 
         public static bool autoSupplyDisabled = false;
 
-        // todo
-        //public static ThingFilter PackUpFilter
-        //{
-        //    get
-        //    {
-        //        if (packUpFilter == null) Settings.SettingsFilters.RestoreFilterDefaults();
-        //        return packUpFilter;
-        //    }
-        //    set => packUpFilter = value;
-        //}
-
-
         public InitGC(Game game)
         {
         }
