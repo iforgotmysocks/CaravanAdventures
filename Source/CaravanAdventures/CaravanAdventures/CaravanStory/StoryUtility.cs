@@ -137,6 +137,8 @@ namespace CaravanAdventures.CaravanStory
             StoryUtility.RemoveMapParentsOfDef(CaravanStorySiteDefOf.CAAncientMasterShrineWO);
             StoryUtility.RemoveMapParentsOfDef(CaravanStorySiteDefOf.CALastJudgmentMP);
             Quests.QuestUtility.DeleteQuest(StoryQuestDefOf.CA_FindAncientShrine);
+            if (CompCache.StoryWC.questCont.LastJudgment.Apocalypse != null) CompCache.StoryWC.questCont.LastJudgment.Apocalypse.End();
+
             Log.Message($"Story reset complete");
         }
 
