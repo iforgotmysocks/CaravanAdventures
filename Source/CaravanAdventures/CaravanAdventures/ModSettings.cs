@@ -14,7 +14,7 @@ namespace CaravanAdventures
     class ModSettings : Verse.ModSettings
     {
         // not saved!
-        private Rect lastRect = default;
+        public static Rect lastRect = default;
         public bool toggleTest = false;
 
 
@@ -126,30 +126,12 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref bountyValueMult, "bountyValueMult", 0.25f);
         }
 
-        public void DoWindowContentsNew(Rect wrect)
+        public static Rect BRect(Rect rect)
         {
-            var options = new Listing_Standard();
-
-            options.Begin(wrect);
-            var viewRect = new Rect(0f, 0f, wrect.width, 1200);
-            options.BeginScrollView(wrect, ref this.scrollPos, ref viewRect);
-
-            options.Label("Ancient Abilities:".Colorize(Color.red), 40f);
-            if (options.ButtonTextLabeled("Ancient ability settings", "Open Ability")) Find.WindowStack.Add(new SettingsAbilities());
-
-
-            Widgets.CheckboxLabeled(BRect(options.ColumnWidth - 400, options.GetRect(Text.LineHeight).y, 200, Text.LineHeight), "Enabled: ", ref toggleTest);
-            Widgets.ButtonText(BRect(options.ColumnWidth - 200, lastRect.y, 200, Text.LineHeight), "button");
-
-
-            options.Gap();
-
-            options.EndScrollView(ref viewRect);
-            options.End();
-            this.Write();
+            lastRect = rect;
+            return rect;
         }
-
-        private Rect BRect(float x, float y, float width, float height)
+        public static Rect BRect(float x, float y, float width, float height)
         {
             lastRect = new Rect(x, y, width, height);
             return lastRect;
@@ -165,28 +147,67 @@ namespace CaravanAdventures
             var viewRect = new Rect(0f, 0f, wrect.width, 1600);
             options.BeginScrollView(wrect, ref this.scrollPos, ref viewRect);
 
+            var debugRect = BRect(options.GetRect(Text.LineHeight));
+            //options.CheckboxLabeled("Debug mode", ref debug);
+            //options.CheckboxLabeled("Debug messages", ref debugMessages);
 
-            options.CheckboxLabeled("Debug mode", ref debug);
-            options.CheckboxLabeled("Debug messages", ref debugMessages);
+            //if (options.ButtonText("Reset final shrine flags")) StoryUtility.ResetLastShrineFlags();
+            //if (options.ButtonText("Print world pawns")) Helper.PrintWorldPawns();
+            //if (options.ButtonText("Reset full story")) StoryUtility.RestartStory();
 
-            if (options.ButtonText("Reset final shrine flags")) StoryUtility.ResetLastShrineFlags();
-            if (options.ButtonText("Print world pawns")) Helper.PrintWorldPawns();
-            if (options.ButtonText("Reset full story")) StoryUtility.RestartStory();
+            Widgets.CheckboxLabeled(BRect(0, lastRect.y, options.ColumnWidth / 5 - 20, lastRect.height), "Debug mode", ref debug);
+            Widgets.CheckboxLabeled(BRect(options.ColumnWidth / 5 * 1, lastRect.y, options.ColumnWidth / 5 - 20, lastRect.height), "Debug messages", ref debugMessages);
+            if (Widgets.ButtonText(BRect(options.ColumnWidth / 5 * 2, lastRect.y, options.ColumnWidth / 5 - 10, lastRect.height), "Reset final shrine flags")) StoryUtility.ResetLastShrineFlags();
+            if (Widgets.ButtonText(BRect(options.ColumnWidth / 5 * 3, lastRect.y, options.ColumnWidth / 5 - 10, lastRect.height), "Print world pawns")) Helper.PrintWorldPawns();
+            if (Widgets.ButtonText(BRect(options.ColumnWidth / 5 * 4, lastRect.y, options.ColumnWidth / 5 - 10, lastRect.height), "Reset full story")) StoryUtility.RestartStory();
 
-            // test
-            options.Label("Filtertest:".Colorize(Color.red), 40f);
-            if (options.ButtonTextLabeled("Filter settings", "Open Filters")) Find.WindowStack.Add(new SettingsFilters());
-            Widgets.CheckboxLabeled(BRect(options.ColumnWidth - 400, options.GetRect(Text.LineHeight).y, 200, Text.LineHeight), "Enabled: ", ref toggleTest);
-            Widgets.ButtonText(BRect(options.ColumnWidth - 200, lastRect.y, 200, Text.LineHeight), "button");
+
+            options.GapLine();
+
+            Text.Font = GameFont.Medium;
+            var cRect = BRect(options.GetRect(Text.LineHeight));
+            Widgets.Label(cRect, $"Filter settings".HtmlFormatting("00ff00", false, 18));
+            Text.Font = GameFont.Small;
+            Widgets.CheckboxLabeled(new Rect(options.ColumnWidth - 400, lastRect.y + 10, 110, Text.LineHeight), "Enabled: ", ref toggleTest);
+            if (Widgets.ButtonText(new Rect(options.ColumnWidth - 225, lastRect.y + 6, 150, Text.LineHeight + 10), "Open")) Find.WindowStack.Add(new SettingsFilters());
+            options.Gap(10);
+            options.Label($"Adjust settings related to the automatic camp generation. Depending if the player has enough camp supplies, the player's pawns will either build a high quality camp, or a wanting camp construted with makeshift materials.");
+            options.GapLine();
             options.Gap();
 
-            options.Label("Ancient abilities:".Colorize(Color.red), 40f);
-            if (options.ButtonTextLabeled("Ancient ability settings", "Open abilities")) Find.WindowStack.Add(new SettingsAbilities());
+            Text.Font = GameFont.Medium;
+            cRect = BRect(options.GetRect(Text.LineHeight));
+            Widgets.Label(cRect, $"Camp settings".HtmlFormatting("00ff00", false, 20));
+            Text.Font = GameFont.Small;
+            Widgets.CheckboxLabeled(new Rect(options.ColumnWidth - 400, lastRect.y + 10, 110, Text.LineHeight), "Enabled: ", ref toggleTest);
+            if (Widgets.ButtonText(new Rect(options.ColumnWidth - 225, lastRect.y + 6, 150, Text.LineHeight + 10), "Open")) Find.WindowStack.Add(new SettingsCamp());
+            options.Gap(10);
+            options.Label($"Adjust settings related to the automatic camp generation. Depending if the player has enough camp supplies, the player's pawns will either build a high quality camp, or a wanting camp construted with makeshift materials.");
+            options.GapLine();
             options.Gap();
 
-            options.Label("Story settings:".Colorize(Color.red), 40f);
-            if (options.ButtonTextLabeled("Story settings", "Open story")) Find.WindowStack.Add(new SettingsStory());
+            Text.Font = GameFont.Medium;
+            cRect = BRect(options.GetRect(Text.LineHeight));
+            Widgets.Label(cRect, $"Story settings".HtmlFormatting("00ff00", false, 20));
+            Text.Font = GameFont.Small;
+            Widgets.CheckboxLabeled(new Rect(options.ColumnWidth - 400, lastRect.y + 10, 110, Text.LineHeight), "Enabled: ", ref toggleTest);
+            if (Widgets.ButtonText(new Rect(options.ColumnWidth - 225, lastRect.y + 6, 150, Text.LineHeight + 10), "Open")) Find.WindowStack.Add(new SettingsStory());
+            options.Gap(10);
+            options.Label($"Adjust settings related to the automatic camp generation. Depending if the player has enough camp supplies, the player's pawns will either build a high quality camp, or a wanting camp construted with makeshift materials.");
+            options.GapLine();
             options.Gap();
+
+            Text.Font = GameFont.Medium;
+            cRect = BRect(options.GetRect(Text.LineHeight));
+            Widgets.Label(cRect, $"Ancient abilitiy settings".HtmlFormatting("00ff00", false, 20));
+            Text.Font = GameFont.Small;
+            Widgets.CheckboxLabeled(new Rect(options.ColumnWidth - 400, lastRect.y + 10, 110, Text.LineHeight), "Enabled: ", ref toggleTest);
+            if (Widgets.ButtonText(new Rect(options.ColumnWidth - 225, lastRect.y + 6, 150, Text.LineHeight + 10), "Open")) Find.WindowStack.Add(new SettingsAbilities());
+            options.Gap(10);
+            options.Label($"Adjust settings related to the automatic camp generation. Depending if the player has enough camp supplies, the player's pawns will either build a high quality camp, or a wanting camp construted with makeshift materials.");
+            options.GapLine();
+            options.Gap();
+
 
             // move to improvement settings -> or rather delete and adjust that via def patch
             options.Label("Settlement price adjustments");

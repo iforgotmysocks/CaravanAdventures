@@ -51,9 +51,9 @@ namespace CaravanAdventures.Settings
             }
 
             Text.Font = GameFont.Small;
-            if (InitGC.packUpFilter == null || InitGC.goodsFilter == null || optionHeading.ButtonText("Restore defaults")) RestoreFilterDefaults();
-            optionHeading.Gap();
-            optionHeading.Label($"Filter settings are saved within a savegame, so don't forget to save to keep ur changes");
+            var cRect = ModSettings.BRect(optionHeading.GetRect(Text.LineHeight));
+            Widgets.Label(cRect, "Filter settings are saved within a savegame, so don't forget to save to keep ur changes");
+            if (InitGC.packUpFilter == null || InitGC.goodsFilter == null || Widgets.ButtonText(ModSettings.BRect(optionHeading.ColumnWidth * 0.8f, ModSettings.lastRect.y - 4, optionHeading.ColumnWidth * 0.15f, Text.LineHeight + 10), "Restore defaults")) RestoreFilterDefaults();
             optionHeading.Gap();
             optionHeading.End();
             
