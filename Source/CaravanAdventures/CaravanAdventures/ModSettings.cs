@@ -69,6 +69,9 @@ namespace CaravanAdventures
         public static bool allowBuyingBountyWithSilver = true;
         public static float bountyValueMult = 0.25f;
 
+        public static bool caravanCampEnabled = true;
+        public static bool caravanFormingFilterSelectionEnabled = true;
+
         //public static ModSettings Get() => LoadedModManager.GetMod<CaravanAdventures.Main>().GetSettings<ModSettings>();
         private Vector2 scrollPos = Vector2.zero;
 
@@ -124,6 +127,10 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref allowBountyFromBuildingInstigators, "allowBountyFromBuildingInstigators", true);
             Scribe_Values.Look(ref allowBuyingBountyWithSilver, "allowBuyingBountyWithSilver", true);
             Scribe_Values.Look(ref bountyValueMult, "bountyValueMult", 0.25f);
+
+            Scribe_Values.Look(ref caravanCampEnabled, "caravanCampEnabled", true);
+            Scribe_Values.Look(ref caravanFormingFilterSelectionEnabled, "caravanFormingFilterSelectionEnabled", true);
+
         }
 
         public static Rect BRect(Rect rect)
@@ -160,42 +167,63 @@ namespace CaravanAdventures
             if (Widgets.ButtonText(BRect(options.ColumnWidth / 5 * 2, lastRect.y, options.ColumnWidth / 5 - 10, lastRect.height), "Reset final shrine flags")) StoryUtility.ResetLastShrineFlags();
             if (Widgets.ButtonText(BRect(options.ColumnWidth / 5 * 3, lastRect.y, options.ColumnWidth / 5 - 10, lastRect.height), "Print world pawns")) Helper.PrintWorldPawns();
             if (Widgets.ButtonText(BRect(options.ColumnWidth / 5 * 4, lastRect.y, options.ColumnWidth / 5 - 10, lastRect.height), "Reset full story")) StoryUtility.RestartStory();
-
-
+            
             options.GapLine();
 
             Text.Font = GameFont.Medium;
             var cRect = BRect(options.GetRect(Text.LineHeight));
-            Widgets.Label(cRect, $"Filter settings".HtmlFormatting("00ff00", false, 18));
+            Widgets.Label(cRect, $"Caravan camping & Caravan improvements".HtmlFormatting("00ff00", false, 18));
             Text.Font = GameFont.Small;
-            Widgets.CheckboxLabeled(new Rect(options.ColumnWidth - 400, lastRect.y + 10, 110, Text.LineHeight), "Enabled: ", ref toggleTest);
+            Widgets.CheckboxLabeled(new Rect(options.ColumnWidth - 400, lastRect.y + 10, 110, Text.LineHeight), "Enabled: ", ref caravanCampEnabled);
+            if (Widgets.ButtonText(new Rect(options.ColumnWidth - 225, lastRect.y + 6, 150, Text.LineHeight + 10), "Camp Settings", true, true, true)) Find.WindowStack.Add(new SettingsCamp());
+            options.Gap(10);
+            options.Label($"Enables settling with a camp, settling with items still packed and the ability to drop them later on and nighttravel.\nAdjust settings related to the automatic camp generation. Depending if the player has enough camp supplies, the player's pawns will either build a high quality camp, or a wanting camp construted with makeshift materials.");
+            options.GapLine();
+            //options.Gap();
+
+            Text.Font = GameFont.Medium;
+            cRect = BRect(options.GetRect(Text.LineHeight));
+            Widgets.Label(cRect, $"Caravan forming & Filter settings".HtmlFormatting("00ff00", false, 18));
+            Text.Font = GameFont.Small;
+            Widgets.CheckboxLabeled(new Rect(options.ColumnWidth - 400, lastRect.y + 10, 110, Text.LineHeight), "Enabled: ", ref caravanFormingFilterSelectionEnabled);
             if (Widgets.ButtonText(new Rect(options.ColumnWidth - 225, lastRect.y + 6, 150, Text.LineHeight + 10), "Open")) Find.WindowStack.Add(new SettingsFilters());
             options.Gap(10);
-            options.Label($"Adjust settings related to the automatic camp generation. Depending if the player has enough camp supplies, the player's pawns will either build a high quality camp, or a wanting camp construted with makeshift materials.");
+            options.Label($"Adds new filter presets to the caravan forming and trade dialogs the player can use to quickly select all items he wants to use. Also allows to disable auto supply selection. Fully customizable presets in options.");
             options.GapLine();
-            options.Gap();
+            //options.Gap();
 
             Text.Font = GameFont.Medium;
             cRect = BRect(options.GetRect(Text.LineHeight));
-            Widgets.Label(cRect, $"Camp settings".HtmlFormatting("00ff00", false, 20));
+            Widgets.Label(cRect, $"Caravan immersion - Travel companions".HtmlFormatting("00ff00", false, 18));
             Text.Font = GameFont.Small;
             Widgets.CheckboxLabeled(new Rect(options.ColumnWidth - 400, lastRect.y + 10, 110, Text.LineHeight), "Enabled: ", ref toggleTest);
-            if (Widgets.ButtonText(new Rect(options.ColumnWidth - 225, lastRect.y + 6, 150, Text.LineHeight + 10), "Open")) Find.WindowStack.Add(new SettingsCamp());
+            //if (Widgets.ButtonText(new Rect(options.ColumnWidth - 225, lastRect.y + 6, 150, Text.LineHeight + 10), "Open")) Find.WindowStack.Add(new SettingsFilters());
             options.Gap(10);
-            options.Label($"Adjust settings related to the automatic camp generation. Depending if the player has enough camp supplies, the player's pawns will either build a high quality camp, or a wanting camp construted with makeshift materials.");
+            options.Label($"Colonists will start out disliking new arrivals to your group, but grow to accept, welcome and maybe embrace them as true friends over time.");
             options.GapLine();
-            options.Gap();
+            //options.Gap();
 
             Text.Font = GameFont.Medium;
             cRect = BRect(options.GetRect(Text.LineHeight));
-            Widgets.Label(cRect, $"Story settings".HtmlFormatting("00ff00", false, 20));
+            Widgets.Label(cRect, $"Caravan Incidents - (testing)".HtmlFormatting("00ff00", false, 18));
+            Text.Font = GameFont.Small;
+            Widgets.CheckboxLabeled(new Rect(options.ColumnWidth - 400, lastRect.y + 10, 110, Text.LineHeight), "Enabled: ", ref toggleTest);
+            //if (Widgets.ButtonText(new Rect(options.ColumnWidth - 225, lastRect.y + 6, 150, Text.LineHeight + 10), "Open", true, false, false)) Find.WindowStack.Add(new SettingsFilters());
+            options.Gap(10);
+            options.Label($"Additional Caravan incidents - (only 1 in testing currently, more coming with the next expansion)");
+            options.GapLine();
+            //options.Gap();
+
+            Text.Font = GameFont.Medium;
+            cRect = BRect(options.GetRect(Text.LineHeight));
+            Widgets.Label(cRect, $"Story settings".HtmlFormatting("00ff00", false, 18));
             Text.Font = GameFont.Small;
             Widgets.CheckboxLabeled(new Rect(options.ColumnWidth - 400, lastRect.y + 10, 110, Text.LineHeight), "Enabled: ", ref toggleTest);
             if (Widgets.ButtonText(new Rect(options.ColumnWidth - 225, lastRect.y + 6, 150, Text.LineHeight + 10), "Open")) Find.WindowStack.Add(new SettingsStory());
             options.Gap(10);
-            options.Label($"Adjust settings related to the automatic camp generation. Depending if the player has enough camp supplies, the player's pawns will either build a high quality camp, or a wanting camp construted with makeshift materials.");
+            options.Label($"Story settings. Requires Royalty.");
             options.GapLine();
-            options.Gap();
+            //options.Gap();
 
             Text.Font = GameFont.Medium;
             cRect = BRect(options.GetRect(Text.LineHeight));
