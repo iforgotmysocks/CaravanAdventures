@@ -20,6 +20,7 @@ namespace CaravanAdventures
             Helper.RunSavely(PatchAddNewMechanoidPawnGroupMakerDef);
 
             // todo -> check for royalty
+            Helper.RunSavely(PatchAddCaravanDecisionsComp);
             Helper.RunSavely(PatchTreeDef_AddTalkOption);
             Helper.RunSavely(PatchHumanDef_AddTalkOption);
             Helper.RunSavely(PatchRemoveRoyalTitleRequirements);
@@ -27,6 +28,13 @@ namespace CaravanAdventures
             Helper.RunSavely(PatchIncreaseBaseWealthAndFood);
 
             CompatibilityPatches.ExecuteCompatibilityPatches();
+        }
+
+        private static void PatchAddCaravanDecisionsComp()
+        {
+            if (!ModSettings.caravanCampEnabled) return;
+            var caravanDef = WorldObjectDefOf.Caravan;
+            if (caravanDef != null) caravanDef.comps.Add(new WorldObjectCompProperties() { compClass = typeof(CaravanImprovements.CompCaravanDecisions) });
         }
 
         private static void PatchAddNewMechanoidPawnGroupMakerDef()
