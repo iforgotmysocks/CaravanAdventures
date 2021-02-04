@@ -71,6 +71,7 @@ namespace CaravanAdventures
 
         public static bool caravanCampEnabled = true;
         public static bool caravanFormingFilterSelectionEnabled = true;
+        public static bool caravanTravelCompanionsEnabled = true;
 
         //public static ModSettings Get() => LoadedModManager.GetMod<CaravanAdventures.Main>().GetSettings<ModSettings>();
         private Vector2 scrollPos = Vector2.zero;
@@ -130,7 +131,7 @@ namespace CaravanAdventures
 
             Scribe_Values.Look(ref caravanCampEnabled, "caravanCampEnabled", true);
             Scribe_Values.Look(ref caravanFormingFilterSelectionEnabled, "caravanFormingFilterSelectionEnabled", true);
-
+            Scribe_Values.Look(ref caravanTravelCompanionsEnabled, "caravanTravelCompanionsEnabled", true);
         }
 
         public static Rect BRect(Rect rect)
@@ -179,7 +180,6 @@ namespace CaravanAdventures
             options.Gap(10);
             options.Label($"Enables settling with a camp, settling with items still packed and the ability to drop them later on and nighttravel.\nAdjust settings related to the automatic camp generation. Depending if the player has enough camp supplies, the player's pawns will either build a high quality camp, or a wanting camp construted with makeshift materials.");
             options.GapLine();
-            //options.Gap();
 
             Text.Font = GameFont.Medium;
             cRect = BRect(options.GetRect(Text.LineHeight));
@@ -190,18 +190,16 @@ namespace CaravanAdventures
             options.Gap(10);
             options.Label($"Adds new filter presets to the caravan forming and trade dialogs the player can use to quickly select all items he wants to use. Also allows to disable auto supply selection. Fully customizable presets in options.");
             options.GapLine();
-            //options.Gap();
 
             Text.Font = GameFont.Medium;
             cRect = BRect(options.GetRect(Text.LineHeight));
             Widgets.Label(cRect, $"Caravan immersion - Travel companions".HtmlFormatting("00ff00", false, 18));
             Text.Font = GameFont.Small;
-            Widgets.CheckboxLabeled(new Rect(options.ColumnWidth - 400, lastRect.y + 10, 110, Text.LineHeight), "Enabled: ", ref toggleTest);
+            Widgets.CheckboxLabeled(new Rect(options.ColumnWidth - 400, lastRect.y + 10, 110, Text.LineHeight), "Enabled: ", ref caravanTravelCompanionsEnabled);
             //if (Widgets.ButtonText(new Rect(options.ColumnWidth - 225, lastRect.y + 6, 150, Text.LineHeight + 10), "Open")) Find.WindowStack.Add(new SettingsFilters());
             options.Gap(10);
             options.Label($"Colonists will start out disliking new arrivals to your group, but grow to accept, welcome and maybe embrace them as true friends over time.");
             options.GapLine();
-            //options.Gap();
 
             Text.Font = GameFont.Medium;
             cRect = BRect(options.GetRect(Text.LineHeight));
@@ -212,7 +210,6 @@ namespace CaravanAdventures
             options.Gap(10);
             options.Label($"Additional Caravan incidents - (only 1 in testing currently, more coming with the next expansion)");
             options.GapLine();
-            //options.Gap();
 
             Text.Font = GameFont.Medium;
             cRect = BRect(options.GetRect(Text.LineHeight));
@@ -223,7 +220,6 @@ namespace CaravanAdventures
             options.Gap(10);
             options.Label($"Story settings. Requires Royalty.");
             options.GapLine();
-            //options.Gap();
 
             Text.Font = GameFont.Medium;
             cRect = BRect(options.GetRect(Text.LineHeight));
@@ -234,7 +230,6 @@ namespace CaravanAdventures
             options.Gap(10);
             options.Label($"Adjust settings related to the automatic camp generation. Depending if the player has enough camp supplies, the player's pawns will either build a high quality camp, or a wanting camp construted with makeshift materials.");
             options.GapLine();
-            options.Gap();
 
 
             // move to improvement settings -> or rather delete and adjust that via def patch

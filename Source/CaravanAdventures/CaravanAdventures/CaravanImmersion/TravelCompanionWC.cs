@@ -13,6 +13,7 @@ namespace CaravanAdventures.CaravanImmersion
     {
         private int ticks = 1000;
         private List<PawnRelationDef> relationShipsWithImpact;
+        private bool wasActive = false;
 
         public TravelCompanionWC(World world) : base(world)
         {
@@ -22,6 +23,7 @@ namespace CaravanAdventures.CaravanImmersion
         {
             base.ExposeData();
             Scribe_Values.Look(ref ticks, "ticks", 0);
+            Scribe_Values.Look(ref wasActive, "wasActive", false);
         }
 
         public override void FinalizeInit()
@@ -33,9 +35,32 @@ namespace CaravanAdventures.CaravanImmersion
         public override void WorldComponentTick()
         {
             base.WorldComponentTick();
-
+            if (!ModSettings.caravanTravelCompanionsEnabled)
+            {
+                if (wasActive)
+                {
+                    wasActive = false;
+                    RemoveRelations();
+                }
+                return;
+            }
+            wasActive = true;
             ApplySocialRelations();
             ticks++;
+        }
+
+        private void RemoveRelations()
+        {
+            var playerPawns = PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction.Where(x => x.RaceProps.Humanlike).ToList();
+
+            foreach (var mainPawn in playerPawns)
+            {
+                var pawnRelations = mainPawn.relations.DirectRelations;
+                foreach (var relation in pawnRelations.Reverse<DirectPawnRelation>())
+                {
+                    if (relation.def.GetModExtension<TravelCompanionModExt>() != null) mainPawn.relations.RemoveDirectRelation(relation.def, relation.otherPawn);
+                }
+            }
         }
 
         private void ApplySocialRelations()

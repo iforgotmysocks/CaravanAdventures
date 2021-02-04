@@ -17,6 +17,7 @@ namespace CaravanAdventures.CaravanImmersion
         }
         protected override ThoughtState CurrentStateInternal(Pawn p)
         {
+            if (!ModSettings.caravanTravelCompanionsEnabled) return ThoughtState.Inactive;
             TravelCompanionDef companionDef = GetCurrentDef(p);
             if (companionDef == null)
             {

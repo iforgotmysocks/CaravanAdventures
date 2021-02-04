@@ -21,6 +21,7 @@ namespace CaravanAdventures.Patches
         private static List<Pawn> caravanMembers;
         public static void ApplyPatches(Harmony harmony)
         {
+            if (!ModSettings.caravanFormingFilterSelectionEnabled) return;
             var orgOnGUI = AccessTools.Method(typeof(TransferableOneWayWidget), "OnGUI", new Type[]
             {
                 typeof(Rect),
