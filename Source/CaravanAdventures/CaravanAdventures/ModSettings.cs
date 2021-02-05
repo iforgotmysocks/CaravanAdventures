@@ -195,6 +195,16 @@ namespace CaravanAdventures
 
             Text.Font = GameFont.Medium;
             cRect = BRect(options.GetRect(Text.LineHeight));
+            Widgets.Label(cRect, $"Mechanoid Bounty".HtmlFormatting("00ff00", false, 18));
+            Text.Font = GameFont.Small;
+            Widgets.CheckboxLabeled(new Rect(options.ColumnWidth - 400, lastRect.y + 10, 110, Text.LineHeight), "Enabled: ", ref bountyEnabled);
+            if (Widgets.ButtonText(new Rect(options.ColumnWidth - 225, lastRect.y + 6, 150, Text.LineHeight + 10), "Open")) Find.WindowStack.Add(new SettingsBounty());
+            options.Gap(10);
+            options.Label($"Adjust settings related to the bounty hunting efforts against mechanoids. Settings for the bounty component of the story, which is used as a standalone, so a vanilla faction, the player can choose, will call out the bounty if royalty isn't isntalled.");
+            options.GapLine();
+
+            Text.Font = GameFont.Medium;
+            cRect = BRect(options.GetRect(Text.LineHeight));
             Widgets.Label(cRect, $"Caravan immersion - Travel companions".HtmlFormatting("00ff00", false, 18));
             Text.Font = GameFont.Small;
             Widgets.CheckboxLabeled(new Rect(options.ColumnWidth - 400, lastRect.y + 10, 110, Text.LineHeight), "Enabled: ", ref caravanTravelCompanionsEnabled);
