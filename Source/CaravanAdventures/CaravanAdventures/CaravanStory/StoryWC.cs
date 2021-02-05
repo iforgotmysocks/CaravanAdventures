@@ -60,6 +60,7 @@ namespace CaravanAdventures.CaravanStory
 {
     class StoryWC : WorldComponent
     {
+        private bool wasEnabled = false;
         private readonly float baseDelayNextShrineReveal = Helper.Debug() ? 1800f : 60000f * 3f;
         private float shrineRevealCounter = -1f;
         private int ticks = -1;
@@ -133,6 +134,7 @@ namespace CaravanAdventures.CaravanStory
             Scribe_Values.Look(ref bossMissedCounter, "bossMissedCounter", 0);
             Scribe_Deep.Look(ref questCont, "questCont");
             Scribe_Values.Look(ref shrineTileUnsuccessfulCounter, "shrineTileUnsuccessfulCounter", 0);
+            Scribe_Values.Look(ref wasEnabled, "wasEnabled", false);
         }
 
         public StoryWC(World world) : base(world)
@@ -143,6 +145,10 @@ namespace CaravanAdventures.CaravanStory
         {
             base.FinalizeInit();
             CompCache.StoryWC = null;
+
+            // todo - probably not needed here when checking in ticks?
+            //RoyaltyCheckAndModPrep();
+
             InitializeStoryFlags();
             InitializeQuestCont();
 
@@ -158,6 +164,15 @@ namespace CaravanAdventures.CaravanStory
             }
 
             if (debugFlags["ShowDebugInfo"]) storyFlags.ToList().ForEach(flag => Log.Message($"{flag.Key} {flag.Value}"));
+        }
+
+        private void RoyaltyCheckAndModPrep()
+        {
+            // todo
+            if (!ModsConfig.RoyaltyActive)
+            {
+                ModSettings.storyEnabled = false;
+            }
         }
 
         private void InitializeStoryFlags()
@@ -186,6 +201,9 @@ namespace CaravanAdventures.CaravanStory
         {
             base.WorldComponentTick();
             RunDebugActionsOnceAtStartUp();
+
+            if (!RoyaltyActiveCheck()) return;
+
             if (ticks == -1) StoryUtility.EnsureSacrilegHunters();
 
             if (ticks > 1200)
@@ -227,10 +245,21 @@ namespace CaravanAdventures.CaravanStory
             shrineRevealCounter--;
         }
 
+        private bool RoyaltyActiveCheck()
+        {
+            if (!ModsConfig.RoyaltyActive)
+            {
+                if (wasEnabled) StoryUtility.RemoveStoryComponentsNoRoyalty();
+                wasEnabled = false;
+                return false;
+            }
+            wasEnabled = true;
+            return true;
+        }
+
         private void RunDebugActionsOnceAtStartUp()
         {
             if (ranDebugActionsOnceAtStartUp) return;
-
 
             ranDebugActionsOnceAtStartUp = true;
         }

@@ -15,6 +15,7 @@ namespace CaravanAdventures
     {
         static InitPatches()
         {
+            // todo -> only patch when enabled
             Helper.RunSavely(FilterCombs.InitFilterSets);
             Helper.RunSavely(PatchAncientShrineDefs_MoreShrinesAndBetterRewards);
             Helper.RunSavely(PatchAddNewMechanoidPawnGroupMakerDef);

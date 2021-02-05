@@ -67,7 +67,6 @@ namespace CaravanAdventures
         public static bool allowBountyFromBuildingInstigators = true;
         public static bool allowBuyingBountyWithSilver = true;
         public static float bountyValueMult = 0.25f;
-        public static Faction selectedBountyFaction;
 
         // categories enabled
         public static bool caravanCampEnabled = true;
@@ -218,17 +217,19 @@ namespace CaravanAdventures
             cRect = BRect(options.GetRect(Text.LineHeight));
             Widgets.Label(cRect, $"Story settings".HtmlFormatting("00ff00", false, 18));
             Text.Font = GameFont.Small;
-            Widgets.CheckboxLabeled(new Rect(options.ColumnWidth - 400, lastRect.y + 10, 110, Text.LineHeight), "Enabled: ", ref toggleTest);
+            Widgets.CheckboxLabeled(new Rect(options.ColumnWidth - 400, lastRect.y + 10, 110, Text.LineHeight), "Enabled: ", ref storyEnabled);
             if (Widgets.ButtonText(new Rect(options.ColumnWidth - 225, lastRect.y + 6, 150, Text.LineHeight + 10), "Open")) Find.WindowStack.Add(new SettingsStory());
             options.Gap(10);
             options.Label($"Story settings. Requires Royalty.");
             options.GapLine();
-
+            if (!ModsConfig.RoyaltyActive && storyEnabled) Find.WindowStack.Add(new Dialog_MessageBox(new TaggedString($"Missing DLC notification!".HtmlFormatting("ffffff", false, 19) + "\n\nSorry, but the story relies upon and requires Royalty and will be disabled. However all other mod categories are still available.\n\nOnce you have Royalty enabled, you can enable the story here.\nThanks for understanding.".HtmlFormatting("ffffff", false, 16)), "Gotcha", () => { }));
+            storyEnabled = ModsConfig.RoyaltyActive && storyEnabled;
+            
             Text.Font = GameFont.Medium;
             cRect = BRect(options.GetRect(Text.LineHeight));
             Widgets.Label(cRect, $"Ancient abilitiy settings".HtmlFormatting("00ff00", false, 20));
             Text.Font = GameFont.Small;
-            Widgets.CheckboxLabeled(new Rect(options.ColumnWidth - 400, lastRect.y + 10, 110, Text.LineHeight), "Enabled: ", ref toggleTest);
+            //Widgets.CheckboxLabeled(new Rect(options.ColumnWidth - 400, lastRect.y + 10, 110, Text.LineHeight), "Enabled: ", ref toggleTest);
             if (Widgets.ButtonText(new Rect(options.ColumnWidth - 225, lastRect.y + 6, 150, Text.LineHeight + 10), "Open")) Find.WindowStack.Add(new SettingsAbilities());
             options.Gap(10);
             options.Label($"Adjust settings related to the automatic camp generation. Depending if the player has enough camp supplies, the player's pawns will either build a high quality camp, or a wanting camp construted with makeshift materials.");
