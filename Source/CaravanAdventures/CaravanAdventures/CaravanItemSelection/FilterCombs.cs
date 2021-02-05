@@ -67,7 +67,7 @@ namespace CaravanAdventures.CaravanItemSelection
                 ThingDefOf.Bedroll,
                 ThingDef.Named("BedrollDouble"),
                 ThingDef.Named("MegascreenTelevision"),
-                ThingDef.Named("AnimusStone"),
+                ModsConfig.RoyaltyActive ? ThingDef.Named("AnimusStone") : null,
             })
             {
                 Name = "BuildingsIncluded",

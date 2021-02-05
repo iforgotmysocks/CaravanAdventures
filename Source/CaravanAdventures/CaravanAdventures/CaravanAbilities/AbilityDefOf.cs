@@ -10,12 +10,16 @@ namespace CaravanAdventures.CaravanAbilities
 {
 #pragma warning disable CS0649
     [DefOf]
+
     class AbilityDefOf
     {
+        [MayRequireRoyalty]
         public static HediffDef CAAncientProtectiveAura;
+        [MayRequireRoyalty]
         public static HediffDef CAAncientGift;
-
+        [MayRequireRoyalty]
         public static HediffDef CAAncientCoordinator;
+        [MayRequireRoyalty]
         public static HediffDef CAAncientProtectiveAuraLinked;
 
         public static BodyPartDef Finger;

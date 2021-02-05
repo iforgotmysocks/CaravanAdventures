@@ -168,7 +168,7 @@ namespace CaravanAdventures.CaravanMechBounty
             return "CABountyExchangeRequestItem_ItemRestockDetail".Translate(CompCache.BountyWC.GetNextAvailableDateInDays(CompCache.BountyWC.OngoingItemDelay));
         }
 
-        private object[] customRewardsRoyalty = new object[] { ThingCategoryDef.Named("WeaponsMeleeBladelink"), ThingDefOf.AnimusStone };
+        private object[] customRewardsRoyalty = !ModsConfig.RoyaltyActive ? new object[] {} : new object[] { ThingCategoryDef.Named("WeaponsMeleeBladelink"), ThingDef.Named("AnimusStone")};
         private List<object> customRewards = new List<object>() { ThingDefOf.VanometricPowerCell, ThingDefOf.InfiniteChemreactor };
         private List<Thing> GenerateItemStock(int itemCount, int customItemCount = 0)
         {

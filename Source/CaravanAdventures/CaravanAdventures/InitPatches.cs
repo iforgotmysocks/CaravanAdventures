@@ -18,12 +18,15 @@ namespace CaravanAdventures
             // todo -> only patch when enabled
             Helper.RunSavely(FilterCombs.InitFilterSets);
             Helper.RunSavely(PatchAncientShrineDefs_MoreShrinesAndBetterRewards);
-            Helper.RunSavely(PatchAddNewMechanoidPawnGroupMakerDef);
 
-            // todo -> check for royalty
+            if (ModsConfig.RoyaltyActive && ModSettings.storyEnabled)
+            {
+                Helper.RunSavely(PatchAddNewMechanoidPawnGroupMakerDef);
+                Helper.RunSavely(PatchTreeDef_AddTalkOption);
+                Helper.RunSavely(PatchHumanDef_AddTalkOption);
+            }
+         
             Helper.RunSavely(PatchAddCaravanDecisionsComp);
-            Helper.RunSavely(PatchTreeDef_AddTalkOption);
-            Helper.RunSavely(PatchHumanDef_AddTalkOption);
             Helper.RunSavely(PatchRemoveRoyalTitleRequirements);
             Helper.RunSavely(PatchAddPsychiteTeaToCampFire);
             Helper.RunSavely(PatchIncreaseBaseWealthAndFood);

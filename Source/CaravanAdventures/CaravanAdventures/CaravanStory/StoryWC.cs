@@ -247,7 +247,7 @@ namespace CaravanAdventures.CaravanStory
 
         private bool RoyaltyActiveCheck()
         {
-            if (!ModsConfig.RoyaltyActive)
+            if (!ModsConfig.RoyaltyActive || !ModSettings.storyEnabled)
             {
                 if (wasEnabled) StoryUtility.RemoveStoryComponentsNoRoyalty();
                 wasEnabled = false;

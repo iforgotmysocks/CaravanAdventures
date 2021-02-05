@@ -13,12 +13,8 @@ namespace CaravanAdventures.Patches
             harmony = harmony ?? (harmony = new Harmony("iforgotmysocks.CaravanAdventures"));
             CaravanTravel.ApplyPatches(harmony);
             AutomaticItemSelection.ApplyPatches(harmony);
-         
-            if (ModSettings.storyEnabled)
-            {
-                TalkPawnGUIOverlay.ApplyPatches(harmony);
-                KillBountyPatches.ApplyPatches(harmony);
-            }
+            KillBountyPatches.ApplyPatches(harmony);
+            if (ModSettings.storyEnabled) TalkPawnGUIOverlay.ApplyPatches(harmony);
         }
 
         /// <summary>
@@ -27,7 +23,7 @@ namespace CaravanAdventures.Patches
         internal static void RunEarlyPatches()
         {
             harmony = harmony ?? (harmony = new Harmony("iforgotmysocks.CaravanAdventures"));
-            AbilityNeurotrainerDefGenerator.ApplyPatches(harmony);
+            if (ModSettings.storyEnabled && ModsConfig.RoyaltyActive) AbilityNeurotrainerDefGenerator.ApplyPatches(harmony);
         }
     }
 }

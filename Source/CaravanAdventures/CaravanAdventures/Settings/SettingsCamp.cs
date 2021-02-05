@@ -57,17 +57,17 @@ namespace CaravanAdventures.Settings
 
             // todo figure out and finish
             // dafuq does getPayload do
-            Widgets.Dropdown<List<Faction>, Faction>(
-                rect, 
-                Find.FactionManager.AllFactions.ToList(), 
-                (List<Faction> factions) => { return factions.FirstOrDefault(); }, 
-                GenerateDropDownElements, 
-                CompCache.BountyWC.BountyFaction != null ? new TaggedString($"{CompCache.BountyWC.BountyFaction.NameColored} ({CompCache.BountyWC.BountyFaction.GoodwillWith(Faction.OfPlayerSilentFail)})") : new TaggedString("Please select a faction"));
+            //Widgets.Dropdown<List<Faction>, Faction>(
+            //    rect, 
+            //    Find.FactionManager.AllFactions.ToList(), 
+            //    (List<Faction> factions) => { return factions.FirstOrDefault(); }, 
+            //    GenerateDropDownElements, 
+            //    CompCache.BountyWC.BountyFaction != null ? new TaggedString($"{CompCache.BountyWC.BountyFaction.NameColored} ({CompCache.BountyWC.BountyFaction.GoodwillWith(Faction.OfPlayerSilentFail)})") : new TaggedString("Please select a faction"));
 
-            // only for testing purposes, remove
-            var serviceAvailable = CompCache.BountyWC.BountyServiceAvailable;
-            options.CheckboxLabeled("bounty services enabled", ref serviceAvailable);
-            CompCache.BountyWC.BountyServiceAvailable = serviceAvailable;
+            //// only for testing purposes, remove
+            //var serviceAvailable = CompCache.BountyWC.BountyServiceAvailable;
+            //options.CheckboxLabeled("bounty services enabled", ref serviceAvailable);
+            //CompCache.BountyWC.BountyServiceAvailable = serviceAvailable;
 
             options.EndScrollView(ref viewRect);
             options.End();

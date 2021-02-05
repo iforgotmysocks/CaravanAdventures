@@ -92,7 +92,7 @@ namespace CaravanAdventures.CaravanMechBounty
             // todo once settings for replacement faction exists in settings, use that here
             if (bountyNotificationCounter == 0)
             {
-                Find.LetterStack.ReceiveLetter("StoryVillage_Response_BountyInitiatedTitle".Translate(), "StoryVillage_Response_BountyInitiatedDesc".Translate(CaravanStory.StoryUtility.FactionOfSacrilegHunters.NameColored, Faction.OfMechanoids.NameColored), LetterDefOf.PositiveEvent);
+                Find.LetterStack.ReceiveLetter("StoryVillage_Response_BountyInitiatedTitle".Translate(), "StoryVillage_Response_BountyInitiatedDesc".Translate(bountyFaction.NameColored, Faction.OfMechanoids.NameColored), LetterDefOf.PositiveEvent);
                 bountyServiceAvailable = true;
             }
 

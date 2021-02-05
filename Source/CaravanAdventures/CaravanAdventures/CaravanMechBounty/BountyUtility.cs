@@ -30,19 +30,19 @@ namespace CaravanAdventures.CaravanMechBounty
             if (selPersonality != null) veteran.story.traits.GainTrait(new Trait(selPersonality, selPersonality.degreeDatas.OrderByDescending(data => data.degree).FirstOrDefault().degree));
             if (selSkill != null) veteran.story.traits.GainTrait(new Trait(selSkill, selSkill.degreeDatas.OrderByDescending(data => data.degree).FirstOrDefault().degree));
 
-            if (veteran.story.childhood.disallowedTraits == null 
+            if (veteran.story.childhood.disallowedTraits == null
                 || veteran.story.childhood.disallowedTraits.Any()
                 || veteran.story.childhood.DisabledWorkTypes == null
                 || veteran.story.childhood.DisabledWorkTypes.Any())
                 veteran.story.childhood = BackstoryDatabase.allBackstories
                     .Where(backstory =>
-                    (backstory.Value.DisabledWorkTypes == null 
+                    (backstory.Value.DisabledWorkTypes == null
                         || !backstory.Value.DisabledWorkTypes.Any())
-                    && (backstory.Value.disallowedTraits == null 
+                    && (backstory.Value.disallowedTraits == null
                         || !backstory.Value.disallowedTraits.Any())
                     && backstory.Value.slot == BackstorySlot.Childhood
                     && backstory.Value.skillGainsResolved != null
-                    && (backstory.Value.skillGainsResolved.FirstOrDefault().Key == SkillDefOf.Shooting 
+                    && (backstory.Value.skillGainsResolved.FirstOrDefault().Key == SkillDefOf.Shooting
                         || backstory.Value.skillGainsResolved.FirstOrDefault().Key == SkillDefOf.Melee)
                     && backstory.Value.skillGainsResolved.FirstOrDefault().Value > 0).InRandomOrder().FirstOrDefault().Value;
 
@@ -52,9 +52,9 @@ namespace CaravanAdventures.CaravanMechBounty
                 || veteran.story.adulthood.DisabledWorkTypes.Any())
                 veteran.story.adulthood = BackstoryDatabase.allBackstories
                     .Where(backstory =>
-                    (backstory.Value.DisabledWorkTypes == null 
+                    (backstory.Value.DisabledWorkTypes == null
                         || !backstory.Value.DisabledWorkTypes.Any())
-                    && (backstory.Value.disallowedTraits == null 
+                    && (backstory.Value.disallowedTraits == null
                         || !backstory.Value.disallowedTraits.Any())
                     && backstory.Value.slot == BackstorySlot.Adulthood
                     && backstory.Value.skillGainsResolved != null
@@ -74,8 +74,11 @@ namespace CaravanAdventures.CaravanMechBounty
             veteran.skills.skills.FirstOrDefault(skill => skill.def == SkillDefOf.Construction).Level = Rand.Range(7, 15);
             veteran.skills.skills.FirstOrDefault(skill => skill.def == SkillDefOf.Construction).passion = Rand.Chance(0.5f) ? Passion.Major : Passion.Minor;
 
-            var gland = veteran.health.hediffSet.hediffs.FirstOrDefault(hediff => hediff.def == HediffDef.Named("StoneskinGland"));
-            if (gland != null && Rand.Chance(0.5f)) veteran.health.hediffSet.hediffs.Remove(gland);
+            if (ModsConfig.RoyaltyActive)
+            {
+                var gland = veteran.health.hediffSet.hediffs.FirstOrDefault(hediff => hediff.def == HediffDef.Named("StoneskinGland"));
+                if (gland != null && Rand.Chance(0.5f)) veteran.health.hediffSet.hediffs.Remove(gland);
+            }
 
             var joywire = veteran.health.hediffSet.hediffs.FirstOrDefault(hediff => hediff.def == HediffDef.Named("Joywire"));
             if (joywire != null) veteran.health.hediffSet.hediffs.Remove(joywire);

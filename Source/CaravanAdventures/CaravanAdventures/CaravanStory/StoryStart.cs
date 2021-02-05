@@ -46,7 +46,9 @@ namespace CaravanAdventures.CaravanStory
         public override void MapComponentTick()
         {
             base.MapComponentTick();
-            DrawTreeQuestionMark();
+            if (!ModsConfig.RoyaltyActive || !ModSettings.storyEnabled) return;
+
+                DrawTreeQuestionMark();
 
             if (ticks >= 300 && (CompCache.StoryWC.storyFlags["IntroVillage_Finished"] || CompCache.StoryWC.debugFlags["VillageDone"]))
             {
