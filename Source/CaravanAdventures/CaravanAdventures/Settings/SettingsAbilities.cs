@@ -34,7 +34,7 @@ namespace CaravanAdventures.Settings
             var options = new Listing_Standard();
             options.Begin(wrect);
 
-            var viewRect = new Rect(0f, 0f, windowRect.width - 150, 1200f);
+            var viewRect = new Rect(0f, 0f, windowRect.width - 150, 850f);
             options.BeginScrollView(wrect, ref scrollPos, ref viewRect);
 
             Text.Font = GameFont.Medium;

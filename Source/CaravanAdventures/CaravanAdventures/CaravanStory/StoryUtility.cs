@@ -213,11 +213,6 @@ namespace CaravanAdventures.CaravanStory
             if (pawn?.needs?.comfort != null) pawn.needs.comfort.CurLevel = pawn.needs.comfort.MaxLevel;
         }
 
-        public static StoryWC GetSWC()
-        {
-            return Find.World.GetComponent<StoryWC>();
-        }
-
         public static IntVec3 GetCenterOfSettlementBase(Map map, Faction faction)
         {
             var coords = new List<IntVec3>();

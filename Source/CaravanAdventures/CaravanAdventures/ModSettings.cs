@@ -143,6 +143,16 @@ namespace CaravanAdventures
             lastRect = rect;
             return rect;
         }
+        public static Rect BRect(float height)
+        {
+            lastRect = new Rect(lastRect.x, lastRect.y + height, lastRect.width, lastRect.height);
+            return lastRect;
+        }
+        public static Rect BRect(Rect rect, float height)
+        {
+            lastRect = new Rect(rect.x, rect.y + height, rect.width, rect.height);
+            return lastRect;
+        }
         public static Rect BRect(float x, float y, float width, float height)
         {
             lastRect = new Rect(x, y, width, height);
@@ -156,7 +166,7 @@ namespace CaravanAdventures
             //GUI.BeginGroup(wrect);
             //Widgets.BeginScrollView(wrect, ref this.scrollPos, new Rect(0f, 0f, wrect.width, 700f));
 
-            var viewRect = new Rect(0f, 0f, wrect.width, 1600);
+            var viewRect = new Rect(0f, 0f, wrect.width, 850);
             options.BeginScrollView(wrect, ref this.scrollPos, ref viewRect);
 
             var debugRect = BRect(options.GetRect(Text.LineHeight));
@@ -234,12 +244,19 @@ namespace CaravanAdventures
             options.Gap(10);
             options.Label($"Story settings. Requires Royalty.");
             options.GapLine();
-            if (!ModsConfig.RoyaltyActive && storyEnabled) Find.WindowStack.Add(new Dialog_MessageBox(new TaggedString($"Missing DLC notification!".HtmlFormatting("ffffff", false, 19) + "\n\nSorry, but the story relies upon and requires Royalty and will be disabled. However all other mod categories are still available.\n\nOnce you have Royalty enabled, you can enable the story here.\nThanks for understanding.".HtmlFormatting("ffffff", false, 16)), "Gotcha", () => { }));
+            //if (!ModsConfig.RoyaltyActive && storyEnabled) Find.WindowStack.Add(new Dialog_MessageBox(new TaggedString($"Missing DLC notification!".HtmlFormatting("ffffff", false, 19) + "\n\nSorry, but the story relies upon and requires Royalty and will be disabled. However all other mod categories are still available.\n\nOnce you have Royalty enabled, you can enable the story here.\nThanks for understanding.".HtmlFormatting("ffffff", false, 16)), "Gotcha", () => { }));
+            if (!ModsConfig.RoyaltyActive && storyEnabled) Find.WindowStack.Add(new Dialog_MessageBox(
+                new TaggedString($"\nSorry, but the story relies upon and requires Royalty and will be disabled. However all other mod categories are still available.\n\nOnce you have Royalty enabled, you can enable the story here.\nThanks for understanding."),
+                "Gotcha",
+                () => { },
+                null,
+                null,
+                "Missing DLC notification!"));
             storyEnabled = ModsConfig.RoyaltyActive && storyEnabled;
             
             Text.Font = GameFont.Medium;
             cRect = BRect(options.GetRect(Text.LineHeight));
-            Widgets.Label(cRect, $"Ancient abilitiy settings".HtmlFormatting("00ff00", false, 20));
+            Widgets.Label(cRect, $"Ancient abilitiy settings".HtmlFormatting("00ff00", false, 18));
             Text.Font = GameFont.Small;
             //Widgets.CheckboxLabeled(new Rect(options.ColumnWidth - 400, lastRect.y + 10, 110, Text.LineHeight), "Enabled: ", ref toggleTest);
             if (Widgets.ButtonText(new Rect(options.ColumnWidth - 225, lastRect.y + 6, 150, Text.LineHeight + 10), "Open")) Find.WindowStack.Add(new SettingsAbilities());

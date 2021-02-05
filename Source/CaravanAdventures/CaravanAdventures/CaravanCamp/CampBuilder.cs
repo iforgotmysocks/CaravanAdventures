@@ -26,7 +26,6 @@ namespace CaravanAdventures.CaravanCamp
         private Caravan caravan;
 
         private IntVec3 tentSize = new IntVec3(5, 0, 5);
-        //private IntVec3 campSize = new IntVec3(21, 0, 21);
         private int spacer = 2;
         private List<CampArea> campParts;
         private IntVec3 campCenterSpot;

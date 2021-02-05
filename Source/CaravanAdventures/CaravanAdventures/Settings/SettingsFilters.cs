@@ -32,12 +32,9 @@ namespace CaravanAdventures.Settings
 
         public override void DoWindowContents(Rect wrect)
         {
-            // todo finish
             var optionHeading = new Listing_Standard();
-            optionHeading.Begin(new Rect(wrect.x, wrect.y, wrect.width, 180));
-
-            //var viewRect = new Rect(0f, 0f, wrect.width, 1600);
-            //options.BeginScrollView(wrect, ref scrollPos, ref viewRect);
+            //optionHeading.Begin(new Rect(wrect.x, wrect.y, wrect.width, 200f));
+            optionHeading.Begin(wrect);
 
             Text.Font = GameFont.Medium;
             optionHeading.Label("Filter settings:".Colorize(Color.green), 40f);
@@ -54,6 +51,8 @@ namespace CaravanAdventures.Settings
             var cRect = ModSettings.BRect(optionHeading.GetRect(Text.LineHeight));
             Widgets.Label(cRect, "Filter settings are saved within a savegame, so don't forget to save to keep ur changes");
             if (InitGC.packUpFilter == null || InitGC.goodsFilter == null || Widgets.ButtonText(ModSettings.BRect(optionHeading.ColumnWidth * 0.8f, ModSettings.lastRect.y - 4, optionHeading.ColumnWidth * 0.15f, Text.LineHeight + 10), "Restore defaults")) RestoreFilterDefaults();
+            optionHeading.Gap(28);
+            Widgets.Label(ModSettings.BRect(optionHeading.GetRect(Text.LineHeight * 3)), "Here you can adjust what items the specific filters should cover, which can simply be applied by clicking the specific button in the caravan forming or trading dialog. Further filter options like quality or tainted are applied aswell.\nThe \"Exclude other items\" option sets whether selecting the preset should reset previously made selections or not.");
             optionHeading.Gap();
             optionHeading.End();
             
@@ -86,7 +85,6 @@ namespace CaravanAdventures.Settings
             options.CheckboxLabeled("Exclude other items", ref InitGC.journeyExclusive, "When active, the button will disable other items instead of just adding the filtered ones");
             options.Gap();
 
-            //options.EndScrollView(ref viewRect);
             options.End();
         }
 

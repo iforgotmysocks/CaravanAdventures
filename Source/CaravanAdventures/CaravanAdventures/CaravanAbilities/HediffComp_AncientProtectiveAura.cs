@@ -161,19 +161,9 @@ namespace CaravanAdventures.CaravanAbilities
             if (wound == null) return;
             //Log.Message($"Healing perm wound {wound.def.defName}", true);
 
-            // todo - check this, this doesn't make sense... max severity is 1, this willl always heal... until then we just set it to true to always heal
-            var dmgToHeal = wound?.Part == null ? 100 : wound.Part.def.GetMaxHealth(Pawn) / 3f;
-            if (wound.Severity - dmgToHeal <= 0f || true)
-            {
-                if (wound.IsPermanent()) wound.Severity = 0f;
-                else HealthUtility.CureHediff(wound);
-                if (PawnUtility.ShouldSendNotificationAbout(base.Pawn)) Messages.Message("MessagePermanentWoundHealed".Translate(this.parent.LabelCap, base.Pawn.LabelShort, wound.Label, base.Pawn.Named("PAWN")), base.Pawn, MessageTypeDefOf.PositiveEvent, true);
-            }
-            else wound.Severity -= dmgToHeal;
+            if (wound.IsPermanent()) wound.Severity = 0f;
+            else HealthUtility.CureHediff(wound);
+            if (PawnUtility.ShouldSendNotificationAbout(base.Pawn)) Messages.Message("MessagePermanentWoundHealed".Translate(this.parent.LabelCap, base.Pawn.LabelShort, wound.Label, base.Pawn.Named("PAWN")), base.Pawn, MessageTypeDefOf.PositiveEvent, true);
         }
-
-
-
-
     }
 }
