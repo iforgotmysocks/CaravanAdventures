@@ -17,7 +17,6 @@ namespace CaravanAdventures
         public static Rect lastRect = default;
         public bool toggleTest = false;
 
-
         // general
         public static bool debug = false;
         public static bool debugMessages = false;
@@ -68,10 +67,13 @@ namespace CaravanAdventures
         public static bool allowBountyFromBuildingInstigators = true;
         public static bool allowBuyingBountyWithSilver = true;
         public static float bountyValueMult = 0.25f;
+        public static Faction selectedBountyFaction;
 
+        // categories enabled
         public static bool caravanCampEnabled = true;
         public static bool caravanFormingFilterSelectionEnabled = true;
         public static bool caravanTravelCompanionsEnabled = true;
+        public static bool bountyEnabled = true;
 
         //public static ModSettings Get() => LoadedModManager.GetMod<CaravanAdventures.Main>().GetSettings<ModSettings>();
         private Vector2 scrollPos = Vector2.zero;
@@ -132,6 +134,7 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref caravanCampEnabled, "caravanCampEnabled", true);
             Scribe_Values.Look(ref caravanFormingFilterSelectionEnabled, "caravanFormingFilterSelectionEnabled", true);
             Scribe_Values.Look(ref caravanTravelCompanionsEnabled, "caravanTravelCompanionsEnabled", true);
+            Scribe_Values.Look(ref bountyEnabled, "bountyEnabled", true);
         }
 
         public static Rect BRect(Rect rect)

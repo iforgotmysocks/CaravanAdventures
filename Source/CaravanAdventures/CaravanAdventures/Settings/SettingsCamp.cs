@@ -34,21 +34,35 @@ namespace CaravanAdventures.Settings
             var options = new Listing_Standard();
             options.Begin(wrect);
 
+
+            if (CompCache.BountyWC == null || Find.FactionManager?.AllFactionsListForReading?.FirstOrDefault() == null)
+            {
+                Log.Warning($"todo label game not loaded");
+                options.End();
+                return;
+            }
+
             var viewRect = new Rect(0f, 0f, windowRect.width - 150, 1200f);
             options.BeginScrollView(wrect, ref scrollPos, ref viewRect);
 
             Text.Font = GameFont.Medium;
             options.Label("Camp settings:".HtmlFormatting("ff7777"), 40f);
+            var rect = options.GetRect(Text.LineHeight);
+
+            // todo figure out and finish
+            Widgets.Dropdown<List<Faction>, Faction>(rect, Find.FactionManager.AllFactions.ToList(), (List<Faction> factions) => { ModSettings.selectedBountyFaction = factions.FirstOrDefault(); return factions.FirstOrDefault(); }, GenerateDropDownElements);
 
             Text.Font = GameFont.Small;
-
-           
-
 
             options.EndScrollView(ref viewRect);
             options.End();
 
         }
 
+        private IEnumerable<Widgets.DropdownMenuElement<Faction>> GenerateDropDownElements(List<Faction> factions)
+        {
+            foreach (var faction in factions)
+                yield return new Widgets.DropdownMenuElement<Faction>() { option = new FloatMenuOption(faction.Name, () => Log.Message($"why")), payload = faction };
+        }
     }
 }

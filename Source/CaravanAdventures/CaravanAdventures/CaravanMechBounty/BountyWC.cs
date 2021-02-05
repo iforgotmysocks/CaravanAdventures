@@ -21,6 +21,7 @@ namespace CaravanAdventures.CaravanMechBounty
         public readonly float bountyNotificationDelay = Helper.Debug() ? 1000 : 60000 * 2;
         private float bountyNotificationCounter;
         private bool bountyServiceAvailable;
+        private Faction bountyFaction;
 
         public float BountyPoints { get => bountyPoints; set => bountyPoints = value; }
         public float OngoingAlliedAssistanceDelay { get => ongoingAlliedAssistanceDelay; set => ongoingAlliedAssistanceDelay = value; }
@@ -47,6 +48,8 @@ namespace CaravanAdventures.CaravanMechBounty
         {
             base.FinalizeInit();
             CompCache.BountyWC = null;
+
+            if (bountyFaction == null) bountyFaction = ModSettings.selectedBountyFaction ?? Find.FactionManager.AllFactionsListForReading.FirstOrDefault(x => x.def == FactionDefOf.OutlanderCivil);
         }
 
         public override void ExposeData()
@@ -61,6 +64,7 @@ namespace CaravanAdventures.CaravanMechBounty
             Scribe_Values.Look(ref bountyNotificationCounterStarted, "bountyNotificationCounterStarted", false);
             Scribe_Values.Look(ref bountyNotificationCounter, "bountyNotificationCounter", -1f);
             Scribe_Values.Look(ref bountyServiceAvailable, "bountyServiceAvailable", false);
+            Scribe_References.Look(ref bountyFaction, "bountyFaction");
         }
 
         public override void WorldComponentTick()
@@ -89,6 +93,7 @@ namespace CaravanAdventures.CaravanMechBounty
 
         private bool CheckCanStartBountyNotificationCounter()
         {
+            if (!ModSettings.bountyEnabled) return false;
             if (!ModSettings.storyEnabled) return true;
             else return !bountyNotificationCounterStarted && CompCache.StoryWC.storyFlags["IntroVillage_Finished"];
         }
