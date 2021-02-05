@@ -31,6 +31,18 @@ namespace CaravanAdventures.CaravanMechBounty
         public float OngoingVeteranDelay { get => ongoingVeteranDelay; set => ongoingVeteranDelay = value; }
         public float BountyNotificationCounter { get => bountyNotificationCounter; set => bountyNotificationCounter = value; }
         public bool BountyServiceAvailable { get => bountyServiceAvailable; set => bountyServiceAvailable = value; }
+        public Faction BountyFaction
+        {
+            get
+            {
+                if (bountyFaction != null) return bountyFaction;
+                var outlanders = Find.FactionManager?.AllFactionsListForReading?.FirstOrDefault(x => x.def == FactionDefOf.OutlanderCivil);
+                if (ModSettings.storyEnabled) bountyFaction = CaravanStory.StoryUtility.FactionOfSacrilegHunters ?? outlanders;
+                else bountyFaction = outlanders;
+                return bountyFaction;
+            }
+            set => bountyFaction = value;
+        }
 
         public BountyWC(World world) : base(world)
         {
@@ -49,7 +61,7 @@ namespace CaravanAdventures.CaravanMechBounty
             base.FinalizeInit();
             CompCache.BountyWC = null;
 
-            if (bountyFaction == null) bountyFaction = ModSettings.selectedBountyFaction ?? Find.FactionManager.AllFactionsListForReading.FirstOrDefault(x => x.def == FactionDefOf.OutlanderCivil);
+            if (bountyFaction == null) bountyFaction = CaravanStory.StoryUtility.FactionOfSacrilegHunters ?? Find.FactionManager?.AllFactionsListForReading?.FirstOrDefault(x => x.def == FactionDefOf.OutlanderCivil);
         }
 
         public override void ExposeData()
@@ -94,8 +106,8 @@ namespace CaravanAdventures.CaravanMechBounty
         private bool CheckCanStartBountyNotificationCounter()
         {
             if (!ModSettings.bountyEnabled) return false;
-            if (!ModSettings.storyEnabled) return true;
-            else return !bountyNotificationCounterStarted && CompCache.StoryWC.storyFlags["IntroVillage_Finished"];
+            if (!ModSettings.storyEnabled && !bountyNotificationCounterStarted) return true;
+            return ModSettings.storyEnabled && !bountyNotificationCounterStarted && CompCache.StoryWC.storyFlags["IntroVillage_Finished"];
         }
 
         public string GetNextAvailableDateInDays(float value)

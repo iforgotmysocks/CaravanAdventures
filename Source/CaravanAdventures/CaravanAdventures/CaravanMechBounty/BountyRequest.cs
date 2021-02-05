@@ -9,8 +9,6 @@ using Verse;
 
 namespace CaravanAdventures.CaravanMechBounty
 {
-    // todo add recruitment option to recruit veteran pawns
-    // todo create artifacts in shrines that the player can trade in for points
     class BountyRequest
     {
         private Pawn requestor;
