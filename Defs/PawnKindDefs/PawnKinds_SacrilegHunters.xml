@@ -40,7 +40,7 @@
       <li>PainCauser</li>
     </techHediffsDisallowTags>
     <techHediffsRequired>
-      <li>StoneskinGland</li>
+      	<li MayRequire="Ludeon.RimWorld.Royalty">StoneskinGland</li>
     </techHediffsRequired>
     <techHediffsChance>0.3</techHediffsChance>
     <techHediffsMaxAmount>2</techHediffsMaxAmount>
@@ -99,7 +99,7 @@
 		</techHediffsDisallowTags>
 		<techHediffsRequired>
 			<li>BionicEye</li>
-			<li>StoneskinGland</li>
+			<li MayRequire="Ludeon.RimWorld.Royalty">StoneskinGland</li>
 		</techHediffsRequired>
     <techHediffsChance>0.8</techHediffsChance>
     <techHediffsMaxAmount>4</techHediffsMaxAmount>

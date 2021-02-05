@@ -210,6 +210,6 @@
     <!-- obj -->
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>copy /Y "$(TargetDir)$(ProjectName).dll" "$(SolutionDir)\..\..\1.1\Assemblies\$(ProjectName).dll"</PostBuildEvent>
+    <PostBuildEvent>copy /Y "$(TargetDir)$(ProjectName).dll" "$(SolutionDir)\..\..\Assemblies\$(ProjectName).dll"</PostBuildEvent>
   </PropertyGroup>
 </Project>

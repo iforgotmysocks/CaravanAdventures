@@ -1,7 +1,28 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
-  <AbilityDef ParentName="PsycastBase">
+  <!--<AbilityDef Name="PsycastBase" Abstract="True" MayRequire="Ludeon.RimWorld.Royalty">
+    <abilityClass>Psycast</abilityClass>
+    <category>Psychic</category>
+    <statBases>
+      <Ability_Duration>0</Ability_Duration>
+    </statBases>
+    <warmupSound>PsycastCastLoop</warmupSound>
+    <verbProperties>
+      <verbClass>Verb_CastPsycast</verbClass>
+      <range>24.9</range>
+      <requireLineOfSight>True</requireLineOfSight>
+      <warmupTime>1</warmupTime>
+      <targetParams>
+        <canTargetBuildings>False</canTargetBuildings>
+        <canTargetAnimals>False</canTargetAnimals>
+        <thingCategory>Item</thingCategory>
+        <mapObjectTargetsMustBeAutoAttackable>False</mapObjectTargetsMustBeAutoAttackable>
+      </targetParams>
+    </verbProperties>
+  </AbilityDef>-->
+
+  <AbilityDef ParentName="PsycastBase" MayRequire="Ludeon.RimWorld.Royalty">
     <defName>CAAncientMeditate</defName>
     <label>ancient meditation</label>
     <description>Absorbs psychic energy from nature and restores it for the user. Other colonists standing close to the caster regain a small amount aswell.</description>
@@ -32,7 +53,7 @@
     </comps>
   </AbilityDef>
 
-  <AbilityDef ParentName="PsycastBase">
+  <AbilityDef ParentName="PsycastBase" MayRequire="Ludeon.RimWorld.Royalty">
     <defName>CAAncientThunderBolt</defName>
     <label>ancient thunder bolt</label>
     <description>Targettet thunder blast with area damage.</description>
@@ -60,7 +81,7 @@
     </comps>
   </AbilityDef>
 	
-	<AbilityDef ParentName="PsycastBase">
+	<AbilityDef ParentName="PsycastBase" MayRequire="Ludeon.RimWorld.Royalty">
     <defName>CAAncientMechSignal</defName>
     <label>ancient mech signal</label>
     <description>Summons a group of mechanoid scythers to the casters aid.</description>
@@ -88,7 +109,7 @@
     </comps>
   </AbilityDef>
 
-  <!--<AbilityDef ParentName="PsycastBase">
+  <!--<AbilityDef ParentName="PsycastBase" MayRequire="Ludeon.RimWorld.Royalty">
     <defName>CAAncientInvisibility</defName>
     <label>ancient invisibility</label>
     <description>Psychically manipulate the visual centers of everyone nearby, rendering them unable to perceive a particular individual for a short time.</description>
@@ -118,7 +139,7 @@
     </comps>
   </AbilityDef>-->
 
-  <!--<AbilityDef ParentName="PsycastBase">
+  <!--<AbilityDef ParentName="PsycastBase" MayRequire="Ludeon.RimWorld.Royalty">
     <defName>CAAncientProtectiveAura</defName>
     <label>ancient protective aura</label>
     <description>Protects the target from a large part of incoming damage, fire and heals wounds over time (even permanent ones when active long enough). \n\nReduces the overall heat a pawn can handle and accelerates psyfocus drain by 2% / day while active. The effect of this spell disappears if it is cast a second time on the target or if the targetted pawn runs out of psyfocus. \n\nThe effect is weaker and drains more psyfocus when cast on pawns without the ancient gift.</description>
@@ -150,7 +171,7 @@
     </comps>
   </AbilityDef>-->
 
-  <AbilityDef ParentName="PsycastBase">
+  <AbilityDef ParentName="PsycastBase" MayRequire="Ludeon.RimWorld.Royalty">
     <defName>CAAncientCoordinator</defName>
     <label>ancient coordinator</label>
     <description>The caster aswell as 4 other colonists are granted the power of the ancient protective aura without any downsides as long as the caster is alive. However, every other pawn exceeding the limit of 5 will die.</description>
@@ -186,7 +207,7 @@
     </comps>
   </AbilityDef>
 
-  <AbilityDef ParentName="PsycastBase">
+  <AbilityDef ParentName="PsycastBase" MayRequire="Ludeon.RimWorld.Royalty">
     <defName>CAAncientProtectiveAura</defName>
     <label>ancient protective aura</label>
     <description>Allows the caster to channel psyfocus to directly strenghten the bodies capabilities in almost any humanly possible way. Agility, melee combat, aswell as endurance are highly increased. It also protects the target from a large part of incoming damage, fire , heals wounds over time (even permanent ones when active long enough). \n\nReduces the overall heat a pawn can handle and accelerates psyfocus drain by 2% / day while active. The effect of this spell disappears if it is cast a second time on the target or if the targetted pawn runs out of psyfocus. \n\nThe effect is weaker and drains more psyfocus when cast on pawns without the ancient gift.</description>
@@ -222,7 +243,7 @@
     </comps>
   </AbilityDef>
 
-  <AbilityDef ParentName="PsycastBase">
+  <AbilityDef ParentName="PsycastBase" MayRequire="Ludeon.RimWorld.Royalty">
     <defName>CAConjureLight</defName>
     <label>conjure light</label>
     <description>Conjures a light brighting up the area which follows pawn it was cast for.</description>
