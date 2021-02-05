@@ -140,6 +140,7 @@
 
 
   <!-- thoughts not in use, mainly testing -->
+  <!--
   <ThoughtDef>
     <defName>CAOutsiderRelation</defName>
     <thoughtClass>Thought_MemorySocial</thoughtClass>
@@ -259,4 +260,5 @@
       </li>
     </modExtensions>
   </ThoughtDef>
+  -->
 </Defs>
