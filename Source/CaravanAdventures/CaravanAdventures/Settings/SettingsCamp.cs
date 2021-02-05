@@ -41,18 +41,33 @@ namespace CaravanAdventures.Settings
                 options.End();
                 return;
             }
+            if (CompCache.BountyWC.BountyFaction == null)
+            {
+                Log.Warning($"bounty faction null which should not happen");
+            }
 
             var viewRect = new Rect(0f, 0f, windowRect.width - 150, 1200f);
             options.BeginScrollView(wrect, ref scrollPos, ref viewRect);
 
             Text.Font = GameFont.Medium;
             options.Label("Camp settings:".HtmlFormatting("ff7777"), 40f);
+            Text.Font = GameFont.Small;
+
             var rect = options.GetRect(Text.LineHeight);
 
             // todo figure out and finish
-            Widgets.Dropdown<List<Faction>, Faction>(rect, Find.FactionManager.AllFactions.ToList(), (List<Faction> factions) => { ModSettings.selectedBountyFaction = factions.FirstOrDefault(); return factions.FirstOrDefault(); }, GenerateDropDownElements);
+            // dafuq does getPayload do
+            Widgets.Dropdown<List<Faction>, Faction>(
+                rect, 
+                Find.FactionManager.AllFactions.ToList(), 
+                (List<Faction> factions) => { return factions.FirstOrDefault(); }, 
+                GenerateDropDownElements, 
+                CompCache.BountyWC.BountyFaction != null ? new TaggedString($"{CompCache.BountyWC.BountyFaction.NameColored} ({CompCache.BountyWC.BountyFaction.GoodwillWith(Faction.OfPlayerSilentFail)})") : new TaggedString("Please select a faction"));
 
-            Text.Font = GameFont.Small;
+            // only for testing purposes, remove
+            var serviceAvailable = CompCache.BountyWC.BountyServiceAvailable;
+            options.CheckboxLabeled("bounty services enabled", ref serviceAvailable);
+            CompCache.BountyWC.BountyServiceAvailable = serviceAvailable;
 
             options.EndScrollView(ref viewRect);
             options.End();
@@ -62,7 +77,11 @@ namespace CaravanAdventures.Settings
         private IEnumerable<Widgets.DropdownMenuElement<Faction>> GenerateDropDownElements(List<Faction> factions)
         {
             foreach (var faction in factions)
-                yield return new Widgets.DropdownMenuElement<Faction>() { option = new FloatMenuOption(faction.Name, () => Log.Message($"why")), payload = faction };
+            {
+                if (faction.def.permanentEnemy || faction == Faction.OfPlayer || faction.leader == null || faction.def.techLevel < TechLevel.Industrial) continue;
+                if (ModSettings.storyEnabled && faction != CaravanStory.StoryUtility.FactionOfSacrilegHunters) continue;
+                yield return new Widgets.DropdownMenuElement<Faction>() { option = new FloatMenuOption(faction.Name, () => CompCache.BountyWC.BountyFaction = faction), payload = faction };
+            }
         }
     }
 }
