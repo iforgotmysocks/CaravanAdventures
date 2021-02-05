@@ -50,13 +50,12 @@ namespace CaravanAdventures.CaravanStory
 
             if (ticks >= 300 && (CompCache.StoryWC.storyFlags["IntroVillage_Finished"] || CompCache.StoryWC.debugFlags["VillageDone"]))
             {
-                AddTalkTreeAction();
-                AddTreeWhisper();
-                StartTreeQuest();
-               
+                    AddTalkTreeAction();
+                    AddTreeWhisper();
+                    StartTreeQuest();
 
-                // todo maybe run on a WC, so the gift can be past on without a map present
-                CheckEnsureGifted();
+                    // todo maybe run on a WC, so the gift can be past on without a map present
+                    CheckEnsureGifted();
 
                 ticks = 0;
             }
@@ -235,7 +234,7 @@ namespace CaravanAdventures.CaravanStory
                    .ToList()
                    .ForEach(spell => {
                        if (!CompCache.StoryWC.GetUnlockedSpells().Contains(spell)) CompCache.StoryWC.GetUnlockedSpells().Add(spell);
-                   });
+            });
 
             var abilityDefs = CompCache.StoryWC.GetUnlockedSpells();
 
@@ -244,7 +243,7 @@ namespace CaravanAdventures.CaravanStory
                 chosen.abilities.GainAbility(abilityDef);
             }
             var lightAbilityDef = DefDatabase<AbilityDef>.AllDefs.FirstOrDefault(x => x.defName == "CAConjureLight");
-            chosen.abilities.GainAbility(lightAbilityDef);
+            if (lightAbilityDef != null) chosen.abilities.GainAbility(lightAbilityDef);
         }
 
         public override void MapRemoved()
