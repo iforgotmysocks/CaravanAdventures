@@ -73,6 +73,7 @@ namespace CaravanAdventures
         public static bool caravanFormingFilterSelectionEnabled = true;
         public static bool caravanTravelCompanionsEnabled = true;
         public static bool bountyEnabled = true;
+        public static bool caravanIncidentsEnabled = true;
 
         //public static ModSettings Get() => LoadedModManager.GetMod<CaravanAdventures.Main>().GetSettings<ModSettings>();
         private Vector2 scrollPos = Vector2.zero;
@@ -134,6 +135,7 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref caravanFormingFilterSelectionEnabled, "caravanFormingFilterSelectionEnabled", true);
             Scribe_Values.Look(ref caravanTravelCompanionsEnabled, "caravanTravelCompanionsEnabled", true);
             Scribe_Values.Look(ref bountyEnabled, "bountyEnabled", true);
+            Scribe_Values.Look(ref caravanIncidentsEnabled, "caravanIncidentsEnabled", true);
         }
 
         public static Rect BRect(Rect rect)
@@ -185,7 +187,7 @@ namespace CaravanAdventures
 
             Text.Font = GameFont.Medium;
             cRect = BRect(options.GetRect(Text.LineHeight));
-            Widgets.Label(cRect, $"Caravan forming & Filter settings".HtmlFormatting("00ff00", false, 18));
+            Widgets.Label(cRect, $"Caravan forming / trading presets & Filter settings".HtmlFormatting("00ff00", false, 18));
             Text.Font = GameFont.Small;
             Widgets.CheckboxLabeled(new Rect(options.ColumnWidth - 400, lastRect.y + 10, 110, Text.LineHeight), "Enabled: ", ref caravanFormingFilterSelectionEnabled);
             if (Widgets.ButtonText(new Rect(options.ColumnWidth - 225, lastRect.y + 6, 150, Text.LineHeight + 10), "Open")) Find.WindowStack.Add(new SettingsFilters());
@@ -217,7 +219,7 @@ namespace CaravanAdventures
             cRect = BRect(options.GetRect(Text.LineHeight));
             Widgets.Label(cRect, $"Caravan Incidents - (testing)".HtmlFormatting("00ff00", false, 18));
             Text.Font = GameFont.Small;
-            Widgets.CheckboxLabeled(new Rect(options.ColumnWidth - 400, lastRect.y + 10, 110, Text.LineHeight), "Enabled: ", ref toggleTest);
+            Widgets.CheckboxLabeled(new Rect(options.ColumnWidth - 400, lastRect.y + 10, 110, Text.LineHeight), "Enabled: ", ref caravanIncidentsEnabled);
             //if (Widgets.ButtonText(new Rect(options.ColumnWidth - 225, lastRect.y + 6, 150, Text.LineHeight + 10), "Open", true, false, false)) Find.WindowStack.Add(new SettingsFilters());
             options.Gap(10);
             options.Label($"Additional Caravan incidents - (only 1 in testing currently, more coming with the next expansion)");

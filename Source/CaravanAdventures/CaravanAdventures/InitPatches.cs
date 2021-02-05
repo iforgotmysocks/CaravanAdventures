@@ -15,21 +15,23 @@ namespace CaravanAdventures
     {
         static InitPatches()
         {
-            // todo -> only patch when enabled
             Helper.RunSavely(FilterCombs.InitFilterSets);
-            Helper.RunSavely(PatchAncientShrineDefs_MoreShrinesAndBetterRewards);
 
             if (ModsConfig.RoyaltyActive && ModSettings.storyEnabled)
             {
                 Helper.RunSavely(PatchAddNewMechanoidPawnGroupMakerDef);
                 Helper.RunSavely(PatchTreeDef_AddTalkOption);
                 Helper.RunSavely(PatchHumanDef_AddTalkOption);
+                Helper.RunSavely(PatchRemoveRoyalTitleRequirements);
             }
          
-            Helper.RunSavely(PatchAddCaravanDecisionsComp);
-            Helper.RunSavely(PatchRemoveRoyalTitleRequirements);
-            Helper.RunSavely(PatchAddPsychiteTeaToCampFire);
+            if (ModSettings.caravanFormingFilterSelectionEnabled) Helper.RunSavely(PatchAddCaravanDecisionsComp);
+            if (ModSettings.caravanCampEnabled) Helper.RunSavely(PatchAddPsychiteTeaToCampFire);
+            if (!ModSettings.caravanIncidentsEnabled) Helper.RunSavely(PatchIncidentsTo0Chance);
+            
+            // todo find category
             Helper.RunSavely(PatchIncreaseBaseWealthAndFood);
+            Helper.RunSavely(PatchAncientShrineDefs_MoreShrinesAndBetterRewards);
 
             CompatibilityPatches.ExecuteCompatibilityPatches();
         }
@@ -177,5 +179,14 @@ namespace CaravanAdventures
             foreach (var recipe in recipes) if (recipe != null) campFire.recipes.Add(recipe);
         }
 
+        private static void PatchIncidentsTo0Chance()
+        {
+            var incidents = DefDatabase<IncidentDef>.AllDefsListForReading.Where(x => x.defName.StartsWith("CACaravan"));
+            foreach (var incident in incidents)
+            {
+                incident.allowedBiomes = new List<BiomeDef>();
+                incident.baseChance = 0;
+            }
+        }
     }
 }

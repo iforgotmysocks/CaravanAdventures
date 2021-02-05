@@ -11,9 +11,9 @@ namespace CaravanAdventures.Patches
         static HarmonyPatcher()
         {
             harmony = harmony ?? (harmony = new Harmony("iforgotmysocks.CaravanAdventures"));
-            CaravanTravel.ApplyPatches(harmony);
-            AutomaticItemSelection.ApplyPatches(harmony);
-            KillBountyPatches.ApplyPatches(harmony);
+            if (ModSettings.caravanCampEnabled) CaravanTravel.ApplyPatches(harmony);
+            if (ModSettings.caravanFormingFilterSelectionEnabled) AutomaticItemSelection.ApplyPatches(harmony);
+            if (ModSettings.bountyEnabled) KillBountyPatches.ApplyPatches(harmony);
             if (ModSettings.storyEnabled) TalkPawnGUIOverlay.ApplyPatches(harmony);
         }
 
