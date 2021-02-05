@@ -198,6 +198,12 @@ namespace CaravanAdventures.CaravanStory
             CompCache.StoryWC.SetSF("IntroVillage_Created");
         }
 
+        internal static void RemoveStoryComponentsNoRoyalty()
+        {
+            // todo
+            RestartStory();
+        }
+
         public static void FreshenUpPawn(Pawn pawn)
         {
             HealthUtility.HealNonPermanentInjuriesAndRestoreLegs(pawn);
@@ -340,6 +346,7 @@ namespace CaravanAdventures.CaravanStory
                 var empireDef = FactionDefOf.Empire;
                 if (!empireDef.permanentEnemyToEveryoneExcept.Contains(sacrilegHunters.def)) empireDef.permanentEnemyToEveryoneExcept.Add(sacrilegHunters.def);
             }
+            CompCache.BountyWC.BountyFaction = sacrilegHunters;
             SetSacNeutralToPossibleFactions(sacrilegHunters);
             if ((sacrilegHunters.leader == null || sacrilegHunters.leader.Dead || sacrilegHunters.leader.Destroyed) && !skipLeaderGeneration)
             {
