@@ -34,42 +34,18 @@ namespace CaravanAdventures.Settings
             var options = new Listing_Standard();
             options.Begin(wrect);
 
-
-            if (CompCache.BountyWC == null || Find.FactionManager?.AllFactionsListForReading?.FirstOrDefault() == null)
-            {
-                Log.Warning($"todo label game not loaded");
-                options.End();
-                return;
-            }
-            if (CompCache.BountyWC.BountyFaction == null)
-            {
-                Log.Warning($"bounty faction null which should not happen");
-            }
-
-            var viewRect = new Rect(0f, 0f, windowRect.width - 150, 1200f);
-            options.BeginScrollView(wrect, ref scrollPos, ref viewRect);
+            //var viewRect = new Rect(0f, 0f, windowRect.width - 150, 1200f);
+            //options.BeginScrollView(wrect, ref scrollPos, ref viewRect);
 
             Text.Font = GameFont.Medium;
-            options.Label("Camp settings:".HtmlFormatting("ff7777"), 40f);
+            options.Label("Camp settings:".Colorize(Color.green), 40f);
             Text.Font = GameFont.Small;
+
+            //options.CheckboxLabeled("Select the tent types you want ur pawns to build by themselfs before you get to ")
 
             var rect = options.GetRect(Text.LineHeight);
 
-            // todo figure out and finish
-            // dafuq does getPayload do
-            //Widgets.Dropdown<List<Faction>, Faction>(
-            //    rect, 
-            //    Find.FactionManager.AllFactions.ToList(), 
-            //    (List<Faction> factions) => { return factions.FirstOrDefault(); }, 
-            //    GenerateDropDownElements, 
-            //    CompCache.BountyWC.BountyFaction != null ? new TaggedString($"{CompCache.BountyWC.BountyFaction.NameColored} ({CompCache.BountyWC.BountyFaction.GoodwillWith(Faction.OfPlayerSilentFail)})") : new TaggedString("Please select a faction"));
-
-            //// only for testing purposes, remove
-            //var serviceAvailable = CompCache.BountyWC.BountyServiceAvailable;
-            //options.CheckboxLabeled("bounty services enabled", ref serviceAvailable);
-            //CompCache.BountyWC.BountyServiceAvailable = serviceAvailable;
-
-            options.EndScrollView(ref viewRect);
+            //options.EndScrollView(ref viewRect);
             options.End();
 
         }

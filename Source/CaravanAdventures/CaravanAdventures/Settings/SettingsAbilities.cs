@@ -38,7 +38,7 @@ namespace CaravanAdventures.Settings
             options.BeginScrollView(wrect, ref scrollPos, ref viewRect);
 
             Text.Font = GameFont.Medium;
-            options.Label("Ancient Abilities:".Colorize(Color.red), 40f);
+            options.Label("Ancient Abilities:".Colorize(Color.green), 40f);
 
             Text.Font = GameFont.Small;
 
