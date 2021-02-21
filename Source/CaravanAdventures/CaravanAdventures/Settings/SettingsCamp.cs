@@ -34,20 +34,25 @@ namespace CaravanAdventures.Settings
             var options = new Listing_Standard();
             options.Begin(wrect);
 
-            //var viewRect = new Rect(0f, 0f, windowRect.width - 150, 1200f);
-            //options.BeginScrollView(wrect, ref scrollPos, ref viewRect);
-
             Text.Font = GameFont.Medium;
             options.Label("Camp settings:".Colorize(Color.green), 40f);
             Text.Font = GameFont.Small;
 
-            //options.CheckboxLabeled("Select the tent types you want ur pawns to build by themselfs before you get to ")
+            options.Gap();
+            options.Label("Select the tent types you want ur pawns to build by themselfs.");
 
-            var rect = options.GetRect(Text.LineHeight);
+            options.CheckboxLabeled("Build production tent", ref ModSettings.hasProductionTent);
+            options.CheckboxLabeled("Build storage tent", ref ModSettings.hasStorageTent);
+            options.CheckboxLabeled("Build medical tent", ref ModSettings.hasMedicalTent);
+            options.CheckboxLabeled("Build animal area", ref ModSettings.hasAnimalArea);
+            options.CheckboxLabeled("Build prison tent", ref ModSettings.hasPrisonTent);
+            options.CheckboxLabeled("Build plant tent", ref ModSettings.hasPlantTent);
 
-            //options.EndScrollView(ref viewRect);
+            options.CheckboxLabeled("Generate storage for all inventory items", ref ModSettings.generateStorageForAllInventory, "When disabled, most items will remain packed on the animals");
+            options.CheckboxLabeled("Let animals mostly free instead of limiting them to their small animal area", ref ModSettings.letAnimalsRunFree);
+
+            options.CheckboxLabeled("Disable Tentsupply requirement costs", ref ModSettings.hasSupplyCostsDisabled);
             options.End();
-
         }
 
         private IEnumerable<Widgets.DropdownMenuElement<Faction>> GenerateDropDownElements(List<Faction> factions)

@@ -37,7 +37,7 @@ namespace CaravanAdventures.Settings
 
             if (CompCache.BountyWC == null || Find.FactionManager?.AllFactionsListForReading?.FirstOrDefault() == null)
             {
-                Log.Warning($"todo label game not loaded");
+                options.Label($"Bounty settings are savegame specific, please load up a savegame to adjust the settings. Thanks.");
                 options.End();
                 return;
             }
@@ -50,10 +50,19 @@ namespace CaravanAdventures.Settings
             options.BeginScrollView(wrect, ref scrollPos, ref viewRect);
 
             Text.Font = GameFont.Medium;
-            options.Label("Bounty settings:".HtmlFormatting("ff7777"), 40f);
+            options.Label("Camp settings:".Colorize(Color.green), 40f);
             Text.Font = GameFont.Small;
 
+            options.Gap();
+            options.Label("Here bounty settings can be configured.");
+            options.Gap();
+
             var rect = options.GetRect(Text.LineHeight);
+
+            Widgets.Label(rect, "Select the desired bounty faction");
+
+            rect.x += options.ColumnWidth / 2;
+            rect.width = options.ColumnWidth / 2;
 
             // todo figure out and finish
             // dafuq does getPayload do

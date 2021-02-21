@@ -92,12 +92,12 @@ namespace CaravanAdventures.CaravanCamp
             campParts.Add(new CampCenter());
             campParts.Add(new FoodTent());
             // todo change to configurable number including auto (-1)
-            if (hasProductionTent) campParts.Add(new ProductionTent());
-            if (hasStorageTent) campParts.Add(new StorageTent());
-            if (hasMedicalTent) campParts.Add(new MedicalTent());
-            if (hasAnimalArea) campParts.Add(new AnimalArea());
-            if (hasPrisonTent) campParts.Add(new PrisonerTent());
-            if (hasPlantTent) campParts.Add(new PlantTent());
+            if (ModSettings.hasProductionTent) campParts.Add(new ProductionTent());
+            if (ModSettings.hasStorageTent) campParts.Add(new StorageTent());
+            if (ModSettings.hasMedicalTent) campParts.Add(new MedicalTent());
+            if (ModSettings.hasAnimalArea) campParts.Add(new AnimalArea());
+            if (ModSettings.hasPrisonTent) campParts.Add(new PrisonerTent());
+            if (ModSettings.hasPlantTent) campParts.Add(new PlantTent());
             if (ModSettings.generateStorageForAllInventory)
             {
                 var tent = new StorageTent();

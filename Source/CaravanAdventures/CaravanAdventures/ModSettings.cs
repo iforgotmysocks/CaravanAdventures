@@ -28,6 +28,13 @@ namespace CaravanAdventures
         // camp
         public static bool generateStorageForAllInventory = true;
         public static bool letAnimalsRunFree = false;
+        public static bool hasProductionTent = true;
+        public static bool hasStorageTent = true;
+        public static bool hasMedicalTent = true;
+        public static bool hasAnimalArea = true;
+        public static bool hasPrisonTent = true;
+        public static bool hasPlantTent = true;
+        public static bool hasSupplyCostsDisabled = false;
 
         // abilities
         // - ancient gift
@@ -92,6 +99,13 @@ namespace CaravanAdventures
             // camp
             Scribe_Values.Look(ref generateStorageForAllInventory, "generateStorageForAllInventory", false);
             Scribe_Values.Look(ref letAnimalsRunFree, "letAnimalsRunFree", false);
+            Scribe_Values.Look(ref hasProductionTent, "hasProductionTent", true);
+            Scribe_Values.Look(ref hasStorageTent, "hasStorageTent", true);
+            Scribe_Values.Look(ref hasMedicalTent, "hasMedicalTent", true);
+            Scribe_Values.Look(ref hasAnimalArea, "hasAnimalArea", true);
+            Scribe_Values.Look(ref hasPrisonTent, "hasPrisonTent", true);
+            Scribe_Values.Look(ref hasPlantTent, "hasPlantTent", true);
+            Scribe_Values.Look(ref hasSupplyCostsDisabled, "hasSupplyCostsDisabled", false);
 
             // abilities
             // - ancient gift
