@@ -34,6 +34,9 @@ namespace CaravanAdventures.Settings
             var options = new Listing_Standard();
             options.Begin(wrect);
 
+            Text.Font = GameFont.Medium;
+            options.Label("Camp settings:".Colorize(Color.green), 40f);
+            options.Gap();
 
             if (CompCache.BountyWC == null || Find.FactionManager?.AllFactionsListForReading?.FirstOrDefault() == null)
             {
@@ -46,20 +49,19 @@ namespace CaravanAdventures.Settings
                 Log.Warning($"bounty faction null which should not happen");
             }
 
-            var viewRect = new Rect(0f, 0f, windowRect.width - 150, 1200f);
-            options.BeginScrollView(wrect, ref scrollPos, ref viewRect);
+            //var viewRect = new Rect(0f, 0f, windowRect.width - 150, 1200f);
+            //options.BeginScrollView(wrect, ref scrollPos, ref viewRect);
 
-            Text.Font = GameFont.Medium;
-            options.Label("Camp settings:".Colorize(Color.green), 40f);
+
             Text.Font = GameFont.Small;
-
             options.Gap();
             options.Label("Here bounty settings can be configured.");
             options.Gap();
 
-            var rect = options.GetRect(Text.LineHeight);
 
-            Widgets.Label(rect, "Select the desired bounty faction");
+            options.Label("(Matters when royalty, or rather the story isn't enabled and sacrileg hunters don't exist");
+            var rect = options.GetRect(Text.LineHeight);
+            Widgets.Label(rect, "Select the desired bounty faction:");
 
             rect.x += options.ColumnWidth / 2;
             rect.width = options.ColumnWidth / 2;
@@ -78,7 +80,20 @@ namespace CaravanAdventures.Settings
             options.CheckboxLabeled("bounty services enabled", ref serviceAvailable);
             CompCache.BountyWC.BountyServiceAvailable = serviceAvailable;
 
-            options.EndScrollView(ref viewRect);
+            options.Label($"Envoy duration to improve relations with bounties in days: {Math.Round(ModSettings.envoyDurationTimeForBountyRelationHagglingInDays, 1)}");
+            ModSettings.envoyDurationTimeForBountyRelationHagglingInDays = options.Slider(ModSettings.envoyDurationTimeForBountyRelationHagglingInDays, 0.1f, 60f);
+            options.Label($"Rare item restock duration in days: {Math.Round(ModSettings.itemRestockDurationInDays, 1)}");
+            ModSettings.itemRestockDurationInDays = options.Slider(ModSettings.itemRestockDurationInDays, 0.1f, 60f);
+            options.Label($"Allied assistance timeout in days: {Math.Round(ModSettings.alliedAssistanceDurationInDays, 1)}");
+            ModSettings.alliedAssistanceDurationInDays = options.Slider(ModSettings.alliedAssistanceDurationInDays, 0.1f, 60f);
+            options.Label($"Veteran availability in days: {Math.Round(ModSettings.veteranResetTimeInDays, 1)}");
+            ModSettings.veteranResetTimeInDays = options.Slider(ModSettings.veteranResetTimeInDays, 0.1f, 60f);
+            options.CheckboxLabeled("Allow bounty gained by buildings (turrets etc)", ref ModSettings.allowBountyFromBuildingInstigators);
+            options.CheckboxLabeled("Allow exchanging bounty points for silver", ref ModSettings.allowBuyingBountyWithSilver);
+            options.Label($"Bounty value multiplier. (Default: 1 silver ~ 0.25 bounty credit): {Math.Round(ModSettings.bountyValueMult, 2)}");
+            ModSettings.bountyValueMult = options.Slider(ModSettings.bountyValueMult, 0.1f, 4f);
+
+            //options.EndScrollView(ref viewRect);
             options.End();
 
         }

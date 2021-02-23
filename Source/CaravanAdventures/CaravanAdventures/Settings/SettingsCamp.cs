@@ -40,6 +40,7 @@ namespace CaravanAdventures.Settings
 
             options.Gap();
             options.Label("Select the tent types you want ur pawns to build by themselfs.");
+            options.Gap();
 
             options.CheckboxLabeled("Build production tent", ref ModSettings.hasProductionTent);
             options.CheckboxLabeled("Build storage tent", ref ModSettings.hasStorageTent);

@@ -204,7 +204,7 @@ namespace CaravanAdventures
             Widgets.Label(cRect, $"Caravan camping & Caravan improvements".HtmlFormatting("00ff00", false, 18));
             Text.Font = GameFont.Small;
             Widgets.CheckboxLabeled(new Rect(options.ColumnWidth - 400, lastRect.y + 10, 110, Text.LineHeight), "Enabled: ", ref caravanCampEnabled);
-            if (Widgets.ButtonText(new Rect(options.ColumnWidth - 225, lastRect.y + 6, 150, Text.LineHeight + 10), "Camp Settings", true, true, true)) Find.WindowStack.Add(new SettingsCamp());
+            if (Widgets.ButtonText(new Rect(options.ColumnWidth - 225, lastRect.y + 6, 150, Text.LineHeight + 10), "Open", true, true, true)) Find.WindowStack.Add(new SettingsCamp());
             options.Gap(10);
             options.Label($"Enables settling with a camp, settling with items still packed and the ability to drop them later on and nighttravel.\nAdjust settings related to the automatic camp generation. Depending if the player has enough camp supplies, the player's pawns will either build a high quality camp, or a wanting camp construted with makeshift materials.");
             options.GapLine();
@@ -280,16 +280,10 @@ namespace CaravanAdventures
 
 
             // move to improvement settings -> or rather delete and adjust that via def patch
-            options.Label("Settlement price adjustments");
-            options.Label("Multiplies the current money for settlements with less then 3k silver by 3, and those with more by 2");
-            if (options.ButtonTextLabeled("Increase Settlement money", "Increase")) Helper.AdjustSettlementPrices();
+            //options.Label("Settlement price adjustments");
+            //options.Label("Multiplies the current money for settlements with less then 3k silver by 3, and those with more by 2");
+            //if (options.ButtonTextLabeled("Increase Settlement money", "Increase")) Helper.AdjustSettlementPrices();
             // todo add min and max multiplier used in the def patch for settlement money
-            options.Gap();
-
-            // camp settings
-            options.CheckboxLabeled("Generate storage tents for all items and unload", ref generateStorageForAllInventory);
-            options.CheckboxLabeled("Let animals run free", ref letAnimalsRunFree);
-
             options.EndScrollView(ref viewRect);
             //Widgets.EndScrollView();
             //GUI.EndGroup();

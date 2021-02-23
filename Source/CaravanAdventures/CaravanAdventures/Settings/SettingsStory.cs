@@ -34,8 +34,8 @@ namespace CaravanAdventures.Settings
             var options = new Listing_Standard();
             options.Begin(wrect);
 
-            var viewRect = new Rect(0f, 0f, windowRect.width - 150, 1200f);
-            options.BeginScrollView(wrect, ref scrollPos, ref viewRect);
+            //var viewRect = new Rect(0f, 0f, windowRect.width - 150, 1200f);
+            //options.BeginScrollView(wrect, ref scrollPos, ref viewRect);
 
             Text.Font = GameFont.Medium;
             options.Label("Story settings:".Colorize(Color.red), 40f);
@@ -52,6 +52,8 @@ namespace CaravanAdventures.Settings
             options.Label("Multiplier: " + Math.Round(ModSettings.shrineMechDifficultyMultiplier, 2) + "  (default: 1.2)");
             ModSettings.shrineMechDifficultyMultiplier = options.Slider(ModSettings.shrineMechDifficultyMultiplier, 0.2f, 10f);
             options.Gap();
+            options.CheckboxLabeled("Issue further shrine locations after story is complete", ref ModSettings.issueFurtherShrineLocationsAfterStoryEnd);
+            options.CheckboxLabeled("Limit larger map sizes to tested medium-large map size for shrines", ref ModSettings.limitLargeMapSizesToTestedSize);
 
             options.CheckboxLabeled("Remove royal title requirements", ref ModSettings.removeRoyalTitleRequirements);
             options.Gap();
@@ -59,7 +61,7 @@ namespace CaravanAdventures.Settings
             options.Gap();
 
 
-            options.EndScrollView(ref viewRect);
+            //options.EndScrollView(ref viewRect);
             options.End();
 
         }
