@@ -89,7 +89,6 @@ namespace CaravanAdventures.CaravanMechBounty
                 bountyNotificationCounterStarted = true;
             }
 
-            // todo once settings for replacement faction exists in settings, use that here
             if (bountyNotificationCounter == 0)
             {
                 Find.LetterStack.ReceiveLetter("StoryVillage_Response_BountyInitiatedTitle".Translate(), "StoryVillage_Response_BountyInitiatedDesc".Translate(bountyFaction.NameColored, Faction.OfMechanoids.NameColored), LetterDefOf.PositiveEvent);
@@ -105,7 +104,7 @@ namespace CaravanAdventures.CaravanMechBounty
 
         private bool CheckCanStartBountyNotificationCounter()
         {
-            if (!ModSettings.bountyEnabled) return false;
+            if (!ModSettings.bountyEnabled || !Patches.KillBountyPatches.killBountyPatchesApplied) return false;
             if (!ModSettings.storyEnabled && !bountyNotificationCounterStarted) return true;
             return ModSettings.storyEnabled && !bountyNotificationCounterStarted && CompCache.StoryWC.storyFlags["IntroVillage_Finished"];
         }

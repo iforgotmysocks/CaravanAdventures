@@ -13,6 +13,7 @@ namespace CaravanAdventures
     [StaticConstructorOnStartup]
     static class InitPatches
     {
+        public static bool storyPatchesLoaded = false;
         static InitPatches()
         {
             Helper.RunSavely(FilterCombs.InitFilterSets);
@@ -23,6 +24,7 @@ namespace CaravanAdventures
                 Helper.RunSavely(PatchTreeDef_AddTalkOption);
                 Helper.RunSavely(PatchHumanDef_AddTalkOption);
                 Helper.RunSavely(PatchRemoveRoyalTitleRequirements);
+                storyPatchesLoaded = true;
             }
          
             if (ModSettings.caravanFormingFilterSelectionEnabled) Helper.RunSavely(PatchAddCaravanDecisionsComp);
@@ -143,30 +145,31 @@ namespace CaravanAdventures
                 thingSetMaker_Count.fixedParams.filter.Allows(ThingDefOf.InfiniteChemreactor);
                 root.options.Add(newOption);
 
+                {
+                    //var newItems = new ThingDef[]
+                    //{
+                    //    DefDatabase<ThingDef>.GetNamed("MechSerumHealer"),
+                    //    DefDatabase<ThingDef>.GetNamed("MechSerumResurrector"),
+                    //};
 
-                //var newItems = new ThingDef[]
-                //{
-                //    DefDatabase<ThingDef>.GetNamed("MechSerumHealer"),
-                //    DefDatabase<ThingDef>.GetNamed("MechSerumResurrector"),
-                //};
+                    //var newFilter = new ThingFilter();
+                    //foreach (var item in newItems)
+                    //{
+                    //    newFilter.Allows(item);
+                    //}
 
-                //var newFilter = new ThingFilter();
-                //foreach (var item in newItems)
-                //{
-                //    newFilter.Allows(item);
-                //}
-
-                //root.options.Add(new ThingSetMaker_Sum.Option
-                //{
-                //    chance = 1,
-                //    thingSetMaker = new ThingSetMaker_Count()
-                //    {
-                //        fixedParams = new ThingSetMakerParams()
-                //        {
-                //            filter = newFilter,
-                //        }
-                //    }
-                //});
+                    //root.options.Add(new ThingSetMaker_Sum.Option
+                    //{
+                    //    chance = 1,
+                    //    thingSetMaker = new ThingSetMaker_Count()
+                    //    {
+                    //        fixedParams = new ThingSetMakerParams()
+                    //        {
+                    //            filter = newFilter,
+                    //        }
+                    //    }
+                    //});
+                }
             }
         }
 

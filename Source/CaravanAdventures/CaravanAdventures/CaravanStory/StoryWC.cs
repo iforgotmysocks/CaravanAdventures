@@ -253,6 +253,7 @@ namespace CaravanAdventures.CaravanStory
                 wasEnabled = false;
                 return false;
             }
+            if (!InitPatches.storyPatchesLoaded) return false;
             wasEnabled = true;
             return true;
         }

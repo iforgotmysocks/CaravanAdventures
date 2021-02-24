@@ -60,7 +60,7 @@ namespace CaravanAdventures.CaravanStory.Quests
         {
             DLog.Message($"Signalling to end quest");
             var quest = Find.QuestManager.QuestsListForReading.FirstOrDefault(x => x.root == questDef
-            && (x.State == state || ignoreStateCompleteAnyway));
+                && (x.State == state || ignoreStateCompleteAnyway));
             if (quest != null)
             {
                 if (addQuestUpdatedNoticeToLetter && sendLetter)
