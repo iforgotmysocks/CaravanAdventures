@@ -22,30 +22,24 @@ namespace CaravanAdventures.CaravanCamp
 
     class CampBuilder
     {
-        private Map map;
-        private Caravan caravan;
+        protected Map map;
+        protected Caravan caravan;
 
-        private IntVec3 tentSize = new IntVec3(5, 0, 5);
-        private int spacer = 2;
-        private List<CampArea> campParts;
-        private IntVec3 campCenterSpot;
+        protected IntVec3 tentSize = new IntVec3(5, 0, 5);
+        protected int spacer = 2;
+        protected List<CampArea> campParts;
+        protected IntVec3 campCenterSpot;
 
         // todo move to camp config settings
-        private bool hasMedicalTent = true;
-        private bool hasStorageTent = true;
-        private bool hasProductionTent = true;
-        private bool hasAnimalArea = true;
-        private bool hasPrisonTent = true;
-        private bool hasPlantTent = true;
-        private bool clearSnow = false;
+        protected bool clearSnow = false;
 
-        private CellRect coordSystem;
-        private CellRect campSiteRect;
+        protected CellRect coordSystem;
+        protected CellRect campSiteRect;
 
-        private List<Thing> campAssetListRef;
-        private float campCost = 0;
-        private bool tribal = false;
-        private int waste;
+        protected List<Thing> campAssetListRef;
+        protected float campCost = 0;
+        protected bool tribal = false;
+        protected int waste;
 
 
         public CampBuilder(Caravan caravan, Map map)
@@ -77,13 +71,13 @@ namespace CaravanAdventures.CaravanCamp
             return true;
         }
 
-        protected void CalculateTentSizes()
+        protected virtual void CalculateTentSizes()
         {
             // based on colonists, settings and inventory
             // TODO!
         }
 
-        protected void CalculateTentNumbersAndAssignPawnsToTents()
+        protected virtual void CalculateTentNumbersAndAssignPawnsToTents()
         {
             var colonists = caravan.PawnsListForReading.Where(col => col.IsFreeColonist).ToList();
             var sickColonists = caravan.PawnsListForReading.Where(col => col.IsFreeColonist && col.health.hediffSet.HasNaturallyHealingInjury()).ToList();
@@ -112,7 +106,7 @@ namespace CaravanAdventures.CaravanCamp
                 campParts.Add(new RestTent() { Occupants = new List<Pawn>() { couple[0], couple[1] } });
             });
 
-            if (hasMedicalTent)
+            if (ModSettings.hasMedicalTent)
             {
                 sickColonists.ForEach(sick =>
                 {
@@ -153,7 +147,7 @@ namespace CaravanAdventures.CaravanCamp
                 });
         }
 
-        protected void CalculateCostAndDetermineType(bool tribal = false)
+        protected virtual void CalculateCostAndDetermineType(bool tribal = false)
         {
             if (tribal)
             {
@@ -179,7 +173,7 @@ namespace CaravanAdventures.CaravanCamp
             foreach (var mat in materials.Reverse<Thing>()) mat.Destroy();
         }
 
-        protected void AssignCampLayout()
+        protected virtual void AssignCampLayout()
         {
             campCenterSpot = CampHelper.FindCenterCell(map, (IntVec3 x) => x.GetRoom(map, RegionType.Set_Passable).CellCount >= 600);
             var campCenter = campParts.OfType<CampCenter>().FirstOrDefault();
@@ -202,7 +196,7 @@ namespace CaravanAdventures.CaravanCamp
             campSiteRect = CalcCampSiteRect();
         }
 
-        protected void TransformTerrain()
+        protected virtual void TransformTerrain()
         {
             foreach (var c in campSiteRect.ExpandedBy(1).Cells)
             {
@@ -235,7 +229,7 @@ namespace CaravanAdventures.CaravanCamp
             campSiteRect.ExpandedBy(1).EdgeCells.ToList().ForEach(cell => map.fogGrid.Unfog(cell));
         }
 
-        protected CellRect CalcCampSiteRect()
+        protected virtual CellRect CalcCampSiteRect()
         {
             var width = campParts.Max(p => p.CellRect.maxX) - campParts.Min(p => p.CellRect.minX);
             var height = campParts.Max(p => p.CellRect.maxZ) - campParts.Min(p => p.CellRect.minZ);
@@ -245,7 +239,7 @@ namespace CaravanAdventures.CaravanCamp
                 height + (1 + spacer) * 2 + 1);
         }
 
-        protected CellRect CalculateRect(CampArea part)
+        protected virtual CellRect CalculateRect(CampArea part)
         {
             // todo merge
             CellRect rect = default;
@@ -272,7 +266,7 @@ namespace CaravanAdventures.CaravanCamp
             return rect;
         }
 
-        protected List<IntVec3> FindPlacement(CampArea part)
+        protected virtual List<IntVec3> FindPlacement(CampArea part)
         {
             var placementCells = new List<IntVec3>();
             var center = new IntVec3(0, 0, 0);
@@ -306,7 +300,7 @@ namespace CaravanAdventures.CaravanCamp
             return placementCells;
         }
 
-        protected List<IntVec3> GetNeigbourCells(IntVec3 cell, IOrderedEnumerable<IntVec3> source, int limit = 0, ForcedTentDirection tentDirection = ForcedTentDirection.None)
+        protected virtual List<IntVec3> GetNeigbourCells(IntVec3 cell, IOrderedEnumerable<IntVec3> source, int limit = 0, ForcedTentDirection tentDirection = ForcedTentDirection.None)
         {
             var result = new List<IntVec3>() { cell };
             for (; ; )
@@ -325,7 +319,7 @@ namespace CaravanAdventures.CaravanCamp
             return result;
         }
 
-        protected IEnumerable<IntVec3> FindFreeCoords()
+        protected virtual IEnumerable<IntVec3> FindFreeCoords()
         {
             for (int z = coordSystem.Max(cell => cell.z); z >= coordSystem.Min(cell => cell.z); z--)
             {
@@ -336,7 +330,7 @@ namespace CaravanAdventures.CaravanCamp
             }
         }
 
-        protected List<List<Pawn>> GetRelationShipPairs(List<Pawn> colonists)
+        protected virtual List<List<Pawn>> GetRelationShipPairs(List<Pawn> colonists)
         {
             var pairList = new List<List<Pawn>>();
             var prodColList = colonists.ToList();
@@ -357,7 +351,7 @@ namespace CaravanAdventures.CaravanCamp
             return pairList;
         }
 
-        protected void GenerateBuildings()
+        protected virtual void GenerateBuildings()
         {
             campAssetListRef = new List<Thing>();
             foreach (var part in campParts)
@@ -384,7 +378,7 @@ namespace CaravanAdventures.CaravanCamp
             comp.Waste = waste;
         }
 
-        protected void UpdateAreas()
+        protected virtual void UpdateAreas()
         {
             //todo add to settings
             foreach (var cell in campSiteRect)
@@ -406,7 +400,7 @@ namespace CaravanAdventures.CaravanCamp
             }
         }
 
-        protected void ApplyZonesAndInventory()
+        protected virtual void ApplyZonesAndInventory()
         {
             foreach (var zoneTent in campParts.OfType<IZoneTent>())
             {
@@ -431,7 +425,7 @@ namespace CaravanAdventures.CaravanCamp
             CampHelper.AddAnimalFreeAreaRestriction(campParts.Where(part => part is FoodTent || part is PlantTent), map, caravan, ModSettings.letAnimalsRunFree);
         }
 
-        protected void GenerateRecipes()
+        protected virtual void GenerateRecipes()
         {
             foreach (var recipeHolder in campParts.OfType<IRecipeHolder>())
             {
@@ -440,9 +434,9 @@ namespace CaravanAdventures.CaravanCamp
             }
         }
 
-        private void GiveHappyThoughts() => caravan.PawnsListForReading.Where(pawn => pawn.IsColonist).ToList().ForEach(pawn => pawn.needs.mood.thoughts.memories.TryGainMemory(ThoughtDef.Named("CACamping")));
+        protected virtual void GiveHappyThoughts() => caravan.PawnsListForReading.Where(pawn => pawn.IsColonist).ToList().ForEach(pawn => pawn.needs.mood.thoughts.memories.TryGainMemory(ThoughtDef.Named("CACamping")));
 
-        private void MovePrisonersToCells()
+        protected virtual void MovePrisonersToCells()
         {
             var prisoners = caravan.PawnsListForReading.Where(col => col.IsPrisoner).ToList();
             var beds = map.listerBuildings.allBuildingsColonist.OfType<Building_Bed>().Where(x => x.ForPrisoners);
@@ -455,7 +449,7 @@ namespace CaravanAdventures.CaravanCamp
             }
         }
 
-        private void GetIntoBed(Pawn pawn, Building_Bed bed)
+        protected virtual void GetIntoBed(Pawn pawn, Building_Bed bed)
         {
             var pos = RestUtility.GetBedSleepingSlotPosFor(pawn, bed);
             caravan.RemovePawn(pawn);
