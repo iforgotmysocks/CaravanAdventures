@@ -23,14 +23,11 @@ using Verse.Noise;
 // -- add comm device gizmo to the gifted hediff, that is visible, when the player isn't hostile towards hunters -> opens dialog with hunters
 // --> upon death of second boss, the story contact informs the player about data they were able to trace to a remote location, but they required more attempts to find the spot
 
-// - trade / caravan dialog filters
-// --> try turning them into regular game filters, which would allow the player to set specific items for the options
-// --> turn provisions button into enable/disable auto supplies
-
 // - add and rework dialogs from shrines onwards
 // - add system that allows inclusion or exclusion for other races to relation
 // - suddenly yellow save error for the sacrileg hunter faction appeared and the story char was generated anew -> fix!!
-// - village still throws an error sometimes, when story char is being spawned on a unwalkable cell
+
+// - spawn tree for tree wisper quest if it doesn't exist yet
 
 // med prio:
 // - add check to master shrine location selection, that keeps it away from a player settlement

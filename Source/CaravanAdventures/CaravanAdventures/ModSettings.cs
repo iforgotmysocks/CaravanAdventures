@@ -35,6 +35,7 @@ namespace CaravanAdventures
         public static bool hasPrisonTent = true;
         public static bool hasPlantTent = true;
         public static bool hasSupplyCostsDisabled = false;
+        public static IntVec3 campMapSize = new IntVec3(275, 1, 275);
 
         // abilities
         // - ancient gift
@@ -106,6 +107,7 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref hasPrisonTent, "hasPrisonTent", true);
             Scribe_Values.Look(ref hasPlantTent, "hasPlantTent", true);
             Scribe_Values.Look(ref hasSupplyCostsDisabled, "hasSupplyCostsDisabled", false);
+            Scribe_Values.Look(ref campMapSize, "campMapSize", new IntVec3(275, 1, 275));
 
             // abilities
             // - ancient gift
