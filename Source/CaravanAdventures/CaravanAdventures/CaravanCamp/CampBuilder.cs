@@ -66,6 +66,7 @@ namespace CaravanAdventures.CaravanCamp
             GenerateRecipes();
             GiveHappyThoughts();
             MovePrisonersToCells();
+            InformPlayerHighTechCosts();
 
             Current.ProgramState = stateBackup;
             return true;
@@ -91,7 +92,7 @@ namespace CaravanAdventures.CaravanCamp
             if (ModSettings.hasMedicalTent) campParts.Add(new MedicalTent());
             if (ModSettings.hasAnimalArea) campParts.Add(new AnimalArea());
             if (ModSettings.hasPrisonTent) campParts.Add(new PrisonerTent());
-            if (ModSettings.hasPlantTent) campParts.Add(new PlantTent());
+            if (ModSettings.hasPlantTent && !tribal) campParts.Add(new PlantTent());
             if (ModSettings.generateStorageForAllInventory)
             {
                 var tent = new StorageTent();
@@ -155,13 +156,15 @@ namespace CaravanAdventures.CaravanCamp
                 return;
             }
             campParts.ForEach(part => campCost += part.SupplyCost);
+            if (ModSettings.hasSupplyCostsDisabled) campCost = 0;
+            else if (campCost > ModSettings.maxCampSupplyCost) campCost = ModSettings.maxCampSupplyCost;
             var amount = caravan.AllThings?.Where(thing => thing.def == CampDefOf.CASpacerTentSupplies)?.Select(thing => thing?.stackCount)?.Sum();
             if (amount == null || amount == 0 || campCost > amount)
             {
                 this.tribal = true;
                 return;
             }
-            waste = campParts.Where(part => part is RestTent || part is ProductionTent).ToList().Count;
+            waste = ModSettings.hasSupplyCostsDisabled ? 0 : campParts.Where(part => part is RestTent || part is ProductionTent).ToList().Count;
             var remaining = Convert.ToInt32(campCost);
             var materials = CaravanInventoryUtility.TakeThings(caravan, (Func<Thing, int>)delegate (Thing thing)
             {
@@ -178,6 +181,7 @@ namespace CaravanAdventures.CaravanCamp
             campCenterSpot = CampHelper.FindCenterCell(map, (IntVec3 x) => x.GetRoom(map, RegionType.Set_Passable).CellCount >= 600);
             var campCenter = campParts.OfType<CampCenter>().FirstOrDefault();
             campCenter.Coords.Add(new IntVec3(0, 0, 0));
+            var failedTentCounter = 0;
 
             var coords = new List<IntVec3>();
             coordSystem = new CellRect(0, 0, 1, 1);
@@ -193,6 +197,14 @@ namespace CaravanAdventures.CaravanCamp
                 part.CellRect = CalculateRect(part);
             }
 
+            foreach (var part in campParts.Reverse<CampArea>())
+            {
+                if (part.CellRect.ExpandedBy(1 + spacer + 1).InBounds(map)) continue;
+                campParts.Remove(part);
+                failedTentCounter++;
+            }
+
+            if (failedTentCounter != 0) Messages.Message("CABuildFailTents".Translate(failedTentCounter), MessageTypeDefOf.NegativeEvent);
             campSiteRect = CalcCampSiteRect();
         }
 
@@ -447,6 +459,11 @@ namespace CaravanAdventures.CaravanCamp
                 GetIntoBed(prisoner, bed);
                 prisoners.Remove(prisoner);
             }
+        }
+
+        protected virtual void InformPlayerHighTechCosts() 
+        { 
+            if (!tribal) Messages.Message("CAEstablishedCampNotification".Translate(campCost), MessageTypeDefOf.PositiveEvent); 
         }
 
         protected virtual void GetIntoBed(Pawn pawn, Building_Bed bed)

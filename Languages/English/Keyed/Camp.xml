@@ -6,7 +6,9 @@
   <CAAnimalFoodZoneLabel>Animal food</CAAnimalFoodZoneLabel>
   <CADeconstructCamp>Pack up the camp</CADeconstructCamp>
   <CADeconstructCampMessage>Packing up the camp</CADeconstructCampMessage>
+  <CABuildFailTents>{0} tents couldn't be built as no space was available.</CABuildFailTents>
   <CAMedicineZone>Medicine</CAMedicineZone>
+  <CAEstablishedCampNotification>A high-tech camp was set up for {0} tent supplies</CAEstablishedCampNotification>
 
   <CALeaveImmediately>Leave immediately</CALeaveImmediately>
   <CALeaveImmediatelyPackupCamp>Do you want to pack up the camp and abandon this place? \n{0} spacer tent supplies will be added to the caravan.</CALeaveImmediatelyPackupCamp>

@@ -20,7 +20,7 @@ namespace CaravanAdventures.Settings
             closeOnCancel = true;
             scrollPos = Vector2.zero;
 
-            width = 600f;
+            width = 600f; 
         }
 
         protected override void SetInitialSizeAndPosition()
@@ -46,18 +46,21 @@ namespace CaravanAdventures.Settings
 
             options.Gap();
             options.Label("Select the tent types you want ur pawns to build by themselfs.");
-            options.Gap();
-
             options.CheckboxLabeled("Build production tent", ref ModSettings.hasProductionTent);
             options.CheckboxLabeled("Build storage tent", ref ModSettings.hasStorageTent);
             options.CheckboxLabeled("Build medical tent", ref ModSettings.hasMedicalTent);
             options.CheckboxLabeled("Build animal area", ref ModSettings.hasAnimalArea);
             options.CheckboxLabeled("Build prison tent", ref ModSettings.hasPrisonTent);
             options.CheckboxLabeled("Build plant tent", ref ModSettings.hasPlantTent);
-
+            options.Gap();
             options.CheckboxLabeled("Generate storage for all inventory items", ref ModSettings.generateStorageForAllInventory, "When disabled, most items will remain packed on the animals");
             options.CheckboxLabeled("Let animals mostly free instead of limiting them to their small animal area", ref ModSettings.letAnimalsRunFree);
 
+            var rect = options.GetRect(Text.LineHeight);
+            rect.width = options.ColumnWidth / 2;
+            Widgets.Label(rect, "Maximum camp supply cost: ");
+            var campCostInput = Widgets.TextField(ModSettings.BRect(options.ColumnWidth - 40, rect.y, 40, Text.LineHeight), ModSettings.maxCampSupplyCost.ToString());
+            if (double.TryParse(campCostInput, out var campCostDouble)) ModSettings.maxCampSupplyCost = Convert.ToInt32(campCostDouble);
             options.CheckboxLabeled("Disable Tentsupply requirement costs", ref ModSettings.hasSupplyCostsDisabled);
             options.End();
         }
