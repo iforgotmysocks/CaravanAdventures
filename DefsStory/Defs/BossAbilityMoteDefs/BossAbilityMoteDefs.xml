@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Defs>
+  <ThingDef ParentName="MoteBase">
+    <defName>CACirclingBlades</defName>
+    <thingClass>CaravanAdventures.CaravanStory.MechChips.AbilityMotes.CirclingBlades</thingClass>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <drawOffscreen>true</drawOffscreen>
+    <graphicData>
+      <texPath>Things/Item/Bossweapons/Blade/Blade</texPath>
+      <!--<shaderType>MoteGlow</shaderType>-->
+    </graphicData>
+    <mote>
+      <fadeInTime>1</fadeInTime>
+      <solidTime>3</solidTime>
+      <fadeOutTime>1</fadeOutTime>
+    </mote>
+  </ThingDef>
+
+</Defs>

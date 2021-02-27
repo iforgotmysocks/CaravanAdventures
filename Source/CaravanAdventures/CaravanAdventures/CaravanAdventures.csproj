@@ -137,6 +137,7 @@
     <Compile Include="CaravanStory\Lords\LordJob_DefendBaseAgaintHostiles.cs" />
     <Compile Include="CaravanStory\Lords\Trigger_AttackWithReinforcements.cs" />
     <Compile Include="CaravanStory\Lords\Trigger_ChanceOnMechHarmNPCBuilding.cs" />
+    <Compile Include="CaravanStory\MechChips\AbilityMotes\CirclingBlades.cs" />
     <Compile Include="CaravanStory\Quests\QuestCont.cs" />
     <Compile Include="CaravanStory\Quests\QuestCont_FriendlyCaravan.cs" />
     <Compile Include="CaravanStory\Quests\QuestCont_LastJudgment.cs" />
