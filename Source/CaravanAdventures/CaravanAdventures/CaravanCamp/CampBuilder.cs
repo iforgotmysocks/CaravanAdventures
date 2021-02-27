@@ -71,8 +71,6 @@ namespace CaravanAdventures.CaravanCamp
 
         public static int PreemptivelyCalculateCampCosts(Caravan caravan)
         {
-            // todo -> so a preemptive amount of supplies needed can be dispalyed on the gizmo
-
             var buildingCosts = 0;
             buildingCosts += (int)Math.Ceiling(caravan.PawnsListForReading.Where(x => x.IsColonist || x.IsPrisoner).Count() / 3.0);
             if (ModSettings.hasProductionTent) buildingCosts += ModSettings.campSupplyCostProductionTent;
@@ -98,7 +96,7 @@ namespace CaravanAdventures.CaravanCamp
         protected virtual void CalculateTentSizes()
         {
             // based on colonists, settings and inventory
-            // TODO!
+            // TODO... eventually...
         }
 
         protected virtual void CalculateTentNumbersAndAssignPawnsToTents()
@@ -239,13 +237,14 @@ namespace CaravanAdventures.CaravanCamp
 
                 if (room != null && room.CellCount < 700 && room.ContainsThing(ThingDefOf.AncientCryptosleepCasket))
                 {
-                    // todo test if that uncovers better
-                    CaravanStory.StoryUtility.FloodUnfogAdjacent(room.Map.fogGrid, room.Map, room.Cells.FirstOrDefault(cell => !room.BorderCells.Contains(cell)));
-
                     foreach (var roomCell in room.Cells)
                     {
                         foreach (var thing in map.thingGrid.ThingsListAt(roomCell).Reverse<Thing>()) if (thing.def.destroyable) thing.Destroy();
                     }
+
+                    // todo test if that uncovers better
+                    CaravanStory.StoryUtility.FloodUnfogAdjacent(room.Map.fogGrid, room.Map, room.Cells.FirstOrDefault(cell => !room.BorderCells.Contains(cell)));
+
 
                     var roomRect = CellRect.FromLimits(room.Cells.MinBy(cell => cell.x + cell.z), room.Cells.MaxBy(cell => cell.x + cell.z));
                     foreach (var cell in roomRect.ExpandedBy(1).Cells) if (cell.Fogged(map)) map.fogGrid.Unfog(cell);
@@ -415,7 +414,6 @@ namespace CaravanAdventures.CaravanCamp
 
         protected virtual void UpdateAreas()
         {
-            //todo add to settings
             foreach (var cell in campSiteRect)
             {
                 map.areaManager.Home[cell] = true;
