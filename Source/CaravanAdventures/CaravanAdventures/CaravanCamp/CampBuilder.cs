@@ -12,10 +12,7 @@ using Verse;
 namespace CaravanAdventures.CaravanCamp
 {
     // todos
-    // add a guardening tent with high powered sunlamp thingy
     // fix unfogging in TransformTerrain()
-
-    // find out why burning corpses at the bio chem station removes cloths
 
     // functionality: 
     // add another field rect
@@ -70,6 +67,29 @@ namespace CaravanAdventures.CaravanCamp
 
             Current.ProgramState = stateBackup;
             return true;
+        }
+
+        public static int PreemptivelyCalculateCampCosts(Caravan caravan, Map map)
+        {
+            // todo -> so a preemptive amount of supplies needed can be dispalyed on the gizmo
+            var colonistCosts = (int)Math.Ceiling(caravan.PawnsListForReading.Where(x => x.IsColonist || x.IsPrisoner).Count() / 3.0);
+            var otherBuildingCosts = 0;
+
+            //if (ModSettings.hasProductionTent) otherBuildingCosts += ;
+            //if (ModSettings.hasStorageTent) otherBuildingCosts += StorageTent.SupplyCost;
+            //if (ModSettings.hasMedicalTent) campParts.Add(new MedicalTent());
+            //if (ModSettings.hasAnimalArea) campParts.Add(new AnimalArea());
+            //if (ModSettings.hasPrisonTent) campParts.Add(new PrisonerTent());
+            //if (ModSettings.hasPlantTent && !tribal) campParts.Add(new PlantTent());
+            //if (ModSettings.generateStorageForAllInventory)
+            //{
+            //    var tent = new StorageTent();
+            //    var cellsPerTent = (tent.CoordSize * tentSize.x) * (tentSize.z - 2);
+            //    var tentsAmount = CaravanInventoryUtility.AllInventoryItems(caravan).Count / cellsPerTent;
+            //    for (int i = 0; i < tentsAmount; i++) campParts.Add(new StorageTent());
+            //}
+
+            return 0;
         }
 
         protected virtual void CalculateTentSizes()
@@ -396,8 +416,7 @@ namespace CaravanAdventures.CaravanCamp
             foreach (var cell in campSiteRect)
             {
                 map.areaManager.Home[cell] = true;
-                // todo add to settings
-                if (clearSnow) if (!cell.Roofed(map)) map.areaManager.SnowClear[cell] = true;
+                if (ModSettings.autoApplyCampClearSnowArea) if (!cell.Roofed(map)) map.areaManager.SnowClear[cell] = true;
             }
 
             foreach (var tent in campParts.OfType<Tent>())
@@ -439,6 +458,7 @@ namespace CaravanAdventures.CaravanCamp
 
         protected virtual void GenerateRecipes()
         {
+            if (!ModSettings.autoApplyCampGearRecipes) return;
             foreach (var recipeHolder in campParts.OfType<IRecipeHolder>())
             {
                 if (tribal) recipeHolder.ApplyRecipesTribal(caravan);

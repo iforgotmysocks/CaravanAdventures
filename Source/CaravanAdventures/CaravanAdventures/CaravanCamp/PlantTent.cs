@@ -44,8 +44,7 @@ namespace CaravanAdventures.CaravanCamp
             generatorPos.x -= 1;
             generatorPos.z -= 1;
             var generator = CampHelper.PrepAndGenerateThing(CampDefOf.CAChemfuelPoweredGenerator, generatorPos, map, default, campAssetListRef);
-            var refuelComp = generator.TryGetComp<CompRefuelable>();
-            if (refuelComp != null) refuelComp.Refuel(refuelComp.GetFuelCountToFullyRefuel());
+            CampHelper.RefuelByPerc(generator, -1);
         }
 
         public override void BuildTribal(Map map, List<Thing> campAssetListRef)

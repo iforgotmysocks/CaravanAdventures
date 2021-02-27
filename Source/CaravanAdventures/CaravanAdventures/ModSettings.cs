@@ -35,8 +35,11 @@ namespace CaravanAdventures
         public static bool hasPrisonTent = true;
         public static bool hasPlantTent = true;
         public static bool hasSupplyCostsDisabled = false;
+        public static bool autoApplyCampGearRecipes = true;
+        public static bool autoApplyCampClearSnowArea = false;
         public static IntVec3 campMapSize = new IntVec3(275, 1, 275);
         public static int maxCampSupplyCost = 75;
+        public static int fuelStartingFillPercentage = 50;
 
         // abilities
         // - ancient gift
@@ -108,8 +111,11 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref hasPrisonTent, "hasPrisonTent", true);
             Scribe_Values.Look(ref hasPlantTent, "hasPlantTent", true);
             Scribe_Values.Look(ref hasSupplyCostsDisabled, "hasSupplyCostsDisabled", false);
+            Scribe_Values.Look(ref autoApplyCampGearRecipes, "autoApplyCampGearRecipes", true);
+            Scribe_Values.Look(ref autoApplyCampClearSnowArea, "autoApplyCampClearSnowArea", false);
             Scribe_Values.Look(ref campMapSize, "campMapSize", new IntVec3(275, 1, 275));
             Scribe_Values.Look(ref maxCampSupplyCost, "maxCampSupplyCost", 75);
+            Scribe_Values.Look(ref fuelStartingFillPercentage, "fuelStartingFillPercentage", 50);
 
             // abilities
             // - ancient gift

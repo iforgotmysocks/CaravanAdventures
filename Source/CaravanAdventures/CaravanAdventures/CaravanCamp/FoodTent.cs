@@ -25,11 +25,8 @@ namespace CaravanAdventures.CaravanCamp
         {
             base.Build(map, campAssetListRef);
             var cacoolerPos = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 1 && cell.z == CellRect.minZ + 1);
-            var cacooler = GenSpawn.Spawn(CampDefOf.CACooler, cacoolerPos, map);
-            campAssetListRef.Add(cacooler);
-            cacooler.SetFaction(Faction.OfPlayer);
-            var refuelComp = cacooler.TryGetComp<CompRefuelable>();
-            if (refuelComp != null) refuelComp.Refuel(refuelComp.GetFuelCountToFullyRefuel());
+            var cacooler = CampHelper.PrepAndGenerateThing(CampDefOf.CACooler, cacoolerPos, map, default, campAssetListRef);
+            CampHelper.RefuelByPerc(cacooler, -1);
         }
 
         public override void BuildTribal(Map map, List<Thing> campAssetListRef)

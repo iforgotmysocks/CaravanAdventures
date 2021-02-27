@@ -53,15 +53,19 @@ namespace CaravanAdventures.Settings
             options.CheckboxLabeled("Build prison tent", ref ModSettings.hasPrisonTent);
             options.CheckboxLabeled("Build plant tent", ref ModSettings.hasPlantTent);
             options.Gap();
+            options.CheckboxLabeled("Auto apply camp gear recipes (e.g. food depending on pawn number, clothes)", ref ModSettings.autoApplyCampGearRecipes);
+            options.CheckboxLabeled("Auto apply zone for snow to be cleared within the camp", ref ModSettings.autoApplyCampClearSnowArea);
             options.CheckboxLabeled("Generate storage for all inventory items", ref ModSettings.generateStorageForAllInventory, "When disabled, most items will remain packed on the animals");
             options.CheckboxLabeled("Let animals mostly free instead of limiting them to their small animal area", ref ModSettings.letAnimalsRunFree);
-
+            
             var rect = options.GetRect(Text.LineHeight);
             rect.width = options.ColumnWidth / 2;
             Widgets.Label(rect, "Maximum camp supply cost: ");
             var campCostInput = Widgets.TextField(ModSettings.BRect(options.ColumnWidth - 40, rect.y, 40, Text.LineHeight), ModSettings.maxCampSupplyCost.ToString());
             if (double.TryParse(campCostInput, out var campCostDouble)) ModSettings.maxCampSupplyCost = Convert.ToInt32(campCostDouble);
             options.CheckboxLabeled("Disable Tentsupply requirement costs", ref ModSettings.hasSupplyCostsDisabled);
+            options.Label($"Starting fuel percentage for camp-gear: {ModSettings.fuelStartingFillPercentage}%");
+            ModSettings.fuelStartingFillPercentage = Convert.ToInt32(options.Slider(ModSettings.fuelStartingFillPercentage, 0, 100));
             options.End();
         }
 

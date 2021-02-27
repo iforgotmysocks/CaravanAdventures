@@ -64,7 +64,8 @@ namespace CaravanAdventures.CaravanCamp
                 map.thingGrid.ThingAt(cellSpotTorch, ThingCategory.Building).Destroy();
 
                 var location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.minX + 5 && cell.z == CellRect.minZ + 1);
-                CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDefOf.TorchLamp), location, map, default, campAssetListRef);
+                var torch = CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDefOf.TorchLamp), location, map, default, campAssetListRef);
+                CampHelper.RefuelByPerc(torch, -1);
             }
         }
 

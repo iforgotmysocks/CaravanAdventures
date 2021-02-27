@@ -54,12 +54,10 @@ namespace CaravanAdventures.CaravanCamp
             var caheater = GenSpawn.Spawn(CampDefOf.CAAirConditioningHeater, caheaterPos, map);
             caheater.SetFaction(Faction.OfPlayer);
             campAssetListRef.Add(caheater);
-            var refuelComp = caheater.TryGetComp<CompRefuelable>();
-            if (refuelComp != null) refuelComp.Refuel(refuelComp.GetFuelCountToFullyRefuel());
+            CampHelper.RefuelByPerc(caheater, ModSettings.fuelStartingFillPercentage);
 
             var plantPos = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.minX + 1 && cell.z == CellRect.minZ + 1);
             CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDefOf.Stool, ThingDefOf.WoodLog), plantPos, map, default, campAssetListRef);
-
             //var plant = CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDefOf.PlantPot, ThingDefOf.WoodLog), plantPos, map, default, campAssetListRef) as Building_PlantGrower;
 
             //var realPlant = CampHelper.PrepAndGenerateThing(plant.GetPlantDefToGrow(), plant.Position, map, default, campAssetListRef, true) as Plant;
@@ -100,11 +98,11 @@ namespace CaravanAdventures.CaravanCamp
 
             var caheaterPos = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 1 && cell.z == CellRect.minZ + 1);
             var caheater = CampHelper.PrepAndGenerateThing(ThingDefOf.TorchLamp, caheaterPos, map, default, campAssetListRef);
+            CampHelper.RefuelByPerc(caheater, ModSettings.fuelStartingFillPercentage);
 
             var passiveCoolerPos = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.minX + 1 && cell.z == CellRect.minZ + 1);
             var cooler = CampHelper.PrepAndGenerateThing(ThingDefOf.PassiveCooler, passiveCoolerPos, map, default, campAssetListRef);
-            var refuelComp = cooler.TryGetComp<CompRefuelable>();
-            if (refuelComp != null) refuelComp.Refuel(refuelComp.GetFuelCountToFullyRefuel() / 2f);
+            CampHelper.RefuelByPerc(cooler, ModSettings.fuelStartingFillPercentage);
         }
     }
 }

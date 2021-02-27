@@ -100,5 +100,14 @@ namespace CaravanAdventures.CaravanCamp
             if (firstDirectRelationPawn != null) return firstDirectRelationPawn;
             return null;
         }
+
+        public static void RefuelByPerc(Thing consumer, int fuelPerc = 100)
+        {
+            var refuelComp = consumer.TryGetComp<CompRefuelable>();
+            if (refuelComp == null) return;
+            if (fuelPerc == -1) fuelPerc = ModSettings.fuelStartingFillPercentage;
+            if (fuelPerc != 100) refuelComp.ConsumeFuel(refuelComp.Fuel);
+            refuelComp.Refuel(refuelComp.GetFuelCountToFullyRefuel() * fuelPerc / 100);
+        }
     }
 }

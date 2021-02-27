@@ -33,8 +33,7 @@ namespace CaravanAdventures.CaravanCamp
 
             location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 4 && cell.z == CellRect.minZ + 1);
             var comms = CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(CampDefOf.CAMiniCommsConsole), location, map, Rot4.North, campAssetListRef);
-            var commsComp = comms.TryGetComp<CompRefuelable>();
-            if (commsComp != null) commsComp.Refuel(commsComp.GetFuelCountToFullyRefuel());
+            CampHelper.RefuelByPerc(comms, -1);
 
             location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 3 && cell.z == CellRect.minZ + 1);
             shelf = CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("Shelf"), ThingDefOf.WoodLog), location, map, Rot4.North, campAssetListRef) as Building_Storage;
@@ -43,15 +42,15 @@ namespace CaravanAdventures.CaravanCamp
             shelf.GetStoreSettings().filter.SetAllow(ThingCategoryDef.Named("Textiles"), true);
 
             location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.minX + 5 && cell.z == CellRect.minZ + 1);
-            CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("CASpacerBiofuelRefinery")), location, map, Rot4.South, campAssetListRef);
+            var refinery = CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("CASpacerBiofuelRefinery")), location, map, Rot4.South, campAssetListRef);
+            CampHelper.RefuelByPerc(refinery, -1);
 
             location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 1 && cell.z == CellRect.minZ + 2);
             handTailoringBench = CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("HandTailoringBench"), ThingDefOf.WoodLog), location, map, Rot4.East, campAssetListRef) as Building_WorkTable;
 
             location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.minX + 3 && cell.z == CellRect.minZ + 1);
             var heater = CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(CampDefOf.CAAirConditioningHeater), location, map, default, campAssetListRef);
-            var refuelComp = heater.TryGetComp<CompRefuelable>();
-            if (refuelComp != null) refuelComp.Refuel(refuelComp.GetFuelCountToFullyRefuel());
+            CampHelper.RefuelByPerc(heater, -1);
 
             CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDefOf.DiningChair, ThingDefOf.WoodLog), new IntVec3(CellRect.minX + 3, 0, CellRect.minZ + 2), map, Rot4.West, campAssetListRef);
             CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDefOf.DiningChair, ThingDefOf.WoodLog), new IntVec3(CellRect.minX + 4, 0, CellRect.minZ + 2), map, Rot4.North, campAssetListRef);
@@ -85,12 +84,12 @@ namespace CaravanAdventures.CaravanCamp
             }
 
             location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.minX + 5 && cell.z == CellRect.minZ + 1);
-            CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDefOf.TorchLamp), location, map, default, campAssetListRef);
+            var torch = CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDefOf.TorchLamp), location, map, default, campAssetListRef);
+            CampHelper.RefuelByPerc(torch, -1);
 
             var passiveCoolerPos = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 4 && cell.z == CellRect.minZ + 1);
             var cooler = CampHelper.PrepAndGenerateThing(ThingDefOf.PassiveCooler, passiveCoolerPos, map, default, campAssetListRef);
-            var refuelComp = cooler.TryGetComp<CompRefuelable>();
-            if (refuelComp != null) refuelComp.Refuel(refuelComp.GetFuelCountToFullyRefuel() / 2f);
+            CampHelper.RefuelByPerc(cooler, -1);
 
             CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDefOf.Stool, ThingDefOf.WoodLog), new IntVec3(CellRect.minX + 3, 0, CellRect.minZ + 2), map, default, campAssetListRef);
             CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDefOf.Stool, ThingDefOf.WoodLog), new IntVec3(CellRect.minX + 4, 0, CellRect.minZ + 2), map, default, campAssetListRef);

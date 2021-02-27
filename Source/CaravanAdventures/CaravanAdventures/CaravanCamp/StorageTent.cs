@@ -23,8 +23,7 @@ namespace CaravanAdventures.CaravanCamp
             base.Build(map, campAssetListRef);
             var beacon = ThingMaker.MakeThing(CampDefOf.CAOrbitalTradeBeacon);
             var beaconThing = CampHelper.PrepAndGenerateThing(beacon, CellRect.CenterCell, map, default, campAssetListRef);
-            var refuelComp = beaconThing.TryGetComp<CompRefuelable>();
-            if (refuelComp != null) refuelComp.Refuel(refuelComp.GetFuelCountToFullyRefuel());
+            CampHelper.RefuelByPerc(beaconThing, -1);
         }
 
         public override void BuildTribal(Map map, List<Thing> campAssetListRef)
