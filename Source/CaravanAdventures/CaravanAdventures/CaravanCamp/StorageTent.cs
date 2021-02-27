@@ -15,6 +15,7 @@ namespace CaravanAdventures.CaravanCamp
         public StorageTent()
         {
             CoordSize = 2;
+            SupplyCost = ModSettings.campSupplyCostStorageTent; // 3
         }
         public Zone GetZone() => zone;
 

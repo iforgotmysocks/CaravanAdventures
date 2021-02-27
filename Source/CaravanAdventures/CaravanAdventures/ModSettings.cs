@@ -41,6 +41,19 @@ namespace CaravanAdventures
         public static int maxCampSupplyCost = 75;
         public static int fuelStartingFillPercentage = 50;
 
+        // camp cost TODO -> create defs for tent types and move it there
+        public static int campSupplyCostAnimalArea = 1;
+        public static int campSupplyCostCampCenter = 1;
+        public static int campSupplyCostFoodTent = 3;
+        public static int campSupplyCostMedicalTent = 4;
+        public static int campSupplyCostPlantTent = 6;
+        public static int campSupplyCostProductionTent = 4;
+        public static int campSupplyCostRestTent = 3;
+        public static int campSupplyCostStorageTent = 3;
+
+        // camp hardcoded for now (plsdonthateme)
+        public static IntVec3 tentSize = new IntVec3(5, 0, 5);
+
         // abilities
         // - ancient gift
         public static float ancientGiftPassivePsyfocusGainPerSec = 0.00035f;

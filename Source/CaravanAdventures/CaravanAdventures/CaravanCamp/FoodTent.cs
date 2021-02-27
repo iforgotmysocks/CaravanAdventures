@@ -17,7 +17,7 @@ namespace CaravanAdventures.CaravanCamp
         public FoodTent()
         {
             this.CoordSize = 2;
-            SupplyCost = 3;
+            SupplyCost = ModSettings.campSupplyCostFoodTent; // 3;
         }
 
         public Zone GetZone() => zone;

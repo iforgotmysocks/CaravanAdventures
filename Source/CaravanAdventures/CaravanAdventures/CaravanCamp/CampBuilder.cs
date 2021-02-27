@@ -22,7 +22,7 @@ namespace CaravanAdventures.CaravanCamp
         protected Map map;
         protected Caravan caravan;
 
-        protected IntVec3 tentSize = new IntVec3(5, 0, 5);
+        protected IntVec3 tentSize = ModSettings.tentSize;
         protected int spacer = 2;
         protected List<CampArea> campParts;
         protected IntVec3 campCenterSpot;
@@ -72,24 +72,26 @@ namespace CaravanAdventures.CaravanCamp
         public static int PreemptivelyCalculateCampCosts(Caravan caravan, Map map)
         {
             // todo -> so a preemptive amount of supplies needed can be dispalyed on the gizmo
-            var colonistCosts = (int)Math.Ceiling(caravan.PawnsListForReading.Where(x => x.IsColonist || x.IsPrisoner).Count() / 3.0);
-            var otherBuildingCosts = 0;
 
-            //if (ModSettings.hasProductionTent) otherBuildingCosts += ;
-            //if (ModSettings.hasStorageTent) otherBuildingCosts += StorageTent.SupplyCost;
-            //if (ModSettings.hasMedicalTent) campParts.Add(new MedicalTent());
-            //if (ModSettings.hasAnimalArea) campParts.Add(new AnimalArea());
-            //if (ModSettings.hasPrisonTent) campParts.Add(new PrisonerTent());
-            //if (ModSettings.hasPlantTent && !tribal) campParts.Add(new PlantTent());
-            //if (ModSettings.generateStorageForAllInventory)
-            //{
-            //    var tent = new StorageTent();
-            //    var cellsPerTent = (tent.CoordSize * tentSize.x) * (tentSize.z - 2);
-            //    var tentsAmount = CaravanInventoryUtility.AllInventoryItems(caravan).Count / cellsPerTent;
-            //    for (int i = 0; i < tentsAmount; i++) campParts.Add(new StorageTent());
-            //}
+            var buildingCosts = 0;
+            buildingCosts += (int)Math.Ceiling(caravan.PawnsListForReading.Where(x => x.IsColonist || x.IsPrisoner).Count() / 3.0);
+            if (ModSettings.hasProductionTent) buildingCosts += ModSettings.campSupplyCostProductionTent;
+            if (ModSettings.hasStorageTent) buildingCosts += ModSettings.campSupplyCostStorageTent;
+            if (ModSettings.hasMedicalTent) buildingCosts += ModSettings.campSupplyCostMedicalTent;
+            if (ModSettings.hasAnimalArea) buildingCosts += ModSettings.campSupplyCostAnimalArea;
+            if (ModSettings.hasPrisonTent) buildingCosts += ModSettings.campSupplyCostRestTent;
+            if (ModSettings.hasPlantTent) buildingCosts += ModSettings.campSupplyCostPlantTent;
+            buildingCosts += ModSettings.campSupplyCostFoodTent;
+            buildingCosts += ModSettings.campSupplyCostCampCenter;
+            if (ModSettings.generateStorageForAllInventory)
+            {
+                var tent = new StorageTent();
+                var cellsPerTent = (tent.CoordSize * ModSettings.tentSize.x) * (ModSettings.tentSize.z - 2);
+                var tentsAmount = CaravanInventoryUtility.AllInventoryItems(caravan).Count / cellsPerTent;
+                for (int i = 0; i < tentsAmount; i++) buildingCosts += tent.SupplyCost;
+            }
 
-            return 0;
+            return buildingCosts;
         }
 
         protected virtual void CalculateTentSizes()

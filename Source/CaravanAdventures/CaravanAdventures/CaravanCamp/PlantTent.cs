@@ -15,7 +15,7 @@ namespace CaravanAdventures.CaravanCamp
         {
             ForcedTentDirection = ForcedTentDirection.Horizontal;
             CoordSize = 2;
-            SupplyCost = 6;
+            SupplyCost = ModSettings.campSupplyCostPlantTent; // 6
         }
 
         public override void Build(Map map, List<Thing> campAssetListRef)
