@@ -57,7 +57,7 @@ namespace CaravanAdventures.Settings
             options.CheckboxLabeled("Auto apply zone for snow to be cleared within the camp", ref ModSettings.autoApplyCampClearSnowArea);
             options.CheckboxLabeled("Generate storage for all inventory items", ref ModSettings.generateStorageForAllInventory, "When disabled, most items will remain packed on the animals");
             options.CheckboxLabeled("Let animals mostly free instead of limiting them to their small animal area", ref ModSettings.letAnimalsRunFree);
-            
+            options.CheckboxLabeled("Show camp supply cost approximate on settle gizmo", ref ModSettings.showSupplyCostsInGizmo, "Enable if the approximate amount of camp supplies needed / available should be shown on the caravan settle gui gizmo label (value may be incorrect by a few units)");
             var rect = options.GetRect(Text.LineHeight);
             rect.width = options.ColumnWidth / 2;
             Widgets.Label(rect, "Maximum camp supply cost: ");

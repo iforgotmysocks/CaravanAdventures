@@ -40,6 +40,7 @@ namespace CaravanAdventures
         public static IntVec3 campMapSize = new IntVec3(275, 1, 275);
         public static int maxCampSupplyCost = 75;
         public static int fuelStartingFillPercentage = 50;
+        public static bool showSupplyCostsInGizmo = true;
 
         // camp cost TODO -> create defs for tent types and move it there
         public static int campSupplyCostAnimalArea = 1;
@@ -129,6 +130,7 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref campMapSize, "campMapSize", new IntVec3(275, 1, 275));
             Scribe_Values.Look(ref maxCampSupplyCost, "maxCampSupplyCost", 75);
             Scribe_Values.Look(ref fuelStartingFillPercentage, "fuelStartingFillPercentage", 50);
+            Scribe_Values.Look(ref showSupplyCostsInGizmo, "showSupplyCostsInGizmo", true);
 
             // abilities
             // - ancient gift

@@ -16,12 +16,20 @@ namespace CaravanAdventures.CaravanImprovements
         public bool unpackGearOnSettling = true;
         public bool allowNightTravel = false;
         private static StringBuilder tmpSettleFailReason = new StringBuilder();
+        private int campCost = -1;
+        private int suppliesAvailable = -1;
 
         public override void PostExposeData()
         {
             base.PostExposeData();
             Scribe_Values.Look(ref unpackGearOnSettling, "unpackGearOnSettling", true);
             Scribe_Values.Look(ref allowNightTravel, "allowNightTravel", false);
+        }
+
+        public void UpdateCampCostAndSupplies(Caravan caravan)
+        {
+            campCost = CampBuilder.PreemptivelyCalculateCampCosts(caravan);
+            suppliesAvailable = caravan.AllThings?.Where(thing => thing.def == CampDefOf.CASpacerTentSupplies)?.Select(thing => thing?.stackCount)?.Sum() ?? 0;
         }
 
         private static void SettleWithoutDroppingGear(Caravan caravan, bool createCamp = false)
@@ -78,9 +86,11 @@ namespace CaravanAdventures.CaravanImprovements
                 }
                 yield return cmdSettleAsCaravan;
 
+                if (ModSettings.showSupplyCostsInGizmo && (Find.TickManager.TicksGame % 61 == 0 || campCost == -1) && caravan != null) UpdateCampCostAndSupplies(caravan);
+
                 var cmdSettleWithCamp = new Command_Settle
                 {
-                    defaultLabel = "SettleWithCampLabel".Translate(),
+                    defaultLabel = "SettleWithCampLabel".Translate() + (ModSettings.showSupplyCostsInGizmo ? $" ({campCost}/{suppliesAvailable})" : ""),
                     defaultDesc = "SettleWithCampDesc".Translate(),
                     order = 198f,
                     icon = ContentFinder<Texture2D>.Get("UI/Icons/Settle", true),

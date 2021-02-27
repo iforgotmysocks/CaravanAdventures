@@ -69,7 +69,7 @@ namespace CaravanAdventures.CaravanCamp
             return true;
         }
 
-        public static int PreemptivelyCalculateCampCosts(Caravan caravan, Map map)
+        public static int PreemptivelyCalculateCampCosts(Caravan caravan)
         {
             // todo -> so a preemptive amount of supplies needed can be dispalyed on the gizmo
 
@@ -83,14 +83,15 @@ namespace CaravanAdventures.CaravanCamp
             if (ModSettings.hasPlantTent) buildingCosts += ModSettings.campSupplyCostPlantTent;
             buildingCosts += ModSettings.campSupplyCostFoodTent;
             buildingCosts += ModSettings.campSupplyCostCampCenter;
-            if (ModSettings.generateStorageForAllInventory)
+            
+            if (buildingCosts <= ModSettings.maxCampSupplyCost && ModSettings.generateStorageForAllInventory)
             {
                 var tent = new StorageTent();
                 var cellsPerTent = (tent.CoordSize * ModSettings.tentSize.x) * (ModSettings.tentSize.z - 2);
                 var tentsAmount = CaravanInventoryUtility.AllInventoryItems(caravan).Count / cellsPerTent;
                 for (int i = 0; i < tentsAmount; i++) buildingCosts += tent.SupplyCost;
             }
-
+            if (buildingCosts > ModSettings.maxCampSupplyCost) buildingCosts = ModSettings.maxCampSupplyCost;
             return buildingCosts;
         }
 
