@@ -24,7 +24,6 @@ namespace CaravanAdventures.CaravanStory.MechChips.AbilityMotes
 
         protected override void TimeInterval(float deltaTime)
         {
-            DLog.Message($"deltatime: {deltaTime} rotation: {this.exactRotation} pos: {this.exactPosition}");
             base.TimeInterval(deltaTime);
             this.exactRotation += this.rotationRate * deltaTime;
             this.exactPosition = launchObject.Thing.DrawPos;
