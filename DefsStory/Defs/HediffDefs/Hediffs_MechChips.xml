@@ -49,6 +49,32 @@
     <stages>
       <li>
         <statOffsets>
+					<MoveSpeed>+1</MoveSpeed>
+          <ArmorRating_Sharp>0.5</ArmorRating_Sharp>
+					<PsychicSensitivity>-0.2</PsychicSensitivity>
+        </statOffsets>
+        <statFactors>
+          <IncomingDamageFactor>0.7</IncomingDamageFactor>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+  
+  <HediffDef ParentName = "MechChipHediffBase">
+    <defName>CAEXT1Laser</defName>
+    <label>EXT1 Laser</label>
+    <isBad>false</isBad>
+    <everCurableByItem>false</everCurableByItem>
+    <defaultLabelColor>(255, 20, 20)</defaultLabelColor>
+    <description>Enables machines to use advanced combat logic depending on the version, like connect to dormant networks, like missile silos and a range of other terrifying abilities.</description>
+    <comps>
+      <li>
+        <compClass>CaravanAdventures.CaravanStory.MechChips.HediffComp_EXT1Laser</compClass>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <statOffsets>
 					<MoveSpeed>-1</MoveSpeed>
           <ArmorRating_Sharp>0.5</ArmorRating_Sharp>
 					<PsychicSensitivity>-0.2</PsychicSensitivity>

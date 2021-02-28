@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CaravanAdventures.CaravanStory.MechChips.Abilities;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -12,10 +13,10 @@ using Verse.Sound;
 
 namespace CaravanAdventures.CaravanStory.MechChips
 {
-    public class HediffComp_EXT1Melee : HediffComp
+    public class HediffComp_EXT1Laser : HediffComp
     {
         private int ticks = 1250;
-        private Abilities.CirclingBladesMote blades;
+        List<RapidLaser> lasers = new List<RapidLaser>();
 
         public HediffCompProperties_EXT1Melee Props => (HediffCompProperties_EXT1Melee)props;
 
@@ -34,33 +35,50 @@ namespace CaravanAdventures.CaravanStory.MechChips
         {
             base.CompPostTick(ref severityAdjustment);
             if (Pawn?.Destroyed != false || !Pawn.Awake() || Pawn.Map == null) return;
-            
-            if (ticks % 25 == 0 && blades != null && blades.Spawned)
-            {
-                SliceSurroundingEnemies();
-            }
 
+            TickLasers();
+
+            
+            //if (ticks % 25 == 0 && blades != null && blades.Spawned)
+            //{
+            //    SliceSurroundingEnemies();
+            //}
+
+            //if (ticks % 350 == 0)
+            //{
+            //   // LaserAttackAOE
+            //}
+            
             if (ticks % 350 == 0)
             {
-                if (GenRadial.RadialCellsAround(Pawn.Position, 4, false).Select(x => x.GetFirstPawn(Pawn.Map)).Where(x => x != Pawn).Count() != 0)
-                {
-                    blades = (Abilities.CirclingBladesMote)ThingMaker.MakeThing(ThingDef.Named("CACirclingBlades"));
-                    blades.Attach(Pawn);
-                    blades.launchObject = Pawn;
-                    blades.rotationRate = 1400;
-                    //blades.Scale = 2.5f;
-                    blades.Scale = 5f;
-                    blades.exactPosition = Pawn.DrawPos;
-                    blades.solidTimeOverride = -1f;
-                    GenSpawn.Spawn(blades, Pawn.Position, Pawn.Map);
-                }
+                LaserAttack(); 
             }
-            
+
             if (ticks >= 700)
             {
-                if (JumpToTarget()) ticks = 0;
+                ticks = 0;
             }
             ticks++;
+        }
+
+        protected void TickLasers()
+        {
+            foreach (var laser in lasers.Reverse<RapidLaser>())
+            {
+                if (laser.done)
+                {
+                    lasers.Remove(laser);
+                }
+                laser.Tick();
+            }
+        }
+
+        protected virtual void LaserAttack()
+        {
+            var cells = GenRadial.RadialCellsAround(Pawn.Position, 20, false).Where(cell => cell.Standable(Pawn.Map));
+            var pawns = cells.SelectMany(cell => cell.GetThingList(Pawn.Map).OfType<Pawn>().Where(pawn => !pawn.RaceProps.IsMechanoid)).ToList();
+
+            foreach (var pawn in pawns) lasers.Add(new RapidLaser(pawn, Pawn, 10, 15, 7));
         }
 
         protected void SliceSurroundingEnemies()
@@ -86,10 +104,7 @@ namespace CaravanAdventures.CaravanStory.MechChips
 
         protected bool JumpToTarget()
         {
-            if (Pawn.mindState.enemyTarget != null 
-                && Pawn.mindState.enemyTarget.Position != LocalTargetInfo.Invalid 
-                && Pawn.mindState.enemyTarget.Position.DistanceTo(Pawn.Position) >= 2f 
-                && Pawn.mindState.enemyTarget.Position.DistanceTo(Pawn.Position) <= 10f)
+            if (Pawn.mindState.enemyTarget != null && Pawn.mindState.enemyTarget.Position != LocalTargetInfo.Invalid && Pawn.mindState.enemyTarget.Position.DistanceTo(Pawn.Position) >= 2f)
             {
                 var map = Pawn.Map;
                 try
@@ -112,7 +127,6 @@ namespace CaravanAdventures.CaravanStory.MechChips
         public override void CompPostPostRemoved()
         {
             base.CompPostPostRemoved();
-            if (blades?.Spawned == true) blades.Destroy();
         }
     }
 }

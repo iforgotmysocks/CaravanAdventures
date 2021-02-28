@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Verse;
 
-namespace CaravanAdventures.CaravanStory.MechChips.AbilityMotes
+namespace CaravanAdventures.CaravanStory.MechChips.Abilities
 {
-    class CirclingBlades : Mote
+    class CirclingBladesMote : Mote
     {
         public LocalTargetInfo launchObject;
 

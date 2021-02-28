@@ -3,7 +3,7 @@
 <Defs>
   <ThingDef ParentName="MoteBase">
     <defName>CACirclingBlades</defName>
-    <thingClass>CaravanAdventures.CaravanStory.MechChips.AbilityMotes.CirclingBlades</thingClass>
+    <thingClass>CaravanAdventures.CaravanStory.MechChips.Abilities.CirclingBladesMote</thingClass>
     <altitudeLayer>MoteOverhead</altitudeLayer>
     <drawOffscreen>true</drawOffscreen>
     <graphicData>
@@ -14,6 +14,22 @@
       <fadeInTime>1</fadeInTime>
       <solidTime>3</solidTime>
       <fadeOutTime>1</fadeOutTime>
+    </mote>
+  </ThingDef>
+
+  <ThingDef ParentName="MoteBase">
+    <defName>CARapidLaser</defName>
+    <thingClass>CaravanAdventures.CaravanStory.MechChips.Abilities.RapidLaserMote</thingClass>
+    <altitudeLayer>MetaOverlays</altitudeLayer>
+    <drawOffscreen>true</drawOffscreen>
+    <graphicData>
+      <texPath>Other/OrbitalBeam</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <mote>
+      <fadeInTime>0.025</fadeInTime>
+      <solidTime>0.1</solidTime>
+      <fadeOutTime>0.025</fadeOutTime>
     </mote>
   </ThingDef>
 

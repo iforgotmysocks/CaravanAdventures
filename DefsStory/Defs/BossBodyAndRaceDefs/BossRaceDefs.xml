@@ -85,7 +85,7 @@
   <ThingDef ParentName="BaseMechanoidWalker">
     <defName>CACrystalScythe</defName>
     <label>Crystal scythe</label>
-    <description>Fast, spindly, human-sized combat mechanoids specializing in rapid approach and close-range combat. Their bodies are covered in points and blades, but their mostly use two arm blades to lop off limbs or gut their victims alive.</description>
+    <description>Fast, spindly, and deadly. That's all you can tell. There isn't any information about those things out there. Best keep ur distance.</description>
     <generateCommonality>0</generateCommonality>
     <statBases>
       <MoveSpeed>5.5</MoveSpeed>
@@ -100,7 +100,7 @@
           <li>Cut</li>
           <li>Stab</li>
         </capacities>
-        <power>30</power>
+        <power>20</power>
         <cooldownTime>1</cooldownTime>
         <linkedBodyPartsGroup>LeftBlade</linkedBodyPartsGroup>
         <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
@@ -111,7 +111,7 @@
           <li>Cut</li>
           <li>Stab</li>
         </capacities>
-        <power>30</power>
+        <power>20</power>
         <cooldownTime>1</cooldownTime>
         <linkedBodyPartsGroup>RightBlade</linkedBodyPartsGroup>
         <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
@@ -121,7 +121,7 @@
         <capacities>
           <li>Blunt</li>
         </capacities>
-        <power>18</power>
+        <power>15</power>
         <cooldownTime>2</cooldownTime>
         <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
         <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
@@ -130,7 +130,7 @@
     </tools>
     <race>
       <body>Scyther</body>
-      <baseHealthScale>8.32</baseHealthScale>
+      <baseHealthScale>4.32</baseHealthScale>
       <soundMeleeHitPawn>Pawn_Melee_MechanoidSlash_HitPawn</soundMeleeHitPawn>
       <soundMeleeHitBuilding>Pawn_Melee_MechanoidSlash_HitBuilding</soundMeleeHitBuilding>
       <soundMeleeMiss>Pawn_Melee_MechanoidSlash_Miss</soundMeleeMiss>
