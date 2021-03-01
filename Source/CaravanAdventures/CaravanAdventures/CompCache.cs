@@ -9,7 +9,7 @@ using Verse;
 
 namespace CaravanAdventures
 {
-    // when adding new world components, remember to set them null in their own FinalizeInit() method
+    // when adding new game / world components, remember to set them null in their own FinalizeInit() method
     static class CompCache
     {
         private static InitGC initGC;

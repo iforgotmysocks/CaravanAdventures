@@ -24,6 +24,7 @@ namespace CaravanAdventures
         // improvements
         public static bool removeRoyalTitleRequirements = true;
         public static bool removeOnlyAcolyteAndKnightRoyalTitleRequirements = true;
+        public static bool autoRemoveAbandondSettlementRuins = true;
 
         // camp
         public static bool generateStorageForAllInventory = true;
@@ -114,6 +115,7 @@ namespace CaravanAdventures
             // improvements
             Scribe_Values.Look(ref removeRoyalTitleRequirements, "removeRoyalTitleRequirements", true);
             Scribe_Values.Look(ref removeOnlyAcolyteAndKnightRoyalTitleRequirements, "removeOnlyAcolyteAndKnightRoyalTitleRequirements", true);
+            Scribe_Values.Look(ref autoRemoveAbandondSettlementRuins, "autoRemoveAbandondSettlementRuins", true);
 
             // camp
             Scribe_Values.Look(ref generateStorageForAllInventory, "generateStorageForAllInventory", false);

@@ -62,6 +62,7 @@ namespace CaravanAdventures
         public override void GameComponentTick()
         {
             base.GameComponentTick();
+            if (!ModSettings.autoRemoveAbandondSettlementRuins) return;
             RemoveRuins();
             removeRuinsTick++;
         }
