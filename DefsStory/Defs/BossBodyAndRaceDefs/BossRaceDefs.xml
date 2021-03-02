@@ -246,7 +246,8 @@
     </weaponTags>
     <modExtensions>
       <li Class="CaravanAdventures.CaravanStory.MechChips.MechChipModExt">
-        <mechChipDefName>CAEXT1Melee</mechChipDefName>
+        <mechChipDefName>CAEXT1Guardian</mechChipDefName>
+        <hasShield>true</hasShield>
       </li>
     </modExtensions>
 

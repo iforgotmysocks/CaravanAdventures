@@ -137,9 +137,12 @@
     <Compile Include="CaravanStory\Lords\LordJob_DefendBaseAgaintHostiles.cs" />
     <Compile Include="CaravanStory\Lords\Trigger_AttackWithReinforcements.cs" />
     <Compile Include="CaravanStory\Lords\Trigger_ChanceOnMechHarmNPCBuilding.cs" />
+    <Compile Include="CaravanStory\MechChips\Abilities\GuardianShield.cs" />
+    <Compile Include="CaravanStory\MechChips\Abilities\GuardianShieldApparel.cs" />
     <Compile Include="CaravanStory\MechChips\Abilities\RapidLaser.cs" />
     <Compile Include="CaravanStory\MechChips\Abilities\RapidLaserMote.cs" />
     <Compile Include="CaravanStory\MechChips\Abilities\CirclingBladesMote.cs" />
+    <Compile Include="CaravanStory\MechChips\HediffComp_EXT1Guardian.cs" />
     <Compile Include="CaravanStory\MechChips\HediffComp_EXT1Laser.cs" />
     <Compile Include="CaravanStory\Quests\QuestCont.cs" />
     <Compile Include="CaravanStory\Quests\QuestCont_FriendlyCaravan.cs" />

@@ -111,9 +111,9 @@ namespace CaravanAdventures
             Log.Message($"wp total: {Find.World.worldPawns.AllPawnsAliveOrDead.Where(x => x.Faction == Faction.OfPlayer).Count()} wp alive: {Find.World.worldPawns.AllPawnsAlive.Where(x => x.Faction == Faction.OfPlayer).Count()} dead: {Find.World.worldPawns.AllPawnsDead.Where(x => x.Faction == Faction.OfPlayer).Count()}");
         }
 
-        public static void RunSavely(Action action) => RunSavely(() => { action(); return 0; });
+        public static void RunSavely(Action action, bool suppressError = false) => RunSavely(() => { action(); return 0; }, suppressError);
 
-        public static T RunSavely<T>(Func<T> action)
+        public static T RunSavely<T>(Func<T> action, bool suppressError = false)
         {
             try
             {
@@ -121,7 +121,7 @@ namespace CaravanAdventures
             }
             catch (Exception ex)
             {
-                Log.Error(ex.ToString());
+                if (!suppressError) Log.Error(ex.ToString());
             }
 
             return default(T);
