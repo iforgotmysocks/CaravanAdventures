@@ -15,6 +15,10 @@ namespace CaravanAdventures.Patches
             if (ModSettings.caravanFormingFilterSelectionEnabled) AutomaticItemSelection.ApplyPatches(harmony);
             if (ModSettings.bountyEnabled) KillBountyPatches.ApplyPatches(harmony);
             if (ModSettings.storyEnabled) TalkPawnGUIOverlay.ApplyPatches(harmony);
+
+            // test
+            BossPatches.ApplyPatches(harmony);
+
         }
 
         /// <summary>

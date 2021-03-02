@@ -15,7 +15,7 @@ namespace CaravanAdventures.CaravanStory.MechChips
     public class HediffComp_EXT1Guardian : HediffComp
     {
         private int ticks = 0;
-        private MechChips.Abilities.GuardianShield guardianShield;
+        private Abilities.GuardianShieldPet guardianShield;
 
         public HediffCompProperties_EXT1Basic Props => (HediffCompProperties_EXT1Basic)props;
 
@@ -38,7 +38,8 @@ namespace CaravanAdventures.CaravanStory.MechChips
 
             if (ticks % 250 == 0)
             {
-                EnsureShield();
+                //EnsureShield();
+                if (guardianShield == null || guardianShield.Destroyed || !guardianShield.Spawned) guardianShield = CreateShield();
             }
 
             if (ticks % 450 == 0)
@@ -60,6 +61,14 @@ namespace CaravanAdventures.CaravanStory.MechChips
                 DLog.Message($"trying to apply apparel to {Pawn.Name}");
                 StoryUtility.EquipApparel(Pawn, ThingDef.Named("CAGuardianShieldApparel"));
             }
+        }
+
+        private Abilities.GuardianShieldPet CreateShield()
+        {
+            var thing = ThingMaker.MakeThing(ThingDef.Named("CAGuardianShieldPet")) as Abilities.GuardianShieldPet;
+            thing.Owner = Pawn;
+            GenSpawn.Spawn(thing, Pawn.Position, Pawn.Map);
+            return thing;
         }
 
         public override void CompPostPostRemoved()

@@ -1,206 +1,57 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
 <Defs>
-<ThingDef ParentName="ApparelBase">
-    <defName>CAGuardianShield</defName>
-    <label>Guardian Shield</label>
-    <description>A projectile-repulsion device. It will attempt to stop incoming projectiles or shrapnel, but does nothing against melee attacks or heat. It prevents the wearer from firing out, and shuts down instantly if hit by EMP.</description>
-    <thingClass>CaravanAdventures.CaravanStory.MechChips.Abilities.GuardianShield</thingClass>
+
+  <ThingDef>
+    <defName>CAGuardianShieldPet</defName>
+    <label>guardian shield</label>
+    <description>A man-portable low-angle shield projector. Bullets can go out, but not in. Its compact power source burns out after a few seconds of use.</description>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
+    <pathCost>0</pathCost>
+    <thingClass>CaravanAdventures.CaravanStory.MechChips.Abilities.GuardianShieldPet</thingClass>
+    <passability>Standable</passability>
+    <fillPercent>0</fillPercent>
     <graphicData>
       <texPath>Things/Empty</texPath>
       <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>0</drawSize>
+      <!--<shadowData>
+        <volume>(0.3, 0.2, 0.3)</volume>
+        <offset>(0,0,-0.1)</offset>
+      </shadowData>
+      <damageData>
+        <rect>(0.2,0.2,0.6,0.6)</rect>
+      </damageData>-->
     </graphicData>
+    <!--<statBases>
+      <MaxHitPoints>250</MaxHitPoints>
+      <Flammability>0.5</Flammability>
+    </statBases>-->
     <tickerType>Normal</tickerType>
-    <statBases>
-      <Mass>3</Mass>
-      <WorkToMake>14000</WorkToMake>
-      <Flammability>0.4</Flammability>
-      <EnergyShieldRechargeRate>0.13</EnergyShieldRechargeRate>
-      <EnergyShieldEnergyMax>1.1</EnergyShieldEnergyMax>
-      <EquipDelay>2</EquipDelay>
-    </statBases>
-    <thingSetMakerTags>
-      <!--<li>RewardStandardMidFreq</li>-->
-      <!--<li>RewardStandardQualitySuper</li>-->
-    </thingSetMakerTags>
-    <costList>
-      <ComponentIndustrial>2</ComponentIndustrial>
-      <Steel>50</Steel>
-      <Plasteel>20</Plasteel>
-    </costList>
-    <!--<recipeMaker>
-      <unfinishedThingDef>UnfinishedBelt</unfinishedThingDef>
-      <researchPrerequisite>ShieldBelt</researchPrerequisite>
-      <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
-      <workSkill>Crafting</workSkill>
-      <effectWorking>Smith</effectWorking>
-      <soundWorking>Recipe_Machining</soundWorking>
-      <recipeUsers>
-        <li>TableMachining</li>
-      </recipeUsers>
-      <useIngredientsForColor>false</useIngredientsForColor>
-      <skillRequirements>
-        <Crafting>6</Crafting>
-      </skillRequirements>
-    </recipeMaker>-->
-    <!--<thingCategories>
-      <li>ApparelUtility</li>
-    </thingCategories>-->
-    <!--<apparel>
-      <careIfWornByCorpse>false</careIfWornByCorpse>
-      <careIfDamaged>false</careIfDamaged>
-      <wearPerDay>0</wearPerDay>
-      <bodyPartGroups>
-        <li>Waist</li>
-      </bodyPartGroups>
-      <layers>
-        <li>Belt</li>
-      </layers>
-      <tags>
-        <li>BeltDefense</li>
-      </tags>
-    </apparel>-->
-    <!--<colorGenerator Class="ColorGenerator_Options">
-      <options>
-        <li>
-          <weight>10</weight>
-          <only>(0.33,0.33,0.33,1)</only>
-        </li>
-        <li>
-          <weight>10</weight>
-          <only>(0.65,0.65,0.65,1)</only>
-        </li>
-        <li>
-          <weight>6</weight>
-          <min>(0.3,0.3,0.3,1)</min>
-          <max>(0.5,0.5,0.5,1)</max>
-        </li>
-        <li>
-          <weight>10</weight>
-          <only>(0.9,0.9,0.9,1)</only>
-        </li>
-      </options>
-    </colorGenerator>-->
-  </ThingDef>
-
-  <ThingDef ParentName="ApparelBase">
-    <defName>CAGuardianShieldApparel</defName>
-    <label>Guardian Shield</label>
-    <description>A projectile-repulsion device. It will attempt to stop incoming projectiles or shrapnel, but does nothing against melee attacks or heat. It prevents the wearer from firing out, and shuts down instantly if hit by EMP.</description>
-    <thingClass>CaravanAdventures.CaravanStory.MechChips.Abilities.GuardianShieldApparel</thingClass>
-    <graphicData>
-      <texPath>Things/Pawn/Humanlike/Apparel/ShieldBelt/ShieldBelt</texPath>
-      <!--<texPath>Things/Empty</texPath>-->
-      <graphicClass>Graphic_Single</graphicClass>
-    </graphicData>
-    <tickerType>Normal</tickerType>
-    <statBases>
-      <Mass>3</Mass>
-      <WorkToMake>14000</WorkToMake>
-      <Flammability>0.4</Flammability>
-      <EnergyShieldRechargeRate>0.23</EnergyShieldRechargeRate>
-      <EnergyShieldEnergyMax>100.1</EnergyShieldEnergyMax>
-      <EquipDelay>2</EquipDelay>
-    </statBases>
-    <thingSetMakerTags>
-      <!--<li>RewardStandardMidFreq</li>-->
-      <!--<li>RewardStandardQualitySuper</li>-->
-    </thingSetMakerTags>
-    <costList>
-      <ComponentIndustrial>2</ComponentIndustrial>
-      <Steel>50</Steel>
-      <Plasteel>20</Plasteel>
-    </costList>
-    <!--<recipeMaker>
-      <unfinishedThingDef>UnfinishedBelt</unfinishedThingDef>
-      <researchPrerequisite>ShieldBelt</researchPrerequisite>
-      <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
-      <workSkill>Crafting</workSkill>
-      <effectWorking>Smith</effectWorking>
-      <soundWorking>Recipe_Machining</soundWorking>
-      <recipeUsers>
-        <li>TableMachining</li>
-      </recipeUsers>
-      <useIngredientsForColor>false</useIngredientsForColor>
-      <skillRequirements>
-        <Crafting>6</Crafting>
-      </skillRequirements>
-    </recipeMaker>-->
-    <thingCategories>
-      <li>ApparelUtility</li>
-    </thingCategories>
-    <apparel>
-      <careIfWornByCorpse>false</careIfWornByCorpse>
-      <careIfDamaged>false</careIfDamaged>
-      <wearPerDay>0</wearPerDay>
-      <!--bodyPartGroups>
-        <li>Torso</li>
-      </bodyPartGroups>-->
-      <layers>
-        <li>Middle</li>
-      </layers>
-      <tags>
-        <li>BeltDefense</li>
-      </tags>
-    </apparel>
-    <colorGenerator Class="ColorGenerator_Options">
-      <options>
-        <li>
-          <weight>10</weight>
-          <only>(0.33,0.33,0.33,1)</only>
-        </li>
-        <li>
-          <weight>10</weight>
-          <only>(0.65,0.65,0.65,1)</only>
-        </li>
-        <li>
-          <weight>6</weight>
-          <min>(0.3,0.3,0.3,1)</min>
-          <max>(0.5,0.5,0.5,1)</max>
-        </li>
-        <li>
-          <weight>10</weight>
-          <only>(0.9,0.9,0.9,1)</only>
-        </li>
-      </options>
-    </colorGenerator>
-  </ThingDef>
-
-
-  <ThingDef ParentName="EtherealThingBase">
-    <defName>CAGuardianShieldAbility</defName>
-    <label>guardian shield</label>
-    <thingClass>ThingWithComps</thingClass>
-    <tickerType>Normal</tickerType>
-    <drawerType>RealtimeOnly</drawerType>
-    <drawOffscreen>true</drawOffscreen>
-    <graphicData>
-      <graphicClass>Graphic_Single</graphicClass>
-      <texPath>Things/Ethereal/PsychicShieldRipples</texPath>
-      <shaderType>BulletShieldPsychic</shaderType>
-      <color>(180, 231, 237)</color>
-      <drawSize>9.9</drawSize>
-      <shaderParameters>
-        <_PulseInterval>0.5</_PulseInterval>
-        <_DistortionScale>0.5</_DistortionScale>
-        <_DistortionIntensity>0.15</_DistortionIntensity>
-        <_MinAlpha>0.1</_MinAlpha>
-        <_MaxAlpha>0.3</_MaxAlpha>
-        <_DistortionTex>/Things/Mote/SmokeTiled</_DistortionTex>
-      </shaderParameters>
-    </graphicData>
+    <killedLeavings/>
+    <rotatable>false</rotatable>
+    <!--<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>-->
+    <!--<soundImpactDefault>BulletImpact_Metal</soundImpactDefault>-->
+    <!--<repairEffect>ConstructMetal</repairEffect>-->
+    <!--<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>-->
+    <selectable>false</selectable>
     <comps>
       <li Class="CompProperties_ProjectileInterceptor">
-        <radius>4.9</radius>
+        <!--<compClass>CaravanAdventures.CaravanStory.MechChips.Abilities.CompGuardianShieldPet</compClass>-->
+        <radius>2.5</radius>
         <interceptGroundProjectiles>true</interceptGroundProjectiles>
         <interceptNonHostileProjectiles>true</interceptNonHostileProjectiles>
-        <interceptOutgoingProjectiles>true</interceptOutgoingProjectiles>
-        <color>(0.4, 0.4, 0.4)</color>
-        <minAlpha>0.2</minAlpha>
-        <interceptEffect>Interceptor_BlockedProjectilePsychic</interceptEffect>
+        <interceptOutgoingProjectiles>false</interceptOutgoingProjectiles>
+        <color>(1, 0.2, 0.2)</color>
+        <idlePulseSpeed>3</idlePulseSpeed>
+        <minIdleAlpha>0.05</minIdleAlpha>
+        <disarmedByEmpForTicks>600</disarmedByEmpForTicks>
+        <activeSound>Broadshield_Ambience</activeSound>
       </li>
       <li Class="CompProperties_DestroyAfterDelay">
-        <delayTicks>900</delayTicks>
+        <delayTicks>1800</delayTicks>
+        <destroyMode>KillFinalize</destroyMode>
+        <countdownLabel>Burnout in</countdownLabel>
       </li>
     </comps>
   </ThingDef>
