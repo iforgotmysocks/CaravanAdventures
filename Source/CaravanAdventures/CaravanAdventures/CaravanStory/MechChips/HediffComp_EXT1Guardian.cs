@@ -15,9 +15,15 @@ namespace CaravanAdventures.CaravanStory.MechChips
     public class HediffComp_EXT1Guardian : HediffComp
     {
         private int ticks = 0;
-        private Abilities.GuardianShieldPet guardianShield;
+        private Abilities.GuardianShield guardianShield;
+        private int shieldCooldown = 100;
+        public readonly int shieldCooldownBase = 300;
+        private float absorbedDamage = 0;
 
         public HediffCompProperties_EXT1Basic Props => (HediffCompProperties_EXT1Basic)props;
+
+        public int ShieldCooldown { get => shieldCooldown; set => shieldCooldown = value; }
+        public float AbsorbedDamage { get => absorbedDamage; set => absorbedDamage = value; }
 
         public override void CompExposeData()
         {
@@ -38,19 +44,21 @@ namespace CaravanAdventures.CaravanStory.MechChips
 
             if (ticks % 250 == 0)
             {
-                //EnsureShield();
-                if (guardianShield == null || guardianShield.Destroyed || !guardianShield.Spawned) guardianShield = CreateShield();
             }
 
             if (ticks % 450 == 0)
             {
             }
             
-            if (ticks >= 500)
+            if (ticks >= 1000)
             {
                 ticks = 0;
             }
+
+            if (shieldCooldown == 0) if (guardianShield == null || guardianShield.Destroyed || !guardianShield.Spawned) guardianShield = CreateShield();
+
             ticks++;
+            shieldCooldown--;
         }
 
         private void EnsureShield()
@@ -63,9 +71,9 @@ namespace CaravanAdventures.CaravanStory.MechChips
             }
         }
 
-        private Abilities.GuardianShieldPet CreateShield()
+        private Abilities.GuardianShield CreateShield()
         {
-            var thing = ThingMaker.MakeThing(ThingDef.Named("CAGuardianShieldPet")) as Abilities.GuardianShieldPet;
+            var thing = ThingMaker.MakeThing(ThingDef.Named("CAGuardianShield")) as Abilities.GuardianShield;
             thing.Owner = Pawn;
             GenSpawn.Spawn(thing, Pawn.Position, Pawn.Map);
             return thing;

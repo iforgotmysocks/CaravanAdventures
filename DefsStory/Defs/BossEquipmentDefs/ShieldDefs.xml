@@ -3,12 +3,12 @@
 <Defs>
 
   <ThingDef>
-    <defName>CAGuardianShieldPet</defName>
+    <defName>CAGuardianShield</defName>
     <label>guardian shield</label>
     <description>A man-portable low-angle shield projector. Bullets can go out, but not in. Its compact power source burns out after a few seconds of use.</description>
     <altitudeLayer>BuildingOnTop</altitudeLayer>
     <pathCost>0</pathCost>
-    <thingClass>CaravanAdventures.CaravanStory.MechChips.Abilities.GuardianShieldPet</thingClass>
+    <thingClass>CaravanAdventures.CaravanStory.MechChips.Abilities.GuardianShield</thingClass>
     <passability>Standable</passability>
     <fillPercent>0</fillPercent>
     <graphicData>
@@ -47,11 +47,6 @@
         <minIdleAlpha>0.05</minIdleAlpha>
         <disarmedByEmpForTicks>600</disarmedByEmpForTicks>
         <activeSound>Broadshield_Ambience</activeSound>
-      </li>
-      <li Class="CompProperties_DestroyAfterDelay">
-        <delayTicks>1800</delayTicks>
-        <destroyMode>KillFinalize</destroyMode>
-        <countdownLabel>Burnout in</countdownLabel>
       </li>
     </comps>
   </ThingDef>
