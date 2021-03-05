@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>CAHomingMissile</defName>
+    <label>Homing missile</label>
+    <thingClass>CaravanAdventures.CaravanStory.MechChips.Abilities.ProjectileHomingMissile</thingClass>
+    <graphicData>
+      <texPath>Things/Projectile/Rocket_Big</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+    </graphicData>
+    <projectile>
+      <!--<damageDef>Bullet</damageDef>
+      <damageAmountBase>15</damageAmountBase>
+      <armorPenetrationBase>0.30</armorPenetrationBase>
+      <speed>95</speed>-->
+
+      <damageDef>Bomb</damageDef>
+      <armorPenetrationBase>0.72</armorPenetrationBase>
+      <explosionRadius>2</explosionRadius>
+      <damageAmountBase>100</damageAmountBase>
+      <speed>20</speed>
+    </projectile>
+  </ThingDef>
+
+</Defs>

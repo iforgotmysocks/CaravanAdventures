@@ -44,7 +44,7 @@ namespace CaravanAdventures.CaravanStory.MechChips
             //    SliceSurroundingEnemies();
             //}
 
-            if (ticks % 200 == 0)
+            if (ticks % 50 == 0)
             {
                 // LaserAttackAOE
                 LaunchMissile();
@@ -52,7 +52,7 @@ namespace CaravanAdventures.CaravanStory.MechChips
 
             if (ticks % 350 == 0)
             {
-                LaserAttack(); 
+                //LaserAttack(); 
             }
 
             if (ticks >= 700)
@@ -64,7 +64,13 @@ namespace CaravanAdventures.CaravanStory.MechChips
 
         private void LaunchMissile()
         {
-            Projectile projectile = (ProjectileHomingMissile)GenSpawn.Spawn(ThingDef.Named("CAHomingMissile"), Pawn.Position, Pawn.Map, WipeMode.Vanish);
+            var target = Pawn.mindState.enemyTarget;
+            ProjectileHomingMissile projectile = (ProjectileHomingMissile)GenSpawn.Spawn(ThingDef.Named("CAHomingMissile"), Pawn.Position, Pawn.Map, WipeMode.Vanish);
+            projectile.realPosition = Pawn.DrawPos;
+            projectile.realRotation = Pawn.Rotation.AsQuat;
+            projectile.speed = 20f;
+            projectile.rotationSpeed = 10f;
+            projectile.Launch(Pawn, Pawn.DrawPos, target, target, ProjectileHitFlags.All);
         }
 
         protected void TickLasers()
