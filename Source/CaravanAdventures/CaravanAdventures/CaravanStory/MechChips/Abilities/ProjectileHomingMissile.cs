@@ -28,10 +28,13 @@ namespace CaravanAdventures.CaravanStory.MechChips.Abilities
         public int maxTicks = 20000;
         public int ticksAlive = 0;
 
-
         public Vector3 lastPosition = new Vector3();
 
         private static List<IntVec3> checkedCells = new List<IntVec3>();
+        public Vector3 offset = new Vector3(0,0,0);
+        public FloatRange effectRange = new FloatRange(0.5f, 1f);
+        public float launchSpeed = 10f;
+        public int launchTicks = 180;
 
         public override void Tick()
         {
@@ -45,8 +48,8 @@ namespace CaravanAdventures.CaravanStory.MechChips.Abilities
 
             if (ticksAlive % 10 == 0)
             {
-                MoteMaker.ThrowDustPuff(Position, map, new FloatRange(0.5f, 1f).RandomInRange);
-                MoteMaker.ThrowFireGlow(Position, map, new FloatRange(0.5f, 1f).RandomInRange);
+                MoteMaker.ThrowDustPuff(Position, map, effectRange.RandomInRange);
+                MoteMaker.ThrowFireGlow(Position, map, effectRange.RandomInRange);
             }
             FindTarget();
             UpdateRotationAndPosition();
@@ -138,7 +141,7 @@ namespace CaravanAdventures.CaravanStory.MechChips.Abilities
             }
             rotateToTarget = Quaternion.Euler(0, angle, 0);
             realRotation = Quaternion.Slerp(realRotation, rotateToTarget, Time.deltaTime * rotationSpeed);
-            var wayAdvanced = Vector3.forward.normalized.Yto0() * speed * Time.deltaTime;
+            var wayAdvanced = Vector3.forward.normalized.Yto0() * (ticksAlive < launchTicks ? launchSpeed : speed) * Time.deltaTime;
             wayAdvanced = realRotation * wayAdvanced;
             realPosition += wayAdvanced;
             this.Position = realPosition.ToIntVec3();

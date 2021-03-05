@@ -26,4 +26,28 @@
     </projectile>
   </ThingDef>
 
+  <ThingDef ParentName="BaseBullet">
+    <defName>CAStingerMissile</defName>
+    <label>Stinger missile</label>
+    <thingClass>CaravanAdventures.CaravanStory.MechChips.Abilities.ProjectileHomingMissile</thingClass>
+    <graphicData>
+      <texPath>Things/Projectile/Rocket_Big</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+      <drawSize>(0.5, 0.5)</drawSize>
+    </graphicData>
+    <projectile>
+      <!--<damageDef>Bullet</damageDef>
+      <damageAmountBase>15</damageAmountBase>
+      <armorPenetrationBase>0.30</armorPenetrationBase>
+      <speed>95</speed>-->
+
+      <damageDef>Bomb</damageDef>
+      <armorPenetrationBase>0.12</armorPenetrationBase>
+      <explosionRadius>2</explosionRadius>
+      <damageAmountBase>10</damageAmountBase>
+      <speed>20</speed>
+    </projectile>
+  </ThingDef>
+
 </Defs>
