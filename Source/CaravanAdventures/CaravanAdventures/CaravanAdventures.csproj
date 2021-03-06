@@ -143,6 +143,7 @@
     <Compile Include="CaravanStory\MechChips\Abilities\RapidLaserMote.cs" />
     <Compile Include="CaravanStory\MechChips\Abilities\CirclingBladesMote.cs" />
     <Compile Include="CaravanStory\MechChips\HediffComp_EXT1Guardian.cs" />
+    <Compile Include="CaravanStory\MechChips\HediffComp_EXT1Missile.cs" />
     <Compile Include="CaravanStory\MechChips\HediffComp_EXT1Laser.cs" />
     <Compile Include="CaravanStory\Quests\QuestCont.cs" />
     <Compile Include="CaravanStory\Quests\QuestCont_FriendlyCaravan.cs" />

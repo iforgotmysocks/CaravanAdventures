@@ -49,64 +49,18 @@ namespace CaravanAdventures.CaravanStory.MechChips
             if (ticks > 50 && ticks < 100)
             {
                 // LaserAttackAOE
-                if (ticks % 5 == 0 && CanLaunchMissile())
-                {
-                    LaunchStinger(right);
-                    right = !right;
-                }
             }
 
             if (ticks % 350 == 0)
             {
-                //LaserAttack(); 
+                LaserAttack();
             }
 
             if (ticks >= 700)
             {
                 ticks = 0;
-                if (CanLaunchMissile()) LaunchMissile();
             }
             ticks++;
-        }
-
-        private bool CanLaunchMissile()
-        {
-            //return Pawn.mindState.enemyTarget != null
-            //    && Pawn.mindState.enemyTarget.Position != LocalTargetInfo.Invalid
-            //    && Pawn.mindState.enemyTarget.Position.DistanceTo(Pawn.Position) >= 0f
-            //    && Pawn.mindState.enemyTarget.Position.DistanceTo(Pawn.Position) <= 30f;
-
-            var cells = GenRadial.RadialCellsAround(Pawn.Position, 30, false).Where(cell => cell.Standable(Pawn.Map));
-            var pawns = cells.SelectMany(cell => cell.GetThingList(Pawn.Map).OfType<Pawn>().Where(pawn => pawn.RaceProps.Humanlike && !pawn.RaceProps.IsMechanoid)).ToList();
-            if (pawns != null && pawns.Count() != 0) return true;
-
-            return false;
-        }
-
-        private void LaunchStinger(bool right)
-        {
-            var target = Pawn.mindState.enemyTarget;
-            ProjectileHomingMissile projectile = (ProjectileHomingMissile)GenSpawn.Spawn(ThingDef.Named("CAStingerMissile"), Pawn.Position, Pawn.Map, WipeMode.Vanish);
-            projectile.offset = right ? new Vector3(2, 0, 0) : new Vector3(-2, 0, 0);
-            projectile.realRotation = Pawn.Rotation.AsQuat;
-            projectile.realPosition = Pawn.DrawPos + (projectile.realRotation * projectile.offset);
-            projectile.speed = 35f;
-            projectile.launchSpeed = 10f;
-            projectile.launchTicks = 70;
-            projectile.rotationSpeed = 30f;
-            projectile.effectRange = new FloatRange(0.25f, 0.5f);
-            projectile.Launch(Pawn, Pawn.DrawPos, target, target, ProjectileHitFlags.All);
-        }
-
-        private void LaunchMissile()
-        {
-            var target = Pawn.mindState.enemyTarget;
-            ProjectileHomingMissile projectile = (ProjectileHomingMissile)GenSpawn.Spawn(ThingDef.Named("CAHomingMissile"), Pawn.Position, Pawn.Map, WipeMode.Vanish);
-            projectile.realPosition = Pawn.DrawPos;
-            projectile.realRotation = Pawn.Rotation.AsQuat;
-            projectile.speed = 20f;
-            projectile.rotationSpeed = 10f;
-            projectile.Launch(Pawn, Pawn.DrawPos, target, target, ProjectileHitFlags.All);
         }
 
         protected void TickLasers()

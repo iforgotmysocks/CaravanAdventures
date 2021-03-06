@@ -12,11 +12,6 @@ namespace CaravanAdventures.CaravanStory.MechChips.Abilities
 {
     class ProjectileHomingMissile : Projectile_Explosive
     {
-        public static int currentTotalCount = 0;
-        private bool ticked = false;
-        private const int maxCount = 2;
-        private int currentCount = 0;
-        private const int totalCount = 100;
         private Map map;
 
         public float rotationSpeed = 0.5f;
@@ -34,18 +29,49 @@ namespace CaravanAdventures.CaravanStory.MechChips.Abilities
         public Vector3 offset = new Vector3(0,0,0);
         public FloatRange effectRange = new FloatRange(0.5f, 1f);
         public float launchSpeed = 10f;
-        public int launchTicks = 180;
+        public int launchTicks = 140;
+        public bool smallerMissile = false;
+
+        private Sustainer ambientSustainer;
+
+        public new void Launch(Thing launcher, Vector3 origin, LocalTargetInfo usedTarget, LocalTargetInfo intendedTarget, ProjectileHitFlags hitFlags, Thing equipment = null, ThingDef targetCoverDef = null)
+        {
+            this.launcher = launcher;
+            this.origin = origin;
+            this.usedTarget = usedTarget;
+            this.intendedTarget = intendedTarget;
+            this.targetCoverDef = targetCoverDef;
+            this.HitFlags = hitFlags;
+            if (equipment != null)
+            {
+                this.equipmentDef = equipment.def;
+                this.weaponDamageMultiplier = equipment.GetStatValue(StatDefOf.RangedWeapon_DamageMultiplier, true);
+            }
+            else
+            {
+                this.equipmentDef = null;
+                this.weaponDamageMultiplier = 1f;
+            }
+            this.destination = usedTarget.Cell.ToVector3Shifted() + Gen.RandomHorizontalVector(0.3f);
+            this.ticksToImpact = Mathf.CeilToInt(this.StartingTicksToImpact);
+            if (this.ticksToImpact < 1)
+            {
+                this.ticksToImpact = 1;
+            }
+            if (!this.def.projectile.soundAmbient.NullOrUndefined())
+            {
+                SoundInfo info = SoundInfo.InMap(this, MaintenanceType.PerTick);
+                this.ambientSustainer = this.def.projectile.soundAmbient.TrySpawnSustainer(info);
+            }
+        }
+
 
         public override void Tick()
         {
             map = usedTarget.Thing?.Map ?? Map;
             if (map == null) {
-                if (!this.Destroyed) this.Destroy();
                 return;
             }
-            // todo maybe just not render them back have them swing back?
-            if (!CheckStillOnMap()) return;
-
             if (ticksAlive % 10 == 0)
             {
                 MoteMaker.ThrowDustPuff(Position, map, effectRange.RandomInRange);
@@ -53,7 +79,6 @@ namespace CaravanAdventures.CaravanStory.MechChips.Abilities
             }
             FindTarget();
             UpdateRotationAndPosition();
-            if (this.Destroyed) return;
 
             if (ticksAlive >= maxTicks || this.Position == usedTarget.Thing?.Position)
             {
@@ -144,9 +169,10 @@ namespace CaravanAdventures.CaravanStory.MechChips.Abilities
             var wayAdvanced = Vector3.forward.normalized.Yto0() * (ticksAlive < launchTicks ? launchSpeed : speed) * Time.deltaTime;
             wayAdvanced = realRotation * wayAdvanced;
             realPosition += wayAdvanced;
-            this.Position = realPosition.ToIntVec3();
 
-            if (!CheckStillOnMap()) return;
+            if (!CheckStillOnMap(realPosition.ToIntVec3())) return;
+
+            this.Position = realPosition.ToIntVec3();
 
             //Vector3 exactPosition = this.ExactPosition;
             //this.ticksToImpact--;
@@ -168,17 +194,17 @@ namespace CaravanAdventures.CaravanStory.MechChips.Abilities
             //    this.def.projectile.soundImpactAnticipate.PlayOneShot(this);
             //}
 
-            //if (this.ambientSustainer != null)
-            //{
-            //    this.ambientSustainer.Maintain();
-            //}
+            if (ambientSustainer != null)
+            {
+                ambientSustainer.Maintain();
+            }
 
             lastPosition = realPosition;
         }
 
-        private bool CheckStillOnMap()
+        private bool CheckStillOnMap(IntVec3 position)
         {
-            if (Position.InBounds(map)) return true;
+            if (position.InBounds(map)) return true;
             this.Destroy();
             return false;
         }
@@ -254,6 +280,7 @@ namespace CaravanAdventures.CaravanStory.MechChips.Abilities
                 return false;
             }
             float num = VerbUtility.InterceptChanceFactorFromDistance(this.origin, c);
+            if (smallerMissile) num /= 2;
             if (num <= 0f)
             {
                 return false;
@@ -337,7 +364,7 @@ namespace CaravanAdventures.CaravanStory.MechChips.Abilities
 
         protected override void Explode()
         {
-            currentTotalCount--;
+            if (this.Destroyed) return;
             this.Destroy(DestroyMode.Vanish);
             if (this.def.projectile.explosionEffect != null)
             {

@@ -17,7 +17,7 @@
       <damageAmountBase>15</damageAmountBase>
       <armorPenetrationBase>0.30</armorPenetrationBase>
       <speed>95</speed>-->
-
+      <soundAmbient>MortarRound_Ambient</soundAmbient>
       <damageDef>Bomb</damageDef>
       <armorPenetrationBase>0.72</armorPenetrationBase>
       <explosionRadius>2</explosionRadius>
@@ -41,7 +41,7 @@
       <damageAmountBase>15</damageAmountBase>
       <armorPenetrationBase>0.30</armorPenetrationBase>
       <speed>95</speed>-->
-
+      <soundAmbient>MortarRound_Ambient</soundAmbient>
       <damageDef>Bomb</damageDef>
       <armorPenetrationBase>0.12</armorPenetrationBase>
       <explosionRadius>2</explosionRadius>

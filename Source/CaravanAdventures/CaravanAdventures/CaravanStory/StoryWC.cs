@@ -12,18 +12,14 @@ using Verse;
 using Verse.Noise;
 
 // high prio:
-// - change rewards
-// --> maybe remove additional reward generation for shrines for a bounty system
 
 // - story: 
 // --> what to do when they get hostile
 // --> when removing shrines, and all pawns are dead, don't continue the conversation... xD
 
 // -- story continuation: 
-// -- add comm device gizmo to the gifted hediff, that is visible, when the player isn't hostile towards hunters -> opens dialog with hunters
-// --> upon death of second boss, the story contact informs the player about data they were able to trace to a remote location, but they required more attempts to find the spot
-
-// - add and rework dialogs from shrines onwards
+// -- (optional branch, possible merge) add comm device gizmo to the gifted hediff, that is visible, when the player isn't hostile towards hunters -> opens dialog with hunters
+// - add and rework dialogs from shrines onwards (done i think?)
 // - add system that allows inclusion or exclusion for other races to relation
 // - suddenly yellow save error for the sacrileg hunter faction appeared and the story char was generated anew -> fix!!
 
@@ -39,10 +35,7 @@ using Verse.Noise;
 //          that opens a window showing tips how to handle shrines: shrines stay, 
 //          shrines can be fled and come back when better equipped, allies can be used...)
 // --> fix mental state: Berserk caused by insanity lance on bosses -> maybe remove them on a timer
-// - allow adjusting the map size in settings for the camping map
 // - camp: doesn't uncover open zones when rock is removed
-// - abilities: create a rage power that reduces melee cooldown by alot -> rimsec forest, increases movement, reduces pain, maybe reduces incoming damage
-// - bounty: allow trading in items for bountypoints?
 
 // low prio:
 // - make configurable if sacrileg hunters are hostile towards the empire
