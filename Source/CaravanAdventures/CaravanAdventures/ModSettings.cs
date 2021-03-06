@@ -38,7 +38,8 @@ namespace CaravanAdventures
         public static bool hasSupplyCostsDisabled = false;
         public static bool autoApplyCampGearRecipes = true;
         public static bool autoApplyCampClearSnowArea = false;
-        public static IntVec3 campMapSize = new IntVec3(275, 1, 275);
+        public static bool useCustomMapSize = false;
+        public static IntVec3 campMapSize = new IntVec3(250, 1, 250);
         public static int maxCampSupplyCost = 75;
         public static int fuelStartingFillPercentage = 50;
         public static bool showSupplyCostsInGizmo = true;
@@ -129,7 +130,8 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref hasSupplyCostsDisabled, "hasSupplyCostsDisabled", false);
             Scribe_Values.Look(ref autoApplyCampGearRecipes, "autoApplyCampGearRecipes", true);
             Scribe_Values.Look(ref autoApplyCampClearSnowArea, "autoApplyCampClearSnowArea", false);
-            Scribe_Values.Look(ref campMapSize, "campMapSize", new IntVec3(275, 1, 275));
+            Scribe_Values.Look(ref useCustomMapSize, "useCustomMapSize", false);
+            Scribe_Values.Look(ref campMapSize, "campMapSize", new IntVec3(250, 1, 250));
             Scribe_Values.Look(ref maxCampSupplyCost, "maxCampSupplyCost", 75);
             Scribe_Values.Look(ref fuelStartingFillPercentage, "fuelStartingFillPercentage", 50);
             Scribe_Values.Look(ref showSupplyCostsInGizmo, "showSupplyCostsInGizmo", true);

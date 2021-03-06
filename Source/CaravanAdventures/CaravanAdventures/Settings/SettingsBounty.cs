@@ -35,12 +35,12 @@ namespace CaravanAdventures.Settings
             options.Begin(wrect);
 
             Text.Font = GameFont.Medium;
-            options.Label("Camp settings:".Colorize(Color.green), 40f);
+            options.Label("Bounty settings:".Colorize(Color.green), 40f);
             options.Gap();
 
             if (CompCache.BountyWC == null || Find.FactionManager?.AllFactionsListForReading?.FirstOrDefault() == null)
             {
-                options.Label($"Bounty settings are savegame specific, please load up a savegame to adjust the settings. Thanks.");
+                options.Label($"Some bounty settings are savegame specific, please load up a savegame to adjust the settings. Thanks.");
                 options.End();
                 return;
             }

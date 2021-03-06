@@ -156,15 +156,6 @@ namespace CaravanAdventures.CaravanStory
             if (debugFlags["ShowDebugInfo"]) storyFlags.ToList().ForEach(flag => Log.Message($"{flag.Key} {flag.Value}"));
         }
 
-        private void RoyaltyCheckAndModPrep()
-        {
-            // todo
-            if (!ModsConfig.RoyaltyActive)
-            {
-                ModSettings.storyEnabled = false;
-            }
-        }
-
         private void InitializeStoryFlags()
         {
             if (storyFlags == null) storyFlags = new Dictionary<string, bool>();
@@ -189,7 +180,7 @@ namespace CaravanAdventures.CaravanStory
 
         public override void WorldComponentTick()
         {
-            base.WorldComponentTick();
+            base.WorldComponentTick();  
             RunDebugActionsOnceAtStartUp();
 
             if (!RoyaltyActiveCheck()) return;

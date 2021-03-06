@@ -43,8 +43,7 @@ namespace CaravanAdventures.CaravanImprovements
             Settlement newHome = SettleUtility.AddNewHome(caravan.Tile, faction);
             LongEventHandler.QueueLongEvent(delegate ()
             {
-                // Find.World.info.initialMapSize
-                var map = GetOrGenerateMapUtility.GetOrGenerateMap(caravan.Tile, ModSettings.campMapSize, null);
+                var map = GetOrGenerateMapUtility.GetOrGenerateMap(caravan.Tile, ModSettings.useCustomMapSize ? ModSettings.campMapSize : Find.World.info.initialMapSize, null);
                 if (createCamp) new CampBuilder(caravan, map).GenerateCamp();
             }, "GeneratingMap", true, new Action<Exception>(GameAndMapInitExceptionHandlers.ErrorWhileGeneratingMap), true);
             LongEventHandler.QueueLongEvent(delegate ()

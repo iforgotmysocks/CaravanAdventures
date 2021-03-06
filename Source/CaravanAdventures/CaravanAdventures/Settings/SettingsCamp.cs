@@ -39,11 +39,14 @@ namespace CaravanAdventures.Settings
             Text.Font = GameFont.Small;
             options.Gap();
 
-            options.Label($"Select the mapsize for camps: {ModSettings.campMapSize.x}/1/{ModSettings.campMapSize.z}");
-            var mapSize = Convert.ToInt32(options.Slider(ModSettings.campMapSize.x / 25, 3, 12) * 25);
-            if (mapSize <= 75) mapSize = 275;
-            ModSettings.campMapSize = new IntVec3(mapSize, 1, mapSize);
-
+            options.CheckboxLabeled($"Use custom camping map size", ref ModSettings.useCustomMapSize, "When disabled, the regular map size is being used");
+            if (ModSettings.useCustomMapSize)
+            {
+                options.Label($"Select the mapsize for camps: {ModSettings.campMapSize.x}/1/{ModSettings.campMapSize.z}");
+                var mapSize = Convert.ToInt32(options.Slider(ModSettings.campMapSize.x / 25, 3, 13) * 25);
+                if (mapSize <= 75) mapSize = 250;
+                ModSettings.campMapSize = new IntVec3(mapSize, 1, mapSize);
+            }
             options.Gap();
             options.Label("Select the tent types you want ur pawns to build by themselfs.");
             options.CheckboxLabeled("Build production tent", ref ModSettings.hasProductionTent);
