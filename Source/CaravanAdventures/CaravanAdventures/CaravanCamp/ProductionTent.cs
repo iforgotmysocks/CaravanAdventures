@@ -8,9 +8,9 @@ namespace CaravanAdventures.CaravanCamp
 {
     class ProductionTent : Tent, IRecipeHolder, IShelfTent
     {
-        private Building_WorkTable tableButcher;
-        private Building_WorkTable handTailoringBench;
-        private Building_Storage shelf;
+        protected Building_WorkTable tableButcher;
+        protected Building_WorkTable handTailoringBench;
+        protected Building_Storage shelf;
 
         public ProductionTent()
         {
@@ -97,7 +97,7 @@ namespace CaravanAdventures.CaravanCamp
             CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDefOf.Stool, ThingDefOf.WoodLog), new IntVec3(CellRect.maxX - 3, 0, CellRect.minZ + 2), map, default, campAssetListRef);
         }
 
-        public void ApplyRecipes(Caravan caravan)
+        public virtual void ApplyRecipes(Caravan caravan)
         {
             var bill = new Bill_Production(DefDatabase<RecipeDef>.GetNamed("ButcherCorpseFlesh")) { repeatMode = BillRepeatModeDefOf.Forever };
             bill.ingredientFilter.SetAllow(ThingCategoryDefOf.CorpsesInsect, false);
@@ -120,7 +120,7 @@ namespace CaravanAdventures.CaravanCamp
             handTailoringBench.BillStack.AddBill(parkaBill);
         }
 
-        public void ApplyRecipesTribal(Caravan caravan)
+        public virtual void ApplyRecipesTribal(Caravan caravan)
         {
             if (ResearchProjectDef.Named("ComplexClothing")?.ProgressPercent == 1f)
             {
@@ -142,7 +142,7 @@ namespace CaravanAdventures.CaravanCamp
             handTailoringBench.BillStack.AddBill(shirtBill);
         }
 
-        public void FillShelfs(Map map, Caravan caravan)
+        public virtual void FillShelfs(Map map, Caravan caravan)
         {
             foreach (var cell in shelf.AllSlotCells())
             {
@@ -152,6 +152,6 @@ namespace CaravanAdventures.CaravanCamp
             }
         }
 
-        public Building_Storage GetShelf() => shelf;
+        public virtual Building_Storage GetShelf() => shelf;
     }
 }

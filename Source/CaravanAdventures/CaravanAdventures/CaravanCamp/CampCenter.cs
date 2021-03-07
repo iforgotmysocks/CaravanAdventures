@@ -11,9 +11,9 @@ namespace CaravanAdventures.CaravanCamp
 {
     class CampCenter : CampArea, IRecipeHolder
     {
-        private ThingWithComps control;
+        protected ThingWithComps control;
         public ThingWithComps Control { get => control; private set => control = value; }
-        private Building_WorkTable campFire;
+        protected Building_WorkTable campFire;
         public CampCenter()
         {
             SupplyCost = 1;
@@ -82,14 +82,14 @@ namespace CaravanAdventures.CaravanCamp
             }
         }
 
-        public void ApplyRecipes(Caravan caravan)
+        public virtual void ApplyRecipes(Caravan caravan)
         {
             var colonists = caravan.PawnsListForReading.Where(col => col.IsFreeColonist).ToList();
             var bill = new Bill_Production(CampDefOf.CACookGrillSnackBulk) { targetCount = colonists.Count != 0 ? colonists.Count * 2 : 12, repeatMode = BillRepeatModeDefOf.TargetCount };
             campFire.BillStack.AddBill(bill);
         }
 
-        public void ApplyRecipesTribal(Caravan caravan)
+        public virtual void ApplyRecipesTribal(Caravan caravan)
         {
             var colonists = caravan.PawnsListForReading.Where(col => col.IsFreeColonist).ToList();
             var bill = new Bill_Production(DefDatabase<RecipeDef>.GetNamed("CookMealSimpleBulk")) { targetCount = colonists.Count != 0 ? colonists.Count * 2 : 12, repeatMode = BillRepeatModeDefOf.TargetCount };

@@ -12,8 +12,8 @@ namespace CaravanAdventures.CaravanCamp
 {
     class AnimalArea : CampArea, IAreaRestrictionTent, IZoneTent
     {
-        private Area_Allowed animalArea;
-        private Zone_Stockpile zone;
+        protected Area_Allowed animalArea;
+        protected Zone_Stockpile zone;
 
         public AnimalArea()
         {
@@ -39,7 +39,7 @@ namespace CaravanAdventures.CaravanCamp
             Build(map, campAssetListRef);
         }
 
-        public void CreateNewRestrictionArea(Map map, Caravan caravan)
+        public virtual void CreateNewRestrictionArea(Map map, Caravan caravan)
         {
             // only works with 1 animal area right now!
             animalArea = new Area_Allowed(map.areaManager);
@@ -49,15 +49,15 @@ namespace CaravanAdventures.CaravanCamp
             animalArea.AreaUpdate();
         }
 
-        public void AssignPawnsToAreas(Map map, Caravan caravan)
+        public virtual void AssignPawnsToAreas(Map map, Caravan caravan)
         {
             if (ModSettings.letAnimalsRunFree) return;
             foreach (var animal in caravan.PawnsListForReading.Where(pawn => pawn.RaceProps.Animal)) animal.playerSettings.AreaRestriction = animalArea;
         }
 
-        public Zone GetZone() => zone;
+        public virtual Zone GetZone() => zone;
 
-        public void CreateZone(Map map)
+        public virtual void CreateZone(Map map)
         {
             var zoneCells = CellRect.Height > CellRect.Width
                 ? CellRect.Cells.Where(cell => cell.z == CellRect.maxZ - 1 && !CellRect.EdgeCells.Contains(cell))
@@ -74,7 +74,7 @@ namespace CaravanAdventures.CaravanCamp
             zoneCells.ToList().ForEach(cell => zone.AddCell(cell));
         }
 
-        public void ApplyInventory(Map map, Caravan caravan)
+        public virtual void ApplyInventory(Map map, Caravan caravan)
         {
             foreach (var cell in zone.Cells)
             {

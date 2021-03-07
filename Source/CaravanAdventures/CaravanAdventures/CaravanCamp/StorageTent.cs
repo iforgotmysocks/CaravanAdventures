@@ -11,13 +11,13 @@ namespace CaravanAdventures.CaravanCamp
 {
     class StorageTent : Tent, IZoneTent
     {
-        private Zone_Stockpile zone;
+        protected Zone_Stockpile zone;
         public StorageTent()
         {
             CoordSize = 2;
             SupplyCost = ModSettings.campSupplyCostStorageTent; // 3
         }
-        public Zone GetZone() => zone;
+        public virtual Zone GetZone() => zone;
 
         public override void Build(Map map, List<Thing> campAssetListRef)
         {
@@ -41,7 +41,7 @@ namespace CaravanAdventures.CaravanCamp
             CellRect.Cells.Where(cell => cell != null && !CellRect.EdgeCells.Contains(cell)).ToList().ForEach(cell => zone.AddCell(cell));
         }
 
-        public void ApplyInventory(Map map, Caravan caravan)
+        public virtual void ApplyInventory(Map map, Caravan caravan)
         {
             if (!ModSettings.generateStorageForAllInventory) return;
 

@@ -11,16 +11,17 @@ namespace CaravanAdventures.CaravanCamp
 {
     class FoodTent : Tent, IZoneTent
     {
-        private Zone_Stockpile zone;
-        private ThingCategoryDef[] validFoods = new[] { ThingCategoryDefOf.FoodMeals, ThingCategoryDefOf.Foods, ThingCategoryDefOf.MeatRaw };
-        private ThingDef[] unvalidFoods = new[] { ThingDefOf.Kibble, ThingDefOf.Hay };
+        protected Zone_Stockpile zone;
+        protected ThingCategoryDef[] validFoods = new[] { ThingCategoryDefOf.FoodMeals, ThingCategoryDefOf.Foods, ThingCategoryDefOf.MeatRaw };
+        protected ThingDef[] unvalidFoods = new[] { ThingDefOf.Kibble, ThingDefOf.Hay };
+
         public FoodTent()
         {
             this.CoordSize = 2;
             SupplyCost = ModSettings.campSupplyCostFoodTent; // 3;
         }
 
-        public Zone GetZone() => zone;
+        public virtual Zone GetZone() => zone;
         public override void Build(Map map, List<Thing> campAssetListRef)
         {
             base.Build(map, campAssetListRef);
@@ -60,7 +61,7 @@ namespace CaravanAdventures.CaravanCamp
             //zone.CheckContiguous();
         }
 
-        public void ApplyInventory(Map map, Caravan caravan)
+        public virtual void ApplyInventory(Map map, Caravan caravan)
         {
             foreach (var cell in zone.Cells)
             {

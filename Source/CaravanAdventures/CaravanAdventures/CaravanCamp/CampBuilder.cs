@@ -180,7 +180,7 @@ namespace CaravanAdventures.CaravanCamp
             if (ModSettings.hasSupplyCostsDisabled) campCost = 0;
             else if (campCost > ModSettings.maxCampSupplyCost) campCost = ModSettings.maxCampSupplyCost;
             var amount = caravan.AllThings?.Where(thing => thing.def == CampDefOf.CASpacerTentSupplies)?.Select(thing => thing?.stackCount)?.Sum();
-            if (amount == null || amount == 0 || campCost > amount)
+            if (!ModSettings.hasSupplyCostsDisabled && (amount == null || amount == 0 || campCost > amount))
             {
                 this.tribal = true;
                 return;

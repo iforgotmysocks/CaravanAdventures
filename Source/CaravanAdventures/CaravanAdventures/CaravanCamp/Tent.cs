@@ -15,7 +15,7 @@ namespace CaravanAdventures.CaravanCamp
             SupplyCost = 2;
         }
 
-        public IEnumerable<IntVec3> GetEntraceCells() => CellRect.EdgeCells.Where(cell => {
+        public virtual IEnumerable<IntVec3> GetEntraceCells() => CellRect.EdgeCells.Where(cell => {
             if (CoordSize == 1) return cell.z == CellRect.minZ && cell.x == CellRect.minX + Convert.ToInt32(CellRect.Width / 2);
             else if (CoordSize == 2) return cell.z == CellRect.minZ && cell.x == CellRect.minX + Convert.ToInt32(CellRect.Width / 2)
                 || cell.z == CellRect.maxZ && cell.x == CellRect.minX + Convert.ToInt32(CellRect.Width / 2);

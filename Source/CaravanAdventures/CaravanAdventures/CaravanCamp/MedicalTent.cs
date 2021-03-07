@@ -11,9 +11,9 @@ namespace CaravanAdventures.CaravanCamp
 {
     class MedicalTent : RestTent, IShelfTent, IZoneTent
     {
-        private ThingDef[] validMedicine = new[] { ThingDefOf.MedicineUltratech, ThingDefOf.MedicineIndustrial, ThingDefOf.MedicineHerbal };
-        private Building_Storage shelf;
-        private Zone_Stockpile zone;
+        protected ThingDef[] validMedicine = new[] { ThingDefOf.MedicineUltratech, ThingDefOf.MedicineIndustrial, ThingDefOf.MedicineHerbal };
+        protected Building_Storage shelf;
+        protected Zone_Stockpile zone;
         public MedicalTent()
         {
             this.CoordSize = 2;
@@ -79,9 +79,9 @@ namespace CaravanAdventures.CaravanCamp
             }
         }
 
-        public Building_Storage GetShelf() => shelf;
+        public virtual Building_Storage GetShelf() => shelf;
 
-        public void CreateZone(Map map)
+        public virtual void CreateZone(Map map)
         {
             if (shelf != null) return;
             var zoneCells = CellRect.Cells.Where(cell => cell.x == CellRect.maxX - 1 && cell.z != CellRect.minZ + 1 && !CellRect.EdgeCells.Contains(cell));
@@ -97,7 +97,7 @@ namespace CaravanAdventures.CaravanCamp
             zoneCells.ToList().ForEach(cell => zone.AddCell(cell));
         }
 
-        public void ApplyInventory(Map map, Caravan caravan)
+        public virtual void ApplyInventory(Map map, Caravan caravan)
         {
             if (zone == null) return;
             foreach (var cell in zone.Cells)
@@ -108,6 +108,6 @@ namespace CaravanAdventures.CaravanCamp
             }
         }
 
-        public Zone GetZone() => zone;
+        public virtual Zone GetZone() => zone;
     }
 }
