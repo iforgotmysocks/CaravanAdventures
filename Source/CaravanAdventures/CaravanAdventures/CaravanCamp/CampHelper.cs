@@ -107,7 +107,7 @@ namespace CaravanAdventures.CaravanCamp
             if (refuelComp == null) return;
             if (fuelPerc == -1) fuelPerc = ModSettings.fuelStartingFillPercentage;
             if (fuelPerc != 100) refuelComp.ConsumeFuel(refuelComp.Fuel);
-            refuelComp.Refuel(refuelComp.GetFuelCountToFullyRefuel() * fuelPerc / 100);
+            refuelComp.Refuel(refuelComp.GetFuelCountToFullyRefuel() * fuelPerc / 100f);
         }
     }
 }
