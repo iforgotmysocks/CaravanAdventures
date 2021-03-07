@@ -71,6 +71,7 @@ namespace CaravanAdventures.CaravanCamp
 
         public static int PreemptivelyCalculateCampCosts(Caravan caravan)
         {
+            if (ModSettings.hasSupplyCostsDisabled) return 0;
             var buildingCosts = 0;
             buildingCosts += (int)Math.Ceiling(caravan.PawnsListForReading.Where(x => x.IsColonist || x.IsPrisoner).Count() / 3.0);
             if (ModSettings.hasProductionTent) buildingCosts += ModSettings.campSupplyCostProductionTent;
