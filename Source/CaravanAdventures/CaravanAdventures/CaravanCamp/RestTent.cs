@@ -26,6 +26,7 @@ namespace CaravanAdventures.CaravanCamp
             var lover = Occupants.FirstOrDefault(col => col != null && CampHelper.ExistingColonistLovePartner(col, Occupants) != null);
             var otherLover = lover != null ? CampHelper.ExistingColonistLovePartner(lover, Occupants) : null;
             var cellSpots = CellRect.Cells.Where(cell => !CellRect.EdgeCells.Contains(cell) && cell.z == CellRect.maxZ - 1).ToArray();
+            var assigned = new List<Building_Bed>();
 
             for (int i = 0; i < cellSpots.Length; i++)
             {
@@ -45,7 +46,7 @@ namespace CaravanAdventures.CaravanCamp
                     var bed = GenSpawn.Spawn(thing, cellSpots[i], map, Rot4.South);
                     bed.SetFaction(Faction.OfPlayer);
                     campAssetListRef.Add(bed);
-                    var pawnInNeedOfBed = Occupants.FirstOrDefault(occ => occ != null && occ != lover && occ != otherLover && (occ.ownership.OwnedBed == null || occ.ownership.OwnedBed.Map != map));
+                    var pawnInNeedOfBed = Occupants.FirstOrDefault(occ => occ != null && occ != lover && occ != otherLover && !assigned.Any(x => x.OwnersForReading.Contains(occ)));
                     if (pawnInNeedOfBed != null) pawnInNeedOfBed.ownership.ClaimBedIfNonMedical((Building_Bed)bed);
                 }
             }
@@ -72,6 +73,7 @@ namespace CaravanAdventures.CaravanCamp
                && Occupants.Contains(CampHelper.ExistingColonistLovePartner(col)));
             var otherLover = lover != null ? CampHelper.ExistingColonistLovePartner(lover) : null;
             var cellSpots = CellRect.Cells.Where(cell => !CellRect.EdgeCells.Contains(cell) && cell.z == CellRect.maxZ - 1).ToArray();
+            var assigned = new List<Building_Bed>();
 
             for (int i = 0; i < cellSpots.Length; i++)
             {
@@ -91,7 +93,7 @@ namespace CaravanAdventures.CaravanCamp
                     var bed = GenSpawn.Spawn(thing, cellSpots[i], map, Rot4.South);
                     bed.SetFaction(Faction.OfPlayer);
                     campAssetListRef.Add(bed);
-                    var pawnInNeedOfBed = Occupants.FirstOrDefault(occ => occ != null && occ != lover && occ != otherLover && (occ.ownership.OwnedBed == null || occ.ownership.OwnedBed.Map != map));
+                    var pawnInNeedOfBed = Occupants.FirstOrDefault(occ => occ != null && occ != lover && occ != otherLover && !assigned.Any(x => x.OwnersForReading.Contains(occ)));
                     if (pawnInNeedOfBed != null) pawnInNeedOfBed.ownership.ClaimBedIfNonMedical((Building_Bed)bed);
                 }
             }
