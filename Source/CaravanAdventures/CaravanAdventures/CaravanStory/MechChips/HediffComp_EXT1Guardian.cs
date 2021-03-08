@@ -42,14 +42,6 @@ namespace CaravanAdventures.CaravanStory.MechChips
             base.CompPostTick(ref severityAdjustment);
             if (Pawn?.Destroyed != false || !Pawn.Awake() || Pawn?.Map == null) return;
 
-            if (ticks % 250 == 0)
-            {
-            }
-
-            if (ticks % 450 == 0)
-            {
-            }
-            
             if (ticks >= 1000)
             {
                 ticks = 0;

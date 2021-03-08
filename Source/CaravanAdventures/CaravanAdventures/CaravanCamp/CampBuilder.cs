@@ -11,12 +11,6 @@ using Verse;
 
 namespace CaravanAdventures.CaravanCamp
 {
-    // todos
-    // fix unfogging in TransformTerrain()
-
-    // functionality: 
-    // add another field rect
-
     class CampBuilder
     {
         protected Map map;
@@ -37,7 +31,6 @@ namespace CaravanAdventures.CaravanCamp
         protected float campCost = 0;
         protected bool tribal = false;
         protected int waste;
-
 
         public CampBuilder(Caravan caravan, Map map)
         {

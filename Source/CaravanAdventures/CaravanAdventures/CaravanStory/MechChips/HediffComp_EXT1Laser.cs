@@ -31,7 +31,6 @@ namespace CaravanAdventures.CaravanStory.MechChips
             base.CompPostMake();
         }
 
-        public bool right = true;
         public override void CompPostTick(ref float severityAdjustment)
         {
             base.CompPostTick(ref severityAdjustment);
@@ -40,15 +39,8 @@ namespace CaravanAdventures.CaravanStory.MechChips
             TickLasers();
 
 
-            //if (ticks % 25 == 0 && blades != null && blades.Spawned)
-            //{
-            //    SliceSurroundingEnemies();
-            //}
-
-
             if (ticks > 50 && ticks < 100)
             {
-                // LaserAttackAOE
             }
 
             if (ticks % 350 == 0)

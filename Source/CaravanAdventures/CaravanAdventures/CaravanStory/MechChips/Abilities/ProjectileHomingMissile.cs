@@ -156,9 +156,9 @@ namespace CaravanAdventures.CaravanStory.MechChips.Abilities
 
         public void UpdateRotationAndPosition()
         {
-            Vector3 dir = new Vector3();
-            float angle = 0f;
-            Quaternion rotateToTarget = new Quaternion();
+            var dir = new Vector3();
+            var angle = 0f;
+            var rotateToTarget = new Quaternion();
             if (usedTarget.Thing?.Position != null)
             {
                 dir = (usedTarget.Thing.DrawPos - realPosition).normalized;

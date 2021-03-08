@@ -14,11 +14,11 @@ namespace CaravanAdventures.Patches
             if (ModSettings.caravanCampEnabled) CaravanTravel.ApplyPatches(harmony);
             if (ModSettings.caravanFormingFilterSelectionEnabled) AutomaticItemSelection.ApplyPatches(harmony);
             if (ModSettings.bountyEnabled) KillBountyPatches.ApplyPatches(harmony);
-            if (ModSettings.storyEnabled) TalkPawnGUIOverlay.ApplyPatches(harmony);
-
-            // test
-            BossPatches.ApplyPatches(harmony);
-
+            if (ModSettings.storyEnabled)
+            {
+                TalkPawnGUIOverlay.ApplyPatches(harmony);
+                BossPatches.ApplyPatches(harmony);
+            }
         }
 
         /// <summary>
