@@ -27,10 +27,6 @@ using Verse.Noise;
 
 // med prio:
 // - add check to master shrine location selection, that keeps it away from a player settlement
-// - seperate bounty system from story
-// --> allow to set another faction in settings that offers the bounties
-// --> implement rewards with and without royalty
-// --> allow abandoning an already existing shrineMP?
 // --> show tips about how to handle a shrine when first entering (and create a "show tips" link in the quest window, 
 //          that opens a window showing tips how to handle shrines: shrines stay, 
 //          shrines can be fled and come back when better equipped, allies can be used...)

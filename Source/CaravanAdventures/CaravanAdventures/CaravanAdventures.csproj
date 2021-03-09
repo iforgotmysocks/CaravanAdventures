@@ -142,6 +142,7 @@
     <Compile Include="CaravanStory\MechChips\Abilities\RapidLaser.cs" />
     <Compile Include="CaravanStory\MechChips\Abilities\RapidLaserMote.cs" />
     <Compile Include="CaravanStory\MechChips\Abilities\CirclingBladesMote.cs" />
+    <Compile Include="CaravanStory\MechChips\HediffComp_EXT1Basic.cs" />
     <Compile Include="CaravanStory\MechChips\HediffComp_EXT1Guardian.cs" />
     <Compile Include="CaravanStory\MechChips\HediffComp_EXT1Missile.cs" />
     <Compile Include="CaravanStory\MechChips\HediffComp_EXT1Laser.cs" />
@@ -160,7 +161,7 @@
     <Compile Include="CaravanStory\MechChips\HediffCompProperties_EXT1Melee.cs" />
     <Compile Include="CaravanStory\MechChips\HediffCompProperties_EXT1Basic.cs" />
     <Compile Include="CaravanStory\MechChips\HediffComp_EXT1Melee.cs" />
-    <Compile Include="CaravanStory\MechChips\HediffComp_EXT1Basic.cs" />
+    <Compile Include="CaravanStory\MechChips\HediffComp_EXT1Artillary.cs" />
     <Compile Include="CaravanStory\MechChips\MechChipModExt.cs" />
     <Compile Include="CaravanStory\StoryUtility.cs" />
     <Compile Include="CaravanStory\AncientMasterShrineWO.cs" />

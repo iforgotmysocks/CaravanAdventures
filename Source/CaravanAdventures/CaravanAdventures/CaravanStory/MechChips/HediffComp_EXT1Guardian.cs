@@ -12,7 +12,7 @@ using Verse.Sound;
 
 namespace CaravanAdventures.CaravanStory.MechChips
 {
-    public class HediffComp_EXT1Guardian : HediffComp
+    public class HediffComp_EXT1Guardian : HediffComp_EXT1Basic
     {
         private int ticks = 0;
         private Abilities.GuardianShield guardianShield;

@@ -13,7 +13,7 @@ using Verse.Sound;
 
 namespace CaravanAdventures.CaravanStory.MechChips
 {
-    public class HediffComp_EXT1Laser : HediffComp
+    public class HediffComp_EXT1Laser : HediffComp_EXT1Basic
     {
         private int ticks = 1250;
         List<RapidLaser> lasers = new List<RapidLaser>();
