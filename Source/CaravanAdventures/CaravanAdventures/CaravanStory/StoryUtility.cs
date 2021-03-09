@@ -385,6 +385,11 @@ namespace CaravanAdventures.CaravanStory
             foreach (var faction in Find.FactionManager.AllFactionsListForReading)
             {
                 if (faction == Faction.OfPlayer || faction.def.permanentEnemy || faction == sacrilegHunters) continue;
+                if (ModSettings.sacHuntersHostileTowardsEmpire && faction == Faction.Empire)
+                {
+                    faction.SetRelationDirect(sacrilegHunters, FactionRelationKind.Hostile);
+                    continue;
+                }
                 faction.SetRelationDirect(sacrilegHunters, FactionRelationKind.Neutral);
             }
         }
