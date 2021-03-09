@@ -14,8 +14,8 @@ namespace CaravanAdventures.CaravanStory.MechChips.Abilities
     {
         private Map map;
 
-        public float rotationSpeed = 0.5f;
-        public float speed = 2.0f;
+        public float rotationSpeed = 10f;
+        public float speed = 20f;
 
         public Vector3 realPosition;
         public Quaternion realRotation;
@@ -36,6 +36,9 @@ namespace CaravanAdventures.CaravanStory.MechChips.Abilities
 
         public new void Launch(Thing launcher, Vector3 origin, LocalTargetInfo usedTarget, LocalTargetInfo intendedTarget, ProjectileHitFlags hitFlags, Thing equipment = null, ThingDef targetCoverDef = null)
         {
+            realRotation = launcher.Rotation.AsQuat;
+            realPosition = launcher.DrawPos + (realRotation * offset);
+
             this.launcher = launcher;
             this.origin = origin;
             this.usedTarget = usedTarget;

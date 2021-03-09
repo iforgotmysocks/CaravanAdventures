@@ -82,8 +82,6 @@ namespace CaravanAdventures.CaravanStory.MechChips
             var target = Pawn.mindState.enemyTarget;
             ProjectileHomingMissile projectile = (ProjectileHomingMissile)GenSpawn.Spawn(ThingDef.Named("CAStingerMissile"), Pawn.Position, Pawn.Map, WipeMode.Vanish);
             projectile.offset = right ? new Vector3(2, 0, 0) : new Vector3(-2, 0, 0);
-            projectile.realRotation = Pawn.Rotation.AsQuat;
-            projectile.realPosition = Pawn.DrawPos + (projectile.realRotation * projectile.offset);
             projectile.speed = 35f;
             projectile.launchSpeed = 10f;
             projectile.launchTicks = 70;
