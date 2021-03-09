@@ -204,6 +204,7 @@ namespace CaravanAdventures
             return lastRect;
         }
 
+        private bool showRestartReminder = false;
         public void DoWindowContents(Rect wrect)
         {
             var options = new Listing_Standard();
@@ -227,14 +228,16 @@ namespace CaravanAdventures
             if (Widgets.ButtonText(BRect(options.ColumnWidth / 5 * 2, lastRect.y, options.ColumnWidth / 5 - 10, lastRect.height), "Reset final shrine flags")) StoryUtility.ResetLastShrineFlags();
             if (Widgets.ButtonText(BRect(options.ColumnWidth / 5 * 3, lastRect.y, options.ColumnWidth / 5 - 10, lastRect.height), "Print world pawns")) Helper.PrintWorldPawns();
             if (Widgets.ButtonText(BRect(options.ColumnWidth / 5 * 4, lastRect.y, options.ColumnWidth / 5 - 10, lastRect.height), "Reset full story")) StoryUtility.RestartStory();
-            
+
             options.GapLine();
+            var checkRestartRequiringValueChanged = false;
 
             Text.Font = GameFont.Medium;
             var cRect = BRect(options.GetRect(Text.LineHeight));
             Widgets.Label(cRect, $"Caravan camping & Caravan improvements".HtmlFormatting("00ff00", false, 18));
             Text.Font = GameFont.Small;
-            Widgets.CheckboxLabeled(new Rect(options.ColumnWidth - 400, lastRect.y + 10, 110, Text.LineHeight), "Enabled: ", ref caravanCampEnabled);
+            Widgets.CheckboxLabeled(new Rect(options.ColumnWidth - 400, lastRect.y + 10, 110, Text.LineHeight), "Enabled: ", ref CheckForRestart(ref caravanCampEnabled, ref checkRestartRequiringValueChanged));
+            if (caravanCampEnabled != checkRestartRequiringValueChanged) showRestartReminder = true;
             if (Widgets.ButtonText(new Rect(options.ColumnWidth - 225, lastRect.y + 6, 150, Text.LineHeight + 10), "Open", true, true, true)) Find.WindowStack.Add(new SettingsCamp());
             options.Gap(10);
             options.Label($"Enables settling with a camp, settling with items still packed and the ability to drop them later on and nighttravel.\nAdjust settings related to the automatic camp generation. Depending if the player has enough camp supplies, the player's pawns will either build a high quality camp, or a wanting camp construted with makeshift materials.");
@@ -244,7 +247,8 @@ namespace CaravanAdventures
             cRect = BRect(options.GetRect(Text.LineHeight));
             Widgets.Label(cRect, $"Caravan forming / trading presets & Filter settings".HtmlFormatting("00ff00", false, 18));
             Text.Font = GameFont.Small;
-            Widgets.CheckboxLabeled(new Rect(options.ColumnWidth - 400, lastRect.y + 10, 110, Text.LineHeight), "Enabled: ", ref caravanFormingFilterSelectionEnabled);
+            Widgets.CheckboxLabeled(new Rect(options.ColumnWidth - 400, lastRect.y + 10, 110, Text.LineHeight), "Enabled: ", ref CheckForRestart(ref caravanFormingFilterSelectionEnabled, ref checkRestartRequiringValueChanged));
+            if (caravanFormingFilterSelectionEnabled != checkRestartRequiringValueChanged) showRestartReminder = true;
             if (Widgets.ButtonText(new Rect(options.ColumnWidth - 225, lastRect.y + 6, 150, Text.LineHeight + 10), "Open")) Find.WindowStack.Add(new SettingsFilters());
             options.Gap(10);
             options.Label($"Adds new filter presets to the caravan forming and trade dialogs the player can use to quickly select all items he wants to use. Also allows to disable auto supply selection. Fully customizable presets in options.");
@@ -254,7 +258,8 @@ namespace CaravanAdventures
             cRect = BRect(options.GetRect(Text.LineHeight));
             Widgets.Label(cRect, $"Mechanoid Bounty".HtmlFormatting("00ff00", false, 18));
             Text.Font = GameFont.Small;
-            Widgets.CheckboxLabeled(new Rect(options.ColumnWidth - 400, lastRect.y + 10, 110, Text.LineHeight), "Enabled: ", ref bountyEnabled);
+            Widgets.CheckboxLabeled(new Rect(options.ColumnWidth - 400, lastRect.y + 10, 110, Text.LineHeight), "Enabled: ", ref CheckForRestart(ref bountyEnabled, ref checkRestartRequiringValueChanged));
+            if (bountyEnabled != checkRestartRequiringValueChanged) showRestartReminder = true;
             if (Widgets.ButtonText(new Rect(options.ColumnWidth - 225, lastRect.y + 6, 150, Text.LineHeight + 10), "Open")) Find.WindowStack.Add(new SettingsBounty());
             options.Gap(10);
             options.Label($"Adjust settings related to the bounty hunting efforts against mechanoids. Settings for the bounty component of the story, which is used as a standalone, so a vanilla faction, the player can choose, will call out the bounty if royalty isn't isntalled.");
@@ -274,7 +279,8 @@ namespace CaravanAdventures
             cRect = BRect(options.GetRect(Text.LineHeight));
             Widgets.Label(cRect, $"Caravan Incidents - (testing)".HtmlFormatting("00ff00", false, 18));
             Text.Font = GameFont.Small;
-            Widgets.CheckboxLabeled(new Rect(options.ColumnWidth - 400, lastRect.y + 10, 110, Text.LineHeight), "Enabled: ", ref caravanIncidentsEnabled);
+            Widgets.CheckboxLabeled(new Rect(options.ColumnWidth - 400, lastRect.y + 10, 110, Text.LineHeight), "Enabled: ", ref CheckForRestart(ref caravanIncidentsEnabled, ref checkRestartRequiringValueChanged));
+            if (caravanIncidentsEnabled != checkRestartRequiringValueChanged) showRestartReminder = true;
             //if (Widgets.ButtonText(new Rect(options.ColumnWidth - 225, lastRect.y + 6, 150, Text.LineHeight + 10), "Open", true, false, false)) Find.WindowStack.Add(new SettingsFilters());
             options.Gap(10);
             options.Label($"Additional Caravan incidents - (only 1 in testing currently, more coming with the next expansion)");
@@ -284,7 +290,8 @@ namespace CaravanAdventures
             cRect = BRect(options.GetRect(Text.LineHeight));
             Widgets.Label(cRect, $"Story settings".HtmlFormatting("00ff00", false, 18));
             Text.Font = GameFont.Small;
-            Widgets.CheckboxLabeled(new Rect(options.ColumnWidth - 400, lastRect.y + 10, 110, Text.LineHeight), "Enabled: ", ref storyEnabled);
+            Widgets.CheckboxLabeled(new Rect(options.ColumnWidth - 400, lastRect.y + 10, 110, Text.LineHeight), "Enabled: ", ref CheckForRestart(ref storyEnabled, ref checkRestartRequiringValueChanged));
+
             if (Widgets.ButtonText(new Rect(options.ColumnWidth - 225, lastRect.y + 6, 150, Text.LineHeight + 10), "Open")) Find.WindowStack.Add(new SettingsStory());
             options.Gap(10);
             options.Label($"Story settings. Requires Royalty.");
@@ -293,12 +300,13 @@ namespace CaravanAdventures
             if (!ModsConfig.RoyaltyActive && storyEnabled) Find.WindowStack.Add(new Dialog_MessageBox(
                 new TaggedString($"\nSorry, but the story relies upon and requires Royalty and will be disabled. However all other mod categories are still available.\n\nOnce you have Royalty enabled, you can enable the story here.\nThanks for understanding."),
                 "Gotcha",
-                () => { },
+                () => { if (showRestartReminder) showRestartReminder = false; },
                 null,
                 null,
                 "Missing DLC notification!"));
+            else if (checkRestartRequiringValueChanged != storyEnabled) showRestartReminder = true;
             storyEnabled = ModsConfig.RoyaltyActive && storyEnabled;
-            
+
             Text.Font = GameFont.Medium;
             cRect = BRect(options.GetRect(Text.LineHeight));
             Widgets.Label(cRect, $"Ancient abilitiy settings".HtmlFormatting("00ff00", false, 18));
@@ -309,6 +317,17 @@ namespace CaravanAdventures
             options.Label($"Adjust settings related to the automatic camp generation. Depending if the player has enough camp supplies, the player's pawns will either build a high quality camp, or a wanting camp construted with makeshift materials.");
             options.GapLine();
 
+            if (showRestartReminder)
+            {
+                showRestartReminder = false;
+                Find.WindowStack.Add(new Dialog_MessageBox(
+                new TaggedString($"\nYour latest changes require a game restart to take effect."),
+                "Gotcha",
+                () => { },
+                null,
+                null,
+                "Restart reminder"));
+            }
 
             // move to improvement settings -> or rather delete and adjust that via def patch
             //options.Label("Settlement price adjustments");
@@ -322,8 +341,11 @@ namespace CaravanAdventures
             this.Write();
         }
 
-
-
+        private ref bool CheckForRestart(ref bool setting, ref bool checkRestart)
+        {
+            checkRestart = setting;
+            return ref setting;
+        }
 
     }
 }
