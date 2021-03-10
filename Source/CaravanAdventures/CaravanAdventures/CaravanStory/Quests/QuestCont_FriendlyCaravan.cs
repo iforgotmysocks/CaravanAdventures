@@ -62,16 +62,6 @@ namespace CaravanAdventures.CaravanStory.Quests
 
         public void FriendlyCaravan_Conversation(Pawn initiator, Pawn addressed)
         {
-            // dialog ideas: 
-            // -> currently constructing village nearby
-            // -> looking for allies to help explore
-            // -> missing her homeworld, lost her husband
-            // -> mechs seem to be very aggressive 
-
-            // -> maybe turn next quest into a help call instead of a "visit"
-
-            // todo give main char good equipment
-
             DiaNode diaNode = null;
 
             var diaNode6_1 = new DiaNode("TradeCaravan_Dia1_6_1".Translate(addressed.NameShortColored, ThingDefOf.VanometricPowerCell.LabelCap.ToString().Colorize(UnityEngine.Color.green), GenderUtility.GetPossessive(addressed.gender)));
