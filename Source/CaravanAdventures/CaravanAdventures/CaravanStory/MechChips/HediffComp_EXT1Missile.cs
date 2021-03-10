@@ -19,8 +19,6 @@ namespace CaravanAdventures.CaravanStory.MechChips
         public bool right = true;
         private bool hasTarget = false;
 
-        public HediffCompProperties_EXT1Melee Props => (HediffCompProperties_EXT1Melee)props;
-
         public override void CompExposeData()
         {
             base.CompExposeData();
@@ -64,7 +62,8 @@ namespace CaravanAdventures.CaravanStory.MechChips
 
         private bool CanLaunchMissile()
         {
-            return true;
+            //return true;
+
             //return Pawn.mindState.enemyTarget != null
             //    && Pawn.mindState.enemyTarget.Position != LocalTargetInfo.Invalid
             //    && Pawn.mindState.enemyTarget.Position.DistanceTo(Pawn.Position) >= 0f

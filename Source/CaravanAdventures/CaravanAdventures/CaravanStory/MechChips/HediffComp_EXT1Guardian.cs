@@ -20,8 +20,6 @@ namespace CaravanAdventures.CaravanStory.MechChips
         public readonly int shieldCooldownBase = 300;
         private float absorbedDamage = 0;
 
-        public HediffCompProperties_EXT1Basic Props => (HediffCompProperties_EXT1Basic)props;
-
         public int ShieldCooldown { get => shieldCooldown; set => shieldCooldown = value; }
         public float AbsorbedDamage { get => absorbedDamage; set => absorbedDamage = value; }
 

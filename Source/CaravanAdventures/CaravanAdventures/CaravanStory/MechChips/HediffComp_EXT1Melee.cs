@@ -17,8 +17,6 @@ namespace CaravanAdventures.CaravanStory.MechChips
         private int ticks = 1250;
         private Abilities.CirclingBladesMote blades;
 
-        public HediffCompProperties_EXT1Melee Props => (HediffCompProperties_EXT1Melee)props;
-
         public override void CompExposeData()
         {
             base.CompExposeData();

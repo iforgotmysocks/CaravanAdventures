@@ -24,7 +24,6 @@ namespace CaravanAdventures
         // improvements
         public static bool removeRoyalTitleRequirements = true;
         public static bool removeOnlyAcolyteAndKnightRoyalTitleRequirements = true;
-        public static bool autoRemoveAbandondSettlementRuins = true;
 
         // camp
         public static bool generateStorageForAllInventory = true;
@@ -97,6 +96,11 @@ namespace CaravanAdventures
         public static bool allowBuyingBountyWithSilver = true;
         public static float bountyValueMult = 0.25f;
 
+        // general
+        public static bool autoRemoveAbandondSettlementRuins = true;
+        public static bool buffSettlementFoodAndSilverAvailability;
+        public static bool buffShrineRewards;
+
         // categories enabled
         public static bool caravanCampEnabled = true;
         public static bool caravanFormingFilterSelectionEnabled = true;
@@ -117,7 +121,6 @@ namespace CaravanAdventures
             // improvements
             Scribe_Values.Look(ref removeRoyalTitleRequirements, "removeRoyalTitleRequirements", true);
             Scribe_Values.Look(ref removeOnlyAcolyteAndKnightRoyalTitleRequirements, "removeOnlyAcolyteAndKnightRoyalTitleRequirements", true);
-            Scribe_Values.Look(ref autoRemoveAbandondSettlementRuins, "autoRemoveAbandondSettlementRuins", true);
 
             // camp
             Scribe_Values.Look(ref generateStorageForAllInventory, "generateStorageForAllInventory", false);
@@ -176,6 +179,12 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref allowBuyingBountyWithSilver, "allowBuyingBountyWithSilver", true);
             Scribe_Values.Look(ref bountyValueMult, "bountyValueMult", 0.25f);
 
+            //general 
+            Scribe_Values.Look(ref autoRemoveAbandondSettlementRuins, "autoRemoveAbandondSettlementRuins", true);
+            Scribe_Values.Look(ref buffSettlementFoodAndSilverAvailability, "buffSettlementFoodAndSilverAvailability", true);
+            Scribe_Values.Look(ref buffShrineRewards, "buffShrineRewards", true);
+
+            // categories enabled
             Scribe_Values.Look(ref caravanCampEnabled, "caravanCampEnabled", true);
             Scribe_Values.Look(ref caravanFormingFilterSelectionEnabled, "caravanFormingFilterSelectionEnabled", true);
             Scribe_Values.Look(ref caravanTravelCompanionsEnabled, "caravanTravelCompanionsEnabled", true);
@@ -205,6 +214,7 @@ namespace CaravanAdventures
         }
 
         private bool showRestartReminder = false;
+
         public void DoWindowContents(Rect wrect)
         {
             var options = new Listing_Standard();
@@ -212,7 +222,7 @@ namespace CaravanAdventures
             //GUI.BeginGroup(wrect);
             //Widgets.BeginScrollView(wrect, ref this.scrollPos, new Rect(0f, 0f, wrect.width, 700f));
 
-            var viewRect = new Rect(0f, 0f, wrect.width, 850);
+            var viewRect = new Rect(0f, 0f, wrect.width, 820);
             options.BeginScrollView(wrect, ref this.scrollPos, ref viewRect);
 
             var debugRect = BRect(options.GetRect(Text.LineHeight));
@@ -317,6 +327,16 @@ namespace CaravanAdventures
             options.Label($"Adjust settings related to the automatic camp generation. Depending if the player has enough camp supplies, the player's pawns will either build a high quality camp, or a wanting camp construted with makeshift materials.");
             options.GapLine();
 
+            Text.Font = GameFont.Medium;
+            cRect = BRect(options.GetRect(Text.LineHeight));
+            Widgets.Label(cRect, $"General settings".HtmlFormatting("00ff00", false, 18));
+            Text.Font = GameFont.Small;
+            //Widgets.CheckboxLabeled(new Rect(options.ColumnWidth - 400, lastRect.y + 10, 110, Text.LineHeight), "Enabled: ", ref toggleTest);
+            if (Widgets.ButtonText(new Rect(options.ColumnWidth - 225, lastRect.y + 6, 150, Text.LineHeight + 10), "Open")) Find.WindowStack.Add(new SettingsOther());
+            options.Gap(10);
+            options.Label($"A collection of more general, small impovements that help support a life on the road.");
+            options.GapLine();
+
             if (showRestartReminder)
             {
                 showRestartReminder = false;
@@ -329,11 +349,6 @@ namespace CaravanAdventures
                 "Restart reminder"));
             }
 
-            // move to improvement settings -> or rather delete and adjust that via def patch
-            //options.Label("Settlement price adjustments");
-            //options.Label("Multiplies the current money for settlements with less then 3k silver by 3, and those with more by 2");
-            //if (options.ButtonTextLabeled("Increase Settlement money", "Increase")) Helper.AdjustSettlementPrices();
-            // todo add min and max multiplier used in the def patch for settlement money
             options.EndScrollView(ref viewRect);
             //Widgets.EndScrollView();
             //GUI.EndGroup();

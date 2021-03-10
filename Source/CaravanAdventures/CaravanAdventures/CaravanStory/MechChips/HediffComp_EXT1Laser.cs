@@ -18,8 +18,6 @@ namespace CaravanAdventures.CaravanStory.MechChips
         private int ticks = 1250;
         List<RapidLaser> lasers = new List<RapidLaser>();
 
-        public HediffCompProperties_EXT1Melee Props => (HediffCompProperties_EXT1Melee)props;
-
         public override void CompExposeData()
         {
             base.CompExposeData();

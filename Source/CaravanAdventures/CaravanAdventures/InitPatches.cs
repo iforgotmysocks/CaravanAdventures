@@ -30,10 +30,8 @@ namespace CaravanAdventures
             if (ModSettings.caravanFormingFilterSelectionEnabled) Helper.RunSavely(PatchAddCaravanDecisionsComp);
             if (ModSettings.caravanCampEnabled) Helper.RunSavely(PatchAddPsychiteTeaToCampFire);
             if (!ModSettings.caravanIncidentsEnabled) Helper.RunSavely(PatchIncidentsTo0Chance);
-            
-            // todo find category
-            Helper.RunSavely(PatchIncreaseBaseWealthAndFood);
-            Helper.RunSavely(PatchAncientShrineDefs_MoreShrinesAndBetterRewards);
+            if (ModSettings.buffSettlementFoodAndSilverAvailability) Helper.RunSavely(PatchIncreaseBaseWealthAndFood);
+            if (ModSettings.buffShrineRewards) Helper.RunSavely(PatchAncientShrineDefs_MoreShrinesAndBetterRewards);
 
             CompatibilityPatches.ExecuteCompatibilityPatches();
         }

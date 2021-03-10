@@ -17,8 +17,6 @@ namespace CaravanAdventures.CaravanStory.MechChips
         private int ticks = 0;
         private List<Pawn> producedMechs;
 
-        public HediffCompProperties_EXT1Basic Props => (HediffCompProperties_EXT1Basic)props;
-
         public override void CompExposeData()
         {
             base.CompExposeData();

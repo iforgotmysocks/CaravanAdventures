@@ -16,9 +16,10 @@ namespace CaravanAdventures
     {
         public static void ExecuteCompatibilityPatches()
         {
+
             Helper.RunSavely(() => {
                 var alienRaceAssembly = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(assembly => assembly.FullName.ToLower().StartsWith("alienrace"));
-                if (alienRaceAssembly != null)
+                if (alienRaceAssembly != null && ModSettings.caravanFormingFilterSelectionEnabled)
                 {
                     Log.Message($"Caravan Adventures: Applying patch for AlienRaces - adding alienrace corpses to caravan dialog filter");
                     FilterCombs.packUp.appliedFilters.FirstOrDefault(filter => filter.Name == "Corpses").ThingCategoryDefs.Add(ThingCategoryDef.Named("alienCorpseCategory"));
