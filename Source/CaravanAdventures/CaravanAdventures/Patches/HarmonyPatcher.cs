@@ -27,7 +27,7 @@ namespace CaravanAdventures.Patches
         internal static void RunEarlyPatches()
         {
             harmony = harmony ?? (harmony = new Harmony("iforgotmysocks.CaravanAdventures"));
-            if (ModSettings.storyEnabled && ModsConfig.RoyaltyActive) AbilityNeurotrainerDefGenerator.ApplyPatches(harmony);
+            if (ModsConfig.RoyaltyActive) AbilityNeurotrainerDefGenerator.ApplyPatches(harmony);
         }
     }
 }
