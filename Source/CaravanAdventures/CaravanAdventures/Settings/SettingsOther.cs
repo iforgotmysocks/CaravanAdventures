@@ -38,7 +38,7 @@ namespace CaravanAdventures.Settings
 
             options.CheckboxLabeled("Auto-cleanup for abandoned settlements by the player", ref ModSettings.autoRemoveAbandondSettlementRuins);
             options.CheckboxLabeled("Increase npc settlement's available silver and food by 2-3 and 1.5-2, respectively", ref ModSettings.buffSettlementFoodAndSilverAvailability);
-            options.CheckboxLabeled("Adds the chance for a second valuable item when raiding ancient shrines (heavily nerfed for story master shrines)", ref ModSettings.buffShrineRewards);
+            options.CheckboxLabeled("Increased ancient shrine rewards chance (hover for more info)", ref ModSettings.buffShrineRewards, "Adds the chance for a second valuable item when raiding ancient shrines (heavily nerfed for story master shrines)");
 
             options.End();
 

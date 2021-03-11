@@ -222,7 +222,7 @@ namespace CaravanAdventures
             //GUI.BeginGroup(wrect);
             //Widgets.BeginScrollView(wrect, ref this.scrollPos, new Rect(0f, 0f, wrect.width, 700f));
 
-            var viewRect = new Rect(0f, 0f, wrect.width, 820);
+            var viewRect = new Rect(0f, 0f, wrect.width, 760);
             options.BeginScrollView(wrect, ref this.scrollPos, ref viewRect);
 
             var debugRect = BRect(options.GetRect(Text.LineHeight));
