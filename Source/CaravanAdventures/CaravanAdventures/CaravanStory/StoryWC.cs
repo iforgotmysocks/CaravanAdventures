@@ -19,11 +19,9 @@ using Verse.Noise;
 
 // -- story continuation: 
 // -- (optional branch, possible merge) add comm device gizmo to the gifted hediff, that is visible, when the player isn't hostile towards hunters -> opens dialog with hunters
-// - add and rework dialogs from shrines onwards (done i think?)
 // - add system that allows inclusion or exclusion for other races to relation
-// - suddenly yellow save error for the sacrileg hunter faction appeared and the story char was generated anew -> fix!!
 
-// - spawn tree for tree wisper quest if it doesn't exist yet
+// - spawn tree for tree wisper quest if it doesn't exist yet !!
 
 // med prio:
 // - add check to master shrine location selection, that keeps it away from a player settlement
@@ -131,9 +129,6 @@ namespace CaravanAdventures.CaravanStory
         {
             base.FinalizeInit();
             CompCache.StoryWC = null;
-
-            // todo - probably not needed here when checking in ticks?
-            //RoyaltyCheckAndModPrep();
 
             InitializeStoryFlags();
             InitializeQuestCont();
