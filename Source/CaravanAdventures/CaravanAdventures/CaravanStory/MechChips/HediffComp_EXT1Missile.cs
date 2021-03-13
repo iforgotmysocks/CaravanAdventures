@@ -13,7 +13,7 @@ using Verse.Sound;
 
 namespace CaravanAdventures.CaravanStory.MechChips
 {
-    public class HediffComp_EXT1Missile : HediffComp_EXT1Basic
+    public class HediffComp_EXT1Missile : HediffComp
     {
         private int ticks = 0;
         public bool right = true;

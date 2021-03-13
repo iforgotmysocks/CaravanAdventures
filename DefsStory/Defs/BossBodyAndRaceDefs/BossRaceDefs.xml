@@ -74,7 +74,10 @@
     </weaponTags>
     <modExtensions>
       <li Class="CaravanAdventures.CaravanStory.MechChips.MechChipModExt">
-        <mechChipDefName>CAEXT1Basic</mechChipDefName>
+        <mechChipDefs>
+          <li>CAEXT1Basic</li>
+          <li>CAEXT1Artillary</li>
+        </mechChipDefs>
       </li>
     </modExtensions>
   </PawnKindDef>
@@ -160,7 +163,11 @@
     </weaponTags>
     <modExtensions>
       <li Class="CaravanAdventures.CaravanStory.MechChips.MechChipModExt">
-        <mechChipDefName>CAEXT1Melee</mechChipDefName>
+        <mechChipDefs>
+          <li>CAEXT1Basic</li>
+          <li>CAEXT1Melee</li>
+          <li>CAEXT1Guardian</li>
+        </mechChipDefs>
       </li>
     </modExtensions>
   </PawnKindDef>
@@ -240,14 +247,17 @@
       </li>
     </lifeStages>
     <defendPointRadius>0</defendPointRadius>
-    <weaponMoney>9999~9999</weaponMoney>
+    <weaponMoney>0</weaponMoney>
     <weaponTags>
-      <li>MechanoidGunHeavy</li>
+   
     </weaponTags>
     <modExtensions>
       <li Class="CaravanAdventures.CaravanStory.MechChips.MechChipModExt">
-        <mechChipDefName>CAEXT1Guardian</mechChipDefName>
-        <hasShield>true</hasShield>
+        <mechChipDefs>
+          <li>CAEXT1Basic</li>
+          <li>CAEXT1Melee</li>
+          <li>CAEXT1Guardian</li>
+        </mechChipDefs>
       </li>
     </modExtensions>
 
@@ -334,7 +344,10 @@
     </weaponTags>
     <modExtensions>
       <li Class="CaravanAdventures.CaravanStory.MechChips.MechChipModExt">
-        <mechChipDefName>CAEXT1Melee</mechChipDefName>
+        <mechChipDefs>
+          <li>CAEXT1Basic</li>
+          <li>CAEXT1Missile</li>
+        </mechChipDefs>
       </li>
     </modExtensions>
 
@@ -414,7 +427,12 @@
     </weaponTags>
     <modExtensions>
       <li Class="CaravanAdventures.CaravanStory.MechChips.MechChipModExt">
-        <mechChipDefName>CAEXT1Basic</mechChipDefName>
+        <mechChipDefs>
+          <li>CAEXT1Basic</li>
+          <li>CAEXT1Laser</li>
+          <li>CAEXT1Missile</li>
+          <li>CAEXT1Guardian</li>
+        </mechChipDefs>
       </li>
     </modExtensions>
   </PawnKindDef>

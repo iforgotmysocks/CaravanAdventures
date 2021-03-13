@@ -12,7 +12,7 @@ using Verse.Sound;
 
 namespace CaravanAdventures.CaravanStory.MechChips
 {
-    public class HediffComp_EXT1Guardian : HediffComp_EXT1Basic
+    public class HediffComp_EXT1Guardian : HediffComp
     {
         private int ticks = 0;
         private Abilities.GuardianShield guardianShield;
@@ -49,16 +49,6 @@ namespace CaravanAdventures.CaravanStory.MechChips
 
             ticks++;
             shieldCooldown--;
-        }
-
-        private void EnsureShield()
-        {
-            if (Pawn.Map == null) return;
-            if (!Pawn.apparel.WornApparel.Any(x => x.def.defName == "CAGuardianShieldApparel"))
-            {
-                DLog.Message($"trying to apply apparel to {Pawn.Name}");
-                StoryUtility.EquipApparel(Pawn, ThingDef.Named("CAGuardianShieldApparel"));
-            }
         }
 
         private Abilities.GuardianShield CreateShield()

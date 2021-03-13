@@ -23,12 +23,37 @@
     <stages>
       <li>
         <statOffsets>
-					<MoveSpeed>-1</MoveSpeed>
+					<MoveSpeed>0</MoveSpeed>
           <ArmorRating_Sharp>0.5</ArmorRating_Sharp>
 					<PsychicSensitivity>-0.2</PsychicSensitivity>
         </statOffsets>
         <statFactors>
           <IncomingDamageFactor>0.7</IncomingDamageFactor>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef ParentName = "MechChipHediffBase">
+    <defName>CAEXT1Artillary</defName>
+    <label>EXT1 Artillary</label>
+    <isBad>false</isBad>
+    <everCurableByItem>false</everCurableByItem>
+    <defaultLabelColor>(255, 20, 20)</defaultLabelColor>
+    <description>Enables machines to use advanced combat logic depending on the version, like connect to dormant networks, like missile silos and a range of other terrifying abilities.</description>
+    <comps>
+      <li Class="CaravanAdventures.CaravanStory.MechChips.HediffCompProperties_EXT1Basic">
+        <compClass>CaravanAdventures.CaravanStory.MechChips.HediffComp_EXT1Artillary</compClass>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <statOffsets>
+          <MoveSpeed>-1</MoveSpeed>
+          <ArmorRating_Sharp>0.2</ArmorRating_Sharp>
+          <ArmorRating_Blunt>0.3</ArmorRating_Blunt>
+        </statOffsets>
+        <statFactors>
         </statFactors>
       </li>
     </stages>
@@ -50,11 +75,8 @@
       <li>
         <statOffsets>
 					<MoveSpeed>+1</MoveSpeed>
-          <ArmorRating_Sharp>0.5</ArmorRating_Sharp>
-					<PsychicSensitivity>-0.2</PsychicSensitivity>
         </statOffsets>
         <statFactors>
-          <IncomingDamageFactor>0.7</IncomingDamageFactor>
         </statFactors>
       </li>
     </stages>
@@ -75,12 +97,8 @@
     <stages>
       <li>
         <statOffsets>
-					<MoveSpeed>0</MoveSpeed>
-          <ArmorRating_Sharp>0.5</ArmorRating_Sharp>
-					<PsychicSensitivity>-0.2</PsychicSensitivity>
         </statOffsets>
         <statFactors>
-          <IncomingDamageFactor>0.7</IncomingDamageFactor>
         </statFactors>
       </li>
     </stages>
@@ -101,12 +119,8 @@
     <stages>
       <li>
         <statOffsets>
-          <MoveSpeed>-1</MoveSpeed>
-          <ArmorRating_Sharp>0.5</ArmorRating_Sharp>
-          <PsychicSensitivity>-0.2</PsychicSensitivity>
         </statOffsets>
         <statFactors>
-          <IncomingDamageFactor>0.7</IncomingDamageFactor>
         </statFactors>
       </li>
     </stages>
@@ -127,12 +141,8 @@
     <stages>
       <li>
         <statOffsets>
-          <MoveSpeed>0</MoveSpeed>
-          <ArmorRating_Sharp>0.5</ArmorRating_Sharp>
-          <PsychicSensitivity>-0.2</PsychicSensitivity>
         </statOffsets>
         <statFactors>
-          <IncomingDamageFactor>0.7</IncomingDamageFactor>
         </statFactors>
       </li>
     </stages>

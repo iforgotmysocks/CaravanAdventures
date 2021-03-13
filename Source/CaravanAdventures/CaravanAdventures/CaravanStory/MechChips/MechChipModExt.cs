@@ -11,5 +11,6 @@ namespace CaravanAdventures.CaravanStory.MechChips
     {
         public string mechChipDefName = null;
         public bool hasShield = false;
+        public List<HediffDef> mechChipDefs = new List<HediffDef>();
     }
 }

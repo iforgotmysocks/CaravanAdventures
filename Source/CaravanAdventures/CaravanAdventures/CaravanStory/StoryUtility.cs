@@ -466,19 +466,15 @@ namespace CaravanAdventures.CaravanStory
             var possibleBosses = DefDatabase<PawnKindDef>.AllDefsListForReading.Where(x => x.RaceProps.IsMechanoid && x.defName.ToLower().StartsWith("cabossmech"));
             var selected = (endboss ? StoryDefOf.CAEndBossMech : possibleBosses.FirstOrDefault(boss => !CompCache.StoryWC.mechBossKillCounters?.Keys?.Contains(boss) ?? false)) ?? possibleBosses.RandomElement();
             var bossPawn = PawnGenerator.GeneratePawn(selected, Faction.OfMechanoids);
-            if (bossPawn != null) bossPawn.health.AddHediff(DefDatabase<HediffDef>.GetNamed(bossPawn.kindDef.GetModExtension<MechChipModExt>().mechChipDefName));
+            if (bossPawn != null)
+            {
+                var modext = bossPawn.kindDef.GetModExtension<MechChipModExt>();
+                if (modext?.mechChipDefs?.Count != null)
+                {
+                    foreach (var chipDef in modext.mechChipDefs) bossPawn.health.AddHediff(chipDef);
+                }
+            }
             return bossPawn;
-        }
-
-        public static void EquipApparel(Pawn pawn, ThingDef def)
-        {
-            var apparel = ThingMaker.MakeThing(def) as Apparel;
-            if (apparel == null) DLog.Warning($"{def.defName} was null");
-            if (apparel == null) return;
-
-            // little hack, sorry bout that, but i couldn't be bothered to take care of this single error
-            if (pawn.def.GetModExtension<MechChipModExt>()?.hasShield == true) Helper.RunSavely(() => pawn.apparel.Wear(apparel), true);
-            else pawn.apparel.Wear(apparel);
         }
 
         public static Faction FactionOfSacrilegHunters { get => Find.FactionManager.FirstFactionOfDef(StoryDefOf.CASacrilegHunters); private set => FactionOfSacrilegHunters = value; }
