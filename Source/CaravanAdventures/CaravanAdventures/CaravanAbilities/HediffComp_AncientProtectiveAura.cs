@@ -93,9 +93,6 @@ namespace CaravanAdventures.CaravanAbilities
             ticksSinceStatusCheck++;
             ticksSincePsyCost++;
             ticksSincePermHeal++;
-
-            //if (stopwatch.ElapsedMilliseconds > 10) Log.Error(debugString + $" time: {stopwatch.ElapsedMilliseconds} ms");
-            //else if (debugString != "") Log.Message(debugString + $" time: {stopwatch.ElapsedMilliseconds} ms");
         }
 
         private void CureIllnesses()
@@ -137,7 +134,7 @@ namespace CaravanAdventures.CaravanAbilities
             if (ModSettings.stopMentalBreaks && Pawn.InMentalState)
             {
                 Pawn.MentalState.RecoverFromState();
-                // todo add message that aura curred it.
+                Messages.Message("CAProtectiveAuraCureMentalBreaks".Translate(Pawn.NameShortColored, parent.Label), MessageTypeDefOf.PositiveEvent, false);
             }
         }
 
@@ -147,7 +144,7 @@ namespace CaravanAdventures.CaravanAbilities
             {
                 var fire = this.Pawn.GetAttachment(ThingDefOf.Fire);
                 fire.Destroy();
-                // todo add message that aura ext it.
+                Messages.Message("CAProtectiveAuraExtinguishFire".Translate(Pawn.NameShortColored, parent.Label), MessageTypeDefOf.PositiveEvent, false);
             }
         }
 

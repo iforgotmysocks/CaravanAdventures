@@ -42,7 +42,6 @@ namespace CaravanAdventures.CaravanAbilities
                     if (pawn == pawnToExclude || pawn.Dead) continue;
                     var isBoss = CompCache.StoryWC.BossDefs().Contains(pawn.def);
                     var count = Rand.Range(5, 8);
-                    // todo meassure if this causes drops to exclude the waist
                     foreach (var part in Helper.PickSomeInRandomOrder(pawn.RaceProps.body.AllParts.Where(part => part.def != AbilityDefOf.Finger && part.def != AbilityDefOf.Toe), count))
                     {
                         if (pawn == null | pawn.Dead) break;
@@ -54,7 +53,7 @@ namespace CaravanAdventures.CaravanAbilities
                             damage *= isBoss ? 3 : 5;
                         }
 
-                        //Log.Message($"Calculated {damage} damage for {pawn.Name} with bodypart {part.Label}.");
+                        DLog.Message($"Calculated {damage} damage for {pawn.Name} with bodypart {part.Label}.");
                         pawn.TakeDamage(new DamageInfo(DamageDefOf.Burn, damage, 2f, -1, null, part));
                     }
                 }
@@ -70,11 +69,8 @@ namespace CaravanAdventures.CaravanAbilities
             if (target.Cell.Filled(this.parent.pawn.Map)) yield break;
             foreach (IntVec3 intVec in GenRadial.RadialCellsAround(target.Cell, this.parent.def.EffectRadius, true))
             {
-                // todo line of sight check needed here?
-                //if (intVec.InBounds(map) && GenSight.LineOfSightToEdges(target.Cell, intVec, map, true, null))
                 if (intVec.InBounds(map)) yield return intVec;
             }
-            yield break;
         }
 
         private void ApplyGoodwillImpact(LocalTargetInfo target, int radius)
