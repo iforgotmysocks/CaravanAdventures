@@ -80,7 +80,6 @@
     <Compile Include="CaravanAbilities\HediffComp_AncientProtectiveAura.cs" />
     <Compile Include="CaravanAbilities\HediffComp_OverheatingBrain.cs" />
     <Compile Include="CaravanAbilities\HediffComp_AncientGift.cs" />
-    <Compile Include="CaravanAbilities\HediffComp_AncientProtectiveAura_Old.cs" />
     <Compile Include="CaravanAbilities\HediffComp_ConjuredLight.cs" />
     <Compile Include="CaravanAbilities\HediffComp_DrainNature.cs" />
     <Compile Include="CaravanCamp\AnimalArea.cs" />

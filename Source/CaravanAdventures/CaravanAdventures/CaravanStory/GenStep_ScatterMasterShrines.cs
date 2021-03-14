@@ -33,8 +33,6 @@ namespace CaravanAdventures.CaravanStory
 			}
 
 			return true;
-			Building edifice = c.GetEdifice(map);
-			return edifice != null && edifice.def.building.isNaturalRock;
 		}
 
 		protected override bool TryFindScatterCell(Map map, out IntVec3 result)

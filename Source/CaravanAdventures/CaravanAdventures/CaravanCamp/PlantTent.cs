@@ -49,9 +49,6 @@ namespace CaravanAdventures.CaravanCamp
 
         public override void BuildTribal(Map map, List<Thing> campAssetListRef)
         {
-            // todo
-            return;
-
         }
     }
 }

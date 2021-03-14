@@ -12,11 +12,6 @@ namespace CaravanAdventures.CaravanCamp
 {
     class CompCampControl : ThingComp
     {
-        // todo save tents
-        // check for building that can be used as middle "control" thingy
-        // turn MapComp into a thingcomp for a thing that's a light and can't be destroyed
-        // apply 
-
         private List<CellRect> campRects;
         private int resourceCount;
         private int waste;

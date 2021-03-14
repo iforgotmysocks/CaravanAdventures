@@ -55,16 +55,15 @@ namespace CaravanAdventures.CaravanAbilities
                 plantScore = 0;
             }
 
-            if (ticks % 60 == 0) Log.Message($"score raw {plantScore} score mult: {plantScore * ModSettings.plantScoreMultiplier} total: {totalPlantScore}");
+            if (ticks % 60 == 0) DLog.Message($"score raw {plantScore} score mult: {plantScore * ModSettings.plantScoreMultiplier} total: {totalPlantScore}");
 
             if (ticks > endTicks)
             {
-                //Log.Message("Plantscore: " + totalPlantScore);
+                DLog.Message("Plantscore: " + totalPlantScore);
                 ApplyPsyfocusToSurroundingPawns(10);
                 Pawn.health.hediffSet.hediffs.Remove(parent);
                 return;
             }
-            // changed from ticks % radiusIncreaseInTicks == 0, see if there is any difference in execution
             if (ticksSinceLastRadiusIncrease >= radiusIncreaseInTicks && currentRadius <= maxRadius)
             {
                 currentRadius += 1;

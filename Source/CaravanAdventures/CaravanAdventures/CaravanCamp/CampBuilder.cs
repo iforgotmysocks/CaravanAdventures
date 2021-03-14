@@ -21,9 +21,6 @@ namespace CaravanAdventures.CaravanCamp
         protected List<CampArea> campParts;
         protected IntVec3 campCenterSpot;
 
-        // todo move to camp config settings
-        protected bool clearSnow = false;
-
         protected CellRect coordSystem;
         protected CellRect campSiteRect;
 

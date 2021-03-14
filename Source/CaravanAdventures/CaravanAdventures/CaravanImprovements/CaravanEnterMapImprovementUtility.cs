@@ -50,7 +50,6 @@ namespace CaravanAdventures.CaravanImprovements
                     tmpPawns[j].inventory.UnloadEverything = true;
                 }
             }
-            // todo add gizmo to allow unloading later
 
             if (draftColonists)
             {

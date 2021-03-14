@@ -104,11 +104,11 @@ namespace CaravanAdventures.CaravanImmersion
 
             if (mainPawn.relations.DirectRelations.Any(x => relationShipsWithImpact.Contains(x.def) && x.otherPawn == pawn) || BothPawnsStartPawns(mainPawn, pawn)) timeSpentTogether += 60000f * 60;
 
-            //Log.Message($"{mainPawn.Name} {pawn.Name} : {Math.Round(timeSpentTogether / 60000f)} days, startpawns?: {BothPawnsStartPawns(mainPawn, pawn)} relationship? {mainPawn.relations.DirectRelations.Any(x => relationShipsWithImpact.Contains(x.def) && x.otherPawn == pawn)} borrowed: {mainPawn.IsBorrowedByAnyFaction()} otherhomefaction: {mainPawn.HasExtraHomeFaction()}");
+            //DLog.Message($"{mainPawn.Name} {pawn.Name} : {Math.Round(timeSpentTogether / 60000f)} days, startpawns?: {BothPawnsStartPawns(mainPawn, pawn)} relationship? {mainPawn.relations.DirectRelations.Any(x => relationShipsWithImpact.Contains(x.def) && x.otherPawn == pawn)} borrowed: {mainPawn.IsBorrowedByAnyFaction()} otherhomefaction: {mainPawn.HasExtraHomeFaction()}");
 
             foreach (var def in companionDefs)
             {
-                //Log.Message($"compareing time: {Math.Round(timeSpentTogether / 60000, 0)} with def {def.defName} maxDays: {def.maxDays} on pawns {mainPawn.Name} and {pawn.Name}");
+                //DLog.Message($"compareing time: {Math.Round(timeSpentTogether / 60000, 0)} with def {def.defName} maxDays: {def.maxDays} on pawns {mainPawn.Name} and {pawn.Name}");
                 // todo add multiplier to adjust time based on how good or bad a pawn was treated
                 // -> dive into log entries
                 if (timeSpentTogether / 60000f >= def.maxDays) return def;

@@ -46,8 +46,6 @@ namespace CaravanAdventures.CaravanAbilities
             if (target.Cell.Filled(this.parent.pawn.Map)) yield break;
             foreach (IntVec3 intVec in GenRadial.RadialCellsAround(target.Cell, this.parent.def.EffectRadius, true))
             {
-                // todo line of sight check needed here?
-                //if (intVec.InBounds(map) && GenSight.LineOfSightToEdges(target.Cell, intVec, map, true, null))
                 if (intVec.InBounds(map)) yield return intVec;
             }
             yield break;

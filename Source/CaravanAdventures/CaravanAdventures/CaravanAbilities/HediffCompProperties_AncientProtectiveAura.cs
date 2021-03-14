@@ -11,10 +11,10 @@ namespace CaravanAdventures.CaravanAbilities
 {
     public class HediffCompProperties_AncientProtectiveAura : HediffCompProperties
     {
-        public
-            HediffCompProperties_AncientProtectiveAura()
+        public HediffCompProperties_AncientProtectiveAura()
         {
-            this.compClass = typeof(HediffComp_AncientProtectiveAura_Old);
+            // todo why dafuq was _Old referenced here? -> probably didn't matter since the compclass was set via xml
+            this.compClass = typeof(HediffComp_AncientProtectiveAura);
         }
 
         public bool linked = false;

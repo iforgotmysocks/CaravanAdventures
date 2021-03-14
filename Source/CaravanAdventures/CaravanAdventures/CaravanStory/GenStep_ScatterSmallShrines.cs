@@ -31,8 +31,6 @@ namespace CaravanAdventures.CaravanStory
                 return false;
             }
 			return true;
-			Building edifice = c.GetEdifice(map);
-			return edifice != null && edifice.def.building.isNaturalRock;
 		}
 
         protected override void ScatterAt(IntVec3 loc, Map map, GenStepParams parms, int stackCount = 1)
