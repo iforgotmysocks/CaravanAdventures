@@ -72,12 +72,17 @@ namespace CaravanAdventures.CaravanIncidents
 			return pawn;
 		}
 
-		public static void GirlJoins(List<Pawn> pawns, Pawn girl, Caravan caravan = null)
+		public static void GirlJoins(List<Pawn> pawns, Pawn girl, Caravan caravan = null, bool prisoner = false)
 		{
-			var faction = pawns.FirstOrDefault()?.Faction;
-			girl.SetFaction(faction);
+			var faction = caravan?.Faction ?? pawns.FirstOrDefault(x => x.RaceProps.Humanlike).Faction;
+			if (!prisoner) girl.SetFaction(faction);
+			else girl.guest.SetGuestStatus(girl.Faction, true);
 
-			if (caravan != null) caravan.AddPawn(girl, true);
+			if (caravan != null)
+			{
+				if (!girl.IsWorldPawn()) Find.WorldPawns.PassToWorld(girl, PawnDiscardDecideMode.Decide);
+				caravan.AddPawn(girl, true);
+			}
 		}
 
 

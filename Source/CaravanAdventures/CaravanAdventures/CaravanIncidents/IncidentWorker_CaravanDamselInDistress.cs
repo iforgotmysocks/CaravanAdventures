@@ -16,13 +16,12 @@ namespace CaravanAdventures.CaravanIncidents
     {
         protected override bool CanFireNowSub(IncidentParms parms)
         {
-            Faction faction;
-            return CaravanIncidentUtility.CanFireIncidentWhichWantsToGenerateMapAt(parms.target.Tile) && PawnGroupMakerUtility.TryGetRandomFactionForCombatPawnGroup(parms.points, out faction, null, false, false, false, true);
+            return CaravanIncidentUtility.CanFireIncidentWhichWantsToGenerateMapAt(parms.target.Tile) && PawnGroupMakerUtility.TryGetRandomFactionForCombatPawnGroup(parms.points, out var faction, null, false, false, false, true);
         }
         protected override bool TryExecuteWorker(IncidentParms parms)
         {
-            parms.points *= IncidentWorker_CaravanDamselInDistress.IncidentPointsFactorRange.RandomInRange;
-            Caravan caravan = (Caravan)parms.target;
+            parms.points *= IncidentPointsFactorRange.RandomInRange;
+            var caravan = (Caravan)parms.target;
             if (!PawnGroupMakerUtility.TryGetRandomFactionForCombatPawnGroup(parms.points, out parms.faction, null, false, false, false, true))
             {
                 return false;
@@ -51,7 +50,7 @@ namespace CaravanAdventures.CaravanIncidents
             CameraJumper.TryJumpAndSelect(caravan);
 
             var joinDiaNode = new DiaNode("CaravanDamselInDistress_AsksToJoin".Translate());
-            joinDiaNode.options.Add(new DiaOption("CaravanDamselInDistress_JoinAllow".Translate()) { action = () => DamselInDistressUtility.GirlJoins(caravan.pawns.InnerListForReading, girl, caravan), resolveTree = true });
+            joinDiaNode.options.Add(new DiaOption("CaravanDamselInDistress_JoinAllow".Translate()) { action = () => DamselInDistressUtility.GirlJoins(caravan.PawnsListForReading, girl, caravan), resolveTree = true });
             joinDiaNode.options.Add(new DiaOption("CaravanDamselInDistress_JoinDeny".Translate()) { resolveTree = true });
 
             var subSubDiaNode = new DiaNode("CaravanDamselInDistress_Follow_KillSuccess_Main".Translate());
@@ -80,14 +79,13 @@ namespace CaravanAdventures.CaravanIncidents
 
         private void ActionRewardPrisoner(Caravan caravan, Pawn girl)
         {
-            girl.guest.SetGuestStatus(caravan.pawns.InnerListForReading.FirstOrDefault()?.Faction ?? Faction.OfPlayer, true);
+            DamselInDistressUtility.GirlJoins(caravan.PawnsListForReading, girl, caravan, true);
         }
 
         private DiaNode ChanceByHuntingSkill(Caravan caravan, DiaNode subSubDiaNode, DiaNode subSubBadDiaNode)
         {
-            //var huntingSkill = caravan.pawns.InnerListForReading.Where(x => x.RaceProps.Humanlike).Select(x => x.skills.skills.FirstOrDefault(skill => skill.def == skilldef).Level).Average();
-            var huntingSkill = caravan.pawns.InnerListForReading.Where(x => x.RaceProps.Humanlike).Select(x => x.GetStatValue(StatDefOf.HuntingStealth)).Average();
-            if (Rand.Chance(huntingSkill / 100 * 5)) return subSubDiaNode;
+            var huntingSkill = caravan.pawns.InnerListForReading.Where(x => x.RaceProps.Humanlike).Select(x => x.skills.GetSkill(SkillDefOf.Melee).Level).Average();
+            if (Rand.Chance((float)huntingSkill / 100f * 5f)) return subSubDiaNode;
             else return subSubBadDiaNode;
         }
 
