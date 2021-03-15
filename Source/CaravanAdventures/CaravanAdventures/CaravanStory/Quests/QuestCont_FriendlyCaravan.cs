@@ -18,7 +18,6 @@ namespace CaravanAdventures.CaravanStory.Quests
         public void ExposeData()
         {
             Scribe_Values.Look(ref friendlyCaravanCounter, "friendlyCaravanCounter", -1);
-            // todo used to be deep saved due to reference causing errors now reverted back to reference - maybe revert to reference when it's clear dafuq is going on
             Scribe_References.Look(ref storyContactBondedPawn, "storyContactBondedPawn");
         }
 
@@ -93,8 +92,6 @@ namespace CaravanAdventures.CaravanStory.Quests
 
         private void ConversationFinished(Pawn initiator, Pawn addressed, bool reward = false)
         {
-            // todo maybe get lord and have them leave early?
-
             CompCache.StoryWC.questCont.FriendlyCaravan.storyContactBondedPawn = initiator;
             CompCache.StoryWC.SetSF("TradeCaravan_DialogFinished");
             Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_TradeCaravan, "TradeCaravanQuestInfoTalkedTo".Translate(addressed.NameShortColored));

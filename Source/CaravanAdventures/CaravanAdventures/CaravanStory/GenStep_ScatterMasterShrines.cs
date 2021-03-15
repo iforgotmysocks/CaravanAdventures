@@ -161,7 +161,6 @@ namespace CaravanAdventures.CaravanStory
 				DLog.Message($"Terrain not changeable: {c.GetTerrain(map).defName}");
 				return false;
 			}
-			// todo collect failing cells and replace terrain afterwards
 			TerrainAffordanceDef terrainAffordanceNeed = entDef.GetTerrainAffordanceNeed(stuffDef);
 			if (terrainAffordanceNeed != null)
 			{

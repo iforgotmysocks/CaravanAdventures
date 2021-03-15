@@ -40,6 +40,12 @@ using Verse.Noise;
 // etc: 
 // {PAWN_pronoun} in text possible? -> GenderUtility.GetPronoun()
 
+// cleanup: 
+// - check why AncientAura_Old type was passed to the compprops (most likely overwritten by the xml class assignment)
+// - check if error notification about the new caravan event is still happening
+// - run test if generated mechs on a shrine map are still loaded and saved correctly
+// - move baseDelayNextShrineReveal and shrineDistance to settings
+
 namespace CaravanAdventures.CaravanStory
 {
     class StoryWC : WorldComponent
@@ -263,11 +269,7 @@ namespace CaravanAdventures.CaravanStory
 
             var ancientMasterShrineWO = (AncientMasterShrineWO)WorldObjectMaker.MakeWorldObject(CaravanStorySiteDefOf.CAAncientMasterShrineWO);
             ancientMasterShrineWO.Tile = tile;
-            //ancientMasterShrineWO.GetComponent<TimeoutComp>().StartTimeout(timeoutDaysRange.RandomInRange * 60000);
             Find.WorldObjects.Add(ancientMasterShrineWO);
-
-            // todo turn into quest
-            // todo figure out how to append location links into quest
 
             StoryUtility.GenerateStoryContact();
             Find.LetterStack.ReceiveLetter("Story_Shrine1_NewShrineDetectedLetterLabel".Translate(), "Story_Shrine1_NewShrineDetectedLetterMessage".Translate(CompCache.StoryWC.questCont.Village.StoryContact.NameShortColored), LetterDefOf.PositiveEvent, ancientMasterShrineWO);

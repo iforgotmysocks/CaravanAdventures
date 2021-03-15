@@ -75,8 +75,6 @@ namespace CaravanAdventures.CaravanStory
 			}
 			if (!Enabled || actionsCt == null || actionsCt.Count == 0) yield break;
 			if (!actionsCt.Any(x => !x.Finished || x.Repeatable)) yield break;
-			// todo why did i disable the dia when pawn is drafted?
-			//if (pawn.Dead || pawn.Drafted) yield break;
 			if (pawn.Dead) yield break;
 			string text = "CA_Start_Begin".Translate();
             AcceptanceReport acceptanceReport = this.CanTalkTo(pawn, null);

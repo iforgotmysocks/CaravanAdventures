@@ -82,20 +82,14 @@ namespace CaravanAdventures.CaravanStory
 
         private Pawn AddBoss(Map map, Caravan caravan, Room mainRoom)
         {
-            // todo boss not attackign with group -> find error
-            // todo map gen can also fail on just not spawning caskets and therefore no mechs, if that happens, the boss can't be spawned!
             IntVec3 pos = default;
-            if (!StoryUtility.CanSpawnSpotCloseToCaskets(mainRoom, map, out pos)) return null;
+            if (!StoryUtility.CanSpawnSpotCloseToCaskets(mainRoom, map, out pos)) pos = mainRoom.Cells.Where(x => x.Walkable(map) && x.Standable(map)).RandomElement();
 
-            // todo get random boss def with fitting implant
-            //var boss = PawnGenerator.GeneratePawn(DefDatabase<PawnKindDef>.GetNamedSilentFail("CABossMechDevourer"), Faction.OfMechanoids);
-            //boss.health.AddHediff(HediffDef.Named("EXT1Basic"), boss.health.hediffSet.GetBrain());
             var boss = StoryUtility.GetFittingMechBoss();
             GenSpawn.Spawn(boss, pos, map, WipeMode.Vanish);
             var compDormant = boss.TryGetComp<CompWakeUpDormant>();
             if (compDormant != null) compDormant.wakeUpIfColonistClose = true;
 
-            //GenStep_SleepingMechanoids.SendMechanoidsToSleepImmediately(new List<Pawn> { boss });
             return boss;
         }
 
@@ -299,7 +293,7 @@ namespace CaravanAdventures.CaravanStory
                 existingMechs.Add(pawn);
             }
 
-            mp.generatedMechs.AddRange(spawnedMechs);
+            //mp.generatedMechs.AddRange(spawnedMechs);
             var emptyCells = room.Cells.Where(x => x.Standable(map) && !x.Filled(map));
             var idx = 0;
             foreach (var cell in emptyCells.InRandomOrder().Take(spawnedMechs.Count))
@@ -326,7 +320,6 @@ namespace CaravanAdventures.CaravanStory
 
             DLog.Message($"Points before: {defaultPawnGroupMakerParms.points} roomcells: {room.CellCount}");
 
-            // todo make 1.2f a difficulty setting
             var calcedFromRoomSize = Convert.ToInt32(defaultPawnGroupMakerParms.points * (CompCache.StoryWC.GetCurrentShrineCounter() * ModSettings.shrineMechDifficultyMultiplier) * ((room == mainRoom ? Math.Max(room.CellCount, 3000) : room.CellCount) / 1000f));
             var minPoints = room == mainRoom ? 2000 : 130;
 

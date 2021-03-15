@@ -382,7 +382,6 @@ namespace CaravanAdventures.CaravanStory.MechChips.Abilities
             Thing launcher = this.launcher;
             int damageAmount = DamageAmount;
 
-            // todo move to explosion
             var hittedPawn = this.usedTarget.Pawn;
             if (hittedPawn != null)
             {

@@ -34,10 +34,6 @@ namespace CaravanAdventures.CaravanStory
 
 		protected override void ScatterAt(IntVec3 loc, Map map, GenStepParams parms, int stackCount = 1)
 		{
-			// todo - do
-			//int randomInRange = GenStep_ScatterMasterShrines.SizeRangeDependingOnMapSize().RandomInRange;
-			//int randomInRange2 = GenStep_ScatterMasterShrines.SizeRangeDependingOnMapSize().RandomInRange;
-
 			int randomInRange = SizeRange.RandomInRange;
 			int randomInRange2 = SizeRange.RandomInRange;
 			CellRect rect = new CellRect(loc.x, loc.z, randomInRange, randomInRange2);
@@ -57,7 +53,6 @@ namespace CaravanAdventures.CaravanStory
 					}
 				}
 			}
-			// todo - CanPlaceAncientBuildingInRangeAfterAdjustingGround() see if we cant make that work?
 			if (!base.CanPlaceAncientBuildingInRange(rect, map))
 			//if (!CanPlaceAncientBuildingInRangeAfterAdjustingGround(rect, map))
 			{

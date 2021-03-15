@@ -18,7 +18,8 @@ namespace CaravanAdventures.CaravanStory
         private bool wonBattle;
 
         public List<Pawn> generatedSoldiers = new List<Pawn>();
-        public List<Pawn> generatedMechs = new List<Pawn>();
+        // todo remove
+        //public List<Pawn> generatedMechs = new List<Pawn>();
         public List<Pawn> generatedBandits = new List<Pawn>();
         public Pawn boss = null;
         private bool bossDefeatedAndRewardsGiven;
@@ -47,7 +48,7 @@ namespace CaravanAdventures.CaravanStory
             Scribe_Values.Look(ref bossWasSpawned, "bossWasSpawned", false);
             Scribe_Values.Look(ref lastJudgementEntraceWasSpawned, "lastJudgementEntraceWasSpawned", false);
             // todo are mechs enough? Need them for comparison later - dont think so, i should drop them
-            Scribe_Collections.Look(ref generatedMechs, "generatedMechs", LookMode.Reference);
+            //Scribe_Collections.Look(ref generatedMechs, "generatedMechs", LookMode.Reference);
             Scribe_Values.Look(ref abandonShrine, "abandonShrine", false);
 
             Scribe_References.Look(ref lastJudgmentEntrance, "lastJudgmentEntrance");
@@ -447,29 +448,15 @@ namespace CaravanAdventures.CaravanStory
 
         private void CheckWonBattle()
         {
-            // todo - completely redo battle won, we don't really need it. (currently it's being set to wonBattle = true upon killing the boss)
-            if (this.wonBattle)
-            {
-                return;
-            }
-            if (boss != null && !boss.Dead) return;
-            if (GenHostility.AnyHostileActiveThreatToPlayer(base.Map, false))
-            {
-                return;
-            }
-            //string forceExitAndRemoveMapCountdownTimeLeftString = TimedForcedExit.GetForceExitAndRemoveMapCountdownTimeLeftString(60000);
-
+            // currently used to check if bandits are defeated
+            if (this.wonBattle) return;
+            if (GenHostility.AnyHostileActiveThreatToPlayer(base.Map, false)) return;
             else
             {
                 Find.LetterStack.ReceiveLetter("MasterShrineVictoryLetterLabel".Translate(), "MasterShrineVictoryLetterMessage".Translate(), LetterDefOf.PositiveEvent, this, null, null, null, null);
                 Find.LetterStack.ReceiveLetter("NoMasterShrineLetterLabel".Translate(), "NoMasterShrineLetterMessage".Translate(), LetterDefOf.NegativeEvent, this, null, null, null, null);
             }
-            // todo new tale
-            //TaleRecorder.RecordTale(TaleDefOf.CaravanAmbushDefeated, new object[]
-            //{
-            //	base.Map.mapPawns.FreeColonists.RandomElement<Pawn>()
-            //});
-            this.wonBattle = true;
+          this.wonBattle = true;
         }
 
         public override IEnumerable<Gizmo> GetGizmos()

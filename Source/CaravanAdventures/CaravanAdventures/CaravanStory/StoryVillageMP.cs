@@ -67,17 +67,13 @@ namespace CaravanAdventures.CaravanStory
 
                 if (!CompCache.StoryWC.storyFlags["IntroVillage_Entered"])
                 {
-                    // todo - sometimes selects non-walkable cells, figure out why / improve
                     if (!CellFinder.TryFindRandomSpawnCellForPawnNear_NewTmp(new IntVec3(Map.Size.x / 2, 0, Map.Size.z / 2), Map, out var storyContactCell, 4, x => x.Walkable(Map)))
                     {
                         Log.Error("Couldn't find a cell to spawn pawn");
                     }
-                    // todo handle case if no position was found!!!
-                    /*if (storyChar?.Map != orGenerateMap)*/
 
                     if (storyChar.Spawned) storyChar.DeSpawn();
                     StoryUtility.FreshenUpPawn(storyChar);
-                    // todo create method that re-creates the gear of the pawn
                     GenSpawn.Spawn(storyChar, storyContactCell, Map);
                     StoryUtility.AssignDialog("StoryVillage_Conversation", storyChar, GetType().ToString(), "ConversationFinished");
                     AddNewLordAndAssignStoryChar(storyChar);
@@ -165,11 +161,9 @@ namespace CaravanAdventures.CaravanStory
                 //incidentParms.points = StorytellerUtility.DefaultThreatPointsNow(incidentParms.target) * 2.5f;
                 points = 32000,
                 faction = Faction.OfMechanoids,
-                // todo - find out how to ensure mixed pawngroupmakerkinds
                 raidArrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn
             };
             DLog.Message($"Default threat points: {StorytellerUtility.DefaultThreatPointsNow(incidentParms.target)}");
-            // todo test new def, used to be RaidEnemy! 
             StoryDefOf.CAMechRaidMixed.Worker.TryExecute(incidentParms);
             
             CompCache.StoryWC.SetSF("IntroVillage_MechsArrived");
