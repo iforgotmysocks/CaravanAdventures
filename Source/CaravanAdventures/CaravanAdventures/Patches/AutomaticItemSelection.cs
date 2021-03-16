@@ -27,7 +27,6 @@ namespace CaravanAdventures.Patches
                 typeof(Rect),
                 typeof(bool).MakeByRefType()
             });
-            var preOnGUI = new HarmonyMethod(typeof(AutomaticItemSelection).GetMethod(nameof(OnGUI_Prefix)));
             var postOnGUI = new HarmonyMethod(typeof(AutomaticItemSelection).GetMethod(nameof(OnGUI_Postfix)));
             harmony.Patch(orgOnGUI, null, postOnGUI);
 
@@ -46,14 +45,6 @@ namespace CaravanAdventures.Patches
             });
             var postDialog_FormCaravan = new HarmonyMethod(typeof(AutomaticItemSelection).GetMethod(nameof(Dialog_FormCaravan_Postfix)));
             harmony.Patch(orgDialog_FormCaravan, null, postDialog_FormCaravan);
-        }
-
-        public static bool OnGUI_Prefix(TransferableOneWayWidget __instance, List<Section> ___sections, out List<Section> __state, Rect inRect, out bool anythingChanged)
-        {
-            // todo check for cleanup, don't think we need the prefix there.
-            __state = new List<Section>(___sections);
-            anythingChanged = false;
-            return true;
         }
 
         public static void OnGUI_Postfix(TransferableOneWayWidget __instance, List<Section> ___sections, List<Section> __state, Rect inRect, ref bool anythingChanged)
