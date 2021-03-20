@@ -31,8 +31,11 @@ namespace CaravanAdventures.CaravanStory.MechChips.Abilities
         public float launchSpeed = 10f;
         public int launchTicks = 140;
         public bool smallerMissile = false;
+        public bool canBeIntercepted = false;
+
 
         private Sustainer ambientSustainer;
+
 
         public new void Launch(Thing launcher, Vector3 origin, LocalTargetInfo usedTarget, LocalTargetInfo intendedTarget, ProjectileHitFlags hitFlags, Thing equipment = null, ThingDef targetCoverDef = null)
         {
@@ -218,13 +221,16 @@ namespace CaravanAdventures.CaravanStory.MechChips.Abilities
             {
                 return false;
             }
-            List<Thing> list = base.Map.listerThings.ThingsInGroup(ThingRequestGroup.ProjectileInterceptor);
-            for (int i = 0; i < list.Count; i++)
+            if (canBeIntercepted)
             {
-                if (list[i].TryGetComp<CompProjectileInterceptor>().CheckIntercept(this, lastExactPos, newExactPos))
+                List<Thing> list = base.Map.listerThings.ThingsInGroup(ThingRequestGroup.ProjectileInterceptor);
+                for (int i = 0; i < list.Count; i++)
                 {
-                    this.Destroy(DestroyMode.Vanish);
-                    return true;
+                    if (list[i].TryGetComp<CompProjectileInterceptor>().CheckIntercept(this, lastExactPos, newExactPos))
+                    {
+                        this.Destroy(DestroyMode.Vanish);
+                        return true;
+                    }
                 }
             }
             IntVec3 intVec = lastExactPos.ToIntVec3();

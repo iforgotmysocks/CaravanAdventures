@@ -10,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Verse;
 using Verse.Noise;
+using Verse.Sound;
 
 // high prio:
 
@@ -112,6 +113,10 @@ namespace CaravanAdventures.CaravanStory
 
         public QuestCont questCont;
 
+        // not saved for now
+        private bool doEarthQuake = false;
+        private Sustainer earthquakeSustainer;
+
         public override void ExposeData()
         {
             base.ExposeData();
@@ -184,6 +189,17 @@ namespace CaravanAdventures.CaravanStory
 
             if (ticks == -1) StoryUtility.EnsureSacrilegHunters();
 
+            if (doEarthQuake && ticks > 0 && ticks <= 1100)
+            {
+                if (earthquakeSustainer == null) earthquakeSustainer = SoundDef.Named("CAEarthquake").TrySpawnSustainer(SoundInfo.OnCamera(MaintenanceType.None));
+                earthquakeSustainer.Maintain();
+                Find.CameraDriver.shaker.DoShake(10);
+                if (ticks == 1100) {
+                    earthquakeSustainer.End();
+                    doEarthQuake = false;
+                }
+            }
+
             if (ticks > 1200)
             {
                 StoryUtility.GenerateStoryContact();
@@ -209,8 +225,12 @@ namespace CaravanAdventures.CaravanStory
                 }
 
                 // todo add mod setting and ability to disable
-                if (CanDoApocalypse()) questCont.LastJudgment.StartApocalypse(-0.1f);
-
+                if (CanDoApocalypse())
+                {
+                    doEarthQuake = true;
+                    SetSF("Judgment_ApocalypseStarted");
+                    questCont.LastJudgment.StartApocalypse(-0.1f);
+                }
                 ticks = 0;
             }
             if (questCont.FriendlyCaravan.friendlyCaravanCounter == 0) CompCache.StoryWC.questCont.FriendlyCaravan.TryCreateFriendlyCaravan(ref questCont.FriendlyCaravan.friendlyCaravanCounter);

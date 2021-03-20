@@ -47,7 +47,6 @@ namespace CaravanAdventures.CaravanStory
 
 		public void Init(Faction forcedFaction = null)
         {
-
 			this.forcedFaction = forcedFaction;
 			var mapParent = (MapParent)this.parent;
 			if (!mapParent.HasMap) return;
