@@ -11,16 +11,17 @@
 		</graphicData>
 		<selectable>true</selectable>
 		<comps>
-			<!--<li Class="CompProperties_Glower">
+			<li Class="CompProperties_Glower">
 				<glowRadius>3</glowRadius>
 				<glowColor>(255,0,0,0)</glowColor>
-			</li>-->
+			</li>
 			<li Class="CompProperties_HeatPusher">
 				<compClass>CompHeatPusherPowered</compClass>
 				<heatPerSecond>3.5</heatPerSecond>
 				<heatPushMaxTemperature>23</heatPushMaxTemperature>
 			</li>
 		</comps>
+    <useHitPoints>false</useHitPoints>
 		<building>
 			<isInert>true</isInert>
 			<isEdifice>false</isEdifice>

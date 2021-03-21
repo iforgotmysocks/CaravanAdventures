@@ -303,7 +303,7 @@ namespace CaravanAdventures.CaravanStory
         public void SetSF(string key) => storyFlags[key] = true;
         public void SetShrineSF(string postFix) => storyFlags[storyFlags.Keys.FirstOrDefault(x => x.StartsWith(BuildCurrentShrinePrefix() + postFix))] = true;
         public void ResetCurrentShrineFlags() => storyFlags.Keys.Where(x => x.StartsWith(BuildCurrentShrinePrefix())).ToList().ForEach(key => storyFlags[key] = false);
-        public void ResetSFsStartingWith(string start) => storyFlags.Keys.Where(x => x.StartsWith(start)).ToList().ForEach(key => storyFlags[key] = false);
+        public void SetSFsStartingWith(string start, bool value = false) => storyFlags.Keys.Where(x => x.StartsWith(start)).ToList().ForEach(key => storyFlags[key] = value);
         public string BuildCurrentShrinePrefix(bool ignoreLimit = false) => ignoreLimit ? "Shrine" + countShrinesCompleted + 1 : "Shrine" + (countShrinesCompleted < shrineMaximum + 1 ? countShrinesCompleted + 1 : shrineMaximum + 1) + "_";
         public string BuildMaxShrinePrefix() => "Shrine" + shrineMaximum + "_";
         public int GetCurrentShrineCounter(bool ignoreLimit = false) => ignoreLimit ? countShrinesCompleted + 1 : countShrinesCompleted < shrineMaximum +1 ? countShrinesCompleted + 1 : shrineMaximum + 1;

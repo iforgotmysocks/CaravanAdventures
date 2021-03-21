@@ -256,7 +256,7 @@ namespace CaravanAdventures.CaravanStory
             if (currentStoryTrigger && !CompCache.StoryWC.storyFlags["Start_ReceivedGift"])
             {
                 DLog.Message($"StoryStart Map removed, resetting StoryStart Flags.");
-                CompCache.StoryWC.ResetSFsStartingWith("Start_");
+                CompCache.StoryWC.SetSFsStartingWith("Start_");
             }
         }
 

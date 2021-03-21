@@ -91,12 +91,14 @@ namespace CaravanAdventures.CaravanStory
 
         public override bool ShouldRemoveMapNow(out bool alsoRemoveWorldObject)
         {
-            // todo add scenatio of keeping map until last judgement is completed and left, 
-            //if (!base.Map.mapPawns.AnyPawnBlockingMapRemoval && boss == null && (CompCache.StoryWC.GetCurrentShrineCounter() - 1 != CompCache.StoryWC.GetShrineMaxiumum || CompCache.StoryWC.storyFlags["Judgment_Completed"])
-            //|| !base.Map.mapPawns.AnyPawnBlockingMapRemoval && bossDefeatedAndRewardsGiven && (CompCache.StoryWC.GetCurrentShrineCounter() - 1 != CompCache.StoryWC.GetShrineMaxiumum || CompCache.StoryWC.storyFlags["Judgment_Completed"]))
-            if (!base.Map.mapPawns.AnyPawnBlockingMapRemoval && boss == null && !lastJudgementEntraceWasSpawned
-             || !base.Map.mapPawns.AnyPawnBlockingMapRemoval && bossDefeatedAndRewardsGiven
-             || !base.Map.mapPawns.AnyPawnBlockingMapRemoval && CompCache.StoryWC.GetCurrentShrineCounter(true) - 1 == CompCache.StoryWC.GetShrineMaxiumum && CompCache.StoryWC.storyFlags["Judgment_Completed"])
+            //  if (!base.Map.mapPawns.AnyPawnBlockingMapRemoval && boss == null && !lastJudgementEntraceWasSpawned
+            //|| !base.Map.mapPawns.AnyPawnBlockingMapRemoval && bossDefeatedAndRewardsGiven
+            //|| !base.Map.mapPawns.AnyPawnBlockingMapRemoval && CompCache.StoryWC.GetCurrentShrineCounter(true) - 1 == CompCache.StoryWC.GetShrineMaxiumum && CompCache.StoryWC.storyFlags["Judgment_Completed"])
+
+            if ((boss == null && !lastJudgementEntraceWasSpawned
+            || bossDefeatedAndRewardsGiven
+            || CompCache.StoryWC.GetCurrentShrineCounter(true) - 1 == CompCache.StoryWC.GetShrineMaxiumum && CompCache.StoryWC.storyFlags["Judgment_Completed"]
+            ) && !base.Map.mapPawns.AnyPawnBlockingMapRemoval)
             {
                 DLog.Message($"Prepping to remove map now current shrine counter {CompCache.StoryWC.GetCurrentShrineCounter(true) - 1} max counter: {CompCache.StoryWC.GetShrineMaxiumum}");
                 // resetting flags here due to shrine map being a bandit map without boss!!
@@ -235,20 +237,25 @@ namespace CaravanAdventures.CaravanStory
             var gifted = StoryUtility.GetGiftedPawn();
             var storyChar = CompCache.StoryWC.questCont.Village.StoryContact;
             var diaNode = new DiaNode("Story_Shrine5_SacrilegHunters_Portal_Dia1_1".Translate(storyChar.NameShortColored));
-            diaNode.options.Add(new DiaOption("Story_Shrine5_SacrilegHunters_Portal_Dia1_1_Option1".Translate()) { resolveTree = true, action = () => {
-                Quests.QuestUtility.AppendQuestDescription(Quests.StoryQuestDefOf.CA_FindAncientShrine,
-                "Story_Shrine5_QuestUpdate_1".Translate(
-                    GenDate.DateFullStringAt(
-                        (long)GenDate.TickGameToAbs(Find.TickManager.TicksGame),
-                        Find.WorldGrid.LongLatOf(Tile)
-                    ),
-                    CompCache.StoryWC.GetCurrentShrineCounter(true),
-                    gifted.NameShortColored,
-                    storyChar.NameShortColored
-                ));
+            diaNode.options.Add(new DiaOption("Story_Shrine5_SacrilegHunters_Portal_Dia1_1_Option1".Translate())
+            {
+                resolveTree = true,
+                action = () =>
+                {
+                    Quests.QuestUtility.AppendQuestDescription(Quests.StoryQuestDefOf.CA_FindAncientShrine,
+                    "Story_Shrine5_QuestUpdate_1".Translate(
+                        GenDate.DateFullStringAt(
+                            (long)GenDate.TickGameToAbs(Find.TickManager.TicksGame),
+                            Find.WorldGrid.LongLatOf(Tile)
+                        ),
+                        CompCache.StoryWC.GetCurrentShrineCounter(true),
+                        gifted.NameShortColored,
+                        storyChar.NameShortColored
+                    ));
 
-                CompCache.StoryWC.SetSF("Judgment_PortalRevealed");
-            } });
+                    CompCache.StoryWC.SetSF("Judgment_PortalRevealed");
+                }
+            });
 
             TaggedString taggedString = "Story_Shrine1_SacrilegHunters_DiaTitle".Translate(storyChar.NameShortColored);
             Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
@@ -300,7 +307,7 @@ namespace CaravanAdventures.CaravanStory
             if (CompCache.StoryWC.GetCurrentShrineCounter() == 1)
             {
                 var diaNode = new DiaNode("Story_Shrine1_SacrilegHunters_Dia1_1".Translate(storyChar.NameShortColored));
-                diaNode.options.Add(new DiaOption("Story_Shrine1_SacrilegHunters_Dia1_1_Option1".Translate()) { resolveTree = true, action = () => StoryUtility.GetAssistanceFromAlliedFaction(StoryUtility.FactionOfSacrilegHunters, Map) });
+                diaNode.options.Add(new DiaOption("Story_Shrine1_SacrilegHunters_Dia1_1_Option1".Translate()) { resolveTree = true, action = () => StoryUtility.GetAssistanceFromAlliedFaction(StoryUtility.FactionOfSacrilegHunters, Map, 3000 * ModSettings.hunterAssistanceMult, 4000 * ModSettings.hunterAssistanceMult) });
                 diaNode.options.Add(new DiaOption("Story_Shrine1_SacrilegHunters_Dia1_1_Option2".Translate()) { resolveTree = true });
 
                 TaggedString taggedString = "Story_Shrine1_SacrilegHunters_DiaTitle".Translate(storyChar.NameShortColored);
@@ -310,7 +317,7 @@ namespace CaravanAdventures.CaravanStory
             else if (CompCache.StoryWC.GetCurrentShrineCounter() == CompCache.StoryWC.GetShrineMaxiumum)
             {
                 var diaNode = new DiaNode("Story_Shrine5_SacrilegHunters_Dia1_1".Translate());
-                diaNode.options.Add(new DiaOption("Story_Shrine5_SacrilegHunters_Dia1_1_Option1".Translate()) { resolveTree = true, action = () => StoryUtility.GetAssistanceFromAlliedFaction(StoryUtility.FactionOfSacrilegHunters, Map) });
+                diaNode.options.Add(new DiaOption("Story_Shrine5_SacrilegHunters_Dia1_1_Option1".Translate()) { resolveTree = true, action = () => StoryUtility.GetAssistanceFromAlliedFaction(StoryUtility.FactionOfSacrilegHunters, Map, 3000 * ModSettings.hunterAssistanceMult, 4000 * ModSettings.hunterAssistanceMult) });
                 diaNode.options.Add(new DiaOption("Story_Shrine5_SacrilegHunters_Dia1_1_Option2".Translate()) { resolveTree = true });
 
                 TaggedString taggedString = "Story_Shrine1_SacrilegHunters_DiaTitle".Translate(storyChar.NameShortColored);
@@ -320,7 +327,7 @@ namespace CaravanAdventures.CaravanStory
             else
             {
                 var diaNode = new DiaNode("Story_Shrine2_SacrilegHunters_Dia1_1".Translate());
-                diaNode.options.Add(new DiaOption("Story_Shrine2_SacrilegHunters_Dia1_1_Option1".Translate()) { resolveTree = true, action = () => StoryUtility.GetAssistanceFromAlliedFaction(StoryUtility.FactionOfSacrilegHunters, Map) });
+                diaNode.options.Add(new DiaOption("Story_Shrine2_SacrilegHunters_Dia1_1_Option1".Translate()) { resolveTree = true, action = () => StoryUtility.GetAssistanceFromAlliedFaction(StoryUtility.FactionOfSacrilegHunters, Map, 3000 * ModSettings.hunterAssistanceMult, 4000 * ModSettings.hunterAssistanceMult) });
                 diaNode.options.Add(new DiaOption("Story_Shrine2_SacrilegHunters_Dia1_1_Option2".Translate()) { resolveTree = true });
 
                 TaggedString taggedString = "Story_Shrine1_SacrilegHunters_DiaTitle".Translate(storyChar.NameShortColored);
@@ -456,7 +463,7 @@ namespace CaravanAdventures.CaravanStory
                 Find.LetterStack.ReceiveLetter("MasterShrineVictoryLetterLabel".Translate(), "MasterShrineVictoryLetterMessage".Translate(), LetterDefOf.PositiveEvent, this, null, null, null, null);
                 Find.LetterStack.ReceiveLetter("NoMasterShrineLetterLabel".Translate(), "NoMasterShrineLetterMessage".Translate(), LetterDefOf.NegativeEvent, this, null, null, null, null);
             }
-          this.wonBattle = true;
+            this.wonBattle = true;
         }
 
         public override IEnumerable<Gizmo> GetGizmos()
@@ -500,7 +507,7 @@ namespace CaravanAdventures.CaravanStory
             {
                 Current.Game.DeinitAndRemoveMap(lastJudgmentMP.Map);
                 lastJudgmentMP.Destroy();
-                CompCache.StoryWC.ResetSFsStartingWith("Judgment");
+                CompCache.StoryWC.SetSFsStartingWith("Judgment");
             }
             this.abandonShrine = true;
             Current.Game.DeinitAndRemoveMap(Map);

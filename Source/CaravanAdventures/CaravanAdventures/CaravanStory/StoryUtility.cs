@@ -127,6 +127,7 @@ namespace CaravanAdventures.CaravanStory
         internal static void RestartStory()
         {
             // todo update - needs to remove judgment aswell
+            // todo other quests?
             if (CompCache.StoryWC.questCont.Village.StoryContact != null) CompCache.StoryWC.questCont.Village.StoryContact.Destroy();
             CompCache.StoryWC.questCont.Village.StoryContact = null;
             CompCache.StoryWC.questCont.FriendlyCaravan.storyContactBondedPawn = null;
@@ -144,8 +145,16 @@ namespace CaravanAdventures.CaravanStory
 
         public static void ResetLastShrineFlags()
         {
-            CompCache.StoryWC.ResetSFsStartingWith("Judgment_");
-            CompCache.StoryWC.ResetSFsStartingWith(CompCache.StoryWC.BuildMaxShrinePrefix());
+            StoryUtility.RemoveMapParentsOfDef(CaravanStorySiteDefOf.CAAncientMasterShrineMP);
+            StoryUtility.RemoveMapParentsOfDef(CaravanStorySiteDefOf.CAAncientMasterShrineWO);
+            for (; ; )
+            {
+                if (CompCache.StoryWC.GetCurrentShrineCounter() == CompCache.StoryWC.GetShrineMaxiumum) break;
+                CompCache.StoryWC.IncreaseShrineCompleteCounter();
+            }
+            foreach (var flag in CompCache.StoryWC.storyFlags) CompCache.StoryWC.storyFlags[flag.Key] = true;
+            CompCache.StoryWC.SetSFsStartingWith("Judgment_");
+            CompCache.StoryWC.SetSFsStartingWith(CompCache.StoryWC.BuildMaxShrinePrefix());
         }
 
         internal static IEnumerable<ThingDef> ReadBossDefNames()
