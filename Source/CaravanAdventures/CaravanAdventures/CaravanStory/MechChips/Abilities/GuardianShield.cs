@@ -44,6 +44,7 @@ namespace CaravanAdventures.CaravanStory.MechChips.Abilities
         public override void Destroy(DestroyMode mode = DestroyMode.Vanish)
         {
             base.Destroy(mode);
+            if (owner == null || owner.Destroyed || owner.Dead) return;
             var chip = owner.health.hediffSet.GetAllComps().OfType<HediffComp_EXT1Guardian>().FirstOrDefault();
             if (chip == null) return;
             chip.ShieldCooldown = chip.shieldCooldownBase;

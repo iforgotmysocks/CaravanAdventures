@@ -347,6 +347,7 @@
         <mechChipDefs>
           <li>CAEXT1Basic</li>
           <li>CAEXT1Missile</li>
+          <li>CAEXT1Guardian</li>
         </mechChipDefs>
       </li>
     </modExtensions>

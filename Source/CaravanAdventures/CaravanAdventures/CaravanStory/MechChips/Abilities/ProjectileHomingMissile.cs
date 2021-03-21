@@ -15,7 +15,7 @@ namespace CaravanAdventures.CaravanStory.MechChips.Abilities
         private Map map;
 
         public float rotationSpeed = 10f;
-        public float speed = 20f;
+        public float speed = 15f;
 
         public Vector3 realPosition;
         public Quaternion realRotation;
@@ -28,8 +28,8 @@ namespace CaravanAdventures.CaravanStory.MechChips.Abilities
         private static List<IntVec3> checkedCells = new List<IntVec3>();
         public Vector3 offset = new Vector3(0,0,0);
         public FloatRange effectRange = new FloatRange(0.5f, 1f);
-        public float launchSpeed = 10f;
-        public int launchTicks = 140;
+        public float launchSpeed = 4f;
+        public int launchTicks = 70;
         public bool smallerMissile = false;
         public bool canBeIntercepted = false;
 
