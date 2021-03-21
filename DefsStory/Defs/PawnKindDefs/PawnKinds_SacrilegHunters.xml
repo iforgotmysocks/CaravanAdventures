@@ -29,7 +29,7 @@
       <li>GunHeavy</li>
       <li>SpacerGun</li>
     </weaponTags>
-    <techHediffsMoney>8000~10000</techHediffsMoney>
+    <techHediffsMoney>3000~5000</techHediffsMoney>
     <techHediffsTags>
       <li>Advanced</li>
       <li>AdvancedWeapon</li>
@@ -40,7 +40,7 @@
       <li>PainCauser</li>
     </techHediffsDisallowTags>
     <techHediffsRequired>
-      	<li MayRequire="Ludeon.RimWorld.Royalty">StoneskinGland</li>
+      	<!--<li MayRequire="Ludeon.RimWorld.Royalty">StoneskinGland</li>-->
     </techHediffsRequired>
     <techHediffsChance>0.3</techHediffsChance>
     <techHediffsMaxAmount>2</techHediffsMaxAmount>

@@ -48,9 +48,13 @@ namespace CaravanAdventures.Settings
             if (options.ButtonTextLabeled("Reset apocalypse event", "Reset")) CompCache.StoryWC.questCont.LastJudgment.ResetApocalypse(-0.1f);
             options.Gap();
 
-            options.Label("Shrine mech combat point multiplier:".Colorize(Color.red), 40f);
+            options.Label("Shrine mechanoid combat point multiplier:".Colorize(Color.red), 40f);
             options.Label("Multiplier: " + Math.Round(ModSettings.shrineMechDifficultyMultiplier, 2) + "  (default: 1.2)");
             ModSettings.shrineMechDifficultyMultiplier = options.Slider(ModSettings.shrineMechDifficultyMultiplier, 0.2f, 10f);
+            options.Gap();
+            options.Label("Shrine hunter assistance combat point multiplier:".Colorize(Color.red), 40f);
+            options.Label("Multiplier: " + Math.Round(ModSettings.hunterAssistanceMult, 2) + "  (default: 1.2)");
+            ModSettings.hunterAssistanceMult = options.Slider(ModSettings.hunterAssistanceMult, 0.2f, 2f);
             options.Gap();
             options.CheckboxLabeled("Issue further shrine locations after story is complete", ref ModSettings.issueFurtherShrineLocationsAfterStoryEnd);
             options.CheckboxLabeled("Limit larger map sizes to tested medium-large map size for shrines", ref ModSettings.limitLargeMapSizesToTestedSize);

@@ -86,6 +86,7 @@ namespace CaravanAdventures
 
         // shrines
         public static float shrineMechDifficultyMultiplier = 1.2f;
+        public static float hunterAssistanceMult = 1.2f;
 
         // bounty
         public static float envoyDurationTimeForBountyRelationHagglingInDays = 1f;
@@ -169,6 +170,7 @@ namespace CaravanAdventures
 
             // shrines
             Scribe_Values.Look(ref shrineMechDifficultyMultiplier, "shrineMechDifficultyMultiplier", 1.2f);
+            Scribe_Values.Look(ref hunterAssistanceMult, "hunterAssistanceMult", 1.2f);
 
             // bounty
             Scribe_Values.Look(ref envoyDurationTimeForBountyRelationHagglingInDays, "envoyDurationTimeForBountyRelationHagglingInDays", 1f);
