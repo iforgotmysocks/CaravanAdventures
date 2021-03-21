@@ -61,7 +61,7 @@ namespace CaravanAdventures.CaravanStory
             else CompCache.BountyWC.BountyPoints += 12;
         }
 
-        public static void GetAssistanceFromAlliedFaction(Faction faction, Map map, int pointsMin = 4000, int pointsMax = 5000, IntVec3 spawnSpot = default)
+        public static void GetAssistanceFromAlliedFaction(Faction faction, Map map, float pointsMin = 4000, float pointsMax = 5000, IntVec3 spawnSpot = default)
         {
             var incidentParms = new IncidentParms
             {

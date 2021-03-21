@@ -189,12 +189,12 @@ namespace CaravanAdventures.CaravanStory
 
             if (ticks == -1) StoryUtility.EnsureSacrilegHunters();
 
-            if (doEarthQuake && ticks > 0 && ticks <= 1100)
+            if (doEarthQuake && ticks > 0 && ticks <= 1200)
             {
                 if (earthquakeSustainer == null) earthquakeSustainer = SoundDef.Named("CAEarthquake").TrySpawnSustainer(SoundInfo.OnCamera(MaintenanceType.None));
                 earthquakeSustainer.Maintain();
                 Find.CameraDriver.shaker.DoShake(10);
-                if (ticks == 1100) {
+                if (ticks == 1200) {
                     earthquakeSustainer.End();
                     doEarthQuake = false;
                 }

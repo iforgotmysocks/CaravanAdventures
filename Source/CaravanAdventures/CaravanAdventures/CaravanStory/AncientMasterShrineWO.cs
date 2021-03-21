@@ -325,7 +325,7 @@ namespace CaravanAdventures.CaravanStory
 
             DLog.Message($"from roomsize: {calcedFromRoomSize} minpoints: {minPoints}");
             var selected = Math.Max(calcedFromRoomSize, minPoints);
-            if (removedHives) selected += 500;
+            if (removedHives) selected += 200;
 
             var mechPawnGroupMakerParams = new PawnGroupMakerParms
             {

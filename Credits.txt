@@ -5,4 +5,4 @@ Textuers:
 
 Sounds:
 Anima tree whisper by zapsplat (zapsplat_whispers.mp3) from https://www.zapsplat.com
-Earthquake by zatar (zatar_earthquake.wav) https://freesound.org/people/zatar/sounds/514381/
+Earthquake by zatar (zatar_earthquake.mp3) https://freesound.org/people/zatar/sounds/514381/
