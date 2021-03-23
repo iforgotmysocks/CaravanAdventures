@@ -6,9 +6,11 @@
     <label>Ancient Master Shrine</label>
     <description>a dangerous and long forgotten shrine</description>
     <worldObjectClass>CaravanAdventures.CaravanStory.AncientMasterShrineWO</worldObjectClass>
-    <texture>World/WorldObjects/Ambush</texture>
+    <!--<texture>World/WorldObjects/Ambush</texture>-->
+    <texture>World/WorldObjects/Questionmark</texture>
     <expandingIcon>true</expandingIcon>
-    <expandingIconTexture>World/WorldObjects/Expanding/Ambush</expandingIconTexture>
+    <!--<expandingIconTexture>World/WorldObjects/Expanding/Ambush</expandingIconTexture>-->
+    <expandingIconTexture>World/WorldObjects/Questionmark</expandingIconTexture>
     <expandingIconPriority>80</expandingIconPriority>
     <expandMore>true</expandMore>
     <blockExitGridUntilBattleIsWon>false</blockExitGridUntilBattleIsWon>
@@ -28,9 +30,11 @@
 		<label>Ancient Master Shrine</label>
 		<description>a dangerous and long forgotten shrine</description>
 		<worldObjectClass>CaravanAdventures.CaravanStory.AncientMasterShrineMP</worldObjectClass>
-		<texture>World/WorldObjects/Ambush</texture>
+		<!--<texture>World/WorldObjects/Ambush</texture>-->
+    <texture>World/WorldObjects/MasterShrine</texture>
 		<expandingIcon>true</expandingIcon>
-		<expandingIconTexture>World/WorldObjects/Expanding/Ambush</expandingIconTexture>
+		<!--<expandingIconTexture>World/WorldObjects/Expanding/Ambush</expandingIconTexture>-->
+    <expandingIconTexture>World/WorldObjects/MasterShrine</expandingIconTexture>
 		<expandingIconPriority>80</expandingIconPriority>
 		<expandMore>true</expandMore>
 		<blockExitGridUntilBattleIsWon>false</blockExitGridUntilBattleIsWon>
@@ -47,7 +51,7 @@
 	<WorldObjectDef>
 		<defName>CAStoryVillageMP</defName>
 		<label>Friend's Village</label>
-		<description>The village of an old friend of your's.</description>
+		<description>The village of a friend of your's.</description>
 		<worldObjectClass>CaravanAdventures.CaravanStory.StoryVillageMP</worldObjectClass>
 		<!--<texture>World/WorldObjects/Ambush</texture>-->
 		<expandingIcon>true</expandingIcon>

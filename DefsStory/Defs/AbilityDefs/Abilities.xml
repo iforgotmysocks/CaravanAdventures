@@ -27,7 +27,7 @@
     <label>ancient meditation</label>
     <description>Absorbs psychic energy from nature and restores it for the user. Other colonists standing close to the caster regain a small amount aswell.</description>
     <level>0</level>
-    <iconPath>UI/Abilities/Stun</iconPath>
+    <iconPath>UI/Abilities/Meditate</iconPath>
     <canUseAoeToGetTargets>False</canUseAoeToGetTargets>
 		<displayGizmoWhileUndrafted>True</displayGizmoWhileUndrafted>
 		<disableGizmoWhileUndrafted>False</disableGizmoWhileUndrafted>
@@ -58,7 +58,7 @@
     <label>ancient thunder bolt</label>
     <description>Targettet thunder blast with area damage.</description>
     <level>0</level>
-    <iconPath>UI/Abilities/Flashstorm</iconPath>
+    <iconPath>UI/Abilities/Thunderbolt</iconPath>
     <canUseAoeToGetTargets>False</canUseAoeToGetTargets>
     <statBases>
       <Ability_EntropyGain>65</Ability_EntropyGain>
@@ -86,7 +86,7 @@
     <label>ancient mech signal</label>
     <description>Summons a group of mechanoid scythers to the casters aid.</description>
     <level>0</level>
-    <iconPath>UI/Abilities/Flashstorm</iconPath>
+    <iconPath>UI/Abilities/CallScyther</iconPath>
     <canUseAoeToGetTargets>False</canUseAoeToGetTargets>
     <statBases>
       <Ability_EntropyGain>30</Ability_EntropyGain>
@@ -217,7 +217,7 @@
     <targetRequired>False</targetRequired>
     <canUseAoeToGetTargets>False</canUseAoeToGetTargets>
     <!--<showPsycastEffects>False</showPsycastEffects>-->
-    <iconPath>UI/Abilities/Painblock</iconPath>
+    <iconPath>UI/Abilities/Protect</iconPath>
     <hotKey>Misc12</hotKey>
     <statBases>
       <Ability_EntropyGain>30</Ability_EntropyGain>

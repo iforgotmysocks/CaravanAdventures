@@ -66,7 +66,7 @@ namespace CaravanAdventures.CaravanImprovements
                     defaultLabel = "SettleWithoutUnloading".Translate(),
                     defaultDesc = "SettleWithoutUnloadingDesc".Translate(),
                     order = 198f,
-                    icon = ContentFinder<Texture2D>.Get("UI/Icons/Settle", true),
+                    icon = ContentFinder<Texture2D>.Get("UI/Icons/Settle/SettleWithoutUnloading_up", true),
                     action = () => {
                         Action settleAction = () => SettleWithoutDroppingGear(caravan);
                         SettlementProximityGoodwillUtility.CheckConfirmSettle(caravan.Tile, settleAction);
@@ -91,7 +91,7 @@ namespace CaravanAdventures.CaravanImprovements
                     defaultLabel = "SettleWithCampLabel".Translate() + (ModSettings.showSupplyCostsInGizmo ? $" ({campCost}/{suppliesAvailable})" : ""),
                     defaultDesc = "SettleWithCampDesc".Translate(),
                     order = 198f,
-                    icon = ContentFinder<Texture2D>.Get("UI/Icons/Settle", true),
+                    icon = ContentFinder<Texture2D>.Get("UI/Icons/Settle/SettleCamp_up", true),
                     action = () => {
                         Action settleAction = () => SettleWithoutDroppingGear(caravan, true);
                         SettlementProximityGoodwillUtility.CheckConfirmSettle(caravan.Tile, settleAction);
