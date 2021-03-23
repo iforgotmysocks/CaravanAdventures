@@ -49,7 +49,7 @@ namespace CaravanAdventures.CaravanCamp
             handTailoringBench = CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("HandTailoringBench"), ThingDefOf.WoodLog), location, map, Rot4.East, campAssetListRef) as Building_WorkTable;
 
             location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.minX + 3 && cell.z == CellRect.minZ + 1);
-            var heater = CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(CampDefOf.CAAirConditioningHeater), location, map, default, campAssetListRef);
+            var heater = CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(CampDefOf.CAAirConditioningHeater), location, map, Rot4.South, campAssetListRef);
             CampHelper.RefuelByPerc(heater, -1);
 
             CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDefOf.DiningChair, ThingDefOf.WoodLog), new IntVec3(CellRect.minX + 3, 0, CellRect.minZ + 2), map, Rot4.West, campAssetListRef);

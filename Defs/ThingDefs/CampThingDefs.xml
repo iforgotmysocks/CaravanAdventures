@@ -505,7 +505,7 @@
     <tradeability>None</tradeability>
   </ThingDef>
 
-  <!-- oc -->
+  <!-- ac -->
   <ThingDef ParentName="CATentBase">
     <defName>CAAirConditioningHeater</defName>
     <label>One-way A/C and Heater</label>
@@ -513,8 +513,9 @@
     <!--<thingClass>CaravanAdventures.CaravanCamp.Buildings.Building_AirConditioningHeater</thingClass>-->
     <thingClass>Building_WorkTable</thingClass>
     <graphicData>
-      <texPath>Things/Building/Misc/TempControl/Heater</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>Things/Buildings/Camp/HeaterAC/HeaterAC</texPath>
+      <drawSize>0.8, 0.8</drawSize>
+      <graphicClass>Graphic_Multi</graphicClass>
       <shadowData>
         <volume>(0.5,0.3,0.7)</volume>
         <offset>(0,0,-0.15)</offset>
@@ -532,7 +533,7 @@
     <passability>PassThroughOnly</passability>
     <pathCost>40</pathCost>
     <blockWind>true</blockWind>
-    <rotatable>false</rotatable>
+    <!--<rotatable>false</rotatable>-->
     <fillPercent>0.4</fillPercent>
     <!--<thingCategories>
 			<li>BuildingsTemperature</li>
@@ -615,9 +616,9 @@
     <!--<thingClass>CaravanAdventures.CaravanCamp.Buildings.Building_AirConditioningHeater</thingClass>-->
     <thingClass>Building_WorkTable</thingClass>
     <graphicData>
-      <texPath>Things/Building/Misc/TempControl/Cooler</texPath>
+      <texPath>Things/Buildings/Camp/Cooler/Cooler</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
-      <drawSize>0.5,0.5</drawSize>
+      <drawSize>0.8, 0.8</drawSize>
       <shadowData>
         <volume>(0.5,0.3,0.7)</volume>
         <offset>(0,0,-0.15)</offset>
@@ -635,7 +636,7 @@
     <passability>PassThroughOnly</passability>
     <pathCost>40</pathCost>
     <blockWind>true</blockWind>
-    <rotatable>false</rotatable>
+    <!--<rotatable>false</rotatable>-->
     <fillPercent>0.4</fillPercent>
     <!--<thingCategories>
 			<li>BuildingsTemperature</li>

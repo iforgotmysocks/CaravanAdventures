@@ -52,9 +52,7 @@ namespace CaravanAdventures.CaravanCamp
             }
 
             var caheaterPos = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 1 && cell.z == CellRect.minZ + 1);
-            var caheater = GenSpawn.Spawn(CampDefOf.CAAirConditioningHeater, caheaterPos, map);
-            caheater.SetFaction(Faction.OfPlayer);
-            campAssetListRef.Add(caheater);
+            var caheater = CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(CampDefOf.CAAirConditioningHeater), caheaterPos, map, Rot4.South, campAssetListRef);
             CampHelper.RefuelByPerc(caheater, ModSettings.fuelStartingFillPercentage);
 
             var plantPos = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.minX + 1 && cell.z == CellRect.minZ + 1);

@@ -26,7 +26,7 @@ namespace CaravanAdventures.CaravanCamp
         {
             base.Build(map, campAssetListRef);
             var cacoolerPos = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 1 && cell.z == CellRect.minZ + 1);
-            var cacooler = CampHelper.PrepAndGenerateThing(CampDefOf.CACooler, cacoolerPos, map, default, campAssetListRef);
+            var cacooler = CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(CampDefOf.CACooler), cacoolerPos, map, Rot4.South, campAssetListRef);
             CampHelper.RefuelByPerc(cacooler, -1);
         }
 
