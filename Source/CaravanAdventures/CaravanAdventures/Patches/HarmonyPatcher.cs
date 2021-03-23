@@ -19,9 +19,6 @@ namespace CaravanAdventures.Patches
                 TalkPawnGUIOverlay.ApplyPatches(harmony);
                 BossPatches.ApplyPatches(harmony);
             }
-
-            // new todo 
-            AbilityBackgroundPatch.ApplyPatches(harmony);
         }
 
         /// <summary>
