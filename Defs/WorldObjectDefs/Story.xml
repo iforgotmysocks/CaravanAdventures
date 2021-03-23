@@ -7,7 +7,7 @@
     <description>a dangerous and long forgotten shrine</description>
     <worldObjectClass>CaravanAdventures.CaravanStory.AncientMasterShrineWO</worldObjectClass>
     <!--<texture>World/WorldObjects/Ambush</texture>-->
-    <texture>World/WorldObjects/Questionmark</texture>
+    <texture>World/WorldObjects/TribalSettlement</texture>
     <expandingIcon>true</expandingIcon>
     <!--<expandingIconTexture>World/WorldObjects/Expanding/Ambush</expandingIconTexture>-->
     <expandingIconTexture>World/WorldObjects/Questionmark</expandingIconTexture>
@@ -31,8 +31,8 @@
 		<description>a dangerous and long forgotten shrine</description>
 		<worldObjectClass>CaravanAdventures.CaravanStory.AncientMasterShrineMP</worldObjectClass>
 		<!--<texture>World/WorldObjects/Ambush</texture>-->
-    <texture>World/WorldObjects/MasterShrine</texture>
-		<expandingIcon>true</expandingIcon>
+    <texture>World/WorldObjects/TribalSettlement</texture>
+    <expandingIcon>true</expandingIcon>
 		<!--<expandingIconTexture>World/WorldObjects/Expanding/Ambush</expandingIconTexture>-->
     <expandingIconTexture>World/WorldObjects/MasterShrine</expandingIconTexture>
 		<expandingIconPriority>80</expandingIconPriority>
