@@ -15,7 +15,6 @@ namespace CaravanAdventures
     {
         // not saved!
         public static Rect lastRect = default;
-        public bool toggleTest = false;
 
         // general
         public static bool debug = false;
@@ -109,7 +108,6 @@ namespace CaravanAdventures
         public static bool bountyEnabled = true;
         public static bool caravanIncidentsEnabled = true;
 
-        //public static ModSettings Get() => LoadedModManager.GetMod<CaravanAdventures.Main>().GetSettings<ModSettings>();
         private Vector2 scrollPos = Vector2.zero;
 
         public override void ExposeData()
@@ -282,7 +280,6 @@ namespace CaravanAdventures
             Widgets.Label(cRect, $"Caravan immersion - Travel companions".HtmlFormatting("00ff00", false, 18));
             Text.Font = GameFont.Small;
             Widgets.CheckboxLabeled(new Rect(options.ColumnWidth - 400, lastRect.y + 10, 110, Text.LineHeight), "Enabled: ", ref caravanTravelCompanionsEnabled);
-            //if (Widgets.ButtonText(new Rect(options.ColumnWidth - 225, lastRect.y + 6, 150, Text.LineHeight + 10), "Open")) Find.WindowStack.Add(new SettingsFilters());
             options.Gap(10);
             options.Label($"Colonists will start out disliking new arrivals to your group, but grow to accept, welcome and maybe embrace them as true friends over time.");
             options.GapLine();
@@ -293,7 +290,6 @@ namespace CaravanAdventures
             Text.Font = GameFont.Small;
             Widgets.CheckboxLabeled(new Rect(options.ColumnWidth - 400, lastRect.y + 10, 110, Text.LineHeight), "Enabled: ", ref CheckForRestart(ref caravanIncidentsEnabled, ref checkRestartRequiringValueChanged));
             if (caravanIncidentsEnabled != checkRestartRequiringValueChanged) showRestartReminder = true;
-            //if (Widgets.ButtonText(new Rect(options.ColumnWidth - 225, lastRect.y + 6, 150, Text.LineHeight + 10), "Open", true, false, false)) Find.WindowStack.Add(new SettingsFilters());
             options.Gap(10);
             options.Label($"Additional Caravan incidents - (only 1 in testing currently, more coming with the next expansion)");
             options.GapLine();
@@ -308,7 +304,6 @@ namespace CaravanAdventures
             options.Gap(10);
             options.Label($"Story settings. Requires Royalty.");
             options.GapLine();
-            //if (!ModsConfig.RoyaltyActive && storyEnabled) Find.WindowStack.Add(new Dialog_MessageBox(new TaggedString($"Missing DLC notification!".HtmlFormatting("ffffff", false, 19) + "\n\nSorry, but the story relies upon and requires Royalty and will be disabled. However all other mod categories are still available.\n\nOnce you have Royalty enabled, you can enable the story here.\nThanks for understanding.".HtmlFormatting("ffffff", false, 16)), "Gotcha", () => { }));
             if (!ModsConfig.RoyaltyActive && storyEnabled) Find.WindowStack.Add(new Dialog_MessageBox(
                 new TaggedString($"\nSorry, but the story relies upon and requires Royalty and will be disabled. However all other mod categories are still available.\n\nOnce you have Royalty enabled, you can enable the story here.\nThanks for understanding."),
                 "Gotcha",
@@ -323,7 +318,6 @@ namespace CaravanAdventures
             cRect = BRect(options.GetRect(Text.LineHeight));
             Widgets.Label(cRect, $"Ancient abilitiy settings".HtmlFormatting("00ff00", false, 18));
             Text.Font = GameFont.Small;
-            //Widgets.CheckboxLabeled(new Rect(options.ColumnWidth - 400, lastRect.y + 10, 110, Text.LineHeight), "Enabled: ", ref toggleTest);
             if (Widgets.ButtonText(new Rect(options.ColumnWidth - 225, lastRect.y + 6, 150, Text.LineHeight + 10), "Open")) Find.WindowStack.Add(new SettingsAbilities());
             options.Gap(10);
             options.Label($"Adjust settings related to the automatic camp generation. Depending if the player has enough camp supplies, the player's pawns will either build a high quality camp, or a wanting camp construted with makeshift materials.");
@@ -333,7 +327,6 @@ namespace CaravanAdventures
             cRect = BRect(options.GetRect(Text.LineHeight));
             Widgets.Label(cRect, $"General settings".HtmlFormatting("00ff00", false, 18));
             Text.Font = GameFont.Small;
-            //Widgets.CheckboxLabeled(new Rect(options.ColumnWidth - 400, lastRect.y + 10, 110, Text.LineHeight), "Enabled: ", ref toggleTest);
             if (Widgets.ButtonText(new Rect(options.ColumnWidth - 225, lastRect.y + 6, 150, Text.LineHeight + 10), "Open")) Find.WindowStack.Add(new SettingsOther());
             options.Gap(10);
             options.Label($"A collection of more general, small impovements that help support a life on the road.");

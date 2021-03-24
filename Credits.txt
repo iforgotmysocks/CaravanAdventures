@@ -1,8 +1,0 @@
-
-Textuers: 
-(Portal.png) - Portal in Ancient master shrine by gecko-kobold
-
-
-Sounds:
-Anima tree whisper by zapsplat (zapsplat_whispers.mp3) from https://www.zapsplat.com
-Earthquake by zatar (zatar_earthquake.mp3) https://freesound.org/people/zatar/sounds/514381/
