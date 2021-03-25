@@ -126,33 +126,44 @@ namespace CaravanAdventures.CaravanStory
 
         internal static void RestartStory()
         {
-            // todo update - needs to remove judgment aswell
-            // todo other quests?
             if (CompCache.StoryWC.questCont.Village.StoryContact != null) CompCache.StoryWC.questCont.Village.StoryContact.Destroy();
             CompCache.StoryWC.questCont.Village.StoryContact = null;
             CompCache.StoryWC.questCont.FriendlyCaravan.storyContactBondedPawn = null;
             CompCache.StoryWC.ResetStoryVars();
             StoryUtility.RemoveExistingQuestFriendlyVillages();
+            Quests.QuestUtility.DeleteQuest(StoryQuestDefOf.CA_TradeCaravan);
+            Quests.QuestUtility.DeleteQuest(StoryQuestDefOf.CA_StoryVillage_Arrival);
             Quests.QuestUtility.DeleteQuest(StoryQuestDefOf.CA_TheTree);
             StoryUtility.RemoveMapParentsOfDef(CaravanStorySiteDefOf.CAAncientMasterShrineMP);
             StoryUtility.RemoveMapParentsOfDef(CaravanStorySiteDefOf.CAAncientMasterShrineWO);
             StoryUtility.RemoveMapParentsOfDef(CaravanStorySiteDefOf.CALastJudgmentMP);
             Quests.QuestUtility.DeleteQuest(StoryQuestDefOf.CA_FindAncientShrine);
-            if (CompCache.StoryWC.questCont.LastJudgment.Apocalypse != null) CompCache.StoryWC.questCont.LastJudgment.Apocalypse.End();
+            if (CompCache.StoryWC.questCont.LastJudgment.Apocalypse != null) CompCache.StoryWC.questCont.LastJudgment.EndApocalypse();
 
-            Log.Message($"Story reset complete");
+            var gifted = CompCache.StoryWC.questCont.StoryStart.Gifted;
+            if (gifted != null && !gifted.Dead)
+            {
+                gifted.health.hediffSet.hediffs.RemoveAll(x => x.def.defName.StartsWith("CAAncient"));
+                foreach (var ability in gifted.abilities.abilities.Where(x => x.def.defName.StartsWith("CAAncient")).Reverse()) gifted.abilities.RemoveAbility(ability.def);
+            }
+            CompCache.StoryWC.questCont.StoryStart.Gifted = null;
+
+            Messages.Message($"Story reset complete", MessageTypeDefOf.PositiveEvent, false);
         }
 
-        public static void ResetLastShrineFlags()
+        public static void ResetLastShrineFlags(bool advanceToLastShrine = false)
         {
             StoryUtility.RemoveMapParentsOfDef(CaravanStorySiteDefOf.CAAncientMasterShrineMP);
             StoryUtility.RemoveMapParentsOfDef(CaravanStorySiteDefOf.CAAncientMasterShrineWO);
-            for (; ; )
+            if (advanceToLastShrine)
             {
-                if (CompCache.StoryWC.GetCurrentShrineCounter() == CompCache.StoryWC.GetShrineMaxiumum) break;
-                CompCache.StoryWC.IncreaseShrineCompleteCounter();
+                for (; ; )
+                {
+                    if (CompCache.StoryWC.GetCurrentShrineCounter() == CompCache.StoryWC.GetShrineMaxiumum) break;
+                    CompCache.StoryWC.IncreaseShrineCompleteCounter();
+                }
+                foreach (var flag in CompCache.StoryWC.storyFlags) CompCache.StoryWC.storyFlags[flag.Key] = true;
             }
-            foreach (var flag in CompCache.StoryWC.storyFlags) CompCache.StoryWC.storyFlags[flag.Key] = true;
             CompCache.StoryWC.SetSFsStartingWith("Judgment_");
             CompCache.StoryWC.SetSFsStartingWith(CompCache.StoryWC.BuildMaxShrinePrefix());
         }

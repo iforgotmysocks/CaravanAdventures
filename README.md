@@ -1,6 +1,6 @@
 # CaravanAdventures
 
-Welcome to the closed beta for Caravan Adventures, my technically first mod. As always, please backup your savegames. I'm glad for any feedback and bugs you may find or can provide. :)
+Welcome to the beta for Caravan Adventures, my technically first Rimworld mod. As always, please backup your savegames. I'm glad for any feedback and bugs you may find or can provide. :)
 
 Caravan Adventures aims to transform traveling around the world into a fun adventure by stripping away all the little annoying things that require alot of micro management or just aren't fun. It also provides the player with a few reasons to travel. Quick heads-up, about 20% of this mod's content is the Storyline, which requires Royalty. Everything else can be used without it, don't worry. 
 
@@ -31,7 +31,7 @@ Let me give you an overview over what this mod provides:
 * Improve relations to other factions in exchange for bounty credits
 * Buy bounty credits for a large amount of silver
 
-## Caravan immersion - Travel companions
+## Immersion - Travel companions
 * Pawns start out disliking the newcomers due to uncertainty and some lack of trust
 * Pawns indiviually bond with eath other over time which can turn the initial distrust into a true friendship
 

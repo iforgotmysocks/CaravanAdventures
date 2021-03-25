@@ -38,6 +38,12 @@ namespace CaravanAdventures.CaravanStory.Quests
             }
 		}
 
+		public void EndApocalypse()
+        {
+			apocalypse.End();
+			apocalypse = null;
+        }
+
 		public void ResetApocalypse(float minTemp)
         {
 			apocalypse.End();
