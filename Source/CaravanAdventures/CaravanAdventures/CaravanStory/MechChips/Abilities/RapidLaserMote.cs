@@ -8,6 +8,7 @@ using Verse;
 
 namespace CaravanAdventures.CaravanStory.MechChips.Abilities
 {
+    [StaticConstructorOnStartup]
     class RapidLaserMote : Mote
     {
         public Vector3 launchPos;

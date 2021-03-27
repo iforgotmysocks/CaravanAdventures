@@ -155,7 +155,7 @@ namespace CaravanAdventures.CaravanStory
                     storyFlags[flag.Key] = true;
             }
 
-            if (debugFlags["ShowDebugInfo"]) storyFlags.ToList().ForEach(flag => Log.Message($"{flag.Key} {flag.Value}"));
+            if (ModSettings.debugMessages) storyFlags.ToList().ForEach(flag => Log.Message($"{flag.Key} {flag.Value}"));
         }
 
         private void InitializeStoryFlags()
@@ -299,7 +299,6 @@ namespace CaravanAdventures.CaravanStory
         }
 
         // SF helper methods used to be static, if the CompCache doesn't work out, turn access to the SFs static again
-        public bool Dg => debugFlags["ShowDebugInfo"];
         public void SetSF(string key) => storyFlags[key] = true;
         public void SetShrineSF(string postFix) => storyFlags[storyFlags.Keys.FirstOrDefault(x => x.StartsWith(BuildCurrentShrinePrefix() + postFix))] = true;
         public void ResetCurrentShrineFlags() => storyFlags.Keys.Where(x => x.StartsWith(BuildCurrentShrinePrefix())).ToList().ForEach(key => storyFlags[key] = false);
