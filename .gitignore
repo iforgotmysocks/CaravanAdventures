@@ -240,5 +240,3 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
-/Source/CaravanAdventures/CaravanAdventures/inspirations
-/Source/CaravanAdventures/CaravanAdventures/allowences

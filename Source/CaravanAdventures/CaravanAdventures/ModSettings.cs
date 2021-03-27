@@ -122,7 +122,7 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref removeOnlyAcolyteAndKnightRoyalTitleRequirements, "removeOnlyAcolyteAndKnightRoyalTitleRequirements", true);
 
             // camp
-            Scribe_Values.Look(ref generateStorageForAllInventory, "generateStorageForAllInventory", false);
+            Scribe_Values.Look(ref generateStorageForAllInventory, "generateStorageForAllInventory", true);
             Scribe_Values.Look(ref letAnimalsRunFree, "letAnimalsRunFree", false);
             Scribe_Values.Look(ref hasProductionTent, "hasProductionTent", true);
             Scribe_Values.Look(ref hasStorageTent, "hasStorageTent", true);
@@ -148,8 +148,8 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref additionalBuildingAreaDamageMin, "additionalBuildingAreaDamageMin", 0.5f);
             Scribe_Values.Look(ref additionalBuildingAreaDamageMax, "additionalBuildingAreaDamageMax", 0.75f);
             // - meditation
-            Scribe_Values.Look(ref psyfocusToRestore, "psyfocusToRestore", 0.2f);
-            Scribe_Values.Look(ref plantScoreMultiplier, "plantScoreMultiplier", 2.0f);
+            Scribe_Values.Look(ref psyfocusToRestore, "psyfocusToRestore", 0.15f);
+            Scribe_Values.Look(ref plantScoreMultiplier, "plantScoreMultiplier", 2.25f);
             // - protective aura
             Scribe_Values.Look(ref healingPerSecond, "healingPerSecond", 0.05f);
             Scribe_Values.Look(ref stopMentalBreaks, "stopMentalBreaks", false);
@@ -161,7 +161,7 @@ namespace CaravanAdventures
             // story
             Scribe_Values.Look(ref storyEnabled, "storyEnabled", true);
             Scribe_Values.Look(ref limitLargeMapSizesToTestedSize, "limitLargeMapSizesToTestedSize", true);
-            Scribe_Values.Look(ref apocalypseEnabled, "apocalypseEndabled");
+            Scribe_Values.Look(ref apocalypseEnabled, "apocalypseEnabled", true);
             Scribe_Values.Look(ref apocalypseTemperatureChangePerDay, "apocalypseTemperatureChangePerDay", -0.084f);
             Scribe_Values.Look(ref issueFurtherShrineLocationsAfterStoryEnd, "issueFurtherShrineLocationsAfterStoryEnd", true);
             Scribe_Values.Look(ref sacHuntersHostileTowardsEmpire, "sacHuntersHostileTowardsEmpire", false);

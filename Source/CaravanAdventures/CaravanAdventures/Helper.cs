@@ -108,8 +108,7 @@ namespace CaravanAdventures
         {
             if (Find.World == null) return;
             Log.Message($"wp total: {Find.World.worldPawns.AllPawnsAliveOrDead.Count} wp alive: {Find.World.worldPawns.AllPawnsAlive.Count} dead: {Find.World.worldPawns.AllPawnsDead.Count}");
-            Log.Message("Faction player:");
-            Log.Message($"wp total: {Find.World.worldPawns.AllPawnsAliveOrDead.Where(x => x.Faction == Faction.OfPlayer).Count()} wp alive: {Find.World.worldPawns.AllPawnsAlive.Where(x => x.Faction == Faction.OfPlayer).Count()} dead: {Find.World.worldPawns.AllPawnsDead.Where(x => x.Faction == Faction.OfPlayer).Count()}");
+            Log.Message($"wp player: {Find.World.worldPawns.AllPawnsAliveOrDead.Where(x => x.Faction == Faction.OfPlayer).Count()} wp alive: {Find.World.worldPawns.AllPawnsAlive.Where(x => x.Faction == Faction.OfPlayer).Count()} dead: {Find.World.worldPawns.AllPawnsDead.Where(x => x.Faction == Faction.OfPlayer).Count()}");
         }
 
         public static void RunSavely(Action action, bool suppressError = false) => RunSavely(() => { action(); return 0; }, suppressError);
