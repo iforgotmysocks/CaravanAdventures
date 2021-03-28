@@ -11,7 +11,7 @@ namespace CaravanAdventures.CaravanStory.Quests
     class QuestCont_FriendlyCaravan : IExposable
     {
         public readonly float baseDelayFriendlyCaravan = Helper.Debug() ? 1000f : 60000f * 5f;
-        public readonly float baseDelayFurtherFriendlyCaravan = Helper.Debug() ? 60000f * 3f : 60000f * 10f;
+        public readonly float baseDelayFurtherFriendlyCaravan = Helper.Debug() ? 60000f * 3f : 60000f * 7f;
         public float friendlyCaravanCounter = -1f;
         public Pawn storyContactBondedPawn;
 
