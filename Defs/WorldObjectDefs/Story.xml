@@ -3,8 +3,8 @@
 <Defs>
   <WorldObjectDef>
     <defName>CAAncientMasterShrineWO</defName>
-    <label>Ancient Master Shrine</label>
-    <description>a dangerous and long forgotten shrine</description>
+    <label>Hint - Dangerous Shrine</label>
+    <description>A vague clue regarding tales of a dangerous shrine. The people providing the hint weren't very credible, so take care, as they also said that noone ever returned who dared to pilgrimage there. </description>
     <worldObjectClass>CaravanAdventures.CaravanStory.AncientMasterShrineWO</worldObjectClass>
     <!--<texture>World/WorldObjects/Ambush</texture>-->
     <texture>World/WorldObjects/TribalSettlement</texture>
@@ -51,7 +51,7 @@
 	<WorldObjectDef>
 		<defName>CAStoryVillageMP</defName>
 		<label>Friend's Village</label>
-		<description>The village of a friend of your's.</description>
+		<description>The village of your recent new friends.</description>
 		<worldObjectClass>CaravanAdventures.CaravanStory.StoryVillageMP</worldObjectClass>
 		<!--<texture>World/WorldObjects/Ambush</texture>-->
 		<expandingIcon>true</expandingIcon>

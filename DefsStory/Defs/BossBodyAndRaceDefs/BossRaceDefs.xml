@@ -4,7 +4,7 @@
   <ThingDef ParentName="BaseMechanoid">
     <defName>CADevourer</defName>
     <label>Devourer</label>
-    <description>Heavy combat mechanoids that glide on dozens of tiny legs. Their thick carpace and firepower makes them very effective against bunched-up static defenders. They are somewhat vulnerable to mobile hit-and-run tactics.</description>
+    <description>01010011 01100101 01100101 01101011 01101001 01101110 01100111 00100000 01101000 01110101 01101101 01100001 01101110 00100000 01100001 01101110 01101110 01101001 01101000 01101001 01101100 01100001 01110100 01101001 01101111 01101110 00101110 00101110 00101110 00100000 01010000 01110010 01101111 01100011 01100101 01110011 01110011 01101001 01101110 01100111 00101110 00101110 00101110</description>
     <statBases>
       <MoveSpeed>3.5</MoveSpeed>
       <ArmorRating_Blunt>0.65</ArmorRating_Blunt>

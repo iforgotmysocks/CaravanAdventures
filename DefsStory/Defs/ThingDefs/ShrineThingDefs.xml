@@ -33,7 +33,7 @@
 	<ThingDef ParentName="BuildingBase">
 		<defName>CARedLight</defName>
 		<label>Red light</label>
-		<description>Red lighting</description>
+		<description>A red light, it shines red</description>
 		<graphicData>
 			<texPath>Things/Buildings/Misc/Empty</texPath>
 			<graphicClass>Graphic_Single</graphicClass>

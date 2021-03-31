@@ -14,7 +14,7 @@
     <isBad>false</isBad>
     <everCurableByItem>false</everCurableByItem>
     <defaultLabelColor>(255, 20, 20)</defaultLabelColor>
-    <description>Enables machines to use advanced combat logic depending on the version, like connect to dormant networks, like missile silos and a range of other terrifying abilities.</description>
+    <description>Enables machines to use advanced combat logic depending on the version, connect to dormant networks and utilize a set of terrifying abilities.</description>
     <comps>
       <li Class="CaravanAdventures.CaravanStory.MechChips.HediffCompProperties_EXT1Basic">
         <compClass>CaravanAdventures.CaravanStory.MechChips.HediffComp_EXT1Basic</compClass>
@@ -40,7 +40,7 @@
     <isBad>false</isBad>
     <everCurableByItem>false</everCurableByItem>
     <defaultLabelColor>(255, 20, 20)</defaultLabelColor>
-    <description>Enables machines to use advanced combat logic depending on the version, like connect to dormant networks, like missile silos and a range of other terrifying abilities.</description>
+    <description>Enables machines to use advanced combat logic depending on the version, connect to dormant networks and utilize a set of terrifying abilities.</description>
     <comps>
       <li Class="CaravanAdventures.CaravanStory.MechChips.HediffCompProperties_EXT1Basic">
         <compClass>CaravanAdventures.CaravanStory.MechChips.HediffComp_EXT1Artillary</compClass>
@@ -65,7 +65,7 @@
     <isBad>false</isBad>
     <everCurableByItem>false</everCurableByItem>
     <defaultLabelColor>(255, 20, 20)</defaultLabelColor>
-    <description>Enables machines to use advanced combat logic depending on the version, like connect to dormant networks, like missile silos and a range of other terrifying abilities.</description>
+    <description>Enables machines to use advanced combat logic depending on the version, connect to dormant networks and utilize a set of terrifying abilities.</description>
     <comps>
       <li Class="CaravanAdventures.CaravanStory.MechChips.HediffCompProperties_EXT1Melee">
         <compClass>CaravanAdventures.CaravanStory.MechChips.HediffComp_EXT1Melee</compClass>
@@ -88,7 +88,7 @@
     <isBad>false</isBad>
     <everCurableByItem>false</everCurableByItem>
     <defaultLabelColor>(255, 20, 20)</defaultLabelColor>
-    <description>Enables machines to use advanced combat logic depending on the version, like connect to dormant networks, like missile silos and a range of other terrifying abilities.</description>
+    <description>Enables machines to use advanced combat logic depending on the version, connect to dormant networks and utilize a set of terrifying abilities.</description>
     <comps>
       <li>
         <compClass>CaravanAdventures.CaravanStory.MechChips.HediffComp_EXT1Laser</compClass>
@@ -110,7 +110,7 @@
     <isBad>false</isBad>
     <everCurableByItem>false</everCurableByItem>
     <defaultLabelColor>(255, 20, 20)</defaultLabelColor>
-    <description>Enables machines to use advanced combat logic depending on the version, like connect to dormant networks, like missile silos and a range of other terrifying abilities.</description>
+    <description>Enables machines to use advanced combat logic depending on the version, connect to dormant networks and utilize a set of terrifying abilities.</description>
     <comps>
       <li>
         <compClass>CaravanAdventures.CaravanStory.MechChips.HediffComp_EXT1Guardian</compClass>
@@ -132,7 +132,7 @@
     <isBad>false</isBad>
     <everCurableByItem>false</everCurableByItem>
     <defaultLabelColor>(255, 20, 20)</defaultLabelColor>
-    <description>Enables machines to use advanced combat logic depending on the version, like connect to dormant networks, like missile silos and a range of other terrifying abilities.</description>
+    <description>Enables machines to use advanced combat logic depending on the version, connect to dormant networks and utilize a set of terrifying abilities.</description>
     <comps>
       <li>
         <compClass>CaravanAdventures.CaravanStory.MechChips.HediffComp_EXT1Missile</compClass>

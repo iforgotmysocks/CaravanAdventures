@@ -33,17 +33,12 @@ using Verse.Sound;
 // - camp: doesn't uncover open zones when rock is removed
 
 // low prio:
-// - make configurable if sacrileg hunters are hostile towards the empire
 // - collect player responses and use them to determine the support strength for troups at shrines
 // - balance village hunter strenght depending on player character wealth
 // - export shrine stuff to seperate questCont
 
-// etc: 
-// {PAWN_pronoun} in text possible? -> GenderUtility.GetPronoun()
-
 // cleanup: 
 // - check why AncientAura_Old type was passed to the compprops (most likely overwritten by the xml class assignment)
-// - check if error notification about the new caravan event is still happening
 // - run test if generated mechs on a shrine map are still loaded and saved correctly
 // - move baseDelayNextShrineReveal and shrineDistance to settings
 

@@ -5,7 +5,7 @@
   <RecipeDef>
     <defName>Make_CASpacerTentSupplies</defName>
     <label>make spacer tent supplies</label>
-    <description>Make spacer tent supplies.</description>
+    <description>Create spacer tent supplies, used to build high quality camp sites.</description>
     <jobString>Making spacer tent supplies.</jobString>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <effectWorking>Cook</effectWorking>

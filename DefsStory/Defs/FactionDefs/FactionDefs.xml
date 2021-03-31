@@ -147,7 +147,7 @@
 	<FactionDef ParentName="CASacrilegHuntersFactionBase">
 		<defName>CASacrilegHunters</defName>
 		<label>Sacrileg Hunters</label>
-		<description>These people have lived here for decades or centuries, and have lost most of the technology that brought them to this world. They usually work with simple machinery and defend themselves with advanced gunpowder weapons.\n\nThey are concerned with the practical matters of trade, trust, and survival.\n\nThis particular group holds civil behavior in high regard.</description>
+		<description>A technologically well advanced faction which crashlanded on this rimworld with their generation ship. Their speciallization lies in retrieving old artifacts and hunting for treasure, which helped them enormously to get a quick foothold on this planet, which is covered with old structures.</description>
 		<!--<colorSpectrum>
 			<li>(0.35, 0.30, 0.60)</li>
 			<li>(0.45, 0.40, 0.90)</li>
@@ -175,7 +175,6 @@
 			</rulesStrings>
 		</rulePack>
 	</RulePackDef>
-
 
 	<FactionDef ParentName="FactionBase">
 		<defName>CAFriendlyMechanoid</defName>

@@ -25,7 +25,7 @@
   <AbilityDef ParentName="PsycastBase" MayRequire="Ludeon.RimWorld.Royalty">
     <defName>CAAncientMeditate</defName>
     <label>ancient meditation</label>
-    <description>Absorbs psychic energy from nature and restores it for the user. Other colonists standing close to the caster regain a small amount aswell.</description>
+    <description>Absorbs psychic energy from nature and restores it for the user. Other colonists standing close to the caster regain a small amount aswell. Requires the ancient gift.</description>
     <level>0</level>
     <iconPath>UI/Abilities/Meditate</iconPath>
     <canUseAoeToGetTargets>False</canUseAoeToGetTargets>
@@ -56,7 +56,7 @@
   <AbilityDef ParentName="PsycastBase" MayRequire="Ludeon.RimWorld.Royalty">
     <defName>CAAncientThunderBolt</defName>
     <label>ancient thunder bolt</label>
-    <description>Targettet thunder blast with area damage.</description>
+    <description>Powerful ancient psypower, a targettet thunder blast with area damage. Requires the ancient gift.</description>
     <level>0</level>
     <iconPath>UI/Abilities/Thunderbolt</iconPath>
     <canUseAoeToGetTargets>False</canUseAoeToGetTargets>
@@ -84,7 +84,7 @@
 	<AbilityDef ParentName="PsycastBase" MayRequire="Ludeon.RimWorld.Royalty">
     <defName>CAAncientMechSignal</defName>
     <label>ancient mech signal</label>
-    <description>Summons a group of mechanoid scythers to the casters aid.</description>
+    <description>Summons a group of mechanoid scythers to the caster's aid. Requires the ancient gift.</description>
     <level>0</level>
     <iconPath>UI/Abilities/CallScyther</iconPath>
     <canUseAoeToGetTargets>False</canUseAoeToGetTargets>
@@ -174,7 +174,7 @@
   <AbilityDef ParentName="PsycastBase" MayRequire="Ludeon.RimWorld.Royalty">
     <defName>CAAncientCoordinator</defName>
     <label>ancient coordinator</label>
-    <description>The caster aswell as 4 other colonists are granted the power of the ancient protective aura without any downsides as long as the caster is alive. However, every other pawn exceeding the limit of 5 will die.</description>
+    <description>The caster aswell as 4 other colonists are granted the power of the ancient protective aura without any downsides as long as the caster is alive. However, every other pawn exceeding the limit of 5 will die. Requires the ancient gift.</description>
     <level>0</level>
     <displayGizmoWhileUndrafted>True</displayGizmoWhileUndrafted>
     <disableGizmoWhileUndrafted>False</disableGizmoWhileUndrafted>
@@ -210,7 +210,7 @@
   <AbilityDef ParentName="PsycastBase" MayRequire="Ludeon.RimWorld.Royalty">
     <defName>CAAncientProtectiveAura</defName>
     <label>ancient protective aura</label>
-    <description>Allows the caster to channel psyfocus to directly strenghten the bodies capabilities in almost any humanly possible way. Agility, melee combat, aswell as endurance are highly increased. It also protects the target from a large part of incoming damage, fire , heals wounds over time (even permanent ones when active long enough). \n\nReduces the overall heat a pawn can handle and accelerates psyfocus drain by 2% / day while active. The effect of this spell disappears if it is cast a second time on the target or if the targetted pawn runs out of psyfocus. \n\nThe effect is weaker and drains more psyfocus when cast on pawns without the ancient gift.</description>
+    <description>Allows the caster to channel psyfocus to directly strenghten the bodies capabilities in almost any humanly possible way. Agility, melee combat, aswell as endurance are highly increased. It also protects the target from a large part of incoming damage, fire , heals wounds over time (even permanent ones when active long enough). \n\nReduces the overall heat a pawn can handle and accelerates psyfocus drain by 2% / day while active. The effect of this spell disappears if it is cast a second time on the target or if the targetted pawn runs out of psyfocus. \n\nRequires the ancient gift, unless enhanced by The Ancient Coordinator spell.</description>
     <level>0</level>
     <displayGizmoWhileUndrafted>True</displayGizmoWhileUndrafted>
     <disableGizmoWhileUndrafted>False</disableGizmoWhileUndrafted>

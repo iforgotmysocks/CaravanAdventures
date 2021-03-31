@@ -17,7 +17,7 @@
   <ThingDef ParentName="CATentBase">
     <defName>CAMakeshiftTentWall</defName>
     <label>tent wall</label>
-    <description>Fabric for putting up tents quickly.</description>
+    <description>Makeshift fabric tent wall, quickly assembled with all kinds of cheap fibres.</description>
     <thingClass>Building</thingClass>
     <!--<category>Building</category>-->
     <graphicData>
@@ -91,7 +91,7 @@
   <ThingDef ParentName="ResourceBase">
     <defName>CAMakeshiftTentLeather</defName>
     <label>Makeshift leather</label>
-    <description>Makeshift tent leather stitched together by all sorts of leathers</description>
+    <description>Makeshift tent leather stitched together by all sorts of leathers.</description>
     <graphicData>
       <texPath>Things/Item/Resource/Leather</texPath>
       <graphicClass>Graphic_StackCount</graphicClass>

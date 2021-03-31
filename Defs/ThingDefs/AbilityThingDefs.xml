@@ -3,7 +3,7 @@
 	<ThingDef ParentName="BuildingBase">
 		<defName>CAMagicLight</defName>
 		<label>magical light</label>
-		<description>Magical light.</description>
+		<description>Brightens the darkness and follows it's assigned target.</description>
 		<graphicData>
 			<texPath>Things/Buildings/Misc/Empty</texPath>
 			<graphicClass>Graphic_Single</graphicClass>

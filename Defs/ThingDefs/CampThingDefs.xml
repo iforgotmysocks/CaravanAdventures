@@ -326,7 +326,7 @@
   <ThingDef ParentName="CATentBase">
     <defName>CACampfireRoast</defName>
     <label>campfire with roast</label>
-    <description>Cooks meals and produces heat, and burns out after a few days. As with all heat sources, it must be placed indoors so it has a closed space to heat. Refuelable.</description>
+    <description>Heart of each camp, a cosy campfire with a modern grill to get those tastey grill snacks done. Pawn can also use it to manage the camp.</description>
     <thingClass>Building_WorkTable</thingClass>
     <category>Building</category>
     <graphicData>
@@ -692,7 +692,7 @@
   <ThingDef ParentName="CATentBase">
     <defName>CAOrbitalTradeBeacon</defName>
     <label>orbital trade beacon</label>
-    <description>Required for orbital trading. You can only sell goods to orbital traders if they're near an orbital trade beacon. Can be placed indoors.</description>
+    <description>Required for orbital trading. You can only sell goods to orbital traders if they're near an orbital trade beacon.</description>
     <thingClass>Building_OrbitalTradeBeacon</thingClass>
     <graphicData>
       <texPath>Things/Building/Misc/DropBeacon</texPath>
@@ -1038,7 +1038,7 @@
   <ThingDef ParentName="CABedBase">
     <defName>CASpacerBedroll</defName>
     <label>spacer bedroll</label>
-    <description>A simple bed that lays on the floor, usually made of cloth or leather, often lined with fur. It is lightweight and can be rolled up for easy transport, but it is not quite as comfortable as a typical bed. Caravans can use bedrolls while traveling for better sleep.</description>
+    <description>A high quality camping bed. Rather comfy.</description>
     <graphicData>
       <texPath>Things/Building/Furniture/Bed/Bedroll</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
@@ -1084,7 +1084,7 @@
   <ThingDef ParentName="CABedBase">
     <defName>CASpacerBedrollDouble</defName>
     <label>spacer double bedroll</label>
-    <description>A simple double-wide bed that lays on the floor, usually made of cloth or leather, often lined with fur. It is lightweight and can be rolled up for easy transport, but it is not quite as comfortable as a typical bed. Caravans can use bedrolls while traveling for better sleep.</description>
+    <description>A high quality camping double-bed. Rather comfy.</description>
     <graphicData>
       <texPath>Things/Building/Furniture/Bed/BedrollDouble</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
