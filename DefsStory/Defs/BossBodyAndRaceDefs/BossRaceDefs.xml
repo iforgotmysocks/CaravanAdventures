@@ -88,7 +88,7 @@
   <ThingDef ParentName="BaseMechanoidWalker">
     <defName>CACrystalScythe</defName>
     <label>Crystal scythe</label>
-    <description>Fast, spindly, and deadly. That's all you can tell. There isn't any information about those things out there. Best keep ur distance.</description>
+    <description>01010011 01100101 01100101 01101011 01101001 01101110 01100111 00100000 01101000 01110101 01101101 01100001 01101110 00100000 01100001 01101110 01101110 01101001 01101000 01101001 01101100 01100001 01110100 01101001 01101111 01101110 00101110 00101110 00101110 00100000 01010000 01110010 01101111 01100011 01100101 01110011 01110011 01101001 01101110 01100111 00101110 00101110 00101110</description>
     <generateCommonality>0</generateCommonality>
     <statBases>
       <MoveSpeed>5.5</MoveSpeed>
@@ -177,7 +177,7 @@
   <ThingDef ParentName="BaseMechanoidWalker">
     <defName>CAHarbinger</defName>
     <label>Harbinger</label>
-    <description>Todo</description>
+    <description>01010011 01100101 01100101 01101011 01101001 01101110 01100111 00100000 01101000 01110101 01101101 01100001 01101110 00100000 01100001 01101110 01101110 01101001 01101000 01101001 01101100 01100001 01110100 01101001 01101111 01101110 00101110 00101110 00101110 00100000 01010000 01110010 01101111 01100011 01100101 01110011 01110011 01101001 01101110 01100111 00101110 00101110 00101110</description>
     <generateCommonality>0</generateCommonality>
     <statBases>
       <MoveSpeed>1.9</MoveSpeed>
@@ -255,8 +255,8 @@
       <li Class="CaravanAdventures.CaravanStory.MechChips.MechChipModExt">
         <mechChipDefs>
           <li>CAEXT1Basic</li>
+          <li>CAEXT1Laser</li>
           <li>CAEXT1Melee</li>
-          <li>CAEXT1Guardian</li>
         </mechChipDefs>
       </li>
     </modExtensions>
@@ -268,7 +268,7 @@
   <ThingDef ParentName="BaseMechanoidWalker">
     <defName>CAHavoc</defName>
     <label>Havoc</label>
-    <description>Todo</description>
+    <description>01010011 01100101 01100101 01101011 01101001 01101110 01100111 00100000 01101000 01110101 01101101 01100001 01101110 00100000 01100001 01101110 01101110 01101001 01101000 01101001 01101100 01100001 01110100 01101001 01101111 01101110 00101110 00101110 00101110 00100000 01010000 01110010 01101111 01100011 01100101 01110011 01110011 01101001 01101110 01100111 00101110 00101110 00101110</description>
     <generateCommonality>0</generateCommonality>
     <statBases>
       <MoveSpeed>1.9</MoveSpeed>
@@ -347,7 +347,6 @@
         <mechChipDefs>
           <li>CAEXT1Basic</li>
           <li>CAEXT1Missile</li>
-          <li>CAEXT1Guardian</li>
         </mechChipDefs>
       </li>
     </modExtensions>
@@ -359,7 +358,7 @@
   <ThingDef ParentName="BaseMechanoid">
     <defName>CAEndBossMech</defName>
     <label>Judgment</label>
-    <description>Heavy combat mechanoids that glide on dozens of tiny legs. Their thick carpace and firepower makes them very effective against bunched-up static defenders. They are somewhat vulnerable to mobile hit-and-run tactics.</description>
+    <description>01010011 01100101 01100101 01101011 01101001 01101110 01100111 00100000 01101000 01110101 01101101 01100001 01101110 00100000 01100001 01101110 01101110 01101001 01101000 01101001 01101100 01100001 01110100 01101001 01101111 01101110 00101110 00101110 00101110 00100000 01010000 01110010 01101111 01100011 01100101 01110011 01110011 01101001 01101110 01100111 00101110 00101110 00101110</description>
     <generateCommonality>0</generateCommonality>
     <statBases>
       <MoveSpeed>1.9</MoveSpeed>
@@ -431,7 +430,7 @@
         <mechChipDefs>
           <li>CAEXT1Basic</li>
           <li>CAEXT1Laser</li>
-          <li>CAEXT1Missile</li>
+          <li>CAEXT1Artillary</li>
           <li>CAEXT1Guardian</li>
         </mechChipDefs>
       </li>

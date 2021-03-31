@@ -74,7 +74,7 @@ namespace CaravanAdventures.CaravanStory.MechChips.Abilities
                 mote.color = Color.red;
                 GenSpawn.Spawn(mote, instigator.Position, instigator.Map, WipeMode.Vanish);
 
-                if (targetPawn != null) targetPawn.TakeDamage(new DamageInfo(DamageDefOf.Burn, damage, 0.5f, -1, instigator, targetPawn.health.hediffSet.GetRandomNotMissingPart(DamageDefOf.Burn, BodyPartHeight.Undefined, BodyPartDepth.Outside)));
+                if (targetPawn != null) targetPawn.TakeDamage(new DamageInfo(DamageDefOf.Burn, damage, 0.2f, -1, instigator, targetPawn.health.hediffSet.GetRandomNotMissingPart(DamageDefOf.Burn, BodyPartHeight.Undefined, BodyPartDepth.Outside)));
                 else target.TakeDamage(new DamageInfo(DamageDefOf.Crush, 4, 0.5f, -1, instigator));
 
                 return true;

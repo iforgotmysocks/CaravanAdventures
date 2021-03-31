@@ -330,7 +330,7 @@ namespace CaravanAdventures.CaravanStory
         public void ResetStoryVars()
         {
             storyFlags.Keys.ToList().ForEach(key => storyFlags[key] = false);
-            mechBossKillCounters.Keys.ToList().ForEach(key => mechBossKillCounters[key] = 0);
+            mechBossKillCounters.Clear();
 
             shrineRevealCounter = -1;
             ticks = -1;
