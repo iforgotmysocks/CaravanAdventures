@@ -67,9 +67,18 @@ namespace CaravanAdventures.CaravanImmersion
         {
             if (ticks > 1200)
             {
-                // just debug stuff -> todo figure out why Outsider is used for non player faction pawns!
-                //CleanUpOutsiderRelations();
                 var playerPawns = PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction.Where(x => x.RaceProps.Humanlike).ToList();
+                playerPawns.RemoveAll(x =>
+                {
+                    if (CompatibilityDefOf.CACompatDef.raceDefsToExcludeFromTravelCompanions.Contains(x.def)) return true;
+                    foreach (var modExtsToCheck in CompatibilityDefOf.CACompatDef.racesWithModExtsToExcludeFromTravelCompanions)
+                    {
+                        if (x.def.modExtensions != null 
+                            && x.def.modExtensions.Any(modExt => modExt?.GetType()?.ToString() == modExtsToCheck)) 
+                                return true;
+                    }
+                    return false;
+                });
 
                 foreach (var mainPawn in playerPawns)
                 {

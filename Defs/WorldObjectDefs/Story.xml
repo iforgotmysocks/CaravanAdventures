@@ -4,7 +4,7 @@
   <WorldObjectDef>
     <defName>CAAncientMasterShrineWO</defName>
     <label>Hint - Dangerous Shrine</label>
-    <description>A vague clue regarding tales of a dangerous shrine. The people providing the hint weren't very credible, so take care, as they also said that noone ever returned who dared to pilgrimage there. </description>
+    <description>A vague clue regarding tales of a dangerous shrine. The people providing the hint weren't very credible, so take care, as they also said that noone ever returned who dared to pilgrimage there.</description>
     <worldObjectClass>CaravanAdventures.CaravanStory.AncientMasterShrineWO</worldObjectClass>
     <!--<texture>World/WorldObjects/Ambush</texture>-->
     <texture>World/WorldObjects/TribalSettlement</texture>

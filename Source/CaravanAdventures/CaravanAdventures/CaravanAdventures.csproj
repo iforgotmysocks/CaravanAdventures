@@ -172,6 +172,7 @@
     <Compile Include="CaravanStory\StoryWC.cs" />
     <Compile Include="CaravanStory\StoryStart.cs" />
     <Compile Include="CaravanStory\TimedDetectionPatrols.cs" />
+    <Compile Include="CompatibilityDef.cs" />
     <Compile Include="CompCache.cs" />
     <Compile Include="DLog.cs" />
     <Compile Include="ExclusionModExt.cs" />

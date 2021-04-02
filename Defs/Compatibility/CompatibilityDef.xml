@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+  <!-- This def is used for mod compatibility. 
+  To exclude races from TravelCompanions or to add 
+  new mechanoids to the bounty system, you can patch this def.-->
+  <CaravanAdventures.CompatibilityDef>
+    <defName>CACompatDef</defName>
+
+    <!-- add race defs to exclude here -->
+    <raceDefsToExcludeFromTravelCompanions>
+      <li>RSPeacekeeperDefender</li>
+    </raceDefsToExcludeFromTravelCompanions>
+
+    <!-- add a race def's mod extention, which should be used to identify all race defs instead here, beware to include the namespace -->
+    <racesWithModExtsToExcludeFromTravelCompanions>
+      <li>RimsecSecurity.RSPeacekeeperModExt</li>
+    </racesWithModExtsToExcludeFromTravelCompanions>
+
+    <!-- add new mechanoid race defs with their bounty point rewards for a kill. Default bounties range from 12 to 45 points -->
+    <mechanoidBountyToAdd>
+      <li>
+        <raceDefName>CAEndBossMech</raceDefName>
+        <bountyPoints>3000</bountyPoints>
+      </li>
+    </mechanoidBountyToAdd>
+  </CaravanAdventures.CompatibilityDef>
+
+</Defs>

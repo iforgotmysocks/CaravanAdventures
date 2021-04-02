@@ -38,7 +38,7 @@ namespace CaravanAdventures.CaravanStory
             return false;
         }
 
-        internal static IntVec3 GetAllowedMapSizeConcideringSettings()
+        public static IntVec3 GetAllowedMapSizeConcideringSettings()
         {
             var testedMaxSize = new IntVec3(275, 1, 275);
             var resultSize = Find.World.info.initialMapSize;
@@ -50,15 +50,19 @@ namespace CaravanAdventures.CaravanStory
             return resultSize;
         }
 
-        internal static void AddBountyPointsForKilledMech(Pawn mech)
+        public static void AddBountyPointsForKilledMech(Pawn mech)
         {
             if (mech.def == ThingDef.Named("Mech_Pikeman")) CompCache.BountyWC.BountyPoints += 7;
             else if (mech.def == ThingDef.Named("Mech_Scyther")) CompCache.BountyWC.BountyPoints += 10;
             else if (mech.def == ThingDef.Named("Mech_Lancer")) CompCache.BountyWC.BountyPoints += 15;
             else if (mech.def == ThingDef.Named("Mech_Centipede")) CompCache.BountyWC.BountyPoints += 45;
             else if (CompCache.StoryWC.BossDefs().Contains(mech.def)) CompCache.BountyWC.BountyPoints += 500; // sdt boss
-            //else if (mech.def == ThingDef.Named("Endboss")) CompCache.BountyWC.BountyPoints += 3000; // end boss
-            else CompCache.BountyWC.BountyPoints += 12;
+            else
+            {
+                var addedBounty = CompatibilityDefOf.CACompatDef.mechanoidBountyToAdd.FirstOrDefault(x => x?.raceDefName != null && x?.raceDefName == mech.def.defName);
+                if (addedBounty != null) CompCache.BountyWC.BountyPoints += addedBounty.bountyPoints;
+                else CompCache.BountyWC.BountyPoints += 12;
+            }
         }
 
         public static void GetAssistanceFromAlliedFaction(Faction faction, Map map, float pointsMin = 4000, float pointsMax = 5000, IntVec3 spawnSpot = default)
@@ -124,7 +128,7 @@ namespace CaravanAdventures.CaravanStory
             faction.TryAffectGoodwillWith(Faction.OfPlayer, amount);
         }
 
-        internal static void RestartStory()
+        public static void RestartStory()
         {
             if (CompCache.StoryWC.questCont.Village.StoryContact != null) CompCache.StoryWC.questCont.Village.StoryContact.Destroy();
             CompCache.StoryWC.questCont.Village.StoryContact = null;
@@ -168,7 +172,7 @@ namespace CaravanAdventures.CaravanStory
             CompCache.StoryWC.SetSFsStartingWith(CompCache.StoryWC.BuildMaxShrinePrefix());
         }
 
-        internal static IEnumerable<ThingDef> ReadBossDefNames()
+        public static IEnumerable<ThingDef> ReadBossDefNames()
         {
             foreach (var kind in DefDatabase<PawnKindDef>.AllDefsListForReading)
             {
