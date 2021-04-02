@@ -182,7 +182,7 @@ namespace CaravanAdventures.CaravanStory
 
             if (!RoyaltyActiveCheck()) return;
 
-            if (ticks == -1) StoryUtility.EnsureSacrilegHunters();
+            if (ticks == -1) StoryUtility.EnsureSacrilegHunters(FactionRelationKind.Neutral);
 
             if (doEarthQuake && ticks > 0 && ticks <= 1200)
             {
