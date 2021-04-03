@@ -19,14 +19,10 @@
 
     <!-- add new mechanoid race defs with their bounty point rewards for a kill. Default bounties range from 12 to 45 points -->
     <mechanoidBountyToAdd>
-      <!--<li>
-        <raceDefName>Mech_Lancer</raceDefName>
-        <bountyPoints>15</bountyPoints>
-      </li>
       <li>
         <raceDefName>CABossMechHavoc</raceDefName>
         <bountyPoints>500</bountyPoints>
-      </li>-->
+      </li>
     </mechanoidBountyToAdd>
   </CaravanAdventures.CompatibilityDef>
 
