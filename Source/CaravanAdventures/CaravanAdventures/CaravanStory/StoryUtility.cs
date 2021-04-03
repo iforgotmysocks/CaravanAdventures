@@ -51,12 +51,13 @@ namespace CaravanAdventures.CaravanStory
         }
 
         public static void AddBountyPointsForKilledMech(Pawn mech)
-        {
+        {   
             if (mech.def == ThingDef.Named("Mech_Pikeman")) CompCache.BountyWC.BountyPoints += 7;
             else if (mech.def == ThingDef.Named("Mech_Scyther")) CompCache.BountyWC.BountyPoints += 10;
             else if (mech.def == ThingDef.Named("Mech_Lancer")) CompCache.BountyWC.BountyPoints += 15;
             else if (mech.def == ThingDef.Named("Mech_Centipede")) CompCache.BountyWC.BountyPoints += 45;
-            else if (CompCache.StoryWC.BossDefs().Contains(mech.def)) CompCache.BountyWC.BountyPoints += 500; // sdt boss
+            else if (mech.def == ThingDef.Named("CAEndBossMech")) CompCache.BountyWC.BountyPoints += 3000;
+            else if (CompCache.StoryWC.BossDefs().Contains(mech.def)) CompCache.BountyWC.BountyPoints += 500;
             else
             {
                 var addedBounty = CompatibilityDefOf.CACompatDef.mechanoidBountyToAdd.FirstOrDefault(x => x?.raceDefName != null && x?.raceDefName == mech.def.defName);

@@ -144,9 +144,18 @@ namespace CaravanAdventures.CaravanStory.Quests
                 raidArrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn
             };
 
-            StoryDefOf.CAFriendlyCaravan.Worker.TryExecute(incidentParms);
-            CompCache.StoryWC.SetSF("TradeCaravan_Arrived");
-            friendlyCaravanCounter = baseDelayFurtherFriendlyCaravan;
+            if (StoryDefOf.CAFriendlyCaravan.Worker.TryExecute(incidentParms))
+            {
+                DLog.Message($"CA trade caravan created successfully");
+                CompCache.StoryWC.SetSF("TradeCaravan_Arrived");
+                friendlyCaravanCounter = baseDelayFurtherFriendlyCaravan;
+            }
+            else
+            {
+                DLog.Warning($"CA Trade caravan couldn't be generated for quest, retrying in 20 seconds");
+                friendlyCaravanCounter = 1200;
+            }
+           
         }
 
     
