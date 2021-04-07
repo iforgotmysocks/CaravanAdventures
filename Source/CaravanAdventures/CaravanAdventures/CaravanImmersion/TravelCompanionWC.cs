@@ -70,7 +70,7 @@ namespace CaravanAdventures.CaravanImmersion
                 var playerPawns = PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction.Where(x => x.RaceProps.Humanlike).ToList();
                 playerPawns.RemoveAll(x =>
                 {
-                    if (CompatibilityDefOf.CACompatDef.raceDefsToExcludeFromTravelCompanions.Contains(x.def)) return true;
+                    if (CompatibilityDefOf.CACompatDef.raceDefsToExcludeFromTravelCompanions.Contains(x.def.defName)) return true;
                     foreach (var modExtsToCheck in CompatibilityDefOf.CACompatDef.racesWithModExtsToExcludeFromTravelCompanions)
                     {
                         if (x.def.modExtensions != null 

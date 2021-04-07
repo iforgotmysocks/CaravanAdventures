@@ -17,6 +17,11 @@
       <li>RimsecSecurity.RSPeacekeeperModExt</li>
     </racesWithModExtsToExcludeFromTravelCompanions>
 
+    <!-- if ur race defs belong to a new faction that isn't mechanoids, add the faction def here-->
+    <additionalBountyFactionDefsToAdd>
+      <li>VFE_Mechanoid</li>
+    </additionalBountyFactionDefsToAdd>
+    
     <!-- add new mechanoid race defs with their bounty point rewards for a kill. Default bounties range from 12 to 45 points -->
     <mechanoidBountyToAdd>
       <li>

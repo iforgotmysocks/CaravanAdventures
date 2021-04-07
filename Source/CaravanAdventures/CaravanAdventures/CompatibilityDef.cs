@@ -17,8 +17,9 @@ namespace CaravanAdventures
 
     class CompatibilityDef : Def
     {
+        public List<string> additionalBountyFactionDefsToAdd = new List<string>();
         public List<MechanoidBounty> mechanoidBountyToAdd = new List<MechanoidBounty>();
-        public List<ThingDef> raceDefsToExcludeFromTravelCompanions = new List<ThingDef>();
+        public List<string> raceDefsToExcludeFromTravelCompanions = new List<string>();
         public List<string> racesWithModExtsToExcludeFromTravelCompanions = new List<string>();
     }
 
