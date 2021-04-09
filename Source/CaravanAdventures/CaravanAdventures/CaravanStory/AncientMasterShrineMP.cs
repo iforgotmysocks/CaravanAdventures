@@ -35,6 +35,7 @@ namespace CaravanAdventures.CaravanStory
         private bool abandonShrine = false;
 
         public override MapGeneratorDef MapGeneratorDef => CaravanStorySiteDefOf.CAAncientMasterShrineMG;
+        public bool BossDefeatedAndRewardsGiven { get => bossDefeatedAndRewardsGiven; set => bossDefeatedAndRewardsGiven = value; }
 
         public override void ExposeData()
         {
@@ -271,6 +272,7 @@ namespace CaravanAdventures.CaravanStory
             DLog.Message($"is null {lastJudgmentMP == null} destroyed {(lastJudgmentMP?.Destroyed == true ? "true" : "false")}");
             if (lastJudgmentMP == null || (lastJudgmentMP != null && lastJudgmentMP.Destroyed))
             {
+                if (!CompCache.StoryWC.storyFlags["Judgment_PortalRevealed"]) CompCache.StoryWC.SetSF("Judgment_PortalRevealed");
                 LongEventHandler.QueueLongEvent(delegate ()
                 {
                     CompCache.StoryWC.questCont.LastJudgment.CreateLastJudgment(ref lastJudgmentMP, Tile);
@@ -339,11 +341,9 @@ namespace CaravanAdventures.CaravanStory
         private void CheckBossDefeated()
         {
             // todo - test if .destroyed needs to be added (in case of the body being completely nuked)?
-            if ((boss != null && !boss.Dead) || (!bossWasSpawned && boss == null && CompCache.StoryWC.storyFlags[CompCache.StoryWC.BuildCurrentShrinePrefix() + "Created"]) || bossDefeatedAndRewardsGiven) return;
-
+            if ((boss != null && !boss.Dead) || (!bossWasSpawned && boss == null && CompCache.StoryWC.storyFlags[CompCache.StoryWC.BuildCurrentShrinePrefix() + "Created"]) || bossDefeatedAndRewardsGiven || lastJudgementEntraceWasSpawned) return;
             var gifted = StoryUtility.GetGiftedPawn();
             if (gifted == null) Log.Warning("gifted pawn was null, which shouldn't happen. Spell was stored for when another gifted pawn awakes");
-
             AbilityDef spell = null;
             var endSpell = CaravanAbilities.AbilityDefOf.Named("CAAncientCoordinator");
             //Log.Message($"Unlocked spellcount: {CompCache.StoryWC.GetUnlockedSpells().Count} Database count: {DefDatabase<AbilityDef>.AllDefsListForReading.Where(x => x.defName.StartsWith("CAAncient")).Count()}");
@@ -357,14 +357,11 @@ namespace CaravanAdventures.CaravanStory
                 spell = endSpell;
                 LearnSpell(gifted, spell);
             }
-
             CompCache.StoryWC.SetShrineSF("Completed");
             CompCache.StoryWC.IncreaseShrineCompleteCounter();
             CompCache.StoryWC.mechBossKillCounters[boss.kindDef] = CompCache.StoryWC.mechBossKillCounters.TryGetValue(boss.kindDef, out var result) ? result + 1 : 1;
-
             BossDefeatedDialog(gifted, boss, spell);
             bossDefeatedAndRewardsGiven = true;
-
             StoryUtility.AdjustGoodWill(75);
             Quests.QuestUtility.AppendQuestDescription(Quests.StoryQuestDefOf.CA_FindAncientShrine,
                 (CompCache.StoryWC.GetCurrentShrineCounter(true) - 1 > CompCache.StoryWC.GetShrineMaxiumum
@@ -378,11 +375,11 @@ namespace CaravanAdventures.CaravanStory
                     CompCache.StoryWC.GetCurrentShrineCounter(true) - 1,
                     gifted.NameShortColored,
                     boss.LabelCap,
-                    spell.label.CapitalizeFirst().Colorize(Color.cyan)
+                    spell != null ? spell.label.CapitalizeFirst().Colorize(Color.cyan) : ""
                 )
             );
 
-            if (CompCache.StoryWC.GetCurrentShrineCounter() > CompCache.StoryWC.GetShrineMaxiumum) CompCache.StoryWC.ResetCurrentShrineFlags();
+            if (CompCache.StoryWC.GetCurrentShrineCounter(true) > CompCache.StoryWC.GetShrineMaxiumum) CompCache.StoryWC.ResetCurrentShrineFlags();
         }
 
         private void LearnSpell(Pawn gifted, AbilityDef spell)

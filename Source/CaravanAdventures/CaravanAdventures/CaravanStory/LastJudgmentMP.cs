@@ -99,7 +99,7 @@ namespace CaravanAdventures.CaravanStory
 
 			BossDefeatedDialog(gifted, endBoss, spell);
 
-			StoryUtility.AdjustGoodWill(75);
+            StoryUtility.AdjustGoodWill(75);
 			Quests.QuestUtility.AppendQuestDescription(Quests.StoryQuestDefOf.CA_FindAncientShrine,
 				(CompCache.StoryWC.GetCurrentShrineCounter(true) - 1 > CompCache.StoryWC.GetShrineMaxiumum
 					? "Story_Shrine1_QuestRewardUpdate_1_WithoutSpell"
@@ -158,8 +158,8 @@ namespace CaravanAdventures.CaravanStory
 
 		private void CheckStoryOverDialogAndDisableApocalypse()
 		{
+			StoryUtility.GenerateStoryContact();
 			var storyChar = CompCache.StoryWC.questCont.Village.StoryContact;
-
 			var diaNode = new DiaNode("Story_Shrine5_Apocalypse_Dia1_1".Translate(storyChar.NameShortColored));
 			diaNode.options.Add(new DiaOption("Story_Shrine5_Apocalypse_Dia1_1_Option1".Translate()) { resolveTree = true });
 

@@ -26,7 +26,7 @@ namespace CaravanAdventures.CaravanImprovements
             Scribe_Values.Look(ref allowNightTravel, "allowNightTravel", false);
         }
 
-        public void UpdateCampCostAndSupplies(Caravan caravan)
+        private void UpdateCampCostAndSupplies(Caravan caravan)
         {
             campCost = CampBuilder.PreemptivelyCalculateCampCosts(caravan);
             suppliesAvailable = caravan.AllThings?.Where(thing => thing.def == CampDefOf.CASpacerTentSupplies)?.Select(thing => thing?.stackCount)?.Sum() ?? 0;
@@ -44,7 +44,7 @@ namespace CaravanAdventures.CaravanImprovements
             LongEventHandler.QueueLongEvent(delegate ()
             {
                 var map = GetOrGenerateMapUtility.GetOrGenerateMap(caravan.Tile, ModSettings.useCustomMapSize ? ModSettings.campMapSize : Find.World.info.initialMapSize, null);
-                if (createCamp) new CampBuilder(caravan, map).GenerateCamp();
+                if (createCamp) CampBuilderHook(caravan, map).GenerateCamp();
             }, "GeneratingMap", true, new Action<Exception>(GameAndMapInitExceptionHandlers.ErrorWhileGeneratingMap), true);
             LongEventHandler.QueueLongEvent(delegate ()
             {
@@ -55,6 +55,11 @@ namespace CaravanAdventures.CaravanImprovements
                 CaravanEnterMapUtility.Enter(caravan, map, CaravanEnterMode.Center, CaravanDropInventoryMode.DoNotDrop, false, (IntVec3 x) => x.GetRoom(map, RegionType.Set_Passable).CellCount >= 600);
                 CameraJumper.TryJump(t);
             }, "SpawningColonists", true, new Action<Exception>(GameAndMapInitExceptionHandlers.ErrorWhileGeneratingMap), true);
+        }
+
+        private static CampBuilder CampBuilderHook(Caravan caravan, Map map)
+        {
+            return new CampBuilder(caravan, map);
         }
 
         public override IEnumerable<Gizmo> GetCaravanGizmos(Caravan caravan)
