@@ -162,6 +162,8 @@
 		</weaponTags>
 		<apparelMoney>700~1200</apparelMoney>
 		<apparelTags>
+       <li>IndustrialBasic</li>
+      <li>IndustrialAdvanced</li>
 			<li>IndustrialMilitaryBasic</li>
 			<li>BeltDefensePop</li>
 		</apparelTags>
@@ -191,6 +193,8 @@
 		<weaponMoney>200~200</weaponMoney>
 		<apparelMoney>400~600</apparelMoney>
 		<apparelTags>
+      <li>IndustrialBasic</li>
+      <li>IndustrialAdvanced</li>
 			<li>IndustrialMilitaryBasic</li>
 			<li>IndustrialMilitaryAdvanced</li>
 			<li>BeltDefensePop</li>
@@ -221,6 +225,10 @@
     </weaponTags>
 		<weaponMoney>250~400</weaponMoney>
     <apparelMoney>200~400</apparelMoney>
+    <apparelTags>
+      <li>IndustrialBasic</li>
+      <li>IndustrialAdvanced</li>
+		</apparelTags>
     <apparelAllowHeadgearChance>0.4</apparelAllowHeadgearChance>
     <techHediffsChance>0.06</techHediffsChance>
     <techHediffsMoney>50~600</techHediffsMoney>
@@ -238,6 +246,8 @@
 		<isFighter>true</isFighter>
 		<gearHealthRange>0.6~2</gearHealthRange>
 		<apparelTags>
+      <li>IndustrialBasic</li>
+      <li>IndustrialAdvanced</li>
 			<li>IndustrialMilitaryBasic</li>
 			<li>BeltDefensePop</li>
 		</apparelTags>

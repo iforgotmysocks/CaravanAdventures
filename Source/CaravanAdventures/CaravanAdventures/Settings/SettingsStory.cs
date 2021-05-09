@@ -56,6 +56,10 @@ namespace CaravanAdventures.Settings
             options.Label("Multiplier: " + Math.Round(ModSettings.hunterAssistanceMult, 2) + "  (default: 1.2)");
             ModSettings.hunterAssistanceMult = options.Slider(ModSettings.hunterAssistanceMult, 0.2f, 2f);
             options.Gap();
+            //options.Label("Max room combat points (x50 for huge shrine crypts):".Colorize(Color.red), 40f, "Only needed for crazy game setups with insane wealth.");
+            //options.Label("Points: " + Math.Round(ModSettings.maxShrineCombatPoints, 0) + "  (default: 10000)");
+            //ModSettings.maxShrineCombatPoints = options.Slider(ModSettings.maxShrineCombatPoints, 300f, 50000f);
+            //options.Gap();
             options.CheckboxLabeled("Issue further shrine locations after story is complete", ref ModSettings.issueFurtherShrineLocationsAfterStoryEnd);
             options.CheckboxLabeled("Limit larger map sizes to tested medium-large map size for shrines", ref ModSettings.limitLargeMapSizesToTestedSize);
 

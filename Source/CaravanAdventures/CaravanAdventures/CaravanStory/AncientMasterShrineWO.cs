@@ -320,12 +320,13 @@ namespace CaravanAdventures.CaravanStory
 
             DLog.Message($"Points before: {defaultPawnGroupMakerParms.points} roomcells: {room.CellCount}");
 
-            var calcedFromRoomSize = Convert.ToInt32(defaultPawnGroupMakerParms.points * (CompCache.StoryWC.GetCurrentShrineCounter() * ModSettings.shrineMechDifficultyMultiplier) * ((room == mainRoom ? Math.Max(room.CellCount, 3000) : room.CellCount) / 1000f));
-            var minPoints = room == mainRoom ? 2000 : 130;
+            var calcedFromRoomSize = Convert.ToInt32(defaultPawnGroupMakerParms.points * (CompCache.StoryWC.GetCurrentShrineCounter() * ModSettings.shrineMechDifficultyMultiplier) * ((room.CellCount >= minMainRoomSize ? Math.Max(room.CellCount, 3000) : room.CellCount) / 1000f));
+            var minPoints = room.CellCount >= minMainRoomSize ? 2000 : 130;
 
             DLog.Message($"from roomsize: {calcedFromRoomSize} minpoints: {minPoints}");
-            var selected = Math.Max(calcedFromRoomSize, minPoints);
+            float selected = Math.Max(calcedFromRoomSize, minPoints);
             if (removedHives) selected += 200;
+            selected = Math.Min(selected, room.CellCount >= minMainRoomSize ? ModSettings.maxShrineCombatPoints * 50f : ModSettings.maxShrineCombatPoints);
 
             var mechPawnGroupMakerParams = new PawnGroupMakerParms
             {

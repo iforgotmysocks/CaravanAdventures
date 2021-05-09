@@ -86,6 +86,8 @@ namespace CaravanAdventures
         // shrines
         public static float shrineMechDifficultyMultiplier = 1.2f;
         public static float hunterAssistanceMult = 1.2f;
+        // todo make configurable
+        public static float maxShrineCombatPoints = 10000f;
 
         // bounty
         public static float envoyDurationTimeForBountyRelationHagglingInDays = 1f;
@@ -169,6 +171,7 @@ namespace CaravanAdventures
             // shrines
             Scribe_Values.Look(ref shrineMechDifficultyMultiplier, "shrineMechDifficultyMultiplier", 1.2f);
             Scribe_Values.Look(ref hunterAssistanceMult, "hunterAssistanceMult", 1.2f);
+            //Scribe_Values.Look(ref maxShrineCombatPoints, "maxShrineCombatPoints", 10000f);
 
             // bounty
             Scribe_Values.Look(ref envoyDurationTimeForBountyRelationHagglingInDays, "envoyDurationTimeForBountyRelationHagglingInDays", 1f);
@@ -235,9 +238,12 @@ namespace CaravanAdventures
 
             Widgets.CheckboxLabeled(BRect(0, lastRect.y, options.ColumnWidth / 5 - 20, lastRect.height), "Debug mode", ref debug);
             Widgets.CheckboxLabeled(BRect(options.ColumnWidth / 5 * 1, lastRect.y, options.ColumnWidth / 5 - 20, lastRect.height), "Debug messages", ref debugMessages);
-            if (Widgets.ButtonText(BRect(options.ColumnWidth / 5 * 2, lastRect.y, options.ColumnWidth / 5 - 10, lastRect.height), "Reset final shrine flags")) StoryUtility.ResetLastShrineFlags();
-            if (Widgets.ButtonText(BRect(options.ColumnWidth / 5 * 3, lastRect.y, options.ColumnWidth / 5 - 10, lastRect.height), "Print world pawns")) Helper.PrintWorldPawns();
-            if (Widgets.ButtonText(BRect(options.ColumnWidth / 5 * 4, lastRect.y, options.ColumnWidth / 5 - 10, lastRect.height), "Reset full story")) StoryUtility.RestartStory();
+            if (debug)
+            {
+                if (Widgets.ButtonText(BRect(options.ColumnWidth / 5 * 2, lastRect.y, options.ColumnWidth / 5 - 10, lastRect.height), "Reset final shrine flags")) StoryUtility.ResetLastShrineFlags();
+                if (Widgets.ButtonText(BRect(options.ColumnWidth / 5 * 3, lastRect.y, options.ColumnWidth / 5 - 10, lastRect.height), "Print world pawns")) Helper.PrintWorldPawns();
+                if (Widgets.ButtonText(BRect(options.ColumnWidth / 5 * 4, lastRect.y, options.ColumnWidth / 5 - 10, lastRect.height), "Reset full story")) StoryUtility.RestartStory();
+            }
 
             options.GapLine();
             var checkRestartRequiringValueChanged = false;
