@@ -174,6 +174,7 @@ namespace CaravanAdventures.CaravanCamp
             if (!ModSettings.hasSupplyCostsDisabled && (amount == null || amount == 0 || campCost > amount))
             {
                 this.tribal = true;
+                campParts.RemoveAll(tent => tent.GetType() == typeof(PlantTent));
                 return;
             }
             waste = ModSettings.hasSupplyCostsDisabled ? 0 : campParts.Where(part => part is RestTent || part is ProductionTent).ToList().Count;
