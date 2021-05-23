@@ -61,6 +61,7 @@ namespace CaravanAdventures.CaravanCamp
                         Current.Game.DeinitAndRemoveMap(parent.Map);
                         mp.Destroy();
 
+                        if (tribal) return;
                         var caravan = Find.WorldObjects.Caravans.FirstOrDefault(x => x.IsPlayerControlled && x.Tile == tile);
                         if (caravan == null)
                         {
