@@ -13,13 +13,11 @@ namespace CaravanAdventures.CaravanStory.Quests
         private Pawn storyContact;
         private StoryVillageMP settlement;
         private MapParent destroyedSettlement;
-
-        public readonly float baseDelayVillageGeneration = Helper.Debug() ? 1000f : (60000f * 5f);
         public float villageGenerationCounter = -1f;
-
         public Pawn StoryContact { get => storyContact; set => storyContact = value; }
         public StoryVillageMP Settlement { get => settlement; internal set => settlement = value; }
         public MapParent DestroyedSettlement { get => destroyedSettlement; internal set => destroyedSettlement = value; }
+        public float BaseDelayVillageGeneration => Helper.Debug() ? 1000f : (60000f * 5f);
 
         public QuestCont_Village()
         {

@@ -10,10 +10,11 @@ namespace CaravanAdventures.CaravanStory.Quests
 {
     class QuestCont_FriendlyCaravan : IExposable
     {
-        public readonly float baseDelayFriendlyCaravan = Helper.Debug() ? 1000f : 60000f * 5f;
-        public readonly float baseDelayFurtherFriendlyCaravan = Helper.Debug() ? 60000f * 3f : 60000f * 7f;
         public float friendlyCaravanCounter = -1f;
         public Pawn storyContactBondedPawn;
+
+        public float BaseDelayFriendlyCaravan => Helper.Debug() ? 1000f : 60000f * 5f;
+        public float BaseDelayFurtherFriendlyCaravan => Helper.Debug() ? 60000f * 3f : 60000f * 7f;
 
         public void ExposeData()
         {
@@ -148,7 +149,7 @@ namespace CaravanAdventures.CaravanStory.Quests
             {
                 DLog.Message($"CA trade caravan created successfully");
                 CompCache.StoryWC.SetSF("TradeCaravan_Arrived");
-                friendlyCaravanCounter = baseDelayFurtherFriendlyCaravan;
+                friendlyCaravanCounter = BaseDelayFurtherFriendlyCaravan;
             }
             else
             {

@@ -47,7 +47,7 @@ namespace CaravanAdventures.CaravanStory
     class StoryWC : WorldComponent
     {
         private bool wasEnabled = false;
-        private readonly float baseDelayNextShrineReveal = Helper.Debug() ? 1800f : 60000f * 3f;
+        public float BaseDelayNextShrineReveal => Helper.Debug() ? 1800f : 60000f * 3f;
         private float shrineRevealCounter = -1f;
         private int ticks = -1;
         private int countShrinesCompleted = 0;
@@ -55,10 +55,9 @@ namespace CaravanAdventures.CaravanStory
 
         private readonly IntRange timeoutDaysRange = new IntRange(10, 12);
         // todo move baseDelayNextShrineReveal and shrineDistance to settings?
-        private readonly IntRange shrineDistance = Helper.Debug() ? new IntRange(2, 4) : new IntRange(300, 500);
+        public IntRange ShrineDistance => Helper.Debug() ? new IntRange(2, 4) : ModSettings.shrineDistance;
         private int shrineTileUnsuccessfulCounter = 0;
         private List<AbilityDef> unlockedSpells = new List<AbilityDef>();
-        private int bossMissedCounter = 0;
         private bool ranDebugActionsOnceAtStartUp;
         private IEnumerable<ThingDef> bossDefs;
 
@@ -121,7 +120,6 @@ namespace CaravanAdventures.CaravanStory
             Scribe_Values.Look(ref ticks, "ticks", -1);
             Scribe_Values.Look(ref shrineRevealCounter, "shrineRevealCounter", -1);
             Scribe_Values.Look(ref countShrinesCompleted, "countShrinesCompleted", 0);
-            Scribe_Values.Look(ref bossMissedCounter, "bossMissedCounter", 0);
             Scribe_Deep.Look(ref questCont, "questCont");
             Scribe_Values.Look(ref shrineTileUnsuccessfulCounter, "shrineTileUnsuccessfulCounter", 0);
             Scribe_Values.Look(ref wasEnabled, "wasEnabled", false);
@@ -200,26 +198,25 @@ namespace CaravanAdventures.CaravanStory
                 StoryUtility.GenerateStoryContact();
                 if (CheckCanStartFriendlyCaravanCounter() && !debugFlags["FriendlyCaravanDone"])
                 {
-                    questCont.FriendlyCaravan.friendlyCaravanCounter = questCont.FriendlyCaravan.baseDelayFriendlyCaravan;
+                    questCont.FriendlyCaravan.friendlyCaravanCounter = questCont.FriendlyCaravan.BaseDelayFriendlyCaravan;
                     DLog.Message("friendlycaravan counter running " + questCont.FriendlyCaravan.friendlyCaravanCounter);
                     SetSF("TradeCaravan_InitCountDownStarted");
                 }
 
                 if (CheckCanStartVillageGenerationCounter() && !debugFlags["VillageDone"])
                 {
-                    questCont.Village.villageGenerationCounter = questCont.Village.baseDelayVillageGeneration;
+                    questCont.Village.villageGenerationCounter = questCont.Village.BaseDelayVillageGeneration;
                     DLog.Message("village gen counter running " + questCont.Village.villageGenerationCounter);
                     SetSF("IntroVillage_InitCountDownStarted");
                 }
 
                 if (CheckCanStartCountDownOnNewShrine() && !debugFlags["ShrinesDone"])
                 {
-                    shrineRevealCounter = baseDelayNextShrineReveal * (countShrinesCompleted + 1f) * 0.5f;
+                    shrineRevealCounter = BaseDelayNextShrineReveal * (countShrinesCompleted + 1f) * 0.5f;
                     DLog.Message("Shrine counter running " + shrineRevealCounter);
                     SetShrineSF("InitCountDownStarted");
                 }
 
-                // todo add mod setting and ability to disable
                 if (CanDoApocalypse())
                 {
                     doEarthQuake = true;
@@ -266,7 +263,7 @@ namespace CaravanAdventures.CaravanStory
         {
             // todo Create own find method that keeps the same distance from bases and caravans
             // -> after an unsuccesfull attempt, select tile that supports it for sure.
-            var newRange = new IntRange(shrineDistance.min / (shrineTileUnsuccessfulCounter + 1), shrineDistance.max / (shrineTileUnsuccessfulCounter + 1));
+            var newRange = new IntRange(ShrineDistance.min / (shrineTileUnsuccessfulCounter + 1), ShrineDistance.max / (shrineTileUnsuccessfulCounter + 1));
             if (!TileFinder.TryFindNewSiteTile(out var tile, newRange.min, newRange.max))
             {
                 shrineTileUnsuccessfulCounter++;
@@ -330,7 +327,6 @@ namespace CaravanAdventures.CaravanStory
             shrineRevealCounter = -1;
             ticks = -1;
             countShrinesCompleted = 0;
-            bossMissedCounter = 0;
             unlockedSpells = new List<AbilityDef>();
 
             CompCache.BountyWC.BountyServiceAvailable = false;

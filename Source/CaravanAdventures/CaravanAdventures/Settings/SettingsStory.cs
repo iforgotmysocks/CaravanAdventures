@@ -48,14 +48,20 @@ namespace CaravanAdventures.Settings
             if (options.ButtonTextLabeled("Reset apocalypse event", "Reset")) CompCache.StoryWC.questCont.LastJudgment.ResetApocalypse(-0.1f);
             options.Gap();
 
-            options.Label("Shrine mechanoid combat point multiplier:".Colorize(Color.red), 40f);
+            options.Label("Shrine mechanoid combat point multiplier:".Colorize(Color.green), 40f);
             options.Label("Multiplier: " + Math.Round(ModSettings.shrineMechDifficultyMultiplier, 2) + "  (default: 1.2)");
             ModSettings.shrineMechDifficultyMultiplier = options.Slider(ModSettings.shrineMechDifficultyMultiplier, 0.2f, 10f);
             options.Gap();
-            options.Label("Shrine hunter assistance combat point multiplier:".Colorize(Color.red), 40f);
+            options.Label("Shrine hunter assistance combat point multiplier:".Colorize(Color.green), 40f);
             options.Label("Multiplier: " + Math.Round(ModSettings.hunterAssistanceMult, 2) + "  (default: 1.2)");
             ModSettings.hunterAssistanceMult = options.Slider(ModSettings.hunterAssistanceMult, 0.2f, 2f);
             options.Gap();
+
+            options.Label("Ancient shrine min/max spawn distance from the player's settlement:".Colorize(Color.green), 40f, "If the distance is too large for the world map, the distance will be halfed for the next attempt.");
+            //options.Label("Multiplier: " + Math.Round(ModSettings.shrineDistance, 2) + "  (default: 1.2)");
+            options.IntRange(ref ModSettings.shrineDistance, 50, 800);
+            options.Gap();
+
             //options.Label("Max room combat points (x50 for huge shrine crypts):".Colorize(Color.red), 40f, "Only needed for crazy game setups with insane wealth.");
             //options.Label("Points: " + Math.Round(ModSettings.maxShrineCombatPoints, 0) + "  (default: 10000)");
             //ModSettings.maxShrineCombatPoints = options.Slider(ModSettings.maxShrineCombatPoints, 300f, 50000f);

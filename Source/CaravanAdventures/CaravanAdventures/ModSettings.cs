@@ -86,6 +86,7 @@ namespace CaravanAdventures
         // shrines
         public static float shrineMechDifficultyMultiplier = 1.2f;
         public static float hunterAssistanceMult = 1.2f;
+        public static IntRange shrineDistance = new IntRange(300, 500);
         // todo make configurable
         public static float maxShrineCombatPoints = 10000f;
 
@@ -171,6 +172,7 @@ namespace CaravanAdventures
             // shrines
             Scribe_Values.Look(ref shrineMechDifficultyMultiplier, "shrineMechDifficultyMultiplier", 1.2f);
             Scribe_Values.Look(ref hunterAssistanceMult, "hunterAssistanceMult", 1.2f);
+            Scribe_Values.Look(ref shrineDistance, "shrineDistance", new IntRange(300, 500));
             //Scribe_Values.Look(ref maxShrineCombatPoints, "maxShrineCombatPoints", 10000f);
 
             // bounty
@@ -217,6 +219,7 @@ namespace CaravanAdventures
         }
 
         private bool showRestartReminder = false;
+
 
         public void DoWindowContents(Rect wrect)
         {
