@@ -18,7 +18,6 @@ namespace CaravanAdventures.CaravanMechBounty
         private float ongoingVeteranDelay;
         private List<Thing> currentTradeItemStock;
         private bool bountyNotificationCounterStarted;
-        public readonly float bountyNotificationDelay = Helper.Debug() ? 1000 : 60000 * 2;
         private float bountyNotificationCounter;
         private bool bountyServiceAvailable;
         private Faction bountyFaction;
@@ -31,6 +30,7 @@ namespace CaravanAdventures.CaravanMechBounty
         public float OngoingVeteranDelay { get => ongoingVeteranDelay; set => ongoingVeteranDelay = value; }
         public float BountyNotificationCounter { get => bountyNotificationCounter; set => bountyNotificationCounter = value; }
         public bool BountyServiceAvailable { get => bountyServiceAvailable; set => bountyServiceAvailable = value; }
+        public float BountyNotificationDelay => Helper.Debug() ? 1000 : 60000 * 2;
         public Faction BountyFaction
         {
             get
@@ -85,7 +85,7 @@ namespace CaravanAdventures.CaravanMechBounty
 
             if (CheckCanStartBountyNotificationCounter())
             {
-                bountyNotificationCounter = bountyNotificationDelay;
+                bountyNotificationCounter = BountyNotificationDelay;
                 bountyNotificationCounterStarted = true;
             }
 

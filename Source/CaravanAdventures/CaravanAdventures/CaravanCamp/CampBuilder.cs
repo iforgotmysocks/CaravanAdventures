@@ -336,7 +336,8 @@ namespace CaravanAdventures.CaravanCamp
                     && result.All(res => tentDirection == ForcedTentDirection.None
                         ? (cur.x == res.x || cur.z == res.z)
                         : tentDirection == ForcedTentDirection.Horizontal
-                        ? cur.z == res.z : cur.x == res.x));
+                            ? cur.z == res.z 
+                            : cur.x == res.x));
                 if (neighbour == default || limit != 0 && result.Count == limit) break;
                 result.Add(neighbour);
             }
