@@ -113,7 +113,7 @@
     <label>spacer tent supplies</label>
     <description>A mix of technically advanced camping gear and fabric. Perfect to survive harsh conditions and quite good looking.</description>
     <graphicData>
-      <texPath>Things/Item/Resource/ComponentIndustrial</texPath>
+      <texPath>Things/Item/Camp/TentSupplies</texPath>
       <graphicClass>Graphic_StackCount</graphicClass>
     </graphicData>
     <soundInteract>Metal_Drop</soundInteract>

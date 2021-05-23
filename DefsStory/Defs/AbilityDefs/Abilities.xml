@@ -181,7 +181,7 @@
     <targetRequired>False</targetRequired>
     <canUseAoeToGetTargets>False</canUseAoeToGetTargets>
     <!--<showPsycastEffects>False</showPsycastEffects>-->
-    <iconPath>UI/Abilities/Painblock</iconPath>
+    <iconPath>UI/Abilities/Circles</iconPath>
     <hotKey>Misc12</hotKey>
     <statBases>
       <Ability_EntropyGain>30</Ability_EntropyGain>

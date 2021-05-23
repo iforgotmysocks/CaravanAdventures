@@ -59,7 +59,7 @@
     <lifeStages>
       <li>
         <bodyGraphicData>
-          <texPath>Things/Pawn/Mechanoid/Centipede</texPath>
+          <texPath>Things/Bosses/1</texPath>
           <graphicClass>Graphic_Multi</graphicClass>
           <drawSize>6</drawSize>
           <shadowData>
@@ -148,7 +148,7 @@
     <lifeStages>
       <li>
         <bodyGraphicData>
-          <texPath>Things/Pawn/Mechanoid/Scyther</texPath>
+          <texPath>Things/Bosses/2</texPath>
           <graphicClass>Graphic_Multi</graphicClass>
           <drawSize>3.5</drawSize>
           <shadowData>
@@ -237,7 +237,7 @@
     <lifeStages>
       <li>
         <bodyGraphicData>
-          <texPath>Things/Pawn/Mechanoid/Scyther</texPath>
+          <texPath>Things/Bosses/3</texPath>
           <graphicClass>Graphic_Multi</graphicClass>
           <drawSize>3.5</drawSize>
           <shadowData>
@@ -328,7 +328,7 @@
     <lifeStages>
       <li>
         <bodyGraphicData>
-          <texPath>Things/Pawn/Mechanoid/Scyther</texPath>
+          <texPath>Things/Bosses/4</texPath>
           <graphicClass>Graphic_Multi</graphicClass>
           <drawSize>3.5</drawSize>
           <shadowData>
@@ -412,7 +412,7 @@
     <lifeStages>
       <li>
         <bodyGraphicData>
-          <texPath>Things/Pawn/Mechanoid/Centipede</texPath>
+          <texPath>Things/Bosses/5</texPath>
           <graphicClass>Graphic_Multi</graphicClass>
           <drawSize>6</drawSize>
           <shadowData>

@@ -121,7 +121,7 @@ namespace CaravanAdventures.CaravanImprovements
                     defaultLabel = "AllowNightTravel".Translate(),
                     defaultDesc = "AllowNightTravelDesc".Translate(),
                     order = 199f,
-                    icon = ContentFinder<Texture2D>.Get("UI/Icons/Settle", true),
+                    icon = ContentFinder<Texture2D>.Get("UI/Icons/Settle/Nighttravel", true),
                 };
                 yield return cmdAllowNightTravel;
             }

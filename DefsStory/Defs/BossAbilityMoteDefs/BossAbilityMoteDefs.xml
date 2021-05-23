@@ -7,7 +7,7 @@
     <altitudeLayer>MoteOverhead</altitudeLayer>
     <drawOffscreen>true</drawOffscreen>
     <graphicData>
-      <texPath>Things/Item/Bossweapons/Blade/Blade</texPath>
+      <texPath>Things/Item/Bossweapons/Blade/Blades</texPath>
       <!--<shaderType>MoteGlow</shaderType>-->
     </graphicData>
     <mote>
