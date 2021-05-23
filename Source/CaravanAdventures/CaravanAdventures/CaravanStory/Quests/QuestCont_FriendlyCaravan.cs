@@ -123,7 +123,7 @@ namespace CaravanAdventures.CaravanStory.Quests
             if (selectedMap == null)
             {
                 DLog.Message($"Story caravan couldn't be created, no player map found");
-                friendlyCaravanCounter = 1000f;
+                friendlyCaravanCounter = 10000f;
                 return;
             }
 
