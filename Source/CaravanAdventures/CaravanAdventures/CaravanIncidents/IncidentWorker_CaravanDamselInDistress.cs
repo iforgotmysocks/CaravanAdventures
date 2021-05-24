@@ -22,7 +22,7 @@ namespace CaravanAdventures.CaravanIncidents
         {
             parms.points *= IncidentPointsFactorRange.RandomInRange;
             var caravan = (Caravan)parms.target;
-            if (!PawnGroupMakerUtility.TryGetRandomFactionForCombatPawnGroup(parms.points, out parms.faction, null, false, false, false, true))
+            if (!PawnGroupMakerUtility.TryGetRandomFactionForCombatPawnGroup(parms.points, out parms.faction, null, false, false, false, false))
             {
                 return false;
             }
