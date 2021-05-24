@@ -121,6 +121,9 @@ namespace CaravanAdventures.CaravanCamp
 
             var fuelFromWoodBill = new Bill_ProductionWithUft(DefDatabase<RecipeDef>.GetNamed("CAMake_ChemfuelFromWood")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 30 };
             refinery.BillStack.AddBill(fuelFromWoodBill);
+
+            var fuelFromOrganicsBill = new Bill_ProductionWithUft(DefDatabase<RecipeDef>.GetNamed("CAMake_ChemfuelFromOrganics")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 30 };
+            refinery.BillStack.AddBill(fuelFromOrganicsBill);
         }
 
         public virtual void ApplyRecipesTribal(Caravan caravan)
