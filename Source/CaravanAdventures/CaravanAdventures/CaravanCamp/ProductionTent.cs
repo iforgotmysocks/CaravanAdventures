@@ -10,6 +10,7 @@ namespace CaravanAdventures.CaravanCamp
     {
         protected Building_WorkTable tableButcher;
         protected Building_WorkTable handTailoringBench;
+        protected Building_WorkTable refinery;
         protected Building_Storage shelf;
 
         public ProductionTent()
@@ -42,7 +43,7 @@ namespace CaravanAdventures.CaravanCamp
             shelf.GetStoreSettings().filter.SetAllow(ThingCategoryDef.Named("Textiles"), true);
 
             location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.minX + 5 && cell.z == CellRect.minZ + 1);
-            var refinery = CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("CASpacerBiofuelRefinery")), location, map, Rot4.South, campAssetListRef);
+            refinery = CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("CASpacerBiofuelRefinery")), location, map, Rot4.South, campAssetListRef) as Building_WorkTable;
             CampHelper.RefuelByPerc(refinery, -1);
 
             location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 1 && cell.z == CellRect.minZ + 2);
@@ -103,10 +104,6 @@ namespace CaravanAdventures.CaravanCamp
             bill.ingredientFilter.SetAllow(ThingCategoryDefOf.CorpsesInsect, false);
             tableButcher.BillStack.AddBill(bill);
 
-            // todo check in modsettings 
-            // if (doApperalRecipes) 
-         
-            
             var pantsBill = new Bill_ProductionWithUft(DefDatabase<RecipeDef>.GetNamed("Make_Apparel_Pants")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 1, hpRange = new FloatRange(0.9f, 1f), includeTainted = false, qualityRange = new QualityRange(QualityCategory.Normal, QualityCategory.Legendary) };
             handTailoringBench.BillStack.AddBill(pantsBill);
 
@@ -118,6 +115,12 @@ namespace CaravanAdventures.CaravanCamp
 
             var parkaBill = new Bill_ProductionWithUft(DefDatabase<RecipeDef>.GetNamed("Make_Apparel_Parka")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 1, hpRange = new FloatRange(0.9f, 1f), includeTainted = false, qualityRange = new QualityRange(QualityCategory.Normal, QualityCategory.Legendary) };
             handTailoringBench.BillStack.AddBill(parkaBill);
+
+            var fuelFromCorpseBill = new Bill_ProductionWithUft(DefDatabase<RecipeDef>.GetNamed("CAMake_ChemfuelFromCorpses")) { repeatMode = BillRepeatModeDefOf.Forever };
+            refinery.BillStack.AddBill(fuelFromCorpseBill);
+
+            var fuelFromWoodBill = new Bill_ProductionWithUft(DefDatabase<RecipeDef>.GetNamed("CAMake_ChemfuelFromWood")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 30 };
+            refinery.BillStack.AddBill(fuelFromWoodBill);
         }
 
         public virtual void ApplyRecipesTribal(Caravan caravan)
