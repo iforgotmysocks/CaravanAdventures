@@ -38,7 +38,7 @@ namespace CaravanAdventures.Settings
             //options.BeginScrollView(wrect, ref scrollPos, ref viewRect);
 
             Text.Font = GameFont.Medium;
-            options.Label("Story settings:".Colorize(Color.red), 40f);
+            options.Label("Story settings:".Colorize(Color.green), 40f);
 
             Text.Font = GameFont.Small;
 

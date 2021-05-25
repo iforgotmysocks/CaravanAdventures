@@ -222,7 +222,7 @@
     </tools>
     <race>
       <body>Scyther</body>
-      <baseHealthScale>4.32</baseHealthScale>
+      <baseHealthScale>6.32</baseHealthScale>
       <soundMeleeHitPawn>Pawn_Melee_MechanoidSlash_HitPawn</soundMeleeHitPawn>
       <soundMeleeHitBuilding>Pawn_Melee_MechanoidSlash_HitBuilding</soundMeleeHitBuilding>
       <soundMeleeMiss>Pawn_Melee_MechanoidSlash_Miss</soundMeleeMiss>
@@ -237,7 +237,7 @@
     <lifeStages>
       <li>
         <bodyGraphicData>
-          <texPath>Things/Bosses/3</texPath>
+          <texPath>Things/Bosses/4</texPath>
           <graphicClass>Graphic_Multi</graphicClass>
           <drawSize>3.5</drawSize>
           <shadowData>
@@ -256,7 +256,6 @@
         <mechChipDefs>
           <li>CAEXT1Basic</li>
           <li>CAEXT1Laser</li>
-          <li>CAEXT1Melee</li>
         </mechChipDefs>
       </li>
     </modExtensions>
@@ -313,7 +312,7 @@
     </tools>
     <race>
       <body>Scyther</body>
-      <baseHealthScale>4.32</baseHealthScale>
+      <baseHealthScale>6.32</baseHealthScale>
       <soundMeleeHitPawn>Pawn_Melee_MechanoidSlash_HitPawn</soundMeleeHitPawn>
       <soundMeleeHitBuilding>Pawn_Melee_MechanoidSlash_HitBuilding</soundMeleeHitBuilding>
       <soundMeleeMiss>Pawn_Melee_MechanoidSlash_Miss</soundMeleeMiss>
@@ -328,7 +327,7 @@
     <lifeStages>
       <li>
         <bodyGraphicData>
-          <texPath>Things/Bosses/4</texPath>
+          <texPath>Things/Bosses/3</texPath>
           <graphicClass>Graphic_Multi</graphicClass>
           <drawSize>3.5</drawSize>
           <shadowData>
