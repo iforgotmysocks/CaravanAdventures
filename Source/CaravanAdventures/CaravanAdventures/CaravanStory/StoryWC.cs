@@ -25,6 +25,7 @@ using Verse.Sound;
 // - spawn tree for tree wisper quest if it doesn't exist yet !!
 
 // med prio:
+// TileTemperaturesComp -> CalculateOutdoorTemperatureAtTile postfix to add event temperature and make enableable
 // - add check to master shrine location selection, that keeps it away from a player settlement
 // --> show tips about how to handle a shrine when first entering (and create a "show tips" link in the quest window, 
 //          that opens a window showing tips how to handle shrines: shrines stay, 

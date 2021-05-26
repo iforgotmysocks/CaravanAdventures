@@ -107,8 +107,17 @@ namespace CaravanAdventures
         internal static void PrintWorldPawns()
         {
             if (Find.World == null) return;
-            Log.Message($"wp total: {Find.World.worldPawns.AllPawnsAliveOrDead.Count} wp alive: {Find.World.worldPawns.AllPawnsAlive.Count} dead: {Find.World.worldPawns.AllPawnsDead.Count}");
-            Log.Message($"wp player: {Find.World.worldPawns.AllPawnsAliveOrDead.Where(x => x.Faction == Faction.OfPlayer).Count()} wp alive: {Find.World.worldPawns.AllPawnsAlive.Where(x => x.Faction == Faction.OfPlayer).Count()} dead: {Find.World.worldPawns.AllPawnsDead.Where(x => x.Faction == Faction.OfPlayer).Count()}");
+            DLog.Message($"wp total: {Find.World.worldPawns.AllPawnsAliveOrDead.Count} wp alive: {Find.World.worldPawns.AllPawnsAlive.Count} dead: {Find.World.worldPawns.AllPawnsDead.Count}");
+            DLog.Message($"wp player: {Find.World.worldPawns.AllPawnsAliveOrDead.Where(x => x.Faction == Faction.OfPlayer).Count()} wp alive: {Find.World.worldPawns.AllPawnsAlive.Where(x => x.Faction == Faction.OfPlayer).Count()} dead: {Find.World.worldPawns.AllPawnsDead.Where(x => x.Faction == Faction.OfPlayer).Count()}");
+
+
+            // todo remove 
+            var comp = Find.World.GetComponent<TileTemperaturesComp>();
+            if (comp != null)
+            {
+                DLog.Message($"clearing temp caches");
+                comp.ClearCaches();
+            }
         }
 
         public static void RunSavely(Action action, bool suppressError = false) => RunSavely(() => { action(); return 0; }, suppressError);

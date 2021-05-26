@@ -82,6 +82,8 @@ namespace CaravanAdventures
         public static float apocalypseTemperatureChangePerDay = -0.084f;
         public static bool issueFurtherShrineLocationsAfterStoryEnd = true;
         public static bool sacHuntersHostileTowardsEmpire = false;
+        // todo add to settings and start false
+        public static bool allowApocToAlterTileTemp = true;
 
         // shrines
         public static float shrineMechDifficultyMultiplier = 1.2f;
@@ -219,7 +221,6 @@ namespace CaravanAdventures
         }
 
         private bool showRestartReminder = false;
-
 
         public void DoWindowContents(Rect wrect)
         {
