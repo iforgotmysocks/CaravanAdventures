@@ -116,6 +116,8 @@ namespace CaravanAdventures.CaravanCamp
             var parkaBill = new Bill_ProductionWithUft(DefDatabase<RecipeDef>.GetNamed("Make_Apparel_Parka")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 1, hpRange = new FloatRange(0.9f, 1f), includeTainted = false, qualityRange = new QualityRange(QualityCategory.Normal, QualityCategory.Legendary) };
             handTailoringBench.BillStack.AddBill(parkaBill);
 
+            if (refinery == null) return;
+
             var fuelFromCorpseBill = new Bill_ProductionWithUft(DefDatabase<RecipeDef>.GetNamed("CAMake_ChemfuelFromCorpses")) { repeatMode = BillRepeatModeDefOf.Forever };
             fuelFromCorpseBill.ingredientFilter.SetAllow(SpecialThingFilterDef.Named("AllowCorpsesColonist"), false);
             refinery.BillStack.AddBill(fuelFromCorpseBill);
