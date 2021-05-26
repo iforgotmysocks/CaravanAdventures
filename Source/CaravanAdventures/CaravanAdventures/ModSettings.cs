@@ -82,8 +82,7 @@ namespace CaravanAdventures
         public static float apocalypseTemperatureChangePerDay = -0.084f;
         public static bool issueFurtherShrineLocationsAfterStoryEnd = true;
         public static bool sacHuntersHostileTowardsEmpire = false;
-        // todo add to settings and start false
-        public static bool allowApocToAlterTileTemp = true;
+        public static bool allowApocToAlterTileTemp = false;
 
         // shrines
         public static float shrineMechDifficultyMultiplier = 1.2f;
@@ -170,6 +169,7 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref apocalypseTemperatureChangePerDay, "apocalypseTemperatureChangePerDay", -0.084f);
             Scribe_Values.Look(ref issueFurtherShrineLocationsAfterStoryEnd, "issueFurtherShrineLocationsAfterStoryEnd", true);
             Scribe_Values.Look(ref sacHuntersHostileTowardsEmpire, "sacHuntersHostileTowardsEmpire", false);
+            Scribe_Values.Look(ref allowApocToAlterTileTemp, "allowApocToAlterTileTemp", false);
 
             // shrines
             Scribe_Values.Look(ref shrineMechDifficultyMultiplier, "shrineMechDifficultyMultiplier", 1.2f);
@@ -346,7 +346,7 @@ namespace CaravanAdventures
             {
                 showRestartReminder = false;
                 Find.WindowStack.Add(new Dialog_MessageBox(
-                new TaggedString($"\nYour latest changes require a game restart to take effect."),
+                new TaggedString($"\nToggling a mod category requires a game restart to take effect.\n\n Some sub-category settings may also require a restart, but do not get a specific notification."),
                 "Gotcha",
                 () => { },
                 null,

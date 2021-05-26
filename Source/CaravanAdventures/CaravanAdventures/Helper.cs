@@ -110,13 +110,9 @@ namespace CaravanAdventures
             DLog.Message($"wp total: {Find.World.worldPawns.AllPawnsAliveOrDead.Count} wp alive: {Find.World.worldPawns.AllPawnsAlive.Count} dead: {Find.World.worldPawns.AllPawnsDead.Count}");
             DLog.Message($"wp player: {Find.World.worldPawns.AllPawnsAliveOrDead.Where(x => x.Faction == Faction.OfPlayer).Count()} wp alive: {Find.World.worldPawns.AllPawnsAlive.Where(x => x.Faction == Faction.OfPlayer).Count()} dead: {Find.World.worldPawns.AllPawnsDead.Where(x => x.Faction == Faction.OfPlayer).Count()}");
 
-
-            // todo remove 
-            var comp = Find.World.GetComponent<TileTemperaturesComp>();
-            if (comp != null)
+            foreach (var pawn in PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_FreeColonists)
             {
-                DLog.Message($"clearing temp caches");
-                comp.ClearCaches();
+                DLog.Message($"Name: {pawn.NameShortColored} Temp: {pawn.AmbientTemperature} Spawned: {pawn.Spawned}");
             }
         }
 

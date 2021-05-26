@@ -12,25 +12,18 @@ namespace CaravanAdventures.Patches
     {
         public static void ApplyPatches(Harmony harmony)
         {
-            //var org = AccessTools.Method(typeof(TileTemperaturesComp.CachedTileTemperatureData), "CalculateOutdoorTemperatureAtTile");
-            var nestedType = typeof(TileTemperaturesComp).GetNestedType("CachedTileTemperatureData", BindingFlags.Static |
-                                                   BindingFlags.Instance |
-                                                   BindingFlags.Public |
-                                                   BindingFlags.NonPublic);
-            if (nestedType == null) DLog.Warning($"nope");
-            //var methodInfo = nestedType.GetMethod()
-            var org = AccessTools.Method(nestedType, "CalculateOutdoorTemperatureAtTile");
-            //var org = AccessTools.Method(Type.GetType("CachedTileTemperatureData"), "CalculateOutdoorTemperatureAtTile");
-            var post = new HarmonyMethod(typeof(ApocalypsePatches).GetMethod(nameof(CalculateOutdoorTemperatureAtTilePostFix)));
-            harmony.Patch(org, null, post);
+            var seasonTempOrg = AccessTools.Method(typeof(GenTemperature), nameof(GenTemperature.OffsetFromSeasonCycle));
+            var seasonTempPost = new HarmonyMethod(typeof(ApocalypsePatches).GetMethod(nameof(OffsetFromSeasonCycle_Postfix)));
+            harmony.Patch(seasonTempOrg, null, seasonTempPost);
+            // GenTemperature / GetTemperatureFromSeasonAtTile
         }
 
-        public static void CalculateOutdoorTemperatureAtTilePostFix(ref float __result)
+        public static void OffsetFromSeasonCycle_Postfix(ref float __result, int tile)
         {
             if (CompCache.StoryWC?.questCont?.LastJudgment?.Apocalypse == null) return;
-            DLog.Warning($"temp before adjusting: {__result}");
+            Map map = Current.Game.FindMap(tile);
+            if (map != null) return;
             __result += CompCache.StoryWC.questCont.LastJudgment.Apocalypse.TempOffset;
-            DLog.Warning($"temp after adjusting: {__result}");
         }
 
 

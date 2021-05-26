@@ -45,6 +45,8 @@ namespace CaravanAdventures.Settings
             options.CheckboxLabeled("Apocalypse enabled", ref ModSettings.apocalypseEnabled);
             options.Label($"Apocalypse temperature change per day: {Math.Round(ModSettings.apocalypseTemperatureChangePerDay, 4)}  (Default: -0.084)");
             ModSettings.apocalypseTemperatureChangePerDay = options.Slider(ModSettings.apocalypseTemperatureChangePerDay, 0f, -0.5f);
+            options.CheckboxLabeled("Apply Apocalypse temperature change while traveling the world map", ref ModSettings.allowApocToAlterTileTemp, "When enabled, the temperature change will apply to all tiles on the map. Vanilla itself applies those temperature changes from events only to maps and tiles that have a map loaded.");
+            options.Gap();
             if (options.ButtonTextLabeled("Reset apocalypse event", "Reset")) CompCache.StoryWC.questCont.LastJudgment.ResetApocalypse(-0.1f);
             options.Gap();
 
