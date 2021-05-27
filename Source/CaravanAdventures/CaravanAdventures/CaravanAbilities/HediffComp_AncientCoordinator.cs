@@ -82,7 +82,7 @@ namespace CaravanAdventures.CaravanAbilities
                     Pawn.health.RemoveHediff(parent);
                     return;
                 }
-                var pawns = PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_Colonists;
+                var pawns = PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_Colonists.Where(pawn => !pawn.HasExtraHomeFaction()).ToList();
                 if (!TryAddPawn(pawns)) TryKillPawn(pawns);
                 ticks = 0;
             }
