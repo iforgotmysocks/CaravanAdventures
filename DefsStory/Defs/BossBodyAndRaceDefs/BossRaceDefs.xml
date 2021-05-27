@@ -405,7 +405,7 @@
 
   <PawnKindDef ParentName="BaseMechanoidKind">
     <defName>CAEndBossMech</defName>
-    <label>EndBoss</label>
+    <label>Ancient Coordinator AI</label>
     <race>CAEndBossMech</race>
     <combatPower>400000000</combatPower>
     <lifeStages>
