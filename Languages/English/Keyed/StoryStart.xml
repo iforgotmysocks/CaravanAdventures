@@ -22,5 +22,9 @@
   <CA_Story_ReceivedGiftLetterTitle>Recieved ancient gift</CA_Story_ReceivedGiftLetterTitle>
   <CA_Story_ReceivedGiftLetterDesc>{0} has been granted the ancient gift. {0} also started to remember 2 spells that {1} never knew before. You can find more info in {0}'s health tab.</CA_Story_ReceivedGiftLetterDesc>
 
+  <CA_Story_Start_EnableAncientMachines>Help me contact the ancient machines below the planet's surface.</CA_Story_Start_EnableAncientMachines>
+  <CA_Story_Start_MachinesEnabled>As you wish... hmmm, the machines have become active again and continue fulfilling their work.</CA_Story_Start_MachinesEnabled>
+  <CA_Story_Start_MachinesDisabled>As you wish... hmmm, the machines have become dormant and remain inactive.</CA_Story_Start_MachinesDisabled>
+  <CA_Story_Start_Bye>Bye.</CA_Story_Start_Bye>
 </LanguageData>
 

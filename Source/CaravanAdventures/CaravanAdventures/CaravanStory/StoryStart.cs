@@ -151,7 +151,7 @@ namespace CaravanAdventures.CaravanStory
                 subDiaNode.options.Add(new DiaOption("Story_Start_Dia1_Me_SomeoneBetter".Translate()) { link = endDiaNodeDenied });
 
                 diaNode = new DiaNode("Story_Start_Dia1".Translate());
-                diaNode.options.Add(new DiaOption("Story_Start_Dia1_GuessMe".Translate()) { link = subDiaNode }); ;
+                diaNode.options.Add(new DiaOption("Story_Start_Dia1_GuessMe".Translate()) { link = subDiaNode });
             }
             else
             {
@@ -161,13 +161,31 @@ namespace CaravanAdventures.CaravanStory
                 subDiaNode.options.Add(new DiaOption("Story_Start_Dia1_2_Neg_Option1".Translate()) { resolveTree = true, action = () => CheckEnsureGifted(initiator, true) });
 
                 diaNode = new DiaNode("Story_Start_Dia1_Me_End_GiftAlreadyRecieved".Translate());
-                diaNode.options.Add(new DiaOption("Story_Start_Dia1_Me_End_Bye".Translate()) { resolveTree = true }); ;
+                diaNode.options.Add(new DiaOption("Story_Start_Dia1_Me_End_Bye".Translate()) { resolveTree = true });
                 diaNode.options.Add(new DiaOption("Story_Start_Dia1_1_Neg_Option2".Translate(gifted.NameShortColored, GenderUtility.GetPossessive(gifted.gender))) { link = subDiaNode });
 
             }
-            TaggedString taggedString = "Story_Start_Dia1_Title".Translate();
+
+            if (CompCache.StoryWC.storyFlags["Judgment_Completed"])
+            {
+                var apoActive = CompCache.StoryWC.questCont.LastJudgment?.Apocalypse != null;
+                var subDiaNode = new DiaNode(apoActive
+                    ? "CA_Story_Start_MachinesDisabled".Translate() 
+                    : "CA_Story_Start_MachinesEnabled".Translate());
+                subDiaNode.options.Add(new DiaOption("CA_Story_Start_Bye".Translate()) { resolveTree = true, action = () => TriggerApocalypse(initiator, !apoActive) });
+
+                diaNode.options.Add(new DiaOption("CA_Story_Start_EnableAncientMachines".Translate()) { link = subDiaNode }); ;
+            }
+
+                TaggedString taggedString = "Story_Start_Dia1_Title".Translate();
             Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
             Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
+        }
+
+        private void TriggerApocalypse(Pawn initiator, bool enable)
+        {
+            if (enable) CompCache.StoryWC.questCont.LastJudgment.StartApocalypse(-20);
+            else CompCache.StoryWC.questCont.LastJudgment.EndApocalypse();
         }
 
         private void GrantAncientGift(Pawn initiator, object addressed)

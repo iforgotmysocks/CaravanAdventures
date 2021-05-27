@@ -166,6 +166,8 @@ namespace CaravanAdventures.CaravanStory
 			TaggedString taggedString = "Story_Shrine1_Apocalypse_Dia1Title".Translate(storyChar.NameShortColored, storyChar.Faction.NameColored);
 			Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
 			Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
+
+			CompCache.BountyWC.BountyPoints += 4000;
 		}
 
 		private void CheckSpawnPortalAndBringHome()
@@ -218,9 +220,26 @@ namespace CaravanAdventures.CaravanStory
             base.PostRemove();
 			if (endBoss != null && !endBoss.Destroyed) endBoss.Destroy();
 			if (CompCache.StoryWC.storyFlags["Judgment_StoryOverDialog"] && !CompCache.StoryWC.storyFlags["Judgment_Completed"]) CompCache.StoryWC.SetSF("Judgment_Completed");
-        }
+			if (CompCache.StoryWC.storyFlags["Judgment_Completed"]) LeavingShrineDialog();
+		}
 
-        public override IEnumerable<FloatMenuOption> GetFloatMenuOptions(Caravan caravan)
+		private void LeavingShrineDialog()
+		{
+			var storyChar = CompCache.StoryWC.questCont.Village.StoryContact;
+			switch (CompCache.StoryWC.GetCurrentShrineCounter(true))
+			{
+				case 6:
+					var diaNode = new DiaNode("Story_Shrine5_Apocalypse_Dia2_1".Translate(storyChar.NameShortColored));
+					diaNode.options.Add(new DiaOption("Story_Shrine5_Apocalypse_Dia2_1_Option1".Translate()) { resolveTree = true });
+
+					var taggedString = "Story_Shrine5_Apocalypse_Dia2Title".Translate(storyChar.NameShortColored, storyChar.Faction.NameColored);
+					Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
+					Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
+					break;
+			}
+		}
+
+		public override IEnumerable<FloatMenuOption> GetFloatMenuOptions(Caravan caravan)
         {
 			return new List<FloatMenuOption>();
         }
