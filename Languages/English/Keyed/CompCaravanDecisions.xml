@@ -4,6 +4,6 @@
   <SettleWithoutUnloadingDesc>Allows the caravan to settle without unloading to find a good spot first or leave quickly.</SettleWithoutUnloadingDesc>
   <SettleWithCampLabel>Settle with Camp</SettleWithCampLabel>
   <SettleWithCampDesc>Settle with a prebuild camp ur pawn quickly set up. Will consume camp supplies to construct tents and equipment of high quality. If not enough are present, pawns will use materials they can find at hand. Camping supplies can be recovered when packing up the camp.</SettleWithCampDesc>
-  <AllowNightTravel>Allow night travel</AllowNightTravel>
+  <AllowNightTravel>Night travel</AllowNightTravel>
   <AllowNightTravelDesc>Allow your caravan to travel through the night, but keep in mind that this harbours great risk for strong attacks and if your caravan members get too tired, they have no choice but to rest.</AllowNightTravelDesc>
 </LanguageData>
