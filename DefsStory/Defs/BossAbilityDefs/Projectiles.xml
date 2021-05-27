@@ -43,9 +43,9 @@
       <speed>95</speed>-->
       <soundAmbient>MortarRound_Ambient</soundAmbient>
       <damageDef>Bomb</damageDef>
-      <armorPenetrationBase>0.12</armorPenetrationBase>
+      <armorPenetrationBase>0.22</armorPenetrationBase>
       <explosionRadius>2</explosionRadius>
-      <damageAmountBase>10</damageAmountBase>
+      <damageAmountBase>20</damageAmountBase>
       <speed>20</speed>
     </projectile>
   </ThingDef>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Defs>
+    <ThingDef ParentName="Gun_ChargeBlasterHeavyBase">
+    <defName>Gun_ChargeBlasterHeavy</defName>
+      <graphicData>
+        <texPath>Things/Empty</texPath>
+        <graphicClass>Graphic_Single</graphicClass>
+      </graphicData>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Bullet_ChargeBlasterHeavy</defaultProjectile>
+        <warmupTime>1.25</warmupTime>
+        <range>26.9</range>
+        <ticksBetweenBurstShots>5</ticksBetweenBurstShots>
+        <burstShotCount>24</burstShotCount>
+        <soundCast>Shot_ChargeBlaster</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>9</muzzleFlashScale>
+      </li>
+    </verbs>
+    <weaponTags>
+      <li>MechanoidGunFake</li>
+    </weaponTags>
+  </ThingDef>
+
+</Defs>

@@ -32,15 +32,15 @@ namespace CaravanAdventures.CaravanStory.MechChips.Abilities
         public int launchTicks = 70;
         public bool smallerMissile = false;
         public bool canBeIntercepted = false;
-
+        public bool pawnOffsetMode = false;
 
         private Sustainer ambientSustainer;
-
 
         public new void Launch(Thing launcher, Vector3 origin, LocalTargetInfo usedTarget, LocalTargetInfo intendedTarget, ProjectileHitFlags hitFlags, Thing equipment = null, ThingDef targetCoverDef = null)
         {
             realRotation = launcher.Rotation.AsQuat;
-            realPosition = launcher.DrawPos + (realRotation * offset);
+            realPosition = !pawnOffsetMode ? launcher.DrawPos + (realRotation * offset) : launcher.DrawPos + offset;
+            if (pawnOffsetMode && launcher.Rotation != Rot4.North) realPosition += Vector3.up * 4 * 0.428571433f;
 
             this.launcher = launcher;
             this.origin = origin;
