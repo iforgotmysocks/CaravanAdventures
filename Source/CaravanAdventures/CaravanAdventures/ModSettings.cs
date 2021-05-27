@@ -346,7 +346,7 @@ namespace CaravanAdventures
             {
                 showRestartReminder = false;
                 Find.WindowStack.Add(new Dialog_MessageBox(
-                new TaggedString($"\nToggling a mod category requires a game restart to take effect.\n\n Some sub-category settings may also require a restart, but do not get a specific notification."),
+                new TaggedString($"\nToggling a mod category requires a game restart to take effect.\n\nSome sub-category settings may also require a restart, but do not get a specific notification."),
                 "Gotcha",
                 () => { },
                 null,
