@@ -83,7 +83,7 @@ namespace CaravanAdventures.Patches
         {
             GUI.BeginGroup(new Rect(350f, 0f, 530f, 27f));
             Text.Font = GameFont.Tiny;
-            Rect rect = new Rect(0f, 0f, 60f, 27f);
+            Rect rect = new Rect(0f, 0f, 55f, 27f);
             Text.Anchor = TextAnchor.MiddleLeft;
             Widgets.Label(rect, "Select");
             Text.Anchor = TextAnchor.UpperLeft;
@@ -105,18 +105,18 @@ namespace CaravanAdventures.Patches
                 anythingChanged = true;
             }
 
-            if (Widgets.ButtonText(new Rect(rect2.xMax + 15f + 140f, 0f, 85f, 27f), "Goods2", true, true, true))
+            if (Widgets.ButtonText(new Rect(rect2.xMax + 15f + 140f, 0f, 70f, 27f), "Goods2", true, true, true))
             {
                 //FilterCombs.ApplyJourney(sections, caravanMembers);
                 FilterCombs.ApplyGoods2(sections);
                 anythingChanged = true;
             }
-            if (Widgets.ButtonText(new Rect(rect2.xMax + 20f + 225f, 0f, 50f, 27f), "Clear", true, true, true))
+            if (Widgets.ButtonText(new Rect(rect2.xMax + 20f + 210f, 0f, 50f, 27f), "Clear", true, true, true))
             {
                 FilterCombs.ApplyNone(sections);
                 anythingChanged = true;
             }
-            Widgets.CheckboxLabeled(new Rect(rect2.xMax + 25f + 285f, 0f, 77f, 30f), "Supply disabled", ref InitGC.autoSupplyDisabled);
+            Widgets.CheckboxLabeled(new Rect(rect2.xMax + 25f + 270f, 0f, 77f, 30f), "Supply disabled", ref InitGC.autoSupplyDisabled);
             GUI.EndGroup();
         }
 
