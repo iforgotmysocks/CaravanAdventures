@@ -25,6 +25,15 @@ namespace CaravanAdventures
                     FilterCombs.packUp.appliedFilters.FirstOrDefault(filter => filter.Name == "Corpses").ThingCategoryDefs.Add(ThingCategoryDef.Named("alienCorpseCategory"));
                 }
             });
+
+            Helper.RunSavely(() => {
+                var simpleSearchBarAssembly = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(assembly => assembly.FullName.ToLower().StartsWith("simplesearchbar"));
+                if (simpleSearchBarAssembly != null && ModSettings.caravanFormingFilterSelectionEnabled)
+                {
+                    Log.Message($"Caravan Adventures: Applying patch for SimpleSearchBar - smaller caravan button layout to make room for search bar");
+                    Patches.AutomaticItemSelection.smallLayoutCompatibility = true;
+                }
+            });
         }
 
         public static void ExecuteHarmonyCompatibilityPatches(Harmony harmony)
