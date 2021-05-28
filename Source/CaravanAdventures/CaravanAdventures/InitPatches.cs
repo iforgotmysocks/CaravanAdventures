@@ -29,11 +29,18 @@ namespace CaravanAdventures
          
             if (ModSettings.caravanFormingFilterSelectionEnabled) Helper.RunSavely(PatchAddCaravanDecisionsComp);
             if (ModSettings.caravanCampEnabled) Helper.RunSavely(PatchAddPsychiteTeaToCampFire);
+            if (ModSettings.caravanCampEnabled && !ModSettings.decorativeFencePosts) Helper.RunSavely(PatchNonDecorativeFencePosts);
             if (!ModSettings.caravanIncidentsEnabled) Helper.RunSavely(PatchIncidentsTo0Chance);
             if (ModSettings.buffSettlementFoodAndSilverAvailability) Helper.RunSavely(PatchIncreaseBaseWealthAndFood);
             if (ModSettings.buffShrineRewards) Helper.RunSavely(PatchAncientShrineDefs_MoreShrinesAndBetterRewards);
 
             CompatibilityPatches.ExecuteCompatibilityPatches();
+        }
+
+        private static void PatchNonDecorativeFencePosts()
+        {
+            var fencePostDef = CaravanCamp.CampDefOf.CAFencePost;
+            fencePostDef.passability = Traversability.Impassable;
         }
 
         private static void PatchAddCaravanDecisionsComp()

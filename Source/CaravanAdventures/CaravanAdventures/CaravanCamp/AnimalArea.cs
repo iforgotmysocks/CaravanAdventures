@@ -24,6 +24,7 @@ namespace CaravanAdventures.CaravanCamp
         public override void Build(Map map, List<Thing> campAssetListRef)
         {
             var entranceCells = CellRect.EdgeCells.Where(cell => cell.z == CellRect.minZ && cell.x == CellRect.minX + Convert.ToInt32(CellRect.Width / 2));
+            if (!ModSettings.decorativeFencePosts) CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDefOf.Door, ThingDefOf.WoodLog), entranceCells.First(), map, default, campAssetListRef);
 
             foreach (var edgeCell in CellRect.EdgeCells)
             {
