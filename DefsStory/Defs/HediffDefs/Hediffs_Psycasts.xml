@@ -48,7 +48,7 @@
           <ImmunityGainSpeed>3</ImmunityGainSpeed>
           <MoveSpeed>2</MoveSpeed>
           <ToxicSensitivity>-0.8</ToxicSensitivity>
-          <MentalBreakThreshold>-0.35</MentalBreakThreshold>
+          <MentalBreakThreshold>-0.20</MentalBreakThreshold>
           <MeleeDodgeChance>30</MeleeDodgeChance>
           <MeleeHitChance>15</MeleeHitChance>
         </statOffsets>
@@ -90,7 +90,7 @@
 					<ImmunityGainSpeed>3</ImmunityGainSpeed>
 					<MoveSpeed>2</MoveSpeed>
 					<ToxicSensitivity>-0.8</ToxicSensitivity>
-					<MentalBreakThreshold>-0.35</MentalBreakThreshold>
+					<MentalBreakThreshold>-0.20</MentalBreakThreshold>
           <MeleeDodgeChance>30</MeleeDodgeChance>
           <MeleeHitChance>15</MeleeHitChance>
 				</statOffsets>
