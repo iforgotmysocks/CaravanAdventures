@@ -100,8 +100,14 @@ namespace CaravanAdventures.CaravanImmersion
                         }
                         pawn.relations.AddDirectRelation(TravelCompanionDefOf.RelationNamed(newRelation.relationDefName), mainPawn);
                     }
+
+                    foreach (var relation in mainPawn.relations.DirectRelations.Reverse<DirectPawnRelation>())
+                    {
+                        if (relation?.otherPawn?.Dead != true) continue;
+                        if (relation.def.GetModExtension<TravelCompanionModExt>() != null) mainPawn.relations.RemoveDirectRelation(relation.def, relation.otherPawn);
+                    }
                 }
-                
+
                 ticks = 0;
             }
         }
@@ -162,18 +168,6 @@ namespace CaravanAdventures.CaravanImmersion
             }
         }
 
-        /// <summary>
-        /// Just to cleanup Outsider relations that keep appearing -> have yet to figure out why
-        /// </summary>
-        private void CleanUpOutsiderRelations()
-        {
-            var playerPawns = PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction.Where(x => x.RaceProps.Humanlike).ToList();
-
-            foreach (var mainPawn in playerPawns)
-            {
-                mainPawn.relations.DirectRelations.RemoveAll(x => x.def.HasModExtension<TravelCompanionModExt>());
-            }
-        }
         #endregion
 
     }
