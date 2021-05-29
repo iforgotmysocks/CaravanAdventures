@@ -74,7 +74,7 @@ namespace CaravanAdventures.CaravanAbilities
                 return;
             }
 
-            if (ticks > 50)
+            if (ticks > 180)
             {
                 if (!IsGifted())
                 {
@@ -82,7 +82,7 @@ namespace CaravanAdventures.CaravanAbilities
                     Pawn.health.RemoveHediff(parent);
                     return;
                 }
-                var pawns = PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_Colonists.Where(pawn => !pawn.HasExtraHomeFaction()).ToList();
+                var pawns = PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_Colonists.Where(pawn => !pawn.HasExtraHomeFaction() && pawn != Pawn && !pawn.IsKidnapped()).ToList();
                 if (!TryAddPawn(pawns)) TryKillPawn(pawns);
                 ticks = 0;
             }
@@ -112,7 +112,7 @@ namespace CaravanAdventures.CaravanAbilities
 
         private void TryKillPawn(List<Pawn> pawns)
         {
-            if (pawns.Count <= (ModSettings.maxLinkedAuraPawns + 1)) return;
+            if (pawns.Count <= ModSettings.maxLinkedAuraPawns) return;
             var pawnToKill = pawns.FirstOrDefault(pawn => !linkedPawns.Contains(pawn) && !pawn.health.hediffSet.HasHediff(AbilityDefOf.CAAncientProtectiveAuraLinked) && !pawn.health.hediffSet.HasHediff(AbilityDefOf.CAAncientGift));
             if (pawnToKill == null) return;
             pawnToKill.Kill(null, parent);
@@ -120,26 +120,41 @@ namespace CaravanAdventures.CaravanAbilities
 
         private bool TryAddPawn(List<Pawn> pawns)
         {
-            if ((linkedPawns.Count + 1) >= pawns.Count || linkedPawns.Count >= ModSettings.maxLinkedAuraPawns) return false;
+            RemovePawnsNoLongerApplying(pawns); 
+            if (linkedPawns.Count >= pawns.Count || linkedPawns.Count >= ModSettings.maxLinkedAuraPawns) return false;
             var pawnToAdd = pawns.FirstOrDefault(pawn => !linkedPawns.Contains(pawn) && !pawn.health.hediffSet.HasHediff(AbilityDefOf.CAAncientProtectiveAuraLinked) && !pawn.health.hediffSet.HasHediff(AbilityDefOf.CAAncientGift));
             if (pawnToAdd == null) return false;
-            Log.Message($"trying to add {pawnToAdd}");
+            DLog.Message($"Adding {pawnToAdd} as linked aura pawn");
             AddLinkedHediffToPawn(pawnToAdd, Pawn);
             linkedPawns.Add(pawnToAdd);
             return true;
         }
 
+        private void RemovePawnsNoLongerApplying(List<Pawn> pawns)
+        {
+            if (linkedPawns.Count < pawns.Count) return;
+            var pawnsToRemove = linkedPawns.Where(p => p == null || p.Dead || p.HasExtraHomeFaction() || p.IsKidnapped()).ToList();
+            pawnsToRemove.ForEach(p => RemoveLinkedAura(p));
+            linkedPawns.RemoveAll(p => pawnsToRemove.Contains(p));
+            if (pawnsToRemove.Count > 0) DLog.Message($"Removing {pawnsToRemove.Count} linked aura pawns");
+        }
+
         private void RemoveAllLinkedAuras()
         {
-            var hediff = Pawn?.health?.hediffSet?.hediffs?.FirstOrDefault(x => x.def == AbilityDefOf.CAAncientProtectiveAuraLinked);
-            if (hediff != null) Pawn.health.RemoveHediff(hediff);
+            RemoveLinkedAura(Pawn);
 
             foreach (var pawn in linkedPawns)
             {
                 if (pawn == null) continue;
-                hediff = pawn?.health?.hediffSet?.hediffs?.FirstOrDefault(x => x.def == AbilityDefOf.CAAncientProtectiveAuraLinked);
-                if (hediff != null) pawn.health.RemoveHediff(hediff);
+                RemoveLinkedAura(pawn);
             }
+        }
+
+        private void RemoveLinkedAura(Pawn pawn)
+        {
+            if (pawn == null) return;
+            var hediff = pawn?.health?.hediffSet?.hediffs?.FirstOrDefault(x => x.def == AbilityDefOf.CAAncientProtectiveAuraLinked);
+            if (hediff != null) pawn.health.RemoveHediff(hediff);
         }
     }
 }
