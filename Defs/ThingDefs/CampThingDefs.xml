@@ -395,6 +395,7 @@
         <fuelFilter>
           <thingDefs>
             <li>WoodLog</li>
+            <li>Chemfuel</li>
           </thingDefs>
         </fuelFilter>
         <initialFuelPercent>1</initialFuelPercent>
