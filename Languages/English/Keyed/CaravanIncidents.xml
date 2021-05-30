@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
 	<CaravanDamselInDistressTitle>Damsel in distress, kidnapped by {0}</CaravanDamselInDistressTitle>
-	<CaravanDamselInDistress>We stumbled over a beautifully stunning and helpless girl held by {2} of {1}'s savages... could we bare the thought to leave her in their grasp?</CaravanDamselInDistress>
+	<CaravanDamselInDistress>We stumbled over a stunning and helpless girl held by {2} of {1}'s savages... could we bare the thought to leave her in their grasp?</CaravanDamselInDistress>
 	<CaravanDamselInDistress_Rescue>Rescue her immediately</CaravanDamselInDistress_Rescue>
 	<CaravanDamselInDistress_Follow>Follow them silently until they make camp</CaravanDamselInDistress_Follow>
 	<CaravanDamselInDistress_Leave>Leave her to her fate</CaravanDamselInDistress_Leave>
