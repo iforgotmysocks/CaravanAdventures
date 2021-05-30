@@ -48,7 +48,6 @@
       <Steel>30</Steel>
       <Plasteel>10</Plasteel>
     </butcherProducts>
-
   </ThingDef>
 
   <PawnKindDef ParentName="BaseMechanoidKind">
@@ -150,7 +149,7 @@
         <bodyGraphicData>
           <texPath>Things/Bosses/2</texPath>
           <graphicClass>Graphic_Multi</graphicClass>
-          <drawSize>3.5</drawSize>
+          <drawSize>4.5</drawSize>
           <shadowData>
             <volume>(0.4, 0.8, 0.4)</volume>
           </shadowData>
@@ -239,7 +238,7 @@
         <bodyGraphicData>
           <texPath>Things/Bosses/4</texPath>
           <graphicClass>Graphic_Multi</graphicClass>
-          <drawSize>3.5</drawSize>
+          <drawSize>4.5</drawSize>
           <shadowData>
             <volume>(0.4, 0.8, 0.4)</volume>
           </shadowData>
@@ -329,7 +328,7 @@
         <bodyGraphicData>
           <texPath>Things/Bosses/3</texPath>
           <graphicClass>Graphic_Multi</graphicClass>
-          <drawSize>3.5</drawSize>
+          <drawSize>4.5</drawSize>
           <shadowData>
             <volume>(0.4, 0.8, 0.4)</volume>
           </shadowData>

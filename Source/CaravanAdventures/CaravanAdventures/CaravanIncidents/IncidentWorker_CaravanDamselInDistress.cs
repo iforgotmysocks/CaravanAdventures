@@ -7,9 +7,6 @@ using Verse;
 using Verse.AI.Group;
 using RimWorld;
 
-// todo update broke quest... check out what happend.
-// todo cleanup, should prolly remove pawns when leaving early or not killing everyone!
-
 namespace CaravanAdventures.CaravanIncidents
 {
     public class IncidentWorker_CaravanDamselInDistress : IncidentWorker
