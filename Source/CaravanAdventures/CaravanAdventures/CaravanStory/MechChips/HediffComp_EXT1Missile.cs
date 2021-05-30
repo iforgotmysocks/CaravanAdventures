@@ -46,7 +46,7 @@ namespace CaravanAdventures.CaravanStory.MechChips
                 }
             }
 
-            if (ticks >= 700)
+            if (ticks >= 500)
             {
                 ticks = 0;
                 //if (hasTarget) LaunchMissile();
