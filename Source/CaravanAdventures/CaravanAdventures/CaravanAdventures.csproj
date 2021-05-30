@@ -141,6 +141,7 @@
     <Compile Include="CaravanStory\MechChips\Abilities\RapidLaser.cs" />
     <Compile Include="CaravanStory\MechChips\Abilities\RapidLaserMote.cs" />
     <Compile Include="CaravanStory\MechChips\Abilities\CirclingBladesMote.cs" />
+    <Compile Include="CaravanStory\MechChips\Abilities\MechChipAbilitySoundDefOf.cs" />
     <Compile Include="CaravanStory\MechChips\HediffComp_EXT1Basic.cs" />
     <Compile Include="CaravanStory\MechChips\HediffComp_EXT1Guardian.cs" />
     <Compile Include="CaravanStory\MechChips\HediffComp_EXT1Missile.cs" />

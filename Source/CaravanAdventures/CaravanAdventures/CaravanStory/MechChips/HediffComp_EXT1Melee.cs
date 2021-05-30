@@ -40,7 +40,7 @@ namespace CaravanAdventures.CaravanStory.MechChips
 
             if (ticks % 350 == 0)
             {
-                if (GenRadial.RadialCellsAround(Pawn.Position, 4, false).Select(x => x.GetFirstPawn(Pawn.Map)).Where(x => x != Pawn).Count() != 0)
+                if (GenRadial.RadialCellsAround(Pawn.Position, 4, false).Select(x => x.GetFirstPawn(Pawn.Map)).Where(x => x != null && x != Pawn && x.Faction != Faction.OfMechanoids).Count() != 0)
                 {
                     blades = (Abilities.CirclingBladesMote)ThingMaker.MakeThing(ThingDef.Named("CACirclingBlades"));
                     blades.Attach(Pawn);
@@ -63,21 +63,21 @@ namespace CaravanAdventures.CaravanStory.MechChips
 
         protected void SliceSurroundingEnemies()
         {
-            var cells = GenRadial.RadialCellsAround(Pawn.Position, 4, false).Where(cell => cell.Standable(Pawn.Map));
-            var pawns = cells.SelectMany(cell => cell.GetThingList(Pawn.Map).OfType<Pawn>().Where(pawn => !pawn.RaceProps.IsMechanoid)).ToList();
+            var cells = GenRadial.RadialCellsAround(Pawn.Position, 4, false).Where(cell => cell.InBounds(Pawn.Map));
+            var pawns = cells.SelectMany(cell => cell.GetThingList(Pawn.Map).OfType<Pawn>().Where(pawn => pawn.Faction != Faction.OfMechanoids)).ToList();
             if (pawns != null && pawns.Count() != 0)
             {
-                foreach (var cell in cells)
-                {
-                    //    MoteMaker.MakeStaticMote(cell, Pawn.Map, ThingDef.Named("Mote_BlastFlame"));
-                    //    MoteMaker.ThrowDustPuffThick(cell.ToVector3(), Pawn.Map, Rand.Range(1.5f, 3f), new Color(1f, 1f, 1f, 2.5f));
-                    //    MoteMaker.ThrowAirPuffUp(cell.ToVector3(), Pawn.Map);
-
-                    //var cellPawns = cell.GetThingList(Pawn.Map).OfType<Pawn>().ToList();
-                    //cellPawns.ForEach(pawn => pawn.TakeDamage(new DamageInfo(DamageDefOf.Burn, 20, 50, -1, Pawn, pawn.health.hediffSet.GetRandomNotMissingPart(DamageDefOf.Burn, BodyPartHeight.Undefined, BodyPartDepth.Outside))));
-                }
                 pawns.ForEach(pawn => Enumerable.Range(0, 3).ToList().ForEach(run => pawn.TakeDamage(new DamageInfo(DamageDefOf.Scratch, 7, 0.5f, -1, Pawn, pawn.health.hediffSet.GetRandomNotMissingPart(DamageDefOf.Burn, BodyPartHeight.Undefined, BodyPartDepth.Outside)))));
-                SoundDefOf.MetalHitImportant.PlayOneShot(new TargetInfo(Pawn.Position, Pawn.Map, false));
+
+                //SoundDefOf.MetalHitImportant
+                new[] 
+                {
+                    Abilities.MechChipAbilitySoundDefOf.CASlice1,
+                    Abilities.MechChipAbilitySoundDefOf.CASlice2,
+                    Abilities.MechChipAbilitySoundDefOf.CASlice3,
+                    Abilities.MechChipAbilitySoundDefOf.CASlice4
+                }.RandomElement().PlayOneShot(new TargetInfo(Pawn.Position, Pawn.Map, false));
+                
                 //SoundDef.Named("DropPod_Leaving").PlayOneShot(new TargetInfo(Pawn.Position, Pawn.Map, false));
             }
         }
