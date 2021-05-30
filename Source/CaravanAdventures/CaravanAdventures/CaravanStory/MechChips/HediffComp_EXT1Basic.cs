@@ -31,14 +31,16 @@ namespace CaravanAdventures.CaravanStory.MechChips
 
         public override void CompPostTick(ref float severityAdjustment)
         {
-          if (ticks > 60)
+            if (ticks > 60)
             {
                 ticks = 0;
                 Helper.RunSavely(NegateNegativeEffects);
             }
+
+            ticks++;
         }
 
-        
+
         private IntVec3 GetMinionSpawnPosition(IntVec3 position, Map map)
         {
             var positions = GenRadial.RadialCellsAround(position, 1, false);
@@ -52,11 +54,11 @@ namespace CaravanAdventures.CaravanStory.MechChips
 
         public virtual void NegateNegativeEffects()
         {
-            if (Pawn.MentalState.def == MentalStateDefOf.BerserkMechanoid 
+            if (Pawn.MentalState.def == MentalStateDefOf.BerserkMechanoid
                 || Pawn.MentalState.def == MentalStateDefOf.Berserk)
                 Pawn.MentalState.RecoverFromState();
         }
 
-       
+
     }
 }
