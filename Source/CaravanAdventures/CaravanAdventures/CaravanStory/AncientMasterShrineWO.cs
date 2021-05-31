@@ -53,8 +53,6 @@ namespace CaravanAdventures.CaravanStory
 
         private void AddBandits(Map map, Caravan caravan, bool sendLetterIfRelatedPawns = true)
         {
-            // todo add notification about this being an ambush and not the real thing.
-
             IncidentParms incidentParms = StorytellerUtility.DefaultParmsNow(IncidentCategoryDefOf.ThreatBig, caravan);
             if (incidentParms.points < 400f)
             {
@@ -173,8 +171,6 @@ namespace CaravanAdventures.CaravanStory
 
         private int SetAndReturnCasketGroupId(Room room)
         {
-            // todo test id
-            //var id = Rand.Range(1, Int32.MaxValue - 1);
             var id = Find.UniqueIDsManager.GetNextAncientCryptosleepCasketGroupID();
             var caskets = room.ContainedThings(ThingDefOf.AncientCryptosleepCasket);
             foreach (var casket in caskets)
@@ -232,7 +228,6 @@ namespace CaravanAdventures.CaravanStory
 
         private void SpawnCasketAt(IntVec3 curCell, Map map, Caravan caravan, Rot4 rotation, int casketGroupId)
         {
-            // todo if casket is opend, all caskets need to trigger!
             var casket = (Building_AncientCryptosleepCasket)ThingMaker.MakeThing(ThingDefOf.AncientCryptosleepCasket);
             casket.groupID = casketGroupId;
             GenSpawn.Spawn(casket, curCell, map, rotation, WipeMode.Vanish);
@@ -243,9 +238,6 @@ namespace CaravanAdventures.CaravanStory
 
         private bool FindEmptyRectInRoom(Room room, int width, int height, out CellRect rect)
         {
-            // todo improve 
-            // --> reduce rect to find fitting place if unsuccessful
-            // --> check what things block cells and remove things that don't matter
             rect = new CellRect(0, 0, width, height);
             foreach (var cell in room.Cells)
             {

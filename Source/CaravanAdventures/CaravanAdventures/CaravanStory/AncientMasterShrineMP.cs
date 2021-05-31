@@ -18,8 +18,6 @@ namespace CaravanAdventures.CaravanStory
         private bool wonBattle;
 
         public List<Pawn> generatedSoldiers = new List<Pawn>();
-        // todo remove
-        //public List<Pawn> generatedMechs = new List<Pawn>();
         public List<Pawn> generatedBandits = new List<Pawn>();
         public Pawn boss = null;
         private bool bossDefeatedAndRewardsGiven;
@@ -48,8 +46,6 @@ namespace CaravanAdventures.CaravanStory
             Scribe_Values.Look(ref checkRangeForJudgmentTicks, "checkRangeForJudgmentTicks", 0);
             Scribe_Values.Look(ref bossWasSpawned, "bossWasSpawned", false);
             Scribe_Values.Look(ref lastJudgementEntraceWasSpawned, "lastJudgementEntraceWasSpawned", false);
-            // todo are mechs enough? Need them for comparison later - dont think so, i should drop them
-            //Scribe_Collections.Look(ref generatedMechs, "generatedMechs", LookMode.Reference);
             Scribe_Values.Look(ref abandonShrine, "abandonShrine", false);
 
             Scribe_References.Look(ref lastJudgmentEntrance, "lastJudgmentEntrance");
@@ -73,7 +69,6 @@ namespace CaravanAdventures.CaravanStory
                 wonBattle = true;
 
                 GetComponent<TimedDetectionPatrols>().Init();
-                // todo balance strenth! maybe include shrine counter
                 GetComponent<TimedDetectionPatrols>().StartDetectionCountdown(60000, -1, (int)(8000 * (1 + CompCache.StoryWC.GetCurrentShrineCounter() / 10)));
 
                 if (boss != null) bossWasSpawned = true;
@@ -81,7 +76,6 @@ namespace CaravanAdventures.CaravanStory
             }
             else
             {
-                // todo do we want a raid here? 
                 GetComponent<TimedDetectionPatrols>().Init();
                 GetComponent<TimedDetectionPatrols>().StartDetectionCountdown(180000, -1, (int)(8000 * (1 + CompCache.StoryWC.GetCurrentShrineCounter() / 10)));
                 GetComponent<TimedDetectionPatrols>().ToggleIncreaseStrenthByCounter = true;
@@ -340,7 +334,6 @@ namespace CaravanAdventures.CaravanStory
 
         private void CheckBossDefeated()
         {
-            // todo - test if .destroyed needs to be added (in case of the body being completely nuked)?
             if ((boss != null && !boss.Dead) || (!bossWasSpawned && boss == null && CompCache.StoryWC.storyFlags[CompCache.StoryWC.BuildCurrentShrinePrefix() + "Created"]) || bossDefeatedAndRewardsGiven || lastJudgementEntraceWasSpawned) return;
             var gifted = StoryUtility.GetGiftedPawn();
             if (gifted == null) Log.Warning("gifted pawn was null, which shouldn't happen. Spell was stored for when another gifted pawn awakes");
@@ -497,7 +490,6 @@ namespace CaravanAdventures.CaravanStory
 
         public void AbandonShrineAndResetFlags()
         {
-            // todo cleanup + notify story to tick on
             SoundDefOf.Click.PlayOneShot(null);
             if (!bossDefeatedAndRewardsGiven) CompCache.StoryWC.ResetCurrentShrineFlags();
             if (lastJudgmentMP != null && !CompCache.StoryWC.storyFlags["Judgment_StoryOverDialog"])

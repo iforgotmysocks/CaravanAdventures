@@ -53,7 +53,6 @@ namespace CaravanAdventures.CaravanStory.MechChips.Abilities
         {
             if (target != null && target != LocalTargetInfo.Invalid && target.Position.DistanceTo(instigator.Position) >= 3f)
             {
-                // todo choose different target if current is too close
                 if (!GenGrid.InBounds(target.Position, instigator.Map))
                 {
                     DLog.Message($"Target cell out of bounds!");

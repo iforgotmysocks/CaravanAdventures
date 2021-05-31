@@ -89,8 +89,6 @@ namespace CaravanAdventures.CaravanStory
 					}
 				}
 			}
-			// todo - CanPlaceAncientBuildingInRangeAfterAdjustingGround() see if we cant make that work?
-			//if (!base.CanPlaceAncientBuildingInRange(rect, map))
 			if (!CanPlaceAncientBuildingInRangeAfterAdjustingGround(rect, map))
 			{
 				DLog.Message($"CanPlaceAncientBuildingInRangeAfterAdjustingGround");
