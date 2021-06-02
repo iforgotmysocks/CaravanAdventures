@@ -55,8 +55,6 @@ namespace CaravanAdventures.CaravanStory
                     AddTalkTreeAction();
                     AddTreeWhisper();
                     StartTreeQuest();
-
-                    // todo maybe run on a WC, so the gift can be past on without a map present
                     CheckEnsureGifted();
 
                 ticks = 0;
@@ -162,7 +160,7 @@ namespace CaravanAdventures.CaravanStory
 
                 diaNode = new DiaNode("Story_Start_Dia1_Me_End_GiftAlreadyRecieved".Translate());
                 diaNode.options.Add(new DiaOption("Story_Start_Dia1_Me_End_Bye".Translate()) { resolveTree = true });
-                diaNode.options.Add(new DiaOption("Story_Start_Dia1_1_Neg_Option2".Translate(gifted.NameShortColored, GenderUtility.GetPossessive(gifted.gender))) { link = subDiaNode });
+                if (gifted != initiator) diaNode.options.Add(new DiaOption("Story_Start_Dia1_1_Neg_Option2".Translate(gifted.NameShortColored, GenderUtility.GetPossessive(gifted.gender))) { link = subDiaNode });
 
             }
 
