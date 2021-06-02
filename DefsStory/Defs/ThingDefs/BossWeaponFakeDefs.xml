@@ -2,7 +2,7 @@
 
 <Defs>
     <ThingDef ParentName="Gun_ChargeBlasterHeavyBase">
-    <defName>Gun_ChargeBlasterHeavy</defName>
+    <defName>CAFakeGun_ChargeBlasterHeavy</defName>
       <graphicData>
         <texPath>Things/Empty</texPath>
         <graphicClass>Graphic_Single</graphicClass>
