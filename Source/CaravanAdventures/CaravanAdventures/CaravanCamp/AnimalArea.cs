@@ -33,6 +33,13 @@ namespace CaravanAdventures.CaravanCamp
                 thing.SetFaction(Faction.OfPlayer); 
                 campAssetListRef.Add(GenSpawn.Spawn(thing, edgeCell, map));
             }
+
+            var innerCells = CellRect.Cells.Where(cell => cell.z == CellRect.maxZ - 1).ToArray();
+            for (int i = 0; i < 6; i++)
+            {
+                if (i == 0 || i % 2 == 0) continue;
+                CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("AnimalBed"), ThingDefOf.Leather_Plain), innerCells[i], map, default, campAssetListRef);
+            }
         }
 
         public override void BuildTribal(Map map, List<Thing> campAssetListRef)
