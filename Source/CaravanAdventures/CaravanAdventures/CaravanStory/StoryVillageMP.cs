@@ -224,9 +224,6 @@ namespace CaravanAdventures.CaravanStory
             }
             else if (!CompCache.StoryWC.storyFlags["IntroVillage_TalkedToFriend"] && storyChar.Dead)
             {
-                // todo send letter and remove map -> adjust map removal option
-                // todo letter
-                // todo quest update
                 SpawnMechArmy(true, false);
                 mainCharLeftOrDied = true;
                 return;

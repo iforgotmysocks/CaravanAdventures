@@ -120,7 +120,6 @@ namespace CaravanAdventures.CaravanStory
 		{
 			if(ModSettings.debugMessages) if (ticksLeftToSendRaid % 100 == 0) DLog.Message($"{this.parent.Label}: notify / raid {ticksLeftTillNotifyPlayer} / {ticksLeftToSendRaid}");
 
-			// todo changed from AncientShrineMP to generall MP, check if shrine still works!
 			var mapParent = (MapParent)this.parent;
 			if (mapParent.HasMap)
 			{

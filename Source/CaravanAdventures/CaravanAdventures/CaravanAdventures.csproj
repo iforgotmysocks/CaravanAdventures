@@ -176,7 +176,6 @@
     <Compile Include="CompatibilityDef.cs" />
     <Compile Include="CompCache.cs" />
     <Compile Include="DLog.cs" />
-    <Compile Include="ExclusionModExt.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="InitGC.cs" />
     <Compile Include="InitPatches.cs" />

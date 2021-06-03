@@ -55,7 +55,6 @@ namespace CaravanAdventures.CaravanStory
         private int shrineMaximum = 5;
 
         private readonly IntRange timeoutDaysRange = new IntRange(10, 12);
-        // todo move baseDelayNextShrineReveal and shrineDistance to settings?
         public IntRange ShrineDistance => Helper.Debug() ? new IntRange(2, 4) : ModSettings.shrineDistance;
         private int shrineTileUnsuccessfulCounter = 0;
         private List<AbilityDef> unlockedSpells = new List<AbilityDef>();
@@ -312,7 +311,6 @@ namespace CaravanAdventures.CaravanStory
             && !storyFlags.Any(x => x.Key == BuildCurrentShrinePrefix() + "InitCountDownStarted" && x.Value == true)
             && (countShrinesCompleted < shrineMaximum || countShrinesCompleted >= shrineMaximum && ModSettings.issueFurtherShrineLocationsAfterStoryEnd);
 
-        // todo - incomplete
         private bool CheckCanStartFriendlyCaravanCounter() => !storyFlags["TradeCaravan_InitCountDownStarted"];
         private bool CheckCanStartVillageGenerationCounter() => storyFlags["TradeCaravan_DialogFinished"] && !storyFlags["IntroVillage_InitCountDownStarted"];
         private bool CanDoApocalypse() => !storyFlags["Judgment_ApocalypseStarted"]
