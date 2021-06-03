@@ -223,7 +223,7 @@ namespace CaravanAdventures.CaravanStory
 
             // todo choose best candidate
             // todo make sure the pawn isn't psychially unsensitive.
-            gifted = pawn ?? PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction?.FirstOrDefault(x => x?.RaceProps?.Humanlike ?? false);
+            gifted = pawn ?? PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction?.FirstOrDefault(x => (x?.RaceProps?.Humanlike ?? false) && !x.HasExtraHomeFaction() && !x.HasExtraMiniFaction());
 
             if (gifted == null)
             {

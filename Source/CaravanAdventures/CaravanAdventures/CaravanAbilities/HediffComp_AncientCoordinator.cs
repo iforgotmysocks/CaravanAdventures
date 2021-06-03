@@ -82,7 +82,7 @@ namespace CaravanAdventures.CaravanAbilities
                     Pawn.health.RemoveHediff(parent);
                     return;
                 }
-                var pawns = PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_Colonists.Where(pawn => !pawn.HasExtraHomeFaction() && pawn != Pawn && !pawn.IsKidnapped()).ToList();
+                var pawns = PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_Colonists.Where(pawn => !pawn.HasExtraHomeFaction() && !pawn.HasExtraMiniFaction() && pawn != Pawn && !pawn.IsKidnapped()).ToList();
                 if (!TryAddPawn(pawns)) TryKillPawn(pawns);
                 ticks = 0;
             }
@@ -133,7 +133,7 @@ namespace CaravanAdventures.CaravanAbilities
         private void RemovePawnsNoLongerApplying(List<Pawn> pawns)
         {
             if (linkedPawns.Count < pawns.Count) return;
-            var pawnsToRemove = linkedPawns.Where(p => p == null || p.Dead || p.HasExtraHomeFaction() || p.IsKidnapped()).ToList();
+            var pawnsToRemove = linkedPawns.Where(p => p == null || p.Dead || p.HasExtraHomeFaction() || p.HasExtraMiniFaction() || p.IsKidnapped()).ToList();
             pawnsToRemove.ForEach(p => RemoveLinkedAura(p));
             linkedPawns.RemoveAll(p => pawnsToRemove.Contains(p));
             if (pawnsToRemove.Count > 0) DLog.Message($"Removing {pawnsToRemove.Count} linked aura pawns");
