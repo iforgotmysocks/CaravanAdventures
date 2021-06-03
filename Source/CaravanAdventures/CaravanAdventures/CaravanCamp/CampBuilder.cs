@@ -423,6 +423,15 @@ namespace CaravanAdventures.CaravanCamp
                     map.areaManager.NoRoof[cell] = false;
                 }
             }
+
+            foreach (var animalArea in campParts.OfType<AnimalArea>())
+            {
+                foreach (var cell in animalArea.CellRect.Cells)
+                {
+                    map.areaManager.BuildRoof[cell] = false;
+                    map.areaManager.NoRoof[cell] = true;
+                }
+            }
         }
 
         protected virtual void ApplyZonesAndInventory()
