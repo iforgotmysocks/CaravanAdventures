@@ -67,7 +67,7 @@ namespace CaravanAdventures.CaravanCamp
             zone = new Zone_Stockpile(StorageSettingsPreset.DefaultStockpile, map.zoneManager);
             map.zoneManager.RegisterZone(zone);
             zone.settings.filter = new ThingFilter();
-            zone.settings.filter.SetAllow(ThingCategoryDefOf.PlantFoodRaw, true);
+            if (!ModSettings.useAnimalOnlyFoodForAnimalArea) zone.settings.filter.SetAllow(ThingCategoryDefOf.PlantFoodRaw, true);
             zone.settings.filter.SetAllow(ThingDefOf.Hay, true);
             zone.settings.filter.SetAllow(ThingDefOf.Kibble, true);
             zone.settings.Priority = StoragePriority.Preferred;

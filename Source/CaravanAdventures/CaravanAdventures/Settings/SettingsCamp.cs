@@ -60,6 +60,7 @@ namespace CaravanAdventures.Settings
             options.CheckboxLabeled("Auto apply zone for snow to be cleared within the camp", ref ModSettings.autoApplyCampClearSnowArea);
             options.CheckboxLabeled("Generate storage for all inventory items", ref ModSettings.generateStorageForAllInventory, "When disabled, most items will remain packed on the animals");
             options.CheckboxLabeled("Let animals mostly free instead of limiting them to their small animal area", ref ModSettings.letAnimalsRunFree);
+            options.CheckboxLabeled("Restrict animal zone food to kibble and hay", ref ModSettings.useAnimalOnlyFoodForAnimalArea, "When disabled, corn and vegetables will also be used as feed");
             options.CheckboxLabeled("Fence posts only decorative", ref ModSettings.decorativeFencePosts, "When set to false, fence posts can't be walked through and a door is created as entrace.");
             options.CheckboxLabeled("Show camp supply cost approximate on settle gizmo", ref ModSettings.showSupplyCostsInGizmo, "Enable if the approximate amount of camp supplies needed / available should be shown on the caravan settle gui gizmo label (value may be incorrect by a few units)");
             var rect = options.GetRect(Text.LineHeight);

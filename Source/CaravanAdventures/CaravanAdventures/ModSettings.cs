@@ -42,6 +42,7 @@ namespace CaravanAdventures
         public static int fuelStartingFillPercentage = 50;
         public static bool showSupplyCostsInGizmo = true;
         public static bool decorativeFencePosts = true;
+        public static bool useAnimalOnlyFoodForAnimalArea = false;
 
         // camp cost TODO -> create defs for tent types and move it there
         public static int campSupplyCostAnimalArea = 1;
@@ -144,6 +145,7 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref fuelStartingFillPercentage, "fuelStartingFillPercentage", 50);
             Scribe_Values.Look(ref showSupplyCostsInGizmo, "showSupplyCostsInGizmo", true);
             Scribe_Values.Look(ref decorativeFencePosts, "decorativeFencePosts", true);
+            Scribe_Values.Look(ref useAnimalOnlyFoodForAnimalArea, "useAnimalOnlyFoodForAnimalArea", false);
 
             // abilities
             // - ancient gift
