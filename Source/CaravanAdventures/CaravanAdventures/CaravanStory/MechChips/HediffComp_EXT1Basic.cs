@@ -54,8 +54,8 @@ namespace CaravanAdventures.CaravanStory.MechChips
 
         public virtual void NegateNegativeEffects()
         {
-            if (Pawn.MentalState.def == MentalStateDefOf.BerserkMechanoid
-                || Pawn.MentalState.def == MentalStateDefOf.Berserk)
+            if (Pawn?.MentalState?.def == MentalStateDefOf.BerserkMechanoid
+                || Pawn?.MentalState?.def == MentalStateDefOf.Berserk)
                 Pawn.MentalState.RecoverFromState();
         }
 

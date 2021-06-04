@@ -54,7 +54,8 @@ namespace CaravanAdventures.CaravanStory.MechChips
 
         protected void ManufactureScyther()
         {
-            if (producedMechs.Where(x => !x.Dead).Count() > 15) return;
+            producedMechs.RemoveAll(x => x == null || x.Dead);
+            if (producedMechs.Count() > 15) return;
             if (GenHostility.AnyHostileActiveThreatTo(Pawn.Map, Pawn.Faction))
             {
                 var spawnPos = GetMinionSpawnPosition(Pawn.Position, Pawn.Map);
@@ -67,7 +68,10 @@ namespace CaravanAdventures.CaravanStory.MechChips
                     if (lord != null) lord.AddPawn(scyther);
                     producedMechs.Add(scyther);
                 }
+
+                
             }
+          
         }
 
         protected bool LaunchBombardmentOnCurrentTarget()
