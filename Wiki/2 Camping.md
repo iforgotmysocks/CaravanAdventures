@@ -67,7 +67,6 @@ A second gizmo/icon allows your caravan to settle with all your items still pack
 Traveling in the night may sometimes be required if your pawns are able, but can't be done if pawns are fully exhausted. An extra icon was added for it.
 
 ## Mod Settings
-
 Following settings can be configured within the mods settings:
 * camp map size
 * configure which tent types should be build by your pawns
