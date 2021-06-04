@@ -85,6 +85,7 @@ namespace CaravanAdventures.CaravanIncidents
 			if (caravan != null)
 			{
 				if (!girl.IsWorldPawn()) Find.WorldPawns.PassToWorld(girl, PawnDiscardDecideMode.Decide);
+				if (girl?.holdingOwner != null) girl.holdingOwner.Remove(girl); 
 				caravan.AddPawn(girl, true);
 				if (!prisoner) girl.SetFaction(faction);
 			}
