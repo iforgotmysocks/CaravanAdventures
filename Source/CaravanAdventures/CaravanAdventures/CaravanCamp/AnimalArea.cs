@@ -14,6 +14,7 @@ namespace CaravanAdventures.CaravanCamp
     {
         protected Area_Allowed animalArea;
         protected Zone_Stockpile zone;
+        private bool tribal = false;
 
         public AnimalArea()
         {
@@ -38,12 +39,15 @@ namespace CaravanAdventures.CaravanCamp
             for (int i = 0; i < 6; i++)
             {
                 if (i == 0 || i % 2 == 0) continue;
-                CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("AnimalBed"), ThingDefOf.Leather_Plain), innerCells[i], map, default, campAssetListRef);
+                CampHelper.PrepAndGenerateThing(tribal 
+                    ? ThingMaker.MakeThing(ThingDef.Named("AnimalSleepingSpot")) 
+                    : ThingMaker.MakeThing(ThingDef.Named("AnimalBed"), ThingDefOf.Leather_Plain), innerCells[i], map, default, campAssetListRef);
             }
         }
 
         public override void BuildTribal(Map map, List<Thing> campAssetListRef)
         {
+            tribal = true;
             Build(map, campAssetListRef);
         }
 
@@ -88,7 +92,7 @@ namespace CaravanAdventures.CaravanCamp
             {
                 var stack = caravan.AllThings.Where(x => x.def == ThingDefOf.Kibble).OrderByDescending(x => x.stackCount).FirstOrDefault()
                     ?? caravan.AllThings.Where(x => x.def == ThingDefOf.Hay).OrderByDescending(x => x.stackCount).FirstOrDefault()
-                    ?? CampHelper.GetFirstOrderedThingOfCategoryFromCaravan(caravan, new[] { ThingCategoryDefOf.PlantFoodRaw });
+                    ?? (ModSettings.useAnimalOnlyFoodForAnimalArea ? null : CampHelper.GetFirstOrderedThingOfCategoryFromCaravan(caravan, new[] { ThingCategoryDefOf.PlantFoodRaw }));
 
                 if (stack == null) stack = map.zoneManager.AllZones.OfType<Zone_Stockpile>()
                     .FirstOrDefault(zone => zone != this.zone && zone.AllContainedThings.Any(thing => (new List<ThingDef> { ThingDefOf.Kibble, ThingDefOf.Hay }).Contains(thing?.def)))
