@@ -309,7 +309,8 @@ namespace CaravanAdventures.CaravanStory
             !storyFlags.Any(x => x.Key.StartsWith("Start_") && x.Value == false)
             && !storyFlags.Any(x => x.Key == BuildCurrentShrinePrefix() + "Completed" && x.Value == true)
             && !storyFlags.Any(x => x.Key == BuildCurrentShrinePrefix() + "InitCountDownStarted" && x.Value == true)
-            && (countShrinesCompleted < shrineMaximum || countShrinesCompleted >= shrineMaximum && ModSettings.issueFurtherShrineLocationsAfterStoryEnd);
+            && (countShrinesCompleted < shrineMaximum || countShrinesCompleted >= shrineMaximum && ModSettings.issueFurtherShrineLocationsAfterStoryEnd)
+            && Find.World?.worldObjects?.AllWorldObjects?.OfType<AncientMasterShrineMP>()?.Count() == 0;
 
         private bool CheckCanStartFriendlyCaravanCounter() => !storyFlags["TradeCaravan_InitCountDownStarted"];
         private bool CheckCanStartVillageGenerationCounter() => storyFlags["TradeCaravan_DialogFinished"] && !storyFlags["IntroVillage_InitCountDownStarted"];
