@@ -11,6 +11,8 @@ Upon settling, your pawns will choose their tents and bed roll setups depeding o
 Prisoners will be placed in for prisoners dedicated tents and your animals get a small place for themselfs. 
 Your equipment, depending on settings, will either be placed in enough storage tents as are required, or remain stored on your animals and pawns.
 
+Spacer camp supplies can be produced at the machineing table for 3 components, 25 plasteel and 10 chemfuel.
+
 ## Tent types
 Depending on if you have a makeshift camp or a high tech camp, most tents comes with different mobiliar, 
 different job preapplied, and different efficiencies. As an example, a makeshift camp comes with a tent for food, however a hightech camp would comes with a cooler preinstalled to keep food frozen.
