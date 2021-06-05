@@ -30,8 +30,8 @@ namespace CaravanAdventures.CaravanCamp
 
             for (int i = 0; i < cellSpots.Length; i++)
             {
-                if (lover != null && !lover.IsPrisoner && i == 0) continue;
-                else if (lover != null && !lover.IsPrisoner && i == 1)
+                if (lover != null && !lover.IsPrisoner && !HealthAIUtility.ShouldSeekMedicalRest(lover) && i == 0) continue;
+                else if (lover != null && !lover.IsPrisoner && !HealthAIUtility.ShouldSeekMedicalRest(lover) && i == 1)
                 {
                     var dbThing = ThingMaker.MakeThing(CampDefOf.CASpacerBedrollDouble, CampDefOf.CASpacerTentFabric);
                     var doubleBed = GenSpawn.Spawn(dbThing, cellSpots[i], map, Rot4.South);
