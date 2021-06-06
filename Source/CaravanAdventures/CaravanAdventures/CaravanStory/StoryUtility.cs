@@ -489,7 +489,7 @@ namespace CaravanAdventures.CaravanStory
         public static Pawn GetFittingMechBoss(bool endboss = false)
         {
             var possibleBosses = DefDatabase<PawnKindDef>.AllDefsListForReading.Where(x => x.RaceProps.IsMechanoid && x.defName.ToLower().StartsWith("cabossmech"));
-            var selected = (endboss ? StoryDefOf.CAEndBossMech : possibleBosses.FirstOrDefault(boss => !CompCache.StoryWC.mechBossKillCounters?.Keys?.Contains(boss) ?? false)) ?? possibleBosses.RandomElement();
+            var selected = (endboss ? StoryDefOf.CAEndBossMech : possibleBosses.Where(boss => !CompCache.StoryWC.mechBossKillCounters?.Keys?.Contains(boss) ?? false)?.RandomElement()) ?? possibleBosses.RandomElement();
             var bossPawn = PawnGenerator.GeneratePawn(selected, Faction.OfMechanoids);
             if (bossPawn != null)
             {
