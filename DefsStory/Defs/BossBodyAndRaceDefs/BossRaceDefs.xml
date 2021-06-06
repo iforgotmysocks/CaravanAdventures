@@ -419,9 +419,9 @@
         </bodyGraphicData>
       </li>
     </lifeStages>
-    <weaponMoney>0~0</weaponMoney>
+    <weaponMoney>9999~9999</weaponMoney>
     <weaponTags>
-      <!--<li>MechanoidGunFake</li>-->
+      <li>MechanoidGunFake</li>
     </weaponTags>
     <defendPointRadius>-1</defendPointRadius>
     <modExtensions>
