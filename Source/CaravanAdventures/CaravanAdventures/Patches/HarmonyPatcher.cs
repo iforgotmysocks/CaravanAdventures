@@ -18,9 +18,11 @@ namespace CaravanAdventures.Patches
             {
                 TalkPawnGUIOverlay.ApplyPatches(harmony);
                 BossPatches.ApplyPatches(harmony);
+
+                if (ModSettings.allowApocToAlterTileTemp) ApocalypsePatches.ApplyPatches(harmony);
             }
 
-            if (ModSettings.allowApocToAlterTileTemp) ApocalypsePatches.ApplyPatches(harmony);
+            if (ModSettings.spDecayLevelIncrease) SpDecayLevelIncrease.ApplyPatches(harmony);
         }
 
         /// <summary>
