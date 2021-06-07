@@ -322,11 +322,8 @@ namespace CaravanAdventures.CaravanStory
 
         public static void GenerateStoryContact()
         {
-            if (CompCache.StoryWC.questCont.Village.StoryContact != null && !CompCache.StoryWC.questCont.Village.StoryContact.Dead)
-            {
-                DLog.Message($"skipping story char generation, char already exists");
-                return;
-            }
+            if (CompCache.StoryWC.questCont.Village.StoryContact != null && !CompCache.StoryWC.questCont.Village.StoryContact.Dead) return;
+            
             var girl = PawnGenerator.GeneratePawn(new PawnGenerationRequest()
             {
                 Context = PawnGenerationContext.NonPlayer,
