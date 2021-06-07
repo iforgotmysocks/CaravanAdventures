@@ -40,7 +40,7 @@ namespace CaravanAdventures.CaravanStory.MechChips
 
             if (ticks % 350 == 0)
             {
-                if (GenRadial.RadialCellsAround(Pawn.Position, 4, false).Select(x => x.GetFirstPawn(Pawn.Map)).Where(x => x != null && x != Pawn && x.Faction != Faction.OfMechanoids).Count() != 0)
+                if (GenRadial.RadialCellsAround(Pawn.Position, 4, false).Where(cell => cell.InBounds(Pawn.Map)).Select(x => x.GetFirstPawn(Pawn.Map)).Where(x => x != null && x != Pawn && x.Faction != Faction.OfMechanoids).Count() != 0)
                 {
                     blades = (Abilities.CirclingBladesMote)ThingMaker.MakeThing(ThingDef.Named("CACirclingBlades"));
                     blades.Attach(Pawn);
