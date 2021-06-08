@@ -15,7 +15,7 @@
 						<clipFolderPath>Bosses/Attacks/slice1_audione</clipFolderPath>
 					</li>
 				</grains>
-				<volumeRange>70~70</volumeRange>
+				<volumeRange>50~50</volumeRange>
 				<!--<pitchRange>0.9~1.1</pitchRange>-->
 				<sustainLoop>false</sustainLoop>
 				<!--<sustainAttack>1.1</sustainAttack>-->
@@ -38,7 +38,7 @@
             <clipFolderPath>Bosses/Attacks/slice2_freefire66</clipFolderPath>
           </li>
         </grains>
-        <volumeRange>50~50</volumeRange>
+        <volumeRange>30~30</volumeRange>
         <!--<pitchRange>0.9~1.1</pitchRange>-->
         <sustainLoop>false</sustainLoop>
         <!--<sustainAttack>1.1</sustainAttack>-->
@@ -61,7 +61,7 @@
             <clipFolderPath>Bosses/Attacks/slice3_TheBuilder15</clipFolderPath>
           </li>
         </grains>
-        <volumeRange>80~80</volumeRange>
+        <volumeRange>50~50</volumeRange>
         <!--<pitchRange>0.9~1.1</pitchRange>-->
         <sustainLoop>false</sustainLoop>
         <!--<sustainAttack>1.1</sustainAttack>-->
@@ -84,7 +84,7 @@
             <clipFolderPath>Bosses/Attacks/slice4_Aleks41</clipFolderPath>
           </li>
         </grains>
-        <volumeRange>80~80</volumeRange>
+        <volumeRange>50~50</volumeRange>
         <!--<pitchRange>0.9~1.1</pitchRange>-->
         <sustainLoop>false</sustainLoop>
         <!--<sustainAttack>1.1</sustainAttack>-->
