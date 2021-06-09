@@ -305,7 +305,9 @@ namespace CaravanAdventures.CaravanStory
             if (!CompCache.StoryWC.storyFlags["IntroVillage_MechsArrived"] || !HasMap || !mainCharLeftOrDied) return;
             // change to remove when downed?
             if (timerTillRemoval > 0) return;
-            if (Map.mapPawns.FreeColonistsSpawned.Any(x => !x.Dead)) return;
+            //if (Map.mapPawns.FreeColonistsSpawned.Any(x => !x.Dead)) return;
+            if (Map.mapPawns.AnyPawnBlockingMapRemoval) return;
+
             var killCamp = Map.mapPawns.AllPawnsSpawned.Any(x => x.Faction == Faction.OfMechanoids && !x.Dead && !x.Downed);
             Current.Game.DeinitAndRemoveMap(Map);
             
