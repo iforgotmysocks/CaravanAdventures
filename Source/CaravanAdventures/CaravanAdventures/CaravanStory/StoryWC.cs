@@ -20,7 +20,6 @@ using Verse.Sound;
 
 // -- story continuation: 
 // -- (optional branch, possible merge) add comm device gizmo to the gifted hediff, that is visible, when the player isn't hostile towards hunters -> opens dialog with hunters
-// - add system that allows inclusion or exclusion for other races to relation
 
 // - spawn tree for tree wisper quest if it doesn't exist yet !!
 
@@ -30,18 +29,12 @@ using Verse.Sound;
 // --> show tips about how to handle a shrine when first entering (and create a "show tips" link in the quest window, 
 //          that opens a window showing tips how to handle shrines: shrines stay, 
 //          shrines can be fled and come back when better equipped, allies can be used...)
-// --> fix mental state: Berserk caused by insanity lance on bosses -> maybe remove them on a timer
 // - camp: doesn't uncover open zones when rock is removed
 
 // low prio:
 // - collect player responses and use them to determine the support strength for troups at shrines
 // - balance village hunter strenght depending on player character wealth
 // - export shrine stuff to seperate questCont
-
-// cleanup: 
-// - check why AncientAura_Old type was passed to the compprops (most likely overwritten by the xml class assignment)
-// - run test if generated mechs on a shrine map are still loaded and saved correctly
-// - move baseDelayNextShrineReveal and shrineDistance to settings
 
 namespace CaravanAdventures.CaravanStory
 {
