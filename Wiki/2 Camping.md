@@ -2,12 +2,8 @@
 
 Camping is an important part when it comes to long distance journeys and to make it more enjoyable, this mod gives your pawns the ability to set up a camp for themselfs which includes various types of tents, preapplied jobs, zones and other features.
 
-<br>
-
 ## Settle as Caravan
 The first gizmo/icon allows your caravan to settle with all your items still packed and adds an alert which starts the unloading process when clicked. This allows you to find a decent place first and maybe build some storage buildings instead of scattering all your precious gear on the ground. However this option will not lead to an assembled camp.
-
-<br>
 
 ## Settle with Camp
 <img src="Images\Settle.png" alt="Settle"/>  
@@ -21,8 +17,6 @@ Prisoners will be placed in for prisoners dedicated tents and your animals get a
 Your equipment, depending on settings, will either be placed in enough storage tents as are required, or remain stored on your animals and pawns.
 
 Spacer camp supplies can be produced at the machineing table for 3 components, 25 plasteel and 10 chemfuel.
-
-<br>
 
 ## Tent types 
 
@@ -76,9 +70,6 @@ area can be set in the camp settings.
 ### Growing tent
 The growing tent is hightech specific and allos to grow a few plants in a greenhouse sort of tent. However the generator supporting the sunlamp is quite bio fuel hungry. Suitable to be expanded with additional plant trays. 
 
-
-<br>
-
 ## Night travel
 Traveling in the night may sometimes be required if your pawns are able, but can't be done if pawns are fully exhausted. An extra icon was added for it.
 
@@ -95,3 +86,5 @@ Following settings can be configured within the mods settings:
 * define the maximum camp supply cost used
 * disable camp supply costs which will always lead to a hightech camp being build
 * starting fuel percentage for camp-gear
+
+<a href="1 General.md">Next page</a> <--> <a href="3 3 CaravanFormingTradingPresetFilters.md">Next page</a>
