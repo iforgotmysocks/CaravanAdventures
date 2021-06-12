@@ -2,8 +2,19 @@
 
 Camping is an important part when it comes to long distance journeys and to make it more enjoyable, this mod gives your pawns the ability to set up a camp for themselfs which includes various types of tents, preapplied jobs, zones and other features.
 
-## Setup
-You can select the "settle with Camp" having a caravan selected, so your pawns know they should construct a camp when settling.
+<br>
+
+## Settle as Caravan
+---
+The first gizmo/icon allows your caravan to settle with all your items still packed and adds an alert which starts the unloading process when clicked. This allows you to find a decent place first and maybe build some storage buildings instead of scattering all your precious gear on the ground. However this option will not lead to an assembled camp.
+
+<br>
+
+## Settle with Camp
+---
+
+![Settle](Images\Settle.png)  
+You can select the "Settle with Camp" Button having a caravan selected, so your pawns know they should construct a camp when settling.
 The settle icon shows how many spacer camp supplies your caravan has available and an approximate value how many would be required for a high quality camp.
 If you do not have enough, ur pawns will use makeshift materials they may find in nature, however a high tech camp will come with alot of adventages which are listed down below.
 
@@ -13,7 +24,10 @@ Your equipment, depending on settings, will either be placed in enough storage t
 
 Spacer camp supplies can be produced at the machineing table for 3 components, 25 plasteel and 10 chemfuel.
 
-## Tent types
+<br>
+
+## Tent types 
+---
 Depending on if you have a makeshift camp or a high tech camp, most tents comes with different mobiliar, 
 different job preapplied, and different efficiencies. As an example, a makeshift camp comes with a tent for food, however a hightech camp would comes with a cooler preinstalled to keep food frozen.
 Important to note, most camp related buildings can not be build manually. Camps should be a temporary solution, so if more space or other buildings are required, start expanding with the gear you have access to. 
@@ -60,10 +74,11 @@ area can be set in the camp settings.
 ### Growing tent
 The growing tent is hightech specific and allos to grow a few plants in a greenhouse sort of tent. However the generator supporting the sunlamp is quite bio fuel hungry. Suitable to be expanded with additional plant trays. 
 
-## Settle as Caravan
-A second gizmo/icon allows your caravan to settle with all your items still packed and adds an alert which starts the unloading process when clicked. This allows you to find a decent place first and maybe build some storage buildings instead of scattering all your precious gear on the ground.
+
+<br>
 
 ## Night travel
+---
 Traveling in the night may sometimes be required if your pawns are able, but can't be done if pawns are fully exhausted. An extra icon was added for it.
 
 ## Mod Settings
