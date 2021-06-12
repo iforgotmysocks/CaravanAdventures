@@ -25,7 +25,7 @@ Spacer camp supplies can be produced at the machineing table for 3 components, 2
 
 ## Tent types 
 
-<img src="Images\CampBuildings.png" alt="drawing" width="48%"/> <img src="Images\CampBuildingsTribal.png" alt="drawing" width="48%"/><br>
+<img src="Images\CampBuildings.PNG" alt="drawing" width="48%"/> <img src="Images\CampBuildingsTribal.png" alt="drawing" width="48%"/><br>
 
 Depending on if you have a makeshift camp or a high tech camp, most tents comes with different mobiliar, 
 different job preapplied, and different efficiencies. As an example, a makeshift camp comes with a tent for food, however a hightech camp would comes with a cooler preinstalled to keep food frozen.
