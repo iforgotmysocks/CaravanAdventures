@@ -10,7 +10,8 @@ The first gizmo/icon allows your caravan to settle with all your items still pac
 <br>
 
 ## Settle with Camp
-![Settle](Images\Settle.png)  
+<img src="Images\Settle.png" alt="Settle"/>  
+
 You can select the "Settle with Camp" Button having a caravan selected, so your pawns know they should construct a camp when settling.
 The settle icon shows how many spacer camp supplies your caravan has available and an approximate value how many would be required for a high quality camp.
 If you do not have enough, ur pawns will use makeshift materials they may find in nature, however a high tech camp will come with alot of adventages which are listed down below.
@@ -25,7 +26,7 @@ Spacer camp supplies can be produced at the machineing table for 3 components, 2
 
 ## Tent types 
 
-<img src="Images\CampBuildings.PNG" alt="drawing" width="48%"/> <img src="Images\CampBuildingsTribal.png" alt="drawing" width="48%"/><br>
+<img src="Images\CampBuildings.png" alt="img" width="48%"/> <img src="Images\CampBuildingsTribal.png" alt="img" width="48%"/><br>
 
 Depending on if you have a makeshift camp or a high tech camp, most tents comes with different mobiliar, 
 different job preapplied, and different efficiencies. As an example, a makeshift camp comes with a tent for food, however a hightech camp would comes with a cooler preinstalled to keep food frozen.
