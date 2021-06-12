@@ -30,6 +30,7 @@ Important to note, most camp related buildings can not be build manually. Camps 
 <img src="Images\CampControl2.png">
 <br>
 You can rightclick the camp fire to bring up the additional camp control options which allow you to:
+
 * pack up your camp by taking down tents to either leave or make room for other buildings
 * pack up your camp and leave the map immediately, which will bring up the caravan forming dialog and skip the lengthy caravan packing process
 
@@ -87,4 +88,4 @@ Following settings can be configured within the mods settings:
 * disable camp supply costs which will always lead to a hightech camp being build
 * starting fuel percentage for camp-gear
 
-<a href="1 General.md">Next page</a> <--> <a href="3 3 CaravanFormingTradingPresetFilters.md">Next page</a>
+<a href="1 General.md">Next page</a> <--> <a href="3 CaravanFormingTradingPresetFilters.md">Next page</a>

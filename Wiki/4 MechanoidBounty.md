@@ -1,25 +1,28 @@
-# Caravan forming / trading preset filter settings
+# Mechanoid Bounty
 
-Wasting time selecting all items individually everytime you want to pack up and travel some place else or just want to get your next trading caravan going is now over. 
+If you play with the story enabled, the story faction will call out a bounty on mechanoids, if not, you can choose the faction in modsettings, which by default falls to the civil outlanders.
 
-<img src="Images/CaravanFormDia.png">
+Once the bounty is called out and you receive the notification, the hunt can begin. Every Mechanoid kill your colonists or structures pull off will reward your bounty credit balance with a certain amount of points. 
 
-Your caravan forming and trade menus now contain additional buttons allowing you to allow you to: 
-* select all items at once
-* select predifined items for each of the 3 available presets
-* reset the entire selection
-* disable the automatic supply selection of the "Travel supplies" tab when the dialog is opend, which can cause considerable lag when active
+To trade in these points for services provided by the bounty faction, simply reach out to them via the comms console and choose "Bounty Services":
+| | |
+--- | ---
+<img src="Images/BountyDialog2.png" height="400"> | Your currently collected bounty points <br><br> The bounty rewards you can gain for the different mech types. <br> Mechs provided by other mods all reward 12 points, however the third <br> party mod support section below describes how you can add <br> additional supported factions or bounty point rewards for your mod <br><br><br><br><br>- Request military assistance ranging between 6 and 30 soldiers <br> - Exchange bounty points for rare items <br> - Use envoys in exchange for bounty credits to improve your relations <br> - Permenantely recruit skilled veteran soldiers and choose some of their traits <br> - Exchange your hard earned silver for more bounty credits (4 silver ~ 1 bc) <br><br><br>
 
-The 3 presets can be set in ur mod settings and allow you to fine tune all items you'd like to be selected by each preset:
+## Mod Settings
 
-<img src="Images/FilterSettings.png" height="500">
+* Choose the faction calling out the bounty if you do not have the storyline active
+* adjust the durations, when item restocks happen or how long services won't be available after use
+* allow bounty points being collected by structures (e.g. turrets)
+* Allow the exchange of silver for bounty credits
+* Adjust the silver to bounty credit value modifier 
 
-You can further limit the item selecting by using the specialized filter settings that the filter dialog offers.
+## Third party mod support
 
-The last option in each row allows you to set whether using a preset will reset other item selections that you may have toggled or not. For the typical "Pack up" preset this may make sense to only include what you'd want on your journey, however for presets you may use for trading, you may also want to sell other goods, so selecting those shouldn't reset other selections.
+The CompatibilityDef can be patched in order to register new factions and new bounty point reward allocations for your mod's mech races.  
+The CompatibilityDef is located at Defs/Compatibility/CompatibilityDef.xml
 
-And a short preview in action:
-
-<img src="Images/filter.gif" height="600">
+To register new Factions, you can patch them into the ``<additionalBountyFactionDefsToAdd/>`` node.  
+To register a bounty value for a new race you can patch in a new ``<li/>`` list entry under the ``<mechanoidBountyToAdd/>`` node.
 
 <br><a href="1 General.md">Next page</a> <--> <a href="3 3 CaravanFormingTradingPresetFilters.md">Next page</a>
