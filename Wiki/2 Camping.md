@@ -5,14 +5,11 @@ Camping is an important part when it comes to long distance journeys and to make
 <br>
 
 ## Settle as Caravan
----
 The first gizmo/icon allows your caravan to settle with all your items still packed and adds an alert which starts the unloading process when clicked. This allows you to find a decent place first and maybe build some storage buildings instead of scattering all your precious gear on the ground. However this option will not lead to an assembled camp.
 
 <br>
 
 ## Settle with Camp
----
-
 ![Settle](Images\Settle.png)  
 You can select the "Settle with Camp" Button having a caravan selected, so your pawns know they should construct a camp when settling.
 The settle icon shows how many spacer camp supplies your caravan has available and an approximate value how many would be required for a high quality camp.
@@ -27,12 +24,16 @@ Spacer camp supplies can be produced at the machineing table for 3 components, 2
 <br>
 
 ## Tent types 
----
+
+<img src="Images\CampBuildings.png" alt="drawing" width="48%"/> <img src="Images\CampBuildingsTribal.png" alt="drawing" width="48%"/><br>
+
 Depending on if you have a makeshift camp or a high tech camp, most tents comes with different mobiliar, 
 different job preapplied, and different efficiencies. As an example, a makeshift camp comes with a tent for food, however a hightech camp would comes with a cooler preinstalled to keep food frozen.
 Important to note, most camp related buildings can not be build manually. Camps should be a temporary solution, so if more space or other buildings are required, start expanding with the gear you have access to. 
 
-### Camp control & Camp fire with grill
+### Camp control & Camp fire with grill  
+<img src="Images\CampControl2.png">
+<br>
 You can rightclick the camp fire to bring up the additional camp control options which allow you to:
 * pack up your camp by taking down tents to either leave or make room for other buildings
 * pack up your camp and leave the map immediately, which will bring up the caravan forming dialog and skip the lengthy caravan packing process
@@ -78,7 +79,6 @@ The growing tent is hightech specific and allos to grow a few plants in a greenh
 <br>
 
 ## Night travel
----
 Traveling in the night may sometimes be required if your pawns are able, but can't be done if pawns are fully exhausted. An extra icon was added for it.
 
 ## Mod Settings
