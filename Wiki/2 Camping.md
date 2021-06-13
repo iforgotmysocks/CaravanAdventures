@@ -1,14 +1,14 @@
 # Camping / Automatic Camp Setup
 
-Camping is an important part when it comes to long distance journeys and to make it more enjoyable, this mod gives your pawns the ability to set up a camp for themselfs which includes various types of tents, preapplied jobs, zones and other features.
+Camping is an important part when it comes to long distance journeys and to make it more enjoyable, this mod gives your pawns the ability to settle without dropping all their items all over the place, to set up a camp for themselfs which includes various types of tents, preapplied jobs, zones and other features and the ability to night travel if need be.
+
+<img src="Images\Settle.png" alt="Settle"/>  
 
 ## Settle as Caravan
 The first gizmo/icon allows your caravan to settle with all your items still packed and adds an alert which starts the unloading process when clicked. This allows you to find a decent place first and maybe build some storage buildings instead of scattering all your precious gear on the ground. However this option will not lead to an assembled camp.
 
 ## Settle with Camp
-<img src="Images\Settle.png" alt="Settle"/>  
-
-You can select the "Settle with Camp" Button having a caravan selected, so your pawns know they should construct a camp when settling.
+You can select the "Settle with Camp" button having a caravan selected, so your pawns know they should construct a camp when settling.
 The settle icon shows how many spacer camp supplies your caravan has available and an approximate value how many would be required for a high quality camp.
 If you do not have enough, ur pawns will use makeshift materials they may find in nature, however a high tech camp will come with alot of adventages which are listed down below.
 
@@ -88,4 +88,4 @@ Following settings can be configured within the mods settings:
 * disable camp supply costs which will always lead to a hightech camp being build
 * starting fuel percentage for camp-gear
 
-<a href="1 General.md">Next page</a> <--> <a href="3 CaravanFormingTradingPresetFilters.md">Next page</a>
+<br><a href="1 General.md">Next page</a> <--> <a href="3 CaravanFormingTradingPresetFilters.md">Next page</a>

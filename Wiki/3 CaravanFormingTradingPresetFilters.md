@@ -22,4 +22,4 @@ And a short preview in action:
 
 <img src="Images/filter.gif" height="600">
 
-<br><a href="1 General.md">Next page</a> <--> <a href="3 3 CaravanFormingTradingPresetFilters.md">Next page</a>
+<br><a href="1 General.md">Next page</a> <--> <a href="3 CaravanFormingTradingPresetFilters.md">Next page</a>
