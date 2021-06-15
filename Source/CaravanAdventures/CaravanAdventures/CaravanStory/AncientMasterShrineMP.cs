@@ -82,6 +82,9 @@ namespace CaravanAdventures.CaravanStory
             }
             CompCache.StoryWC.SetShrineSF("Created");
             Quests.QuestUtility.UpdateQuestLocation(Quests.StoryQuestDefOf.CA_FindAncientShrine, this);
+
+            var playerPawn = Map?.mapPawns?.FreeColonistsSpawned?.FirstOrDefault();
+            if (playerPawn != null) CameraJumper.TryJumpAndSelect(playerPawn);
         }
 
         public override bool ShouldRemoveMapNow(out bool alsoRemoveWorldObject)
