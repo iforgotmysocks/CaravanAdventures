@@ -17,9 +17,8 @@ namespace CaravanAdventures.CaravanStory
     class StoryStart : MapComponent
     {
         private Sustainer animaTreeWhipserSustainer;
-        private bool currentStoryTrigger = false;
         private Thing theTree;
-        private int ticks;
+        private int ticks = 20000;
 
         public StoryStart(Map map) : base(map)
         {
@@ -28,7 +27,6 @@ namespace CaravanAdventures.CaravanStory
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_Values.Look(ref currentStoryTrigger, "currentStoryTrigger", false);
             Scribe_References.Look(ref theTree, "theTree");
         }
 
@@ -40,7 +38,6 @@ namespace CaravanAdventures.CaravanStory
         public override void MapGenerated()
         {
             base.MapGenerated();
-            // ModLister.RoyaltyInstalled or ModsConfig.RoyaltyActive
         }
 
         public override void MapComponentTick()
@@ -50,7 +47,11 @@ namespace CaravanAdventures.CaravanStory
 
                 DrawTreeQuestionMark();
 
-            if (ticks >= 300 && (CompCache.StoryWC.storyFlags["IntroVillage_Finished"] || CompCache.StoryWC.debugFlags["VillageDone"]))
+            if (ticks >= (CompCache.StoryWC.storyFlags["Start_ReceivedGift"] || Helper.Debug() ? 20000 : 40000) 
+                && (CompCache.StoryWC.storyFlags["IntroVillage_Finished"] 
+                    || CompCache.StoryWC.debugFlags["VillageDone"])
+                && (CompCache.StoryWC.storyFlags["Start_ReceivedGift"] 
+                    || map.IsPlayerHome))
             {
                     AddTalkTreeAction();
                     AddTreeWhisper();
@@ -66,8 +67,7 @@ namespace CaravanAdventures.CaravanStory
         private void StartTreeQuest()
         {
             if (CompCache.StoryWC.storyFlags["Start_TreeWhisperQuestStarted"]
-                || !CompCache.StoryWC.storyFlags["Start_InitialTreeWhisper"] 
-                || map.mapPawns.FreeColonistsSpawnedCount == 0) return;
+                || !CompCache.StoryWC.storyFlags["Start_InitialTreeWhisper"]) return;
 
             Quests.QuestUtility.GenerateStoryQuest(Quests.StoryQuestDefOf.CA_TheTree,
                 true,
@@ -89,7 +89,6 @@ namespace CaravanAdventures.CaravanStory
 
         private void AddTalkTreeAction()
         {
-            //if (CompCache.StoryWC.storyFlags["Start_InitialTreeAddTalkOption"]) return;
             var tree = map.spawnedThings.FirstOrDefault(x => x.def.defName == "Plant_TreeAnima") as ThingWithComps;
             if (tree == null)
             {
@@ -97,7 +96,6 @@ namespace CaravanAdventures.CaravanStory
                 return;
             }
             theTree = tree;
-            currentStoryTrigger = true;
             StoryUtility.AssignDialog("StoryStart_TreeDialog", tree, this.GetType().ToString(), "StoryStartDialog", true, true, true, null, true);
             CompCache.StoryWC.storyFlags["Start_InitialTreeAddTalkOption"] = true;
         }
@@ -117,8 +115,7 @@ namespace CaravanAdventures.CaravanStory
         private void AddTreeWhisper()
         {
             if (CompCache.StoryWC.storyFlags["Start_ReceivedGift"] 
-                || CompCache.StoryWC.storyFlags["Start_InitialTreeWhisper"] && animaTreeWhipserSustainer != null
-                || CompCache.StoryWC.storyFlags["Start_InitialTreeWhisper"] && !currentStoryTrigger) return;
+                || CompCache.StoryWC.storyFlags["Start_InitialTreeWhisper"] && animaTreeWhipserSustainer != null) return;
             
             var tree = map.spawnedThings.FirstOrDefault(x => x.def.defName == "Plant_TreeAnima");
             if (tree == null)
@@ -175,7 +172,7 @@ namespace CaravanAdventures.CaravanStory
                 diaNode.options.Add(new DiaOption("CA_Story_Start_EnableAncientMachines".Translate()) { link = subDiaNode }); ;
             }
 
-                TaggedString taggedString = "Story_Start_Dia1_Title".Translate();
+            TaggedString taggedString = "Story_Start_Dia1_Title".Translate();
             Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
             Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
         }
@@ -190,7 +187,16 @@ namespace CaravanAdventures.CaravanStory
         {
             CompCache.StoryWC.storyFlags["Start_CanReceiveGift"] = true;
             CheckEnsureGifted(initiator);
-            if (animaTreeWhipserSustainer != null && !animaTreeWhipserSustainer.Ended) animaTreeWhipserSustainer.End();
+
+            foreach (var susMap in Find.Maps)
+            {
+                if (susMap == null) continue;
+                var comp = susMap.GetComponent<StoryStart>();
+                if (comp == null || comp.animaTreeWhipserSustainer == null) continue;
+                DLog.Message($"Ending sustainer on {susMap.Parent.Label}");
+                comp.animaTreeWhipserSustainer.End();
+            }
+
             CompCache.StoryWC.storyFlags["Start_ReceivedGift"] = true;
 
             Quests.QuestUtility.AppendQuestDescription(Quests.StoryQuestDefOf.CA_TheTree, "CA_Story_ReceivedGiftLetterDesc".Translate(initiator.NameShortColored, GenderUtility.GetPronoun(initiator.gender)));
@@ -267,9 +273,8 @@ namespace CaravanAdventures.CaravanStory
         public override void MapRemoved()
         {
             base.MapRemoved();
-            // todo is currentStoryTrigger really needed?? -> currently used to limit the tree dialog to only one tree, yould prolly allow for all trees with extra checks, needs testing.
-           
-            if (currentStoryTrigger && !CompCache.StoryWC.storyFlags["Start_ReceivedGift"])
+
+            if (!CompCache.StoryWC.storyFlags["Start_ReceivedGift"])
             {
                 DLog.Message($"StoryStart Map removed, resetting StoryStart Flags.");
                 CompCache.StoryWC.SetSFsStartingWith("Start_");
