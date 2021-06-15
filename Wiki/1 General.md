@@ -4,9 +4,7 @@
 
 <br> Welcome to the Wiki for Caravan Adventures. On the following pages to the right u'll find features explained in more detail. 
 
-The features are under the following wiki page names and the same within the mod's options. All categories can be enabled and disabled there, to give you full control over what features u'd like and which u'd rather disable.
-
-
+The mod features are categorized into the following wiki page names and the same within the mod's options. All categories can be enabled and disabled there, to give you full control over what features u'd like and which u'd rather disable.
 
 <br><img src="Images\Camp2.png" alt="Camp2" width="70%"/>  
 
