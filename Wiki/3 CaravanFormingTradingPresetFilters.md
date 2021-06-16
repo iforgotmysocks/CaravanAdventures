@@ -1,14 +1,14 @@
 # Caravan forming / trading preset filter settings
 
-Wasting time selecting all items individually everytime you want to pack up and travel some place else or just want to get your next trading caravan going is now over. 
+Wasting time selecting all items individually every time you want to pack up and travel some place else or just want to get your next trading caravan going is now over. 
 
 <img src="Images/CaravanFormDia.png">
 
 Your caravan forming and trade menus now contain additional buttons allowing you to allow you to: 
 * select all items at once
-* select predifined items for each of the 3 available presets
+* select predefined items for each of the 3 available presets
 * reset the entire selection
-* disable the automatic supply selection of the "Travel supplies" tab when the dialog is opend, which can cause considerable lag when active
+* disable the automatic supply selection of the "Travel supplies" tab when the dialog is opened, which can cause considerable lag when active
 
 The 3 presets can be set in ur mod settings and allow you to fine tune all items you'd like to be selected by each preset:
 
@@ -22,4 +22,4 @@ And a short preview in action:
 
 <img src="Images/filter.gif" height="600">
 
-<br><a href="1 General.md">Next page</a> <--> <a href="3 CaravanFormingTradingPresetFilters.md">Next page</a>
+<br><a href="2 Camping.md">Last page</a> <--> <a href="4 MechanoidBounty.md">Next page</a>

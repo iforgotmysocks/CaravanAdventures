@@ -7,7 +7,7 @@ Once the bounty is called out and you receive the notification, the hunt can beg
 To trade in these points for services provided by the bounty faction, simply reach out to them via the comms console and choose "Bounty Services":
 | | |
 --- | ---
-<img src="Images/BountyDialog2.png" height="400"> | Your currently collected bounty points <br><br> The bounty rewards you can gain for the different mech types. <br> Mechs provided by other mods all reward 12 points, however the third <br> party mod support section below describes how you can add <br> additional supported factions or bounty point rewards for your mod <br><br><br><br><br>- Request military assistance ranging between 6 and 30 soldiers <br> - Exchange bounty points for rare items <br> - Use envoys in exchange for bounty credits to improve your relations <br> - Permenantely recruit skilled veteran soldiers and choose some of their traits <br> - Exchange your hard earned silver for more bounty credits (4 silver ~ 1 bc) <br><br><br>
+<img src="Images/BountyDialog2.png" height="400"> | Your currently collected bounty points <br><br> The bounty rewards you can gain for the different mech types. <br> Mechs provided by other mods all reward 12 points, however the third <br> party mod support section below describes how you can add <br> additional supported factions or bounty point rewards for your mod <br><br><br><br><br>- Request military assistance ranging between 6 and 30 soldiers <br> - Exchange bounty points for rare items <br> - Use envoys in exchange for bounty credits to improve your relations <br> - Permanently recruit skilled veteran soldiers and choose some of their traits <br> - Exchange your hard earned silver for more bounty credits (4 silver ~ 1 bc) <br><br><br>
 
 ## Mod Settings
 
@@ -25,4 +25,4 @@ The CompatibilityDef is located at Defs/Compatibility/CompatibilityDef.xml
 To register new Factions, you can patch them into the ``<additionalBountyFactionDefsToAdd/>`` node.  
 To register a bounty value for a new race you can patch in a new ``<li/>`` list entry under the ``<mechanoidBountyToAdd/>`` node.
 
-<br><a href="1 General.md">Next page</a> <--> <a href="3 3 CaravanFormingTradingPresetFilters.md">Next page</a>
+<br><a href="3 CaravanFormingTradingPresetFilters.md">Last page</a> <--> <a href="5 TravelCompanions.md">Next page</a>

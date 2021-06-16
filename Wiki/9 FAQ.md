@@ -1,19 +1,10 @@
-# General Features
-The mod offers some additional features you can enable to make the day to day on the road more enjoyable. A few story related settings can be found in the story options, like removing the royal title requirements up to a certain title.
 
-## Available features:
 
-### Auto-cleanup for abandoned settlements
-Removes blockers for abandoned settlements over time.
+# Frequently asked Questions
 
-### Increase settlement food and silver
-Increase npc settlement's available silver and food by 2-3 and 1.5-2, respectively. More food for the road.
+## Can x about the camping feature be changed
+Modsettings give you a bunch of settings you can play with, however most camp related functionalities are imbedded into the code and exposing them to xml would require alot more work and complex coding to make it applicable. 
 
-### Increased Ancient shrine reward chance
-Adds the chance for a second valuable item when raiding ancient shrines (heavily nerfed for story master shrines)
+However the camp builder was created with polymorphism support in mind, so you can inherit from the CA Camp Builder, and override parts to implement your own logic for your mod.
 
-### Later skill point decay 
-Increases the level to 15, when the skill decay starts to set in, so your travelers have it easier being on the road for longer durations
-
-<br><a href="7 Story.md">Last page</a> <--> <a href="">Next page</a>
-
+<br><a href="8 GeneralFeatures.md">Last page</a> <-
