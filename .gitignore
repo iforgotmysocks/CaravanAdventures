@@ -241,3 +241,5 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 /About/possiblePreviews
+/Wiki/.vscode
+/Wiki/repo
