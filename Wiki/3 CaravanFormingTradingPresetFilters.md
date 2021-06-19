@@ -1,6 +1,6 @@
 # Caravan forming / trading preset filter settings
 
-Wasting time selecting all items individually every time you want to pack up and travel some place else or just want to get your next trading caravan going is now over. 
+Instead of manually selecting each item for your caravan whether it be for a trading caravan or to settle at a new site, a new feature is introduced in order to make this experience a lot better.
 
 <img src="Images/CaravanFormDia.png">
 
