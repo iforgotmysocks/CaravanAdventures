@@ -38,17 +38,18 @@ namespace CaravanAdventures.CaravanImprovements
             var map = Find.CurrentMap;
             if (map == null) return;
 
-            var pawns = map.mapPawns.AllPawnsSpawned.Where(x => !x.Dead && (x?.Faction?.IsPlayer ?? false));
-            
-            foreach (var pawn in pawns)
+            if (Event.current.type == EventType.Used && Event.current.button == 0)
             {
-                pawn.inventory.UnloadEverything = true;
+                var pawns = map.mapPawns.AllPawnsSpawned.Where(x => !x.Dead && (x?.Faction?.IsPlayer ?? false));
+                foreach (var pawn in pawns)
+                {
+                    pawn.inventory.UnloadEverything = true;
+                }
             }
 
             var comp = map.GetComponent<CompUnloadItems>();
             if (comp != null) comp.Unload = false;
         }
 
-        
     }
 }
