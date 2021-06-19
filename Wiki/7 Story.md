@@ -46,12 +46,12 @@ Some parts of the story aren't all that easy, depending on your play style. You 
 * If you struggle too much or shrines are too easy, don't forget about the mod settings allowing you to adjust the multipliers for the help you initially get and how strong the enemy should be.
 </details>
 <details>
-    <summary>The Apocaplyse</summary>
+    <summary>The Apocalypse</summary>
 
-* No worries, u've got time. It progresses rather slowly. But it will keep on progressing indefinitely unless stopped.
+* No worries, you've got time. It progresses rather slowly. But it will keep on progressing indefinitely unless stopped.
 * For the sake of realism, the mod comes with a modsetting allowing you to apply the apoc's temperature change to the general world map and traveling caravans. That's not a thing in vanilla and hurts the scenery quite a bit, but makes later travels alot harder when it gets cold. Frequent frostbite isn't fun and may require more stops.
-* You can adjust the progression rate in settings. Make use of it to find the correct and fun pace for urself, or stop progression entirely if u're not into the idea.
-* If you like the apocalypse, there is no need to hold off finishing the story to keep it going. You may find urself surprised what the ending offers.
+* You can adjust the progression rate in settings. Make use of it to find the correct and fun pace for yourself, or stop progression entirely if you're not into the idea.
+* If you like the apocalypse, there is no need to hold off finishing the story to keep it going. You may find yourself surprised what the ending offers.
 </details>
 <details>
     <summary>The final fight</summary>

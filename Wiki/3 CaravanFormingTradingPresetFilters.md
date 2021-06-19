@@ -10,7 +10,7 @@ Your caravan forming and trade menus now contain additional buttons allowing you
 * reset the entire selection
 * disable the automatic supply selection of the "Travel supplies" tab when the dialog is opened, which can cause considerable lag when active
 
-The 3 presets can be set in ur mod settings and allow you to fine tune all items you'd like to be selected by each preset:
+The 3 presets can be set in your mod settings and allow you to fine tune all items you'd like to be selected by each preset:
 
 <img src="Images/FilterSettings.png" height="500">
 

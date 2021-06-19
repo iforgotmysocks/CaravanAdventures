@@ -1,6 +1,6 @@
 # Caravan Incidents
 
-Alot can happen on the road that's why this mod adds additional incident(s), that are more sturctured to not always have to end in a fight, but may even be resolvable due to actions you might take within the dialog. 
+Alot can happen on the road that's why this mod adds additional incident(s), that are more structured to not always have to end in a fight, but may even be resolvable due to actions you might take within the dialog. 
 
 Currently only 1 additional Event is included, but there may be more coming.
 

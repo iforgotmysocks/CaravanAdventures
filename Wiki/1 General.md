@@ -2,9 +2,9 @@
 
 > **Disclaimer: This repository is only used to temporarily host the wiki, the wiki will be moved to the mod's main repository upon release** 
 
-<br> Welcome to the Wiki for Caravan Adventures. On the following pages to the right u'll find features explained in more detail. 
+<br> Welcome to the Wiki for Caravan Adventures. On the following pages to the right you'll find features explained in more detail. 
 
-The mod features are categorized into the following wiki page names and mirror the mod's setting categories. All categories can be enabled and disabled there, to give you full control over what features u'd like and which u'd rather disable.
+The mod features are categorized into the following wiki page names and mirror the mod's setting categories. All categories can be enabled and disabled there, to give you full control over what features you'd like and which you'd rather disable.
 
 <br><img src="Images\Camp2.png" alt="Camp2" width="70%"/>  
 

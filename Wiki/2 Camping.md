@@ -1,6 +1,6 @@
 # Camping / Automatic Camp Setup
 
-Camping is an important part when it comes to long distance journeys and to make it more enjoyable, this mod gives your pawns the ability to settle without dropping all their items all over the place, to set up a camp for themselves which includes various types of tents, preapplied jobs, zones and other features and the ability to night travel if need be.
+Camping is an important part when it comes to long distance journeys and to make it more enjoyable, this mod gives your pawns the ability to settle without dropping all their items all over the place, to set up a camp for themselves which includes various types of tents, pre-applied jobs, zones and other features and the ability to night travel if need be.
 
 <img src="Images\Settle.png" alt="Settle"/>  
 
@@ -10,9 +10,9 @@ The first gizmo/icon allows your caravan to settle with all your items still pac
 ## Settle with Camp
 You can select the "Settle with Camp" button having a caravan selected, so your pawns know they should construct a camp when settling.
 The settle icon shows how many spacer camp supplies your caravan has available and an approximate value how many would be required for a high quality camp.
-If you do not have enough, ur pawns will use makeshift materials they may find in nature, however a high tech camp will come with alot of advantages which are listed down below.
+If you do not have enough, your pawns will use makeshift materials they may find in nature, however a high tech camp will come with alot of advantages which are listed down below.
 
-Upon settling, your pawns will choose their tents and bed roll setups depanding on their relations towards each other.
+Upon settling, your pawns will choose their tents and bed roll setups depending on their relations towards each other.
 Prisoners will be placed in for prisoners dedicated tents and your animals get a small place for themselves. 
 Your equipment, depending on settings, will either be placed in enough storage tents as are required, or remain stored on your animals and pawns.
 
