@@ -48,7 +48,7 @@ namespace CaravanAdventures.CaravanStory
                 Find.TickManager.CurTimeSpeed = TimeSpeed.Paused;
 
                 mp.Init();
-            }, "Story_Shrine1_EnterPossibleShrine", true, null, true);
+            }, "Story_Shrine1_EnterPossibleShrine", true, null, false);
         }
 
         private void AddBandits(Map map, Caravan caravan, bool sendLetterIfRelatedPawns = true)
