@@ -14,7 +14,7 @@ namespace CaravanAdventures.CaravanStory.Quests
         public Pawn storyContactBondedPawn;
 
         public float BaseDelayFriendlyCaravan => Helper.Debug() ? 1000f : 60000f * 5f;
-        public float BaseDelayFurtherFriendlyCaravan => Helper.Debug() ? 60000f * 3f : 60000f * 7f;
+        public float BaseDelayFurtherFriendlyCaravan => Helper.Debug() ? 60000f * 3f : 60000f * 8f;
 
         public void ExposeData()
         {
