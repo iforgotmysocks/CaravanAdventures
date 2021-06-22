@@ -33,6 +33,7 @@ namespace CaravanAdventures.CaravanStory
 
         public static GameConditionDef CAGameCondition_Apocalypse;
 
+        [MayRequireRoyalty]
         public static ThingDef CAShrinePortal;
 
         [MayRequireRoyalty]
