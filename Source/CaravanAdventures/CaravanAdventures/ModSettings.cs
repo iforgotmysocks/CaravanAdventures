@@ -235,7 +235,7 @@ namespace CaravanAdventures
             //GUI.BeginGroup(wrect);
             //Widgets.BeginScrollView(wrect, ref this.scrollPos, new Rect(0f, 0f, wrect.width, 700f));
 
-            var viewRect = new Rect(0f, 0f, wrect.width, 760);
+            var viewRect = new Rect(0f, 0f, wrect.width, 780);
             options.BeginScrollView(wrect, ref this.scrollPos, ref viewRect);
 
             var debugRect = BRect(options.GetRect(Text.LineHeight));
@@ -271,7 +271,7 @@ namespace CaravanAdventures
 
             Text.Font = GameFont.Medium;
             cRect = BRect(options.GetRect(Text.LineHeight));
-            Widgets.Label(cRect, $"Caravan forming / trading presets & Filter settings".HtmlFormatting("00ff00", false, 18));
+            Widgets.Label(cRect, $"Caravan forming & trade filter presets".HtmlFormatting("00ff00", false, 18));
             Text.Font = GameFont.Small;
             Widgets.CheckboxLabeled(new Rect(options.ColumnWidth - 400, lastRect.y + 10, 110, Text.LineHeight), "Enabled: ", ref CheckForRestart(ref caravanFormingFilterSelectionEnabled, ref checkRestartRequiringValueChanged));
             if (caravanFormingFilterSelectionEnabled != checkRestartRequiringValueChanged) showRestartReminder = true;
@@ -312,13 +312,13 @@ namespace CaravanAdventures
 
             Text.Font = GameFont.Medium;
             cRect = BRect(options.GetRect(Text.LineHeight));
-            Widgets.Label(cRect, $"Story settings".HtmlFormatting("00ff00", false, 18));
+            Widgets.Label(cRect, $"The Story".HtmlFormatting("00ff00", false, 18));
             Text.Font = GameFont.Small;
             Widgets.CheckboxLabeled(new Rect(options.ColumnWidth - 400, lastRect.y + 10, 110, Text.LineHeight), "Enabled: ", ref CheckForRestart(ref storyEnabled, ref checkRestartRequiringValueChanged));
 
             if (Widgets.ButtonText(new Rect(options.ColumnWidth - 225, lastRect.y + 6, 150, Text.LineHeight + 10), "Open")) Find.WindowStack.Add(new SettingsStory());
             options.Gap(10);
-            options.Label($"Story settings. Requires Royalty.");
+            options.Label($"Configure various aspects of the story line to adjust the experience more to your playstyle. Spoiler light and no danger of spoilers once you completed your first ancient master shrine. Requires Royalty.");
             options.GapLine();
             if (!ModsConfig.RoyaltyActive && storyEnabled) Find.WindowStack.Add(new Dialog_MessageBox(
                 new TaggedString($"\nSorry, but the story relies upon and requires Royalty and will be disabled. However all other mod categories are still available.\n\nOnce you have Royalty enabled, you can enable the story here.\nThanks for understanding."),
@@ -332,7 +332,7 @@ namespace CaravanAdventures
 
             Text.Font = GameFont.Medium;
             cRect = BRect(options.GetRect(Text.LineHeight));
-            Widgets.Label(cRect, $"Ancient abilitiy settings".HtmlFormatting("00ff00", false, 18));
+            Widgets.Label(cRect, $"Ancient abilities".HtmlFormatting("00ff00", false, 18));
             Text.Font = GameFont.Small;
             if (Widgets.ButtonText(new Rect(options.ColumnWidth - 225, lastRect.y + 6, 150, Text.LineHeight + 10), "Open")) Find.WindowStack.Add(new SettingsAbilities());
             options.Gap(10);
@@ -341,7 +341,7 @@ namespace CaravanAdventures
 
             Text.Font = GameFont.Medium;
             cRect = BRect(options.GetRect(Text.LineHeight));
-            Widgets.Label(cRect, $"General settings".HtmlFormatting("00ff00", false, 18));
+            Widgets.Label(cRect, $"General travel support".HtmlFormatting("00ff00", false, 18));
             Text.Font = GameFont.Small;
             if (Widgets.ButtonText(new Rect(options.ColumnWidth - 225, lastRect.y + 6, 150, Text.LineHeight + 10), "Open")) Find.WindowStack.Add(new SettingsOther());
             options.Gap(10);

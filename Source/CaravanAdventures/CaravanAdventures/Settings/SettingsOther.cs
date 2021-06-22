@@ -36,7 +36,7 @@ namespace CaravanAdventures.Settings
             options.Label("General Settings:".Colorize(Color.green), 40f);
             Text.Font = GameFont.Small;
 
-            options.CheckboxLabeled("Auto-cleanup for abandoned settlements by the player", ref ModSettings.autoRemoveAbandondSettlementRuins);
+            options.CheckboxLabeled("Auto-cleanup for abandoned settlements by the player", ref ModSettings.autoRemoveAbandondSettlementRuins, "Doesn't influence camp behaviour, camps won't leave ruins either way");
             options.CheckboxLabeled("Increase npc settlement's available silver and food by 2-3 and 1.5-2, respectively", ref ModSettings.buffSettlementFoodAndSilverAvailability);
             options.CheckboxLabeled("Increased ancient shrine rewards chance (hover for more info)", ref ModSettings.buffShrineRewards, "Adds the chance for a second valuable item when raiding ancient shrines (heavily nerfed for story master shrines)");
             options.CheckboxLabeled("Increase skill point decay level from 10 to 15", ref ModSettings.spDecayLevelIncrease, "Increases the level to 15, when the skill decay starts to set in, so your travelers have it easier being on the road for longer durations");
