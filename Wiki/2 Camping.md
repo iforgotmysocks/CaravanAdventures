@@ -101,6 +101,7 @@ Following settings can be configured within the mods settings:
 * auto apply zone for snow to be cleared within the camp
 * generate storage for all inventory items - when unchecked, most items will remain packed on animals and pawns
 * let animals mostly run free instead of limiting them to their small animal area (choosing their applied area)
+* restrict animal zone food to kibble and hay
 * fence posts only decorative, when unchecked fence posts will protect animals from wild animals and raiders, however they can still be shot
 * show camp supply cost approximate on settle gizmo / icon
 * define the maximum camp supply cost used

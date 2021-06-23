@@ -1,10 +1,9 @@
 Welcome to the beta for Caravan Adventures. As always, please backup your savegames. I'm glad for any feedback and bugs you may find or can provide. :)
+[b]This mod will be released as a new mod upon the end of the beta and the beta version will be removed, so please don't waste your hard earned steam points on the beta version.[/b]
 
-Caravan Adventures aims to transform traveling around the world into a fun adventure by stripping away all the little annoying things that require alot of micro management or just aren't fun. It also provides the player with a few reasons to travel. Quick heads-up, about 25% of this mod's content is the Storyline, which requires Royalty. Everything else can be used without it, don't worry. 
+Caravan Adventures aims to transform traveling around the world into a fun adventure by providing new features to help strip away all the annoying things that require alot of micro management or just aren't fun. It also provides the player with a few reasons to travel more. Quick heads-up, about 25% of this mod's content is the Storyline, which requires Royalty. Everything else can be used without it, don't worry. 
 
-Let me give you an overview over what this mod provides:
-(All categories can be enabled or disabled and further configured to your liking in the mod's settings) 
-
+All details available in the [url=https://github.com/iforgotmysocks/CaravanAdventuresWiki]Mod's Wikipedia[/url]
 
 [h1]Automatic Camp Setup[/h1]
 [list]
@@ -48,9 +47,12 @@ Let me give you an overview over what this mod provides:
 [*] Fight bosses to claim treasures, learn powerful spells and prevent the end of all living beings
 [/list]
 
+(All categories can be enabled or disabled and further configured to your liking in the mod's settings) 
+
+
 [h1]Credits[/h1] 
 Artwork:  
-Artwork generously provided by Shakesthespeare, thank you mate, u're awesome!  
+Artwork and the preview image generously provided by Shakesthespeare, thank you mate, u're awesome!  
 Portal in Ancient master shrine by gecko-kobold  
 
 Sounds:  

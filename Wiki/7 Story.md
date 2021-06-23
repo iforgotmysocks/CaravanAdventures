@@ -1,8 +1,8 @@
 # Story line
 
-*You have been fighting off various dangers on this Rimworld, be it fauna or flora, be it raiders or rogue mechaniods, yet the biggest danger still lies out there dormant. And waiting.*
+*You have been fighting off various dangers on this Rimworld, be it fauna or flora, be it raiders or rogue mechanoids, yet the biggest danger still lies out there dormant. And waiting.*
 
-*And there suddenly, between day to day mental breaks and the usual insanity, a larger than usual caravan approaches. The fact that they seemed armed to their teeth and equipped with frighteningly effective gear, renders the picture of the young woman waving at you with a slight smile on her face rather bizarre...* 
+*And there suddenly, between day to day mental breaks and the usual insanity, a larger than usual caravan approaches. The fact that they seemed armed to their teeth and equipped with frighteningly effective gear, renders the picture of the young woman waving at you with a bright smile on her face rather bizarre...* 
 
 ## Royalty dependency
 
@@ -11,11 +11,11 @@ Sorry about that, but since i've been using a bunch of royalty features that i a
 ## Story content  
  <img src="Images\CrystalScythe.png" height="200" alt="pic"/>   
 
-Depending on your means of travel and the state of your faction's power due to mods or time played, the story can either be a relatively short and fun adventure with possibly endless grinding opportunities, or a really time intensive, challenging and grant journey. Many aspects can be adjusted to your playstyle if distances seem too short / far or enemies too strong or too weak. The mod settings are well structured and should be easy to navigate.
+Depending on your means of travel and the state of your faction's power due to mods or time played, the story can either be a relatively short and fun adventure with possibly endless grinding opportunities, or a really time intensive, challenging and grant journey. Many aspects can be adjusted to your play style if distances seem too short / far or enemies too strong or too weak. The mod settings are well structured and should be easy to navigate.
 
 ## Quest tips
 
-Some parts of the story aren't all that easy, depending on your play style. You can expand the sections that are relevant to you to gain some additional info on how to handle certain issues
+Some parts of the story aren't all that easy, depending on your play style. You can expand the sections that are relevant to you to gain some additional info on how to handle certain issues.
 
 **Consider all collapsed sections Spoilers!**
 <details>
