@@ -59,6 +59,7 @@ namespace CaravanAdventures.Settings
             options.CheckboxLabeled("Auto apply camp gear recipes (e.g. food depending on pawn number, clothes)", ref ModSettings.autoApplyCampGearRecipes);
             options.CheckboxLabeled("Auto apply zone for snow to be cleared within the camp", ref ModSettings.autoApplyCampClearSnowArea);
             options.CheckboxLabeled("Generate storage for all inventory items", ref ModSettings.generateStorageForAllInventory, "When disabled, most items will remain packed on the animals");
+            options.CheckboxLabeled("Set up a stone cutting table instead of the art bench if researched", ref ModSettings.preferStonecutting);
             options.CheckboxLabeled("Let animals mostly free instead of limiting them to their small animal area", ref ModSettings.letAnimalsRunFree);
             options.CheckboxLabeled("Restrict animal zone food to kibble and hay", ref ModSettings.useAnimalOnlyFoodForAnimalArea, "When disabled, corn and vegetables will also be used as feed");
             options.CheckboxLabeled("Fence posts only decorative", ref ModSettings.decorativeFencePosts, "When set to false, fence posts can't be walked through and a door is created as entrace.");

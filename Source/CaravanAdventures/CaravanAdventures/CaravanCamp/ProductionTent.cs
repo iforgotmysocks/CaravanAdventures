@@ -27,7 +27,8 @@ namespace CaravanAdventures.CaravanCamp
             CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("SimpleResearchBench"), ThingDefOf.WoodLog), location, map, Rot4.West, campAssetListRef);
 
             location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.minX + 4 && cell.z == CellRect.minZ + 3);
-            CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("TableSculpting"), ThingDefOf.WoodLog), location, map, Rot4.North, campAssetListRef);
+            if (ModSettings.preferStonecutting && ResearchProjectDef.Named("Stonecutting")?.ProgressPercent == 1f) CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("TableStonecutter"), ThingDefOf.WoodLog), location, map, Rot4.North, campAssetListRef);
+            else CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("TableSculpting"), ThingDefOf.WoodLog), location, map, Rot4.North, campAssetListRef);
 
             location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 3 && cell.z == CellRect.minZ + 3);
             tableButcher = CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("TableButcher"), ThingDefOf.WoodLog), location, map, Rot4.North, campAssetListRef) as Building_WorkTable;
@@ -68,7 +69,8 @@ namespace CaravanAdventures.CaravanCamp
             CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("SimpleResearchBench"), ThingDefOf.WoodLog), location, map, Rot4.West, campAssetListRef);
 
             location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.minX + 4 && cell.z == CellRect.minZ + 3);
-            CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("TableSculpting"), ThingDefOf.WoodLog), location, map, Rot4.North, campAssetListRef);
+            if (ModSettings.preferStonecutting && ResearchProjectDef.Named("Stonecutting")?.ProgressPercent == 1f) CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("TableStonecutter"), ThingDefOf.WoodLog), location, map, Rot4.North, campAssetListRef);
+            else CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("TableSculpting"), ThingDefOf.WoodLog), location, map, Rot4.North, campAssetListRef);
 
             location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 3 && cell.z == CellRect.minZ + 3);
             tableButcher = CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("TableButcher"), ThingDefOf.WoodLog), location, map, Rot4.North, campAssetListRef) as Building_WorkTable;

@@ -43,6 +43,7 @@ namespace CaravanAdventures
         public static bool showSupplyCostsInGizmo = true;
         public static bool decorativeFencePosts = false;
         public static bool useAnimalOnlyFoodForAnimalArea = false;
+        public static bool preferStonecutting = false;
 
         // camp cost TODO -> create defs for tent types and move it there
         public static int campSupplyCostAnimalArea = 1;
@@ -147,6 +148,7 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref showSupplyCostsInGizmo, "showSupplyCostsInGizmo", true);
             Scribe_Values.Look(ref decorativeFencePosts, "decorativeFencePosts", false);
             Scribe_Values.Look(ref useAnimalOnlyFoodForAnimalArea, "useAnimalOnlyFoodForAnimalArea", false);
+            Scribe_Values.Look(ref preferStonecutting, "preferStonecutting", false);
 
             // abilities
             // - ancient gift
