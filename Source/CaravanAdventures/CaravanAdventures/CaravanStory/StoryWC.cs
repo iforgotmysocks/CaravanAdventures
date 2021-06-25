@@ -46,9 +46,16 @@ namespace CaravanAdventures.CaravanStory
         private int ticks = -1;
         private int countShrinesCompleted = 0;
         private int shrineMaximum = 5;
+        public bool wasShrineAmbushNoLuck = false;
 
         private readonly IntRange timeoutDaysRange = new IntRange(10, 12);
-        public IntRange ShrineDistance => Helper.Debug() ? new IntRange(2, 4) : ModSettings.shrineDistance;
+
+        public IntRange ShrineDistance => Helper.Debug() 
+            ? new IntRange(2, 4) 
+            : wasShrineAmbushNoLuck 
+                ? new IntRange(ModSettings.shrineDistance.min / 5, ModSettings.shrineDistance.max / 5) 
+                : ModSettings.shrineDistance;
+
         private int shrineTileUnsuccessfulCounter = 0;
         private List<AbilityDef> unlockedSpells = new List<AbilityDef>();
         private bool ranDebugActionsOnceAtStartUp;
@@ -116,6 +123,7 @@ namespace CaravanAdventures.CaravanStory
             Scribe_Deep.Look(ref questCont, "questCont");
             Scribe_Values.Look(ref shrineTileUnsuccessfulCounter, "shrineTileUnsuccessfulCounter", 0);
             Scribe_Values.Look(ref wasEnabled, "wasEnabled", false);
+            Scribe_Values.Look(ref wasShrineAmbushNoLuck, "wasShrineAmbushNoLuck", false);
         }
 
         public StoryWC(World world) : base(world)

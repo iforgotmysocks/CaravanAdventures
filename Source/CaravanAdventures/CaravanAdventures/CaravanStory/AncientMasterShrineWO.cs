@@ -38,9 +38,13 @@ namespace CaravanAdventures.CaravanStory
                 {
                     if (CompCache.StoryWC.GetCurrentShrineCounter() != CompCache.StoryWC.GetShrineMaxiumum) mp.boss = AddBoss(map, caravan, mainRoom);
                     else mp.lastJudgmentEntrance = InitCellarEntrace(map);
+                    CompCache.StoryWC.wasShrineAmbushNoLuck = false;
                 }
-                else AddBandits(map, caravan);
-
+                else
+                {
+                    AddBandits(map, caravan);
+                    CompCache.StoryWC.wasShrineAmbushNoLuck = true;
+                }
                 AdjustAncientShrines(map, caravan, mp.boss);
 
                 //(Pawn x) => CellFinder.RandomSpawnCellForPawnNear(playerStartingSpot, map, 4)
