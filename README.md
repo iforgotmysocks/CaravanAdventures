@@ -2,18 +2,19 @@
 
 Welcome to the beta for Caravan Adventures. As always, please backup your savegames. I'm glad for any feedback and bugs you may find or can provide. :)
 
-Caravan Adventures aims to transform traveling around the world into a fun adventure by stripping away all the little annoying things that require alot of micro management or just aren't fun. It also provides the player with a few reasons to travel. Quick heads-up, about 25% of this mod's content is the Storyline, which requires Royalty. Everything else can be used without it, don't worry. 
+Caravan Adventures aims to transform traveling around the world into a real adventure by providing new features to replace the annoying micromanagement, make traveling more fun and give you a sense of purpose doing so. Quick heads-up, about 25% of this mod's content is the Storyline, which requires Royalty. Everything else can be used without it, don't worry. 
 
-Let me give you an overview over what this mod provides:
-(All categories can be enabled or disabled and further configured to your liking in the mod's settings) 
+Feedback would be amazing, please join our <a href="https://discord.gg/KwaRubs2kx">discord</a> and let us know what you think. Thanks guys!
+
+All mod details available in the <a href="https://github.com/iforgotmysocks/CaravanAdventuresWiki/wiki"Mod's Wikipedia</a>
 
 <br>
 
 ## Automatic Camp Setup
 * Settle on tiles by having ur pawns set up a camp first, before you even get involved. 
 * If you prepared and have enough spacer tent supplies, you will be able to stay in high quality camp sites, if not, ur pawns will divert to make shift materials.
-* You pawns automatically build enough tents for your individual number of travelers and prisoners. Pawns also choose their tents based on their relationship.
-* Choose to either leave the bulk of most items strapped to your animals or create enough storage tents, so all your equipment is tugged away "savely".
+* Your pawns automatically build enough tents for your individual number of travelers and prisoners. Pawns also choose their tents based on their relationship.
+* Choose to either leave the bulk of most items strapped to your animals or create enough storage tents, so all your equipment is tugged away "safely".
 * Choose to preapply basic jobs, like creating a set of fresh clothes, butcher animals or grill some stakes
 * Leave the camp site immediately if you want to, just for the impatient ones
 
@@ -45,6 +46,8 @@ Let me give you an overview over what this mod provides:
 * Fight bosses to claim treasures, learn powerful spells and prevent the end of all living beings
 
 <br>
+(All categories can be enabled or disabled and further configured to your liking in the mod's settings)  
+
 
 ## Credits 
 Artwork:  
@@ -59,4 +62,4 @@ slice2 by freefire66 https://freesound.org/people/freefire66/sounds/175949/
 slice3 by TheBuilder15 https://freesound.org/people/TheBuilder15/sounds/434896/  
 slice4 by Aleks41 https://freesound.org/people/Aleks41/sounds/449552/  
 
-Thanks to all the testers who helped to get this mod on the road!  
+Thanks to the testers who helped to get this mod on the road!  
