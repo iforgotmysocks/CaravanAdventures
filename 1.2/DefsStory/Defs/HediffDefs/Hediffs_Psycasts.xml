@@ -144,7 +144,7 @@
 		<stages>
 			<li>
 				<label>Ancient Destiny</label>
-				<description>I am destant to accomplish great things!</description>
+				<description>I am destined to accomplish great things!</description>
 				<baseMoodEffect>12</baseMoodEffect>
 			</li>
 		</stages>
@@ -163,7 +163,6 @@
 			</li>
 		</comps>
 	</HediffDef>
-
 
 	<HediffDef ParentName="CAAncientPsycastHediffBase">
 		<defName>CAConjuredLight</defName>
