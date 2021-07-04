@@ -67,7 +67,7 @@ namespace CaravanAdventures.CaravanStory
 
                 if (!CompCache.StoryWC.storyFlags["IntroVillage_Entered"])
                 {
-                    if (!CellFinder.TryFindRandomSpawnCellForPawnNear_NewTmp(new IntVec3(Map.Size.x / 2, 0, Map.Size.z / 2), Map, out var storyContactCell, 4, x => x.Walkable(Map)))
+                    if (!CellFinder.TryFindRandomSpawnCellForPawnNear_NewTmp(new IntVec3(Map.Size.x / 2, 0, Map.Size.z / 2), Map, out var storyContactCell, 4, x => x.Standable(Map)))
                     {
                         Log.Error("Couldn't find a cell to spawn pawn");
                     }
