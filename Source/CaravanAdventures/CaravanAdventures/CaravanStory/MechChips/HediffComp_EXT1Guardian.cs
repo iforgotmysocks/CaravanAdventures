@@ -38,6 +38,7 @@ namespace CaravanAdventures.CaravanStory.MechChips
         public override void CompPostTick(ref float severityAdjustment)
         {
             base.CompPostTick(ref severityAdjustment);
+            if (!ModsConfig.RoyaltyActive) return;
             if (Pawn?.Destroyed != false || !Pawn.Awake() || Pawn?.Map == null) return;
 
             if (ticks >= 1000)

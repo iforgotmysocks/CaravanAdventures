@@ -84,6 +84,7 @@ namespace CaravanAdventures.CaravanStory.MechChips
 
         protected bool JumpToTarget()
         {
+            if (!ModsConfig.RoyaltyActive) return true;
             if (Pawn.mindState.enemyTarget != null 
                 && Pawn.mindState.enemyTarget.Position != LocalTargetInfo.Invalid 
                 && Pawn.mindState.enemyTarget.Position.DistanceTo(Pawn.Position) >= 2f 
