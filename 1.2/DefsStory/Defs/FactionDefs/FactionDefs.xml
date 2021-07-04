@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
 <Defs>
-	<FactionDef ParentName="HumanFactionBase" Name="CASacrilegHuntersFactionBase" Abstract="True">
+	<FactionDef ParentName="OutlanderFactionBase" Name="CASacrilegHuntersFactionBase" Abstract="True">
 		<pawnSingular>Sacrileg Hunter</pawnSingular>
 		<pawnsPlural>Sacrileg Hunters</pawnsPlural>
 		<categoryTag>Outlander</categoryTag>
@@ -33,9 +33,9 @@
 			</li>
 		</backstoryFilters>
 		<geneticVariance>0.8</geneticVariance>
-		<hairTags>
+		<!--<hairTags>
 			<li>Rural</li>
-		</hairTags>
+		</hairTags>-->
 		<caravanTraderKinds>
 			<li>Caravan_Outlander_BulkGoods</li>
 			<li>Caravan_Outlander_CombatSupplier</li>
@@ -159,8 +159,6 @@
 			<!--<li>(0.98, 0.75, 0.37)</li>-->
 			<!--<li>(0.97, 0.62, 0.52)</li>-->
 		</colorSpectrum>
-		<startingGoodwill>0</startingGoodwill>
-		<naturalColonyGoodwill>0~100</naturalColonyGoodwill>
 	</FactionDef>
 
 	<RulePackDef>

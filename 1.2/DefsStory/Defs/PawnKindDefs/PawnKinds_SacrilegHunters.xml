@@ -7,6 +7,8 @@
     <chemicalAddictionChance>0.05</chemicalAddictionChance>
     <backstoryCryptosleepCommonality>0.05</backstoryCryptosleepCommonality>
     <invNutrition>2.55</invNutrition>
+    <initialWillRange>0~1</initialWillRange>
+    <initialResistanceRange>10~17</initialResistanceRange>
   </PawnKindDef>
 
   <PawnKindDef Name="CASacrilegHunters_HunterBase" ParentName="CASacrilegHuntersBase" Abstract="True">
