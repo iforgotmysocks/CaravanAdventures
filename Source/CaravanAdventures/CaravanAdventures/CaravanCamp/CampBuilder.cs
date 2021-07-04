@@ -191,7 +191,7 @@ namespace CaravanAdventures.CaravanCamp
 
         protected virtual void AssignCampLayout()
         {
-            campCenterSpot = CampHelper.FindCenterCell(map, (IntVec3 x) => x.GetRoom(map, RegionType.Set_Passable).CellCount >= 600);
+            campCenterSpot = CampHelper.FindCenterCell(map, (IntVec3 x) => x.GetRoom(map).CellCount >= 600);
             var campCenter = campParts.OfType<CampCenter>().FirstOrDefault();
             campCenter.Coords.Add(new IntVec3(0, 0, 0));
             var failedTentCounter = 0;

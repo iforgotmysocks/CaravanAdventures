@@ -159,7 +159,7 @@ namespace CaravanAdventures.CaravanAbilities
             //Log.Message($"Healing perm wound {wound.def.defName}", true);
 
             if (wound.IsPermanent()) wound.Severity = 0f;
-            else HealthUtility.CureHediff(wound);
+            else HealthUtility.Cure(wound);
             if (PawnUtility.ShouldSendNotificationAbout(base.Pawn)) Messages.Message("MessagePermanentWoundHealed".Translate(this.parent.LabelCap, base.Pawn.LabelShort, wound.Label, base.Pawn.Named("PAWN")), base.Pawn, MessageTypeDefOf.PositiveEvent, true);
         }
     }

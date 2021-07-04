@@ -60,7 +60,7 @@ namespace CaravanAdventures.CaravanCamp
 
         internal static void BringToNormalizedTemp(CellRect cellRect, Map map)
         {
-            var roomGroup = cellRect.CenterCell.GetRoomGroup(map);
+            var roomGroup = cellRect.CenterCell.GetRoom(map);
             var remainingTemp = 22 - roomGroup.Temperature;
             roomGroup.PushHeat(remainingTemp * cellRect.Cells.Where(curCell => !cellRect.EdgeCells.Contains(curCell)).Count());
         }

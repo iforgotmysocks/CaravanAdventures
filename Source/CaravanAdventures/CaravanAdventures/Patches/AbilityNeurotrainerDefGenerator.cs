@@ -13,7 +13,7 @@ namespace CaravanAdventures.Patches
     {
         public static void ApplyPatches(Harmony harmony)
         {
-            var org = AccessTools.Method(typeof(NeurotrainerDefGenerator), "ImpliedThingDefs");
+            var org = AccessTools.Method(typeof(ThingDefGenerator_Neurotrainer), "ImpliedThingDefs");
             var post = new HarmonyMethod(typeof(Patches.AbilityNeurotrainerDefGenerator), nameof(ImpliedThingDefs_Postfix));
             harmony.Patch(org, null, post);
         }

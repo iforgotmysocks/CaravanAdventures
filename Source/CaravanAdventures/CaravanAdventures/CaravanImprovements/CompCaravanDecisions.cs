@@ -52,7 +52,7 @@ namespace CaravanAdventures.CaravanImprovements
                 var unloadComp = map.GetComponent<CompUnloadItems>();
                 if (unloadComp != null && CaravanInventoryUtility.AllInventoryItems(caravan).Count != 0) unloadComp.Unload = true;
                 Thing t = caravan.PawnsListForReading[0];
-                CaravanEnterMapUtility.Enter(caravan, map, CaravanEnterMode.Center, CaravanDropInventoryMode.DoNotDrop, false, (IntVec3 x) => x.GetRoom(map, RegionType.Set_Passable).CellCount >= 600);
+                CaravanEnterMapUtility.Enter(caravan, map, CaravanEnterMode.Center, CaravanDropInventoryMode.DoNotDrop, false, (IntVec3 x) => x.GetRoom(map).CellCount >= 600);
                 CameraJumper.TryJump(t);
             }, "SpawningColonists", true, new Action<Exception>(GameAndMapInitExceptionHandlers.ErrorWhileGeneratingMap), true);
         }

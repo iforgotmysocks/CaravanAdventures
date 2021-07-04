@@ -106,7 +106,7 @@ namespace CaravanAdventures.CaravanStory
 		public AcceptanceReport CanTalkTo(Pawn pawn, LocalTargetInfo? knownSpot = null)
 		{
 			if (pawn.Dead || pawn.Faction != Faction.OfPlayer) return false;
-            if (!pawn.CanReach(this.parent, PathEndMode.Touch, Danger.Deadly, false, TraverseMode.ByPawn)) return new AcceptanceReport("can't reach");
+            if (!pawn.CanReach(this.parent, PathEndMode.Touch, Danger.Deadly, false, false, TraverseMode.ByPawn)) return new AcceptanceReport("can't reach");
             if (!pawn.Map.reservationManager.CanReserve(pawn, this.parent, 1, -1, null, false))
             {
                 Pawn pawn2 = pawn.Map.reservationManager.FirstRespectedReserver(this.parent, pawn);
@@ -125,7 +125,7 @@ namespace CaravanAdventures.CaravanStory
 		private bool CanUseSpot(Pawn pawn, LocalTargetInfo spot)
 		{
 			IntVec3 cell = spot.Cell;
-			return cell.DistanceTo(this.parent.Position) <= 3.9f && cell.Standable(this.parent.Map) && GenSight.LineOfSight(cell, this.parent.Position, this.parent.Map, false, null, 0, 0) && pawn.CanReach(spot, PathEndMode.OnCell, Danger.Deadly, false, TraverseMode.ByPawn);
+			return cell.DistanceTo(this.parent.Position) <= 3.9f && cell.Standable(this.parent.Map) && GenSight.LineOfSight(cell, this.parent.Position, this.parent.Map, false, null, 0, 0) && pawn.CanReach(spot, PathEndMode.OnCell, Danger.Deadly, false, false, TraverseMode.ByPawn);
 		}
 
 	}

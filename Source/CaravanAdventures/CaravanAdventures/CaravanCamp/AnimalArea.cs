@@ -101,7 +101,7 @@ namespace CaravanAdventures.CaravanCamp
                 if (stack == null) break;
                 if (!cell.Filled(map))
                 {
-                    if (!stack.Spawned) GenDrop.TryDropSpawn_NewTmp(stack, cell, map, ThingPlaceMode.Direct, out var result);
+                    if (!stack.Spawned) GenDrop.TryDropSpawn(stack, cell, map, ThingPlaceMode.Direct, out var result);
                     else
                     {
                         stack.DeSpawn();

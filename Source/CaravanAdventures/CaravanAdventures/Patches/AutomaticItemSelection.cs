@@ -60,9 +60,9 @@ namespace CaravanAdventures.Patches
             if (anythingChanged) Traverse.Create(__instance).Method("CountToTransferChanged").GetValue();
         }
 
-        public static void Dialog_FormCaravan_Postfix(ref bool ___autoSelectFoodAndMedicine)
+        public static void Dialog_FormCaravan_Postfix(ref bool ___autoSelectTravelSupplies)
         {
-            if (InitGC.autoSupplyDisabled) ___autoSelectFoodAndMedicine = false;
+            if (InitGC.autoSupplyDisabled) ___autoSelectTravelSupplies = false;
         }
 
         private static void UpdatePeopleSection(List<Section> ___sections)

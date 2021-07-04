@@ -238,7 +238,8 @@ namespace CaravanAdventures
             //Widgets.BeginScrollView(wrect, ref this.scrollPos, new Rect(0f, 0f, wrect.width, 700f));
 
             var viewRect = new Rect(0f, 0f, wrect.width, 780);
-            options.BeginScrollView(wrect, ref this.scrollPos, ref viewRect);
+            Widgets.BeginScrollView(wrect, ref this.scrollPos, viewRect);
+            
 
             var debugRect = BRect(options.GetRect(Text.LineHeight));
             //options.CheckboxLabeled("Debug mode", ref debug);
@@ -362,9 +363,8 @@ namespace CaravanAdventures
                 "Restart reminder"));
             }
 
-            options.EndScrollView(ref viewRect);
-            //Widgets.EndScrollView();
-            //GUI.EndGroup();
+            Widgets.EndScrollView();
+
             options.End();
             this.Write();
         }

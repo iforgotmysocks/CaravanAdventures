@@ -34,10 +34,10 @@ namespace CaravanAdventures.CaravanCamp.Buildings
                 bool flag = !Mathf.Approximately(num2, 0f);
                 DLog.Message($"elmit: {energyLimit} num2: {num2} flag: {flag}");
                 CompProperties_Power props = this.compPowerTrader.Props;
-                var highPower = this.GetRoomGroup().Temperature < 20 || this.GetRoomGroup().Temperature > 22 ? true : false;
+                var highPower = this.GetRoom().Temperature < 20 || this.GetRoom().Temperature > 22 ? true : false;
                 if (flag)
                 {
-                    this.GetRoomGroup().Temperature += num2;
+                    this.GetRoom().Temperature += num2;
                     this.compPowerTrader.PowerOutput = -props.basePowerConsumption;
                 }
                 else

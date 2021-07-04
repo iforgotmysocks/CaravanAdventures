@@ -75,7 +75,7 @@ namespace CaravanAdventures.CaravanCamp
             {
                 var medicine = caravan.AllThings.FirstOrDefault(thing => validMedicine.Contains(thing.def));
                 if (medicine == null) break;
-                if (!cell.Filled(map)) GenDrop.TryDropSpawn_NewTmp(medicine, cell, map, ThingPlaceMode.Direct, out var result); 
+                if (!cell.Filled(map)) GenDrop.TryDropSpawn(medicine, cell, map, ThingPlaceMode.Direct, out var result); 
             }
         }
 
@@ -104,7 +104,7 @@ namespace CaravanAdventures.CaravanCamp
             {
                 var medicine = caravan.AllThings.FirstOrDefault(thing => validMedicine.Contains(thing.def));
                 if (medicine == null) break;
-                if (!cell.Filled(map)) GenDrop.TryDropSpawn_NewTmp(medicine, cell, map, ThingPlaceMode.Direct, out var result);
+                if (!cell.Filled(map)) GenDrop.TryDropSpawn(medicine, cell, map, ThingPlaceMode.Direct, out var result);
             }
         }
 

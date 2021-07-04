@@ -159,7 +159,7 @@ namespace CaravanAdventures.CaravanCamp
             {
                 var stuff = CampHelper.GetFirstOrderedThingOfCategoryFromCaravan(caravan, new[] { ThingCategoryDefOf.Leathers, ThingCategoryDef.Named("Textiles") }, new[] { ThingDef.Named("Leather_Thrumbo") });
                 if (stuff == null) break;
-                if (!cell.Filled(map)) GenDrop.TryDropSpawn_NewTmp(stuff, cell, map, ThingPlaceMode.Direct, out var result);
+                if (!cell.Filled(map)) GenDrop.TryDropSpawn(stuff, cell, map, ThingPlaceMode.Direct, out var result);
             }
         }
 

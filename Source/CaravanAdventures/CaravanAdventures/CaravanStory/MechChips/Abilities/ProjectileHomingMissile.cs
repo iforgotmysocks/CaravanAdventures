@@ -80,8 +80,8 @@ namespace CaravanAdventures.CaravanStory.MechChips.Abilities
             }
             if (ticksAlive % 10 == 0)
             {
-                MoteMaker.ThrowDustPuff(Position, map, effectRange.RandomInRange);
-                MoteMaker.ThrowFireGlow(Position, map, effectRange.RandomInRange);
+                FleckMaker.ThrowDustPuff(Position, map, effectRange.RandomInRange);
+                FleckMaker.ThrowFireGlow(Position.ToVector3(), map, effectRange.RandomInRange);
             }
             FindTarget();
             UpdateRotationAndPosition();

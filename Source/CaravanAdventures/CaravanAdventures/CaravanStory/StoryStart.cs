@@ -239,7 +239,7 @@ namespace CaravanAdventures.CaravanStory
 
             DLog.Message(gifted.Name + " " + gifted.NameFullColored);
 
-            MoteMaker.MakeStaticMote(gifted.Position, gifted.Map, ThingDefOf.Mote_PsycastAreaEffect, 10f);
+            MoteMaker.MakeStaticMote(gifted.Position, gifted.Map, ThingDefOf.Mote_CastPsycast, 10f);
             SoundDefOf.PsycastPsychicPulse.PlayOneShot(new TargetInfo(gifted));
 
             gifted.health.AddHediff(DefDatabase<HediffDef>.AllDefs.FirstOrDefault(x => x.defName == "PsychicAmplifier"), gifted.health.hediffSet.GetBrain());

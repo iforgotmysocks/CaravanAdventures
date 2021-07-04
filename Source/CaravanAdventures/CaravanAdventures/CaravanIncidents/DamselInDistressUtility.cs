@@ -63,7 +63,7 @@ namespace CaravanAdventures.CaravanIncidents
 
 		public static Pawn GenerateGirl(int tile)
 		{
-			Pawn pawn = PawnGenerator.GeneratePawn(new PawnGenerationRequest(PawnKindDefOf.SpaceRefugee, DownedRefugeeQuestUtility.GetRandomFactionForRefugee(), PawnGenerationContext.NonPlayer, tile, false, false, false, false, true, false, 20f, true, true, true, true, false, false, false, false, 0f, null, 1f, null, null, null, null, new float?(0.2f), null, null, Gender.Female, null, null, null, null));
+			Pawn pawn = PawnGenerator.GeneratePawn(new PawnGenerationRequest(PawnKindDefOf.SpaceRefugee, DownedRefugeeQuestUtility.GetRandomFactionForRefugee(), PawnGenerationContext.NonPlayer, tile, false, false, false, false, true, false, 0, true, true, true, true, false, false, false, false, 0f, 0f, null, 0, null, null, null, null, null, 20f, null, Gender.Female, null, null, null, null));
 			pawn.story.traits.allTraits.RemoveAll(x => x.def == TraitDefOf.Beauty);
 			pawn.story.traits.GainTrait(new Trait(TraitDefOf.Beauty, 2));
 			if (!pawn.story.traits.allTraits.Any(x => x.def == TraitDefOf.Tough) && Rand.Chance(0.4f)) pawn.story.traits.GainTrait(new Trait(TraitDefOf.Tough));
@@ -80,7 +80,7 @@ namespace CaravanAdventures.CaravanIncidents
                 girl.SetFaction(faction);
                 girl.guest.Released = true;
             }
-			else girl.guest.SetGuestStatus(girl.Faction, true);
+			else girl.guest.SetGuestStatus(girl.Faction, GuestStatus.Prisoner);
 
 			if (caravan != null)
 			{

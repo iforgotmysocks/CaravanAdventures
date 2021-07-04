@@ -13,13 +13,14 @@ namespace CaravanAdventures.Settings
     class SettingsFilters : Page
     {
         private float width;
-        private Vector2 scrollPos, scrollPosPackup, scrollPosGoods, scrollPosJourney;
+        //private Vector2 scrollPos, scrollPosPackup, scrollPosGoods, scrollPosJourney;
+        private ThingFilterUI.UIState scrollPos, scrollPosPackup, scrollPosGoods, scrollPosJourney;
 
         public SettingsFilters()
         {
             doCloseButton = true;
             closeOnCancel = true;
-            scrollPos = scrollPosPackup = scrollPosGoods = scrollPosJourney = Vector2.zero;
+            scrollPos.scrollPosition = scrollPosPackup.scrollPosition = scrollPosGoods.scrollPosition = scrollPosJourney.scrollPosition = Vector2.zero;
 
             width = UI.screenWidth < 900 ? UI.screenWidth : 900;
         }
@@ -62,7 +63,7 @@ namespace CaravanAdventures.Settings
 
             options.Label("Pack up:".Colorize(Color.green), 24f);
             var packUpRect = options.GetRect(400);
-            ThingFilterUI.DoThingFilterConfigWindow(packUpRect, ref scrollPosPackup, InitGC.packUpFilter);
+            ThingFilterUI.DoThingFilterConfigWindow(packUpRect, scrollPosPackup, InitGC.packUpFilter);
             options.Gap();
             options.CheckboxLabeled("Exclude other items", ref InitGC.packUpExclusive, "When active, the button will disable other items instead of just adding the filtered ones");
             options.Gap();
@@ -71,7 +72,7 @@ namespace CaravanAdventures.Settings
 
             options.Label("Goods:".Colorize(Color.green), 24f);
             var goodsRect = options.GetRect(400);
-            ThingFilterUI.DoThingFilterConfigWindow(goodsRect, ref scrollPosGoods, InitGC.goodsFilter);
+            ThingFilterUI.DoThingFilterConfigWindow(goodsRect, scrollPosGoods, InitGC.goodsFilter);
             options.Gap();
             options.CheckboxLabeled("Exclude other items", ref InitGC.goodsExclusive, "When active, the button will disable other items instead of just adding the filtered ones");
             options.Gap();
@@ -80,7 +81,7 @@ namespace CaravanAdventures.Settings
 
             options.Label("Goods2:".Colorize(Color.green), 24f);
             var journeyRect = options.GetRect(400);
-            ThingFilterUI.DoThingFilterConfigWindow(journeyRect, ref scrollPosJourney, InitGC.journeyFilter);
+            ThingFilterUI.DoThingFilterConfigWindow(journeyRect, scrollPosJourney, InitGC.journeyFilter);
             options.Gap();
             options.CheckboxLabeled("Exclude other items", ref InitGC.journeyExclusive, "When active, the button will disable other items instead of just adding the filtered ones");
             options.Gap();

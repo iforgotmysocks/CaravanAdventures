@@ -21,7 +21,7 @@ namespace CaravanAdventures.CaravanStory
             {
                 for (int i = 0; i < 50; i++)
                 {
-                    CellFinder.TryFindRandomSpawnCellForPawnNear_NewTmp(casket.Position, map, out var result, 4);
+                    CellFinder.TryFindRandomSpawnCellForPawnNear(casket.Position, map, out var result, 4);
                     if (mainRoom.Cells.Contains(result))
                     {
                         pos = result;
@@ -280,7 +280,7 @@ namespace CaravanAdventures.CaravanStory
                 relations.Add(new FactionRelation
                 {
                     other = curFaction,
-                    goodwill = curFaction == Faction.OfPlayer ? 100 : Faction.OfPlayer.GoodwillWith(curFaction),
+                    baseGoodwill = curFaction == Faction.OfPlayer ? 100 : Faction.OfPlayer.GoodwillWith(curFaction),
                     kind = curFaction == Faction.OfPlayer ? FactionRelationKind.Ally : Faction.OfPlayer.RelationKindWith(curFaction)
                 });
             }
@@ -291,7 +291,7 @@ namespace CaravanAdventures.CaravanStory
                 faction = FactionGenerator.NewGeneratedFactionWithRelations(FactionDef.Named("CAFriendlyMechanoid"), relations);
                 faction.hidden = new bool?(true);
                 faction.temporary = true;
-                faction.hostileFromMemberCapture = false;
+                faction.factionHostileOnHarmByPlayer = false;
                 Find.FactionManager.Add(faction);
             }
             else
@@ -317,7 +317,7 @@ namespace CaravanAdventures.CaravanStory
                 if (caravan != null) startTile = caravan.Tile;
                 else DLog.Message($"caraavn is null");
             }
-            return TileFinder.TryFindNewSiteTile(out newTile, minDist, maxDist, false, false, startTile);
+            return TileFinder.TryFindNewSiteTile(out newTile, minDist, maxDist, false, TileFinderMode.Near, startTile, false);
         }
 
         public static void GenerateStoryContact()
@@ -357,7 +357,7 @@ namespace CaravanAdventures.CaravanStory
             var sacrilegHunters = Find.FactionManager.AllFactions.FirstOrDefault(x => x.def.defName == "CASacrilegHunters");
             if (sacrilegHunters == null)
             {
-                sacrilegHunters = FactionGenerator.NewGeneratedFaction(DefDatabase<FactionDef>.GetNamedSilentFail("CASacrilegHunters"));
+                sacrilegHunters = FactionGenerator.NewGeneratedFaction(new FactionGeneratorParms(DefDatabase<FactionDef>.GetNamedSilentFail("CASacrilegHunters"), default, false));
 
                 Find.FactionManager.Add(sacrilegHunters);
                 var empireDef = FactionDefOf.Empire;
@@ -386,18 +386,20 @@ namespace CaravanAdventures.CaravanStory
                         switch (relationKind)
                         {
                             case FactionRelationKind.Ally:
-                                sacrilegHunters.SetRelation(new FactionRelation() { kind = FactionRelationKind.Ally, goodwill = 100, other = Faction.OfPlayer });
+                                sacrilegHunters.SetRelation(new FactionRelation() { kind = FactionRelationKind.Ally, baseGoodwill = 100, other = Faction.OfPlayer });
+                                sacrilegHunters.factionHostileOnHarmByPlayer = false;
                                 break;
                             case FactionRelationKind.Neutral:
-                                sacrilegHunters.SetRelation(new FactionRelation() { kind = FactionRelationKind.Neutral, goodwill = 0, other = Faction.OfPlayer });
+                                sacrilegHunters.SetRelation(new FactionRelation() { kind = FactionRelationKind.Neutral, baseGoodwill = 0, other = Faction.OfPlayer });
+                                sacrilegHunters.factionHostileOnHarmByPlayer = false;
                                 break;
                             case FactionRelationKind.Hostile:
-                                sacrilegHunters.SetRelation(new FactionRelation() { kind = FactionRelationKind.Hostile, goodwill = -100, other = Faction.OfPlayer });
+                                sacrilegHunters.SetRelation(new FactionRelation() { kind = FactionRelationKind.Hostile, baseGoodwill = -100, other = Faction.OfPlayer });
                                 break;
                         }
                     }
                 }
-                else if (sacrilegHunters.RelationKindWith(Faction.OfPlayerSilentFail) != FactionRelationKind.Hostile) sacrilegHunters.SetRelation(new FactionRelation() { kind = FactionRelationKind.Hostile, goodwill = -100, other = Faction.OfPlayer });
+                else if (sacrilegHunters.RelationKindWith(Faction.OfPlayerSilentFail) != FactionRelationKind.Hostile) sacrilegHunters.SetRelation(new FactionRelation() { kind = FactionRelationKind.Hostile, baseGoodwill = -100, other = Faction.OfPlayer });
             }
             return sacrilegHunters;
         }
@@ -407,7 +409,7 @@ namespace CaravanAdventures.CaravanStory
             foreach (var faction in Find.FactionManager.AllFactionsListForReading)
             {
                 if (faction == Faction.OfPlayer || faction.def.permanentEnemy || faction == sacrilegHunters) continue;
-                if (ModSettings.sacHuntersHostileTowardsEmpire && faction == Faction.Empire)
+                if (ModSettings.sacHuntersHostileTowardsEmpire && faction == Faction.OfEmpire)
                 {
                     faction.SetRelationDirect(sacrilegHunters, FactionRelationKind.Hostile);
                     continue;

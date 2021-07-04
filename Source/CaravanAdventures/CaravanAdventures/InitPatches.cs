@@ -89,7 +89,7 @@ namespace CaravanAdventures
                 if (ModSettings.removeOnlyAcolyteAndKnightRoyalTitleRequirements && !new[] { RoyalTitleDefOf.Knight, DefDatabase<RoyalTitleDef>.GetNamedSilentFail("Esquire"), DefDatabase<RoyalTitleDef>.GetNamedSilentFail("Acolyte") }.Contains(def)) continue;
                 def.disabledJoyKinds = new List<JoyKindDef>();
                 def.disabledWorkTags = WorkTags.None;
-                def.requiredApparel = new List<RoyalTitleDef.ApparelRequirement>();
+                def.requiredApparel = new List<ApparelRequirement>();
                 def.bedroomRequirements = new List<RoomRequirement>();
                 def.foodRequirement = default;
                 def.throneRoomRequirements = new List<RoomRequirement>();

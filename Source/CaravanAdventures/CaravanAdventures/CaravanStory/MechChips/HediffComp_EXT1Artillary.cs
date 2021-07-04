@@ -102,8 +102,8 @@ namespace CaravanAdventures.CaravanStory.MechChips
                     //MoteMaker.MakeStaticMote(cell, Pawn.Map, ThingDef.Named("Mote_LongSparkThrown"));
                     MoteMaker.MakeStaticMote(cell, Pawn.Map, ThingDef.Named("Mote_BlastFlame"));
                     //MoteMaker.MakeStaticMote(cell, Pawn.Map, ThingDef.Named("Mote_DustSlow"));
-                    MoteMaker.ThrowDustPuffThick(cell.ToVector3(), Pawn.Map, Rand.Range(1.5f, 3f), new Color(1f, 1f, 1f, 2.5f));
-                    MoteMaker.ThrowAirPuffUp(cell.ToVector3(), Pawn.Map);
+                    FleckMaker.ThrowDustPuffThick(cell.ToVector3(), Pawn.Map, Rand.Range(1.5f, 3f), new Color(1f, 1f, 1f, 2.5f));
+                    FleckMaker.ThrowAirPuffUp(cell.ToVector3(), Pawn.Map);
 
                     //var cellPawns = cell.GetThingList(Pawn.Map).OfType<Pawn>().ToList();
                     //cellPawns.ForEach(pawn => pawn.TakeDamage(new DamageInfo(DamageDefOf.Burn, 20, 50, -1, Pawn, pawn.health.hediffSet.GetRandomNotMissingPart(DamageDefOf.Burn, BodyPartHeight.Undefined, BodyPartDepth.Outside))));

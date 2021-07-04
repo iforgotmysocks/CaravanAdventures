@@ -94,7 +94,7 @@ namespace CaravanAdventures.CaravanMechBounty
             int tile = requestor.Map.Tile;
             previousTimeSpeed = Find.TickManager.CurTimeSpeed;
             Find.TickManager.CurTimeSpeed = TimeSpeed.Paused;
-            Find.WorldTargeter.BeginTargeting_NewTemp(ChoseWorldTarget, true, CompLaunchable.TargeterMouseAttachment, true, delegate
+            Find.WorldTargeter.BeginTargeting(ChoseWorldTarget, true, CompLaunchable.TargeterMouseAttachment, true, delegate
             {
                 //GenDraw.DrawWorldRadiusRing(tile, this.MaxLaunchDistance);
             }, (GlobalTargetInfo target) => "Select target tile", ValidateLaunchTarget);
