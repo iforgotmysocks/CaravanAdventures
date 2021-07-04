@@ -18,7 +18,7 @@ namespace CaravanAdventures.CaravanStory
     {
         private Sustainer animaTreeWhipserSustainer;
         private Thing theTree;
-        private int ticks = 20000;
+        private int ticks = 0;
 
         public StoryStart(Map map) : base(map)
         {
@@ -45,18 +45,18 @@ namespace CaravanAdventures.CaravanStory
             base.MapComponentTick();
             if (!ModsConfig.RoyaltyActive || !ModSettings.storyEnabled) return;
 
-                DrawTreeQuestionMark();
+            DrawTreeQuestionMark();
 
-            if (ticks >= (CompCache.StoryWC.storyFlags["Start_ReceivedGift"] || Helper.Debug() ? 20000 : 40000) 
-                && (CompCache.StoryWC.storyFlags["IntroVillage_Finished"] 
+            if (ticks >= 1000
+                && (CompCache.StoryWC.storyFlags["IntroVillage_Finished"]
                     || CompCache.StoryWC.debugFlags["VillageDone"])
-                && (CompCache.StoryWC.storyFlags["Start_ReceivedGift"] 
+                && (CompCache.StoryWC.storyFlags["Start_ReceivedGift"]
                     || map.IsPlayerHome))
             {
-                    AddTalkTreeAction();
-                    AddTreeWhisper();
-                    StartTreeQuest();
-                    CheckEnsureGifted();
+                AddTalkTreeAction();
+                AddTreeWhisper();
+                StartTreeQuest();
+                CheckEnsureGifted();
 
                 ticks = 0;
             }
@@ -82,8 +82,8 @@ namespace CaravanAdventures.CaravanStory
         {
             if (theTree != null
                 && !CompCache.StoryWC.storyFlags["Start_ReceivedGift"]
-                && theTree.TryGetComp<CompTalk>() != null 
-                && theTree.TryGetComp<CompTalk>().ShowQuestionMark) 
+                && theTree.TryGetComp<CompTalk>() != null
+                && theTree.TryGetComp<CompTalk>().ShowQuestionMark)
                 theTree.Map.overlayDrawer.DrawOverlay(theTree, OverlayTypes.QuestionMark);
         }
 
@@ -114,9 +114,9 @@ namespace CaravanAdventures.CaravanStory
 
         private void AddTreeWhisper()
         {
-            if (CompCache.StoryWC.storyFlags["Start_ReceivedGift"] 
+            if (CompCache.StoryWC.storyFlags["Start_ReceivedGift"]
                 || CompCache.StoryWC.storyFlags["Start_InitialTreeWhisper"] && animaTreeWhipserSustainer != null) return;
-            
+
             var tree = map.spawnedThings.FirstOrDefault(x => x.def.defName == "Plant_TreeAnima");
             if (tree == null)
             {
@@ -165,7 +165,7 @@ namespace CaravanAdventures.CaravanStory
             {
                 var apoActive = CompCache.StoryWC.questCont.LastJudgment?.Apocalypse != null;
                 var subDiaNode = new DiaNode(apoActive
-                    ? "CA_Story_Start_MachinesDisabled".Translate() 
+                    ? "CA_Story_Start_MachinesDisabled".Translate()
                     : "CA_Story_Start_MachinesEnabled".Translate());
                 subDiaNode.options.Add(new DiaOption("CA_Story_Start_Bye".Translate()) { resolveTree = true, action = () => TriggerApocalypse(initiator, !apoActive) });
 
@@ -256,9 +256,10 @@ namespace CaravanAdventures.CaravanStory
             if (CompCache.StoryWC.debugFlags["DebugAllAbilities"]) DefDatabase<AbilityDef>.AllDefsListForReading
                    .Where(x => x.defName.StartsWith("CAAncient"))
                    .ToList()
-                   .ForEach(spell => {
+                   .ForEach(spell =>
+                   {
                        if (!CompCache.StoryWC.GetUnlockedSpells().Contains(spell)) CompCache.StoryWC.GetUnlockedSpells().Add(spell);
-            });
+                   });
 
             var abilityDefs = CompCache.StoryWC.GetUnlockedSpells();
 
