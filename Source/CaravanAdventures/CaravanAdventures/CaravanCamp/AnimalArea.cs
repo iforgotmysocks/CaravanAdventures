@@ -25,12 +25,12 @@ namespace CaravanAdventures.CaravanCamp
         public override void Build(Map map, List<Thing> campAssetListRef)
         {
             var entranceCells = CellRect.EdgeCells.Where(cell => cell.z == CellRect.minZ && cell.x == CellRect.minX + Convert.ToInt32(CellRect.Width / 2));
-            if (!ModSettings.decorativeFencePosts) CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(CampDefOf.CATentFenceDoor, ThingDefOf.WoodLog), entranceCells.First(), map, default, campAssetListRef);
+            CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("FenceGate"), ThingDefOf.WoodLog), entranceCells.First(), map, default, campAssetListRef);
 
             foreach (var edgeCell in CellRect.EdgeCells)
             {
                 if (entranceCells.Contains(edgeCell)) continue;
-                var thing = ThingMaker.MakeThing(CampDefOf.CAFencePost);
+                var thing = ThingMaker.MakeThing(ThingDefOf.Fence, ThingDefOf.WoodLog);
                 thing.SetFaction(Faction.OfPlayer); 
                 campAssetListRef.Add(GenSpawn.Spawn(thing, edgeCell, map));
             }
@@ -43,6 +43,8 @@ namespace CaravanAdventures.CaravanCamp
                     ? ThingMaker.MakeThing(ThingDef.Named("AnimalSleepingSpot")) 
                     : ThingMaker.MakeThing(ThingDef.Named("AnimalBed"), ThingDefOf.Leather_Plain), innerCells[i], map, default, campAssetListRef);
             }
+
+            CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("PenMarker"), ThingDefOf.WoodLog), CellRect.CenterCell, map, default, campAssetListRef);
         }
 
         public override void BuildTribal(Map map, List<Thing> campAssetListRef)

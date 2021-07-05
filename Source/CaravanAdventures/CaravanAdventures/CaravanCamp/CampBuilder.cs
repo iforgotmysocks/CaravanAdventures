@@ -52,6 +52,7 @@ namespace CaravanAdventures.CaravanCamp
             ApplyZonesAndInventory();
             GenerateRecipes();
             GiveHappyThoughts();
+            MoveAnimalsToAnimalArea();
             MovePrisonersToCells();
             InformPlayerHighTechCosts();
 
@@ -470,6 +471,28 @@ namespace CaravanAdventures.CaravanCamp
         }
 
         protected virtual void GiveHappyThoughts() => caravan.PawnsListForReading.Where(pawn => pawn.IsColonist).ToList().ForEach(pawn => pawn.needs.mood.thoughts.memories.TryGainMemory(ThoughtDef.Named("CACamping")));
+
+        protected virtual void MoveAnimalsToAnimalArea()
+        {
+            var animalArea = campParts.OfType<AnimalArea>().FirstOrDefault();
+            if (animalArea == null || ModSettings.letAnimalsRunFree) return;
+            var animals = caravan.PawnsListForReading.Where(pawn => pawn?.RaceProps?.Animal == true);
+            foreach (var animal in animals.Reverse())
+            {
+                PlaceIntoAnimalArea(animalArea, animal);
+            }
+        }
+
+        protected virtual void PlaceIntoAnimalArea(AnimalArea animalArea, Pawn animal)
+        {
+            var cell = animalArea.CellRect.Cells.Where(c => !animalArea.CellRect.EdgeCells.Contains(c)).RandomElement();
+            if (cell == default) return;
+            caravan.RemovePawn(animal);
+            caravan.Notify_PawnRemoved(animal);
+            GenSpawn.Spawn(animal, cell, map, Rot4.Random);
+            animal.inventory.DropAllNearPawn(animal.Position);
+            animal.jobs.StartJob(JobMaker.MakeJob(JobDefOf.GotoWander, null), Verse.AI.JobCondition.InterruptForced, null, false, true, null, new Verse.AI.JobTag?(Verse.AI.JobTag.Idle), false, false);
+        }
 
         protected virtual void MovePrisonersToCells()
         {

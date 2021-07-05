@@ -41,7 +41,6 @@ namespace CaravanAdventures
         public static int maxCampSupplyCost = 75;
         public static int fuelStartingFillPercentage = 50;
         public static bool showSupplyCostsInGizmo = true;
-        public static bool decorativeFencePosts = false;
         public static bool useAnimalOnlyFoodForAnimalArea = false;
         public static bool preferStonecutting = false;
 
@@ -146,7 +145,6 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref maxCampSupplyCost, "maxCampSupplyCost", 75);
             Scribe_Values.Look(ref fuelStartingFillPercentage, "fuelStartingFillPercentage", 50);
             Scribe_Values.Look(ref showSupplyCostsInGizmo, "showSupplyCostsInGizmo", true);
-            Scribe_Values.Look(ref decorativeFencePosts, "decorativeFencePosts", false);
             Scribe_Values.Look(ref useAnimalOnlyFoodForAnimalArea, "useAnimalOnlyFoodForAnimalArea", false);
             Scribe_Values.Look(ref preferStonecutting, "preferStonecutting", false);
 
