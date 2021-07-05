@@ -226,10 +226,11 @@ namespace CaravanAdventures.CaravanStory
 		private void LeavingShrineDialog()
 		{
 			var storyChar = CompCache.StoryWC.questCont.Village.StoryContact;
+			var gifted = CompCache.StoryWC.questCont.StoryStart.Gifted;
 			switch (CompCache.StoryWC.GetCurrentShrineCounter(true))
 			{
 				case 6:
-					var diaNode = new DiaNode("Story_Shrine5_Apocalypse_Dia2_1".Translate(storyChar.NameShortColored));
+					var diaNode = new DiaNode("Story_Shrine5_Apocalypse_Dia2_1".Translate(gifted.NameShortColored));
 					diaNode.options.Add(new DiaOption("Story_Shrine5_Apocalypse_Dia2_1_Option1".Translate()) { resolveTree = true });
 
 					var taggedString = "Story_Shrine5_Apocalypse_Dia2Title".Translate(storyChar.NameShortColored, storyChar.Faction.NameColored);
