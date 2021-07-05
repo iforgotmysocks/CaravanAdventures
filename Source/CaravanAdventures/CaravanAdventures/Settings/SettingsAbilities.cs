@@ -32,12 +32,10 @@ namespace CaravanAdventures.Settings
         public override void DoWindowContents(Rect wrect)
         {
             var options = new Listing_Standard();
-            options.Begin(wrect);
-
-            var viewRect = new Rect(0f, 0f, windowRect.width - 150, 850f);
+            var viewRect = new Rect(0f, 0f, windowRect.width - 65, 850f);
 
             Widgets.BeginScrollView(wrect, ref scrollPos, viewRect);
-
+            options.Begin(viewRect);
             Text.Font = GameFont.Medium;
             options.Label("Ancient Abilities:".Colorize(Color.green), 40f);
 
@@ -84,9 +82,8 @@ namespace CaravanAdventures.Settings
             options.Label($"Duration in seconds: {Math.Round(ModSettings.lightDuration / 60, 0)}");
             ModSettings.lightDuration = options.Slider(ModSettings.lightDuration, 60f, 14400f);
 
-            Widgets.EndScrollView();
             options.End();
-
+            Widgets.EndScrollView();
         }
 
     }

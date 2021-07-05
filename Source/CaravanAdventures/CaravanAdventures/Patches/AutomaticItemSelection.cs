@@ -79,12 +79,11 @@ namespace CaravanAdventures.Patches
             if (detectedPeople.Count > 0) caravanMembers = detectedPeople;
         }
 
-        public static bool smallLayoutCompatibility = false;
         private static void DoOwnCaravanFormButtons(List<Section> sections, ref bool anythingChanged)
         {
-            GUI.BeginGroup(new Rect(350f, 0f, 530f, 27f));
+            GUI.BeginGroup(new Rect(530f, 0f, 530f, 27f));
             Text.Font = GameFont.Tiny;
-            Rect rect = new Rect(0f, 0f, smallLayoutCompatibility ? 140f : 155f, 27f);
+            Rect rect = new Rect(0f, 0f, 40f, 27f);
             Text.Anchor = TextAnchor.MiddleLeft;
             Widgets.Label(rect, "Select");
             Text.Anchor = TextAnchor.UpperLeft;
@@ -117,7 +116,7 @@ namespace CaravanAdventures.Patches
                 FilterCombs.ApplyNone(sections);
                 anythingChanged = true;
             }
-            Widgets.CheckboxLabeled(new Rect(rect2.xMax + 25f + 265f, 0f, smallLayoutCompatibility ? 60f : 77f, 30f), "Supply disabled", ref InitGC.autoSupplyDisabled);
+            Widgets.CheckboxLabeled(new Rect(rect2.xMax + 25f + 265f, 0f, 77f, 30f), "Supply disabled", ref InitGC.autoSupplyDisabled);
             GUI.EndGroup();
         }
 

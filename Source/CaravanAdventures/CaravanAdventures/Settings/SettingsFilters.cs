@@ -20,7 +20,11 @@ namespace CaravanAdventures.Settings
         {
             doCloseButton = true;
             closeOnCancel = true;
-            scrollPos = scrollPosPackup = scrollPosGoods = scrollPosJourney = new ThingFilterUI.UIState();
+            scrollPos = new ThingFilterUI.UIState();
+            scrollPosPackup = new ThingFilterUI.UIState();
+            scrollPosGoods = new ThingFilterUI.UIState();
+            scrollPosJourney = new ThingFilterUI.UIState();
+
             scrollPos.scrollPosition = scrollPosPackup.scrollPosition = scrollPosGoods.scrollPosition = scrollPosJourney.scrollPosition = Vector2.zero;
 
             width = UI.screenWidth < 900 ? UI.screenWidth : 900;

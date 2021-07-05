@@ -161,7 +161,8 @@ namespace CaravanAdventures.CaravanStory
                 //incidentParms.points = StorytellerUtility.DefaultThreatPointsNow(incidentParms.target) * 2.5f;
                 points = 32000,
                 faction = Faction.OfMechanoids,
-                raidArrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn
+                raidArrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn,
+                raidStrategy = RaidStrategyDefOf.ImmediateAttack
             };
             DLog.Message($"Default threat points: {StorytellerUtility.DefaultThreatPointsNow(incidentParms.target)}");
             StoryDefOf.CAMechRaidMixed.Worker.TryExecute(incidentParms);

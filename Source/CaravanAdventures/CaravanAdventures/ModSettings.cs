@@ -237,7 +237,7 @@ namespace CaravanAdventures
             //GUI.BeginGroup(wrect);
             //Widgets.BeginScrollView(wrect, ref this.scrollPos, new Rect(0f, 0f, wrect.width, 700f));
 
-            var viewRect = new Rect(0f, 0f, wrect.width, 780);
+            var viewRect = new Rect(0f, 0f, wrect.width - 20f, 780);
             Widgets.BeginScrollView(wrect, ref this.scrollPos, viewRect);
             options.Begin(viewRect);
 
@@ -305,12 +305,12 @@ namespace CaravanAdventures
 
             Text.Font = GameFont.Medium;
             cRect = BRect(options.GetRect(Text.LineHeight));
-            Widgets.Label(cRect, $"Caravan Incidents - (testing)".HtmlFormatting("00ff00", false, 18));
+            Widgets.Label(cRect, $"Caravan Incidents".HtmlFormatting("00ff00", false, 18));
             Text.Font = GameFont.Small;
             Widgets.CheckboxLabeled(new Rect(options.ColumnWidth - 400, lastRect.y + 10, 110, Text.LineHeight), "Enabled: ", ref CheckForRestart(ref caravanIncidentsEnabled, ref checkRestartRequiringValueChanged));
             if (caravanIncidentsEnabled != checkRestartRequiringValueChanged) showRestartReminder = true;
             options.Gap(10);
-            options.Label($"Additional Caravan incidents - (only 1 in testing currently, more coming with the next expansion)");
+            options.Label($"Additional Caravan incidents - (currently just 1, more coming with the next expansion)");
             options.GapLine();
 
             Text.Font = GameFont.Medium;

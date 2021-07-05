@@ -100,7 +100,7 @@ namespace CaravanAdventures.CaravanStory.MechChips
                 foreach (var cell in cells)
                 {
                     //MoteMaker.MakeStaticMote(cell, Pawn.Map, ThingDef.Named("Mote_LongSparkThrown"));
-                    MoteMaker.MakeStaticMote(cell, Pawn.Map, ThingDef.Named("Mote_BlastFlame"));
+                    FleckMaker.Static(cell, Pawn.Map, DefDatabase<FleckDef>.GetNamed("BlastFlame"));
                     //MoteMaker.MakeStaticMote(cell, Pawn.Map, ThingDef.Named("Mote_DustSlow"));
                     FleckMaker.ThrowDustPuffThick(cell.ToVector3(), Pawn.Map, Rand.Range(1.5f, 3f), new Color(1f, 1f, 1f, 2.5f));
                     FleckMaker.ThrowAirPuffUp(cell.ToVector3(), Pawn.Map);
