@@ -233,13 +233,13 @@ namespace CaravanAdventures
         public void DoWindowContents(Rect wrect)
         {
             var options = new Listing_Standard();
-            options.Begin(wrect);
+
             //GUI.BeginGroup(wrect);
             //Widgets.BeginScrollView(wrect, ref this.scrollPos, new Rect(0f, 0f, wrect.width, 700f));
 
             var viewRect = new Rect(0f, 0f, wrect.width, 780);
             Widgets.BeginScrollView(wrect, ref this.scrollPos, viewRect);
-            
+            options.Begin(viewRect);
 
             var debugRect = BRect(options.GetRect(Text.LineHeight));
             //options.CheckboxLabeled("Debug mode", ref debug);
@@ -358,14 +358,14 @@ namespace CaravanAdventures
                 new TaggedString($"\nToggling a mod category requires a game restart to take effect.\n\nSome sub-category settings may also require a restart, but do not get a specific notification."),
                 "Gotcha",
                 () => { },
-                null,
+                null, 
                 null,
                 "Restart reminder"));
             }
 
+            options.End();
             Widgets.EndScrollView();
 
-            options.End();
             this.Write();
         }
 

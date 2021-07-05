@@ -41,7 +41,7 @@ namespace CaravanAdventures.CaravanIncidents
                     (defaultPawnGroupMakerParms.faction != null) ? defaultPawnGroupMakerParms.faction.def.ToString() : "null",
                     ") parms=",
                     parms
-                }), false);
+                }));
                 return false;
             }
             CameraJumper.TryJumpAndSelect(caravan);

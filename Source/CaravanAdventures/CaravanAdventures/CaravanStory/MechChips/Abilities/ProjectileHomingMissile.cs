@@ -36,7 +36,7 @@ namespace CaravanAdventures.CaravanStory.MechChips.Abilities
 
         private Sustainer ambientSustainer;
 
-        public new void Launch(Thing launcher, Vector3 origin, LocalTargetInfo usedTarget, LocalTargetInfo intendedTarget, ProjectileHitFlags hitFlags, Thing equipment = null, ThingDef targetCoverDef = null)
+        public void Launch(Thing launcher, Vector3 origin, LocalTargetInfo usedTarget, LocalTargetInfo intendedTarget, ProjectileHitFlags hitFlags, Thing equipment = null, ThingDef targetCoverDef = null)
         {
             realRotation = launcher.Rotation.AsQuat;
             realPosition = !pawnOffsetMode ? launcher.DrawPos + (realRotation * offset) : launcher.DrawPos + offset;
@@ -324,7 +324,7 @@ namespace CaravanAdventures.CaravanStory.MechChips.Abilities
                         }
                         if (this.launcher != null && pawn.Faction != null && this.launcher.Faction != null && !pawn.Faction.HostileTo(this.launcher.Faction))
                         {
-                            num2 *= Find.Storyteller.difficultyValues.friendlyFireChanceFactor;
+                            num2 *= Find.Storyteller.difficulty.friendlyFireChanceFactor;
                         }
                     }
                     else if (thing.def.fillPercent > 0.2f)

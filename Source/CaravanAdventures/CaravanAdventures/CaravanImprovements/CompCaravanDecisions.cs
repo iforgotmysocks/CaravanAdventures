@@ -37,7 +37,7 @@ namespace CaravanAdventures.CaravanImprovements
             Faction faction = caravan.Faction;
             if (faction != Faction.OfPlayer)
             {
-                Log.Error("Cannot settle with non-player faction.", false);
+                Log.Error("Cannot settle with non-player faction.");
                 return;
             }
             Settlement newHome = SettleUtility.AddNewHome(caravan.Tile, faction);

@@ -22,7 +22,7 @@ namespace CaravanAdventures.CaravanImprovements
                     map,
                     " with enter mode ",
                     enterMode
-                }), false);
+                }));
                 enterMode = CaravanEnterMode.Edge;
             }
             IntVec3 enterCell = GetEnterCell(caravan, map, enterMode, extraCellValidator);
@@ -105,7 +105,7 @@ namespace CaravanAdventures.CaravanImprovements
             {
                 return CellFinder.RandomClosewalkCellNear(root, map, 5, null);
             }
-            Log.Warning("Could not find any valid edge cell.", false);
+            Log.Warning("Could not find any valid edge cell.");
             return CellFinder.RandomCell(map);
         }
 
@@ -122,7 +122,7 @@ namespace CaravanAdventures.CaravanImprovements
             {
                 return result;
             }
-            Log.Warning("Could not find any valid cell.", false);
+            Log.Warning("Could not find any valid cell.");
             return CellFinder.RandomCell(map);
         }
 

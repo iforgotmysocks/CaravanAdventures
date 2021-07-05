@@ -12,17 +12,17 @@ namespace CaravanAdventures
         private static bool shouldLog => ModSettings.debugMessages;
         public static void Message(string message, bool ignoreLimit = false)
         {
-            if (shouldLog) Log.Message(message, ignoreLimit);
+            if (shouldLog) Log.Message(message);
         }
 
         public static void Warning(string message, bool ignoreLimit = false)
         {
-            if (shouldLog) Log.Warning(message, ignoreLimit);
+            if (shouldLog) Log.Warning(message);
         }
 
         public static void Error (string message, bool ignoreLimit = false)
         {
-            if (shouldLog) Log.Error(message, ignoreLimit);
+            if (shouldLog) Log.Error(message);
         }
 
     }

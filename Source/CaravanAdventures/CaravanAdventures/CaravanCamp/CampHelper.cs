@@ -24,7 +24,7 @@ namespace CaravanAdventures.CaravanCamp
             {
                 return result;
             }
-            Log.Warning("Could not find any valid cell.", false);
+            Log.Warning("Could not find any valid cell.");
             return CellFinder.RandomCell(map);
         }
 

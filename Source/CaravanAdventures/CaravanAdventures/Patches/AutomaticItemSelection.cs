@@ -84,7 +84,7 @@ namespace CaravanAdventures.Patches
         {
             GUI.BeginGroup(new Rect(350f, 0f, 530f, 27f));
             Text.Font = GameFont.Tiny;
-            Rect rect = new Rect(0f, 0f, smallLayoutCompatibility ? 40f : 55f, 27f);
+            Rect rect = new Rect(0f, 0f, smallLayoutCompatibility ? 140f : 155f, 27f);
             Text.Anchor = TextAnchor.MiddleLeft;
             Widgets.Label(rect, "Select");
             Text.Anchor = TextAnchor.UpperLeft;
