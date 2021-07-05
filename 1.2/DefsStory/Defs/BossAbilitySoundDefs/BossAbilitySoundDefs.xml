@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+
+	<SoundDef>
+		<defName>CASlice1</defName>
+		<context>MapOnly</context>
+		<sustain>False</sustain>
+		<maxSimultaneous>1</maxSimultaneous>
+		<priorityMode>PrioritizeNearest</priorityMode>
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Folder">
+						<clipFolderPath>Bosses/Attacks/slice1_audione</clipFolderPath>
+					</li>
+				</grains>
+				<volumeRange>50~50</volumeRange>
+				<!--<pitchRange>0.9~1.1</pitchRange>-->
+				<sustainLoop>false</sustainLoop>
+				<!--<sustainAttack>1.1</sustainAttack>-->
+        <!--<onCamera>False</onCamera>-->
+        <distRange>10~100</distRange>
+			</li>
+		</subSounds>
+	</SoundDef>
+
+  <SoundDef>
+    <defName>CASlice2</defName>
+    <context>MapOnly</context>
+    <sustain>False</sustain>
+    <maxSimultaneous>1</maxSimultaneous>
+    <priorityMode>PrioritizeNearest</priorityMode>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Folder">
+            <clipFolderPath>Bosses/Attacks/slice2_freefire66</clipFolderPath>
+          </li>
+        </grains>
+        <volumeRange>30~30</volumeRange>
+        <!--<pitchRange>0.9~1.1</pitchRange>-->
+        <sustainLoop>false</sustainLoop>
+        <!--<sustainAttack>1.1</sustainAttack>-->
+        <!--<onCamera>False</onCamera>-->
+        <distRange>10~100</distRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+  <SoundDef>
+    <defName>CASlice3</defName>
+    <context>MapOnly</context>
+    <sustain>False</sustain>
+    <maxSimultaneous>1</maxSimultaneous>
+    <priorityMode>PrioritizeNearest</priorityMode>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Folder">
+            <clipFolderPath>Bosses/Attacks/slice3_TheBuilder15</clipFolderPath>
+          </li>
+        </grains>
+        <volumeRange>50~50</volumeRange>
+        <!--<pitchRange>0.9~1.1</pitchRange>-->
+        <sustainLoop>false</sustainLoop>
+        <!--<sustainAttack>1.1</sustainAttack>-->
+        <!--<onCamera>False</onCamera>-->
+        <distRange>10~100</distRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+  <SoundDef>
+    <defName>CASlice4</defName>
+    <context>MapOnly</context>
+    <sustain>False</sustain>
+    <maxSimultaneous>1</maxSimultaneous>
+    <priorityMode>PrioritizeNearest</priorityMode>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Folder">
+            <clipFolderPath>Bosses/Attacks/slice4_Aleks41</clipFolderPath>
+          </li>
+        </grains>
+        <volumeRange>50~50</volumeRange>
+        <!--<pitchRange>0.9~1.1</pitchRange>-->
+        <sustainLoop>false</sustainLoop>
+        <!--<sustainAttack>1.1</sustainAttack>-->
+        <!--<onCamera>False</onCamera>-->
+        <distRange>10~100</distRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+</Defs>

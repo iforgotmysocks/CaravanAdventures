@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+  <!-- todo priorities ? -->
+  <WorkGiverDef>
+    <defName>CADoBillsCookCampfireRoast</defName>
+    <label>cook meals at campfire</label>
+    <giverClass>WorkGiver_DoBill</giverClass>
+    <workType>Cooking</workType>
+    <!-- not sure if same as vanilla -->
+    <priorityInType>98</priorityInType>
+    <fixedBillGiverDefs>
+      <li>CACampfireRoast</li>
+    </fixedBillGiverDefs>
+    <verb>cook</verb>
+    <gerund>cooking at</gerund>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <prioritizeSustains>true</prioritizeSustains>
+  </WorkGiverDef>
+
+  <WorkGiverDef>
+    <defName>CADoBillsHaulCampfireRoast</defName>
+    <label>do bills at campfire</label>
+    <giverClass>WorkGiver_DoBill</giverClass>
+    <workType>Hauling</workType>
+    <!-- same as vanilla -->
+    <priorityInType>30</priorityInType>
+    <fixedBillGiverDefs>
+      <li>CACampfireRoast</li>
+    </fixedBillGiverDefs>
+    <verb>work at</verb>
+    <gerund>working at</gerund>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <prioritizeSustains>true</prioritizeSustains>
+  </WorkGiverDef>
+
+  <WorkGiverDef>
+    <defName>CADoBillsSpacerRefinery</defName>
+    <label>work at refinery</label>
+    <giverClass>WorkGiver_DoBill</giverClass>
+    <workType>Hauling</workType>
+    <!--<priorityInType>89</priorityInType>-->
+    <!-- cremate is 40 -->
+    <priorityInType>39</priorityInType>
+    <fixedBillGiverDefs>
+      <li>CASpacerBiofuelRefinery</li>
+    </fixedBillGiverDefs>
+    <verb>refine chemicals</verb>
+    <gerund>refining chemicals at</gerund>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <prioritizeSustains>true</prioritizeSustains>
+  </WorkGiverDef>
+</Defs>
