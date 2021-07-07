@@ -90,6 +90,8 @@ namespace CaravanAdventures.CaravanStory
             var raidLords = Map.lordManager.lords.Where(lord => lord.faction == StoryUtility.FactionOfSacrilegHunters);
             DLog.Message($"hunter lords: {raidLords.Select(lord => lord.ownedPawns).Count()}");
 
+            if (Faction.OfMechanoids == null) StoryUtility.EnsureEvilMechanoidFaction(FactionRelationKind.Hostile);
+
             foreach (var lord in raidLords.Reverse())
             {
                 var pawnsToReassign = lord.ownedPawns;

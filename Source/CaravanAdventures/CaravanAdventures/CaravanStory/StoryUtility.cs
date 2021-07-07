@@ -418,6 +418,67 @@ namespace CaravanAdventures.CaravanStory
             }
         }
 
+        private static void SetStandingForPossibleFactions(Faction factionToAdjust, FactionRelationKind kind, int goodwill)
+        {
+            foreach (var faction in Find.FactionManager.AllFactionsListForReading)
+            {
+                if (faction == Faction.OfPlayer || faction.def.permanentEnemy || faction == factionToAdjust) continue;
+                faction.SetRelation(new FactionRelation() { baseGoodwill = goodwill, kind = kind, other = factionToAdjust });
+            }
+        }
+
+        public static Faction EnsureEvilMechanoidFaction(FactionRelationKind? relationKind = null, bool ignoreBetrayal = false, bool skipLeaderGeneration = false)
+        {
+            var mechanoidFaction = Find.FactionManager.AllFactions.FirstOrDefault(x => x.def.defName == "Mechanoid");
+            if (mechanoidFaction == null)
+            {
+                mechanoidFaction = FactionGenerator.NewGeneratedFaction(new FactionGeneratorParms(DefDatabase<FactionDef>.GetNamedSilentFail("Mechanoid"), default, true));
+
+                Find.FactionManager.Add(mechanoidFaction);
+                var empireDef = FactionDefOf.Empire;
+                if (!empireDef.permanentEnemyToEveryoneExcept.Contains(mechanoidFaction.def)) empireDef.permanentEnemyToEveryoneExcept.Add(mechanoidFaction.def);
+            }
+            SetStandingForPossibleFactions(mechanoidFaction, FactionRelationKind.Hostile, -100);
+            if ((mechanoidFaction.leader == null || mechanoidFaction.leader.Dead || mechanoidFaction.leader.Destroyed) && !skipLeaderGeneration)
+            {
+                try
+                {
+                    mechanoidFaction.TryGenerateNewLeader();
+                }
+                catch (Exception e)
+                {
+                    Log.Error(e.ToString());
+                }
+            }
+            //if (Faction.OfPlayerSilentFail != null && mechanoidFaction.RelationWith(Faction.OfPlayer, true) == null) mechanoidFaction.TryMakeInitialRelationsWith(Faction.OfPlayer);
+            //if (mechanoidFaction != null && Faction.OfPlayerSilentFail != null)
+            //{
+                //if ((!CompCache.StoryWC.storyFlags["SacrilegHuntersBetrayal"] || ignoreBetrayal))
+                //{
+                //    if (relationKind != null && mechanoidFaction.RelationKindWith(Faction.OfPlayerSilentFail) != relationKind)
+                //    {
+                //        switch (relationKind)
+                //        {
+                //            case FactionRelationKind.Ally:
+                //                mechanoidFaction.SetRelation(new FactionRelation() { kind = FactionRelationKind.Ally, baseGoodwill = 100, other = Faction.OfPlayer });
+                //                mechanoidFaction.factionHostileOnHarmByPlayer = false;
+                //                break;
+                //            case FactionRelationKind.Neutral:
+                //                mechanoidFaction.SetRelation(new FactionRelation() { kind = FactionRelationKind.Neutral, baseGoodwill = 0, other = Faction.OfPlayer });
+                //                mechanoidFaction.factionHostileOnHarmByPlayer = false;
+                //                break;
+                //            case FactionRelationKind.Hostile:
+                //                mechanoidFaction.SetRelation(new FactionRelation() { kind = FactionRelationKind.Hostile, baseGoodwill = -100, other = Faction.OfPlayer });
+                //                break;
+                //        }
+                //    }
+                //}
+                //else if (mechanoidFaction.RelationKindWith(Faction.OfPlayerSilentFail) != FactionRelationKind.Hostile) 
+                    mechanoidFaction.SetRelation(new FactionRelation() { kind = FactionRelationKind.Hostile, baseGoodwill = -100, other = Faction.OfPlayer });
+            //}
+            return mechanoidFaction;
+        }
+
         public static void RemoveExistingQuestFriendlyVillages()
         {
             //var settlements = Find.WorldObjects.Settlements.Where(x => x?.Faction?.def?.defName == "SacrilegHunters");
