@@ -61,7 +61,7 @@ namespace CaravanAdventures.CaravanItemSelection
                     if (filter.ThingDefs.Contains(thingDef)) return true;
                     if (thingDef.thingCategories?.Count == null || thingDef.thingCategories.Count == 0)
                     {
-                        DLog.Message($"{thingDef.defName} has no thingCategories.");
+                        //DLog.Message($"{thingDef.defName} has no thingCategories.");
                         continue;
                     }
                     if (canUseQuality)
@@ -78,7 +78,7 @@ namespace CaravanAdventures.CaravanItemSelection
                     if (filter.ThingDefs.Contains(thingDef)) return false;
                     if (thingDef.thingCategories?.Count == null || thingDef.thingCategories.Count == 0)
                     {
-                        DLog.Message($"{thingDef.defName} has no thingCategories.");
+                        //DLog.Message($"{thingDef.defName} has no thingCategories.");
                         continue;
                     }
                     if (thingDef.thingCategories.Any(x => filter.ThingCategoryDefs.Contains(x))) return false;
