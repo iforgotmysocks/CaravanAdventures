@@ -46,6 +46,7 @@ namespace CaravanAdventures.CaravanCamp
 
         public override void BuildTribal(Map map, List<Thing> campAssetListRef)
         {
+            SkipPawnAssignment = true;
             base.BuildTribal(map, campAssetListRef);
             var beds = CellRect.Cells.Select(cell => cell.GetFirstThing<Building_Bed>(map));
             foreach (var bed in beds)
