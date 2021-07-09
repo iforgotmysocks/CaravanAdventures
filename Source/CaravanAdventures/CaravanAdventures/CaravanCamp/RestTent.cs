@@ -12,12 +12,14 @@ namespace CaravanAdventures.CaravanCamp
     class RestTent : Tent
     {
         public List<Pawn> Occupants { get; set; }
+        public bool SkipPawnAssignment { get; set; }
 
         public RestTent()
         {
             ForcedTentDirection = ForcedTentDirection.Horizontal;
             Occupants = new List<Pawn>();
             SupplyCost = ModSettings.campSupplyCostRestTent; // 3;
+            SkipPawnAssignment = false;
         }
 
         public override void Build(Map map, List<Thing> campAssetListRef)
@@ -27,7 +29,7 @@ namespace CaravanAdventures.CaravanCamp
             var otherLover = lover != null ? CampHelper.ExistingColonistLovePartner(lover, Occupants) : null;
             var cellSpots = CellRect.Cells.Where(cell => !CellRect.EdgeCells.Contains(cell) && cell.z == CellRect.maxZ - 1).ToArray();
             var assigned = new List<Building_Bed>();
-
+            
             for (int i = 0; i < cellSpots.Length; i++)
             {
                 if (lover != null && !lover.IsPrisoner && !HealthAIUtility.ShouldSeekMedicalRest(lover) && i == 0) continue;
@@ -37,8 +39,10 @@ namespace CaravanAdventures.CaravanCamp
                     var doubleBed = GenSpawn.Spawn(dbThing, cellSpots[i], map, Rot4.South);
                     doubleBed.SetFaction(Faction.OfPlayer);
                     campAssetListRef.Add(doubleBed);
+                    if (SkipPawnAssignment) continue;
                     lover.ownership.ClaimBedIfNonMedical((Building_Bed)doubleBed);
                     otherLover.ownership.ClaimBedIfNonMedical((Building_Bed)doubleBed);
+                    assigned.Add((Building_Bed)doubleBed);
                 }
                 else
                 {
@@ -46,8 +50,13 @@ namespace CaravanAdventures.CaravanCamp
                     var bed = GenSpawn.Spawn(thing, cellSpots[i], map, Rot4.South);
                     bed.SetFaction(Faction.OfPlayer);
                     campAssetListRef.Add(bed);
+                    if (SkipPawnAssignment) continue;
                     var pawnInNeedOfBed = Occupants.FirstOrDefault(occ => occ != null && occ != lover && occ != otherLover && !assigned.Any(x => x.OwnersForReading.Contains(occ)));
-                    if (pawnInNeedOfBed != null) pawnInNeedOfBed.ownership.ClaimBedIfNonMedical((Building_Bed)bed);
+                    if (pawnInNeedOfBed != null)
+                    {
+                        pawnInNeedOfBed.ownership.ClaimBedIfNonMedical((Building_Bed)bed);
+                        assigned.Add((Building_Bed)bed);
+                    }
                 }
             }
 
@@ -82,8 +91,10 @@ namespace CaravanAdventures.CaravanCamp
                     var doubleBed = GenSpawn.Spawn(dbThing, cellSpots[i], map, Rot4.South);
                     doubleBed.SetFaction(Faction.OfPlayer);
                     campAssetListRef.Add(doubleBed);
+                    if (SkipPawnAssignment) continue;
                     lover.ownership.ClaimBedIfNonMedical((Building_Bed)doubleBed);
                     otherLover.ownership.ClaimBedIfNonMedical((Building_Bed)doubleBed);
+                    assigned.Add((Building_Bed)doubleBed);
                 }
                 else
                 {
@@ -91,8 +102,13 @@ namespace CaravanAdventures.CaravanCamp
                     var bed = GenSpawn.Spawn(thing, cellSpots[i], map, Rot4.South);
                     bed.SetFaction(Faction.OfPlayer);
                     campAssetListRef.Add(bed);
+                    if (SkipPawnAssignment) continue;
                     var pawnInNeedOfBed = Occupants.FirstOrDefault(occ => occ != null && occ != lover && occ != otherLover && !assigned.Any(x => x.OwnersForReading.Contains(occ)));
-                    if (pawnInNeedOfBed != null) pawnInNeedOfBed.ownership.ClaimBedIfNonMedical((Building_Bed)bed);
+                    if (pawnInNeedOfBed != null) {
+                        DLog.Message($"Found pawn in need of bed {pawnInNeedOfBed.NameShortColored} at {i}");
+                        pawnInNeedOfBed.ownership.ClaimBedIfNonMedical((Building_Bed)bed);
+                        assigned.Add((Building_Bed)bed);
+                    }
                 }
             }
 
