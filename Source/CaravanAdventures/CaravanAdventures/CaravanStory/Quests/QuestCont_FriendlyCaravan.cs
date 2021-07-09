@@ -111,7 +111,7 @@ namespace CaravanAdventures.CaravanStory.Quests
         public void TryCreateFriendlyCaravan(ref float friendlyCaravanCounter, Map map = null)
         {
             if (CompCache.StoryWC.storyFlags["TradeCaravan_DialogFinished"]) return;
-             
+
             DLog.Message($"creating caravan");
             if (Faction.OfPlayer.HostileTo(StoryUtility.FactionOfSacrilegHunters))
             {
@@ -126,17 +126,7 @@ namespace CaravanAdventures.CaravanStory.Quests
                 friendlyCaravanCounter = 10000f;
                 return;
             }
-
-            if (!CompCache.StoryWC.storyFlags["TradeCaravan_Arrived"]) QuestUtility.GenerateStoryQuest(StoryQuestDefOf.CA_TradeCaravan, true, "TradeCaravanQuestName", null, "TradeCaravanQuestDesc");
             StoryUtility.EnsureSacrilegHunters();
-            StoryUtility.AssignDialog("FriendlyCaravan_Conversation",
-               CompCache.StoryWC.questCont.Village.StoryContact,
-               typeof(QuestCont_FriendlyCaravan).ToString(),
-               "FriendlyCaravan_Conversation");
-            DLog.Message($"added conv to mainpawn {CompCache.StoryWC.questCont.Village.StoryContact.Name}");
-
-            //Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillage_QuestUpdate_MechsArrived".Translate(addressed.NameShortColored));
-
             var incidentParms = new IncidentParms
             {
                 target = selectedMap,
@@ -145,20 +135,27 @@ namespace CaravanAdventures.CaravanStory.Quests
                 raidArrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn
             };
 
-            if (StoryDefOf.CAFriendlyCaravan.Worker.TryExecute(incidentParms))
+            if (Helper.RunSavely(() => StoryDefOf.CAFriendlyCaravan.Worker.TryExecute(incidentParms)))
             {
                 DLog.Message($"CA trade caravan created successfully");
-                CompCache.StoryWC.SetSF("TradeCaravan_Arrived");
                 friendlyCaravanCounter = BaseDelayFurtherFriendlyCaravan;
             }
             else
             {
-                DLog.Warning($"CA Trade caravan couldn't be generated for quest, retrying in 20 seconds");
-                friendlyCaravanCounter = 1200;
+                DLog.Warning($"CA Trade caravan couldn't be generated for quest, retrying in 3 minutes");
+                friendlyCaravanCounter = 10800;
+                return;
             }
-           
+
+            if (!CompCache.StoryWC.storyFlags["TradeCaravan_Arrived"]) QuestUtility.GenerateStoryQuest(StoryQuestDefOf.CA_TradeCaravan, true, "TradeCaravanQuestName", null, "TradeCaravanQuestDesc");
+            CompCache.StoryWC.SetSF("TradeCaravan_Arrived");
+            StoryUtility.AssignDialog("FriendlyCaravan_Conversation",
+               CompCache.StoryWC.questCont.Village.StoryContact,
+               typeof(QuestCont_FriendlyCaravan).ToString(),
+               "FriendlyCaravan_Conversation");
+            DLog.Message($"added conv to mainpawn {CompCache.StoryWC.questCont.Village.StoryContact.Name}");
         }
 
-    
+
     }
 }
