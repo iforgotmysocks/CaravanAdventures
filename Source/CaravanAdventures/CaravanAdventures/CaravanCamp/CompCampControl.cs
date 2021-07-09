@@ -70,7 +70,7 @@ namespace CaravanAdventures.CaravanCamp
                         }
                         var supplies = ThingMaker.MakeThing(CampDefOf.CASpacerTentSupplies);
                         supplies.stackCount = Convert.ToInt32(resourceCount * 0.7);
-                        caravan.AddPawnOrItem(supplies, false);
+                        if (supplies.stackCount >= 1) caravan.AddPawnOrItem(supplies, false);
                     }, false, null));
                 }, false));
             });
