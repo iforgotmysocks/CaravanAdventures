@@ -19,7 +19,7 @@
   <CABountyExchangeRequestHelp_StrengthSelection_TroopDeploymentDetail>Next hunter deployment ready in {0} days</CABountyExchangeRequestHelp_StrengthSelection_TroopDeploymentDetail>
   <CABountyExchangeRequestHelp_StrengthSelection_TroopDeploymentBusy>Hunters busy</CABountyExchangeRequestHelp_StrengthSelection_TroopDeploymentBusy>
   
-  <CABountyExchangeRequestItemTitle>Current bounty credits: {0}\n\n\nPlease select the item u'd like to exchange bounty credits for. It will be delivered via drop pod.\n\n{1}</CABountyExchangeRequestItemTitle>
+  <CABountyExchangeRequestItemTitle>Current bounty credits: {0}\n\n\nPlease select the item you'd like to exchange bounty credits for. It will be delivered via drop pod.\n\n{1}</CABountyExchangeRequestItemTitle>
   <CABountyExchangeRequestItem_ItemDetails>         buy {0} for: {1} credits</CABountyExchangeRequestItem_ItemDetails>
   <CABountyExchangeRequestItem_ItemArrived>Your delivery from {0} arrived!</CABountyExchangeRequestItem_ItemArrived>
   <CABountyExchangeRequestItem_ItemRestockNow>Just restocked. </CABountyExchangeRequestItem_ItemRestockNow>
@@ -35,11 +35,11 @@
   <CABountyExchangeRelationHaggle_Factions>Current bounty credits: {0}\n\n\nFollowing Factions are available:\n\n{1}</CABountyExchangeRelationHaggle_Factions>
   <CABountyExchangeRelationHaggle_Factions_ListedFaction>{0} ({1})   buy: {2} for: {3} credits</CABountyExchangeRelationHaggle_Factions_ListedFaction>
 
-  <CABountyExchangeVeteranRecruitment>Current bounty credits: {0}\n\n\nThis rare opportunity allows you to recruit one of {1}'s finest soldiers. A battle hardent veteran who knows exactly how to survive on this planet. However, such a privilage requires amounting a lot of bounty credit.\n\n{2}</CABountyExchangeVeteranRecruitment>
+  <CABountyExchangeVeteranRecruitment>Current bounty credits: {0}\n\n\nThis rare opportunity allows you to recruit one of {1}'s finest soldiers. A battle hardened veteran who knows exactly how to survive on this planet. However, such a privilege requires amounting a lot of bounty credit.\n\n{2}</CABountyExchangeVeteranRecruitment>
   <CABountyExchangeVeteranRecruitment_Available>Veteran available</CABountyExchangeVeteranRecruitment_Available>
   <CABountyExchangeVeteranRecruitment_Details>Next veteran available in {0} days</CABountyExchangeVeteranRecruitment_Details>
   <CABountyExchangeVeteranRecruitment_Enlist>Enlist top veteran for {0} bounty credits</CABountyExchangeVeteranRecruitment_Enlist>
-  <CABountyExchangeVeteranRecruitment_NotAvailable>No veteran availale</CABountyExchangeVeteranRecruitment_NotAvailable>
+  <CABountyExchangeVeteranRecruitment_NotAvailable>No veteran available</CABountyExchangeVeteranRecruitment_NotAvailable>
   <CABountyExchangeVeteranRecruitment_ChoosePersonality>\n\n\nAs the personality is usually important, we try to find a good fit for you.</CABountyExchangeVeteranRecruitment_ChoosePersonality>
   <CABountyExchangeVeteranRecruitment_ChoosePersonalityNone>Rather none of those</CABountyExchangeVeteranRecruitment_ChoosePersonalityNone>
   <CABountyExchangeVeteranRecruitment_ChooseSkill>\n\n\nAnd the unique skill?</CABountyExchangeVeteranRecruitment_ChooseSkill>
