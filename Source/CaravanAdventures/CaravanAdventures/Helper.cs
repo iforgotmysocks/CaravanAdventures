@@ -131,5 +131,25 @@ namespace CaravanAdventures
 
             return default(T);
         }
+
+        public static void RunSavelyWithDelay(Action action, ref float counter, int timeout = 1200, bool suppressError = false)
+        {
+            RunSavelyWithDelay(() => { action(); return 0; }, ref counter, timeout, suppressError);
+        }
+
+        public static T RunSavelyWithDelay<T>(Func<T> action, ref float counter, int timeout = 1200, bool suppressError = false)
+        {
+            try
+            {
+                return action();
+            }
+            catch (Exception ex)
+            {
+                counter += timeout; 
+                if (!suppressError) Log.Error(ex.ToString());
+            }
+
+            return default(T);
+        }
     }
 }

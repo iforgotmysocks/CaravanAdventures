@@ -196,6 +196,7 @@ namespace CaravanAdventures.CaravanStory
 
             if (ticks > 1200)
             {
+                ticks = 0;
                 StoryUtility.GenerateStoryContact();
                 if (CheckCanStartFriendlyCaravanCounter() && !debugFlags["FriendlyCaravanDone"])
                 {
@@ -224,11 +225,21 @@ namespace CaravanAdventures.CaravanStory
                     SetSF("Judgment_ApocalypseStarted");
                     questCont.LastJudgment.StartApocalypse(-0.1f);
                 }
-                ticks = 0;
             }
-            if (questCont.FriendlyCaravan.friendlyCaravanCounter == 0) CompCache.StoryWC.questCont.FriendlyCaravan.TryCreateFriendlyCaravan(ref questCont.FriendlyCaravan.friendlyCaravanCounter);
-            if (questCont.Village.villageGenerationCounter == 0) StoryUtility.GenerateFriendlyVillage(ref questCont.Village.villageGenerationCounter);
-            if (shrineRevealCounter == 0) TryCreateNewShrine(ref shrineRevealCounter);
+            if (questCont.FriendlyCaravan.friendlyCaravanCounter == 0) Helper.RunSavelyWithDelay(() => 
+                    CompCache.StoryWC.questCont.FriendlyCaravan.TryCreateFriendlyCaravan(
+                        ref questCont.FriendlyCaravan.friendlyCaravanCounter), 
+                    ref questCont.FriendlyCaravan.friendlyCaravanCounter);
+            
+            if (questCont.Village.villageGenerationCounter == 0) Helper.RunSavelyWithDelay(() => 
+                StoryUtility.GenerateFriendlyVillage(
+                    ref questCont.Village.villageGenerationCounter), 
+                ref questCont.Village.villageGenerationCounter);
+            
+            if (shrineRevealCounter == 0) Helper.RunSavelyWithDelay(() => 
+                TryCreateNewShrine(
+                    ref shrineRevealCounter), 
+                ref shrineRevealCounter);
 
             ticks++;
             questCont.FriendlyCaravan.friendlyCaravanCounter--;
