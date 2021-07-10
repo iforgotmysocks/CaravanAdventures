@@ -61,7 +61,7 @@ namespace CaravanAdventures.CaravanStory.MechChips
 
         public virtual void MakeSureDeadWhenDowned()
         {
-            if (Pawn != null && !Pawn.Dead && Pawn.Downed) Pawn.Kill(new DamageInfo());
+            if (Pawn != null && !Pawn.Dead && Pawn.Downed) Pawn.TakeDamage(new DamageInfo(DamageDefOf.Burn, 5000, 200, -1, null, Pawn.health.hediffSet.GetBrain()));
         }
 
     }
