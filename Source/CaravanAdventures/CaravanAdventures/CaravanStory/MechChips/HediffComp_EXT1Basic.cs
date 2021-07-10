@@ -35,11 +35,11 @@ namespace CaravanAdventures.CaravanStory.MechChips
             {
                 ticks = 0;
                 Helper.RunSavely(NegateNegativeEffects);
+                Helper.RunSavely(MakeSureDeadWhenDowned);
             }
 
             ticks++;
         }
-
 
         private IntVec3 GetMinionSpawnPosition(IntVec3 position, Map map)
         {
@@ -59,6 +59,10 @@ namespace CaravanAdventures.CaravanStory.MechChips
                 Pawn.MentalState.RecoverFromState();
         }
 
+        public virtual void MakeSureDeadWhenDowned()
+        {
+            if (Pawn != null && !Pawn.Dead && Pawn.Downed) Pawn.Kill(new DamageInfo());
+        }
 
     }
 }
