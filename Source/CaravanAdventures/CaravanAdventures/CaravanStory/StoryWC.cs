@@ -273,16 +273,9 @@ namespace CaravanAdventures.CaravanStory
 
         private void TryCreateNewShrine(ref float shrineRevealCounter)
         {
-            // todo Create own find method that keeps the same distance from bases and caravans
-            // -> after an unsuccesfull attempt, select tile that supports it for sure.
-            var newRange = new IntRange(ShrineDistance.min / (shrineTileUnsuccessfulCounter + 1), ShrineDistance.max / (shrineTileUnsuccessfulCounter + 1));
-            if (!TileFinder.TryFindNewSiteTile(out var tile, newRange.min, newRange.max))
-            {
-                shrineTileUnsuccessfulCounter++;
-                DLog.Message("Couldn't find tile to create a new shrine");
-                shrineRevealCounter = 60f;
-                return;
-            }
+            var tile = GetShrineLocation();
+            if (tile == -1) return;
+
             shrineTileUnsuccessfulCounter = 0;
             if (Faction.OfPlayer.HostileTo(StoryUtility.FactionOfSacrilegHunters))
             {
@@ -300,6 +293,39 @@ namespace CaravanAdventures.CaravanStory
             Quests.QuestUtility.GenerateStoryQuest(StoryQuestDefOf.CA_FindAncientShrine, true, "Story_Shrine1_QuestName", null, "Story_Shrine1_QuestDesc", new object[] { CompCache.StoryWC.questCont.Village.StoryContact.NameShortColored });
             Quests.QuestUtility.UpdateQuestLocation(StoryQuestDefOf.CA_FindAncientShrine, ancientMasterShrineWO);
             SetShrineSF("Created");
+        }
+
+        private int GetShrineLocation()
+        {
+            int tile = -1;
+            var newRange = new IntRange(ShrineDistance.min / (shrineTileUnsuccessfulCounter + 1), ShrineDistance.max);
+            if (CompatibilityDefOf.CACompatDef.excludedBiomeDefNamesForStoryShrineGeneration.Any())
+            {
+                DLog.Message($"Trying to skip biome defs.");
+                var startTile = -1;
+                TileFinder.TryFindRandomPlayerTile(out startTile, true);
+                if (startTile == -1) startTile = Find.World.worldObjects?.Caravans?.FirstOrDefault(x => x?.IsPlayerControlled == true)?.Tile ?? -1;
+                if (!TileFinder.TryFindPassableTileWithTraversalDistance(startTile, newRange.min, newRange.max, out tile, (int x) =>
+                    !CompatibilityDefOf.CACompatDef.excludedBiomeDefNamesForStoryShrineGeneration.Contains(Find.World.grid[x].biome?.defName)))
+                {
+                    shrineTileUnsuccessfulCounter++;
+                    DLog.Message("Couldn't find tile to create a new shrine");
+                    shrineRevealCounter = 180f;
+                    return -1;
+                }
+            }
+            else
+            {
+                if (!TileFinder.TryFindNewSiteTile(out tile, newRange.min, newRange.max))
+                {
+                    shrineTileUnsuccessfulCounter++;
+                    DLog.Message("Couldn't find tile to create a new shrine");
+                    shrineRevealCounter = 180f;
+                    return -1;
+                }
+            }
+         
+            return tile;
         }
 
         // SF helper methods used to be static, if the CompCache doesn't work out, turn access to the SFs static again

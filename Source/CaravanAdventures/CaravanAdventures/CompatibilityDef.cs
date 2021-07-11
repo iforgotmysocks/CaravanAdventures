@@ -21,6 +21,7 @@ namespace CaravanAdventures
         public List<MechanoidBounty> mechanoidBountyToAdd = new List<MechanoidBounty>();
         public List<string> raceDefsToExcludeFromTravelCompanions = new List<string>();
         public List<string> racesWithModExtsToExcludeFromTravelCompanions = new List<string>();
+        public List<string> excludedBiomeDefNamesForStoryShrineGeneration = new List<string>();
     }
 
     [DefOf]

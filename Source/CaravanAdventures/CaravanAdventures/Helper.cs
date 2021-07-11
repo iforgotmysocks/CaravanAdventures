@@ -37,11 +37,11 @@ namespace CaravanAdventures
             }
         }
 
-        public static System.Reflection.Assembly GetAssembly(string assemblyString, List<(string assemblyString, string assemblyName)> detectedAssemblies)
+        public static System.Reflection.Assembly GetAssembly(string assemblyString, List<(string assemblyString, System.Reflection.Assembly assembly)> detectedAssemblies)
         {
             var selAssembly = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(assembly => assembly.FullName.ToLower().StartsWith(assemblyString));
             if (selAssembly == null) return null;
-            detectedAssemblies.Add((assemblyString, selAssembly.FullName));
+            detectedAssemblies.Add((assemblyString, selAssembly));
             return selAssembly;
         }
 
