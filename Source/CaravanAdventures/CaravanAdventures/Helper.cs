@@ -37,6 +37,14 @@ namespace CaravanAdventures
             }
         }
 
+        public static System.Reflection.Assembly GetAssembly(string assemblyString, List<(string assemblyString, string assemblyName)> detectedAssemblies)
+        {
+            var selAssembly = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(assembly => assembly.FullName.ToLower().StartsWith(assemblyString));
+            if (selAssembly == null) return null;
+            detectedAssemblies.Add((assemblyString, selAssembly.FullName));
+            return selAssembly;
+        }
+
         public static IEnumerable<T> PickSomeInRandomOrder<T>(IEnumerable<T> items, int count)
         {
             var random = new System.Random(DateTime.Now.Millisecond);

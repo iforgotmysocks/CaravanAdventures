@@ -14,11 +14,13 @@ namespace CaravanAdventures
 {
     static class CompatibilityPatches
     {
+        public static List<(string assemblyString, string assemblyName)> detectedAssemblies;
         public static void ExecuteCompatibilityPatches()
         {
+            detectedAssemblies = new List<(string, string)>();
 
             Helper.RunSavely(() => {
-                var alienRaceAssembly = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(assembly => assembly.FullName.ToLower().StartsWith("alienrace"));
+                var alienRaceAssembly = Helper.GetAssembly("alienrace", detectedAssemblies); 
                 if (alienRaceAssembly != null && ModSettings.caravanFormingFilterSelectionEnabled)
                 {
                     Log.Message($"Caravan Adventures: Applying patch for AlienRaces - adding alienrace corpses to caravan dialog filter");
@@ -26,7 +28,8 @@ namespace CaravanAdventures
                 }
             });
 
-            Helper.RunSavely(() => {
+            Helper.RunSavely(() =>
+            {
                 var simpleSearchBarAssembly = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(assembly => assembly.FullName.ToLower().StartsWith("simplesearchbar"));
                 if (simpleSearchBarAssembly != null && ModSettings.caravanFormingFilterSelectionEnabled)
                 {
@@ -34,11 +37,15 @@ namespace CaravanAdventures
                     Patches.AutomaticItemSelection.smallLayoutCompatibility = true;
                 }
             });
+
+            Helper.RunSavely(() => {
+                var alphaBiomesAssembly = Helper.GetAssembly("alphabiomes", detectedAssemblies);
+            });
         }
 
         public static void ExecuteHarmonyCompatibilityPatches(Harmony harmony)
         {
-              
+            
         }
     }
     
