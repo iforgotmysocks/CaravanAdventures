@@ -29,6 +29,12 @@
         <bountyPoints>500</bountyPoints>
       </li>
     </mechanoidBountyToAdd>
+
+    <!-- add biome def names that conflict with ancient shrine map generation. Indicators for incompatibility are missing shrine walls -->
+    <excludedBiomeDefNamesForStoryShrineGeneration>
+      <!-- <li>SampleDefName</li> -->
+    </excludedBiomeDefNamesForStoryShrineGeneration>
+
   </CaravanAdventures.CompatibilityDef>
 
 </Defs>
