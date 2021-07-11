@@ -34,7 +34,7 @@ namespace CaravanAdventures.CaravanStory
                 mp = map.Parent as AncientMasterShrineMP;
                 mainRoom = GetAncientShrineRooms(map).FirstOrDefault();
 
-                if (mainRoom.CellCount > minMainRoomSize)
+                if (mainRoom.CellCount > minMainRoomSize) //  && mainRoom.CellCount < map.AllCells.Count() / 2
                 {
                     if (CompCache.StoryWC.GetCurrentShrineCounter() != CompCache.StoryWC.GetShrineMaxiumum) mp.boss = AddBoss(map, caravan, mainRoom);
                     else mp.lastJudgmentEntrance = InitCellarEntrace(map);
@@ -316,13 +316,21 @@ namespace CaravanAdventures.CaravanStory
 
             DLog.Message($"Points before: {defaultPawnGroupMakerParms.points} roomcells: {room.CellCount}");
 
-            var calcedFromRoomSize = Convert.ToInt32(defaultPawnGroupMakerParms.points * (CompCache.StoryWC.GetCurrentShrineCounter() * ModSettings.shrineMechDifficultyMultiplier) * ((room.CellCount >= minMainRoomSize ? Math.Max(room.CellCount, 3000) : room.CellCount) / 1000f));
+            var calcedFromRoomSize = Convert.ToInt32(defaultPawnGroupMakerParms.points 
+                * (CompCache.StoryWC.GetCurrentShrineCounter() * ModSettings.shrineMechDifficultyMultiplier) 
+                * ((room.CellCount > (map.AllCells.Count() / 2)
+                    ? 3200
+                    : room.CellCount >= minMainRoomSize 
+                        ? Math.Max(room.CellCount, 3000) 
+                        : room.CellCount) / 1000f));
             var minPoints = room.CellCount >= minMainRoomSize ? 2000 : 130;
 
             DLog.Message($"from roomsize: {calcedFromRoomSize} minpoints: {minPoints}");
             float selected = Math.Max(calcedFromRoomSize, minPoints);
             if (removedHives) selected += 200;
-            selected = Math.Min(selected, room.CellCount >= minMainRoomSize ? ModSettings.maxShrineCombatPoints * 50f : ModSettings.maxShrineCombatPoints);
+            selected = Math.Min(selected, room.CellCount >= minMainRoomSize 
+                    ? ModSettings.maxShrineCombatPoints * 50f 
+                    : ModSettings.maxShrineCombatPoints);
 
             var mechPawnGroupMakerParams = new PawnGroupMakerParms
             {
