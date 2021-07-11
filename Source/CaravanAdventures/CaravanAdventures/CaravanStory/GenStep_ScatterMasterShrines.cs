@@ -140,13 +140,23 @@ namespace CaravanAdventures.CaravanStory
 
 			if (!fakeTerrainReplacement)
 			{
+				var curTerrainName = string.Empty;
+				var terrainCounter = 0;
 				foreach (var terrain in newTerrainCells)
 				{
 					//map.terrainGrid.SetTerrain(terrain, GenStep_RocksFromGrid.RockDefAt(terrain).building.naturalTerrain);
 					var newTerrain = TerrainThreshold.TerrainAtValue(map.Biome.terrainsByFertility, 0.7f);
-					if (newTerrain != TerrainDefOf.Soil) DLog.Warning($"Creating new terrain: {newTerrain.defName}");
+					if (newTerrain != TerrainDefOf.Soil && newTerrain?.defName != curTerrainName)
+					{
+						DLog.Warning($"Creating new terrain: {newTerrain.defName} x {terrainCounter}");
+						curTerrainName = newTerrain.defName;
+						terrainCounter = 1;
+					}
+					else terrainCounter++;
 					map.terrainGrid.SetTerrain(terrain, newTerrain);
 				}
+				if (terrainCounter != 0) DLog.Warning($"Creating new terrain: {curTerrainName ?? TerrainDefOf.Soil.defName} x {terrainCounter}");
+
 			}
 			
 			return true;
