@@ -27,7 +27,7 @@ namespace CaravanAdventures.CaravanIncidents
             PawnGroupMakerParms defaultPawnGroupMakerParms = IncidentParmsUtility.GetDefaultPawnGroupMakerParms(PawnGroupKindDefOf.Combat, parms, false);
             defaultPawnGroupMakerParms.generateFightersOnly = true;
             defaultPawnGroupMakerParms.dontUseSingleUseRocketLaunchers = true;
-            defaultPawnGroupMakerParms.raidStrategy = DefDatabase<RaidStrategyDef>.GetNamed("SiegeMechanoid");
+            defaultPawnGroupMakerParms.raidStrategy = RaidStrategyDefOf.ImmediateAttack; // DefDatabase<RaidStrategyDef>.GetNamed("SiegeMechanoid");
             List<Pawn> attackers = PawnGroupMakerUtility.GeneratePawns(defaultPawnGroupMakerParms, true).ToList<Pawn>();
             var girl = DamselInDistressUtility.GenerateGirl(caravan.Tile);
 
