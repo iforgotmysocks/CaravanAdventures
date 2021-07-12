@@ -51,6 +51,18 @@ namespace CaravanAdventures
                     }
                 }
             });
+
+            Helper.RunSavely(() => {
+                var realRuinsAssembly = Helper.GetAssembly("realruins", detectedAssemblies);
+                if (realRuinsAssembly != null)
+                {
+                    if (CaravanStory.CaravanStorySiteDefOf.CAAncientMasterShrineMG.genSteps.RemoveAll(x => x.defName == "ScatterRealRuins") == 1)
+                    {
+                        Log.Message($"Caravan Adventures: Applying patch to remove realruins from CA story shrine maps");
+                    }
+                    else Log.Warning($"Caravan Adventures: Applying patch for realruins failed");
+                }
+            });
         }
 
         public static void ExecuteHarmonyCompatibilityPatches(Harmony harmony)
