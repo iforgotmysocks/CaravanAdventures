@@ -50,6 +50,7 @@ All mod details available in the <a href="https://github.com/iforgotmysocks/Cara
 
 
 ## Credits 
+
 Artwork:  
 Artwork generously provided by Shakesthespeare, thank you mate, u're awesome!  
 Portal in Ancient master shrine by gecko-kobold  
@@ -60,6 +61,8 @@ Earthquake by zatar (zatar_earthquake.mp3) https://freesound.org/people/zatar/so
 slice1 by audione https://freesound.org/people/audione/sounds/52458/  
 slice2 by freefire66 https://freesound.org/people/freefire66/sounds/175949/  
 slice3 by TheBuilder15 https://freesound.org/people/TheBuilder15/sounds/434896/  
-slice4 by Aleks41 https://freesound.org/people/Aleks41/sounds/449552/  
+slice4 by Aleks41 https://freesound.org/people/Aleks41/sounds/449552/ 
+
+CE Patch done by dokupe / the english mech hater  
 
 Thanks to the testers who helped to get this mod on the road!  
