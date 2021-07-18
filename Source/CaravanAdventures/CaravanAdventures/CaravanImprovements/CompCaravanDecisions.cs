@@ -82,11 +82,6 @@ namespace CaravanAdventures.CaravanImprovements
                 {
                     cmdSettleAsCaravan.Disable(tmpSettleFailReason.ToString());
                 }
-                else if (SettleUtility.PlayerSettlementsCountLimitReached)
-                {
-                    if (Prefs.MaxNumberOfPlayerSettlements > 1) cmdSettleAsCaravan.Disable("CommandSettleFailReachedMaximumNumberOfBases".Translate());
-                    else cmdSettleAsCaravan.Disable("CommandSettleFailAlreadyHaveBase".Translate());
-                }
                 yield return cmdSettleAsCaravan;
 
                 if (ModSettings.showSupplyCostsInGizmo && (Find.TickManager.TicksGame % 61 == 0 || campCost == -1) && caravan != null) UpdateCampCostAndSupplies(caravan);
@@ -106,11 +101,6 @@ namespace CaravanAdventures.CaravanImprovements
                 if (!TileFinder.IsValidTileForNewSettlement(caravan.Tile, tmpSettleFailReason))
                 {
                     cmdSettleWithCamp.Disable(tmpSettleFailReason.ToString());
-                }
-                else if (SettleUtility.PlayerSettlementsCountLimitReached)
-                {
-                    if (Prefs.MaxNumberOfPlayerSettlements > 1) cmdSettleWithCamp.Disable("CommandSettleFailReachedMaximumNumberOfBases".Translate());
-                    else cmdSettleWithCamp.Disable("CommandSettleFailAlreadyHaveBase".Translate());
                 }
                 yield return cmdSettleWithCamp;
 
