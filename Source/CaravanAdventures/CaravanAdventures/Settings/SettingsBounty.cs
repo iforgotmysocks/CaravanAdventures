@@ -82,6 +82,8 @@ namespace CaravanAdventures.Settings
 
             options.Label($"Envoy duration to improve relations with bounties in days: {Math.Round(ModSettings.envoyDurationTimeForBountyRelationHagglingInDays, 1)}");
             ModSettings.envoyDurationTimeForBountyRelationHagglingInDays = options.Slider(ModSettings.envoyDurationTimeForBountyRelationHagglingInDays, 0.1f, 60f);
+            options.Label($"Rare item stock amount: {ModSettings.itemStockAmount}");
+            ModSettings.itemStockAmount = Convert.ToInt32(options.Slider(ModSettings.itemStockAmount, 1f, 30f));
             options.Label($"Rare item restock duration in days: {Math.Round(ModSettings.itemRestockDurationInDays, 1)}");
             ModSettings.itemRestockDurationInDays = options.Slider(ModSettings.itemRestockDurationInDays, 0.1f, 60f);
             options.Label($"Allied assistance timeout in days: {Math.Round(ModSettings.alliedAssistanceDurationInDays, 1)}");
@@ -92,7 +94,7 @@ namespace CaravanAdventures.Settings
             options.CheckboxLabeled("Allow exchanging bounty points for silver", ref ModSettings.allowBuyingBountyWithSilver);
             options.Label($"Bounty value multiplier. (Default: 1 silver ~ 0.25 bounty credit): {Math.Round(ModSettings.bountyValueMult, 2)}");
             ModSettings.bountyValueMult = options.Slider(ModSettings.bountyValueMult, 0.1f, 4f);
-
+             
             //options.EndScrollView(ref viewRect);
             options.End();
 
