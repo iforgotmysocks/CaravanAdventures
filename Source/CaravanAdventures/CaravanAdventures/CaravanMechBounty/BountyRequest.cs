@@ -127,7 +127,7 @@ namespace CaravanAdventures.CaravanMechBounty
         private DiaNode GetItemOverview(DiaNode parent)
         {
             var node = new DiaNode("CABountyExchangeRequestItemTitle".Translate(CompCache.BountyWC.BountyPoints, GetRestockTimeString()));
-            foreach (var item in GenerateItemStock(4, 1))
+            foreach (var item in GenerateItemStock(ModSettings.itemStockAmount, 1))
             {
                 if (item == null) continue;
                 var link = new Dialog_InfoCard.Hyperlink { thing = item.GetInnerIfMinified(), def = item.GetInnerIfMinified().def };
@@ -160,6 +160,11 @@ namespace CaravanAdventures.CaravanMechBounty
             }
             node.options.Add(new DiaOption("CABountyBack".Translate()) { linkLateBind = () => CreateMainMenuNode() });
             return node;
+        }
+
+        private IEnumerable<Thing> GenerateItemStock(object itemStockAmount, int v)
+        {
+            throw new NotImplementedException();
         }
 
         private string GetRestockTimeString()
