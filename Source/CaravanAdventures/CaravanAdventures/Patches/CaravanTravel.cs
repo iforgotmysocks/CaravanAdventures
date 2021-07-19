@@ -14,7 +14,6 @@ namespace CaravanAdventures.Patches
         {
             if (!ModSettings.caravanCampEnabled) return;
             var carTravelOrg = AccessTools.PropertyGetter(typeof(Caravan), nameof(Caravan.NightResting));
-            //var carTravelOrg = AccessTools.Method(typeof(Caravan), "get_NightResting");
             var carTravelPost = new HarmonyMethod(typeof(CaravanTravel).GetMethod(nameof(CarTravelPostfix)));
             harmony.Patch(carTravelOrg, null, carTravelPost);
         }
