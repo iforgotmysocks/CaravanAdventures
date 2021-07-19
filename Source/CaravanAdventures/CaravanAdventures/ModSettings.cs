@@ -105,10 +105,10 @@ namespace CaravanAdventures
         public static int itemStockAmount;
 
         // general
-        public static bool autoRemoveAbandondSettlementRuins = true;
+        public static bool autoRemoveAbandondSettlementRuins;
         public static bool buffSettlementFoodAndSilverAvailability;
         public static bool buffShrineRewards;
-        public static bool spDecayLevelIncrease = false;
+        public static bool spDecayLevelIncrease;
         public static bool showLetterRemoval;
 
         // categories enabled
@@ -197,8 +197,8 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref itemStockAmount, "itemStockAmount", 4);
 
             //general 
-            Scribe_Values.Look(ref autoRemoveAbandondSettlementRuins, "autoRemoveAbandondSettlementRuins", true);
-            Scribe_Values.Look(ref buffSettlementFoodAndSilverAvailability, "buffSettlementFoodAndSilverAvailability", true);
+            Scribe_Values.Look(ref autoRemoveAbandondSettlementRuins, "autoRemoveAbandondSettlementRuins", false);
+            Scribe_Values.Look(ref buffSettlementFoodAndSilverAvailability, "buffSettlementFoodAndSilverAvailability", false);
             Scribe_Values.Look(ref buffShrineRewards, "buffShrineRewards", true);
             Scribe_Values.Look(ref spDecayLevelIncrease, "spDecayLevelIncrease", false);
             Scribe_Values.Look(ref showLetterRemoval, "showLetterRemoval", false);
