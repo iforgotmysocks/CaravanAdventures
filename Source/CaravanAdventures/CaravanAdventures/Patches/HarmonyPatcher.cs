@@ -23,6 +23,7 @@ namespace CaravanAdventures.Patches
             }
 
             if (ModSettings.spDecayLevelIncrease) SpDecayLevelIncrease.ApplyPatches(harmony);
+            if (ModSettings.showLetterRemoval) LetterRemovalPatch.ApplyPatches(harmony);
         }
 
         /// <summary>
