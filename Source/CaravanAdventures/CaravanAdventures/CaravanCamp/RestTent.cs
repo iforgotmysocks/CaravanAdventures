@@ -29,17 +29,25 @@ namespace CaravanAdventures.CaravanCamp
             var otherLover = lover != null ? CampHelper.ExistingColonistLovePartner(lover, Occupants) : null;
             var cellSpots = CellRect.Cells.Where(cell => !CellRect.EdgeCells.Contains(cell) && cell.z == CellRect.maxZ - 1).ToArray();
             var assigned = new List<Building_Bed>();
-            
+            var shareBed = lover != null 
+                && otherLover != null 
+                && BedUtility.WillingToShareBed(lover, otherLover) 
+                && !HealthAIUtility.ShouldSeekMedicalRest(lover) 
+                && !HealthAIUtility.ShouldSeekMedicalRest(otherLover);
+
+
             for (int i = 0; i < cellSpots.Length; i++)
             {
-                if (lover != null && !lover.IsPrisoner && !HealthAIUtility.ShouldSeekMedicalRest(lover) && i == 0) continue;
-                else if (lover != null && !lover.IsPrisoner && !HealthAIUtility.ShouldSeekMedicalRest(lover) && i == 1)
+                if (lover != null && !lover.IsPrisoner && shareBed && i == 0) continue;
+                else if (lover != null && !lover.IsPrisoner && shareBed && i == 1)
                 {
                     var dbThing = ThingMaker.MakeThing(CampDefOf.CASpacerBedrollDouble, CampDefOf.CASpacerTentFabric);
                     var doubleBed = GenSpawn.Spawn(dbThing, cellSpots[i], map, Rot4.South);
                     doubleBed.SetFaction(Faction.OfPlayer);
                     campAssetListRef.Add(doubleBed);
                     if (SkipPawnAssignment) continue;
+                    if (!CheckAssignableAndMarkBedForOwnerType(lover, doubleBed)
+                        || !CheckAssignableAndMarkBedForOwnerType(otherLover, doubleBed)) continue;
                     lover.ownership.ClaimBedIfNonMedical((Building_Bed)doubleBed);
                     otherLover.ownership.ClaimBedIfNonMedical((Building_Bed)doubleBed);
                     assigned.Add((Building_Bed)doubleBed);
@@ -51,9 +59,10 @@ namespace CaravanAdventures.CaravanCamp
                     bed.SetFaction(Faction.OfPlayer);
                     campAssetListRef.Add(bed);
                     if (SkipPawnAssignment) continue;
-                    var pawnInNeedOfBed = Occupants.FirstOrDefault(occ => occ != null && occ != lover && occ != otherLover && !assigned.Any(x => x.OwnersForReading.Contains(occ)));
+                    var pawnInNeedOfBed = Occupants.FirstOrDefault(occ => occ != null && (occ != lover && occ != otherLover || !shareBed) && !assigned.Any(x => x.OwnersForReading.Contains(occ)));
                     if (pawnInNeedOfBed != null)
                     {
+                        if (!CheckAssignableAndMarkBedForOwnerType(pawnInNeedOfBed, bed)) continue;
                         pawnInNeedOfBed.ownership.ClaimBedIfNonMedical((Building_Bed)bed);
                         assigned.Add((Building_Bed)bed);
                     }
@@ -73,6 +82,16 @@ namespace CaravanAdventures.CaravanCamp
             //realPlant.sown = true;
         }
 
+        private bool CheckAssignableAndMarkBedForOwnerType(Pawn pawn, Thing bed)
+        {
+            var bBed = bed as Building_Bed;
+            if (bBed == null) return false;
+            if (bBed.CompAssignableToPawn.IdeoligionForbids(pawn)) return false;
+            if (pawn.IsPrisoner && !bBed.ForPrisoners) bBed.ForPrisoners = true;
+            else if (pawn.IsSlave && !bBed.ForSlaves) bBed.SetBedOwnerTypeByInterface(BedOwnerType.Slave); // todo set via gui not really working yet...
+            return true;
+        }
+
         public override void BuildTribal(Map map, List<Thing> campAssetListRef)
         {
             base.BuildTribal(map, campAssetListRef);
@@ -81,17 +100,24 @@ namespace CaravanAdventures.CaravanCamp
             var otherLover = lover != null ? CampHelper.ExistingColonistLovePartner(lover) : null;
             var cellSpots = CellRect.Cells.Where(cell => !CellRect.EdgeCells.Contains(cell) && cell.z == CellRect.maxZ - 1).ToArray();
             var assigned = new List<Building_Bed>();
+            var shareBed = lover != null
+               && otherLover != null
+               && BedUtility.WillingToShareBed(lover, otherLover)
+               && !HealthAIUtility.ShouldSeekMedicalRest(lover)
+               && !HealthAIUtility.ShouldSeekMedicalRest(otherLover);
 
             for (int i = 0; i < cellSpots.Length; i++)
             {
-                if (lover != null && i == 0) continue;
-                else if (lover != null && i == 1)
+                if (lover != null && shareBed && i == 0) continue;
+                else if (lover != null && shareBed && i == 1)
                 {
                     var dbThing = ThingMaker.MakeThing(CampDefOf.CAMakeshiftBedrollDouble, CampDefOf.CAMakeshiftTentLeather);
                     var doubleBed = GenSpawn.Spawn(dbThing, cellSpots[i], map, Rot4.South);
                     doubleBed.SetFaction(Faction.OfPlayer);
                     campAssetListRef.Add(doubleBed);
                     if (SkipPawnAssignment) continue;
+                    if (!CheckAssignableAndMarkBedForOwnerType(lover, doubleBed)
+                        || !CheckAssignableAndMarkBedForOwnerType(otherLover, doubleBed)) continue;
                     lover.ownership.ClaimBedIfNonMedical((Building_Bed)doubleBed);
                     otherLover.ownership.ClaimBedIfNonMedical((Building_Bed)doubleBed);
                     assigned.Add((Building_Bed)doubleBed);
@@ -103,9 +129,10 @@ namespace CaravanAdventures.CaravanCamp
                     bed.SetFaction(Faction.OfPlayer);
                     campAssetListRef.Add(bed);
                     if (SkipPawnAssignment) continue;
-                    var pawnInNeedOfBed = Occupants.FirstOrDefault(occ => occ != null && occ != lover && occ != otherLover && !assigned.Any(x => x.OwnersForReading.Contains(occ)));
+                    var pawnInNeedOfBed = Occupants.FirstOrDefault(occ => occ != null && (occ != lover && occ != otherLover || !shareBed) && !assigned.Any(x => x.OwnersForReading.Contains(occ)));
                     if (pawnInNeedOfBed != null) {
                         DLog.Message($"Found pawn in need of bed {pawnInNeedOfBed.NameShortColored} at {i}");
+                        if (!CheckAssignableAndMarkBedForOwnerType(pawnInNeedOfBed, bed)) continue;
                         pawnInNeedOfBed.ownership.ClaimBedIfNonMedical((Building_Bed)bed);
                         assigned.Add((Building_Bed)bed);
                     }

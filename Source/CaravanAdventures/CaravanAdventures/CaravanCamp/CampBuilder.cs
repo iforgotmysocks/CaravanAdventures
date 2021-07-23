@@ -93,9 +93,10 @@ namespace CaravanAdventures.CaravanCamp
 
         protected virtual void CalculateTentNumbersAndAssignPawnsToTents()
         {
-            var colonists = caravan.PawnsListForReading.Where(col => col.IsFreeColonist).ToList();
+            var colonists = caravan.PawnsListForReading.Where(col => col.IsFreeColonist && !col.IsSlave).ToList();
             var sickColonists = caravan.PawnsListForReading.Where(col => col.IsFreeColonist && col.health.hediffSet.HasNaturallyHealingInjury()).ToList();
             var prisoners = caravan.PawnsListForReading.Where(col => col.IsPrisoner).ToList();
+            var slaves = caravan.PawnsListForReading.Where(col => col.IsSlave).ToList();
 
             campParts.Add(new CampCenter());
             campParts.Add(new FoodTent());
@@ -145,13 +146,24 @@ namespace CaravanAdventures.CaravanCamp
                 tentWithSpace.Occupants.Add(pris);
             });
 
+            slaves.ForEach(slave =>
+            {
+                var tentWithSpace = campParts?.OfType<SlaveTent>()?.FirstOrDefault(tent => tent.Occupants.Count < (tentSize.x * tent.CoordSize - 2));
+                if (tentWithSpace == null)
+                {
+                    tentWithSpace = new SlaveTent();
+                    campParts.Add(tentWithSpace);
+                }
+                tentWithSpace.Occupants.Add(slave);
+            });
+
             colonists.Where(col => !colonistRelationShipPairs
                 .SelectMany(pair => pair)
                 .Contains(col))
                 .ToList()
                 .ForEach(col =>
                 {
-                    var tentWithSpace = campParts?.OfType<RestTent>()?.FirstOrDefault(tent => tent.Occupants.Count < (tentSize.x * tent.CoordSize - 2) && !(tent is MedicalTent) && !(tent is PrisonerTent));
+                    var tentWithSpace = campParts?.OfType<RestTent>()?.FirstOrDefault(tent => tent.Occupants.Count < (tentSize.x * tent.CoordSize - 2) && !(tent is MedicalTent) && !(tent is PrisonerTent) && !(tent is SlaveTent));
                     if (tentWithSpace == null)
                     {
                         tentWithSpace = new RestTent();

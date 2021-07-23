@@ -23,6 +23,7 @@ namespace CaravanAdventures.CaravanCamp
 
         public override void Build(Map map, List<Thing> campAssetListRef)
         {
+            SkipPawnAssignment = true;
             base.Build(map, campAssetListRef);
             var beds = CellRect.Cells.Select(cell => cell.GetFirstThing<Building_Bed>(map));
             foreach (var bed in beds)
