@@ -54,7 +54,7 @@ namespace CaravanAdventures.CaravanAbilities
                         }
 
                         DLog.Message($"Calculated {damage} damage for {pawn.Name} with bodypart {part.Label}.");
-                        pawn.TakeDamage(new DamageInfo(DamageDefOf.Burn, damage, 2f, -1, null, part));
+                        pawn.TakeDamage(new DamageInfo(DamageDefOf.Burn, damage, 2f, -1, parent.pawn, part));
                     }
                 }
                 else if (thing is Building building)
