@@ -82,16 +82,6 @@ namespace CaravanAdventures.CaravanCamp
             //realPlant.sown = true;
         }
 
-        private bool CheckAssignableAndMarkBedForOwnerType(Pawn pawn, Thing bed)
-        {
-            var bBed = bed as Building_Bed;
-            if (bBed == null) return false;
-            if (bBed.CompAssignableToPawn.IdeoligionForbids(pawn)) return false;
-            if (pawn.IsPrisoner && !bBed.ForPrisoners) bBed.ForPrisoners = true;
-            else if (pawn.IsSlave && !bBed.ForSlaves) bBed.SetBedOwnerTypeByInterface(BedOwnerType.Slave); // todo set via gui not really working yet...
-            return true;
-        }
-
         public override void BuildTribal(Map map, List<Thing> campAssetListRef)
         {
             base.BuildTribal(map, campAssetListRef);
@@ -146,6 +136,28 @@ namespace CaravanAdventures.CaravanCamp
             var passiveCoolerPos = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.minX + 1 && cell.z == CellRect.minZ + 1);
             var cooler = CampHelper.PrepAndGenerateThing(ThingDefOf.PassiveCooler, passiveCoolerPos, map, default, campAssetListRef);
             CampHelper.RefuelByPerc(cooler, ModSettings.fuelStartingFillPercentage);
+        }
+
+        private bool CheckAssignableAndMarkBedForOwnerType(Pawn pawn, Thing bed)
+        {
+            var bBed = bed as Building_Bed;
+            if (bBed == null) return false;
+            if (bBed.CompAssignableToPawn.IdeoligionForbids(pawn)) return false;
+            if (pawn.IsPrisoner && !bBed.ForPrisoners) bBed.ForPrisoners = true;
+            else if (pawn.IsSlave && !bBed.ForSlaves) bBed.GetType().GetField("forOwnerType", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).SetValue(bBed, BedOwnerType.Slave);
+            return true;
+        }
+
+        protected virtual void CheckAndPostApplyBedState(Map map, BedOwnerType ownerType)
+        {
+            var beds = CellRect.Cells.Select(cell => cell.GetFirstThing<Building_Bed>(map));
+            foreach (var bed in beds)
+            {
+                if (bed == null || (ownerType == BedOwnerType.Prisoner ? bed.ForPrisoners : bed.ForSlaves)) continue;
+                var bedFieldInstance = bed.GetType().GetField("forOwnerType", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+                if (bedFieldInstance == null) continue;
+                bedFieldInstance.SetValue(bed, ownerType);
+            }
         }
     }
 }

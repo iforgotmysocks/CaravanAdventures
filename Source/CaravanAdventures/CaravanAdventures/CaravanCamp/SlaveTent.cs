@@ -19,11 +19,15 @@ namespace CaravanAdventures.CaravanCamp
         public override void Build(Map map, List<Thing> campAssetListRef)
         {
             base.Build(map, campAssetListRef);
+            CheckAndPostApplyBedState(map, BedOwnerType.Slave);
         }
 
         public override void BuildTribal(Map map, List<Thing> campAssetListRef)
         {
             base.BuildTribal(map, campAssetListRef);
+            CheckAndPostApplyBedState(map, BedOwnerType.Slave);
         }
+
+        
     }
 }
