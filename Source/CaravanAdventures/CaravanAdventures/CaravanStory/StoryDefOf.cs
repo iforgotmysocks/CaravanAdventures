@@ -16,6 +16,7 @@ namespace CaravanAdventures.CaravanStory
     {
         [MayRequireRoyalty]
         public static FactionDef CASacrilegHunters;
+        [MayRequireRoyalty]
         public static IncidentDef CAFriendlyCaravan;
 
         [MayRequireRoyalty]
@@ -30,7 +31,7 @@ namespace CaravanAdventures.CaravanStory
         public static PawnKindDef CASacrilegHunters_ExperiencedHunter;
         [MayRequireRoyalty]
         public static PawnKindDef CASacrilegHunters_ExperiencedHunterVillage;
-
+        [MayRequireRoyalty]
         public static GameConditionDef CAGameCondition_Apocalypse;
 
         [MayRequireRoyalty]
@@ -41,7 +42,7 @@ namespace CaravanAdventures.CaravanStory
 
         [MayRequireRoyalty]
         public static PawnGroupKindDef CAMechanoidPawnGroupKindCombatMixed;
-
+        [MayRequireRoyalty]
         public static IncidentDef CAMechRaidMixed;
     }
 }
