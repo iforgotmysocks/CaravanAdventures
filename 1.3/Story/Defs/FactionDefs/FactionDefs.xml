@@ -180,7 +180,7 @@
 		<pawnSingular>mechanoid</pawnSingular>
 		<pawnsPlural>mechanoids</pawnsPlural>
 		<factionNameMaker>NamerFactionMechanoid</factionNameMaker>
-		<factionIconPath>World/WorldObjects/Expanding/Sites/MechCluster</factionIconPath>
+    <factionIconPath>World/WorldObjects/Expanding/Mechanoids</factionIconPath>
 		<raidCommonalityFromPointsCurve>
 			<points>
 				<li>(300,  0)</li>
