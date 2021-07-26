@@ -3,7 +3,7 @@
 
   <Operation Class="PatchOperationFindMod">
     <mods>
-      <li>Combat Extended</li>
+      <li>Royalty</li>
     </mods>
     <match Class="PatchOperationSequence">
       <success>Always</success>
