@@ -1,12 +1,9 @@
 # CaravanAdventures
 
-Welcome to the beta for Caravan Adventures. As always, please backup your savegames. I'm glad for any feedback and bugs you may find or can provide. :)
-
 Caravan Adventures aims to transform traveling around the world into a real adventure by providing new features to replace the annoying micromanagement, make traveling more fun and give you a sense of purpose doing so. Quick heads-up, about 25% of this mod's content is the Storyline, which requires Royalty. Everything else can be used without it, don't worry. 
 
-Feedback would be amazing, please join our <a href="https://discord.gg/KwaRubs2kx">discord</a> and let us know what you think. Thanks guys!
-
-All mod details available in the <a href="https://github.com/iforgotmysocks/CaravanAdventuresWiki/wiki"Mod's Wikipedia</a>
+Feedback would be amazing, join us on <a href="https://discord.gg/KwaRubs2kx">discord</a>  
+All mod details available in the <a href="https://github.com/iforgotmysocks/CaravanAdventuresWiki/wiki">Mod's Wikipedia</a>
 
 <br>
 
@@ -45,6 +42,14 @@ All mod details available in the <a href="https://github.com/iforgotmysocks/Cara
 * Encounter a dangerous threat that endangers the entire world
 * Fight bosses to claim treasures, learn powerful spells and prevent the end of all living beings
 
+## General travel support
+(disabled at default, enable in mod settings)  
+* auto clean up settlement remains
+* Increase food and silver available for settlements to trade
+* Increase ancient shrine spawns and reward changes
+* Increase skill decay level from 10 to 15
+* Enable a side bar icon allowing to remove letters
+
 <br>
 (All categories can be enabled or disabled and further configured to your liking in the mod's settings)  
 
@@ -63,6 +68,6 @@ slice2 by freefire66 https://freesound.org/people/freefire66/sounds/175949/
 slice3 by TheBuilder15 https://freesound.org/people/TheBuilder15/sounds/434896/  
 slice4 by Aleks41 https://freesound.org/people/Aleks41/sounds/449552/ 
 
-CE Patch done by dokupe / the english mech hater  
+CE Patch done by DkPepper 
 
 Thanks to the testers who helped to get this mod on the road!  
