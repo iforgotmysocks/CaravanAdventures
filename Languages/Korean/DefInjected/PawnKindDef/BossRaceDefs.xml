@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <CABossMechDevourer.label>포식자</CABossMechDevourer.label>
+  <CABossMechDevourer.labelPlural>포식자들</CABossMechDevourer.labelPlural>
+  <CABossMechDevourer.labelMale>남성 포식자</CABossMechDevourer.labelMale>
+  <CABossMechDevourer.labelMalePlural>남성 포식자들</CABossMechDevourer.labelMalePlural>
+  <CABossMechDevourer.labelFemale>여성 포식자</CABossMechDevourer.labelFemale>
+  <CABossMechDevourer.labelFemalePlural>여성 포식자들</CABossMechDevourer.labelFemalePlural>
+
+
+  <!-- CACrystalScythe -->
+
+  <CABossMechCrystalScythe.label>수정 낫</CABossMechCrystalScythe.label>
+  <CABossMechCrystalScythe.labelPlural>수정 낫들</CABossMechCrystalScythe.labelPlural>
+  <CABossMechCrystalScythe.labelMale>남성 수정 낫</CABossMechCrystalScythe.labelMale>
+  <CABossMechCrystalScythe.labelMalePlural>남성 수정 낫들</CABossMechCrystalScythe.labelMalePlural>
+  <CABossMechCrystalScythe.labelFemale>여성 수정 낫</CABossMechCrystalScythe.labelFemale>
+  <CABossMechCrystalScythe.labelFemalePlural>여성 수정 낫들</CABossMechCrystalScythe.labelFemalePlural>
+
+
+  <!-- harbinger -->
+
+  <CABossMechHarbinger.label>전령</CABossMechHarbinger.label>
+  <CABossMechHarbinger.labelPlural>전령들</CABossMechHarbinger.labelPlural>
+  <CABossMechHarbinger.labelMale>남성 전령</CABossMechHarbinger.labelMale>
+  <CABossMechHarbinger.labelMalePlural>남성 전령들</CABossMechHarbinger.labelMalePlural>
+  <CABossMechHarbinger.labelFemale>여성 전령</CABossMechHarbinger.labelFemale>
+  <CABossMechHarbinger.labelFemalePlural>여성 전령들</CABossMechHarbinger.labelFemalePlural>
+
+
+  <!-- Havoc -->
+
+  <CABossMechHavoc.label>파괴자</CABossMechHavoc.label>
+  <CABossMechHavoc.labelPlural>파괴자들</CABossMechHavoc.labelPlural>
+  <CABossMechHavoc.labelMale>남성 파괴자</CABossMechHavoc.labelMale>
+  <CABossMechHavoc.labelMalePlural>남성 파괴자들</CABossMechHavoc.labelMalePlural>
+  <CABossMechHavoc.labelFemale>여성 파괴자</CABossMechHavoc.labelFemale>
+  <CABossMechHavoc.labelFemalePlural>여성 파괴자들</CABossMechHavoc.labelFemalePlural>
+
+
+  <!-- endboss -->
+
+  <CAEndBossMech.label>고대 조정자 인공지능</CAEndBossMech.label>
+  <CAEndBossMech.labelPlural>고대 조정자 인공지능들</CAEndBossMech.labelPlural>
+  <CAEndBossMech.labelMale>남성 고대 조정자 인공지능</CAEndBossMech.labelMale>
+  <CAEndBossMech.labelMalePlural>남성 고대 조정자 인공지능들</CAEndBossMech.labelMalePlural>
+  <CAEndBossMech.labelFemale>여성 고대 조정자 인공지능</CAEndBossMech.labelFemale>
+  <CAEndBossMech.labelFemalePlural>여성 고대 조정자 인공지능들</CAEndBossMech.labelFemalePlural>
+
+
+</LanguageData>

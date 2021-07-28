@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <CASacrilegHunters.label>불경한 사냥꾼들</CASacrilegHunters.label>
+  <CASacrilegHunters.description>세대 함선과 함께 이 변방계에 추락한 기술적으로 발달한 세력입니다. 오래된 유물과 보물 찾기의 전문가들로, 옛 구조물로 뒤덮인 이 행성에서 빠르게 자리를 잡는 데 그 능력은 큰 도움이 되었습니다.</CASacrilegHunters.description>
+  <CASacrilegHunters.pawnsPlural>불경한 사냥꾼들</CASacrilegHunters.pawnsPlural>
+  <CASacrilegHunters.leaderTitle>최고 위원</CASacrilegHunters.leaderTitle>
+
+  <CAFriendlyMechanoid.label>메카노이드 군락</CAFriendlyMechanoid.label>
+  <CAFriendlyMechanoid.pawnsPlural>메카노이드들</CAFriendlyMechanoid.pawnsPlural>
+
+
+</LanguageData>

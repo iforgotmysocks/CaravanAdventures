@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <CABossMechDevourerBody.label>포식자</CABossMechDevourerBody.label>
+  <CABossMechDevourerBody.corePart.parts.0.parts.1.customLabel>왼쪽 시각 센서</CABossMechDevourerBody.corePart.parts.0.parts.1.customLabel>
+  <CABossMechDevourerBody.corePart.parts.0.parts.2.customLabel>오른쪽 시각 센서</CABossMechDevourerBody.corePart.parts.0.parts.2.customLabel>
+  <CABossMechDevourerBody.corePart.parts.0.parts.3.customLabel>왼쪽 청각 센서</CABossMechDevourerBody.corePart.parts.0.parts.3.customLabel>
+  <CABossMechDevourerBody.corePart.parts.0.parts.4.customLabel>오른쪽 청각 센서</CABossMechDevourerBody.corePart.parts.0.parts.4.customLabel>
+
+  <CACrystalScytheBody.label>수정 낫</CACrystalScytheBody.label>
+  <CACrystalScytheBody.corePart.parts.0.parts.0.parts.1.customLabel>왼쪽 시각 센서</CACrystalScytheBody.corePart.parts.0.parts.0.parts.1.customLabel>
+  <CACrystalScytheBody.corePart.parts.0.parts.0.parts.2.customLabel>오른쪽 시각 센서</CACrystalScytheBody.corePart.parts.0.parts.0.parts.2.customLabel>
+  <CACrystalScytheBody.corePart.parts.0.parts.0.parts.3.customLabel>왼쪽 청각 센서</CACrystalScytheBody.corePart.parts.0.parts.0.parts.3.customLabel>
+  <CACrystalScytheBody.corePart.parts.0.parts.0.parts.4.customLabel>오른쪽 청각 센서</CACrystalScytheBody.corePart.parts.0.parts.0.parts.4.customLabel>
+  <CACrystalScytheBody.corePart.parts.1.customLabel>왼쪽 어깨</CACrystalScytheBody.corePart.parts.1.customLabel>
+  <CACrystalScytheBody.corePart.parts.1.parts.0.customLabel>왼쪽 팔</CACrystalScytheBody.corePart.parts.1.parts.0.customLabel>
+  <CACrystalScytheBody.corePart.parts.1.parts.0.parts.0.customLabel>왼쪽 칼날</CACrystalScytheBody.corePart.parts.1.parts.0.parts.0.customLabel>
+  <CACrystalScytheBody.corePart.parts.1.parts.0.parts.1.customLabel>왼쪽 손</CACrystalScytheBody.corePart.parts.1.parts.0.parts.1.customLabel>
+  <CACrystalScytheBody.corePart.parts.1.parts.0.parts.1.parts.0.customLabel>왼쪽 새끼손가락</CACrystalScytheBody.corePart.parts.1.parts.0.parts.1.parts.0.customLabel>
+  <CACrystalScytheBody.corePart.parts.1.parts.0.parts.1.parts.1.customLabel>왼쪽 중지</CACrystalScytheBody.corePart.parts.1.parts.0.parts.1.parts.1.customLabel>
+  <CACrystalScytheBody.corePart.parts.1.parts.0.parts.1.parts.2.customLabel>왼쪽 검지</CACrystalScytheBody.corePart.parts.1.parts.0.parts.1.parts.2.customLabel>
+  <CACrystalScytheBody.corePart.parts.1.parts.0.parts.1.parts.3.customLabel>왼쪽 엄지</CACrystalScytheBody.corePart.parts.1.parts.0.parts.1.parts.3.customLabel>
+  <CACrystalScytheBody.corePart.parts.2.customLabel>오른쪽 어깨</CACrystalScytheBody.corePart.parts.2.customLabel>
+  <CACrystalScytheBody.corePart.parts.2.parts.0.customLabel>오른쪽 팔</CACrystalScytheBody.corePart.parts.2.parts.0.customLabel>
+  <CACrystalScytheBody.corePart.parts.2.parts.0.parts.0.customLabel>오른쪽 칼날</CACrystalScytheBody.corePart.parts.2.parts.0.parts.0.customLabel>
+  <CACrystalScytheBody.corePart.parts.2.parts.0.parts.1.customLabel>오른쪽 손</CACrystalScytheBody.corePart.parts.2.parts.0.parts.1.customLabel>
+  <CACrystalScytheBody.corePart.parts.2.parts.0.parts.1.parts.0.customLabel>오른쪽 새끼손가락</CACrystalScytheBody.corePart.parts.2.parts.0.parts.1.parts.0.customLabel>
+  <CACrystalScytheBody.corePart.parts.2.parts.0.parts.1.parts.1.customLabel>오른쪽 중지</CACrystalScytheBody.corePart.parts.2.parts.0.parts.1.parts.1.customLabel>
+  <CACrystalScytheBody.corePart.parts.2.parts.0.parts.1.parts.2.customLabel>오른쪽 검지</CACrystalScytheBody.corePart.parts.2.parts.0.parts.1.parts.2.customLabel>
+  <CACrystalScytheBody.corePart.parts.2.parts.0.parts.1.parts.3.customLabel>오른쪽 엄지</CACrystalScytheBody.corePart.parts.2.parts.0.parts.1.parts.3.customLabel>
+  <CACrystalScytheBody.corePart.parts.3.customLabel>왼쪽 다리</CACrystalScytheBody.corePart.parts.3.customLabel>
+  <CACrystalScytheBody.corePart.parts.3.parts.0.customLabel>왼쪽 발</CACrystalScytheBody.corePart.parts.3.parts.0.customLabel>
+  <CACrystalScytheBody.corePart.parts.4.customLabel>오른쪽 다리</CACrystalScytheBody.corePart.parts.4.customLabel>
+  <CACrystalScytheBody.corePart.parts.4.parts.0.customLabel>오른쪽 발</CACrystalScytheBody.corePart.parts.4.parts.0.customLabel>
+
+
+</LanguageData>

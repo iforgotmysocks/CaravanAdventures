@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <StoryVillageQuestName>상단 모험 - 친구 구하기</StoryVillageQuestName>
+  <StoryVillageQuestDesc>{0}(이)가 급히 도움을 구하는 편지를 보냈습니다. 편지에 적혀 있기를:\n</StoryVillageQuestDesc>
+  <StoryVillageQuestLetterContent>친애하는 {0},\n\n시간 내에 이 편지를 받았으면 좋겠어. 아니면 모두 죽어 있을 테니까. 우리는 큰 성소를 마주쳤는데 열자마자 엄청난 수의 메카노이드가 쏟아져 나왔어. 도망치긴 했지만, 그 때부터 큰 메카노이드 무리들이 우리 마을을 계속 공격하고 있지.\n네가 시간 내에 도착해서 우리를 돕기를 바라며 이 편지를 써. 탈출할 준비를 하고 있지만, 목숨을 건져 도망칠 가능성이라도 잡으려면 지원군을 기다릴 수밖에 없어.\n\n부디 {1}(으)로 급히 달려와 이 암울한 시기에 우리를 도와주길 바랄게. 결코 잊지 않을 거야.</StoryVillageQuestLetterContent>
+  <StoryVillageQuestLetterContentPS>추신: 잘 지내고 있다면 좋겠네. 서로 얘기도 하고 싶고. 우리가 만났을 때 정말 좋은 시간을 보냈었지. 우리를 다시 한 번 도와주고, 다시 보기를 기대할게.</StoryVillageQuestLetterContentPS>
+  <StoryVillageQuestLetterContentEnding>너의 진실한 벗,\n\n{0}\n</StoryVillageQuestLetterContentEnding>
+  <StoryVillageQuestDesc2>{0} 마을 {1}(으)로 이동해 너무 늦기 전에 {2}(을)를 도우십시오.</StoryVillageQuestDesc2>
+  <VisitStoryVillageLabel>{0} 진입</VisitStoryVillageLabel>
+  <StoryVillageEnterMapMessage>마을로 들어가는 중</StoryVillageEnterMapMessage>
+  <StoryVillageArrivedLetterTitle>{0} 진입함</StoryVillageArrivedLetterTitle>
+  <StoryVillageArrivedLetterMessage>상단이 {0}에 도착했습니다. 멋진 장소 같습니다.</StoryVillageArrivedLetterMessage>
+  <StoryVillageCantArriveHostile>적대적일 때는 {0}(을)를 도울 수 없습니다.</StoryVillageCantArriveHostile>
+
+  <StoryVillage_Dia1_DiaTitle>{0}(이)가 당신을 포옹함</StoryVillage_Dia1_DiaTitle>
+  <StoryVillage_Dia1_1>{0}, 왔구나. 이렇게 고마울 데가. 마지막 공격을 간신히 막아냈지만 우리 정찰병이 몇 분 거리에서 다음 번 가장 큰 군대를 발견했어.\n\n지원 병력이 제 때 도착하면 좋을 텐데. </StoryVillage_Dia1_1>
+  <StoryVillage_Dia1_1_Option1>다시 보니 반갑군. 왜 저 메카노이드들이 너를 저리도 쫓아다니는지 알아?\n우리도 공격을 받기는 했지만, 얘기한 정도로는 아녔어.</StoryVillage_Dia1_1_Option1>
+  <StoryVillage_Dia1_2>[{0}, 창백하고 지쳐, 당신의 눈을 바라보며] 우리도 정확히는 몰라. 큰 성소였어. 거기서 메카노이드 무리가 쏟아져 나오는 것을 보았을 때 그 장소를 모조리 날려 버리기 위해 마지막 핵을 썼지. 하지만 보아하니 대부분 살아남았고 이제 우리를 쫓는 것 같아.\n\n[{0}(이)가 당신에게 작은 장비를 급히 넘기며] 앞으로 연락할 수 있게 이 통신기를 받아.</StoryVillage_Dia1_2>
+  <StoryVillage_Dia1_2_Option1>좋아, 우리가 여기를 방어할 수 있는지 보자고.</StoryVillage_Dia1_2_Option1>
+  <StoryVillage_Dia1_2_Option2>그냥 지금 떠나는 건 어때?</StoryVillage_Dia1_2_Option2>
+  <StoryVillage_Dia1_3>왔다, 엄폐하라!\n\n[{0}, 울부짖으며] 세상에, 엄청난 숫자야...</StoryVillage_Dia1_3>
+  <StoryVillage_Dia1_3_Option1>정말 이것들과 싸우려는 거야?</StoryVillage_Dia1_3_Option1>
+  <StoryVillage_Dia1_4>그래, 시민들을 대피시킬 때까지 붙잡아 둬야지.</StoryVillage_Dia1_4>
+  <StoryVillage_Dia1_4_Option1>오늘은 죽기 좋은 날인 모양이구만.</StoryVillage_Dia1_4_Option1>
+
+  <StoryVillage_QuestUpdate_MechsArrived>{0}(을)를 도와 {0} 기지를 방어하거나 도망치십시오. 닥칠 전투에서 불경한 사냥꾼들은 좋은 동맹이 될 것입니다.</StoryVillage_QuestUpdate_MechsArrived>
+  <StoryVillage_QuestUpdate_MechsArrivedFriendAlreadyDead>적대 메카노이드들이 도착하기 전에 {0}(이)가 죽었습니다. 아직 기지를 방어하려 시도할 수는 있지만, 쉽지 않을 것입니다.</StoryVillage_QuestUpdate_MechsArrivedFriendAlreadyDead>
+  <StoryVillage_QuestUpdate_MechsArrivedFriendDiedFleeing>{0}(은)는 지원 병력이 도착하기 전에 도망쳐야 했고 마을로 접근하는 메카노이드들에게 죽었습니다.</StoryVillage_QuestUpdate_MechsArrivedFriendDiedFleeing>
+  <VillageAttackMechsMessage>{0}이 {2}(을)를 공격하고 있습니다.</VillageAttackMechsMessage>
+
+  <StoryVillage_Dia2_Title>{0}(이)가 크게 외칩니다...</StoryVillage_Dia2_Title>
+  <StoryVillage_Dia2_1>어이, 지원군이 왔다! 가서 지옥 맛을 보여주자구!\n\n마을 사람들과 의원들, 탈출로로!</StoryVillage_Dia2_1>
+  <StoryVillage_Dia2_1_Option1>끝이 좋지 않을 거야......</StoryVillage_Dia2_1_Option1>
+
+  <StoryVillage_Dia3_Title>{0}(이)가 통신기로 연락해 옵니다...</StoryVillage_Dia3_Title>
+  <StoryVillage_Dia3_1_Alive>살아 나왔어, 끔찍하구만. 우리 숙련된 사냥꾼들과 만나서 어떻게 저것들을 물리칠지 계획을 세워야겠어. 빨리 행동하지 않으면 다 끝장이야.\n\n뭔가 더 알게 되면 연락할게, 행운을 빌게.\n... 그리고 고마워. 우리를 위해서 싸운 것, 잊지 않을게.</StoryVillage_Dia3_1_Alive>
+  <StoryVillage_Dia3_1_Dying>너라도... 살아...\n이 싸움은... 졌어...\n누군가... 너에게... 갈 거야... 미안... 해...</StoryVillage_Dia3_1_Dying>
+  <StoryVillage_Dia3_1_AliveNoHelpFromPlayer>살아 나왔어, 끔찍하구만. 우리 숙련된 사냥꾼들과 만나서 어떻게 저것들을 물리칠지 계획을 세워야겠어. 빨리 행동하지 않으면 다 끝장이야.\n\n뭔가 더 알게 되면 연락할게, 그래도 다음엔 도와주면 정말 좋겠어. 도와주러 오지 않아서 좀 섭섭했어.</StoryVillage_Dia3_1_AliveNoHelpFromPlayer>
+  <StoryVillage_Dia3_1_Option1>계속 가자.</StoryVillage_Dia3_1_Option1>
+  <StoryVillage_SacHunters_Fleeing>불경한 사냥꾼들이 도망치고 있습니다..</StoryVillage_SacHunters_Fleeing>
+  <StoryVillage_SacHuntersCivs_Fleeing>계획대로 마을 사람들이 탈출하고 있습니다.</StoryVillage_SacHuntersCivs_Fleeing>
+
+  <StoryVillage_QuestUpdate_CanLeaveSuccess>마을 사람들이 대피할 수 있었습니다. 임무는 끝났습니다.</StoryVillage_QuestUpdate_CanLeaveSuccess>
+  <StoryVillage_QuestUpdate_CanLeaveFailed>불경한 사냥꾼들의 지도부가 피해를 입었고 회복하려면 시간이 좀 걸릴 것입니다. 임무는 실패했습니다.</StoryVillage_QuestUpdate_CanLeaveFailed>
+  <StoryVillage_QuestUpdate_Survived>당신은 살아남았습니다. 하지만 저 메카노이드들은 다 어디서 온 걸까요? 단서가 더 있는지 지켜봐야 할 것 같습니다...</StoryVillage_QuestUpdate_Survived>
+
+  <StoryVillage_Response_BountyInitiatedTitle>행성 전체에 현상금 알림</StoryVillage_Response_BountyInitiatedTitle>
+  <StoryVillage_Response_BountyInitiatedDesc>우리 정착지에 닥친 비극적인 메카노이드 공격에 따라, 우리 {0}(은)는 {1}에 현상금을 건다.\n\n하나 죽일 때마다, 귀하의 세력은 현상금 점수를 얻고, 이것으로 군사 지원, 희귀품, 관계 개선에 도움을 살 수 있고, 아주 야심찬 참여자들은 우리의 최고 베테랑들을 영원히 요청할 수도 있다.\n\n통신기로 우리에게 연락하기만 하면 된다.\n좋은 사냥 되시길!</StoryVillage_Response_BountyInitiatedDesc>
+
+</LanguageData>

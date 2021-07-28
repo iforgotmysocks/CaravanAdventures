@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <TradeCaravanQuestName>상단 모험 - 거래 상단</TradeCaravanQuestName>
+  <TradeCaravanQuestDesc>잘 무장한 불경한 사냥꾼들의 상단이 접근하고 있습니다. 무엇을 하고 있는지 확인해 볼 가치가 있을지도 모릅니다.\n\n이 기회를 놓친다면 다른 상단을 기다리세요. 대부분 단순히 거래만 하는 것이 아니라 접촉하고 싶어할지 모릅니다.</TradeCaravanQuestDesc>
+  <TradeCaravanQuestInfoTalkedTo>{0}(와)과 좋은 이야기를 나누었습니다. 계속 접촉하고 있으면 굉장한 기회가 올지도 모릅니다.</TradeCaravanQuestInfoTalkedTo>
+  <TradeCaravanQuestInfoTalkedToReward>{0}(이)가 이야기하고 난 뒤 {1}(을)를 남겼습니다.</TradeCaravanQuestInfoTalkedToReward>
+
+  <TradeCaravan_Dia1_DiaTitle>{0}(이)가 손을 흔들고 다가온다</TradeCaravan_Dia1_DiaTitle>
+  <TradeCaravan_Dia1_1>여어. 몇 주 동안 여행하고 있는데 당신 마을에서 며칠 쉴 수 있었으면 해. 말썽 피우진 않을 거고, 그냥 조금 쉬고 싶은 것뿐이야.\n길에서 좀 힘들었거든. [{0}(이)가 몸을 떤다]</TradeCaravan_Dia1_1>
+  <TradeCaravan_Dia1_1_Option1>물론, 상관없지. 얼마간 머물러도 좋아.</TradeCaravan_Dia1_1_Option1>
+  <TradeCaravan_Dia1_2>[{0}(이)가 피곤하지만 아름다운 미소를 짓는다] 친절하구나.\n[{0}(이)가 깊게 숨을 들이쉬더니 {1} 눈이 마을과 그 너머를 바라본다]\n환상적인 마을인데, 주위의 아름다운 자연에 완벽히 녹아들어 있어.\n여기서 어떻게들 지내?</TradeCaravan_Dia1_2>
+  <TradeCaravan_Dia1_2_Option1>그렇게 말해 줘서 고맙군. \n여태까지 고생 좀 해서 만들었지. 이번 겨울을 잘 날 수 있기를 바랄 뿐이야.</TradeCaravan_Dia1_2_Option1>
+  <TradeCaravan_Dia1_3>보나마나 괜찮을 거야. 이 근처에 정착지를 만들기 시작했어. 술이 빨리 떨어져서 잭이 나머지 건물을 계획할 수 있으면 좋겠는데. 우리 사람들이 일하고 싶어서 안달이 났다구.\n어쨌든, 마무리되면 한 번 들러서, 이 환대를 갚을 기회를 줘. [{0}(이)가 풀어지고 미소짓기 시작하는 것을 알아챈다]</TradeCaravan_Dia1_3>
+  <TradeCaravan_Dia1_3_Option1>고마워, 기꺼이 한 번 들를게. 그래서 여긴 무슨 일이야?</TradeCaravan_Dia1_3_Option1>
+  <TradeCaravan_Dia1_3_Option2>가다가 지나칠 수도 있지. 난 가 봐야 돼, 일이 있거든.\n여행에 행운을 빌지.</TradeCaravan_Dia1_3_Option2>
+  <TradeCaravan_Dia1_4>[{0}(이)가 내려보며 {1} 입술을 깨문다] 말하자면 긴데...\n\n그래도 시간이 있을 것 같네. 우리는 다른 행성에서 왔어. 강력한 유물을 둘러싼 끝없는 전쟁이 발레론의 최후였어. 우리가 길드 함선으로 도망갔을 때 내 약혼자는 죽었지. 행성의 핵이 붕괴하기 전에 어떻게 살아나왔는지도 모르겠어.\n\n[{0}(이)가 하늘을 쳐다보며 나쁜 기억을 떨쳐내려고 애쓴다] 몇 년이 지나 이 행성을 마주쳤어. 이 행성 어디에나 널려 있는 고대 구조물을 발견했고, 우리의 지식에 대한 목마름이 우리를 여기에 살게 했지.\n[{0}이 으쓱한다] 우리의 실수를 반복하려는 건 아니지만, 우리가 잘 하는 게 그거인걸. 여기 정착하는 게 쉽진 않았어. 병이 돌고, 여러 세력이 습격하고.\n\n뭔가 해 줄 수 있는 조언이라도 있어?</TradeCaravan_Dia1_4>
+  <TradeCaravan_Dia1_4_Option1>와, 그거 참 대단한 얘긴데. 우리 함선도 얼마 전에 여기 추락한 거야.\n우리도 너희처럼 뭐가 어떻게 돌아가는지 파악하려는 정도지, 뭐.\n[{1}(이)가 {0}의 무기를 가리키며] 그래도 무장은 잘 한 것 같은데.</TradeCaravan_Dia1_4_Option1>
+  <TradeCaravan_Dia1_5>[{0}(이)가 불안하게 {1} 머리카락을 만지작대며] 알아보는구나? 그래, 이미 성소 군데를 발굴해서 놀라운 유물을 찾았지. 그렇지만 안에 있는 메카노이드는 걱정돼. 두번째 성소를 열 때 우리 중 둘을 잃었거든.\n\n헛된 죽음은 아니었어! 우리가 긁어모은 이 장비들이 아니었으면 지금쯤 확실히 죽었을 거야.\n\n[다시 미소지으며 {0}(이)가 당신의 눈을 바라본다] 하지만 잘 돌아가고 있는 것 같아, 이제 당신들을 만났잖아. 흥미 있다면 우리 세력도 서로 도와줄 수 있을 거야.</TradeCaravan_Dia1_5>
+  <TradeCaravan_Dia1_5_Option1>물론이지! 함께라면 어쩌면 이 이상한 곳에서 잘 해내갈 수 있을 거야.</TradeCaravan_Dia1_5_Option1>
+  <TradeCaravan_Dia1_5_Option2>약속은 못 하겠네, 미안.</TradeCaravan_Dia1_5_Option2>
+  <TradeCaravan_Dia1_6_1>[{0}(이)가 당신의 손을 잡고 미소짓는다] 멋져, 고향에 어서 좋은 소식을 전해주고 싶어... 우리는 이제 혼자가 아니야.\n\n{1}(을)를 남겨 둘게, 이 정도는 내어줄 수 있어.\n\n다른 사람과 얘기하고 다들 괜찮은지 봐야겠어. 고마워, 좋은 대화였어. 우리에게... 희망을 줬어. [{0}(이)가 당신의 손을 놓고 {2} 길드 동료들에게 돌아가며 뺨을 붉힌다]</TradeCaravan_Dia1_6_1>
+  <TradeCaravan_Dia1_6_1_Option1>[당황해 기침하며] 좋아, 다음에 보지.</TradeCaravan_Dia1_6_1_Option1>
+  <TradeCaravan_Dia1_6_2>[{0}(은)는 실망한 것처럼 보임] 어... 알겠어. 그래도 너의 도움을 잊지 않을 거야. 고마워.</TradeCaravan_Dia1_6_2>
+  <TradeCaravan_Dia1_6_2_Option1>여행 조심하고!</TradeCaravan_Dia1_6_2_Option1>
+
+</LanguageData>

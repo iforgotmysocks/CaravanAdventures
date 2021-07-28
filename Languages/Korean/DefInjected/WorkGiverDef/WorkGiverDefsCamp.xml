@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- todo priorities ? -->
+
+  <CADoBillsCookCampfireRoast.label>모닥불에서 요리</CADoBillsCookCampfireRoast.label>
+  <CADoBillsCookCampfireRoast.verb>요리</CADoBillsCookCampfireRoast.verb>
+  <CADoBillsCookCampfireRoast.gerund>요리 중:</CADoBillsCookCampfireRoast.gerund>
+
+  <CADoBillsHaulCampfireRoast.label>모닥불에서 작업</CADoBillsHaulCampfireRoast.label>
+  <CADoBillsHaulCampfireRoast.verb>작업</CADoBillsHaulCampfireRoast.verb>
+  <CADoBillsHaulCampfireRoast.gerund>일하는 중:</CADoBillsHaulCampfireRoast.gerund>
+
+  <CADoBillsSpacerRefinery.label>정제소에서 작업</CADoBillsSpacerRefinery.label>
+  <CADoBillsSpacerRefinery.verb>화학물질 정제</CADoBillsSpacerRefinery.verb>
+  <CADoBillsSpacerRefinery.gerund>화학물질 정제 중</CADoBillsSpacerRefinery.gerund>
+
+
+</LanguageData>

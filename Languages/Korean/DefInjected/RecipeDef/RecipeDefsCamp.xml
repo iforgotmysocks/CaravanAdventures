@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <Make_CASpacerTentSupplies.label>첨단 텐트 보급품 제작</Make_CASpacerTentSupplies.label>
+  <Make_CASpacerTentSupplies.description>질 좋은 캠프를 만들 때 쓰는 첨단 텐트 보급품을 제작합니다.</Make_CASpacerTentSupplies.description>
+  <Make_CASpacerTentSupplies.jobString>첨단 텐트 보급품 제작 중.</Make_CASpacerTentSupplies.jobString>
+
+  <CACookGrillSnack.label>구운 간식 조리</CACookGrillSnack.label>
+  <CACookGrillSnack.description>구운 간식을 조리합니다.</CACookGrillSnack.description>
+  <CACookGrillSnack.jobString>구운 간식을 조리합니다.</CACookGrillSnack.jobString>
+
+  <CACookGrillSnackBulk.label>구운 간식 x4 조리</CACookGrillSnackBulk.label>
+  <CACookGrillSnackBulk.description>구운 간식을 4개 조리합니다.</CACookGrillSnackBulk.description>
+  <CACookGrillSnackBulk.jobString>구운 간식 x4 조리 중.</CACookGrillSnackBulk.jobString>
+
+  <CABurnApparel.label>의류 소각</CABurnApparel.label>
+  <CABurnApparel.description>필요없는 의류를 태워 완전히 파괴합니다.</CABurnApparel.description>
+  <CABurnApparel.jobString>의류 소각 중.</CABurnApparel.jobString>
+
+  <CAMake_ChemfuelFromWood.label>목재로 화학연료 정제</CAMake_ChemfuelFromWood.label>
+  <CAMake_ChemfuelFromWood.description>목재에서 가스를 뽑아내고 응축해 화학연료를 만듭니다.</CAMake_ChemfuelFromWood.description>
+  <CAMake_ChemfuelFromWood.jobString>목재로 화학연료 정제 중.</CAMake_ChemfuelFromWood.jobString>
+
+  <CAMake_ChemfuelFromOrganics.label>유기물로 화학연료 정제</CAMake_ChemfuelFromOrganics.label>
+  <CAMake_ChemfuelFromOrganics.description>유기 재료에서 바이오 연료를 뽑아내 화학연료를 만듭니다.</CAMake_ChemfuelFromOrganics.description>
+  <CAMake_ChemfuelFromOrganics.jobString>유기물로 화학연료 정제 중.</CAMake_ChemfuelFromOrganics.jobString>
+
+  <CAMake_ChemfuelFromCorpses.label>시체로 화학연료 정제</CAMake_ChemfuelFromCorpses.label>
+  <CAMake_ChemfuelFromCorpses.description>시체에서 바이오 연료를 뽑아내 화학연료를 만듭니다.</CAMake_ChemfuelFromCorpses.description>
+  <CAMake_ChemfuelFromCorpses.jobString>시체로 화학연료 정제 중.</CAMake_ChemfuelFromCorpses.jobString>
+
+
+</LanguageData>

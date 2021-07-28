@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <CAEXT1Basic.label>EXT1 기본</CAEXT1Basic.label>
+  <CAEXT1Basic.description>기계들이 버전에 따라 고급 전투 논리를 사용하고, 휴면 네트워크에 연결해 여러 무서운 능력을 사용할 수 있게 합니다.</CAEXT1Basic.description>
+
+  <CAEXT1Artillary.label>EXT1 포병</CAEXT1Artillary.label>
+  <CAEXT1Artillary.description>기계들이 버전에 따라 고급 전투 논리를 사용하고, 휴면 네트워크에 연결해 여러 무서운 능력을 사용할 수 있게 합니다.</CAEXT1Artillary.description>
+
+  <CAEXT1Melee.label>EXT1 근접</CAEXT1Melee.label>
+  <CAEXT1Melee.description>기계들이 버전에 따라 고급 전투 논리를 사용하고, 휴면 네트워크에 연결해 여러 무서운 능력을 사용할 수 있게 합니다.</CAEXT1Melee.description>
+
+  <CAEXT1Laser.label>EXT1 레이저</CAEXT1Laser.label>
+  <CAEXT1Laser.description>기계들이 버전에 따라 고급 전투 논리를 사용하고, 휴면 네트워크에 연결해 여러 무서운 능력을 사용할 수 있게 합니다.</CAEXT1Laser.description>
+
+  <CAEXT1Guardian.label>EXT1 수호자</CAEXT1Guardian.label>
+  <CAEXT1Guardian.description>기계들이 버전에 따라 고급 전투 논리를 사용하고, 휴면 네트워크에 연결해 여러 무서운 능력을 사용할 수 있게 합니다.</CAEXT1Guardian.description>
+
+  <CAEXT1Missile.label>EXT1 미사일</CAEXT1Missile.label>
+  <CAEXT1Missile.description>기계들이 버전에 따라 고급 전투 논리를 사용하고, 휴면 네트워크에 연결해 여러 무서운 능력을 사용할 수 있게 합니다.</CAEXT1Missile.description>
+
+
+</LanguageData>

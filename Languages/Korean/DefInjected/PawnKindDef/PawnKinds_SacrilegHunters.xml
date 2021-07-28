@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <CASacrilegHunters_ExperiencedHunterVillage.label>경험 많은 사냥꾼</CASacrilegHunters_ExperiencedHunterVillage.label>
+  <CASacrilegHunters_ExperiencedHunterVillage.labelPlural>경험 많은 사냥꾼들</CASacrilegHunters_ExperiencedHunterVillage.labelPlural>
+
+  <CASacrilegHunters_ExperiencedHunter.label>경험 많은 사냥꾼</CASacrilegHunters_ExperiencedHunter.label>
+  <CASacrilegHunters_ExperiencedHunter.labelPlural>경험 많은 사냥꾼들</CASacrilegHunters_ExperiencedHunter.labelPlural>
+
+  <CASacrilegHunters_HunterVillage.label>사냥꾼</CASacrilegHunters_HunterVillage.label>
+  <CASacrilegHunters_HunterVillage.labelPlural>사냥꾼들</CASacrilegHunters_HunterVillage.labelPlural>
+
+  <CASacrilegHunters_Hunter.label>사냥꾼</CASacrilegHunters_Hunter.label>
+  <CASacrilegHunters_Hunter.labelPlural>사냥꾼들</CASacrilegHunters_Hunter.labelPlural>
+
+  <CASacrilegHunters_Town_Councilman.label>마을 의원</CASacrilegHunters_Town_Councilman.label>
+  <CASacrilegHunters_Town_Councilman.labelPlural>마을 의원들</CASacrilegHunters_Town_Councilman.labelPlural>
+
+  <CASacrilegHunters_Town_Trader.label>마을 상인</CASacrilegHunters_Town_Trader.label>
+  <CASacrilegHunters_Town_Trader.labelPlural>마을 상인들</CASacrilegHunters_Town_Trader.labelPlural>
+
+  <CASacrilegHunters_Villager.label>주민</CASacrilegHunters_Villager.label>
+  <CASacrilegHunters_Villager.labelPlural>주민들</CASacrilegHunters_Villager.labelPlural>
+
+  <CASacrilegHunters_Town_Guard.label>마을 경비병</CASacrilegHunters_Town_Guard.label>
+  <CASacrilegHunters_Town_Guard.labelPlural>마을 경비병들</CASacrilegHunters_Town_Guard.labelPlural>
+
+
+</LanguageData>

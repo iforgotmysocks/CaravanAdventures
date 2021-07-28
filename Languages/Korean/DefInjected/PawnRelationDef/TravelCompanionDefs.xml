@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <CAOutsiderRelation.label>외부인</CAOutsiderRelation.label>
+  <CAOutsiderRelation.labelFemale>외부인</CAOutsiderRelation.labelFemale>
+
+  <CAThirdWheelRelation.label>깍두기</CAThirdWheelRelation.label>
+  <CAThirdWheelRelation.labelFemale>깍두기</CAThirdWheelRelation.labelFemale>
+
+  <CAFamiliarCompanionRelation.label>익숙한 동행</CAFamiliarCompanionRelation.label>
+  <CAFamiliarCompanionRelation.labelFemale>익숙한 동행</CAFamiliarCompanionRelation.labelFemale>
+
+  <CAPartOfTheGangRelation.label>무리의 일원</CAPartOfTheGangRelation.label>
+  <CAPartOfTheGangRelation.labelFemale>무리의 일원</CAPartOfTheGangRelation.labelFemale>
+
+  <CATrustedMateRelation.label>믿음직한 친구</CATrustedMateRelation.label>
+  <CATrustedMateRelation.labelFemale>믿음직한 친구</CATrustedMateRelation.labelFemale>
+
+  <CATrueFriendRelation.label>진정한 친구</CATrueFriendRelation.label>
+  <CATrueFriendRelation.labelFemale>진정한 친구</CATrueFriendRelation.labelFemale>
+
+
+</LanguageData>

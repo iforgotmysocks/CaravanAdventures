@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <CaravanDamselInDistressTitle>곤경에 처한 소녀, {0}(이)가 납치함</CaravanDamselInDistressTitle>
+  <CaravanDamselInDistress>{1}의 야만인 {2}(이)가 붙잡은 아름답고 무력한 소녀를 마주쳤습니다... 그녀를 그들의 손아귀에 내버려둔다는 생각을 할 수나 있을까요?</CaravanDamselInDistress>
+  <CaravanDamselInDistress_Rescue>즉시 구출한다</CaravanDamselInDistress_Rescue>
+  <CaravanDamselInDistress_Follow>캠프를 꾸밀 때까지 조용히 따라간다</CaravanDamselInDistress_Follow>
+  <CaravanDamselInDistress_Leave>운명에 맡겨 둔다</CaravanDamselInDistress_Leave>
+
+  <CaravanDamselInDistress_Follow_Title>따라갔습니다...</CaravanDamselInDistress_Follow_Title>
+  <CaravanDamselInDistress_Follow_Main>그들의 캠프까지 따라가서 어두워질 때까지 기다렸습니다. 경비병이 하나인데 꽤 취해 있고 제압하기 쉬워 보입니다. 어떻게 할까요?</CaravanDamselInDistress_Follow_Main>
+  <CaravanDamselInDistress_Follow_SneakFreeGirl>숨어들어서 도적들을 죽이고 소녀를 풀어준다</CaravanDamselInDistress_Follow_SneakFreeGirl>
+
+  <CaravanDamselInDistress_Follow_KillSuccess_Title></CaravanDamselInDistress_Follow_KillSuccess_Title>
+  <CaravanDamselInDistress_Follow_KillSuccess_Main>일어나기도 전에 모두 처리하고, 놀라워하는 희망에 찬 소녀를 풀어주었습니다. 그녀를 어떻게 하고 싶습니까?</CaravanDamselInDistress_Follow_KillSuccess_Main>
+  <CaravanDamselInDistress_Follow_KillSuccess_Free>이미 너무 고생했으니 길을 떠나게 한다. </CaravanDamselInDistress_Follow_KillSuccess_Free>
+  <CaravanDamselInDistress_Follow_KilSuccess_Slave>괜찮은 노예가 되겠는데.</CaravanDamselInDistress_Follow_KilSuccess_Slave>
+
+  <CaravanDamselInDistress_Follow_KillFail_Main>나뭇가지를 밟아 경비병들이 일어났습니다. 싸우거나 도망칠 수 있습니다.</CaravanDamselInDistress_Follow_KillFail_Main>
+  <CaravanDamselInDistress_Follow_KillFail_Fight>싸운다</CaravanDamselInDistress_Follow_KillFail_Fight>
+  <CaravanDamselInDistress_Follow_KillFail_Leave>탈출을 시도한다</CaravanDamselInDistress_Follow_KillFail_Leave>
+
+  <CaravanDamselInDistress_Saved_AsksToJoin>{0}(이)가 당신에게 가까이 와 달라고 부탁합니다.</CaravanDamselInDistress_Saved_AsksToJoin>
+  <Okay>그래요.</Okay>
+  <CaravanDamselInDistress_Saved_AsksToJoinTitle>작은 목소리가 들립니다...</CaravanDamselInDistress_Saved_AsksToJoinTitle>
+
+  <CaravanDamselInDistress_AsksToJoinTitle>{0}(이)가 합류하기를 청합니다.</CaravanDamselInDistress_AsksToJoinTitle>
+  <CaravanDamselInDistress_AsksToJoin>살려 주셔서 감사해요. 같이 여행할 수 있게 해 주시겠나요?</CaravanDamselInDistress_AsksToJoin>
+  <CaravanDamselInDistress_JoinAllow>네, 환영합니다.</CaravanDamselInDistress_JoinAllow>
+  <CaravanDamselInDistress_JoinDeny>죄송합니다, 위험을 감수할 수는 없군요.</CaravanDamselInDistress_JoinDeny>
+
+</LanguageData>
