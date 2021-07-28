@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <CAMakeshiftTentWall.label>텐트 벽</CAMakeshiftTentWall.label>
+  <CAMakeshiftTentWall.description>온갖 종류의 싸구려 천을 빠르게 조립해 만든 급조 직물 텐트 벽입니다.</CAMakeshiftTentWall.description>
+
+  <CAMakeshiftTentLeather.label>급조 가죽</CAMakeshiftTentLeather.label>
+  <CAMakeshiftTentLeather.description>온갖 종류의 가죽을 이어붙여 만든 급조한 텐트 가죽입니다.</CAMakeshiftTentLeather.description>
+
+
+  <!-- bedrolls -->
+
+  <CAMakeshiftBedroll.label>침낭</CAMakeshiftBedroll.label>
+  <CAMakeshiftBedroll.description>주로 천이나 가죽으로 만들고 천으로 안감을 대기도 하는, 바닥에 누이는 간단한 침대입니다. 가볍고 말아서 쉽게 운반할 수 있지만, 일반적인 침대만큼 편하지는 않습니다. 상단은 여행하는 도중 더 잘 자기 위해 침낭을 사용할 수 있습니다.</CAMakeshiftBedroll.description>
+
+  <CAMakeshiftBedrollDouble.label>큰 침낭</CAMakeshiftBedrollDouble.label>
+  <CAMakeshiftBedrollDouble.description>주로 천이나 가죽으로 만들고 천으로 안감을 대기도 하는, 두 배로 넓은 바닥에 누이는 간단한 침대입니다. 가볍고 말아서 쉽게 운반할 수 있지만, 일반적인 침대만큼 편하지는 않습니다. 상단은 여행하는 도중 더 잘 자기 위해 침낭을 사용할 수 있습니다.</CAMakeshiftBedrollDouble.description>
+
+
+</LanguageData>

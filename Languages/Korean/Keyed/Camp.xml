@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <CAAnimalAreaLabel>동물 구역</CAAnimalAreaLabel>
+  <CAAnimalNoFoodAreaLabel>동물 자유</CAAnimalNoFoodAreaLabel>
+  <CAFoodZoneLabel>음식</CAFoodZoneLabel>
+  <CAAnimalFoodZoneLabel>동물 음식</CAAnimalFoodZoneLabel>
+  <CADeconstructCamp>짐 꾸리기</CADeconstructCamp>
+  <CADeconstructCampMessage>짐 꾸리는 중</CADeconstructCampMessage>
+  <CABuildFailTents>공간이 부족하여 {0}개의 텐트를 설치할 수 없습니다.</CABuildFailTents>
+  <CAMedicineZone>약품</CAMedicineZone>
+  <CAEstablishedCampNotification>{0}개의 텐트 보급품을 사용하여 첨단 캠프를 설치했습니다.</CAEstablishedCampNotification>
+
+  <CALeaveImmediately>바로 떠나기</CALeaveImmediately>
+  <CALeaveImmediatelyPackupCamp>바로 짐을 꾸리고 이 장소를 버리시겠습니까?\n{0}개의 텐트 보급품이 상단에 추가됩니다.</CALeaveImmediatelyPackupCamp>
+  <CALeaveImmediatelyPackupCampTribal>바로 짐을 꾸리고 이 장소를 버리시겠습니까?</CALeaveImmediatelyPackupCampTribal>
+
+</LanguageData>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <SettleWithoutUnloading>상단 자리잡기</SettleWithoutUnloading>
+  <SettleWithoutUnloadingDesc>먼저 좋은 자리를 찾거나 빠르게 떠나기 위해 상단이 짐을 풀지 않은 채 자리잡게 합니다.</SettleWithoutUnloadingDesc>
+
+  <SettleWithCampLabel>캠프와 함께 자리잡기</SettleWithCampLabel>
+  <SettleWithCampDesc>빠르게 설치할 수 있는 미리 건설한 캠프와 함께 자리잡습니다. 높은 품질의 텐트와 장비를 건설하기 위해 캠프 보급품을 소비합니다. 부족하다면, 당장 사용할 수 있는 재료를 찾을 것입니다. 캠핑 보급품은 짐을 쌀 때 다시 돌려받을 수 있습니다.</SettleWithCampDesc>
+
+  <AllowNightTravel>야간 이동</AllowNightTravel>
+  <AllowNightTravelDesc>밤에도 상단이 이동하게 합니다. 하지만 강력한 공격의 위험이 도사리고 있고, 상단 구성원이 너무 피곤해지면 쉴 수밖에 없음을 명심하세요.</AllowNightTravelDesc>
+
+</LanguageData>

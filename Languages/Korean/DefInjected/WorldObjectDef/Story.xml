@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <CAAncientMasterShrineWO.label>단서 - 위험한 성소</CAAncientMasterShrineWO.label>
+  <CAAncientMasterShrineWO.description>위험한 성소 이야기에 얽힌 희미한 단서입니다. 단서를 제공한 사람들이 그렇게 믿을 만하지는 않았으므로 조심하십시오. 그들의 말로는 그곳으로 감히 순례하러 간 사람들은 아무도 돌아오지 않았다고 합니다.</CAAncientMasterShrineWO.description>
+
+  <CAAncientMasterShrineMP.label>고대 중앙 성소</CAAncientMasterShrineMP.label>
+  <CAAncientMasterShrineMP.description>오랫동안 잊혀진 위험한 성소입니다.</CAAncientMasterShrineMP.description>
+
+  <CAStoryVillageMP.label>친구의 마을</CAStoryVillageMP.label>
+  <CAStoryVillageMP.description>새로 생긴 친구들의 마을입니다.</CAStoryVillageMP.description>
+
+  <CALastJudgmentMP.label>고대의 마지막 심판</CALastJudgmentMP.label>
+  <CALastJudgmentMP.description>오랫동안 잊혀진 위험한 성소입니다.</CALastJudgmentMP.description>
+
+
+</LanguageData>

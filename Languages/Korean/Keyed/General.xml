@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <LetterQuestConcludedLabelWithUpdateInfo>임무 완수 (임무 정보 갱신됨)</LetterQuestConcludedLabelWithUpdateInfo>
+  <LetterQuestCompletedLabelWithUpdateInfo>임무 완료 (임무 정보 갱신됨)</LetterQuestCompletedLabelWithUpdateInfo>
+  <LetterQuestFailedLabelWithUpdateInfo>임무 실패 (임무 정보 갱신됨)</LetterQuestFailedLabelWithUpdateInfo>
+
+  <CALetterQuestOngoingUpdatedInfo>임무 갱신됨</CALetterQuestOngoingUpdatedInfo>
+  <CALetterQuestOngoingUpdatedInfoText>"{0}" 임무가 갱신되었습니다.</CALetterQuestOngoingUpdatedInfoText>
+
+  <CAAbilityCoordinatorApprovalText>고대의 조정기를 시전하면, 기본 연결 한계인 4명(선물받은 폰 포함하지 않음)을 초과하는 폰이 모두 죽을 것입니다.\n\n정말 고대의 조정기를 시전하시겠습니까?</CAAbilityCoordinatorApprovalText>
+
+</LanguageData>

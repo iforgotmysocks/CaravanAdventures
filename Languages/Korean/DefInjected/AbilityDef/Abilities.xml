@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <CAAncientMeditate.label>고대의 명상</CAAncientMeditate.label>
+  <CAAncientMeditate.description>자연으로부터 초능력 에너지를 빨아들여 사용자에게 회복시킵니다. 시전자 근처의 다른 정착민들도 적은 양을 받습니다. 고대의 선물이 필요합니다.</CAAncientMeditate.description>
+
+  <CAAncientThunderBolt.label>고대의 번개 창</CAAncientThunderBolt.label>
+  <CAAncientThunderBolt.description>강력한 고대의 초능력으로, 대상에게 번개 폭발을 일으키고 광역 피해를 줍니다. 고대의 선물이 필요합니다.</CAAncientThunderBolt.description>
+
+  <CAAncientMechSignal.label>고대의 메카노이드 신호</CAAncientMechSignal.label>
+  <CAAncientMechSignal.description>시전자를 돕는 사이더 한 무리를 소환합니다. 고대의 선물이 필요합니다.</CAAncientMechSignal.description>
+
+  <CAAncientCoordinator.label>고대의 조정자</CAAncientCoordinator.label>
+  <CAAncientCoordinator.description>시전자가 살아 있는 한, 시전자와 다른 네 명의 정착민에게 부작용 없이 고대의 보호 효과가 주어집니다. 그러나, 5명의 한계를 초과하는 다른 모든 폰은 죽을 것입니다.</CAAncientCoordinator.description>
+
+  <CAAncientProtectiveAura.label>고대의 보호 오라</CAAncientProtectiveAura.label>
+  <CAAncientProtectiveAura.description>사용자가 초집중을 불어넣어 신체 능력을 인간에게 가능한 거의 모든 방법으로 강화합니다. 민첩성, 근접 전투, 내구력 모두 크게 증가합니다. 또한 날아오는 피해와 불의 상당 부분으로부터 대상을 보호하며, 시간에 따라 상처를 (오래 지속된다면 영구적인 것들까지) 치유합니다.\n\n활성화한 동안 다룰 수 있는 열기 총량이 줄어들고 초집중 감소를 하루 2%만큼 증가시킵니다. 이 주문의 효과는 같은 대상에 두 번째로 사용하거나 초집중이 떨어지면 끝납니다.\n\n고대의 조정자 주문으로 강화하지 않았다면 고대의 선물이 필요합니다.</CAAncientProtectiveAura.description>
+
+  <CAConjureLight.label>빛 불러내기</CAConjureLight.label>
+  <CAConjureLight.description>시전된 폰을 따라다니며 주위를 밝히는 빛을 만들어냅니다.</CAConjureLight.description>
+
+
+</LanguageData>

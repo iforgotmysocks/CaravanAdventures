@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <CATentDoor.label>텐트 문</CATentDoor.label>
+  <CATentDoor.description>방을 나눕니다. 간단한 문은 손으로 열어야 하므로 지나다닐 때 느려집니다. 얼마나 느려지는지는 문의 재질에 따라 달라집니다.</CATentDoor.description>
+
+  <CATentFenceDoor.label>울타리 문</CATentFenceDoor.label>
+  <CATentFenceDoor.description>방을 나눕니다. 간단한 문은 손으로 열어야 하므로 지나다닐 때 느려집니다. 얼마나 느려지는지는 문의 재질에 따라 달라집니다.</CATentFenceDoor.description>
+
+
+  <!-- supplies -->
+
+  <CASpacerTentSupplies.label>첨단 텐트 보급품</CASpacerTentSupplies.label>
+  <CASpacerTentSupplies.description>기술적으로 발달한 캠핑 장비와 직물입니다. 가혹한 환경을 견디는 데 완벽하고 상당히 보기도 좋습니다.</CASpacerTentSupplies.description>
+
+  <CACampControl.label>캠프 제어</CACampControl.label>
+  <CACampControl.description>캠프 제어</CACampControl.description>
+
+
+  <!-- chem fuel -->
+
+  <CASpacerBiofuelRefinery.label>첨단 화학연료 정제기</CASpacerBiofuelRefinery.label>
+  <CASpacerBiofuelRefinery.description>나무나 식물성 재료와 같은 유기물을 화학연료로 정제합니다.</CASpacerBiofuelRefinery.description>
+
+  <CAMiniCommsConsole.label>소형 통신기</CAMiniCommsConsole.label>
+  <CAMiniCommsConsole.description>다른 세력 및 궤도 상선과 무선 통신할 수 있게 합니다.</CAMiniCommsConsole.description>
+
+
+  <!-- camp fire roast -->
+
+  <CACampfireRoast.label>그릴 달린 모닥불</CACampfireRoast.label>
+  <CACampfireRoast.description>캠프의 핵심으로, 간식을 맛있게 굽기 위한 현대적 그릴이 달린 아늑한 모닥불입니다. 캠프를 관리하는 데 사용할 수도 있습니다.</CACampfireRoast.description>
+
+  <CAGrillSnack.label>구운 간식</CAGrillSnack.label>
+  <CAGrillSnack.description>맛있게 구운 간식으로, 간단한 식사만큼 영양이 많지는 않지만, 식중독을 일으키지 않습니다.</CAGrillSnack.description>
+
+
+  <!-- ac -->
+
+  <CAAirConditioningHeater.label>단방향 냉난방기</CAAirConditioningHeater.label>
+  <CAAirConditioningHeater.description>화학연료를 열로 바꾸는 장비이지만, 방을 어느 정도 시원하게 할 수도 있습니다.</CAAirConditioningHeater.description>
+
+
+  <!-- cooler -->
+
+  <CACooler.label>단방향 냉방기</CACooler.label>
+  <CACooler.description>방 온도를 내리는 장비입니다.</CACooler.description>
+
+
+  <!-- trade beacon -->
+
+  <CAOrbitalTradeBeacon.label>무역 송신기</CAOrbitalTradeBeacon.label>
+  <CAOrbitalTradeBeacon.description>궤도 무역에 필요합니다. 무역 송신기 근처에 있는 상품만 궤도 상선에 팔 수 있습니다.</CAOrbitalTradeBeacon.description>
+
+
+  <!-- generator -->
+
+  <CAChemfuelPoweredGenerator.label>화학연료 발전기</CAChemfuelPoweredGenerator.label>
+  <CAChemfuelPoweredGenerator.description>화학연료를 소비해 전력을 생산합니다. 정기적으로 연료를 수동 공급해야 합니다.</CAChemfuelPoweredGenerator.description>
+
+
+  <!-- wall -->
+
+  <CATentWall.label>텐트 벽</CATentWall.label>
+  <CATentWall.description>첨단 텐트 벽입니다. 보기도 좋고, 미래지향적 창문이 달려 아름다운 바깥 경치를 볼 수 있으면서도 안쪽을 엿볼 수는 없습니다.</CATentWall.description>
+
+
+  <!-- fabric -->
+
+  <CASpacerTentFabric.label>첨단 직물</CASpacerTentFabric.label>
+  <CASpacerTentFabric.description>특별한 생산 메카나이트를 이용해 분자 단위에서 엮은 나노섬유입니다. 대부분 자유롭게 구부러지지만, 타격을 가하면 즉시 경화하며, 부서뜨리기 굉장히 어렵습니다. 가장 발달한 번화계 문화에만 그 제조법의 비밀이 알려져 있습니다.</CASpacerTentFabric.description>
+
+
+  <!-- fence -->
+
+  <CAFencePost.label>동물 울타리 말뚝</CAFencePost.label>
+  <CAFencePost.description>동물 울타리 말뚝입니다.</CAFencePost.description>
+
+
+  <!-- bedrolls -->
+
+  <CASpacerBedroll.label>첨단 침낭</CASpacerBedroll.label>
+  <CASpacerBedroll.description>질 좋은 캠핑 침대입니다. 꽤 편합니다.</CASpacerBedroll.description>
+
+  <CASpacerBedrollDouble.label>첨단 큰 침낭</CASpacerBedrollDouble.label>
+  <CASpacerBedrollDouble.description>꽤 좋은 2인용 캠핑 침대입니다. 꽤 편합니다.</CASpacerBedrollDouble.description>
+
+
+</LanguageData>
