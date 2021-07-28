@@ -342,7 +342,7 @@ namespace CaravanAdventures
             Text.Font = GameFont.Small;
             if (Widgets.ButtonText(new Rect(options.ColumnWidth - 225, lastRect.y + 6, 150, Text.LineHeight + 10), "Open")) Find.WindowStack.Add(new SettingsAbilities());
             options.Gap(10);
-            options.Label($"Adjust settings related to the automatic camp generation. Depending if the player has enough camp supplies, the player's pawns will either build a high quality camp, or a wanting camp construted with makeshift materials.");
+            options.Label($"Balance the ancient abilities that can be gained by playing the story line to your personal preference.");
             options.GapLine();
 
             Text.Font = GameFont.Medium;
