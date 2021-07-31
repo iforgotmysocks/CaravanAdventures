@@ -235,7 +235,13 @@ namespace CaravanAdventures.CaravanStory
             var casket = (Building_AncientCryptosleepCasket)ThingMaker.MakeThing(ThingDefOf.AncientCryptosleepCasket);
             casket.groupID = casketGroupId;
             GenSpawn.Spawn(casket, curCell, map, rotation, WipeMode.Vanish);
-            var pawn = PawnGenerator.GeneratePawn(new PawnGenerationRequest(PawnKindDefOf.AncientSoldier, Faction.OfAncientsHostile));
+            var pawn = PawnGenerator.GeneratePawn(new PawnGenerationRequest(PawnKindDefOf.AncientSoldier, Faction.OfAncientsHostile)
+            {
+                FixedMelanin = 0.1f,
+                CanGeneratePawnRelations = false,
+                ColonistRelationChanceFactor = 0,
+                RelationWithExtraPawnChanceFactor = 0,
+            });
             mp.generatedSoldiers.Add(pawn);
             casket.GetDirectlyHeldThings().TryAdd(pawn, true);
         }
