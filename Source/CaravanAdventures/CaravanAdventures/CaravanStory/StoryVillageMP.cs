@@ -54,33 +54,42 @@ namespace CaravanAdventures.CaravanStory
             }, "GeneratingMap", false, new Action<Exception>(GameAndMapInitExceptionHandlers.ErrorWhileGeneratingMap), true);
             LongEventHandler.QueueLongEvent(delegate ()
             {
-                var storyChar = CompCache.StoryWC.questCont.Village.StoryContact;
+                StoryUtility.GenerateStoryContact();
+                var storyChar = CompCache.StoryWC.questCont.Village?.StoryContact;
                 //var orGenerateMap = GetOrGenerateMapUtility.GetOrGenerateMap(this.Tile, null);
                 var label = "StoryVillageArrivedLetterTitle".Translate(Label.ApplyTag(TagType.Settlement, Faction.GetUniqueLoadID()));
                 var text = "StoryVillageArrivedLetterMessage".Translate(Label.ApplyTag(TagType.Settlement, Faction.GetUniqueLoadID())).CapitalizeFirst();
 
                 //var storyContactCell = CellFinder.RandomNotEdgeCell(Math.Min(orGenerateMap.Size.x / 2 - (orGenerateMap.Size.x / 6), orGenerateMap.Size.z / 2 - (orGenerateMap.Size.y / 6)), Map);
 
+                if (storyChar == null)
+                {
+                    Log.Warning($"storychar was null");
+                }
+
+                if (!CompCache.StoryWC.storyFlags["IntroVillage_Entered"])
+                {
+                    if (!CellFinder.TryFindRandomSpawnCellForPawnNear_NewTmp(new IntVec3(Map.Size.x / 2, 0, Map.Size.z / 2), Map, out var storyContactCell, 8, x => x.Standable(Map)))
+                    {
+                        Log.Warning("Couldn't find a cell to spawn pawn");
+                    }
+
+                    if (storyChar != null)
+                    {
+                        if (storyChar.Spawned) storyChar.DeSpawn();
+                        StoryUtility.FreshenUpPawn(storyChar);
+                        GenSpawn.Spawn(storyChar, storyContactCell, Map);
+                        StoryUtility.AssignDialog("StoryVillage_Conversation", storyChar, GetType().ToString(), "ConversationFinished");
+                        AddNewLordAndAssignStoryChar(storyChar);
+                    }
+                    CompCache.StoryWC.SetSF("IntroVillage_Entered");
+                    timerForceStartRaid = 60000;
+                }
+
                 Find.LetterStack.ReceiveLetter(label, text, LetterDefOf.NeutralEvent, caravan.PawnsListForReading, Faction, null, null, null);
                 CaravanEnterMapUtility.Enter(caravan, Map, CaravanEnterMode.Edge, CaravanDropInventoryMode.DoNotDrop, true, null);
                 Find.TickManager.CurTimeSpeed = TimeSpeed.Normal;
 
-                if (!CompCache.StoryWC.storyFlags["IntroVillage_Entered"])
-                {
-                    if (!CellFinder.TryFindRandomSpawnCellForPawnNear_NewTmp(new IntVec3(Map.Size.x / 2, 0, Map.Size.z / 2), Map, out var storyContactCell, 4, x => x.Standable(Map)))
-                    {
-                        Log.Error("Couldn't find a cell to spawn pawn");
-                    }
-
-                    if (storyChar.Spawned) storyChar.DeSpawn();
-                    StoryUtility.FreshenUpPawn(storyChar);
-                    GenSpawn.Spawn(storyChar, storyContactCell, Map);
-                    StoryUtility.AssignDialog("StoryVillage_Conversation", storyChar, GetType().ToString(), "ConversationFinished");
-                    AddNewLordAndAssignStoryChar(storyChar);
-
-                    CompCache.StoryWC.SetSF("IntroVillage_Entered");
-                    timerForceStartRaid = 60000;
-                }
             }, "StoryVillageEnterMapMessage", false, new Action<Exception>(GameAndMapInitExceptionHandlers.ErrorWhileGeneratingMap), true);
         }
 
@@ -146,13 +155,13 @@ namespace CaravanAdventures.CaravanStory
             {
                 CompCache.StoryWC.SetSF("IntroVillage_FriendAlreadyDeadOrLeft");
                 Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillage_QuestUpdate_MechsArrivedFriendAlreadyDead".Translate(storyChar.NameShortColored, GenderUtility.GetPossessive(storyChar.gender)));
-                timerTillRemoval = 60 * 60 * 3;
+                timerTillRemoval = 60 * 60 * 2;
             }
             else if (pawnAlreadyLeft)
             {
                 CompCache.StoryWC.SetSF("IntroVillage_FriendAlreadyDeadOrLeft");
                 Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillage_QuestUpdate_MechsArrivedFriendDiedFleeing".Translate(storyChar.NameShortColored, GenderUtility.GetPossessive(storyChar.gender)));
-                timerTillRemoval = 60 * 60 * 3;
+                timerTillRemoval = 60 * 60 * 2;
             }
 
             var incidentParms = new IncidentParms
@@ -165,7 +174,7 @@ namespace CaravanAdventures.CaravanStory
             };
             DLog.Message($"Default threat points: {StorytellerUtility.DefaultThreatPointsNow(incidentParms.target)}");
             StoryDefOf.CAMechRaidMixed.Worker.TryExecute(incidentParms);
-            
+
             CompCache.StoryWC.SetSF("IntroVillage_MechsArrived");
 
             GetComponent<TimedDetectionPatrols>().Init(Faction.OfMechanoids);
@@ -240,10 +249,10 @@ namespace CaravanAdventures.CaravanStory
             if (Map.mapPawns.AllPawnsSpawned.Contains(storyChar) && !storyChar.Dead && !storyChar.Downed) return;
 
             DiaNode diaNode = null;
-            diaNode = new DiaNode(storyChar.Dead || storyChar.Downed 
-                ? "StoryVillage_Dia3_1_Dying".Translate() 
-                : Map.mapPawns.FreeColonistsSpawnedCount != 0 
-                    ? "StoryVillage_Dia3_1_Alive".Translate() 
+            diaNode = new DiaNode(storyChar.Dead || storyChar.Downed
+                ? "StoryVillage_Dia3_1_Dying".Translate()
+                : Map.mapPawns.FreeColonistsSpawnedCount != 0
+                    ? "StoryVillage_Dia3_1_Alive".Translate()
                     : "StoryVillage_Dia3_1_AliveNoHelpFromPlayer".Translate());
             diaNode.options.Add(new DiaOption("StoryVillage_Dia3_1_Option1".Translate()) { resolveTree = true }); ;
 
@@ -281,7 +290,7 @@ namespace CaravanAdventures.CaravanStory
         private void CheckShouldCiviliansFlee()
         {
             if (sacHuntersCiviliansFleeing || !HasMap) return;
-            var civs = Map.mapPawns.AllPawnsSpawned.Where(x => x.Faction == StoryUtility.FactionOfSacrilegHunters 
+            var civs = Map.mapPawns.AllPawnsSpawned.Where(x => x.Faction == StoryUtility.FactionOfSacrilegHunters
                 && (x.kindDef != StoryDefOf.CASacrilegHunters_ExperiencedHunter
                 && x.kindDef != StoryDefOf.CASacrilegHunters_ExperiencedHunterVillage
                 && x.kindDef != StoryDefOf.CASacrilegHunters_Hunter
@@ -307,10 +316,9 @@ namespace CaravanAdventures.CaravanStory
             if (timerTillRemoval > 0) return;
             //if (Map.mapPawns.FreeColonistsSpawned.Any(x => !x.Dead)) return;
             if (Map.mapPawns.AnyPawnBlockingMapRemoval) return;
-
             var killCamp = Map.mapPawns.AllPawnsSpawned.Any(x => x.Faction == Faction.OfMechanoids && !x.Dead && !x.Downed);
             Current.Game.DeinitAndRemoveMap(Map);
-            
+
             if (killCamp)
             {
                 DLog.Message($"camp destroyed");
