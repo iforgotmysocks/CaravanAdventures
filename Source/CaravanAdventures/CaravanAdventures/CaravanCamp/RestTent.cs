@@ -121,7 +121,6 @@ namespace CaravanAdventures.CaravanCamp
                     if (SkipPawnAssignment) continue;
                     var pawnInNeedOfBed = Occupants.FirstOrDefault(occ => occ != null && (occ != lover && occ != otherLover || !shareBed) && !assigned.Any(x => x.OwnersForReading.Contains(occ)));
                     if (pawnInNeedOfBed != null) {
-                        DLog.Message($"Found pawn in need of bed {pawnInNeedOfBed.NameShortColored} at {i}");
                         if (!CheckAssignableAndMarkBedForOwnerType(pawnInNeedOfBed, bed)) continue;
                         pawnInNeedOfBed.ownership.ClaimBedIfNonMedical((Building_Bed)bed);
                         assigned.Add((Building_Bed)bed);
