@@ -21,11 +21,12 @@ namespace CaravanAdventures.CaravanStory.MechChips.Abilities
         private Color curColor;
         private static readonly Material BeamMat = MaterialPool.MatFrom("Other/OrbitalBeam", ShaderDatabase.MoteGlow, MapMaterialRenderQueues.OrbitalBeam);
         private Material bufferMat = BeamMat;
+        public IntVec3 offset = new IntVec3(0, 0, 0);
 
         public override void Draw()
         {
             if (launchObject == default || targetObject == default) return;
-            launchPos = launchObject.Thing.DrawPos;
+            launchPos = launchObject.Thing.DrawPos + offset.ToVector3();
             targetPos = targetObject.Thing?.DrawPos ?? targetObject.Cell.ToVector3();
             launchPos.y = targetPos.y = AltitudeLayer.MetaOverlays.AltitudeFor();
             if (launchPos == targetPos) return;
