@@ -63,6 +63,8 @@ namespace CaravanAdventures
                     else Log.Warning($"Caravan Adventures: Applying patch for realruins failed");
                 }
             });
+
+            Log.Message($"CA (1.2) patches complete.");
         }
 
         public static void ExecuteHarmonyCompatibilityPatches(Harmony harmony)
