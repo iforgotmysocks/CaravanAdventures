@@ -22,8 +22,13 @@ namespace CaravanAdventures.CaravanStory
 
 		public static FloatMenuAcceptanceReport CanVisit(Caravan caravan, StoryVillageMP storyVillageMP)
 		{
-            if (CompCache.StoryWC.storyFlags["IntroVillage_PlayerWon"] && storyVillageMP?.Map != null && !storyVillageMP.Map.mapPawns.FreeColonists.Any(x => !x.Dead)) return false;
-			if (Faction.OfPlayer.HostileTo(StoryUtility.FactionOfSacrilegHunters)) return FloatMenuAcceptanceReport.WithFailMessage("StoryVillageCantArriveHostile".Translate(StoryUtility.FactionOfSacrilegHunters.NameColored));
+            if ((CompCache.StoryWC.storyFlags["IntroVillage_PlayerWon"] 
+				|| CompCache.StoryWC.storyFlags["IntroVillage_Finished"])
+                 && (storyVillageMP?.Map == null
+                     || (storyVillageMP?.Map != null
+                         && !storyVillageMP.Map.mapPawns.FreeColonists.Any(x => !x.Dead)))) return false;
+
+            if (Faction.OfPlayer.HostileTo(StoryUtility.FactionOfSacrilegHunters)) return FloatMenuAcceptanceReport.WithFailMessage("StoryVillageCantArriveHostile".Translate(StoryUtility.FactionOfSacrilegHunters.NameColored));
 			return storyVillageMP != null && storyVillageMP.Spawned;
 		}
 
@@ -37,6 +42,7 @@ namespace CaravanAdventures.CaravanStory
 
 		public override void Arrived(Caravan caravan)
 		{
+			if (!CanVisit(caravan, storyVillageMP)) return;
 			this.storyVillageMP.Notify_CaravanArrived(caravan);
 		}
 
@@ -53,7 +59,6 @@ namespace CaravanAdventures.CaravanStory
 				() => new CaravanArrivalAction_StoryVillageMP(storyVillage), "VisitStoryVillageLabel".Translate(storyVillage.Label), 
 				caravan, storyVillage.Tile, storyVillage, null);
 		}
-
 
 	}
 }
