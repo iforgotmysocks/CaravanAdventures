@@ -67,6 +67,7 @@
 			<li>
 				<compClass>CaravanAdventures.CaravanStory.TimedDetectionPatrols</compClass>
 			</li>
+      <li Class="WorldObjectCompProperties_TradeRequest" />
 		</comps>
 	</WorldObjectDef>
 
