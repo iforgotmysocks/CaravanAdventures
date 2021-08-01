@@ -96,14 +96,21 @@ namespace CaravanAdventures.CaravanStory.Quests
             CompCache.StoryWC.questCont.FriendlyCaravan.storyContactBondedPawn = initiator;
             CompCache.StoryWC.SetSF("TradeCaravan_DialogFinished");
             Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_TradeCaravan, "TradeCaravanQuestInfoTalkedTo".Translate(addressed.NameShortColored));
-            if (reward)
+            if (reward && ResearchProjectDef.Named("Electricity")?.ProgressPercent == 1f)
             {
                 var cell = ThingMaker.MakeThing(ThingDefOf.VanometricPowerCell);
                 cell.SetFaction(Faction.OfPlayer);
                 cell = cell.TryMakeMinified();
                 GenSpawn.Spawn(cell, addressed.Position, addressed.Map, WipeMode.VanishOrMoveAside);
                 Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_TradeCaravan, "TradeCaravanQuestInfoTalkedToReward".Translate(addressed.NameShortColored, ThingDefOf.VanometricPowerCell.LabelCap.ToString().Colorize(UnityEngine.Color.green)));
-
+            }
+            else if (reward)
+            {
+                var belt = ThingMaker.MakeThing(ThingDefOf.Apparel_ShieldBelt);
+                var beltQual = belt.TryGetComp<CompQuality>();
+                if (beltQual != null) beltQual.SetQuality(QualityCategory.Masterwork, ArtGenerationContext.Colony);
+                GenSpawn.Spawn(belt, addressed.Position, addressed.Map, WipeMode.VanishOrMoveAside);
+                Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_TradeCaravan, "TradeCaravanQuestInfoTalkedToReward".Translate(addressed.NameShortColored, ThingDefOf.Apparel_ShieldBelt.LabelCap.ToString().Colorize(UnityEngine.Color.green)));
             }
             Quests.QuestUtility.CompleteQuest(StoryQuestDefOf.CA_TradeCaravan);
         }
