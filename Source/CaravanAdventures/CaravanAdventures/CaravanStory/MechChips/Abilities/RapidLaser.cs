@@ -20,8 +20,9 @@ namespace CaravanAdventures.CaravanStory.MechChips.Abilities
         private int ticks = 0;
         private int totalTicks;
         public bool done = false;
+        private IntVec3 offset;
 
-        public RapidLaser(Thing target, Pawn instigator, int shotCount = 10, int frequencyTicks = 15, int randomDelayUpTo = 0, int damage = 7, bool ignoreLineOfSight = false)
+        public RapidLaser(Thing target, Pawn instigator, int shotCount = 10, int frequencyTicks = 15, int randomDelayUpTo = 0, int damage = 7, int offsetX = 0, int offsetZ = 0, bool ignoreLineOfSight = false)
         {
             this.randomDelayUpTo = Rand.Range(0, randomDelayUpTo);
             totalTicks = (shotCount * frequencyTicks);
@@ -30,6 +31,7 @@ namespace CaravanAdventures.CaravanStory.MechChips.Abilities
             this.frequencyTicks = frequencyTicks;
             this.damage = damage;
             this.ignoreLineOfSight = ignoreLineOfSight;
+            this.offset = new IntVec3(offsetX, 0, offsetZ);
         }
 
         public void Tick()
@@ -71,6 +73,7 @@ namespace CaravanAdventures.CaravanStory.MechChips.Abilities
                 mote.targetPos = target.DrawPos;
                 mote.targetObject = target;
                 mote.color = Color.red;
+                mote.offset = offset;
                 GenSpawn.Spawn(mote, instigator.Position, instigator.Map, WipeMode.Vanish);
 
                 if (targetPawn != null) targetPawn.TakeDamage(new DamageInfo(DamageDefOf.Burn, damage, 0.2f, -1, instigator, targetPawn.health.hediffSet.GetRandomNotMissingPart(DamageDefOf.Burn, BodyPartHeight.Undefined, BodyPartDepth.Outside)));
