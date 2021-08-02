@@ -57,6 +57,9 @@ namespace CaravanAdventures
         // camp hardcoded for now (plsdonthateme)
         public static IntVec3 tentSize = new IntVec3(5, 0, 5);
 
+        // filters
+        public static bool autoSelectPawns = true;
+
         // abilities
         // - ancient gift
         public static float ancientGiftPassivePsyfocusGainPerSec = 0.00035f;
@@ -150,6 +153,9 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref useAnimalOnlyFoodForAnimalArea, "useAnimalOnlyFoodForAnimalArea", false);
             Scribe_Values.Look(ref preferStonecutting, "preferStonecutting", false);
 
+            // filters
+            Scribe_Values.Look(ref autoSelectPawns, "autoSelectPawns", true);
+
             // abilities
             // - ancient gift
             Scribe_Values.Look(ref ancientGiftPassivePsyfocusGainPerSec, "ancientGiftPassivePsyfocusGainPerSec", 0.00035f);
@@ -232,7 +238,6 @@ namespace CaravanAdventures
         }
 
         private bool showRestartReminder = false;
-
         public void DoWindowContents(Rect wrect)
         {
             var options = new Listing_Standard();

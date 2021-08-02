@@ -92,6 +92,12 @@ namespace CaravanAdventures.Settings
             options.Gap();
 
             options.End();
+            // todo
+            //var footer = new Listing_Standard();
+            //footer.Begin(new Rect(wrect.x, wrect.y + options.CurHeight, wrect.width, wrect.height));
+            //var footerRect = ModSettings.BRect(footer.GetRect(Text.LineHeight));
+            //Widgets.CheckboxLabeled(footerRect, "Auto enable selected map pawns in caravan forming dialogs", ref ModSettings.autoSelectPawns);
+            //footer.End();
         }
 
         public static void RestoreFilterDefaults()
