@@ -19,6 +19,8 @@ namespace CaravanAdventures.Patches
     class AutomaticItemSelection
     {
         private static List<Pawn> caravanMembers;
+        private static bool pawnFlag = false;
+
         public static void ApplyPatches(Harmony harmony)
         {
             if (!ModSettings.caravanFormingFilterSelectionEnabled) return;
@@ -49,8 +51,36 @@ namespace CaravanAdventures.Patches
 
         public static void OnGUI_Postfix(TransferableOneWayWidget __instance, List<Section> ___sections, List<Section> __state, Rect inRect, ref bool anythingChanged)
         {
-            //UpdatePeopleSection(___sections);
             DoOwnCaravanFormButtons(___sections, ref anythingChanged);
+            if (ModSettings.autoSelectPawns) SelectPawns(___sections, ref anythingChanged);
+        }
+
+        private static void SelectPawns(List<Section> sections, ref bool anythingChanged)
+        {
+            if (pawnFlag == false && ModSettings.autoSelectPawns)
+            {
+                pawnFlag = true;
+                if (caravanMembers == null)
+                {
+                    DLog.Message($"caravanMembers null");
+                    return;
+                }
+
+                foreach (var section in sections)
+                {
+                    DLog.Message($"title {section.title}");
+                    foreach (var trans in section.transferables)
+                    {
+                        var pawn = (Pawn)trans?.AnyThing;
+                        if (pawn == null) continue;
+                        if (caravanMembers.Contains(pawn) && Find.Selector.SelectedPawns.Contains(pawn))
+                        {
+                            FilterHelper.SetMaxAmount(trans);
+                            anythingChanged = true;
+                        }
+                    }
+                }
+            }
         }
 
         public static void DoWindowContents_Postfix(Dialog_Trade __instance, bool ___playerIsCaravan, List<Tradeable> ___cachedTradeables, Rect inRect)
@@ -60,18 +90,20 @@ namespace CaravanAdventures.Patches
             if (anythingChanged) Traverse.Create(__instance).Method("CountToTransferChanged").GetValue();
         }
 
-        public static void Dialog_FormCaravan_Postfix(ref bool ___autoSelectFoodAndMedicine)
+        public static void Dialog_FormCaravan_Postfix(ref bool ___autoSelectFoodAndMedicine, Map ___map)
         {
             if (InitGC.autoSupplyDisabled) ___autoSelectFoodAndMedicine = false;
+            pawnFlag = false;
+            if (ModSettings.autoSelectPawns) caravanMembers = RimWorld.Planet.CaravanFormingUtility.AllSendablePawns(___map);
         }
 
         private static void UpdatePeopleSection(List<Section> ___sections)
         {
             var detectedPeople = ___sections.SelectMany(section => section.cachedTransferables.Where(trans =>
             {
-                var pawn = trans.AnyThing as Pawn;
+                var pawn = trans?.AnyThing as Pawn;
                 if (pawn == null) return false;
-                if (pawn.RaceProps.Humanlike && trans.CountToTransfer > 0) return true;
+                if (pawn.RaceProps?.Humanlike == true && trans.CountToTransfer > 0) return true;
                 return false;
             }).Select(trans => (Pawn)trans.AnyThing)
             ).ToList();
