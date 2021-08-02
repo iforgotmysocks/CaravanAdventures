@@ -49,7 +49,7 @@ namespace CaravanAdventures.CaravanImmersion
             ticks++;
         }
 
-        private void RemoveRelations()
+        public void RemoveRelations()
         {
             var playerPawns = PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction.Where(x => x.RaceProps.Humanlike).ToList();
 

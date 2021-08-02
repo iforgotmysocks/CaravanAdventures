@@ -131,6 +131,11 @@ namespace CaravanAdventures.CaravanStory
 
         public static void RestartStory()
         {
+            if (Find.World == null)
+            {
+                Messages.Message($"Load up a savegame to reset the storyline", MessageTypeDefOf.NegativeEvent);
+                return;
+            }
             if (CompCache.StoryWC.questCont.Village.StoryContact != null) CompCache.StoryWC.questCont.Village.StoryContact.Destroy();
             CompCache.StoryWC.questCont.Village.StoryContact = null;
             CompCache.StoryWC.questCont.FriendlyCaravan.storyContactBondedPawn = null;
@@ -225,8 +230,7 @@ namespace CaravanAdventures.CaravanStory
 
         internal static void RemoveStoryComponentsNoRoyalty()
         {
-            // todo
-            RestartStory();
+            RemoveStoryOrMod();
         }
 
         public static void FreshenUpPawn(Pawn pawn)
@@ -261,6 +265,50 @@ namespace CaravanAdventures.CaravanStory
             DLog.Message($"Center: {centerPoint.x} / {centerPoint.z}");
 
             return centerPoint;
+        }
+
+        internal static void RemoveStoryOrMod(bool removeFullMod = false)
+        {
+            if (Find.World == null)
+            {
+                if (removeFullMod) Messages.Message($"Load up a savegame to remove the mod's components", MessageTypeDefOf.NegativeEvent);
+                else Messages.Message($"Load up a savegame to remove the storyline", MessageTypeDefOf.NegativeEvent);
+                return;
+            }
+            
+            Helper.RunSavely(RestartStory);
+            Helper.RunSavely(() =>
+            {
+                foreach (var settlement in Find.World.worldObjects.Settlements.Reverse<Settlement>())
+                {
+                    if (settlement?.Faction?.def != StoryDefOf.CASacrilegHunters) continue;
+                    if (settlement.HasMap) Current.Game.DeinitAndRemoveMap(settlement.Map);
+                    settlement.Destroy();
+                }
+
+                if (removeFullMod)
+                {
+                    ModSettings.apocalypseEnabled = false;
+                    ModSettings.bountyEnabled = false;
+                    ModSettings.caravanCampEnabled = false;
+                    ModSettings.caravanFormingFilterSelectionEnabled = false;
+                    ModSettings.caravanIncidentsEnabled = false;
+                    ModSettings.caravanTravelCompanionsEnabled = false;
+                    ModSettings.storyEnabled = false;
+
+                    ModSettings.autoRemoveAbandondSettlementRuins = false;
+                    ModSettings.buffSettlementFoodAndSilverAvailability = false;
+                    ModSettings.buffShrineRewards = false;
+                    ModSettings.spDecayLevelIncrease = false;
+                    ModSettings.showLetterRemoval = false;
+
+                    var travelComp = Find.World.GetComponent<CaravanImmersion.TravelCompanionWC>();
+                    if (travelComp != null) travelComp.RemoveRelations();
+                }
+
+                if (removeFullMod) Messages.Message("Mod component removal complete (experimental)", MessageTypeDefOf.NeutralEvent);
+                else Messages.Message("Story removal complete (experimental)", MessageTypeDefOf.NeutralEvent);
+            });
         }
 
         internal static void FindUnfoggedMechsAndWakeUp(Map map)
