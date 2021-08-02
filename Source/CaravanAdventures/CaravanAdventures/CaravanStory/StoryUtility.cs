@@ -402,11 +402,17 @@ namespace CaravanAdventures.CaravanStory
 
         public static Faction EnsureSacrilegHunters(FactionRelationKind? relationKind = null, bool ignoreBetrayal = false, bool skipLeaderGeneration = false)
         {
-            var sacrilegHunters = Find.FactionManager.AllFactions.FirstOrDefault(x => x.def.defName == "CASacrilegHunters");
+            var sacrilegHunters = Find.FactionManager.AllFactions.FirstOrDefault(x => x.def?.defName == "CASacrilegHunters");
             if (sacrilegHunters == null)
             {
-                sacrilegHunters = FactionGenerator.NewGeneratedFaction(DefDatabase<FactionDef>.GetNamedSilentFail("CASacrilegHunters"));
-
+                if (DefDatabase<FactionDef>.GetNamedSilentFail("CASacrilegHunters") == null) return null;
+                sacrilegHunters = Helper.RunSavely(() => FactionGenerator.NewGeneratedFaction(DefDatabase<FactionDef>.GetNamedSilentFail("CASacrilegHunters")));
+                
+                if (sacrilegHunters == null)
+                {
+                    Log.Error($"Creating the sacrileg hunter faction failed due to some incompatibility. Error above.");
+                    return null;
+                }
                 Find.FactionManager.Add(sacrilegHunters);
                 var empireDef = FactionDefOf.Empire;
                 if (!empireDef.permanentEnemyToEveryoneExcept.Contains(sacrilegHunters.def)) empireDef.permanentEnemyToEveryoneExcept.Add(sacrilegHunters.def);

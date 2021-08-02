@@ -138,6 +138,12 @@ namespace CaravanAdventures.CaravanStory.Quests
                 return;
             }
             StoryUtility.EnsureSacrilegHunters();
+            if (StoryUtility.FactionOfSacrilegHunters == null)
+            {
+                DLog.Error($"Caravan Adventures Story caravan not created, incompatibility with faction generation!");
+                friendlyCaravanCounter = 10000f;
+                return;
+            }
             var incidentParms = new IncidentParms
             {
                 target = selectedMap,
