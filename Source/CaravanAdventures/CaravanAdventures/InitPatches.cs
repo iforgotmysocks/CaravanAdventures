@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using CaravanAdventures.CaravanItemSelection;
@@ -26,7 +27,11 @@ namespace CaravanAdventures
                 Helper.RunSavely(PatchRemoveRoyalTitleRequirements);
                 storyPatchesLoaded = true;
             }
-         
+            if (!ModSettings.storyEnabled && ModsConfig.RoyaltyActive)
+            {
+                Helper.RunSavely(DisableFactionVillageCreation);
+            }
+
             if (ModSettings.caravanFormingFilterSelectionEnabled) Helper.RunSavely(PatchAddCaravanDecisionsComp);
             if (ModSettings.caravanCampEnabled) Helper.RunSavely(PatchAddPsychiteTeaToCampFire);
             if (ModSettings.caravanCampEnabled && !ModSettings.decorativeFencePosts) Helper.RunSavely(PatchNonDecorativeFencePosts);
@@ -41,6 +46,12 @@ namespace CaravanAdventures
         {
             var fencePostDef = CaravanCamp.CampDefOf.CAFencePost;
             fencePostDef.passability = Traversability.Impassable;
+        }
+
+        private static void DisableFactionVillageCreation()
+        {
+            CaravanStory.StoryDefOf.CASacrilegHunters.settlementGenerationWeight = 0;
+            CaravanStory.StoryDefOf.CASacrilegHunters.requiredCountAtGameStart = 0;
         }
 
         private static void PatchAddCaravanDecisionsComp()
