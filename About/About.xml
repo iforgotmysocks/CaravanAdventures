@@ -17,7 +17,7 @@
   </modDependencies>
   <packageId>iforgotmysocks.CaravanAdventures</packageId>
   <description>
-Version 1.0.2
+Version 1.1.0
 
 Caravan Adventures aims to transform traveling around the world into a fun adventure by providing new features to replace the annoying micromanagement, make traveling more fun and give you a sense of purpose doing so. Quick heads-up, about 25% of this mod's content is the Storyline, which requires Royalty. Everything else can be used without it, don't worry.
 
@@ -36,6 +36,7 @@ Caravan forming / trading presets
 * Set up 3 presets in mod settings, that allow you to quickly select all items for travel, or create specific trade filters to select all you may want to sell at once.
 * More basic selection options for all items or none
 * Keep the automatic supplies disabled with a toggle, to avoid some lag when it's active every time you open up the dialog
+* Have selected pawns on the map automatically enabled in the caravan forming dialog
 
 Mechanoid Bounty
 * Initially part of the story, but also separately available
