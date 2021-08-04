@@ -15,6 +15,12 @@
       <downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
     </li>
   </modDependencies>
+  <loadAfter>
+    <li>Ludeon.RimWorld</li>
+    <li>Ludeon.RimWorld.Royalty</li>
+    <li>Ludeon.RimWorld.Ideology</li>
+    <li>newcolonist.largefactionbases</li>
+  </loadAfter>
   <packageId>iforgotmysocks.CaravanAdventures</packageId>
 	<description>
 [Beta 0.3.1]
