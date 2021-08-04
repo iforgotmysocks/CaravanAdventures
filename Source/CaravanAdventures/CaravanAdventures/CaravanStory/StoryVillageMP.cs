@@ -383,7 +383,7 @@ namespace CaravanAdventures.CaravanStory
             {
                 yield return new Command_Action
                 {
-                    icon = TexButton.Drop,
+                    icon = Patches.TexCustom.Drop,
                     defaultLabel = "VisitStoryVillageLabel".Translate(Label),
                     defaultDesc = "CaravanVisiting".Translate(Label),
                     action = delegate ()
