@@ -11,9 +11,10 @@ using Verse;
 namespace CaravanAdventures.Patches
 {
     [StaticConstructorOnStartup]
-    class TaxButtonLetter
+    class TexCustom
     {
         public static readonly Texture2D RemoveLetters = ContentFinder<Texture2D>.Get("UI/Buttons/RemoveLetters", true);
+        public static readonly Texture2D Drop = ContentFinder<Texture2D>.Get("UI/Buttons/Drop", true);
     }
 
     class LetterRemovalPatch
@@ -29,7 +30,7 @@ namespace CaravanAdventures.Patches
         public static void PlaySettingsDoPlaySettingsGlobalControlsPostfix(WidgetRow row, bool worldView)
         {
             if (worldView) return;
-            if (row.ButtonIcon(TaxButtonLetter.RemoveLetters, "CARemoveLettersButton".Translate())) Find.LetterStack.LettersListForReading.ToList().ForEach(letter => Find.LetterStack.RemoveLetter(letter));
+            if (row.ButtonIcon(TexCustom.RemoveLetters, "CARemoveLettersButton".Translate())) Find.LetterStack.LettersListForReading.ToList().ForEach(letter => Find.LetterStack.RemoveLetter(letter));
         }
     }
 }
