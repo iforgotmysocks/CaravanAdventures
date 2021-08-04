@@ -29,10 +29,10 @@ namespace CaravanAdventures.CaravanCamp
             var otherLover = lover != null ? CampHelper.ExistingColonistLovePartner(lover, Occupants) : null;
             var cellSpots = CellRect.Cells.Where(cell => !CellRect.EdgeCells.Contains(cell) && cell.z == CellRect.maxZ - 1).ToArray();
             var assigned = new List<Building_Bed>();
-            var shareBed = lover != null 
-                && otherLover != null 
-                && BedUtility.WillingToShareBed(lover, otherLover) 
-                && !HealthAIUtility.ShouldSeekMedicalRest(lover) 
+            var shareBed = lover != null
+                && otherLover != null
+                && BedUtility.WillingToShareBed(lover, otherLover)
+                && !HealthAIUtility.ShouldSeekMedicalRest(lover)
                 && !HealthAIUtility.ShouldSeekMedicalRest(otherLover);
 
 
@@ -120,7 +120,8 @@ namespace CaravanAdventures.CaravanCamp
                     campAssetListRef.Add(bed);
                     if (SkipPawnAssignment) continue;
                     var pawnInNeedOfBed = Occupants.FirstOrDefault(occ => occ != null && (occ != lover && occ != otherLover || !shareBed) && !assigned.Any(x => x.OwnersForReading.Contains(occ)));
-                    if (pawnInNeedOfBed != null) {
+                    if (pawnInNeedOfBed != null)
+                    {
                         if (!CheckAssignableAndMarkBedForOwnerType(pawnInNeedOfBed, bed)) continue;
                         pawnInNeedOfBed.ownership.ClaimBedIfNonMedical((Building_Bed)bed);
                         assigned.Add((Building_Bed)bed);
@@ -156,6 +157,12 @@ namespace CaravanAdventures.CaravanCamp
                 var bedFieldInstance = bed.GetType().GetField("forOwnerType", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
                 if (bedFieldInstance == null) continue;
                 bedFieldInstance.SetValue(bed, ownerType);
+
+                var district = bed.GetDistrict(RegionType.Set_Passable);
+                if (district == null) continue;
+                district.Notify_RoomShapeOrContainedBedsChanged();
+                var room = district.Room;
+                if (room != null) room.Notify_RoomShapeChanged();
             }
         }
     }
