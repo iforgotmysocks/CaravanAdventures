@@ -173,7 +173,10 @@ namespace CaravanAdventures.CaravanStory
                 raidArrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn
             };
             DLog.Message($"Default threat points: {StorytellerUtility.DefaultThreatPointsNow(incidentParms.target)}");
-            StoryDefOf.CAMechRaidMixed.Worker.TryExecute(incidentParms);
+            if (Helper.RunSavely(() => StoryDefOf.CAMechRaidMixed.Worker.TryExecute(incidentParms)) != true)
+            {
+                Log.Error($"Creating CA mech raid failed due to some incompatibility, error above.");
+            };
 
             CompCache.StoryWC.SetSF("IntroVillage_MechsArrived");
 

@@ -82,7 +82,10 @@ namespace CaravanAdventures.CaravanStory
             DLog.Message($"Assistance with {incidentParms.points} points and kind: {incidentParms.pawnKind}, targetspot default? {spawnSpot == default} if yes, a colonist should be selected as drop spot");
             if (spawnSpot == default && map.mapPawns.AnyColonistSpawned) spawnSpot = map.mapPawns.FreeColonists.Where(col => col.Spawned).RandomElement().Position;
             if (spawnSpot != default) incidentParms.spawnCenter = spawnSpot;
-            IncidentDefOf.RaidFriendly.Worker.TryExecute(incidentParms);
+            if (Helper.RunSavely(() => IncidentDefOf.RaidFriendly.Worker.TryExecute(incidentParms)) != true)
+            {
+                Log.Error($"Dropping in the sacrileg hunter faction failed due to some incompatibility, error above.");
+            };
         }
 
         public static void AssignDialog(string id, ThingWithComps addressed, string className, string methodName, bool repeatable = false, bool showQuestionMark = true, bool enabled = true, Pawn initiator = null, bool skipAlreadyExistsWarning = false)
