@@ -104,7 +104,7 @@ namespace CaravanAdventures
         public static bool allowBountyFromBuildingInstigators = true;
         public static bool allowBuyingBountyWithSilver = true;
         public static float bountyValueMult = 0.25f;
-        public static int itemStockAmount;
+        public static int itemStockAmount = 6;
 
         // general
         public static bool autoRemoveAbandondSettlementRuins;
@@ -198,7 +198,7 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref allowBountyFromBuildingInstigators, "allowBountyFromBuildingInstigators", true);
             Scribe_Values.Look(ref allowBuyingBountyWithSilver, "allowBuyingBountyWithSilver", true);
             Scribe_Values.Look(ref bountyValueMult, "bountyValueMult", 0.25f);
-            Scribe_Values.Look(ref itemStockAmount, "itemStockAmount", 4);
+            Scribe_Values.Look(ref itemStockAmount, "itemStockAmount", 6);
 
             //general 
             Scribe_Values.Look(ref autoRemoveAbandondSettlementRuins, "autoRemoveAbandondSettlementRuins", false);
