@@ -116,7 +116,7 @@ namespace CaravanAdventures.CaravanStory
 
         public override void PostMapGenerate()
         {
-
+            // override without calling base to avoid error of not existing timed raid component
         }
 
         public void ConversationFinished(Pawn initiator, Pawn addressed)
@@ -370,6 +370,25 @@ namespace CaravanAdventures.CaravanStory
             }
           
             yield break;
+        }
+
+        public override IEnumerable<Gizmo> GetCaravanGizmos(Caravan caravan)
+        {
+            foreach (var baseGiz in base.GetCaravanGizmos(caravan)) yield return baseGiz;
+
+            if (CaravanArrivalAction_StoryVillageMP.CanVisit(caravan, this))
+            {
+                yield return new Command_Action
+                {
+                    icon = TexButton.Drop,
+                    defaultLabel = "VisitStoryVillageLabel".Translate(Label),
+                    defaultDesc = "CaravanVisiting".Translate(Label),
+                    action = delegate ()
+                    {
+                        Notify_CaravanArrived(caravan);
+                    }
+                };
+            }
         }
 
     }
