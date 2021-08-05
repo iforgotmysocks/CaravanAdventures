@@ -77,7 +77,8 @@ namespace CaravanAdventures
         public static bool stopMentalBreaks = false;
         public static int maxLinkedAuraPawns = 4;
         // - light
-        public static float lightDuration = 1200f;
+        public static float lightDuration = 180000f;
+        public static float magicLightCaravanSpeedMult = 1.5f;
 
         // story
         // todo remove the ability to disable the apoc? Can always set the increase to 0
@@ -173,7 +174,8 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref onlyHealPermWhenGifted, "onlyHealPermWhenGifted", false);
             Scribe_Values.Look(ref maxLinkedAuraPawns, "maxLinkedAuraPawns", 4);
             // - light
-            Scribe_Values.Look(ref lightDuration, "lightDuration", 1200f);
+            Scribe_Values.Look(ref lightDuration, "lightDuration", 180000);
+            Scribe_Values.Look(ref magicLightCaravanSpeedMult, "magicLightCaravanSpeedMult", 1.5f);
 
             // story
             Scribe_Values.Look(ref storyEnabled, "storyEnabled", true);

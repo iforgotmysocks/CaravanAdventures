@@ -183,6 +183,7 @@
     <Compile Include="ModSettings.cs" />
     <Compile Include="CompatibilityPatches.cs" />
     <Compile Include="Patches\AbilityNeurotrainerDefGenerator.cs" />
+    <Compile Include="Patches\CaravanMagicLight.cs" />
     <Compile Include="Patches\LetterRemovalPatch.cs" />
     <Compile Include="Patches\SpDecayLevelIncrease.cs" />
     <Compile Include="Patches\ApocalypsePatches.cs" />

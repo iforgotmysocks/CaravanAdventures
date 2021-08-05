@@ -19,6 +19,11 @@ namespace CaravanAdventures.CaravanAbilities
         public override void CompPostPostRemoved()
         {
             base.CompPostPostRemoved();
+
+            if (Patches.CaravanMagicLight.magicLightTravelers.Contains(Pawn))
+            {
+                Patches.CaravanMagicLight.magicLightTravelers.Remove(Pawn);
+            }
             if (light != null) light.Destroy();
         }
 
@@ -27,12 +32,16 @@ namespace CaravanAdventures.CaravanAbilities
             base.CompPostTick(ref severityAdjustment);
            
             if (ticksToDisappear > ModSettings.lightDuration) Pawn.health.RemoveHediff(this.parent);
-            if (ticks >= 10 && light?.Position != Pawn.Position && Pawn?.Map != null)
+
+            if (ticks > 500)
             {
-                if (light != null) light.Destroy();
-                light = GenSpawn.Spawn(ThingDef.Named("CAMagicLight"), Pawn.Position, Pawn.Map);
                 ticks = 0;
+                if (!Patches.CaravanMagicLight.magicLightTravelers.Contains(Pawn))
+                {
+                    Patches.CaravanMagicLight.magicLightTravelers.Add(Pawn);
+                }
             }
+
             ticks++;
             ticksToDisappear++;
         }
