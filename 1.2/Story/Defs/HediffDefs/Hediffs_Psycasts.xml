@@ -165,16 +165,31 @@
 	</HediffDef>
 
 	<HediffDef ParentName="CAAncientPsycastHediffBase">
-		<defName>CAConjuredLight</defName>
-		<label>conjured light</label>
-		<description>A conjured light brighting up the area which follows pawn it was cast for.</description>
-		<isBad>false</isBad>
-		<everCurableByItem>false</everCurableByItem>
-		<defaultLabelColor>(255, 0, 0)</defaultLabelColor>
-		<comps>
-			<li Class="CaravanAdventures.CaravanAbilities.HediffCompProperties_ConjuredLight"/>
-		</comps>
-	</HediffDef>
+    <defName>CAConjuredLight</defName>
+    <label>conjured guiding light</label>
+    <description>A support light for travels that increases the travelers speed, may it be on a map or caravan. Can't be cast on the road and has a lengthy preperation time. Lasts 3 days.</description>
+    <isBad>false</isBad>
+    <everCurableByItem>false</everCurableByItem>
+    <defaultLabelColor>(255, 0, 0)</defaultLabelColor>
+    <comps>
+      <li Class="CaravanAdventures.CaravanAbilities.HediffCompProperties_ConjuredLight"/>
+    </comps>
+    <stages>
+      <li>
+        <statOffsets>
+          <MoveSpeed>1.5</MoveSpeed>
+        </statOffsets>
+        <statFactors>
+        </statFactors>
+        <!--<capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>0.3</offset>
+          </li>
+        </capMods>-->
+      </li>
+    </stages>
+  </HediffDef>
 
 	<HediffDef ParentName="CAAncientPsycastHediffBase">
 		<defName>CAOverheatingBrain</defName>
