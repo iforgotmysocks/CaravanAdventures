@@ -10,11 +10,11 @@ namespace CaravanAdventures.Patches
 {
     internal class SpDecayLevelIncrease
     {
-        public static void ApplyPatches(Harmony harmony)
+        public static void ApplyPatches()
         {
             var skillOrg = AccessTools.Method(typeof(SkillRecord), nameof(SkillRecord.Learn));
             var skillPost = new HarmonyMethod(typeof(SpDecayLevelIncrease).GetMethod(nameof(Learn_Postfix)));
-            harmony.Patch(skillOrg, null, skillPost);
+            HarmonyPatcher.harmony.Patch(skillOrg, null, skillPost);
         }
 
         public static void Learn_Postfix(SkillRecord __instance, Pawn ___pawn, float xp, bool direct = false)

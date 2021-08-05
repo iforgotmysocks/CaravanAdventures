@@ -12,16 +12,16 @@ namespace CaravanAdventures.Patches
     class KillBountyPatches
     {
         public static bool killBountyPatchesApplied = false;
-        public static void ApplyPatches(Harmony harmony)
+        public static void ApplyPatches()
         {
             if (!ModSettings.bountyEnabled) return;
             var pawnKillOrg = AccessTools.Method(typeof(Pawn), nameof(Pawn.Kill));
             var pawnKillPost = new HarmonyMethod(typeof(KillBountyPatches).GetMethod(nameof(PawnKillPostfix)));
-            harmony.Patch(pawnKillOrg, null, pawnKillPost);
+            HarmonyPatcher.harmony.Patch(pawnKillOrg, null, pawnKillPost);
 
             var factionDialogMakerFactionDialogForOrg = AccessTools.Method(typeof(FactionDialogMaker), nameof(FactionDialogMaker.FactionDialogFor));
             var factionDialogMakerFactionDialogForPost = new HarmonyMethod(typeof(KillBountyPatches).GetMethod(nameof(FactionDialogMakerFactionDialogForPostfix)));
-            harmony.Patch(factionDialogMakerFactionDialogForOrg, null, factionDialogMakerFactionDialogForPost);
+            HarmonyPatcher.harmony.Patch(factionDialogMakerFactionDialogForOrg, null, factionDialogMakerFactionDialogForPost);
 
             killBountyPatchesApplied = true;
         }

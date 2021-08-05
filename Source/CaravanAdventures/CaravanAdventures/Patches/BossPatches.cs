@@ -8,15 +8,15 @@ namespace CaravanAdventures.Patches
 {
     internal class BossPatches
     {
-        public static void ApplyPatches(Harmony harmony)
+        public static void ApplyPatches()
         {
             var projDrawOrg = AccessTools.Method(typeof(CompProjectileInterceptor), nameof(CompProjectileInterceptor.PostDraw));
             var projDrawPre = new HarmonyMethod(typeof(BossPatches).GetMethod(nameof(PostDrawPrefix)));
-            harmony.Patch(projDrawOrg, projDrawPre, null);
+            HarmonyPatcher.harmony.Patch(projDrawOrg, projDrawPre, null);
 
             var projOrg = AccessTools.Method(typeof(CompProjectileInterceptor), nameof(CompProjectileInterceptor.CheckIntercept));
             var projPost = new HarmonyMethod(typeof(BossPatches).GetMethod(nameof(CheckInterceptPostFix)));
-            harmony.Patch(projOrg, null, projPost);
+            HarmonyPatcher.harmony.Patch(projOrg, null, projPost);
         }
 
         public static bool PostDrawPrefix(CompProjectileInterceptor __instance, float ___lastInterceptAngle, Material ___ForceFieldMat, Material ___ForceFieldConeMat, MaterialPropertyBlock ___MatPropertyBlock, Color ___InactiveColor)

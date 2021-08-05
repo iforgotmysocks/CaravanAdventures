@@ -21,7 +21,7 @@ namespace CaravanAdventures.Patches
         private static List<Pawn> caravanMembers;
         private static bool pawnFlag = false;
 
-        public static void ApplyPatches(Harmony harmony)
+        public static void ApplyPatches()
         {
             if (!ModSettings.caravanFormingFilterSelectionEnabled) return;
             var orgOnGUI = AccessTools.Method(typeof(TransferableOneWayWidget), "OnGUI", new Type[]
@@ -30,14 +30,14 @@ namespace CaravanAdventures.Patches
                 typeof(bool).MakeByRefType()
             });
             var postOnGUI = new HarmonyMethod(typeof(AutomaticItemSelection).GetMethod(nameof(OnGUI_Postfix)));
-            harmony.Patch(orgOnGUI, null, postOnGUI);
+            HarmonyPatcher.harmony.Patch(orgOnGUI, null, postOnGUI);
 
             var orgDoWindowContents = AccessTools.Method(typeof(Dialog_Trade), "DoWindowContents", new Type[]
             {
                 typeof(Rect),
             });
             var postDoWindowContents = new HarmonyMethod(typeof(AutomaticItemSelection).GetMethod(nameof(DoWindowContents_Postfix)));
-            harmony.Patch(orgDoWindowContents, null, postDoWindowContents);
+            HarmonyPatcher.harmony.Patch(orgDoWindowContents, null, postDoWindowContents);
 
             var orgDialog_FormCaravan = AccessTools.DeclaredConstructor(typeof(Dialog_FormCaravan), new[] {
                 typeof(Map),
@@ -46,7 +46,7 @@ namespace CaravanAdventures.Patches
                 typeof(bool)
             });
             var postDialog_FormCaravan = new HarmonyMethod(typeof(AutomaticItemSelection).GetMethod(nameof(Dialog_FormCaravan_Postfix)));
-            harmony.Patch(orgDialog_FormCaravan, null, postDialog_FormCaravan);
+            HarmonyPatcher.harmony.Patch(orgDialog_FormCaravan, null, postDialog_FormCaravan);
         }
 
         public static void OnGUI_Postfix(TransferableOneWayWidget __instance, List<Section> ___sections, List<Section> __state, Rect inRect, ref bool anythingChanged)
@@ -68,7 +68,6 @@ namespace CaravanAdventures.Patches
 
                 foreach (var section in sections)
                 {
-                    DLog.Message($"title {section.title}");
                     foreach (var trans in section.transferables)
                     {
                         var pawn = (Pawn)trans?.AnyThing;

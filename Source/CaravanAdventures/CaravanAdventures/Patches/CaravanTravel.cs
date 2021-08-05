@@ -9,13 +9,12 @@ namespace CaravanAdventures.Patches
 {
     class CaravanTravel
     {
-
-        public static void ApplyPatches(Harmony harmony)
+        public static void ApplyPatches()
         {
             if (!ModSettings.caravanCampEnabled) return;
             var carTravelOrg = AccessTools.PropertyGetter(typeof(Caravan), nameof(Caravan.NightResting));
             var carTravelPost = new HarmonyMethod(typeof(CaravanTravel).GetMethod(nameof(CarTravelPostfix)));
-            harmony.Patch(carTravelOrg, null, carTravelPost);
+            HarmonyPatcher.harmony.Patch(carTravelOrg, null, carTravelPost);
         }
 
         public static void CarTravelPostfix(ref bool __result, Caravan __instance)

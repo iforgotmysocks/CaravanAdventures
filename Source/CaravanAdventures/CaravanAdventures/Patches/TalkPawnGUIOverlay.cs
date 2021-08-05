@@ -12,11 +12,11 @@ namespace CaravanAdventures.Patches
 {
     class TalkPawnGUIOverlay
     {
-        public static void ApplyPatches(Harmony harmony)
+        public static void ApplyPatches()
         {
             var drawPawnOrg = AccessTools.Method(typeof(PawnUIOverlay), nameof(PawnUIOverlay.DrawPawnGUIOverlay));
             var drawPawnPost = new HarmonyMethod(typeof(TalkPawnGUIOverlay).GetMethod(nameof(DrawPawnGUIOverlayPostfix)));
-            harmony.Patch(drawPawnOrg, null, drawPawnPost);
+            HarmonyPatcher.harmony.Patch(drawPawnOrg, null, drawPawnPost);
         }
 
         public static void DrawPawnGUIOverlayPostfix(Pawn ___pawn)

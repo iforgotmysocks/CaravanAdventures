@@ -11,19 +11,20 @@ namespace CaravanAdventures.Patches
         static HarmonyPatcher()
         {
             harmony = harmony ?? (harmony = new Harmony("iforgotmysocks.CaravanAdventures"));
-            if (ModSettings.caravanCampEnabled) CaravanTravel.ApplyPatches(harmony);
-            if (ModSettings.caravanFormingFilterSelectionEnabled) AutomaticItemSelection.ApplyPatches(harmony);
-            if (ModSettings.bountyEnabled) KillBountyPatches.ApplyPatches(harmony);
+            if (ModSettings.caravanCampEnabled) CaravanTravel.ApplyPatches();
+            if (ModSettings.caravanFormingFilterSelectionEnabled) AutomaticItemSelection.ApplyPatches();
+            if (ModSettings.bountyEnabled) KillBountyPatches.ApplyPatches();
             if (ModSettings.storyEnabled)
             {
-                TalkPawnGUIOverlay.ApplyPatches(harmony);
-                BossPatches.ApplyPatches(harmony);
+                TalkPawnGUIOverlay.ApplyPatches();
+                BossPatches.ApplyPatches();
+                CaravanMagicLight.ApplyPatches();
 
-                if (ModSettings.allowApocToAlterTileTemp) ApocalypsePatches.ApplyPatches(harmony);
+                if (ModSettings.allowApocToAlterTileTemp) ApocalypsePatches.ApplyPatches();
             }
 
-            if (ModSettings.spDecayLevelIncrease) SpDecayLevelIncrease.ApplyPatches(harmony);
-            if (ModSettings.showLetterRemoval) LetterRemovalPatch.ApplyPatches(harmony);
+            if (ModSettings.spDecayLevelIncrease) SpDecayLevelIncrease.ApplyPatches();
+            if (ModSettings.showLetterRemoval) LetterRemovalPatch.ApplyPatches();
         }
 
         /// <summary>
@@ -32,7 +33,7 @@ namespace CaravanAdventures.Patches
         internal static void RunEarlyPatches()
         {
             harmony = harmony ?? (harmony = new Harmony("iforgotmysocks.CaravanAdventures"));
-            if (ModsConfig.RoyaltyActive) AbilityNeurotrainerDefGenerator.ApplyPatches(harmony);
+            if (ModsConfig.RoyaltyActive) AbilityNeurotrainerDefGenerator.ApplyPatches();
         }
     }
 }

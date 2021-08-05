@@ -10,11 +10,11 @@ namespace CaravanAdventures.Patches
 {
     internal class ApocalypsePatches
     {
-        public static void ApplyPatches(Harmony harmony)
+        public static void ApplyPatches()
         {
             var seasonTempOrg = AccessTools.Method(typeof(GenTemperature), nameof(GenTemperature.OffsetFromSeasonCycle));
             var seasonTempPost = new HarmonyMethod(typeof(ApocalypsePatches).GetMethod(nameof(OffsetFromSeasonCycle_Postfix)));
-            harmony.Patch(seasonTempOrg, null, seasonTempPost);
+            HarmonyPatcher.harmony.Patch(seasonTempOrg, null, seasonTempPost);
             // GenTemperature / GetTemperatureFromSeasonAtTile
         }
 
