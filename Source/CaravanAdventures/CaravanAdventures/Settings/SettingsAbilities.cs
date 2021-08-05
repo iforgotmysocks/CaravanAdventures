@@ -32,11 +32,13 @@ namespace CaravanAdventures.Settings
         public override void DoWindowContents(Rect wrect)
         {
             var options = new Listing_Standard();
-            options.Begin(wrect);
+            var viewRect = new Rect(0f, 0f, windowRect.width - 65, 900f);
 
-            var viewRect = new Rect(0f, 0f, windowRect.width - 150, 850f);
-            options.BeginScrollView(wrect, ref scrollPos, ref viewRect);
+            //var viewRect = new Rect(0f, 0f, windowRect.width - 150, 850f);
+            //options.BeginScrollView(wrect, ref scrollPos, ref viewRect);
 
+            Widgets.BeginScrollView(wrect, ref scrollPos, viewRect);
+            options.Begin(viewRect);
             Text.Font = GameFont.Medium;
             options.Label("Ancient Abilities:".Colorize(Color.green), 40f);
 
@@ -79,12 +81,15 @@ namespace CaravanAdventures.Settings
 
             options.Gap(24f);
 
-            options.Label("Mystical light".Colorize(Color.green));
-            options.Label($"Duration in seconds: {Math.Round(ModSettings.lightDuration / 60, 0)}");
-            ModSettings.lightDuration = options.Slider(ModSettings.lightDuration, 60f, 14400f);
+            options.Label("Mystical guiding light".Colorize(Color.green));
+            options.Label($"Duration in days: {Math.Round(ModSettings.lightDuration / 60000, 2)}");
+            ModSettings.lightDuration = options.Slider(ModSettings.lightDuration, 60f, 300000);
+            options.Label($"Caravan travel speed multiplier: {Math.Round(ModSettings.magicLightCaravanSpeedMult, 1)}");
+            ModSettings.magicLightCaravanSpeedMult = options.Slider(ModSettings.magicLightCaravanSpeedMult, 0.1f, 5f);
 
 
-            options.EndScrollView(ref viewRect);
+            //options.EndScrollView(ref viewRect);
+            Widgets.EndScrollView();
             options.End();
 
         }
