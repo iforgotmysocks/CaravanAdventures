@@ -248,7 +248,7 @@
     <label>conjure guiding light</label>
     <description>A support light for travels that increases the travelers speed, may it be on a map or caravan. Can't be cast on the road and has a lengthy preperation time. Lasts 3 days.</description>
     <level>1</level>
-    <iconPath>UI/Icons/Animal/Rideable</iconPath>
+    <iconPath>UI/Abilities/GuidingLight</iconPath>
     <hotKey>Misc12</hotKey>
     <displayGizmoWhileUndrafted>True</displayGizmoWhileUndrafted>
     <disableGizmoWhileUndrafted>False</disableGizmoWhileUndrafted>
