@@ -16,9 +16,10 @@ namespace CaravanAdventures.CaravanStory
 {
     class StoryStart : MapComponent
     {
-        private Sustainer animaTreeWhipserSustainer;
+        private Sustainer animaTreeWhisperSustainer;
         private Thing theTree;
         private int ticks = 0;
+        private bool whisperStopped = false;
 
         public StoryStart(Map map) : base(map)
         {
@@ -28,6 +29,7 @@ namespace CaravanAdventures.CaravanStory
         {
             base.ExposeData();
             Scribe_References.Look(ref theTree, "theTree");
+            Scribe_Values.Look(ref whisperStopped, "whisperStopped", false);
         }
 
         public override void FinalizeInit()
@@ -43,6 +45,8 @@ namespace CaravanAdventures.CaravanStory
         public override void MapComponentTick()
         {
             base.MapComponentTick();
+
+            EnsureWhisperStopped();
             if (!ModsConfig.RoyaltyActive || !ModSettings.storyEnabled) return;
 
             DrawTreeQuestionMark();
@@ -115,7 +119,7 @@ namespace CaravanAdventures.CaravanStory
         private void AddTreeWhisper()
         {
             if (CompCache.StoryWC.storyFlags["Start_ReceivedGift"]
-                || CompCache.StoryWC.storyFlags["Start_InitialTreeWhisper"] && animaTreeWhipserSustainer != null) return;
+                || CompCache.StoryWC.storyFlags["Start_InitialTreeWhisper"] && animaTreeWhisperSustainer != null) return;
 
             var tree = map.spawnedThings.FirstOrDefault(x => x.def.defName == "Plant_TreeAnima");
             if (tree == null)
@@ -125,8 +129,23 @@ namespace CaravanAdventures.CaravanStory
             }
 
             var info = SoundInfo.InMap(tree, MaintenanceType.None);
-            animaTreeWhipserSustainer = DefDatabase<SoundDef>.GetNamed("CAAnimaTreeWhispers").TrySpawnSustainer(info);
-            if (animaTreeWhipserSustainer != null) CompCache.StoryWC.storyFlags["Start_InitialTreeWhisper"] = true;
+            animaTreeWhisperSustainer = DefDatabase<SoundDef>.GetNamed("CAAnimaTreeWhispers").TrySpawnSustainer(info);
+            if (animaTreeWhisperSustainer != null) CompCache.StoryWC.storyFlags["Start_InitialTreeWhisper"] = true;
+        }
+
+        private void EnsureWhisperStopped()
+        {
+            if (!whisperStopped && CompCache.StoryWC.storyFlags["Start_ReceivedGift"] || !ModSettings.storyEnabled)
+            {
+                whisperStopped = true;
+                if (animaTreeWhisperSustainer != null)
+                {
+                    if (!animaTreeWhisperSustainer.Ended) DLog.Message($"Ending whisper sustainer in fallback check on {map?.Parent?.Label ?? ""}");
+                    animaTreeWhisperSustainer.End();
+                    DLog.Message($"Ended whisper sustainer in fallback check on {map?.Parent?.Label ?? ""}");
+                }
+                else DLog.Message($"Sustainer already null in fallback check on {map?.Parent?.Label ?? ""}");
+            }
         }
 
         public void StoryStartDialog(Pawn initiator, Thing addressed)
@@ -192,9 +211,9 @@ namespace CaravanAdventures.CaravanStory
             {
                 if (susMap == null) continue;
                 var comp = susMap.GetComponent<StoryStart>();
-                if (comp == null || comp.animaTreeWhipserSustainer == null) continue;
+                if (comp == null || comp.animaTreeWhisperSustainer == null) continue;
                 DLog.Message($"Ending sustainer on {susMap.Parent.Label}");
-                comp.animaTreeWhipserSustainer.End();
+                comp.animaTreeWhisperSustainer.End();
             }
 
             CompCache.StoryWC.storyFlags["Start_ReceivedGift"] = true;
