@@ -17,13 +17,15 @@ namespace CaravanAdventures.Patches
         {
             if (!ModSettings.storyEnabled) return;
 
-            var orgt = AccessTools.Method(typeof(CaravanTicksPerMoveUtility), "GetTicksPerMove", new System.Type[] { typeof(Caravan), typeof(StringBuilder) });
-            var pret = new HarmonyMethod(typeof(CaravanMagicLight).GetMethod(nameof(GetTicksPerMovePrefix)));
-            HarmonyPatcher.harmony.Patch(orgt, pret, null);
+            // patches not needed in 1.2 as the caravan speed is still calculated by actual pawn speed
 
-            var org = AccessTools.Method(typeof(CaravanTicksPerMoveUtility), "BaseHumanlikeTicksPerCell");
-            var post = new HarmonyMethod(typeof(CaravanMagicLight).GetMethod(nameof(BaseHumanlikeTicksPerCellPostfix)));
-            HarmonyPatcher.harmony.Patch(org, null, post);
+            //var orgt = AccessTools.Method(typeof(CaravanTicksPerMoveUtility), "GetTicksPerMove", new System.Type[] { typeof(Caravan), typeof(StringBuilder) });
+            //var pret = new HarmonyMethod(typeof(CaravanMagicLight).GetMethod(nameof(GetTicksPerMovePrefix)));
+            //HarmonyPatcher.harmony.Patch(orgt, pret, null);
+
+            //var org = AccessTools.Method(typeof(CaravanTicksPerMoveUtility), "BaseHumanlikeTicksPerCell");
+            //var post = new HarmonyMethod(typeof(CaravanMagicLight).GetMethod(nameof(BaseHumanlikeTicksPerCellPostfix)));
+            //HarmonyPatcher.harmony.Patch(org, null, post);
         }
 
         public static bool GetTicksPerMovePrefix(Caravan caravan, StringBuilder explanation)
