@@ -11,11 +11,11 @@ namespace CaravanAdventures.Patches
 {
     class AbilityNeurotrainerDefGenerator
     {
-        public static void ApplyPatches(Harmony harmony)
+        public static void ApplyPatches()
         {
             var org = AccessTools.Method(typeof(ThingDefGenerator_Neurotrainer), "ImpliedThingDefs");
             var post = new HarmonyMethod(typeof(Patches.AbilityNeurotrainerDefGenerator), nameof(ImpliedThingDefs_Postfix));
-            harmony.Patch(org, null, post);
+            HarmonyPatcher.harmony.Patch(org, null, post);
         }
 
         public static void ImpliedThingDefs_Postfix(ref IEnumerable<ThingDef> __result)

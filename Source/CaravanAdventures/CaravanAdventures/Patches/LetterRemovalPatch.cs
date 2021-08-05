@@ -19,12 +19,12 @@ namespace CaravanAdventures.Patches
 
     class LetterRemovalPatch
     {
-        public static void ApplyPatches(Harmony harmony)
+        public static void ApplyPatches()
         {
             if (!ModSettings.showLetterRemoval) return;
             var letterOrg = AccessTools.Method(typeof(PlaySettings), nameof(PlaySettings.DoPlaySettingsGlobalControls));
             var letterPost = new HarmonyMethod(typeof(LetterRemovalPatch).GetMethod(nameof(PlaySettingsDoPlaySettingsGlobalControlsPostfix)));
-            harmony.Patch(letterOrg, null, letterPost);
+            HarmonyPatcher.harmony.Patch(letterOrg, null, letterPost);
         }
 
         public static void PlaySettingsDoPlaySettingsGlobalControlsPostfix(WidgetRow row, bool worldView)
