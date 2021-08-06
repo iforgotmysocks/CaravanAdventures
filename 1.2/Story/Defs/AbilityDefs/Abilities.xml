@@ -245,33 +245,36 @@
 
   <AbilityDef ParentName="PsycastBase" MayRequire="Ludeon.RimWorld.Royalty">
     <defName>CAConjureLight</defName>
-    <label>conjure light</label>
-    <description>Conjures a light brighting up the area which follows pawn it was cast for.</description>
+    <label>mystical guiding light</label>
+    <description>A support light for travels that increases the travelers speed, may it be on a map or caravan. Can't be cast on the road and has a lengthy preperation time. Lasts 3 days.</description>
     <level>1</level>
-    <iconPath>UI/Abilities/Invisibility</iconPath>
+    <iconPath>UI/Abilities/GuidingLight</iconPath>
     <hotKey>Misc12</hotKey>
-		<displayGizmoWhileUndrafted>True</displayGizmoWhileUndrafted>
-		<disableGizmoWhileUndrafted>False</disableGizmoWhileUndrafted>
+    <displayGizmoWhileUndrafted>True</displayGizmoWhileUndrafted>
+    <disableGizmoWhileUndrafted>False</disableGizmoWhileUndrafted>
+    <showGizmoOnWorldView>False</showGizmoOnWorldView>
+    <targetRequired>False</targetRequired>
+    <canUseAoeToGetTargets>False</canUseAoeToGetTargets>
     <statBases>
       <Ability_EntropyGain>5</Ability_EntropyGain>
-      <Ability_PsyfocusCost>0.005</Ability_PsyfocusCost>
-      <Ability_Duration>60</Ability_Duration>
+      <Ability_PsyfocusCost>0.1</Ability_PsyfocusCost>
+      <Ability_Duration>3000</Ability_Duration>
     </statBases>
     <verbProperties>
-      <warmupTime>0.25</warmupTime>
-      <range>19.9</range>
-      <onlyManualCast>True</onlyManualCast>
+      <warmupTime>15</warmupTime>
+      <range>0</range>
+      <requireLineOfSight>False</requireLineOfSight>
       <targetParams>
         <canTargetSelf>True</canTargetSelf>
-        <canTargetAnimals>True</canTargetAnimals>
       </targetParams>
     </verbProperties>
     <comps>
-      <li Class = "CompProperties_AbilityGiveHediff">
-        <compClass>CompAbilityEffect_GiveHediff</compClass>
-        <!--<compClass>CaravanAdventures.CaravanAbilities.CompAbilityEffect_GiveToggleableHediff</compClass>-->
+      <li Class = "CaravanAdventures.CaravanAbilities.CompProperties_GiveToggleableHediff">
+        <compClass>CaravanAdventures.CaravanAbilities.CompAbilityEffect_GiveToggleableHediff</compClass>
         <hediffDef>CAConjuredLight</hediffDef>
+        <hediffSecondary>CAConjuredLight</hediffSecondary>
         <psychic>True</psychic>
+        <onlyApplyToSelf>True</onlyApplyToSelf>
       </li>
     </comps>
   </AbilityDef>
