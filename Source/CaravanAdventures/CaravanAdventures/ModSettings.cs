@@ -361,6 +361,8 @@ namespace CaravanAdventures
             options.Gap(10);
             options.Label($"A collection of more general, small impovements that help support a life on the road.");
             options.GapLine();
+            options.Label($"v{System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString().TrimEnd(new[] { '.', '0' })}");
+
 
             if (showRestartReminder)
             {
