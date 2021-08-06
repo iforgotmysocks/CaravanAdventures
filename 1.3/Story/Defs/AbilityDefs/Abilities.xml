@@ -245,7 +245,7 @@
 
   <AbilityDef ParentName="PsycastBase" MayRequire="Ludeon.RimWorld.Royalty">
     <defName>CAConjureLight</defName>
-    <label>conjure guiding light</label>
+    <label>mystical guiding light</label>
     <description>A support light for travels that increases the travelers speed, may it be on a map or caravan. Can't be cast on the road and has a lengthy preperation time. Lasts 3 days.</description>
     <level>1</level>
     <iconPath>UI/Abilities/GuidingLight</iconPath>
@@ -258,7 +258,7 @@
     <statBases>
       <Ability_EntropyGain>5</Ability_EntropyGain>
       <Ability_PsyfocusCost>0.1</Ability_PsyfocusCost>
-      <Ability_Duration>60</Ability_Duration>
+      <Ability_Duration>3000</Ability_Duration>
     </statBases>
     <verbProperties>
       <warmupTime>15</warmupTime>

@@ -166,7 +166,7 @@
 
   <HediffDef ParentName="CAAncientPsycastHediffBase">
     <defName>CAConjuredLight</defName>
-    <label>conjured guiding light</label>
+    <label>mystical guiding light</label>
     <description>A support light for travels that increases the travelers speed, may it be on a map or caravan. Can't be cast on the road and has a lengthy preperation time. Lasts 3 days.</description>
     <isBad>false</isBad>
     <everCurableByItem>false</everCurableByItem>
