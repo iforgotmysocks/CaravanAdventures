@@ -97,6 +97,7 @@ namespace CaravanAdventures
         public static IntRange shrineDistance = new IntRange(200, 300);
         // todo make configurable
         public static float maxShrineCombatPoints = 10000f;
+        public static bool mutedShrineMessages = false;
 
         // bounty
         public static float envoyDurationTimeForBountyRelationHagglingInDays = 1f;
@@ -193,6 +194,7 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref hunterAssistanceMult, "hunterAssistanceMult", 1.2f);
             Scribe_Values.Look(ref shrineDistance, "shrineDistance", new IntRange(200, 300));
             //Scribe_Values.Look(ref maxShrineCombatPoints, "maxShrineCombatPoints", 10000f);
+            Scribe_Values.Look(ref mutedShrineMessages, "mutedShrineMessages", false);
 
             // bounty
             Scribe_Values.Look(ref envoyDurationTimeForBountyRelationHagglingInDays, "envoyDurationTimeForBountyRelationHagglingInDays", 1f);
