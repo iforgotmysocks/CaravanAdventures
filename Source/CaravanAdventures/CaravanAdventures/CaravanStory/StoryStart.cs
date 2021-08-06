@@ -96,7 +96,7 @@ namespace CaravanAdventures.CaravanStory
             var tree = map.spawnedThings.FirstOrDefault(x => x.def.defName == "Plant_TreeAnima") as ThingWithComps;
             if (tree == null)
             {
-                Log.Message("Tree is null");
+                DLog.Message("Tree is null");
                 return;
             }
             theTree = tree;
@@ -109,7 +109,7 @@ namespace CaravanAdventures.CaravanStory
             var tree = map.spawnedThings.FirstOrDefault(x => x.def.defName == "Plant_TreeAnima");
             if (tree == null)
             {
-                Log.Message("Tree is null");
+                DLog.Message("Tree is null");
                 return;
             }
 
@@ -124,7 +124,7 @@ namespace CaravanAdventures.CaravanStory
             var tree = map.spawnedThings.FirstOrDefault(x => x.def.defName == "Plant_TreeAnima");
             if (tree == null)
             {
-                Log.Message("Tree is null in AddTreeWisper");
+                DLog.Message("Tree is null in AddTreeWisper");
                 return;
             }
 
