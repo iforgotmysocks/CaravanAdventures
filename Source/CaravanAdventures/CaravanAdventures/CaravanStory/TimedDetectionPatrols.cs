@@ -136,23 +136,24 @@ namespace CaravanAdventures.CaravanStory
 					this.ticksLeftToSendRaid--;
 					if (this.ticksLeftToSendRaid == 0)
 					{
-                        var incidentParms = new IncidentParms
-                        {
-                            target = mapParent.Map,
-                            //incidentParms.points = StorytellerUtility.DefaultThreatPointsNow(incidentParms.target) * 2.5f;
-                            points = raidPoints * (1 + increaseStrengthCounter * 0.2f),
-                            faction = this.RaidFaction,
-                            raidArrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn
+						var incidentParms = new IncidentParms
+						{
+							target = mapParent.Map,
+							//incidentParms.points = StorytellerUtility.DefaultThreatPointsNow(incidentParms.target) * 2.5f;
+							points = raidPoints * (1 + increaseStrengthCounter * 0.2f),
+							faction = this.RaidFaction,
+							raidArrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn,
+							customLetterDef = ModSettings.mutedShrineMessages ? LetterDefOf.NeutralEvent : LetterDefOf.NegativeEvent
                         };
                         DLog.Message($"Default threat points: {StorytellerUtility.DefaultThreatPointsNow(incidentParms.target)}");
 						IncidentDefOf.RaidEnemy.Worker.TryExecute(incidentParms);
 						this.ticksLeftToSendRaid = (int)(Rand.Range(18f, 24f) * 2500f);
 						ticksLeftTillLeaveIfNoEnemies = defaultTicksTillLeave;
 						if (toggleIncreaseStrenthByCounter) increaseStrengthCounter++;
-						Messages.Message("MessageCaravanDetectedRaidArrived".Translate(incidentParms.faction.def.pawnsPlural, incidentParms.faction, this.ticksLeftToSendRaid.ToStringTicksToDays("F1")), MessageTypeDefOf.ThreatBig, true);
+						Messages.Message("MessageCaravanDetectedRaidArrived".Translate(incidentParms.faction.def.pawnsPlural, incidentParms.faction, this.ticksLeftToSendRaid.ToStringTicksToDays("F1")), ModSettings.mutedShrineMessages ? MessageTypeDefOf.SilentInput : MessageTypeDefOf.ThreatBig, true);
 						return;
 					}
-					else if (ticksLeftToSendRaid % 7500 == 0) Messages.Message(new Message("Story_Shrine1_NextPatrolWarning".Translate(this.parent.Label, GetDetectionCountdownTimeLeftString(ticksLeftToSendRaid)), MessageTypeDefOf.ThreatBig), false);
+					else if (ticksLeftToSendRaid % 7500 == 0) Messages.Message(new Message("Story_Shrine1_NextPatrolWarning".Translate(this.parent.Label, GetDetectionCountdownTimeLeftString(ticksLeftToSendRaid)), ModSettings.mutedShrineMessages ? MessageTypeDefOf.SilentInput : MessageTypeDefOf.ThreatBig), false);
 				}
 				if (ticksLeftTillLeaveIfNoEnemies > 0)
 				{

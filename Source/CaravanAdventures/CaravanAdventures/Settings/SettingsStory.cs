@@ -70,6 +70,7 @@ namespace CaravanAdventures.Settings
             //options.Gap();
             options.CheckboxLabeled("Issue further shrine locations after story is complete", ref ModSettings.issueFurtherShrineLocationsAfterStoryEnd);
             options.CheckboxLabeled("Limit larger map sizes to tested medium-large map size for shrines", ref ModSettings.limitLargeMapSizesToTestedSize);
+            options.CheckboxLabeled("Mute ancient master shrine detection patrol notifications", ref ModSettings.mutedShrineMessages);
 
             options.Gap();
             options.CheckboxLabeled("Should sacrileg hunters be hostile towards the empire?", ref ModSettings.sacHuntersHostileTowardsEmpire);
