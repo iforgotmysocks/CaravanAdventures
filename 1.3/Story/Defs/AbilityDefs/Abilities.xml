@@ -257,11 +257,11 @@
     <canUseAoeToGetTargets>False</canUseAoeToGetTargets>
     <statBases>
       <Ability_EntropyGain>5</Ability_EntropyGain>
-      <Ability_PsyfocusCost>0.005</Ability_PsyfocusCost>
+      <Ability_PsyfocusCost>0.1</Ability_PsyfocusCost>
       <Ability_Duration>60</Ability_Duration>
     </statBases>
     <verbProperties>
-      <warmupTime>3</warmupTime>
+      <warmupTime>15</warmupTime>
       <range>0</range>
       <requireLineOfSight>False</requireLineOfSight>
       <targetParams>
