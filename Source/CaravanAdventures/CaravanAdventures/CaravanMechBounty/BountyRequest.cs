@@ -246,10 +246,11 @@ namespace CaravanAdventures.CaravanMechBounty
                 Log.Warning($"item was null, skipping");
                 return;
             }
-            var foundSpot = DropCellFinder.TryFindDropSpotNear(requestor.Position, requestor.Map, out var validPosition, false, false);
-            if (!foundSpot)
+            var validPosition = DropCellFinder.TradeDropSpot(requestor.Map);
+            if (validPosition == default)
             {
-                Log.Warning($"Not able to drop requested item");
+                Log.Warning($"Not able to drop requested item at this location");
+                Messages.Message($"Not able to drop requested item at this location", MessageTypeDefOf.NegativeEvent);
                 return;
             }
 
