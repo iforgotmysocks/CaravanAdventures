@@ -19,6 +19,7 @@ namespace CaravanAdventures.CaravanStory
             pos = default;
             if (casket != null)
             {
+                // todo look into this shit
                 for (int i = 0; i < 50; i++)
                 {
                     CellFinder.TryFindRandomSpawnCellForPawnNear_NewTmp(casket.Position, map, out var result, 4);
@@ -245,7 +246,7 @@ namespace CaravanAdventures.CaravanStory
             if (pawn?.needs?.comfort != null) pawn.needs.comfort.CurLevel = pawn.needs.comfort.MaxLevel;
         }
 
-        public static IntVec3 GetCenterOfSettlementBase(Map map, Faction faction)
+        public static IntVec3 GetCenterOfSettlementBase(Map map, Faction faction, bool useMapCenterAsFallback = false)
         {
             var coords = new List<IntVec3>();
             map.regionGrid.allRooms
@@ -263,6 +264,17 @@ namespace CaravanAdventures.CaravanStory
                 )
             );
             coords.ForEach(coord => DLog.Message($"Coord: {coord.x} / {coord.z}"));
+
+            if (coords.Count == 0)
+            {
+                Log.Error($"Calculating GetCenterOfSettlementBase failed, returning default location");
+                if (!useMapCenterAsFallback) return default;
+                var mapSize = Find.World.info.initialMapSize;
+
+                var tempLoc = CellFinder.RandomSpawnCellForPawnNear(new IntVec3(mapSize.x / 2, 1, mapSize.z / 2), map, 20);
+                DLog.Message($"Default location using map center?: {useMapCenterAsFallback} : {tempLoc.x} / {tempLoc.z}");
+                return tempLoc;
+            }
 
             var centerPoint = new IntVec3(Convert.ToInt32(coords.Select(coord => coord.x).Average()), 0, Convert.ToInt32(coords.Select(coord => coord.z).Average()));
             DLog.Message($"Center: {centerPoint.x} / {centerPoint.z}");

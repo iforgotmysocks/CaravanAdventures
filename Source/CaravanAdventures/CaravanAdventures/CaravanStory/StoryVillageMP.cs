@@ -95,7 +95,7 @@ namespace CaravanAdventures.CaravanStory
 
         private void AddNewLordAndAssignStoryChar(Pawn storyChar)
         {
-            centerPoint = StoryUtility.GetCenterOfSettlementBase(Map, StoryUtility.FactionOfSacrilegHunters);
+            centerPoint = StoryUtility.GetCenterOfSettlementBase(Map, StoryUtility.FactionOfSacrilegHunters, false);
             var raidLords = Map.lordManager.lords.Where(lord => lord.faction == StoryUtility.FactionOfSacrilegHunters);
             DLog.Message($"hunter lords: {raidLords.Select(lord => lord.ownedPawns).Count()}");
 
@@ -103,6 +103,7 @@ namespace CaravanAdventures.CaravanStory
             {
                 var pawnsToReassign = lord.ownedPawns;
                 lord.lordManager.RemoveLord(lord);
+                if (centerPoint == default && pawnsToReassign.Count != 0) centerPoint = pawnsToReassign.FirstOrDefault().Position;
                 var genLord = LordMaker.MakeNewLord(Faction, new LordJob_DefendBaseAgaintHostiles(Faction, centerPoint), Map, pawnsToReassign);
                 DLog.Message($"Created lord with id {genLord.loadID}");
             }
