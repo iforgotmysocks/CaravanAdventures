@@ -38,7 +38,8 @@ namespace CaravanAdventures.CaravanStory
                 {
                     if (CompCache.StoryWC.GetCurrentShrineCounter() != CompCache.StoryWC.GetShrineMaxiumum) mp.boss = AddBoss(map, caravan, mainRoom);
                     else mp.lastJudgmentEntrance = InitCellarEntrace(map);
-                    CompCache.StoryWC.wasShrineAmbushNoLuck = false;
+                    CompCache.StoryWC.wasShrineAmbushNoLuck = (mp.boss == null && mp.lastJudgmentEntrance == null);
+                    DLog.Message($"Was shrine ambush: {CompCache.StoryWC.wasShrineAmbushNoLuck}");
                 }
                 else
                 {
