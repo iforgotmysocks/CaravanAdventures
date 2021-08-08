@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <CATentDoor.label>puerta de tienda</CATentDoor.label>
+  <CATentDoor.description>Divide las habitaciones. Las puertas sencillas deben abrirse manualmente, lo que ralentiza a las personas. La cantidad de ralentización depende del material de la puerta.</CATentDoor.description>
+
+  <CATentFenceDoor.label>puerta de valla</CATentFenceDoor.label>
+  <CATentFenceDoor.description>Divide las habitaciones. Las puertas sencillas deben abrirse manualmente, lo que ralentiza a las personas. La cantidad de ralentización depende del material de la puerta.</CATentFenceDoor.description>
+
+
+  <!-- supplies -->
+
+  <CASpacerTentSupplies.label>suministros espaciales de tienda de campaña</CASpacerTentSupplies.label>
+  <CASpacerTentSupplies.description>Una mezcla de equipos y tejidos para acampar tecnológicamente avanzados. Perfectos para sobrevivir a las condiciones más duras y bastante bonitos.</CASpacerTentSupplies.description>
+
+  <CACampControl.label>control de campamento</CACampControl.label>
+  <CACampControl.description>control del campamento</CACampControl.description>
+
+
+  <!-- chem fuel -->
+
+  <CASpacerBiofuelRefinery.label>refinería espacial de biocombustible</CASpacerBiofuelRefinery.label>
+  <CASpacerBiofuelRefinery.description>Refina la materia biológica, como la madera o la materia vegetal, para convertirla en quimicombustible.</CASpacerBiofuelRefinery.description>
+
+  <CAMiniCommsConsole.label>mini consola de comunicaciones</CAMiniCommsConsole.label>
+  <CAMiniCommsConsole.description>Permite el contacto por radio con otras facciones y comerciantes orbitales.</CAMiniCommsConsole.description>
+
+
+  <!-- camp fire roast -->
+
+  <CACampfireRoast.label>fogata con asador</CACampfireRoast.label>
+  <CACampfireRoast.description>El corazón de cada campamento, una acogedora hoguera con una moderna parrilla para preparar esos sabrosos bocadillos parrilleros. Los colonos también pueden utilizarla para gestionar el campamento.</CACampfireRoast.description>
+
+  <CAGrillSnack.label>bocadillo parrillero</CAGrillSnack.label>
+  <CAGrillSnack.description>Un sabroso aperitivo a la parrilla, no es tan nutritivo como una comida sencilla, pero no provoca una intoxicación alimenticia.</CAGrillSnack.description>
+
+
+  <!-- ac -->
+
+  <CAAirConditioningHeater.label>Aire acondicionado unidireccional</CAAirConditioningHeater.label>
+  <CAAirConditioningHeater.description>Un dispositivo que convierte el quimicombustible en calor, pero que también es capaz de enfriar la habitación hasta cierto punto.</CAAirConditioningHeater.description>
+
+
+  <!-- cooler -->
+
+  <CACooler.label>Enfriador unidireccional</CACooler.label>
+  <CACooler.description>Un dispositivo que enfría la temperatura de la habitación.</CACooler.description>
+
+
+  <!-- trade beacon -->
+
+  <CAOrbitalTradeBeacon.label>baliza de comercio orbital</CAOrbitalTradeBeacon.label>
+  <CAOrbitalTradeBeacon.description>Necesario para el comercio orbital. Solo puedes vender bienes a los comerciantes orbitales si están cerca de una baliza de comercio orbital.</CAOrbitalTradeBeacon.description>
+
+
+  <!-- generator -->
+
+  <CAChemfuelPoweredGenerator.label>generador a quimicombustible</CAChemfuelPoweredGenerator.label>
+  <CAChemfuelPoweredGenerator.description>Produce energía consumiendo quimicombustible. Debe ser alimentado a mano periodicamente.</CAChemfuelPoweredGenerator.description>
+
+
+  <!-- wall -->
+
+  <CATentWall.label>muro de tienda</CATentWall.label>
+  <CATentWall.description>Pared de tienda de campaña de alta tecnología. Es bastante atractiva, a pesar de que las ventanas futuristas permiten observar el hermoso exterior, pero no asomarse al interior.</CATentWall.description>
+
+
+  <!-- fabric -->
+
+  <CASpacerTentFabric.label>tejido espacial</CASpacerTentFabric.label>
+  <CASpacerTentFabric.description>Nanofibras tejidas en láminas molécula a molécula mediante mecanismos de producción especializados. Aunque se flexiona libremente la mayor parte del tiempo, se endurece para absorber los golpes que recibe y es increíblemente difícil de romper. Los secretos de su producción sólo son conocidos por las culturas más avanzadas de los glitterworlds.</CASpacerTentFabric.description>
+
+
+  <!-- fence -->
+
+  <CAFencePost.label>poste de valla de animales</CAFencePost.label>
+  <CAFencePost.description>Un poste de valla de animales</CAFencePost.description>
+
+
+  <!-- bedrolls -->
+
+  <CASpacerBedroll.label>cama enrollable espacial</CASpacerBedroll.label>
+  <CASpacerBedroll.description>Una cama de campaña de alta calidad. Bastante cómoda.</CASpacerBedroll.description>
+
+  <CASpacerBedrollDouble.label>cama enrollable espacial doble</CASpacerBedrollDouble.label>
+  <CASpacerBedrollDouble.description>Una cama doble de campaña de alta calidad. Bastante cómoda.</CASpacerBedrollDouble.description>
+
+
+</LanguageData>

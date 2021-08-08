@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <CAAncientMasterShrineWO.label>Pista - Santuario peligroso</CAAncientMasterShrineWO.label>
+  <CAAncientMasterShrineWO.description>Una vaga pista sobre historias de un santuario peligroso. Las personas que proporcionaron la pista no eran muy creíbles, así que ten cuidado, ya que también dijeron que el que se atrevió a peregrinar allí nunca regresó.</CAAncientMasterShrineWO.description>
+
+  <CAAncientMasterShrineMP.label>Santuario Maestro Ancestral</CAAncientMasterShrineMP.label>
+  <CAAncientMasterShrineMP.description>Un peligroso y olvidado santuario.</CAAncientMasterShrineMP.description>
+
+  <CAStoryVillageMP.label>Pueblo amigo</CAStoryVillageMP.label>
+  <CAStoryVillageMP.description>El pueblo de tus recientes nuevos amigos.</CAStoryVillageMP.description>
+
+  <CALastJudgmentMP.label>Ancestral Juicio Final</CALastJudgmentMP.label>
+  <CALastJudgmentMP.description>un peligroso y olvidado santuario</CALastJudgmentMP.description>
+
+
+</LanguageData>

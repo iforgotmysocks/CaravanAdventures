@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <CABossMechDevourerBody.label>Devorador</CABossMechDevourerBody.label>
+  <CABossMechDevourerBody.corePart.parts.0.parts.1.customLabel>sensor visual izquierdo</CABossMechDevourerBody.corePart.parts.0.parts.1.customLabel>
+  <CABossMechDevourerBody.corePart.parts.0.parts.2.customLabel>sensor visual derecho</CABossMechDevourerBody.corePart.parts.0.parts.2.customLabel>
+  <CABossMechDevourerBody.corePart.parts.0.parts.3.customLabel>sensor auditivo izquierdo</CABossMechDevourerBody.corePart.parts.0.parts.3.customLabel>
+  <CABossMechDevourerBody.corePart.parts.0.parts.4.customLabel>sensor auditivo derecho</CABossMechDevourerBody.corePart.parts.0.parts.4.customLabel>
+
+  <CACrystalScytheBody.label>Segador de cristal</CACrystalScytheBody.label>
+  <CACrystalScytheBody.corePart.parts.0.parts.0.parts.1.customLabel>sensor visual izquierdo</CACrystalScytheBody.corePart.parts.0.parts.0.parts.1.customLabel>
+  <CACrystalScytheBody.corePart.parts.0.parts.0.parts.2.customLabel>sensor visual derecho</CACrystalScytheBody.corePart.parts.0.parts.0.parts.2.customLabel>
+  <CACrystalScytheBody.corePart.parts.0.parts.0.parts.3.customLabel>sensor auditivo izquierdo</CACrystalScytheBody.corePart.parts.0.parts.0.parts.3.customLabel>
+  <CACrystalScytheBody.corePart.parts.0.parts.0.parts.4.customLabel>sensor auditivo derecho</CACrystalScytheBody.corePart.parts.0.parts.0.parts.4.customLabel>
+  <CACrystalScytheBody.corePart.parts.1.customLabel>hombro izquierdo</CACrystalScytheBody.corePart.parts.1.customLabel>
+  <CACrystalScytheBody.corePart.parts.1.parts.0.customLabel>brazo izquierdo</CACrystalScytheBody.corePart.parts.1.parts.0.customLabel>
+  <CACrystalScytheBody.corePart.parts.1.parts.0.parts.0.customLabel>cuchilla izquierda</CACrystalScytheBody.corePart.parts.1.parts.0.parts.0.customLabel>
+  <CACrystalScytheBody.corePart.parts.1.parts.0.parts.1.customLabel>mano izquierda</CACrystalScytheBody.corePart.parts.1.parts.0.parts.1.customLabel>
+  <CACrystalScytheBody.corePart.parts.1.parts.0.parts.1.parts.0.customLabel>meñique izquierdo</CACrystalScytheBody.corePart.parts.1.parts.0.parts.1.parts.0.customLabel>
+  <CACrystalScytheBody.corePart.parts.1.parts.0.parts.1.parts.1.customLabel>dedo medio izquierdo</CACrystalScytheBody.corePart.parts.1.parts.0.parts.1.parts.1.customLabel>
+  <CACrystalScytheBody.corePart.parts.1.parts.0.parts.1.parts.2.customLabel>dedo índice izquierdo</CACrystalScytheBody.corePart.parts.1.parts.0.parts.1.parts.2.customLabel>
+  <CACrystalScytheBody.corePart.parts.1.parts.0.parts.1.parts.3.customLabel>pulgar izquierdo</CACrystalScytheBody.corePart.parts.1.parts.0.parts.1.parts.3.customLabel>
+  <CACrystalScytheBody.corePart.parts.2.customLabel>hombro derecho</CACrystalScytheBody.corePart.parts.2.customLabel>
+  <CACrystalScytheBody.corePart.parts.2.parts.0.customLabel>brazo derecho</CACrystalScytheBody.corePart.parts.2.parts.0.customLabel>
+  <CACrystalScytheBody.corePart.parts.2.parts.0.parts.0.customLabel>cuchilla derecha</CACrystalScytheBody.corePart.parts.2.parts.0.parts.0.customLabel>
+  <CACrystalScytheBody.corePart.parts.2.parts.0.parts.1.customLabel>mano derecha</CACrystalScytheBody.corePart.parts.2.parts.0.parts.1.customLabel>
+  <CACrystalScytheBody.corePart.parts.2.parts.0.parts.1.parts.0.customLabel>meñique derecho</CACrystalScytheBody.corePart.parts.2.parts.0.parts.1.parts.0.customLabel>
+  <CACrystalScytheBody.corePart.parts.2.parts.0.parts.1.parts.1.customLabel>dedo medio derecho</CACrystalScytheBody.corePart.parts.2.parts.0.parts.1.parts.1.customLabel>
+  <CACrystalScytheBody.corePart.parts.2.parts.0.parts.1.parts.2.customLabel>dedo índice derecho</CACrystalScytheBody.corePart.parts.2.parts.0.parts.1.parts.2.customLabel>
+  <CACrystalScytheBody.corePart.parts.2.parts.0.parts.1.parts.3.customLabel>pulgar derecho</CACrystalScytheBody.corePart.parts.2.parts.0.parts.1.parts.3.customLabel>
+  <CACrystalScytheBody.corePart.parts.3.customLabel>pierna izquierda</CACrystalScytheBody.corePart.parts.3.customLabel>
+  <CACrystalScytheBody.corePart.parts.3.parts.0.customLabel>pie izquierdo</CACrystalScytheBody.corePart.parts.3.parts.0.customLabel>
+  <CACrystalScytheBody.corePart.parts.4.customLabel>pierna derecho</CACrystalScytheBody.corePart.parts.4.customLabel>
+  <CACrystalScytheBody.corePart.parts.4.parts.0.customLabel>pie derecho</CACrystalScytheBody.corePart.parts.4.parts.0.customLabel>
+
+
+</LanguageData>

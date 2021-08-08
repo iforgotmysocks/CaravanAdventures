@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <CAShrinePortal.label>Portal Mecanoide</CAShrinePortal.label>
+  <CAShrinePortal.description>Un portal construido por mecanoides. Parece llevar a algún sitio. Las encriptaciones concluyen que sólo alguien con el don ancestral puede usarlo.</CAShrinePortal.description>
+
+  <CARedLight.label>Luz Roja</CARedLight.label>
+  <CARedLight.description>Una luz roja, brilla de color rojo.</CARedLight.description>
+
+
+</LanguageData>

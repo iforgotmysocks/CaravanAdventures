@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <CASacrilegHunters.label>Cazadores sacrílegos</CASacrilegHunters.label>
+  <CASacrilegHunters.description>Una facción muy avanzada tecnológicamente que se estrelló con su nave generacional en este mundo. Su especialización radica en la recuperación de artefactos antiguos y en la búsqueda de tesoros, lo que les ayudó enormemente a afianzarse en este planeta, que está cubierto de estructuras antiguas.</CASacrilegHunters.description>
+  <CASacrilegHunters.pawnsPlural>Cazadores sacrílegos</CASacrilegHunters.pawnsPlural>
+  <CASacrilegHunters.leaderTitle>comisionado supremo</CASacrilegHunters.leaderTitle>
+
+  <CAFriendlyMechanoid.label>colmena mecanoide</CAFriendlyMechanoid.label>
+  <CAFriendlyMechanoid.pawnsPlural>mecanoides</CAFriendlyMechanoid.pawnsPlural>
+
+
+</LanguageData>

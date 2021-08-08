@@ -1,5 +1,6 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-	<DropItemAlert>Unload items</DropItemAlert>
-	<DropItemDesc>Start unloading items from all colonists and animals.</DropItemDesc>
+  <DropItemAlert>Descargar objetos</DropItemAlert>
+  <DropItemDesc>Comienza a descargar los objetos de todos los colonos y animales.</DropItemDesc>
+
 </LanguageData>

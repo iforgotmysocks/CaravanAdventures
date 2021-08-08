@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- todo priorities ? -->
+
+  <CADoBillsCookCampfireRoast.label>cocinar comidas en la fogata</CADoBillsCookCampfireRoast.label>
+  <CADoBillsCookCampfireRoast.verb>cocinar</CADoBillsCookCampfireRoast.verb>
+  <CADoBillsCookCampfireRoast.gerund>cocinando en</CADoBillsCookCampfireRoast.gerund>
+
+  <CADoBillsHaulCampfireRoast.label>realizar tareas en la fogata</CADoBillsHaulCampfireRoast.label>
+  <CADoBillsHaulCampfireRoast.verb>trabajar</CADoBillsHaulCampfireRoast.verb>
+  <CADoBillsHaulCampfireRoast.gerund>trabajando en</CADoBillsHaulCampfireRoast.gerund>
+
+  <CADoBillsSpacerRefinery.label>trabajar en la refinería</CADoBillsSpacerRefinery.label>
+  <CADoBillsSpacerRefinery.verb>refinar químicos</CADoBillsSpacerRefinery.verb>
+  <CADoBillsSpacerRefinery.gerund>refinando químicos en</CADoBillsSpacerRefinery.gerund>
+
+
+</LanguageData>

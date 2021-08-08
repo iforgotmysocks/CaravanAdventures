@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <CABossMechDevourer.label>Devorador</CABossMechDevourer.label>
+  <CABossMechDevourer.labelPlural>Devoradores</CABossMechDevourer.labelPlural>
+
+
+  <!-- CACrystalScythe -->
+
+  <CABossMechCrystalScythe.label>Segador de cristal</CABossMechCrystalScythe.label>
+  <CABossMechCrystalScythe.labelPlural>Segadores de cristal</CABossMechCrystalScythe.labelPlural>
+
+
+  <!-- harbinger -->
+
+  <CABossMechHarbinger.label>Precursor</CABossMechHarbinger.label>
+  <CABossMechHarbinger.labelPlural>Precursores</CABossMechHarbinger.labelPlural>
+
+
+  <!-- Havoc -->
+
+  <CABossMechHavoc.label>Caos</CABossMechHavoc.label>
+  <CABossMechHavoc.labelPlural>Caos</CABossMechHavoc.labelPlural>
+
+
+  <!-- endboss -->
+
+  <CAEndBossMech.label>IA ancestral coordinador</CAEndBossMech.label>
+  <CAEndBossMech.labelPlural>IAs ancestrales coordinadores</CAEndBossMech.labelPlural>
+
+
+</LanguageData>

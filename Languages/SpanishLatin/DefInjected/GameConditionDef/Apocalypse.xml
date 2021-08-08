@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <CAGameCondition_Apocalypse.label>Apocalipsis inminente</CAGameCondition_Apocalypse.label>
+  <CAGameCondition_Apocalypse.description>Una tecnología mecanoide desconocida está generando un apocalipsis que está provocando que la temperatura del planeta siga bajando hasta que todo ser vivo muera. La causa de esta condición no debe ser ignorada por mucho tiempo.\n\nAjuste de la temperatura actual: {0}</CAGameCondition_Apocalypse.description>
+  <CAGameCondition_Apocalypse.descriptionFuture>Una tecnología mecanoide desconocida está generando un apocalipsis inminente que hace que la temperatura del planeta siga bajando hasta que todo ser vivo muera. Hay que encontrar rápidamente la causa de esta situación.</CAGameCondition_Apocalypse.descriptionFuture>
+  <CAGameCondition_Apocalypse.endMessage>El apocalipsis ha sido detenido.</CAGameCondition_Apocalypse.endMessage>
+  <CAGameCondition_Apocalypse.letterText>Una tecnología mecanoide desconocida está generando un apocalipsis que hace que la temperatura del planeta siga bajando hasta que todo ser vivo muera. Hay que encontrar rápidamente la causa de esta situación.</CAGameCondition_Apocalypse.letterText>
+
+
+</LanguageData>

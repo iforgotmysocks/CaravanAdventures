@@ -1,17 +1,18 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-  <CAAnimalAreaLabel>Animal area</CAAnimalAreaLabel>
-  <CAAnimalNoFoodAreaLabel>Animal free</CAAnimalNoFoodAreaLabel>
-  <CAFoodZoneLabel>Food</CAFoodZoneLabel>
-  <CAAnimalFoodZoneLabel>Animal food</CAAnimalFoodZoneLabel>
-  <CADeconstructCamp>Pack up the camp</CADeconstructCamp>
-  <CADeconstructCampMessage>Packing up the camp</CADeconstructCampMessage>
-  <CABuildFailTents>{0} tents couldn't be built as no space was available.</CABuildFailTents>
-  <CAMedicineZone>Medicine</CAMedicineZone>
-  <CAEstablishedCampNotification>A high-tech camp was set up for {0} tent supplies</CAEstablishedCampNotification>
+  <CAAnimalAreaLabel>Area animal</CAAnimalAreaLabel>
+  <CAAnimalNoFoodAreaLabel>Sin animales</CAAnimalNoFoodAreaLabel>
+  <CAFoodZoneLabel>Comida</CAFoodZoneLabel>
+  <CAAnimalFoodZoneLabel>Comida animal</CAAnimalFoodZoneLabel>
+  <CADeconstructCamp>Recoger el campamento</CADeconstructCamp>
+  <CADeconstructCampMessage>Recogiendo el campamento</CADeconstructCampMessage>
+  <CABuildFailTents>{0} tiendas de campaña no pudieron ser construidas porque no había espacio disponible.</CABuildFailTents>
+  <CAMedicineZone>Medicina</CAMedicineZone>
+  <CAEstablishedCampNotification>Se instaló un campamento de alta tecnología por {0} suministros de tienda</CAEstablishedCampNotification>
 
-  <CALeaveImmediately>Leave immediately</CALeaveImmediately>
-  <CALeaveImmediatelyPackupCamp>Do you want to pack up the camp and abandon this place? \n{0} spacer tent supplies will be added to the caravan.</CALeaveImmediatelyPackupCamp>
-  <CALeaveImmediatelyPackupCampTribal>Do you want to pack up the camp and abandon this place?</CALeaveImmediatelyPackupCampTribal>
+  <CALeaveImmediately>Salir inmediatamente</CALeaveImmediately>
+  <CALeaveImmediatelyPackupCamp>¿Quieres recoger el campamento y abandonar este lugar? \n{0} suministros de tienda espaciales se añadirán a la caravana.</CALeaveImmediatelyPackupCamp>
+  <CALeaveImmediatelyPackupCampTribal>¿Quieres recoger el campamento y abandonar este lugar?</CALeaveImmediatelyPackupCampTribal>
+
 </LanguageData>
 

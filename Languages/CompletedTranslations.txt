@@ -1,1 +1,1 @@
-korean,
+korean,SpanishLatin,
