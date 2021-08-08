@@ -1,50 +1,51 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-	<StoryVillageQuestName>Caravan Adventures - Rescue a friend</StoryVillageQuestName>
-	<StoryVillageQuestDesc>{0} sent a letter requesting help urgently. The letter reads:\n</StoryVillageQuestDesc>
-	<StoryVillageQuestLetterContent>Dear {0},\n\nI really hope u get this letter in time, or we might all be dead. We came across a large shrine and as we cracked it open masses of mechanoids streamed out. We got away, but ever since huge hordes of mechanoids keep attacking our village.\nI'm sending this letter in hope that you can make it here in time to assist us. We're preparing an escape, but we have to wait for our reinforcements to stand any chance of escaping with our lives.\n\nPlease help us in those dark times and venture to {1} at haste, we'd never forget this great deed.</StoryVillageQuestLetterContent>
-	<StoryVillageQuestLetterContentPS>PS: I hope you guys are doing well, I really miss talking to you, I had such a great time when we met. I hope to see you soon, aiding us again.</StoryVillageQuestLetterContentPS>
-	<StoryVillageQuestLetterContentEnding>Your's sincerely,\n\n{0}\n</StoryVillageQuestLetterContentEnding>
-	<StoryVillageQuestDesc2>Travel to the {0} Village {1} and assist {2} before it's too late.</StoryVillageQuestDesc2>
-	<VisitStoryVillageLabel>Enter {0}</VisitStoryVillageLabel>
-	<StoryVillageEnterMapMessage>Entering village</StoryVillageEnterMapMessage>
-	<StoryVillageArrivedLetterTitle>Entered {0}</StoryVillageArrivedLetterTitle>
-	<StoryVillageArrivedLetterMessage>Your caravan arrived at {0}. Seems to be a nice place.</StoryVillageArrivedLetterMessage>
-	<StoryVillageCantArriveHostile>While hostile, you can't help {0}.</StoryVillageCantArriveHostile>
-  
-	<StoryVillage_Dia1_DiaTitle>{0} embraces you</StoryVillage_Dia1_DiaTitle>
-	<StoryVillage_Dia1_1>{0}, you came. Thank god. We barely fended off the last attack and our scouts spotted the next and yet biggest army only a few minutes away.\n\nI hope our reinforcements make it in time. </StoryVillage_Dia1_1>
-	<StoryVillage_Dia1_1_Option1>Good to see you. Any idea why those mechs are after you that bad?\nWe sure get attacked as well, but nothing as you described.</StoryVillage_Dia1_1_Option1>
-	<StoryVillage_Dia1_2>[{0}, pale and exhausted, looks you in the eyes] We don't know exactly. It was a huge shrine. Once we discovered the hordes of mechs coming out of that place we used our last nuke to level the whole place. But it looks like most made it out and they're after us now.\n\n[{0} hands you a small device in haste] Take this comms device, so I'll be able to contact you.</StoryVillage_Dia1_2>
-	<StoryVillage_Dia1_2_Option1>Alright, lets see if we can't defend this place.</StoryVillage_Dia1_2_Option1>
-	<StoryVillage_Dia1_2_Option2>How about we just leave now?</StoryVillage_Dia1_2_Option2>
-	<StoryVillage_Dia1_3>They are here, take cover!\n\n[{0} screamed] My god, what a horde...</StoryVillage_Dia1_3>
-	<StoryVillage_Dia1_3_Option1>Are you really sure you want to fight this?</StoryVillage_Dia1_3_Option1>
-	<StoryVillage_Dia1_4>Yah, they need to be held of until we were able to get the civilians out of here.</StoryVillage_Dia1_4>
-	<StoryVillage_Dia1_4_Option1>Guess today is as good a day to die as any.</StoryVillage_Dia1_4_Option1>
-	
-	<StoryVillage_QuestUpdate_MechsArrived>Either help {0} to defend {1} base or make a run for it, although Sacrileg Hunters would make good allies in the battles to come.</StoryVillage_QuestUpdate_MechsArrived>
-  <StoryVillage_QuestUpdate_MechsArrivedFriendAlreadyDead>{0} died before the hostile mechs arrived. You can still try to defend the base, but it won't be easy.</StoryVillage_QuestUpdate_MechsArrivedFriendAlreadyDead>
-  <StoryVillage_QuestUpdate_MechsArrivedFriendDiedFleeing>{0} had to flee before reinforcements arrived and was killed by mechanoids approaching the village.</StoryVillage_QuestUpdate_MechsArrivedFriendDiedFleeing>
-  <VillageAttackMechsMessage>{0} are attacking {2}</VillageAttackMechsMessage>
+  <StoryVillageQuestName>Aventuras en caravana - Rescatando a un amigo</StoryVillageQuestName>
+  <StoryVillageQuestDesc>{0} envió una carta solicitando ayuda urgente. La carta dice:\n</StoryVillageQuestDesc>
+  <StoryVillageQuestLetterContent>Querido {0},\n\nespero que recibas esta carta a tiempo, o podríamos estar todos muertos. Nos encontramos con un gran santuario y al abrirlo salieron masas de mecanoides. Escapamos, pero desde entonces enormes hordas de mecanoides siguen atacando nuestra aldea.\nEnvío esta carta con la esperanza de que puedas llegar a tiempo para ayudarnos. Estamos preparando una huida, pero tenemos que esperar a los refuerzos para tener alguna posibilidad de escapar con vida.\n\nPor favor, ayúdanos en estos tiempos oscuros y aventúrate a {1} a toda prisa, nunca olvidaremos esta gran hazaña.</StoryVillageQuestLetterContent>
+  <StoryVillageQuestLetterContentPS>PD: Espero que se encuentren bien, realmente extraño hablar con ustedes, la pasé muy bien cuando nos conocimos. Espero verte pronto, ayudándonos de nuevo.</StoryVillageQuestLetterContentPS>
+  <StoryVillageQuestLetterContentEnding>Sinceramente,\n\n{0}\n</StoryVillageQuestLetterContentEnding>
+  <StoryVillageQuestDesc2>Viaja al pueblo {1} de {0} y ayuda a {2} antes de que sea demasiado tarde.</StoryVillageQuestDesc2>
+  <VisitStoryVillageLabel>Entrar a {0}</VisitStoryVillageLabel>
+  <StoryVillageEnterMapMessage>Entrando al pueblo</StoryVillageEnterMapMessage>
+  <StoryVillageArrivedLetterTitle>Entraste a {0}</StoryVillageArrivedLetterTitle>
+  <StoryVillageArrivedLetterMessage>Tu caravana llegó a {0}. Parece ser un lugar agradable.</StoryVillageArrivedLetterMessage>
+  <StoryVillageCantArriveHostile>Mientras sea hostil, no puede ayudar a {0}.</StoryVillageCantArriveHostile>
 
-	<StoryVillage_Dia2_Title>{0} shouts loudly...</StoryVillage_Dia2_Title>
-	<StoryVillage_Dia2_1>Ey, our reinforcements are here, lets go guys, give them hell!\n\nTowns people and council members, to the escape routes!</StoryVillage_Dia2_1>
-	<StoryVillage_Dia2_1_Option1>This isn't gonna end well...</StoryVillage_Dia2_1_Option1>
+  <StoryVillage_Dia1_DiaTitle>{0} te abraza</StoryVillage_Dia1_DiaTitle>
+  <StoryVillage_Dia1_1>{0}, has venido. Gracias a Dios. Apenas pudimos rechazar el último ataque y nuestros exploradores vieron al siguiente y mucho más grande ejército a sólo unos minutos de distancia.\n\nEspero que nuestros refuerzos lleguen a tiempo.</StoryVillage_Dia1_1>
+  <StoryVillage_Dia1_1_Option1>Me alegro de verte. ¿Alguna idea de por qué esos mecanoides te persiguen tanto?\nSeguro que a nosotros también nos atacan, pero nada como lo que has descrito.</StoryVillage_Dia1_1_Option1>
+  <StoryVillage_Dia1_2>[{0}, pálido y agotado, te mira a los ojos] No lo sabemos exactamente. Era un santuario enorme. Una vez que descubrimos las hordas de mecanoides que salían de ese lugar, usamos nuestra última bomba nuclear para arrasar todo el lugar. Pero parece que la mayoría logró salir y ahora nos persiguen.\n\n[{0} te entrega un pequeño dispositivo a toda prisa] Toma este dispositivo de comunicación, así podré contactarte.</StoryVillage_Dia1_2>
+  <StoryVillage_Dia1_2_Option1>Muy bien, veamos si podemos defender este lugar.</StoryVillage_Dia1_2_Option1>
+  <StoryVillage_Dia1_2_Option2>¿Qué tal si simplemente nos vamos ahora?</StoryVillage_Dia1_2_Option2>
+  <StoryVillage_Dia1_3>¡Están aquí, cúbranse!\n\n[{0} grita] Dios mío, qué horda...</StoryVillage_Dia1_3>
+  <StoryVillage_Dia1_3_Option1>¿Estás seguro de que quieres luchar contra eso?</StoryVillage_Dia1_3_Option1>
+  <StoryVillage_Dia1_4>Sí, hay que retenerlos hasta que podamos sacar a los civiles de aquí.</StoryVillage_Dia1_4>
+  <StoryVillage_Dia1_4_Option1>Supongo que hoy es un buen día para morir como cualquier otro.</StoryVillage_Dia1_4_Option1>
 
-	<StoryVillage_Dia3_Title>{0} contacts you via comms device...</StoryVillage_Dia3_Title>
-	<StoryVillage_Dia3_1_Alive>We got out alive, this is horrible. I'll have to meet up with our expert hunters and come up with a plan how to defeat these things. We need to act fast or all is lost.\n\nI'll contact you when we know more, good luck.\n... and thanks. I won't forget that you fought for us.</StoryVillage_Dia3_1_Alive>
-  <StoryVillage_Dia3_1_Dying>Save... yourself...\nThis battle... is lost...\nSomeone will reach... out to... you... I'm... sorry...</StoryVillage_Dia3_1_Dying>
-  <StoryVillage_Dia3_1_AliveNoHelpFromPlayer>We got out alive, this is horrible. I'll have to meet up with our expert hunters and come up with a plan how to defeat these things. We need to act fast or all is lost.\n\nI'll contact you when we know more, though I really hope u will help us next time. I was sad to see that you didn't stick around to help.</StoryVillage_Dia3_1_AliveNoHelpFromPlayer>
-  <StoryVillage_Dia3_1_Option1>Lets move on</StoryVillage_Dia3_1_Option1>
-	<StoryVillage_SacHunters_Fleeing>Sacrileg Hunters are fleeing.</StoryVillage_SacHunters_Fleeing>
-	<StoryVillage_SacHuntersCivs_Fleeing>Villagers are escaping as planned.</StoryVillage_SacHuntersCivs_Fleeing>
+  <StoryVillage_QuestUpdate_MechsArrived>O bien ayudar a {0} a defender su base o salir huyendo, aunque los Cazadores de Sacrilegs serán buenos aliados en las batallas que se avecinan.</StoryVillage_QuestUpdate_MechsArrived>
+  <StoryVillage_QuestUpdate_MechsArrivedFriendAlreadyDead>{0} murió antes de que llegaran los mecanoides hostiles. Todavía puedes intentar defender la base, pero no será fácil.</StoryVillage_QuestUpdate_MechsArrivedFriendAlreadyDead>
+  <StoryVillage_QuestUpdate_MechsArrivedFriendDiedFleeing>{0} tuvo que huir antes de que llegaran los refuerzos y fue asesinado por los mecanoides que se acercaban al pueblo.</StoryVillage_QuestUpdate_MechsArrivedFriendDiedFleeing>
+  <VillageAttackMechsMessage>{0} están atacando a {2}</VillageAttackMechsMessage>
 
-  <StoryVillage_QuestUpdate_CanLeaveSuccess>The towns folk was able to get to safety, your task is complete.</StoryVillage_QuestUpdate_CanLeaveSuccess>
-  <StoryVillage_QuestUpdate_CanLeaveFailed>Sacrileg Hunter's leadership took losses and they will need some time to recover. Your task failed.</StoryVillage_QuestUpdate_CanLeaveFailed>
-	<StoryVillage_QuestUpdate_Survived>You survived and made it out alive. But where did all those mechs come from? Best to watch out for more clues...</StoryVillage_QuestUpdate_Survived>
+  <StoryVillage_Dia2_Title>{0} grita fuerte...</StoryVillage_Dia2_Title>
+  <StoryVillage_Dia2_1>Nuestros refuerzos están aquí, ¡vamos chicos, denles duro!\n\nCiudadanos y miembros del consejo, ¡a las rutas de escape!</StoryVillage_Dia2_1>
+  <StoryVillage_Dia2_1_Option1>Esto no acabará bien...</StoryVillage_Dia2_1_Option1>
 
-  <StoryVillage_Response_BountyInitiatedTitle>Planet-wide bounty announcement</StoryVillage_Response_BountyInitiatedTitle>
-  <StoryVillage_Response_BountyInitiatedDesc>Following the tragic mechanoid attack on one of our settlements we, {0}, hereby place a bounty on {1}.\n\nFor every personal kill, your faction will earn bounty credits which can be traded in for military support, rare items, help with smoothing over relations, and for very ambitious participants, you may get the ability to enlist our top veterans permanently.\n\nSimply contact us via the comms console.\nGood hunt!</StoryVillage_Response_BountyInitiatedDesc>
+  <StoryVillage_Dia3_Title>{0} te contacta a través del dispositivo de comunicación...</StoryVillage_Dia3_Title>
+  <StoryVillage_Dia3_1_Alive>Salimos vivos, esto es horrible. Tendré que reunirme con nuestros expertos cazadores y pensar en un plan para derrotar a estas cosas. Tenemos que actuar rápido o todo estará perdido.\n\nMe pondré en contacto contigo cuando sepamos más, buena suerte.\n... Y gracias. No olvidaré que has luchado por nosotros.</StoryVillage_Dia3_1_Alive>
+  <StoryVillage_Dia3_1_Dying>Sálvense... ustedes mismos... Esta batalla... está perdida... Alguien contactará... con... ustedes... Lo... siento...</StoryVillage_Dia3_1_Dying>
+  <StoryVillage_Dia3_1_AliveNoHelpFromPlayer>Salimos vivos, esto es horrible. Tendré que reunirme con nuestros expertos cazadores y pensar en un plan para derrotar a estas cosas. Tenemos que actuar rápido o todo está perdido.\n\nMe pondré en contacto contigo cuando sepamos más, aunque realmente espero que nos ayudes la próxima vez. Me apenó ver que no estabas para ayudar.</StoryVillage_Dia3_1_AliveNoHelpFromPlayer>
+  <StoryVillage_Dia3_1_Option1>Sigamos adelante</StoryVillage_Dia3_1_Option1>
+  <StoryVillage_SacHunters_Fleeing>Los cazadores sacrílegos están huyendo.</StoryVillage_SacHunters_Fleeing>
+  <StoryVillage_SacHuntersCivs_Fleeing>Los aldeanos están escapando como estaba previsto.</StoryVillage_SacHuntersCivs_Fleeing>
+
+  <StoryVillage_QuestUpdate_CanLeaveSuccess>Las personas del pueblo pudieron ponerse a salvo, tu tarea está completa.</StoryVillage_QuestUpdate_CanLeaveSuccess>
+  <StoryVillage_QuestUpdate_CanLeaveFailed>Los líderes de los Cazadores sacrílegos sufrieron pérdidas y necesitarán algún tiempo para recuperarse. Tu tarea ha fracasado.</StoryVillage_QuestUpdate_CanLeaveFailed>
+  <StoryVillage_QuestUpdate_Survived>Has sobrevivido y has salido con vida. ¿Pero de dónde salieron todos esos mecanoides? Lo mejor es estar atento a más pistas...</StoryVillage_QuestUpdate_Survived>
+
+  <StoryVillage_Response_BountyInitiatedTitle>Anuncio de recompensa para todo el planeta</StoryVillage_Response_BountyInitiatedTitle>
+  <StoryVillage_Response_BountyInitiatedDesc>Tras el trágico ataque mecanoide a uno de nuestros asentamientos, nosotros, {0}, ponemos una recompensa sobre {1}.\n\nPor cada muerte individual, tu facción ganará créditos de recompensa que pueden ser intercambiados por apoyo militar, objetos raros, ayuda para suavizar las relaciones, y para los participantes muy ambiciosos, puedes obtener la capacidad de alistar a nuestros mejores veteranos de forma permanente.\n\nSimplemente ponte en contacto con nosotros a través de la consola de comunicaciones.\n¡Buena caza!</StoryVillage_Response_BountyInitiatedDesc>
+
 </LanguageData>
 

@@ -1,12 +1,13 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-  <LetterQuestConcludedLabelWithUpdateInfo>Quest concluded (Quest info updated)</LetterQuestConcludedLabelWithUpdateInfo>
-  <LetterQuestCompletedLabelWithUpdateInfo>Quest completed (Quest info updated)</LetterQuestCompletedLabelWithUpdateInfo>
-  <LetterQuestFailedLabelWithUpdateInfo>Quest failed (Quest info updated)</LetterQuestFailedLabelWithUpdateInfo>
+  <LetterQuestConcludedLabelWithUpdateInfo>Misión finalizada (Información de la misión actualizada)</LetterQuestConcludedLabelWithUpdateInfo>
+  <LetterQuestCompletedLabelWithUpdateInfo>Misión completada (Información de la misión actualizada)</LetterQuestCompletedLabelWithUpdateInfo>
+  <LetterQuestFailedLabelWithUpdateInfo>Misión fallida (Información de la misión actualizada)</LetterQuestFailedLabelWithUpdateInfo>
 
-  <CALetterQuestOngoingUpdatedInfo>Quest updated</CALetterQuestOngoingUpdatedInfo>
-  <CALetterQuestOngoingUpdatedInfoText>The quest "{0}" was updated.</CALetterQuestOngoingUpdatedInfoText>
+  <CALetterQuestOngoingUpdatedInfo>Misión actualizada</CALetterQuestOngoingUpdatedInfo>
+  <CALetterQuestOngoingUpdatedInfoText>La misión "{0}" fue actualizada.</CALetterQuestOngoingUpdatedInfoText>
 
-  <CAAbilityCoordinatorApprovalText>When casting ancient coordinator, every pawn exceeding the default link limit of 4 (gifted pawn not included) will die.\n\n\nDo you really want to cast ancient coordinator?</CAAbilityCoordinatorApprovalText>
+  <CAAbilityCoordinatorApprovalText>Al lanzar coordinación ancestral, todos los colonos que superen el límite por defecto de 4 enlaces (no se incluye el lanzador) morirán.\n\n\n¿Realmente quieres lanzar coordinación ancestral?</CAAbilityCoordinatorApprovalText>
+
 </LanguageData>
 

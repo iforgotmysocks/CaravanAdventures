@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <TravelCompanions.stages.0.label>Forastero</TravelCompanions.stages.0.label>
+  <TravelCompanions.stages.0.description>No tuve más opción que unirme a ellos... habría muerto solo, pero tengo miedo de lo que puedan hacerme.</TravelCompanions.stages.0.description>
+  <TravelCompanions.stages.1.label>Tercera rueda</TravelCompanions.stages.1.label>
+  <TravelCompanions.stages.1.description>Realmente no conozco a esta gente, ¿debería quedarme?</TravelCompanions.stages.1.description>
+  <TravelCompanions.stages.2.label>Compañero conocido</TravelCompanions.stages.2.label>
+  <TravelCompanions.stages.2.description>La mayoría de los chistes son sobre mí y me toca hacer todo el trabajo asqueroso, ¡pero parece que empiezo a ser aceptado!</TravelCompanions.stages.2.description>
+  <TravelCompanions.stages.3.label>Parte de la banda</TravelCompanions.stages.3.label>
+  <TravelCompanions.stages.3.description>Mis compañeros empiezan a valorar mis habilidades y mi perspicacia, ¡puedo sentarme en la mesa!</TravelCompanions.stages.3.description>
+  <TravelCompanions.stages.4.label>Compañero de confianza</TravelCompanions.stages.4.label>
+  <TravelCompanions.stages.4.description>Mis compañeros están ahí cuando los necesito y pueden contar conmigo.</TravelCompanions.stages.4.description>
+  <TravelCompanions.stages.5.label>Amigo verdadero</TravelCompanions.stages.5.label>
+  <TravelCompanions.stages.5.description>Hemos pasado por muchas cosas juntos y siempre nos cubrimos las espaldas. Moriríamos el uno por el otro.</TravelCompanions.stages.5.description>
+
+
+</LanguageData>

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <CAAncientCoordinator.label>coordinación ancestral</CAAncientCoordinator.label>
+  <CAAncientCoordinator.description>El lanzador, así como otros 4 colonos, reciben el poder del aura de protección ancestral sin ninguna desventaja mientras el lanzador esté vivo. Sin embargo, todos los demás peones que superen el límite de peones morirán. Requiere el don ancestral.</CAAncientCoordinator.description>
+
+  <CAAncientProtectiveAuraLinked.label>aura de protección ancestral (vinculada)</CAAncientProtectiveAuraLinked.label>
+  <CAAncientProtectiveAuraLinked.description>Permite al lanzador canalizar el psicofoco para fortalecer directamente las capacidades del cuerpo en casi cualquier forma humanamente posible. La agilidad, el combate cuerpo a cuerpo y la resistencia aumentan considerablemente. También protege al objetivo de una gran parte del daño entrante, el fuego, cura las heridas con el tiempo (incluso las permanentes cuando está activo el tiempo suficiente). \n\nReduce el calor total que puede soportar una persona y acelera el drenaje de psicofoco en un 2% por día mientras está activo. El efecto de este hechizo desaparece si se lanza por segunda vez o si no hay más psicofoco disponible. \n\nRequiere el don ancestral, a menos que esté potenciado por el hechizo de Coordinación ancestral.</CAAncientProtectiveAuraLinked.description>
+
+  <CAAncientProtectiveAura.label>aura de protección ancestral</CAAncientProtectiveAura.label>
+  <CAAncientProtectiveAura.description>Protege al objetivo de una gran parte del daño entrante, el fuego, cura las heridas con el tiempo (incluso las permanentes cuando está activo el tiempo suficiente). \n\nReduce el calor total que puede soportar una persona y acelera el drenaje de psicofoco en un 2% por día mientras está activo. El efecto de este hechizo desaparece si se lanza por segunda vez o si no hay más psicofoco disponible. \n\nRequiere el don ancestral, a menos que esté potenciado por el hechizo de Coordinación ancestral.</CAAncientProtectiveAura.description>
+
+  <CAAncientGift.label>Don ancestral</CAAncientGift.label>
+  <CAAncientGift.description>El don ancestral, un poder para acceder a un potencial largamente olvidado que permite a los dotados lanzar hechizos ancestrales. También se habla en las historias de la lenta recuperación del psicofoco, incluso sin meditación.</CAAncientGift.description>
+
+  <CADrainNature.label>Drenar la naturaleza</CADrainNature.label>
+  <CADrainNature.description>Un ente poderoso está drenando la energía de las plantas cercanas.</CADrainNature.description>
+
+  <CAConjuredLight.label>mística luz guía</CAConjuredLight.label>
+  <CAConjuredLight.description>Una luz de apoyo para los viajes que aumenta la velocidad de los viajeros, ya sea en un mapa o en una caravana. No se puede lanzar en el camino y tiene un largo tiempo de preparación. Dura 3 días.</CAConjuredLight.description>
+
+  <CAOverheatingBrain.label>Sobrecalentamiento del cerebro</CAOverheatingBrain.label>
+  <CAOverheatingBrain.description>Debido a la programación o producción antinatural de la unidad y sus componentes, el cerebro se está sobrecalentando debido a los crecientes errores que se producen y que no se pueden resolver.</CAOverheatingBrain.description>
+
+
+</LanguageData>

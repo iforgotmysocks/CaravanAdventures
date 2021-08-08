@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <CAEXT1Basic.label>EXT1 Básico</CAEXT1Basic.label>
+  <CAEXT1Basic.description>Permite a las máquinas utilizar una lógica de combate avanzada según la versión, conectarse a redes inactivas y utilizar un conjunto de habilidades terroríficas.</CAEXT1Basic.description>
+
+  <CAEXT1Artillary.label>EXT1 Artillero</CAEXT1Artillary.label>
+  <CAEXT1Artillary.description>Permite a las máquinas utilizar una lógica de combate avanzada según la versión, conectarse a redes inactivas y utilizar un conjunto de habilidades terroríficas.</CAEXT1Artillary.description>
+
+  <CAEXT1Melee.label>EXT1 CaC</CAEXT1Melee.label>
+  <CAEXT1Melee.description>Permite a las máquinas utilizar una lógica de combate avanzada según la versión, conectarse a redes inactivas y utilizar un conjunto de habilidades terroríficas.</CAEXT1Melee.description>
+
+  <CAEXT1Laser.label>EXT1 Láser</CAEXT1Laser.label>
+  <CAEXT1Laser.description>Permite a las máquinas utilizar una lógica de combate avanzada según la versión, conectarse a redes inactivas y utilizar un conjunto de habilidades terroríficas.</CAEXT1Laser.description>
+
+  <CAEXT1Guardian.label>EXT1 Guardián</CAEXT1Guardian.label>
+  <CAEXT1Guardian.description>Permite a las máquinas utilizar una lógica de combate avanzada según la versión, conectarse a redes inactivas y utilizar un conjunto de habilidades terroríficas.</CAEXT1Guardian.description>
+
+  <CAEXT1Missile.label>EXT1 Misil</CAEXT1Missile.label>
+  <CAEXT1Missile.description>Permite a las máquinas utilizar una lógica de combate avanzada según la versión, conectarse a redes inactivas y utilizar un conjunto de habilidades terroríficas.</CAEXT1Missile.description>
+
+
+</LanguageData>

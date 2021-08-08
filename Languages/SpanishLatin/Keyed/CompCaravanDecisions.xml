@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-  <SettleWithoutUnloading>Settle Caravan</SettleWithoutUnloading>
-  <SettleWithoutUnloadingDesc>Allows the caravan to settle without unloading to find a good spot first or leave quickly.</SettleWithoutUnloadingDesc>
-  <SettleWithCampLabel>Settle with Camp</SettleWithCampLabel>
-  <SettleWithCampDesc>Settle with a prebuild camp your pawns quickly set up. Will consume camp supplies to construct tents and equipment of high quality. If not enough are present, pawns will use materials they can find at hand. Camping supplies can be recovered when packing up the camp.</SettleWithCampDesc>
-  <AllowNightTravel>Night travel</AllowNightTravel>
-  <AllowNightTravelDesc>Allow your caravan to travel through the night, but keep in mind that this harbors great risk for strong attacks and if your caravan members get too tired, they have no choice but to rest.</AllowNightTravelDesc>
+  <SettleWithoutUnloading>Asentar caravana</SettleWithoutUnloading>
+  <SettleWithoutUnloadingDesc>Permite que la caravana se asiente sin descargar, para encontrar primero un buen lugar o salir rápidamente.</SettleWithoutUnloadingDesc>
+  <SettleWithCampLabel>Asentarse con el campamento</SettleWithCampLabel>
+  <SettleWithCampDesc>Asentarse con un campamento pre-construido que tus colonos montarán rápidamente. Consumirán los suministros del campamento para construir tiendas y equipos de gran calidad. Si no hay suficientes, los peones utilizarán materiales que puedan encontrar a mano. Los suministros de campamento se pueden recuperar al recoger el campamento.</SettleWithCampDesc>
+  <AllowNightTravel>Viaje nocturno</AllowNightTravel>
+  <AllowNightTravelDesc>Permite que tu caravana viaje durante la noche, pero ten en cuenta que esto alberga un gran riesgo de sufrir fuertes ataques y que si los miembros de tu caravana se cansan demasiado, no tendrán más remedio que descansar.</AllowNightTravelDesc>
+
 </LanguageData>

@@ -1,103 +1,102 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-  <Story_Shrine1_NewShrineDetectedLetterLabel>Hints of a dangerous shrine</Story_Shrine1_NewShrineDetectedLetterLabel>
-  <Story_Shrine1_NewShrineDetectedLetterMessage>{0} sent you a message with vague hints regarding tales of a dangerous shrine. The people providing the hint weren't very credible, so take care, as they also said that no one ever returned who dared to pilgrimage there.</Story_Shrine1_NewShrineDetectedLetterMessage>
-  <Story_Shrine1_EnterPossibleShrine>Discovering mysterious shrine (This might take a while)</Story_Shrine1_EnterPossibleShrine>
+  <Story_Shrine1_NewShrineDetectedLetterLabel>Indicios de un santuario peligroso</Story_Shrine1_NewShrineDetectedLetterLabel>
+  <Story_Shrine1_NewShrineDetectedLetterMessage>{0} te envió un mensaje con vagas pistas sobre historias de un santuario peligroso. Las personas que proporcionaron la pista no eran muy creíbles, así que ten cuidado, ya que también dijeron que nunca regresó nadie que se atreviera a peregrinar allí.</Story_Shrine1_NewShrineDetectedLetterMessage>
+  <Story_Shrine1_EnterPossibleShrine>Descubriendo el santuario misterioso (Esto puede llevar un tiempo)</Story_Shrine1_EnterPossibleShrine>
 
-  <Story_Shrine1_QuestName>Caravan Adventures - Secrets of the Shrines</Story_Shrine1_QuestName>
-  <Story_Shrine1_QuestDesc>Explore possible master shrines to reveal their secrets and to determine the mechanoid armada threat.\nTake your time to prepare, this may be a long journey and the enemy won't be easily defeated!</Story_Shrine1_QuestDesc>
+  <Story_Shrine1_QuestName>Aventuras en caravana - Secretos de los santuarios</Story_Shrine1_QuestName>
+  <Story_Shrine1_QuestDesc>Explora los posibles santuarios maestros para revelar sus secretos y determinar la amenaza del ejército mecanoide.\n¡Tómate tu tiempo para prepararte, este puede ser un largo viaje y el enemigo no será derrotado fácilmente!</Story_Shrine1_QuestDesc>
 
-  <VisitAncientMasterShrine>Visit ancient master shrine</VisitAncientMasterShrine>
-  <Story_Shrine1_EnemyEncounterLetterLabel>Enemies encountered</Story_Shrine1_EnemyEncounterLetterLabel>
-  <Story_Shrine1_EnemyEncounterLetterMessage>Looks like we're not alone here.</Story_Shrine1_EnemyEncounterLetterMessage>
-  <VisitAncientMasterShrine>Visit Shrine test</VisitAncientMasterShrine>
+  <VisitAncientMasterShrine>Visita el santuario ancestral</VisitAncientMasterShrine>
+  <Story_Shrine1_EnemyEncounterLetterLabel>Enemigos encontrados</Story_Shrine1_EnemyEncounterLetterLabel>
+  <Story_Shrine1_EnemyEncounterLetterMessage>Parece que no estamos solos aquí.</Story_Shrine1_EnemyEncounterLetterMessage>
 
-  <GiveUpOnClueLabel>Give up on clue</GiveUpOnClueLabel>
-  <GiveUpOnClueDesc>Give up on this clue, you'll hear about another one soon.</GiveUpOnClueDesc>
+  <GiveUpOnClueLabel>Renunciar a la pista</GiveUpOnClueLabel>
+  <GiveUpOnClueDesc>Abandona esta pista, pronto sabrás de otra.</GiveUpOnClueDesc>
 
-  <Story_Shrine1_GiveUpOnShrineLabel>Give up on shrine</Story_Shrine1_GiveUpOnShrineLabel>
-  <Story_Shrine1_GiveUpOnShrineDesc>Give up on this shrine, you'll hear about another clue soon.</Story_Shrine1_GiveUpOnShrineDesc>
+  <Story_Shrine1_GiveUpOnShrineLabel>Abandonar el santuario</Story_Shrine1_GiveUpOnShrineLabel>
+  <Story_Shrine1_GiveUpOnShrineDesc>Abandona este santuario, pronto oirás hablar de otra pista.</Story_Shrine1_GiveUpOnShrineDesc>
 
-  <Story_Shrine_AbandonColonists>Are you sure you want to abandon your remaining colonists?</Story_Shrine_AbandonColonists>
+  <Story_Shrine_AbandonColonists>¿Estás seguro de que quieres abandonar a los colonos que quedan?</Story_Shrine_AbandonColonists>
 
-  <MasterShrineVictoryLetterLabel>Bandits defeated</MasterShrineVictoryLetterLabel>
-  <MasterShrineVictoryLetterMessage>The bandits setting a trap at the shrine were defeated. </MasterShrineVictoryLetterMessage>
-  <NoMasterShrineLetterLabel>No luck.</NoMasterShrineLetterLabel>
-  <NoMasterShrineLetterMessage>While this place may harbor treasures, it doesn't look like the place you're searching for.</NoMasterShrineLetterMessage>
-  <MasterShrineVictoryBossLetterLabel>Defeated {0}</MasterShrineVictoryBossLetterLabel>
-  <MasterShrineVictoryBossLetterMessage>Defeated {0}, the ancient harbinger of destruction. The shrine awarded you with {1}</MasterShrineVictoryBossLetterMessage>
+  <MasterShrineVictoryLetterLabel>Bandidos derrotados</MasterShrineVictoryLetterLabel>
+  <MasterShrineVictoryLetterMessage>Los bandidos que tendieron una trampa en el santuario fueron derrotados.</MasterShrineVictoryLetterMessage>
+  <NoMasterShrineLetterLabel>No hay suerte.</NoMasterShrineLetterLabel>
+  <NoMasterShrineLetterMessage>Aunque este lugar puede albergar tesoros, no parece el lugar que estás buscando.</NoMasterShrineLetterMessage>
+  <MasterShrineVictoryBossLetterLabel>{0} derrotado</MasterShrineVictoryBossLetterLabel>
+  <MasterShrineVictoryBossLetterMessage>Derrotaste a {0}, el ancestral precursor de la destrucción. El santuario te premió con {1}</MasterShrineVictoryBossLetterMessage>
 
-  <Story_Shrine1_NextPatrolWarning>A mech patrol will come through {0} in about {1}.</Story_Shrine1_NextPatrolWarning>
+  <Story_Shrine1_NextPatrolWarning>Una patrulla mecanoide pasará por {0} en aproximadamente {1}.</Story_Shrine1_NextPatrolWarning>
 
-  <Story_Shrine1_BossDefeated_Dia1Title>Pure pain explodes in {0}'s head</Story_Shrine1_BossDefeated_Dia1Title>
-  <Story_Shrine1_BossDefeated_Dia1_1>While the {0} dies, memories start rushing back to the surface... although not {1}'s memories.\n\n{1} can't make sense of it, but {1} seems to recall a long forgotten spell named {2}.</Story_Shrine1_BossDefeated_Dia1_1>
-  <Story_Shrine1_BossDefeated_Dia1_1_NoSpell>The huge metal body of {0} crashes on the ground.</Story_Shrine1_BossDefeated_Dia1_1_NoSpell>
-  <Story_Shrine1_BossDefeated_Dia1_1_Option1>Astonishing...</Story_Shrine1_BossDefeated_Dia1_1_Option1>
-  <Story_Shrine1_BossDefeated_Dia1_2>When {0}'s mechanical body came to rest, loud scratching starts to hollow around the ruins... something woke up.</Story_Shrine1_BossDefeated_Dia1_2>
-  <Story_Shrine1_BossDefeated_Dia1_1_Option2>We better get out of here...</Story_Shrine1_BossDefeated_Dia1_1_Option2>
-  <Story_Shrine1_AbilityGainedLetterTitle>Ancient ability gained: {0}</Story_Shrine1_AbilityGainedLetterTitle>
-  <Story_Shrine1_AbilityGainedLetterDesc>By defeating {0} and with the power of the Ancient Gift, {1} received the sacred knowledge of the spell: {2}</Story_Shrine1_AbilityGainedLetterDesc>
-  <Story_Shrine1_ArrivalTimeShownLetterMessage>Your caravan has been detected. In {0}, reinforcing {1} from {2} will begin arriving in the area.\n\nReform your caravan and begin moving to avoid the {1}. You can return once they moved on. You'll be notified about their arrival every 3 hours.</Story_Shrine1_ArrivalTimeShownLetterMessage>
+  <Story_Shrine1_BossDefeated_Dia1Title>Puro dolor estalla en la cabeza de {0}</Story_Shrine1_BossDefeated_Dia1Title>
+  <Story_Shrine1_BossDefeated_Dia1_1>Mientras {0} muere, los recuerdos empiezan a salir a la superficie... aunque no los recuerdos de {1}.\n\n{1} no puede darle sentido, pero {1} parece recordar un hechizo olvidado hace tiempo llamado {2}.</Story_Shrine1_BossDefeated_Dia1_1>
+  <Story_Shrine1_BossDefeated_Dia1_1_NoSpell>El enorme cuerpo metálico de {0} se estrella contra el suelo.</Story_Shrine1_BossDefeated_Dia1_1_NoSpell>
+  <Story_Shrine1_BossDefeated_Dia1_1_Option1>Asombroso...</Story_Shrine1_BossDefeated_Dia1_1_Option1>
+  <Story_Shrine1_BossDefeated_Dia1_2>Cuando el cuerpo mecánico de {0} cayó, fuertes arañazos comenzaron a oírse alrededor de las ruinas... algo despertó.</Story_Shrine1_BossDefeated_Dia1_2>
+  <Story_Shrine1_BossDefeated_Dia1_1_Option2>Será mejor que salgamos de aquí...</Story_Shrine1_BossDefeated_Dia1_1_Option2>
+  <Story_Shrine1_AbilityGainedLetterTitle>Habilidad ancestral adquirida: {0}</Story_Shrine1_AbilityGainedLetterTitle>
+  <Story_Shrine1_AbilityGainedLetterDesc>Al derrotar a {0} y con el poder del Don Ancestral, {1} recibió el conocimiento sagrado del hechizo: {2}</Story_Shrine1_AbilityGainedLetterDesc>
+  <Story_Shrine1_ArrivalTimeShownLetterMessage>Tu caravana ha sido detectada. En {0}, los refuerzos {1} de {2} empezarán a llegar a la zona.\n\nReforma tu caravana y empieza a moverte para evitar a los {1}. Puedes volver una vez que se hayan ido. Serás notificado de su llegada cada 3 horas.</Story_Shrine1_ArrivalTimeShownLetterMessage>
 
-  <Story_Shrine1_QuestRewardUpdate_1>({1}) {0}: {2} defeated the {3} and received the ancient spell {4}.</Story_Shrine1_QuestRewardUpdate_1>
-  <Story_Shrine1_QuestRewardUpdate_1_WithoutSpell>({1}) {0}: {2} defeated the {3}.</Story_Shrine1_QuestRewardUpdate_1_WithoutSpell>
+  <Story_Shrine1_QuestRewardUpdate_1>({1}) {0}: {2} derrotó a {3} y recibió el hechizo ancestral {4}.</Story_Shrine1_QuestRewardUpdate_1>
+  <Story_Shrine1_QuestRewardUpdate_1_WithoutSpell>({1}) {0}: {2} derrotó a {3}.</Story_Shrine1_QuestRewardUpdate_1_WithoutSpell>
 
-  <Story_Shrine1_SacrilegHunters_DiaTitle>{0} is contacting you via comms...</Story_Shrine1_SacrilegHunters_DiaTitle>
-  <Story_Shrine1_SacrilegHunters_Dia1_1>You did it! You found a master shrine!
-    \nTake care when exploring, as I told you before, we lost brothers and sisters when we came across our first shrine of this kind and escaped just barely.\nFocus on the larger buildings, that's what we're looking for.
-    \nWe'll send you some additional help, maybe another disaster can be avoided if we work together.\nGood luck... [{0} pauses shortly] and be careful.
+  <Story_Shrine1_SacrilegHunters_DiaTitle>{0} te habla por la radio...</Story_Shrine1_SacrilegHunters_DiaTitle>
+  <Story_Shrine1_SacrilegHunters_Dia1_1>¡Lo lograste! ¡Encontraste un santuario maestro!
+    \nTen cuidado al explorar, como te dije antes, perdimos algunos hermanos y hermanas cuando nos topamos con nuestro primer santuario de este tipo y escapamos apenas.\nEnfócate en los edificios más grandes, eso es lo que estamos buscando.
+    \nTe enviaremos ayuda adicional, tal vez se pueda evitar otro desastre si trabajamos juntos.\nBuena suerte... [{0} hace una breve pausa] y ten cuidado.
   </Story_Shrine1_SacrilegHunters_Dia1_1>
-  <Story_Shrine1_SacrilegHunters_Dia1_1_Option1>Thank you, from the looks of this place, we may need them.</Story_Shrine1_SacrilegHunters_Dia1_1_Option1>
-  <Story_Shrine1_SacrilegHunters_Dia1_1_Option2>(Not recommended) No need, we can handle it ourselves.</Story_Shrine1_SacrilegHunters_Dia1_1_Option2>
+  <Story_Shrine1_SacrilegHunters_Dia1_1_Option1>Gracias, por el aspecto de este lugar, puede que los necesitemos.</Story_Shrine1_SacrilegHunters_Dia1_1_Option1>
+  <Story_Shrine1_SacrilegHunters_Dia1_1_Option2>(No recomendado) No es necesario, podemos manejarlo nosotros mismos.</Story_Shrine1_SacrilegHunters_Dia1_1_Option2>
 
-  <Story_Shrine2_SacrilegHunters_Dia1_1>Perfect, another shrine, that's great!\nDo you want us to assist you again?</Story_Shrine2_SacrilegHunters_Dia1_1>
-  <Story_Shrine2_SacrilegHunters_Dia1_1_Option1>Not gonna turn down help, those things are dangerous. Thank you!</Story_Shrine2_SacrilegHunters_Dia1_1_Option1>
-  <Story_Shrine2_SacrilegHunters_Dia1_1_Option2>(Not recommended) We'll deal with it ourselves.</Story_Shrine2_SacrilegHunters_Dia1_1_Option2>
+  <Story_Shrine2_SacrilegHunters_Dia1_1>Perfecto, otro santuario, eso es bueno. ¿Quieres que te ayudemos de nuevo?</Story_Shrine2_SacrilegHunters_Dia1_1>
+  <Story_Shrine2_SacrilegHunters_Dia1_1_Option1>No voy a rechazar la ayuda, esas cosas son peligrosas. ¡Gracias!</Story_Shrine2_SacrilegHunters_Dia1_1_Option1>
+  <Story_Shrine2_SacrilegHunters_Dia1_1_Option2>(No recomendado) Nos encargaremos nosotros mismos.</Story_Shrine2_SacrilegHunters_Dia1_1_Option2>
 
-  <Story_Shrine5_SacrilegHunters_Dia1_1>Wow, this must be it. Alright, lets finish this. I have our best fighters ready if you wish.</Story_Shrine5_SacrilegHunters_Dia1_1>
-  <Story_Shrine5_SacrilegHunters_Dia1_1_Option1>Ya, lets tear this place down.</Story_Shrine5_SacrilegHunters_Dia1_1_Option1>
-  <Story_Shrine5_SacrilegHunters_Dia1_1_Option2>(Not recommended) Gonna take a different approach, trust me, it'll be fine.</Story_Shrine5_SacrilegHunters_Dia1_1_Option2>
+  <Story_Shrine5_SacrilegHunters_Dia1_1>Wow, esto debe ser. Muy bien, vamos a terminar esto. Tengo a nuestros mejores combatientes listos si lo deseas.</Story_Shrine5_SacrilegHunters_Dia1_1>
+  <Story_Shrine5_SacrilegHunters_Dia1_1_Option1>Sí, vamos a derribar este lugar.</Story_Shrine5_SacrilegHunters_Dia1_1_Option1>
+  <Story_Shrine5_SacrilegHunters_Dia1_1_Option2>(No recomendado) Voy a adoptar un método diferente, confía en mí, saldrá bien.</Story_Shrine5_SacrilegHunters_Dia1_1_Option2>
 
-  <Story_Shrine5_SacrilegHunters_Portal_Dia1_1>Guys, I'm not getting any readings of another huge mech here. Although there seems to be a disturbance, some highly bundled particle displacement.\n\n[{0} suddenly worried] Be careful when checking that out, i have a bad feeling about this...</Story_Shrine5_SacrilegHunters_Portal_Dia1_1>
-  <Story_Shrine5_SacrilegHunters_Portal_Dia1_1_Option1>Hmm, we'll keep an eye out, thanks.</Story_Shrine5_SacrilegHunters_Portal_Dia1_1_Option1>
+  <Story_Shrine5_SacrilegHunters_Portal_Dia1_1>Chicos, no estoy recibiendo ninguna lectura de otro enorme mecanoide aquí. Aunque parece haber una perturbación, algún tipo de desplazamiento de partículas altamente concentradas.\n\n[{0} repentinamente preocupado(a)] Tengan cuidado al revisar eso, tengo un mal presentimiento...</Story_Shrine5_SacrilegHunters_Portal_Dia1_1>
+  <Story_Shrine5_SacrilegHunters_Portal_Dia1_1_Option1>Hmm, estaremos atentos, gracias.</Story_Shrine5_SacrilegHunters_Portal_Dia1_1_Option1>
 
-  <Story_Shrine5_BossDefeated_Dia1_2>When {0}'s mechanical body came to rest, the ground started to vibrate stronger, then suddenly came to rest, as the old machinery deep within the planet came to a hold.</Story_Shrine5_BossDefeated_Dia1_2>
-  <Story_Shrine5_BossDefeated_Dia1_2_Option1>Is it... over?</Story_Shrine5_BossDefeated_Dia1_2_Option1>
+  <Story_Shrine5_BossDefeated_Dia1_2>Cuando el cuerpo mecánico de {0} cayó, el suelo empezó a vibrar con más fuerza, y de repente se calmó, ya que la vieja maquinaria en las profundidades del planeta se detuvo.</Story_Shrine5_BossDefeated_Dia1_2>
+  <Story_Shrine5_BossDefeated_Dia1_2_Option1>Se ha... terminado?</Story_Shrine5_BossDefeated_Dia1_2_Option1>
 
-  <Story_Shrine1_Apocalypse_Dia1Title>{0} of {1} is contacting you via comms...</Story_Shrine1_Apocalypse_Dia1Title>
-  <Story_Shrine1_Apocalypse_Dia1_1>[{0}, out of breath and shocked] My god, did you guys get out alive?\nWhat happened there? When that abomination died? You screamed like you'd die. Are you alright?</Story_Shrine1_Apocalypse_Dia1_1>
-  <Story_Shrine1_Apocalypse_Dia1_1_Option1>I remembered something, but I'm not clear what yet, some sort of power... the tree...\nThis is a bad idea over comms...</Story_Shrine1_Apocalypse_Dia1_1_Option1>
-  <Story_Shrine1_Apocalypse_Dia1_2>Aaah, okay... Well, what ever the death of that monster and the following earthquake caused, it's bad, and it wasn't natural.\nOur scientists are going crazy. Something very old under the planet's surface was activated. Our scientists believe it started to cool down the planet's core.\nWhile the process seems to be slow, it will mean certain death if we can't find out how to stop it!</Story_Shrine1_Apocalypse_Dia1_2>
-  <Story_Shrine1_Apocalypse_Dia1_2_Option1>Let's find more of those shrines and see if we can't find more clues \nas to what we're dealing with.</Story_Shrine1_Apocalypse_Dia1_2_Option1>
-  <Story_Shrine1_Apocalypse_Dia1_3>Ya, we'll message you when we can find more shrines. \n[{0}'s voice turning to a worried tone] And stay save until then, i have a really bad feeling about this.</Story_Shrine1_Apocalypse_Dia1_3>
-  <Story_Shrine1_Apocalypse_Dia1_3_Option1>We will, take care as well. Bye!</Story_Shrine1_Apocalypse_Dia1_3_Option1>
+  <Story_Shrine1_Apocalypse_Dia1Title>{0} de {1} te contacta por la radio...</Story_Shrine1_Apocalypse_Dia1Title>
+  <Story_Shrine1_Apocalypse_Dia1_1>[{0}, sin aliento y conmocionado(a)] Dios mío, ¿están vivos? ¿Qué pasó allí? Cuando esa abominación murió, gritaron como si fueran a morir. ¿Están bien?</Story_Shrine1_Apocalypse_Dia1_1>
+  <Story_Shrine1_Apocalypse_Dia1_1_Option1>Me he acordado de algo, pero aún no tengo claro qué, algún tipo de poder... el árbol...\nNo es buena idea hablarlo por radio...</Story_Shrine1_Apocalypse_Dia1_1_Option1>
+  <Story_Shrine1_Apocalypse_Dia1_2>Aaah, ok... Bueno, lo que sea que la muerte de ese monstruo y el siguiente terremoto causaron, es malo, y no fue natural.\nNuestros científicos se están volviendo locos. Algo muy antiguo bajo la superficie del planeta se activó. Nuestros científicos creen que empezó a enfriar el núcleo del planeta.\nAunque el proceso parece ser lento, significará una muerte segura si no encontramos como detenerlo.</Story_Shrine1_Apocalypse_Dia1_2>
+  <Story_Shrine1_Apocalypse_Dia1_2_Option1>Busquemos más de esos santuarios y veamos si podemos encontrar más pistas \nsobre lo que enfrentamos.</Story_Shrine1_Apocalypse_Dia1_2_Option1>
+  <Story_Shrine1_Apocalypse_Dia1_3>Ya, te enviaremos un mensaje cuando podamos encontrar más santuarios. \n[La voz de {0} se convierte en un tono de preocupación] Y manténgase a salvo hasta entonces, tengo un muy mal presentimiento sobre esto.</Story_Shrine1_Apocalypse_Dia1_3>
+  <Story_Shrine1_Apocalypse_Dia1_3_Option1>Lo haremos, cuídate también. ¡Adiós!</Story_Shrine1_Apocalypse_Dia1_3_Option1>
 
-  <Story_Shrine2_Apocalypse_Dia1_1>You did it again! What a fight...\nWe were able to track a transmission, when the monster died. Looks like data was sent to a remote site. We need to find it! That is our best bet in stopping whatever the hell is happening with this RimWorld.</Story_Shrine2_Apocalypse_Dia1_1>
-  <Story_Shrine2_Apocalypse_Dia1_1_Option1>Hmm, how would we go about that?</Story_Shrine2_Apocalypse_Dia1_1_Option1>
-  <Story_Shrine2_Apocalypse_Dia1_2>We managed to get a rough location, but we need more transmissions to get the exact location. About two more should do the trick, if we can find one.</Story_Shrine2_Apocalypse_Dia1_2>
-  <Story_Shrine2_Apocalypse_Dia1_2_Option1>Or survive the encounter, for that matter...</Story_Shrine2_Apocalypse_Dia1_2_Option1>
-  <Story_Shrine2_Apocalypse_Dia1_3>[{0} laughs and answers sarcastically] Yep, but if we don't try, it's gonna be a little frosty around here soon.</Story_Shrine2_Apocalypse_Dia1_3>
-  <Story_Shrine2_Apocalypse_Dia1_3_Option1>While I do like snow, this shouldn't get out of hand.\nAnyway, let us know when you find another one, take care!</Story_Shrine2_Apocalypse_Dia1_3_Option1>
+  <Story_Shrine2_Apocalypse_Dia1_1>¡Lo hiciste de nuevo! Qué pelea... Cuando el monstruo murió, pudimos rastrear una transmisión. Parece que los datos fueron enviados a un sitio remoto. ¡Necesitamos encontrarlo! Esa es nuestra mejor apuesta para detener lo que sea que esté pasando con este planeta.</Story_Shrine2_Apocalypse_Dia1_1>
+  <Story_Shrine2_Apocalypse_Dia1_1_Option1>Hmm, ¿cómo lo haríamos?</Story_Shrine2_Apocalypse_Dia1_1_Option1>
+  <Story_Shrine2_Apocalypse_Dia1_2>Hemos conseguido una ubicación aproximada, pero necesitamos más transmisiones para conseguir la ubicación exacta. Unas dos más deberían ser suficientes, si es que podemos encontrar una.</Story_Shrine2_Apocalypse_Dia1_2>
+  <Story_Shrine2_Apocalypse_Dia1_2_Option1>O sobrevivir al encuentro, en realidad...</Story_Shrine2_Apocalypse_Dia1_2_Option1>
+  <Story_Shrine2_Apocalypse_Dia1_3>[{0} se ríe y responde sarcásticamente] Sí, pero si no lo intentamos, pronto estará un poco helado por aquí.</Story_Shrine2_Apocalypse_Dia1_3>
+  <Story_Shrine2_Apocalypse_Dia1_3_Option1>Aunque me gusta la nieve, esto no debería salirse de control.\nDe todas formas, avísanos cuando encuentres otra, ¡cuídate!</Story_Shrine2_Apocalypse_Dia1_3_Option1>
 
-  <Story_Shrine3_Apocalypse_Dia1_1>You're getting pretty good at this, remind me not getting on your bad side...\nWe tracked another transmission. We're getting closer!</Story_Shrine3_Apocalypse_Dia1_1>
-  <Story_Shrine3_Apocalypse_Dia1_1_Option1>Off to the next I guess.</Story_Shrine3_Apocalypse_Dia1_1_Option1>
+  <Story_Shrine3_Apocalypse_Dia1_1>Te estás volviendo muy bueno en esto, recuérdame que no te ponga de malas... Rastreamos otra transmisión. ¡Nos estamos acercando!</Story_Shrine3_Apocalypse_Dia1_1>
+  <Story_Shrine3_Apocalypse_Dia1_1_Option1>Vamos a la siguiente, supongo.</Story_Shrine3_Apocalypse_Dia1_1_Option1>
 
-  <Story_Shrine4_Apocalypse_Dia1_1>Yes! We have the required data! We'll let you know when we have the final location.</Story_Shrine4_Apocalypse_Dia1_1>
-  <Story_Shrine4_Apocalypse_Dia1_1_Option1>Why do I kind of not want to know?</Story_Shrine4_Apocalypse_Dia1_1_Option1>
-  <Story_Shrine4_Apocalypse_Dia1_2>[{0} giggles] Come on now, we're so close. Don't you want to rescue this planet?</Story_Shrine4_Apocalypse_Dia1_2>
-  <Story_Shrine4_Apocalypse_Dia1_2_Option1>[Sigh] Considering what we might be facing, a little snow really doesn't sound so bad...</Story_Shrine4_Apocalypse_Dia1_2_Option1>
-  <Story_Shrine4_Apocalypse_Dia1_3>[{0} laughs] Well, we better prepare ourselves thoroughly, so you get to "enjoy" it until you think you're ready. Talk to you later?</Story_Shrine4_Apocalypse_Dia1_3>
-  <Story_Shrine4_Apocalypse_Dia1_3_Option1>Alright, good luck with those calculations!</Story_Shrine4_Apocalypse_Dia1_3_Option1>
+  <Story_Shrine4_Apocalypse_Dia1_1>Sí. ¡Tenemos los datos necesarios! Te avisaremos cuando tengamos la ubicación definitiva.</Story_Shrine4_Apocalypse_Dia1_1>
+  <Story_Shrine4_Apocalypse_Dia1_1_Option1>¿Porque como que no quiero saberlo?</Story_Shrine4_Apocalypse_Dia1_1_Option1>
+  <Story_Shrine4_Apocalypse_Dia1_2>[{0} ríe] Vamos, estamos tan cerca. ¿No quieres salvar este planeta?</Story_Shrine4_Apocalypse_Dia1_2>
+  <Story_Shrine4_Apocalypse_Dia1_2_Option1>[Suspiro] Considerando lo que podríamos estar enfrentando,\n un poco de nieve realmente no suena tan mal...</Story_Shrine4_Apocalypse_Dia1_2_Option1>
+  <Story_Shrine4_Apocalypse_Dia1_3>[{0} se carcajea] Bueno, será mejor que nos organicemos a fondo, para que puedas " disfrutar" hasta que creas que estás preparado. ¿Hablamos luego?</Story_Shrine4_Apocalypse_Dia1_3>
+  <Story_Shrine4_Apocalypse_Dia1_3_Option1>Está bien, ¡buena suerte con esos cálculos!</Story_Shrine4_Apocalypse_Dia1_3_Option1>
 
-  <Story_Shrine5_Apocalypse_Dia1_1>[{0} laughing full of joy] Yes, the ancient machines powered down, the planet is heating up again. We did it. You were so great. \n\nWe won't forget what you guys have done for us and the entire world. \n\nHmmm, how about 4000 bounty credits, that you can spent freely. \nAnd I really hope u guys stay in touch, especially since I'm not sure this is the last we saw of those damn mechs. \n\nThe planet is safe for now, but there is plenty more ruins out there. \nWe'll let you know if we find more in case you want to help ridding the planet of them, but for now, go celebrate and enjoy our victory. Wuhuuuuuuu.</Story_Shrine5_Apocalypse_Dia1_1>
-  <Story_Shrine5_Apocalypse_Dia1_1_Option1>We couldn't have done it without you, thanks for all that help.\nWe'll come visit. Cya.</Story_Shrine5_Apocalypse_Dia1_1_Option1>
-  
-  <Story_Shrine1_QuestUpdate_1>Defeating the mechanical monstrosity activated old unknown machinery deep below the planet's surface that started to cool down the planet's core. This will slowly render the planet inhabitable and the cause needs to be found. You should seek out more shrines to get answers.</Story_Shrine1_QuestUpdate_1>
-  <Story_Shrine5_QuestUpdate_1>({1}) {0}: {2} entered a shrine not harboring a guardian.\n{3} mentioned a disturbance, some highly bundled particle displacement.\nYou should find it, it must be hidden away in these ruins. </Story_Shrine5_QuestUpdate_1>
-  <Story_Shrine5_QuestUpdate_2>Defeating the {0} disabled the mechanoid mechanism responsible for freezing the planet. The catastrophe was avoided, the world will return to normal, but some other shrines may still be out there.</Story_Shrine5_QuestUpdate_2>
-  <Story_Shrine5_QuestUpdate_Info_1>(The main quest is now complete, but this quest will stay active to keep logging further shrines you may choose to explore. If you do not wish so, you can dismiss this quest.)</Story_Shrine5_QuestUpdate_Info_1>
+  <Story_Shrine5_Apocalypse_Dia1_1>[{0} riendo lleno de alegría] Sí, las máquinas ancestrales se apagaron, el planeta se está calentando de nuevo. Lo logramos. Lo hicieron muy bien.\n\nNo olvidaremos lo que habéis hecho por nosotros y por el mundo entero.\n\n¿Qué tal 4000 créditos de recompensa, que puedes gastar libremente?\nY realmente espero que sigan en contacto, especialmente porque no estoy seguro de que esto sea lo último que veamos de esos malditos mecanoides.\n\nEl planeta es seguro por ahora, pero hay muchas más ruinas ahí fuera.\nTe avisaremos si encontramos más en caso de que quieras ayudar a librar el planeta de ellas, pero por ahora, ve a celebrar y a disfrutar de nuestra victoria. Woohoooo.</Story_Shrine5_Apocalypse_Dia1_1>
+  <Story_Shrine5_Apocalypse_Dia1_1_Option1>No podríamos haberlo hecho sin ti, gracias por toda la ayuda.\nVendremos a visitarte. Adiós.</Story_Shrine5_Apocalypse_Dia1_1_Option1>
 
-  <Story_Shrine5_Apocalypse_Dia2Title>You look around as you step out of the portal's room</Story_Shrine5_Apocalypse_Dia2Title>
-  <Story_Shrine5_Apocalypse_Dia2_1>[{0} deep in thoughts] The sacrileg hunters have no idea, that I felt something deep within the planet, when I killed the mechanoid monster. It's still down there... waiting. I may be able to reach it with some amplifier, but what could be that powerful?\n\nOh! Yes, maybe the tree, that chose me to begin with. But what might happen if I do? Do I even want to find out? Hmm, but for now it's time to get some rest...</Story_Shrine5_Apocalypse_Dia2_1>
-  <Story_Shrine5_Apocalypse_Dia2_1_Option1>Let's move on.</Story_Shrine5_Apocalypse_Dia2_1_Option1>
+  <Story_Shrine1_QuestUpdate_1>Al derrotar a la monstruosidad mecánica se activó una vieja maquinaria desconocida en las profundidades de la superficie del planeta que comenzó a enfriar el núcleo del mismo. Esto hará que el planeta se vuelva lentamente inhabitable y es necesario encontrar la causa. Debes buscar más santuarios para obtener respuestas.</Story_Shrine1_QuestUpdate_1>
+  <Story_Shrine5_QuestUpdate_1>({1}) {0}: {2} ha entrado en un santuario que no alberga a un guardián.\n{3} ha mencionado una perturbación, un desplazamiento de partículas altamente concentradas.\nDeberías encontrarlo, debe estar oculto en estas ruinas. </Story_Shrine5_QuestUpdate_1>
+  <Story_Shrine5_QuestUpdate_2>Al derrotar a {0} se desactivó el mecanismo mecanoide responsable de la congelación del planeta. La catástrofe se evitó, el mundo volverá a la normalidad, pero es posible que haya otros santuarios ahí fuera.</Story_Shrine5_QuestUpdate_2>
+  <Story_Shrine5_QuestUpdate_Info_1>(La misión principal ya está completa, pero esta misión permanecerá activa para seguir registrando otros santuarios que decidas explorar. Si no lo deseas, puedes descartar esta búsqueda.)</Story_Shrine5_QuestUpdate_Info_1>
+
+  <Story_Shrine5_Apocalypse_Dia2Title>Miras a tu alrededor mientras sales de la sala del portal</Story_Shrine5_Apocalypse_Dia2Title>
+  <Story_Shrine5_Apocalypse_Dia2_1>[{0} en sus pensamientos] Los cazadores sacrílegos no tienen idea, de que sentí algo en lo profundo del planeta, cuando maté al monstruo mecanoide. Todavía está ahí abajo... esperando. Puedo ser capaz de alcanzarlo con algún amplificador, pero ¿qué podría ser tan poderoso?\n\nSí, tal vez el árbol, que me eligió para empezar. ¿Pero qué podría pasar si lo hago? ¿Acaso quiero averiguarlo? Hmm, pero por ahora es tiempo de descansar un poco...</Story_Shrine5_Apocalypse_Dia2_1>
+  <Story_Shrine5_Apocalypse_Dia2_1_Option1>Sigamos adelante.</Story_Shrine5_Apocalypse_Dia2_1_Option1>
 </LanguageData>

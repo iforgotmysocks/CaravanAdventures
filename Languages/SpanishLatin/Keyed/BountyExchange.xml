@@ -1,55 +1,55 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-  <CABountyExchangeOpenOption>Bounty Services</CABountyExchangeOpenOption>
-  <CABountyExchangeMain>Current bounty credits: {0}\n\n\nBounty for mechanoid kills:\nPikeman - 7\nScyther - 10\nLancer - 15\nCentipede - 45\nSpecial mechs may grand more credits</CABountyExchangeMain>
-  <CABountyExchangeRequestHelp>Request military assistance</CABountyExchangeRequestHelp>
-  <CABountyExchangeRequestItem>Request rare item</CABountyExchangeRequestItem>
-  <CABountyExchangeRequestImprovedRelations>Improve relations</CABountyExchangeRequestImprovedRelations>
-  <CABountyExchangeRecruitVeteranHunter>Recruit veteran soldier</CABountyExchangeRecruitVeteranHunter>
-  <CABountyExchangeBuyBountyWithSilver>Exchange silver for bounty credit</CABountyExchangeBuyBountyWithSilver>
-  <CABountyBack>Back</CABountyBack>
-  <CABountyExchangeHostile>You are hostile towards {0}</CABountyExchangeHostile>
-  
-  <CABountyExchangeRequestHelp_StrengthSelection>Current bounty credits: {0}\n\n\nPlease choose the amount of men you need.\n\n{1}</CABountyExchangeRequestHelp_StrengthSelection>
-  <CABountyExchangeRequestHelp_StrengthSelection_Few>A few   (~ 6 hunters)  - 250 bounty credit</CABountyExchangeRequestHelp_StrengthSelection_Few>
-  <CABountyExchangeRequestHelp_StrengthSelection_Bunch>A bunch (~ 15 hunters) - 650 bounty credit</CABountyExchangeRequestHelp_StrengthSelection_Bunch>
-  <CABountyExchangeRequestHelp_StrengthSelection_Army>An army (~ 30 hunters) - 1250 bounty credit</CABountyExchangeRequestHelp_StrengthSelection_Army>
-  <CABountyExchangeRequestHelp_StrengthSelection_NotEnoughMoney>Not enough credits</CABountyExchangeRequestHelp_StrengthSelection_NotEnoughMoney>
-  <CABountyExchangeRequestHelp_StrengthSelection_TroopDeploymentReady>Hunters ready to deploy</CABountyExchangeRequestHelp_StrengthSelection_TroopDeploymentReady>
-  <CABountyExchangeRequestHelp_StrengthSelection_TroopDeploymentDetail>Next hunter deployment ready in {0} days</CABountyExchangeRequestHelp_StrengthSelection_TroopDeploymentDetail>
-  <CABountyExchangeRequestHelp_StrengthSelection_TroopDeploymentBusy>Hunters busy</CABountyExchangeRequestHelp_StrengthSelection_TroopDeploymentBusy>
-  
-  <CABountyExchangeRequestItemTitle>Current bounty credits: {0}\n\n\nPlease select the item you'd like to exchange bounty credits for. It will be delivered via drop pod.\n\n{1}</CABountyExchangeRequestItemTitle>
-  <CABountyExchangeRequestItem_ItemDetails>         buy {0} for: {1} credits</CABountyExchangeRequestItem_ItemDetails>
-  <CABountyExchangeRequestItem_ItemArrived>Your delivery from {0} arrived!</CABountyExchangeRequestItem_ItemArrived>
-  <CABountyExchangeRequestItem_ItemRestockNow>Just restocked. </CABountyExchangeRequestItem_ItemRestockNow>
-  <CABountyExchangeRequestItem_ItemRestockDetail>Next restock in {0} days</CABountyExchangeRequestItem_ItemRestockDetail>
-  
-  <CABountyExchangeRelationHaggle>Current bounty credits: {0}\n\n\nYou can trade in bounty to improve relations.\nRelation trades towards us work immediately, but if we should negotiate with other factions on your behalf, it will cost more and also take some time for our envoy to make the trip.\nThe worse the relations are, the more bounty credits are required.</CABountyExchangeRelationHaggle>
-  <CABountyExchangeRelationHaggle_WithYou>Trade {0} credits for {1} goodwill with {2}</CABountyExchangeRelationHaggle_WithYou>
-  <CABountyExchangeRelationHaggle_WithAnotherFaction>Choose another faction</CABountyExchangeRelationHaggle_WithAnotherFaction>
-  <CABountyExchangeRelationHaggle_EnvoyBusyDetail>Envoy traveling for another {0} days</CABountyExchangeRelationHaggle_EnvoyBusyDetail>
-  <CABountyExchangeRelationHaggle_EnvoyBusy>Envoy busy</CABountyExchangeRelationHaggle_EnvoyBusy>
-  <CABountyExchangeRelationHaggle_EnvoyReady>Envoy ready</CABountyExchangeRelationHaggle_EnvoyReady>
-  <CABountyExchangeRelationHaggle_AlreadyMax>Max goodwill</CABountyExchangeRelationHaggle_AlreadyMax>
-  <CABountyExchangeRelationHaggle_Factions>Current bounty credits: {0}\n\n\nFollowing Factions are available:\n\n{1}</CABountyExchangeRelationHaggle_Factions>
-  <CABountyExchangeRelationHaggle_Factions_ListedFaction>{0} ({1})   buy: {2} for: {3} credits</CABountyExchangeRelationHaggle_Factions_ListedFaction>
+  <CABountyExchangeOpenOption>Servicios de recompensas</CABountyExchangeOpenOption>
+  <CABountyExchangeMain>Créditos de recompensa actuales: {0}n\nRecompensa por muertes de mecanoides:\nPiquero - 7\nSegador - 10\nLancero - 15\nCienpies - 45\nLos mecanoides especiales pueden dar más créditos</CABountyExchangeMain>
+  <CABountyExchangeRequestHelp>Solicitar ayuda militar</CABountyExchangeRequestHelp>
+  <CABountyExchangeRequestItem>Solicitar objeto raro</CABountyExchangeRequestItem>
+  <CABountyExchangeRequestImprovedRelations>Mejorar relaciones</CABountyExchangeRequestImprovedRelations>
+  <CABountyExchangeRecruitVeteranHunter>Reclutar soldado veterano</CABountyExchangeRecruitVeteranHunter>
+  <CABountyExchangeBuyBountyWithSilver>Intercambiar plata por créditos de recompensa</CABountyExchangeBuyBountyWithSilver>
+  <CABountyBack>Atrás</CABountyBack>
+  <CABountyExchangeHostile>Eres hostil con {0}</CABountyExchangeHostile>
 
-  <CABountyExchangeVeteranRecruitment>Current bounty credits: {0}\n\n\nThis rare opportunity allows you to recruit one of {1}'s finest soldiers. A battle hardened veteran who knows exactly how to survive on this planet. However, such a privilege requires amounting a lot of bounty credit.\n\n{2}</CABountyExchangeVeteranRecruitment>
-  <CABountyExchangeVeteranRecruitment_Available>Veteran available</CABountyExchangeVeteranRecruitment_Available>
-  <CABountyExchangeVeteranRecruitment_Details>Next veteran available in {0} days</CABountyExchangeVeteranRecruitment_Details>
-  <CABountyExchangeVeteranRecruitment_Enlist>Enlist top veteran for {0} bounty credits</CABountyExchangeVeteranRecruitment_Enlist>
-  <CABountyExchangeVeteranRecruitment_NotAvailable>No veteran available</CABountyExchangeVeteranRecruitment_NotAvailable>
-  <CABountyExchangeVeteranRecruitment_ChoosePersonality>\n\n\nAs the personality is usually important, we try to find a good fit for you.</CABountyExchangeVeteranRecruitment_ChoosePersonality>
-  <CABountyExchangeVeteranRecruitment_ChoosePersonalityNone>Rather none of those</CABountyExchangeVeteranRecruitment_ChoosePersonalityNone>
-  <CABountyExchangeVeteranRecruitment_ChooseSkill>\n\n\nAnd the unique skill?</CABountyExchangeVeteranRecruitment_ChooseSkill>
+  <CABountyExchangeRequestHelp_StrengthSelection>Créditos de recompensa actuales: {0}\n\n\nPor favor, elija la cantidad de hombres que necesita.\n\n{1}</CABountyExchangeRequestHelp_StrengthSelection>
+  <CABountyExchangeRequestHelp_StrengthSelection_Few>Unos pocos (~ 6 cazadores) - 250 créditos de recompensa</CABountyExchangeRequestHelp_StrengthSelection_Few>
+  <CABountyExchangeRequestHelp_StrengthSelection_Bunch>Un grupo (~ 15 cazadores) - 650 créditos de recompensa</CABountyExchangeRequestHelp_StrengthSelection_Bunch>
+  <CABountyExchangeRequestHelp_StrengthSelection_Army>Un ejército (~ 30 cazadores) - 1250 créditos de recompensa</CABountyExchangeRequestHelp_StrengthSelection_Army>
+  <CABountyExchangeRequestHelp_StrengthSelection_NotEnoughMoney>Créditos insuficientes</CABountyExchangeRequestHelp_StrengthSelection_NotEnoughMoney>
+  <CABountyExchangeRequestHelp_StrengthSelection_TroopDeploymentReady>Cazadores listos para desplegar</CABountyExchangeRequestHelp_StrengthSelection_TroopDeploymentReady>
+  <CABountyExchangeRequestHelp_StrengthSelection_TroopDeploymentDetail>Próximo despliegue de cazadores listo en {0} días</CABountyExchangeRequestHelp_StrengthSelection_TroopDeploymentDetail>
+  <CABountyExchangeRequestHelp_StrengthSelection_TroopDeploymentBusy>Cazadores ocupados</CABountyExchangeRequestHelp_StrengthSelection_TroopDeploymentBusy>
 
-  <CABountyExchangeSilverForBounty>Current bounty credits: {0}\nCurrent silver: {1}\n\n\nChoose how many bounty credits you want to buy</CABountyExchangeSilverForBounty>
-  <CABountyExchangeSilverForBountyOption>Exchange {0} silver for {1} bounty credit</CABountyExchangeSilverForBountyOption>
-  <CABountyExchangeSilverForBountyLackingSilver>Not enough silver</CABountyExchangeSilverForBountyLackingSilver>
+  <CABountyExchangeRequestItemTitle>Créditos de recompensa actuales: {0}\n\n\nSeleccione el artículo por el que le gustaría cambiar los créditos de recompensa. Será entregado por medio de una cápsula.\n\n{1}</CABountyExchangeRequestItemTitle>
+  <CABountyExchangeRequestItem_ItemDetails>         comprar {0} por: {1} créditos</CABountyExchangeRequestItem_ItemDetails>
+  <CABountyExchangeRequestItem_ItemArrived>Su entrega de {0} ha llegado.</CABountyExchangeRequestItem_ItemArrived>
+  <CABountyExchangeRequestItem_ItemRestockNow>Recién reabastecido. </CABountyExchangeRequestItem_ItemRestockNow>
+  <CABountyExchangeRequestItem_ItemRestockDetail>Siguiente reabastecimiento en {0} días</CABountyExchangeRequestItem_ItemRestockDetail>
 
-  <CABountyKillMessage>Collected {0, -10} bounty credit for killing a {1, -20}, total credit: {2}</CABountyKillMessage>
-  <CABountyKillMessageBounty>Bounty-kill: </CABountyKillMessageBounty>
-  <CABountyKillMessageReward>Reward: </CABountyKillMessageReward>
-  <CABountyKillMessageCredit>Total credit: </CABountyKillMessageCredit>
+  <CABountyExchangeRelationHaggle>Créditos de recompensa actuales: {0}\n\n\nPuedes intercambiar recompensas para mejorar las relaciones.\nLos intercambios de relaciones hacia nosotros funcionan de inmediato, pero si debemos negociar con otras facciones en tu nombre, costará más y también tomará algo de tiempo para que nuestro embajador haga el viaje.\nCuanto peores sean las relaciones, más créditos de recompensa se requieren.</CABountyExchangeRelationHaggle>
+  <CABountyExchangeRelationHaggle_WithYou>Cambiar {0} créditos por {1} buena voluntad con {2}</CABountyExchangeRelationHaggle_WithYou>
+  <CABountyExchangeRelationHaggle_WithAnotherFaction>Elija otra facción</CABountyExchangeRelationHaggle_WithAnotherFaction>
+  <CABountyExchangeRelationHaggle_EnvoyBusyDetail>Embajador viajando por otros {0} días</CABountyExchangeRelationHaggle_EnvoyBusyDetail>
+  <CABountyExchangeRelationHaggle_EnvoyBusy>Embajador ocupado</CABountyExchangeRelationHaggle_EnvoyBusy>
+  <CABountyExchangeRelationHaggle_EnvoyReady>Embajador listo</CABountyExchangeRelationHaggle_EnvoyReady>
+  <CABountyExchangeRelationHaggle_AlreadyMax>Buena voluntad al máx.</CABountyExchangeRelationHaggle_AlreadyMax>
+  <CABountyExchangeRelationHaggle_Factions>Créditos de recompensa actuales: {0}\n\n\nLas siguientes facciones están disponibles:\n\n{1}</CABountyExchangeRelationHaggle_Factions>
+  <CABountyExchangeRelationHaggle_Factions_ListedFaction>{0} ({1})   comprar: {2} por: {3} créditos</CABountyExchangeRelationHaggle_Factions_ListedFaction>
+
+  <CABountyExchangeVeteranRecruitment>Créditos de recompensa actuales: {0}\n\n\nEsta rara oportunidad te permite reclutar a uno de los mejores soldados de {1}. Un veterano curtido en la batalla que sabe exactamente cómo sobrevivir en este planeta. Sin embargo, tal privilegio requiere una gran cantidad de créditos de recompensa.\n\n{2}</CABountyExchangeVeteranRecruitment>
+  <CABountyExchangeVeteranRecruitment_Available>Veterano disponible</CABountyExchangeVeteranRecruitment_Available>
+  <CABountyExchangeVeteranRecruitment_Details>Próximo veterano disponible en {0} días</CABountyExchangeVeteranRecruitment_Details>
+  <CABountyExchangeVeteranRecruitment_Enlist>Recluta al mejor veterano por {0} créditos de recompensa</CABountyExchangeVeteranRecruitment_Enlist>
+  <CABountyExchangeVeteranRecruitment_NotAvailable>No hay veteranos disponibles</CABountyExchangeVeteranRecruitment_NotAvailable>
+  <CABountyExchangeVeteranRecruitment_ChoosePersonality>\n\n\nComo la personalidad suele ser importante, tratamos de encontrar uno que se adapte a ti.</CABountyExchangeVeteranRecruitment_ChoosePersonality>
+  <CABountyExchangeVeteranRecruitment_ChoosePersonalityNone>Mejor ninguno de esos</CABountyExchangeVeteranRecruitment_ChoosePersonalityNone>
+  <CABountyExchangeVeteranRecruitment_ChooseSkill>\n\n\n¿Y la habilidad única?</CABountyExchangeVeteranRecruitment_ChooseSkill>
+
+  <CABountyExchangeSilverForBounty>Créditos de recompensa actuales: {0}\nPlata actual: {1}\n\n\nEscoge cuántos créditos de recompensa quieres comprar</CABountyExchangeSilverForBounty>
+  <CABountyExchangeSilverForBountyOption>Cambia {0} plata por {1} créditos de recompensa</CABountyExchangeSilverForBountyOption>
+  <CABountyExchangeSilverForBountyLackingSilver>Plata insuficiente</CABountyExchangeSilverForBountyLackingSilver>
+
+  <CABountyKillMessage>Obtuviste {0, -10} créditos de recompensa por matar un {1, -20}, créditos totales: {2}</CABountyKillMessage>
+  <CABountyKillMessageBounty>Muertes: </CABountyKillMessageBounty>
+  <CABountyKillMessageReward>Recompensa: </CABountyKillMessageReward>
+  <CABountyKillMessageCredit>Créditos totales: </CABountyKillMessageCredit>
 </LanguageData>

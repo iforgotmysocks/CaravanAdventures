@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <CAOutsiderRelation.label>Forastero</CAOutsiderRelation.label>
+  <CAOutsiderRelation.labelFemale>Forastera</CAOutsiderRelation.labelFemale>
+
+  <CAThirdWheelRelation.label>Tercera rueda</CAThirdWheelRelation.label>
+  <CAThirdWheelRelation.labelFemale>Tercera rueda</CAThirdWheelRelation.labelFemale>
+
+  <CAFamiliarCompanionRelation.label>Compañero conocido</CAFamiliarCompanionRelation.label>
+  <CAFamiliarCompanionRelation.labelFemale>Compañera conocida</CAFamiliarCompanionRelation.labelFemale>
+
+  <CAPartOfTheGangRelation.label>Parte de la banda</CAPartOfTheGangRelation.label>
+  <CAPartOfTheGangRelation.labelFemale>Parte de la banda</CAPartOfTheGangRelation.labelFemale>
+
+  <CATrustedMateRelation.label>Compañero de confianza</CATrustedMateRelation.label>
+  <CATrustedMateRelation.labelFemale>Compañera de confianza</CATrustedMateRelation.labelFemale>
+
+  <CATrueFriendRelation.label>Amigo verdadero</CATrueFriendRelation.label>
+  <CATrueFriendRelation.labelFemale>Amiga verdadera</CATrueFriendRelation.labelFemale>
+
+
+</LanguageData>

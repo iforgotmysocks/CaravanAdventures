@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <CAMakeshiftTentWall.label>muro de la carpa</CAMakeshiftTentWall.label>
+  <CAMakeshiftTentWall.description>Pared de tienda de campaña improvisada, montada rápidamente con todo tipo de telas baratas.</CAMakeshiftTentWall.description>
+
+  <CAMakeshiftTentLeather.label>Cuero improvisado</CAMakeshiftTentLeather.label>
+  <CAMakeshiftTentLeather.description>Cuero de tienda improvisado cosido con todo tipo de cueros.</CAMakeshiftTentLeather.description>
+
+
+  <!-- bedrolls -->
+
+  <CAMakeshiftBedroll.label>cama enrollable</CAMakeshiftBedroll.label>
+  <CAMakeshiftBedroll.description>Una cama sencilla que se tiende en el suelo, normalmente de tela o cuero, a menudo forrada de piel. Es ligera y puede enrollarse para facilitar su transporte, pero no es tan cómoda como una cama típica. Las caravanas pueden utilizar los sacos de dormir mientras viajan para dormir mejor.</CAMakeshiftBedroll.description>
+
+  <CAMakeshiftBedrollDouble.label>cama enrollable doble</CAMakeshiftBedrollDouble.label>
+  <CAMakeshiftBedrollDouble.description>Una sencilla cama doble que se tiende en el suelo, normalmente de tela o cuero, a menudo forrada de piel. Es ligera y puede enrollarse para facilitar su transporte, pero no es tan cómoda como una cama típica. Las caravanas pueden utilizar los sacos de dormir mientras viajan para dormir mejor.</CAMakeshiftBedrollDouble.description>
+
+
+</LanguageData>

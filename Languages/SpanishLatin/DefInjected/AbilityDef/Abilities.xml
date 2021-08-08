@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <CAAncientMeditate.label>meditación ancestral</CAAncientMeditate.label>
+  <CAAncientMeditate.description>Absorbe la energía psíquica de la naturaleza y restablece la del usuario. Los demás colonos que estén cerca del lanzador también recuperan una pequeña cantidad. Requiere el don ancestral.</CAAncientMeditate.description>
+
+  <CAAncientThunderBolt.label>trueno ancestral</CAAncientThunderBolt.label>
+  <CAAncientThunderBolt.description>Poderoso y ancestral poder psíquico, una explosión de truenos con daño de área. Requiere el don ancestral.</CAAncientThunderBolt.description>
+
+  <CAAncientMechSignal.label>señal mecanoide ancestral</CAAncientMechSignal.label>
+  <CAAncientMechSignal.description>Invoca a un grupo de segadores mecanoides para que ayuden al lanzador. Requiere el don ancestral.</CAAncientMechSignal.description>
+
+  <CAAncientCoordinator.label>coordinación ancestral</CAAncientCoordinator.label>
+  <CAAncientCoordinator.description>El lanzador, así como otros 4 colonos, reciben el poder del aura de protección ancestral sin ninguna desventaja mientras el lanzador esté vivo. Sin embargo, todos los demás colonos que superen el límite de 5 morirán. Requiere el don ancestral.</CAAncientCoordinator.description>
+
+  <CAAncientProtectiveAura.label>aura de protección ancestral</CAAncientProtectiveAura.label>
+  <CAAncientProtectiveAura.description>Permite al lanzador canalizar el psicofoco para fortalecer directamente las capacidades del cuerpo en casi cualquier forma humanamente posible. La agilidad, el combate cuerpo a cuerpo y la resistencia aumentan considerablemente. También protege al objetivo de una gran parte del daño entrante, el fuego, cura las heridas con el tiempo (incluso las permanentes cuando está activo el tiempo suficiente).\n\nReduce el calor total que puede soportar un colono y acelera el drenaje de psicofoco en un 2% por día mientras está activo. El efecto de este hechizo desaparece si se lanza por segunda vez o si no hay más psicofoco disponible.\n\nRequiere el don ancestral, a menos que esté potenciado por el hechizo coordinación ancestral.</CAAncientProtectiveAura.description>
+
+  <CAConjureLight.label>mística luz guía</CAConjureLight.label>
+  <CAConjureLight.description>Una luz de apoyo para los viajes que aumenta la velocidad de los viajeros, ya sea en un mapa o en una caravana. No se puede lanzar en el camino y tiene un largo tiempo de preparación. Dura 3 días.</CAConjureLight.description>
+
+
+</LanguageData>

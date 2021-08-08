@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <Make_CASpacerTentSupplies.label>hacer suministros espaciales de tienda de campaña</Make_CASpacerTentSupplies.label>
+  <Make_CASpacerTentSupplies.description>Crear suministros espaciales de tienda de campaña, utilizadas para construir campamentos de alta calidad.</Make_CASpacerTentSupplies.description>
+  <Make_CASpacerTentSupplies.jobString>Haciendo suministros espaciales de tienda de campaña.</Make_CASpacerTentSupplies.jobString>
+
+  <CACookGrillSnack.label>cocinar un bocadillo parrillero</CACookGrillSnack.label>
+  <CACookGrillSnack.description>Cocinar un bocadillo parrillero.</CACookGrillSnack.description>
+  <CACookGrillSnack.jobString>Cocinando un bocadillo parrillero</CACookGrillSnack.jobString>
+
+  <CACookGrillSnackBulk.label>cocinar un bocadillo parrillero x4</CACookGrillSnackBulk.label>
+  <CACookGrillSnackBulk.description>Cocinar 4 bocadillos parrilleros.</CACookGrillSnackBulk.description>
+  <CACookGrillSnackBulk.jobString>Cocinando 4 bocadillos parrilleros.</CACookGrillSnackBulk.jobString>
+
+  <CABurnApparel.label>quemar ropa</CABurnApparel.label>
+  <CABurnApparel.description>Quema la ropa no deseada para destruirla completamente.</CABurnApparel.description>
+  <CABurnApparel.jobString>Quemando ropa</CABurnApparel.jobString>
+
+  <CAMake_ChemfuelFromWood.label>fabricar quimicombustible con madera</CAMake_ChemfuelFromWood.label>
+  <CAMake_ChemfuelFromWood.description>Haz un lote de quimicombustible extrayendo y condensando el gas de la madera.</CAMake_ChemfuelFromWood.description>
+  <CAMake_ChemfuelFromWood.jobString>Refinando quimicombustible de madera.</CAMake_ChemfuelFromWood.jobString>
+
+  <CAMake_ChemfuelFromOrganics.label>hacer quimicombustible con productos orgánicos</CAMake_ChemfuelFromOrganics.label>
+  <CAMake_ChemfuelFromOrganics.description>Hacer un lote de quimicombustible extrayendolo de materias primas orgánicas.</CAMake_ChemfuelFromOrganics.description>
+  <CAMake_ChemfuelFromOrganics.jobString>Refinando quimicombustible de productos orgánicos.</CAMake_ChemfuelFromOrganics.jobString>
+
+  <CAMake_ChemfuelFromCorpses.label>hacer quimicombustible con cadáveres</CAMake_ChemfuelFromCorpses.label>
+  <CAMake_ChemfuelFromCorpses.description>Hacer un lote de quimicombustible extrayendolo de cadáveres orgánicos.</CAMake_ChemfuelFromCorpses.description>
+  <CAMake_ChemfuelFromCorpses.jobString>Refinando quimicombustible de cadáveres.</CAMake_ChemfuelFromCorpses.jobString>
+
+
+</LanguageData>
