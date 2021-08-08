@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <Story_Shrine1_NewShrineDetectedLetterLabel>Hints of a dangerous shrine</Story_Shrine1_NewShrineDetectedLetterLabel>
+  <Story_Shrine1_NewShrineDetectedLetterMessage>{0} sent you a message with vague hints regarding tales of a dangerous shrine. The people providing the hint weren't very credible, so take care, as they also said that no one ever returned who dared to pilgrimage there.</Story_Shrine1_NewShrineDetectedLetterMessage>
+  <Story_Shrine1_EnterPossibleShrine>Discovering mysterious shrine (This might take a while)</Story_Shrine1_EnterPossibleShrine>
+
+  <Story_Shrine1_QuestName>Caravan Adventures - Secrets of the Shrines</Story_Shrine1_QuestName>
+  <Story_Shrine1_QuestDesc>Explore possible master shrines to reveal their secrets and to determine the mechanoid armada threat.\nTake your time to prepare, this may be a long journey and the enemy won't be easily defeated!</Story_Shrine1_QuestDesc>
+
+  <VisitAncientMasterShrine>Visit ancient master shrine</VisitAncientMasterShrine>
+  <Story_Shrine1_EnemyEncounterLetterLabel>Enemies encountered</Story_Shrine1_EnemyEncounterLetterLabel>
+  <Story_Shrine1_EnemyEncounterLetterMessage>Looks like we're not alone here.</Story_Shrine1_EnemyEncounterLetterMessage>
+  <VisitAncientMasterShrine>Visit Shrine test</VisitAncientMasterShrine>
+
+  <GiveUpOnClueLabel>Give up on clue</GiveUpOnClueLabel>
+  <GiveUpOnClueDesc>Give up on this clue, you'll hear about another one soon.</GiveUpOnClueDesc>
+
+  <Story_Shrine1_GiveUpOnShrineLabel>Give up on shrine</Story_Shrine1_GiveUpOnShrineLabel>
+  <Story_Shrine1_GiveUpOnShrineDesc>Give up on this shrine, you'll hear about another clue soon.</Story_Shrine1_GiveUpOnShrineDesc>
+
+  <Story_Shrine_AbandonColonists>Are you sure you want to abandon your remaining colonists?</Story_Shrine_AbandonColonists>
+
+  <MasterShrineVictoryLetterLabel>Bandits defeated</MasterShrineVictoryLetterLabel>
+  <MasterShrineVictoryLetterMessage>The bandits setting a trap at the shrine were defeated. </MasterShrineVictoryLetterMessage>
+  <NoMasterShrineLetterLabel>No luck.</NoMasterShrineLetterLabel>
+  <NoMasterShrineLetterMessage>While this place may harbor treasures, it doesn't look like the place you're searching for.</NoMasterShrineLetterMessage>
+  <MasterShrineVictoryBossLetterLabel>Defeated {0}</MasterShrineVictoryBossLetterLabel>
+  <MasterShrineVictoryBossLetterMessage>Defeated {0}, the ancient harbinger of destruction. The shrine awarded you with {1}</MasterShrineVictoryBossLetterMessage>
+
+  <Story_Shrine1_NextPatrolWarning>A mech patrol will come through {0} in about {1}.</Story_Shrine1_NextPatrolWarning>
+
+  <Story_Shrine1_BossDefeated_Dia1Title>Pure pain explodes in {0}'s head</Story_Shrine1_BossDefeated_Dia1Title>
+  <Story_Shrine1_BossDefeated_Dia1_1>While the {0} dies, memories start rushing back to the surface... although not {1}'s memories.\n\n{1} can't make sense of it, but {1} seems to recall a long forgotten spell named {2}.</Story_Shrine1_BossDefeated_Dia1_1>
+  <Story_Shrine1_BossDefeated_Dia1_1_NoSpell>The huge metal body of {0} crashes on the ground.</Story_Shrine1_BossDefeated_Dia1_1_NoSpell>
+  <Story_Shrine1_BossDefeated_Dia1_1_Option1>Astonishing...</Story_Shrine1_BossDefeated_Dia1_1_Option1>
+  <Story_Shrine1_BossDefeated_Dia1_2>When {0}'s mechanical body came to rest, loud scratching starts to hollow around the ruins... something woke up.</Story_Shrine1_BossDefeated_Dia1_2>
+  <Story_Shrine1_BossDefeated_Dia1_1_Option2>We better get out of here...</Story_Shrine1_BossDefeated_Dia1_1_Option2>
+  <Story_Shrine1_AbilityGainedLetterTitle>Ancient ability gained: {0}</Story_Shrine1_AbilityGainedLetterTitle>
+  <Story_Shrine1_AbilityGainedLetterDesc>By defeating {0} and with the power of the Ancient Gift, {1} received the sacred knowledge of the spell: {2}</Story_Shrine1_AbilityGainedLetterDesc>
+  <Story_Shrine1_ArrivalTimeShownLetterMessage>Your caravan has been detected. In {0}, reinforcing {1} from {2} will begin arriving in the area.\n\nReform your caravan and begin moving to avoid the {1}. You can return once they moved on. You'll be notified about their arrival every 3 hours.</Story_Shrine1_ArrivalTimeShownLetterMessage>
+
+  <Story_Shrine1_QuestRewardUpdate_1>({1}) {0}: {2} defeated the {3} and received the ancient spell {4}.</Story_Shrine1_QuestRewardUpdate_1>
+  <Story_Shrine1_QuestRewardUpdate_1_WithoutSpell>({1}) {0}: {2} defeated the {3}.</Story_Shrine1_QuestRewardUpdate_1_WithoutSpell>
+
+  <Story_Shrine1_SacrilegHunters_DiaTitle>{0} is contacting you via comms...</Story_Shrine1_SacrilegHunters_DiaTitle>
+  <Story_Shrine1_SacrilegHunters_Dia1_1>You did it! You found a master shrine!
+    \nTake care when exploring, as I told you before, we lost brothers and sisters when we came across our first shrine of this kind and escaped just barely.\nFocus on the larger buildings, that's what we're looking for.
+    \nWe'll send you some additional help, maybe another disaster can be avoided if we work together.\nGood luck... [{0} pauses shortly] and be careful.
+  </Story_Shrine1_SacrilegHunters_Dia1_1>
+  <Story_Shrine1_SacrilegHunters_Dia1_1_Option1>Thank you, from the looks of this place, we may need them.</Story_Shrine1_SacrilegHunters_Dia1_1_Option1>
+  <Story_Shrine1_SacrilegHunters_Dia1_1_Option2>(Not recommended) No need, we can handle it ourselves.</Story_Shrine1_SacrilegHunters_Dia1_1_Option2>
+
+  <Story_Shrine2_SacrilegHunters_Dia1_1>Perfect, another shrine, that's great!\nDo you want us to assist you again?</Story_Shrine2_SacrilegHunters_Dia1_1>
+  <Story_Shrine2_SacrilegHunters_Dia1_1_Option1>Not gonna turn down help, those things are dangerous. Thank you!</Story_Shrine2_SacrilegHunters_Dia1_1_Option1>
+  <Story_Shrine2_SacrilegHunters_Dia1_1_Option2>(Not recommended) We'll deal with it ourselves.</Story_Shrine2_SacrilegHunters_Dia1_1_Option2>
+
+  <Story_Shrine5_SacrilegHunters_Dia1_1>Wow, this must be it. Alright, lets finish this. I have our best fighters ready if you wish.</Story_Shrine5_SacrilegHunters_Dia1_1>
+  <Story_Shrine5_SacrilegHunters_Dia1_1_Option1>Ya, lets tear this place down.</Story_Shrine5_SacrilegHunters_Dia1_1_Option1>
+  <Story_Shrine5_SacrilegHunters_Dia1_1_Option2>(Not recommended) Gonna take a different approach, trust me, it'll be fine.</Story_Shrine5_SacrilegHunters_Dia1_1_Option2>
+
+  <Story_Shrine5_SacrilegHunters_Portal_Dia1_1>Guys, I'm not getting any readings of another huge mech here. Although there seems to be a disturbance, some highly bundled particle displacement.\n\n[{0} suddenly worried] Be careful when checking that out, i have a bad feeling about this...</Story_Shrine5_SacrilegHunters_Portal_Dia1_1>
+  <Story_Shrine5_SacrilegHunters_Portal_Dia1_1_Option1>Hmm, we'll keep an eye out, thanks.</Story_Shrine5_SacrilegHunters_Portal_Dia1_1_Option1>
+
+  <Story_Shrine5_BossDefeated_Dia1_2>When {0}'s mechanical body came to rest, the ground started to vibrate stronger, then suddenly came to rest, as the old machinery deep within the planet came to a hold.</Story_Shrine5_BossDefeated_Dia1_2>
+  <Story_Shrine5_BossDefeated_Dia1_2_Option1>Is it... over?</Story_Shrine5_BossDefeated_Dia1_2_Option1>
+
+  <Story_Shrine1_Apocalypse_Dia1Title>{0} of {1} is contacting you via comms...</Story_Shrine1_Apocalypse_Dia1Title>
+  <Story_Shrine1_Apocalypse_Dia1_1>[{0}, out of breath and shocked] My god, did you guys get out alive?\nWhat happened there? When that abomination died? You screamed like you'd die. Are you alright?</Story_Shrine1_Apocalypse_Dia1_1>
+  <Story_Shrine1_Apocalypse_Dia1_1_Option1>I remembered something, but I'm not clear what yet, some sort of power... the tree...\nThis is a bad idea over comms...</Story_Shrine1_Apocalypse_Dia1_1_Option1>
+  <Story_Shrine1_Apocalypse_Dia1_2>Aaah, okay... Well, what ever the death of that monster and the following earthquake caused, it's bad, and it wasn't natural.\nOur scientists are going crazy. Something very old under the planet's surface was activated. Our scientists believe it started to cool down the planet's core.\nWhile the process seems to be slow, it will mean certain death if we can't find out how to stop it!</Story_Shrine1_Apocalypse_Dia1_2>
+  <Story_Shrine1_Apocalypse_Dia1_2_Option1>Let's find more of those shrines and see if we can't find more clues \nas to what we're dealing with.</Story_Shrine1_Apocalypse_Dia1_2_Option1>
+  <Story_Shrine1_Apocalypse_Dia1_3>Ya, we'll message you when we can find more shrines. \n[{0}'s voice turning to a worried tone] And stay save until then, i have a really bad feeling about this.</Story_Shrine1_Apocalypse_Dia1_3>
+  <Story_Shrine1_Apocalypse_Dia1_3_Option1>We will, take care as well. Bye!</Story_Shrine1_Apocalypse_Dia1_3_Option1>
+
+  <Story_Shrine2_Apocalypse_Dia1_1>You did it again! What a fight...\nWe were able to track a transmission, when the monster died. Looks like data was sent to a remote site. We need to find it! That is our best bet in stopping whatever the hell is happening with this RimWorld.</Story_Shrine2_Apocalypse_Dia1_1>
+  <Story_Shrine2_Apocalypse_Dia1_1_Option1>Hmm, how would we go about that?</Story_Shrine2_Apocalypse_Dia1_1_Option1>
+  <Story_Shrine2_Apocalypse_Dia1_2>We managed to get a rough location, but we need more transmissions to get the exact location. About two more should do the trick, if we can find one.</Story_Shrine2_Apocalypse_Dia1_2>
+  <Story_Shrine2_Apocalypse_Dia1_2_Option1>Or survive the encounter, for that matter...</Story_Shrine2_Apocalypse_Dia1_2_Option1>
+  <Story_Shrine2_Apocalypse_Dia1_3>[{0} laughs and answers sarcastically] Yep, but if we don't try, it's gonna be a little frosty around here soon.</Story_Shrine2_Apocalypse_Dia1_3>
+  <Story_Shrine2_Apocalypse_Dia1_3_Option1>While I do like snow, this shouldn't get out of hand.\nAnyway, let us know when you find another one, take care!</Story_Shrine2_Apocalypse_Dia1_3_Option1>
+
+  <Story_Shrine3_Apocalypse_Dia1_1>You're getting pretty good at this, remind me not getting on your bad side...\nWe tracked another transmission. We're getting closer!</Story_Shrine3_Apocalypse_Dia1_1>
+  <Story_Shrine3_Apocalypse_Dia1_1_Option1>Off to the next I guess.</Story_Shrine3_Apocalypse_Dia1_1_Option1>
+
+  <Story_Shrine4_Apocalypse_Dia1_1>Yes! We have the required data! We'll let you know when we have the final location.</Story_Shrine4_Apocalypse_Dia1_1>
+  <Story_Shrine4_Apocalypse_Dia1_1_Option1>Why do I kind of not want to know?</Story_Shrine4_Apocalypse_Dia1_1_Option1>
+  <Story_Shrine4_Apocalypse_Dia1_2>[{0} giggles] Come on now, we're so close. Don't you want to rescue this planet?</Story_Shrine4_Apocalypse_Dia1_2>
+  <Story_Shrine4_Apocalypse_Dia1_2_Option1>[Sigh] Considering what we might be facing, a little snow really doesn't sound so bad...</Story_Shrine4_Apocalypse_Dia1_2_Option1>
+  <Story_Shrine4_Apocalypse_Dia1_3>[{0} laughs] Well, we better prepare ourselves thoroughly, so you get to "enjoy" it until you think you're ready. Talk to you later?</Story_Shrine4_Apocalypse_Dia1_3>
+  <Story_Shrine4_Apocalypse_Dia1_3_Option1>Alright, good luck with those calculations!</Story_Shrine4_Apocalypse_Dia1_3_Option1>
+
+  <Story_Shrine5_Apocalypse_Dia1_1>[{0} laughing full of joy] Yes, the ancient machines powered down, the planet is heating up again. We did it. You were so great. \n\nWe won't forget what you guys have done for us and the entire world. \n\nHmmm, how about 4000 bounty credits, that you can spent freely. \nAnd I really hope u guys stay in touch, especially since I'm not sure this is the last we saw of those damn mechs. \n\nThe planet is safe for now, but there is plenty more ruins out there. \nWe'll let you know if we find more in case you want to help ridding the planet of them, but for now, go celebrate and enjoy our victory. Wuhuuuuuuu.</Story_Shrine5_Apocalypse_Dia1_1>
+  <Story_Shrine5_Apocalypse_Dia1_1_Option1>We couldn't have done it without you, thanks for all that help.\nWe'll come visit. Cya.</Story_Shrine5_Apocalypse_Dia1_1_Option1>
+  
+  <Story_Shrine1_QuestUpdate_1>Defeating the mechanical monstrosity activated old unknown machinery deep below the planet's surface that started to cool down the planet's core. This will slowly render the planet inhabitable and the cause needs to be found. You should seek out more shrines to get answers.</Story_Shrine1_QuestUpdate_1>
+  <Story_Shrine5_QuestUpdate_1>({1}) {0}: {2} entered a shrine not harboring a guardian.\n{3} mentioned a disturbance, some highly bundled particle displacement.\nYou should find it, it must be hidden away in these ruins. </Story_Shrine5_QuestUpdate_1>
+  <Story_Shrine5_QuestUpdate_2>Defeating the {0} disabled the mechanoid mechanism responsible for freezing the planet. The catastrophe was avoided, the world will return to normal, but some other shrines may still be out there.</Story_Shrine5_QuestUpdate_2>
+  <Story_Shrine5_QuestUpdate_Info_1>(The main quest is now complete, but this quest will stay active to keep logging further shrines you may choose to explore. If you do not wish so, you can dismiss this quest.)</Story_Shrine5_QuestUpdate_Info_1>
+
+  <Story_Shrine5_Apocalypse_Dia2Title>You look around as you step out of the portal's room</Story_Shrine5_Apocalypse_Dia2Title>
+  <Story_Shrine5_Apocalypse_Dia2_1>[{0} deep in thoughts] The sacrileg hunters have no idea, that I felt something deep within the planet, when I killed the mechanoid monster. It's still down there... waiting. I may be able to reach it with some amplifier, but what could be that powerful?\n\nOh! Yes, maybe the tree, that chose me to begin with. But what might happen if I do? Do I even want to find out? Hmm, but for now it's time to get some rest...</Story_Shrine5_Apocalypse_Dia2_1>
+  <Story_Shrine5_Apocalypse_Dia2_1_Option1>Let's move on.</Story_Shrine5_Apocalypse_Dia2_1_Option1>
+</LanguageData>
