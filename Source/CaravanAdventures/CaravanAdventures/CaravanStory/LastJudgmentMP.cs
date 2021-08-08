@@ -89,17 +89,13 @@ namespace CaravanAdventures.CaravanStory
 				spell = endSpell;
 				LearnSpell(gifted, spell);
 			}
-
 			CompCache.StoryWC.SetShrineSF("Completed");
 			CompCache.StoryWC.IncreaseShrineCompleteCounter();
 			CompCache.StoryWC.mechBossKillCounters[endBoss.kindDef] = CompCache.StoryWC.mechBossKillCounters.TryGetValue(endBoss.kindDef, out var result) ? result + 1 : 1;
-
-			CompCache.StoryWC.questCont.LastJudgment.Apocalypse.End();
-			CompCache.StoryWC.SetSF("Judgment_StoryOverDialog");
-
+            CompCache.StoryWC.questCont.LastJudgment.EndApocalypse();
+            CompCache.StoryWC.SetSF("Judgment_StoryOverDialog");
 			BossDefeatedDialog(gifted, endBoss, spell);
-
-            StoryUtility.AdjustGoodWill(75);
+			StoryUtility.AdjustGoodWill(75);
 			Quests.QuestUtility.AppendQuestDescription(Quests.StoryQuestDefOf.CA_FindAncientShrine,
 				(CompCache.StoryWC.GetCurrentShrineCounter(true) - 1 > CompCache.StoryWC.GetShrineMaxiumum
 					? "Story_Shrine1_QuestRewardUpdate_1_WithoutSpell"
@@ -115,7 +111,6 @@ namespace CaravanAdventures.CaravanStory
 					spell.label.CapitalizeFirst().Colorize(Color.cyan)
 				)
 			);
-
 			Quests.QuestUtility.AppendQuestDescription(Quests.StoryQuestDefOf.CA_FindAncientShrine, Helper.HtmlFormatting("Story_Shrine5_QuestUpdate_2".Translate(endBoss.NameShortColored), "b6f542"), false, true);
 			Quests.QuestUtility.AppendQuestDescription(Quests.StoryQuestDefOf.CA_FindAncientShrine, "Story_Shrine5_QuestUpdate_Info_1".Translate(), false, true);
 		}
