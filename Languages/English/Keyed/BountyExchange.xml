@@ -47,4 +47,9 @@
   <CABountyExchangeSilverForBounty>Current bounty credits: {0}\nCurrent silver: {1}\n\n\nChoose how many bounty credits you want to buy</CABountyExchangeSilverForBounty>
   <CABountyExchangeSilverForBountyOption>Exchange {0} silver for {1} bounty credit</CABountyExchangeSilverForBountyOption>
   <CABountyExchangeSilverForBountyLackingSilver>Not enough silver</CABountyExchangeSilverForBountyLackingSilver>
+
+  <CABountyKillMessage>Collected {0, -10} bounty credit for killing a {1, -20}, total credit: {2}</CABountyKillMessage>
+  <CABountyKillMessageBounty>Bounty-kill: </CABountyKillMessageBounty>
+  <CABountyKillMessageReward>Reward: </CABountyKillMessageReward>
+  <CABountyKillMessageCredit>Total credit: </CABountyKillMessageCredit>
 </LanguageData>

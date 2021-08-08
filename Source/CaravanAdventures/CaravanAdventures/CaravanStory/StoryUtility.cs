@@ -52,19 +52,24 @@ namespace CaravanAdventures.CaravanStory
         }
 
         public static void AddBountyPointsForKilledMech(Pawn mech)
-        {   
-            if (mech.def == ThingDef.Named("Mech_Pikeman")) CompCache.BountyWC.BountyPoints += 7;
-            else if (mech.def == ThingDef.Named("Mech_Scyther")) CompCache.BountyWC.BountyPoints += 10;
-            else if (mech.def == ThingDef.Named("Mech_Lancer")) CompCache.BountyWC.BountyPoints += 15;
-            else if (mech.def == ThingDef.Named("Mech_Centipede")) CompCache.BountyWC.BountyPoints += 45;
-            else if (mech.def == ThingDef.Named("CAEndBossMech")) CompCache.BountyWC.BountyPoints += 3000;
-            else if (CompCache.StoryWC.BossDefs().Contains(mech.def)) CompCache.BountyWC.BountyPoints += 500;
+        {
+            var reward = 0f;
+            if (mech.def == ThingDef.Named("Mech_Pikeman")) reward += 7;
+            else if (mech.def == ThingDef.Named("Mech_Scyther")) reward += 10;
+            else if (mech.def == ThingDef.Named("Mech_Lancer")) reward += 15;
+            else if (mech.def == ThingDef.Named("Mech_Centipede")) reward += 45;
+            else if (mech.def == ThingDef.Named("CAEndBossMech")) reward += 3000;
+            else if (CompCache.StoryWC.BossDefs().Contains(mech.def)) reward += 500;
             else
             {
                 var addedBounty = CompatibilityDefOf.CACompatDef.mechanoidBountyToAdd.FirstOrDefault(x => x?.raceDefName != null && x?.raceDefName == mech.def.defName);
-                if (addedBounty != null) CompCache.BountyWC.BountyPoints += addedBounty.bountyPoints;
-                else CompCache.BountyWC.BountyPoints += 12;
+                if (addedBounty != null) reward += addedBounty.bountyPoints;
+                else reward += 12;
             }
+            CompCache.BountyWC.BountyPoints += reward;
+            if (!ModSettings.showBountyRewardInfo) return;
+            Messages.Message($"{"CABountyKillMessageBounty".Translate() + Helper.HtmlFormatting(mech?.Label.CapitalizeFirst(), "FF8C00")}  {"CABountyKillMessageReward".Translate() + Helper.HtmlFormatting(reward.ToString(), "FF8C00")}  {"CABountyKillMessageCredit".Translate() + Helper.HtmlFormatting(CompCache.BountyWC.BountyPoints.ToString(), "FF8C00")}", MessageTypeDefOf.SilentInput);
+            //Messages.Message("CABountyKillMessage".Translate(reward, mech?.Label, CompCache.BountyWC.BountyPoints), MessageTypeDefOf.SilentInput);
         }
 
         public static void GetAssistanceFromAlliedFaction(Faction faction, Map map, float pointsMin = 4000, float pointsMax = 5000, IntVec3 spawnSpot = default)
