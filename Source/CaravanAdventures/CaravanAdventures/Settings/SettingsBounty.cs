@@ -77,8 +77,10 @@ namespace CaravanAdventures.Settings
 
             // only for testing purposes, remove
             var serviceAvailable = CompCache.BountyWC.BountyServiceAvailable;
-            options.CheckboxLabeled("bounty services enabled", ref serviceAvailable);
+            options.CheckboxLabeled("Bounty services enabled", ref serviceAvailable);
             CompCache.BountyWC.BountyServiceAvailable = serviceAvailable;
+            
+            options.CheckboxLabeled("Show bounty credit message with details upon a kill", ref ModSettings.showBountyRewardInfo);
 
             options.Label($"Envoy duration to improve relations with bounties in days: {Math.Round(ModSettings.envoyDurationTimeForBountyRelationHagglingInDays, 1)}");
             ModSettings.envoyDurationTimeForBountyRelationHagglingInDays = options.Slider(ModSettings.envoyDurationTimeForBountyRelationHagglingInDays, 0.1f, 60f);
