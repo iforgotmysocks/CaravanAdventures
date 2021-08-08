@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+	<CaravanDamselInDistressTitle>Damsel in distress, kidnapped by {0}</CaravanDamselInDistressTitle>
+	<CaravanDamselInDistress>We stumbled over a stunning and helpless girl held by {2} of {1}'s savages... could we bare the thought to leave her in their grasp?</CaravanDamselInDistress>
+	<CaravanDamselInDistress_Rescue>Rescue her immediately</CaravanDamselInDistress_Rescue>
+	<CaravanDamselInDistress_Follow>Follow them silently until they make camp</CaravanDamselInDistress_Follow>
+	<CaravanDamselInDistress_Leave>Leave her to her fate</CaravanDamselInDistress_Leave>
+
+	<CaravanDamselInDistress_Follow_Title>You followed...</CaravanDamselInDistress_Follow_Title>
+	<CaravanDamselInDistress_Follow_Main>You follow up to their camp and wait till dark, they only have 1 guard which seems rather drunk and would be easy to take. How do you proceed?</CaravanDamselInDistress_Follow_Main>
+	<CaravanDamselInDistress_Follow_SneakFreeGirl>Sneak in, kill the bandits in their sleep and free the girl</CaravanDamselInDistress_Follow_SneakFreeGirl>
+
+	<CaravanDamselInDistress_Follow_KillSuccess_Title></CaravanDamselInDistress_Follow_KillSuccess_Title>
+	<CaravanDamselInDistress_Follow_KillSuccess_Main>You successfully cut their thoughts without them waking up and freed the surprised and hopeful looking girl. What do you want to do with her?</CaravanDamselInDistress_Follow_KillSuccess_Main>
+	<CaravanDamselInDistress_Follow_KillSuccess_Free>Let her be on her way, she's been through enough</CaravanDamselInDistress_Follow_KillSuccess_Free>
+	<CaravanDamselInDistress_Follow_KilSuccess_Slave>She'll make a fine slave</CaravanDamselInDistress_Follow_KilSuccess_Slave>
+
+	<CaravanDamselInDistress_Follow_KillFail_Main>You stepped on a twig and the guards woke up, we can either fight them or run.</CaravanDamselInDistress_Follow_KillFail_Main>
+	<CaravanDamselInDistress_Follow_KillFail_Fight>Fight</CaravanDamselInDistress_Follow_KillFail_Fight>
+	<CaravanDamselInDistress_Follow_KillFail_Leave>Try to escape</CaravanDamselInDistress_Follow_KillFail_Leave>
+
+	<CaravanDamselInDistress_Saved_AsksToJoin>You hear {0} asking you to come closer.</CaravanDamselInDistress_Saved_AsksToJoin>
+	<Okay>Ok.</Okay>
+	<CaravanDamselInDistress_Saved_AsksToJoinTitle>You hear a weak voice...</CaravanDamselInDistress_Saved_AsksToJoinTitle>
+
+<CaravanDamselInDistress_AsksToJoinTitle>{0} asks to join.</CaravanDamselInDistress_AsksToJoinTitle>
+	<CaravanDamselInDistress_AsksToJoin>Thank you for saving my life, Would you allow me to join you on your journey?</CaravanDamselInDistress_AsksToJoin>
+	<CaravanDamselInDistress_JoinAllow>Yes, you're welcome to join.</CaravanDamselInDistress_JoinAllow>
+	<CaravanDamselInDistress_JoinDeny>Sorry, we can't take the risk.</CaravanDamselInDistress_JoinDeny>
+</LanguageData>
