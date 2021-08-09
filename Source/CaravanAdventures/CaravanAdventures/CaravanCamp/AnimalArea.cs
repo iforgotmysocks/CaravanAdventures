@@ -39,9 +39,10 @@ namespace CaravanAdventures.CaravanCamp
             for (int i = 0; i < 6; i++)
             {
                 if (i == 0 || i % 2 == 0) continue;
-                CampHelper.PrepAndGenerateThing(tribal 
+                var animalPlace = CampHelper.PrepAndGenerateThing(tribal 
                     ? ThingMaker.MakeThing(ThingDef.Named("AnimalSleepingSpot")) 
-                    : ThingMaker.MakeThing(ThingDef.Named("AnimalBed"), ThingDefOf.Leather_Plain), innerCells[i], map, default, campAssetListRef);
+                    : ThingMaker.MakeThing(ThingDef.Named("AnimalBed"), ThingDefOf.Leather_Plain), innerCells[i], map, default, campAssetListRef) as Building_Bed;
+                if (animalPlace != null) animalPlace.Medical = true;
             }
 
             CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("PenMarker"), ThingDefOf.WoodLog), CellRect.CenterCell, map, default, campAssetListRef);
