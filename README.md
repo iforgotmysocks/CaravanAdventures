@@ -68,9 +68,11 @@ slice2 by freefire66 https://freesound.org/people/freefire66/sounds/175949/
 slice3 by TheBuilder15 https://freesound.org/people/TheBuilder15/sounds/434896/  
 slice4 by Aleks41 https://freesound.org/people/Aleks41/sounds/449552/ 
 
-Translations:  
+Translations: 
+ChineseSimplified translation by ameki  
+ChineseTraditional translation by ameki  
 Korean translation by inbae  
 SpanishLatin translation by Evilservant6  
 
-CE Patch done by DkPepper 
+CE Patch done by DkPepper  
 Thanks to the testers who helped to get this mod on the road!  
