@@ -273,10 +273,6 @@ namespace CaravanAdventures.CaravanStory
 
         private void TryCreateNewShrine(ref float shrineRevealCounter)
         {
-            var tile = GetShrineLocation();
-            if (tile == -1) return;
-
-            shrineTileUnsuccessfulCounter = 0;
             if (Faction.OfPlayer.HostileTo(StoryUtility.FactionOfSacrilegHunters))
             {
                 DLog.Message($"Skipping shrine revealation, Sac hunters are hostile.");
@@ -284,6 +280,15 @@ namespace CaravanAdventures.CaravanStory
                 return;
             }
 
+            var tile = GetShrineLocation();
+            if (tile == -1)
+            {
+                DLog.Message($"Skipping shrine revealation, couldn't find valid location.");
+                shrineRevealCounter = 1000;
+                return;
+            }
+
+            shrineTileUnsuccessfulCounter = 0;
             var ancientMasterShrineWO = (AncientMasterShrineWO)WorldObjectMaker.MakeWorldObject(CaravanStorySiteDefOf.CAAncientMasterShrineWO);
             ancientMasterShrineWO.Tile = tile;
             Find.WorldObjects.Add(ancientMasterShrineWO);
