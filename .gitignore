@@ -240,8 +240,6 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
-/About/possiblePreviews
 /Wiki/repo
 /Wiki/.vscode
-/About/workshopdescRelease.txt
 /Languages/CopyLanguageFiles.exe
