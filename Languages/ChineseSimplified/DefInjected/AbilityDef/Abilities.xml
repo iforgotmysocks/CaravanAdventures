@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- <AbilityDef Name="PsycastBase" Abstract="True" MayRequire="Ludeon.RimWorld.Royalty">
+    <abilityClass>Psycast</abilityClass>
+    <category>Psychic</category>
+    <statBases>
+      <Ability_Duration>0</Ability_Duration>
+    </statBases>
+    <warmupSound>PsycastCastLoop</warmupSound>
+    <verbProperties>
+      <verbClass>Verb_CastPsycast</verbClass>
+      <range>24.9</range>
+      <requireLineOfSight>True</requireLineOfSight>
+      <warmupTime>1</warmupTime>
+      <targetParams>
+        <canTargetBuildings>False</canTargetBuildings>
+        <canTargetAnimals>False</canTargetAnimals>
+        <thingCategory>Item</thingCategory>
+        <mapObjectTargetsMustBeAutoAttackable>False</mapObjectTargetsMustBeAutoAttackable>
+      </targetParams>
+    </verbProperties>
+  </AbilityDef> -->
+
+  <CAAncientMeditate.label>古代冥想</CAAncientMeditate.label>
+  <CAAncientMeditate.description>从自然中吸收精神能量并为使用者恢复。 靠近施法者的其他殖民者也会获得少量。 需要远古天赋。</CAAncientMeditate.description>
+
+  <CAAncientThunderBolt.label>古老的雷电</CAAncientThunderBolt.label>
+  <CAAncientThunderBolt.description>强大的远古精神力量，一种具有区域伤害的目标雷霆爆炸。 需要远古天赋。</CAAncientThunderBolt.description>
+
+  <CAAncientMechSignal.label>古代机甲信号</CAAncientMechSignal.label>
+  <CAAncientMechSignal.description>召唤一群机械镰刀来帮助施法者。 需要远古天赋。</CAAncientMechSignal.description>
+
+
+  <!-- <AbilityDef ParentName="PsycastBase" MayRequire="Ludeon.RimWorld.Royalty">
+    <defName>CAAncientProtectiveAura</defName>
+    <label>ancient protective aura</label>
+    <description>Protects the target from a large part of incoming damage, fire and heals wounds over time (even permanent ones when active long enough). \n\nReduces the overall heat a pawn can handle and accelerates psyfocus drain by 2% / day while active. The effect of this spell disappears if it is cast a second time on the target or if the targetted pawn runs out of psyfocus. \n\nThe effect is weaker and drains more psyfocus when cast on pawns without the ancient gift.</description>
+    <level>0</level>
+		<displayGizmoWhileUndrafted>True</displayGizmoWhileUndrafted>
+		<disableGizmoWhileUndrafted>False</disableGizmoWhileUndrafted>
+    <iconPath>UI/Abilities/Painblock</iconPath>
+    <hotKey>Misc12</hotKey>
+    <statBases>
+      <Ability_EntropyGain>30</Ability_EntropyGain>
+      <Ability_PsyfocusCost>0</Ability_PsyfocusCost>
+    </statBases>
+    <verbProperties>
+      <warmupTime>0.25</warmupTime>
+      <range>5</range>
+      <onlyManualCast>True</onlyManualCast>
+      <targetParams>
+        <canTargetSelf>True</canTargetSelf>
+        <canTargetAnimals>False</canTargetAnimals>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class = "CaravanAdventures.CaravanAbilities.CompProperties_GiveToggleableHediff">
+        <compClass>CaravanAdventures.CaravanAbilities.CompAbilityEffect_GiveToggleableHediff</compClass>
+        <hediffDef>CAAncientProtectiveAura</hediffDef>
+        <hediffSecondary>CAAncientProtectiveAuraWeak</hediffSecondary>
+        <psychic>True</psychic>
+      </li>
+    </comps>
+  </AbilityDef> -->
+
+  <CAAncientCoordinator.label>古代协调</CAAncientCoordinator.label>
+  <CAAncientCoordinator.description>只要施法者还活着，施法者以及其他 4 名殖民者就会被授予远古保护光环的力量，而不会产生任何不利影响。 但是，每个其他超过 5 个限制的小人都会死亡。 需要远古天赋。</CAAncientCoordinator.description>
+
+  <CAAncientProtectiveAura.label>古老的保护光环</CAAncientProtectiveAura.label>
+  <CAAncientProtectiveAura.description>允许施法者引导精神焦点，以几乎任何人类可能的方式直接加强身体能力。 敏捷、近战和耐力都得到了极大的提升。 它还可以保护目标免受大部分传入伤害，火灾，随着时间的推移愈合伤口（如果活动时间足够长，甚至是永久性伤口）。 \n\n减少小人可以处理的整体热量，并在活动时每天加速 2% 的灵能消耗。 如果第二次施展或没有更多的灵能可用，该法术的效果就会消失。 \n\n需要远古天赋，除非被远古协调者法术强化。</CAAncientProtectiveAura.description>
+
+  <CAConjureLight.label>神秘的指路灯</CAConjureLight.label>
+  <CAConjureLight.description>用于提高旅行者速度的旅行辅助灯，可以在地图或商队。 不能在路上施放，准备时间长。 持续3天。</CAConjureLight.description>
+
+
+</LanguageData>

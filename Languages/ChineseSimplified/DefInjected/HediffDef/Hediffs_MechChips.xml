@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <CAEXT1Basic.label>EXT1 基本</CAEXT1Basic.label>
+  <CAEXT1Basic.description>使机器能够根据版本使用先进的战斗逻辑，连接到休眠网络并使用一组可怕的能力。</CAEXT1Basic.description>
+
+  <CAEXT1Artillary.label>EXT1火炮</CAEXT1Artillary.label>
+  <CAEXT1Artillary.description>使机器能够根据版本使用先进的战斗逻辑，连接到休眠网络并使用一组可怕的能力。</CAEXT1Artillary.description>
+
+  <CAEXT1Melee.label>EXT1 近战</CAEXT1Melee.label>
+  <CAEXT1Melee.description>使机器能够根据版本使用先进的战斗逻辑，连接到休眠网络并使用一组可怕的能力。</CAEXT1Melee.description>
+
+  <CAEXT1Laser.label>EXT1 激光</CAEXT1Laser.label>
+  <CAEXT1Laser.description>使机器能够根据版本使用先进的战斗逻辑，连接到休眠网络并使用一组可怕的能力。</CAEXT1Laser.description>
+
+  <CAEXT1Guardian.label>EXT1 守护者</CAEXT1Guardian.label>
+  <CAEXT1Guardian.description>使机器能够根据版本使用先进的战斗逻辑，连接到休眠网络并使用一组可怕的能力。</CAEXT1Guardian.description>
+
+  <CAEXT1Missile.label>EXT1 导弹</CAEXT1Missile.label>
+  <CAEXT1Missile.description>使机器能够根据版本使用先进的战斗逻辑，连接到休眠网络并使用一组可怕的能力。</CAEXT1Missile.description>
+
+
+</LanguageData>

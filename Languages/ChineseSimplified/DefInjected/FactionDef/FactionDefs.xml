@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <CASacrilegHunters.label>祭祀猎人</CASacrilegHunters.label>
+  <CASacrilegHunters.description>一个技术先进的派系，与他们的世代飞船坠毁在这个边缘世界。 他们的专长在于取回古老的文物和寻找宝藏，这极大地帮助了他们在这个布满古老建筑的星球上快速立足。</CASacrilegHunters.description>
+  <CASacrilegHunters.pawnsPlural>祭祀猎人</CASacrilegHunters.pawnsPlural>
+  <CASacrilegHunters.leaderTitle>首席议员</CASacrilegHunters.leaderTitle>
+
+  <CAFriendlyMechanoid.label>机械蜂巢</CAFriendlyMechanoid.label>
+  <CAFriendlyMechanoid.pawnsPlural>机械人</CAFriendlyMechanoid.pawnsPlural>
+
+
+</LanguageData>

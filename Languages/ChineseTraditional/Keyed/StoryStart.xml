@@ -1,30 +1,31 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 
-  <CA_Story_TheTree_QuestName>Caravan Adventures - Whispers</CA_Story_TheTree_QuestName>
-  <CA_Story_TheTree_QuestDesc>Creepy whispers echo around the village. They seem to be coming from the direction of the anima tree.</CA_Story_TheTree_QuestDesc>
+  <CA_Story_TheTree_QuestName>商隊歷險 - 耳語</CA_Story_TheTree_QuestName>
+  <CA_Story_TheTree_QuestDesc>令人毛骨悚然的低語在村子裡回蕩。 他們似乎是從心能樹的方向來的。</CA_Story_TheTree_QuestDesc>
 
-  <CA_Start_Begin>Talk...</CA_Start_Begin>
-  <Story_Start_Dia1_Title>The mysterious tree speaks...</Story_Start_Dia1_Title>
-	<Story_Start_Dia1>Listen human, the ancient creature awoke. We may all perish unless we empower a savior to gather the ancient spells in order to battle the creature when it is ready to strike.</Story_Start_Dia1>
-	<Story_Start_Dia1_GuessMe>Wha... me?</Story_Start_Dia1_GuessMe>
-	<Story_Start_Dia1_Me>Yes, you have the potential that is required to wield the power of the ancient scrolls. Start the journey, acquire the spells and save this planet from doom. Do you accept the Ancient Gift?</Story_Start_Dia1_Me>
-	<Story_Start_Dia1_Me_NoChoice>Guess I don't have much of a choice, I accept.</Story_Start_Dia1_Me_NoChoice>
-	<Story_Start_Dia1_Me_SomeoneBetter>Sorry, I can't, but there may be someone better suited...</Story_Start_Dia1_Me_SomeoneBetter>
-	<Story_Start_Dia1_Me_End_Accepted>The location of the first spell will reveal itself to you soon. Good luck on your journey, chosen one.</Story_Start_Dia1_Me_End_Accepted>
-	<Story_Start_Dia1_Me_End_Denied>We hope you are right.</Story_Start_Dia1_Me_End_Denied>
-	<Story_Start_Dia1_Me_End_Bye>Bye.</Story_Start_Dia1_Me_End_Bye>
-	<Story_Start_Dia1_Me_End_GiftAlreadyRecieved>The ancient gift was already granted, don't disturb me any longer.</Story_Start_Dia1_Me_End_GiftAlreadyRecieved>
-	<Story_Start_Dia1_1_Neg_Option2>{0} can't fulfill {1} duty, that's why I would like to take on the gift.</Story_Start_Dia1_1_Neg_Option2>
-	<Story_Start_Dia1_2_Neg>So be it. Now leave.</Story_Start_Dia1_2_Neg>
-	<Story_Start_Dia1_2_Neg_Option1>Thank you!</Story_Start_Dia1_2_Neg_Option1>
+  <CA_Start_Begin>講話...</CA_Start_Begin>
+  <Story_Start_Dia1_Title>神秘的樹會說話……</Story_Start_Dia1_Title>
+  <Story_Start_Dia1>聽著人類，古老的生物醒來了。 除非我們授權一位救世主收集古老的咒語，以便在它准備發動攻擊時與它戰斗，否則我們可能都會滅亡。</Story_Start_Dia1>
+  <Story_Start_Dia1_GuessMe>什麼……我？</Story_Start_Dia1_GuessMe>
+  <Story_Start_Dia1_Me>是的，您擁有運用遠古卷軸力量所需的潛力。 開始旅程，獲得法術並從厄運中拯救這個星球。 你接受古代禮物嗎？</Story_Start_Dia1_Me>
+  <Story_Start_Dia1_Me_NoChoice>我想我沒有太多選擇，我接受。</Story_Start_Dia1_Me_NoChoice>
+  <Story_Start_Dia1_Me_SomeoneBetter>抱歉，我不能，但可能有更適合的人...</Story_Start_Dia1_Me_SomeoneBetter>
+  <Story_Start_Dia1_Me_End_Accepted>第一個咒語的位置很快就會向您顯示。 祝你旅途順利，被選中的人。</Story_Start_Dia1_Me_End_Accepted>
+  <Story_Start_Dia1_Me_End_Denied>我們希望你是對的。</Story_Start_Dia1_Me_End_Denied>
+  <Story_Start_Dia1_Me_End_Bye>再見。</Story_Start_Dia1_Me_End_Bye>
+  <Story_Start_Dia1_Me_End_GiftAlreadyRecieved>上古之禮已賜，別再打擾我。</Story_Start_Dia1_Me_End_GiftAlreadyRecieved>
+  <Story_Start_Dia1_1_Neg_Option2>{0} 不能履行 {1} 的職責，因此我想接受這份禮物。</Story_Start_Dia1_1_Neg_Option2>
+  <Story_Start_Dia1_2_Neg>就這樣吧。 現在離開。</Story_Start_Dia1_2_Neg>
+  <Story_Start_Dia1_2_Neg_Option1>謝謝！</Story_Start_Dia1_2_Neg_Option1>
 
-  <CA_Story_ReceivedGiftLetterTitle>Received ancient gift</CA_Story_ReceivedGiftLetterTitle>
-  <CA_Story_ReceivedGiftLetterDesc>{0} has been granted the ancient gift. {0} also started to remember 2 spells that {1} never knew before. You can find more info in {0}'s health tab.</CA_Story_ReceivedGiftLetterDesc>
+  <CA_Story_ReceivedGiftLetterTitle>收到古代禮物</CA_Story_ReceivedGiftLetterTitle>
+  <CA_Story_ReceivedGiftLetterDesc>{0} 已被授予古老的禮物。 {0} 也開始記住 {1} 以前不知道的 2 個咒語。 您可以在 {0} 的健康標簽中找到更多信息。</CA_Story_ReceivedGiftLetterDesc>
 
-  <CA_Story_Start_EnableAncientMachines>Help me contact the ancient machines below the planet's surface.</CA_Story_Start_EnableAncientMachines>
-  <CA_Story_Start_MachinesEnabled>As you wish... hmmm, the machines have become active again and continue fulfilling their work.</CA_Story_Start_MachinesEnabled>
-  <CA_Story_Start_MachinesDisabled>As you wish... hmmm, the machines have become dormant and remain inactive.</CA_Story_Start_MachinesDisabled>
-  <CA_Story_Start_Bye>Bye.</CA_Story_Start_Bye>
+  <CA_Story_Start_EnableAncientMachines>幫我聯系地球表面下的古老機器。</CA_Story_Start_EnableAncientMachines>
+  <CA_Story_Start_MachinesEnabled>如您所願……嗯，機器再次活躍起來並繼續完成它們的工作。</CA_Story_Start_MachinesEnabled>
+  <CA_Story_Start_MachinesDisabled>如您所願……嗯，這些機器已經進入休眠狀態並保持不活動狀態。</CA_Story_Start_MachinesDisabled>
+  <CA_Story_Start_Bye>再見。</CA_Story_Start_Bye>
+
 </LanguageData>
 

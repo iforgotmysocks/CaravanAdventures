@@ -1,30 +1,31 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-	<CaravanDamselInDistressTitle>Damsel in distress, kidnapped by {0}</CaravanDamselInDistressTitle>
-	<CaravanDamselInDistress>We stumbled over a stunning and helpless girl held by {2} of {1}'s savages... could we bare the thought to leave her in their grasp?</CaravanDamselInDistress>
-	<CaravanDamselInDistress_Rescue>Rescue her immediately</CaravanDamselInDistress_Rescue>
-	<CaravanDamselInDistress_Follow>Follow them silently until they make camp</CaravanDamselInDistress_Follow>
-	<CaravanDamselInDistress_Leave>Leave her to her fate</CaravanDamselInDistress_Leave>
+  <CaravanDamselInDistressTitle>遇险的少女被 {0} 绑架</CaravanDamselInDistressTitle>
+  <CaravanDamselInDistress>我们偶然发现了一个被 {1} 的 {2} 名野蛮人抓住的迷人而无助的女孩……我们能忍受将她留在他们手中吗？</CaravanDamselInDistress>
+  <CaravanDamselInDistress_Rescue>马上救她</CaravanDamselInDistress_Rescue>
+  <CaravanDamselInDistress_Follow>偷偷跟着他们直到他们扎营</CaravanDamselInDistress_Follow>
+  <CaravanDamselInDistress_Leave>让她自生自灭</CaravanDamselInDistress_Leave>
 
-	<CaravanDamselInDistress_Follow_Title>You followed...</CaravanDamselInDistress_Follow_Title>
-	<CaravanDamselInDistress_Follow_Main>You follow up to their camp and wait till dark, they only have 1 guard which seems rather drunk and would be easy to take. How do you proceed?</CaravanDamselInDistress_Follow_Main>
-	<CaravanDamselInDistress_Follow_SneakFreeGirl>Sneak in, kill the bandits in their sleep and free the girl</CaravanDamselInDistress_Follow_SneakFreeGirl>
+  <CaravanDamselInDistress_Follow_Title>你跟踪着……</CaravanDamselInDistress_Follow_Title>
+  <CaravanDamselInDistress_Follow_Main>你跟进他们的营地，等到天黑，他们只有 1 名守卫，看起来很醉，很容易被带走。 你怎么做？</CaravanDamselInDistress_Follow_Main>
+  <CaravanDamselInDistress_Follow_SneakFreeGirl>摸进去，在睡梦中杀了山贼，并救出女孩</CaravanDamselInDistress_Follow_SneakFreeGirl>
 
-	<CaravanDamselInDistress_Follow_KillSuccess_Title></CaravanDamselInDistress_Follow_KillSuccess_Title>
-	<CaravanDamselInDistress_Follow_KillSuccess_Main>You successfully cut their thoughts without them waking up and freed the surprised and hopeful looking girl. What do you want to do with her?</CaravanDamselInDistress_Follow_KillSuccess_Main>
-	<CaravanDamselInDistress_Follow_KillSuccess_Free>Let her be on her way, she's been through enough</CaravanDamselInDistress_Follow_KillSuccess_Free>
-	<CaravanDamselInDistress_Follow_KilSuccess_Slave>She'll make a fine slave</CaravanDamselInDistress_Follow_KilSuccess_Slave>
+  <CaravanDamselInDistress_Follow_KillSuccess_Title></CaravanDamselInDistress_Follow_KillSuccess_Title>
+  <CaravanDamselInDistress_Follow_KillSuccess_Main>你成功地切断了他们的喉咙，他们再也无法醒来，释放了这个看起来既惊讶又充满希望的女孩。 你想对她做什么？</CaravanDamselInDistress_Follow_KillSuccess_Main>
+  <CaravanDamselInDistress_Follow_KillSuccess_Free>放她走，她受的苦太多了</CaravanDamselInDistress_Follow_KillSuccess_Free>
+  <CaravanDamselInDistress_Follow_KilSuccess_Slave>她很适合当一个好奴隶</CaravanDamselInDistress_Follow_KilSuccess_Slave>
 
-	<CaravanDamselInDistress_Follow_KillFail_Main>You stepped on a twig and the guards woke up, we can either fight them or run.</CaravanDamselInDistress_Follow_KillFail_Main>
-	<CaravanDamselInDistress_Follow_KillFail_Fight>Fight</CaravanDamselInDistress_Follow_KillFail_Fight>
-	<CaravanDamselInDistress_Follow_KillFail_Leave>Try to escape</CaravanDamselInDistress_Follow_KillFail_Leave>
+  <CaravanDamselInDistress_Follow_KillFail_Main>你踩到一根树枝，守卫醒了，我们要么与他们战斗，要么逃跑。</CaravanDamselInDistress_Follow_KillFail_Main>
+  <CaravanDamselInDistress_Follow_KillFail_Fight>战斗</CaravanDamselInDistress_Follow_KillFail_Fight>
+  <CaravanDamselInDistress_Follow_KillFail_Leave>尝试逃跑</CaravanDamselInDistress_Follow_KillFail_Leave>
 
-	<CaravanDamselInDistress_Saved_AsksToJoin>You hear {0} asking you to come closer.</CaravanDamselInDistress_Saved_AsksToJoin>
-	<Okay>Ok.</Okay>
-	<CaravanDamselInDistress_Saved_AsksToJoinTitle>You hear a weak voice...</CaravanDamselInDistress_Saved_AsksToJoinTitle>
+  <CaravanDamselInDistress_Saved_AsksToJoin>你听到 {0} 要求你靠近一些。</CaravanDamselInDistress_Saved_AsksToJoin>
+  <Okay>好的。</Okay>
+  <CaravanDamselInDistress_Saved_AsksToJoinTitle>你听到一声微弱的声音……</CaravanDamselInDistress_Saved_AsksToJoinTitle>
 
-<CaravanDamselInDistress_AsksToJoinTitle>{0} asks to join.</CaravanDamselInDistress_AsksToJoinTitle>
-	<CaravanDamselInDistress_AsksToJoin>Thank you for saving my life, Would you allow me to join you on your journey?</CaravanDamselInDistress_AsksToJoin>
-	<CaravanDamselInDistress_JoinAllow>Yes, you're welcome to join.</CaravanDamselInDistress_JoinAllow>
-	<CaravanDamselInDistress_JoinDeny>Sorry, we can't take the risk.</CaravanDamselInDistress_JoinDeny>
+  <CaravanDamselInDistress_AsksToJoinTitle>{0} 请求加入。</CaravanDamselInDistress_AsksToJoinTitle>
+  <CaravanDamselInDistress_AsksToJoin>谢谢你救了我，我可以加入你的旅途吗？</CaravanDamselInDistress_AsksToJoin>
+  <CaravanDamselInDistress_JoinAllow>是的，欢迎加入。</CaravanDamselInDistress_JoinAllow>
+  <CaravanDamselInDistress_JoinDeny>抱歉，我们不能冒这个险。</CaravanDamselInDistress_JoinDeny>
+
 </LanguageData>

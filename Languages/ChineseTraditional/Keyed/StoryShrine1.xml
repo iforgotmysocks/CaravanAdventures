@@ -1,103 +1,104 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-  <Story_Shrine1_NewShrineDetectedLetterLabel>Hints of a dangerous shrine</Story_Shrine1_NewShrineDetectedLetterLabel>
-  <Story_Shrine1_NewShrineDetectedLetterMessage>{0} sent you a message with vague hints regarding tales of a dangerous shrine. The people providing the hint weren't very credible, so take care, as they also said that no one ever returned who dared to pilgrimage there.</Story_Shrine1_NewShrineDetectedLetterMessage>
-  <Story_Shrine1_EnterPossibleShrine>Discovering mysterious shrine (This might take a while)</Story_Shrine1_EnterPossibleShrine>
+  <Story_Shrine1_NewShrineDetectedLetterLabel>危險神社的提示</Story_Shrine1_NewShrineDetectedLetterLabel>
+  <Story_Shrine1_NewShrineDetectedLetterMessage>{0} 向您發送了一條消息，其中包含有關危險神殿故事的模糊提示。 提供提示的人不是很可信，所以要小心，因為他們還說沒有人敢去那裡朝聖。</Story_Shrine1_NewShrineDetectedLetterMessage>
+  <Story_Shrine1_EnterPossibleShrine>發現神秘的神社（這可能需要一段時間）</Story_Shrine1_EnterPossibleShrine>
 
-  <Story_Shrine1_QuestName>Caravan Adventures - Secrets of the Shrines</Story_Shrine1_QuestName>
-  <Story_Shrine1_QuestDesc>Explore possible master shrines to reveal their secrets and to determine the mechanoid armada threat.\nTake your time to prepare, this may be a long journey and the enemy won't be easily defeated!</Story_Shrine1_QuestDesc>
+  <Story_Shrine1_QuestName>商隊歷險 - 神殿的秘密</Story_Shrine1_QuestName>
+  <Story_Shrine1_QuestDesc>探索可能的主神殿以揭示他們的秘密並確定機械無敵艦隊的威脅。\n請花點時間做好准備，這可能是一段漫長的旅程，敵人不會輕易被擊敗！</Story_Shrine1_QuestDesc>
 
-  <VisitAncientMasterShrine>Visit ancient master shrine</VisitAncientMasterShrine>
-  <Story_Shrine1_EnemyEncounterLetterLabel>Enemies encountered</Story_Shrine1_EnemyEncounterLetterLabel>
-  <Story_Shrine1_EnemyEncounterLetterMessage>Looks like we're not alone here.</Story_Shrine1_EnemyEncounterLetterMessage>
-  <VisitAncientMasterShrine>Visit Shrine test</VisitAncientMasterShrine>
+  <VisitAncientMasterShrine>參拜神社試煉</VisitAncientMasterShrine>
+  <Story_Shrine1_EnemyEncounterLetterLabel>遇到敵人</Story_Shrine1_EnemyEncounterLetterLabel>
+  <Story_Shrine1_EnemyEncounterLetterMessage>看來我們在這裡並不孤單。</Story_Shrine1_EnemyEncounterLetterMessage>
+  <VisitAncientMasterShrine>參拜神社試煉</VisitAncientMasterShrine>
 
-  <GiveUpOnClueLabel>Give up on clue</GiveUpOnClueLabel>
-  <GiveUpOnClueDesc>Give up on this clue, you'll hear about another one soon.</GiveUpOnClueDesc>
+  <GiveUpOnClueLabel>放棄線索</GiveUpOnClueLabel>
+  <GiveUpOnClueDesc>放棄這條線索，你很快就會聽到另一條線索。</GiveUpOnClueDesc>
 
-  <Story_Shrine1_GiveUpOnShrineLabel>Give up on shrine</Story_Shrine1_GiveUpOnShrineLabel>
-  <Story_Shrine1_GiveUpOnShrineDesc>Give up on this shrine, you'll hear about another clue soon.</Story_Shrine1_GiveUpOnShrineDesc>
+  <Story_Shrine1_GiveUpOnShrineLabel>放棄神社</Story_Shrine1_GiveUpOnShrineLabel>
+  <Story_Shrine1_GiveUpOnShrineDesc>放棄這個神社，你很快就會聽到另一個線索。</Story_Shrine1_GiveUpOnShrineDesc>
 
-  <Story_Shrine_AbandonColonists>Are you sure you want to abandon your remaining colonists?</Story_Shrine_AbandonColonists>
+  <Story_Shrine_AbandonColonists>您確定要放棄剩余的殖民者嗎？</Story_Shrine_AbandonColonists>
 
-  <MasterShrineVictoryLetterLabel>Bandits defeated</MasterShrineVictoryLetterLabel>
-  <MasterShrineVictoryLetterMessage>The bandits setting a trap at the shrine were defeated. </MasterShrineVictoryLetterMessage>
-  <NoMasterShrineLetterLabel>No luck.</NoMasterShrineLetterLabel>
-  <NoMasterShrineLetterMessage>While this place may harbor treasures, it doesn't look like the place you're searching for.</NoMasterShrineLetterMessage>
-  <MasterShrineVictoryBossLetterLabel>Defeated {0}</MasterShrineVictoryBossLetterLabel>
-  <MasterShrineVictoryBossLetterMessage>Defeated {0}, the ancient harbinger of destruction. The shrine awarded you with {1}</MasterShrineVictoryBossLetterMessage>
+  <MasterShrineVictoryLetterLabel>敵人被擊敗</MasterShrineVictoryLetterLabel>
+  <MasterShrineVictoryLetterMessage>在神社設下陷阱的土匪被打敗了。 </MasterShrineVictoryLetterMessage>
+  <NoMasterShrineLetterLabel>沒運氣。</NoMasterShrineLetterLabel>
+  <NoMasterShrineLetterMessage>雖然這個地方可能藏有寶藏，但它看起來不像你正在尋找的地方。</NoMasterShrineLetterMessage>
+  <MasterShrineVictoryBossLetterLabel>擊敗 {0}</MasterShrineVictoryBossLetterLabel>
+  <MasterShrineVictoryBossLetterMessage>擊敗了古老的毀滅預兆 {0} 。 神社授予您 {1}</MasterShrineVictoryBossLetterMessage>
 
-  <Story_Shrine1_NextPatrolWarning>A mech patrol will come through {0} in about {1}.</Story_Shrine1_NextPatrolWarning>
+  <Story_Shrine1_NextPatrolWarning>大約 {1} 后，一支機械巡邏隊將通過 {0} 。</Story_Shrine1_NextPatrolWarning>
 
-  <Story_Shrine1_BossDefeated_Dia1Title>Pure pain explodes in {0}'s head</Story_Shrine1_BossDefeated_Dia1Title>
-  <Story_Shrine1_BossDefeated_Dia1_1>While the {0} dies, memories start rushing back to the surface... although not {1}'s memories.\n\n{1} can't make sense of it, but {1} seems to recall a long forgotten spell named {2}.</Story_Shrine1_BossDefeated_Dia1_1>
-  <Story_Shrine1_BossDefeated_Dia1_1_NoSpell>The huge metal body of {0} crashes on the ground.</Story_Shrine1_BossDefeated_Dia1_1_NoSpell>
-  <Story_Shrine1_BossDefeated_Dia1_1_Option1>Astonishing...</Story_Shrine1_BossDefeated_Dia1_1_Option1>
-  <Story_Shrine1_BossDefeated_Dia1_2>When {0}'s mechanical body came to rest, loud scratching starts to hollow around the ruins... something woke up.</Story_Shrine1_BossDefeated_Dia1_2>
-  <Story_Shrine1_BossDefeated_Dia1_1_Option2>We better get out of here...</Story_Shrine1_BossDefeated_Dia1_1_Option2>
-  <Story_Shrine1_AbilityGainedLetterTitle>Ancient ability gained: {0}</Story_Shrine1_AbilityGainedLetterTitle>
-  <Story_Shrine1_AbilityGainedLetterDesc>By defeating {0} and with the power of the Ancient Gift, {1} received the sacred knowledge of the spell: {2}</Story_Shrine1_AbilityGainedLetterDesc>
-  <Story_Shrine1_ArrivalTimeShownLetterMessage>Your caravan has been detected. In {0}, reinforcing {1} from {2} will begin arriving in the area.\n\nReform your caravan and begin moving to avoid the {1}. You can return once they moved on. You'll be notified about their arrival every 3 hours.</Story_Shrine1_ArrivalTimeShownLetterMessage>
+  <Story_Shrine1_BossDefeated_Dia1Title>純粹的痛苦在 {0} 的頭腦中爆發</Story_Shrine1_BossDefeated_Dia1Title>
+  <Story_Shrine1_BossDefeated_Dia1_1>當 {0} 死去時，記憶開始涌回表面……雖然不是 {1} 的記憶。\n\n{1} 無法理解，但 {1} 似乎回憶起了一段很長的時間被遺忘的名為 {2} 的咒語。</Story_Shrine1_BossDefeated_Dia1_1>
+  <Story_Shrine1_BossDefeated_Dia1_1_NoSpell>{0} 巨大的金屬身軀轟然倒地。</Story_Shrine1_BossDefeated_Dia1_1_NoSpell>
+  <Story_Shrine1_BossDefeated_Dia1_1_Option1>驚人...</Story_Shrine1_BossDefeated_Dia1_1_Option1>
+  <Story_Shrine1_BossDefeated_Dia1_2>當 {0} 的機械軀體停下來時，廢墟周圍開始發出響亮的刮擦聲……有什麼東西蘇醒了。</Story_Shrine1_BossDefeated_Dia1_2>
+  <Story_Shrine1_BossDefeated_Dia1_1_Option2>我們最好離開這裡......</Story_Shrine1_BossDefeated_Dia1_1_Option2>
+  <Story_Shrine1_AbilityGainedLetterTitle>獲得遠古能力: {0}</Story_Shrine1_AbilityGainedLetterTitle>
+  <Story_Shrine1_AbilityGainedLetterDesc>通過擊敗 {0} 並借助遠古禮物的力量， {1} 獲得了法術的神聖知識：{2}</Story_Shrine1_AbilityGainedLetterDesc>
+  <Story_Shrine1_ArrivalTimeShownLetterMessage>有人檢測到您的商隊。 在 {0}，來自 {2} 的增援 {1} 將開始抵達該地區。\n\n重組您的商隊並開始避開 {1}。 一旦他們繼續前進，您就可以返回。 您將每 3 小時收到一次有關他們到達的通知。</Story_Shrine1_ArrivalTimeShownLetterMessage>
 
-  <Story_Shrine1_QuestRewardUpdate_1>({1}) {0}: {2} defeated the {3} and received the ancient spell {4}.</Story_Shrine1_QuestRewardUpdate_1>
-  <Story_Shrine1_QuestRewardUpdate_1_WithoutSpell>({1}) {0}: {2} defeated the {3}.</Story_Shrine1_QuestRewardUpdate_1_WithoutSpell>
+  <Story_Shrine1_QuestRewardUpdate_1>({1}) {0}：{2} 擊敗了 {3} 並獲得了古老的咒語 {4}。</Story_Shrine1_QuestRewardUpdate_1>
+  <Story_Shrine1_QuestRewardUpdate_1_WithoutSpell>({1}) {0}：{2} 擊敗了 {3}。</Story_Shrine1_QuestRewardUpdate_1_WithoutSpell>
 
-  <Story_Shrine1_SacrilegHunters_DiaTitle>{0} is contacting you via comms...</Story_Shrine1_SacrilegHunters_DiaTitle>
-  <Story_Shrine1_SacrilegHunters_Dia1_1>You did it! You found a master shrine!
-    \nTake care when exploring, as I told you before, we lost brothers and sisters when we came across our first shrine of this kind and escaped just barely.\nFocus on the larger buildings, that's what we're looking for.
-    \nWe'll send you some additional help, maybe another disaster can be avoided if we work together.\nGood luck... [{0} pauses shortly] and be careful.
+  <Story_Shrine1_SacrilegHunters_DiaTitle>{0} 正在通過通訊與您聯系...</Story_Shrine1_SacrilegHunters_DiaTitle>
+  <Story_Shrine1_SacrilegHunters_Dia1_1>你做到了！ 你找到了主神殿！
+     \n探索時要小心，正如我之前告訴過你的，當我們遇到第一個這種神殿時，我們失去了兄弟姐妹，勉強逃脫。\n專注於更大的建筑物，這就是我們正在尋找的。
+     \n我們會向您發送一些額外的幫助，如果我們共同努力，也許可以避免另一場災難。\n祝您好運... [{0} 短暫停頓] 並小心。
   </Story_Shrine1_SacrilegHunters_Dia1_1>
-  <Story_Shrine1_SacrilegHunters_Dia1_1_Option1>Thank you, from the looks of this place, we may need them.</Story_Shrine1_SacrilegHunters_Dia1_1_Option1>
-  <Story_Shrine1_SacrilegHunters_Dia1_1_Option2>(Not recommended) No need, we can handle it ourselves.</Story_Shrine1_SacrilegHunters_Dia1_1_Option2>
+  <Story_Shrine1_SacrilegHunters_Dia1_1_Option1>謝謝，從這個地方看，我們可能需要它們。</Story_Shrine1_SacrilegHunters_Dia1_1_Option1>
+  <Story_Shrine1_SacrilegHunters_Dia1_1_Option2>（不推薦）不需要，我們可以自己處理。</Story_Shrine1_SacrilegHunters_Dia1_1_Option2>
 
-  <Story_Shrine2_SacrilegHunters_Dia1_1>Perfect, another shrine, that's great!\nDo you want us to assist you again?</Story_Shrine2_SacrilegHunters_Dia1_1>
-  <Story_Shrine2_SacrilegHunters_Dia1_1_Option1>Not gonna turn down help, those things are dangerous. Thank you!</Story_Shrine2_SacrilegHunters_Dia1_1_Option1>
-  <Story_Shrine2_SacrilegHunters_Dia1_1_Option2>(Not recommended) We'll deal with it ourselves.</Story_Shrine2_SacrilegHunters_Dia1_1_Option2>
+  <Story_Shrine2_SacrilegHunters_Dia1_1>完美，又一個神社，太棒了！\n要我們再幫你嗎？</Story_Shrine2_SacrilegHunters_Dia1_1>
+  <Story_Shrine2_SacrilegHunters_Dia1_1_Option1>不會拒絕幫助，那些東西很危險。 謝謝！</Story_Shrine2_SacrilegHunters_Dia1_1_Option1>
+  <Story_Shrine2_SacrilegHunters_Dia1_1_Option2>（不推薦）我們自己處理。</Story_Shrine2_SacrilegHunters_Dia1_1_Option2>
 
-  <Story_Shrine5_SacrilegHunters_Dia1_1>Wow, this must be it. Alright, lets finish this. I have our best fighters ready if you wish.</Story_Shrine5_SacrilegHunters_Dia1_1>
-  <Story_Shrine5_SacrilegHunters_Dia1_1_Option1>Ya, lets tear this place down.</Story_Shrine5_SacrilegHunters_Dia1_1_Option1>
-  <Story_Shrine5_SacrilegHunters_Dia1_1_Option2>(Not recommended) Gonna take a different approach, trust me, it'll be fine.</Story_Shrine5_SacrilegHunters_Dia1_1_Option2>
+  <Story_Shrine5_SacrilegHunters_Dia1_1>哇，一定是這個。 好吧，讓我們完成這個。 如果你願意，我已經准備好了我們最好的戰士。</Story_Shrine5_SacrilegHunters_Dia1_1>
+  <Story_Shrine5_SacrilegHunters_Dia1_1_Option1>是的，讓我們把這個地方拆了。</Story_Shrine5_SacrilegHunters_Dia1_1_Option1>
+  <Story_Shrine5_SacrilegHunters_Dia1_1_Option2>（不推薦）我要採取不同的方法，相信我，會沒事的。</Story_Shrine5_SacrilegHunters_Dia1_1_Option2>
 
-  <Story_Shrine5_SacrilegHunters_Portal_Dia1_1>Guys, I'm not getting any readings of another huge mech here. Although there seems to be a disturbance, some highly bundled particle displacement.\n\n[{0} suddenly worried] Be careful when checking that out, i have a bad feeling about this...</Story_Shrine5_SacrilegHunters_Portal_Dia1_1>
-  <Story_Shrine5_SacrilegHunters_Portal_Dia1_1_Option1>Hmm, we'll keep an eye out, thanks.</Story_Shrine5_SacrilegHunters_Portal_Dia1_1_Option1>
+  <Story_Shrine5_SacrilegHunters_Portal_Dia1_1>伙計們，我沒有得到任何關於另一個巨大機械的讀數。 雖然似乎有干擾，一些高度捆綁的粒子位移。\n\n[{0}突然擔心]檢查時要小心，我對此有一種不好的感覺......</Story_Shrine5_SacrilegHunters_Portal_Dia1_1>
+  <Story_Shrine5_SacrilegHunters_Portal_Dia1_1_Option1>嗯，我們會注意的，謝謝。</Story_Shrine5_SacrilegHunters_Portal_Dia1_1_Option1>
 
-  <Story_Shrine5_BossDefeated_Dia1_2>When {0}'s mechanical body came to rest, the ground started to vibrate stronger, then suddenly came to rest, as the old machinery deep within the planet came to a hold.</Story_Shrine5_BossDefeated_Dia1_2>
-  <Story_Shrine5_BossDefeated_Dia1_2_Option1>Is it... over?</Story_Shrine5_BossDefeated_Dia1_2_Option1>
+  <Story_Shrine5_BossDefeated_Dia1_2>當{0}的機械軀體靜止時，地面開始劇烈震動，然后突然靜止，行星深處的舊機械停止運轉。</Story_Shrine5_BossDefeated_Dia1_2>
+  <Story_Shrine5_BossDefeated_Dia1_2_Option1>是……結束了嗎？</Story_Shrine5_BossDefeated_Dia1_2_Option1>
 
-  <Story_Shrine1_Apocalypse_Dia1Title>{0} of {1} is contacting you via comms...</Story_Shrine1_Apocalypse_Dia1Title>
-  <Story_Shrine1_Apocalypse_Dia1_1>[{0}, out of breath and shocked] My god, did you guys get out alive?\nWhat happened there? When that abomination died? You screamed like you'd die. Are you alright?</Story_Shrine1_Apocalypse_Dia1_1>
-  <Story_Shrine1_Apocalypse_Dia1_1_Option1>I remembered something, but I'm not clear what yet, some sort of power... the tree...\nThis is a bad idea over comms...</Story_Shrine1_Apocalypse_Dia1_1_Option1>
-  <Story_Shrine1_Apocalypse_Dia1_2>Aaah, okay... Well, what ever the death of that monster and the following earthquake caused, it's bad, and it wasn't natural.\nOur scientists are going crazy. Something very old under the planet's surface was activated. Our scientists believe it started to cool down the planet's core.\nWhile the process seems to be slow, it will mean certain death if we can't find out how to stop it!</Story_Shrine1_Apocalypse_Dia1_2>
-  <Story_Shrine1_Apocalypse_Dia1_2_Option1>Let's find more of those shrines and see if we can't find more clues \nas to what we're dealing with.</Story_Shrine1_Apocalypse_Dia1_2_Option1>
-  <Story_Shrine1_Apocalypse_Dia1_3>Ya, we'll message you when we can find more shrines. \n[{0}'s voice turning to a worried tone] And stay save until then, i have a really bad feeling about this.</Story_Shrine1_Apocalypse_Dia1_3>
-  <Story_Shrine1_Apocalypse_Dia1_3_Option1>We will, take care as well. Bye!</Story_Shrine1_Apocalypse_Dia1_3_Option1>
+  <Story_Shrine1_Apocalypse_Dia1Title>來自 {1} 的 {0} 正在通過通訊與您聯系...</Story_Shrine1_Apocalypse_Dia1Title>
+  <Story_Shrine1_Apocalypse_Dia1_1>[{0}，氣喘吁吁，震驚] 天哪，你們活著出來了嗎？\那裡發生了什麼？ 那個可憎的人什麼時候死的？ 你像死了一樣尖叫。 你還好嗎？</Story_Shrine1_Apocalypse_Dia1_1>
+  <Story_Shrine1_Apocalypse_Dia1_1_Option1>我想起了一些東西，但我還不清楚是什麼，某種力量……樹……\n這對通信來說是個壞主意……</Story_Shrine1_Apocalypse_Dia1_1_Option1>
+  <Story_Shrine1_Apocalypse_Dia1_2>啊，好吧...好吧，不管那個怪物的死亡和接下來的地震造成了什麼，這很糟糕，而且不是自然的。\n我們的科學家快瘋了。 地球表面下非常古老的東西被激活了。 我們的科學家相信它開始冷卻地球的核心。\n雖然這個過程看起來很緩慢，但如果我們無法找到阻止它的方法，那將意味著一定的死亡！</Story_Shrine1_Apocalypse_Dia1_2>
+  <Story_Shrine1_Apocalypse_Dia1_2_Option1>讓我們找到更多這些神殿，看看我們是否找不到更多線索來說明我們正在處理的問題。</Story_Shrine1_Apocalypse_Dia1_2_Option1>
+  <Story_Shrine1_Apocalypse_Dia1_3>是的，當我們找到更多神殿時，我們會通知你。 \n[{0} 的聲音變成了擔憂的語氣] 在那之前別著急，我對此有一種非常糟糕的感覺。</Story_Shrine1_Apocalypse_Dia1_3>
+  <Story_Shrine1_Apocalypse_Dia1_3_Option1>我們會的，照顧好你自己。 再見！</Story_Shrine1_Apocalypse_Dia1_3_Option1>
 
-  <Story_Shrine2_Apocalypse_Dia1_1>You did it again! What a fight...\nWe were able to track a transmission, when the monster died. Looks like data was sent to a remote site. We need to find it! That is our best bet in stopping whatever the hell is happening with this RimWorld.</Story_Shrine2_Apocalypse_Dia1_1>
-  <Story_Shrine2_Apocalypse_Dia1_1_Option1>Hmm, how would we go about that?</Story_Shrine2_Apocalypse_Dia1_1_Option1>
-  <Story_Shrine2_Apocalypse_Dia1_2>We managed to get a rough location, but we need more transmissions to get the exact location. About two more should do the trick, if we can find one.</Story_Shrine2_Apocalypse_Dia1_2>
-  <Story_Shrine2_Apocalypse_Dia1_2_Option1>Or survive the encounter, for that matter...</Story_Shrine2_Apocalypse_Dia1_2_Option1>
-  <Story_Shrine2_Apocalypse_Dia1_3>[{0} laughs and answers sarcastically] Yep, but if we don't try, it's gonna be a little frosty around here soon.</Story_Shrine2_Apocalypse_Dia1_3>
-  <Story_Shrine2_Apocalypse_Dia1_3_Option1>While I do like snow, this shouldn't get out of hand.\nAnyway, let us know when you find another one, take care!</Story_Shrine2_Apocalypse_Dia1_3_Option1>
+  <Story_Shrine2_Apocalypse_Dia1_1>你又做到了！ 真是一場大戰……\n當怪物死了時，我們能夠追蹤到一個傳輸。 看起來數據已發送到遠程站點。 我們需要找到它！ 這是我們阻止這個 邊緣世界 發生的任何事情的最佳選擇。</Story_Shrine2_Apocalypse_Dia1_1>
+  <Story_Shrine2_Apocalypse_Dia1_1_Option1>嗯，我們該怎麼做呢？</Story_Shrine2_Apocalypse_Dia1_1_Option1>
+  <Story_Shrine2_Apocalypse_Dia1_2>我們設法獲得了一個粗略的位置，但我們需要更多的傳輸才能獲得確切的位置。 如果我們能找到一個的話，大約還有兩個應該可以解決問題。</Story_Shrine2_Apocalypse_Dia1_2>
+  <Story_Shrine2_Apocalypse_Dia1_2_Option1>或者在遭遇中幸存下來，就此而言......</Story_Shrine2_Apocalypse_Dia1_2_Option1>
+  <Story_Shrine2_Apocalypse_Dia1_3>[{0} 大笑並諷刺地回答] 是的，但如果我們不嘗試，這裡很快就會有點冷。</Story_Shrine2_Apocalypse_Dia1_3>
+  <Story_Shrine2_Apocalypse_Dia1_3_Option1>雖然我確實喜歡雪，但這應該不會失控。\n無論如何，當你找到下一個時告訴我們，小心！</Story_Shrine2_Apocalypse_Dia1_3_Option1>
 
-  <Story_Shrine3_Apocalypse_Dia1_1>You're getting pretty good at this, remind me not getting on your bad side...\nWe tracked another transmission. We're getting closer!</Story_Shrine3_Apocalypse_Dia1_1>
-  <Story_Shrine3_Apocalypse_Dia1_1_Option1>Off to the next I guess.</Story_Shrine3_Apocalypse_Dia1_1_Option1>
+  <Story_Shrine3_Apocalypse_Dia1_1>你在這方面做得很好，提醒我不要對你不利...\n我們跟蹤了另一個傳輸。 我們越來越近了！</Story_Shrine3_Apocalypse_Dia1_1>
+  <Story_Shrine3_Apocalypse_Dia1_1_Option1>去下一個，我覺得。</Story_Shrine3_Apocalypse_Dia1_1_Option1>
 
-  <Story_Shrine4_Apocalypse_Dia1_1>Yes! We have the required data! We'll let you know when we have the final location.</Story_Shrine4_Apocalypse_Dia1_1>
-  <Story_Shrine4_Apocalypse_Dia1_1_Option1>Why do I kind of not want to know?</Story_Shrine4_Apocalypse_Dia1_1_Option1>
-  <Story_Shrine4_Apocalypse_Dia1_2>[{0} giggles] Come on now, we're so close. Don't you want to rescue this planet?</Story_Shrine4_Apocalypse_Dia1_2>
-  <Story_Shrine4_Apocalypse_Dia1_2_Option1>[Sigh] Considering what we might be facing, a little snow really doesn't sound so bad...</Story_Shrine4_Apocalypse_Dia1_2_Option1>
-  <Story_Shrine4_Apocalypse_Dia1_3>[{0} laughs] Well, we better prepare ourselves thoroughly, so you get to "enjoy" it until you think you're ready. Talk to you later?</Story_Shrine4_Apocalypse_Dia1_3>
-  <Story_Shrine4_Apocalypse_Dia1_3_Option1>Alright, good luck with those calculations!</Story_Shrine4_Apocalypse_Dia1_3_Option1>
+  <Story_Shrine4_Apocalypse_Dia1_1>是的！ 我們有所需的數據！ 我們會在確定最終位置時通知您。</Story_Shrine4_Apocalypse_Dia1_1>
+  <Story_Shrine4_Apocalypse_Dia1_1_Option1>為什麼我有點不想知道？</Story_Shrine4_Apocalypse_Dia1_1_Option1>
+  <Story_Shrine4_Apocalypse_Dia1_2>[{0} 咯咯笑] 來吧，我們離的很近了。 你不想拯救這個星球嗎？</Story_Shrine4_Apocalypse_Dia1_2>
+  <Story_Shrine4_Apocalypse_Dia1_2_Option1>[嘆氣] 考慮到我們可能面臨的情況，一點點雪聽起來真的不那麼糟糕......</Story_Shrine4_Apocalypse_Dia1_2_Option1>
+  <Story_Shrine4_Apocalypse_Dia1_3>[{0} 笑] 好吧，我們最好做好充分的准備，這樣您就可以“享受”它，直到您認為自己准備好了。 我們回聊？</Story_Shrine4_Apocalypse_Dia1_3>
+  <Story_Shrine4_Apocalypse_Dia1_3_Option1>好吧，祝這些計算好運！</Story_Shrine4_Apocalypse_Dia1_3_Option1>
 
-  <Story_Shrine5_Apocalypse_Dia1_1>[{0} laughing full of joy] Yes, the ancient machines powered down, the planet is heating up again. We did it. You were so great. \n\nWe won't forget what you guys have done for us and the entire world. \n\nHmmm, how about 4000 bounty credits, that you can spent freely. \nAnd I really hope u guys stay in touch, especially since I'm not sure this is the last we saw of those damn mechs. \n\nThe planet is safe for now, but there is plenty more ruins out there. \nWe'll let you know if we find more in case you want to help ridding the planet of them, but for now, go celebrate and enjoy our victory. Wuhuuuuuuu.</Story_Shrine5_Apocalypse_Dia1_1>
-  <Story_Shrine5_Apocalypse_Dia1_1_Option1>We couldn't have done it without you, thanks for all that help.\nWe'll come visit. Cya.</Story_Shrine5_Apocalypse_Dia1_1_Option1>
-  
-  <Story_Shrine1_QuestUpdate_1>Defeating the mechanical monstrosity activated old unknown machinery deep below the planet's surface that started to cool down the planet's core. This will slowly render the planet inhabitable and the cause needs to be found. You should seek out more shrines to get answers.</Story_Shrine1_QuestUpdate_1>
-  <Story_Shrine5_QuestUpdate_1>({1}) {0}: {2} entered a shrine not harboring a guardian.\n{3} mentioned a disturbance, some highly bundled particle displacement.\nYou should find it, it must be hidden away in these ruins. </Story_Shrine5_QuestUpdate_1>
-  <Story_Shrine5_QuestUpdate_2>Defeating the {0} disabled the mechanoid mechanism responsible for freezing the planet. The catastrophe was avoided, the world will return to normal, but some other shrines may still be out there.</Story_Shrine5_QuestUpdate_2>
-  <Story_Shrine5_QuestUpdate_Info_1>(The main quest is now complete, but this quest will stay active to keep logging further shrines you may choose to explore. If you do not wish so, you can dismiss this quest.)</Story_Shrine5_QuestUpdate_Info_1>
+  <Story_Shrine5_Apocalypse_Dia1_1>[{0} 笑得很開心] 是的，古老的機器停電了，地球又開始升溫了。 我們做到了。 你太棒了。 \n\n我們不會忘記你們為我們和整個世界所做的一切。 \n\n嗯，4000 點賞金積分怎麼樣，你可以隨意花掉。 \n我真的希望你們保持聯系，尤其是因為我不確定這是我們最后一次看到那些該死的機甲。 \n\n這個星球目前是安全的，但那裡還有更多的廢墟。 \n如果我們發現更多，我們會通知您，以防您想幫助地球擺脫它們，但現在，去慶祝並享受我們的勝利吧。 哇嗚嗚嗚嗚哦！</Story_Shrine5_Apocalypse_Dia1_1>
+  <Story_Shrine5_Apocalypse_Dia1_1_Option1>沒有你，我們不可能做到，謝謝你的幫助。\n我們會來拜訪的。 回頭見。</Story_Shrine5_Apocalypse_Dia1_1_Option1>
 
-  <Story_Shrine5_Apocalypse_Dia2Title>You look around as you step out of the portal's room</Story_Shrine5_Apocalypse_Dia2Title>
-  <Story_Shrine5_Apocalypse_Dia2_1>[{0} deep in thoughts] The sacrileg hunters have no idea, that I felt something deep within the planet, when I killed the mechanoid monster. It's still down there... waiting. I may be able to reach it with some amplifier, but what could be that powerful?\n\nOh! Yes, maybe the tree, that chose me to begin with. But what might happen if I do? Do I even want to find out? Hmm, but for now it's time to get some rest...</Story_Shrine5_Apocalypse_Dia2_1>
-  <Story_Shrine5_Apocalypse_Dia2_1_Option1>Let's move on.</Story_Shrine5_Apocalypse_Dia2_1_Option1>
+  <Story_Shrine1_QuestUpdate_1>擊敗機械怪物會激活行星表面深處的古老未知機器，開始冷卻行星的核心。 這將慢慢使這個星球變得適合居住，需要找到原因。 你應該尋找更多的神社來得到答案。</Story_Shrine1_QuestUpdate_1>
+  <Story_Shrine5_QuestUpdate_1>({1}) {0}：{2} 進入了一個沒有守護者的神殿。\n{3} 提到了一個擾動，一些高度捆綁的粒子位移。\n你應該找到它，它必須隱藏在這些廢墟中。</Story_Shrine5_QuestUpdate_1>
+  <Story_Shrine5_QuestUpdate_2>擊敗 {0} 會禁用負責凍結行星的機械裝置。 災難避免了，世界將恢復正常，但其他一些神殿可能仍然存在。</Story_Shrine5_QuestUpdate_2>
+  <Story_Shrine5_QuestUpdate_Info_1>（主要任務現已完成，但此任務將保持活動狀態以繼續記錄您可以選擇探索的更多神殿。如果您不希望如此，您可以關閉此任務。）</Story_Shrine5_QuestUpdate_Info_1>
+
+  <Story_Shrine5_Apocalypse_Dia2Title>當你走出傳送門的房間時，你環顧四周</Story_Shrine5_Apocalypse_Dia2Title>
+  <Story_Shrine5_Apocalypse_Dia2_1>[{0}陷入沉思] 祭祀獵人不知道，當我殺死機械怪物時，我感覺到了地球深處的某種東西。 它仍然在那裡......等待。 我也許可以用一些放大器來達到它，但有什麼能這麼強大？\n\n哦！ 是的，也許是那棵樹，它選擇了我。 但如果我這樣做會發生什麼？ 我什至想知道嗎？ 嗯，但現在是時候休息一下了......</Story_Shrine5_Apocalypse_Dia2_1>
+  <Story_Shrine5_Apocalypse_Dia2_1_Option1>讓我們繼續。</Story_Shrine5_Apocalypse_Dia2_1_Option1>
+
 </LanguageData>

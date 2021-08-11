@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <CAOutsiderRelation.label>外来人</CAOutsiderRelation.label>
+  <CAOutsiderRelation.labelFemale>外来人</CAOutsiderRelation.labelFemale>
+
+  <CAThirdWheelRelation.label>电灯泡</CAThirdWheelRelation.label>
+  <CAThirdWheelRelation.labelFemale>电灯泡</CAThirdWheelRelation.labelFemale>
+
+  <CAFamiliarCompanionRelation.label>熟悉的伴侣</CAFamiliarCompanionRelation.label>
+  <CAFamiliarCompanionRelation.labelFemale>熟悉的伴侣</CAFamiliarCompanionRelation.labelFemale>
+
+  <CAPartOfTheGangRelation.label>团伙的一员</CAPartOfTheGangRelation.label>
+  <CAPartOfTheGangRelation.labelFemale>团伙的一员</CAPartOfTheGangRelation.labelFemale>
+
+  <CATrustedMateRelation.label>值得信赖的伙伴</CATrustedMateRelation.label>
+  <CATrustedMateRelation.labelFemale>值得信赖的伙伴</CATrustedMateRelation.labelFemale>
+
+  <CATrueFriendRelation.label>真正的朋友</CATrueFriendRelation.label>
+  <CATrueFriendRelation.labelFemale>真正的朋友</CATrueFriendRelation.labelFemale>
+
+
+</LanguageData>

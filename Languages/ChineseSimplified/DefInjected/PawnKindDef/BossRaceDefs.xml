@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <CABossMechDevourer.label>吞噬者</CABossMechDevourer.label>
+  <CABossMechDevourer.labelPlural>吞噬者</CABossMechDevourer.labelPlural>
+  <CABossMechDevourer.labelMale>雄性 吞噬者</CABossMechDevourer.labelMale>
+  <CABossMechDevourer.labelMalePlural>雄性 吞噬者</CABossMechDevourer.labelMalePlural>
+  <CABossMechDevourer.labelFemale>雌性 吞噬者</CABossMechDevourer.labelFemale>
+  <CABossMechDevourer.labelFemalePlural>雌性 吞噬者</CABossMechDevourer.labelFemalePlural>
+
+
+  <!-- CACrystalScythe -->
+
+  <CABossMechCrystalScythe.label>水晶镰刀</CABossMechCrystalScythe.label>
+  <CABossMechCrystalScythe.labelPlural>水晶镰刀</CABossMechCrystalScythe.labelPlural>
+  <CABossMechCrystalScythe.labelMale>雄性 水晶镰刀</CABossMechCrystalScythe.labelMale>
+  <CABossMechCrystalScythe.labelMalePlural>雄性 水晶镰刀</CABossMechCrystalScythe.labelMalePlural>
+  <CABossMechCrystalScythe.labelFemale>雌性 水晶镰刀</CABossMechCrystalScythe.labelFemale>
+  <CABossMechCrystalScythe.labelFemalePlural>雌性 水晶镰刀</CABossMechCrystalScythe.labelFemalePlural>
+
+
+  <!-- harbinger -->
+
+  <CABossMechHarbinger.label>先驱者</CABossMechHarbinger.label>
+  <CABossMechHarbinger.labelPlural>先驱者</CABossMechHarbinger.labelPlural>
+  <CABossMechHarbinger.labelMale>雄性 先驱者</CABossMechHarbinger.labelMale>
+  <CABossMechHarbinger.labelMalePlural>雄性 先驱者</CABossMechHarbinger.labelMalePlural>
+  <CABossMechHarbinger.labelFemale>雌性 先驱者</CABossMechHarbinger.labelFemale>
+  <CABossMechHarbinger.labelFemalePlural>雌性 先驱者</CABossMechHarbinger.labelFemalePlural>
+
+
+  <!-- Havoc -->
+
+  <CABossMechHavoc.label>浩劫</CABossMechHavoc.label>
+  <CABossMechHavoc.labelPlural>浩劫</CABossMechHavoc.labelPlural>
+  <CABossMechHavoc.labelMale>雄性 浩劫</CABossMechHavoc.labelMale>
+  <CABossMechHavoc.labelMalePlural>雄性 浩劫</CABossMechHavoc.labelMalePlural>
+  <CABossMechHavoc.labelFemale>雌性 浩劫</CABossMechHavoc.labelFemale>
+  <CABossMechHavoc.labelFemalePlural>雌性 浩劫</CABossMechHavoc.labelFemalePlural>
+
+
+  <!-- endboss -->
+
+  <CAEndBossMech.label>古代协调者 AI</CAEndBossMech.label>
+  <CAEndBossMech.labelPlural>古代协调者 AI</CAEndBossMech.labelPlural>
+  <CAEndBossMech.labelMale>雄性 古代协调者 AI</CAEndBossMech.labelMale>
+  <CAEndBossMech.labelMalePlural>雄性 古代协调者 AI</CAEndBossMech.labelMalePlural>
+  <CAEndBossMech.labelFemale>雌性 古代协调者 AI</CAEndBossMech.labelFemale>
+  <CAEndBossMech.labelFemalePlural>雌性 古代协调者 AI</CAEndBossMech.labelFemalePlural>
+
+
+</LanguageData>
