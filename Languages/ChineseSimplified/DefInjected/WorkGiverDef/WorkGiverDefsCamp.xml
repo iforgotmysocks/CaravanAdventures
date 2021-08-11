@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- todo priorities ? -->
+
+  <CADoBillsCookCampfireRoast.label>在篝火旁做饭</CADoBillsCookCampfireRoast.label>
+  <CADoBillsCookCampfireRoast.verb>做饭</CADoBillsCookCampfireRoast.verb>
+  <CADoBillsCookCampfireRoast.gerund>做饭于</CADoBillsCookCampfireRoast.gerund>
+
+  <CADoBillsHaulCampfireRoast.label>在篝火旁做帐</CADoBillsHaulCampfireRoast.label>
+  <CADoBillsHaulCampfireRoast.verb>做帐</CADoBillsHaulCampfireRoast.verb>
+  <CADoBillsHaulCampfireRoast.gerund>做帐于</CADoBillsHaulCampfireRoast.gerund>
+
+  <CADoBillsSpacerRefinery.label>在炼油处工作</CADoBillsSpacerRefinery.label>
+  <CADoBillsSpacerRefinery.verb>精炼化学品</CADoBillsSpacerRefinery.verb>
+  <CADoBillsSpacerRefinery.gerund>精炼化学品于</CADoBillsSpacerRefinery.gerund>
+
+
+</LanguageData>

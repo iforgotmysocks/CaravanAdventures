@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-  <SettleWithoutUnloading>Settle Caravan</SettleWithoutUnloading>
-  <SettleWithoutUnloadingDesc>Allows the caravan to settle without unloading to find a good spot first or leave quickly.</SettleWithoutUnloadingDesc>
-  <SettleWithCampLabel>Settle with Camp</SettleWithCampLabel>
-  <SettleWithCampDesc>Settle with a prebuild camp your pawns quickly set up. Will consume camp supplies to construct tents and equipment of high quality. If not enough are present, pawns will use materials they can find at hand. Camping supplies can be recovered when packing up the camp.</SettleWithCampDesc>
-  <AllowNightTravel>Night travel</AllowNightTravel>
-  <AllowNightTravelDesc>Allow your caravan to travel through the night, but keep in mind that this harbors great risk for strong attacks and if your caravan members get too tired, they have no choice but to rest.</AllowNightTravelDesc>
+  <SettleWithoutUnloading>商队暂居</SettleWithoutUnloading>
+  <SettleWithoutUnloadingDesc>允许商队不必卸货地暂住，直到我们找到一个好地方或者马上走人。</SettleWithoutUnloadingDesc>
+  <SettleWithCampLabel>用帐篷暂居</SettleWithCampLabel>
+  <SettleWithCampDesc>用预先搭好的帐篷住下来。会消耗帐篷补给来建造帐篷和高质量装备设施。 如果现有的不够，你的小人会用手头上能找到的材料。 帐篷补给在你离开营地时可以回收。</SettleWithCampDesc>
+  <AllowNightTravel>晚间旅行</AllowNightTravel>
+  <AllowNightTravelDesc>允许你的伤对在晚间旅行，但记住这担上很大的风险，会招来很强的袭击。当然，你的小人太累的情况下也只能停下休息。</AllowNightTravelDesc>
+
 </LanguageData>

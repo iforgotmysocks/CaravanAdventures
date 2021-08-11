@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <CABossMechDevourerBody.label>吞噬者</CABossMechDevourerBody.label>
+  <CABossMechDevourerBody.corePart.parts.0.parts.1.customLabel>左视线传感器</CABossMechDevourerBody.corePart.parts.0.parts.1.customLabel>
+  <CABossMechDevourerBody.corePart.parts.0.parts.2.customLabel>右视线传感器</CABossMechDevourerBody.corePart.parts.0.parts.2.customLabel>
+  <CABossMechDevourerBody.corePart.parts.0.parts.3.customLabel>左听力传感器</CABossMechDevourerBody.corePart.parts.0.parts.3.customLabel>
+  <CABossMechDevourerBody.corePart.parts.0.parts.4.customLabel>右听力传感器</CABossMechDevourerBody.corePart.parts.0.parts.4.customLabel>
+
+  <CACrystalScytheBody.label>水晶镰刀</CACrystalScytheBody.label>
+  <CACrystalScytheBody.corePart.parts.0.parts.0.parts.1.customLabel>左视线传感器</CACrystalScytheBody.corePart.parts.0.parts.0.parts.1.customLabel>
+  <CACrystalScytheBody.corePart.parts.0.parts.0.parts.2.customLabel>右视线传感器</CACrystalScytheBody.corePart.parts.0.parts.0.parts.2.customLabel>
+  <CACrystalScytheBody.corePart.parts.0.parts.0.parts.3.customLabel>左听力传感器</CACrystalScytheBody.corePart.parts.0.parts.0.parts.3.customLabel>
+  <CACrystalScytheBody.corePart.parts.0.parts.0.parts.4.customLabel>右听力传感器</CACrystalScytheBody.corePart.parts.0.parts.0.parts.4.customLabel>
+  <CACrystalScytheBody.corePart.parts.1.customLabel>左肩</CACrystalScytheBody.corePart.parts.1.customLabel>
+  <CACrystalScytheBody.corePart.parts.1.parts.0.customLabel>左臂</CACrystalScytheBody.corePart.parts.1.parts.0.customLabel>
+  <CACrystalScytheBody.corePart.parts.1.parts.0.parts.0.customLabel>左刃</CACrystalScytheBody.corePart.parts.1.parts.0.parts.0.customLabel>
+  <CACrystalScytheBody.corePart.parts.1.parts.0.parts.1.customLabel>左手</CACrystalScytheBody.corePart.parts.1.parts.0.parts.1.customLabel>
+  <CACrystalScytheBody.corePart.parts.1.parts.0.parts.1.parts.0.customLabel>左小指</CACrystalScytheBody.corePart.parts.1.parts.0.parts.1.parts.0.customLabel>
+  <CACrystalScytheBody.corePart.parts.1.parts.0.parts.1.parts.1.customLabel>左中指</CACrystalScytheBody.corePart.parts.1.parts.0.parts.1.parts.1.customLabel>
+  <CACrystalScytheBody.corePart.parts.1.parts.0.parts.1.parts.2.customLabel>左食指</CACrystalScytheBody.corePart.parts.1.parts.0.parts.1.parts.2.customLabel>
+  <CACrystalScytheBody.corePart.parts.1.parts.0.parts.1.parts.3.customLabel>左大拇指</CACrystalScytheBody.corePart.parts.1.parts.0.parts.1.parts.3.customLabel>
+  <CACrystalScytheBody.corePart.parts.2.customLabel>右肩</CACrystalScytheBody.corePart.parts.2.customLabel>
+  <CACrystalScytheBody.corePart.parts.2.parts.0.customLabel>右臂</CACrystalScytheBody.corePart.parts.2.parts.0.customLabel>
+  <CACrystalScytheBody.corePart.parts.2.parts.0.parts.0.customLabel>右刃</CACrystalScytheBody.corePart.parts.2.parts.0.parts.0.customLabel>
+  <CACrystalScytheBody.corePart.parts.2.parts.0.parts.1.customLabel>右手</CACrystalScytheBody.corePart.parts.2.parts.0.parts.1.customLabel>
+  <CACrystalScytheBody.corePart.parts.2.parts.0.parts.1.parts.0.customLabel>右小指</CACrystalScytheBody.corePart.parts.2.parts.0.parts.1.parts.0.customLabel>
+  <CACrystalScytheBody.corePart.parts.2.parts.0.parts.1.parts.1.customLabel>右中指</CACrystalScytheBody.corePart.parts.2.parts.0.parts.1.parts.1.customLabel>
+  <CACrystalScytheBody.corePart.parts.2.parts.0.parts.1.parts.2.customLabel>右食指</CACrystalScytheBody.corePart.parts.2.parts.0.parts.1.parts.2.customLabel>
+  <CACrystalScytheBody.corePart.parts.2.parts.0.parts.1.parts.3.customLabel>右大拇指</CACrystalScytheBody.corePart.parts.2.parts.0.parts.1.parts.3.customLabel>
+  <CACrystalScytheBody.corePart.parts.3.customLabel>左腿</CACrystalScytheBody.corePart.parts.3.customLabel>
+  <CACrystalScytheBody.corePart.parts.3.parts.0.customLabel>左足</CACrystalScytheBody.corePart.parts.3.parts.0.customLabel>
+  <CACrystalScytheBody.corePart.parts.4.customLabel>右腿</CACrystalScytheBody.corePart.parts.4.customLabel>
+  <CACrystalScytheBody.corePart.parts.4.parts.0.customLabel>右足</CACrystalScytheBody.corePart.parts.4.parts.0.customLabel>
+
+
+</LanguageData>

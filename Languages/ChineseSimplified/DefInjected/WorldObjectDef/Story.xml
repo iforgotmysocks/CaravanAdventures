@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <CAAncientMasterShrineWO.label>提示 - 危险的神社</CAAncientMasterShrineWO.label>
+  <CAAncientMasterShrineWO.description>关于危险神社故事的模糊线索。 提供提示的人不太可信，所以要小心，因为他们还说，没有人敢在那里朝圣。</CAAncientMasterShrineWO.description>
+
+  <CAAncientMasterShrineMP.label>上古神社</CAAncientMasterShrineMP.label>
+  <CAAncientMasterShrineMP.description>一个危险的、被遗忘已久的神社</CAAncientMasterShrineMP.description>
+
+  <CAStoryVillageMP.label>朋友的村</CAStoryVillageMP.label>
+  <CAStoryVillageMP.description>您最近的新朋友所在的村庄。</CAStoryVillageMP.description>
+
+  <CALastJudgmentMP.label>古代末日审判</CALastJudgmentMP.label>
+  <CALastJudgmentMP.description>一个危险的、被遗忘已久的神社</CALastJudgmentMP.description>
+
+
+</LanguageData>

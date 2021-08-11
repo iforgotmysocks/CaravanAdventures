@@ -1,55 +1,56 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-  <CABountyExchangeOpenOption>Bounty Services</CABountyExchangeOpenOption>
-  <CABountyExchangeMain>Current bounty credits: {0}\n\n\nBounty for mechanoid kills:\nPikeman - 7\nScyther - 10\nLancer - 15\nCentipede - 45\nSpecial mechs may grand more credits</CABountyExchangeMain>
-  <CABountyExchangeRequestHelp>Request military assistance</CABountyExchangeRequestHelp>
-  <CABountyExchangeRequestItem>Request rare item</CABountyExchangeRequestItem>
-  <CABountyExchangeRequestImprovedRelations>Improve relations</CABountyExchangeRequestImprovedRelations>
-  <CABountyExchangeRecruitVeteranHunter>Recruit veteran soldier</CABountyExchangeRecruitVeteranHunter>
-  <CABountyExchangeBuyBountyWithSilver>Exchange silver for bounty credit</CABountyExchangeBuyBountyWithSilver>
-  <CABountyBack>Back</CABountyBack>
-  <CABountyExchangeHostile>You are hostile towards {0}</CABountyExchangeHostile>
-  
-  <CABountyExchangeRequestHelp_StrengthSelection>Current bounty credits: {0}\n\n\nPlease choose the amount of men you need.\n\n{1}</CABountyExchangeRequestHelp_StrengthSelection>
-  <CABountyExchangeRequestHelp_StrengthSelection_Few>A few   (~ 6 hunters)  - 250 bounty credit</CABountyExchangeRequestHelp_StrengthSelection_Few>
-  <CABountyExchangeRequestHelp_StrengthSelection_Bunch>A bunch (~ 15 hunters) - 650 bounty credit</CABountyExchangeRequestHelp_StrengthSelection_Bunch>
-  <CABountyExchangeRequestHelp_StrengthSelection_Army>An army (~ 30 hunters) - 1250 bounty credit</CABountyExchangeRequestHelp_StrengthSelection_Army>
-  <CABountyExchangeRequestHelp_StrengthSelection_NotEnoughMoney>Not enough credits</CABountyExchangeRequestHelp_StrengthSelection_NotEnoughMoney>
-  <CABountyExchangeRequestHelp_StrengthSelection_TroopDeploymentReady>Hunters ready to deploy</CABountyExchangeRequestHelp_StrengthSelection_TroopDeploymentReady>
-  <CABountyExchangeRequestHelp_StrengthSelection_TroopDeploymentDetail>Next hunter deployment ready in {0} days</CABountyExchangeRequestHelp_StrengthSelection_TroopDeploymentDetail>
-  <CABountyExchangeRequestHelp_StrengthSelection_TroopDeploymentBusy>Hunters busy</CABountyExchangeRequestHelp_StrengthSelection_TroopDeploymentBusy>
-  
-  <CABountyExchangeRequestItemTitle>Current bounty credits: {0}\n\n\nPlease select the item you'd like to exchange bounty credits for. It will be delivered via drop pod.\n\n{1}</CABountyExchangeRequestItemTitle>
-  <CABountyExchangeRequestItem_ItemDetails>         buy {0} for: {1} credits</CABountyExchangeRequestItem_ItemDetails>
-  <CABountyExchangeRequestItem_ItemArrived>Your delivery from {0} arrived!</CABountyExchangeRequestItem_ItemArrived>
-  <CABountyExchangeRequestItem_ItemRestockNow>Just restocked. </CABountyExchangeRequestItem_ItemRestockNow>
-  <CABountyExchangeRequestItem_ItemRestockDetail>Next restock in {0} days</CABountyExchangeRequestItem_ItemRestockDetail>
-  
-  <CABountyExchangeRelationHaggle>Current bounty credits: {0}\n\n\nYou can trade in bounty to improve relations.\nRelation trades towards us work immediately, but if we should negotiate with other factions on your behalf, it will cost more and also take some time for our envoy to make the trip.\nThe worse the relations are, the more bounty credits are required.</CABountyExchangeRelationHaggle>
-  <CABountyExchangeRelationHaggle_WithYou>Trade {0} credits for {1} goodwill with {2}</CABountyExchangeRelationHaggle_WithYou>
-  <CABountyExchangeRelationHaggle_WithAnotherFaction>Choose another faction</CABountyExchangeRelationHaggle_WithAnotherFaction>
-  <CABountyExchangeRelationHaggle_EnvoyBusyDetail>Envoy traveling for another {0} days</CABountyExchangeRelationHaggle_EnvoyBusyDetail>
-  <CABountyExchangeRelationHaggle_EnvoyBusy>Envoy busy</CABountyExchangeRelationHaggle_EnvoyBusy>
-  <CABountyExchangeRelationHaggle_EnvoyReady>Envoy ready</CABountyExchangeRelationHaggle_EnvoyReady>
-  <CABountyExchangeRelationHaggle_AlreadyMax>Max goodwill</CABountyExchangeRelationHaggle_AlreadyMax>
-  <CABountyExchangeRelationHaggle_Factions>Current bounty credits: {0}\n\n\nFollowing Factions are available:\n\n{1}</CABountyExchangeRelationHaggle_Factions>
-  <CABountyExchangeRelationHaggle_Factions_ListedFaction>{0} ({1})   buy: {2} for: {3} credits</CABountyExchangeRelationHaggle_Factions_ListedFaction>
+  <CABountyExchangeOpenOption>赏金服务</CABountyExchangeOpenOption>
+  <CABountyExchangeMain>当前的赏金积分： {0}\n\n\n机械击杀奖励：\n长枪兵 - 7\n镰刀兵 - 10\n枪骑兵 - 15\n蜈蚣 - 45\n特别的机械及啥会奖励更多的点数</CABountyExchangeMain>
+  <CABountyExchangeRequestHelp>请求军事协助</CABountyExchangeRequestHelp>
+  <CABountyExchangeRequestItem>请求稀有物品</CABountyExchangeRequestItem>
+  <CABountyExchangeRequestImprovedRelations>提高关系</CABountyExchangeRequestImprovedRelations>
+  <CABountyExchangeRecruitVeteranHunter>招募熟练士兵</CABountyExchangeRecruitVeteranHunter>
+  <CABountyExchangeBuyBountyWithSilver>将赏金点数兑换成银子</CABountyExchangeBuyBountyWithSilver>
+  <CABountyBack>后退</CABountyBack>
+  <CABountyExchangeHostile>你和 {0} 相互敌对</CABountyExchangeHostile>
 
-  <CABountyExchangeVeteranRecruitment>Current bounty credits: {0}\n\n\nThis rare opportunity allows you to recruit one of {1}'s finest soldiers. A battle hardened veteran who knows exactly how to survive on this planet. However, such a privilege requires amounting a lot of bounty credit.\n\n{2}</CABountyExchangeVeteranRecruitment>
-  <CABountyExchangeVeteranRecruitment_Available>Veteran available</CABountyExchangeVeteranRecruitment_Available>
-  <CABountyExchangeVeteranRecruitment_Details>Next veteran available in {0} days</CABountyExchangeVeteranRecruitment_Details>
-  <CABountyExchangeVeteranRecruitment_Enlist>Enlist top veteran for {0} bounty credits</CABountyExchangeVeteranRecruitment_Enlist>
-  <CABountyExchangeVeteranRecruitment_NotAvailable>No veteran available</CABountyExchangeVeteranRecruitment_NotAvailable>
-  <CABountyExchangeVeteranRecruitment_ChoosePersonality>\n\n\nAs the personality is usually important, we try to find a good fit for you.</CABountyExchangeVeteranRecruitment_ChoosePersonality>
-  <CABountyExchangeVeteranRecruitment_ChoosePersonalityNone>Rather none of those</CABountyExchangeVeteranRecruitment_ChoosePersonalityNone>
-  <CABountyExchangeVeteranRecruitment_ChooseSkill>\n\n\nAnd the unique skill?</CABountyExchangeVeteranRecruitment_ChooseSkill>
+  <CABountyExchangeRequestHelp_StrengthSelection>当前赏金积分： {0}\n\n\n请选择你需要多少人\n\n{1}</CABountyExchangeRequestHelp_StrengthSelection>
+  <CABountyExchangeRequestHelp_StrengthSelection_Few>少量   (~ 6 猎人)  - 250 赏金点数</CABountyExchangeRequestHelp_StrengthSelection_Few>
+  <CABountyExchangeRequestHelp_StrengthSelection_Bunch>一点 (~ 15 猎人) - 650 赏金点数</CABountyExchangeRequestHelp_StrengthSelection_Bunch>
+  <CABountyExchangeRequestHelp_StrengthSelection_Army>一支军队 (~ 30 猎人) - 1250 赏金点数</CABountyExchangeRequestHelp_StrengthSelection_Army>
+  <CABountyExchangeRequestHelp_StrengthSelection_NotEnoughMoney>点数不足</CABountyExchangeRequestHelp_StrengthSelection_NotEnoughMoney>
+  <CABountyExchangeRequestHelp_StrengthSelection_TroopDeploymentReady>猎人部署就绪</CABountyExchangeRequestHelp_StrengthSelection_TroopDeploymentReady>
+  <CABountyExchangeRequestHelp_StrengthSelection_TroopDeploymentDetail>下一次猎人部署将在 {0} 日后就绪</CABountyExchangeRequestHelp_StrengthSelection_TroopDeploymentDetail>
+  <CABountyExchangeRequestHelp_StrengthSelection_TroopDeploymentBusy>猎人正忙</CABountyExchangeRequestHelp_StrengthSelection_TroopDeploymentBusy>
 
-  <CABountyExchangeSilverForBounty>Current bounty credits: {0}\nCurrent silver: {1}\n\n\nChoose how many bounty credits you want to buy</CABountyExchangeSilverForBounty>
-  <CABountyExchangeSilverForBountyOption>Exchange {0} silver for {1} bounty credit</CABountyExchangeSilverForBountyOption>
-  <CABountyExchangeSilverForBountyLackingSilver>Not enough silver</CABountyExchangeSilverForBountyLackingSilver>
+  <CABountyExchangeRequestItemTitle>当前赏金积分： {0}\n\n\n请选择你需要交换的物品。将会以空投形式送达。\n\n{1}</CABountyExchangeRequestItemTitle>
+  <CABountyExchangeRequestItem_ItemDetails>         买 {0} 需要： {1} 点数</CABountyExchangeRequestItem_ItemDetails>
+  <CABountyExchangeRequestItem_ItemArrived>你从 {0} 点的外卖已送达！</CABountyExchangeRequestItem_ItemArrived>
+  <CABountyExchangeRequestItem_ItemRestockNow>刚刚进货。 </CABountyExchangeRequestItem_ItemRestockNow>
+  <CABountyExchangeRequestItem_ItemRestockDetail>下次进货在 {0} 天后</CABountyExchangeRequestItem_ItemRestockDetail>
 
-  <CABountyKillMessage>Collected {0, -10} bounty credit for killing a {1, -20}, total credit: {2}</CABountyKillMessage>
-  <CABountyKillMessageBounty>Bounty-kill: </CABountyKillMessageBounty>
-  <CABountyKillMessageReward>Reward: </CABountyKillMessageReward>
-  <CABountyKillMessageCredit>Total credit: </CABountyKillMessageCredit>
+  <CABountyExchangeRelationHaggle>当前赏金积分： {0}\n\n\n你可以用积分来换取关系提升。\n对我们的关系交易会立刻生效，但如果你需要我们来提升和其他派系的关系，将会消耗更多的点数，我们也需要点时间派信使去一趟。\n关系越差，需要的点数越多。</CABountyExchangeRelationHaggle>
+  <CABountyExchangeRelationHaggle_WithYou>用 {0} 点数换取和 {2} 之间 {1} 的好感度</CABountyExchangeRelationHaggle_WithYou>
+  <CABountyExchangeRelationHaggle_WithAnotherFaction>选择另一个派系</CABountyExchangeRelationHaggle_WithAnotherFaction>
+  <CABountyExchangeRelationHaggle_EnvoyBusyDetail>信使需要额外 {0} 天来完成旅行</CABountyExchangeRelationHaggle_EnvoyBusyDetail>
+  <CABountyExchangeRelationHaggle_EnvoyBusy>信使正忙</CABountyExchangeRelationHaggle_EnvoyBusy>
+  <CABountyExchangeRelationHaggle_EnvoyReady>信使就绪</CABountyExchangeRelationHaggle_EnvoyReady>
+  <CABountyExchangeRelationHaggle_AlreadyMax>最大好感度</CABountyExchangeRelationHaggle_AlreadyMax>
+  <CABountyExchangeRelationHaggle_Factions>当前赏金积分： {0}\n\n\n以下派系可以提升好感度：\n\n{1}</CABountyExchangeRelationHaggle_Factions>
+  <CABountyExchangeRelationHaggle_Factions_ListedFaction>{0} ({1})   提升 {2} 关系，消耗 {3} 点数</CABountyExchangeRelationHaggle_Factions_ListedFaction>
+
+  <CABountyExchangeVeteranRecruitment>当前赏金积分： {0}\n\n\n这机会可不常见，你可以招募一个 {1} 的最好的士兵。 他是一个知道怎么在战火纷飞的这个星球上活下来的老兵。 然而，这种殊荣需要大量的积分点数。\n\n{2}</CABountyExchangeVeteranRecruitment>
+  <CABountyExchangeVeteranRecruitment_Available>老兵可招募</CABountyExchangeVeteranRecruitment_Available>
+  <CABountyExchangeVeteranRecruitment_Details>下一个老兵将在 {0} 天后可招募</CABountyExchangeVeteranRecruitment_Details>
+  <CABountyExchangeVeteranRecruitment_Enlist>用 {0} 赏金点数招募顶级老兵</CABountyExchangeVeteranRecruitment_Enlist>
+  <CABountyExchangeVeteranRecruitment_NotAvailable>当前无老兵可招募</CABountyExchangeVeteranRecruitment_NotAvailable>
+  <CABountyExchangeVeteranRecruitment_ChoosePersonality>\n\n\n性格很关键，我们当然会给你找最合适的。</CABountyExchangeVeteranRecruitment_ChoosePersonality>
+  <CABountyExchangeVeteranRecruitment_ChoosePersonalityNone>这些都不合适</CABountyExchangeVeteranRecruitment_ChoosePersonalityNone>
+  <CABountyExchangeVeteranRecruitment_ChooseSkill>\n\n\n还需要什么特殊的本领吗？</CABountyExchangeVeteranRecruitment_ChooseSkill>
+
+  <CABountyExchangeSilverForBounty>当前赏金积分： {0}\n当前银子： {1}\n\n\n选择你要对还多少积分点数</CABountyExchangeSilverForBounty>
+  <CABountyExchangeSilverForBountyOption>交换 {0} 银子需要 {1} 积分</CABountyExchangeSilverForBountyOption>
+  <CABountyExchangeSilverForBountyLackingSilver>银两不足</CABountyExchangeSilverForBountyLackingSilver>
+
+  <CABountyKillMessage>获得了 {0, -10} 赏金点，源自击杀 {1, -20}，总点数 {2}</CABountyKillMessage>
+  <CABountyKillMessageBounty>赏金击杀： </CABountyKillMessageBounty>
+  <CABountyKillMessageReward>奖励： </CABountyKillMessageReward>
+  <CABountyKillMessageCredit>总点数： </CABountyKillMessageCredit>
+
 </LanguageData>

@@ -1,27 +1,27 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-	<TradeCaravanQuestName>Caravan Adventures - Trade Caravan</TradeCaravanQuestName>
-	<TradeCaravanQuestDesc>A Sacrileg Hunters caravan is approaching and it seems rather well equipped. Might be worth checking out what they're doing here.\n\nIf you miss this chance wait for further caravans, most may seek contact beyond just trade.</TradeCaravanQuestDesc>
-	<TradeCaravanQuestInfoTalkedTo>You had a really nice chat with {0}, keeping in touch may provide great opportunities.</TradeCaravanQuestInfoTalkedTo>
-	<TradeCaravanQuestInfoTalkedToReward>{0} left you a {1} after your chat.</TradeCaravanQuestInfoTalkedToReward>
+  <TradeCaravanQuestName>商隊歷險 - 貿易商隊</TradeCaravanQuestName>
+  <TradeCaravanQuestDesc>一個祭祀獵人的商隊正在接近，它似乎裝備精良。 可能值得看看他們在這裡做什麼。\n\n如果你錯過了這個等待更多商隊的機會，大多數人可能會尋求不僅僅是貿易的聯系。</TradeCaravanQuestDesc>
+  <TradeCaravanQuestInfoTalkedTo>您與 {0} 進行了非常愉快的交談，保持聯系可能會提供很好的機會。</TradeCaravanQuestInfoTalkedTo>
+  <TradeCaravanQuestInfoTalkedToReward>{0} 在您聊天后給您留下了 {1}。</TradeCaravanQuestInfoTalkedToReward>
 
-	<TradeCaravan_Dia1_DiaTitle>{0} waves and comes closer</TradeCaravan_Dia1_DiaTitle>
-	<TradeCaravan_Dia1_1>Hey you. We've been traveling for weeks now and we were hoping if we could make a few days rest at your village. We won't trouble you of course, we just need to relax for a bit. \nIt's been hard on the road. [{0} shivers]</TradeCaravan_Dia1_1>
-	<TradeCaravan_Dia1_1_Option1>Sure, we don't mind. You're welcome to stay a while.</TradeCaravan_Dia1_1_Option1>
-	<TradeCaravan_Dia1_2>[{0} gives you a tired but beautiful smile] That's kind of you.\n[{0} takes a deep breath and {1} eyes glance over the village and beyond]\nThis is a fantastic village, it fades in with the beautiful nature all around perfectly. \nHow are you guys doing here?</TradeCaravan_Dia1_2>
-	<TradeCaravan_Dia1_2_Option1>That's... nice of you to say, thanks. \nWe've put a lot of work into it so far, I hope we'll make it through the winter.</TradeCaravan_Dia1_2_Option1>
-	<TradeCaravan_Dia1_3>I'm sure you'll be fine. We started building a settlement not far from here. Hopefully Jack runs out of booze soon, so he can finally plan out the rest of the buildings. Our constructors are anxious to get to work.\n\nAnyway, you should come visit us when we're done and give us a chance to repay you guys for your hospitality. [You notice {0} starting to relax and smile]</TradeCaravan_Dia1_3>
-	<TradeCaravan_Dia1_3_Option1>Thanks, we'll be happy to come visit. What brings you guys here?</TradeCaravan_Dia1_3_Option1>
-	<TradeCaravan_Dia1_3_Option2>We might swing by. I've got to go, duty calls. \nGood luck on your travels.</TradeCaravan_Dia1_3_Option2>
-	<TradeCaravan_Dia1_4>[{0} looks down and bites on {1} lip] That's a long story...\n\nBut I guess we have time. We come from another planet, but endless war over powerful artifacts was the end of Valeron. My fiance died when we fled to our guild's ship. I have no idea how we made it out alive before the planets's core collapsed.\n\n[{0} looks up to the sky trying to shake the bad memories] Years later we came across your planet. We quickly noticed the ancient structures that can be found all over the planet and our thirst for knowledge drove us to settle here.\n[{0} shrugs] I'm not looking to repeat our mistakes, but in the end it's what we're good at. Settling here wasn't easy though, we were plagued by sickness, and raids from various factions.\n\n Any advice you can give us?</TradeCaravan_Dia1_4>
-	<TradeCaravan_Dia1_4_Option1>Wow, that's quite a story. Our ship crashed here as well not long ago.\nWe are just figuring things out same as you, i guess. \n[{1} points at {0}'s weapon] You seem well equipped for the challenge though.</TradeCaravan_Dia1_4_Option1>
-	<TradeCaravan_Dia1_5>[{0} starts playing with {1} hair nervously] You noticed hm? Ya, we managed to excavate a bunch of shrines already and found incredible artifacts, but the mechs inside worry me. We lost two of us when breaking open our second shrine.\n\nTheir deaths weren't in vain! We'd certainly be dead by now without all this gear we managed to scavenge.\n\n[Smiling again {0} looks you in the eyes] But things seem to work out fine, now that we have met you guys. I'm sure our factions will be able to help one another if you're interested.</TradeCaravan_Dia1_5>
-	<TradeCaravan_Dia1_5_Option1>Definitely! Together we might actually make it in this strange place.</TradeCaravan_Dia1_5_Option1>
-	<TradeCaravan_Dia1_5_Option2>Can't make any commitments, sorry.</TradeCaravan_Dia1_5_Option2>
-	<TradeCaravan_Dia1_6_1>[{0} takes your hand and smiles] Amazing, I can't wait to bring the good news home... We're no longer alone.\n\nI'm going to leave this {1} with you, we can spare it.\n\nI should talk to the others and see if everyone is ok. Thank you for that amazing chat, you gave me... hope. [{0} blushed as she let go of your hand and turned to {2} fellow guild mates]</TradeCaravan_Dia1_6_1>
-	<TradeCaravan_Dia1_6_1_Option1>[Coughing perplexed] Alright, see ya soon.</TradeCaravan_Dia1_6_1_Option1>
-	<TradeCaravan_Dia1_6_2>[{0} seems disappointed] Oh... okay. We still won't forget your help. Thank you.</TradeCaravan_Dia1_6_2>
-	<TradeCaravan_Dia1_6_2_Option1>Take care on your travels!</TradeCaravan_Dia1_6_2_Option1>
+  <TradeCaravan_Dia1_DiaTitle>{0} 揮手靠近</TradeCaravan_Dia1_DiaTitle>
+  <TradeCaravan_Dia1_1>嘿，你。 我們已經旅行了幾個星期，希望能在你們村子裡休息幾天。 我們當然不會打擾您，我們隻是需要放鬆一下。 \n路上很辛苦。 [{0} 顫抖]</TradeCaravan_Dia1_1>
+  <TradeCaravan_Dia1_1_Option1>當然，我們不介意。 歡迎你多留一會兒。</TradeCaravan_Dia1_1_Option1>
+  <TradeCaravan_Dia1_2>[{0} 給你一個疲憊但美麗的微笑]你真好。\n[{0} 深呼吸，{1} 眼睛掃視村庄和遠處]\n這是一個夢幻般的村庄，它逐漸融入 周圍美麗的大自然。 \n你們在這裡過得好嗎？</TradeCaravan_Dia1_2>
+  <TradeCaravan_Dia1_2_Option1>那是……你說得真好，謝謝。 \n到目前為止我們已經做了很多工作，我希望我們能熬過冬天。</TradeCaravan_Dia1_2_Option1>
+  <TradeCaravan_Dia1_3>我相信你會沒事的。 我們開始在離這裡不遠的地方建造一個定居點。 希望 Jack 很快就會喝完酒，這樣他就可以最終規劃其余的建筑物。 我們的施工人員急於開工。\n\n不管怎樣，我們完成后你應該來拜訪我們，讓我們有機會報答你們的款待。 [你注意到{0}開始放鬆並微笑]</TradeCaravan_Dia1_3>
+  <TradeCaravan_Dia1_3_Option1>謝謝，我們很樂意來拜訪。 是什麼讓你們來到這裡？</TradeCaravan_Dia1_3_Option1>
+  <TradeCaravan_Dia1_3_Option2>我們可能會搖擺不定。 我得走了，職責在呼喚。 \祝你旅途愉快。</TradeCaravan_Dia1_3_Option2>
+  <TradeCaravan_Dia1_4>[{0} 低頭咬住 {1} 嘴唇]說來話長...\n\n但我想我們有時間。 我們來自另一個星球，但為了強大的神器而無休止的戰爭是 Valeron 的終結。 當我們逃到公會的船上時，我的未婚夫死了。 我不知道在行星的核心坍塌之前我們是如何活著的。\n\n[{0} 仰望天空，試圖撼動那些糟糕的記憶] 多年后，我們遇到了你們的星球。 我們很快注意到了在地球上隨處可見的古老建筑，我們對知識的渴望驅使我們在這裡定居。\n[{0} 聳肩]我不想重蹈覆轍，但最終這就是我們 擅長。 在這裡定居並不容易，我們飽受疾病的困擾，還有來自各個派系的襲擊。\n\n你能給我們什麼建議嗎？</TradeCaravan_Dia1_4>
+  <TradeCaravan_Dia1_4_Option1>哇，這真是一個好故事。 我們的船不久前也在這裡墜毀了。\n我想我們隻是在想像你一樣的事情。 \n[{1} 點在 {0} 的武器上] 不過你似乎已經做好了迎接挑戰的准備。</TradeCaravan_Dia1_4_Option1>
+  <TradeCaravan_Dia1_5>[{0} 開始緊張地玩弄 {1} 頭發]你注意到了嗎？ 是的，我們已經設法挖掘了一堆神殿並發現了令人難以置信的神器，但是裡面的機甲讓我擔心。 我們在打開第二個神殿時失去了兩個人。\n\n他們的死沒有白費！ 如果沒有我們設法清除的所有這些裝備，我們現在肯定會死。\n\n[再次微笑{0}看著你的眼睛]但事情似乎進展順利，現在我們遇到了你們。 如果您有興趣，我相信我們的派系將能夠互相幫助。</TradeCaravan_Dia1_5>
+  <TradeCaravan_Dia1_5_Option1>確實！ 我們實際上可能會一起在這個陌生的地方成功。</TradeCaravan_Dia1_5_Option1>
+  <TradeCaravan_Dia1_5_Option2>不能做出任何承諾，抱歉。</TradeCaravan_Dia1_5_Option2>
+  <TradeCaravan_Dia1_6_1>[{0} 牽著你的手微笑] 太棒了，我迫不及待想把這個好消息帶回家......我們不再孤單了。\n\n我要把這個 {1} 留給你，我們 可以放過它。\n\n我應該和其他人談談，看看大家是否還好。 謝謝你的精彩聊天，你給了我......希望。 [{0} 臉紅了，她鬆開了你的手，轉向 {2} 位公會伙伴]</TradeCaravan_Dia1_6_1>
+  <TradeCaravan_Dia1_6_1_Option1>[咳嗽]好的，待會見。</TradeCaravan_Dia1_6_1_Option1>
+  <TradeCaravan_Dia1_6_2>[{0} 似乎很失望] 哦……好吧。 我們仍然不會忘記您的幫助。 謝謝你。</TradeCaravan_Dia1_6_2>
+  <TradeCaravan_Dia1_6_2_Option1>旅行要注意！</TradeCaravan_Dia1_6_2_Option1>
 
 </LanguageData>
 

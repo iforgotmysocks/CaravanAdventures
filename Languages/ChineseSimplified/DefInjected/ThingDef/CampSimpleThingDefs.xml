@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <CAMakeshiftTentWall.label>帐篷墙</CAMakeshiftTentWall.label>
+  <CAMakeshiftTentWall.description>临时织物帐篷墙，用各种廉价纤维快速组装。</CAMakeshiftTentWall.description>
+
+  <CAMakeshiftTentLeather.label>临时皮革</CAMakeshiftTentLeather.label>
+  <CAMakeshiftTentLeather.description>由各种皮革拼接而成的临时帐篷皮革。</CAMakeshiftTentLeather.description>
+
+
+  <!-- bedrolls -->
+
+  <CAMakeshiftBedroll.label>铺盖卷</CAMakeshiftBedroll.label>
+  <CAMakeshiftBedroll.description>铺在地板上的简单床，通常由布或皮革制成，通常内衬毛皮。 它很轻，可以卷起来方便运输，但它不像普通床那么舒服。 商队可以在旅行时使用床单以获得更好的睡眠。</CAMakeshiftBedroll.description>
+
+  <CAMakeshiftBedrollDouble.label>双人铺盖卷</CAMakeshiftBedrollDouble.label>
+  <CAMakeshiftBedrollDouble.description>一张简单的双人床，铺在地板上，通常由布或皮革制成，通常内衬毛皮。 它很轻，可以卷起来方便运输，但它不像普通床那么舒服。 商队可以在旅行时使用床单以获得更好的睡眠。</CAMakeshiftBedrollDouble.description>
+
+
+</LanguageData>

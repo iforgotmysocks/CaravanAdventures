@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <CAGameCondition_Apocalypse.label>侵袭天启</CAGameCondition_Apocalypse.label>
+  <CAGameCondition_Apocalypse.description>未知的机械技术正在产生一个逐渐蔓延的世界末日，导致地球的温度不断下降，直到每个生物都死去。 这种情况的原因不应被忽略太久。\n\n当前温度调整：{0}</CAGameCondition_Apocalypse.description>
+  <CAGameCondition_Apocalypse.endMessage>天启已经停止。</CAGameCondition_Apocalypse.endMessage>
+  <CAGameCondition_Apocalypse.letterText>未知的机械技术正在产生一个逐渐蔓延的世界末日，导致地球的温度不断下降，直到每个生物都死去。 需要迅速找到这种情况的原因。</CAGameCondition_Apocalypse.letterText>
+
+
+</LanguageData>

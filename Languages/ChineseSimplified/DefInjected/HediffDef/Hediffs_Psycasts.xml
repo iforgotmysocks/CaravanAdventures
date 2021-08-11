@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <CAAncientCoordinator.label>古代协调器</CAAncientCoordinator.label>
+  <CAAncientCoordinator.description>只要施法者还活着，施法者以及其他 4 名殖民者就会被授予远古保护光环的力量而不会产生任何不利影响。 但是，每个其他超过人数限制的小人都会死亡。 需要远古天赋。</CAAncientCoordinator.description>
+
+  <CAAncientProtectiveAuraLinked.label>远古保护光环（链接）</CAAncientProtectiveAuraLinked.label>
+  <CAAncientProtectiveAuraLinked.description>随着时间的推移保护目标免受大部分传入伤害，火灾和愈合伤口（即使活动时间足够长，甚至是永久性的）。 \n\n减少小人可以处理的整体热量，并在活动时每天加速 2% 的灵能消耗。 如果对目标再次施放此法术或目标小人的精神焦点耗尽，则该法术的效果会消失。 \n\n需要远古天赋，除非被远古协调者法术强化。</CAAncientProtectiveAuraLinked.description>
+
+  <CAAncientProtectiveAura.label>远古保护光环</CAAncientProtectiveAura.label>
+  <CAAncientProtectiveAura.description>随着时间的推移保护目标免受大部分传入伤害，火灾和愈合伤口（即使活动时间足够长，甚至是永久性的）。 \n\n减少小人可以处理的整体热量，并在活动时每天加速 2% 的灵能消耗。 如果对目标再次施放此法术或目标小人的精神焦点耗尽，则该法术的效果会消失。 \n\n需要远古天赋，除非被远古协调者法术强化。</CAAncientProtectiveAura.description>
+
+  <CAAncientGift.label>古代礼物</CAAncientGift.label>
+  <CAAncientGift.description>古老的礼物，一种获得长期被遗忘的潜力的力量，使有天赋的人能够施展古老的咒语。 故事中也谈到了即使没有冥想也能缓慢恢复精神焦点。</CAAncientGift.description>
+
+  <CADrainNature.label>枯萎的自然</CADrainNature.label>
+  <CADrainNature.description>一个强大的存在正在从附近的植物中吸取能量。</CADrainNature.description>
+
+  <CAConjuredLight.label>神秘的指路灯</CAConjuredLight.label>
+  <CAConjuredLight.description>用于提高旅行者速度的旅行辅助灯，可以在地图或商队中。 不能在路上施放，准备时间长。 持续3天。</CAConjuredLight.description>
+
+  <CAOverheatingBrain.label>过热的大脑</CAOverheatingBrain.label>
+  <CAOverheatingBrain.description>由于单元及其组件的非自然编程或生产，大脑会因无法解决的日益增长的错误而过热。</CAOverheatingBrain.description>
+
+
+</LanguageData>

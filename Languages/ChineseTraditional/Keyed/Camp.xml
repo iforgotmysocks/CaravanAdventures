@@ -1,17 +1,18 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-  <CAAnimalAreaLabel>Animal area</CAAnimalAreaLabel>
-  <CAAnimalNoFoodAreaLabel>Animal free</CAAnimalNoFoodAreaLabel>
-  <CAFoodZoneLabel>Food</CAFoodZoneLabel>
-  <CAAnimalFoodZoneLabel>Animal food</CAAnimalFoodZoneLabel>
-  <CADeconstructCamp>Pack up the camp</CADeconstructCamp>
-  <CADeconstructCampMessage>Packing up the camp</CADeconstructCampMessage>
-  <CABuildFailTents>{0} tents couldn't be built as no space was available.</CABuildFailTents>
-  <CAMedicineZone>Medicine</CAMedicineZone>
-  <CAEstablishedCampNotification>A high-tech camp was set up for {0} tent supplies</CAEstablishedCampNotification>
+  <CAAnimalAreaLabel>動物區</CAAnimalAreaLabel>
+  <CAAnimalNoFoodAreaLabel>不允許動物</CAAnimalNoFoodAreaLabel>
+  <CAFoodZoneLabel>食物區</CAFoodZoneLabel>
+  <CAAnimalFoodZoneLabel>動物食物區</CAAnimalFoodZoneLabel>
+  <CADeconstructCamp>收拾營地</CADeconstructCamp>
+  <CADeconstructCampMessage>正在收拾營地</CADeconstructCampMessage>
+  <CABuildFailTents>{0} 帳篷不能再建造了，因為地方不夠大。</CABuildFailTents>
+  <CAMedicineZone>醫藥區</CAMedicineZone>
+  <CAEstablishedCampNotification>一個包含 {0} 帳篷的高科技營地已經建好了。</CAEstablishedCampNotification>
 
-  <CALeaveImmediately>Leave immediately</CALeaveImmediately>
-  <CALeaveImmediatelyPackupCamp>Do you want to pack up the camp and abandon this place? \n{0} spacer tent supplies will be added to the caravan.</CALeaveImmediatelyPackupCamp>
-  <CALeaveImmediatelyPackupCampTribal>Do you want to pack up the camp and abandon this place?</CALeaveImmediatelyPackupCampTribal>
+  <CALeaveImmediately>立刻離開</CALeaveImmediately>
+  <CALeaveImmediatelyPackupCamp>你希望放棄這裡，打包上路嗎？ \n{0} 太空帳篷會被裝載到商隊中。</CALeaveImmediatelyPackupCamp>
+  <CALeaveImmediatelyPackupCampTribal>你希望放棄這裡，打包上路嗎？ </CALeaveImmediatelyPackupCampTribal>
+
 </LanguageData>
 
