@@ -217,6 +217,7 @@
     <passability>PassThroughOnly</passability>
     <pathCost>50</pathCost>
     <tickerType>Normal</tickerType>
+    <drawerType>MapMeshAndRealTime</drawerType>
     <statBases>
       <MaxHitPoints>200</MaxHitPoints>
       <WorkToBuild>2000</WorkToBuild>
@@ -301,6 +302,7 @@
       </shadowData>
     </graphicData>
     <tickerType>Normal</tickerType>
+    <drawerType>MapMeshAndRealTime</drawerType>
     <altitudeLayer>Building</altitudeLayer>
     <passability>PassThroughOnly</passability>
     <pathCost>50</pathCost>
@@ -569,6 +571,7 @@
       <Flammability>0.5</Flammability>
     </statBases>
     <tickerType>Normal</tickerType>
+    <drawerType>MapMeshAndRealTime</drawerType>
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
     <placeWorkers>
       <li>PlaceWorker_Heater</li>
@@ -672,6 +675,7 @@
       <Flammability>0.5</Flammability>
     </statBases>
     <tickerType>Normal</tickerType>
+    <drawerType>MapMeshAndRealTime</drawerType>
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
     <placeWorkers>
       <li>PlaceWorker_Heater</li>
@@ -806,6 +810,7 @@
       <Flammability>1.0</Flammability>
       <Beauty>-20</Beauty>
     </statBases>
+    <drawerType>MapMeshAndRealTime</drawerType>
     <tickerType>Normal</tickerType>
     <canOverlapZones>false</canOverlapZones>
     <size>(1,1)</size>
