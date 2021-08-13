@@ -48,7 +48,7 @@ namespace CaravanAdventures.Settings
                 ModSettings.campMapSize = new IntVec3(mapSize, 1, mapSize);
             }
             options.Gap();
-            options.Label("Select the tent types you want ur pawns to build by themselfs.");
+            options.Label("Select the tent types you want ur pawns to build by themselves.");
             options.CheckboxLabeled("Build production tent", ref ModSettings.hasProductionTent);
             options.CheckboxLabeled("Build storage tent", ref ModSettings.hasStorageTent);
             options.CheckboxLabeled("Build medical tent", ref ModSettings.hasMedicalTent);
