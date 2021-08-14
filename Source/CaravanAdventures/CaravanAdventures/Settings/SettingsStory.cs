@@ -42,6 +42,7 @@ namespace CaravanAdventures.Settings
 
             Text.Font = GameFont.Small;
 
+            options.CheckboxLabeled("Mute the anima tree whisper sound", ref ModSettings.whisperDisabledManually);
             options.CheckboxLabeled("Apocalypse enabled", ref ModSettings.apocalypseEnabled);
             options.Label($"Apocalypse temperature change per day: {Math.Round(ModSettings.apocalypseTemperatureChangePerDay, 4)}  (Default: -0.084)");
             ModSettings.apocalypseTemperatureChangePerDay = options.Slider(ModSettings.apocalypseTemperatureChangePerDay, 0f, -0.5f);

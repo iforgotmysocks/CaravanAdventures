@@ -51,21 +51,47 @@ namespace CaravanAdventures.CaravanStory
 
             DrawTreeQuestionMark();
 
-            if (ticks >= 1000
-                && (CompCache.StoryWC.storyFlags["IntroVillage_Finished"]
-                    || CompCache.StoryWC.debugFlags["VillageDone"])
-                && (CompCache.StoryWC.storyFlags["Start_ReceivedGift"]
-                    || map.IsPlayerHome))
+            if (ticks >= 1000)
             {
-                AddTalkTreeAction();
-                AddTreeWhisper();
-                StartTreeQuest();
-                CheckEnsureGifted();
-
                 ticks = 0;
+
+                if ((CompCache.StoryWC.storyFlags["IntroVillage_Finished"]
+                        || CompCache.StoryWC.debugFlags["VillageDone"])
+                    && (CompCache.StoryWC.storyFlags["Start_ReceivedGift"]
+                        || map.IsPlayerHome))
+                {
+                    GetTheTree();
+                    AddTalkTreeAction();
+                    AddTreeWhisper();
+                    CheckRemoveWhisperTemporarily();
+                    StartTreeQuest();
+                    CheckEnsureGifted();
+                }
             }
 
             ticks++;
+        }
+
+        private void GetTheTree()
+        {
+            var tree = map.spawnedThings.FirstOrDefault(x => x.def.defName == "Plant_TreeAnima") as ThingWithComps;
+            if (tree == null)
+            {
+                theTree = null;
+                DLog.Message("Tree is null");
+                return;
+            }
+            theTree = tree;
+        }
+
+        private void CheckRemoveWhisperTemporarily()
+        {
+            if (animaTreeWhisperSustainer == null) return;
+            if (ModSettings.whisperDisabledManually || theTree == null)
+            {
+                DLog.Message($"disabling whispers temporarily");
+                animaTreeWhisperSustainer.End();
+            }
         }
 
         private void StartTreeQuest()
@@ -85,6 +111,7 @@ namespace CaravanAdventures.CaravanStory
         private void DrawTreeQuestionMark()
         {
             if (theTree != null
+                && !theTree.Destroyed
                 && !CompCache.StoryWC.storyFlags["Start_ReceivedGift"]
                 && theTree.TryGetComp<CompTalk>() != null
                 && theTree.TryGetComp<CompTalk>().ShowQuestionMark)
@@ -93,42 +120,30 @@ namespace CaravanAdventures.CaravanStory
 
         private void AddTalkTreeAction()
         {
-            var tree = map.spawnedThings.FirstOrDefault(x => x.def.defName == "Plant_TreeAnima") as ThingWithComps;
-            if (tree == null)
-            {
-                DLog.Message("Tree is null");
-                return;
-            }
-            theTree = tree;
-            StoryUtility.AssignDialog("StoryStart_TreeDialog", tree, this.GetType().ToString(), "StoryStartDialog", true, true, true, null, true);
+            if (theTree == null) return;
+            StoryUtility.AssignDialog("StoryStart_TreeDialog", (ThingWithComps)theTree, this.GetType().ToString(), "StoryStartDialog", true, true, true, null, true);
             CompCache.StoryWC.storyFlags["Start_InitialTreeAddTalkOption"] = true;
         }
 
         private void DisableTreeTalkAction()
         {
-            var tree = map.spawnedThings.FirstOrDefault(x => x.def.defName == "Plant_TreeAnima");
-            if (tree == null)
-            {
-                DLog.Message("Tree is null");
-                return;
-            }
-
-            var comp = tree.TryGetComp<CompTalk>();
+            if (theTree == null) return;
+            var comp = theTree.TryGetComp<CompTalk>();
         }
 
         private void AddTreeWhisper()
         {
             if (CompCache.StoryWC.storyFlags["Start_ReceivedGift"]
-                || CompCache.StoryWC.storyFlags["Start_InitialTreeWhisper"] && animaTreeWhisperSustainer != null) return;
+                || CompCache.StoryWC.storyFlags["Start_InitialTreeWhisper"] && animaTreeWhisperSustainer != null
+                || ModSettings.whisperDisabledManually) return;
 
-            var tree = map.spawnedThings.FirstOrDefault(x => x.def.defName == "Plant_TreeAnima");
-            if (tree == null)
+            if (theTree == null)
             {
                 DLog.Message("Tree is null in AddTreeWisper");
                 return;
             }
 
-            var info = SoundInfo.InMap(tree, MaintenanceType.None);
+            var info = SoundInfo.InMap(theTree, MaintenanceType.None);
             animaTreeWhisperSustainer = DefDatabase<SoundDef>.GetNamed("CAAnimaTreeWhispers").TrySpawnSustainer(info);
             if (animaTreeWhisperSustainer != null) CompCache.StoryWC.storyFlags["Start_InitialTreeWhisper"] = true;
         }
