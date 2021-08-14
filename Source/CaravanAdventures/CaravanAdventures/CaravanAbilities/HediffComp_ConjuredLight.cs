@@ -13,6 +13,7 @@ namespace CaravanAdventures.CaravanAbilities
         private int ticks = 0;
         private int ticksToDisappear = 0;
         private Thing light;
+        public override string CompLabelInBracketsExtra => base.CompLabelInBracketsExtra + ((int)ModSettings.lightDuration - ticksToDisappear).ToStringTicksToPeriod(true, true);
 
         public HediffCompProperties_ConjuredLight Props => (HediffCompProperties_ConjuredLight)props;
 
