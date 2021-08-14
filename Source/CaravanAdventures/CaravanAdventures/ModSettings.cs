@@ -90,6 +90,7 @@ namespace CaravanAdventures
         public static bool issueFurtherShrineLocationsAfterStoryEnd = true;
         public static bool sacHuntersHostileTowardsEmpire = false;
         public static bool allowApocToAlterTileTemp = false;
+        public static bool whisperDisabledManually = false;
 
         // shrines
         public static float shrineMechDifficultyMultiplier = 1.2f;
@@ -189,6 +190,7 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref issueFurtherShrineLocationsAfterStoryEnd, "issueFurtherShrineLocationsAfterStoryEnd", true);
             Scribe_Values.Look(ref sacHuntersHostileTowardsEmpire, "sacHuntersHostileTowardsEmpire", false);
             Scribe_Values.Look(ref allowApocToAlterTileTemp, "allowApocToAlterTileTemp", false);
+            Scribe_Values.Look(ref whisperDisabledManually, "whisperDisabledManually", false);
 
             // shrines
             Scribe_Values.Look(ref shrineMechDifficultyMultiplier, "shrineMechDifficultyMultiplier", 1.2f);
@@ -246,6 +248,7 @@ namespace CaravanAdventures
         }
 
         private bool showRestartReminder = false;
+
         public void DoWindowContents(Rect wrect)
         {
             var options = new Listing_Standard();
