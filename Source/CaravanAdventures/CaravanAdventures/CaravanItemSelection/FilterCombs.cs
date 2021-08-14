@@ -90,6 +90,13 @@ namespace CaravanAdventures.CaravanItemSelection
                 Connection = FilterConnection.OR,
                 Operation = FilterOperation.Exclude,
             });
+            packUp.appliedFilters.Add(new Filter(new object[] {
+                ThingCategoryDef.Named("Plants")})
+            {
+                Name = "Trees",
+                Connection = FilterConnection.OR,
+                Operation = FilterOperation.Exclude,
+            });
 
             goods.appliedFilters.Add(new Filter(new object[] {
                 ThingCategoryDefOf.Apparel,
