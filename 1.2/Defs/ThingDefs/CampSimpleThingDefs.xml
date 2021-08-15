@@ -109,6 +109,7 @@
     </thingCategories>-->
     <burnableByRecipe>true</burnableByRecipe>
     <healthAffectsPrice>false</healthAffectsPrice>
+    <tradeability>None</tradeability>
     <stuffProps>
       <color>(62,37,22)</color>
       <commonality>0</commonality>

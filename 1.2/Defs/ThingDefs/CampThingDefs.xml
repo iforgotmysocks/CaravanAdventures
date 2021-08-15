@@ -143,6 +143,10 @@
     <soundDrop>Standard_Drop</soundDrop>
     <stackLimit>500</stackLimit>
     <healthAffectsPrice>false</healthAffectsPrice>
+    <!--<tradeability>Buyable</tradeability>-->
+    <!--<tradeTags>
+      <li>ExoticMisc</li>
+    </tradeTags>-->
     <statBases>
       <MaxHitPoints>70</MaxHitPoints>
       <MarketValue>10</MarketValue>
@@ -995,6 +999,7 @@
     </statBases>
     <burnableByRecipe>true</burnableByRecipe>
     <healthAffectsPrice>false</healthAffectsPrice>
+    <tradeability>None</tradeability>
     <!--<minRewardCount>30</minRewardCount>-->
     <stuffProps>
       <categories>
