@@ -5,7 +5,7 @@
 		<defName>CAStoryVillageMG</defName>
 		<genSteps>
 			<li>RocksFromGrid</li>
-			<li>Settlement</li>
+			<li>CASettlement</li>
 			<li>SettlementPower</li>
 		</genSteps>
 	</MapGeneratorDef>
