@@ -19,7 +19,6 @@
     <li>Ludeon.RimWorld</li>
     <li>Ludeon.RimWorld.Royalty</li>
     <li>Ludeon.RimWorld.Ideology</li>
-    <li>newcolonist.largefactionbases</li>
   </loadAfter>
   <packageId>iforgotmysocks.CaravanAdventures</packageId>
 	<description>
