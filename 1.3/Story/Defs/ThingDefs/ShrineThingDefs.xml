@@ -28,6 +28,7 @@
 			<deconstructible>false</deconstructible>
 			<claimable>false</claimable>
 		</building>
+    <destroyable>false</destroyable>
 	</ThingDef>
 
 	<ThingDef ParentName="BuildingBase">
