@@ -269,11 +269,12 @@
       </targetParams>
     </verbProperties>
     <comps>
-      <li Class = "CaravanAdventures.CaravanAbilities.CompProperties_GiveToggleableHediff">
-        <compClass>CaravanAdventures.CaravanAbilities.CompAbilityEffect_GiveToggleableHediff</compClass>
+      <li Class="CompProperties_AbilityGiveHediff">
+        <compClass>CompAbilityEffect_GiveHediff</compClass>
         <hediffDef>CAConjuredLight</hediffDef>
-        <hediffSecondary>CAConjuredLight</hediffSecondary>
+        <onlyBrain>True</onlyBrain>
         <psychic>True</psychic>
+        <replaceExisting>true</replaceExisting>
         <onlyApplyToSelf>True</onlyApplyToSelf>
       </li>
     </comps>
