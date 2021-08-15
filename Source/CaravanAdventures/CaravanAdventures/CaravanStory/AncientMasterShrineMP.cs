@@ -451,7 +451,7 @@ namespace CaravanAdventures.CaravanStory
         {
             // currently used to check if bandits are defeated
             if (this.wonBattle) return;
-            if (GenHostility.AnyHostileActiveThreatToPlayer(base.Map, false)) return;
+            if (GenHostility.AnyHostileActiveThreatToPlayer_NewTemp(base.Map, false)) return;
             else
             {
                 Find.LetterStack.ReceiveLetter("MasterShrineVictoryLetterLabel".Translate(), "MasterShrineVictoryLetterMessage".Translate(), LetterDefOf.PositiveEvent, this, null, null, null, null);

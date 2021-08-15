@@ -163,7 +163,7 @@ namespace CaravanAdventures.CaravanStory
 						var raidLords = mapParent.Map.lordManager.lords.Where(lord => lord.faction == Faction.OfMechanoids && !lordsToExcludeFromRaidLogic.Contains(lord));
 						DLog.Message($"raid mechs: {raidLords.Select(lord => lord.ownedPawns).Count()}");
 						if (!raidLords.Any(lord => lord.AnyActivePawn)) ticksLeftTillLeaveIfNoEnemies = -1;
-						else if (GenHostility.AnyHostileActiveThreatTo(mapParent.Map, Faction.OfMechanoids)) ticksLeftTillLeaveIfNoEnemies = 1000;
+						else if (GenHostility.AnyHostileActiveThreatTo_NewTemp(mapParent.Map, Faction.OfMechanoids)) ticksLeftTillLeaveIfNoEnemies = 1000;
 						else
 						{
 							foreach (var lord in raidLords.Reverse())
