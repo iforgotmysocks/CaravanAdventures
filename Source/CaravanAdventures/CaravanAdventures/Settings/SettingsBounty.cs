@@ -66,7 +66,6 @@ namespace CaravanAdventures.Settings
             rect.x += options.ColumnWidth / 2;
             rect.width = options.ColumnWidth / 2;
 
-            // todo figure out and finish
             // dafuq does getPayload do
             Widgets.Dropdown<List<Faction>, Faction>(
                 rect, 
