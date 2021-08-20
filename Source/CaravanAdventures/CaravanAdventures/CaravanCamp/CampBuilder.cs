@@ -487,10 +487,11 @@ namespace CaravanAdventures.CaravanCamp
         protected virtual void MoveAnimalsToAnimalArea()
         {
             var animalArea = campParts.OfType<AnimalArea>().FirstOrDefault();
-            if (animalArea == null || ModSettings.letAnimalsRunFree) return;
+            if (animalArea == null) return;
             var animals = caravan.PawnsListForReading.Where(pawn => pawn?.RaceProps?.Animal == true);
             foreach (var animal in animals.Reverse())
             {
+                if (ModSettings.letAnimalsRunFree && animal?.RaceProps?.trainability != null && animal?.RaceProps?.trainability != TrainabilityDefOf.None) continue;
                 PlaceIntoAnimalArea(animalArea, animal);
             }
         }
