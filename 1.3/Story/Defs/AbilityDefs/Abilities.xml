@@ -90,7 +90,7 @@
     <canUseAoeToGetTargets>False</canUseAoeToGetTargets>
     <statBases>
       <Ability_EntropyGain>30</Ability_EntropyGain>
-      <Ability_PsyfocusCost>0.10</Ability_PsyfocusCost>
+      <Ability_PsyfocusCost>0.15</Ability_PsyfocusCost>
       <Ability_EffectRadius>2</Ability_EffectRadius>
       <!--<Ability_Duration>3</Ability_Duration>-->
     </statBases>
@@ -98,13 +98,14 @@
       <warmupTime>0.25</warmupTime>
       <range>29.9</range>
       <targetParams>
-        <canTargetPawns>False</canTargetPawns>
+        <canTargetPawns>True</canTargetPawns>
+        <canTargetSelf>True</canTargetSelf>
         <canTargetLocations>True</canTargetLocations>
       </targetParams>
     </verbProperties>
     <comps>
       <li Class="CaravanAdventures.CaravanAbilities.CompProperties_AbilityAncientMechSignal">
-        <goodwillImpact>-35</goodwillImpact>
+        <goodwillImpact>-5</goodwillImpact>
       </li>
     </comps>
   </AbilityDef>

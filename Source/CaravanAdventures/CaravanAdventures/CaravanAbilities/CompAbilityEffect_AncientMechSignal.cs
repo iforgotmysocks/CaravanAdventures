@@ -27,7 +27,9 @@ namespace CaravanAdventures.CaravanAbilities
                 .InRandomOrder().Take(Rand.RangeInclusive(5, 7)).ToList()
                 .ForEach(cell => scythers.Add(SpawnScyther(cell, parent.pawn, faction)));
 
-            LordMaker.MakeNewLord(parent.pawn.Faction, new LordJob_AssistColony(parent.pawn.Faction, dest.Cell), map, scythers);
+            if (target.Pawn != null) LordMaker.MakeNewLord(parent.pawn.Faction, new LordJob_EscortPawn(target.Pawn), map, scythers);
+            else if (target.Cell != default) LordMaker.MakeNewLord(parent.pawn.Faction, new LordJob_AssistColony(parent.pawn.Faction, target.Cell), map, scythers);
+
             this.ApplyGoodwillImpact(target, Mathf.RoundToInt(this.parent.def.EffectRadius));
         }
 
