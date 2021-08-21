@@ -48,4 +48,8 @@
   <CABountyExchangeSilverForBountyOption>은 {0}개를 {1} 현상금 점수로 교환</CABountyExchangeSilverForBountyOption>
   <CABountyExchangeSilverForBountyLackingSilver>은 부족함</CABountyExchangeSilverForBountyLackingSilver>
 
+  <CABountyKillMessage>{1, -20}(을)를 사살해 {0, -10} 현상금 점수 획득, 총 현상금 점수: {2}</CABountyKillMessage>
+  <CABountyKillMessageBounty>현상 사살: </CABountyKillMessageBounty>
+  <CABountyKillMessageReward>보상: </CABountyKillMessageReward>
+  <CABountyKillMessageCredit>총 현상금 점수: </CABountyKillMessageCredit>
 </LanguageData>

@@ -1,1 +1,1 @@
-Korean,SpanishLatin,ChineseSimplified,ChineseTraditional,
+ChineseSimplified,ChineseTraditional,Korean,SpanishLatin,
