@@ -188,7 +188,12 @@ namespace CaravanAdventures.Patches
                 anythingChanged = true;
             }
 
-            if (Widgets.ButtonText(new Rect(rect2.xMax + 15f + 120f, 0f, 50f, 27f), "Reset", true, true, true))
+            if (Widgets.ButtonImage(new Rect(rect2.xMax + 15f + 120f, 0f, 27f, 27f), TexCustom.CaravanSettings))
+            {
+                Find.WindowStack.Add(new Settings.SettingsFilters());
+            }
+
+            if (Widgets.ButtonText(new Rect(rect2.xMax + 20f + 147f, 0f, 50f, 27f), "Reset", true, true, true))
             {
                 FilterCombs.ApplyNoneTrade(tradeables);
                 anythingChanged = true;
