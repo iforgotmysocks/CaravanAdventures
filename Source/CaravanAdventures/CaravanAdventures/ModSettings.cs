@@ -59,6 +59,7 @@ namespace CaravanAdventures
 
         // filters
         public static bool autoSelectPawns = true;
+        public static bool autoSelectItems = true;
 
         // abilities
         // - ancient gift
@@ -159,6 +160,7 @@ namespace CaravanAdventures
 
             // filters
             Scribe_Values.Look(ref autoSelectPawns, "autoSelectPawns", true);
+            Scribe_Values.Look(ref autoSelectItems, "autoSelectItems", true);
 
             // abilities
             // - ancient gift
