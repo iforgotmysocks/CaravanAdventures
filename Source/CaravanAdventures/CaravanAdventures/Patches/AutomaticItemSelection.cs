@@ -125,30 +125,36 @@ namespace CaravanAdventures.Patches
                 FilterCombs.ApplyAll(sections);
                 anythingChanged = true;
             }
-            if (Widgets.ButtonText(new Rect(rect2.xMax + 5f, 0f, 70f, 27f), "Pack up", true, true, true))
+            if (Widgets.ButtonText(new Rect(rect2.xMax + 5f, 0f, 65f, 27f), "Pack up", true, true, true))
             {
                 FilterCombs.ApplyPackUp(sections);
                 anythingChanged = true;
             }
            
-            if (Widgets.ButtonText(new Rect(rect2.xMax + 10f + 70f, 0f, 70f, 27f), "Goods", true, true, true))
+            if (Widgets.ButtonText(new Rect(rect2.xMax + 10f + 65f, 0f, 65f, 27f), "Goods", true, true, true))
             {
                 FilterCombs.ApplyGoods(sections);
                 anythingChanged = true;
             }
 
-            if (Widgets.ButtonText(new Rect(rect2.xMax + 15f + 140f, 0f, 70f, 27f), "Goods2", true, true, true))
+            if (Widgets.ButtonText(new Rect(rect2.xMax + 15f + 130f, 0f, 65f, 27f), "Goods2", true, true, true))
             {
                 //FilterCombs.ApplyJourney(sections, caravanMembers);
                 FilterCombs.ApplyGoods2(sections);
                 anythingChanged = true;
             }
-            if (Widgets.ButtonText(new Rect(rect2.xMax + 20f + 210f, 0f, 50f, 27f), "Clear", true, true, true))
+
+            if (Widgets.ButtonImage(new Rect(rect2.xMax + 20f + 195f, 0f, 27f, 27f), TexCustom.CaravanSettings)) //  Widgets.ButtonText(new Rect(rect2.xMax + 20f + 210f, 0f, 70f, 27f), "Config", true, true, true))
+            {
+                Find.WindowStack.Add(new Settings.SettingsFilters());
+            }
+
+            if (Widgets.ButtonText(new Rect(rect2.xMax + 25f + 222f, 0f, 45f, 27f), "Clear", true, true, true))
             {
                 FilterCombs.ApplyNone(sections);
                 anythingChanged = true;
             }
-            Widgets.CheckboxLabeled(new Rect(rect2.xMax + 25f + 265f, 0f, smallLayoutCompatibility ? 60f : 77f, 30f), "Supply disabled", ref InitGC.autoSupplyDisabled);
+            Widgets.CheckboxLabeled(new Rect(rect2.xMax + 30f + 267f, 0f, 77f, 30f), "Supply disabled", ref InitGC.autoSupplyDisabled);
             GUI.EndGroup();
         }
 

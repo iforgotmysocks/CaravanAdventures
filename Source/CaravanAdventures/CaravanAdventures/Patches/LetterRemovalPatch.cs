@@ -15,6 +15,7 @@ namespace CaravanAdventures.Patches
     {
         public static readonly Texture2D RemoveLetters = ContentFinder<Texture2D>.Get("UI/Buttons/RemoveLetters", true);
         public static readonly Texture2D Drop = ContentFinder<Texture2D>.Get("UI/Buttons/Drop", true);
+        public static readonly Texture2D CaravanSettings = ContentFinder<Texture2D>.Get("UI/Buttons/CaravanSettings", true);
     }
 
     class LetterRemovalPatch
