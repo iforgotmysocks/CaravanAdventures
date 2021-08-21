@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <CAFormingTradePresetSell>판매</CAFormingTradePresetSell>
+  <CAFormingTradePresetSelect>선택</CAFormingTradePresetSelect>
+  <CAFormingTradePresetAll>모두</CAFormingTradePresetAll>
+  <CAFormingTradePresetPackUp>여행용 짐</CAFormingTradePresetPackUp>
+  <CAFormingTradePresetGoods>상품</CAFormingTradePresetGoods>
+  <CAFormingTradePresetGoods2>상품2</CAFormingTradePresetGoods2>
+  <CAFormingTradePresetClear>비우기</CAFormingTradePresetClear>
+  <CAFormingTradePresetSupply>보급품 선택 비활성화</CAFormingTradePresetSupply>
+</LanguageData>
+
