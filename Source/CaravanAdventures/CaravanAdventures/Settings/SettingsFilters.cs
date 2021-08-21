@@ -56,6 +56,7 @@ namespace CaravanAdventures.Settings
             textLabelRect.width = optionHeading.ColumnWidth * 0.64f;
             Widgets.Label(textLabelRect, "Here you can adjust what items the specific filters should cover, which can simply be applied by clicking the specific button in the caravan forming or trading dialog. Further filter options like quality or tainted are applied aswell. The \"Exclude other items\" option sets whether selecting the preset should reset previously made selections or not.");
             Widgets.CheckboxLabeled(ModSettings.BRect(optionHeading.ColumnWidth / 3 * 2.1f, ModSettings.lastRect.y, optionHeading.ColumnWidth / 3 * 0.8f, Text.LineHeight + 4), "Toggle selected caravan pawns", ref ModSettings.autoSelectPawns);
+            Widgets.CheckboxLabeled(ModSettings.BRect(optionHeading.ColumnWidth / 3 * 2.1f, ModSettings.lastRect.y + Text.LineHeight + 4, optionHeading.ColumnWidth / 3 * 0.8f, Text.LineHeight + 4), "Toggle selected caravan items", ref ModSettings.autoSelectItems);
             optionHeading.Gap();
             optionHeading.End();
             

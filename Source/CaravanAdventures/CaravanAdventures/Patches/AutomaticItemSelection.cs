@@ -20,6 +20,7 @@ namespace CaravanAdventures.Patches
     {
         private static List<Pawn> caravanMembers;
         private static bool pawnFlag = false;
+        private static bool thingFlag = false;
 
         public static void ApplyPatches()
         {
@@ -47,14 +48,18 @@ namespace CaravanAdventures.Patches
             });
             var postDialog_FormCaravan = new HarmonyMethod(typeof(AutomaticItemSelection).GetMethod(nameof(Dialog_FormCaravan_Postfix)));
             HarmonyPatcher.harmony.Patch(orgDialog_FormCaravan, null, postDialog_FormCaravan);
+
+            var orgDialog_FormCaravan_PostOpen = AccessTools.Method(typeof(Dialog_FormCaravan), "PostOpen");
+            var postDialog_FormCaravan_PostOpen = new HarmonyMethod(typeof(AutomaticItemSelection).GetMethod(nameof(Dialog_FormCaravan_PostOpen_Postfix)));
+            HarmonyPatcher.harmony.Patch(orgDialog_FormCaravan_PostOpen, null, postDialog_FormCaravan_PostOpen);
         }
 
         public static void OnGUI_Postfix(TransferableOneWayWidget __instance, List<Section> ___sections, List<Section> __state, Rect inRect, ref bool anythingChanged)
         {
             DoOwnCaravanFormButtons(___sections, ref anythingChanged);
-            if (ModSettings.autoSelectPawns) SelectPawns(___sections, ref anythingChanged);
         }
 
+        // currently disabled -> using PostOpen
         private static void SelectPawns(List<Section> sections, ref bool anythingChanged)
         {
             if (pawnFlag == false && ModSettings.autoSelectPawns)
@@ -89,11 +94,35 @@ namespace CaravanAdventures.Patches
             if (anythingChanged) Traverse.Create(__instance).Method("CountToTransferChanged").GetValue();
         }
 
-        public static void Dialog_FormCaravan_Postfix(ref bool ___autoSelectFoodAndMedicine, Map ___map)
+        public static void Dialog_FormCaravan_Postfix(Dialog_FormCaravan __instance, ref bool ___autoSelectFoodAndMedicine, Map ___map)
         {
             if (InitGC.autoSupplyDisabled) ___autoSelectFoodAndMedicine = false;
-            pawnFlag = false;
-            if (ModSettings.autoSelectPawns) caravanMembers = RimWorld.Planet.CaravanFormingUtility.AllSendablePawns(___map);
+            thingFlag = false;
+            //if (ModSettings.autoSelectPawns) caravanMembers = RimWorld.Planet.CaravanFormingUtility.AllSendablePawns(___map);
+        }
+
+        public static void Dialog_FormCaravan_PostOpen_Postfix(Dialog_FormCaravan __instance)
+        {
+            if (thingFlag) return;
+            if (ModSettings.autoSelectItems || ModSettings.autoSelectPawns) SelectThings(__instance.transferables);
+            thingFlag = true;
+        }
+
+        private static void SelectThings(List<TransferableOneWay> transferables)
+        {
+            foreach (var trans in transferables)
+            {
+                var thing = trans?.AnyThing;
+                if (thing == null) continue;
+                var selected = Find.Selector.SelectedObjects.Where(x => x != null && trans.things.Contains(x))?.OfType<Thing>();
+                if (selected == null || selected.Count() == 0) continue;
+
+                var isPawn = thing is Pawn;
+                if (!ModSettings.autoSelectPawns && isPawn) continue;
+                else if (!ModSettings.autoSelectItems && !isPawn) continue;
+
+                FilterHelper.SetAmount(trans, selected.Select(x => x.stackCount).Sum());
+            }
         }
 
         private static void UpdatePeopleSection(List<Section> ___sections)
@@ -117,44 +146,44 @@ namespace CaravanAdventures.Patches
             Text.Font = GameFont.Tiny;
             Rect rect = new Rect(0f, 0f, smallLayoutCompatibility ? 40f : 55f, 27f);
             Text.Anchor = TextAnchor.MiddleLeft;
-            Widgets.Label(rect, "Select");
+            Widgets.Label(rect, "CAFormingTradePresetSelect".Translate());
             Text.Anchor = TextAnchor.UpperLeft;
             Rect rect2 = new Rect(rect.xMax + 10f, 0f, 40f, 27f);
-            if (Widgets.ButtonText(rect2, "All", true, true, true))
+            if (Widgets.ButtonText(rect2, "CAFormingTradePresetAll".Translate(), true, true, true))
             {
                 FilterCombs.ApplyAll(sections);
                 anythingChanged = true;
             }
-            if (Widgets.ButtonText(new Rect(rect2.xMax + 5f, 0f, 65f, 27f), "Pack up", true, true, true))
+            if (Widgets.ButtonText(new Rect(rect2.xMax + 5f, 0f, 65f, 27f), "CAFormingTradePresetPackUp".Translate(), true, true, true))
             {
                 FilterCombs.ApplyPackUp(sections);
                 anythingChanged = true;
             }
            
-            if (Widgets.ButtonText(new Rect(rect2.xMax + 10f + 65f, 0f, 65f, 27f), "Goods", true, true, true))
+            if (Widgets.ButtonText(new Rect(rect2.xMax + 10f + 65f, 0f, 65f, 27f), "CAFormingTradePresetGoods".Translate(), true, true, true))
             {
                 FilterCombs.ApplyGoods(sections);
                 anythingChanged = true;
             }
 
-            if (Widgets.ButtonText(new Rect(rect2.xMax + 15f + 130f, 0f, 65f, 27f), "Goods2", true, true, true))
+            if (Widgets.ButtonText(new Rect(rect2.xMax + 15f + 130f, 0f, 65f, 27f), "CAFormingTradePresetGoods2".Translate(), true, true, true))
             {
                 //FilterCombs.ApplyJourney(sections, caravanMembers);
                 FilterCombs.ApplyGoods2(sections);
                 anythingChanged = true;
             }
 
-            if (Widgets.ButtonImage(new Rect(rect2.xMax + 20f + 195f, 0f, 27f, 27f), TexCustom.CaravanSettings)) //  Widgets.ButtonText(new Rect(rect2.xMax + 20f + 210f, 0f, 70f, 27f), "Config", true, true, true))
+            if (Widgets.ButtonImageWithBG(new Rect(rect2.xMax + 20f + 195f, 0f, 27f, 27f), TexCustom.CaravanSettings, new Vector2(21, 21))) 
             {
                 Find.WindowStack.Add(new Settings.SettingsFilters());
             }
 
-            if (Widgets.ButtonText(new Rect(rect2.xMax + 25f + 222f, 0f, 45f, 27f), "Clear", true, true, true))
+            if (Widgets.ButtonText(new Rect(rect2.xMax + 25f + 222f, 0f, 45f, 27f), "CAFormingTradePresetClear".Translate(), true, true, true))
             {
                 FilterCombs.ApplyNone(sections);
                 anythingChanged = true;
             }
-            Widgets.CheckboxLabeled(new Rect(rect2.xMax + 30f + 267f, 0f, 77f, 30f), "Supply disabled", ref InitGC.autoSupplyDisabled);
+            Widgets.CheckboxLabeled(new Rect(rect2.xMax + 30f + 267f, 0f, 77f, 30f), "CAFormingTradePresetSupply".Translate(), ref InitGC.autoSupplyDisabled);
             GUI.EndGroup();
         }
 
@@ -168,33 +197,33 @@ namespace CaravanAdventures.Patches
             Text.Font = GameFont.Tiny;
             Rect rect = new Rect(0f, 0f, 30f, 27f);
             Text.Anchor = TextAnchor.MiddleLeft;
-            Widgets.Label(rect, "Sell");
+            Widgets.Label(rect, "CAFormingTradePresetSell".Translate());
             Text.Anchor = TextAnchor.UpperLeft;
             Rect rect2 = new Rect(rect.xMax + 5f, 0f, 40f, 27f);
-            if (Widgets.ButtonText(rect2, "All", true, true, true))
+            if (Widgets.ButtonText(rect2, "CAFormingTradePresetAll".Translate(), true, true, true))
             {
                 FilterCombs.ApplyAllTrade(tradeables);
                 anythingChanged = true;
             }
 
-            if (Widgets.ButtonText(new Rect(rect2.xMax + 5f, 0f, 60f, 27f), "Goods", true, true, true))
+            if (Widgets.ButtonText(new Rect(rect2.xMax + 5f, 0f, 60f, 27f), "CAFormingTradePresetGoods".Translate(), true, true, true))
             {
                 FilterCombs.ApplyGoodsTrade(tradeables);
                 anythingChanged = true;
             }
 
-            if (Widgets.ButtonText(new Rect(rect2.xMax + 10f + 60f, 0f, 60f, 27f), "Goods2", true, true, true))
+            if (Widgets.ButtonText(new Rect(rect2.xMax + 10f + 60f, 0f, 60f, 27f), "CAFormingTradePresetGoods2".Translate(), true, true, true))
             {
                 FilterCombs.ApplyGoodsTrade2(tradeables);
                 anythingChanged = true;
             }
 
-            if (Widgets.ButtonImage(new Rect(rect2.xMax + 15f + 120f, 0f, 27f, 27f), TexCustom.CaravanSettings))
+            if (Widgets.ButtonImageWithBG(new Rect(rect2.xMax + 15f + 120f, 0f, 27f, 27f), TexCustom.CaravanSettings, new Vector2(21, 21)))
             {
                 Find.WindowStack.Add(new Settings.SettingsFilters());
             }
 
-            if (Widgets.ButtonText(new Rect(rect2.xMax + 20f + 147f, 0f, 50f, 27f), "Reset", true, true, true))
+            if (Widgets.ButtonText(new Rect(rect2.xMax + 20f + 147f, 0f, 50f, 27f), "CAFormingTradePresetClear".Translate(), true, true, true))
             {
                 FilterCombs.ApplyNoneTrade(tradeables);
                 anythingChanged = true;
