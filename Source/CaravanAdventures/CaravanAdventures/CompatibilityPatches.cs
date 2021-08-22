@@ -16,6 +16,7 @@ namespace CaravanAdventures
     static class CompatibilityPatches
     {
         public static List<(string assemblyString, Assembly assembly)> detectedAssemblies;
+        public static bool InDetectedAssemblies(string assName) => detectedAssemblies.Any(x => x.assemblyString.ToLower() == assName.ToLower());
         public static void ExecuteCompatibilityPatches()
         {
             detectedAssemblies = new List<(string, Assembly)>();
@@ -60,6 +61,14 @@ namespace CaravanAdventures
                         Log.Message($"Caravan Adventures: Applying patch to remove realruins from CA story shrine maps");
                     }
                     else Log.Warning($"Caravan Adventures: Applying patch for realruins failed");
+                }
+            });
+
+            Helper.RunSavely(() => {
+                var sos2Assembly = Helper.GetAssembly("shipshaveinsides", detectedAssemblies);
+                if (sos2Assembly != null && ModSettings.storyEnabled)
+                {
+                    Log.Message($"Adding SOS2 story check for space");
                 }
             });
 

@@ -130,7 +130,15 @@ namespace CaravanAdventures.CaravanStory.Quests
                 friendlyCaravanCounter = 20000f;
                 return;
             }
-            var selectedMap = map ?? Find.Maps.Where(cmap => cmap.ParentFaction == Faction.OfPlayerSilentFail)?.OrderByDescending(cmap => cmap.wealthWatcher.WealthItems)?.FirstOrDefault();
+
+            BiomeDef sos2Def = null; 
+            if (CompatibilityPatches.InDetectedAssemblies("shipshaveinsides")) sos2Def = DefDatabase<BiomeDef>.GetNamed("OuterSpaceBiome", false);
+
+            var selectedMap = Find.Maps.Where(cmap => cmap.ParentFaction == Faction.OfPlayerSilentFail 
+                && (sos2Def == null ? true : cmap.Biome != sos2Def))
+                ?.OrderByDescending(cmap => cmap.wealthWatcher.WealthItems)
+                ?.FirstOrDefault();
+
             if (selectedMap == null)
             {
                 DLog.Message($"Story caravan couldn't be created, no player map found");
