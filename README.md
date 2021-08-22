@@ -19,6 +19,7 @@ All mod details available in the <a href="https://github.com/iforgotmysocks/Cara
 * Set up 3 presets in mod settings, that allow you to quickly select all items for travel, or create specific trade filters to select all you may want to sell at once.
 * More basic selection options for all items or none
 * Keep the automatic supplies disabled with a toggle, to avoid some lag when it's active everytime you open up the dialog
+* Have selected pawns and items on the map automatically enabled in the caravan forming dialog
 
 ## Mechanoid Bounty
 * Initialy part of the story, but also seperately available
