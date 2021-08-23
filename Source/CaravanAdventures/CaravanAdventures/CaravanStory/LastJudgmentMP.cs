@@ -180,7 +180,7 @@ namespace CaravanAdventures.CaravanStory
 			if (gifted.Spawned) gifted.DeSpawn();
 			GenSpawn.Spawn(gifted, ancientShrineMP.lastJudgmentEntrance.Position, ancientShrineMP.Map);
 			gifted.drafter.Drafted = true;
-			Find.TickManager.CurTimeSpeed = TimeSpeed.Paused;
+			//Find.TickManager.CurTimeSpeed = TimeSpeed.Paused;
 			CompCache.StoryWC.SetSF("Judgment_Completed");
 
 			Thing.allowDestroyNonDestroyable = true;
