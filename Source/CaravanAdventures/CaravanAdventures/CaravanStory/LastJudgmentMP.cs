@@ -166,9 +166,9 @@ namespace CaravanAdventures.CaravanStory
 		}
 
 		private void CheckSpawnPortalAndBringHome()
-        {
-            if (portalHome == null)
-            {
+		{
+			if (portalHome == null)
+			{
 				var portal = ThingMaker.MakeThing(StoryDefOf.CAShrinePortal);
 				portalHome = GenSpawn.Spawn(portal, ancientShrineMP.portalSpawnPosition, Map, WipeMode.Vanish);
 			}
@@ -182,7 +182,17 @@ namespace CaravanAdventures.CaravanStory
 			gifted.drafter.Drafted = true;
 			Find.TickManager.CurTimeSpeed = TimeSpeed.Paused;
 			CompCache.StoryWC.SetSF("Judgment_Completed");
-			ancientShrineMP.lastJudgmentEntrance.Destroy();
+
+			Thing.allowDestroyNonDestroyable = true;
+			try
+			{
+				ancientShrineMP.lastJudgmentEntrance.Destroy();
+			}
+			finally
+			{
+				Thing.allowDestroyNonDestroyable = false;
+			}
+
 			CameraJumper.TryJump(gifted);
 		}
 
