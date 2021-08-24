@@ -150,7 +150,7 @@ namespace CaravanAdventures.CaravanStory
 
         private void EnsureWhisperStopped()
         {
-            if (!whisperStopped && CompCache.StoryWC.storyFlags["Start_ReceivedGift"] || !ModSettings.storyEnabled)
+            if (!whisperStopped && (CompCache.StoryWC.storyFlags["Start_ReceivedGift"] || !ModSettings.storyEnabled))
             {
                 whisperStopped = true;
                 if (animaTreeWhisperSustainer != null)
