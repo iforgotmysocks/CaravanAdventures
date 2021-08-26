@@ -94,7 +94,7 @@ namespace CaravanAdventures.Settings
             options.CheckboxLabeled("Allow bounty gained by buildings (turrets etc)", ref ModSettings.allowBountyFromBuildingInstigators);
             options.CheckboxLabeled("Allow exchanging bounty points for silver", ref ModSettings.allowBuyingBountyWithSilver);
             options.Label($"Bounty value multiplier. (Default: 1 silver ~ 0.25 bounty credit): {Math.Round(ModSettings.bountyValueMult, 2)}");
-            ModSettings.bountyValueMult = options.Slider(ModSettings.bountyValueMult, 0.1f, 4f);
+            ModSettings.bountyValueMult = (float)Math.Round(options.Slider(ModSettings.bountyValueMult, 0.1f, 4f), 2);
              
             //options.EndScrollView(ref viewRect);
             options.End();

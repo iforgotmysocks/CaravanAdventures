@@ -235,7 +235,7 @@ namespace CaravanAdventures.CaravanMechBounty
         private float ConvertItemValueToBounty(Thing thing)
         {
             var value = thing.MarketValue * thing.stackCount;
-            return value * ModSettings.bountyValueMult;
+            return (float)Math.Round(value * ModSettings.bountyValueMult, 2);
         }
 
         private void PurchaseAndDropItem(Thing item, int fixedCredits = 0)
@@ -366,7 +366,7 @@ namespace CaravanAdventures.CaravanMechBounty
             var gwbf = faction.GoodwillWith(Faction.OfPlayer);
             if (gwbf < 0) costPerPoint += Math.Abs(gwbf) * 0.1f;
             if (gwbf + goodwill > 100) goodwill -= (gwbf + goodwill - 100);
-            return costPerPoint * goodwill;
+            return (float)Math.Round(costPerPoint * goodwill, 2);
         }
 
         #endregion
