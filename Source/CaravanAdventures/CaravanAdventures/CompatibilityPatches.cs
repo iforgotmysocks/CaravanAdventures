@@ -73,7 +73,7 @@ namespace CaravanAdventures
                 }
             });
 
-            Log.Message($"CA (1.2) patches complete.");
+            Log.Message($"CA v{System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString().TrimEnd(new[] { '.', '0' })} (1.2) patches complete.");
         }
 
         public static void ExecuteHarmonyCompatibilityPatches(Harmony harmony)
