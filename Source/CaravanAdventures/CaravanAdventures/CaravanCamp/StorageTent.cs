@@ -45,13 +45,12 @@ namespace CaravanAdventures.CaravanCamp
         {
             if (!ModSettings.generateStorageForAllInventory) return;
 
-            foreach (var cell in zone.Cells)
+            foreach (var cell in zone.Cells.Reverse<IntVec3>())
             {
-                var stack = CaravanInventoryUtility.AllInventoryItems(caravan).FirstOrDefault();
+                var stack = Helper.RunSavely(() => CaravanInventoryUtility.AllInventoryItems(caravan).FirstOrDefault());
                 if (stack == null) break;
                 if (!cell.Filled(map)) GenDrop.TryDropSpawn(stack, cell, map, ThingPlaceMode.Direct, out var result);
             }
-
         }
     }
 }
