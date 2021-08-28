@@ -140,12 +140,12 @@ namespace CaravanAdventures
             return default(T);
         }
 
-        public static void RunSavelyWithDelay(Action action, ref float counter, int timeout = 1200, bool suppressError = false)
+        public static void RunSavelyWithDelay(Action action, ref float counter, int timeout = 2000, bool suppressError = false)
         {
             RunSavelyWithDelay(() => { action(); return 0; }, ref counter, timeout, suppressError);
         }
 
-        public static T RunSavelyWithDelay<T>(Func<T> action, ref float counter, int timeout = 1200, bool suppressError = false)
+        public static T RunSavelyWithDelay<T>(Func<T> action, ref float counter, int timeout = 2000, bool suppressError = false)
         {
             try
             {
