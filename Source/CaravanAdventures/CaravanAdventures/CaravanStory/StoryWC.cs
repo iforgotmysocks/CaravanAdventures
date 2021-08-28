@@ -229,7 +229,7 @@ namespace CaravanAdventures.CaravanStory
             if (questCont.FriendlyCaravan.friendlyCaravanCounter == 0) Helper.RunSavelyWithDelay(() => 
                     CompCache.StoryWC.questCont.FriendlyCaravan.TryCreateFriendlyCaravan(
                         ref questCont.FriendlyCaravan.friendlyCaravanCounter), 
-                    ref questCont.FriendlyCaravan.friendlyCaravanCounter);
+                    ref questCont.FriendlyCaravan.friendlyCaravanCounter, 60000);
             
             if (questCont.Village.villageGenerationCounter == 0) Helper.RunSavelyWithDelay(() => 
                 StoryUtility.GenerateFriendlyVillage(
