@@ -44,6 +44,7 @@ namespace CaravanAdventures
         public static bool decorativeFencePosts = false;
         public static bool useAnimalOnlyFoodForAnimalArea = false;
         public static bool preferStonecutting = true;
+        public static bool createCampPackingSpot = true;
 
         // camp cost TODO -> create defs for tent types and move it there
         public static int campSupplyCostAnimalArea = 1;
@@ -159,6 +160,7 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref decorativeFencePosts, "decorativeFencePosts", false);
             Scribe_Values.Look(ref useAnimalOnlyFoodForAnimalArea, "useAnimalOnlyFoodForAnimalArea", false);
             Scribe_Values.Look(ref preferStonecutting, "preferStonecutting", true);
+            Scribe_Values.Look(ref createCampPackingSpot, "createCampPackingSpot", true);
 
             // filters
             Scribe_Values.Look(ref autoSelectPawns, "autoSelectPawns", true);

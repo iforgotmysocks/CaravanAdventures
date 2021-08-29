@@ -60,6 +60,12 @@ namespace CaravanAdventures.CaravanCamp
             location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX && cell.z == CellRect.maxZ);
             CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("HorseshoesPin"), ThingDefOf.WoodLog), location, map, default, campAssetListRef);
 
+            if (ModSettings.createCampPackingSpot)
+            {
+                location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 1 && cell.z == CellRect.maxZ - 1);
+                CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("CaravanPackingSpot")), location, map, default, campAssetListRef);
+            }
+
             foreach (var cell in CellRect.Cells) map.roofGrid.SetRoof(cell, RoofDefOf.RoofConstructed);
         }
 
@@ -73,6 +79,12 @@ namespace CaravanAdventures.CaravanCamp
 
             var location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.minX + 2 && cell.z == CellRect.maxZ);
             CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("HorseshoesPin"), ThingDefOf.WoodLog), location, map, default, campAssetListRef);
+
+            if (ModSettings.createCampPackingSpot)
+            {
+                location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 1 && cell.z == CellRect.maxZ - 1);
+                CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("CaravanPackingSpot")), location, map, default, campAssetListRef);
+            }
 
             foreach (var cornerCell in CellRect.Corners)
             {
