@@ -279,9 +279,10 @@ namespace CaravanAdventures.CaravanStory
             gifted.health.AddHediff(DefDatabase<HediffDef>.AllDefs.FirstOrDefault(x => x.defName == "PsychicAmplifier"), gifted.health.hediffSet.GetBrain());
             gifted.health.AddHediff(DefDatabase<HediffDef>.AllDefs.FirstOrDefault(x => x.defName == "CAAncientGift"), gifted.health.hediffSet.GetBrain());
 
+            var spellCount = gifted?.abilities?.abilities?.Count;
             AddUnlockedAbilities(gifted);
             CompCache.StoryWC.questCont.StoryStart.Gifted = gifted;
-            AddAdditionalSpells(gifted);
+            if (spellCount == 0 || spellCount == 1) AddAdditionalSpells(gifted);
             Find.LetterStack.ReceiveLetter("CA_Story_ReceivedGiftLetterTitle".Translate(), "CA_Story_ReceivedGiftLetterDesc".Translate(gifted.NameShortColored, GenderUtility.GetPronoun(gifted.gender)), LetterDefOf.PositiveEvent);
         }
 
