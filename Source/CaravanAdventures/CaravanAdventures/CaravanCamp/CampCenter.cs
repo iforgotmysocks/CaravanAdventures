@@ -99,6 +99,12 @@ namespace CaravanAdventures.CaravanCamp
             var colonists = caravan.PawnsListForReading.Where(col => col.IsFreeColonist).ToList();
             var bill = new Bill_Production(CampDefOf.CACookGrillSnackBulk) { targetCount = colonists.Count != 0 ? colonists.Count * 3 : 12, repeatMode = BillRepeatModeDefOf.TargetCount };
             campFire.BillStack.AddBill(bill);
+
+            if (DefDatabase<ResearchProjectDef>.GetNamed("PackagedSurvivalMeal", false)?.ProgressPercent == 1f)
+            {
+                var surv = new Bill_Production(DefDatabase<RecipeDef>.GetNamed("CookMealSurvivalBulk", false)) { targetCount = colonists.Count != 0 ? colonists.Count * 10 : 12, repeatMode = BillRepeatModeDefOf.TargetCount };
+                campFire.BillStack.AddBill(surv);
+            }
         }
 
         public virtual void ApplyRecipesTribal(Caravan caravan)
@@ -106,6 +112,12 @@ namespace CaravanAdventures.CaravanCamp
             var colonists = caravan.PawnsListForReading.Where(col => col.IsFreeColonist).ToList();
             var bill = new Bill_Production(DefDatabase<RecipeDef>.GetNamed("CookMealSimpleBulk")) { targetCount = colonists.Count != 0 ? colonists.Count * 3 : 12, repeatMode = BillRepeatModeDefOf.TargetCount };
             campFire.BillStack.AddBill(bill);
+
+            if (DefDatabase<ResearchProjectDef>.GetNamed("Pemmican", false)?.ProgressPercent == 1f)
+            {
+                var surv = new Bill_Production(DefDatabase<RecipeDef>.GetNamed("Make_PemmicanBulk", false)) { targetCount = colonists.Count != 0 ? colonists.Count * 10 * 18 : 12 * 18, repeatMode = BillRepeatModeDefOf.TargetCount };
+                campFire.BillStack.AddBill(surv);
+            }
         }
     }
 }
