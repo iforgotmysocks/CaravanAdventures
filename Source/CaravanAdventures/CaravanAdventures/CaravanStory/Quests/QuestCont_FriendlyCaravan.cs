@@ -88,7 +88,7 @@ namespace CaravanAdventures.CaravanStory.Quests
             diaNode2.options.Add(new DiaOption("TradeCaravan_Dia1_2_Option1".Translate()) { link = diaNode3 });
 
             diaNode = new DiaNode("TradeCaravan_Dia1_1".Translate(addressed.NameShortColored));
-            diaNode.options.Add(new DiaOption("TradeCaravan_Dia1_1_Option1".Translate()) { link = diaNode2 }); ;
+            diaNode.options.Add(new DiaOption("TradeCaravan_Dia1_1_Option1".Translate()) { link = diaNode2 });
 
             TaggedString taggedString = "TradeCaravan_Dia1_DiaTitle".Translate(addressed.NameShortColored);
             Find.WindowStack.Add(new Dialog_NodeTree(diaNode, true, false, taggedString));
@@ -148,7 +148,7 @@ namespace CaravanAdventures.CaravanStory.Quests
             StoryUtility.EnsureSacrilegHunters();
             if (StoryUtility.FactionOfSacrilegHunters == null)
             {
-                DLog.Error($"Caravan Adventures Story caravan not created, incompatibility with faction generation!");
+                Log.Error($"Caravan Adventures Story caravan not created, incompatibility with faction generation!");
                 friendlyCaravanCounter = 10000f;
                 return;
             }
