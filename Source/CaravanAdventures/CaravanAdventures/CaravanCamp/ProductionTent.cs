@@ -131,6 +131,7 @@ namespace CaravanAdventures.CaravanCamp
 
             var fuelFromCorpseBill = new Bill_ProductionWithUft(DefDatabase<RecipeDef>.GetNamed("CAMake_ChemfuelFromCorpses")) { repeatMode = BillRepeatModeDefOf.Forever };
             fuelFromCorpseBill.ingredientFilter.SetAllow(SpecialThingFilterDef.Named("AllowCorpsesColonist"), false);
+            if (DefDatabase<SpecialThingFilterDef>.GetNamed("AllowCorpsesSlave", false) != null) fuelFromCorpseBill.ingredientFilter.SetAllow(SpecialThingFilterDef.Named("AllowCorpsesSlave"), true);
             refinery.BillStack.AddBill(fuelFromCorpseBill);
 
             var fuelFromWoodBill = new Bill_ProductionWithUft(DefDatabase<RecipeDef>.GetNamed("CAMake_ChemfuelFromWood")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 30 };
