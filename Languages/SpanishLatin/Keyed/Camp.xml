@@ -14,5 +14,6 @@
   <CALeaveImmediatelyPackupCamp>¿Quieres recoger el campamento y abandonar este lugar? \n{0} suministros de tienda espaciales se añadirán a la caravana.</CALeaveImmediatelyPackupCamp>
   <CALeaveImmediatelyPackupCampTribal>¿Quieres recoger el campamento y abandonar este lugar?</CALeaveImmediatelyPackupCampTribal>
 
+  <CABuildFailStoppedCampGen>Could not create camp center due to being out of map bounds, canceling camp creation</CABuildFailStoppedCampGen>
 </LanguageData>
 

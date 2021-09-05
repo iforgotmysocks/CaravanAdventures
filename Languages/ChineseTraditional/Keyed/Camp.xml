@@ -14,5 +14,6 @@
   <CALeaveImmediatelyPackupCamp>你希望放棄這裡，打包上路嗎？ \n{0} 太空帳篷會被裝載到商隊中。</CALeaveImmediatelyPackupCamp>
   <CALeaveImmediatelyPackupCampTribal>你希望放棄這裡，打包上路嗎？ </CALeaveImmediatelyPackupCampTribal>
 
+  <CABuildFailStoppedCampGen>Could not create camp center due to being out of map bounds, canceling camp creation</CABuildFailStoppedCampGen>
 </LanguageData>
 
