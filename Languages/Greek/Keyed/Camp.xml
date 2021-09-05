@@ -13,5 +13,7 @@
   <CALeaveImmediately>Leave immediately</CALeaveImmediately>
   <CALeaveImmediatelyPackupCamp>Do you want to pack up the camp and abandon this place? \n{0} spacer tent supplies will be added to the caravan.</CALeaveImmediatelyPackupCamp>
   <CALeaveImmediatelyPackupCampTribal>Do you want to pack up the camp and abandon this place?</CALeaveImmediatelyPackupCampTribal>
+
+  <CABuildFailStoppedCampGen>Could not create camp center due to being out of map bounds, canceling camp creation</CABuildFailStoppedCampGen>
 </LanguageData>
 
