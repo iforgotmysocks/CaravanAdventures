@@ -45,7 +45,12 @@ namespace CaravanAdventures.CaravanCamp
             CalculateTentSizes();
             CalculateTentNumbersAndAssignPawnsToTents();
             CalculateCostAndDetermineType(tribal);
-            AssignCampLayout();
+            if (!AssignCampLayout())
+            {
+                Current.ProgramState = stateBackup;
+                return false;
+            }
+            PaySupplyCost();
             TransformTerrain();
             GenerateBuildings();
             UpdateAreas();
@@ -58,6 +63,11 @@ namespace CaravanAdventures.CaravanCamp
 
             Current.ProgramState = stateBackup;
             return true;
+        }
+
+        private void WarnPlayerAndCancelCampBuild(ProgramState stateBackup, string warning)
+        {
+            throw new NotImplementedException();
         }
 
         public static int PreemptivelyCalculateCampCosts(Caravan caravan)
@@ -190,26 +200,14 @@ namespace CaravanAdventures.CaravanCamp
                 campParts.RemoveAll(tent => tent.GetType() == typeof(PlantTent));
                 return;
             }
-            waste = ModSettings.hasSupplyCostsDisabled ? 0 : campParts.Where(part => part is RestTent || part is ProductionTent).ToList().Count;
-            var remaining = Convert.ToInt32(campCost);
-            var materials = CaravanInventoryUtility.TakeThings(caravan, (Func<Thing, int>)delegate (Thing thing)
-            {
-                if (thing.def != CampDefOf.CASpacerTentSupplies) return 0;
-                var taken = Mathf.Min(remaining, thing.stackCount);
-                remaining -= taken;
-                return taken;
-            });
-            foreach (var mat in materials.Reverse<Thing>()) mat.Destroy();
         }
 
-        protected virtual void AssignCampLayout()
+        protected virtual bool AssignCampLayout()
         {
             campCenterSpot = CampHelper.FindCenterCell(map, (IntVec3 x) => x.GetRoom(map).CellCount >= 600);
             var campCenter = campParts.OfType<CampCenter>().FirstOrDefault();
             campCenter.Coords.Add(new IntVec3(0, 0, 0));
             var failedTentCounter = 0;
-
-            var coords = new List<IntVec3>();
             coordSystem = new CellRect(0, 0, 1, 1);
 
             foreach (var part in campParts)
@@ -221,17 +219,46 @@ namespace CaravanAdventures.CaravanCamp
             foreach (var part in campParts)
             {
                 part.CellRect = CalculateRect(part);
+                //DLog.Message($"Calculated rect info: x: {part.CellRect.minX} - {part.CellRect.maxX} z: {part.CellRect.minZ} - {part.CellRect.maxZ}");
             }
 
             foreach (var part in campParts.Reverse<CampArea>())
             {
                 if (part.CellRect.ExpandedBy(1 + spacer + 1).InBounds(map)) continue;
+                DLog.Message($"Removing {part.GetType()?.Name} due to being out of map bounds, failedTentCounter: {failedTentCounter + 1}");
+                campCost -= part.SupplyCost;
                 campParts.Remove(part);
                 failedTentCounter++;
             }
 
+            if (campParts.Count == 0 || campParts.OfType<CampCenter>()?.Count() == 0)
+            {
+                Messages.Message("CABuildFailStoppedCampGen".Translate(), MessageTypeDefOf.NegativeEvent);
+                Log.Warning("Could not create camp center due to being out of map bounds, canceling camp creation");
+                return false;
+            }
             if (failedTentCounter != 0) Messages.Message("CABuildFailTents".Translate(failedTentCounter), MessageTypeDefOf.NegativeEvent);
+
             campSiteRect = CalcCampSiteRect();
+
+            //DLog.Message($"Mapsize: {map.Size.x} {map.Size.y} {map.Size.z} failed tent counter: {failedTentCounter}");
+            //if (Helper.Debug()) DLog.Message($"Calculated full rect info: x: {campSiteRect.minX} - {campSiteRect.maxX} z: {campSiteRect.minZ} - {campSiteRect.maxZ}");
+            return true;
+        }
+
+        private void PaySupplyCost()
+        {
+            if (tribal) return;
+            waste = ModSettings.hasSupplyCostsDisabled ? 0 : campParts.Where(part => part is RestTent || part is ProductionTent).ToList().Count;
+            var remaining = Convert.ToInt32(campCost);
+            var materials = CaravanInventoryUtility.TakeThings(caravan, (Func<Thing, int>)delegate (Thing thing)
+            {
+                if (thing.def != CampDefOf.CASpacerTentSupplies) return 0;
+                var taken = Mathf.Min(remaining, thing.stackCount);
+                remaining -= taken;
+                return taken;
+            });
+            foreach (var mat in materials.Reverse<Thing>()) mat.Destroy();
         }
 
         protected virtual void TransformTerrain()
