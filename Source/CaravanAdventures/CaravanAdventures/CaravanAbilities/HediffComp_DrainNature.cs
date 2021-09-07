@@ -14,7 +14,6 @@ namespace CaravanAdventures.CaravanAbilities
         private int ticksSinceLastRadiusIncrease;
         private float currentRadius = 1f;
         private int ticksToPlantHarm = 1;
-        // todo - remove totalPlantScore, was just for debugging purposes
         private float plantScore = 0;
         private float totalPlantScore = 0;
         private float totalGain = 0f;
