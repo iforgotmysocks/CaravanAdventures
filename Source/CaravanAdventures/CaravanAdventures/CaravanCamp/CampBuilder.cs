@@ -82,7 +82,7 @@ namespace CaravanAdventures.CaravanCamp
             if (ModSettings.hasPlantTent) buildingCosts += ModSettings.campSupplyCostPlantTent;
             buildingCosts += ModSettings.campSupplyCostFoodTent;
             buildingCosts += ModSettings.campSupplyCostCampCenter;
-            
+
             if (buildingCosts <= ModSettings.maxCampSupplyCost && ModSettings.generateStorageForAllInventory)
             {
                 var tent = new StorageTent();
@@ -119,7 +119,7 @@ namespace CaravanAdventures.CaravanCamp
             {
                 var tent = new StorageTent();
                 var cellsPerTent = (tent.CoordSize * tentSize.x) * (tentSize.z - 2);
-                var tentsAmount = CaravanInventoryUtility.AllInventoryItems(caravan).Count / cellsPerTent;
+                var tentsAmount = Math.Ceiling(CaravanInventoryUtility.AllInventoryItems(caravan).Count / (float)cellsPerTent);
                 for (int i = 0; i < tentsAmount; i++) campParts.Add(new StorageTent());
             }
 
@@ -360,7 +360,7 @@ namespace CaravanAdventures.CaravanCamp
                     && result.All(res => tentDirection == ForcedTentDirection.None
                         ? (cur.x == res.x || cur.z == res.z)
                         : tentDirection == ForcedTentDirection.Horizontal
-                            ? cur.z == res.z 
+                            ? cur.z == res.z
                             : cur.x == res.x));
                 if (neighbour == default || limit != 0 && result.Count == limit) break;
                 result.Add(neighbour);
@@ -508,9 +508,9 @@ namespace CaravanAdventures.CaravanCamp
             }
         }
 
-        protected virtual void InformPlayerHighTechCosts() 
-        { 
-            if (!tribal) Messages.Message("CAEstablishedCampNotification".Translate(campCost), MessageTypeDefOf.PositiveEvent); 
+        protected virtual void InformPlayerHighTechCosts()
+        {
+            if (!tribal) Messages.Message("CAEstablishedCampNotification".Translate(campCost), MessageTypeDefOf.PositiveEvent);
         }
 
         protected virtual void GetIntoBed(Pawn pawn, Building_Bed bed)
