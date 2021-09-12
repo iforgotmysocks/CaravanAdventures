@@ -59,7 +59,7 @@ namespace CaravanAdventures.Settings
             options.Gap();
 
 
-            options.Label("(Matters when royalty, or rather the story isn't enabled and sacrileg hunters don't exist");
+            options.Label("(Matters when royalty, or rather the story isn't enabled and sacrileg hunters don't exist)");
             var rect = options.GetRect(Text.LineHeight);
             Widgets.Label(rect, "Select the desired bounty faction:");
 
