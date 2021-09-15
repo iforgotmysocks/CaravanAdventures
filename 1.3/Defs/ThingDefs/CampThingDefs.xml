@@ -760,6 +760,10 @@
       <destroySound>BuildingDestroyed_Metal_Small</destroySound>
     </building>
     <comps>
+      <li Class="CompProperties_Glower">
+        <glowRadius>13</glowRadius>
+        <glowColor>(150,150,180,0)</glowColor>
+      </li>
       <li Class="CompProperties_Flickable"/>
       <!--<li Class="CompProperties_Breakdownable"/>-->
       <li Class="CompProperties_Refuelable">
