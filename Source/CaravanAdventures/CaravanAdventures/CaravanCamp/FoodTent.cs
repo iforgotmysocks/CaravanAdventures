@@ -13,7 +13,7 @@ namespace CaravanAdventures.CaravanCamp
     {
         protected Zone_Stockpile zone;
         protected ThingCategoryDef[] validFoods = new[] { ThingCategoryDefOf.FoodMeals, ThingCategoryDefOf.Foods, ThingCategoryDefOf.MeatRaw };
-        protected ThingDef[] unvalidFoods = new[] { ThingDefOf.Kibble, ThingDefOf.Hay };
+        protected ThingDef[] unvalidFoods = new[] { ThingDefOf.Kibble, ThingDefOf.Hay, ThingDefOf.MealSurvivalPack };
 
         public FoodTent()
         {
