@@ -43,20 +43,15 @@ namespace CaravanAdventures.CaravanCamp
             return spawnedThing;
         }
 
-        public static Thing GetFirstOrderedThingOfCategoryFromCaravan(Caravan caravan, ThingCategoryDef[] validCategories, ThingDef[] unvalidThings = null)
-        {
-            Thing selected = null;
-            foreach (var category in validCategories)
-            {
-                selected = caravan.AllThings.Where(x => x?.def?.thingCategories != null 
-                    && x.def.thingCategories.Contains(category) 
+        public static IEnumerable<Thing> GetOrderedThingsOfCategoryFromCaravan(Caravan caravan, ThingCategoryDef[] validCategories, ThingDef[] unvalidThings = null)
+            => caravan.AllThings.Where(x => x?.def?.thingCategories != null
+                    && validCategories.Any(cat => x.def.thingCategories.Contains(cat))
                     && ((unvalidThings == null || unvalidThings.Length == 0) || Array.IndexOf(unvalidThings, x.def) == -1))
-                    .OrderByDescending(x => x.stackCount).FirstOrDefault();
+                    .OrderByDescending(x => x.MarketValue).ThenByDescending(x => x.stackCount);
+        
 
-                if (selected != null) return selected;
-            }
-            return selected;
-        }
+        public static Thing GetFirstOrderedThingOfCategoryFromCaravan(Caravan caravan, ThingCategoryDef[] validCategories, ThingDef[] unvalidThings = null)
+            => GetOrderedThingsOfCategoryFromCaravan(caravan, validCategories, unvalidThings)?.FirstOrDefault();
 
         internal static void BringToNormalizedTemp(CellRect cellRect, Map map)
         {

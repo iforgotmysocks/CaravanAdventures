@@ -22,6 +22,8 @@ namespace CaravanAdventures.CaravanCamp
         }
 
         public virtual Zone GetZone() => zone;
+        public virtual ThingCategoryDef[] GetValidFoods => validFoods;
+        public virtual ThingDef[] GetUnvalidFoods => unvalidFoods;
         public override void Build(Map map, List<Thing> campAssetListRef)
         {
             base.Build(map, campAssetListRef);

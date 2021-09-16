@@ -73,7 +73,7 @@ namespace CaravanAdventures.CaravanCamp
         {
             if (ModSettings.hasSupplyCostsDisabled) return 0;
             var buildingCosts = 0;
-            buildingCosts += (int)Math.Ceiling(caravan.PawnsListForReading.Where(x => x.IsColonist || x.IsPrisoner).Count() / 3.0);
+            buildingCosts += (int)Math.Ceiling(caravan.PawnsListForReading.Where(x => x.IsColonist || x.IsPrisoner).Count() / 3.0 * 3);
             if (ModSettings.hasProductionTent) buildingCosts += ModSettings.campSupplyCostProductionTent;
             if (ModSettings.hasStorageTent) buildingCosts += ModSettings.campSupplyCostStorageTent;
             if (ModSettings.hasMedicalTent) buildingCosts += ModSettings.campSupplyCostMedicalTent;
@@ -85,9 +85,16 @@ namespace CaravanAdventures.CaravanCamp
 
             if (buildingCosts <= ModSettings.maxCampSupplyCost && ModSettings.generateStorageForAllInventory)
             {
+                var foodTent = new FoodTent();
                 var tent = new StorageTent();
                 var cellsPerTent = (tent.CoordSize * ModSettings.tentSize.x) * (ModSettings.tentSize.z - 2);
-                var tentsAmount = CaravanInventoryUtility.AllInventoryItems(caravan).Count / cellsPerTent;
+                var itemsToSubstract = foodTent == null
+                    ? 0
+                    : Math.Min(30, CaravanInventoryUtility.AllInventoryItems(caravan)
+                        .Where(x => CampHelper.GetOrderedThingsOfCategoryFromCaravan(caravan, foodTent.GetValidFoods, foodTent.GetUnvalidFoods)
+                            .Contains(x))
+                        .Count());
+                var tentsAmount = Math.Ceiling((CaravanInventoryUtility.AllInventoryItems(caravan).Count - itemsToSubstract) / (float)cellsPerTent);
                 for (int i = 0; i < tentsAmount; i++) buildingCosts += tent.SupplyCost;
             }
             if (buildingCosts > ModSettings.maxCampSupplyCost) buildingCosts = ModSettings.maxCampSupplyCost;
@@ -119,7 +126,14 @@ namespace CaravanAdventures.CaravanCamp
             {
                 var tent = new StorageTent();
                 var cellsPerTent = (tent.CoordSize * tentSize.x) * (tentSize.z - 2);
-                var tentsAmount = Math.Ceiling(CaravanInventoryUtility.AllInventoryItems(caravan).Count / (float)cellsPerTent);
+                var foodTent = campParts.OfType<FoodTent>()?.FirstOrDefault();
+                var itemsToSubstract = foodTent == null
+                    ? 0
+                    : Math.Min(30, CaravanInventoryUtility.AllInventoryItems(caravan)
+                        .Where(x => CampHelper.GetOrderedThingsOfCategoryFromCaravan(caravan, foodTent.GetValidFoods, foodTent.GetUnvalidFoods)
+                            .Contains(x))
+                        .Count());
+                var tentsAmount = Math.Ceiling((CaravanInventoryUtility.AllInventoryItems(caravan).Count - itemsToSubstract) / (float)cellsPerTent);
                 for (int i = 0; i < tentsAmount; i++) campParts.Add(new StorageTent());
             }
 
