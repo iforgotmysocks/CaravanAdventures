@@ -20,6 +20,12 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
+		BuildVersion_ConfigurationName = Debug
+		BuildVersion_AssemblyInfoFilename = CaravanAdventures\Properties\AssemblyInfo.cs
+		BuildVersion_UpdateFileVersion = True
+		BuildVersion_UpdateAssemblyVersion = True
+		BuildVersion_BuildVersioningStyle = None.None.None.Increment
 		SolutionGuid = {56810FDA-FD7A-4F55-B892-F9FDB1E9B791}
+		BuildVersion_StartDate = 2000/1/1
 	EndGlobalSection
 EndGlobal
