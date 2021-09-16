@@ -44,13 +44,17 @@ namespace CaravanAdventures.CaravanCamp
         public virtual void ApplyInventory(Map map, Caravan caravan)
         {
             if (!ModSettings.generateStorageForAllInventory) return;
-
-            foreach (var cell in zone.Cells.Reverse<IntVec3>())
-            {
-                var stack = Helper.RunSavely(() => CaravanInventoryUtility.AllInventoryItems(caravan).FirstOrDefault());
-                if (stack == null) break;
-                if (!cell.Filled(map)) GenDrop.TryDropSpawn_NewTmp(stack, cell, map, ThingPlaceMode.Direct, out var result);
-            }
+            Helper.RunSavely(() => {
+                var orderedItems = CaravanInventoryUtility.AllInventoryItems(caravan).OrderByDescending(x => x.def?.thingCategories?.FirstOrDefault() != null).ThenBy(x => x.def?.thingCategories?.FirstOrDefault().defName).ThenBy(x => x.MarketValue).ToList();
+                foreach (var cell in zone.Cells.Reverse<IntVec3>())
+                {
+                    if (orderedItems.Count == 0) break;
+                    var stack = orderedItems.Pop();
+                    if (stack == null) break;
+                    //DLog.Message($"Tent {this.Coords.First().x} {this.Coords.First().z} placing: {stack.Label}");
+                    if (!cell.Filled(map)) GenDrop.TryDropSpawn_NewTmp(stack, cell, map, ThingPlaceMode.Direct, out var result);
+                }
+            });
         }
     }
 }
