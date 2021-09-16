@@ -42,6 +42,7 @@ namespace CaravanAdventures.CaravanCamp
             zone.settings.filter = new ThingFilter();
             zone.settings.filter.SetAllow(SpecialThingFilterDef.Named("AllowRotten"), false);
             zone.settings.filter.SetAllow(ThingCategoryDefOf.Foods, true);
+            zone.settings.filter.SetAllow(ThingDefOf.MealSurvivalPack, false);
             zone.settings.filter.SetAllow(ThingDefOf.Kibble, false);
             zone.settings.filter.SetAllow(ThingDefOf.Hay, false);
             zone.settings.filter.SetAllow(ThingDef.Named("Meat_Megaspider"), false);
