@@ -17,7 +17,7 @@ namespace CaravanAdventures.CaravanAbilities
         private int permTickCount = new IntRange(10000, 12000).RandomInRange;
         private Hediff_Injury[] sortedInjuries;
         private bool noInjuries = false;
-        private string[] sicknessesToBeHealed = new[] { "WoundInfection", "Flu", "HeartAttack", "FoodPoisoning", "CatatonicBreakdown", "PsychicVertigo", "HeartAttack", "MuscleParasites", "SensoryMechanites", "FibrousMechanites", "GutWorms" };
+        private string[] sicknessesToBeHealed = new[] { "WoundInfection", "Flu", "Plague", "HeartAttack", "FoodPoisoning", "CatatonicBreakdown", "PsychicVertigo", "HeartAttack", "MuscleParasites", "SensoryMechanites", "FibrousMechanites", "GutWorms" };
         private string[] permanentToBeHealed = new[] { "PsychicComa", "Abasia", "Carcinoma", "ChemicalDamageModerate", "ChemicalDamageSevere", "Cirrhosis", "TraumaSavant" };
         private Pawn connector = null;
         private int statusCheckTickCount = new IntRange(55, 65).RandomInRange;
@@ -98,8 +98,17 @@ namespace CaravanAdventures.CaravanAbilities
         private void CureIllnesses()
         {
             var diseases = Pawn.health.hediffSet.hediffs.Where(x => sicknessesToBeHealed.Contains(x.def.defName));
-            if (diseases != null && diseases.Count() != 0) Pawn.health.hediffSet.hediffs.RemoveAll(x => diseases.Contains(x));
+            if (diseases != null && diseases.Count() != 0)
+            {
+                foreach (var hediff in Pawn.health.hediffSet.hediffs.Where(x => diseases.Contains(x)).Reverse()) 
+                {
+                    Pawn.health.hediffSet.hediffs.Remove(hediff);
+                    hediff.PostRemoved();
+                    Pawn.health.Notify_HediffChanged(null);
+                }
+            }
         }
+
 
         private void Heal(bool skip = false)
         {
