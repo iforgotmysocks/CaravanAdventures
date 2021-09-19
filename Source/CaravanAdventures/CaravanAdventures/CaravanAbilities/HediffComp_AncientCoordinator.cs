@@ -86,6 +86,7 @@ namespace CaravanAdventures.CaravanAbilities
                     && !pawn.HasExtraMiniFaction()
                     && pawn != Pawn
                     && !pawn.IsKidnapped()
+                    && !(pawn.IsSlave && ModSettings.excludeSlavesFromCoordinator)
                     && !CompatibilityDefOf.CACompatDef.raceDefsToExcludeFromAncientCoordinator.Contains(pawn.def.defName)
                     && !CompatibilityDefOf.CACompatDef.racesWithModExtsToExcludeFromAncientCoordinator
                     .Any(x => pawn?.def?.modExtensions != null && pawn.def.modExtensions
@@ -155,6 +156,7 @@ namespace CaravanAdventures.CaravanAbilities
                 || p.HasExtraHomeFaction()
                 || p.HasExtraMiniFaction()
                 || p.IsKidnapped()
+                || p.IsSlave && ModSettings.excludeSlavesFromCoordinator
                 || CompatibilityDefOf.CACompatDef.raceDefsToExcludeFromAncientCoordinator.Contains(p.def.defName)
                 || CompatibilityDefOf.CACompatDef.racesWithModExtsToExcludeFromAncientCoordinator
                     .Any(x => p?.def?.modExtensions != null && p.def.modExtensions

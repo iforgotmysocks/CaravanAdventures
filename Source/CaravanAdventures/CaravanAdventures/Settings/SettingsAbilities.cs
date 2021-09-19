@@ -32,9 +32,10 @@ namespace CaravanAdventures.Settings
         public override void DoWindowContents(Rect wrect)
         {
             var options = new Listing_Standard();
-            var viewRect = new Rect(0f, 0f, windowRect.width - 65, 900f);
+            var viewRect = new Rect(0f, 0f, windowRect.width - 65, 940);
+            var smallerOutRect = new Rect(wrect.x, wrect.y, wrect.width, wrect.height - 50);
 
-            Widgets.BeginScrollView(wrect, ref scrollPos, viewRect);
+            Widgets.BeginScrollView(smallerOutRect, ref scrollPos, viewRect);
             options.Begin(viewRect);
             Text.Font = GameFont.Medium;
             options.Label("Ancient Abilities:".Colorize(Color.green), 40f);
@@ -73,6 +74,7 @@ namespace CaravanAdventures.Settings
             ModSettings.healingPerSecond = options.Slider(ModSettings.healingPerSecond, 0f, 1f);
             options.Label($"Max allowed linked pawns: {ModSettings.maxLinkedAuraPawns}");
             ModSettings.maxLinkedAuraPawns = Convert.ToInt32(options.Slider(ModSettings.maxLinkedAuraPawns, 1f, 10f));
+            options.CheckboxLabeled("Exclude Slaves from the Coordinator empowered version of the ancient aura", ref ModSettings.excludeSlavesFromCoordinator);
             options.CheckboxLabeled("Can stop mental breaks?", ref ModSettings.stopMentalBreaks);
             options.CheckboxLabeled("Only heal permanent wounds when pawn has ancient gift?", ref ModSettings.onlyHealPermWhenGifted);
 
