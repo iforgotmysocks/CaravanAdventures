@@ -58,7 +58,7 @@ namespace CaravanAdventures.CaravanStory
             else if (mech.def == ThingDef.Named("Mech_Scyther")) reward += 10;
             else if (mech.def == ThingDef.Named("Mech_Lancer")) reward += 15;
             else if (mech.def == ThingDef.Named("Mech_Centipede")) reward += 45;
-            else if (mech.def == ThingDef.Named("CAEndBossMech")) reward += 3000;
+            else if (mech.def == ThingDef.Named("CAEndBossMech")) reward += 1000;
             else if (CompCache.StoryWC.BossDefs().Contains(mech.def)) reward += 500;
             else
             {
