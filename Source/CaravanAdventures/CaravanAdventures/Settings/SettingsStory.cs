@@ -75,6 +75,7 @@ namespace CaravanAdventures.Settings
 
             options.Gap();
             options.CheckboxLabeled("Should sacrileg hunters be hostile towards the empire?", ref ModSettings.sacHuntersHostileTowardsEmpire);
+            options.CheckboxLabeled("Should sacrileg hunters be hostile towards natural enemies?", ref ModSettings.sacHuntersHostileTowardsNaturalEnemies, "Natural enemies are factions like the rough outlanders or rough tribes, they're not permanent enemies and can become allies, but start out with hostile tendencies.");
 
             options.CheckboxLabeled("Remove royal title requirements", ref ModSettings.removeRoyalTitleRequirements);
             options.CheckboxLabeled("Only remove Acolyte and Knight title requirements", ref ModSettings.removeOnlyAcolyteAndKnightRoyalTitleRequirements);

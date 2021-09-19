@@ -90,6 +90,7 @@ namespace CaravanAdventures
         public static float apocalypseTemperatureChangePerDay = -0.084f;
         public static bool issueFurtherShrineLocationsAfterStoryEnd = true;
         public static bool sacHuntersHostileTowardsEmpire = false;
+        public static bool sacHuntersHostileTowardsNaturalEnemies = true;
         public static bool allowApocToAlterTileTemp = false;
         public static bool whisperDisabledManually = false;
 
@@ -191,6 +192,7 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref apocalypseTemperatureChangePerDay, "apocalypseTemperatureChangePerDay", -0.084f);
             Scribe_Values.Look(ref issueFurtherShrineLocationsAfterStoryEnd, "issueFurtherShrineLocationsAfterStoryEnd", true);
             Scribe_Values.Look(ref sacHuntersHostileTowardsEmpire, "sacHuntersHostileTowardsEmpire", false);
+            Scribe_Values.Look(ref sacHuntersHostileTowardsNaturalEnemies, "sacHuntersHostileTowardsNaturalEnemies", true);
             Scribe_Values.Look(ref allowApocToAlterTileTemp, "allowApocToAlterTileTemp", false);
             Scribe_Values.Look(ref whisperDisabledManually, "whisperDisabledManually", false);
 

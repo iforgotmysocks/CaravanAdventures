@@ -500,7 +500,7 @@ namespace CaravanAdventures.CaravanStory
             foreach (var faction in Find.FactionManager.AllFactionsListForReading)
             {
                 if (faction == Faction.OfPlayer || faction.def.permanentEnemy || faction == sacrilegHunters) continue;
-                if (ModSettings.sacHuntersHostileTowardsEmpire && faction == Faction.OfEmpire)
+                if (ModSettings.sacHuntersHostileTowardsEmpire && faction == Faction.OfEmpire ||  ModSettings.sacHuntersHostileTowardsNaturalEnemies && faction.def.naturalEnemy)
                 {
                     faction.SetRelation(new FactionRelation() { baseGoodwill = -100, kind = FactionRelationKind.Hostile, other = sacrilegHunters });
                     continue;
