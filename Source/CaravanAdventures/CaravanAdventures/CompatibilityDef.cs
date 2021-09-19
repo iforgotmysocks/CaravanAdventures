@@ -22,6 +22,8 @@ namespace CaravanAdventures
         public List<string> raceDefsToExcludeFromTravelCompanions = new List<string>();
         public List<string> racesWithModExtsToExcludeFromTravelCompanions = new List<string>();
         public List<string> excludedBiomeDefNamesForStoryShrineGeneration = new List<string>();
+        public List<string> raceDefsToExcludeFromAncientCoordinator = new List<string>();
+        public List<string> racesWithModExtsToExcludeFromAncientCoordinator = new List<string>();
     }
 
     [DefOf]

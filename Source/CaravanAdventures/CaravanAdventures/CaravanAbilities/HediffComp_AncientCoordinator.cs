@@ -82,7 +82,20 @@ namespace CaravanAdventures.CaravanAbilities
                     Pawn.health.RemoveHediff(parent);
                     return;
                 }
-                var pawns = PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_Colonists.Where(pawn => !pawn.HasExtraHomeFaction() && !pawn.HasExtraMiniFaction() && pawn != Pawn && !pawn.IsKidnapped()).ToList();
+                var pawns = PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_Colonists.Where(pawn => !pawn.HasExtraHomeFaction()
+                    && !pawn.HasExtraMiniFaction()
+                    && pawn != Pawn
+                    && !pawn.IsKidnapped()
+                    && !CompatibilityDefOf.CACompatDef.raceDefsToExcludeFromAncientCoordinator.Contains(pawn.def.defName)
+                    && !CompatibilityDefOf.CACompatDef.racesWithModExtsToExcludeFromAncientCoordinator
+                    .Any(x => pawn?.def?.modExtensions != null && pawn.def.modExtensions
+                        .Where(modExt => modExt != null)
+                        .Select(modext => modext
+                            .GetType()
+                            .ToString())
+                        .ToList()
+                        .Contains(x))
+                    ).ToList();
                 if (!TryAddPawn(pawns)) TryKillPawn(pawns);
                 ticks = 0;
             }
@@ -120,9 +133,12 @@ namespace CaravanAdventures.CaravanAbilities
 
         private bool TryAddPawn(List<Pawn> pawns)
         {
-            RemovePawnsNoLongerApplying(pawns); 
+            RemovePawnsNoLongerApplying(pawns);
             if (linkedPawns.Count >= pawns.Count || linkedPawns.Count >= ModSettings.maxLinkedAuraPawns) return false;
-            var pawnToAdd = pawns.FirstOrDefault(pawn => !linkedPawns.Contains(pawn) && !pawn.health.hediffSet.HasHediff(AbilityDefOf.CAAncientProtectiveAuraLinked) && !pawn.health.hediffSet.HasHediff(AbilityDefOf.CAAncientGift));
+            var pawnToAdd = pawns.FirstOrDefault(pawn => !linkedPawns.Contains(pawn)
+                && !pawn.health.hediffSet.HasHediff(AbilityDefOf.CAAncientProtectiveAuraLinked)
+                && !pawn.health.hediffSet.HasHediff(AbilityDefOf.CAAncientGift
+                ));
             if (pawnToAdd == null) return false;
             DLog.Message($"Adding {pawnToAdd} as linked aura pawn");
             AddLinkedHediffToPawn(pawnToAdd, Pawn);
@@ -133,7 +149,22 @@ namespace CaravanAdventures.CaravanAbilities
         private void RemovePawnsNoLongerApplying(List<Pawn> pawns)
         {
             if (linkedPawns.Count < pawns.Count) return;
-            var pawnsToRemove = linkedPawns.Where(p => p == null || p.Dead || p.HasExtraHomeFaction() || p.HasExtraMiniFaction() || p.IsKidnapped()).ToList();
+            var pawnsToRemove = linkedPawns.Where(p =>
+                p == null
+                || p.Dead
+                || p.HasExtraHomeFaction()
+                || p.HasExtraMiniFaction()
+                || p.IsKidnapped()
+                || CompatibilityDefOf.CACompatDef.raceDefsToExcludeFromAncientCoordinator.Contains(p.def.defName)
+                || CompatibilityDefOf.CACompatDef.racesWithModExtsToExcludeFromAncientCoordinator
+                    .Any(x => p?.def?.modExtensions != null && p.def.modExtensions
+                        .Where(modExt => modExt != null)
+                        .Select(modext => modext
+                            .GetType()
+                            .ToString())
+                        .ToList()
+                        .Contains(x))
+                ).ToList();
             pawnsToRemove.ForEach(p => RemoveLinkedAura(p));
             linkedPawns.RemoveAll(p => pawnsToRemove.Contains(p));
             if (pawnsToRemove.Count > 0) DLog.Message($"Removing {pawnsToRemove.Count} linked aura pawns");
