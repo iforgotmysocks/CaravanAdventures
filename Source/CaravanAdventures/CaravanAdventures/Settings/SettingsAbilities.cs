@@ -32,7 +32,7 @@ namespace CaravanAdventures.Settings
         public override void DoWindowContents(Rect wrect)
         {
             var options = new Listing_Standard();
-            var viewRect = new Rect(0f, 0f, windowRect.width - 65, 940);
+            var viewRect = new Rect(0f, 0f, windowRect.width - 65, 980);
             var smallerOutRect = new Rect(wrect.x, wrect.y, wrect.width, wrect.height - 50);
 
             Widgets.BeginScrollView(smallerOutRect, ref scrollPos, viewRect);
@@ -77,7 +77,12 @@ namespace CaravanAdventures.Settings
             options.CheckboxLabeled("Exclude slaves from the coordinator empowered version of the ancient aura", ref ModSettings.excludeSlavesFromCoordinator);
             options.CheckboxLabeled("Can stop mental breaks?", ref ModSettings.stopMentalBreaks);
             options.CheckboxLabeled("Only heal permanent wounds when pawn has ancient gift?", ref ModSettings.onlyHealPermWhenGifted);
-
+            options.CheckboxLabeled("Enable melee attack speed boost", ref ModSettings.attackspeedIncreaseForAncientProtectiveAura);
+            if (ModSettings.attackspeedIncreaseForAncientProtectiveAura)
+            {
+                options.Label($"Attack speed boost multiplier: {Math.Round(ModSettings.attackspeedMultiplier, 2)}", -1, "(0.5 is default, 1 is vanilla)");
+                ModSettings.attackspeedMultiplier = options.Slider(ModSettings.attackspeedMultiplier, 1f, 0.1f);
+            }
             options.Gap(24f);
 
             options.Label("Mystical guiding light".Colorize(Color.green));

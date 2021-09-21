@@ -19,6 +19,7 @@ namespace CaravanAdventures.Patches
                 TalkPawnGUIOverlay.ApplyPatches();
                 BossPatches.ApplyPatches();
                 CaravanMagicLight.ApplyPatches();
+                AttackSpeed.ApplyPatches();
 
                 if (ModSettings.allowApocToAlterTileTemp) ApocalypsePatches.ApplyPatches();
             }
