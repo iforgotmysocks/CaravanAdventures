@@ -195,6 +195,7 @@
     <Compile Include="Patches\KillBountyPatches.cs" />
     <Compile Include="Patches\TalkPawnGUIOverlay.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings\SettingsTravelCompanions.cs" />
     <Compile Include="Settings\SettingsOther.cs" />
     <Compile Include="Settings\SettingsCamp.cs" />
     <Compile Include="Settings\SettingsBounty.cs" />
@@ -233,7 +234,7 @@
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_BuildVersioningStyle="None.None.None.Increment" BuildVersion_StartDate="2000/1/1" />
+      <UserProperties BuildVersion_StartDate="2000/1/1" BuildVersion_BuildVersioningStyle="None.None.None.Increment" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

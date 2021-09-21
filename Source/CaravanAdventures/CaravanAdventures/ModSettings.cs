@@ -114,6 +114,9 @@ namespace CaravanAdventures
         public static int itemStockAmount = 6;
         public static bool showBountyRewardInfo = false;
 
+        // travel companions
+        public static bool excludeSlavesFromTravelCompanions;
+
         // general
         public static bool autoRemoveAbandondSettlementRuins;
         public static bool buffSettlementFoodAndSilverAvailability;
@@ -216,13 +219,15 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref itemStockAmount, "itemStockAmount", 6);
             Scribe_Values.Look(ref showBountyRewardInfo, "showBountyRewardInfo", false);
 
+            // travel companions
+            Scribe_Values.Look(ref excludeSlavesFromTravelCompanions, "excludeSlavesFromTravelCompanions", false);
+
             //general 
             Scribe_Values.Look(ref autoRemoveAbandondSettlementRuins, "autoRemoveAbandondSettlementRuins", false);
             Scribe_Values.Look(ref buffSettlementFoodAndSilverAvailability, "buffSettlementFoodAndSilverAvailability", false);
             Scribe_Values.Look(ref buffShrineRewards, "buffShrineRewards", true);
             Scribe_Values.Look(ref spDecayLevelIncrease, "spDecayLevelIncrease", false);
             Scribe_Values.Look(ref showLetterRemoval, "showLetterRemoval", false);
-
 
             // categories enabled
             Scribe_Values.Look(ref caravanCampEnabled, "caravanCampEnabled", true);
@@ -324,6 +329,7 @@ namespace CaravanAdventures
             Widgets.Label(cRect, $"Caravan immersion - Travel companions".HtmlFormatting("00ff00", false, 18));
             Text.Font = GameFont.Small;
             Widgets.CheckboxLabeled(new Rect(options.ColumnWidth - 400, lastRect.y + 10, 110, Text.LineHeight), "Enabled: ", ref caravanTravelCompanionsEnabled);
+            if (Widgets.ButtonText(new Rect(options.ColumnWidth - 225, lastRect.y + 6, 150, Text.LineHeight + 10), "Open")) Find.WindowStack.Add(new SettingsTravelCompanions());
             options.Gap(10);
             options.Label($"Colonists will start out disliking new arrivals to your group, but grow to accept, welcome and maybe embrace them as true friends over time.");
             options.GapLine();

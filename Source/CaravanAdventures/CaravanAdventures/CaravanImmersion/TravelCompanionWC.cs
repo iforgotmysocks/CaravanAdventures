@@ -67,48 +67,53 @@ namespace CaravanAdventures.CaravanImmersion
         {
             if (ticks > 1200)
             {
+                ticks = 0;
                 var playerPawns = PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction.Where(x => x.RaceProps.Humanlike).ToList();
                 playerPawns.RemoveAll(x =>
                 {
                     if (CompatibilityDefOf.CACompatDef.raceDefsToExcludeFromTravelCompanions.Contains(x.def.defName)) return true;
                     foreach (var modExtsToCheck in CompatibilityDefOf.CACompatDef.racesWithModExtsToExcludeFromTravelCompanions)
                     {
-                        if (x.def.modExtensions != null 
-                            && x.def.modExtensions.Any(modExt => modExt?.GetType()?.ToString() == modExtsToCheck)) 
-                                return true;
+                        if (x.def.modExtensions != null
+                            && x.def.modExtensions.Any(modExt => modExt?.GetType()?.ToString() == modExtsToCheck))
+                            return true;
                     }
                     return false;
                 });
 
                 foreach (var mainPawn in playerPawns)
                 {
-                    if (mainPawn.IsBorrowedByAnyFaction() || mainPawn.Dead || mainPawn.HasExtraMiniFaction() || mainPawn.HasExtraHomeFaction()) continue;
-                    foreach (var pawn in playerPawns)
+                    if (mainPawn.Dead || mainPawn.IsBorrowedByAnyFaction()  || mainPawn.HasExtraMiniFaction() || mainPawn.HasExtraHomeFaction()) continue;
+                    if (!mainPawn.IsSlave || (mainPawn.IsSlave && !ModSettings.excludeSlavesFromTravelCompanions))
                     {
-                        if (pawn == mainPawn || pawn.IsBorrowedByAnyFaction() || pawn.Dead || pawn.HasExtraMiniFaction() || pawn.HasExtraHomeFaction()) continue;
-                        var currentRelation = pawn.relations.DirectRelations.FirstOrDefault(x => (x.def.GetModExtension<TravelCompanionModExt>()?.isTravelCompanionRelation ?? false) == true && x.otherPawn == mainPawn);
-                        var newRelation = CalculateNewRelation(mainPawn, pawn);
-                        if (newRelation == null)
+                        foreach (var pawn in playerPawns)
                         {
-                            Log.Error($"newRelation is null, which should not be happening!!! -> TravelCompanionWC -> ApplySocialRelation -> CalculateNewRelation()");
-                            continue;
+                            if (pawn == mainPawn || pawn.IsBorrowedByAnyFaction() || pawn.Dead || pawn.HasExtraMiniFaction() || pawn.HasExtraHomeFaction() || (pawn.IsSlave && ModSettings.excludeSlavesFromTravelCompanions)) continue;
+                            var currentRelation = pawn.relations.DirectRelations.FirstOrDefault(x => (x.def.GetModExtension<TravelCompanionModExt>()?.isTravelCompanionRelation ?? false) == true && x.otherPawn == mainPawn);
+                            var newRelation = CalculateNewRelation(mainPawn, pawn);
+                            if (newRelation == null)
+                            {
+                                Log.Error($"newRelation is null, which should not be happening!!! -> TravelCompanionWC -> ApplySocialRelation -> CalculateNewRelation()");
+                                continue;
+                            }
+                            if (currentRelation != null && currentRelation.def.defName == newRelation.relationDefName) continue;
+                            if (currentRelation != null && currentRelation.def.defName != newRelation.relationDefName)
+                            {
+                                pawn.relations.RemoveDirectRelation(currentRelation.def, mainPawn);
+                            }
+                            pawn.relations.AddDirectRelation(TravelCompanionDefOf.RelationNamed(newRelation.relationDefName), mainPawn);
                         }
-                        if (currentRelation != null && currentRelation.def.defName == newRelation.relationDefName) continue;
-                        if (currentRelation != null && currentRelation.def.defName != newRelation.relationDefName)
-                        {
-                            pawn.relations.RemoveDirectRelation(currentRelation.def, mainPawn);
-                        }
-                        pawn.relations.AddDirectRelation(TravelCompanionDefOf.RelationNamed(newRelation.relationDefName), mainPawn);
                     }
 
                     foreach (var relation in mainPawn.relations.DirectRelations.Reverse<DirectPawnRelation>())
                     {
-                        if (relation?.otherPawn?.Dead != true) continue;
-                        if (relation.def.GetModExtension<TravelCompanionModExt>() != null) mainPawn.relations.RemoveDirectRelation(relation.def, relation.otherPawn);
+                        if (relation?.def?.GetModExtension<TravelCompanionModExt>() == null) continue;
+                        if (relation?.otherPawn?.Dead == true || (relation?.otherPawn?.IsSlave == true && ModSettings.excludeSlavesFromTravelCompanions))
+                        {
+                            mainPawn.relations.RemoveDirectRelation(relation.def, relation.otherPawn);
+                        }
                     }
                 }
-
-                ticks = 0;
             }
         }
 

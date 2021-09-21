@@ -74,7 +74,7 @@ namespace CaravanAdventures.Settings
             ModSettings.healingPerSecond = options.Slider(ModSettings.healingPerSecond, 0f, 1f);
             options.Label($"Max allowed linked pawns: {ModSettings.maxLinkedAuraPawns}");
             ModSettings.maxLinkedAuraPawns = Convert.ToInt32(options.Slider(ModSettings.maxLinkedAuraPawns, 1f, 10f));
-            options.CheckboxLabeled("Exclude Slaves from the Coordinator empowered version of the ancient aura", ref ModSettings.excludeSlavesFromCoordinator);
+            options.CheckboxLabeled("Exclude slaves from the coordinator empowered version of the ancient aura", ref ModSettings.excludeSlavesFromCoordinator);
             options.CheckboxLabeled("Can stop mental breaks?", ref ModSettings.stopMentalBreaks);
             options.CheckboxLabeled("Only heal permanent wounds when pawn has ancient gift?", ref ModSettings.onlyHealPermWhenGifted);
 
