@@ -260,7 +260,7 @@ namespace CaravanAdventures.CaravanCamp
             return true;
         }
 
-        private void PaySupplyCost()
+        protected virtual void PaySupplyCost()
         {
             if (tribal) return;
             waste = ModSettings.hasSupplyCostsDisabled ? 0 : campParts.Where(part => part is RestTent || part is ProductionTent).ToList().Count;
