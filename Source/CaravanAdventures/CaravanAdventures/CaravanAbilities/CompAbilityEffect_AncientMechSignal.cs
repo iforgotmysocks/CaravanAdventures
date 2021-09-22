@@ -21,11 +21,11 @@ namespace CaravanAdventures.CaravanAbilities
             base.Apply(target, dest);
             var map = this.parent.pawn.Map;
             var scythers = new List<Pawn>();
-            var faction = StoryUtility.CreateOrGetFriendlyMechFaction();
+            var faction = Faction.OfPlayer; // StoryUtility.CreateOrGetFriendlyMechFaction();
 
             AffectedCells(target, map).Where(x => x.Standable(map))
                 .InRandomOrder().Take(Rand.RangeInclusive(5, 7)).ToList()
-                .ForEach(cell => scythers.Add(SpawnScyther(cell, parent.pawn, faction)));
+                .ForEach(cell => scythers.Add(Helper.RunSavely(() => SpawnScyther(cell, parent.pawn, faction))));
 
             if (target.Pawn != null) LordMaker.MakeNewLord(parent.pawn.Faction, new LordJob_EscortPawn(target.Pawn), map, scythers);
             else if (target.Cell != default) LordMaker.MakeNewLord(parent.pawn.Faction, new LordJob_AssistColony(parent.pawn.Faction, target.Cell), map, scythers);
@@ -36,7 +36,7 @@ namespace CaravanAdventures.CaravanAbilities
         private Pawn SpawnScyther(IntVec3 intVec, Pawn pawn, Faction faction)
         {
             var scyther = PawnGenerator.GeneratePawn(PawnKindDef.Named("Mech_Scyther"), faction);
-            scyther.health.AddHediff(HediffDef.Named("CAOverheatingBrain"), scyther.health.hediffSet.GetBrain());
+            scyther.health.AddHediff(HediffDef.Named("CAOverheatingBrain")); // 1-2 change, assigning hediff to entire body, when killing the brain the hediff gets removed, tho we need the hediff for the notification fix scyther.health.hediffSet.GetBrain()
             GenSpawn.Spawn(scyther, intVec, pawn.Map, WipeMode.Vanish);
             this.parent.AddEffecterToMaintain(EffecterDefOf.Skip_ExitNoDelay.Spawn(intVec, pawn.Map, 1f), intVec, 60);
             GenClamor.DoClamor(pawn, intVec, 2f, ClamorDefOf.Ability);

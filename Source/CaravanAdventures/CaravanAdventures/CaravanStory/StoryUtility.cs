@@ -237,6 +237,23 @@ namespace CaravanAdventures.CaravanStory
             CompCache.StoryWC.SetSF("IntroVillage_Created");
         }
 
+        internal static void ClearFriendlyMechFaction()
+        {
+            var faction = DefDatabase<FactionDef>.GetNamedSilentFail("CAFriendlyMechanoid");
+            if (faction == null) return;
+
+            if (Find.World == null) return;
+            var settlements = Find.World?.worldObjects?.Settlements?.Where(x => x?.Faction?.def == faction);
+            if (settlements == null || settlements.Count() == 0) return;
+
+            foreach (var settlement in settlements.Reverse<Settlement>())
+            {
+                DLog.Message($"Removing no longer needed CA friendly mech settlement.");
+                if (settlement.HasMap) Current.Game.DeinitAndRemoveMap(settlement.Map);
+                settlement.Destroy();
+            }
+        }
+
         internal static void RemoveStoryComponentsNoRoyalty()
         {
             RemoveStoryOrMod();

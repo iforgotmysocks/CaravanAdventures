@@ -182,6 +182,7 @@
     <Compile Include="ModSettings.cs" />
     <Compile Include="CompatibilityPatches.cs" />
     <Compile Include="Patches\AbilityNeurotrainerDefGenerator.cs" />
+    <Compile Include="Patches\ScytherNotifyFix.cs" />
     <Compile Include="Patches\CaravanMagicLight.cs" />
     <Compile Include="Patches\AttackSpeed.cs" />
     <Compile Include="Patches\LetterRemovalPatch.cs" />
@@ -233,7 +234,7 @@
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_BuildVersioningStyle="None.None.None.Increment" BuildVersion_StartDate="2000/1/1" />
+      <UserProperties BuildVersion_StartDate="2000/1/1" BuildVersion_BuildVersioningStyle="None.None.None.Increment" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

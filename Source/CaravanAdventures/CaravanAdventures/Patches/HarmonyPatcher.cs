@@ -20,6 +20,8 @@ namespace CaravanAdventures.Patches
                 BossPatches.ApplyPatches();
                 CaravanMagicLight.ApplyPatches();
                 AttackSpeed.ApplyPatches();
+                // scythernotifyfix only required in 1-2
+                ScytherNotifyFix.ApplyPatches();
 
                 if (ModSettings.allowApocToAlterTileTemp) ApocalypsePatches.ApplyPatches();
             }
