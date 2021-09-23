@@ -22,8 +22,8 @@ namespace CaravanAdventures.Patches
         {
             var isCamp = Find.World?.worldObjects?.SettlementAt(tile)?.Map?.listerBuildings?.allBuildingsColonist?.FirstOrDefault(y => y?.def?.defName == "CACampControl") != null;
             if (!isCamp) return;
-            outOffsets.Clear();
-            DLog.Message($"Removed all settlement prox offsets due to camp");
+            var removed = outOffsets.RemoveAll(x => Find.WorldGrid?.TraversalDistanceBetween(tile, x.First.Tile, false, SettlementProximityGoodwillUtility.MaxDist) != int.MaxValue);
+            DLog.Message($"Removed {removed} settlement prox offsets due to camp");
         }
     }
 }
