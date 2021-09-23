@@ -23,8 +23,7 @@ namespace CaravanAdventures.Patches
                     || attacker?.Faction != Faction.OfPlayer
                     || !attacker.IsColonist
                     || !__instance.IsMeleeAttack
-                    || attacker.health.hediffSet.hediffs.FirstOrDefault(x => x?.def == CaravanAbilities.AbilityDefOf.CAAncientProtectiveAura 
-                    || x?.def == CaravanAbilities.AbilityDefOf.CAAncientProtectiveAuraLinked) == null) return;
+                    || attacker.health.hediffSet.hediffs.FirstOrDefault(x => x?.def == CaravanAbilities.AbilityDefOf.CAAncientGift) == null) return;
 
             __result *= ModSettings.attackspeedMultiplier;
         }
