@@ -38,7 +38,7 @@ namespace CaravanAdventures.Settings
             //var viewRect = new Rect(0f, 0f, windowRect.width - 150, 850f);
             //options.BeginScrollView(wrect, ref scrollPos, ref viewRect);
 
-            Widgets.BeginScrollView(wrect, ref scrollPos, viewRect);
+            Widgets.BeginScrollView(smallerOutRect, ref scrollPos, viewRect);
             options.Begin(viewRect);
             Text.Font = GameFont.Medium;
             options.Label("Ancient Abilities:".Colorize(Color.green), 40f);
@@ -96,8 +96,9 @@ namespace CaravanAdventures.Settings
 
 
             //options.EndScrollView(ref viewRect);
-            Widgets.EndScrollView();
             options.End();
+            Widgets.EndScrollView();
+
 
         }
 
