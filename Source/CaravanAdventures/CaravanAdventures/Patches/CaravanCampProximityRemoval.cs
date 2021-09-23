@@ -25,10 +25,5 @@ namespace CaravanAdventures.Patches
             outOffsets.Clear();
             DLog.Message($"Removed all settlement prox offsets due to camp");
         }
-
-        private static bool CaravanNeedsResting(Caravan caravan)
-        {
-            return caravan.pawns.InnerListForReading.Where(x => x?.needs?.rest?.CurLevelPercentage != null).Any(x => x?.needs?.rest.CurLevelPercentage <= 0.01);
-        }
     }
 }
