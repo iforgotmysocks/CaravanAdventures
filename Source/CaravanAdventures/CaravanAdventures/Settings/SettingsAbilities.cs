@@ -45,6 +45,12 @@ namespace CaravanAdventures.Settings
             options.Label("Ancient Gift:".Colorize(Color.green), 24f);
             options.Label("Passive psyfocus gain per sec: " + Math.Round(ModSettings.ancientGiftPassivePsyfocusGainPerSec * 100, 2) + "%");
             ModSettings.ancientGiftPassivePsyfocusGainPerSec = options.Slider(ModSettings.ancientGiftPassivePsyfocusGainPerSec, 0.00001f, 0.01f);
+            options.CheckboxLabeled("Enable melee attack speed boost", ref ModSettings.attackspeedIncreaseForAncientProtectiveAura);
+            if (ModSettings.attackspeedIncreaseForAncientProtectiveAura)
+            {
+                options.Label($"Attack speed boost: {Math.Round(1000 / (ModSettings.attackspeedMultiplier / 0.1) - 100, 0)}%", -1);
+                ModSettings.attackspeedMultiplier = options.Slider(ModSettings.attackspeedMultiplier, 1f, 0.1f);
+            }
             options.Gap();
 
             options.Label("Ancient thunderbolt:".Colorize(Color.green), 24f);
@@ -77,12 +83,6 @@ namespace CaravanAdventures.Settings
             options.CheckboxLabeled("Exclude slaves from the coordinator empowered version of the ancient aura", ref ModSettings.excludeSlavesFromCoordinator);
             options.CheckboxLabeled("Can stop mental breaks?", ref ModSettings.stopMentalBreaks);
             options.CheckboxLabeled("Only heal permanent wounds when pawn has ancient gift?", ref ModSettings.onlyHealPermWhenGifted);
-            options.CheckboxLabeled("Enable melee attack speed boost", ref ModSettings.attackspeedIncreaseForAncientProtectiveAura);
-            if (ModSettings.attackspeedIncreaseForAncientProtectiveAura)
-            {
-                options.Label($"Attack speed boost multiplier: {Math.Round(ModSettings.attackspeedMultiplier, 2)}", -1, "(0.5 is default, 1 is vanilla)");
-                ModSettings.attackspeedMultiplier = options.Slider(ModSettings.attackspeedMultiplier, 1f, 0.1f);
-            }
             options.Gap(24f);
 
             options.Label("Mystical guiding light".Colorize(Color.green));
