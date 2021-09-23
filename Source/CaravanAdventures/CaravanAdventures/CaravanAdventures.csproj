@@ -185,6 +185,7 @@
     <Compile Include="Patches\ScytherNotifyFix.cs" />
     <Compile Include="Patches\CaravanMagicLight.cs" />
     <Compile Include="Patches\AttackSpeed.cs" />
+    <Compile Include="Patches\CaravanCampProximityRemoval.cs" />
     <Compile Include="Patches\LetterRemovalPatch.cs" />
     <Compile Include="Patches\SpDecayLevelIncrease.cs" />
     <Compile Include="Patches\ApocalypsePatches.cs" />

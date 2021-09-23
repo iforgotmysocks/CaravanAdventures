@@ -47,6 +47,7 @@ namespace CaravanAdventures.Settings
                 if (mapSize <= 75) mapSize = 250;
                 ModSettings.campMapSize = new IntVec3(mapSize, 1, mapSize);
             }
+            options.CheckboxLabeled("Disable settlement proximity goodwill loss for camps", ref ModSettings.caravanCampProximityRemoval, "Disable settlement proximity goodwill loss towards other factions when camping close to their settlements");
             options.Gap();
             options.Label("Select the tent types you want ur pawns to build by themselves.");
             options.CheckboxLabeled("Build production tent", ref ModSettings.hasProductionTent);
