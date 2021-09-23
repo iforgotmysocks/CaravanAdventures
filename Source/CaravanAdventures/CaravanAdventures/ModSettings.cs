@@ -44,6 +44,7 @@ namespace CaravanAdventures
         public static bool useAnimalOnlyFoodForAnimalArea = false;
         public static bool preferStonecutting = true;
         public static bool createCampPackingSpot = true;
+        public static bool caravanCampProximityRemoval;
 
         // camp cost TODO -> create defs for tent types and move it there
         public static int campSupplyCostAnimalArea = 1;
@@ -166,6 +167,7 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref useAnimalOnlyFoodForAnimalArea, "useAnimalOnlyFoodForAnimalArea", false);
             Scribe_Values.Look(ref preferStonecutting, "preferStonecutting", true);
             Scribe_Values.Look(ref createCampPackingSpot, "createCampPackingSpot", true);
+            Scribe_Values.Look(ref caravanCampProximityRemoval, "caravanCampProximityRemoval", false);
 
             // filters
             Scribe_Values.Look(ref autoSelectPawns, "autoSelectPawns", true);
@@ -291,6 +293,7 @@ namespace CaravanAdventures
                 if (Widgets.ButtonText(BRect(options.ColumnWidth / 5 * 3, lastRect.y, options.ColumnWidth / 5 - 10, lastRect.height), "Print world pawns")) Helper.PrintWorldPawns();
                 if (Widgets.ButtonText(BRect(options.ColumnWidth / 5 * 4, lastRect.y, options.ColumnWidth / 5 - 10, lastRect.height), "Reset full story")) StoryUtility.RestartStory();
             }
+            else Widgets.Label(BRect(options.ColumnWidth / 5 * 2.5f, lastRect.y, options.ColumnWidth / 5 * 2.5f, lastRect.height), "Note: Some changes require a game restart to take effect");
 
             options.GapLine();
             var checkRestartRequiringValueChanged = false;

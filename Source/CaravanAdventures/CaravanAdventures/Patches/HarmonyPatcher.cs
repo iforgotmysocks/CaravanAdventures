@@ -11,7 +11,11 @@ namespace CaravanAdventures.Patches
         static HarmonyPatcher()
         {
             harmony = harmony ?? (harmony = new Harmony("iforgotmysocks.CaravanAdventures"));
-            if (ModSettings.caravanCampEnabled) CaravanTravel.ApplyPatches();
+            if (ModSettings.caravanCampEnabled)
+            {
+                CaravanTravel.ApplyPatches();
+                if (ModSettings.caravanCampProximityRemoval) CaravanCampProximityRemoval.ApplyPatches();
+            }
             if (ModSettings.caravanFormingFilterSelectionEnabled) AutomaticItemSelection.ApplyPatches();
             if (ModSettings.bountyEnabled) KillBountyPatches.ApplyPatches();
             if (ModSettings.storyEnabled)

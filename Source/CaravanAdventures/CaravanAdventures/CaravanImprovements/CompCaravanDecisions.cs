@@ -94,7 +94,8 @@ namespace CaravanAdventures.CaravanImprovements
                     icon = ContentFinder<Texture2D>.Get("UI/Icons/Settle/SettleCamp_up", true),
                     action = () => {
                         Action settleAction = () => SettleWithoutDroppingGear(caravan, true);
-                        SettlementProximityGoodwillUtility.CheckConfirmSettle(caravan.Tile, settleAction);
+                        if (!ModSettings.caravanCampProximityRemoval) SettlementProximityGoodwillUtility.CheckConfirmSettle(caravan.Tile, settleAction);
+                        else settleAction();
                     }
                 };
                 tmpSettleFailReason.Length = 0;
