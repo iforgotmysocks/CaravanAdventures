@@ -114,7 +114,7 @@
 	<HediffDef ParentName="CAAncientPsycastHediffBase">
 		<defName>CAAncientGift</defName>
 		<label>Ancient Gift</label>
-		<description>The Ancient Gift, a power to access long forgotten potential which enables the gifted to cast ancient spells. Slow psyfocus recovery even without meditation is spoken about in stories aswell.</description>
+		<description>The Ancient Gift, a power to access long forgotten potential which enables the gifted to cast ancient spells. Slow psyfocus recovery even without meditation and superb speed in melee combat or with a blade is spoken about in stories aswell.</description>
 		<isBad>false</isBad>
 		<everCurableByItem>false</everCurableByItem>
 		<defaultLabelColor>(0, 255, 255)</defaultLabelColor>
