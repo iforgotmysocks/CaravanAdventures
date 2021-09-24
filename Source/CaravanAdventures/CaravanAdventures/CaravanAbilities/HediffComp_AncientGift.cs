@@ -17,11 +17,14 @@ namespace CaravanAdventures.CaravanAbilities
 
             if (ticks >= 60)
             {
-                Pawn.psychicEntropy.OffsetPsyfocusDirectly(ModSettings.ancientGiftPassivePsyfocusGainPerSec);
                 ticks = 0;
+                Pawn.psychicEntropy.OffsetPsyfocusDirectly(ModSettings.ancientGiftPassivePsyfocusGainPerSec);
             }
             ticks++;
         }
+
+        public static double AttackSpeedInBonusPercent => Math.Round(100 / (ModSettings.attackspeedMultiplier), 0);
+        public override string CompTipStringExtra => base.CompTipStringExtra + $"Melee attack speed: x{AttackSpeedInBonusPercent}%";
 
         public override void CompExposeData()
         {
