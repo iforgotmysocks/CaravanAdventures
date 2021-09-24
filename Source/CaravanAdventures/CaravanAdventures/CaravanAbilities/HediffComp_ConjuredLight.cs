@@ -17,6 +17,8 @@ namespace CaravanAdventures.CaravanAbilities
 
         public HediffCompProperties_ConjuredLight Props => (HediffCompProperties_ConjuredLight)props;
 
+        public override string CompTipStringExtra => base.CompTipStringExtra + $"Caravan travel speed: x{Math.Round(ModSettings.magicLightCaravanSpeedMult, 1)}";
+
         public override void CompPostPostRemoved()
         {
             base.CompPostPostRemoved();
