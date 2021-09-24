@@ -51,7 +51,7 @@ namespace CaravanAdventures.Settings
             options.CheckboxLabeled("Enable melee attack speed boost", ref ModSettings.attackspeedIncreaseForAncientProtectiveAura);
             if (ModSettings.attackspeedIncreaseForAncientProtectiveAura)
             {
-                options.Label($"Attack speed boost: {Math.Round(1000 / (ModSettings.attackspeedMultiplier / 0.1) - 100, 0)}%", -1);
+                options.Label($"Melee attack speed: {CaravanAbilities.HediffComp_AncientGift.AttackSpeedInBonusPercent}%", -1);
                 ModSettings.attackspeedMultiplier = options.Slider(ModSettings.attackspeedMultiplier, 1f, 0.1f);
             }
             options.Gap();
