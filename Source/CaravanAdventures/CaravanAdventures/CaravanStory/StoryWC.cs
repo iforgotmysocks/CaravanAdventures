@@ -92,6 +92,7 @@ namespace CaravanAdventures.CaravanStory
             "Start_TreeWhisperQuestStarted",
             "Start_InitialTreeAddTalkOption",
             "Start_CanReceiveGift",
+            "Start_TreeTalkedTo",
             "Start_ReceivedGift",
 
             "SacrilegHuntersBetrayal",
@@ -347,10 +348,10 @@ namespace CaravanAdventures.CaravanStory
         public List<AbilityDef> GetUnlockedSpells() => unlockedSpells;
 
         private bool CheckCanStartCountDownOnNewShrine() =>
-            !storyFlags.Any(x => x.Key.StartsWith("Start_") && x.Value == false)
+            storyFlags["Start_ReceivedGift"]
             && countShrinesCompleted == 0 && !storyFlags.Any(x => x.Key == BuildCurrentShrinePrefix() + "InitCountDownStarted" && x.Value == true)
             ||
-            !storyFlags.Any(x => x.Key.StartsWith("Start_") && x.Value == false)
+            storyFlags["Start_ReceivedGift"]
             && !storyFlags.Any(x => x.Key == BuildCurrentShrinePrefix() + "Completed" && x.Value == true)
             && !storyFlags.Any(x => x.Key == BuildCurrentShrinePrefix() + "InitCountDownStarted" && x.Value == true)
             && (countShrinesCompleted < shrineMaximum || countShrinesCompleted >= shrineMaximum && ModSettings.issueFurtherShrineLocationsAfterStoryEnd)

@@ -112,7 +112,7 @@ namespace CaravanAdventures.CaravanStory
         {
             if (theTree != null
                 && !theTree.Destroyed
-                && !CompCache.StoryWC.storyFlags["Start_ReceivedGift"]
+                && (!CompCache.StoryWC.storyFlags["Start_ReceivedGift"] && !CompCache.StoryWC.storyFlags["Start_TreeTalkedTo"])
                 && theTree.TryGetComp<CompTalk>() != null
                 && theTree.TryGetComp<CompTalk>().ShowQuestionMark)
                 theTree.Map.overlayDrawer.DrawOverlay(theTree, OverlayTypes.QuestionMark);
@@ -134,6 +134,7 @@ namespace CaravanAdventures.CaravanStory
         private void AddTreeWhisper()
         {
             if (CompCache.StoryWC.storyFlags["Start_ReceivedGift"]
+                || CompCache.StoryWC.storyFlags["Start_TreeTalkedTo"]
                 || CompCache.StoryWC.storyFlags["Start_InitialTreeWhisper"] && animaTreeWhisperSustainer != null
                 || ModSettings.whisperDisabledManually) return;
 
@@ -150,7 +151,7 @@ namespace CaravanAdventures.CaravanStory
 
         private void EnsureWhisperStopped()
         {
-            if (!whisperStopped && (CompCache.StoryWC.storyFlags["Start_ReceivedGift"] || !ModSettings.storyEnabled))
+            if (!whisperStopped && ((CompCache.StoryWC.storyFlags["Start_TreeTalkedTo"] || CompCache.StoryWC.storyFlags["Start_ReceivedGift"]) || !ModSettings.storyEnabled))
             {
                 whisperStopped = true;
                 if (animaTreeWhisperSustainer != null)
@@ -170,10 +171,10 @@ namespace CaravanAdventures.CaravanStory
             if (!CompCache.StoryWC.storyFlags["Start_CanReceiveGift"])
             {
                 var endDiaNodeAccepted = new DiaNode("Story_Start_Dia1_Me_End_Accepted".Translate());
-                endDiaNodeAccepted.options.Add(new DiaOption("Story_Start_Dia1_Me_End_Bye".Translate()) { action = () => GrantAncientGift(initiator, addressed), resolveTree = true });
+                endDiaNodeAccepted.options.Add(new DiaOption("Story_Start_Dia1_Me_End_Bye".Translate()) { action = () => TalkedToTree(initiator, addressed), resolveTree = true });
 
                 var endDiaNodeDenied = new DiaNode("Story_Start_Dia1_Me_End_Denied".Translate());
-                endDiaNodeDenied.options.Add(new DiaOption("Story_Start_Dia1_Me_End_Bye".Translate()) { resolveTree = true });
+                endDiaNodeDenied.options.Add(new DiaOption("Story_Start_Dia1_Me_End_Bye".Translate()) { resolveTree = true, action = () => TalkedToTree(initiator, addressed, false) });
 
                 var subDiaNode = new DiaNode("Story_Start_Dia1_Me".Translate());
                 subDiaNode.options.Add(new DiaOption("Story_Start_Dia1_Me_NoChoice".Translate()) { link = endDiaNodeAccepted });
@@ -217,11 +218,9 @@ namespace CaravanAdventures.CaravanStory
             else CompCache.StoryWC.questCont.LastJudgment.EndApocalypse();
         }
 
-        private void GrantAncientGift(Pawn initiator, object addressed)
+        private void TalkedToTree(Pawn initiator, object addressed, bool acceptedGift = true)
         {
-            CompCache.StoryWC.storyFlags["Start_CanReceiveGift"] = true;
-            CheckEnsureGifted(initiator);
-
+            CompCache.StoryWC.SetSF("Start_TreeTalkedTo");
             foreach (var susMap in Find.Maps)
             {
                 if (susMap == null) continue;
@@ -231,6 +230,14 @@ namespace CaravanAdventures.CaravanStory
                 comp.animaTreeWhisperSustainer.End();
             }
 
+            if (acceptedGift) GrantAncientGift(initiator, addressed);
+            else Quests.QuestUtility.AppendQuestDescription(Quests.StoryQuestDefOf.CA_TheTree, "CA_Story_DeniedGift".Translate(initiator.NameShortColored), false, true);
+        }
+
+        private void GrantAncientGift(Pawn initiator, object addressed)
+        {
+            CheckEnsureGifted(initiator);
+            CompCache.StoryWC.storyFlags["Start_CanReceiveGift"] = true;
             CompCache.StoryWC.storyFlags["Start_ReceivedGift"] = true;
 
             Quests.QuestUtility.AppendQuestDescription(Quests.StoryQuestDefOf.CA_TheTree, "CA_Story_ReceivedGiftLetterDesc".Translate(initiator.NameShortColored, GenderUtility.GetPronoun(initiator.gender)));
