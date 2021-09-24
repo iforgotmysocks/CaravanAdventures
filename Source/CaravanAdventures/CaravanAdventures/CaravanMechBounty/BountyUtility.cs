@@ -16,6 +16,7 @@ namespace CaravanAdventures.CaravanMechBounty
             {
                 MustBeCapableOfViolence = true,
                 AllowAddictions = false,
+                FixedIdeo = Faction.OfPlayerSilentFail?.ideos?.PrimaryIdeo
             };
             var veteran = PawnGenerator.GeneratePawn(genPawnRequest);
             if (veteran == null) return null;
