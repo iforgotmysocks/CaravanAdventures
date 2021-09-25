@@ -99,11 +99,16 @@ namespace CaravanAdventures.CaravanCamp
             var colonists = caravan.PawnsListForReading.Where(col => col.IsFreeColonist).ToList();
             var bill = new Bill_Production(CampDefOf.CACookGrillSnackBulk) { targetCount = colonists.Count != 0 ? colonists.Count * 3 : 12, repeatMode = BillRepeatModeDefOf.TargetCount };
             campFire.BillStack.AddBill(bill);
+            if (ModSettings.campStorageAndJobsAllowHumanMeat) bill.ingredientFilter.SetAllow(ThingDefOf.Meat_Human, true);
+            if (ModSettings.campStorageAndJobsAllowInsectMeat) bill.ingredientFilter.SetAllow(ThingDef.Named("Meat_Megaspider"), true);
 
             if (DefDatabase<ResearchProjectDef>.GetNamed("PackagedSurvivalMeal", false)?.ProgressPercent == 1f)
             {
                 var surv = new Bill_Production(DefDatabase<RecipeDef>.GetNamed("CookMealSurvivalBulk", false)) { targetCount = colonists.Count != 0 ? colonists.Count * 10 : 12, repeatMode = BillRepeatModeDefOf.TargetCount };
                 campFire.BillStack.AddBill(surv);
+                if (ModSettings.campStorageAndJobsAllowHumanMeat) surv.ingredientFilter.SetAllow(ThingDefOf.Meat_Human, true);
+                if (ModSettings.campStorageAndJobsAllowInsectMeat) surv.ingredientFilter.SetAllow(ThingDef.Named("Meat_Megaspider"), true);
+
             }
         }
 
@@ -112,11 +117,15 @@ namespace CaravanAdventures.CaravanCamp
             var colonists = caravan.PawnsListForReading.Where(col => col.IsFreeColonist).ToList();
             var bill = new Bill_Production(DefDatabase<RecipeDef>.GetNamed("CookMealSimpleBulk")) { targetCount = colonists.Count != 0 ? colonists.Count * 3 : 12, repeatMode = BillRepeatModeDefOf.TargetCount };
             campFire.BillStack.AddBill(bill);
+            if (ModSettings.campStorageAndJobsAllowHumanMeat) bill.ingredientFilter.SetAllow(ThingDefOf.Meat_Human, true);
+            if (ModSettings.campStorageAndJobsAllowInsectMeat) bill.ingredientFilter.SetAllow(ThingDef.Named("Meat_Megaspider"), true);
 
             if (DefDatabase<ResearchProjectDef>.GetNamed("Pemmican", false)?.ProgressPercent == 1f)
             {
                 var surv = new Bill_Production(DefDatabase<RecipeDef>.GetNamed("Make_PemmicanBulk", false)) { targetCount = colonists.Count != 0 ? colonists.Count * 10 * 18 : 12 * 18, repeatMode = BillRepeatModeDefOf.TargetCount };
                 campFire.BillStack.AddBill(surv);
+                if (ModSettings.campStorageAndJobsAllowHumanMeat) surv.ingredientFilter.SetAllow(ThingDefOf.Meat_Human, true);
+                if (ModSettings.campStorageAndJobsAllowInsectMeat) surv.ingredientFilter.SetAllow(ThingDef.Named("Meat_Megaspider"), true);
             }
         }
     }

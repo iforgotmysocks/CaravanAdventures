@@ -58,6 +58,8 @@ namespace CaravanAdventures.Settings
             options.CheckboxLabeled("Build plant tent", ref ModSettings.hasPlantTent);
             options.Gap();
             options.CheckboxLabeled("Auto apply camp gear recipes (e.g. food depending on pawn number, clothes)", ref ModSettings.autoApplyCampGearRecipes);
+            options.CheckboxLabeled("Allow insect meat usage for jobs and storage", ref ModSettings.campStorageAndJobsAllowInsectMeat);
+            options.CheckboxLabeled("Allow human meat usage for jobs and storage", ref ModSettings.campStorageAndJobsAllowHumanMeat);
             options.CheckboxLabeled("Auto apply zone for snow to be cleared within the camp", ref ModSettings.autoApplyCampClearSnowArea);
             options.CheckboxLabeled("Generate storage for all inventory items", ref ModSettings.generateStorageForAllInventory, "When disabled, most items will remain packed on the animals");
             options.CheckboxLabeled("Set up a stone cutting table instead of the art bench if researched", ref ModSettings.preferStonecutting);
