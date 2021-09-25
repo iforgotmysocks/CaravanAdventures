@@ -103,7 +103,8 @@ namespace CaravanAdventures.CaravanCamp
         public virtual void ApplyRecipes(Caravan caravan)
         {
             var bill = new Bill_Production(DefDatabase<RecipeDef>.GetNamed("ButcherCorpseFlesh")) { repeatMode = BillRepeatModeDefOf.Forever };
-            bill.ingredientFilter.SetAllow(ThingCategoryDefOf.CorpsesInsect, false);
+            bill.ingredientFilter.SetAllow(ThingCategoryDefOf.CorpsesInsect, ModSettings.campStorageAndJobsAllowHumanMeat);
+            bill.ingredientFilter.SetAllow(ThingCategoryDefOf.CorpsesHumanlike, ModSettings.campStorageAndJobsAllowHumanMeat);
             tableButcher.BillStack.AddBill(bill);
 
             var pantsBill = new Bill_ProductionWithUft(DefDatabase<RecipeDef>.GetNamed("Make_Apparel_Pants")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 1, hpRange = new FloatRange(0.9f, 1f), includeTainted = false, qualityRange = new QualityRange(QualityCategory.Normal, QualityCategory.Legendary) };
@@ -140,7 +141,8 @@ namespace CaravanAdventures.CaravanCamp
             }
                 
             var bill = new Bill_Production(DefDatabase<RecipeDef>.GetNamed("ButcherCorpseFlesh")) { repeatMode = BillRepeatModeDefOf.Forever };
-            bill.ingredientFilter.SetAllow(ThingCategoryDefOf.CorpsesInsect, false);
+            bill.ingredientFilter.SetAllow(ThingCategoryDefOf.CorpsesInsect, ModSettings.campStorageAndJobsAllowHumanMeat);
+            bill.ingredientFilter.SetAllow(ThingCategoryDefOf.CorpsesHumanlike, ModSettings.campStorageAndJobsAllowHumanMeat);
             tableButcher.BillStack.AddBill(bill);
 
             var bowBill = new Bill_ProductionWithUft(DefDatabase<RecipeDef>.GetNamed("Make_Bow_Recurve")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 1, hpRange = new FloatRange(0.9f, 1f), includeTainted = false, qualityRange = new QualityRange(QualityCategory.Normal, QualityCategory.Legendary) };

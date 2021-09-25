@@ -47,9 +47,11 @@ namespace CaravanAdventures.CaravanCamp
             zone.settings.filter.SetAllow(ThingDefOf.MealSurvivalPack, false);
             zone.settings.filter.SetAllow(ThingDefOf.Kibble, false);
             zone.settings.filter.SetAllow(ThingDefOf.Hay, false);
-            zone.settings.filter.SetAllow(ThingDef.Named("Meat_Megaspider"), false);
+            zone.settings.filter.SetAllow(ThingDef.Named("Meat_Megaspider"), ModSettings.campStorageAndJobsAllowInsectMeat);
             zone.settings.filter.SetAllow(ThingCategoryDefOf.CorpsesAnimal, true);
-            zone.settings.filter.SetAllow(ThingCategoryDefOf.CorpsesInsect, false);
+            zone.settings.filter.SetAllow(ThingCategoryDefOf.CorpsesInsect, ModSettings.campStorageAndJobsAllowInsectMeat);
+            zone.settings.filter.SetAllow(ThingCategoryDefOf.CorpsesHumanlike, ModSettings.campStorageAndJobsAllowHumanMeat);
+            zone.settings.filter.SetAllow(ThingDefOf.Meat_Human, ModSettings.campStorageAndJobsAllowHumanMeat);
             zone.settings.Priority = StoragePriority.Preferred;
             zone.label = "CAFoodZoneLabel".Translate();
             CellRect.Cells.Where(cell => cell != null && !CellRect.EdgeCells.Contains(cell)).ToList().ForEach(cell => zone.AddCell(cell));

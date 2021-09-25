@@ -46,6 +46,8 @@ namespace CaravanAdventures
         public static bool preferStonecutting = true;
         public static bool createCampPackingSpot = true;
         public static bool caravanCampProximityRemoval;
+        public static bool campStorageAndJobsAllowHumanMeat;
+        public static bool campStorageAndJobsAllowInsectMeat;
 
         // camp cost TODO -> create defs for tent types and move it there
         public static int campSupplyCostAnimalArea = 1;
@@ -166,6 +168,8 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref preferStonecutting, "preferStonecutting", true);
             Scribe_Values.Look(ref createCampPackingSpot, "createCampPackingSpot", true);
             Scribe_Values.Look(ref caravanCampProximityRemoval, "caravanCampProximityRemoval", false);
+            Scribe_Values.Look(ref campStorageAndJobsAllowInsectMeat, "campStorageAndJobsAllowInsectMeat", false);
+            Scribe_Values.Look(ref campStorageAndJobsAllowHumanMeat, "campStorageAndJobsAllowHumanMeat", false);
 
             // filters
             Scribe_Values.Look(ref autoSelectPawns, "autoSelectPawns", true);
