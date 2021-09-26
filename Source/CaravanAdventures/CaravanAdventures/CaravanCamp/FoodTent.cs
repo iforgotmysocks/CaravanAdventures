@@ -60,6 +60,9 @@ namespace CaravanAdventures.CaravanCamp
 
         public virtual void ApplyInventory(Map map, Caravan caravan)
         {
+            if (ModSettings.campStorageAndJobsAllowHumanMeat) validFoods.Append(ThingCategoryDefOf.CorpsesHumanlike);
+            if (ModSettings.campStorageAndJobsAllowInsectMeat) validFoods.Append(ThingCategoryDefOf.CorpsesInsect);
+
             foreach (var cell in zone.Cells)
             {
                 var stack = CampHelper.GetFirstOrderedThingOfCategoryFromCaravan(caravan, validFoods, unvalidFoods);
