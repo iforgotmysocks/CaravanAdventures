@@ -108,8 +108,12 @@ namespace CaravanAdventures.CaravanCamp
                 campFire.BillStack.AddBill(surv);
                 if (ModSettings.campStorageAndJobsAllowHumanMeat) surv.ingredientFilter.SetAllow(ThingDefOf.Meat_Human, true);
                 if (ModSettings.campStorageAndJobsAllowInsectMeat) surv.ingredientFilter.SetAllow(ThingDef.Named("Meat_Megaspider"), true);
-
             }
+
+            if (!ModSettings.campStorageAndJobsAllowHumanMeat) return;
+            var burnApparel = new Bill_Production(DefDatabase<RecipeDef>.GetNamedSilentFail("BurnApparel")) { repeatMode = BillRepeatModeDefOf.Forever };
+            burnApparel.ingredientFilter.SetAllow(SpecialThingFilterDefOf.AllowNonDeadmansApparel, false);
+            campFire.billStack.AddBill(burnApparel);
         }
 
         public virtual void ApplyRecipesTribal(Caravan caravan)
@@ -127,6 +131,11 @@ namespace CaravanAdventures.CaravanCamp
                 if (ModSettings.campStorageAndJobsAllowHumanMeat) surv.ingredientFilter.SetAllow(ThingDefOf.Meat_Human, true);
                 if (ModSettings.campStorageAndJobsAllowInsectMeat) surv.ingredientFilter.SetAllow(ThingDef.Named("Meat_Megaspider"), true);
             }
+
+            if (!ModSettings.campStorageAndJobsAllowHumanMeat) return;
+            var burnApparel = new Bill_Production(DefDatabase<RecipeDef>.GetNamedSilentFail("BurnApparel")) { repeatMode = BillRepeatModeDefOf.Forever };
+            burnApparel.ingredientFilter.SetAllow(SpecialThingFilterDefOf.AllowNonDeadmansApparel, false);
+            campFire.billStack.AddBill(burnApparel);
         }
     }
 }
