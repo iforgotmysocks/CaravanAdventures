@@ -39,7 +39,7 @@ namespace CaravanAdventures
 
         public static System.Reflection.Assembly GetAssembly(string assemblyString, List<(string assemblyString, System.Reflection.Assembly assembly)> detectedAssemblies)
         {
-            var selAssembly = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(assembly => assembly.FullName.ToLower().StartsWith(assemblyString));
+            var selAssembly = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(assembly => assembly.FullName.ToLower().StartsWith(assemblyString.ToLower()));
             if (selAssembly == null) return null;
             detectedAssemblies.Add((assemblyString, selAssembly));
             return selAssembly;
@@ -124,9 +124,9 @@ namespace CaravanAdventures
             }
         }
 
-        public static void RunSavely(Action action, bool suppressError = false) => RunSavely(() => { action(); return 0; }, suppressError);
+        public static void RunSavely(Action action, bool suppressError = false, string failMessage = "") => RunSavely(() => { action(); return 0; }, suppressError, failMessage);
 
-        public static T RunSavely<T>(Func<T> action, bool suppressError = false)
+        public static T RunSavely<T>(Func<T> action, bool suppressError = false, string failMessage = "")
         {
             try
             {
@@ -134,18 +134,18 @@ namespace CaravanAdventures
             }
             catch (Exception ex)
             {
-                if (!suppressError) Log.Error(ex.ToString());
+                if (!suppressError) Log.Error(failMessage + ex.ToString());
             }
 
             return default(T);
         }
 
-        public static void RunSavelyWithDelay(Action action, ref float counter, int timeout = 2000, bool suppressError = false)
+        public static void RunSavelyWithDelay(Action action, ref float counter, int timeout = 2000, bool suppressError = false, string failMessage = "")
         {
-            RunSavelyWithDelay(() => { action(); return 0; }, ref counter, timeout, suppressError);
+            RunSavelyWithDelay(() => { action(); return 0; }, ref counter, timeout, suppressError, failMessage);
         }
 
-        public static T RunSavelyWithDelay<T>(Func<T> action, ref float counter, int timeout = 2000, bool suppressError = false)
+        public static T RunSavelyWithDelay<T>(Func<T> action, ref float counter, int timeout = 2000, bool suppressError = false, string failMessage = "")
         {
             try
             {
@@ -154,7 +154,7 @@ namespace CaravanAdventures
             catch (Exception ex)
             {
                 counter += timeout; 
-                if (!suppressError) Log.Error(ex.ToString());
+                if (!suppressError) Log.Error(failMessage + ex.ToString());
             }
 
             return default(T);
