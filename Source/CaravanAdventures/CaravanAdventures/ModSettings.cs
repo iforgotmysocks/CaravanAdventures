@@ -99,6 +99,7 @@ namespace CaravanAdventures
         public static bool sacHuntersHostileTowardsNaturalEnemies = true;
         public static bool allowApocToAlterTileTemp = false;
         public static bool whisperDisabledManually = false;
+        public static bool noFreeStuff = false;
 
         // shrines
         public static float shrineMechDifficultyMultiplier = 1.2f;
@@ -210,6 +211,7 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref sacHuntersHostileTowardsNaturalEnemies, "sacHuntersHostileTowardsNaturalEnemies", true);
             Scribe_Values.Look(ref allowApocToAlterTileTemp, "allowApocToAlterTileTemp", false);
             Scribe_Values.Look(ref whisperDisabledManually, "whisperDisabledManually", false);
+            Scribe_Values.Look(ref noFreeStuff, "noFreeStuff", false);
 
             // shrines
             Scribe_Values.Look(ref shrineMechDifficultyMultiplier, "shrineMechDifficultyMultiplier", 1.2f);

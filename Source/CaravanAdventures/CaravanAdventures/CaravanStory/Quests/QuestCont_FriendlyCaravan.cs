@@ -62,9 +62,11 @@ namespace CaravanAdventures.CaravanStory.Quests
 
         public void FriendlyCaravan_Conversation(Pawn initiator, Pawn addressed)
         {
-            var rewardDef = DefDatabase<ResearchProjectDef>.GetNamedSilentFail("Electricity")?.ProgressPercent == 1f
-                ? DefDatabase<ThingDef>.GetNamedSilentFail("VanometricPowerCell")
-                : DefDatabase<ThingDef>.GetNamedSilentFail("Apparel_ShieldBelt");
+            var rewardDef = ModSettings.noFreeStuff 
+                ? DefDatabase<ThingDef>.GetNamedSilentFail("WoodLog") 
+                : (DefDatabase<ResearchProjectDef>.GetNamedSilentFail("Electricity")?.ProgressPercent == 1f
+                    ? DefDatabase<ThingDef>.GetNamedSilentFail("VanometricPowerCell")
+                    : DefDatabase<ThingDef>.GetNamedSilentFail("Apparel_ShieldBelt"));
 
             DiaNode diaNode = null;
 

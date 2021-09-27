@@ -42,6 +42,7 @@ namespace CaravanAdventures.Settings
 
             Text.Font = GameFont.Small;
 
+            options.CheckboxLabeled("Disable the quest faction starting gift and lootability", ref ModSettings.noFreeStuff, "Disable the quest faction starting help and apply max biocode chance and DeathAcidifiers");
             options.CheckboxLabeled("Mute the anima tree whisper sound", ref ModSettings.whisperDisabledManually, "Takes a few seconds to take effect when the game is unpaused");
             options.CheckboxLabeled("Apocalypse enabled", ref ModSettings.apocalypseEnabled);
             options.Label($"Apocalypse temperature change per day: {Math.Round(ModSettings.apocalypseTemperatureChangePerDay, 4)}  (Default: -0.084)");
