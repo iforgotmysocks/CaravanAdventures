@@ -25,6 +25,7 @@ namespace CaravanAdventures
                 Helper.RunSavely(PatchTreeDef_AddTalkOption);
                 Helper.RunSavely(PatchHumanDef_AddTalkOption);
                 Helper.RunSavely(PatchRemoveRoyalTitleRequirements);
+                if (ModSettings.noFreeStuff) Helper.RunSavely(PatchSacHunterItemDropStats);
                 storyPatchesLoaded = true;
             }
             if (!ModSettings.storyEnabled && ModsConfig.RoyaltyActive)
@@ -46,6 +47,15 @@ namespace CaravanAdventures
         {
             var fencePostDef = CaravanCamp.CampDefOf.CAFencePost;
             fencePostDef.passability = Traversability.Impassable;
+        }
+
+        private static void PatchSacHunterItemDropStats()
+        {
+            foreach (var kind in DefDatabase<PawnKindDef>.AllDefsListForReading.Where(x => x.defaultFactionType == StoryDefOf.CASacrilegHunters))
+            {
+                kind.biocodeWeaponChance = 1f;
+                if (kind?.techHediffsRequired != null) kind.techHediffsRequired.Add(ThingDef.Named("DeathAcidifier"));
+            }
         }
 
         private static void DisableFactionVillageCreation()
