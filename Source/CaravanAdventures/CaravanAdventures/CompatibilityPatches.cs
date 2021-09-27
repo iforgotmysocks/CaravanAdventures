@@ -19,7 +19,7 @@ namespace CaravanAdventures
         public static bool InDetectedAssemblies(string assName) => detectedAssemblies.Any(x => x.assemblyString.ToLower() == assName.ToLower());
         public static void ExecuteCompatibilityPatches()
         {
-            detectedAssemblies = new List<(string, Assembly)>();
+            detectedAssemblies = detectedAssemblies ?? new List<(string, Assembly)>();
 
             Helper.RunSavely(() => {
                 var alienRaceAssembly = Helper.GetAssembly("alienrace", detectedAssemblies); 
@@ -28,7 +28,7 @@ namespace CaravanAdventures
                     Log.Message($"Caravan Adventures: Applying patch for AlienRaces - adding alienrace corpses to caravan dialog filter");
                     FilterCombs.packUp.appliedFilters.FirstOrDefault(filter => filter.Name == "Corpses").ThingCategoryDefs.Add(ThingCategoryDef.Named("alienCorpseCategory"));
                 }
-            });
+            }, false, ErrorMessage("alien races"));
 
             Helper.RunSavely(() =>
             {
@@ -51,7 +51,7 @@ namespace CaravanAdventures
                         CompatibilityDefOf.CACompatDef.excludedBiomeDefNamesForStoryShrineGeneration.Add(biomeDef.defName);
                     }
                 }
-            });
+            }, false, ErrorMessage("alpha biomes"));
 
             Helper.RunSavely(() => {
                 var realRuinsAssembly = Helper.GetAssembly("realruins", detectedAssemblies);
@@ -63,7 +63,7 @@ namespace CaravanAdventures
                     }
                     else Log.Warning($"Caravan Adventures: Applying patch for realruins failed");
                 }
-            });
+            }, false, "Following error happend while trying to patching SOS2 for compatibility with CA, but was catched savely:");
 
             Helper.RunSavely(() => {
                 var sos2Assembly = Helper.GetAssembly("shipshaveinsides", detectedAssemblies);
@@ -71,15 +71,20 @@ namespace CaravanAdventures
                 {
                     Log.Message($"Adding SOS2 story check for space");
                 }
-            });
+            }, false, ErrorMessage("SOS2"));
+
+            ExecuteHarmonyCompatibilityPatches();
 
             Log.Message($"CA v{System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString().TrimEnd(new[] { '.', '0' })} (1.2) patches complete.");
         }
 
-        public static void ExecuteHarmonyCompatibilityPatches(Harmony harmony)
+        public static void ExecuteHarmonyCompatibilityPatches()
         {
-            
+            detectedAssemblies = detectedAssemblies ?? new List<(string, Assembly)>();
         }
+
+        private static string ErrorMessage(string modName) => $"Following error happend while trying to patching {modName} for compatibility with CA, but was catched savely:\n";
+
     }
     
 }
