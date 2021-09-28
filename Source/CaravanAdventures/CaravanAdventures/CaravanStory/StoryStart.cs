@@ -193,7 +193,6 @@ namespace CaravanAdventures.CaravanStory
                 diaNode = new DiaNode("Story_Start_Dia1_Me_End_GiftAlreadyRecieved".Translate());
                 diaNode.options.Add(new DiaOption("Story_Start_Dia1_Me_End_Bye".Translate()) { resolveTree = true });
                 if (gifted != initiator) diaNode.options.Add(new DiaOption("Story_Start_Dia1_1_Neg_Option2".Translate(gifted.NameShortColored, GenderUtility.GetPossessive(gifted.gender))) { link = subDiaNode });
-
             }
 
             if (CompCache.StoryWC.storyFlags["Judgment_Completed"])
@@ -236,8 +235,8 @@ namespace CaravanAdventures.CaravanStory
 
         private void GrantAncientGift(Pawn initiator, object addressed)
         {
-            CheckEnsureGifted(initiator);
             CompCache.StoryWC.storyFlags["Start_CanReceiveGift"] = true;
+            CheckEnsureGifted(initiator);
             CompCache.StoryWC.storyFlags["Start_ReceivedGift"] = true;
 
             Quests.QuestUtility.AppendQuestDescription(Quests.StoryQuestDefOf.CA_TheTree, "CA_Story_ReceivedGiftLetterDesc".Translate(initiator.NameShortColored, GenderUtility.GetPronoun(initiator.gender)));
