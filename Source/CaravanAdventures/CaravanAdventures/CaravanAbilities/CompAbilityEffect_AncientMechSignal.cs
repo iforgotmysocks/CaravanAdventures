@@ -24,7 +24,7 @@ namespace CaravanAdventures.CaravanAbilities
             var faction = Faction.OfPlayer; // StoryUtility.CreateOrGetFriendlyMechFaction();
 
             AffectedCells(target, map).Where(x => x.Standable(map))
-                .InRandomOrder().Take(Rand.RangeInclusive(5, 7)).ToList()
+                .InRandomOrder().Take(Rand.RangeInclusive(ModSettings.scytherRange.min, ModSettings.scytherRange.max)).ToList()
                 .ForEach(cell => scythers.Add(Helper.RunSavely(() => SpawnScyther(cell, parent.pawn, faction))));
 
             if (target.Pawn != null) LordMaker.MakeNewLord(parent.pawn.Faction, new LordJob_EscortPawn(target.Pawn), map, scythers);

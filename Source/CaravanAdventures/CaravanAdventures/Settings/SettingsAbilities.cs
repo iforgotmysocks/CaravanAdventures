@@ -56,6 +56,11 @@ namespace CaravanAdventures.Settings
             }
             options.Gap();
 
+            options.Label("Ancient mech signal:".Colorize(Color.green), 24f);
+            options.Label($"Set the min and max amount range of scythers that can appear:");
+            options.IntRange(ref ModSettings.scytherRange, 1, 10);
+            options.Gap();
+
             options.Label("Ancient thunderbolt:".Colorize(Color.green), 24f);
             options.Label("Mechanoid bodypart dissmember chance: " + Convert.ToInt32(ModSettings.mechanoidDissmemberChance * 100) + "%");
             ModSettings.mechanoidDissmemberChance = options.Slider(ModSettings.mechanoidDissmemberChance, 0f, 1f);

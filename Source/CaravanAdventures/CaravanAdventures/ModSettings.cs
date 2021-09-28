@@ -69,6 +69,8 @@ namespace CaravanAdventures
         // abilities
         // - ancient gift
         public static float ancientGiftPassivePsyfocusGainPerSec = 0.00035f;
+        // - ancient mech signal
+        public static IntRange scytherRange = new IntRange(2, 4);
         // - thunderbolt
         public static float mechanoidDissmemberChance = 0.6f;
         public static float humanDissmemberChance = 0.3f;
@@ -179,6 +181,8 @@ namespace CaravanAdventures
             // abilities
             // - ancient gift
             Scribe_Values.Look(ref ancientGiftPassivePsyfocusGainPerSec, "ancientGiftPassivePsyfocusGainPerSec", 0.00035f);
+            // - ancient mech signal
+            Scribe_Values.Look(ref scytherRange, "scytherRange", new IntRange(2, 4));
             // - thunderbolt
             Scribe_Values.Look(ref mechanoidDissmemberChance, "mechanoidDissmemberChance", 0.6f);
             Scribe_Values.Look(ref humanDissmemberChance, "humanDissmemberChance", 0.3f);
