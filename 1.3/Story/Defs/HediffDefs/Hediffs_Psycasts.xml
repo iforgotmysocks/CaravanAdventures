@@ -49,8 +49,8 @@
           <MoveSpeed>2</MoveSpeed>
           <ToxicSensitivity>-0.8</ToxicSensitivity>
           <MentalBreakThreshold>-0.20</MentalBreakThreshold>
-          <MeleeDodgeChance>30</MeleeDodgeChance>
-          <MeleeHitChance>15</MeleeHitChance>
+          <MeleeDodgeChance>15</MeleeDodgeChance>
+          <!--<MeleeHitChance>15</MeleeHitChance>-->
         </statOffsets>
         <statFactors>
           <IncomingDamageFactor>0.3</IncomingDamageFactor>
@@ -91,8 +91,8 @@
 					<MoveSpeed>2</MoveSpeed>
 					<ToxicSensitivity>-0.8</ToxicSensitivity>
 					<MentalBreakThreshold>-0.20</MentalBreakThreshold>
-          <MeleeDodgeChance>30</MeleeDodgeChance>
-          <MeleeHitChance>15</MeleeHitChance>
+          <MeleeDodgeChance>15</MeleeDodgeChance>
+          <!--<MeleeHitChance>15</MeleeHitChance>-->
 				</statOffsets>
 				<statFactors>
 					<PsychicEntropyMax>0.9</PsychicEntropyMax>
@@ -122,6 +122,8 @@
 			<li>
 				<statOffsets>
 					<PsychicEntropyRecoveryRate>1.5</PsychicEntropyRecoveryRate>
+          <MeleeDodgeChance>15</MeleeDodgeChance>
+          <MeleeHitChance>15</MeleeHitChance>
 				</statOffsets>
 				<statFactors>
 					<MeditationFocusGain>3</MeditationFocusGain>
