@@ -27,4 +27,5 @@
   <CA_Story_Start_MachinesDisabled>원하는 대로... 흠, 기계들이 잠들었고 비활성화 상태로 남는다.</CA_Story_Start_MachinesDisabled>
   <CA_Story_Start_Bye>안녕히.</CA_Story_Start_Bye>
 
+ <CA_Story_DeniedGift>{0} denied the ancient gift. Accept the gift with a pawn of your choice to continue the story. You can reach out to any anima tree you may find.</CA_Story_DeniedGift>
 </LanguageData>
