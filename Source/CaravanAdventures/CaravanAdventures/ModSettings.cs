@@ -102,6 +102,7 @@ namespace CaravanAdventures
         public static bool allowApocToAlterTileTemp = false;
         public static bool whisperDisabledManually = false;
         public static bool noFreeStuff = false;
+        public static int delayStoryDays = 0;
 
         // shrines
         public static float shrineMechDifficultyMultiplier = 1.2f;
@@ -216,6 +217,7 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref allowApocToAlterTileTemp, "allowApocToAlterTileTemp", false);
             Scribe_Values.Look(ref whisperDisabledManually, "whisperDisabledManually", false);
             Scribe_Values.Look(ref noFreeStuff, "noFreeStuff", false);
+            Scribe_Values.Look(ref delayStoryDays, "delayStoryDays", 0);
 
             // shrines
             Scribe_Values.Look(ref shrineMechDifficultyMultiplier, "shrineMechDifficultyMultiplier", 1.2f);

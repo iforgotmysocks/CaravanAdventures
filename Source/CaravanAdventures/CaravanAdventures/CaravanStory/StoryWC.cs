@@ -196,6 +196,12 @@ namespace CaravanAdventures.CaravanStory
             if (ticks > 1200)
             {
                 ticks = 0;
+
+                if (ModSettings.delayStoryDays != 0 && ModSettings.delayStoryDays * 60000 > Find.TickManager.TicksGame && !ModSettings.debug)
+                {
+                    //DLog.Message($"Delaying story. Current ticks: {Find.TickManager.TicksGame} / {ModSettings.delayStoryDays * 60000}");
+                    return;
+                }
                 StoryUtility.GenerateStoryContact();
                 if (CheckCanStartFriendlyCaravanCounter() && !debugFlags["FriendlyCaravanDone"])
                 {

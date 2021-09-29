@@ -44,6 +44,15 @@ namespace CaravanAdventures.Settings
 
             options.CheckboxLabeled("Disable the quest faction starting gift and lootability", ref ModSettings.noFreeStuff, "Disable the quest faction starting help and apply max biocode chance and DeathAcidifiers");
             options.CheckboxLabeled("Mute the anima tree whisper sound", ref ModSettings.whisperDisabledManually, "Takes a few seconds to take effect when the game is unpaused");
+            
+            var rect = options.GetRect(Text.LineHeight);
+            rect.width = options.ColumnWidth * 0.7f;
+            Widgets.Label(rect, "Delay the story by additional days, default is 0:");
+            var delayInDays = Widgets.TextField(ModSettings.BRect(options.ColumnWidth - 40, rect.y, 40, Text.LineHeight), ModSettings.delayStoryDays.ToString());
+            if (double.TryParse(delayInDays, out var delayInDaysDouble)) ModSettings.delayStoryDays = Convert.ToInt32(delayInDaysDouble);
+            else ModSettings.delayStoryDays = 0;
+            options.Gap();
+            
             options.CheckboxLabeled("Apocalypse enabled", ref ModSettings.apocalypseEnabled);
             options.Label($"Apocalypse temperature change per day: {Math.Round(ModSettings.apocalypseTemperatureChangePerDay, 4)}  (Default: -0.084)");
             ModSettings.apocalypseTemperatureChangePerDay = options.Slider(ModSettings.apocalypseTemperatureChangePerDay, 0f, -0.5f);
