@@ -62,8 +62,12 @@ namespace CaravanAdventures.CaravanCamp
 
             if (ModSettings.createCampPackingSpot)
             {
-                location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 1 && cell.z == CellRect.maxZ - 1);
-                CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("CaravanPackingSpot")), location, map, default, campAssetListRef);
+                var spot = DefDatabase<ThingDef>.GetNamedSilentFail("CaravanPackingSpot") ?? DefDatabase<ThingDef>.GetNamedSilentFail("CaravanHitchingPost");
+                if (spot != null)
+                {
+                    location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 1 && cell.z == CellRect.maxZ - 1);
+                    CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(spot, spot.defName == "CaravanHitchingPost" ? ThingDefOf.WoodLog : null), location, map, default, campAssetListRef);
+                }
             }
 
             foreach (var cell in CellRect.Cells) map.roofGrid.SetRoof(cell, RoofDefOf.RoofConstructed);
@@ -82,8 +86,12 @@ namespace CaravanAdventures.CaravanCamp
 
             if (ModSettings.createCampPackingSpot)
             {
-                location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 1 && cell.z == CellRect.maxZ - 1);
-                CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("CaravanPackingSpot")), location, map, default, campAssetListRef);
+                var spot = DefDatabase<ThingDef>.GetNamedSilentFail("CaravanPackingSpot") ?? DefDatabase<ThingDef>.GetNamedSilentFail("CaravanHitchingPost");
+                if (spot != null)
+                {
+                    location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 1 && cell.z == CellRect.maxZ - 1);
+                    CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(spot, spot.defName == "CaravanHitchingPost" ? ThingDefOf.WoodLog : null), location, map, default, campAssetListRef);
+                }
             }
 
             foreach (var cornerCell in CellRect.Corners)
