@@ -184,6 +184,7 @@
     <Compile Include="DLog.cs" />
     <Compile Include="Expansions\ExpansionDef.cs" />
     <Compile Include="Expansions\ExpansionDefOf.cs" />
+    <Compile Include="Expansions\ExpansionManager.cs" />
     <Compile Include="Expansions\Settings\ExpSettingsDef.cs" />
     <Compile Include="Expansions\Settings\ExpSettingsDefOf.cs" />
     <Compile Include="Helper.cs" />
