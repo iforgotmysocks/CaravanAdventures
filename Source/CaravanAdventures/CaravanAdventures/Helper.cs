@@ -12,6 +12,8 @@ namespace CaravanAdventures
 {
     static class Helper
     {
+        public static Expansions.Settings.ExpSettingsDef ExpSettings => Expansions.ExpansionManager.ActiveExpansion?.expSettingsDef;
+        public static Expansions.ExpansionDef Exp => Expansions.ExpansionManager.ActiveExpansion;
         public static bool Debug() => ModSettings.debug;
 
         public static string LocPrefix(this string baseString)
