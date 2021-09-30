@@ -23,6 +23,7 @@ namespace CaravanAdventures.CaravanAbilities
                 .InRandomOrder().Take(Rand.RangeInclusive(ModSettings.scytherRange.min, ModSettings.scytherRange.max)).ToList()
                 .ForEach(cell => scythers.Add(Helper.RunSafely(() => SpawnScyther(cell, parent.pawn, faction))));
 
+            if (scythers.Count == 0 || !scythers.Any(x => x != null)) return;
             if (target.Pawn != null) LordMaker.MakeNewLord(parent.pawn.Faction, new LordJob_EscortPawn(target.Pawn), map, scythers);
             else if (target.Cell != default) LordMaker.MakeNewLord(parent.pawn.Faction, new LordJob_AssistColony(parent.pawn.Faction, target.Cell), map, scythers);
 
@@ -31,7 +32,7 @@ namespace CaravanAdventures.CaravanAbilities
 
         private Pawn SpawnScyther(IntVec3 intVec, Pawn pawn, Faction faction)
         {
-            var scyther = PawnGenerator.GeneratePawn(PawnKindDef.Named(Helper.ExpSettings.ancientMechSignalPawnKind.defName ?? "Mech_Scyther"), faction);
+            var scyther = PawnGenerator.GeneratePawn(PawnKindDef.Named(Helper.ExpSettings?.ancientMechSignalPawnKind?.defName ?? "Mech_Scyther"), faction);
             scyther.health.AddHediff(HediffDef.Named("CAOverheatingBrain"), scyther.health.hediffSet.GetBrain());
             scyther.forceNoDeathNotification = true;
             GenSpawn.Spawn(scyther, intVec, pawn.Map, WipeMode.Vanish);
