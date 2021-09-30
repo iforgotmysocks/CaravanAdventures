@@ -182,6 +182,10 @@
     <Compile Include="CompatibilityDef.cs" />
     <Compile Include="CompCache.cs" />
     <Compile Include="DLog.cs" />
+    <Compile Include="Expansions\ExpansionDef.cs" />
+    <Compile Include="Expansions\ExpansionDefOf.cs" />
+    <Compile Include="Expansions\Settings\ExpSettingsDef.cs" />
+    <Compile Include="Expansions\Settings\ExpSettingsDefOf.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="InitGC.cs" />
     <Compile Include="InitPatches.cs" />

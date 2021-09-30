@@ -17,8 +17,8 @@ namespace CaravanAdventures
         public static string LocPrefix(this string baseString)
         {
             if (!CompatibilityPatches.RMInst) return baseString;
-            if (!(CompatibilityPatches.RMInstPre + baseString).CanTranslate()) return baseString;
-            return CompatibilityPatches.RMInstPre + baseString;
+            if (!(Expansions.ExpansionDefOf.ExpRimedieval.langKeyPrefix + baseString).CanTranslate()) return baseString;
+            return Expansions.ExpansionDefOf.ExpRimedieval.langKeyPrefix + baseString;
         }
         public static void AdjustSettlementPrices()
         {
