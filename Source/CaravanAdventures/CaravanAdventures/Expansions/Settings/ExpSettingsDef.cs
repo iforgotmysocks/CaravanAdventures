@@ -10,6 +10,7 @@ namespace CaravanAdventures.Expansions.Settings
 {
     class ExpSettingsDef : Def
     {
-        public PawnKindDef ancientMechSignalPawnKind = null;
+        public PawnKindDef ancientMechSignalPawnKind;
+        public FactionDef primaryEnemyFactionDef;
     }
 }

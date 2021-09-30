@@ -91,7 +91,7 @@ namespace CaravanAdventures.CaravanMechBounty
 
             if (bountyNotificationCounter == 0)
             {
-                Find.LetterStack.ReceiveLetter("StoryVillage_Response_BountyInitiatedTitle".Translate(), "StoryVillage_Response_BountyInitiatedDesc".Translate(bountyFaction.NameColored, Faction.OfMechanoids.NameColored), LetterDefOf.PositiveEvent);
+                Find.LetterStack.ReceiveLetter("StoryVillage_Response_BountyInitiatedTitle".Translate(), "StoryVillage_Response_BountyInitiatedDesc".Translate(bountyFaction.NameColored, (Helper.ExpRM ? Find.FactionManager.FirstFactionOfDef(Helper.ExpSettings.primaryEnemyFactionDef) : Faction.OfMechanoids).NameColored), LetterDefOf.PositiveEvent);
                 bountyServiceAvailable = true;
             }
 

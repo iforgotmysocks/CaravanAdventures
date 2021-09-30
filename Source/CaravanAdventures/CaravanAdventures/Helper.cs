@@ -14,6 +14,9 @@ namespace CaravanAdventures
     {
         public static Expansions.Settings.ExpSettingsDef ExpSettings => Expansions.ExpansionManager.ActiveExpansion?.expSettingsDef;
         public static Expansions.ExpansionDef Exp => Expansions.ExpansionManager.ActiveExpansion;
+
+        // todo - add replacesMechanoidFaction field to Expansion and replace rimedieval with the field check
+        public static bool ExpRM => Expansions.ExpansionManager.ActiveExpansion.expansionName.ToLower() == "rimedieval";
         public static bool Debug() => ModSettings.debug;
 
         public static string LocPrefix(this string baseString)

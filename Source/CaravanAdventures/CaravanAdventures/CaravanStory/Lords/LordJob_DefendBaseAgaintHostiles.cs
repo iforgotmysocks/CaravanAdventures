@@ -44,11 +44,11 @@ namespace CaravanAdventures.CaravanStory.Lords
 			//transition3.AddTrigger(new Trigger_ChanceOnTickInteval(2500, 0.03f));
 			//transition3.AddTrigger(new Trigger_TicksPassed(251999));
 			//transition3.AddTrigger(new Trigger_UrgentlyHungry());
-			transition3.AddTrigger(new Trigger_ChanceOnMechHarmNPCBuilding(0.4f));
+			if (!Helper.ExpRM) transition3.AddTrigger(new Trigger_ChanceOnMechHarmNPCBuilding(0.4f));
 			transition3.AddTrigger(new Trigger_AttackWithReinforcements());
 			//transition3.AddTrigger(new Trigger_OnClamor(ClamorDefOf.Ability));
 			transition3.AddPostAction(new TransitionAction_WakeAll());
-			TaggedString taggedString = "VillageAttackMechsMessage".Translate(this.faction.def.pawnsPlural, this.faction.Name, Faction.OfMechanoids.def.pawnsPlural).CapitalizeFirst();
+			TaggedString taggedString = "VillageAttackMechsMessage".Translate(this.faction.def.pawnsPlural, this.faction.Name, Find.FactionManager.FirstFactionOfDef(Helper.ExpSettings?.primaryEnemyFactionDef)?.def?.pawnsPlural ?? Faction.OfMechanoids.def.pawnsPlural).CapitalizeFirst();
 			transition3.AddPreAction(new TransitionAction_Message(taggedString, MessageTypeDefOf.ThreatBig, null, 1f));
 			stateGraph.AddTransition(transition3, false);
 			return stateGraph;
