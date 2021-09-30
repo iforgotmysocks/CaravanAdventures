@@ -5,6 +5,7 @@
     <defName>ExpRimedieval</defName>
     <expansionName>Rimedieval</expansionName>
     <assemblyName>Rimedieval</assemblyName>
+    <replacesContent>true</replacesContent>
     <langKeyPrefix>RM_</langKeyPrefix>
     <expSettingsDef>ExpRimedievalSettings</expSettingsDef>
   </CaravanAdventures.Expansions.ExpansionDef>
