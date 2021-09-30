@@ -10,6 +10,7 @@ namespace CaravanAdventures.Expansions.Settings
 {
     class ExpSettingsDef : Def
     {
+#pragma warning disable CS0649
         public PawnKindDef ancientMechSignalPawnKind;
         public FactionDef primaryEnemyFactionDef;
     }
