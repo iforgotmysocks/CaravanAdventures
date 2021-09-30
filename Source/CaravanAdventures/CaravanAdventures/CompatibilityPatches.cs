@@ -9,6 +9,7 @@ namespace CaravanAdventures
 {
     static class CompatibilityPatches
     {
+        public static bool RMInst => InDetectedAssemblies("rimedieval");
         public static List<(string assemblyString, Assembly assembly)> detectedAssemblies;
         public static bool InDetectedAssemblies(string assName, bool caseSensitive = false) => caseSensitive ? detectedAssemblies.Any(x => x.assemblyString == assName) : detectedAssemblies.Any(x => x.assemblyString.ToLower() == assName.ToLower());
         public static void ExecuteCompatibilityPatches()
@@ -92,6 +93,9 @@ namespace CaravanAdventures
                 {
                     if (!Patches.Compatibility.Rimedieval.CheckRimedievalMechsDisabled(assembly)) return;
                     Log.Message($"Pausing story while rimedieval is enabled and mechs are suppressed");
+
+                    // todo instead:
+                    // Log.Message($"Caravan Adventures: Startig up in Rimedieval Mode");
                 }
             }, false, ErrorMessage("Rimedieval"));
 
