@@ -4,5 +4,6 @@
   <CaravanAdventures.Expansions.Settings.ExpSettingsDef>
     <defName>ExpRimedievalSettings</defName>
     <ancientMechSignalPawnKind>Spelopede</ancientMechSignalPawnKind>
+    <primaryEnemyFactionDef>OutlanderRough</primaryEnemyFactionDef>
   </CaravanAdventures.Expansions.Settings.ExpSettingsDef>
 </Defs>
