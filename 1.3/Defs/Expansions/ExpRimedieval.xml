@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+  <CaravanAdventures.Expansions.ExpansionDef>
+    <defName>ExpRimedieval</defName>
+    <expansionName>Rimedieval</expansionName>
+    <assemblyName>Rimedieval</assemblyName>
+    <langKeyPrefix>RM_</langKeyPrefix>
+    <expSettingsDef>ExpRimedievalSettings</expSettingsDef>
+  </CaravanAdventures.Expansions.ExpansionDef>
+</Defs>

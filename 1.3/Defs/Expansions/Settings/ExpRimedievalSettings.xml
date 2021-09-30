@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+  <CaravanAdventures.Expansions.Settings.ExpSettingsDef>
+    <defName>ExpRimedievalSettings</defName>
+    <ancientMechSignalPawnKind>Spelopede</ancientMechSignalPawnKind>
+    </CaravanAdventures.Expansions.Settings.ExpSettingsDef>
+</Defs>
