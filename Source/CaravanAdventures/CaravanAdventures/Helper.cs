@@ -14,6 +14,12 @@ namespace CaravanAdventures
     {
         public static bool Debug() => ModSettings.debug;
 
+        public static string LocPrefix(this string baseString)
+        {
+            if (!CompatibilityPatches.RMInst) return baseString;
+            if (!(CompatibilityPatches.RMInstPre + baseString).CanTranslate()) return baseString;
+            return CompatibilityPatches.RMInstPre + baseString;
+        }
         public static void AdjustSettlementPrices()
         {
             if (Find.World != null)

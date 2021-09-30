@@ -10,6 +10,7 @@ namespace CaravanAdventures
     static class CompatibilityPatches
     {
         public static bool RMInst => InDetectedAssemblies("rimedieval");
+        public static string RMInstPre => "RM_";
         public static List<(string assemblyString, Assembly assembly)> detectedAssemblies;
         public static bool InDetectedAssemblies(string assName, bool caseSensitive = false) => caseSensitive ? detectedAssemblies.Any(x => x.assemblyString == assName) : detectedAssemblies.Any(x => x.assemblyString.ToLower() == assName.ToLower());
         public static void ExecuteCompatibilityPatches()
