@@ -530,7 +530,7 @@ namespace CaravanAdventures.CaravanCamp
             foreach (var animal in animals.Reverse())
             {
                 if (ModSettings.letAnimalsRunFree && animal?.RaceProps?.trainability != null && animal?.RaceProps?.trainability != TrainabilityDefOf.None) continue;
-                PlaceIntoAnimalArea(animalArea, animal);
+                Helper.RunSavely(() => PlaceIntoAnimalArea(animalArea, animal));
             }
         }
 
@@ -541,6 +541,13 @@ namespace CaravanAdventures.CaravanCamp
             caravan.RemovePawn(animal);
             caravan.Notify_PawnRemoved(animal);
             GenSpawn.Spawn(animal, cell, map, Rot4.Random);
+            if (!animal.Spawned)
+            {
+                Log.Warning($"Unable to place {animal.NameShortColored} in camp area.");
+                caravan.AddPawn(animal, true);
+                caravan.Notify_PawnAdded(animal);
+                return;
+            }
             animal.inventory.DropAllNearPawn(animal.Position);
             animal.jobs.StartJob(JobMaker.MakeJob(JobDefOf.GotoWander, null), Verse.AI.JobCondition.InterruptForced, null, false, true, null, new Verse.AI.JobTag?(Verse.AI.JobTag.Idle), false, false);
         }
