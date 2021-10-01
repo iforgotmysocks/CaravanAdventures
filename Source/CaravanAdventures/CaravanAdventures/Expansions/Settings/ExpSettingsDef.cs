@@ -13,5 +13,7 @@ namespace CaravanAdventures.Expansions.Settings
 #pragma warning disable CS0649
         public PawnKindDef ancientMechSignalPawnKind;
         public FactionDef primaryEnemyFactionDef;
+        public string bossDefPrefix;
+        public PawnKindDef endBossPawnKindDef;
     }
 }

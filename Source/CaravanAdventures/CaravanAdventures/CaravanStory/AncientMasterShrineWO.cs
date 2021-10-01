@@ -121,6 +121,7 @@ namespace CaravanAdventures.CaravanStory
 
         private bool RemoveHivesFromRoom(Room room)
         {
+            if (Helper.ExpRM) return false;
             var found = false;
             foreach (var thing in room.Regions.SelectMany(region => region.ListerThings.AllThings).Distinct().Reverse())
             {
@@ -272,7 +273,7 @@ namespace CaravanAdventures.CaravanStory
         {
             if (ModSettings.storyMode == StoryMode.Performance && Rand.Chance(0.5f) && room != mainRoom && room.CellCount < minMainRoomSize) return;
             var incidentParms = StorytellerUtility.DefaultParmsNow(IncidentCategoryDefOf.ThreatBig, caravan);
-            incidentParms.faction = Faction.OfMechanoids;
+            incidentParms.faction = Helper.ExpRMNewFaction;
 
             var mechPawnGroupMakerParams = CalculateMechPawnGroupMakerParams(room, map, caravan, removedHives, incidentParms);
             var spawnedMechs = PawnGroupMakerUtility.GeneratePawns(mechPawnGroupMakerParams, true).ToList();
@@ -282,7 +283,7 @@ namespace CaravanAdventures.CaravanStory
             var existingMechs = new List<Pawn>();
             foreach (var pawn in room.Regions.SelectMany(region => region.ListerThings.AllThings.OfType<Pawn>()))
             {
-                if (pawn.Faction != Faction.OfMechanoids || existingMechs.Contains(pawn)) continue;
+                if (pawn.Faction != Helper.ExpRMNewFaction || existingMechs.Contains(pawn)) continue;
                 var lord = pawn.GetLord();
                 if (lord != null)
                 {
@@ -314,7 +315,7 @@ namespace CaravanAdventures.CaravanStory
 
             // LordJob_SleepThenMechanoidsDefend
             if (boss != null && room == mainRoom && !newLord.ownedPawns.Contains(boss)) newLord.AddPawn(boss);
-            GenStep_SleepingMechanoids.SendMechanoidsToSleepImmediately(spawnedMechs);
+            if (!Helper.ExpRM) GenStep_SleepingMechanoids.SendMechanoidsToSleepImmediately(spawnedMechs);
         }
 
         private PawnGroupMakerParms CalculateMechPawnGroupMakerParams(Room room, Map map, Caravan caravan, bool removedHives, IncidentParms incidentParms)
@@ -343,9 +344,9 @@ namespace CaravanAdventures.CaravanStory
 
             var mechPawnGroupMakerParams = new PawnGroupMakerParms
             {
-                groupKind = CaravanStory.StoryDefOf.CAMechanoidPawnGroupKindCombatMixed,
+                groupKind = Helper.ExpRM ? PawnGroupKindDefOf.Combat : CaravanStory.StoryDefOf.CAMechanoidPawnGroupKindCombatMixed,
                 tile = map.Tile,
-                faction = Faction.OfMechanoids,
+                faction = Helper.ExpRMNewFaction,
                 points = selected
             };
 

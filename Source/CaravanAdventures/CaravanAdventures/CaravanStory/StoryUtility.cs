@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Verse;
+using Verse.AI.Group;
 using Verse.Sound;
 
 namespace CaravanAdventures.CaravanStory
@@ -471,10 +472,20 @@ namespace CaravanAdventures.CaravanStory
 
         public static void FindUnfoggedMechsAndWakeUp(Map map)
         {
-            map.mapPawns.SpawnedPawnsInFaction(Faction.OfMechanoids)
+            map.mapPawns.SpawnedPawnsInFaction(Helper.ExpRMNewFaction)
                 .Where(mech => !mech.Awake() && !mech.GetRoom().Fogged)
                 .ToList()
-                .ForEach(mech => mech.TryGetComp<CompCanBeDormant>().WakeUp());
+                .ForEach(mech =>
+                {
+                    var comp = mech.TryGetComp<CompCanBeDormant>();
+                    if (comp != null) comp.WakeUp();
+                    else
+                    {
+                        DLog.Message($"waking up lord");
+                        var lord = mech.GetLord();
+                        if (lord != null) lord.Notify_DormancyWakeup();
+                    }
+                });
         }
 
         public static Faction CreateOrGetFriendlyMechFaction()
@@ -530,6 +541,7 @@ namespace CaravanAdventures.CaravanStory
         {
             if (CompCache.StoryWC.questCont.Village.StoryContact != null && !CompCache.StoryWC.questCont.Village.StoryContact.Dead) return;
 
+            // todo rm get def of story pawn
             var girl = PawnGenerator.GeneratePawn(new PawnGenerationRequest(StoryDefOf.CASacrilegHunters_ExperiencedHunterVillage)
             {
                 Context = PawnGenerationContext.NonPlayer,
@@ -807,10 +819,17 @@ namespace CaravanAdventures.CaravanStory
         public static Pawn GetFittingMechBoss(bool endboss = false)
         {
             // we skip the devourer as the first boss as it can be rather... tricky to fight.
-            var possibleBosses = DefDatabase<PawnKindDef>.AllDefsListForReading.Where(x => x.RaceProps.IsMechanoid && x.defName.ToLower().StartsWith("cabossmech") && (CompCache.StoryWC.mechBossKillCounters.Count != 0 || x.defName != "CABossMechDevourer"));
-            DLog.Message($"possibleBosses count: {possibleBosses?.Count()}");
-            var selected = (endboss ? StoryDefOf.CAEndBossMech : possibleBosses.Where(boss => !CompCache.StoryWC.mechBossKillCounters?.Keys?.Contains(boss) ?? false)?.RandomElement()) ?? possibleBosses.RandomElement();
-            var bossPawn = PawnGenerator.GeneratePawn(selected, Faction.OfMechanoids);
+            var possibleBosses = DefDatabase<PawnKindDef>.AllDefsListForReading.Where(x => 
+            (Helper.ExpRM || x.RaceProps.IsMechanoid) 
+            && x.defName.ToLower().StartsWith(Helper.ExpRM ? Helper.ExpSettings?.bossDefPrefix?.ToLower() ?? "cabossmech" : "cabossmech")
+            && (Helper.ExpRM || (CompCache.StoryWC.mechBossKillCounters.Count != 0 || x.defName != "CABossMechDevourer")));
+
+            var selected = (endboss
+                ? (Helper.ExpRM
+                    ? Helper.ExpSettings?.endBossPawnKindDef ?? StoryDefOf.CAEndBossMech
+                    : StoryDefOf.CAEndBossMech)
+                : possibleBosses.Where(boss => !CompCache.StoryWC.mechBossKillCounters?.Keys?.Contains(boss) ?? false)?.RandomElement()) ?? possibleBosses.RandomElement();
+            var bossPawn = PawnGenerator.GeneratePawn(selected, Helper.ExpRMNewFaction);
             if (bossPawn != null)
             {
                 var modext = bossPawn.kindDef.GetModExtension<MechChipModExt>();

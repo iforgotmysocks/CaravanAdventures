@@ -38,7 +38,7 @@ namespace CaravanAdventures.CaravanStory
 			this.Map.exitMapGrid.Grid.Clear();
 			endBoss = StoryUtility.GetFittingMechBoss(true);
 			GenSpawn.Spawn(endBoss, new IntVec3(25, 0, 42), Map);
-            var newLord = LordMaker.MakeNewLord(endBoss.Faction, new LordJob_AssaultColony(Faction.OfMechanoids, false, false, false, false, false), Map);
+            var newLord = LordMaker.MakeNewLord(endBoss.Faction, new LordJob_AssaultColony(Helper.ExpRM ? Find.FactionManager.FirstFactionOfDef(Helper.ExpSettings.primaryEnemyFactionDef) ?? Faction.OfMechanoids : Faction.OfMechanoids, false, false, false, false, false), Map);
             if (newLord != null) newLord.AddPawn(endBoss);
 			CompCache.StoryWC.SetSF("Judgment_Created");
 		}
