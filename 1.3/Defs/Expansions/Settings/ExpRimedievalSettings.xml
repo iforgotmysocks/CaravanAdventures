@@ -3,7 +3,13 @@
 <Defs>
   <CaravanAdventures.Expansions.Settings.ExpSettingsDef>
     <defName>ExpRimedievalSettings</defName>
+    <!-- new pawn kind def name used to be spawned instead of scythers for the ancient mech signal spell -->
     <ancientMechSignalPawnKind>Spelopede</ancientMechSignalPawnKind>
+    <!-- new main hostile faction used for combat events -->
     <primaryEnemyFactionDef>OutlanderRough</primaryEnemyFactionDef>
+    <!-- boss def prefix for all 4 normal bosses, those will be picked randomly for shrine encounters -->
+    <bossDefPrefix>cabossmech</bossDefPrefix>
+    <!-- pawn kind def name of the endboss -->
+    <endBossPawnKindDef>CAEndBossMech</endBossPawnKindDef>
   </CaravanAdventures.Expansions.Settings.ExpSettingsDef>
 </Defs>
