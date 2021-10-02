@@ -1,0 +1,272 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <PawnKindDef Name="CAEvilSacrilegHuntersBase" Abstract="True">
+    <race>Human</race>
+    <defaultFactionType>CAEvilSacrilegHunters</defaultFactionType>
+    <chemicalAddictionChance>0.05</chemicalAddictionChance>
+    <backstoryCryptosleepCommonality>0.05</backstoryCryptosleepCommonality>
+    <invNutrition>2.55</invNutrition>
+    <initialWillRange>0~1</initialWillRange>
+    <initialResistanceRange>10~17</initialResistanceRange>
+  </PawnKindDef>
+
+  <PawnKindDef Name="CAEvilSacrilegHunters_HunterBase" ParentName="CAEvilSacrilegHuntersBase" Abstract="True">
+    <label>Hunter</label>
+    <combatPower>80</combatPower>
+    <isFighter>true</isFighter>
+    <baseRecruitDifficulty>0.60</baseRecruitDifficulty>
+    <gearHealthRange>1~1</gearHealthRange>
+    <itemQuality>Good</itemQuality>
+    <apparelMoney>3800~4800</apparelMoney>
+    <apparelTags>
+      <li>SpacerMilitary</li>
+      <li>BeltDefensePop</li>
+    </apparelTags>
+    <apparelIgnoreSeasons>true</apparelIgnoreSeasons>
+    <weaponMoney>1500~2000</weaponMoney>
+    <weaponTags>
+      <li>IndustrialGunAdvanced</li>
+      <li>SniperRifle</li>
+      <li>GunHeavy</li>
+      <li>SpacerGun</li>
+    </weaponTags>
+    <techHediffsMoney>3000~5000</techHediffsMoney>
+    <techHediffsTags>
+      <li>Advanced</li>
+      <li>AdvancedWeapon</li>
+      <li>ImplantEmpireCommon</li>
+      <li>ImplantEmpireRoyal</li>
+    </techHediffsTags>
+    <techHediffsDisallowTags>
+      <li>PainCauser</li>
+    </techHediffsDisallowTags>
+    <techHediffsRequired>
+      	<!--<li MayRequire="Ludeon.RimWorld.Royalty">StoneskinGland</li>-->
+    </techHediffsRequired>
+    <techHediffsChance>0.3</techHediffsChance>
+    <techHediffsMaxAmount>2</techHediffsMaxAmount>
+    <combatEnhancingDrugsChance>1</combatEnhancingDrugsChance>
+    <combatEnhancingDrugsCount>1~2</combatEnhancingDrugsCount>
+    <biocodeWeaponChance>0.8</biocodeWeaponChance>
+    <requiredWorkTags>
+      <li>Violent</li>
+    </requiredWorkTags>
+    <disallowedTraits>
+      <li>Wimp</li>
+      <li>Nudist</li>
+      <li>BodyPurist</li>
+    </disallowedTraits>
+    <skills>
+      <li>
+        <skill>Shooting</skill>
+        <range>8~12</range>
+      </li>
+      <li>
+        <skill>Melee</skill>
+        <range>7~11</range>
+      </li>
+    </skills>
+  </PawnKindDef>
+
+	<PawnKindDef Name="CAEvilSacrilegHunters_ExperiencedHunterBase" ParentName="CAEvilSacrilegHuntersBase" Abstract="True">
+		<label>Experienced Hunter</label>
+		<combatPower>100</combatPower>
+		<isFighter>true</isFighter>
+		<baseRecruitDifficulty>0.90</baseRecruitDifficulty>
+		<gearHealthRange>1~1</gearHealthRange>
+		<itemQuality>Excellent</itemQuality>
+		<apparelMoney>3800~4800</apparelMoney>
+		<apparelTags>
+			<li>SpacerMilitary</li>
+			<li>BeltDefensePop</li>
+		</apparelTags>
+		<apparelIgnoreSeasons>true</apparelIgnoreSeasons>
+		<weaponMoney>1500~2000</weaponMoney>
+		<weaponTags>
+			<li>IndustrialGunAdvanced</li>
+			<li>SniperRifle</li>
+			<li>GunHeavy</li>
+			<li>SpacerGun</li>
+		</weaponTags>
+		<techHediffsMoney>8000~10000</techHediffsMoney>
+		<techHediffsTags>
+			<li>Advanced</li>
+			<li>AdvancedWeapon</li>
+			<li>ImplantEmpireCommon</li>
+			<li>ImplantEmpireRoyal</li>
+		</techHediffsTags>
+		<techHediffsDisallowTags>
+			<li>PainCauser</li>
+		</techHediffsDisallowTags>
+		<techHediffsRequired>
+			<li>BionicEye</li>
+			<li MayRequire="Ludeon.RimWorld.Royalty">StoneskinGland</li>
+		</techHediffsRequired>
+    <techHediffsChance>0.8</techHediffsChance>
+    <techHediffsMaxAmount>4</techHediffsMaxAmount>
+		<combatEnhancingDrugsChance>1</combatEnhancingDrugsChance>
+		<combatEnhancingDrugsCount>2~2</combatEnhancingDrugsCount>
+		<biocodeWeaponChance>0.8</biocodeWeaponChance>
+		<requiredWorkTags>
+			<li>Violent</li>
+		</requiredWorkTags>
+		<disallowedTraits>
+			<li>Wimp</li>
+			<li>Nudist</li>
+			<li>BodyPurist</li>
+		</disallowedTraits>
+		<skills>
+			<li>
+				<skill>Shooting</skill>
+				<range>12~15</range>
+			</li>
+      <li>
+        <skill>Melee</skill>
+        <range>11~14</range>
+      </li>
+		</skills>
+	</PawnKindDef>
+
+	<PawnKindDef ParentName="CAEvilSacrilegHunters_ExperiencedHunterBase">
+		<defName>CAEvilSacrilegHunters_ExperiencedHunterVillage</defName>
+		<apparelAllowHeadgearChance>0</apparelAllowHeadgearChance>
+	</PawnKindDef>
+
+	<PawnKindDef ParentName="CAEvilSacrilegHunters_ExperiencedHunterBase">
+		<defName>CAEvilSacrilegHunters_ExperiencedHunter</defName>
+		<apparelAllowHeadgearChance>100</apparelAllowHeadgearChance>
+	</PawnKindDef>
+
+  <PawnKindDef ParentName="CAEvilSacrilegHunters_HunterBase">
+    <defName>CAEvilSacrilegHunters_HunterVillage</defName>
+    <apparelAllowHeadgearChance>0</apparelAllowHeadgearChance>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="CAEvilSacrilegHunters_HunterBase">
+    <defName>CAEvilSacrilegHunters_Hunter</defName>
+    <apparelAllowHeadgearChance>100</apparelAllowHeadgearChance>
+  </PawnKindDef>
+
+	<PawnKindDef ParentName="CAEvilSacrilegHuntersBase">
+		<defName>CAEvilSacrilegHunters_Town_Councilman</defName>
+		<label>town councilman</label>
+		<labelPlural>town councilmen</labelPlural>
+		<combatPower>40</combatPower>
+		<factionLeader>true</factionLeader>
+		<minGenerationAge>30</minGenerationAge>
+		<isFighter>false</isFighter>
+		<gearHealthRange>1~1</gearHealthRange>
+		<itemQuality>Good</itemQuality>
+		<weaponMoney>200~200</weaponMoney>
+		<weaponTags>
+			<li>Gun</li>
+		</weaponTags>
+		<apparelMoney>700~1200</apparelMoney>
+		<apparelTags>
+       <li>IndustrialBasic</li>
+      <li>IndustrialAdvanced</li>
+			<li>IndustrialMilitaryBasic</li>
+			<li>BeltDefensePop</li>
+		</apparelTags>
+		<apparelRequired>
+			<li>Apparel_BowlerHat</li>
+		</apparelRequired>
+		<techHediffsChance>0.15</techHediffsChance>
+		<techHediffsMoney>600~1500</techHediffsMoney>
+		<techHediffsTags>
+			<li>Simple</li>
+			<li>Advanced</li>
+			<li>ImplantEmpireCommon</li>
+		</techHediffsTags>
+	</PawnKindDef>
+
+	<PawnKindDef ParentName="CAEvilSacrilegHuntersBase">
+		<defName>CAEvilSacrilegHunters_Town_Trader</defName>
+		<label>town trader</label>
+		<trader>true</trader>
+		<combatPower>40</combatPower>
+		<isFighter>false</isFighter>
+		<gearHealthRange>1~1</gearHealthRange>
+		<itemQuality>Normal</itemQuality>
+		<weaponTags>
+			<li>Gun</li>
+		</weaponTags>
+		<weaponMoney>200~200</weaponMoney>
+		<apparelMoney>400~600</apparelMoney>
+		<apparelTags>
+      <li>IndustrialBasic</li>
+      <li>IndustrialAdvanced</li>
+			<li>IndustrialMilitaryBasic</li>
+			<li>IndustrialMilitaryAdvanced</li>
+			<li>BeltDefensePop</li>
+		</apparelTags>
+		<apparelRequired>
+			<li>Apparel_BowlerHat</li>
+		</apparelRequired>
+		<techHediffsChance>0.15</techHediffsChance>
+		<techHediffsMoney>600~1500</techHediffsMoney>
+		<techHediffsTags>
+			<li>Poor</li>
+			<li>Simple</li>
+			<li>Advanced</li>
+			<li>ImplantEmpireCommon</li>
+		</techHediffsTags>
+	</PawnKindDef>
+
+  <PawnKindDef ParentName="CAEvilSacrilegHuntersBase">
+    <defName>CAEvilSacrilegHunters_Villager</defName>
+    <label>villager</label>
+    <combatPower>35</combatPower>
+    <itemQuality>Poor</itemQuality>
+    <isFighter>false</isFighter>
+    <gearHealthRange>0.2~2.0</gearHealthRange>
+    <weaponTags>
+      <li>Gun</li>
+      <!--<li>MedievalMeleeBasic</li>-->
+    </weaponTags>
+		<weaponMoney>250~400</weaponMoney>
+    <apparelMoney>200~400</apparelMoney>
+    <apparelTags>
+      <li>IndustrialBasic</li>
+      <li>IndustrialAdvanced</li>
+		</apparelTags>
+    <apparelAllowHeadgearChance>0.4</apparelAllowHeadgearChance>
+    <techHediffsChance>0.06</techHediffsChance>
+    <techHediffsMoney>50~600</techHediffsMoney>
+    <techHediffsTags>
+      <li>Poor</li>
+      <li>Simple</li>
+      <li>ImplantEmpireCommon</li>
+    </techHediffsTags>
+  </PawnKindDef>
+
+	<PawnKindDef ParentName="CAEvilSacrilegHuntersBase">
+		<defName>CAEvilSacrilegHunters_Town_Guard</defName>
+		<label>town guard</label>
+		<combatPower>55</combatPower>
+		<isFighter>true</isFighter>
+		<gearHealthRange>0.6~2</gearHealthRange>
+		<apparelTags>
+      <li>IndustrialBasic</li>
+      <li>IndustrialAdvanced</li>
+			<li>IndustrialMilitaryBasic</li>
+			<li>BeltDefensePop</li>
+		</apparelTags>
+		<apparelMoney>400~600</apparelMoney>
+		<apparelAllowHeadgearChance>0.4</apparelAllowHeadgearChance>
+		<weaponTags>
+			<li>Gun</li>
+		</weaponTags>
+		<weaponMoney>250~400</weaponMoney>
+		<techHediffsChance>0.04</techHediffsChance>
+		<techHediffsMoney>200~700</techHediffsMoney>
+		<techHediffsTags>
+			<li>Poor</li>
+			<li>Simple</li>
+			<li>ImplantEmpireCommon</li>
+		</techHediffsTags>
+	</PawnKindDef>
+
+
+</Defs>

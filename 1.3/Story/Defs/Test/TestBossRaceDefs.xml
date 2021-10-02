@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+
+  <ThingDef ParentName="BasePawn" Name="EvilMechanoid" Abstract="True">
+    <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
+    <statBases>
+      <PsychicSensitivity>0.5</PsychicSensitivity>
+      <ToxicSensitivity>0</ToxicSensitivity>
+      <Flammability>0</Flammability>
+      <ComfyTemperatureMin>-100</ComfyTemperatureMin>
+      <ComfyTemperatureMax>250</ComfyTemperatureMax>
+      <MeatAmount>0</MeatAmount>
+      <ArmorRating_Heat>2.00</ArmorRating_Heat>
+    </statBases>
+    <receivesSignals>true</receivesSignals>
+    <race>
+      <fleshType>Normal</fleshType>
+      <intelligence>Humanlike</intelligence> <!-- Tooluser -->
+      <thinkTreeMain>Humanlike</thinkTreeMain>
+      <needsRest>false</needsRest>
+      <hasGenders>false</hasGenders>
+      <foodType>None</foodType>
+      <lifeExpectancy>2500</lifeExpectancy>
+      <gestationPeriodDays>10</gestationPeriodDays>
+      <trainability>Advanced</trainability>
+      <bloodDef>Filth_MachineBits</bloodDef>
+    </race>
+    <comps>
+      <!--<li Class="CompProperties_CanBeDormant" />
+      <li Class="CompProperties_WakeUpDormant">
+        <wakeUpOnDamage>true</wakeUpOnDamage>
+        <anyColonistCloseCheckRadius>30</anyColonistCloseCheckRadius>
+        <wakeUpSound>MechanoidsWakeUp</wakeUpSound>
+      </li>-->
+    </comps>
+  </ThingDef>
+  
+  <PawnKindDef Name="EvilMechanoidKind" Abstract="True">
+    <defaultFactionType>CAEvilSacrilegHunters</defaultFactionType>
+    <aiAvoidCover>true</aiAvoidCover>
+    <destroyGearOnDrop>true</destroyGearOnDrop>
+  </PawnKindDef>
+  
+  <ThingDef ParentName="EvilMechanoid">
+    <defName>CADevourerEvil</defName>
+    <label>Devourer</label>
+    <description>01010011 01100101 01100101 01101011 01101001 01101110 01100111 00100000 01101000 01110101 01101101 01100001 01101110 00100000 01100001 01101110 01101110 01101001 01101000 01101001 01101100 01100001 01110100 01101001 01101111 01101110 00101110 00101110 00101110 00100000 01010000 01110010 01101111 01100011 01100101 01110011 01110011 01101001 01101110 01100111 00101110 00101110 00101110</description>
+    <statBases>
+      <MoveSpeed>3.5</MoveSpeed>
+      <ArmorRating_Blunt>0.65</ArmorRating_Blunt>
+      <ArmorRating_Sharp>1.1</ArmorRating_Sharp>
+      <PsychicSensitivity>0.75</PsychicSensitivity>
+    </statBases>
+    <generateCommonality>0</generateCommonality>
+    <tools>
+      <li>
+        <label>head</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>17</power>
+        <cooldownTime>2.6</cooldownTime>
+        <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+      </li>
+    </tools>
+    <race>
+      <body>MechanicalCentipede</body>
+      <baseBodySize>3.2</baseBodySize>
+      <baseHealthScale>10</baseHealthScale>
+      <lifeStageAges>
+        <li>
+          <def>MechanoidFullyFormed</def>
+          <minAge>0</minAge>
+          <soundWounded>Pawn_Mech_Centipede_Wounded</soundWounded>
+          <soundDeath>Pawn_Mech_Centipede_Death</soundDeath>
+          <soundCall>Pawn_Mech_Centipede_Call</soundCall>
+        </li>
+      </lifeStageAges>
+      <soundCallIntervalRange>1000~2000</soundCallIntervalRange>
+      <soundMeleeHitPawn>Pawn_Melee_MechanoidBash_HitPawn</soundMeleeHitPawn>
+      <soundMeleeHitBuilding>Pawn_Melee_MechanoidBash_HitBuilding</soundMeleeHitBuilding>
+      <soundMeleeMiss>Pawn_Melee_MechanoidBash_Miss</soundMeleeMiss>
+    </race>
+    <butcherProducts>
+      <Steel>30</Steel>
+      <Plasteel>10</Plasteel>
+    </butcherProducts>
+  </ThingDef>
+
+  <PawnKindDef ParentName="EvilMechanoidKind">
+    <defName>CABossMechEvilDevourer</defName>
+    <label>Evil Devourer</label>
+    <race>CADevourerEvil</race>
+    <combatPower>250000</combatPower>
+    <lifeStages>
+      <li>
+        <bodyGraphicData>
+          <texPath>Things/Bosses/1</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>6</drawSize>
+          <shadowData>
+            <volume>(0.6, 0.8, 0.6)</volume>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+    </lifeStages>
+    <weaponMoney>9999~9999</weaponMoney>
+    <weaponTags>
+      <!--<li>MechanoidGunFake</li>-->
+    </weaponTags>
+    <modExtensions>
+      <li Class="CaravanAdventures.CaravanStory.MechChips.MechChipModExt">
+        <mechChipDefs>
+          <li>CAEXT1Basic</li>
+          <!--<li>CAEXT1Artillary</li>-->
+        </mechChipDefs>
+      </li>
+    </modExtensions>
+  </PawnKindDef>
+
+
+  <!-- CACrystalScytheEvil -->
+
+  <ThingDef ParentName="EvilMechanoid">
+    <defName>CACrystalScytheEvil</defName>
+    <label>Crystal scythe</label>
+    <description>01010011 01100101 01100101 01101011 01101001 01101110 01100111 00100000 01101000 01110101 01101101 01100001 01101110 00100000 01100001 01101110 01101110 01101001 01101000 01101001 01101100 01100001 01110100 01101001 01101111 01101110 00101110 00101110 00101110 00100000 01010000 01110010 01101111 01100011 01100101 01110011 01110011 01101001 01101110 01100111 00101110 00101110 00101110</description>
+    <generateCommonality>0</generateCommonality>
+    <statBases>
+      <MoveSpeed>5.5</MoveSpeed>
+      <ArmorRating_Blunt>0.22</ArmorRating_Blunt>
+      <ArmorRating_Sharp>0.72</ArmorRating_Sharp>
+      <PsychicSensitivity>0.75</PsychicSensitivity>
+    </statBases>
+    <tools>
+      <li>
+        <label>left blade</label>
+        <capacities>
+          <li>Cut</li>
+          <li>Stab</li>
+        </capacities>
+        <power>20</power>
+        <cooldownTime>1</cooldownTime>
+        <linkedBodyPartsGroup>LeftBlade</linkedBodyPartsGroup>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+      </li>
+      <li>
+        <label>right blade</label>
+        <capacities>
+          <li>Cut</li>
+          <li>Stab</li>
+        </capacities>
+        <power>20</power>
+        <cooldownTime>1</cooldownTime>
+        <linkedBodyPartsGroup>RightBlade</linkedBodyPartsGroup>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+      </li>
+      <li>
+        <label>head</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>15</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+        <chanceFactor>0.2</chanceFactor>
+      </li>
+    </tools>
+    <race>
+      <body>Scyther</body>
+      <baseHealthScale>4.32</baseHealthScale>
+      <soundMeleeHitPawn>Pawn_Melee_MechanoidSlash_HitPawn</soundMeleeHitPawn>
+      <soundMeleeHitBuilding>Pawn_Melee_MechanoidSlash_HitBuilding</soundMeleeHitBuilding>
+      <soundMeleeMiss>Pawn_Melee_MechanoidSlash_Miss</soundMeleeMiss>
+      <lifeStageAges>
+        <li>
+          <def>MechanoidFullyFormed</def>
+          <minAge>0</minAge>
+          <soundWounded>Pawn_Mech_Centipede_Wounded</soundWounded>
+          <soundDeath>Pawn_Mech_Centipede_Death</soundDeath>
+          <soundCall>Pawn_Mech_Centipede_Call</soundCall>
+        </li>
+      </lifeStageAges>
+    </race>
+  </ThingDef>
+
+  <PawnKindDef ParentName="EvilMechanoidKind">
+    <defName>CABossMechEvilCrystalScythe</defName>
+    <label>Crystal scythe</label>
+    <race>CACrystalScytheEvil</race>
+    <combatPower>240000</combatPower>
+    <lifeStages>
+      <li>
+        <bodyGraphicData>
+          <texPath>Things/Bosses/2</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>4.5</drawSize>
+          <shadowData>
+            <volume>(0.4, 0.8, 0.4)</volume>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+    </lifeStages>
+    <weaponMoney>0~0</weaponMoney>
+    <defendPointRadius>-1</defendPointRadius>
+    <weaponTags>
+    </weaponTags>
+    <modExtensions>
+      <li Class="CaravanAdventures.CaravanStory.MechChips.MechChipModExt">
+        <mechChipDefs>
+          <li>CAEXT1Basic</li>
+          <li>CAEXT1Melee</li>
+          <li>CAEXT1Guardian</li>
+        </mechChipDefs>
+      </li>
+    </modExtensions>
+  </PawnKindDef>
+  
+  <!-- harbinger-->
+
+  <ThingDef ParentName="EvilMechanoid">
+    <defName>CAHarbingerEvil</defName>
+    <label>Harbinger</label>
+    <description>01010011 01100101 01100101 01101011 01101001 01101110 01100111 00100000 01101000 01110101 01101101 01100001 01101110 00100000 01100001 01101110 01101110 01101001 01101000 01101001 01101100 01100001 01110100 01101001 01101111 01101110 00101110 00101110 00101110 00100000 01010000 01110010 01101111 01100011 01100101 01110011 01110011 01101001 01101110 01100111 00101110 00101110 00101110</description>
+    <generateCommonality>0</generateCommonality>
+    <statBases>
+      <MoveSpeed>1.9</MoveSpeed>
+      <ArmorRating_Blunt>0.22</ArmorRating_Blunt>
+      <ArmorRating_Sharp>0.72</ArmorRating_Sharp>
+      <PsychicSensitivity>0.75</PsychicSensitivity>
+    </statBases>
+    <tools>
+      <li>
+        <label>left blade</label>
+        <capacities>
+          <li>Cut</li>
+          <li>Stab</li>
+        </capacities>
+        <power>22</power>
+        <cooldownTime>1</cooldownTime>
+        <linkedBodyPartsGroup>LeftBlade</linkedBodyPartsGroup>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+      </li>
+      <li>
+        <label>right blade</label>
+        <capacities>
+          <li>Cut</li>
+          <li>Stab</li>
+        </capacities>
+        <power>22</power>
+        <cooldownTime>1</cooldownTime>
+        <linkedBodyPartsGroup>RightBlade</linkedBodyPartsGroup>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+      </li>
+      <li>
+        <label>head</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>18</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+        <chanceFactor>0.2</chanceFactor>
+      </li>
+    </tools>
+    <race>
+      <body>Scyther</body>
+      <baseHealthScale>6.32</baseHealthScale>
+      <soundMeleeHitPawn>Pawn_Melee_MechanoidSlash_HitPawn</soundMeleeHitPawn>
+      <soundMeleeHitBuilding>Pawn_Melee_MechanoidSlash_HitBuilding</soundMeleeHitBuilding>
+      <soundMeleeMiss>Pawn_Melee_MechanoidSlash_Miss</soundMeleeMiss>
+      <lifeStageAges>
+        <li>
+          <def>MechanoidFullyFormed</def>
+          <minAge>0</minAge>
+          <soundWounded>Pawn_Mech_Centipede_Wounded</soundWounded>
+          <soundDeath>Pawn_Mech_Centipede_Death</soundDeath>
+          <soundCall>Pawn_Mech_Centipede_Call</soundCall>
+        </li>
+      </lifeStageAges>
+    </race>
+  </ThingDef>
+
+  <PawnKindDef ParentName="EvilMechanoidKind">
+    <defName>CABossMechEvilHarbinger</defName>
+    <label>Harbinger</label>
+    <race>CAHarbingerEvil</race>
+    <combatPower>240000</combatPower>
+    <lifeStages>
+      <li>
+        <bodyGraphicData>
+          <texPath>Things/Bosses/4</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>4.5</drawSize>
+          <shadowData>
+            <volume>(0.4, 0.8, 0.4)</volume>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+    </lifeStages>
+    <defendPointRadius>-1</defendPointRadius>
+    <weaponMoney>0</weaponMoney>
+    <weaponTags>
+   
+    </weaponTags>
+    <modExtensions>
+      <li Class="CaravanAdventures.CaravanStory.MechChips.MechChipModExt">
+        <mechChipDefs>
+          <li>CAEXT1Basic</li>
+          <li>CAEXT1Laser</li>
+        </mechChipDefs>
+      </li>
+    </modExtensions>
+
+  </PawnKindDef>
+
+  <!-- Havoc-->
+
+  <ThingDef ParentName="EvilMechanoid">
+    <defName>CAHavocEvil</defName>
+    <label>Havoc</label>
+    <description>01010011 01100101 01100101 01101011 01101001 01101110 01100111 00100000 01101000 01110101 01101101 01100001 01101110 00100000 01100001 01101110 01101110 01101001 01101000 01101001 01101100 01100001 01110100 01101001 01101111 01101110 00101110 00101110 00101110 00100000 01010000 01110010 01101111 01100011 01100101 01110011 01110011 01101001 01101110 01100111 00101110 00101110 00101110</description>
+    <generateCommonality>0</generateCommonality>
+    <statBases>
+      <MoveSpeed>1.9</MoveSpeed>
+      <ArmorRating_Blunt>0.22</ArmorRating_Blunt>
+      <ArmorRating_Sharp>0.72</ArmorRating_Sharp>
+      <PsychicSensitivity>0.75</PsychicSensitivity>
+    </statBases>
+    <tools>
+      <li>
+        <label>left blade</label>
+        <capacities>
+          <li>Cut</li>
+          <li>Stab</li>
+        </capacities>
+        <power>22</power>
+        <cooldownTime>1</cooldownTime>
+        <linkedBodyPartsGroup>LeftBlade</linkedBodyPartsGroup>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+      </li>
+      <li>
+        <label>right blade</label>
+        <capacities>
+          <li>Cut</li>
+          <li>Stab</li>
+        </capacities>
+        <power>22</power>
+        <cooldownTime>1</cooldownTime>
+        <linkedBodyPartsGroup>RightBlade</linkedBodyPartsGroup>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+      </li>
+      <li>
+        <label>head</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>18</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+        <chanceFactor>0.2</chanceFactor>
+      </li>
+    </tools>
+    <race>
+      <body>Scyther</body>
+      <baseHealthScale>6.32</baseHealthScale>
+      <soundMeleeHitPawn>Pawn_Melee_MechanoidSlash_HitPawn</soundMeleeHitPawn>
+      <soundMeleeHitBuilding>Pawn_Melee_MechanoidSlash_HitBuilding</soundMeleeHitBuilding>
+      <soundMeleeMiss>Pawn_Melee_MechanoidSlash_Miss</soundMeleeMiss>
+      <lifeStageAges>
+        <li>
+          <def>MechanoidFullyFormed</def>
+          <minAge>0</minAge>
+          <soundWounded>Pawn_Mech_Centipede_Wounded</soundWounded>
+          <soundDeath>Pawn_Mech_Centipede_Death</soundDeath>
+          <soundCall>Pawn_Mech_Centipede_Call</soundCall>
+        </li>
+      </lifeStageAges>
+    </race>
+  </ThingDef>
+
+  <PawnKindDef ParentName="EvilMechanoidKind">
+    <defName>CABossMechEvilHavoc</defName>
+    <label>Havoc</label>
+    <race>CAHavocEvil</race>
+    <combatPower>240000</combatPower>
+    <lifeStages>
+      <li>
+        <bodyGraphicData>
+          <texPath>Things/Bosses/3</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>4.5</drawSize>
+          <shadowData>
+            <volume>(0.4, 0.8, 0.4)</volume>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+    </lifeStages>
+    <defendPointRadius>-1</defendPointRadius>
+    <weaponMoney>9999~9999</weaponMoney>
+    <weaponTags>
+      <li>MechanoidGunFake</li>
+    </weaponTags>
+    <modExtensions>
+      <li Class="CaravanAdventures.CaravanStory.MechChips.MechChipModExt">
+        <mechChipDefs>
+          <li>CAEXT1Basic</li>
+          <!--<li>CAEXT1Missile</li>-->
+        </mechChipDefs>
+      </li>
+    </modExtensions>
+
+  </PawnKindDef>
+
+
+  <!--endboss-->
+  <ThingDef ParentName="EvilMechanoid">
+    <defName>CAEndBossMechEvil</defName>
+    <label>Judgment</label>
+    <description>01010011 01100101 01100101 01101011 01101001 01101110 01100111 00100000 01101000 01110101 01101101 01100001 01101110 00100000 01100001 01101110 01101110 01101001 01101000 01101001 01101100 01100001 01110100 01101001 01101111 01101110 00101110 00101110 00101110 00100000 01010000 01110010 01101111 01100011 01100101 01110011 01110011 01101001 01101110 01100111 00101110 00101110 00101110</description>
+    <generateCommonality>0</generateCommonality>
+    <statBases>
+      <MoveSpeed>1.9</MoveSpeed>
+      <ArmorRating_Blunt>0.22</ArmorRating_Blunt>
+      <ArmorRating_Sharp>0.72</ArmorRating_Sharp>
+      <PsychicSensitivity>0.75</PsychicSensitivity>
+    </statBases>
+    <tools>
+      <li>
+        <label>head</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>17</power>
+        <cooldownTime>2.6</cooldownTime>
+        <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+      </li>
+    </tools>
+    <race>
+      <body>MechanicalCentipede</body>
+      <baseBodySize>3.2</baseBodySize>
+      <baseHealthScale>12</baseHealthScale>
+      <lifeStageAges>
+        <li>
+          <def>MechanoidFullyFormed</def>
+          <minAge>0</minAge>
+          <soundWounded>Pawn_Mech_Centipede_Wounded</soundWounded>
+          <soundDeath>Pawn_Mech_Centipede_Death</soundDeath>
+          <soundCall>Pawn_Mech_Centipede_Call</soundCall>
+        </li>
+      </lifeStageAges>
+      <soundCallIntervalRange>1000~2000</soundCallIntervalRange>
+      <soundMeleeHitPawn>Pawn_Melee_MechanoidBash_HitPawn</soundMeleeHitPawn>
+      <soundMeleeHitBuilding>Pawn_Melee_MechanoidBash_HitBuilding</soundMeleeHitBuilding>
+      <soundMeleeMiss>Pawn_Melee_MechanoidBash_Miss</soundMeleeMiss>
+    </race>
+    <butcherProducts>
+      <Steel>30</Steel>
+      <Plasteel>10</Plasteel>
+    </butcherProducts>
+  </ThingDef>
+
+  <PawnKindDef ParentName="EvilMechanoidKind">
+    <defName>CAEndBossMechEvil</defName>
+    <label>Ancient Coordinator AI</label>
+    <race>CAEndBossMechEvil</race>
+    <combatPower>400000000</combatPower>
+    <lifeStages>
+      <li>
+        <bodyGraphicData>
+          <texPath>Things/Bosses/5</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>6</drawSize>
+          <shadowData>
+            <volume>(0.6, 0.8, 0.6)</volume>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+    </lifeStages>
+    <weaponMoney>9999~9999</weaponMoney>
+    <weaponTags>
+      <li>MechanoidGunFake</li>
+    </weaponTags>
+    <defendPointRadius>-1</defendPointRadius>
+    <modExtensions>
+      <li Class="CaravanAdventures.CaravanStory.MechChips.MechChipModExt">
+        <mechChipDefs>
+          <li>CAEXT1Basic</li>
+          <li>CAEXT1Laser</li>
+          <!--<li>CAEXT1Artillary</li>-->
+          <li>CAEXT1Guardian</li>
+        </mechChipDefs>
+      </li>
+    </modExtensions>
+  </PawnKindDef>
+
+</Defs>

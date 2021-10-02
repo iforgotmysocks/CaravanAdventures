@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+  <FactionDef ParentName="OutlanderFactionBase" Name="CAEvilSacrilegHuntersFactionBase" Abstract="True">
+    <pawnSingular>Evil Sacrileg Hunter</pawnSingular>
+    <pawnsPlural>Evil Sacrileg Hunters</pawnsPlural>
+    <categoryTag>Outlander</categoryTag>
+    <listOrderPriority>30</listOrderPriority>
+    <settlementGenerationWeight>0.3</settlementGenerationWeight>
+    <requiredCountAtGameStart>1</requiredCountAtGameStart>
+    <canMakeRandomly>true</canMakeRandomly>
+    <permanentEnemy>true</permanentEnemy>
+    <canSiege>false</canSiege>
+    <hidden>false</hidden>
+    <canStageAttacks>false</canStageAttacks>
+    <leaderTitle>prime councilor</leaderTitle>
+    <factionIconPath>World/WorldObjects/Expanding/Town</factionIconPath>
+    <!--<factionNameMaker>NamerFactionOutlander</factionNameMaker>-->
+    <factionNameMaker>CANamerFactionSacrilegHunters</factionNameMaker>
+    <settlementNameMaker>NamerSettlementOutlander</settlementNameMaker>
+    <techLevel>Ultra</techLevel>
+    <!--<allowedMemes>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Structure_Archist</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Transhumanist</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">HumanPrimacy</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Loyalist</li>
+    </allowedMemes>-->
+    <requiredMemes>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Structure_Archist</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Transhumanist</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">HumanPrimacy</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Loyalist</li>
+    </requiredMemes>
+    <backstoryFilters>
+      <li>
+        <categories>
+          <li>Outlander</li>
+        </categories>
+        <commonality>0.95</commonality>
+      </li>
+      <li>
+        <categories>
+          <li>Offworld</li>
+        </categories>
+        <commonality>0.05</commonality>
+      </li>
+    </backstoryFilters>
+    <geneticVariance>0.8</geneticVariance>
+    <!--<hairTags>
+			<li>Rural</li>
+		</hairTags>-->
+    <caravanTraderKinds>
+      <li>Caravan_Outlander_BulkGoods</li>
+      <li>Caravan_Outlander_CombatSupplier</li>
+      <li>Caravan_Outlander_Exotic</li>
+      <li>Caravan_Outlander_PirateMerchant</li>
+    </caravanTraderKinds>
+    <visitorTraderKinds>
+      <li>Visitor_Outlander_Standard</li>
+    </visitorTraderKinds>
+    <baseTraderKinds>
+      <li>Base_Outlander_Standard</li>
+    </baseTraderKinds>
+    <allowedArrivalTemperatureRange>-40~45</allowedArrivalTemperatureRange>
+    <raidLootMaker>CASacrilegHuntersRaidLootMaker</raidLootMaker>
+    <maxPawnCostPerTotalPointsCurve>
+      <points>
+        <li>(0,35)</li>
+        <li>(70, 50)</li>
+        <li>(700, 100)</li>
+        <li>(1300, 150)</li>
+        <li>(100000, 10000)</li>
+      </points>
+    </maxPawnCostPerTotalPointsCurve>
+    <pawnGroupMakers>
+      <li>
+        <!-- Normal fights, standard mix -->
+        <kindDef>Combat</kindDef>
+        <options>
+          <!--<Villager>5</Villager>-->
+          <!--<Town_Guard>5</Town_Guard>-->
+          <!--<Grenadier_Destructive>2</Grenadier_Destructive>
+					<Mercenary_Slasher>1</Mercenary_Slasher>
+					<Mercenary_Gunner>1</Mercenary_Gunner>
+					<Mercenary_Elite>33</Mercenary_Elite>-->
+          <!--<Town_Councilman>10</Town_Councilman>-->
+          <CAEvilSacrilegHunters_Town_Councilman>1</CAEvilSacrilegHunters_Town_Councilman>
+          <CAEvilSacrilegHunters_Hunter>10</CAEvilSacrilegHunters_Hunter>
+          <CAEvilSacrilegHunters_ExperiencedHunter>2</CAEvilSacrilegHunters_ExperiencedHunter>
+        </options>
+      </li>
+      <li>
+        <kindDef>Peaceful</kindDef>
+        <options>
+          <CAEvilSacrilegHunters_Villager>10</CAEvilSacrilegHunters_Villager>
+          <CAEvilSacrilegHunters_Hunter>15</CAEvilSacrilegHunters_Hunter>
+          <CAEvilSacrilegHunters_ExperiencedHunter>2</CAEvilSacrilegHunters_ExperiencedHunter>
+          <CAEvilSacrilegHunters_Town_Guard>1</CAEvilSacrilegHunters_Town_Guard>
+          <CAEvilSacrilegHunters_Town_Councilman>10</CAEvilSacrilegHunters_Town_Councilman>
+        </options>
+      </li>
+      <li>
+        <kindDef>Trader</kindDef>
+        <traders>
+          <Town_Trader>1</Town_Trader>
+        </traders>
+        <carriers>
+          <Muffalo>6</Muffalo>
+          <Dromedary>5</Dromedary>
+          <Alpaca>2</Alpaca>
+          <Elephant>1</Elephant>
+        </carriers>
+        <guards>
+          <CAEvilSacrilegHunters_Villager>3</CAEvilSacrilegHunters_Villager>
+          <!--<Town_Guard>10</Town_Guard>-->
+          <CAEvilSacrilegHunters_Hunter>10</CAEvilSacrilegHunters_Hunter>
+          <CAEvilSacrilegHunters_ExperiencedHunter>2</CAEvilSacrilegHunters_ExperiencedHunter>
+          <Grenadier_Destructive>1.5</Grenadier_Destructive>
+          <!--<Mercenary_Slasher>7</Mercenary_Slasher>-->
+          <!--<Mercenary_Gunner>10</Mercenary_Gunner>-->
+          <!--<Mercenary_Elite>10</Mercenary_Elite>-->
+        </guards>
+      </li>
+      <li>
+        <kindDef>Settlement</kindDef>
+        <options>
+          <CAEvilSacrilegHunters_Villager>10</CAEvilSacrilegHunters_Villager>
+          <!--<Town_Guard>10</Town_Guard>-->
+          <!--<Grenadier_Destructive>2</Grenadier_Destructive>
+					<Mercenary_Slasher>1</Mercenary_Slasher>
+					<Mercenary_Gunner>1</Mercenary_Gunner>
+					<Mercenary_Elite>33</Mercenary_Elite>-->
+          <!--<Town_Councilman>10</Town_Councilman>-->
+          <CAEvilSacrilegHunters_Town_Councilman>1</CAEvilSacrilegHunters_Town_Councilman>
+          <CAEvilSacrilegHunters_HunterVillage>20</CAEvilSacrilegHunters_HunterVillage>
+          <CAEvilSacrilegHunters_ExperiencedHunterVillage>4</CAEvilSacrilegHunters_ExperiencedHunterVillage>
+        </options>
+      </li>
+    </pawnGroupMakers>
+    <settlementTexturePath>World/WorldObjects/DefaultSettlement</settlementTexturePath>
+  </FactionDef>
+
+  <ThingSetMakerDef>
+    <defName>CASacrilegHuntersRaidLootMaker</defName>
+    <root Class="ThingSetMaker_MarketValue">
+      <fixedParams>
+        <filter>
+          <thingDefs>
+            <li>Silver</li>
+            <li>MedicineIndustrial</li>
+            <li>ComponentIndustrial</li>
+            <li>MealSurvivalPack</li>
+            <li>Neutroamine</li>
+          </thingDefs>
+        </filter>
+      </fixedParams>
+    </root>
+  </ThingSetMakerDef>
+
+  <FactionDef ParentName="CAEvilSacrilegHuntersFactionBase">
+    <defName>CAEvilSacrilegHunters</defName>
+    <label>Evil Sacrileg Hunters</label>
+    <description>A technologically well advanced faction which crashlanded on this rimworld with their generation ship. Their speciallization lies in retrieving old artifacts and hunting for treasure, which helped them enormously to get a quick foothold on this planet, which is covered with old structures.</description>
+    <!--<colorSpectrum>
+			<li>(0.35, 0.30, 0.60)</li>
+			<li>(0.45, 0.40, 0.90)</li>
+		</colorSpectrum>-->
+    <colorSpectrum>
+      <li>(0.93, 0.59, 0.22)</li>
+      <!--<li>(0.35, 0.90, 0.57)</li>-->
+      <!--<li>(0.25, 0.66, 0.94)</li>-->
+      <!--<li>(0.98, 0.75, 0.37)</li>-->
+      <!--<li>(0.97, 0.62, 0.52)</li>-->
+    </colorSpectrum>
+  </FactionDef>
+
+  <RulePackDef>
+    <defName>CANamerFactionSacrilegHunters</defName>
+    <include>
+      <li>EmpireNameUtility</li>
+    </include>
+    <rulePack>
+      <rulesStrings>
+        <li>r_name(p=2)->Sacrileg Hunters</li>
+        <li>r_name->Sacrileg Hunters</li>
+      </rulesStrings>
+    </rulePack>
+  </RulePackDef>
+
+</Defs>
