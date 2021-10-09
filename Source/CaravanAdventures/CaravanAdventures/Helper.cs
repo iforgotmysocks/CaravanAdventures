@@ -16,7 +16,7 @@ namespace CaravanAdventures
         public static Expansions.ExpansionDef Exp => Expansions.ExpansionManager.ActiveExpansion;
 
         // todo - add replacesMechanoidFaction field to Expansion and replace rimedieval with the field check
-        public static bool ExpRM => Expansions.ExpansionManager.ActiveExpansion.expansionName.ToLower() == "rimedieval";
+        public static bool ExpRM => Expansions.ExpansionManager.ActiveExpansion?.expansionName?.ToLower() == "rimedieval";
         public static Faction ExpRMNewFaction => Helper.ExpRM ? Find.FactionManager.FirstFactionOfDef(Helper.ExpSettings.primaryEnemyFactionDef) ?? Faction.OfMechanoids : Faction.OfMechanoids;
         public static bool Debug() => ModSettings.debug;
 

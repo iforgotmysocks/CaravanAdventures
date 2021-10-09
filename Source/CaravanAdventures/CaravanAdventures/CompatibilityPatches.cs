@@ -4,6 +4,7 @@ using System.Reflection;
 using Verse;
 using CaravanAdventures.CaravanItemSelection;
 using RimWorld;
+using HarmonyLib;
 
 namespace CaravanAdventures
 {
@@ -147,10 +148,98 @@ namespace CaravanAdventures
                     Patches.Compatibility.RimWarPatch.ApplyPatches(rimWarAssembly);
                 }
             }, false, ErrorMessage("RimWar"));
+            Patches.HarmonyPatcher.harmony.PatchAll();
+
+            // todo - look into this
+            //var regUpdaterType = typeof(RegionAndRoomUpdater);
+            //var methodInfos = regUpdaterType.GetMethods((BindingFlags)(-1));
+
+            //foreach (var methodinfo in methodInfos)
+            //{
+            //    RimedievelRegionUpdaterCheck.methodname = methodinfo.Name;
+            //}
         }
 
         private static string ErrorMessage(string modName) => $"Following error happend while trying to patch {modName} for compatibility with CA, but was caught safely:\n";
 
+        internal static void TryRegionStuff()
+        {
+            foreach (var map in Find.Maps)
+            {
+                //DLog.Message($"editing with parent faction {map.ParentFaction?.GetCallLabel() ?? "nope"}");
+                //map.regionAndRoomUpdater.Enabled = false;
+                //DLog.Message($"region updater disabled");
+                int casketsdestroyed = 0;
+                foreach (var casket in map.listerThings.AllThings.OfType<Building_CryptosleepCasket>().Reverse()) { casket.Destroy(); casketsdestroyed++; }
+                DLog.Message($"destroyed caskets: {casketsdestroyed}");
+
+                //int pawns = 0;
+                //foreach (var pawn in map.mapPawns.AllPawns.Where(x => x?.Faction != Faction.OfPlayer).Reverse()) { pawn.Destroy(); pawns++; }
+                //DLog.Message($"destroyed pawns: {pawns}");
+            }
+        }
+    }
+
+    //[HarmonyPatch(typeof(Thing), "Destroy")]
+    //class BuildingCheck
+    //{
+    //    public static string methodname;
+    //    public static void Prefix(Thing __instance)
+    //    {
+    //        DLog.Message($"before update {__instance?.def?.defName ?? "nope"}", true);
+    //    }
+
+    //    public static void Postfix()
+    //    {
+    //        DLog.Message($"after update {__instance?.def?.defName ?? "nope"}");
+    //    }
+    //}
+
+    //[HarmonyPatch(typeof(SmoothableWallUtility), "Destroy")]
+    //class BuildingCheckwll
+    //{
+    //    public static string methodname;
+    //    public static void Prefix()
+    //    {
+    //        DLog.Message($"before update destroy", true);
+    //    }
+
+    //    public static void Postfix()
+    //    {
+    //        DLog.Message($"after update destroy");
+    //    }
+    //}
+
+    // test // todo rm
+    [HarmonyPatch(typeof(Verse.AI.Group.Lord), "Notify_BuildingLost")]
+    class RimedievelRegionUpdaterCheck
+    {
+        public static string methodname;
+        public static bool Prefix()
+        {
+            DLog.Message($"before update Notify_BuildingLost");
+            return false;
+        }
+
+        //public static void Postfix()
+        //{
+        //    DLog.Message($"after update Notify_BuildingLost");
+        //}
+    }
+
+    [HarmonyPatch(typeof(RegionAndRoomUpdater), "CreateOrUpdateRooms")]
+    class RimedievelRegionUpdaterCheck2
+    {
+        public static string methodname;
+        public static void Prefix()
+        {
+            DLog.Message($"before update CreateOrUpdateRooms");
+        }
+
+        public static void Postfix()
+        {
+            DLog.Message($"after update CreateOrUpdateRooms");
+        }
     }
 
 }
