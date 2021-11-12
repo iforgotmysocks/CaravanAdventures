@@ -19,6 +19,7 @@ namespace CaravanAdventures.CaravanCamp
         public AnimalArea()
         {
             CoordSize = 2;
+            ForcedTentDirection = ForcedTentDirection.Horizontal;
             SupplyCost = 1;
         }
 
