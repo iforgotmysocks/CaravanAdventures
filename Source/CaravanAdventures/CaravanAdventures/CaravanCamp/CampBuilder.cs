@@ -548,7 +548,7 @@ namespace CaravanAdventures.CaravanCamp
                 caravan.Notify_PawnAdded(animal);
                 return;
             }
-            animal.inventory.DropAllNearPawn(animal.Position);
+            if (ModSettings.generateStorageForAllInventory) animal.inventory.DropAllNearPawn(animal.Position);
             animal.jobs.StartJob(JobMaker.MakeJob(JobDefOf.GotoWander, null), Verse.AI.JobCondition.InterruptForced, null, false, true, null, new Verse.AI.JobTag?(Verse.AI.JobTag.Idle), false, false);
         }
 
@@ -576,7 +576,7 @@ namespace CaravanAdventures.CaravanCamp
             caravan.RemovePawn(pawn);
             caravan.Notify_PawnRemoved(pawn);
             GenSpawn.Spawn(pawn, pos, map);
-            pawn.inventory.DropAllNearPawn(pawn.Position);
+            if (ModSettings.generateStorageForAllInventory) pawn.inventory.DropAllNearPawn(pawn.Position);
             pawn.jobs.StartJob(JobMaker.MakeJob(JobDefOf.LayDown, bed), Verse.AI.JobCondition.InterruptForced, null, false, true, null, new Verse.AI.JobTag?(Verse.AI.JobTag.TuckedIntoBed), false, false);
         }
 
