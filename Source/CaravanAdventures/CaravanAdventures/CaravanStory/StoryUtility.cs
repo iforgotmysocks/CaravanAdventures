@@ -42,10 +42,16 @@ namespace CaravanAdventures.CaravanStory
         public static IntVec3 GetAllowedMapSizeConcideringSettings()
         {
             var testedMaxSize = new IntVec3(275, 1, 275);
+            var minimumSize = new IntVec3(250, 1, 250);
             var resultSize = Find.World.info.initialMapSize;
 
             DLog.Message($"current map size in getallowed {resultSize}");
 
+            if ((resultSize.x * resultSize.z) < (minimumSize.x * minimumSize.y))
+            {
+                DLog.Message($"Using minimum map size 250x250");
+                return minimumSize;
+            }
             if (!ModSettings.limitLargeMapSizesToTestedSize) return resultSize;
             if ((resultSize.x * resultSize.z) > (testedMaxSize.x * testedMaxSize.z)) return testedMaxSize;
             return resultSize;
