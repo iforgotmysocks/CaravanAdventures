@@ -68,12 +68,12 @@ namespace CaravanAdventures.Settings
             options.CheckboxLabeled("Fence posts only decorative", ref ModSettings.decorativeFencePosts, "When set to false, fence posts can't be walked through and a door is created as entrace.");
             options.CheckboxLabeled("Create caravan packing spot at camp center", ref ModSettings.createCampPackingSpot);
             options.CheckboxLabeled("Show camp supply cost approximate on settle gizmo", ref ModSettings.showSupplyCostsInGizmo, "Enable if the approximate amount of camp supplies needed / available should be shown on the caravan settle gui gizmo label (value may be incorrect by a few units)");
+            options.CheckboxLabeled("Disable Tentsupply requirement costs", ref ModSettings.hasSupplyCostsDisabled);
             var rect = options.GetRect(Text.LineHeight);
-            rect.width = options.ColumnWidth / 2;
-            Widgets.Label(rect, "Maximum camp supply cost: ");
+            rect.width = options.ColumnWidth * 0.92f;
+            Widgets.Label(rect, "Maximum camp supply cost (not used to disable cost, check setting above): ");
             var campCostInput = Widgets.TextField(ModSettings.BRect(options.ColumnWidth - 40, rect.y, 40, Text.LineHeight), ModSettings.maxCampSupplyCost.ToString());
             if (double.TryParse(campCostInput, out var campCostDouble)) ModSettings.maxCampSupplyCost = Convert.ToInt32(campCostDouble);
-            options.CheckboxLabeled("Disable Tentsupply requirement costs", ref ModSettings.hasSupplyCostsDisabled);
             options.Label($"Starting fuel percentage for camp-gear: {ModSettings.fuelStartingFillPercentage}%");
             ModSettings.fuelStartingFillPercentage = Convert.ToInt32(options.Slider(ModSettings.fuelStartingFillPercentage, 0, 100));
             options.End();
