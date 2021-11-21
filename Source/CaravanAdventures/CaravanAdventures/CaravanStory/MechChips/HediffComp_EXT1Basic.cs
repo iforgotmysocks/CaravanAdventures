@@ -57,6 +57,9 @@ namespace CaravanAdventures.CaravanStory.MechChips
             if (Pawn?.MentalState?.def == MentalStateDefOf.BerserkMechanoid
                 || Pawn?.MentalState?.def == MentalStateDefOf.Berserk)
                 Pawn.MentalState.RecoverFromState();
+
+            var shockHediff = Pawn.health?.hediffSet?.GetFirstHediffOfDef(HediffDefOf.PsychicShock);
+            if (shockHediff != null) Pawn.health.RemoveHediff(shockHediff);
         }
 
         public virtual void MakeSureDeadWhenDowned()
