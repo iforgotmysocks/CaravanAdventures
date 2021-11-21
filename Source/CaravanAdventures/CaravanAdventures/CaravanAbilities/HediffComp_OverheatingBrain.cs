@@ -37,7 +37,8 @@ namespace CaravanAdventures.CaravanAbilities
 
             if (!Pawn.Dead && ticks >= ticksToOverheat)
             {
-              Pawn.TakeDamage(new DamageInfo(DamageDefOf.Burn, 5000, 200, -1, null, Pawn.health.hediffSet.GetBrain()));
+                if (Pawn?.Faction == Faction.OfPlayer && Pawn?.RaceProps?.IsMechanoid == true) Pawn.forceNoDeathNotification = true;
+                Pawn.TakeDamage(new DamageInfo(DamageDefOf.Burn, 5000, 200, -1, null, Pawn.health.hediffSet.GetBrain()));
             }
             ticks++;
         }
