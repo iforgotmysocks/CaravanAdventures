@@ -65,7 +65,7 @@
 
   <PawnRelationDef>
     <defName>CAThirdWheelRelation</defName>
-    <label>Thrid wheel</label>
+    <label>Third wheel</label>
     <labelFemale>Third wheel</labelFemale>
     <!--<importance>80</importance>-->
     <opinionOffset>-10</opinionOffset>
