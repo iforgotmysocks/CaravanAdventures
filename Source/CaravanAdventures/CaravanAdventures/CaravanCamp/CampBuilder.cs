@@ -187,7 +187,11 @@ namespace CaravanAdventures.CaravanCamp
                 .ToList()
                 .ForEach(col =>
                 {
-                    var tentWithSpace = campParts?.OfType<RestTent>()?.FirstOrDefault(tent => tent.Occupants.Count < (tentSize.x * tent.CoordSize - 2) && !(tent is MedicalTent) && !(tent is PrisonerTent) && !(tent is SlaveTent));
+                    var tentWithSpace = campParts?.OfType<RestTent>()
+                        ?.FirstOrDefault(tent => tent.Occupants.Count < (tentSize.x * tent.CoordSize - 2) 
+                            && !(tent is MedicalTent) 
+                            && !(tent is PrisonerTent) 
+                            && !(tent is SlaveTent));
                     if (tentWithSpace == null)
                     {
                         tentWithSpace = new RestTent();

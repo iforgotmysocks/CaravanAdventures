@@ -12,7 +12,6 @@ namespace CaravanAdventures.CaravanCamp
     interface IShelfTent
     {
         void FillShelfs(Map map, Caravan caravan);
-
         Building_Storage GetShelf();
     }
 }
