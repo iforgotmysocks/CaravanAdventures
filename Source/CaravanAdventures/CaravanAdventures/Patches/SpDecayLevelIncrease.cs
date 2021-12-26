@@ -23,10 +23,10 @@ namespace CaravanAdventures.Patches
             if (___pawn?.Faction != Faction.OfPlayer
                 || xp > 0 
                 || (xp < 0f && __instance.levelInt == 0)
-                || __instance.XpRequiredForLevelUp - Math.Abs(xp) <= 0
-                || __instance.levelInt > 15) return;
+                || __instance.XpRequiredForLevelUp - Math.Abs(xp) <= 0) return;
             
-            __instance.Learn(Math.Abs(xp), true);
+            if (__instance.levelInt > 15) __instance.Learn(Math.Abs(xp / 2), true);
+            else __instance.Learn(Math.Abs(xp), true);
         }
     }
 }
