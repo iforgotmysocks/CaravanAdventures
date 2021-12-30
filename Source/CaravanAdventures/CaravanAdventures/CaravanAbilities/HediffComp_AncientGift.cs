@@ -24,7 +24,9 @@ namespace CaravanAdventures.CaravanAbilities
         }
 
         public static double AttackSpeedInBonusPercent => Math.Round(100 / (ModSettings.attackspeedMultiplier), 0);
-        public override string CompTipStringExtra => base.CompTipStringExtra + $"Melee attack speed: x{AttackSpeedInBonusPercent}%";
+        public static double PsyfocusRegInPercentPerHour => Math.Round(ModSettings.ancientGiftPassivePsyfocusGainPerSec * 100 * 40f, 2);
+        public override string CompTipStringExtra => $"Melee attack speed: x{AttackSpeedInBonusPercent}%"
+            + $"\nPsyfocus regeneration: {PsyfocusRegInPercentPerHour}% / h";
 
         public override void CompExposeData()
         {
