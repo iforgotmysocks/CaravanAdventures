@@ -11,7 +11,7 @@ using Verse;
 
 namespace CaravanAdventures.CaravanCamp
 {
-    class CampBuilder
+    public class CampBuilder
     {
         protected Map map;
         protected Caravan caravan;
@@ -538,7 +538,7 @@ namespace CaravanAdventures.CaravanCamp
             }
         }
 
-        protected virtual void PlaceIntoAnimalArea(AnimalArea animalArea, Pawn animal)
+        public virtual void PlaceIntoAnimalArea(AnimalArea animalArea, Pawn animal)
         {
             var cell = animalArea.CellRect.Cells.Where(c => !animalArea.CellRect.EdgeCells.Contains(c)).RandomElement();
             if (cell == default) return;

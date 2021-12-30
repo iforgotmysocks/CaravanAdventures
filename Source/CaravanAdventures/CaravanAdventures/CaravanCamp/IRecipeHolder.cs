@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CaravanAdventures.CaravanCamp
 {
-    interface IRecipeHolder
+    public interface IRecipeHolder
     {
         void ApplyRecipes(Caravan caravan);
         void ApplyRecipesTribal(Caravan caravan);

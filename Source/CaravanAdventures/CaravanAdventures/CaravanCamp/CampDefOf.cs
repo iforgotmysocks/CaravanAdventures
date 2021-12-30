@@ -5,7 +5,7 @@ using Verse;
 namespace CaravanAdventures.CaravanCamp
 {
     [DefOf]
-    class CampDefOf
+    public class CampDefOf
     {
         public static TerrainDef CATentFloor;
         public static TerrainDef CAMakeshiftTentFloor;

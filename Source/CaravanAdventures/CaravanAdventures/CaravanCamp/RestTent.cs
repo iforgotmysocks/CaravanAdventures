@@ -9,7 +9,7 @@ using Verse;
 
 namespace CaravanAdventures.CaravanCamp
 {
-    class RestTent : Tent
+    public class RestTent : Tent
     {
         public List<Pawn> Occupants { get; set; }
         public bool SkipPawnAssignment { get; set; }
@@ -138,7 +138,7 @@ namespace CaravanAdventures.CaravanCamp
             CampHelper.RefuelByPerc(cooler, ModSettings.fuelStartingFillPercentage);
         }
 
-        private bool CheckAssignableAndMarkBedForOwnerType(Pawn pawn, Thing bed)
+        protected virtual bool CheckAssignableAndMarkBedForOwnerType(Pawn pawn, Thing bed)
         {
             var bBed = bed as Building_Bed;
             if (bBed == null) return false;

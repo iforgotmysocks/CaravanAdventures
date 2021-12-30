@@ -8,7 +8,7 @@ using Verse;
 namespace CaravanAdventures.CaravanCamp
 {
     public enum ForcedTentDirection { Horizontal, Vertical, None }
-    abstract class CampArea
+    public abstract class CampArea
     {
         public int CoordSize { get; set; }
         public List<IntVec3> Coords { get; set; }

@@ -10,13 +10,13 @@ using Verse.AI;
 
 namespace CaravanAdventures.CaravanCamp
 {
-    class CompCampControl : ThingComp
+    public class CompCampControl : ThingComp
     {
-        private List<CellRect> campRects;
-        private int resourceCount;
-        private int waste;
-        private bool tribal;
-        private List<Thing> campAssets;
+        protected List<CellRect> campRects;
+        protected int resourceCount;
+        protected int waste;
+        protected bool tribal;
+        protected List<Thing> campAssets;
 
         public override void PostExposeData()
         {

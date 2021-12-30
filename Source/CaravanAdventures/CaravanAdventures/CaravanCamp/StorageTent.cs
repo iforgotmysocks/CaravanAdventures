@@ -9,7 +9,7 @@ using Verse;
 
 namespace CaravanAdventures.CaravanCamp
 {
-    class StorageTent : Tent, IZoneTent
+    public class StorageTent : Tent, IZoneTent
     {
         protected Zone_Stockpile zone;
         public StorageTent()

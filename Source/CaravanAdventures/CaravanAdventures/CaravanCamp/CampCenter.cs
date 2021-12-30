@@ -9,7 +9,7 @@ using Verse;
 
 namespace CaravanAdventures.CaravanCamp
 {
-    class CampCenter : CampArea, IRecipeHolder
+    public class CampCenter : CampArea, IRecipeHolder
     {
         protected ThingWithComps control;
         public ThingWithComps Control { get => control; private set => control = value; }

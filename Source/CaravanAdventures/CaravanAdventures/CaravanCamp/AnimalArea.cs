@@ -10,11 +10,11 @@ using Verse;
 
 namespace CaravanAdventures.CaravanCamp
 {
-    class AnimalArea : CampArea, IAreaRestrictionTent, IZoneTent
+    public class AnimalArea : CampArea, IAreaRestrictionTent, IZoneTent
     {
         protected Area_Allowed animalArea;
         protected Zone_Stockpile zone;
-        private bool tribal = false;
+        protected bool tribal = false;
 
         public AnimalArea()
         {

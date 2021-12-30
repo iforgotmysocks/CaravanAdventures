@@ -9,7 +9,7 @@ using Verse;
 
 namespace CaravanAdventures.CaravanCamp
 {
-    class FoodTent : Tent, IZoneTent
+    public class FoodTent : Tent, IZoneTent
     {
         protected Zone_Stockpile zone;
         protected ThingCategoryDef[] validFoods = new[] { ThingCategoryDefOf.FoodMeals, ThingCategoryDefOf.Foods, ThingCategoryDefOf.MeatRaw };
