@@ -9,7 +9,7 @@ using RimWorld.Planet;
 
 namespace CaravanAdventures.CaravanCamp
 {
-    class CampHelper
+    public class CampHelper
     {
         public static IntVec3 FindCenterCell(Map map, Predicate<IntVec3> extraCellValidator)
         {
@@ -28,7 +28,7 @@ namespace CaravanAdventures.CaravanCamp
             return CellFinder.RandomCell(map);
         }
 
-        internal static Thing PrepAndGenerateThing(object objThing, IntVec3 cell, Map map, Rot4 rot, List<Thing> campAssetListRef, bool skipFaction = false)
+        public static Thing PrepAndGenerateThing(object objThing, IntVec3 cell, Map map, Rot4 rot, List<Thing> campAssetListRef, bool skipFaction = false)
         {
             var spawnedThing = objThing is Thing thing ? GenSpawn.Spawn(thing, cell, map, rot) 
                 : objThing is ThingDef thingDef ? GenSpawn.Spawn(thingDef, cell, map) : null;
@@ -53,14 +53,14 @@ namespace CaravanAdventures.CaravanCamp
         public static Thing GetFirstOrderedThingOfCategoryFromCaravan(Caravan caravan, ThingCategoryDef[] validCategories, ThingDef[] unvalidThings = null)
             => GetOrderedThingsOfCategoryFromCaravan(caravan, validCategories, unvalidThings)?.FirstOrDefault();
 
-        internal static void BringToNormalizedTemp(CellRect cellRect, Map map)
+        public static void BringToNormalizedTemp(CellRect cellRect, Map map)
         {
             var roomGroup = cellRect.CenterCell.GetRoomGroup(map);
             var remainingTemp = 22 - roomGroup.Temperature;
             roomGroup.PushHeat(remainingTemp * cellRect.Cells.Where(curCell => !cellRect.EdgeCells.Contains(curCell)).Count());
         }
 
-        internal static void AddAnimalFreeAreaRestriction(IEnumerable<CampArea> parts, Map map, Caravan caravan, bool assignAnimals = false)
+        public static void AddAnimalFreeAreaRestriction(IEnumerable<CampArea> parts, Map map, Caravan caravan, bool assignAnimals = false)
         {
             var animalArea = new Area_Allowed(map.areaManager);
             map.areaManager.AllAreas.Add(animalArea);
@@ -73,7 +73,7 @@ namespace CaravanAdventures.CaravanCamp
             if (assignAnimals) foreach (var animal in caravan.PawnsListForReading.Where(pawn => pawn.RaceProps.Animal)) animal.playerSettings.AreaRestriction = animalArea;
         }
 
-        internal static void AssignQualityReflectiveOfSkill(Building thing, int skillLevel, int lowestSkill = 6)
+        public static void AssignQualityReflectiveOfSkill(Building thing, int skillLevel, int lowestSkill = 6)
         {
             var compQual = thing.TryGetComp<CompQuality>();
             if (compQual == null) return;

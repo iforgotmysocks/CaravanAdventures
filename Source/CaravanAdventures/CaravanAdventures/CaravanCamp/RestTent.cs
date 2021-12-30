@@ -9,7 +9,7 @@ using Verse;
 
 namespace CaravanAdventures.CaravanCamp
 {
-    class RestTent : Tent
+    public class RestTent : Tent
     {
         public List<Pawn> Occupants { get; set; }
         public bool SkipPawnAssignment { get; set; }

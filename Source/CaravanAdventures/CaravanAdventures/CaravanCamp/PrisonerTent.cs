@@ -8,7 +8,7 @@ using Verse;
 
 namespace CaravanAdventures.CaravanCamp
 {
-    class PrisonerTent : RestTent
+    public class PrisonerTent : RestTent
     {
         public PrisonerTent()
         {

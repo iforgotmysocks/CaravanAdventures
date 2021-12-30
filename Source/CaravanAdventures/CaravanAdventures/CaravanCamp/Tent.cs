@@ -8,7 +8,7 @@ using Verse;
 
 namespace CaravanAdventures.CaravanCamp
 {
-    abstract class Tent : CampArea
+    public abstract class Tent : CampArea
     {
         public Tent()
         {

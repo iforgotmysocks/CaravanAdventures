@@ -8,7 +8,7 @@ using Verse;
 
 namespace CaravanAdventures.CaravanCamp
 {
-    interface IZoneTent
+    public interface IZoneTent
     {
         Zone GetZone();
         void CreateZone(Map map);

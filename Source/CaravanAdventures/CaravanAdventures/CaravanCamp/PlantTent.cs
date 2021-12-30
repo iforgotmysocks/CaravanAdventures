@@ -9,7 +9,7 @@ using Verse;
 
 namespace CaravanAdventures.CaravanCamp
 {
-    class PlantTent : Tent
+    public class PlantTent : Tent
     {
         public PlantTent()
         {

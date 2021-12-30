@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace CaravanAdventures.CaravanCamp.Buildings
 {
-    class Building_AirConditioningHeater : Building_TempControl
+    public class Building_AirConditioningHeater : Building_TempControl
     {
         public override void TickRare()
         {

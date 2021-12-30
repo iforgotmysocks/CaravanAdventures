@@ -7,7 +7,7 @@ using Verse;
 
 namespace CaravanAdventures.CaravanCamp
 {
-    class CampModExt : DefModExtension
+    public class CampModExt : DefModExtension
     {
     }
 }

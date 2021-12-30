@@ -6,7 +6,7 @@ using Verse;
 
 namespace CaravanAdventures.CaravanCamp
 {
-    class ProductionTent : Tent, IRecipeHolder, IShelfTent
+    public class ProductionTent : Tent, IRecipeHolder, IShelfTent
     {
         protected Building_WorkTable tableButcher;
         protected Building_WorkTable handTailoringBench;

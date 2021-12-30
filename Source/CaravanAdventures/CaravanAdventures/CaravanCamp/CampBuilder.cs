@@ -11,7 +11,7 @@ using Verse;
 
 namespace CaravanAdventures.CaravanCamp
 {
-    class CampBuilder
+    public class CampBuilder
     {
         protected Map map;
         protected Caravan caravan;

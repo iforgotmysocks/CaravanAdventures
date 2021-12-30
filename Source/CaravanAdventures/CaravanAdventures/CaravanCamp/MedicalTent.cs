@@ -9,7 +9,7 @@ using Verse;
 
 namespace CaravanAdventures.CaravanCamp
 {
-    class MedicalTent : RestTent, IShelfTent, IZoneTent
+    public class MedicalTent : RestTent, IShelfTent, IZoneTent
     {
         protected ThingDef[] validMedicine = new[] { ThingDefOf.MedicineUltratech, ThingDefOf.MedicineIndustrial, ThingDefOf.MedicineHerbal };
         protected Building_Storage shelf;

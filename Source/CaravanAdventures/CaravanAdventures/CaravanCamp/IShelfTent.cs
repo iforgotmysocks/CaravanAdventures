@@ -9,7 +9,7 @@ using Verse;
 
 namespace CaravanAdventures.CaravanCamp
 {
-    interface IShelfTent
+    public interface IShelfTent
     {
         void FillShelfs(Map map, Caravan caravan);
         Building_Storage GetShelf();
