@@ -338,7 +338,7 @@ namespace CaravanAdventures.CaravanStory
 
         private void CheckBossDefeated()
         {
-            if ((boss != null && !boss.Dead) || (!bossWasSpawned && boss == null && CompCache.StoryWC.storyFlags[CompCache.StoryWC.BuildCurrentShrinePrefix() + "Created"]) || bossDefeatedAndRewardsGiven || lastJudgementEntraceWasSpawned) return;
+            if ((boss != null && !boss.Dead && !boss.Destroyed) || (!bossWasSpawned && boss == null && CompCache.StoryWC.storyFlags[CompCache.StoryWC.BuildCurrentShrinePrefix() + "Created"]) || bossDefeatedAndRewardsGiven || lastJudgementEntraceWasSpawned) return;
             var gifted = StoryUtility.GetGiftedPawn();
             if (gifted == null) Log.Warning("gifted pawn was null, which shouldn't happen. Spell was stored for when another gifted pawn awakes");
             AbilityDef spell = null;

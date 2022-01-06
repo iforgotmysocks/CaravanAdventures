@@ -70,8 +70,7 @@ namespace CaravanAdventures.CaravanStory
 
 		private void CheckBossDefeated()
 		{
-			// todo - test if .destroyed needs to be added (in case of the body being completely nuked)?
-			if (endBoss != null && !endBoss.Dead || CompCache.StoryWC.storyFlags["Judgment_StoryOverDialog"]) return;
+			if (endBoss != null && !endBoss.Dead && !endBoss.Destroyed || CompCache.StoryWC.storyFlags["Judgment_StoryOverDialog"]) return;
 
 			var gifted = StoryUtility.GetGiftedPawn();
 			if (gifted == null) Log.Warning("gifted pawn was null, which shouldn't happen. Spell was stored for when another gifted pawn awakes");
