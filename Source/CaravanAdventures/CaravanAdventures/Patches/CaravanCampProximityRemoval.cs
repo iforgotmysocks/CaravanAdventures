@@ -1,9 +1,7 @@
 ﻿using System.Linq;
-using RimWorld;
 using Verse;
 using HarmonyLib;
 using RimWorld.Planet;
-using CaravanAdventures.CaravanImprovements;
 using System.Collections.Generic;
 
 namespace CaravanAdventures.Patches

@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RimWorld;
-using Verse.AI.Group;
-using Verse;
+﻿using Verse.AI.Group;
 
 namespace CaravanAdventures.CaravanStory.Lords
 {
-	class Trigger_AttackWithReinforcements : Trigger
+    class Trigger_AttackWithReinforcements : Trigger
 	{
 		public Trigger_AttackWithReinforcements()
 		{

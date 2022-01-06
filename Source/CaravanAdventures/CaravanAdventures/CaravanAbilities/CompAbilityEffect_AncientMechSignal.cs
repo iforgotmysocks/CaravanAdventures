@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using RimWorld;
 using Verse;
 using UnityEngine;
 using RimWorld.Planet;
 using Verse.AI.Group;
-using CaravanAdventures.CaravanStory;
 
 namespace CaravanAdventures.CaravanAbilities
 {

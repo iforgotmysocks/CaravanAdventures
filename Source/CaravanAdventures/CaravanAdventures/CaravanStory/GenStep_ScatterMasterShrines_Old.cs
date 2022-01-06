@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using RimWorld;
-using RimWorld.Planet;
 using RimWorld.BaseGen;
 using Verse;
-using UnityEngine;
 
 namespace CaravanAdventures.CaravanStory
 {
-	// todo - delete whole class when done with the new version
+    // todo - delete whole class when done with the new version
     class GenStep_ScatterMasterShrines_Old : GenStep_ScatterRuinsSimple
 	{
 		public override int SeedPart
