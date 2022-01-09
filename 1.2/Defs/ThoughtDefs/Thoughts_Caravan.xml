@@ -11,12 +11,12 @@
       <li>
         <label>Outsider</label>
         <description>I had no choice but to join them... i'd have died alone, but i'm scared what they might do to me.</description>
-        <baseMoodEffect>-6</baseMoodEffect>
+        <baseMoodEffect>-3</baseMoodEffect>
       </li>
       <li>
         <label>Third wheel</label>
         <description>I don't really know these people, should i stay?</description>
-        <baseMoodEffect>-2</baseMoodEffect>
+        <baseMoodEffect>-1</baseMoodEffect>
       </li>
       <li>
         <label>Familiar companion</label>
