@@ -182,6 +182,7 @@ namespace CaravanAdventures.CaravanStory
 
         public override void Tick()
         {
+            if (this.trader != null) this.trader.TraderTrackerTick();
             for (int i = 0; i < AllComps.Count; i++)
             {
                 AllComps[i].CompTick();
