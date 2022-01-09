@@ -56,7 +56,7 @@
   <AbilityDef ParentName="PsycastBase" MayRequire="Ludeon.RimWorld.Royalty">
     <defName>CAAncientThunderBolt</defName>
     <label>ancient thunder bolt</label>
-    <description>Powerful ancient psypower, a targettet thunder blast with area damage. Requires the ancient gift.</description>
+    <description>Powerful ancient psypower, a targeted thunder blast with area damage. Requires the ancient gift.</description>
     <level>0</level>
     <iconPath>UI/Abilities/Thunderbolt</iconPath>
     <canUseAoeToGetTargets>False</canUseAoeToGetTargets>
@@ -143,7 +143,7 @@
   <!--<AbilityDef ParentName="PsycastBase" MayRequire="Ludeon.RimWorld.Royalty">
     <defName>CAAncientProtectiveAura</defName>
     <label>ancient protective aura</label>
-    <description>Protects the target from a large part of incoming damage, fire and heals wounds over time (even permanent ones when active long enough). \n\nReduces the overall heat a pawn can handle and accelerates psyfocus drain by 2% / day while active. The effect of this spell disappears if it is cast a second time on the target or if the targetted pawn runs out of psyfocus. \n\nThe effect is weaker and drains more psyfocus when cast on pawns without the ancient gift.</description>
+    <description>Protects the target from a large part of incoming damage, fire and heals wounds over time (even permanent ones when active long enough). \n\nReduces the overall heat a pawn can handle and accelerates psyfocus drain by 2% / day while active. The effect of this spell disappears if it is cast a second time on the target or if the targeted pawn runs out of psyfocus. \n\nThe effect is weaker and drains more psyfocus when cast on pawns without the ancient gift.</description>
     <level>0</level>
 		<displayGizmoWhileUndrafted>True</displayGizmoWhileUndrafted>
 		<disableGizmoWhileUndrafted>False</disableGizmoWhileUndrafted>
