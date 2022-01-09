@@ -53,7 +53,7 @@
     <label>Outsider</label>
     <labelFemale>Outsider</labelFemale>
     <!--<importance>-10</importance>-->
-    <opinionOffset>-20</opinionOffset>
+    <opinionOffset>-10</opinionOffset>
     <implied>false</implied>
     <reflexive>true</reflexive>
     <modExtensions>
@@ -68,7 +68,7 @@
     <label>Third wheel</label>
     <labelFemale>Third wheel</labelFemale>
     <!--<importance>80</importance>-->
-    <opinionOffset>-10</opinionOffset>
+    <opinionOffset>-5</opinionOffset>
     <implied>false</implied>
     <reflexive>true</reflexive>
     <modExtensions>
