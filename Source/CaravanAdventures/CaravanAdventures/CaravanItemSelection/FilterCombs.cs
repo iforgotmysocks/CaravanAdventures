@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CaravanAdventures.CaravanItemSelection;
 using RimWorld;
-using RimWorld.Planet;
 using Verse;
-using CaravanAdventures.Patches;
 
 namespace CaravanAdventures.CaravanItemSelection
 {

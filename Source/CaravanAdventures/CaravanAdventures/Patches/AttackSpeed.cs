@@ -2,8 +2,6 @@
 using RimWorld;
 using Verse;
 using HarmonyLib;
-using RimWorld.Planet;
-using CaravanAdventures.CaravanImprovements;
 
 namespace CaravanAdventures.Patches
 {

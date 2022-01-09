@@ -1,8 +1,6 @@
 ﻿using HarmonyLib;
 using RimWorld;
-using System;
 using System.Linq;
-using UnityEngine;
 using Verse;
 
 namespace CaravanAdventures.Patches
