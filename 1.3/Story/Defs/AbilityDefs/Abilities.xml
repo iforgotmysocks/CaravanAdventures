@@ -211,7 +211,7 @@
   <AbilityDef ParentName="PsycastBase" MayRequire="Ludeon.RimWorld.Royalty">
     <defName>CAAncientProtectiveAura</defName>
     <label>ancient protective aura</label>
-    <description>Allows the caster to channel psyfocus to directly strenghten the bodies capabilities in almost any humanly possible way. Agility, melee combat, aswell as endurance are highly increased. It also protects the target from a large part of incoming damage, fire, heals wounds over time (even permanent ones when active long enough). \n\nReduces the overall heat a pawn can handle and accelerates psyfocus drain by 2% / day while active. The effect of this spell disappears if cast a second time or no more psyfocus is available. \n\nRequires the ancient gift, unless enhanced by The Ancient Coordinator spell.</description>
+    <description>Allows the caster to channel psyfocus to directly strenghten the bodies capabilities in almost any humanly possible way. Agility, melee combat, aswell as endurance are highly increased. It also protects the target from a large part of incoming damage, fire, heals wounds over time (even permanent ones when active long enough). \n\nReduces the overall heat a pawn can handle and accelerates psyfocus drain by 20% / day while active. The effect of this spell disappears if cast a second time or no more psyfocus is available. \n\nRequires the ancient gift, unless enhanced by The Ancient Coordinator spell.</description>
     <level>0</level>
     <displayGizmoWhileUndrafted>True</displayGizmoWhileUndrafted>
     <disableGizmoWhileUndrafted>False</disableGizmoWhileUndrafted>
