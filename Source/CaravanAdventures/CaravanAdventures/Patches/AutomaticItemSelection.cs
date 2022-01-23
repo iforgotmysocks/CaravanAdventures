@@ -104,11 +104,13 @@ namespace CaravanAdventures.Patches
         public static void Dialog_FormCaravan_PostOpen_Postfix(Dialog_FormCaravan __instance)
         {
             if (thingFlag) return;
-            if (ModSettings.autoSelectItems || ModSettings.autoSelectPawns) SelectThings(__instance.transferables);
+            var anythingChanged = false;
+            if (ModSettings.autoSelectItems || ModSettings.autoSelectPawns) SelectThings(__instance.transferables, ref anythingChanged);
+            if (anythingChanged) Traverse.Create(__instance).Method("CountToTransferChanged").GetValue();
             thingFlag = true;
         }
 
-        private static void SelectThings(List<TransferableOneWay> transferables)
+        private static void SelectThings(List<TransferableOneWay> transferables, ref bool anythingChanged)
         {
             foreach (var trans in transferables)
             {
@@ -122,6 +124,7 @@ namespace CaravanAdventures.Patches
                 else if (!ModSettings.autoSelectItems && !isPawn) continue;
 
                 FilterHelper.SetAmount(trans, selected.Select(x => x.stackCount).Sum());
+                anythingChanged = true;
             }
         }
 
