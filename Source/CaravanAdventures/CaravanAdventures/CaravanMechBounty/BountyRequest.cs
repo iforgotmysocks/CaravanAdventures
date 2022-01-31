@@ -285,7 +285,7 @@ namespace CaravanAdventures.CaravanMechBounty
         private DiaNode GetListOfFactions(DiaNode parent, Faction faction, int goodwill)
         {
             var node = new DiaNode("CABountyExchangeRelationHaggle_Factions".Translate(CompCache.BountyWC.BountyPoints, GetEnvoyTimeString()));
-            foreach (var curFaction in Find.FactionManager.AllFactions.Where(f => !f.def.permanentEnemy))
+            foreach (var curFaction in Find.FactionManager.AllFactions.Where(f => !f.def.permanentEnemy && !f.def.hidden && !f.temporary))
             {
                 if (curFaction == Faction.OfPlayer || curFaction == this.faction) continue;
                 node.options.Add(new DiaOption("CABountyExchangeRelationHaggle_Factions_ListedFaction".Translate(
