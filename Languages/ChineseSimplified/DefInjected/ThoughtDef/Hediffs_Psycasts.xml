@@ -1,8 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-
-  <CAAncientGiftDestiny.stages.0.label>远古命运</CAAncientGiftDestiny.stages.0.label>
-  <CAAncientGiftDestiny.stages.0.description>我注定要成就大事！</CAAncientGiftDestiny.stages.0.description>
-
-
+  
+  <!-- EN: Ancient Destiny -->
+  <CAAncientGiftDestiny.stages.Ancient_Destiny.label>远古天命</CAAncientGiftDestiny.stages.Ancient_Destiny.label>
+  <!-- EN: I am destined to accomplish great things! -->
+  <CAAncientGiftDestiny.stages.Ancient_Destiny.description>我注定要成就一番伟大的事业！</CAAncientGiftDestiny.stages.Ancient_Destiny.description>
+  
 </LanguageData>

@@ -1,12 +1,19 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-  <CAFormingTradePresetSell>Sell</CAFormingTradePresetSell>
-  <CAFormingTradePresetSelect>Select</CAFormingTradePresetSelect>
-  <CAFormingTradePresetAll>All</CAFormingTradePresetAll>
-  <CAFormingTradePresetPackUp>Pack up</CAFormingTradePresetPackUp>
-  <CAFormingTradePresetGoods>Goods</CAFormingTradePresetGoods>
-  <CAFormingTradePresetGoods2>Goods2</CAFormingTradePresetGoods2>
-  <CAFormingTradePresetClear>Clear</CAFormingTradePresetClear>
-  <CAFormingTradePresetSupply>Supply disabled</CAFormingTradePresetSupply>
+  <!-- EN: Sell -->
+  <CAFormingTradePresetSell>卖出</CAFormingTradePresetSell>
+  <!-- EN: Select -->
+  <CAFormingTradePresetSelect>选择</CAFormingTradePresetSelect>
+  <!-- EN: All -->
+  <CAFormingTradePresetAll>所有</CAFormingTradePresetAll>
+  <!-- EN: Pack up -->
+  <CAFormingTradePresetPackUp>打包</CAFormingTradePresetPackUp>
+  <!-- EN: Goods -->
+  <CAFormingTradePresetGoods>货物</CAFormingTradePresetGoods>
+  <!-- EN: Goods2 -->
+  <CAFormingTradePresetGoods2>货物2</CAFormingTradePresetGoods2>
+  <!-- EN: Clear -->
+  <CAFormingTradePresetClear>清除</CAFormingTradePresetClear>
+  <!-- EN: Supply disabled -->
+  <CAFormingTradePresetSupply>禁用补给</CAFormingTradePresetSupply>
 </LanguageData>
-

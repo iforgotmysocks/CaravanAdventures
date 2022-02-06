@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: mechanoid hive -->
+  <CAFriendlyMechanoid.label>機械族巢穴</CAFriendlyMechanoid.label>
+  <!-- EN: mechanoid -->
+  <CAFriendlyMechanoid.pawnSingular>機械族</CAFriendlyMechanoid.pawnSingular>
+  <!-- EN: mechanoids -->
+  <CAFriendlyMechanoid.pawnsPlural>機械族</CAFriendlyMechanoid.pawnsPlural>
+  
+  <!-- EN: Sacrileg Hunters -->
+  <CASacrilegHunters.label>瀆神獵人</CASacrilegHunters.label>
+  <!-- EN: A technologically well advanced faction which crashlanded on this rimworld with their generation ship. Their speciallization lies in retrieving old artifacts and hunting for treasure, which helped them enormously to get a quick foothold on this planet, which is covered with old structures. -->
+  <CASacrilegHunters.description>科技十分發達的派系，他們的飛船不知為何迫降在了這個邊緣世界上。瀆神獵人擅長回收古老神器以及搜尋密藏，這也是他們能夠在這顆遍佈古老遺跡的星球上迅速扎根立足的重要原因。</CASacrilegHunters.description>
+  <!-- EN: prime councilor -->
+  <CASacrilegHunters.leaderTitle>首席議員</CASacrilegHunters.leaderTitle>
+  <!-- EN: Sacrileg Hunter -->
+  <CASacrilegHunters.pawnSingular>瀆神獵人</CASacrilegHunters.pawnSingular>
+  <!-- EN: Sacrileg Hunters -->
+  <CASacrilegHunters.pawnsPlural>瀆神獵人</CASacrilegHunters.pawnsPlural>
+  
+</LanguageData>

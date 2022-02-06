@@ -1,20 +1,24 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-
+  
+  <!-- EN: bedroll -->
+  <CAMakeshiftBedroll.label>睡袋</CAMakeshiftBedroll.label>
+  <!-- EN: A simple bed that lays on the floor, usually made of cloth or leather, often lined with fur. It is lightweight and can be rolled up for easy transport, but it is not quite as comfortable as a typical bed. Caravans can use bedrolls while traveling for better sleep. -->
+  <CAMakeshiftBedroll.description>铺在地上的睡袋，通常用布或皮革缝制，也经常会用动物毛织成。轻便，可以卷起便于运输，但确实不如传统床那么舒服。</CAMakeshiftBedroll.description>
+  
+  <!-- EN: double bedroll -->
+  <CAMakeshiftBedrollDouble.label>双人睡袋</CAMakeshiftBedrollDouble.label>
+  <!-- EN: A simple double-wide bed that lays on the floor, usually made of cloth or leather, often lined with fur. It is lightweight and can be rolled up for easy transport, but it is not quite as comfortable as a typical bed. Caravans can use bedrolls while traveling for better sleep. -->
+  <CAMakeshiftBedrollDouble.description>铺在地上的双人睡袋，通常用布或皮革缝制，也经常会用动物毛织成。轻便，可以卷起便于运输，但确实不如传统床那么舒服。</CAMakeshiftBedrollDouble.description>
+  
+  <!-- EN: Makeshift leather -->
+  <CAMakeshiftTentLeather.label>粗制皮革</CAMakeshiftTentLeather.label>
+  <!-- EN: Makeshift tent leather stitched together by all sorts of leathers. -->
+  <CAMakeshiftTentLeather.description>将各种皮革简单缝补在一起制成的粗制皮革。用于搭建帐篷。</CAMakeshiftTentLeather.description>
+  
+  <!-- EN: tent wall -->
   <CAMakeshiftTentWall.label>帐篷墙</CAMakeshiftTentWall.label>
-  <CAMakeshiftTentWall.description>临时织物帐篷墙，用各种廉价纤维快速组装。</CAMakeshiftTentWall.description>
-
-  <CAMakeshiftTentLeather.label>临时皮革</CAMakeshiftTentLeather.label>
-  <CAMakeshiftTentLeather.description>由各种皮革拼接而成的临时帐篷皮革。</CAMakeshiftTentLeather.description>
-
-
-  <!-- bedrolls -->
-
-  <CAMakeshiftBedroll.label>铺盖卷</CAMakeshiftBedroll.label>
-  <CAMakeshiftBedroll.description>铺在地板上的简单床，通常由布或皮革制成，通常内衬毛皮。 它很轻，可以卷起来方便运输，但它不像普通床那么舒服。 商队可以在旅行时使用床单以获得更好的睡眠。</CAMakeshiftBedroll.description>
-
-  <CAMakeshiftBedrollDouble.label>双人铺盖卷</CAMakeshiftBedrollDouble.label>
-  <CAMakeshiftBedrollDouble.description>一张简单的双人床，铺在地板上，通常由布或皮革制成，通常内衬毛皮。 它很轻，可以卷起来方便运输，但它不像普通床那么舒服。 商队可以在旅行时使用床单以获得更好的睡眠。</CAMakeshiftBedrollDouble.description>
-
-
+  <!-- EN: Makeshift fabric tent wall, quickly assembled with all kinds of cheap fibres. -->
+  <CAMakeshiftTentWall.description>用各种廉价的织物快速搭建成的简易帐篷墙。</CAMakeshiftTentWall.description>
+  
 </LanguageData>

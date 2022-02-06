@@ -1,89 +1,89 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-
-  <CATentDoor.label>帐篷门</CATentDoor.label>
-  <CATentDoor.description>分隔房间。 简单的门必须手动打开，这会减慢人们的速度。 减速程度取决于门的材质。</CATentDoor.description>
-
-  <CATentFenceDoor.label>栅栏门</CATentFenceDoor.label>
-  <CATentFenceDoor.description>分隔房间。 简单的门必须手动打开，这会减慢人们的速度。 减速程度取决于门的材质。</CATentFenceDoor.description>
-
-
-  <!-- supplies -->
-
-  <CASpacerTentSupplies.label>太空帐篷补给</CASpacerTentSupplies.label>
-  <CASpacerTentSupplies.description>技术先进的露营装备和织物的混合。 非常适合在恶劣的条件下生存并且非常好看。</CASpacerTentSupplies.description>
-
-  <CACampControl.label>营地中控</CACampControl.label>
-  <CACampControl.description>营地控制平台。</CACampControl.description>
-
-
-  <!-- chem fuel -->
-
-  <CASpacerBiofuelRefinery.label>太空生物燃料精炼厂</CASpacerBiofuelRefinery.label>
-  <CASpacerBiofuelRefinery.description>将木材或植物等生物物质提炼成化学燃料。</CASpacerBiofuelRefinery.description>
-
-  <CAMiniCommsConsole.label>迷你通讯控制台</CAMiniCommsConsole.label>
-  <CAMiniCommsConsole.description>允许与其他派系和轨道贸易商进行无线电联系。</CAMiniCommsConsole.description>
-
-
-  <!-- camp fire roast -->
-
-  <CACampfireRoast.label>带烤架的篝火</CACampfireRoast.label>
-  <CACampfireRoast.description>每个营地的中心，舒适的篝火和现代烤架，让那些美味的烧烤小吃大放异彩。 小人也可以用它来管理营地。</CACampfireRoast.description>
-
+  
+  <!-- EN: One-way A/C and Heater -->
+  <CAAirConditioningHeater.label>单向空调/加热器</CAAirConditioningHeater.label>
+  <!-- EN: A device that converts chemfuel into heat, but is also able to cool the room to a certain degree. -->
+  <CAAirConditioningHeater.description>一台将化合燃料转换成热能的设备，也可以将室温降低至一定程度。</CAAirConditioningHeater.description>
+  
+  <!-- EN: Camp control -->
+  <CACampControl.label>营地控制</CACampControl.label>
+  <!-- EN: Camp control -->
+  <CACampControl.description>营地控制</CACampControl.description>
+  
+  <!-- EN: campfire with roast -->
+  <CACampfireRoast.label>烤肉篝火</CACampfireRoast.label>
+  <!-- EN: Heart of each camp, a cosy campfire with a modern grill to get those tastey grill snacks done. Pawn can also use it to manage the camp. -->
+  <CACampfireRoast.description>放置在营地中央的温暖篝火与现代化烤架，很适合用来烹饪香气扑鼻的烧烤小吃。殖民者可以使用烤肉篝火来管理营地。</CACampfireRoast.description>
+  
+  <!-- EN: chemfuel powered generator -->
+  <CAChemfuelPoweredGenerator.label>化合燃料发电机</CAChemfuelPoweredGenerator.label>
+  <!-- EN: Produces power by consuming chemfuel. Must be periodically refueled by hand. -->
+  <CAChemfuelPoweredGenerator.description>通过消耗化合燃料发电。必须手动添加燃料。</CAChemfuelPoweredGenerator.description>
+  
+  <!-- EN: One-way Cooler -->
+  <CACooler.label>单向制冷机</CACooler.label>
+  <!-- EN: A device that cools down the room temperature. -->
+  <CACooler.description>一台可为房间降温的设备。</CACooler.description>
+  
+  <!-- EN: animal fence post -->
+  <CAFencePost.label>动物栅栏栓桩</CAFencePost.label>
+  <!-- EN: An animal fence post -->
+  <CAFencePost.description>动物栅栏栓桩</CAFencePost.description>
+  
+  <!-- EN: grill snack -->
   <CAGrillSnack.label>烧烤小吃</CAGrillSnack.label>
-  <CAGrillSnack.description>一种美味的烧烤小吃，不像简单的一餐那么有营养，但不会引起食物中毒。</CAGrillSnack.description>
-
-
-  <!-- ac -->
-
-  <CAAirConditioningHeater.label>单向空调和加热器</CAAirConditioningHeater.label>
-  <CAAirConditioningHeater.description>一种将化学燃料转化为热量的装置，但也能够在一定程度上冷却房间。</CAAirConditioningHeater.description>
-
-
-  <!-- cooler -->
-
-  <CACooler.label>单向冷却器</CACooler.label>
-  <CACooler.description>一种降低室温的装置。</CACooler.description>
-
-
-  <!-- trade beacon -->
-
-  <CAOrbitalTradeBeacon.label>轨道贸易信标</CAOrbitalTradeBeacon.label>
-  <CAOrbitalTradeBeacon.description>轨道交易所需。 如果轨道贸易商靠近轨道贸易信标，可以向轨道贸易商出售货物。</CAOrbitalTradeBeacon.description>
-
-
-  <!-- generator -->
-
-  <CAChemfuelPoweredGenerator.label>化学燃料发电机</CAChemfuelPoweredGenerator.label>
-  <CAChemfuelPoweredGenerator.description>通过消耗化学燃料来发电。 必须定期手动加油。</CAChemfuelPoweredGenerator.description>
-
-
-  <!-- wall -->
-
-  <CATentWall.label>帐篷墙</CATentWall.label>
-  <CATentWall.description>高科技帐篷墙。 相当漂亮，顶部是未来派的窗户，可以看到美丽的外面，但不能窥视里面。</CATentWall.description>
-
-
-  <!-- fabric -->
-
+  <!-- EN: A tasty grill snack, not as nutritious as a simple meal, but doesn't cause food poisoning. -->
+  <CAGrillSnack.description>香气扑鼻的烧烤小吃。虽然不如简单食物有营养，但食用后不会引发食物中毒。</CAGrillSnack.description>
+  
+  <!-- EN: mini comms console -->
+  <CAMiniCommsConsole.label>迷你通讯台</CAMiniCommsConsole.label>
+  <!-- EN: Allows radio contact with other factions and orbital traders. -->
+  <CAMiniCommsConsole.description>可以通过无线电和遥远的轨道贸易商进行交易。以及和联系其他派系进行外交（发送礼物或呼叫援军）或请求商队交易。</CAMiniCommsConsole.description>
+  
+  <!-- EN: orbital trade beacon -->
+  <CAOrbitalTradeBeacon.label>轨道交易信标</CAOrbitalTradeBeacon.label>
+  <!-- EN: Required for orbital trading. You can only sell goods to orbital traders if they're near an orbital trade beacon. -->
+  <CAOrbitalTradeBeacon.description>若想和轨道贸易商进行交易，你必须建造一个轨道交易信标。只有信标有效范围内的货物和白银才能用于交易。</CAOrbitalTradeBeacon.description>
+  
+  <!-- EN: spacer bedroll -->
+  <CASpacerBedroll.label>太空时代睡袋</CASpacerBedroll.label>
+  <!-- EN: A high quality camping bed. Rather comfy. -->
+  <CASpacerBedroll.description>非常舒服的高质量野营睡袋。</CASpacerBedroll.description>
+  
+  <!-- EN: spacer double bedroll -->
+  <CASpacerBedrollDouble.label>太空时代双人睡袋</CASpacerBedrollDouble.label>
+  <!-- EN: A high quality camping double-bed. Rather comfy. -->
+  <CASpacerBedrollDouble.description>非常舒服的高质量野营睡袋。</CASpacerBedrollDouble.description>
+  
+  <!-- EN: spacer biofuel refinery -->
+  <CASpacerBiofuelRefinery.label>太空时代精炼设备</CASpacerBiofuelRefinery.label>
+  <!-- EN: Refines biological matter like wood or plant matter into chemfuel. -->
+  <CASpacerBiofuelRefinery.description>将生物物质如木材或植物等物质提炼成化合燃料。</CASpacerBiofuelRefinery.description>
+  
+  <!-- EN: spacer fabric -->
   <CASpacerTentFabric.label>太空织物</CASpacerTentFabric.label>
-  <CASpacerTentFabric.description>使用专门的生产机制将纳米纤维逐分子编织成薄片。 虽然它大部分时间都可以自由弯曲，但它在落地时会变硬以吸收打击，并且非常难以打破。 它的生产秘密只有最先进的闪耀世界文化才知道。</CASpacerTentFabric.description>
-
-
-  <!-- fence -->
-
-  <CAFencePost.label>动物围栏标牌</CAFencePost.label>
-  <CAFencePost.description>一个动物围栏柱</CAFencePost.description>
-
-
-  <!-- bedrolls -->
-
-  <CASpacerBedroll.label>太空铺盖卷</CASpacerBedroll.label>
-  <CASpacerBedroll.description>高品质的野营床。 比较舒服。</CASpacerBedroll.description>
-
-  <CASpacerBedrollDouble.label>太空双人铺盖卷</CASpacerBedrollDouble.label>
-  <CASpacerBedrollDouble.description>高品质的野营床。 比较舒服。</CASpacerBedrollDouble.description>
-
-
+  <!-- EN: Nano-fibers woven into sheets molecule-by-molecule using specialized production mechanites. While it flexes freely most of the time, it stiffens to absorb blows as they land, and is incredibly difficult to break. The secrets of its production are known only to the most advanced glitterworld cultures. -->
+  <CASpacerTentFabric.description>高科技纳米纤维织成的布。稍微有点重，但是几乎不可能破损。其生产技术只有最先进的闪耀世界才掌握。</CASpacerTentFabric.description>
+  
+  <!-- EN: spacer tent supplies -->
+  <CASpacerTentSupplies.label>太空时代帐篷用具</CASpacerTentSupplies.label>
+  <!-- EN: A mix of technically advanced camping gear and fabric. Perfect to survive harsh conditions and quite good looking. -->
+  <CASpacerTentSupplies.description>高科技野营装备与帐篷织物的混合物。若想在恶劣环境下扎营生存，这些帐篷用具必不可少。用其搭建的帐篷非常美观。</CASpacerTentSupplies.description>
+  
+  <!-- EN: tent door -->
+  <CATentDoor.label>帐篷门</CATentDoor.label>
+  <!-- EN: Divides rooms. Simple doors must be manually opened, which slows people down. The amount of slowdown depends on what the door is made of. -->
+  <CATentDoor.description>分隔房间。只能手动开关，会减慢人的速度。到底有多慢取决于门的材质。</CATentDoor.description>
+  
+  <!-- EN: fence door -->
+  <CATentFenceDoor.label>栅栏门</CATentFenceDoor.label>
+  <!-- EN: Divides rooms. Simple doors must be manually opened, which slows people down. The amount of slowdown depends on what the door is made of. -->
+  <CATentFenceDoor.description>分隔房间。只能手动开关，会减慢人的速度。到底有多慢取决于门的材质。</CATentFenceDoor.description>
+  
+  <!-- EN: tent wall -->
+  <CATentWall.label>帐篷墙</CATentWall.label>
+  <!-- EN: High tech tent wall. Rather good looking, tho topped by the futuristic windows allowing to watch the beautiful outside, but not peeking inside. -->
+  <CATentWall.description>一面十分美观的高科技帐篷墙。帐篷顶部镶有未来感十足的天窗，露营者可由此欣赏到户外的美景。天窗是单向的，无法从外部窥视到内部的情况。</CATentWall.description>
+  
 </LanguageData>

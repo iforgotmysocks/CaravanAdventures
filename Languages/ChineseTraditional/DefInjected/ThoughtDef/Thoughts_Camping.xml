@@ -1,8 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-
-  <CACamping.stages.0.label>野營</CACamping.stages.0.label>
-  <CACamping.stages.0.description>和我的同伴一起在大自然中，享受這次冒險和自由。</CACamping.stages.0.description>
-
-
+  
+  <!-- EN: camping -->
+  <CACamping.stages.camping.label>露營</CACamping.stages.camping.label>
+  <!-- EN: Being out in nature with my companions, enjoying this adventure and the freedom. -->
+  <CACamping.stages.camping.description>我和同伴們身處美妙的大自然中，盡情地享受著冒險與自由感。</CACamping.stages.camping.description>
+  
 </LanguageData>

@@ -1,19 +1,31 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-  <CAAnimalAreaLabel>動物區</CAAnimalAreaLabel>
-  <CAAnimalNoFoodAreaLabel>不允許動物</CAAnimalNoFoodAreaLabel>
-  <CAFoodZoneLabel>食物區</CAFoodZoneLabel>
-  <CAAnimalFoodZoneLabel>動物食物區</CAAnimalFoodZoneLabel>
-  <CADeconstructCamp>收拾營地</CADeconstructCamp>
-  <CADeconstructCampMessage>正在收拾營地</CADeconstructCampMessage>
-  <CABuildFailTents>{0} 帳篷不能再建造了，因為地方不夠大。</CABuildFailTents>
-  <CAMedicineZone>醫藥區</CAMedicineZone>
-  <CAEstablishedCampNotification>一個包含 {0} 帳篷的高科技營地已經建好了。</CAEstablishedCampNotification>
+  <!-- EN: Animal area -->
+  <CAAnimalAreaLabel>動物區域</CAAnimalAreaLabel>
+  <!-- EN: Animal free -->
+  <CAAnimalNoFoodAreaLabel>動物放牧</CAAnimalNoFoodAreaLabel>
+  <!-- EN: Food -->
+  <CAFoodZoneLabel>食物</CAFoodZoneLabel>
+  <!-- EN: Animal food -->
+  <CAAnimalFoodZoneLabel>動物食物</CAAnimalFoodZoneLabel>
+  <!-- EN: Pack up the camp -->
+  <CADeconstructCamp>打包營地</CADeconstructCamp>
+  <!-- EN: Packing up the camp -->
+  <CADeconstructCampMessage>正在打包營地</CADeconstructCampMessage>
+  <!-- EN: {0} tents couldn't be built as no space was available. -->
+  <CABuildFailTents>無法繼續建造{0}個帳篷，空間不足。</CABuildFailTents>
+  <!-- EN: Medicine -->
+  <CAMedicineZone>醫藥</CAMedicineZone>
+  <!-- EN: A high-tech camp was set up for {0} tent supplies -->
+  <CAEstablishedCampNotification>1個高科技帳篷已建造完畢。花費：{0}個帳篷用具</CAEstablishedCampNotification>
 
-  <CALeaveImmediately>立刻離開</CALeaveImmediately>
-  <CALeaveImmediatelyPackupCamp>你希望放棄這裡，打包上路嗎？ \n{0} 太空帳篷會被裝載到商隊中。</CALeaveImmediatelyPackupCamp>
-  <CALeaveImmediatelyPackupCampTribal>你希望放棄這裡，打包上路嗎？ </CALeaveImmediatelyPackupCampTribal>
+  <!-- EN: Leave immediately -->
+  <CALeaveImmediately>立即離開</CALeaveImmediately>
+  <!-- EN: Do you want to pack up the camp and abandon this place? \n{0} spacer tent supplies will be added to the caravan. -->
+  <CALeaveImmediatelyPackupCamp>你想要打包營地並放棄這裡嗎？\n{0}個帳篷用具將放入旅隊的庫存中。</CALeaveImmediatelyPackupCamp>
+  <!-- EN: Do you want to pack up the camp and abandon this place? -->
+  <CALeaveImmediatelyPackupCampTribal>你想要打包營地並放棄這裡嗎？</CALeaveImmediatelyPackupCampTribal>
 
-  <CABuildFailStoppedCampGen>Could not create camp center due to being out of map bounds, canceling camp creation</CABuildFailStoppedCampGen>
+  <!-- EN: Could not create camp center due to being out of map bounds, canceling camp creation -->
+  <CABuildFailStoppedCampGen>因超出地圖邊界範圍，無法創建營地中心。正在取消搭建營地。</CABuildFailStoppedCampGen>
 </LanguageData>
-

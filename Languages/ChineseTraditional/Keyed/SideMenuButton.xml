@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-  <CARemoveLettersButton>清理開封的信</CARemoveLettersButton>
-
+  <!-- EN: Remove open letters -->
+  <CARemoveLettersButton>刪除已讀信件</CARemoveLettersButton>
 </LanguageData>

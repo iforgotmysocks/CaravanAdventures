@@ -1,7 +1,7 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-
-  <CACaravanDamselInDistress.label>陷入困境的少女</CACaravanDamselInDistress.label>
-
-
+  
+  <!-- EN: damsel in distress -->
+  <CACaravanDamselInDistress.label>遇險的少女</CACaravanDamselInDistress.label>
+  
 </LanguageData>

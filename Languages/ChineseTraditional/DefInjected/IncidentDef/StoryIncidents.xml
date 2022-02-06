@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: trader caravan arrival -->
+  <CAFriendlyCaravan.label>商隊到達</CAFriendlyCaravan.label>
+  
+  <!-- EN: enemy raid -->
+  <CAMechRaidMixed.label>敵襲</CAMechRaidMixed.label>
+  
+</LanguageData>

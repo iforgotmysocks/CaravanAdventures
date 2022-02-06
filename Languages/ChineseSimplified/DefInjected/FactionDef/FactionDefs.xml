@@ -1,13 +1,22 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-
-  <CASacrilegHunters.label>祭祀猎人</CASacrilegHunters.label>
-  <CASacrilegHunters.description>一个技术先进的派系，与他们的世代飞船坠毁在这个边缘世界。 他们的专长在于取回古老的文物和寻找宝藏，这极大地帮助了他们在这个布满古老建筑的星球上快速立足。</CASacrilegHunters.description>
-  <CASacrilegHunters.pawnsPlural>祭祀猎人</CASacrilegHunters.pawnsPlural>
+  
+  <!-- EN: mechanoid hive -->
+  <CAFriendlyMechanoid.label>机械族巢穴</CAFriendlyMechanoid.label>
+  <!-- EN: mechanoid -->
+  <CAFriendlyMechanoid.pawnSingular>机械体</CAFriendlyMechanoid.pawnSingular>
+  <!-- EN: mechanoids -->
+  <CAFriendlyMechanoid.pawnsPlural>机械体</CAFriendlyMechanoid.pawnsPlural>
+  
+  <!-- EN: Sacrileg Hunters -->
+  <CASacrilegHunters.label>渎神猎人</CASacrilegHunters.label>
+  <!-- EN: A technologically well advanced faction which crashlanded on this rimworld with their generation ship. Their speciallization lies in retrieving old artifacts and hunting for treasure, which helped them enormously to get a quick foothold on this planet, which is covered with old structures. -->
+  <CASacrilegHunters.description>科技十分发达的派系，他们的飞船不知为何迫降在了这个边缘世界上。渎神猎人擅长回收古老神器以及搜寻密藏，这也是他们能够在这颗遍布古老遗迹的星球上迅速扎根立足的重要原因。</CASacrilegHunters.description>
+  <!-- EN: prime councilor -->
   <CASacrilegHunters.leaderTitle>首席议员</CASacrilegHunters.leaderTitle>
-
-  <CAFriendlyMechanoid.label>机械蜂巢</CAFriendlyMechanoid.label>
-  <CAFriendlyMechanoid.pawnsPlural>机械人</CAFriendlyMechanoid.pawnsPlural>
-
-
+  <!-- EN: Sacrileg Hunter -->
+  <CASacrilegHunters.pawnSingular>渎神猎人</CASacrilegHunters.pawnSingular>
+  <!-- EN: Sacrileg Hunters -->
+  <CASacrilegHunters.pawnsPlural>渎神猎人</CASacrilegHunters.pawnsPlural>
+  
 </LanguageData>

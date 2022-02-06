@@ -1,23 +1,34 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-
-  <CAOutsiderRelation.label>外來人</CAOutsiderRelation.label>
-  <CAOutsiderRelation.labelFemale>外來人</CAOutsiderRelation.labelFemale>
-
-  <CAThirdWheelRelation.label>電燈泡</CAThirdWheelRelation.label>
-  <CAThirdWheelRelation.labelFemale>電燈泡</CAThirdWheelRelation.labelFemale>
-
-  <CAFamiliarCompanionRelation.label>熟悉的伴侶</CAFamiliarCompanionRelation.label>
-  <CAFamiliarCompanionRelation.labelFemale>熟悉的伴侶</CAFamiliarCompanionRelation.labelFemale>
-
-  <CAPartOfTheGangRelation.label>團伙的一員</CAPartOfTheGangRelation.label>
-  <CAPartOfTheGangRelation.labelFemale>團伙的一員</CAPartOfTheGangRelation.labelFemale>
-
-  <CATrustedMateRelation.label>值得信賴的伙伴</CATrustedMateRelation.label>
-  <CATrustedMateRelation.labelFemale>值得信賴的伙伴</CATrustedMateRelation.labelFemale>
-
-  <CATrueFriendRelation.label>真正的朋友</CATrueFriendRelation.label>
-  <CATrueFriendRelation.labelFemale>真正的朋友</CATrueFriendRelation.labelFemale>
-
-
+  
+  <!-- EN: Familiar companion -->
+  <CAFamiliarCompanionRelation.label>熟識的同伴</CAFamiliarCompanionRelation.label>
+  <!-- EN: Familiar companion -->
+  <CAFamiliarCompanionRelation.labelFemale>熟識的同伴</CAFamiliarCompanionRelation.labelFemale>
+  
+  <!-- EN: Outsider -->
+  <CAOutsiderRelation.label>外人</CAOutsiderRelation.label>
+  <!-- EN: Outsider -->
+  <CAOutsiderRelation.labelFemale>外人</CAOutsiderRelation.labelFemale>
+  
+  <!-- EN: Part of the gang -->
+  <CAPartOfTheGangRelation.label>團體中的一員</CAPartOfTheGangRelation.label>
+  <!-- EN: Part of the gang -->
+  <CAPartOfTheGangRelation.labelFemale>團體中的一員</CAPartOfTheGangRelation.labelFemale>
+  
+  <!-- EN: Thrid wheel -->
+  <CAThirdWheelRelation.label>累贅</CAThirdWheelRelation.label>
+  <!-- EN: Third wheel -->
+  <CAThirdWheelRelation.labelFemale>累贅</CAThirdWheelRelation.labelFemale>
+  
+  <!-- EN: True friend -->
+  <CATrueFriendRelation.label>摯友</CATrueFriendRelation.label>
+  <!-- EN: True friend -->
+  <CATrueFriendRelation.labelFemale>摯友</CATrueFriendRelation.labelFemale>
+  
+  <!-- EN: Trusted mate -->
+  <CATrustedMateRelation.label>可靠的同伴</CATrustedMateRelation.label>
+  <!-- EN: Trusted mate -->
+  <CATrustedMateRelation.labelFemale>可靠的同伴</CATrustedMateRelation.labelFemale>
+  
 </LanguageData>
