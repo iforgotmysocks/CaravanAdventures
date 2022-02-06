@@ -1,12 +1,22 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-
-  <CAOutsider.label>外来者</CAOutsider.label>
-  <CAThirdWheel.label>电灯泡</CAThirdWheel.label>
-  <CAFamiliarCompanion.label>熟悉的伴侣</CAFamiliarCompanion.label>
-  <CAPartOfTheGang.label>团伙的一员</CAPartOfTheGang.label>
-  <CATrustedMate.label>值得信赖的伙伴</CATrustedMate.label>
-  <CATrueFriend.label>真正的朋友</CATrueFriend.label>
-
-
+  
+  <!-- EN: Familiar companion -->
+  <CAFamiliarCompanion.label>熟识的同伴</CAFamiliarCompanion.label>
+  
+  <!-- EN: Outsider -->
+  <CAOutsider.label>外人</CAOutsider.label>
+  
+  <!-- EN: Part of the gang -->
+  <CAPartOfTheGang.label>团体中的一员</CAPartOfTheGang.label>
+  
+  <!-- EN: Third wheel -->
+  <CAThirdWheel.label>累赘</CAThirdWheel.label>
+  
+  <!-- EN: True friend -->
+  <CATrueFriend.label>挚友</CATrueFriend.label>
+  
+  <!-- EN: Trusted mate -->
+  <CATrustedMate.label>可靠的同伴</CATrustedMate.label>
+  
 </LanguageData>

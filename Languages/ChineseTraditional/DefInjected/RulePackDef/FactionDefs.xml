@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN:
+    <li>r_name(p=2)->Sacrileg Hunters</li>
+    <li>r_name->Sacrileg Hunters</li>
+  -->
+  <CANamerFactionSacrilegHunters.rulePack.rulesStrings> 
+    <li>r_name(p=2)->瀆神獵人</li>
+    <li>r_name->瀆神獵人</li>
+  </CANamerFactionSacrilegHunters.rulePack.rulesStrings>
+  
+</LanguageData>

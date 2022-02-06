@@ -1,19 +1,25 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-
-  <!-- todo priorities ? -->
-
-  <CADoBillsCookCampfireRoast.label>在篝火旁做飯</CADoBillsCookCampfireRoast.label>
-  <CADoBillsCookCampfireRoast.verb>做飯</CADoBillsCookCampfireRoast.verb>
-  <CADoBillsCookCampfireRoast.gerund>做飯於</CADoBillsCookCampfireRoast.gerund>
-
-  <CADoBillsHaulCampfireRoast.label>在篝火旁做帳</CADoBillsHaulCampfireRoast.label>
-  <CADoBillsHaulCampfireRoast.verb>做帳</CADoBillsHaulCampfireRoast.verb>
-  <CADoBillsHaulCampfireRoast.gerund>做帳於</CADoBillsHaulCampfireRoast.gerund>
-
-  <CADoBillsSpacerRefinery.label>在煉油處工作</CADoBillsSpacerRefinery.label>
-  <CADoBillsSpacerRefinery.verb>精煉化學品</CADoBillsSpacerRefinery.verb>
-  <CADoBillsSpacerRefinery.gerund>精煉化學品於</CADoBillsSpacerRefinery.gerund>
-
-
+  
+  <!-- EN: cook meals at campfire -->
+  <CADoBillsCookCampfireRoast.label>在營火烹飪食物</CADoBillsCookCampfireRoast.label>
+  <!-- EN: cooking at -->
+  <CADoBillsCookCampfireRoast.gerund>烹飪</CADoBillsCookCampfireRoast.gerund>
+  <!-- EN: cook -->
+  <CADoBillsCookCampfireRoast.verb>烹飪</CADoBillsCookCampfireRoast.verb>
+  
+  <!-- EN: do bills at campfire -->
+  <CADoBillsHaulCampfireRoast.label>在營火工作</CADoBillsHaulCampfireRoast.label>
+  <!-- EN: working at -->
+  <CADoBillsHaulCampfireRoast.gerund>工作</CADoBillsHaulCampfireRoast.gerund>
+  <!-- EN: work at -->
+  <CADoBillsHaulCampfireRoast.verb>工作</CADoBillsHaulCampfireRoast.verb>
+  
+  <!-- EN: work at refinery -->
+  <CADoBillsSpacerRefinery.label>操作生質煉油器</CADoBillsSpacerRefinery.label>
+  <!-- EN: refining chemicals at -->
+  <CADoBillsSpacerRefinery.gerund>提煉</CADoBillsSpacerRefinery.gerund>
+  <!-- EN: refine chemicals -->
+  <CADoBillsSpacerRefinery.verb>提煉</CADoBillsSpacerRefinery.verb>
+  
 </LanguageData>

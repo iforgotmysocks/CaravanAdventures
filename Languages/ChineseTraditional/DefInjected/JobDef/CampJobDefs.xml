@@ -1,7 +1,7 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-
-  <CACampInformPackingUp.reportString>在 目標A 收拾營地。</CACampInformPackingUp.reportString>
-
-
+  
+  <!-- EN: Packing up camp at TargetA. -->
+  <CACampInformPackingUp.reportString>正準備於TargetA處露營。</CACampInformPackingUp.reportString>
+  
 </LanguageData>

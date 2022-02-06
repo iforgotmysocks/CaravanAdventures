@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: heavy charge blaster -->
+  <CAFakeGun_ChargeBlasterHeavy.label>光束衝擊砲</CAFakeGun_ChargeBlasterHeavy.label>
+  <!-- EN: A pulse-charged rapid-fire blaster for area suppressive fire. Heavy cooling allows long, deadly bursts. -->
+  <CAFakeGun_ChargeBlasterHeavy.description>一種範圍性壓制、快速射擊的光束衝擊砲。</CAFakeGun_ChargeBlasterHeavy.description>
+  <!-- EN: barrel -->
+  <CAFakeGun_ChargeBlasterHeavy.tools.barrel.label>槍管</CAFakeGun_ChargeBlasterHeavy.tools.barrel.label>
+  <!-- EN: heavy charge blaster -->
+  <CAFakeGun_ChargeBlasterHeavy.verbs.Verb_Shoot.label>光束衝擊砲</CAFakeGun_ChargeBlasterHeavy.verbs.Verb_Shoot.label>
+  
+</LanguageData>

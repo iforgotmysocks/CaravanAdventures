@@ -1,10 +1,15 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-  <SettleWithoutUnloading>商隊暫居</SettleWithoutUnloading>
-  <SettleWithoutUnloadingDesc>允許商隊不必卸貨地暫住，直到我們找到一個好地方或者馬上走人。</SettleWithoutUnloadingDesc>
-  <SettleWithCampLabel>用帳篷暫居</SettleWithCampLabel>
-  <SettleWithCampDesc>用預先搭好的帳篷住下來。會消耗帳篷補給來建造帳篷和高質量裝備設施。 如果現有的不夠，你的小人會用手頭上能找到的材料。 帳篷補給在你離開營地時可以回收。</SettleWithCampDesc>
-  <AllowNightTravel>晚間旅行</AllowNightTravel>
-  <AllowNightTravelDesc>允許你的傷對在晚間旅行，但記住這擔上很大的風險，會招來很強的襲擊。當然，你的小人太累的情況下也隻能停下休息。</AllowNightTravelDesc>
-
+  <!-- EN: Settle Caravan -->
+  <SettleWithoutUnloading>駐紮旅隊</SettleWithoutUnloading>
+  <!-- EN: Allows the caravan to settle without unloading to find a good spot first or leave quickly. -->
+  <SettleWithoutUnloadingDesc>允許旅隊在不卸載貨物的情況下原地紮營，以便能第一時間找到其他好地方或快速離開。</SettleWithoutUnloadingDesc>
+  <!-- EN: Settle with Camp -->
+  <SettleWithCampLabel>搭建營地</SettleWithCampLabel>
+  <!-- EN: Settle with a prebuild camp your pawns quickly set up. Will consume camp supplies to construct tents and equipment of high quality. If not enough are present, pawns will use materials they can find at hand. Camping supplies can be recovered when packing up the camp. -->
+  <SettleWithCampDesc>在此處快速搭建一個營地。將優先消耗帳篷用具來搭建高質量的帳篷以及各種設備。如果帳篷用具不足，殖民者們將利用從附近收集到的材料來搭建簡易營地。帳篷用具可在營地中央的燒烤營火處進行打包回收。</SettleWithCampDesc>
+  <!-- EN: Night travel -->
+  <AllowNightTravel>夜間旅行</AllowNightTravel>
+  <!-- EN: Allow your caravan to travel through the night, but keep in mind that this harbors great risk for strong attacks and if your caravan members get too tired, they have no choice but to rest. -->
+  <AllowNightTravelDesc>允許你的旅隊連夜趕路。不過請記住：夜間旅行的風險很高，你的旅隊很有可能會遭到襲擊。如果你的旅隊成員太過勞累，他們只能選擇原地休整。</AllowNightTravelDesc>
 </LanguageData>

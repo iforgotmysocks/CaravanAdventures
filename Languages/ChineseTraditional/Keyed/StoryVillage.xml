@@ -1,51 +1,89 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-  <StoryVillageQuestName>商隊歷險 - 營救朋友</StoryVillageQuestName>
-  <StoryVillageQuestDesc>{0} 發送了一封緊急請求幫助的信件。 信中寫道：\n</StoryVillageQuestDesc>
-  <StoryVillageQuestLetterContent>親愛的 {0} ，\n\n我真的希望你能及時收到這封信，否則我們可能都死了。 我們遇到了一個巨大的神殿，當我們打開它時，大量的機械生物涌了出來。 我們逃走了，但自從成群結隊的機械生物不斷襲擊我們的村庄。\n我寄這封信是希望你能及時趕到這裡來幫助我們。 我們正在准備逃跑，但我們必須等待我們的增援有機會逃脫。\n\n請在那些黑暗時期幫助我們，並冒險前往 {1} ，我們永遠不會忘記這一偉大的事業。</StoryVillageQuestLetterContent>
-  <StoryVillageQuestLetterContentPS>PS：我希望你們一切都好，我真的很想和你說話，我們見面時我玩得很開心。 我希望很快見到你，再次幫助我們。</StoryVillageQuestLetterContentPS>
-  <StoryVillageQuestLetterContentEnding>您真誠的\n\n{0}\n</StoryVillageQuestLetterContentEnding>
-  <StoryVillageQuestDesc2>在為時已晚之前前往 {0} 村 {1} 並協助 {2} 。</StoryVillageQuestDesc2>
-  <VisitStoryVillageLabel>進入 {0}</VisitStoryVillageLabel>
-  <StoryVillageEnterMapMessage>進入村子</StoryVillageEnterMapMessage>
-  <StoryVillageArrivedLetterTitle>進入了 {0}</StoryVillageArrivedLetterTitle>
-  <StoryVillageArrivedLetterMessage>您的商隊抵達 {0}。 似乎是個不錯的地方。</StoryVillageArrivedLetterMessage>
-  <StoryVillageCantArriveHostile>敵對時，你無法幫助 {0}。</StoryVillageCantArriveHostile>
+	<!-- EN: Caravan Adventures - Rescue a friend -->
+  <StoryVillageQuestName>旅行大冒險 - 友人救援行動</StoryVillageQuestName>
+	<!-- EN: {0} sent a letter requesting help urgently. The letter reads:\n -->
+  <StoryVillageQuestDesc>我們收到了一封來自{0}的緊急求援信！信上寫道：\n</StoryVillageQuestDesc>
+	<!-- EN: Dear {0},\n\nI really hope u get this letter in time, or we might all be dead. We came across a large shrine and as we cracked it open masses of mechanoids streamed out. We got away, but ever since huge hordes of mechanoids keep attacking our village.\nI'm sending this letter in hope that you can make it here in time to assist us. We're preparing an escape, but we have to wait for our reinforcements to stand any chance of escaping with our lives.\n\nPlease help us in those dark times and venture to {1} at haste, we'd never forget this great deed. -->
+  <StoryVillageQuestLetterContent>親愛的{0}，\n\n我真希望你能及時收到這封信。如果再晚一點，我們可能就已經命喪黃泉了。在先前的探索中，我們偶然發現了一座巨大的聖殿。當聖殿的大門被開啟後，機械族如洪水般從裡面湧了出來。雖然我們設法逃走了，但從那以後，每天都有大批機械族向我們的城鎮發起進攻。\n我寄出這封信是希望你們能及時趕來幫幫我們。我們已經制定了一個逃脫計劃，但如果沒有協會總部援軍的支持，我們很難成功實施。\n\n相信你們一定能在這至暗時刻拯救我等於水火之中，我們將永遠不會忘記這一偉大的功績。\n(信件的末尾標注了求援地點：{1})</StoryVillageQuestLetterContent>
+	<!-- EN: PS: I hope you guys are doing well, I really miss talking to you, I had such a great time when we met. I hope to see you soon, aiding us again. -->
+  <StoryVillageQuestLetterContentPS>PS：希望你們過的都還好。我真的很想再和你們聊聊天，那是我人生中最快樂的時光之一。希望我們很快就能再次見面，我們真的很需要幫助。</StoryVillageQuestLetterContentPS>
+	<!-- EN: Your's sincerely,\n\n{0}\n -->
+  <StoryVillageQuestLetterContentEnding>你真誠的，\n\n{0}\n</StoryVillageQuestLetterContentEnding>
+	<!-- EN: Travel to the {0} Village {1} and assist {2} before it's too late. -->
+  <StoryVillageQuestDesc2>我們要趕在為時已晚前到達{0}的城鎮{1}並幫助{2}。</StoryVillageQuestDesc2>
+	<!-- EN: Enter {0} -->
+  <VisitStoryVillageLabel>協助{0}</VisitStoryVillageLabel>
+	<!-- EN: Entering village -->
+  <StoryVillageEnterMapMessage>進入城鎮。</StoryVillageEnterMapMessage>
+	<!-- EN: Entered {0} -->
+  <StoryVillageArrivedLetterTitle>已進入{0}</StoryVillageArrivedLetterTitle>
+	<!-- EN: Your caravan arrived at {0}. Seems to be a nice place. -->
+  <StoryVillageArrivedLetterMessage>旅隊已到達{0}。這裡可真是個好地方。</StoryVillageArrivedLetterMessage>
+	<!-- EN: While hostile, you can't help {0}. -->
+  <StoryVillageCantArriveHostile>當處於敵對狀態時，你無法幫助{0}。</StoryVillageCantArriveHostile>
+  
+	<!-- EN: {0} embraces you -->
+  <StoryVillage_Dia1_DiaTitle>{0}緊緊地抱住了你</StoryVillage_Dia1_DiaTitle>
+	<!-- EN: {0}, you came. Thank god. We barely fended off the last attack and our scouts spotted the next and yet biggest army only a few minutes away.\n\nI hope our reinforcements make it in time.  -->
+  <StoryVillage_Dia1_1>哦，是{0}！感謝老天，你們終於來了。我們幾乎快撐不住了。我們的偵察兵報告說，下一波機械族的數量極其龐大，而且將在幾分鐘內抵達。\n\n唉，真希望我們的援軍能夠及時趕到。</StoryVillage_Dia1_1>
+	<!-- EN: Good to see you. Any idea why those mechs are after you that bad?\nWe sure get attacked as well, but nothing as you described. -->
+  <StoryVillage_Dia1_1_Option1>很高興看到你沒事。那些機械族為什麼對你們緊追不放？\n雖然我們也遭到了機械族的襲擊，但遠沒有你說的那麼誇張。</StoryVillage_Dia1_1_Option1>
+	<!-- EN: [{0}, pale and exhausted, looks you in the eyes] We don't know exactly. It was a huge shrine. Once we discovered the hordes of mechs coming out of that place we used our last nuke to level the whole place. But it looks like most made it out and they're after us now.\n\n[{0} hands you a small device in haste] Take this comms device, so I'll be able to contact you. -->
+  <StoryVillage_Dia1_2>[{0}面色蒼白，看起來有些精疲力竭]我們也不清楚...不過那可真是座巨大的聖殿。當發現機械族如洪水般從裡面湧出後，我們便啟動了最後一枚核彈頭將整片地區夷為平地。不過即便如此，還是有大量機械族倖免於難並對我們窮追猛打。\n\n[{0}連忙遞給你一個對講機]拿好這個對講機，我會繼續與你們保持聯繫的。</StoryVillage_Dia1_2>
+	<!-- EN: Alright, lets see if we can't defend this place. -->
+  <StoryVillage_Dia1_2_Option1>事已至此，我們唯有背水一戰了。</StoryVillage_Dia1_2_Option1>
+	<!-- EN: How about we just leave now? -->
+  <StoryVillage_Dia1_2_Option2>這場戰鬥恐怕凶多吉少。我們還是快跑吧。</StoryVillage_Dia1_2_Option2>
+	<!-- EN: They are here, take cover!\n\n[{0} screamed] My god, what a horde... -->
+  <StoryVillage_Dia1_3>[遠處傳來了奇怪的響聲]是機械族！它們來了！全體各就各位，尋找掩護！\n\n[{0}驚聲尖叫著]我的老天啊...黑壓壓一片到處都是...</StoryVillage_Dia1_3>
+	<!-- EN: Are you really sure you want to fight this? -->
+  <StoryVillage_Dia1_3_Option1>你真的確定...要和它們打嗎？</StoryVillage_Dia1_3_Option1>
+	<!-- EN: Yah, they need to be held of until we were able to get the civilians out of here. -->
+  <StoryVillage_Dia1_4>是的...毫無疑問。我們需要盡可能的拖住這些機械族，直至平民和非戰鬥人員全部撤離為止。</StoryVillage_Dia1_4>
+	<!-- EN: Guess today is as good a day to die as any. -->
+  <StoryVillage_Dia1_4_Option1>[苦笑]我猜...今天是個去死的好日子。</StoryVillage_Dia1_4_Option1>
+	
+	<!-- EN: Either help {0} to defend {1} base or make a run for it, although Sacrileg Hunters would make good allies in the battles to come. -->
+  <StoryVillage_QuestUpdate_MechsArrived>我們要麼幫助{0}保衛{1}城鎮，要麼就此溜之大吉。儘管瀆神獵人將會在未來的戰鬥中成為我們得力的盟友。</StoryVillage_QuestUpdate_MechsArrived>
+  <!-- EN: {0} died before the hostile mechs arrived. You can still try to defend the base, but it won't be easy. -->
+  <StoryVillage_QuestUpdate_MechsArrivedFriendAlreadyDead>{0}在機械族部隊抵達之前就不幸陣亡了。你仍可以試著防守這個城鎮，但...這並非易事。</StoryVillage_QuestUpdate_MechsArrivedFriendAlreadyDead>
+  <!-- EN: {0} had to flee before reinforcements arrived and was killed by mechanoids approaching the village. -->
+  <StoryVillage_QuestUpdate_MechsArrivedFriendDiedFleeing>{0}不得不在援軍抵達之前就先行撤離，但不幸的被靠近城鎮的機械族殘忍殺死了。</StoryVillage_QuestUpdate_MechsArrivedFriendDiedFleeing>
+  <!-- EN: {0} are attacking {2} -->
+  <VillageAttackMechsMessage>{0}正在向{2}發動進攻</VillageAttackMechsMessage>
 
-  <StoryVillage_Dia1_DiaTitle>{0} 擁抱你</StoryVillage_Dia1_DiaTitle>
-  <StoryVillage_Dia1_1>{0}，你來了。 感謝上帝。 我們勉強抵擋住了最后一次進攻，而我們的偵察兵就在幾分鐘之外發現了下一支但規模最大的軍隊。\n\n我希望我們的增援部隊能及時趕到。 </StoryVillage_Dia1_1>
-  <StoryVillage_Dia1_1_Option1>很高興見到你。 知道為什麼那些機械對你這麼壞嗎？\n我們也受到攻擊，但沒有你描述的那樣。</StoryVillage_Dia1_1_Option1>
-  <StoryVillage_Dia1_2>[{0}，臉色蒼白，精疲力竭，看著你的眼睛]我們不清楚。 那是一座巨大的神殿。 一旦我們發現成群的機甲從那個地方出來，我們就用我們最后的核彈把整個地方夷為平地。 但看起來他們成功活了下來，現在正在追捕我們。\n\n[{0} 匆忙遞給你一個小設備] 拿著這個通訊設備，這樣我就可以聯系你了。</StoryVillage_Dia1_2>
-  <StoryVillage_Dia1_2_Option1>好吧，讓我們看看我們是否無法保衛這個地方。</StoryVillage_Dia1_2_Option1>
-  <StoryVillage_Dia1_2_Option2>我們現在就走怎麼樣？</StoryVillage_Dia1_2_Option2>
-  <StoryVillage_Dia1_3>他們來了，躲起來！\n\n[{0}尖叫]我的天啊，好大的一群...</StoryVillage_Dia1_3>
-  <StoryVillage_Dia1_3_Option1>你真的確定要和這個戰斗嗎？</StoryVillage_Dia1_3_Option1>
-  <StoryVillage_Dia1_4>是的，他們需要被遲滯住，直到我們能夠讓平民離開這裡。</StoryVillage_Dia1_4>
-  <StoryVillage_Dia1_4_Option1>猜猜今天和任何一天一樣是個去死的好日子。</StoryVillage_Dia1_4_Option1>
+	<!-- EN: {0} shouts loudly... -->
+  <StoryVillage_Dia2_Title>{0}驚聲喊道...</StoryVillage_Dia2_Title>
+	<!-- EN: Ey, our reinforcements are here, lets go guys, give them hell!\n\nTowns people and council members, to the escape routes! -->
+  <StoryVillage_Dia2_1>援軍！是我們的援軍！夥計們，開始實施撤退計劃！讓那些機械族見鬼去吧！\n\n鎮子裡的平民和委員會的成員們，趕快到逃生路線去！</StoryVillage_Dia2_1>
+	<!-- EN: This isn't gonna end well... -->
+  <StoryVillage_Dia2_1_Option1>這事兒不會有好結果的...</StoryVillage_Dia2_1_Option1>
 
-  <StoryVillage_QuestUpdate_MechsArrived>要麼幫助 {0} 保衛 {1} 基地，要麼逃跑，盡管祭祀獵人在接下來的戰斗中會成為很好的盟友。</StoryVillage_QuestUpdate_MechsArrived>
-  <StoryVillage_QuestUpdate_MechsArrivedFriendAlreadyDead>{0} 在敵對機甲到達之前死亡。 您仍然可以嘗試保衛基地，但這並不容易。</StoryVillage_QuestUpdate_MechsArrivedFriendAlreadyDead>
-  <StoryVillage_QuestUpdate_MechsArrivedFriendDiedFleeing>{0} 不得不在增援部隊到達之前逃跑，但被接近村庄的機械人殺死。</StoryVillage_QuestUpdate_MechsArrivedFriendDiedFleeing>
-  <VillageAttackMechsMessage>{0} 正在攻擊 {2}</VillageAttackMechsMessage>
+	<!-- EN: {0} contacts you via comms device... -->
+  <StoryVillage_Dia3_Title>{0}正通過對講機與你聯繫...</StoryVillage_Dia3_Title>
+	<!-- EN: We got out alive, this is horrible. I'll have to meet up with our expert hunters and come up with a plan how to defeat these things. We need to act fast or all is lost.\n\nI'll contact you when we know more, good luck.\n... and thanks. I won't forget that you fought for us. -->
+  <StoryVillage_Dia3_1_Alive>我們總算活著逃出來了...這簡直太可怕了。我得去見見協會的精英獵人們，和他們商討一下要如何才能打敗這些鐵疙瘩。我們要趕緊動身了，時間可不等人。\n\n當有更多進展後，我會再和你聯繫的。祝你好運，朋友。\n以及...謝謝你。我欠你太多人情了。</StoryVillage_Dia3_1_Alive>
+  <!-- EN: Save... yourself...\nThis battle... is lost...\nSomeone will reach... out to... you... I'm... sorry... -->
+  <StoryVillage_Dia3_1_Dying>照顧好...你自己...\n這場戰鬥...終究失敗了...\n有人會...繼續和你...保持聯繫的...我...很抱歉...沒能...[雜音]</StoryVillage_Dia3_1_Dying>
+  <!-- EN: We got out alive, this is horrible. I'll have to meet up with our expert hunters and come up with a plan how to defeat these things. We need to act fast or all is lost.\n\nI'll contact you when we know more, though I really hope u will help us next time. I was sad to see that you didn't stick around to help. -->
+  <StoryVillage_Dia3_1_AliveNoHelpFromPlayer>我們總算活著逃出來了...這簡直太可怕了。我得去見見協會的精英獵人們，和他們商討一下要如何才能打敗這些鐵疙瘩。我們要趕緊動身了，時間可不等人。\n\n當有更多進展後，我會再和你聯繫的。不過...我非常希望你下次能夠幫幫我們。看到你沒有選擇留下來，我真的很難過...</StoryVillage_Dia3_1_AliveNoHelpFromPlayer>
+  <!-- EN: Lets move on -->
+  <StoryVillage_Dia3_1_Option1>讓我們繼續行動吧。</StoryVillage_Dia3_1_Option1>
+	<!-- EN: Sacrileg Hunters are fleeing. -->
+  <StoryVillage_SacHunters_Fleeing>瀆神獵人們正在撤離。</StoryVillage_SacHunters_Fleeing>
+	<!-- EN: Villagers are escaping as planned. -->
+  <StoryVillage_SacHuntersCivs_Fleeing>城鎮居民們正按計劃有條不紊的撤離。</StoryVillage_SacHuntersCivs_Fleeing>
 
-  <StoryVillage_Dia2_Title>{0} 大聲喊叫...</StoryVillage_Dia2_Title>
-  <StoryVillage_Dia2_1>哎，我們的增援部隊來了，放手吧伙計們，讓他們見鬼去吧！\n\n鎮上的人和議會成員，逃往逃生路線！</StoryVillage_Dia2_1>
-  <StoryVillage_Dia2_1_Option1>這不會有好結局...</StoryVillage_Dia2_1_Option1>
+  <!-- EN: The towns folk was able to get to safety, your task is complete. -->
+  <StoryVillage_QuestUpdate_CanLeaveSuccess>鎮上的大伙都安全撤離了，你的任務完成了。</StoryVillage_QuestUpdate_CanLeaveSuccess>
+  <!-- EN: Sacrileg Hunter's leadership took losses and they will need some time to recover. Your task failed. -->
+  <StoryVillage_QuestUpdate_CanLeaveFailed>瀆神獵人的領導層蒙受了巨大損失，他們需要一段時間才能恢復過來。你的任務失敗了。</StoryVillage_QuestUpdate_CanLeaveFailed>
+	<!-- EN: You survived and made it out alive. But where did all those mechs come from? Best to watch out for more clues... -->
+  <StoryVillage_QuestUpdate_Survived>你們活了下來，友人們也成功撤離了。不過那些從聖殿中湧出的機械族...最好還是多留意一下。</StoryVillage_QuestUpdate_Survived>
 
-  <StoryVillage_Dia3_Title>{0} 通過通訊設備與您聯系...</StoryVillage_Dia3_Title>
-  <StoryVillage_Dia3_1_Alive>我們活著出去了，這太可怕了。 我將不得不與我們的專家獵人會面，並制定一個如何擊敗這些東西的計劃。 我們需要迅速採取行動，否則一切都會失敗。\n\n當我們了解更多信息時，我會與您聯系，祝您好運。\n...謝謝。 我不會忘記你為我們而戰。</StoryVillage_Dia3_1_Alive>
-  <StoryVillage_Dia3_1_Dying>拯救......你自己......\在這場戰斗......輸了......\有人會跟......你......聯......系......我......對不起......</StoryVillage_Dia3_1_Dying>
-  <StoryVillage_Dia3_1_AliveNoHelpFromPlayer>我們活著出去了，這太可怕了。 我將不得不與我們的專家獵人會面，並制定一個如何擊敗這些東西的計劃。 我們需要迅速採取行動，否則一切都會失敗。\n\n當我們了解更多信息時，我會與您聯系，但我真的希望您下次能幫助我們。我很傷心地看到，你沒有堅持留下來幫助。</StoryVillage_Dia3_1_AliveNoHelpFromPlayer>
-  <StoryVillage_Dia3_1_Option1>讓我們繼續</StoryVillage_Dia3_1_Option1>
-  <StoryVillage_SacHunters_Fleeing>祭祀獵人正在逃離。</StoryVillage_SacHunters_Fleeing>
-  <StoryVillage_SacHuntersCivs_Fleeing>村民們正在按計劃逃離。</StoryVillage_SacHuntersCivs_Fleeing>
-
-  <StoryVillage_QuestUpdate_CanLeaveSuccess>鎮上的人能夠安全到達，你的任務完成了。</StoryVillage_QuestUpdate_CanLeaveSuccess>
-  <StoryVillage_QuestUpdate_CanLeaveFailed>祭祀獵人的領導層遭受了損失，他們需要一些時間來恢復。 你的任務失敗了。</StoryVillage_QuestUpdate_CanLeaveFailed>
-  <StoryVillage_QuestUpdate_Survived>你活了下來，活著出來了。 但是這些機甲是從哪裡來的呢？ 最好留意更多線索...</StoryVillage_QuestUpdate_Survived>
-
-  <StoryVillage_Response_BountyInitiatedTitle>全球賞金公告</StoryVillage_Response_BountyInitiatedTitle>
-  <StoryVillage_Response_BountyInitiatedDesc>在對我們的一個定居點進行悲慘的機械人襲擊之后，我們 {0} 特此懸賞 {1}。\n\n每擊殺一次，您的派系都將獲得懸賞金，這些金幣可用於交易軍事支持、稀有物品 ，幫助緩和關系，對於雄心勃勃的參與者，您可以永久招募我們的頂級退伍軍人。\n\n隻需通過通訊控制台與我們聯系。\n狩獵好運！</StoryVillage_Response_BountyInitiatedDesc>
-
+  <!-- EN: Planet-wide bounty announcement -->
+  <StoryVillage_Response_BountyInitiatedTitle>全球懸賞通告</StoryVillage_Response_BountyInitiatedTitle>
+  <!-- EN: Following the tragic mechanoid attack on one of our settlements we, {0}, hereby place a bounty on {1}.\n\nFor every personal kill, your faction will earn bounty credits which can be traded in for military support, rare items, help with smoothing over relations, and for very ambitious participants, you may get the ability to enlist our top veterans permanently.\n\nSimply contact us via the comms console.\nGood hunt! -->
+  <StoryVillage_Response_BountyInitiatedDesc>在新定居點遭受機械族的無情襲擊後，我等{0}，特此向全球發佈對{1}的懸賞。\n\n每擊殺一隻機械族，你所處的派系都將獲得對應的賞金點數。賞金點數可從我等處換取軍事支援、稀有物品以及改善關係服務。對於那些積極參與狩獵的朋友們——我等還會特別提供精英老兵僱傭服務。\n\n如有任何問題，請使用通訊台與我等進行聯絡。\n\n祝各位狩獵愉快！</StoryVillage_Response_BountyInitiatedDesc>
 </LanguageData>
-

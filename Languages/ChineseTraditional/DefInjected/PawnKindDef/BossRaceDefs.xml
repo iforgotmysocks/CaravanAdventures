@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Crystal scythe -->
+  <CABossMechCrystalScythe.label>冥晶亡鐮</CABossMechCrystalScythe.label>
+  
+  <!-- EN: Devourer -->
+  <CABossMechDevourer.label>深淵吞噬</CABossMechDevourer.label>
+  
+  <!-- EN: Harbinger -->
+  <CABossMechHarbinger.label>強襲先驅</CABossMechHarbinger.label>
+  
+  <!-- EN: Havoc -->
+  <CABossMechHavoc.label>末日浩劫</CABossMechHavoc.label>
+  
+  <!-- EN: Ancient Coordinator AI -->
+  <CAEndBossMech.label>遠古調諧AI</CAEndBossMech.label>
+  
+</LanguageData>

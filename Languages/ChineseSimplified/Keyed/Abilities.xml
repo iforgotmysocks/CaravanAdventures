@@ -1,6 +1,7 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-  <CAProtectiveAuraCureMentalBreaks>{0} 的精神崩溃被 {1} 治好了</CAProtectiveAuraCureMentalBreaks>
-  <CAProtectiveAuraExtinguishFire>{0} 放的火被 {1} 灭了</CAProtectiveAuraExtinguishFire>
-
+  <!-- EN: {0}'s mental break was cured by {1} -->
+  <CAProtectiveAuraCureMentalBreaks>{0}的精神崩溃已被{1}治愈了。</CAProtectiveAuraCureMentalBreaks>
+  <!-- EN: {0}'s fire was extinguished by {1} -->
+  <CAProtectiveAuraExtinguishFire>{0}纵的火已被{1}扑灭了。</CAProtectiveAuraExtinguishFire>
 </LanguageData>

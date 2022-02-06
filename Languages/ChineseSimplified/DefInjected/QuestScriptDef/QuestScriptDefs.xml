@@ -1,17 +1,56 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-
-  <CA_TradeCaravan.questNameRules.rulesStrings.0>questName-&gt;临时的</CA_TradeCaravan.questNameRules.rulesStrings.0>
-  <CA_TradeCaravan.questDescriptionRules.rulesStrings.0>questDescription-&gt;临时的</CA_TradeCaravan.questDescriptionRules.rulesStrings.0>
-
-  <CA_StoryVillage_Arrival.questNameRules.rulesStrings.0>questName-&gt;临时的</CA_StoryVillage_Arrival.questNameRules.rulesStrings.0>
-  <CA_StoryVillage_Arrival.questDescriptionRules.rulesStrings.0>questDescription-&gt;临时的</CA_StoryVillage_Arrival.questDescriptionRules.rulesStrings.0>
-
-  <CA_TheTree.questNameRules.rulesStrings.0>questName-&gt;临时的</CA_TheTree.questNameRules.rulesStrings.0>
-  <CA_TheTree.questDescriptionRules.rulesStrings.0>questDescription-&gt;临时的</CA_TheTree.questDescriptionRules.rulesStrings.0>
-
-  <CA_FindAncientShrine.questNameRules.rulesStrings.0>questName-&gt;临时的</CA_FindAncientShrine.questNameRules.rulesStrings.0>
-  <CA_FindAncientShrine.questDescriptionRules.rulesStrings.0>questDescription-&gt;临时的</CA_FindAncientShrine.questDescriptionRules.rulesStrings.0>
-
-
+  
+  <!-- EN:
+    <li>questDescription->Temp</li>
+  -->
+  <CA_FindAncientShrine.questDescriptionRules.rulesStrings>questDescription->临时</CA_FindAncientShrine.questDescriptionRules.rulesStrings>
+  <!-- EN:
+    <li>questName->Temp</li>
+  -->
+  <CA_FindAncientShrine.questNameRules.rulesStrings>questName->临时</CA_FindAncientShrine.questNameRules.rulesStrings>
+  
+  <!-- UNUSED -->
+  <CA_FindAncientShrine.questDescriptionRules.rulesStrings>questDescription->临时</CA_FindAncientShrine.questDescriptionRules.rulesStrings>
+  <CA_FindAncientShrine.questNameRules.rulesStrings>questName->临时</CA_FindAncientShrine.questNameRules.rulesStrings>
+  
+  <!-- EN:
+    <li>questDescription->Temp</li>
+  -->
+  <CA_StoryVillage_Arrival.questDescriptionRules.rulesStrings>questDescription->临时</CA_StoryVillage_Arrival.questDescriptionRules.rulesStrings>
+  <!-- EN:
+    <li>questName->Temp</li>
+  -->
+  <CA_StoryVillage_Arrival.questNameRules.rulesStrings>questName->临时</CA_StoryVillage_Arrival.questNameRules.rulesStrings>
+  
+  <!-- UNUSED -->
+  <CA_StoryVillage_Arrival.questDescriptionRules.rulesStrings>questDescription->临时</CA_StoryVillage_Arrival.questDescriptionRules.rulesStrings>
+  <CA_StoryVillage_Arrival.questNameRules.rulesStrings>questName->临时</CA_StoryVillage_Arrival.questNameRules.rulesStrings>
+  
+  <!-- EN:
+    <li>questDescription->Temp</li>
+  -->
+  <CA_TheTree.questDescriptionRules.rulesStrings>questDescription->临时</CA_TheTree.questDescriptionRules.rulesStrings>
+  <!-- EN:
+    <li>questName->Temp</li>
+  -->
+  <CA_TheTree.questNameRules.rulesStrings>questName->临时</CA_TheTree.questNameRules.rulesStrings>
+  
+  <!-- UNUSED -->
+  <CA_TheTree.questDescriptionRules.rulesStrings>questDescription->临时</CA_TheTree.questDescriptionRules.rulesStrings>
+  <CA_TheTree.questNameRules.rulesStrings>questName->临时</CA_TheTree.questNameRules.rulesStrings>
+  
+  <!-- EN:
+    <li>questDescription->Temp</li>
+  -->
+  <CA_TradeCaravan.questDescriptionRules.rulesStrings>questDescription->临时</CA_TradeCaravan.questDescriptionRules.rulesStrings>
+  <!-- EN:
+    <li>questName->Temp</li>
+  -->
+  <CA_TradeCaravan.questNameRules.rulesStrings>questName->临时</CA_TradeCaravan.questNameRules.rulesStrings>
+  
+  <!-- UNUSED -->
+  <CA_TradeCaravan.questDescriptionRules.rulesStrings>questDescription->临时</CA_TradeCaravan.questDescriptionRules.rulesStrings>
+  <CA_TradeCaravan.questNameRules.rulesStrings>questName->临时</CA_TradeCaravan.questNameRules.rulesStrings>
+  
 </LanguageData>

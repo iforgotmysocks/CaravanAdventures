@@ -1,8 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-
-  <CAGuardianShield.label>守护者盾</CAGuardianShield.label>
-  <CAGuardianShield.description>一个守护者的盾牌，可以吸收一定程度的伤害直到它破裂。 快速重新激活。</CAGuardianShield.description>
-
-
+  
+  <!-- EN: guardian shield -->
+  <CAGuardianShield.label>守卫者护盾</CAGuardianShield.label>
+  <!-- EN: A guardian shield that absorbs damage to a certain point until it breaks. Reactivates fast. -->
+  <CAGuardianShield.description>能吸收伤害直至过载破裂的守卫者护盾。可快速重启激活。</CAGuardianShield.description>
+  
 </LanguageData>

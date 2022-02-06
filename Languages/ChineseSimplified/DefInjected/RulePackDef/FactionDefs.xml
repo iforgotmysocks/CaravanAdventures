@@ -1,8 +1,13 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-
-  <CANamerFactionSacrilegHunters.rulePack.rulesStrings.0>r_name(p=2)->祭祀猎人</CANamerFactionSacrilegHunters.rulePack.rulesStrings.0>
-  <CANamerFactionSacrilegHunters.rulePack.rulesStrings.1>r_name->祭祀猎人</CANamerFactionSacrilegHunters.rulePack.rulesStrings.1>
-
-
+  
+  <!-- EN:
+    <li>r_name(p=2)->Sacrileg Hunters</li>
+    <li>r_name->Sacrileg Hunters</li>
+  -->
+  <CANamerFactionSacrilegHunters.rulePack.rulesStrings>
+    <li>r_name(p=2)->渎神猎人</li>
+    <li>r_name->渎神猎人</li>
+  </CANamerFactionSacrilegHunters.rulePack.rulesStrings>
+  
 </LanguageData>

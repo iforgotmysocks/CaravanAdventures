@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Red light -->
+  <CARedLight.label>幽暗紅燈</CARedLight.label>
+  <!-- EN: A red light, it shines red -->
+  <CARedLight.description>散發幽暗光芒的紅燈。</CARedLight.description>
+  
+  <!-- EN: Mechanoid Portal -->
+  <CAShrinePortal.label>機械族傳送門</CAShrinePortal.label>
+  <!-- EN: A portal constructed by mechanoids. It seems to lead somewhere. The encryptions conclude that only someone with the ancient gift can use it. -->
+  <CAShrinePortal.description>由機械族構造出的神秘傳送門，似乎與某處相互連通。對其中的加密技術進行破解可推斷出：只有得到遠古天賦的天選之人才能使用它。</CAShrinePortal.description>
+  
+</LanguageData>

@@ -1,10 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-
-  <!-- generator -->
-
+  
+  <!-- EN: Tent Floor -->
   <CATentFloor.label>帳篷地板</CATentFloor.label>
-  <CATentFloor.description>混凝土瓷磚。 便宜，感覺還不錯，但造的慢。</CATentFloor.description>
-
-
+  <!-- EN: Concrete tiles. Cheap, but neutral in terms of looks and slow to build. -->
+  <CATentFloor.description>實用便宜的混凝土帳篷地磚。看起來很一般，而且鋪設速度較慢。</CATentFloor.description>
+  
 </LanguageData>

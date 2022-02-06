@@ -1,18 +1,29 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-
-  <TravelCompanions.stages.0.label>外来人</TravelCompanions.stages.0.label>
-  <TravelCompanions.stages.0.description>我别无选择，只能加入他们……我会独自死去，但我害怕他们会对我做什么。</TravelCompanions.stages.0.description>
-  <TravelCompanions.stages.1.label>电灯泡</TravelCompanions.stages.1.label>
-  <TravelCompanions.stages.1.description>我真的不认识这些人，我应该留下吗？</TravelCompanions.stages.1.description>
-  <TravelCompanions.stages.2.label>熟悉的伴侣</TravelCompanions.stages.2.label>
-  <TravelCompanions.stages.2.description>大多数笑话都在我身上，我做所有糟糕的工作，但我似乎开始被接受了！</TravelCompanions.stages.2.description>
-  <TravelCompanions.stages.3.label>团伙的一部分</TravelCompanions.stages.3.label>
-  <TravelCompanions.stages.3.description>我的同伴开始重视我的技能和洞察力，我可以坐在桌子旁！</TravelCompanions.stages.3.description>
-  <TravelCompanions.stages.4.label>值得信赖的伙伴</TravelCompanions.stages.4.label>
-  <TravelCompanions.stages.4.description>我的同伴在我需要的时候就在那里，他们可以依靠我！</TravelCompanions.stages.4.description>
-  <TravelCompanions.stages.5.label>真正的朋友</TravelCompanions.stages.5.label>
-  <TravelCompanions.stages.5.description>我们一起经历了很多，总是互相支持。 我们会为彼此而死！</TravelCompanions.stages.5.description>
-
-
+  
+  <!-- EN: Outsider -->
+  <TravelCompanions.stages.Outsider.label>外人</TravelCompanions.stages.Outsider.label>
+  <!-- EN: I had no choice but to join them... i'd have died alone, but i'm scared what they might do to me. -->
+  <TravelCompanions.stages.Outsider.description>唉，我别无选择，只能加入他们...我也许会就此孤苦死去，但我更害怕他们会对我做些不好的事！</TravelCompanions.stages.Outsider.description>
+  <!-- EN: Third wheel -->
+  <TravelCompanions.stages.Third_wheel.label>累赘</TravelCompanions.stages.Third_wheel.label>
+  <!-- EN: I don't really know these people, should i stay? -->
+  <TravelCompanions.stages.Third_wheel.description>我和这些人之间有种无形的距离感。或许我不应该继续留在这儿？</TravelCompanions.stages.Third_wheel.description>
+  <!-- EN: Familiar companion -->
+  <TravelCompanions.stages.Familiar_companion.label>熟识的同伴</TravelCompanions.stages.Familiar_companion.label>
+  <!-- EN: Most jokes are on me and i get to do all the crappy work, but i seem to start being accepted! -->
+  <TravelCompanions.stages.Familiar_companion.description>虽然他们仍在拿我开玩笑，我也干着所有的脏累活，但大家似乎也渐渐地接受我了！</TravelCompanions.stages.Familiar_companion.description>
+  <!-- EN: Part of the gang -->
+  <TravelCompanions.stages.Part_of_the_gang.label>团体中的一员</TravelCompanions.stages.Part_of_the_gang.label>
+  <!-- EN: My companions start to value my skills and insight, i get to sit at the table! -->
+  <TravelCompanions.stages.Part_of_the_gang.description>同伴们开始重视我的技能与观察力了，我终于可以和他们坐在同一张桌子旁了！</TravelCompanions.stages.Part_of_the_gang.description>
+  <!-- EN: Trusted mate -->
+  <TravelCompanions.stages.Trusted_mate.label>可靠的同伴</TravelCompanions.stages.Trusted_mate.label>
+  <!-- EN: My companions are there when i need them and they can count on me! -->
+  <TravelCompanions.stages.Trusted_mate.description>我和同伴们相互信任，相互依靠！</TravelCompanions.stages.Trusted_mate.description>
+  <!-- EN: True friend -->
+  <TravelCompanions.stages.True_friend.label>挚友</TravelCompanions.stages.True_friend.label>
+  <!-- EN: We have been through alot together and always have each others backs. We would die for each other! -->
+  <TravelCompanions.stages.True_friend.description>我们推心置腹，肝胆相照。我们愿意为彼此慷慨赴死！</TravelCompanions.stages.True_friend.description>
+  
 </LanguageData>
