@@ -48,6 +48,19 @@ namespace CaravanAdventures
             }, false, ErrorMessage("alpha biomes"));
 
             Helper.RunSavely(() => {
+                var rgwWastelandAssembly = Helper.GetAssembly("RGW_Wasteland", detectedAssemblies);
+                if (rgwWastelandAssembly != null)
+                {
+                    Log.Message($"Caravan Adventures: Applying patch to add Regrowth to excluded BiomeDefs for Story Shrine Generation");
+                    foreach (var biomeDef in DefDatabase<BiomeDef>.AllDefsListForReading
+                        .Where(def => def.modContentPack.assemblies.loadedAssemblies.FirstOrDefault(ass => ass == rgwWastelandAssembly) != null))
+                    {
+                        CompatibilityDefOf.CACompatDef.excludedBiomeDefNamesForStoryShrineGeneration.Add(biomeDef.defName);
+                    }
+                }
+            }, false, ErrorMessage("Regrowth - Wasteland"));
+
+            Helper.RunSavely(() => {
                 var realRuinsAssembly = Helper.GetAssembly("realruins", detectedAssemblies);
                 if (realRuinsAssembly != null)
                 {
