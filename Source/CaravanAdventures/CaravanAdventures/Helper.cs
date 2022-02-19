@@ -122,9 +122,9 @@ namespace CaravanAdventures
             }
         }
 
-        public static void RunSavely(Action action, bool suppressError = false, string failMessage = "") => RunSavely(() => { action(); return 0; }, suppressError, failMessage);
+        public static void RunSavely(Action action, bool suppressError = false, string failMessage = "", bool useDLog = false) => RunSavely(() => { action(); return 0; }, suppressError, failMessage, useDLog);
 
-        public static T RunSavely<T>(Func<T> action, bool suppressError = false, string failMessage = "")
+        public static T RunSavely<T>(Func<T> action, bool suppressError = false, string failMessage = "", bool useDLog = false)
         {
             try
             {
@@ -132,18 +132,22 @@ namespace CaravanAdventures
             }
             catch (Exception ex)
             {
-                if (!suppressError) Log.Error(failMessage + ex.ToString());
+                if (!suppressError)
+                {
+                    if (!useDLog) Log.Error(failMessage + ex.ToString());
+                    else DLog.Error(failMessage + ex.ToString());
+                }
             }
 
             return default(T);
         }
 
-        public static void RunSavelyWithDelay(Action action, ref float counter, int timeout = 2000, bool suppressError = false, string failMessage = "")
+        public static void RunSavelyWithDelay(Action action, ref float counter, int timeout = 2000, bool suppressError = false, string failMessage = "", bool useDLog = false)
         {
-            RunSavelyWithDelay(() => { action(); return 0; }, ref counter, timeout, suppressError, failMessage);
+            RunSavelyWithDelay(() => { action(); return 0; }, ref counter, timeout, suppressError, failMessage, useDLog);
         }
 
-        public static T RunSavelyWithDelay<T>(Func<T> action, ref float counter, int timeout = 2000, bool suppressError = false, string failMessage = "")
+        public static T RunSavelyWithDelay<T>(Func<T> action, ref float counter, int timeout = 2000, bool suppressError = false, string failMessage = "", bool useDLog = false)
         {
             try
             {
@@ -151,8 +155,12 @@ namespace CaravanAdventures
             }
             catch (Exception ex)
             {
-                counter += timeout; 
-                if (!suppressError) Log.Error(failMessage + ex.ToString());
+                counter += timeout;
+                if (!suppressError)
+                {
+                    if (!useDLog) Log.Error(failMessage + ex.ToString());
+                    else DLog.Error(failMessage + ex.ToString());
+                }
             }
 
             return default(T);
