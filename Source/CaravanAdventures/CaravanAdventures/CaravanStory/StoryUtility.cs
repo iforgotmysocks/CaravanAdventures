@@ -244,19 +244,45 @@ namespace CaravanAdventures.CaravanStory
 
         internal static void ClearFriendlyMechFaction()
         {
-            var faction = DefDatabase<FactionDef>.GetNamedSilentFail("CAFriendlyMechanoid");
-            if (faction == null) return;
+            return;
+            var factionDef = DefDatabase<FactionDef>.GetNamedSilentFail("CAFriendlyMechanoid");
+            if (factionDef == null) return;
 
             if (Find.World == null) return;
-            var settlements = Find.World?.worldObjects?.Settlements?.Where(x => x?.Faction?.def == faction);
-            if (settlements == null || settlements.Count() == 0) return;
-
-            foreach (var settlement in settlements.Reverse<Settlement>())
+            var settlements = Find.World?.worldObjects?.AllWorldObjects?.Where(x => x?.Faction?.def == factionDef);
+            if (settlements != null && settlements.Count() != 0)
             {
-                DLog.Message($"Removing no longer needed CA friendly mech settlement.");
-                if (settlement.HasMap) Current.Game.DeinitAndRemoveMap(settlement.Map);
-                settlement.Destroy();
+                foreach (var settlement in settlements.Reverse<WorldObject>())
+                {
+                    DLog.Message($"Removing no longer needed CA friendly mech settlement.");
+                    if (settlement is MapParent parent && parent.HasMap) Current.Game.DeinitAndRemoveMap(parent.Map);
+                    settlement.Destroy();
+                }
             }
+
+            var faction = Find.FactionManager.AllFactions.FirstOrDefault(x => x?.def == factionDef);
+            if (faction == null)
+            {
+                // todo remove, log just debug
+                DLog.Message($"Faction is null");
+                return;
+            }
+
+            faction.temporary = true;
+
+            foreach (var pawn in PawnsFinder.AllMaps_Spawned.Where(x => x.Faction == faction)) pawn.Destroy();
+            foreach (var pawn in PawnsFinder.AllCaravansAndTravelingTransportPods_Alive.Where(x => x.Faction == faction)) pawn.Destroy();
+
+            // rest happens on it's own when removed
+            //faction.RemoveAllRelations();
+            //var removeFactionInfo = typeof(FactionManager).GetMethod("Remove", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+            //if (removeFactionInfo == null)
+            //{
+            //    DLog.Message($"Didn't find method to remove faction");
+            //    return;
+            //}
+            //DLog.Message($"Removing faction {faction.Name} of def: {factionDef.defName}");
+            //removeFactionInfo.Invoke(Find.FactionManager, new object[] { faction });
         }
 
         internal static void RemoveStoryComponentsNoRoyalty()
@@ -317,7 +343,7 @@ namespace CaravanAdventures.CaravanStory
                 else Messages.Message($"Load up a savegame to remove the storyline", MessageTypeDefOf.NegativeEvent);
                 return;
             }
-            
+
             Helper.RunSavely(RestartStory);
             Helper.RunSavely(() =>
             {
@@ -413,7 +439,7 @@ namespace CaravanAdventures.CaravanStory
         public static void GenerateStoryContact()
         {
             if (CompCache.StoryWC.questCont.Village.StoryContact != null && !CompCache.StoryWC.questCont.Village.StoryContact.Dead) return;
-            
+
             var girl = PawnGenerator.GeneratePawn(new PawnGenerationRequest()
             {
                 Context = PawnGenerationContext.NonPlayer,
@@ -510,6 +536,67 @@ namespace CaravanAdventures.CaravanStory
                 }
                 faction.SetRelationDirect(sacrilegHunters, FactionRelationKind.Neutral);
             }
+        }
+
+        private static void SetStandingForPossibleFactions(Faction factionToAdjust, FactionRelationKind kind, int goodwill, bool skipPermanentEnemyCheck = false)
+        {
+            foreach (var faction in Find.FactionManager.AllFactionsListForReading)
+            {
+                if (faction == Faction.OfPlayer || (!skipPermanentEnemyCheck && faction.def.permanentEnemy) || faction == factionToAdjust) continue;
+                Helper.RunSavely(() => faction.SetRelation(new FactionRelation() {kind = kind, other = factionToAdjust }));
+            }
+        }
+
+        public static Faction EnsureEvilMechanoidFaction(FactionRelationKind? relationKind = null, bool ignoreBetrayal = false, bool skipLeaderGeneration = false)
+        {
+            var mechanoidFaction = Find.FactionManager.AllFactions.FirstOrDefault(x => x.def.defName == "Mechanoid");
+            if (mechanoidFaction == null)
+            {
+                mechanoidFaction = FactionGenerator.NewGeneratedFaction(DefDatabase<FactionDef>.GetNamedSilentFail("Mechanoid"));
+
+                Find.FactionManager.Add(mechanoidFaction);
+                var empireDef = FactionDefOf.Empire;
+                if (!empireDef.permanentEnemyToEveryoneExcept.Contains(mechanoidFaction.def)) empireDef.permanentEnemyToEveryoneExcept.Add(mechanoidFaction.def);
+            }
+            SetStandingForPossibleFactions(mechanoidFaction, FactionRelationKind.Hostile, -100);
+            if ((mechanoidFaction.leader == null || mechanoidFaction.leader.Dead || mechanoidFaction.leader.Destroyed) && !skipLeaderGeneration)
+            {
+                try
+                {
+                    mechanoidFaction.TryGenerateNewLeader();
+                }
+                catch (Exception e)
+                {
+                    Log.Error(e.ToString());
+                }
+            }
+            //if (Faction.OfPlayerSilentFail != null && mechanoidFaction.RelationWith(Faction.OfPlayer, true) == null) mechanoidFaction.TryMakeInitialRelationsWith(Faction.OfPlayer);
+            //if (mechanoidFaction != null && Faction.OfPlayerSilentFail != null)
+            //{
+            //if ((!CompCache.StoryWC.storyFlags["SacrilegHuntersBetrayal"] || ignoreBetrayal))
+            //{
+            //    if (relationKind != null && mechanoidFaction.RelationKindWith(Faction.OfPlayerSilentFail) != relationKind)
+            //    {
+            //        switch (relationKind)
+            //        {
+            //            case FactionRelationKind.Ally:
+            //                mechanoidFaction.SetRelation(new FactionRelation() { kind = FactionRelationKind.Ally, baseGoodwill = 100, other = Faction.OfPlayer });
+            //                mechanoidFaction.factionHostileOnHarmByPlayer = false;
+            //                break;
+            //            case FactionRelationKind.Neutral:
+            //                mechanoidFaction.SetRelation(new FactionRelation() { kind = FactionRelationKind.Neutral, baseGoodwill = 0, other = Faction.OfPlayer });
+            //                mechanoidFaction.factionHostileOnHarmByPlayer = false;
+            //                break;
+            //            case FactionRelationKind.Hostile:
+            //                mechanoidFaction.SetRelation(new FactionRelation() { kind = FactionRelationKind.Hostile, baseGoodwill = -100, other = Faction.OfPlayer });
+            //                break;
+            //        }
+            //    }
+            //}
+            //else if (mechanoidFaction.RelationKindWith(Faction.OfPlayerSilentFail) != FactionRelationKind.Hostile) 
+            mechanoidFaction.SetRelation(new FactionRelation() { kind = FactionRelationKind.Hostile, other = Faction.OfPlayer });
+            //}
+            return mechanoidFaction;
         }
 
         public static void RemoveExistingQuestFriendlyVillages()
