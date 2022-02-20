@@ -87,6 +87,15 @@ namespace CaravanAdventures
         public static void ExecuteHarmonyCompatibilityPatches()
         {
             detectedAssemblies = detectedAssemblies ?? new List<(string, Assembly)>();
+
+            Helper.RunSavely(() => {
+                var vsewwAssembly = Helper.GetAssembly("VSEWW", detectedAssemblies);
+                if (vsewwAssembly != null && ModSettings.storyEnabled)
+                {
+                    Log.Message($"Fixing Winston Waves prefix NRE for friendly story raids");
+                    Patches.Compatibility.WinstonWavesPatch.ApplyPatches(vsewwAssembly);
+                }
+            }, false, ErrorMessage("Winston Waves"));
         }
 
         private static string ErrorMessage(string modName) => $"Following error happend while trying to patching {modName} for compatibility with CA, but was catched savely:\n";
