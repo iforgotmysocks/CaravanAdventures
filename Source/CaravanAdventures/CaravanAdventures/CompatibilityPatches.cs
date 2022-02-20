@@ -82,12 +82,22 @@ namespace CaravanAdventures
 
             ExecuteHarmonyCompatibilityPatches();
 
-            Log.Message($"CA v{System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString().TrimEnd(new[] { '.', '0' })} (1.2) patches complete.");
+            Log.Message($"CA patches complete. v{System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString().TrimEnd(new[] { '.', '0' })} (1.2)");
         }
 
         public static void ExecuteHarmonyCompatibilityPatches()
         {
             detectedAssemblies = detectedAssemblies ?? new List<(string, Assembly)>();
+
+            // todo - remove friendly faction detection patch after faction removal
+            Helper.RunSavely(() => {
+                var vfeCoreAssembly = Helper.GetAssembly("VFECore", detectedAssemblies);
+                if (vfeCoreAssembly != null && ModSettings.storyEnabled)
+                {
+                    Log.Message($"Patching VFE from bringing up the faction dialog for no longer needed faction");
+                    Patches.Compatibility.VFECoreFriendlyFactionDetectionPatch.ApplyPatches(vfeCoreAssembly);
+                }
+            }, false, ErrorMessage("VFECore"));
 
             Helper.RunSavely(() => {
                 var vsewwAssembly = Helper.GetAssembly("VSEWW", detectedAssemblies);
@@ -99,7 +109,7 @@ namespace CaravanAdventures
             }, false, ErrorMessage("Winston Waves"));
         }
 
-        private static string ErrorMessage(string modName) => $"Following error happend while trying to patching {modName} for compatibility with CA, but was catched savely:\n";
+        private static string ErrorMessage(string modName) => $"Following error happend while trying to patch {modName} for compatibility with CA, but was catched savely:\n";
 
     }
     

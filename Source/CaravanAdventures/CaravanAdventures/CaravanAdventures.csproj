@@ -186,6 +186,7 @@
     <Compile Include="Patches\CaravanMagicLight.cs" />
     <Compile Include="Patches\AttackSpeed.cs" />
     <Compile Include="Patches\CaravanCampProximityRemoval.cs" />
+    <Compile Include="Patches\Compatibility\VFECoreFriendlyFactionDetectionPatch.cs" />
     <Compile Include="Patches\Compatibility\WinstonWavesPatch.cs" />
     <Compile Include="Patches\LetterRemovalPatch.cs" />
     <Compile Include="Patches\SpDecayLevelIncrease.cs" />
