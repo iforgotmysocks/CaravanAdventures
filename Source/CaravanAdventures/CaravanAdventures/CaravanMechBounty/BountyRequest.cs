@@ -494,6 +494,22 @@ namespace CaravanAdventures.CaravanMechBounty
                 disabled = !CanAfford(cost2, out reason),
                 disabledReason = reason
             });
+            var cost3 = 5000;
+            node.options.Add(new DiaOption("CABountyExchangeSilverForBountyOption".Translate(cost3, Convert.ToInt32(cost3 * ModSettings.bountyValueMult)))
+            {
+                linkLateBind = () => BuyBountyWithMoneyOverview(parent),
+                action = () => ExchangeSilverForBounty(cost3),
+                disabled = !CanAfford(cost3, out reason),
+                disabledReason = reason
+            });
+            var cost4 = 25000;
+            node.options.Add(new DiaOption("CABountyExchangeSilverForBountyOption".Translate(cost4, Convert.ToInt32(cost4 * ModSettings.bountyValueMult)))
+            {
+                linkLateBind = () => BuyBountyWithMoneyOverview(parent),
+                action = () => ExchangeSilverForBounty(cost4),
+                disabled = !CanAfford(cost4, out reason),
+                disabledReason = reason
+            });
             node.options.Add(new DiaOption("CABountyBack".Translate()) { linkLateBind = () => CreateMainMenuNode() });
             return node;
         }
