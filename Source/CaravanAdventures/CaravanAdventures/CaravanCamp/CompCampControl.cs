@@ -15,6 +15,7 @@ namespace CaravanAdventures.CaravanCamp
         protected int waste;
         protected bool tribal;
         protected List<Thing> campAssets;
+        protected bool isPackedUp;
 
         public override void PostExposeData()
         {
@@ -23,6 +24,7 @@ namespace CaravanAdventures.CaravanCamp
             Scribe_Values.Look(ref tribal, "tribal", true);
             Scribe_Collections.Look(ref campAssets, "campAssets", LookMode.Reference);
             Scribe_Values.Look(ref waste, "waste", 0);
+            Scribe_Values.Look(ref isPackedUp, "isPackedUp", false);
         }
 
         public List<CellRect> CampRects { get => campRects; set => campRects = value; }
@@ -35,15 +37,18 @@ namespace CaravanAdventures.CaravanCamp
         {
             foreach (var baseOption in base.CompFloatMenuOptions(selPawn)) yield return baseOption;
 
-            yield return new FloatMenuOption("CADeconstructCamp".Translate(), () =>
+            if (!isPackedUp)
             {
-                Messages.Message(new Message("CADeconstructCampMessage".Translate(), MessageTypeDefOf.NeutralEvent));
+                yield return new FloatMenuOption("CADeconstructCamp".Translate(), () =>
+                {
+                    Messages.Message(new Message("CADeconstructCampMessage".Translate(), MessageTypeDefOf.NeutralEvent));
 
-                var job = JobMaker.MakeJob(CampDefOf.CACampInformPackingUp, parent);
-                job.count = 1;
-                DLog.Message($"trying to take ordered");
-                selPawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
-            });
+                    var job = JobMaker.MakeJob(CampDefOf.CACampInformPackingUp, parent);
+                    job.count = 1;
+                    DLog.Message($"trying to take ordered");
+                    selPawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
+                }, MenuOptionPriority.Default);
+            }
 
             yield return new FloatMenuOption("CALeaveImmediately".Translate(), () =>
             {
@@ -132,7 +137,8 @@ namespace CaravanAdventures.CaravanCamp
                 }
             }
 
-            RemoveControl();
+            isPackedUp = true;
+            if (!ModSettings.leaveCampControlOptionAfterPackingUp) RemoveControl();
         }
 
         private void PackUpTent(CellRect rect)
