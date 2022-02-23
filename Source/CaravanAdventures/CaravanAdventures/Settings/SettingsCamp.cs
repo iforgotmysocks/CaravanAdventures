@@ -73,6 +73,7 @@ namespace CaravanAdventures.Settings
             if (double.TryParse(campCostInput, out var campCostDouble)) ModSettings.maxCampSupplyCost = Convert.ToInt32(campCostDouble);
             options.Label($"Starting fuel percentage for camp-gear: {ModSettings.fuelStartingFillPercentage}%");
             ModSettings.fuelStartingFillPercentage = Convert.ToInt32(options.Slider(ModSettings.fuelStartingFillPercentage, 0, 100));
+            options.CheckboxLabeled("Leave camp control available after packing up (will be invisible)", ref ModSettings.leaveCampControlOptionAfterPackingUp);
             options.End();
         }
 
