@@ -25,19 +25,33 @@ namespace CaravanAdventures.Patches.Compatibility
         public static bool VSEWW_IncidentWorker_Raid_TryExecuteWorker_Patch_Prefix_Prefix(IncidentParms parms, ref bool __result)
         {
             if (Find.Storyteller?.def?.defName != "VSE_WinstonWave") return true;
-            if (parms?.faction != CaravanStory.StoryUtility.FactionOfSacrilegHunters
-                || CaravanStory.StoryUtility.FactionOfSacrilegHunters.HostileTo(Faction.OfPlayer)) return true;
-            __result = true;
-            return false;
+            var mapParentDef = parms?.target is Map map ? map?.Parent?.def : null;
+            if (parms?.faction == CaravanStory.StoryUtility.FactionOfSacrilegHunters
+                    && !CaravanStory.StoryUtility.FactionOfSacrilegHunters.HostileTo(Faction.OfPlayer)
+                || mapParentDef != null
+                    && (mapParentDef == CaravanStory.CaravanStorySiteDefOf.CAStoryVillageMP
+                        || mapParentDef == CaravanStory.CaravanStorySiteDefOf.CAAncientMasterShrineMP))
+            {
+                __result = true;
+                return false;
+            }
+            return true;
         }
 
         public static bool VSEWW_IncidentWorker_Raid_TryGenerateRaidInfo_Patch_Prefix_Prefix(IncidentParms parms, ref bool __result)
         {
             if (Find.Storyteller?.def?.defName != "VSE_WinstonWave") return true;
-            if (parms?.faction != CaravanStory.StoryUtility.FactionOfSacrilegHunters
-                || CaravanStory.StoryUtility.FactionOfSacrilegHunters.HostileTo(Faction.OfPlayer)) return true;
-            __result = true;
-            return false;
+            var mapParentDef = parms?.target is Map map ? map?.Parent?.def : null;
+            if (parms?.faction == CaravanStory.StoryUtility.FactionOfSacrilegHunters 
+                    && !CaravanStory.StoryUtility.FactionOfSacrilegHunters.HostileTo(Faction.OfPlayer)
+                || mapParentDef != null 
+                    && (mapParentDef == CaravanStory.CaravanStorySiteDefOf.CAStoryVillageMP 
+                        || mapParentDef == CaravanStory.CaravanStorySiteDefOf.CAAncientMasterShrineMP))
+            {
+                __result = true;
+                return false;
+            }
+            return true;
         }
     }
 }
