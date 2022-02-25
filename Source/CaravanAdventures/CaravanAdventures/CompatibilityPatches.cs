@@ -102,7 +102,7 @@ namespace CaravanAdventures
                 var vsewwAssembly = Helper.GetAssembly("VSEWW", detectedAssemblies);
                 if (vsewwAssembly != null && ModSettings.storyEnabled)
                 {
-                    Log.Message($"Fixing Winston Waves prefix NRE for friendly story raids");
+                    Log.Message($"Fixing Winston Waves prefix NRE for story and bounty raids");
                     Patches.Compatibility.WinstonWavesPatch.ApplyPatches(vsewwAssembly);
                 }
             }, false, ErrorMessage("Winston Waves"));
