@@ -175,6 +175,12 @@ namespace CaravanAdventures.CaravanStory
             Messages.Message($"Story reset complete", MessageTypeDefOf.PositiveEvent, false);
         }
 
+        public static void CompleteStory()
+        {
+            RestartStory();
+            CompCache.StoryWC.SetStoryCompleteVars();
+        }
+
         public static void ResetLastShrineFlags(bool advanceToLastShrine = false)
         {
             StoryUtility.RemoveMapParentsOfDef(CaravanStorySiteDefOf.CAAncientMasterShrineMP);
