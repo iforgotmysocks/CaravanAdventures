@@ -293,7 +293,7 @@ namespace CaravanAdventures
             if (debug)
             {
                 if (Widgets.ButtonText(BRect(options.ColumnWidth / 5 * 2, lastRect.y, options.ColumnWidth / 5 - 10, lastRect.height), "Remove mod (Exp.)")) StoryUtility.RemoveStoryOrMod(true);
-                if (Widgets.ButtonText(BRect(options.ColumnWidth / 5 * 3, lastRect.y, options.ColumnWidth / 5 - 10, lastRect.height), "Print world pawns")) Helper.PrintWorldPawns();
+                if (Widgets.ButtonText(BRect(options.ColumnWidth / 5 * 3, lastRect.y, options.ColumnWidth / 5 - 10, lastRect.height), "Complete story")) StoryUtility.CompleteStory();
                 if (Widgets.ButtonText(BRect(options.ColumnWidth / 5 * 4, lastRect.y, options.ColumnWidth / 5 - 10, lastRect.height), "Reset full story")) StoryUtility.RestartStory();
             }
             else Widgets.Label(BRect(options.ColumnWidth / 5 * 2.5f, lastRect.y, options.ColumnWidth / 5 * 2.5f, lastRect.height), "Note: Some changes require a game restart to take effect");

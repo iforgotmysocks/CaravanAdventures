@@ -391,6 +391,21 @@ namespace CaravanAdventures.CaravanStory
             CompCache.BountyWC.BountyNotificationCounter = -1;
         }
 
+        public void SetStoryCompleteVars()
+        {
+            storyFlags.Keys.Where(x => x != "SacrilegHuntersBetrayal").ToList().ForEach(key => storyFlags[key] = true);
+            unlockedSpells = new List<AbilityDef>();
+            foreach (var spell in DefDatabase<AbilityDef>.AllDefsListForReading.Where(x => x.defName.StartsWith("CAAncient"))) unlockedSpells.Add(spell);
+            
+            mechBossKillCounters.Clear();
+            shrineRevealCounter = -1;
+            ticks = -1;
+            countShrinesCompleted = 5;
+
+            CompCache.BountyWC.BountyServiceAvailable = true;
+            CompCache.BountyWC.BountyNotificationCounter = -1;
+        }
+
 
     }
 }
