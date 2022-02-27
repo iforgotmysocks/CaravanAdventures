@@ -121,7 +121,7 @@ namespace CaravanAdventures
 
             if (tree == null)
             {
-                Log.Message("Tree is null");
+                DLog.Message("Tree is null");
                 return;
             }
             if (!tree.comps.Any(x => x is CompProperties_Talk)) tree.comps.Add(new CompProperties_Talk());
@@ -133,7 +133,7 @@ namespace CaravanAdventures
 
             if (humanDef == null)
             {
-                Log.Message("HumanDef is null");
+                DLog.Message("HumanDef is null");
                 return;
             }
             // todo reenable?

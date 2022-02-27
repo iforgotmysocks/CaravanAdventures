@@ -88,7 +88,8 @@ namespace CaravanAdventures.CaravanStory.Quests
 			foreach (var cell in map.AllCells)
 			{
 				map.fogGrid.Unfog(cell);
-				map.roofGrid.SetRoof(cell, RoofDefOf.RoofConstructed);
+				//map.roofGrid.SetRoof(cell, RoofDefOf.RoofConstructed);
+				map.roofGrid.SetRoof(cell, RoofDefOf.RoofRockThick);
 			}
 
 			Current.ProgramState = stateBackup; 
