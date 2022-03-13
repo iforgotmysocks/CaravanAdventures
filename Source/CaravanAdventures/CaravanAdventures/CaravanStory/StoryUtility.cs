@@ -298,6 +298,11 @@ namespace CaravanAdventures.CaravanStory
 
         public static void FreshenUpPawn(Pawn pawn)
         {
+            if (pawn == null)
+            {
+                Log.Warning($"CA Story pawn was null which shouldn't happen!");
+                return;
+            }
             HealthUtility.HealNonPermanentInjuriesAndRestoreLegs(pawn);
             if (pawn?.needs?.food != null) pawn.needs.food.CurLevel = pawn.needs.food.MaxLevel;
             if (pawn?.needs?.joy != null) pawn.needs.joy.CurLevel = pawn.needs.joy.MaxLevel;

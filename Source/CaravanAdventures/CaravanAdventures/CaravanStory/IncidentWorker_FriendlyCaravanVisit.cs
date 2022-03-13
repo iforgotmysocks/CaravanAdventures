@@ -65,7 +65,7 @@ namespace CaravanAdventures.CaravanStory
             var mainPawn = CompCache.StoryWC.questCont.Village.StoryContact;
             
             if (!list.Contains(mainPawn)) list.Add(mainPawn);
-            StoryUtility.FreshenUpPawn(mainPawn);
+            Helper.RunSavely(() => StoryUtility.FreshenUpPawn(mainPawn));
             foreach (Thing newThing in list)
             {
                 IntVec3 loc = CellFinder.RandomClosewalkCellNear(parms.spawnCenter, map, 5, null);
