@@ -70,7 +70,7 @@ namespace CaravanAdventures.CaravanStory
                     if (storyChar != null)
                     {
                         if (storyChar.Spawned) storyChar.DeSpawn();
-                        StoryUtility.FreshenUpPawn(storyChar);
+                        Helper.RunSavely(() => StoryUtility.FreshenUpPawn(storyChar));
                         GenSpawn.Spawn(storyChar, storyContactCell, Map);
                         StoryUtility.AssignDialog("StoryVillage_Conversation", storyChar, GetType().ToString(), "ConversationFinished");
                         AddNewLordAndAssignStoryChar(storyChar);
