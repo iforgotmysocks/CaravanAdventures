@@ -15,8 +15,9 @@ namespace CaravanAdventures
         {
             detectedAssemblies = detectedAssemblies ?? new List<(string, Assembly)>();
 
-            Helper.RunSavely(() => {
-                var alienRaceAssembly = Helper.GetAssembly("alienrace", detectedAssemblies); 
+            Helper.RunSavely(() =>
+            {
+                var alienRaceAssembly = Helper.GetAssembly("alienrace", detectedAssemblies);
                 if (alienRaceAssembly != null && ModSettings.caravanFormingFilterSelectionEnabled)
                 {
                     Log.Message($"Caravan Adventures: Applying patch for AlienRaces - adding alienrace corpses to caravan dialog filter");
@@ -33,7 +34,8 @@ namespace CaravanAdventures
             //    }
             //});
 
-            Helper.RunSavely(() => {
+            Helper.RunSavely(() =>
+            {
                 var alphaBiomesAssembly = Helper.GetAssembly("alphabiomes", detectedAssemblies);
                 if (alphaBiomesAssembly != null)
                 {
@@ -46,7 +48,8 @@ namespace CaravanAdventures
                 }
             }, false, ErrorMessage("alpha biomes"));
 
-            Helper.RunSavely(() => {
+            Helper.RunSavely(() =>
+            {
                 var rgwWastelandAssembly = Helper.GetAssembly("RGW_Wasteland", detectedAssemblies);
                 if (rgwWastelandAssembly != null)
                 {
@@ -59,7 +62,8 @@ namespace CaravanAdventures
                 }
             }, false, ErrorMessage("Regrowth - Wasteland"));
 
-            Helper.RunSavely(() => {
+            Helper.RunSavely(() =>
+            {
                 var realRuinsAssembly = Helper.GetAssembly("realruins", detectedAssemblies);
                 if (realRuinsAssembly != null)
                 {
@@ -71,7 +75,8 @@ namespace CaravanAdventures
                 }
             }, false, "Following error happend while trying to patching SOS2 for compatibility with CA, but was catched savely:");
 
-            Helper.RunSavely(() => {
+            Helper.RunSavely(() =>
+            {
                 var sos2Assembly = Helper.GetAssembly("shipshaveinsides", detectedAssemblies);
                 if (sos2Assembly != null && ModSettings.storyEnabled)
                 {
@@ -89,7 +94,8 @@ namespace CaravanAdventures
             detectedAssemblies = detectedAssemblies ?? new List<(string, Assembly)>();
 
             // todo - remove friendly faction detection patch after faction removal
-            Helper.RunSavely(() => {
+            Helper.RunSavely(() =>
+            {
                 var vfeCoreAssembly = Helper.GetAssembly("VFECore", detectedAssemblies);
                 if (vfeCoreAssembly != null && ModSettings.storyEnabled)
                 {
@@ -98,7 +104,8 @@ namespace CaravanAdventures
                 }
             }, false, ErrorMessage("VFECore"));
 
-            Helper.RunSavely(() => {
+            Helper.RunSavely(() =>
+            {
                 var vsewwAssembly = Helper.GetAssembly("VSEWW", detectedAssemblies);
                 if (vsewwAssembly != null && ModSettings.storyEnabled)
                 {
@@ -106,10 +113,19 @@ namespace CaravanAdventures
                     Patches.Compatibility.WinstonWavesPatch.ApplyPatches(vsewwAssembly);
                 }
             }, false, ErrorMessage("Winston Waves"));
+
+            Helper.RunSavely(() =>
+            {
+                if (ModSettings.storyEnabled && detectedAssemblies.Any(x => x.assemblyString == "shipshaveinsides"))
+                {
+                    Log.Message($"Applying CA Ancient Ability adjustments for space");
+                    Patches.Compatibility.SoS2Patch.ApplyPatches(detectedAssemblies.FirstOrDefault(x => x.assemblyString == "shipshaveinsides").assembly);
+                }
+            }, false, ErrorMessage("SoS2"));
         }
 
         private static string ErrorMessage(string modName) => $"Following error happend while trying to patch {modName} for compatibility with CA, but was catched savely:\n";
 
     }
-    
+
 }
