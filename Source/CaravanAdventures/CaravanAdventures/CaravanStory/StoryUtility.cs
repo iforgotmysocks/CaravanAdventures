@@ -479,6 +479,12 @@ namespace CaravanAdventures.CaravanStory
 
         public static Pawn GetGiftedPawn() => CompCache.StoryWC.questCont.StoryStart?.Gifted; // ?? PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction?.FirstOrDefault(x => (x?.RaceProps?.Humanlike ?? false) && x.health.hediffSet.GetFirstHediffOfDef(HediffDef.Named("CAAncientGift")) != null);
 
+        public static bool IsAuraProtected(Pawn pawn) => 
+            pawn?.health?.hediffSet?.hediffs?.Any(
+                x => x != null 
+                && (x.def == CaravanAbilities.AbilityDefOf.CAAncientProtectiveAura 
+                    || x.def == CaravanAbilities.AbilityDefOf.CAAncientProtectiveAuraLinked)) ?? false;
+
         public static Faction EnsureSacrilegHunters(FactionRelationKind? relationKind = null, bool ignoreBetrayal = false, bool skipLeaderGeneration = false)
         {
             var sacrilegHunters = Find.FactionManager.AllFactions.FirstOrDefault(x => x.def?.defName == "CASacrilegHunters");
