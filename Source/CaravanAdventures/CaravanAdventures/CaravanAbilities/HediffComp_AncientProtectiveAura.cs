@@ -10,6 +10,7 @@ namespace CaravanAdventures.CaravanAbilities
         private int ticksSinceStatusCheck = 0;
         private int ticksSincePsyCost = 0;
         private int ticksSincePermHeal = 0;
+        private int ticksSinceHeatCheck = 0;
         private int permTickCount = new IntRange(10000, 12000).RandomInRange;
         private Hediff_Injury[] sortedInjuries;
         private bool noInjuries = false;
@@ -17,6 +18,7 @@ namespace CaravanAdventures.CaravanAbilities
         private string[] permanentToBeHealed = new[] { "PsychicComa", "Abasia", "Carcinoma", "ChemicalDamageModerate", "ChemicalDamageSevere", "Cirrhosis", "TraumaSavant" };
         private Pawn connector = null;
         private int statusCheckTickCount = new IntRange(55, 65).RandomInRange;
+        private int heatCheckTickCount = new IntRange(300, 400).RandomInRange;
 
         public HediffCompProperties_AncientProtectiveAura Props => (HediffCompProperties_AncientProtectiveAura)props;
 
@@ -60,6 +62,7 @@ namespace CaravanAdventures.CaravanAbilities
 
             if (ticksSinceStatusCheck > statusCheckTickCount)
             {
+                ticksSinceStatusCheck = 0;
                 if (Props.linked && (Pawn.Faction != Faction.OfPlayer || connector == null || connector.Dead || connector.Faction != Faction.OfPlayer || !IsGifted(connector) || !IsCoordinatorActive(connector)))
                 {
                     Pawn.health.RemoveHediff(parent);
@@ -69,8 +72,13 @@ namespace CaravanAdventures.CaravanAbilities
                 ExtinguishFire();
                 CureMentalBreaks();
                 CureIllnesses();
-                ticksSinceStatusCheck = 0;
                 if (noInjuries) noInjuries = false;
+            }
+
+            if (ticksSinceHeatCheck > heatCheckTickCount)
+            {
+                ticksSinceHeatCheck = 0;
+                ReduceHeatOrCold();
             }
 
             if (ticksSincePsyCost > 603)
@@ -89,6 +97,23 @@ namespace CaravanAdventures.CaravanAbilities
             ticksSinceStatusCheck++;
             ticksSincePsyCost++;
             ticksSincePermHeal++;
+            ticksSinceHeatCheck++;
+        }
+
+        private void ReduceHeatOrCold()
+        {
+            var cold = Pawn?.health?.hediffSet?.hediffs?.FirstOrDefault(x => x?.def == HediffDefOf.Hypothermia);
+            ReduceSeverity(cold);
+            var heat = Pawn?.health?.hediffSet?.hediffs?.FirstOrDefault(x => x?.def == HediffDefOf.Heatstroke);
+            ReduceSeverity(heat);
+        }
+
+        public bool ReduceSeverity(Hediff hediff)
+        {
+            if (hediff == null || hediff.Severity < 0.3f) return false;
+            Messages.Message("ProtectiveAuraHeatRegulation".Translate(Pawn.NameShortColored, parent.Label), MessageTypeDefOf.SilentInput, false);
+            hediff.Severity = 0.05f;
+            return true;
         }
 
         private void CureIllnesses()
