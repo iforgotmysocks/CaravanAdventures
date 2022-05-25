@@ -2,5 +2,5 @@
 <LanguageData>
   <CAProtectiveAuraCureMentalBreaks>{1}(이)가 {0}의 정신불안을 치료했습니다.</CAProtectiveAuraCureMentalBreaks>
   <CAProtectiveAuraExtinguishFire>{1}(이)가 {0}에 붙은 불을 껐습니다.</CAProtectiveAuraExtinguishFire>
-
+  <ProtectiveAuraHeatRegulation>{0}'s body temperature was regulated by {1}</ProtectiveAuraHeatRegulation>
 </LanguageData>

@@ -2,4 +2,5 @@
 <LanguageData>
   <CAProtectiveAuraCureMentalBreaks>{0}'s mental break was cured by {1}</CAProtectiveAuraCureMentalBreaks>
   <CAProtectiveAuraExtinguishFire>{0}'s fire was extinguished by {1}</CAProtectiveAuraExtinguishFire>
+  <ProtectiveAuraHeatRegulation>{0}'s body temperature was regulated by {1}</ProtectiveAuraHeatRegulation>
 </LanguageData>
