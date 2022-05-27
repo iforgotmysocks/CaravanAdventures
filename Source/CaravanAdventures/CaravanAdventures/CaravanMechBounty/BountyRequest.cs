@@ -171,7 +171,7 @@ namespace CaravanAdventures.CaravanMechBounty
             return "CABountyExchangeRequestItem_ItemRestockDetail".Translate(CompCache.BountyWC.GetNextAvailableDateInDays(CompCache.BountyWC.OngoingItemDelay));
         }
 
-        private object[] customRewardsRoyalty = !ModsConfig.RoyaltyActive ? new object[] {} : new object[] { ThingCategoryDef.Named("WeaponsMeleeBladelink"), ThingDef.Named("AnimusStone")};
+        private object[] customRewardsRoyalty = !ModsConfig.RoyaltyActive ? new object[] { } : new object[] { ThingCategoryDef.Named("WeaponsMeleeBladelink"), ThingDef.Named("AnimusStone") };
         private List<object> customRewards = new List<object>() { ThingDefOf.VanometricPowerCell, ThingDefOf.InfiniteChemreactor };
         private List<Thing> GenerateItemStock(int itemCount, int customItemCount = 0)
         {
@@ -391,13 +391,14 @@ namespace CaravanAdventures.CaravanMechBounty
                 TraitDefOf.Bloodlust,
                 TraitDefOf.Psychopath,
                 TraitDefOf.Transhumanist,
-                TraitDef.Named("Nerves"),
-                TraitDef.Named("NaturalMood"),
-                TraitDef.Named("Masochist") };
+                DefDatabase<TraitDef>.GetNamedSilentFail("Nerves"),
+                DefDatabase<TraitDef>.GetNamedSilentFail("NaturalMood"),
+                DefDatabase<TraitDef>.GetNamedSilentFail("Masochist")};
 
             var node = new DiaNode("CABountyExchangeVeteranRecruitment_ChoosePersonality".Translate());
             foreach (var personality in personalityTraits)
             {
+                if (personality == null) continue;
                 node.options.Add(new DiaOption(personality.degreeDatas.OrderByDescending(data => data.degree).FirstOrDefault().LabelCap)
                 {
                     link = PickVeteranSkill(node, cost, personality),
@@ -415,12 +416,13 @@ namespace CaravanAdventures.CaravanMechBounty
         private DiaNode PickVeteranSkill(DiaNode parent, int cost, TraitDef personality)
         {
             var skillTraits = new[] {
-                TraitDef.Named("Nimble"),
+                DefDatabase<TraitDef>.GetNamedSilentFail("Nimble"),
                 TraitDefOf.SpeedOffset
             };
             var node = new DiaNode("CABountyExchangeVeteranRecruitment_ChooseSkill".Translate());
             foreach (var skill in skillTraits)
             {
+                if (skill == null) continue;
                 node.options.Add(new DiaOption(skill.degreeDatas.OrderByDescending(data => data.degree).FirstOrDefault().LabelCap)
                 {
                     action = () => EnlistVeteran(cost, personality, skill),
