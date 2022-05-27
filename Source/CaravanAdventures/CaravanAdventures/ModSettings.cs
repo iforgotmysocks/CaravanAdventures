@@ -85,6 +85,10 @@ namespace CaravanAdventures
         public static float lightDuration = 180000f;
         public static float magicLightCaravanSpeedMult = 1.5f;
 
+        // compatibility
+        public static bool sos2AuraPreventsHypoxia = true;
+        public static float sos2AuraHeatMult = 0.5f;
+
         // story
         // todo remove the ability to disable the apoc? Can always set the increase to 0
         public static bool storyEnabled = true;
@@ -202,6 +206,10 @@ namespace CaravanAdventures
             // - light
             Scribe_Values.Look(ref lightDuration, "lightDuration", 180000);
             Scribe_Values.Look(ref magicLightCaravanSpeedMult, "magicLightCaravanSpeedMult", 1.5f);
+
+            // compatibility
+            Scribe_Values.Look(ref sos2AuraHeatMult, "sos2AuraHeatMult", 0.5f);
+            Scribe_Values.Look(ref sos2AuraPreventsHypoxia, "sos2AuraPreventsHypoxia", true);
 
             // story
             Scribe_Values.Look(ref storyEnabled, "storyEnabled", true);

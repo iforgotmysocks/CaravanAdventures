@@ -28,7 +28,7 @@ namespace CaravanAdventures.Settings
         public override void DoWindowContents(Rect wrect)
         {
             var options = new Listing_Standard();
-            var viewRect = new Rect(0f, 0f, windowRect.width - 65, 1060);
+            var viewRect = new Rect(0f, 0f, windowRect.width - 65, 1200);
             var smallerOutRect = new Rect(wrect.x, wrect.y, wrect.width, wrect.height - 50);
 
             Widgets.BeginScrollView(smallerOutRect, ref scrollPos, viewRect);
@@ -91,6 +91,15 @@ namespace CaravanAdventures.Settings
             ModSettings.lightDuration = options.Slider(ModSettings.lightDuration, 60f, 300000);
             options.Label($"Caravan travel speed multiplier: {Math.Round(ModSettings.magicLightCaravanSpeedMult, 1)}");
             ModSettings.magicLightCaravanSpeedMult = options.Slider(ModSettings.magicLightCaravanSpeedMult, 0.1f, 5f);
+
+            options.Gap();
+
+            Text.Font = GameFont.Medium;
+            options.Label("Compatibility Settings:".Colorize(Color.green), 40f);
+            Text.Font = GameFont.Small;
+            options.CheckboxLabeled("Protective Aura prevents Hypoxia", ref ModSettings.sos2AuraPreventsHypoxia, "Increases the level to 15, when the skill decay starts to set in, so your travelers have it easier being on the road for longer durations");
+            options.Label($"Protective Aura heat reduction multiplier for space ships (Default: 0.8): {Math.Round(ModSettings.sos2AuraHeatMult, 2)}");
+            ModSettings.sos2AuraHeatMult = (float)Math.Round(options.Slider(ModSettings.sos2AuraHeatMult, 0f, 1f), 2);
 
             options.End();
             Widgets.EndScrollView();
