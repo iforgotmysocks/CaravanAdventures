@@ -98,10 +98,10 @@ namespace CaravanAdventures.Settings
             options.Gap();
 
             Text.Font = GameFont.Medium;
-            options.Label("Compatibility Settings:".Colorize(Color.green), 40f);
+            options.Label("Compatibility Settings:".Colorize(Color.green), 30f);
             Text.Font = GameFont.Small;
-            options.CheckboxLabeled("Protective Aura prevents Hypoxia", ref ModSettings.sos2AuraPreventsHypoxia, "Increases the level to 15, when the skill decay starts to set in, so your travelers have it easier being on the road for longer durations");
-            options.Label($"Protective Aura heat reduction multiplier for space ships (Default: 0.8): {Math.Round(ModSettings.sos2AuraHeatMult, 2)}");
+            options.CheckboxLabeled("(SoS2) Protective Aura prevents Hypoxia", ref ModSettings.sos2AuraPreventsHypoxia);
+            options.Label($"(SoS2) Protective Aura heat reduction multiplier for space ships: {Math.Round(ModSettings.sos2AuraHeatMult, 2)}", -1, "Heat generated e.g. by incoming fire hitting shields will be multiplied by this value and reduced, while a protective aura protected pawn is on the ship's map.");
             ModSettings.sos2AuraHeatMult = (float)Math.Round(options.Slider(ModSettings.sos2AuraHeatMult, 0f, 1f), 2);
 
             options.End();
