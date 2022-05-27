@@ -23,7 +23,7 @@ namespace CaravanAdventures.CaravanMechBounty
                 if (veteran.ageTracker.AgeChronologicalTicks < newAge) veteran.ageTracker.AgeChronologicalTicks = newAge;
             }
             foreach (var trait in veteran.story.traits.allTraits.Reverse<Trait>()) veteran.story.traits.allTraits.Remove(trait);
-            veteran.story.traits.GainTrait(new Trait(TraitDefOf.Tough));
+            if (TraitDefOf.Tough != null) veteran.story.traits.GainTrait(new Trait(TraitDefOf.Tough));
             if (selPersonality != null) veteran.story.traits.GainTrait(new Trait(selPersonality, selPersonality.degreeDatas.OrderByDescending(data => data.degree).FirstOrDefault().degree));
             if (selSkill != null) veteran.story.traits.GainTrait(new Trait(selSkill, selSkill.degreeDatas.OrderByDescending(data => data.degree).FirstOrDefault().degree));
 
