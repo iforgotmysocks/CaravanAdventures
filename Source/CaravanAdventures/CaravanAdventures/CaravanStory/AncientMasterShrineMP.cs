@@ -414,7 +414,11 @@ namespace CaravanAdventures.CaravanStory
 
         private void WakeAllMechanoids()
         {
-            Map.mapPawns.AllPawns.Where(x => x.RaceProps.IsMechanoid && !x.Dead).ToList().ForEach(mech => mech.TryGetComp<CompWakeUpDormant>().Activate());
+            Map.mapPawns.AllPawnsSpawned.Where(x => x?.RaceProps?.IsMechanoid == true && !x?.Dead == true).ToList().ForEach(mech =>
+            {
+                var comp = mech.TryGetComp<CompWakeUpDormant>();
+                if (comp != null) comp.Activate();
+            });
             FreeAllMechsOnMap();
 
             GetComponent<TimedDetectionPatrols>().ToggleIncreaseStrenthByCounter = true;
