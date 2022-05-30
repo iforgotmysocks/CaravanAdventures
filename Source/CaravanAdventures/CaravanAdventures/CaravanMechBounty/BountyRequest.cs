@@ -529,8 +529,36 @@ namespace CaravanAdventures.CaravanMechBounty
 
         private void ExchangeSilverForBounty(int cost)
         {
-            TradeUtility.LaunchSilver(requestor.Map, cost);
+            if (requestor?.Map?.Biome?.defName == "OuterSpaceBiome") LaunchSilverFromSpace(ThingDefOf.Silver, cost, requestor.Map, null);
+            else TradeUtility.LaunchSilver(requestor.Map, cost);
             CompCache.BountyWC.BountyPoints += Convert.ToInt32(cost * ModSettings.bountyValueMult);
+        }
+
+        private void LaunchSilverFromSpace(ThingDef resDef, int debt, Map map, TradeShip trader = null)
+        {
+            while (debt > 0)
+            {
+                var thing = map.zoneManager.AllZones
+                    .SelectMany(x => x.cells)
+                    .SelectMany(x => map.thingGrid.ThingsAt(x))
+                    .FirstOrDefault(x => x?.def == resDef);
+              
+                if (thing == null)
+                {
+                    Log.Error("Could not find any " + resDef + " to transfer to trader.");
+                    return;
+                }
+                int num = Math.Min(debt, thing.stackCount);
+                if (trader != null)
+                {
+                    trader.GiveSoldThingToTrader(thing, num, TradeSession.playerNegotiator);
+                }
+                else
+                {
+                    thing.SplitOff(num).Destroy(DestroyMode.Vanish);
+                }
+                debt -= num;
+            }
         }
         #endregion
     }
