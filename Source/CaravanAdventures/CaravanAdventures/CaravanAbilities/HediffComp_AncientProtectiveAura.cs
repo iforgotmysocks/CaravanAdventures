@@ -1,6 +1,9 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using RimWorld;
+using UnityEngine;
 using Verse;
+using Verse.Sound;
 
 namespace CaravanAdventures.CaravanAbilities
 {
@@ -19,6 +22,9 @@ namespace CaravanAdventures.CaravanAbilities
         private Pawn connector = null;
         private int statusCheckTickCount = new IntRange(55, 65).RandomInRange;
         private int heatCheckTickCount = new IntRange(300, 400).RandomInRange;
+        private bool protectsTheShip = false;
+
+        public bool ProtectsTheShip => protectsTheShip;
 
         public HediffCompProperties_AncientProtectiveAura Props => (HediffCompProperties_AncientProtectiveAura)props;
 
@@ -34,6 +40,7 @@ namespace CaravanAdventures.CaravanAbilities
             Scribe_Values.Look(ref ticksSincePermHeal, "ticksSincePermHeal", 0, false);
             Scribe_Values.Look(ref ticksSortedArray, "ticksSortedArray", 0);
             Scribe_References.Look(ref connector, "connector");
+            Scribe_Values.Look(ref protectsTheShip, "protectsTheShip", false);
         }
 
         private bool IsGifted(Pawn pawn) => pawn.health.hediffSet.HasHediff(AbilityDefOf.CAAncientGift);
@@ -116,6 +123,44 @@ namespace CaravanAdventures.CaravanAbilities
             return true;
         }
 
+        public bool CanShowShipProtectGizmo() => 
+            CompatibilityPatches.detectedAssemblies.Any(x => x.assemblyString == Patches.Compatibility.SoS2Patch.SoS2AssemblyName) 
+                && Pawn?.HasPsylink == true; 
+
+        public bool CanProtectShip(float heatToTakeIn = 0f)
+        {
+            if (!CompatibilityPatches.detectedAssemblies.Any(x => x.assemblyString == Patches.Compatibility.SoS2Patch.SoS2AssemblyName
+            || Pawn?.psychicEntropy?.IsPsychicallySensitive != true
+            || Pawn?.psychicEntropy?.Psylink?.level == null 
+            || Pawn?.psychicEntropy?.Psylink?.level == 0
+            || Pawn.psychicEntropy?.EntropyRelativeValue + heatToTakeIn > Pawn.psychicEntropy.MaxEntropy && Pawn.psychicEntropy.limitEntropyAmount == false
+            )) return false;
+            return true;
+        }
+
+        public override IEnumerable<Gizmo> CompGetGizmos()
+        {
+            if (base.CompGetGizmos() != null) foreach (var baseGiz in base.CompGetGizmos()) if (baseGiz != null) yield return baseGiz;
+            if (!CanShowShipProtectGizmo())
+            {
+                protectsTheShip = false;
+                yield break;
+            }
+            yield return new Command_Toggle
+            {
+                isActive = () => protectsTheShip,
+                defaultLabel = "GiveUpOnClueLabel".Translate(),
+                defaultDesc = "GiveUpOnClueDesc".Translate(),
+                order = 198f,
+                icon = ContentFinder<Texture2D>.Get("UI/commands/AbandonHome", true),
+                toggleAction = () =>
+                {
+                    SoundDefOf.Click.PlayOneShot(null);
+                    protectsTheShip = !protectsTheShip;
+                }
+            };
+        }
+
         private void CureIllnesses()
         {
             var diseases = Pawn.health.hediffSet.hediffs.Where(x => sicknessesToBeHealed.Contains(x.def.defName));
@@ -129,7 +174,6 @@ namespace CaravanAdventures.CaravanAbilities
                 }
             }
         }
-
 
         private void Heal(bool skip = false)
         {

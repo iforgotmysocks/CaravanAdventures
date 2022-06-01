@@ -250,6 +250,7 @@ namespace CaravanAdventures.CaravanStory
 
         internal static void ClearFriendlyMechFaction()
         {
+            // todo remove return and test if that's finished!!!
             return;
             var factionDef = DefDatabase<FactionDef>.GetNamedSilentFail("CAFriendlyMechanoid");
             if (factionDef == null) return;
@@ -485,7 +486,22 @@ namespace CaravanAdventures.CaravanStory
                 && (x.def == CaravanAbilities.AbilityDefOf.CAAncientProtectiveAura 
                     || x.def == CaravanAbilities.AbilityDefOf.CAAncientProtectiveAuraLinked)) ?? false;
 
-        public static bool HasAuraPawn(this Map map) => map.mapPawns.AllPawnsSpawned.Any(x => CaravanStory.StoryUtility.IsAuraProtected(x));
+        public static bool IsAuraProtectedAndTakesShipHeat(this Pawn pawn)
+        {
+            var hediff = pawn?.health?.hediffSet?.hediffs?.FirstOrDefault(
+                x => x != null
+                && (x.def == CaravanAbilities.AbilityDefOf.CAAncientProtectiveAura
+                    || x.def == CaravanAbilities.AbilityDefOf.CAAncientProtectiveAuraLinked));
+
+            if (hediff == null) return false;
+            var comp = hediff.TryGetComp<CaravanAbilities.HediffComp_AncientProtectiveAura>();
+            if (comp == null) return false;
+            return comp.ProtectsTheShip;
+        }
+
+        public static bool HasAuraPawn(this Map map) => map.mapPawns.AllPawnsSpawned.Any(x => IsAuraProtected(x));
+
+        public static Pawn GetFirstPawnWith(this Map map, Func<Pawn, bool> pred) => map.mapPawns.AllPawnsSpawned.FirstOrDefault(x => pred(x));
 
         public static Faction EnsureSacrilegHunters(FactionRelationKind? relationKind = null, bool ignoreBetrayal = false, bool skipLeaderGeneration = false)
         {

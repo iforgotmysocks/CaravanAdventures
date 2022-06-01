@@ -12,6 +12,7 @@ namespace CaravanAdventures.Patches.Compatibility
     class SoS2Patch
     {
         private static Assembly assembly;
+        public static string SoS2AssemblyName = "shipshaveinsides";
         public static void ApplyPatches(Assembly assembly)
         {
             SoS2Patch.assembly = assembly;
@@ -39,10 +40,14 @@ namespace CaravanAdventures.Patches.Compatibility
             var parentValue = (ThingWithComps)parentPropInfo.GetValue(__instance);
 
             var map = parentValue?.Map;
-            if (map == null || !CaravanStory.StoryUtility.HasAuraPawn(map)) return;
+            var calcedHeat = amount * ModSettings.sos2AuraHeatMult;
+            var capableAuraPawn = CaravanStory.StoryUtility.GetFirstPawnWith(map, x => x.HasPsylink && !x.health.hediffSet.HasHediff(HediffDefOf.PsychicShock) && CaravanStory.StoryUtility.IsAuraProtectedAndTakesShipHeat(x) && (x.psychicEntropy.EntropyValue + calcedHeat <= x.psychicEntropy.MaxEntropy || !x.psychicEntropy.limitEntropyAmount));
+            if (map == null || capableAuraPawn == null) return;
+
+            if (!capableAuraPawn.psychicEntropy.TryAddEntropy(calcedHeat, null, true, capableAuraPawn.psychicEntropy.limitEntropyAmount)) return;
 
             var addHeatMethodInfo = compShipHeatSourceType.GetMethod("AddHeatToNetwork", BindingFlags.Public | BindingFlags.Instance);
-            addHeatMethodInfo.Invoke(__instance, new object[] { amount * ModSettings.sos2AuraHeatMult, true });
+            addHeatMethodInfo.Invoke(__instance, new object[] { amount, true });
         }
 
         /*

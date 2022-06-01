@@ -8,6 +8,8 @@ using Verse.Sound;
 
 // high prio:
 
+// - check ClearFriendlyMechFaction and test / finish removal
+
 // - story: 
 // --> when removing shrines, and all pawns are dead, don't continue the conversation... xD
 
