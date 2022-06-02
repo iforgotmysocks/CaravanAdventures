@@ -98,8 +98,8 @@ namespace CaravanAdventures.Settings
             options.Label("Compatibility Settings:".Colorize(Color.green), 30f);
             Text.Font = GameFont.Small;
             options.CheckboxLabeled("(SoS2) Protective Aura prevents Hypoxia", ref ModSettings.sos2AuraPreventsHypoxia);
-            options.Label($"(SoS2) Protective Aura heat reduction multiplier for space ships: {Math.Round(ModSettings.sos2AuraHeatMult, 4)}", -1, "Heat generated e.g. by incoming fire hitting shields will be multiplied by this value and reduced, while a protective aura protected pawn is on the ship's map.");
-            ModSettings.sos2AuraHeatMult = (float)Math.Round(options.Slider(ModSettings.sos2AuraHeatMult, 0f, 0.1f), 4);
+            options.Label($"(SoS2) Protective Aura Ship heat absroption per psychic heat point: {Math.Round(ModSettings.sos2AuraHeatMult, 0)}", -1, "Heat generated e.g. by incoming fire hitting shields will be absorbed by a protective aura protected pawn on the ship's map.");
+            ModSettings.sos2AuraHeatMult = (float)Math.Round(options.Slider(ModSettings.sos2AuraHeatMult, 0f, 10000f), 0);
 
             options.End();
             Widgets.EndScrollView();
