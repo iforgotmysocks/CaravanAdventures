@@ -24,15 +24,20 @@ namespace CaravanAdventures.Patches.Compatibility
         public static void ApplyPatches(Assembly assembly)
         {
             SoS2Patch.assembly = assembly;
-            var org = AccessTools.Method(assembly.GetType("SaveOurShip2.ShipInteriorMod2"), "hasSpaceSuit");
-            var postfix = new HarmonyMethod(typeof(SoS2Patch), nameof(SoS2Patch.ShipInteriorMod2_hasSpaceSuit_Postfix));
-            HarmonyPatcher.harmony.Patch(org, null, postfix);
-
-            var addHeatOrg = AccessTools.Method(assembly.GetType("RimWorld.CompShipHeatSource"), "AddHeatToNetwork");
-            var addHeatPre = new HarmonyMethod(typeof(SoS2Patch), nameof(SoS2Patch.CompShipHeatSource_AddHeatToNetwork_Prefix));
-            HarmonyPatcher.harmony.Patch(addHeatOrg, addHeatPre, null);
-
-            LoadReflectionNecessities(); 
+            if (ModSettings.sos2AuraPreventsHypoxia)
+            {
+                var org = AccessTools.Method(assembly.GetType("SaveOurShip2.ShipInteriorMod2"), "hasSpaceSuit");
+                var postfix = new HarmonyMethod(typeof(SoS2Patch), nameof(SoS2Patch.ShipInteriorMod2_hasSpaceSuit_Postfix));
+                HarmonyPatcher.harmony.Patch(org, null, postfix);
+            }
+            if (ModSettings.sos2AuraHeatManagementEnabled)
+            {
+                var addHeatOrg = AccessTools.Method(assembly.GetType("RimWorld.CompShipHeatSource"), "AddHeatToNetwork");
+                var addHeatPre = new HarmonyMethod(typeof(SoS2Patch), nameof(SoS2Patch.CompShipHeatSource_AddHeatToNetwork_Prefix));
+                HarmonyPatcher.harmony.Patch(addHeatOrg, addHeatPre, null);
+                LoadReflectionNecessities();
+            }
+            
         }
 
         private static void LoadReflectionNecessities()
@@ -51,11 +56,12 @@ namespace CaravanAdventures.Patches.Compatibility
         public static void CompShipHeatSource_AddHeatToNetwork_Prefix(object __instance, ref float amount, bool remove = false)
         {
             if (remove || amount < 6) return;
-            
+
             var parentValue = (ThingWithComps)parentPropInfo.GetValue(__instance);
             var map = parentValue?.Map;
             if (map?.ParentFaction != Faction.OfPlayerSilentFail) return;
-            var calcedHeat = amount / ModSettings.sos2AuraHeatMult;
+            var remainingAmount = amount * ((100 - ModSettings.sos2HeatAbsorptionPercentage) / 100);
+            var calcedHeat = (amount - remainingAmount) / ModSettings.sos2AuraHeatMult;
 
             capableAuraPawn = capableAuraPawn ?? (capableAuraPawn = CaravanStory.StoryUtility.GetFirstPawnWith(map, x => x.HasPsylink && !x.health.hediffSet.HasHediff(HediffDefOf.PsychicShock) && CaravanStory.StoryUtility.IsAuraProtectedAndTakesShipHeat(x) && (x.psychicEntropy.EntropyValue + calcedHeat <= x.psychicEntropy.MaxEntropy || !x.psychicEntropy.limitEntropyAmount)));
             if (map == null
@@ -63,7 +69,8 @@ namespace CaravanAdventures.Patches.Compatibility
                 || capableAuraPawn.Dead
                 || capableAuraPawn.Destroyed
                 || capableAuraPawn.health.hediffSet.HasHediff(HediffDefOf.PsychicShock)
-                || capableAuraPawn?.Map != map)
+                || capableAuraPawn?.Map != map
+                || !CaravanStory.StoryUtility.IsAuraProtectedAndTakesShipHeat(capableAuraPawn))
             {
                 capableAuraPawn = null;
                 return;
@@ -73,7 +80,7 @@ namespace CaravanAdventures.Patches.Compatibility
                 capableAuraPawn = null;
                 return;
             }
-            amount = 0f;
+            amount = remainingAmount;
         }
 
         /*

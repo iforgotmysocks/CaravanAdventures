@@ -125,7 +125,8 @@ namespace CaravanAdventures.CaravanAbilities
 
         public bool CanShowShipProtectGizmo() => 
             CompatibilityPatches.detectedAssemblies.Any(x => x.assemblyString == Patches.Compatibility.SoS2Patch.SoS2AssemblyName) 
-                && Pawn?.HasPsylink == true; 
+                && Pawn?.HasPsylink == true
+                && ModSettings.sos2AuraHeatManagementEnabled; 
 
         public bool CanProtectShip(float heatToTakeIn = 0f)
         {
