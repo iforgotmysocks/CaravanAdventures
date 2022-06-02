@@ -250,8 +250,6 @@ namespace CaravanAdventures.CaravanStory
 
         internal static void ClearFriendlyMechFaction()
         {
-            // todo remove return and test if that's finished!!!
-            return;
             var factionDef = DefDatabase<FactionDef>.GetNamedSilentFail("CAFriendlyMechanoid");
             if (factionDef == null) return;
 
@@ -271,7 +269,7 @@ namespace CaravanAdventures.CaravanStory
             if (faction == null)
             {
                 // todo remove, log just debug
-                DLog.Message($"Faction is null");
+                DLog.Message($"Friendly mech faction is null");
                 return;
             }
 

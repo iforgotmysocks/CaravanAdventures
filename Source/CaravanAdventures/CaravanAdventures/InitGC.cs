@@ -4,7 +4,6 @@ using Verse;
 
 namespace CaravanAdventures
 {
-    // todo https://fluffy-mods.github.io//2020/08/13/debugging-rimworld/
     class InitGC : GameComponent
     {
         private int removeRuinsTick = 0;
