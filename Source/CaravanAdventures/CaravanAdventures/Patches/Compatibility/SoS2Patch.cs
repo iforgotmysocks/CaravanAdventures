@@ -6,6 +6,7 @@ using Verse;
 using RimWorld;
 using System.Collections.Generic;
 using System.Collections;
+using System.Reflection.Emit;
 
 namespace CaravanAdventures.Patches.Compatibility
 {
@@ -13,6 +14,13 @@ namespace CaravanAdventures.Patches.Compatibility
     {
         private static Assembly assembly;
         public static string SoS2AssemblyName = "shipshaveinsides";
+
+        private static Type compShipHeatSourceType;
+        private static FieldInfo parentPropInfo;
+        private static MethodInfo addHeatMethodInfo;
+
+        private static Pawn capableAuraPawn;
+
         public static void ApplyPatches(Assembly assembly)
         {
             SoS2Patch.assembly = assembly;
@@ -21,12 +29,21 @@ namespace CaravanAdventures.Patches.Compatibility
             HarmonyPatcher.harmony.Patch(org, null, postfix);
 
             var addHeatOrg = AccessTools.Method(assembly.GetType("RimWorld.CompShipHeatSource"), "AddHeatToNetwork");
-            var addHeatPost = new HarmonyMethod(typeof(SoS2Patch), nameof(SoS2Patch.CompShipHeatSource_AddHeatToNetwork_Postfix));
-            HarmonyPatcher.harmony.Patch(addHeatOrg, null, addHeatPost);
+            var addHeatPre = new HarmonyMethod(typeof(SoS2Patch), nameof(SoS2Patch.CompShipHeatSource_AddHeatToNetwork_Prefix));
+            HarmonyPatcher.harmony.Patch(addHeatOrg, addHeatPre, null);
 
             var addGiz = AccessTools.Method(assembly.GetType("Verse.Pawn"), "GetGizmos");
             var addGizPost = new HarmonyMethod(typeof(SoS2Patch), nameof(SoS2Patch.Pawn_GetGizmos_Postfix));
             HarmonyPatcher.harmony.Patch(addGiz, null, addGizPost);
+            
+            LoadReflectionNecessities(); 
+        }
+
+        private static void LoadReflectionNecessities()
+        {
+            compShipHeatSourceType = assembly.GetType("RimWorld.CompShipHeatSource");
+            parentPropInfo = compShipHeatSourceType.BaseType.BaseType.GetField("parent", BindingFlags.Instance | BindingFlags.Public);
+            addHeatMethodInfo = compShipHeatSourceType.GetMethod("AddHeatToNetwork", BindingFlags.Public | BindingFlags.Instance);
         }
 
         public static void ShipInteriorMod2_hasSpaceSuit_Postfix(ref bool __result, Pawn pawn)
@@ -35,23 +52,32 @@ namespace CaravanAdventures.Patches.Compatibility
             __result = true;
         }
 
-        public static void CompShipHeatSource_AddHeatToNetwork_Postfix(object __instance, float amount, bool remove = false)
+        public static void CompShipHeatSource_AddHeatToNetwork_Prefix(object __instance, ref float amount, bool remove = false)
         {
-            if (remove) return;
-
-            var compShipHeatSourceType = assembly.GetType("RimWorld.CompShipHeatSource");
-            var parentPropInfo = compShipHeatSourceType.BaseType.BaseType.GetField("parent", BindingFlags.Instance | BindingFlags.Public);
+            if (remove || amount < 6) return;
+            
             var parentValue = (ThingWithComps)parentPropInfo.GetValue(__instance);
-
             var map = parentValue?.Map;
-            var calcedHeat = amount * ModSettings.sos2AuraHeatMult;
-            var capableAuraPawn = CaravanStory.StoryUtility.GetFirstPawnWith(map, x => x.HasPsylink && !x.health.hediffSet.HasHediff(HediffDefOf.PsychicShock) && CaravanStory.StoryUtility.IsAuraProtectedAndTakesShipHeat(x) && (x.psychicEntropy.EntropyValue + calcedHeat <= x.psychicEntropy.MaxEntropy || !x.psychicEntropy.limitEntropyAmount));
-            if (map == null || capableAuraPawn == null) return;
+            if (map?.ParentFaction != Faction.OfPlayerSilentFail) return;
+            var calcedHeat = amount / ModSettings.sos2AuraHeatMult;
 
-            if (!capableAuraPawn.psychicEntropy.TryAddEntropy(calcedHeat, null, true, capableAuraPawn.psychicEntropy.limitEntropyAmount)) return;
-
-            var addHeatMethodInfo = compShipHeatSourceType.GetMethod("AddHeatToNetwork", BindingFlags.Public | BindingFlags.Instance);
-            addHeatMethodInfo.Invoke(__instance, new object[] { amount, true });
+            capableAuraPawn = capableAuraPawn ?? (capableAuraPawn = CaravanStory.StoryUtility.GetFirstPawnWith(map, x => x.HasPsylink && !x.health.hediffSet.HasHediff(HediffDefOf.PsychicShock) && CaravanStory.StoryUtility.IsAuraProtectedAndTakesShipHeat(x) && (x.psychicEntropy.EntropyValue + calcedHeat <= x.psychicEntropy.MaxEntropy || !x.psychicEntropy.limitEntropyAmount)));
+            if (map == null
+                || capableAuraPawn == null
+                || capableAuraPawn.Dead
+                || capableAuraPawn.Destroyed
+                || capableAuraPawn.health.hediffSet.HasHediff(HediffDefOf.PsychicShock)
+                || capableAuraPawn?.Map != map)
+            {
+                capableAuraPawn = null;
+                return;
+            }
+            if (!capableAuraPawn.psychicEntropy.TryAddEntropy(calcedHeat, null, true, !capableAuraPawn.psychicEntropy.limitEntropyAmount))
+            {
+                capableAuraPawn = null;
+                return;
+            }
+            amount = 0f;
         }
 
         static IEnumerable<Gizmo> Pawn_GetGizmos_Postfix(IEnumerable<Gizmo> list, Pawn __instance)
@@ -116,8 +142,39 @@ namespace CaravanAdventures.Patches.Compatibility
         var compShipHeatSourceType = assembly.GetType("RimWorld.CompShipHeatSource");
         var heatComp = parentValue.AllComps.FirstOrDefault(x => x.GetType() == compShipHeatSourceType);
 
+<<<<<<< HEAD
         var addHeatMethodInfo = compShipHeatSourceType.GetMethod("AddHeatToNetwork", BindingFlags.Public | BindingFlags.Instance);
         addHeatMethodInfo.Invoke(heatComp, new object[] { heatToRemove, true });
     }
     */
+
+        //        public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions, object __instance, ref float amount, bool remove = false)
+        //        {
+        //            var codes = new List<CodeInstruction>(instructions);
+
+        //            var instructionsToAdd = new List<CodeInstruction>();
+        //            instructionsToAdd.Add(new CodeInstruction(OpCodes.Nop));
+        //            instructionsToAdd.Add(new CodeInstruction(OpCodes.Ldarg_0));
+        //            instructionsToAdd.Add(new CodeInstruction(OpCodes.Ldarg_0));
+        //            instructionsToAdd.Add(new CodeInstruction(OpCodes.Call, typeof(SoS2Patch).GetMethod(nameof(CompShipHeatSource_AddHeatToNetwork_Prefix), BindingFlags.Public | BindingFlags.Static)));
+        //            instructionsToAdd.Add(new CodeInstruction(OpCodes.Stloc_0));
+        //            instructionsToAdd.Add(new CodeInstruction(OpCodes.Ldloc_0));
+        //            instructionsToAdd.Add(new CodeInstruction(OpCodes.Brfalse_S, new Label() { LabelValue = }));
+        //            var getLabelForInfo = AccessTools.Method(typeof(PawnCapacityDef), "GetLabelFor", new Type[] { typeof(bool), typeof(bool) });
+        //#pragma warning disable CS0252
+        //            var idx = codes.FindIndex(code => code.operand == getLabelForInfo);
+        //#pragma warning restore CS0252 
+
+        //            if (idx == -1)
+        //            {
+        //                Log.Warning($"Could not find GetLabelFor code instruction; skipping changes");
+        //                return instructions;
+        //            }
+
+        //            codes[idx].operand = AccessTools.Method(typeof(PawnCapacityDef), "GetLabelFor", new Type[] { typeof(Pawn) });
+        //            codes.RemoveRange(idx - 7, 7);
+
+        //            return codes;
+        //        }
+    
 }
