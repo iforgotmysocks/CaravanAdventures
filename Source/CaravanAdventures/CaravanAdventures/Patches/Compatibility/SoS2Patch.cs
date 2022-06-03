@@ -37,7 +37,6 @@ namespace CaravanAdventures.Patches.Compatibility
                 HarmonyPatcher.harmony.Patch(addHeatOrg, addHeatPre, null);
                 LoadReflectionNecessities();
             }
-            
         }
 
         private static void LoadReflectionNecessities()
