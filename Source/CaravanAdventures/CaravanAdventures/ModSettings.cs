@@ -82,6 +82,7 @@ namespace CaravanAdventures
         public static bool excludeSlavesFromCoordinator = false;
         public static bool attackspeedIncreaseForAncientProtectiveAura = true;
         public static float attackspeedMultiplier = 0.5f;
+        public static bool regulateBodyTemperature = true;
         // - light
         public static float lightDuration = 180000f;
         public static float magicLightCaravanSpeedMult = 1.5f;
@@ -90,7 +91,7 @@ namespace CaravanAdventures
         public static bool sos2AuraHeatManagementEnabled = true;
         public static bool sos2AuraPreventsHypoxia = true;
         public static float sos2AuraHeatMult = 100f;
-        public static float sos2HeatAbsorptionPercentage = 75f;
+        public static float sos2HeatAbsorptionPercentage = 100f;
 
         // story
         // todo remove the ability to disable the apoc? Can always set the increase to 0
@@ -203,6 +204,7 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref excludeSlavesFromCoordinator, "excludeSlavesFromCoordinator", false);
             Scribe_Values.Look(ref attackspeedIncreaseForAncientProtectiveAura, "attackspeedIncreaseForAncientProtectiveAura", true);
             Scribe_Values.Look(ref attackspeedMultiplier, "attackspeedMultiplier", 0.5f);
+            Scribe_Values.Look(ref regulateBodyTemperature, "regulateBodyTemperature", true);
             // - light
             Scribe_Values.Look(ref lightDuration, "lightDuration", 180000);
             Scribe_Values.Look(ref magicLightCaravanSpeedMult, "magicLightCaravanSpeedMult", 1.5f);
@@ -210,7 +212,7 @@ namespace CaravanAdventures
             // compatibility
             Scribe_Values.Look(ref sos2AuraHeatManagementEnabled, "sos2AuraHeatManagementEnabled", true);
             Scribe_Values.Look(ref sos2AuraHeatMult, "sos2AuraHeatMult", 100f);
-            Scribe_Values.Look(ref sos2HeatAbsorptionPercentage, "sos2HeatAbsorptionPercentage", 75f);
+            Scribe_Values.Look(ref sos2HeatAbsorptionPercentage, "sos2HeatAbsorptionPercentage", 100f);
             Scribe_Values.Look(ref sos2AuraPreventsHypoxia, "sos2AuraPreventsHypoxia", true);
 
             // story

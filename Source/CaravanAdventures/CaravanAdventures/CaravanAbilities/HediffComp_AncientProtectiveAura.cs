@@ -85,7 +85,7 @@ namespace CaravanAdventures.CaravanAbilities
             if (ticksSinceHeatCheck > heatCheckTickCount)
             {
                 ticksSinceHeatCheck = 0;
-                ReduceHeatOrCold();
+                if (ModSettings.regulateBodyTemperature) ReduceHeatOrCold();
             }
 
             if (ticksSincePsyCost > 603)

@@ -28,7 +28,7 @@ namespace CaravanAdventures.Settings
         public override void DoWindowContents(Rect wrect)
         {
             var options = new Listing_Standard();
-            var viewRect = new Rect(0f, 0f, windowRect.width - 65, 1200);
+            var viewRect = new Rect(0f, 0f, windowRect.width - 65, 1250);
             var smallerOutRect = new Rect(wrect.x, wrect.y, wrect.width, wrect.height - 50);
 
             //var viewRect = new Rect(0f, 0f, windowRect.width - 150, 850f);
@@ -82,10 +82,11 @@ namespace CaravanAdventures.Settings
             options.Label("Ancient protective aura".Colorize(Color.green));
             options.Label($"Damage healed per second: {Math.Round(ModSettings.healingPerSecond, 2)}");
             ModSettings.healingPerSecond = options.Slider(ModSettings.healingPerSecond, 0f, 1f);
-            options.Label($"Max allowed linked pawns: {ModSettings.maxLinkedAuraPawns}");
+            options.Label($"Max allowed linked pawns for the coordinator spell: {ModSettings.maxLinkedAuraPawns}");
             ModSettings.maxLinkedAuraPawns = Convert.ToInt32(options.Slider(ModSettings.maxLinkedAuraPawns, 1f, 10f));
             options.CheckboxLabeled("Can stop mental breaks?", ref ModSettings.stopMentalBreaks);
             options.CheckboxLabeled("Only heal permanent wounds when pawn has ancient gift?", ref ModSettings.onlyHealPermWhenGifted);
+            options.CheckboxLabeled("Regulate body temperature to keep pawn save from heat and frost", ref ModSettings.regulateBodyTemperature);
             options.Gap(24f);
 
             options.Label("Mystical guiding light".Colorize(Color.green));
@@ -101,7 +102,7 @@ namespace CaravanAdventures.Settings
             options.Label("Compatibility Settings:".Colorize(Color.green), 30f);
             Text.Font = GameFont.Small;
             options.CheckboxLabeled("(SoS2) Protective Aura prevents Hypoxia", ref ModSettings.sos2AuraPreventsHypoxia);
-            options.Label($"(SoS2) Protective Aura Ship heat absorption percentage: {Math.Round(ModSettings.sos2HeatAbsorptionPercentage, 0)}", -1, "How much of the incoming heat the aura protected pawn can absorb and how much goes through to the ship's network regardless in percent.");
+            options.Label($"(SoS2) Protective Aura Ship heat absorption percentage: {Math.Round(ModSettings.sos2HeatAbsorptionPercentage, 0)}%", -1, "How much of the incoming heat the aura protected pawn can absorb and how much goes through to the ship's network regardless in percent.");
             ModSettings.sos2HeatAbsorptionPercentage = (float)Math.Round(options.Slider(ModSettings.sos2HeatAbsorptionPercentage, 0f, 100f), 0);
             options.Label($"(SoS2) Protective Aura Ship heat absroption per psychic heat point: {Math.Round(ModSettings.sos2AuraHeatMult, 0)}", -1, "Heat generated e.g. by incoming fire hitting shields will be absorbed by a protective aura protected pawn on the ship's map.");
             ModSettings.sos2AuraHeatMult = (float)Math.Round(options.Slider(ModSettings.sos2AuraHeatMult, 0f, 3000f), 0);
