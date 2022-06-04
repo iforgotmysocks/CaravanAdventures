@@ -14,6 +14,7 @@ namespace CaravanAdventures.Patches.Compatibility
     {
         private static Assembly assembly;
         public static string SoS2AssemblyName = "shipshaveinsides";
+        public static string OuterSpaceBiomeName = "OuterSpaceBiome";
 
         private static Type compShipHeatSourceType;
         private static FieldInfo parentPropInfo;
@@ -21,10 +22,11 @@ namespace CaravanAdventures.Patches.Compatibility
 
         private static Pawn capableAuraPawn;
 
+
         public static void ApplyPatches(Assembly assembly)
         {
             SoS2Patch.assembly = assembly;
-            
+
             if (ModSettings.sos2AuraPreventsHypoxia)
             {
                 var org = AccessTools.Method(assembly.GetType("SaveOurShip2.ShipInteriorMod2"), "hasSpaceSuit");
@@ -106,11 +108,12 @@ namespace CaravanAdventures.Patches.Compatibility
 
 
 
+
     /*
     public static void ShipHeatNet_Tick_Postfix(object __instance)
     {
         BiomeDef sos2Def = null;
-        sos2Def = DefDatabase<BiomeDef>.GetNamed("OuterSpaceBiome", false);
+        sos2Def = DefDatabase<BiomeDef>.GetNamed("Patches.Compatibility.SoS2Patch.OuterSpaceBiomeName", false);
 
         var playerSpaceMap = Find.Maps.Where(cmap => cmap.ParentFaction == Faction.OfPlayerSilentFail
             && (sos2Def != null && cmap.Biome == sos2Def))

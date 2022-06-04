@@ -125,6 +125,7 @@ namespace CaravanAdventures.CaravanAbilities
 
         public bool CanShowShipProtectGizmo() => 
             CompatibilityPatches.detectedAssemblies.Any(x => x.assemblyString == Patches.Compatibility.SoS2Patch.SoS2AssemblyName) 
+                && Current.Game.Maps.Any(x => x?.Biome?.defName == Patches.Compatibility.SoS2Patch.OuterSpaceBiomeName && x?.ParentFaction != null && x.ParentFaction == Faction.OfPlayerSilentFail)
                 && Pawn?.HasPsylink == true
                 && ModSettings.sos2AuraHeatManagementEnabled; 
 
@@ -150,10 +151,10 @@ namespace CaravanAdventures.CaravanAbilities
             yield return new Command_Toggle
             {
                 isActive = () => protectsTheShip,
-                defaultLabel = "GiveUpOnClueLabel".Translate(),
-                defaultDesc = "GiveUpOnClueDesc".Translate(),
+                defaultLabel = "sos2ProtectSpaceship".Translate(),
+                defaultDesc = "sos2ProtectSpaceshipDesc".Translate(),
                 order = 198f,
-                icon = ContentFinder<Texture2D>.Get("UI/commands/AbandonHome", true),
+                icon = ContentFinder<Texture2D>.Get("UI/Abilities/Protect", true),
                 toggleAction = () =>
                 {
                     SoundDefOf.Click.PlayOneShot(null);
