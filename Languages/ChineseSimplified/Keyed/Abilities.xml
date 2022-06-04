@@ -5,4 +5,7 @@
   <!-- EN: {0}'s fire was extinguished by {1} -->
   <CAProtectiveAuraExtinguishFire>{0}纵的火已被{1}扑灭了。</CAProtectiveAuraExtinguishFire>
   <ProtectiveAuraHeatRegulation>{0}'s body temperature was regulated by {1}</ProtectiveAuraHeatRegulation>
+
+  <sos2ProtectSpaceship>Protect Spaceship</sos2ProtectSpaceship>
+  <sos2ProtectSpaceshipDesc>Allows the ancient protective aura to transfer incoming heat of the ship to this pawn when enabled.</sos2ProtectSpaceshipDesc>
 </LanguageData>
