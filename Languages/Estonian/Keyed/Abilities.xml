@@ -3,4 +3,7 @@
   <CAProtectiveAuraCureMentalBreaks>{0}'s mental break was cured by {1}</CAProtectiveAuraCureMentalBreaks>
   <CAProtectiveAuraExtinguishFire>{0}'s fire was extinguished by {1}</CAProtectiveAuraExtinguishFire>
   <ProtectiveAuraHeatRegulation>{0}'s body temperature was regulated by {1}</ProtectiveAuraHeatRegulation>
+
+  <sos2ProtectSpaceship>Protect Spaceship</sos2ProtectSpaceship>
+  <sos2ProtectSpaceshipDesc>Allows the ancient protective aura to transfer incoming heat of the ship to this pawn when enabled.</sos2ProtectSpaceshipDesc>
 </LanguageData>
