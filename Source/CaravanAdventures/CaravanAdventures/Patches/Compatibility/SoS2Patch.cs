@@ -45,6 +45,11 @@ namespace CaravanAdventures.Patches.Compatibility
             }
         }
 
+        internal static void Reset()
+        {
+            capableAuraPawn = null;
+        }
+
         private static void LoadReflectionNecessities()
         {
             compShipHeatSourceType = assembly.GetType("RimWorld.CompShipHeatSource");

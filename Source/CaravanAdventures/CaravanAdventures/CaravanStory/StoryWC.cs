@@ -132,6 +132,7 @@ namespace CaravanAdventures.CaravanStory
         {
             base.FinalizeInit();
             CompCache.StoryWC = null;
+            Patches.Compatibility.SoS2Patch.Reset();
 
             InitializeStoryFlags();
             InitializeQuestCont();
