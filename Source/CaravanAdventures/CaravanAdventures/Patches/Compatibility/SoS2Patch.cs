@@ -14,12 +14,14 @@ namespace CaravanAdventures.Patches.Compatibility
     {
         private static Assembly assembly;
         public static string SoS2AssemblyName = "shipshaveinsides";
+        public static string OuterSpaceBiomeName = "OuterSpaceBiome";
 
         private static Type compShipHeatSourceType;
         private static FieldInfo parentPropInfo;
         private static MethodInfo addHeatMethodInfo;
 
         private static Pawn capableAuraPawn;
+
 
         public static void ApplyPatches(Assembly assembly)
         {
@@ -91,7 +93,7 @@ namespace CaravanAdventures.Patches.Compatibility
         public static void ShipHeatNet_Tick_Postfix(object __instance)
         {
             BiomeDef sos2Def = null;
-            sos2Def = DefDatabase<BiomeDef>.GetNamed("OuterSpaceBiome", false);
+            sos2Def = DefDatabase<BiomeDef>.GetNamed("Patches.Compatibility.SoS2Patch.OuterSpaceBiomeName", false);
 
             var playerSpaceMap = Find.Maps.Where(cmap => cmap.ParentFaction == Faction.OfPlayerSilentFail
                 && (sos2Def != null && cmap.Biome == sos2Def))

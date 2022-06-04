@@ -529,7 +529,7 @@ namespace CaravanAdventures.CaravanMechBounty
 
         private void ExchangeSilverForBounty(int cost)
         {
-            if (requestor?.Map?.Biome?.defName == "OuterSpaceBiome") LaunchSilverFromSpace(ThingDefOf.Silver, cost, requestor.Map, null);
+            if (requestor?.Map?.Biome?.defName == Patches.Compatibility.SoS2Patch.OuterSpaceBiomeName) LaunchSilverFromSpace(ThingDefOf.Silver, cost, requestor.Map, null);
             else TradeUtility.LaunchSilver(requestor.Map, cost);
             CompCache.BountyWC.BountyPoints += Convert.ToInt32(cost * ModSettings.bountyValueMult);
         }
@@ -542,7 +542,16 @@ namespace CaravanAdventures.CaravanMechBounty
                     .SelectMany(x => x.cells)
                     .SelectMany(x => map.thingGrid.ThingsAt(x))
                     .FirstOrDefault(x => x?.def == resDef);
-              
+
+                if (thing == null)
+                {
+                    DLog.Message($"Grabbing silver from storage buildings");
+                    thing = map.listerBuildings.AllBuildingsColonistOfClass<Building_Storage>()
+                        .SelectMany(x => x.AllSlotCellsList())
+                        .SelectMany(x => map.thingGrid.ThingsAt(x))
+                        .FirstOrDefault(x => x.def == resDef);
+                }
+
                 if (thing == null)
                 {
                     Log.Error("Could not find any " + resDef + " to transfer to trader.");

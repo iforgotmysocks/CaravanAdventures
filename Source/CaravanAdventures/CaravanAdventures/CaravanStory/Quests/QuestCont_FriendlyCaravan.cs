@@ -130,7 +130,7 @@ namespace CaravanAdventures.CaravanStory.Quests
             }
 
             BiomeDef sos2Def = null; 
-            if (CompatibilityPatches.InDetectedAssemblies("shipshaveinsides")) sos2Def = DefDatabase<BiomeDef>.GetNamed("OuterSpaceBiome", false);
+            if (CompatibilityPatches.InDetectedAssemblies("shipshaveinsides")) sos2Def = DefDatabase<BiomeDef>.GetNamed(Patches.Compatibility.SoS2Patch.OuterSpaceBiomeName, false);
 
             var selectedMap = Find.Maps.Where(cmap => cmap.ParentFaction == Faction.OfPlayerSilentFail 
                 && (sos2Def == null ? true : cmap.Biome != sos2Def))
