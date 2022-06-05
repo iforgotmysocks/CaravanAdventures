@@ -543,14 +543,10 @@ namespace CaravanAdventures.CaravanMechBounty
                     .SelectMany(x => map.thingGrid.ThingsAt(x))
                     .FirstOrDefault(x => x?.def == resDef);
 
-                if (thing == null)
-                {
-                    DLog.Message($"Grabbing silver from storage buildings");
-                    thing = map.listerBuildings.AllBuildingsColonistOfClass<Building_Storage>()
+                if (thing == null) thing = map.listerBuildings.AllBuildingsColonistOfClass<Building_Storage>()
                         .SelectMany(x => x.AllSlotCellsList())
                         .SelectMany(x => map.thingGrid.ThingsAt(x))
                         .FirstOrDefault(x => x.def == resDef);
-                }
 
                 if (thing == null)
                 {
