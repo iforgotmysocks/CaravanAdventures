@@ -88,6 +88,13 @@ namespace CaravanAdventures.CaravanAbilities
                 if (ModSettings.regulateBodyTemperature) ReduceHeatOrCold();
             }
 
+            if ((ticksSincePsyCost == 100 || ticksSincePsyCost == 400) && Pawn?.Map != null) Helper.RunSavely(() =>
+            {
+                FleckCreationData dataAttachedOverlay = FleckMaker.GetDataAttachedOverlay(Pawn, DefDatabase<FleckDef>.GetNamedSilentFail("AncientProtectiveAuraFleck"), Vector3.zero, 0.125f);
+                dataAttachedOverlay.link = new FleckAttachLink(Pawn);
+                Pawn.Map.flecks.CreateFleck(dataAttachedOverlay);
+            });
+
             if (ticksSincePsyCost > 603)
             {
                 ticksSincePsyCost = 0;
@@ -123,17 +130,17 @@ namespace CaravanAdventures.CaravanAbilities
             return true;
         }
 
-        public bool CanShowShipProtectGizmo() => 
-            CompatibilityPatches.detectedAssemblies.Any(x => x.assemblyString == Patches.Compatibility.SoS2Patch.SoS2AssemblyName) 
+        public bool CanShowShipProtectGizmo() =>
+            CompatibilityPatches.detectedAssemblies.Any(x => x.assemblyString == Patches.Compatibility.SoS2Patch.SoS2AssemblyName)
                 && Current.Game.Maps.Any(x => x?.Biome?.defName == Patches.Compatibility.SoS2Patch.OuterSpaceBiomeName && x?.ParentFaction != null && x.ParentFaction == Faction.OfPlayerSilentFail)
                 && Pawn?.HasPsylink == true
-                && ModSettings.sos2AuraHeatManagementEnabled; 
+                && ModSettings.sos2AuraHeatManagementEnabled;
 
         public bool CanProtectShip(float heatToTakeIn = 0f)
         {
             if (!CompatibilityPatches.detectedAssemblies.Any(x => x.assemblyString == Patches.Compatibility.SoS2Patch.SoS2AssemblyName
             || Pawn?.psychicEntropy?.IsPsychicallySensitive != true
-            || Pawn?.psychicEntropy?.Psylink?.level == null 
+            || Pawn?.psychicEntropy?.Psylink?.level == null
             || Pawn?.psychicEntropy?.Psylink?.level == 0
             || Pawn.psychicEntropy?.EntropyRelativeValue + heatToTakeIn > Pawn.psychicEntropy.MaxEntropy && Pawn.psychicEntropy.limitEntropyAmount == false
             )) return false;
@@ -168,7 +175,7 @@ namespace CaravanAdventures.CaravanAbilities
             var diseases = Pawn.health.hediffSet.hediffs.Where(x => sicknessesToBeHealed.Contains(x.def.defName));
             if (diseases != null && diseases.Count() != 0)
             {
-                foreach (var hediff in Pawn.health.hediffSet.hediffs.Where(x => diseases.Contains(x)).Reverse()) 
+                foreach (var hediff in Pawn.health.hediffSet.hediffs.Where(x => diseases.Contains(x)).Reverse())
                 {
                     Pawn.health.hediffSet.hediffs.Remove(hediff);
                     hediff.PostRemoved();
