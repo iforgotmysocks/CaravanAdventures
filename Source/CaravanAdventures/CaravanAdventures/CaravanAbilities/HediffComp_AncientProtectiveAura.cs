@@ -88,7 +88,7 @@ namespace CaravanAdventures.CaravanAbilities
                 if (ModSettings.regulateBodyTemperature) ReduceHeatOrCold();
             }
 
-            if ((ticksSincePsyCost == 100 || ticksSincePsyCost == 400) && Pawn?.Map != null) Helper.RunSavely(() =>
+            if ((ticksSincePsyCost == 100 || ticksSincePsyCost == 400) && Pawn?.Map != null && ModSettings.enableAncientAuraAnimation) Helper.RunSavely(() =>
             {
                 FleckCreationData dataAttachedOverlay = FleckMaker.GetDataAttachedOverlay(Pawn, DefDatabase<FleckDef>.GetNamedSilentFail("AncientProtectiveAuraFleck"), Vector3.zero, 0.125f);
                 dataAttachedOverlay.link = new FleckAttachLink(Pawn);

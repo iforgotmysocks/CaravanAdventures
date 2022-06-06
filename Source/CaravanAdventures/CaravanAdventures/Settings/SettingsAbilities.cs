@@ -28,7 +28,7 @@ namespace CaravanAdventures.Settings
         public override void DoWindowContents(Rect wrect)
         {
             var options = new Listing_Standard();
-            var viewRect = new Rect(0f, 0f, windowRect.width - 65, 1250);
+            var viewRect = new Rect(0f, 0f, windowRect.width - 65, 1300);
             var smallerOutRect = new Rect(wrect.x, wrect.y, wrect.width, wrect.height - 50);
 
             Widgets.BeginScrollView(smallerOutRect, ref scrollPos, viewRect);
@@ -85,6 +85,7 @@ namespace CaravanAdventures.Settings
             options.CheckboxLabeled("Can stop mental breaks?", ref ModSettings.stopMentalBreaks);
             options.CheckboxLabeled("Only heal permanent wounds when pawn has ancient gift?", ref ModSettings.onlyHealPermWhenGifted);
             options.CheckboxLabeled("Regulate body temperature to keep pawn save from heat and frost", ref ModSettings.regulateBodyTemperature);
+            options.CheckboxLabeled("Show protective aura animation", ref ModSettings.enableAncientAuraAnimation);
             options.Gap(24f);
 
             options.Label("Mystical guiding light".Colorize(Color.green));

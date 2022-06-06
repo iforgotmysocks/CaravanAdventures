@@ -82,6 +82,7 @@ namespace CaravanAdventures
         public static bool attackspeedIncreaseForAncientProtectiveAura = true;
         public static float attackspeedMultiplier = 0.5f;
         public static bool regulateBodyTemperature = true;
+        public static bool enableAncientAuraAnimation = true;
         // - light
         public static float lightDuration = 180000f;
         public static float magicLightCaravanSpeedMult = 1.5f;
@@ -207,6 +208,7 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref attackspeedIncreaseForAncientProtectiveAura, "attackspeedIncreaseForAncientProtectiveAura", true);
             Scribe_Values.Look(ref attackspeedMultiplier, "attackspeedMultiplier", 0.5f);
             Scribe_Values.Look(ref regulateBodyTemperature, "regulateBodyTemperature", true);
+            Scribe_Values.Look(ref enableAncientAuraAnimation, "enableAncientAuraAnimation", true);
             // - light
             Scribe_Values.Look(ref lightDuration, "lightDuration", 180000);
             Scribe_Values.Look(ref magicLightCaravanSpeedMult, "magicLightCaravanSpeedMult", 1.5f);
