@@ -100,11 +100,14 @@ namespace CaravanAdventures.Settings
             options.Label("Compatibility Settings:".Colorize(Color.green), 30f);
             Text.Font = GameFont.Small;
             options.CheckboxLabeled("(SoS2) Protective Aura prevents Hypoxia", ref ModSettings.sos2AuraPreventsHypoxia);
-            options.Label($"(SoS2) Protective Aura Ship heat absorption percentage: {Math.Round(ModSettings.sos2HeatAbsorptionPercentage, 0)}%", -1, "How much of the incoming heat the aura protected pawn can absorb and how much goes through to the ship's network regardless in percent.");
-            ModSettings.sos2HeatAbsorptionPercentage = (float)Math.Round(options.Slider(ModSettings.sos2HeatAbsorptionPercentage, 0f, 100f), 0);
-            options.Label($"(SoS2) Protective Aura Ship heat absroption per psychic heat point: {Math.Round(ModSettings.sos2AuraHeatMult, 0)}", -1, "Heat generated e.g. by incoming fire hitting shields will be absorbed by a protective aura protected pawn on the ship's map.");
-            ModSettings.sos2AuraHeatMult = (float)Math.Round(options.Slider(ModSettings.sos2AuraHeatMult, 0f, 3000f), 0);
-
+            options.CheckboxLabeled("(Sos2) Enable ship heat absorption for ancient aura", ref ModSettings.sos2AuraHeatManagementEnabled);
+            if (ModSettings.sos2AuraHeatManagementEnabled)
+            {
+                options.Label($"(SoS2) Protective Aura Ship heat absorption percentage: {Math.Round(ModSettings.sos2HeatAbsorptionPercentage, 0)}%", -1, "How much of the incoming heat the aura protected pawn can absorb and how much goes through to the ship's network regardless in percent.");
+                ModSettings.sos2HeatAbsorptionPercentage = (float)Math.Round(options.Slider(ModSettings.sos2HeatAbsorptionPercentage, 0f, 100f), 0);
+                options.Label($"(SoS2) Protective Aura Ship heat absroption per psychic heat point: {Math.Round(ModSettings.sos2AuraHeatMult, 0)}", -1, "Heat generated e.g. by incoming fire hitting shields will be absorbed by a protective aura protected pawn on the ship's map.");
+                ModSettings.sos2AuraHeatMult = (float)Math.Round(options.Slider(ModSettings.sos2AuraHeatMult, 0f, 3000f), 0);
+            }
             options.End();
             Widgets.EndScrollView();
         }
