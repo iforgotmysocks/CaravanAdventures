@@ -351,7 +351,6 @@ namespace CaravanAdventures.CaravanStory
             return tile;
         }
 
-        // SF helper methods used to be static, if the CompCache doesn't work out, turn access to the SFs static again
         public void SetSF(string key) => storyFlags[key] = true;
         public void SetShrineSF(string postFix) => storyFlags[storyFlags.Keys.FirstOrDefault(x => x.StartsWith(BuildCurrentShrinePrefix() + postFix))] = true;
         public void ResetCurrentShrineFlags() => storyFlags.Keys.Where(x => x.StartsWith(BuildCurrentShrinePrefix())).ToList().ForEach(key => storyFlags[key] = false);

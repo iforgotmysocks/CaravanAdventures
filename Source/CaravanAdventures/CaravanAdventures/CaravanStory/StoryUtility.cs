@@ -143,6 +143,25 @@ namespace CaravanAdventures.CaravanStory
             faction.TryAffectGoodwillWith(Faction.OfPlayer, amount);
         }
 
+        public static void ResetCurrentStoryStageSubProgress()
+        {
+            if (!CompCache.StoryWC.storyFlags["TradeCaravan_DialogFinished"]) return;
+
+            // todo clean up created world objects and reset quest progress for started stages
+            // probably possible to just remove started quests, due to reset flags they should be created again
+
+            if (CompCache.StoryWC.storyFlags["IntroVillage_InitCountDownStarted"] && !CompCache.StoryWC.storyFlags["IntroVillage_Finished"]) CompCache.StoryWC.SetSFsStartingWith("IntroVillage");
+            else if (CompCache.StoryWC.storyFlags["Start_InitialTreeWhisper"] && !CompCache.StoryWC.storyFlags["Start_ReceivedGift"]) CompCache.StoryWC.SetSFsStartingWith("Start");
+            else if (CompCache.StoryWC.storyFlags[CompCache.StoryWC.BuildCurrentShrinePrefix() + "InitCountDownStarted"] && !CompCache.StoryWC.storyFlags[CompCache.StoryWC.BuildCurrentShrinePrefix() + "Completed"])
+            {
+                CompCache.StoryWC.SetSFsStartingWith(CompCache.StoryWC.BuildCurrentShrinePrefix());
+                if (CompCache.StoryWC.storyFlags["Judgment_PortalRevealed"] && !CompCache.StoryWC.storyFlags["Judgment_StoryOverDialog"]) CompCache.StoryWC.SetSFsStartingWith("Judgment");
+            }
+
+            CompCache.StoryWC.questCont.Village.StoryContact = null;
+
+        }
+
         public static void RestartStory()
         {
             if (Find.World == null)
