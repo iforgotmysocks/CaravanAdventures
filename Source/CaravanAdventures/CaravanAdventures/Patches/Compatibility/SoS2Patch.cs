@@ -39,6 +39,13 @@ namespace CaravanAdventures.Patches.Compatibility
                 HarmonyPatcher.harmony.Patch(addHeatOrg, addHeatPre, null);
                 LoadReflectionNecessities();
             }
+
+            var orgSwitchNew = AccessTools.Method(assembly.GetType("SaveOurShip2.WorldSwitchUtility"), "SwitchToNewWorld");
+            var postfixSwitchNew = new HarmonyMethod(typeof(SoS2Patch), nameof(SoS2Patch.WorldSwitchUtility_SwitchToNewWorld_Postfix));
+            HarmonyPatcher.harmony.Patch(orgSwitchNew, null, postfixSwitchNew);
+
+            var orgSwitchLast = AccessTools.Method(assembly.GetType("SaveOurShip2.WorldSwitchUtility"), "ReturnToPreviousWorld");
+            HarmonyPatcher.harmony.Patch(orgSwitchLast, null, postfixSwitchNew);
         }
 
         internal static void Reset()
@@ -58,6 +65,15 @@ namespace CaravanAdventures.Patches.Compatibility
             if (__result == true || !CaravanStory.StoryUtility.IsAuraProtected(pawn)) return;
             __result = true;
         }
+
+        public static void WorldSwitchUtility_SwitchToNewWorld_Postfix()
+        {
+            // todo reset some saved things
+            // - bounty wc selected faction
+            // - saved story pawn?
+
+            CaravanStory.StoryUtility.ResetCurrentStoryStageSubProgress();
+        } 
 
         public static void CompShipHeatSource_AddHeatToNetwork_Prefix(object __instance, ref float amount, bool remove = false)
         {
