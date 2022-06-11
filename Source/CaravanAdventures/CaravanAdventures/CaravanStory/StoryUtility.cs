@@ -326,6 +326,8 @@ namespace CaravanAdventures.CaravanStory
             if (pawn?.needs?.joy != null) pawn.needs.joy.CurLevel = pawn.needs.joy.MaxLevel;
             if (pawn?.needs?.rest != null) pawn.needs.rest.CurLevel = pawn.needs.rest.MaxLevel;
             if (pawn?.needs?.comfort != null) pawn.needs.comfort.CurLevel = pawn.needs.comfort.MaxLevel;
+
+            Helper.RunSavely(() => { if (CheckIfPawnIsNaked(pawn)) GiveClothes(pawn); });
         }
 
         public static IntVec3 GetCenterOfSettlementBase(Map map, Faction faction, bool useMapCenterAsFallback = false)
@@ -493,6 +495,29 @@ namespace CaravanAdventures.CaravanStory
 
             if (!Find.WorldPawns.Contains(girl)) Find.WorldPawns.PassToWorld(girl, PawnDiscardDecideMode.KeepForever);
             CompCache.StoryWC.questCont.Village.StoryContact = girl;
+
+            Helper.RunSavely(() => { if (CheckIfPawnIsNaked(girl)) GiveClothes(girl); });
+        }
+
+        private static void GiveClothes(Pawn pawn)
+        {
+            pawn.apparel.HasBasicApparel(out var hasPants, out var hasShirt);
+            var stuff = ThingDefOf.Hyperweave ?? ThingDefOf.Cloth;
+            if (!hasPants)
+            {
+                var pants = ThingMaker.MakeThing(DefDatabase<ThingDef>.GetNamedSilentFail("Apparel_Pants"), stuff) as Apparel;
+                if (pants != null) pawn.apparel.Wear(pants);
+            }
+            if (hasShirt) return;
+            var shirt = ThingMaker.MakeThing(DefDatabase<ThingDef>.GetNamedSilentFail("Apparel_CollarShirt"), stuff) as Apparel;
+            if (shirt != null) pawn.apparel.Wear(shirt);
+        }
+
+        private static bool CheckIfPawnIsNaked(Pawn pawn)
+        {
+            if (pawn == null) return false;
+            if (pawn?.apparel?.AnyApparel == true) return false;
+            return true;
         }
 
         public static Pawn GetGiftedPawn() => CompCache.StoryWC.questCont.StoryStart?.Gifted; // ?? PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction?.FirstOrDefault(x => (x?.RaceProps?.Humanlike ?? false) && x.health.hediffSet.GetFirstHediffOfDef(HediffDef.Named("CAAncientGift")) != null);

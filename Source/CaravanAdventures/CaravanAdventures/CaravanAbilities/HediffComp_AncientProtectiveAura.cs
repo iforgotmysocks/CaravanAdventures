@@ -92,6 +92,7 @@ namespace CaravanAdventures.CaravanAbilities
 
             if ((ticksSincePsyCost == 100 || ticksSincePsyCost == 400) && Pawn?.Map != null && ModSettings.enableAncientAuraAnimation) Helper.RunSavely(() =>
             {
+                if (!ModsConfig.RoyaltyActive) return;
                 var mote = ThingMaker.MakeThing(DefDatabase<ThingDef>.GetNamedSilentFail("AncientProtectiveAuraFleck")) as MoteThrownAttachedOwn;
                 if (mote != null)
                 {
