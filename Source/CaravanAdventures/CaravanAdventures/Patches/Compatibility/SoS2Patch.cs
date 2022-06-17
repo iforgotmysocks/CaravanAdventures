@@ -105,6 +105,8 @@ namespace CaravanAdventures.Patches.Compatibility
             amount = remainingAmount;
         }
 
+        internal static bool Installed() => ModSettings.storyEnabled && CompatibilityPatches.InDetectedAssemblies("shipshaveinsides");
+
         /*
         public static void ShipHeatNet_Tick_Postfix(object __instance)
         {
