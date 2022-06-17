@@ -117,9 +117,9 @@ namespace CaravanAdventures.Patches.Compatibility
             if (gizmoComp == null) yield break;
             foreach (var gizmo in gizmoComp.GetGizmos()) if (gizmo != null) yield return gizmo;
         }
+
+        internal static bool Installed() => ModSettings.storyEnabled && CompatibilityPatches.InDetectedAssemblies("shipshaveinsides");
     }
-
-
 
 
     /*
