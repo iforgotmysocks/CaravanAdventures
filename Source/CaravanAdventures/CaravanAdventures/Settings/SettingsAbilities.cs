@@ -28,7 +28,7 @@ namespace CaravanAdventures.Settings
         public override void DoWindowContents(Rect wrect)
         {
             var options = new Listing_Standard();
-            var viewRect = new Rect(0f, 0f, windowRect.width - 65, 1300);
+            var viewRect = new Rect(0f, 0f, windowRect.width - 65, Patches.Compatibility.SoS2Patch.Installed() ? 1300 : 1150);
             var smallerOutRect = new Rect(wrect.x, wrect.y, wrect.width, wrect.height - 50);
 
             //var viewRect = new Rect(0f, 0f, windowRect.width - 150, 850f);
