@@ -150,6 +150,9 @@ namespace CaravanAdventures.CaravanStory
             // todo clean up created world objects and reset quest progress for started stages
             // probably possible to just remove started quests, due to reset flags they should be created again
 
+            // todo sacrileg hunter relations are screwed after planet switch? No longer attacking mechs??
+            // --> Actually a SoS2 bug!
+
             if (CompCache.StoryWC.storyFlags["IntroVillage_InitCountDownStarted"] && !CompCache.StoryWC.storyFlags["IntroVillage_Finished"]) CompCache.StoryWC.SetSFsStartingWith("IntroVillage");
             else if (CompCache.StoryWC.storyFlags["Start_InitialTreeWhisper"] && !CompCache.StoryWC.storyFlags["Start_ReceivedGift"]) CompCache.StoryWC.SetSFsStartingWith("Start");
             else if (CompCache.StoryWC.storyFlags[CompCache.StoryWC.BuildCurrentShrinePrefix() + "InitCountDownStarted"] && !CompCache.StoryWC.storyFlags[CompCache.StoryWC.BuildCurrentShrinePrefix() + "Completed"])
@@ -159,7 +162,17 @@ namespace CaravanAdventures.CaravanStory
             }
 
             CompCache.StoryWC.questCont.Village.StoryContact = null;
+           
+            // todo this fix doesn't currently work as the postfix is executed before the faction reset for the new planet actually happens.
+            //StoryUtility.SetMechFactionHostileToHunters();
+        }
 
+        private static void SetMechFactionHostileToHunters()
+        {
+            var mechanoidFaction = Find.FactionManager.AllFactions.FirstOrDefault(x => x.def.defName == "Mechanoid");
+            if (mechanoidFaction == null) return;
+            DLog.Message($"attempt to fix mechanoid relations");
+            SetStandingForPossibleFactions(mechanoidFaction, FactionRelationKind.Hostile, -100, true);
         }
 
         public static void RestartStory()
