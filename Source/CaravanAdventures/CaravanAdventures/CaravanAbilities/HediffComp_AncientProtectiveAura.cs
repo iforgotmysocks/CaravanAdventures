@@ -75,14 +75,14 @@ namespace CaravanAdventures.CaravanAbilities
 
             if (ticksSincePsyCost > 603)
             {
-                if (!this.Props.linked) Pawn.psychicEntropy.OffsetPsyfocusDirectly(IsGifted(Pawn) ? -0.002f : -0.02f);
                 ticksSincePsyCost = 0;
+                if (!this.Props.linked) Pawn.psychicEntropy.OffsetPsyfocusDirectly(IsGifted(Pawn) ? -0.002f : -0.02f);
             }
 
             if (ticksSincePermHeal > permTickCount)
             {
-                if (!ModSettings.onlyHealPermWhenGifted || ModSettings.onlyHealPermWhenGifted && IsGifted(Pawn)) HealPermanent();
                 ticksSincePermHeal = 0;
+                if (!ModSettings.onlyHealPermWhenGifted || ModSettings.onlyHealPermWhenGifted && IsGifted(Pawn)) HealPermanent();
             }
 
             ticksSortedArray++;
