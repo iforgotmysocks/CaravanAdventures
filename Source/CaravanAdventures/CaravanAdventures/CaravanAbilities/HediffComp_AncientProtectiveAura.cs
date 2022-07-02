@@ -92,38 +92,14 @@ namespace CaravanAdventures.CaravanAbilities
 
             if ((ticksSincePsyCost == 100 || ticksSincePsyCost == 400) && Pawn?.Map != null && ModSettings.enableAncientAuraAnimation) Helper.RunSavely(() =>
             {
-                //var mote = MoteMaker.MakeAttachedOverlay(Pawn, DefDatabase<ThingDekf>.GetNamedSilentFail("AncientProtectiveAuraFleck"), Vector3.zero, 0.125f);
-                //mote.link1 = new MoteAttachLink(Pawn);
-
-                //var moteClassType = Assembly.GetAssembly(typeof(Pawn)).GetType("Verse.MoteThrownAttached");
-
-                var thing =  ThingMaker.MakeThing(DefDatabase<ThingDef>.GetNamedSilentFail("AncientProtectiveAuraFleck")) as MoteThrownAttachedOwn;
-                //Convert.ChangeType(thing, moteClassType);
-                thing.link1 = new MoteAttachLink(Pawn);
-                thing.exactPosition = Pawn.DrawPos;
-                thing.Scale = 0.125f;
-
-                //moteClassType.GetProperty("Link1").SetValue(thing, new MoteAttachLink(Pawn));
-                //moteClassType.GetField("exactPosition").SetValue(thing, Pawn.DrawPos);
-                //moteClassType.GetProperty("Scale").SetValue(thing, 0.125f);
-                ////moteClassType.GetProperty("SetVelocity").SetValue(thing, 20f);
-
-                GenSpawn.Spawn(thing, Pawn.Position, Pawn.Map, WipeMode.Vanish);
-
-
-
-                //MoteThrownAttached moteThrownAttached = (MoteThrownAttached)ThingMaker.MakeThing(moteDef, null);
-                //moteThrownAttached.Attach(pawn);
-                //moteThrownAttached.exactPosition = pawn.DrawPos;
-                //moteThrownAttached.Scale = 1.5f;
-                //moteThrownAttached.SetVelocity(Rand.Range(20f, 25f), 0.4f);
-                //GenSpawn.Spawn(moteThrownAttached, pawn.Position, pawn.Map, WipeMode.Vanish);
-
-
-
-                //FleckCreationData dataAttachedOverlay = FleckMaker.GetDataAttachedOverlay(Pawn, DefDatabase<FleckDef>.GetNamedSilentFail("AncientProtectiveAuraFleck"), Vector3.zero, 0.125f);
-                //dataAttachedOverlay.link = new FleckAttachLink(Pawn);
-                //Pawn.Map.flecks.CreateFleck(dataAttachedOverlay);
+                var mote = ThingMaker.MakeThing(DefDatabase<ThingDef>.GetNamedSilentFail("AncientProtectiveAuraFleck")) as MoteThrownAttachedOwn;
+                if (mote != null)
+                {
+                    mote.link1 = new MoteAttachLink(Pawn);
+                    mote.exactPosition = Pawn.DrawPos;
+                    mote.Scale = 0.125f;
+                    GenSpawn.Spawn(mote, Pawn.Position, Pawn.Map, WipeMode.Vanish);
+                }
             });
 
             if (ticksSincePsyCost > 603)
