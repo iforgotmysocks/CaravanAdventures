@@ -23,6 +23,10 @@ namespace CaravanAdventures.Patches.Compatibility
             var addHeatOrg = AccessTools.Method(assembly.GetType("RimWorld.CompShipHeatSource"), "AddHeatToNetwork");
             var addHeatPost = new HarmonyMethod(typeof(SoS2Patch), nameof(SoS2Patch.CompShipHeatSource_AddHeatToNetwork_Postfix));
             HarmonyPatcher.harmony.Patch(addHeatOrg, null, addHeatPost);
+
+            var addGiz = AccessTools.Method(assembly.GetType("Verse.Pawn"), "GetGizmos");
+            var addGizPost = new HarmonyMethod(typeof(SoS2Patch), nameof(SoS2Patch.Pawn_GetGizmos_Postfix));
+            HarmonyPatcher.harmony.Patch(addGiz, null, addGizPost);
         }
 
         public static void ShipInteriorMod2_hasSpaceSuit_Postfix(ref bool __result, Pawn pawn)
@@ -50,58 +54,70 @@ namespace CaravanAdventures.Patches.Compatibility
             addHeatMethodInfo.Invoke(__instance, new object[] { amount, true });
         }
 
-        /*
-        public static void ShipHeatNet_Tick_Postfix(object __instance)
+        static IEnumerable<Gizmo> Pawn_GetGizmos_Postfix(IEnumerable<Gizmo> list, Pawn __instance)
         {
-            BiomeDef sos2Def = null;
-            sos2Def = DefDatabase<BiomeDef>.GetNamed("OuterSpaceBiome", false);
+            foreach (var existing in list) yield return existing;
+            var hediff = __instance.health.hediffSet.hediffs.FirstOrDefault(x => x.def?.defName == "CAAncientProtectiveAuraLinked" || x.def?.defName == "CAAncientProtectiveAura");
+            if (hediff == null) yield break;
+            var gizmoComp = hediff.TryGetComp<CaravanAdventures.CaravanAbilities.HediffComp_AncientProtectiveAura>();
+            if (gizmoComp == null) yield break;
+            foreach (var gizmo in gizmoComp.GetGizmos()) yield return gizmo;
+        }
+    }
 
-            var playerSpaceMap = Find.Maps.Where(cmap => cmap.ParentFaction == Faction.OfPlayerSilentFail
-                && (sos2Def != null && cmap.Biome == sos2Def))
-                ?.FirstOrDefault();
 
-            var netType = assembly.GetType("RimWorld.ShipHeatMapComp");
-            var netComps = playerSpaceMap.components.Where(x => x.GetType() == netType);
 
-            var shipHeatNetType = assembly.GetType("RimWorld.ShipHeatNet");
-            var convertedInstance = Convert.ChangeType(__instance, shipHeatNetType);
+    /*
+    public static void ShipHeatNet_Tick_Postfix(object __instance)
+    {
+        BiomeDef sos2Def = null;
+        sos2Def = DefDatabase<BiomeDef>.GetNamed("OuterSpaceBiome", false);
 
-            foreach (var netComp in netComps)
+        var playerSpaceMap = Find.Maps.Where(cmap => cmap.ParentFaction == Faction.OfPlayerSilentFail
+            && (sos2Def != null && cmap.Biome == sos2Def))
+            ?.FirstOrDefault();
+
+        var netType = assembly.GetType("RimWorld.ShipHeatMapComp");
+        var netComps = playerSpaceMap.components.Where(x => x.GetType() == netType);
+
+        var shipHeatNetType = assembly.GetType("RimWorld.ShipHeatNet");
+        var convertedInstance = Convert.ChangeType(__instance, shipHeatNetType);
+
+        foreach (var netComp in netComps)
+        {
+            var listInfo = netComp.GetType().GetField("cachedNets", BindingFlags.Instance | BindingFlags.NonPublic);
+            var listValue = (IEnumerable)listInfo.GetValue(netComp);
+
+            foreach (var net in listValue)
             {
-                var listInfo = netComp.GetType().GetField("cachedNets", BindingFlags.Instance | BindingFlags.NonPublic);
-                var listValue = (IEnumerable)listInfo.GetValue(netComp);
+                var convertedNet = Convert.ChangeType(net, shipHeatNetType);
+                if (net != convertedInstance) continue;
 
-                foreach (var net in listValue)
-                {
-                    var convertedNet = Convert.ChangeType(net, shipHeatNetType);
-                    if (net != convertedInstance) continue;
-
-                    var field = shipHeatNetType.GetField("StorageCapacity", BindingFlags.Instance | BindingFlags.Public);
-                    var currentValue = (float)field.GetValue(convertedInstance);
-                    var newValue = currentValue + 200000;
-                    field.SetValue(convertedInstance, newValue);
-                }
+                var field = shipHeatNetType.GetField("StorageCapacity", BindingFlags.Instance | BindingFlags.Public);
+                var currentValue = (float)field.GetValue(convertedInstance);
+                var newValue = currentValue + 200000;
+                field.SetValue(convertedInstance, newValue);
             }
         }
+    }
 
-        public static void CompShipCombatShield_HitShield_Postfix(object __instance, Projectile proj)
-        {
-            var shieldCompType = assembly.GetType("RimWorld.CompShipCombatShield");
-            var parentPropInfo = shieldCompType.BaseType.GetField("parent", BindingFlags.Instance | BindingFlags.Public);
-            var parentValue = (ThingWithComps)parentPropInfo.GetValue(__instance);
+    public static void CompShipCombatShield_HitShield_Postfix(object __instance, Projectile proj)
+    {
+        var shieldCompType = assembly.GetType("RimWorld.CompShipCombatShield");
+        var parentPropInfo = shieldCompType.BaseType.GetField("parent", BindingFlags.Instance | BindingFlags.Public);
+        var parentValue = (ThingWithComps)parentPropInfo.GetValue(__instance);
 
-            var map = parentValue?.Map;
-            if (map == null) return;
-            if (!map.mapPawns.FreeColonists.Any(x => CaravanStory.StoryUtility.IsAuraProtected(x))) return;
+        var map = parentValue?.Map;
+        if (map == null) return;
+        if (!map.mapPawns.FreeColonists.Any(x => CaravanStory.StoryUtility.IsAuraProtected(x))) return;
 
-            var heatToRemove = proj.DamageAmount * 1f * 1.5f;
+        var heatToRemove = proj.DamageAmount * 1f * 1.5f;
 
-            var compShipHeatSourceType = assembly.GetType("RimWorld.CompShipHeatSource");
-            var heatComp = parentValue.AllComps.FirstOrDefault(x => x.GetType() == compShipHeatSourceType);
+        var compShipHeatSourceType = assembly.GetType("RimWorld.CompShipHeatSource");
+        var heatComp = parentValue.AllComps.FirstOrDefault(x => x.GetType() == compShipHeatSourceType);
 
-            var addHeatMethodInfo = compShipHeatSourceType.GetMethod("AddHeatToNetwork", BindingFlags.Public | BindingFlags.Instance);
-            addHeatMethodInfo.Invoke(heatComp, new object[] { heatToRemove, true });
-        }
-        */
-    }   
+        var addHeatMethodInfo = compShipHeatSourceType.GetMethod("AddHeatToNetwork", BindingFlags.Public | BindingFlags.Instance);
+        addHeatMethodInfo.Invoke(heatComp, new object[] { heatToRemove, true });
+    }
+    */
 }

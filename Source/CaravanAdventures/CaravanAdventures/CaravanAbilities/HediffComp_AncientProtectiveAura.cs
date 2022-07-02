@@ -130,7 +130,7 @@ namespace CaravanAdventures.CaravanAbilities
         public bool CanProtectShip(float heatToTakeIn = 0f)
         {
             if (!CompatibilityPatches.detectedAssemblies.Any(x => x.assemblyString == Patches.Compatibility.SoS2Patch.SoS2AssemblyName
-            || Pawn?.psychicEntropy?.IsPsychicallySensitive != true
+            || Pawn?.psychicEntropy?.PsychicSensitivity == null
             || Pawn?.psychicEntropy?.Psylink?.level == null 
             || Pawn?.psychicEntropy?.Psylink?.level == 0
             || Pawn.psychicEntropy?.EntropyRelativeValue + heatToTakeIn > Pawn.psychicEntropy.MaxEntropy && Pawn.psychicEntropy.limitEntropyAmount == false
@@ -138,9 +138,9 @@ namespace CaravanAdventures.CaravanAbilities
             return true;
         }
 
-        public override IEnumerable<Gizmo> CompGetGizmos()
+        // todo - possibly patch by postfixing GetGizmos for a pawn, find the hediff comp and return the gizmo
+        public IEnumerable<Gizmo> GetGizmos()
         {
-            if (base.CompGetGizmos() != null) foreach (var baseGiz in base.CompGetGizmos()) if (baseGiz != null) yield return baseGiz;
             if (!CanShowShipProtectGizmo())
             {
                 protectsTheShip = false;
