@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Defs>
+  <ThingDef ParentName="MoteBase">
+    <defName>AncientProtectiveAuraFleck</defName>
+    <graphicData>
+      <texPath>Other/ForceField</texPath>
+      <shaderType>TransparentPostLight</shaderType>
+      <color>(0.6, 1, 0.6)</color>
+    </graphicData>
+    <drawOffscreen>true</drawOffscreen>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <mote>
+    <fadeInTime>0.5</fadeInTime>
+    <solidTime>1</solidTime>
+    <fadeOutTime>0.5</fadeOutTime>
+    <growthRate>1</growthRate>
+    </mote>
+  </ThingDef>
+</Defs>
