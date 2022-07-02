@@ -92,8 +92,11 @@ namespace CaravanAdventures.CaravanAbilities
             {
                 if (!ModsConfig.RoyaltyActive) return;
                 FleckCreationData dataAttachedOverlay = FleckMaker.GetDataAttachedOverlay(Pawn, DefDatabase<FleckDef>.GetNamedSilentFail("AncientProtectiveAuraFleck"), Vector3.zero, 0.125f);
-                dataAttachedOverlay.link = new FleckAttachLink(Pawn);
-                Pawn.Map.flecks.CreateFleck(dataAttachedOverlay);
+                if (!dataAttachedOverlay.Equals(default(FleckCreationData)))
+                {
+                    dataAttachedOverlay.link = new FleckAttachLink(Pawn);
+                    Pawn.Map.flecks.CreateFleck(dataAttachedOverlay);
+                }
             });
 
             if (ticksSincePsyCost > 603)
