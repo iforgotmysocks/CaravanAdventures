@@ -3,6 +3,7 @@
 <Defs>
   <ThingDef ParentName="MoteBase">
     <defName>AncientProtectiveAuraFleck</defName>
+    <thingClass>CaravanAdventures.CaravanAbilities.MoteThrownAttachedOwn</thingClass>
     <graphicData>
       <texPath>Other/ForceField</texPath>
       <shaderType>TransparentPostLight</shaderType>
