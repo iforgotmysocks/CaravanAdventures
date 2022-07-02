@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -88,6 +90,42 @@ namespace CaravanAdventures.CaravanAbilities
                 if (ModSettings.regulateBodyTemperature) ReduceHeatOrCold();
             }
 
+            if ((ticksSincePsyCost == 100 || ticksSincePsyCost == 400) && Pawn?.Map != null) Helper.RunSavely(() =>
+            {
+                //var mote = MoteMaker.MakeAttachedOverlay(Pawn, DefDatabase<ThingDekf>.GetNamedSilentFail("AncientProtectiveAuraFleck"), Vector3.zero, 0.125f);
+                //mote.link1 = new MoteAttachLink(Pawn);
+
+                //var moteClassType = Assembly.GetAssembly(typeof(Pawn)).GetType("Verse.MoteThrownAttached");
+
+                var thing =  ThingMaker.MakeThing(DefDatabase<ThingDef>.GetNamedSilentFail("AncientProtectiveAuraFleck")) as MoteThrownAttachedOwn;
+                //Convert.ChangeType(thing, moteClassType);
+                thing.link1 = new MoteAttachLink(Pawn);
+                thing.exactPosition = Pawn.DrawPos;
+                thing.Scale = 0.125f;
+
+                //moteClassType.GetProperty("Link1").SetValue(thing, new MoteAttachLink(Pawn));
+                //moteClassType.GetField("exactPosition").SetValue(thing, Pawn.DrawPos);
+                //moteClassType.GetProperty("Scale").SetValue(thing, 0.125f);
+                ////moteClassType.GetProperty("SetVelocity").SetValue(thing, 20f);
+
+                GenSpawn.Spawn(thing, Pawn.Position, Pawn.Map, WipeMode.Vanish);
+
+
+
+                //MoteThrownAttached moteThrownAttached = (MoteThrownAttached)ThingMaker.MakeThing(moteDef, null);
+                //moteThrownAttached.Attach(pawn);
+                //moteThrownAttached.exactPosition = pawn.DrawPos;
+                //moteThrownAttached.Scale = 1.5f;
+                //moteThrownAttached.SetVelocity(Rand.Range(20f, 25f), 0.4f);
+                //GenSpawn.Spawn(moteThrownAttached, pawn.Position, pawn.Map, WipeMode.Vanish);
+
+
+
+                //FleckCreationData dataAttachedOverlay = FleckMaker.GetDataAttachedOverlay(Pawn, DefDatabase<FleckDef>.GetNamedSilentFail("AncientProtectiveAuraFleck"), Vector3.zero, 0.125f);
+                //dataAttachedOverlay.link = new FleckAttachLink(Pawn);
+                //Pawn.Map.flecks.CreateFleck(dataAttachedOverlay);
+            });
+
             if (ticksSincePsyCost > 603)
             {
                 ticksSincePsyCost = 0;
@@ -123,11 +161,11 @@ namespace CaravanAdventures.CaravanAbilities
             return true;
         }
 
-        public bool CanShowShipProtectGizmo() => 
-            CompatibilityPatches.detectedAssemblies.Any(x => x.assemblyString == Patches.Compatibility.SoS2Patch.SoS2AssemblyName) 
+        public bool CanShowShipProtectGizmo() =>
+            CompatibilityPatches.detectedAssemblies.Any(x => x.assemblyString == Patches.Compatibility.SoS2Patch.SoS2AssemblyName)
                 && Current.Game.Maps.Any(x => x?.Biome?.defName == Patches.Compatibility.SoS2Patch.OuterSpaceBiomeName && x?.ParentFaction != null && x.ParentFaction == Faction.OfPlayerSilentFail)
                 && Pawn?.HasPsylink == true
-                && ModSettings.sos2AuraHeatManagementEnabled; 
+                && ModSettings.sos2AuraHeatManagementEnabled;
 
         public bool CanProtectShip(float heatToTakeIn = 0f)
         {
@@ -168,7 +206,7 @@ namespace CaravanAdventures.CaravanAbilities
             var diseases = Pawn.health.hediffSet.hediffs.Where(x => sicknessesToBeHealed.Contains(x.def.defName));
             if (diseases != null && diseases.Count() != 0)
             {
-                foreach (var hediff in Pawn.health.hediffSet.hediffs.Where(x => diseases.Contains(x)).Reverse()) 
+                foreach (var hediff in Pawn.health.hediffSet.hediffs.Where(x => diseases.Contains(x)).Reverse())
                 {
                     Pawn.health.hediffSet.hediffs.Remove(hediff);
                     hediff.PostRemoved();

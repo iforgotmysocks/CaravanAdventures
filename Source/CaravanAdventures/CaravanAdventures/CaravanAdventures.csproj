@@ -82,6 +82,7 @@
     <Compile Include="CaravanAbilities\HediffComp_AncientGift.cs" />
     <Compile Include="CaravanAbilities\HediffComp_ConjuredLight.cs" />
     <Compile Include="CaravanAbilities\HediffComp_DrainNature.cs" />
+    <Compile Include="CaravanAbilities\MoteThrownAttachedOwn.cs" />
     <Compile Include="CaravanCamp\AnimalArea.cs" />
     <Compile Include="CaravanCamp\Buildings\Building_AirConditioningHeater.cs" />
     <Compile Include="CaravanCamp\CampArea.cs" />
@@ -239,7 +240,7 @@
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_BuildVersioningStyle="None.None.None.Increment" BuildVersion_StartDate="2000/1/1" />
+      <UserProperties BuildVersion_StartDate="2000/1/1" BuildVersion_BuildVersioningStyle="None.None.None.Increment" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
