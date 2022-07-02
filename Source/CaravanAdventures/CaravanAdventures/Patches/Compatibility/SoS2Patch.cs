@@ -22,11 +22,9 @@ namespace CaravanAdventures.Patches.Compatibility
 
         private static Pawn capableAuraPawn;
 
-
         public static void ApplyPatches(Assembly assembly)
         {
             SoS2Patch.assembly = assembly;
-
             if (ModSettings.sos2AuraPreventsHypoxia)
             {
                 var org = AccessTools.Method(assembly.GetType("SaveOurShip2.ShipInteriorMod2"), "hasSpaceSuit");
@@ -39,8 +37,7 @@ namespace CaravanAdventures.Patches.Compatibility
                 var addHeatOrg = AccessTools.Method(assembly.GetType("RimWorld.CompShipHeatSource"), "AddHeatToNetwork");
                 var addHeatPre = new HarmonyMethod(typeof(SoS2Patch), nameof(SoS2Patch.CompShipHeatSource_AddHeatToNetwork_Prefix));
                 HarmonyPatcher.harmony.Patch(addHeatOrg, addHeatPre, null);
-
-                var addGiz = AccessTools.Method(assembly.GetType("Verse.Pawn"), "GetGizmos");
+                var addGiz = AccessTools.Method(typeof(Pawn), "GetGizmos");
                 var addGizPost = new HarmonyMethod(typeof(SoS2Patch), nameof(SoS2Patch.Pawn_GetGizmos_Postfix));
                 HarmonyPatcher.harmony.Patch(addGiz, null, addGizPost);
                 LoadReflectionNecessities();
@@ -95,14 +92,14 @@ namespace CaravanAdventures.Patches.Compatibility
             amount = remainingAmount;
         }
 
-        static IEnumerable<Gizmo> Pawn_GetGizmos_Postfix(IEnumerable<Gizmo> list, Pawn __instance)
+        public static IEnumerable<Gizmo> Pawn_GetGizmos_Postfix(IEnumerable<Gizmo> list, Pawn __instance)
         {
-            foreach (var existing in list) yield return existing;
+            foreach (var existing in list) if (existing != null) yield return existing;
             var hediff = __instance.health.hediffSet.hediffs.FirstOrDefault(x => x.def?.defName == "CAAncientProtectiveAuraLinked" || x.def?.defName == "CAAncientProtectiveAura");
             if (hediff == null) yield break;
             var gizmoComp = hediff.TryGetComp<CaravanAdventures.CaravanAbilities.HediffComp_AncientProtectiveAura>();
             if (gizmoComp == null) yield break;
-            foreach (var gizmo in gizmoComp.GetGizmos()) yield return gizmo;
+            foreach (var gizmo in gizmoComp.GetGizmos()) if (gizmo != null) yield return gizmo;
         }
     }
 
