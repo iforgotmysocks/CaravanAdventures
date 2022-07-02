@@ -24,19 +24,25 @@ namespace CaravanAdventures.Patches.Compatibility
         public static void ApplyPatches(Assembly assembly)
         {
             SoS2Patch.assembly = assembly;
-            var org = AccessTools.Method(assembly.GetType("SaveOurShip2.ShipInteriorMod2"), "hasSpaceSuit");
-            var postfix = new HarmonyMethod(typeof(SoS2Patch), nameof(SoS2Patch.ShipInteriorMod2_hasSpaceSuit_Postfix));
-            HarmonyPatcher.harmony.Patch(org, null, postfix);
-
-            var addHeatOrg = AccessTools.Method(assembly.GetType("RimWorld.CompShipHeatSource"), "AddHeatToNetwork");
-            var addHeatPre = new HarmonyMethod(typeof(SoS2Patch), nameof(SoS2Patch.CompShipHeatSource_AddHeatToNetwork_Prefix));
-            HarmonyPatcher.harmony.Patch(addHeatOrg, addHeatPre, null);
-
-            var addGiz = AccessTools.Method(assembly.GetType("Verse.Pawn"), "GetGizmos");
-            var addGizPost = new HarmonyMethod(typeof(SoS2Patch), nameof(SoS2Patch.Pawn_GetGizmos_Postfix));
-            HarmonyPatcher.harmony.Patch(addGiz, null, addGizPost);
             
-            LoadReflectionNecessities(); 
+            if (ModSettings.sos2AuraPreventsHypoxia)
+            {
+                var org = AccessTools.Method(assembly.GetType("SaveOurShip2.ShipInteriorMod2"), "hasSpaceSuit");
+                var postfix = new HarmonyMethod(typeof(SoS2Patch), nameof(SoS2Patch.ShipInteriorMod2_hasSpaceSuit_Postfix));
+                HarmonyPatcher.harmony.Patch(org, null, postfix);
+            }
+
+            if (ModSettings.sos2AuraHeatManagementEnabled)
+            {
+                var addHeatOrg = AccessTools.Method(assembly.GetType("RimWorld.CompShipHeatSource"), "AddHeatToNetwork");
+                var addHeatPre = new HarmonyMethod(typeof(SoS2Patch), nameof(SoS2Patch.CompShipHeatSource_AddHeatToNetwork_Prefix));
+                HarmonyPatcher.harmony.Patch(addHeatOrg, addHeatPre, null);
+
+                var addGiz = AccessTools.Method(assembly.GetType("Verse.Pawn"), "GetGizmos");
+                var addGizPost = new HarmonyMethod(typeof(SoS2Patch), nameof(SoS2Patch.Pawn_GetGizmos_Postfix));
+                HarmonyPatcher.harmony.Patch(addGiz, null, addGizPost);
+                LoadReflectionNecessities();
+            }
         }
 
         private static void LoadReflectionNecessities()
@@ -55,11 +61,12 @@ namespace CaravanAdventures.Patches.Compatibility
         public static void CompShipHeatSource_AddHeatToNetwork_Prefix(object __instance, ref float amount, bool remove = false)
         {
             if (remove || amount < 6) return;
-            
+
             var parentValue = (ThingWithComps)parentPropInfo.GetValue(__instance);
             var map = parentValue?.Map;
             if (map?.ParentFaction != Faction.OfPlayerSilentFail) return;
-            var calcedHeat = amount / ModSettings.sos2AuraHeatMult;
+            var remainingAmount = amount * ((100 - ModSettings.sos2HeatAbsorptionPercentage) / 100);
+            var calcedHeat = (amount - remainingAmount) / ModSettings.sos2AuraHeatMult;
 
             capableAuraPawn = capableAuraPawn ?? (capableAuraPawn = CaravanStory.StoryUtility.GetFirstPawnWith(map, x => x.HasPsylink && !x.health.hediffSet.HasHediff(HediffDefOf.PsychicShock) && CaravanStory.StoryUtility.IsAuraProtectedAndTakesShipHeat(x) && (x.psychicEntropy.EntropyValue + calcedHeat <= x.psychicEntropy.MaxEntropy || !x.psychicEntropy.limitEntropyAmount)));
             if (map == null
@@ -67,7 +74,8 @@ namespace CaravanAdventures.Patches.Compatibility
                 || capableAuraPawn.Dead
                 || capableAuraPawn.Destroyed
                 || capableAuraPawn.health.hediffSet.HasHediff(HediffDefOf.PsychicShock)
-                || capableAuraPawn?.Map != map)
+                || capableAuraPawn?.Map != map
+                || !CaravanStory.StoryUtility.IsAuraProtectedAndTakesShipHeat(capableAuraPawn))
             {
                 capableAuraPawn = null;
                 return;
@@ -77,7 +85,7 @@ namespace CaravanAdventures.Patches.Compatibility
                 capableAuraPawn = null;
                 return;
             }
-            amount = 0f;
+            amount = remainingAmount;
         }
 
         static IEnumerable<Gizmo> Pawn_GetGizmos_Postfix(IEnumerable<Gizmo> list, Pawn __instance)
@@ -148,33 +156,33 @@ namespace CaravanAdventures.Patches.Compatibility
     }
     */
 
-        //        public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions, object __instance, ref float amount, bool remove = false)
-        //        {
-        //            var codes = new List<CodeInstruction>(instructions);
+    //        public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions, object __instance, ref float amount, bool remove = false)
+    //        {
+    //            var codes = new List<CodeInstruction>(instructions);
 
-        //            var instructionsToAdd = new List<CodeInstruction>();
-        //            instructionsToAdd.Add(new CodeInstruction(OpCodes.Nop));
-        //            instructionsToAdd.Add(new CodeInstruction(OpCodes.Ldarg_0));
-        //            instructionsToAdd.Add(new CodeInstruction(OpCodes.Ldarg_0));
-        //            instructionsToAdd.Add(new CodeInstruction(OpCodes.Call, typeof(SoS2Patch).GetMethod(nameof(CompShipHeatSource_AddHeatToNetwork_Prefix), BindingFlags.Public | BindingFlags.Static)));
-        //            instructionsToAdd.Add(new CodeInstruction(OpCodes.Stloc_0));
-        //            instructionsToAdd.Add(new CodeInstruction(OpCodes.Ldloc_0));
-        //            instructionsToAdd.Add(new CodeInstruction(OpCodes.Brfalse_S, new Label() { LabelValue = }));
-        //            var getLabelForInfo = AccessTools.Method(typeof(PawnCapacityDef), "GetLabelFor", new Type[] { typeof(bool), typeof(bool) });
-        //#pragma warning disable CS0252
-        //            var idx = codes.FindIndex(code => code.operand == getLabelForInfo);
-        //#pragma warning restore CS0252 
+    //            var instructionsToAdd = new List<CodeInstruction>();
+    //            instructionsToAdd.Add(new CodeInstruction(OpCodes.Nop));
+    //            instructionsToAdd.Add(new CodeInstruction(OpCodes.Ldarg_0));
+    //            instructionsToAdd.Add(new CodeInstruction(OpCodes.Ldarg_0));
+    //            instructionsToAdd.Add(new CodeInstruction(OpCodes.Call, typeof(SoS2Patch).GetMethod(nameof(CompShipHeatSource_AddHeatToNetwork_Prefix), BindingFlags.Public | BindingFlags.Static)));
+    //            instructionsToAdd.Add(new CodeInstruction(OpCodes.Stloc_0));
+    //            instructionsToAdd.Add(new CodeInstruction(OpCodes.Ldloc_0));
+    //            instructionsToAdd.Add(new CodeInstruction(OpCodes.Brfalse_S, new Label() { LabelValue = }));
+    //            var getLabelForInfo = AccessTools.Method(typeof(PawnCapacityDef), "GetLabelFor", new Type[] { typeof(bool), typeof(bool) });
+    //#pragma warning disable CS0252
+    //            var idx = codes.FindIndex(code => code.operand == getLabelForInfo);
+    //#pragma warning restore CS0252 
 
-        //            if (idx == -1)
-        //            {
-        //                Log.Warning($"Could not find GetLabelFor code instruction; skipping changes");
-        //                return instructions;
-        //            }
+    //            if (idx == -1)
+    //            {
+    //                Log.Warning($"Could not find GetLabelFor code instruction; skipping changes");
+    //                return instructions;
+    //            }
 
-        //            codes[idx].operand = AccessTools.Method(typeof(PawnCapacityDef), "GetLabelFor", new Type[] { typeof(Pawn) });
-        //            codes.RemoveRange(idx - 7, 7);
+    //            codes[idx].operand = AccessTools.Method(typeof(PawnCapacityDef), "GetLabelFor", new Type[] { typeof(Pawn) });
+    //            codes.RemoveRange(idx - 7, 7);
 
-        //            return codes;
-        //        }
-    
+    //            return codes;
+    //        }
+
 }
