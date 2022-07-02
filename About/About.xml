@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
-	<name>Caravan Adventures [Beta]</name>
+	<name>Caravan Adventures [1.2]</name>
 	<author>iforgotmysocks</author>
 	<url></url>
   <supportedVersions>
@@ -22,7 +22,7 @@
   </loadAfter>
   <packageId>iforgotmysocks.CaravanAdventures</packageId>
 	<description>
-[Beta 0.3.1]
+[Beta 0.3.1] (1.2 branch!)
 
 Welcome to the beta for Caravan Adventures. As always, please backup your savegames. I'm glad for any feedback and bugs you may find or can provide. :)
 The release will be published as a new workshop file while this beta will remain unlisted and will eventually be removed, so please don't waste your hard earned steam points on the beta version.
