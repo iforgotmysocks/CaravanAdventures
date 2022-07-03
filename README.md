@@ -3,7 +3,7 @@
 Caravan Adventures aims to transform traveling around the world into a real adventure by providing new features to replace the annoying micromanagement, make traveling more fun and give you a sense of purpose doing so. Quick heads-up, about 25% of this mod's content is the Storyline, which requires Royalty. Everything else can be used without it, don't worry. 
 
 Feedback would be amazing, join us on <a href="https://discord.gg/KwaRubs2kx">discord</a>  
-All mod details available in the <a href="https://github.com/iforgotmysocks/CaravanAdventuresWiki/wiki">Mod's Wikipedia</a>
+All mod details available in the <a href="https://github.com/iforgotmysocks/CaravanAdventures/wiki">Mod's Wikipedia</a>
 
 <br>
 
@@ -60,6 +60,7 @@ All mod details available in the <a href="https://github.com/iforgotmysocks/Cara
 Artwork:  
 Artwork generously provided by Shakesthespeare, thank you mate, u're awesome!  
 Portal in Ancient master shrine by gecko-kobold  
+Shortcut-button icon for forming/trade preset settings by Madman666  
 
 Sounds:  
 Anima tree whisper by zapsplat (zapsplat_whispers.mp3) from https://www.zapsplat.com  
@@ -70,8 +71,8 @@ slice3 by TheBuilder15 https://freesound.org/people/TheBuilder15/sounds/434896/
 slice4 by Aleks41 https://freesound.org/people/Aleks41/sounds/449552/ 
 
 Translations: 
-ChineseSimplified translation by ameki  
-ChineseTraditional translation by ameki  
+ChineseSimplified translation by MZM_GOW and ameki  
+ChineseTraditional translation by MZM_GOW and ameki  
 Korean translation by inbae  
 SpanishLatin translation by Evilservant6  
 

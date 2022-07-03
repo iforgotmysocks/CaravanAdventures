@@ -32,7 +32,7 @@
     <isBad>false</isBad>
     <everCurableByItem>false</everCurableByItem>
     <defaultLabelColor>(0, 255, 255)</defaultLabelColor>
-    <description>Protects the target from a large part of incoming damage, fire and heals wounds over time (even permanent ones when active long enough). \n\nReduces the overall heat a pawn can handle and accelerates psyfocus drain by 2% / day while active. The effect of this spell disappears if it is cast a second time on the target or if the targetted pawn runs out of psyfocus. \n\nRequires the ancient gift, unless enhanced by The Ancient Coordinator spell.</description>
+    <description>Protects the target from a large part of incoming damage, fire and heals wounds over time (even permanent ones when active long enough). \n\nReduces the overall heat a pawn can handle and accelerates psyfocus drain by 20% / day while active. The effect of this spell disappears if it is cast a second time on the target or if the targetted pawn runs out of psyfocus. \n\nRequires the ancient gift, unless enhanced by The Ancient Coordinator spell.</description>
     <comps>
       <li Class="CaravanAdventures.CaravanAbilities.HediffCompProperties_AncientProtectiveAura">
         <compClass>CaravanAdventures.CaravanAbilities.HediffComp_AncientProtectiveAura</compClass>

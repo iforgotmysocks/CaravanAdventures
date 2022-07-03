@@ -2,6 +2,9 @@
 <Defs>
 
   <QuestScriptDef Name="CAQuestScriptDefBase" Abstract="True">
+    <!--<isRootSpecial>true</isRootSpecial>-->
+    <!--<hideOnCleanup>true</hideOnCleanup>-->
+    <!--<endOnColonyMove>false</endOnColonyMove>-->
     <rootSelectionWeight>0</rootSelectionWeight>
     <rootMinPoints>350</rootMinPoints>
     <questNameRules>
