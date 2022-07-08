@@ -88,7 +88,7 @@ namespace CaravanAdventures.Patches.Compatibility
             // - saved story pawn?
 
             CaravanStory.StoryUtility.ResetCurrentStoryStageSubProgress();
-        } 
+        }
 
         public static void CompShipHeatSource_AddHeatToNetwork_Prefix(object __instance, ref float amount, bool remove = false)
         {
@@ -100,18 +100,28 @@ namespace CaravanAdventures.Patches.Compatibility
             var remainingAmount = amount * ((100 - ModSettings.sos2HeatAbsorptionPercentage) / 100);
             var calcedHeat = (amount - remainingAmount) / ModSettings.sos2AuraHeatMult;
 
-            capableAuraPawn = capableAuraPawn ?? (capableAuraPawn = CaravanStory.StoryUtility.GetFirstPawnWith(map, x => x.HasPsylink && !x.health.hediffSet.HasHediff(HediffDefOf.PsychicShock) && CaravanStory.StoryUtility.IsAuraProtectedAndTakesShipHeat(x) && (x.psychicEntropy.EntropyValue + calcedHeat <= x.psychicEntropy.MaxEntropy || !x.psychicEntropy.limitEntropyAmount)));
-            if (map == null
-                || capableAuraPawn == null
+            // todo test speed, added the entropy check and pulled the check above selecting the pawn
+            if (capableAuraPawn == null
                 || capableAuraPawn.Dead
                 || capableAuraPawn.Destroyed
                 || capableAuraPawn.health.hediffSet.HasHediff(HediffDefOf.PsychicShock)
                 || capableAuraPawn?.Map != map
-                || !CaravanStory.StoryUtility.IsAuraProtectedAndTakesShipHeat(capableAuraPawn))
+                || !CaravanStory.StoryUtility.IsAuraProtectedAndTakesShipHeat(capableAuraPawn)
+                || capableAuraPawn.psychicEntropy.limitEntropyAmount && (capableAuraPawn.psychicEntropy.EntropyValue + calcedHeat) > capableAuraPawn.psychicEntropy.MaxEntropy)
             {
                 capableAuraPawn = null;
-                return;
+                //return;
             }
+
+            capableAuraPawn = capableAuraPawn
+                ?? (capableAuraPawn = CaravanStory.StoryUtility.GetFirstPawnWith(map, x
+                    => x.HasPsylink
+                        && !x.health.hediffSet.HasHediff(HediffDefOf.PsychicShock)
+                        && CaravanStory.StoryUtility.IsAuraProtectedAndTakesShipHeat(x)
+                        && ((x.psychicEntropy.EntropyValue + calcedHeat) <= x.psychicEntropy.MaxEntropy || !x.psychicEntropy.limitEntropyAmount)));
+
+            if (capableAuraPawn == null) return;
+
             if (!capableAuraPawn.psychicEntropy.TryAddEntropy(calcedHeat, null, true, !capableAuraPawn.psychicEntropy.limitEntropyAmount))
             {
                 capableAuraPawn = null;
