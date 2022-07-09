@@ -63,7 +63,7 @@ namespace CaravanAdventures.CaravanAbilities
 
         private IEnumerable<IntVec3> AffectedCells(LocalTargetInfo target, Map map)
         {
-            if (target.Cell.Filled(this.parent.pawn.Map)) yield break;
+            //if (target.Cell.Filled(this.parent.pawn.Map)) yield break;
             foreach (IntVec3 intVec in GenRadial.RadialCellsAround(target.Cell, this.parent.def.EffectRadius, true))
             {
                 if (intVec.InBounds(map)) yield return intVec;
