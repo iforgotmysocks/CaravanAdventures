@@ -42,6 +42,7 @@ namespace CaravanAdventures
         public static bool campStorageAndJobsAllowHumanMeat;
         public static bool campStorageAndJobsAllowInsectMeat;
         public static bool leaveCampControlOptionAfterPackingUp;
+        public static bool allowMeatForChemfuelProduction;
 
         // camp cost TODO -> create defs for tent types and move it there
         public static int campSupplyCostAnimalArea = 1;
@@ -180,7 +181,7 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref campStorageAndJobsAllowInsectMeat, "campStorageAndJobsAllowInsectMeat", false);
             Scribe_Values.Look(ref campStorageAndJobsAllowHumanMeat, "campStorageAndJobsAllowHumanMeat", false);
             Scribe_Values.Look(ref leaveCampControlOptionAfterPackingUp, "leaveCampControlOptionAfterPackingUp", false);
-            
+            Scribe_Values.Look(ref allowMeatForChemfuelProduction, "allowMeatForChemfuelProduction", false);
 
             // filters
             Scribe_Values.Look(ref autoSelectPawns, "autoSelectPawns", true);
