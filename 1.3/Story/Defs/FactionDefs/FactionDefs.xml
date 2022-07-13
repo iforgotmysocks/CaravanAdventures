@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
 <Defs>
-  <FactionDef ParentName="OutlanderFactionBase" Name="CASacrilegHuntersFactionBase" Abstract="True">
+
+  <FactionDef ParentName="FactionBase" Name="CASacrilegHuntersFactionBase" Abstract="True">
     <pawnSingular>Sacrileg Hunter</pawnSingular>
     <pawnsPlural>Sacrileg Hunters</pawnsPlural>
     <categoryTag>Outlander</categoryTag>
     <listOrderPriority>30</listOrderPriority>
     <settlementGenerationWeight>0.3</settlementGenerationWeight>
+    <hidden>false</hidden>
     <requiredCountAtGameStart>1</requiredCountAtGameStart>
     <canMakeRandomly>true</canMakeRandomly>
-    <canSiege>false</canSiege>
-    <hidden>false</hidden>
-    <canStageAttacks>false</canStageAttacks>
+    <canSiege>true</canSiege>
+    <canStageAttacks>true</canStageAttacks>
     <leaderTitle>prime councilor</leaderTitle>
     <factionIconPath>World/WorldObjects/Expanding/Town</factionIconPath>
-    <!--<factionNameMaker>NamerFactionOutlander</factionNameMaker>-->
     <factionNameMaker>CANamerFactionSacrilegHunters</factionNameMaker>
     <settlementNameMaker>NamerSettlementOutlander</settlementNameMaker>
     <techLevel>Ultra</techLevel>
@@ -30,6 +30,24 @@
       <li MayRequire="Ludeon.RimWorld.Ideology">HumanPrimacy</li>
       <li MayRequire="Ludeon.RimWorld.Ideology">Loyalist</li>
     </requiredMemes>
+    <allowedCultures>
+      <li>Rustican</li>
+    </allowedCultures>
+    <disallowedMemes>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Structure_Animist</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Nudism</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Blindsight</li>
+    </disallowedMemes>
+    <structureMemeWeights>
+      <Structure_TheistEmbodied MayRequire="Ludeon.RimWorld.Ideology">1</Structure_TheistEmbodied>
+      <Structure_TheistAbstract MayRequire="Ludeon.RimWorld.Ideology">2</Structure_TheistAbstract>
+      <Structure_Ideological MayRequire="Ludeon.RimWorld.Ideology">1</Structure_Ideological>
+      <Structure_Archist MayRequire="Ludeon.RimWorld.Ideology">1</Structure_Archist>
+      <Structure_OriginChristian MayRequire="Ludeon.RimWorld.Ideology">1</Structure_OriginChristian>
+      <Structure_OriginIslamic MayRequire="Ludeon.RimWorld.Ideology">1</Structure_OriginIslamic>
+      <Structure_OriginHindu MayRequire="Ludeon.RimWorld.Ideology">1</Structure_OriginHindu>
+      <Structure_OriginBuddhist MayRequire="Ludeon.RimWorld.Ideology">1</Structure_OriginBuddhist>
+    </structureMemeWeights>
     <backstoryFilters>
       <li>
         <categories>
@@ -45,9 +63,6 @@
       </li>
     </backstoryFilters>
     <geneticVariance>0.8</geneticVariance>
-    <!--<hairTags>
-			<li>Rural</li>
-		</hairTags>-->
     <caravanTraderKinds>
       <li>Caravan_Outlander_BulkGoods</li>
       <li>Caravan_Outlander_CombatSupplier</li>
@@ -72,17 +87,62 @@
       </points>
     </maxPawnCostPerTotalPointsCurve>
     <pawnGroupMakers>
-      <li>
-        <!-- Normal fights, standard mix -->
+      <!--<li>
         <kindDef>Combat</kindDef>
         <options>
-          <!--<Villager>5</Villager>-->
-          <!--<Town_Guard>5</Town_Guard>-->
-          <!--<Grenadier_Destructive>2</Grenadier_Destructive>
-					<Mercenary_Slasher>1</Mercenary_Slasher>
-					<Mercenary_Gunner>1</Mercenary_Gunner>
-					<Mercenary_Elite>33</Mercenary_Elite>-->
-          <!--<Town_Councilman>10</Town_Councilman>-->
+          <Villager>5</Villager>
+          <Town_Guard>10</Town_Guard>
+          <Grenadier_Destructive>1.5</Grenadier_Destructive>
+          <Mercenary_Slasher>7</Mercenary_Slasher>
+          <Mercenary_Gunner>10</Mercenary_Gunner>
+          <Mercenary_Elite>10</Mercenary_Elite>
+          <Town_Councilman>10</Town_Councilman>
+        </options>
+      </li>
+      <li>
+        <kindDef>Peaceful</kindDef>
+        <options>
+          <Villager>20</Villager>
+          <Town_Guard>10</Town_Guard>
+          <Town_Councilman>10</Town_Councilman>
+        </options>
+      </li>
+      <li>
+        <kindDef>Trader</kindDef>
+        <traders>
+          <Town_Trader>1</Town_Trader>
+        </traders>
+        <carriers>
+          <Muffalo>6</Muffalo>
+          <Dromedary>5</Dromedary>
+          <Alpaca>2</Alpaca>
+          <Elephant>1</Elephant>
+        </carriers>
+        <guards>
+          <Villager>3</Villager>
+          <Town_Guard>10</Town_Guard>
+          <Grenadier_Destructive>1.5</Grenadier_Destructive>
+          <Mercenary_Slasher>7</Mercenary_Slasher>
+          <Mercenary_Gunner>10</Mercenary_Gunner>
+          <Mercenary_Elite>10</Mercenary_Elite>
+        </guards>
+      </li>
+      <li>
+        <kindDef>Settlement</kindDef>
+        <options>
+          <Villager>10</Villager>
+          <Town_Guard>10</Town_Guard>
+          <Grenadier_Destructive>1.5</Grenadier_Destructive>
+          <Mercenary_Slasher>7</Mercenary_Slasher>
+          <Mercenary_Gunner>10</Mercenary_Gunner>
+          <Mercenary_Elite>10</Mercenary_Elite>
+          <Town_Councilman>10</Town_Councilman>
+        </options>
+      </li>-->
+
+      <li>
+        <kindDef>Combat</kindDef>
+        <options>
           <CASacrilegHunters_Town_Councilman>1</CASacrilegHunters_Town_Councilman>
           <CASacrilegHunters_Hunter>10</CASacrilegHunters_Hunter>
           <CASacrilegHunters_ExperiencedHunter>2</CASacrilegHunters_ExperiencedHunter>
@@ -111,28 +171,46 @@
         </carriers>
         <guards>
           <CASacrilegHunters_Villager>3</CASacrilegHunters_Villager>
-          <!--<Town_Guard>10</Town_Guard>-->
           <CASacrilegHunters_Hunter>10</CASacrilegHunters_Hunter>
           <CASacrilegHunters_ExperiencedHunter>2</CASacrilegHunters_ExperiencedHunter>
           <Grenadier_Destructive>1.5</Grenadier_Destructive>
-          <!--<Mercenary_Slasher>7</Mercenary_Slasher>-->
-          <!--<Mercenary_Gunner>10</Mercenary_Gunner>-->
-          <!--<Mercenary_Elite>10</Mercenary_Elite>-->
         </guards>
       </li>
       <li>
         <kindDef>Settlement</kindDef>
         <options>
           <CASacrilegHunters_Villager>10</CASacrilegHunters_Villager>
-          <!--<Town_Guard>10</Town_Guard>-->
-          <!--<Grenadier_Destructive>2</Grenadier_Destructive>
-					<Mercenary_Slasher>1</Mercenary_Slasher>
-					<Mercenary_Gunner>1</Mercenary_Gunner>
-					<Mercenary_Elite>33</Mercenary_Elite>-->
-          <!--<Town_Councilman>10</Town_Councilman>-->
           <CASacrilegHunters_Town_Councilman>1</CASacrilegHunters_Town_Councilman>
           <CASacrilegHunters_HunterVillage>20</CASacrilegHunters_HunterVillage>
           <CASacrilegHunters_ExperiencedHunterVillage>4</CASacrilegHunters_ExperiencedHunterVillage>
+        </options>
+      </li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">
+        <kindDef>Miners</kindDef>
+        <commonality>1</commonality>
+        <options>
+          <Miner>1</Miner>
+        </options>
+      </li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">
+        <kindDef>Hunters</kindDef>
+        <commonality>1</commonality>
+        <options>
+          <Hunter>1</Hunter>
+        </options>
+      </li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">
+        <kindDef>Loggers</kindDef>
+        <commonality>1</commonality>
+        <options>
+          <Logger>1</Logger>
+        </options>
+      </li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">
+        <kindDef>Farmers</kindDef>
+        <commonality>1</commonality>
+        <options>
+          <Farmer>1</Farmer>
         </options>
       </li>
     </pawnGroupMakers>
