@@ -90,7 +90,7 @@ namespace CaravanAdventures.CaravanStory
                 raidStrategy = RaidStrategyDefOf.ImmediateAttackFriendly,
                 raidArrivalMode = PawnsArrivalModeDefOf.EdgeDrop
             };
-            DLog.Message($"Assistance with {incidentParms.points} points and kind: {incidentParms.pawnKind}, targetspot default? {spawnSpot == default} if yes, a colonist should be selected as drop spot");
+            DLog.Message($"Assistance with {incidentParms.points} points and kind: {incidentParms.pawnKind?.defName}, targetspot default? {spawnSpot == default} if yes, a colonist should be selected as drop spot");
             if (spawnSpot == default && map.mapPawns.AnyColonistSpawned) spawnSpot = map.mapPawns.FreeColonists.Where(col => col.Spawned).RandomElement().Position;
             if (spawnSpot != default) incidentParms.spawnCenter = spawnSpot;
             if (Helper.RunSavely(() => IncidentDefOf.RaidFriendly.Worker.TryExecute(incidentParms)) != true)

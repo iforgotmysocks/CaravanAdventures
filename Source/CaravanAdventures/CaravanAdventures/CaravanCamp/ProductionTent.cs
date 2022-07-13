@@ -126,12 +126,14 @@ namespace CaravanAdventures.CaravanCamp
             
             if (ModSettings.campStorageAndJobsAllowHumanMeat) fuelFromCorpseBill.ingredientFilter.SetAllow(SpecialThingFilterDefOf.AllowFresh, false);
             refinery.BillStack.AddBill(fuelFromCorpseBill);
+            if (ModSettings.campStorageAndJobsAllowHumanMeat) fuelFromCorpseBill.suspended = true;
 
             var fuelFromWoodBill = new Bill_ProductionWithUft(DefDatabase<RecipeDef>.GetNamed("CAMake_ChemfuelFromWood")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 30 };
             refinery.BillStack.AddBill(fuelFromWoodBill);
 
             var fuelFromOrganicsBill = new Bill_ProductionWithUft(DefDatabase<RecipeDef>.GetNamed("CAMake_ChemfuelFromOrganics")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 30 };
             refinery.BillStack.AddBill(fuelFromOrganicsBill);
+            if (ModSettings.allowMeatForChemfuelProduction) fuelFromOrganicsBill.ingredientFilter.SetAllow(ThingCategoryDefOf.MeatRaw, true);
         }
 
         public virtual void ApplyRecipesTribal(Caravan caravan)
