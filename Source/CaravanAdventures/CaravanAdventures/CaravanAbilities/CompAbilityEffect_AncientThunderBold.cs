@@ -39,7 +39,7 @@ namespace CaravanAdventures.CaravanAbilities
                     if (pawn == pawnToExclude || pawn.Dead) continue;
                     var isBoss = CompCache.StoryWC.BossDefs().Contains(pawn.def);
                     var count = Rand.Range(5, 8);
-                    foreach (var part in Helper.PickSomeInRandomOrder(pawn.RaceProps.body.AllParts.Where(part => part.def != AbilityDefOf.Finger && part.def != AbilityDefOf.Toe), count))
+                    foreach (var part in Helper.PickSomeInRandomOrder(pawn.RaceProps.body.AllParts.Where(part => part.def != AbilityDefOf.Finger && part.def != AbilityDefOf.Toe && part.def.defName != "Tongue"), count))
                     {
                         if (pawn == null | pawn.Dead) break;
                         if (part.def == waist) continue;
