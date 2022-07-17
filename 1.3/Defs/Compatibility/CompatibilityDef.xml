@@ -38,6 +38,7 @@
     <!-- add race defs to exclude from the ancient coordinator spell here -->
     <raceDefsToExcludeFromAncientCoordinator>
       <li>RSPeacekeeperDefender</li>
+      <li>SoSHologramRace</li>
     </raceDefsToExcludeFromAncientCoordinator>
 
     <!-- add a race def's mod extention, which should be used to identify all race defs instead here, beware to include the namespace -->
