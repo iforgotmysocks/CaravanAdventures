@@ -162,7 +162,7 @@ namespace CaravanAdventures.CaravanStory
             }
 
             CompCache.StoryWC.questCont.Village.StoryContact = null;
-           
+
             // todo this fix doesn't currently work as the postfix is executed before the faction reset for the new planet actually happens.
             //StoryUtility.SetMechFactionHostileToHunters();
         }
@@ -238,9 +238,9 @@ namespace CaravanAdventures.CaravanStory
             }
         }
 
-        public static void GenerateFriendlyVillage(ref float villageGenerationCounter)
+        public static void GenerateFriendlyVillage(ref float villageGenerationCounter, bool respawn = false)
         {
-            if (!CompCache.StoryWC.storyFlags["TradeCaravan_DialogFinished"] || CompCache.StoryWC.storyFlags["IntroVillage_Created"]) return;
+            if (!CompCache.StoryWC.storyFlags["TradeCaravan_DialogFinished"] || (CompCache.StoryWC.storyFlags["IntroVillage_Created"] && !respawn)) return;
             if (!StoryUtility.TryGenerateDistantTile(out var tile, 6, 15))
             {
                 DLog.Message($"No tile was generated");
@@ -260,22 +260,26 @@ namespace CaravanAdventures.CaravanStory
             settlement.Name = SettlementNameGenerator.GenerateSettlementName(settlement, null);
             Find.WorldObjects.Add(settlement);
             CompCache.StoryWC.questCont.Village.Settlement = settlement;
-            Quests.QuestUtility.GenerateStoryQuest(StoryQuestDefOf.CA_StoryVillage_Arrival,
-                true,
-                "StoryVillageQuestName",
-                null,
-                "StoryVillageQuestDesc",
-                new object[] {
+
+            if (!respawn)
+            {
+                Quests.QuestUtility.GenerateStoryQuest(StoryQuestDefOf.CA_StoryVillage_Arrival,
+                    true,
+                    "StoryVillageQuestName",
+                    null,
+                    "StoryVillageQuestDesc",
+                    new object[] {
                     CompCache.StoryWC.questCont.Village.StoryContact.NameShortColored,
                     CompCache.StoryWC.questCont.Village.StoryContact.Faction.Name,
                     CompCache.StoryWC.questCont.Village.Settlement.Name.Colorize(UnityEngine.Color.cyan)
-                });
+                    });
 
-            var storyContactBondedPerson = CompCache.StoryWC.questCont.FriendlyCaravan?.storyContactBondedPawn;
-            Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillageQuestLetterContent".Translate(storyContactBondedPerson != null ? storyContactBondedPerson.NameShortColored : Faction.OfPlayer.NameColored, CompCache.StoryWC.questCont.Village.Settlement.Label).ToString().HtmlFormatting("add8e6ff", true, 15));
-            if (storyContactBondedPerson != null) Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillageQuestLetterContentPS".Translate().ToString().HtmlFormatting("add8e6ff", true, 13));
-            Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillageQuestLetterContentEnding".Translate(CompCache.StoryWC.questCont.Village.StoryContact.NameShortColored).ToString().HtmlFormatting("add8e6ff", true, 15));
-            Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillageQuestDesc2".Translate(StoryUtility.FactionOfSacrilegHunters.Name.HtmlFormatting("008080"), CompCache.StoryWC.questCont.Village.Settlement.Name.HtmlFormatting("008080"), CompCache.StoryWC.questCont.Village.StoryContact.NameShortColored));
+                var storyContactBondedPerson = CompCache.StoryWC.questCont.FriendlyCaravan?.storyContactBondedPawn;
+                Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillageQuestLetterContent".Translate(storyContactBondedPerson != null ? storyContactBondedPerson.NameShortColored : Faction.OfPlayer.NameColored, CompCache.StoryWC.questCont.Village.Settlement.Label).ToString().HtmlFormatting("add8e6ff", true, 15));
+                if (storyContactBondedPerson != null) Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillageQuestLetterContentPS".Translate().ToString().HtmlFormatting("add8e6ff", true, 13));
+                Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillageQuestLetterContentEnding".Translate(CompCache.StoryWC.questCont.Village.StoryContact.NameShortColored).ToString().HtmlFormatting("add8e6ff", true, 15));
+                Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillageQuestDesc2".Translate(StoryUtility.FactionOfSacrilegHunters.Name.HtmlFormatting("008080"), CompCache.StoryWC.questCont.Village.Settlement.Name.HtmlFormatting("008080"), CompCache.StoryWC.questCont.Village.StoryContact.NameShortColored));
+            }
             Quests.QuestUtility.UpdateQuestLocation(StoryQuestDefOf.CA_StoryVillage_Arrival, CompCache.StoryWC.questCont.Village.Settlement);
             CompCache.StoryWC.SetSF("IntroVillage_Created");
         }
@@ -535,10 +539,10 @@ namespace CaravanAdventures.CaravanStory
 
         public static Pawn GetGiftedPawn() => CompCache.StoryWC.questCont.StoryStart?.Gifted; // ?? PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction?.FirstOrDefault(x => (x?.RaceProps?.Humanlike ?? false) && x.health.hediffSet.GetFirstHediffOfDef(HediffDef.Named("CAAncientGift")) != null);
 
-        public static bool IsAuraProtected(this Pawn pawn) => 
+        public static bool IsAuraProtected(this Pawn pawn) =>
             pawn?.health?.hediffSet?.hediffs?.Any(
-                x => x != null 
-                && (x.def == CaravanAbilities.AbilityDefOf.CAAncientProtectiveAura 
+                x => x != null
+                && (x.def == CaravanAbilities.AbilityDefOf.CAAncientProtectiveAura
                     || x.def == CaravanAbilities.AbilityDefOf.CAAncientProtectiveAuraLinked)) ?? false;
 
         public static bool IsAuraProtectedAndTakesShipHeat(this Pawn pawn)

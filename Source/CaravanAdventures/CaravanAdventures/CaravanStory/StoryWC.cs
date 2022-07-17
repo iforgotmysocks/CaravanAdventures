@@ -1,6 +1,7 @@
 ﻿using CaravanAdventures.CaravanStory.Quests;
 using RimWorld;
 using RimWorld.Planet;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Verse;
@@ -224,6 +225,11 @@ namespace CaravanAdventures.CaravanStory
                     SetSF("IntroVillage_InitCountDownStarted");
                 }
 
+                if (CheckShouldWatchOverVillage())
+                {
+                    Helper.RunSavely(questCont.Village.TryCheckVillageAndEnsure);
+                }
+
                 if (CheckCanStartCountDownOnNewShrine() && !debugFlags["ShrinesDone"])
                 {
                     shrineRevealCounter = BaseDelayNextShrineReveal * (countShrinesCompleted + 1f) * 0.5f;
@@ -245,7 +251,7 @@ namespace CaravanAdventures.CaravanStory
             
             if (questCont.Village.villageGenerationCounter == 0) Helper.RunSavelyWithDelay(() => 
                 StoryUtility.GenerateFriendlyVillage(
-                    ref questCont.Village.villageGenerationCounter), 
+                    ref questCont.Village.villageGenerationCounter, questCont.Village.RespawnVillage), 
                 ref questCont.Village.villageGenerationCounter);
             
             if (shrineRevealCounter == 0) Helper.RunSavelyWithDelay(() => 
@@ -378,6 +384,8 @@ namespace CaravanAdventures.CaravanStory
             && storyFlags["Shrine1_Completed"]
             && !storyFlags[BuildMaxShrinePrefix() + "Completed"]
             && ModSettings.apocalypseEnabled;
+
+        private bool CheckShouldWatchOverVillage() => storyFlags["IntroVillage_Created"] && !storyFlags["IntroVillage_Entered"];
 
         public void ResetStoryVars()
         {
