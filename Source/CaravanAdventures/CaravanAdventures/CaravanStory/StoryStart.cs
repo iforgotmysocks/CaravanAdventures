@@ -52,7 +52,7 @@ namespace CaravanAdventures.CaravanStory
                     && (CompCache.StoryWC.storyFlags["Start_ReceivedGift"]
                         || map.IsPlayerHome))
                 {
-                    GetTheTree();
+                    FindTheTree();
                     AddTalkTreeAction();
                     AddTreeWhisper();
                     CheckRemoveWhisperTemporarily();
@@ -64,16 +64,9 @@ namespace CaravanAdventures.CaravanStory
             ticks++;
         }
 
-        private void GetTheTree()
+        private void FindTheTree()
         {
-            var tree = map.spawnedThings.FirstOrDefault(x => x.def.defName == "Plant_TreeAnima") as ThingWithComps;
-            if (tree == null)
-            {
-                theTree = null;
-                DLog.Message("Tree is null");
-                return;
-            }
-            theTree = tree;
+            theTree = map.spawnedThings.FirstOrDefault(x => x.def.defName == "Plant_TreeAnima") as ThingWithComps;
         }
 
         private void CheckRemoveWhisperTemporarily()
@@ -117,12 +110,6 @@ namespace CaravanAdventures.CaravanStory
             CompCache.StoryWC.storyFlags["Start_InitialTreeAddTalkOption"] = true;
         }
 
-        private void DisableTreeTalkAction()
-        {
-            if (theTree == null) return;
-            var comp = theTree.TryGetComp<CompTalk>();
-        }
-
         private void AddTreeWhisper()
         {
             if (CompCache.StoryWC.storyFlags["Start_ReceivedGift"]
@@ -132,7 +119,7 @@ namespace CaravanAdventures.CaravanStory
 
             if (theTree == null)
             {
-                DLog.Message("Tree is null in AddTreeWisper");
+                //DLog.Message("Tree is null in AddTreeWisper");
                 return;
             }
 
