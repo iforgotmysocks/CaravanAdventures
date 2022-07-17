@@ -27,16 +27,6 @@ namespace CaravanAdventures
 
             Helper.RunSavely(() =>
             {
-                var simpleSearchBarAssembly = Helper.GetAssembly("simplesearchbar", detectedAssemblies);
-                if (simpleSearchBarAssembly != null && ModSettings.caravanFormingFilterSelectionEnabled)
-                {
-                    Log.Message($"Caravan Adventures: Applying patch for SimpleSearchBar - smaller caravan button layout to make room for search bar");
-                    Patches.AutomaticItemSelection.smallLayoutCompatibility = true;
-                }
-            });
-
-            Helper.RunSavely(() =>
-            {
                 var alphaBiomesAssembly = Helper.GetAssembly("alphabiomes", detectedAssemblies);
                 if (alphaBiomesAssembly != null)
                 {
@@ -123,6 +113,16 @@ namespace CaravanAdventures
                     Patches.Compatibility.SoS2Patch.ApplyPatches(detectedAssemblies.FirstOrDefault(x => x.assemblyString == "shipshaveinsides").assembly);
                 }
             }, false, ErrorMessage("SoS2"));
+
+            Helper.RunSavely(() =>
+            {
+                var rimWarAssembly = Helper.GetAssembly("RimWar", detectedAssemblies);
+                if (ModSettings.storyEnabled && rimWarAssembly != null)
+                {
+                    Log.Message($"Enabling rimwar patch to avoid sacrileg hunters being chosen as the victory faction at gamestart");
+                    Patches.Compatibility.RimWarPatch.ApplyPatches(rimWarAssembly);
+                }
+            }, false, ErrorMessage("RimWar"));
         }
 
         private static string ErrorMessage(string modName) => $"Following error happend while trying to patch {modName} for compatibility with CA, but was catched savely:\n";
