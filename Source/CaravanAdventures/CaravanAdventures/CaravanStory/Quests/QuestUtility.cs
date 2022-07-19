@@ -112,7 +112,7 @@ namespace CaravanAdventures.CaravanStory.Quests
             if (sendUpdateInfoLetter) Find.LetterStack.ReceiveLetter("CALetterQuestOngoingUpdatedInfo".Translate(), "CALetterQuestOngoingUpdatedInfoText".Translate(quest.name.CapitalizeFirst()), LetterDefOf.NeutralEvent, null, null, quest, null, null);
         }
 
-        public static void UpdateQuestLocation(QuestScriptDef questDef, WorldObject location, bool clearExistingLocations = true)
+        public static void UpdateQuestLocation(QuestScriptDef questDef, WorldObject location, bool clearExistingLocations = true, bool sendUpdateInfoLetter = false)
         {
             var quest = Find.QuestManager.QuestsListForReading.FirstOrDefault(x => x.root == questDef);
             if (quest == null) return;
@@ -125,6 +125,8 @@ namespace CaravanAdventures.CaravanStory.Quests
             }
             if (clearExistingLocations) locationPart.Locations.Clear();
             locationPart.Locations.Add(location);
+
+            if (sendUpdateInfoLetter) Find.LetterStack.ReceiveLetter("CALetterQuestOngoingUpdatedInfo".Translate(), "CALetterQuestOngoingUpdatedInfoText".Translate(quest.name.CapitalizeFirst()), LetterDefOf.NeutralEvent, null, null, quest, null, null);
         }
     }
 }
