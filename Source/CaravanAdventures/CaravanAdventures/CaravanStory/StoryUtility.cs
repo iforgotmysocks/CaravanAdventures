@@ -280,7 +280,7 @@ namespace CaravanAdventures.CaravanStory
                 Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillageQuestLetterContentEnding".Translate(CompCache.StoryWC.questCont.Village.StoryContact.NameShortColored).ToString().HtmlFormatting("add8e6ff", true, 15));
                 Quests.QuestUtility.AppendQuestDescription(StoryQuestDefOf.CA_StoryVillage_Arrival, "StoryVillageQuestDesc2".Translate(StoryUtility.FactionOfSacrilegHunters.Name.HtmlFormatting("008080"), CompCache.StoryWC.questCont.Village.Settlement.Name.HtmlFormatting("008080"), CompCache.StoryWC.questCont.Village.StoryContact.NameShortColored));
             }
-            Quests.QuestUtility.UpdateQuestLocation(StoryQuestDefOf.CA_StoryVillage_Arrival, CompCache.StoryWC.questCont.Village.Settlement);
+            Quests.QuestUtility.UpdateQuestLocation(StoryQuestDefOf.CA_StoryVillage_Arrival, CompCache.StoryWC.questCont.Village.Settlement, true, respawn);
             CompCache.StoryWC.SetSF("IntroVillage_Created");
         }
 

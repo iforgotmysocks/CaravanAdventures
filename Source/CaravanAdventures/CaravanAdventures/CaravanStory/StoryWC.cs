@@ -227,6 +227,7 @@ namespace CaravanAdventures.CaravanStory
 
                 if (CheckShouldWatchOverVillage())
                 {
+                    DLog.Message($"Checking for settlement availability. Counter: {questCont.Village.villageGenerationCounter}");
                     Helper.RunSavely(questCont.Village.TryCheckVillageAndEnsure);
                 }
 

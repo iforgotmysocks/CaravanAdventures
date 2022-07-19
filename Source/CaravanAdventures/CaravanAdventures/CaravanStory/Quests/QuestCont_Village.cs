@@ -34,9 +34,10 @@ namespace CaravanAdventures.CaravanStory.Quests
 
         public void TryCheckVillageAndEnsure()
         {
-            if (Settlement != null && settlement.Faction == StoryUtility.FactionOfSacrilegHunters) return;
+            if (Settlement != null && !settlement.Destroyed && settlement.Spawned && settlement.Faction == StoryUtility.FactionOfSacrilegHunters) return;
             if (villageGenerationCounter > 0f) return;
-            villageGenerationCounter = 0f;
+            DLog.Message($"allowing village respawn");
+            villageGenerationCounter = ModSettings.debug ? 0f : 20000f;
             respawnVillage = true;
             //CaravanStory.StoryUtility.GenerateFriendlyVillage(ref villageGenerationCounter, true);
         }
