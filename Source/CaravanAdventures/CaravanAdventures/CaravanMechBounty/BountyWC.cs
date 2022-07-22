@@ -83,6 +83,7 @@ namespace CaravanAdventures.CaravanMechBounty
 
             if (CheckCanStartBountyNotificationCounter())
             {
+                DLog.Message($"Starting bounty notification counter at {BountyNotificationDelay}");
                 bountyNotificationCounter = BountyNotificationDelay;
                 bountyNotificationCounterStarted = true;
             }
@@ -98,6 +99,13 @@ namespace CaravanAdventures.CaravanMechBounty
             ongoingItemDelay--;
             ongoingEnvoyDelay--;
             ongoingVeteranDelay--;
+        }
+
+        public void ResetBountyFeature()
+        {
+            bountyNotificationCounterStarted = false;
+            BountyServiceAvailable = false;
+            BountyNotificationCounter = -1;
         }
 
         private bool CheckCanStartBountyNotificationCounter()

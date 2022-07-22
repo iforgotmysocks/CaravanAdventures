@@ -13,6 +13,8 @@ namespace CaravanAdventures.CaravanStory
         private int ticks = 0;
         private bool whisperStopped = false;
 
+        public Thing TheTree { get => theTree; }
+        public static string TreeDialogId => "StoryStart_TreeDialog";
         public StoryStart(Map map) : base(map)
         {
         }
@@ -106,7 +108,7 @@ namespace CaravanAdventures.CaravanStory
         private void AddTalkTreeAction()
         {
             if (theTree == null) return;
-            StoryUtility.AssignDialog("StoryStart_TreeDialog", (ThingWithComps)theTree, this.GetType().ToString(), "StoryStartDialog", true, true, true, null, true);
+            StoryUtility.AssignDialog(TreeDialogId, (ThingWithComps)theTree, this.GetType().ToString(), "StoryStartDialog", true, true, true, null, true);
             CompCache.StoryWC.storyFlags["Start_InitialTreeAddTalkOption"] = true;
         }
 

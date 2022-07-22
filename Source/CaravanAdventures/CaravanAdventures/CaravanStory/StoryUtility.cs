@@ -85,7 +85,7 @@ namespace CaravanAdventures.CaravanStory
                 faction = faction,
                 raidArrivalModeForQuickMilitaryAid = true,
                 // todo by wealth, the richer, the less help // 7500 - 8000
-                points = Rand.Range(pointsMin, pointsMax),  // DiplomacyTuning.RequestedMilitaryAidPointsRange.RandomInRange;
+                points = Rand.Range(pointsMin, pointsMax),
                 raidNeverFleeIndividual = true,
                 raidStrategy = RaidStrategyDefOf.ImmediateAttackFriendly,
                 raidArrivalMode = PawnsArrivalModeDefOf.EdgeDrop
@@ -109,7 +109,7 @@ namespace CaravanAdventures.CaravanStory
             var comp = addressed.TryGetComp<CompTalk>();
             if (comp == null)
             {
-                Log.Warning($"CompTalk on pawn {CompCache.StoryWC.questCont?.Village?.StoryContact?.Name} is null, which shouldn't happen");
+                Log.Warning($"CompTalk on addressed {(addressed is Pawn pawn ? pawn.NameShortColored.ToString() : addressed.def.defName)} is null, which shouldn't happen");
                 comp = new CompTalk();
                 comp.parent = addressed;
                 addressed.AllComps.Add(comp);
@@ -134,6 +134,31 @@ namespace CaravanAdventures.CaravanStory
                 comp.ShowQuestionMark = showQuestionMark;
                 comp.Enabled = enabled;
             }
+        }
+
+        public static bool RemoveDialog(ThingWithComps addressed, string id)
+        {
+            var comp = addressed.TryGetComp<CompTalk>();
+            if (comp == null)
+            {
+                Log.Warning($"CompTalk on addressed {(addressed is Pawn pawn ? pawn.NameShortColored.ToString() : addressed.def.defName)} is null, canceling.");
+                return false;
+            }
+
+            if (comp.actionsCt.RemoveAll(x => x.Id == id) > 0) return true;
+            return false;
+        }
+
+        public static void RemoveAllDialogs(ThingWithComps addressed)
+        {
+            var comp = addressed.TryGetComp<CompTalk>();
+            if (comp == null)
+            {
+                Log.Warning($"CompTalk on addressed {(addressed is Pawn pawn ? pawn.NameShortColored.ToString() : addressed.def.defName)} is null, canceling.");
+                return;
+            }
+
+            comp.actionsCt.Clear();
         }
 
         internal static void AdjustGoodWill(int amount, Faction faction = null)
@@ -186,6 +211,9 @@ namespace CaravanAdventures.CaravanStory
             CompCache.StoryWC.questCont.Village.StoryContact = null;
             CompCache.StoryWC.questCont.FriendlyCaravan.storyContactBondedPawn = null;
             CompCache.StoryWC.ResetStoryVars();
+            CompCache.BountyWC.ResetBountyFeature();
+
+            StoryUtility.RemoveAllWhisperDialogs();
             StoryUtility.RemoveExistingQuestFriendlyVillages();
             Quests.QuestUtility.DeleteQuest(StoryQuestDefOf.CA_TradeCaravan);
             Quests.QuestUtility.DeleteQuest(StoryQuestDefOf.CA_StoryVillage_Arrival);
@@ -205,6 +233,17 @@ namespace CaravanAdventures.CaravanStory
             CompCache.StoryWC.questCont.StoryStart.Gifted = null;
 
             Messages.Message($"Story reset complete", MessageTypeDefOf.PositiveEvent, false);
+        }
+
+        private static void RemoveAllWhisperDialogs()
+        {
+            if (Find.Maps == null || !Find.Maps.Any()) return;
+            foreach (var map in Find.Maps.Where(x => x?.ParentFaction == Faction.OfPlayer))
+            {
+                var tree = map.listerThings.AllThings.FirstOrDefault(x => x.def == ThingDefOf.Plant_TreeAnima) as ThingWithComps;
+                if (tree == null || !tree.Spawned || tree.Destroyed) continue;
+                RemoveDialog(tree, StoryStart.TreeDialogId);
+            }
         }
 
         public static void CompleteStory()
