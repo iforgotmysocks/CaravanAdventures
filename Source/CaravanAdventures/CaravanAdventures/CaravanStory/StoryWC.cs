@@ -397,9 +397,6 @@ namespace CaravanAdventures.CaravanStory
             ticks = -1;
             countShrinesCompleted = 0;
             unlockedSpells = new List<AbilityDef>();
-
-            CompCache.BountyWC.BountyServiceAvailable = false;
-            CompCache.BountyWC.BountyNotificationCounter = -1;
         }
 
         public void SetStoryCompleteVars()
