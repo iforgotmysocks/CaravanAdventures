@@ -98,15 +98,18 @@ namespace CaravanAdventures.CaravanStory
             var stateBackup = Current.ProgramState;
             Current.ProgramState = ProgramState.MapInitializing;
 
-            foreach (var room in GetAncientShrineRooms(map))
+            //todo skip mechs and add insects instead for rimedieval
+            Helper.RunSavely(() =>
             {
-                AddSpacers(room, map, caravan);
-                AddMechanoidsToRoom(room, map, caravan, boss, RemoveHivesFromRoom(room));
-                RemoveRewardsFromSmallShrines(room);
-            }
-            // we're killing insects as they can distract incoming help and have them march across the entire map while mechs destroy the player
-            KillRemainingHivesAndInsectsOnMap(map);
-
+                foreach (var room in GetAncientShrineRooms(map))
+                {
+                    AddSpacers(room, map, caravan);
+                    AddMechanoidsToRoom(room, map, caravan, boss, RemoveHivesFromRoom(room));
+                    RemoveRewardsFromSmallShrines(room);
+                }
+                // we're killing insects as they can distract incoming help and have them march across the entire map while mechs destroy the player
+                KillRemainingHivesAndInsectsOnMap(map);
+            });
             Current.ProgramState = stateBackup;
         }
 
