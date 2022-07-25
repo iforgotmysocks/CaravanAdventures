@@ -124,7 +124,6 @@ namespace CaravanAdventures.CaravanStory
 
         private void LeavingShrineDialog()
         {
-            // todo possibly save current counter before boss is dead as static counter and use that for the leaving part
             var storyChar = CompCache.StoryWC.questCont.Village.StoryContact;
             switch (CompCache.StoryWC.GetCurrentShrineCounter())
             {
