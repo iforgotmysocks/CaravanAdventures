@@ -5,7 +5,8 @@
     <defName>AncientProtectiveAuraFleck</defName>
     <graphicData>
       <texPath>Other/ForceField</texPath>
-      <shaderType>TransparentPostLight</shaderType>
+      <!--<shaderType>TransparentPostLight</shaderType>-->
+      <shaderType>MoteGlow</shaderType>
       <color>(0.6, 1, 0.6)</color>
     </graphicData>
     <altitudeLayer>MoteOverhead</altitudeLayer>
@@ -14,4 +15,22 @@
     <fadeOutTime>0.5</fadeOutTime>
     <growthRate>1</growthRate>
   </FleckDef>
+
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>ConjuredLightFleck</defName>
+    <graphicData>
+      <texPath>Things/Flecks/ConjuredLight</texPath>
+      <!--<shaderType>TransparentPostLight</shaderType>-->
+      <color>(0.6, 1, 0.6)</color>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>(1,1)</drawSize>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.5</fadeInTime>
+    <solidTime>1</solidTime>
+    <fadeOutTime>0.5</fadeOutTime>
+    <growthRate>0.2</growthRate>
+  </FleckDef>
+  
+  
 </Defs>
