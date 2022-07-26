@@ -165,5 +165,21 @@ namespace CaravanAdventures
 
             return default(T);
         }
+
+        public static IEnumerable<ThingDef> FilteredStuffs(this IEnumerable<ThingDef> things, IEnumerable<StuffCategoryDef> stuffCatsToExlude, IEnumerable<ThingDef> stuffsToExclude = null)
+        {
+            if (!(things?.Any() ?? false))
+            {
+                Log.Error($"Tried to process faulty enumerable.");
+                return null;
+            }
+            var res = things.ToList();
+            var fallback = things.OrderBy(x => x?.BaseMarketValue ?? 0).FirstOrDefault();
+            if (stuffCatsToExlude != null) res.RemoveAll(x => x.stuffCategories != null
+                && x.stuffCategories.Any(sc => stuffCatsToExlude.Contains(sc)));
+            if (stuffsToExclude != null) res.RemoveAll(x => stuffsToExclude.Contains(x));
+            if (!res.Any()) res.Add(fallback);
+            return res;
+        }
     }
 }
