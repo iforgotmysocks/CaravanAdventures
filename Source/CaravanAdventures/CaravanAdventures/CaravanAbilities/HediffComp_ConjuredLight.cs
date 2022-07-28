@@ -66,10 +66,7 @@ namespace CaravanAdventures.CaravanAbilities
 
         private void MoveFromCurrentPos(Vector3 vector)
         {
-            if (currentPos.ShouldSpawnMotesAt(parent.pawn.Map))
-            {
-                return;
-            }
+            if (!currentPos.ShouldSpawnMotesAt(parent.pawn.Map)) return;
             var def = DefDatabase<FleckDef>.GetNamedSilentFail("ConjuredLightFleck");
             def.growthRate = new FloatRange(-0.2f, 0.1f).RandomInRange;
 
