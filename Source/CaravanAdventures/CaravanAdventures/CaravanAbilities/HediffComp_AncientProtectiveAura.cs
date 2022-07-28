@@ -93,13 +93,16 @@ namespace CaravanAdventures.CaravanAbilities
             if ((ticksSincePsyCost == 100 || ticksSincePsyCost == 400) && Pawn?.Map != null && ModSettings.enableAncientAuraAnimation) Helper.RunSavely(() =>
             {
                 if (!ModsConfig.RoyaltyActive) return;
-                var mote = ThingMaker.MakeThing(DefDatabase<ThingDef>.GetNamedSilentFail("AncientProtectiveAuraFleck")) as MoteThrownAttachedOwn;
-                if (mote != null)
+                if (Pawn.Position.ShouldSpawnMotesAt(parent.pawn.Map))
                 {
-                    mote.link1 = new MoteAttachLink(Pawn);
-                    mote.exactPosition = Pawn.DrawPos;
-                    mote.Scale = 0.125f;
-                    GenSpawn.Spawn(mote, Pawn.Position, Pawn.Map, WipeMode.Vanish);
+                    var mote = ThingMaker.MakeThing(DefDatabase<ThingDef>.GetNamedSilentFail("AncientProtectiveAuraFleck")) as MoteThrownAttachedOwn;
+                    if (mote != null)
+                    {
+                        mote.link1 = new MoteAttachLink(Pawn);
+                        mote.exactPosition = Pawn.DrawPos;
+                        mote.Scale = 0.125f;
+                        GenSpawn.Spawn(mote, Pawn.Position, Pawn.Map, WipeMode.Vanish);
+                    }
                 }
             });
 
@@ -148,7 +151,7 @@ namespace CaravanAdventures.CaravanAbilities
         {
             if (!CompatibilityPatches.detectedAssemblies.Any(x => x.assemblyString == Patches.Compatibility.SoS2Patch.SoS2AssemblyName
             || Pawn?.psychicEntropy?.PsychicSensitivity == null
-            || Pawn?.psychicEntropy?.Psylink?.level == null 
+            || Pawn?.psychicEntropy?.Psylink?.level == null
             || Pawn?.psychicEntropy?.Psylink?.level == 0
             || Pawn.psychicEntropy?.EntropyRelativeValue + heatToTakeIn > Pawn.psychicEntropy.MaxEntropy && Pawn.psychicEntropy.limitEntropyAmount == false
             )) return false;
