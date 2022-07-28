@@ -169,7 +169,7 @@ namespace CaravanAdventures.CaravanStory
                 var gifted = StoryUtility.GetGiftedPawn();
 
                 var subDiaNode = new DiaNode("Story_Start_Dia1_2_Neg".Translate());
-                subDiaNode.options.Add(new DiaOption("Story_Start_Dia1_2_Neg_Option1".Translate()) { resolveTree = true, action = () => CheckEnsureGifted(initiator, true) });
+                subDiaNode.options.Add(new DiaOption("Story_Start_Dia1_2_Neg_Option1".Translate()) { resolveTree = true, action = () => CheckEnsureGifted(initiator, true, true) });
 
                 diaNode = new DiaNode("Story_Start_Dia1_Me_End_GiftAlreadyRecieved".Translate());
                 diaNode.options.Add(new DiaOption("Story_Start_Dia1_Me_End_Bye".Translate()) { resolveTree = true });
@@ -234,7 +234,7 @@ namespace CaravanAdventures.CaravanStory
             }
         }
 
-        public void CheckEnsureGifted(Pawn pawn = null, bool forceStrip = false)
+        public void CheckEnsureGifted(Pawn pawn = null, bool forceStrip = false, bool calledByTree = false)
         {
             if (!CompCache.StoryWC.storyFlags["Start_CanReceiveGift"]) return;
             var gifted = CompCache.StoryWC.questCont.StoryStart.Gifted;
@@ -250,21 +250,35 @@ namespace CaravanAdventures.CaravanStory
 
             // todo choose best candidate
             // todo make sure the pawn isn't psychially unsensitive.
-            gifted = pawn ?? PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction?.FirstOrDefault(x => (x?.RaceProps?.Humanlike ?? false) && !x.HasExtraHomeFaction() && !x.HasExtraMiniFaction());
+            gifted = pawn ?? PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction?.Where(x =>
+                (x?.RaceProps?.Humanlike ?? false)
+                && !x.HasExtraHomeFaction() && !x.HasExtraMiniFaction()
+                && x?.psychicEntropy?.IsPsychicallySensitive == true
+                ).OrderByDescending(x => x?.psychicEntropy?.PsychicSensitivity ?? -1000).FirstOrDefault();
 
             if (gifted == null)
             {
-                Log.Warning($"Gifted pawn couldn't be found, this shouldn't happen.");
+                Log.Message($"No pawn could be found to take the ancient gift, this shouldn't happen unless all pawns are psychicly insensitive.");
                 return;
             }
 
             DLog.Message(gifted.Name + " " + gifted.NameFullColored);
 
-            MoteMaker.MakeStaticMote(gifted.Position, gifted.Map, ThingDefOf.Mote_CastPsycast, 10f);
+            FleckMaker.Static(gifted.Position, gifted.Map, FleckDefOf.PsycastAreaEffect, 6f);
             SoundDefOf.PsycastPsychicPulse.PlayOneShot(new TargetInfo(gifted));
 
             gifted.health.AddHediff(DefDatabase<HediffDef>.AllDefs.FirstOrDefault(x => x.defName == "PsychicAmplifier"), gifted.health.hediffSet.GetBrain());
             gifted.health.AddHediff(DefDatabase<HediffDef>.AllDefs.FirstOrDefault(x => x.defName == "CAAncientGift"), gifted.health.hediffSet.GetBrain());
+
+            if (!calledByTree)
+            {
+                var levelsToCorrect = (CompCache.StoryWC.GetUnlockedSpells().Count + 1) - gifted.GetPsylinkLevel();
+                if (levelsToCorrect > 0)
+                {
+                    if ((levelsToCorrect + gifted.GetPsylinkLevel()) > gifted.GetMaxPsylinkLevel()) levelsToCorrect = gifted.GetMaxPsylinkLevel() - gifted.GetPsylinkLevel();
+                    gifted.ChangePsylinkLevel(levelsToCorrect, false);
+                }
+            }
 
             var spellCount = gifted?.abilities?.abilities?.Count;
             AddUnlockedAbilities(gifted);
