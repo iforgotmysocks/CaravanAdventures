@@ -77,12 +77,23 @@ namespace CaravanAdventures
 
             Helper.RunSavely(() =>
             {
+
                 var assembly = Helper.GetAssembly("VanillaPsycastsExpanded", detectedAssemblies);
                 if (assembly != null && ModSettings.storyEnabled)
                 {
                     Log.Message($"Adjusted story to no longer grand vanilla psycasts in addition to ancient ones.");
                 }
             }, false, ErrorMessage("Vanilla Psycasts Expanded"));
+
+            Helper.RunSavely(() =>
+            {
+                var assembly = Helper.GetAssembly("rimedieval", detectedAssemblies);
+                if (assembly != null && ModSettings.storyEnabled)
+                {
+                    if (!Patches.Compatibility.Rimedieval.CheckRimedievalMechsDisabled(assembly)) return;
+                    Log.Message($"Pausing story while rimedieval is enabled and mechs are suppressed");
+                }
+            }, false, ErrorMessage("Rimedieval"));
 
             ExecuteHarmonyCompatibilityPatches();
 
