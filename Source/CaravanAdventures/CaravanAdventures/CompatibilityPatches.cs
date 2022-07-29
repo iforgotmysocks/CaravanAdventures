@@ -75,6 +75,16 @@ namespace CaravanAdventures
                 }
             }, false, ErrorMessage("SOS2"));
 
+            Helper.RunSavely(() =>
+            {
+                var assembly = Helper.GetAssembly("rimedieval", detectedAssemblies);
+                if (assembly != null && ModSettings.storyEnabled)
+                {
+                    if (!Patches.Compatibility.Rimedieval.CheckRimedievalMechsDisabled(assembly)) return;
+                    Log.Message($"Pausing story while rimedieval is enabled and mechs are suppressed");
+                }
+            }, false, ErrorMessage("Rimedieval"));
+
             ExecuteHarmonyCompatibilityPatches();
 
             Log.Message($"CA patches complete. v{System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString().TrimEnd(new[] { '.', '0' })} (1.2)");

@@ -187,6 +187,7 @@
     <Compile Include="Patches\CaravanMagicLight.cs" />
     <Compile Include="Patches\AttackSpeed.cs" />
     <Compile Include="Patches\CaravanCampProximityRemoval.cs" />
+    <Compile Include="Patches\Compatibility\Rimedieval.cs" />
     <Compile Include="Patches\Compatibility\RimWarPatch.cs" />
     <Compile Include="Patches\Compatibility\SoS2Patch.cs" />
     <Compile Include="Patches\Compatibility\VFECoreFriendlyFactionDetectionPatch.cs" />
@@ -241,7 +242,7 @@
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_StartDate="2000/1/1" BuildVersion_BuildVersioningStyle="None.None.None.Increment" />
+      <UserProperties BuildVersion_BuildVersioningStyle="None.None.None.Increment" BuildVersion_StartDate="2000/1/1" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
