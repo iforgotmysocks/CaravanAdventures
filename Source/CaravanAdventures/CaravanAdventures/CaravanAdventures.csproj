@@ -82,6 +82,7 @@
     <Compile Include="CaravanAbilities\HediffComp_AncientGift.cs" />
     <Compile Include="CaravanAbilities\HediffComp_ConjuredLight.cs" />
     <Compile Include="CaravanAbilities\HediffComp_DrainNature.cs" />
+    <Compile Include="CaravanAbilities\Swirrly.cs" />
     <Compile Include="CaravanCamp\AnimalArea.cs" />
     <Compile Include="CaravanCamp\Buildings\Building_AirConditioningHeater.cs" />
     <Compile Include="CaravanCamp\CampArea.cs" />

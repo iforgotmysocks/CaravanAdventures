@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -12,20 +13,21 @@ namespace CaravanAdventures.CaravanAbilities
         private Thing light;
         private int fleckTicks;
 
+        private List<Swirly> swirlies = new List<Swirly>(); 
         public override string CompLabelInBracketsExtra => base.CompLabelInBracketsExtra + ((int)ModSettings.lightDuration - ticksToDisappear).ToStringTicksToPeriod(true, true);
-
         public HediffCompProperties_ConjuredLight Props => (HediffCompProperties_ConjuredLight)props;
-
         public override string CompTipStringExtra => base.CompTipStringExtra + $"Caravan travel speed: x{Math.Round(ModSettings.magicLightCaravanSpeedMult, 1)}";
+
+        public override void CompPostMake()
+        {
+            for (int i = 0; i < Rand.Range(20,30); i++) swirlies.Add(new Swirly(this, 120, new IntRange(0, 50).RandomInRange));
+        }
 
         public override void CompPostPostRemoved()
         {
             base.CompPostPostRemoved();
 
-            if (Patches.CaravanMagicLight.magicLightTravelers.Contains(Pawn))
-            {
-                Patches.CaravanMagicLight.magicLightTravelers.Remove(Pawn);
-            }
+            if (Patches.CaravanMagicLight.magicLightTravelers.Contains(Pawn)) Patches.CaravanMagicLight.magicLightTravelers.Remove(Pawn);
             if (light != null) light.Destroy();
         }
 
@@ -42,8 +44,6 @@ namespace CaravanAdventures.CaravanAbilities
                 {
                     Patches.CaravanMagicLight.magicLightTravelers.Add(Pawn);
                 }
-
-              
             }
 
             if (fleckTicks > 120 && Pawn?.Spawned == true)
@@ -53,15 +53,19 @@ namespace CaravanAdventures.CaravanAbilities
 
                 if (currentPos == default) currentPos = Pawn.DrawPos;
                 var newPoint = GetNewPointOnPlayerPath();
-                MoveFromCurrentPos(newPoint);
+                //MoveFromCurrentPos(newPoint);
                 currentPos = newPoint;
+
+                swirlPoint = newPoint;
             }
+
+            foreach (var swirly in swirlies) swirly.Swirl();
 
             fleckTicks++;
             ticks++;
             ticksToDisappear++;
         }
-
+        public Vector3 swirlPoint;
         private Vector3 currentPos;
 
         private void MoveFromCurrentPos(Vector3 vector)
