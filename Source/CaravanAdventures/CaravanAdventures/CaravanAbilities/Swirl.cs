@@ -13,8 +13,7 @@ namespace CaravanAdventures.CaravanAbilities
     {
         HediffComp_ConjuredLight parent;
         private Vector3 currentPos;
-        float size = 0.2f;
-
+        float size;
         int ticks = 0;
         private int swirlTick;
         private int swirlDelay;
@@ -25,7 +24,7 @@ namespace CaravanAdventures.CaravanAbilities
             this.parent = parent;
             this.swirlTick = swirlTick;
             this.swirlDelay = swirlDelay;
-            this.size = new FloatRange(0.05f, 0.1f).RandomInRange;
+            this.size = Rand.Range(0.3f, 0.6f); // Rand.Range(0.05f, 0.1f);
         }
 
         public void Swirl()
@@ -47,9 +46,9 @@ namespace CaravanAdventures.CaravanAbilities
         }
         private void MoveFromCurrentPos(Vector3 vector)
         {
-            if (!currentPos.ShouldSpawnMotesAt(parent.Pawn.Map)) return;
-            var def = DefDatabase<FleckDef>.GetNamedSilentFail("ConjuredLightFleck");
-            def.growthRate = new FloatRange(Math.Min(Math.Abs(-0.1f), Math.Abs(size)) * -1 + 0.02f, 0.03f).RandomInRange;
+            if (!vector.ShouldSpawnMotesAt(parent.Pawn.Map)) return;
+            var def = DefDatabase<FleckDef>.GetNamedSilentFail($"ConjuredLightFleckSmallRotate{Rand.RangeInclusive(2,3)}");
+            def.growthRate = Rand.Range(Math.Min(Math.Abs(-0.1f), Math.Abs(size)) * -1 + 0.02f, 0.03f);
 
             float speed = Rand.Range(1.8f, 2.6f);
             FleckCreationData dataStatic = FleckMaker.GetDataStatic(currentPos, parent.Pawn.Map, def, size);
@@ -57,15 +56,13 @@ namespace CaravanAdventures.CaravanAbilities
             dataStatic.velocityAngle = (vector - dataStatic.spawnPosition).AngleFlat();
             dataStatic.velocitySpeed = speed;
             dataStatic.airTimeLeft = new float?((float)Mathf.RoundToInt((dataStatic.spawnPosition - vector).MagnitudeHorizontal() / speed));
+            if (dataStatic.def.solidTime > dataStatic.airTimeLeft) dataStatic.solidTimeOverride = dataStatic.airTimeLeft;
             parent.Pawn.Map.flecks.CreateFleck(dataStatic);
         }
 
         //private Vector3 GetNewRandomPointAroundPlayer() => GenRadial.RadialCellsAround(parent.swirlPoint, 1, false).RandomElement().ToVector3Shifted();
 
-        private Vector3 GetSwirlPointAroundNewLocation()
-        {
-            return parent.swirlPoint + new Vector3(new FloatRange(-swirlRadius, swirlRadius).RandomInRange, 0, new FloatRange(-swirlRadius, swirlRadius).RandomInRange);
-        }
+        private Vector3 GetSwirlPointAroundNewLocation() => parent.swirlPoint + new Vector3(Rand.Range(-swirlRadius, swirlRadius), 0, Rand.Range(-swirlRadius, swirlRadius));
 
         public Vector3 GetNewPointOnPlayerPath()
         {

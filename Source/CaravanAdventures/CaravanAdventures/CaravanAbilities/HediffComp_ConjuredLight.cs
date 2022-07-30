@@ -12,16 +12,14 @@ namespace CaravanAdventures.CaravanAbilities
         private int ticksToDisappear = 0;
         private Thing light;
         private int fleckTicks;
+        private float swirlRadius = 3f;
 
         private List<Swirly> swirlies = new List<Swirly>(); 
         public override string CompLabelInBracketsExtra => base.CompLabelInBracketsExtra + ((int)ModSettings.lightDuration - ticksToDisappear).ToStringTicksToPeriod(true, true);
         public HediffCompProperties_ConjuredLight Props => (HediffCompProperties_ConjuredLight)props;
         public override string CompTipStringExtra => base.CompTipStringExtra + $"Caravan travel speed: x{Math.Round(ModSettings.magicLightCaravanSpeedMult, 1)}";
 
-        public override void CompPostMake()
-        {
-            for (int i = 0; i < Rand.Range(20,30); i++) swirlies.Add(new Swirly(this, 120, new IntRange(0, 50).RandomInRange));
-        }
+        public override void CompPostMake() => GenerateSwirlies();
 
         public override void CompPostPostRemoved()
         {
@@ -48,12 +46,18 @@ namespace CaravanAdventures.CaravanAbilities
 
             if (fleckTicks > 120 && Pawn?.Spawned == true)
             {
-                DLog.Message($"should be running the fleck");
                 fleckTicks = 0;
 
+                if (swirlies.Count == 0) GenerateSwirlies();
+
+
                 if (currentPos == default) currentPos = Pawn.DrawPos;
+                // todo ensure new pos is actually a little distance from the current position
                 var newPoint = GetNewPointOnPlayerPath();
                 //MoveFromCurrentPos(newPoint);
+
+
+                // todo calculate and adjust next fleckTick to update position based on range between positions of current and new swirlPoint
                 currentPos = newPoint;
 
                 swirlPoint = newPoint;
@@ -65,6 +69,12 @@ namespace CaravanAdventures.CaravanAbilities
             ticks++;
             ticksToDisappear++;
         }
+
+        private void GenerateSwirlies()
+        {
+            for (int i = 0; i < Rand.Range(30, 35); i++) swirlies.Add(new Swirly(this, 120, new IntRange(0, 50).RandomInRange));
+        }
+
         public Vector3 swirlPoint;
         private Vector3 currentPos;
 
@@ -83,7 +93,7 @@ namespace CaravanAdventures.CaravanAbilities
             Pawn.Map.flecks.CreateFleck(dataStatic);
         }
 
-        private Vector3 GetNewRandomPointAroundPlayer() => GenRadial.RadialCellsAround(Pawn.Position, 3, false).RandomElement().ToVector3Shifted(); 
+        private Vector3 GetNewRandomPointAroundPlayer() => Pawn.DrawPos + new Vector3(Rand.Range(-swirlRadius, swirlRadius), 0, Rand.Range(-swirlRadius, swirlRadius));
 
         public Vector3 GetNewPointOnPlayerPath()
         {
