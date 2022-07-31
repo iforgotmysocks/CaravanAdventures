@@ -280,7 +280,7 @@ namespace CaravanAdventures.CaravanStory
             var spellCount = gifted?.abilities?.abilities?.Count;
             AddUnlockedAbilities(gifted);
             CompCache.StoryWC.questCont.StoryStart.Gifted = gifted;
-            if (spellCount == 0 || spellCount == 1) AddAdditionalSpells(gifted);
+            if ((spellCount == 0 || spellCount == 1) && !CompatibilityPatches.InDetectedAssemblies("VanillaPsycastsExpanded")) AddAdditionalSpells(gifted);
             Find.LetterStack.ReceiveLetter("CA_Story_ReceivedGiftLetterTitle".Translate(), "CA_Story_ReceivedGiftLetterDesc".Translate(gifted.NameShortColored, GenderUtility.GetPronoun(gifted.gender)), LetterDefOf.PositiveEvent);
         }
 

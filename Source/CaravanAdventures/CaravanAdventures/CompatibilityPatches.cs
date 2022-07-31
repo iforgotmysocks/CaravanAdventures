@@ -84,6 +84,15 @@ namespace CaravanAdventures
                 }
             }, false, ErrorMessage("SOS2"));
 
+            Helper.RunSavely(() =>
+            {
+                var assembly = Helper.GetAssembly("VanillaPsycastsExpanded", detectedAssemblies);
+                if (assembly != null && ModSettings.storyEnabled)
+                {
+                    Log.Message($"Adjusted story to no longer grand vanilla psycasts in addition to ancient ones.");
+                }
+            }, false, ErrorMessage("Vanilla Psycasts Expanded"));
+
             ExecuteHarmonyCompatibilityPatches();
 
             Log.Message($"CA patches complete. v{System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString().TrimEnd(new[] { '.', '0' })} (1.3)");
