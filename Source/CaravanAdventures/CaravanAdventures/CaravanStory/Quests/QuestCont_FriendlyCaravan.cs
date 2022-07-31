@@ -23,39 +23,6 @@ namespace CaravanAdventures.CaravanStory.Quests
 
         }
 
-        public void AssignCaravanDialog()
-        {
-            if (CompCache.StoryWC.questCont?.Village?.StoryContact == null)
-            {
-                Log.Warning("Skipping AssignCaravanDialog, pawn doesn't exist");
-                return;
-            }
-            var comp = CompCache.StoryWC.questCont.Village.StoryContact.TryGetComp<CompTalk>();
-            if (comp == null)
-            {
-                Log.Warning($"CompTalk on pawn {CompCache.StoryWC.questCont?.Village?.StoryContact?.Name} is null, which shouldn't happen");
-                comp = new CompTalk();
-                comp.parent = CompCache.StoryWC.questCont.Village.StoryContact;
-                CompCache.StoryWC.questCont.Village.StoryContact.AllComps.Add(comp);
-            }
-            var talkSetToAdd = new TalkSet()
-            {
-                Id = "FriendlyCaravan_PawnDia",
-                Addressed = CompCache.StoryWC.questCont.Village.StoryContact,
-                Initiator = null,
-                ClassName = typeof(QuestCont_FriendlyCaravan).ToString(),
-                MethodName = "StoryCharDialog",
-                Repeatable = false,
-            };
-            if (comp.actionsCt.Any(action => action.Id == talkSetToAdd.Id)) Log.Warning($"CompTalk dialog id: {talkSetToAdd.Id} already exists");
-            else
-            {
-                comp.actionsCt.Add(talkSetToAdd);
-                comp.ShowQuestionMark = true;
-                comp.Enabled = true;
-            }
-        }
-
         public void FriendlyCaravan_Conversation(Pawn initiator, Pawn addressed)
         {
             var rewardDef = ModSettings.noFreeStuff 
