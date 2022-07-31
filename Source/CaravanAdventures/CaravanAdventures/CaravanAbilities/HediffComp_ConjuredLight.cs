@@ -59,8 +59,6 @@ namespace CaravanAdventures.CaravanAbilities
 
             foreach (var swirly in swirlies) swirly.Swirl();
 
-
-
             fleckTicks++;
             ticks++;
             ticksToDisappear++;
@@ -73,26 +71,13 @@ namespace CaravanAdventures.CaravanAbilities
 
         public Vector3 swirlPoint;
 
-        //private void MoveFromCurrentPos(Vector3 vector)
-        //{
-        //    if (!currentPos.ShouldSpawnMotesAt(parent.pawn.Map)) return;
-        //    var def = DefDatabase<FleckDef>.GetNamedSilentFail("ConjuredLightFleck");
-        //    def.growthRate = new FloatRange(-0.2f, 0.1f).RandomInRange;
-
-        //    float speed = Rand.Range(1.8f, 2.6f);
-        //    FleckCreationData dataStatic = FleckMaker.GetDataStatic(currentPos, parent.pawn.Map, def, 0.3f); 
-        //    dataStatic.rotationRate = (float)Rand.Range(-300, 300);
-        //    dataStatic.velocityAngle = (vector - dataStatic.spawnPosition).AngleFlat();
-        //    dataStatic.velocitySpeed = speed;
-        //    dataStatic.airTimeLeft = new float?((float)Mathf.RoundToInt((dataStatic.spawnPosition - vector).MagnitudeHorizontal() / speed));
-        //    Pawn.Map.flecks.CreateFleck(dataStatic);
-        //}
-
         private Vector3 GetNewRandomPointAroundPlayer() => Pawn.DrawPos + new Vector3(Rand.Range(-swirlRadius, swirlRadius), 0, Rand.Range(-swirlRadius, swirlRadius));
 
         public Vector3 GetNewPointOnPlayerPath()
         {
-            var node = Pawn?.pather?.curPath.Peek(Pawn?.pather?.curPath?.NodesLeftCount ?? 0);
+            IntVec3? node = null;
+            var path = Pawn?.pather?.curPath;
+            if (path != null) node = path?.Peek(path.NodesLeftCount - 1);
             if (node == null || !node.HasValue) return GetNewRandomPointAroundPlayer();
             return GenRadial.RadialCellsAround(node.Value, 2, false).RandomElement().ToVector3Shifted();
         }
