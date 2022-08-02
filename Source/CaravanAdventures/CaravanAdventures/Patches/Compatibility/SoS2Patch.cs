@@ -29,6 +29,12 @@ namespace CaravanAdventures.Patches.Compatibility
             {
                 var org = AccessTools.Method(assembly.GetType("SaveOurShip2.ShipInteriorMod2"), "hasSpaceSuit");
                 var postfix = new HarmonyMethod(typeof(SoS2Patch), nameof(SoS2Patch.ShipInteriorMod2_hasSpaceSuit_Postfix));
+                // in case we can't find the original method from v2.5, user may be using the experimental version
+                if (org == null)
+                {
+                    org = AccessTools.Method(assembly.GetType("SaveOurShip2.ShipInteriorMod2"), "EVAlevel");
+                    postfix = new HarmonyMethod(typeof(SoS2Patch), nameof(SoS2Patch.ShipInteriorMod2_EVAlevel_Postfix));
+                }
                 HarmonyPatcher.harmony.Patch(org, null, postfix);
             }
 
@@ -67,6 +73,12 @@ namespace CaravanAdventures.Patches.Compatibility
         {
             if (__result == true || !CaravanStory.StoryUtility.IsAuraProtected(pawn)) return;
             __result = true;
+        }
+
+        public static void ShipInteriorMod2_EVAlevel_Postfix(ref byte __result, Pawn pawn)
+        {
+            if (__result == 8 || !CaravanStory.StoryUtility.IsAuraProtected(pawn)) return;
+            __result = 8;
         }
 
         public static void WorldSwitchUtility_SwitchToNewWorld_Postfix()
