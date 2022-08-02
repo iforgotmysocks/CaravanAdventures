@@ -70,7 +70,7 @@ slice2 by freefire66 https://freesound.org/people/freefire66/sounds/175949/
 slice3 by TheBuilder15 https://freesound.org/people/TheBuilder15/sounds/434896/  
 slice4 by Aleks41 https://freesound.org/people/Aleks41/sounds/449552/ 
 
-Translations: 
+Translations:  
 ChineseSimplified translation by MZM_GOW and ameki  
 ChineseTraditional translation by MZM_GOW and ameki  
 Korean translation by inbae  
