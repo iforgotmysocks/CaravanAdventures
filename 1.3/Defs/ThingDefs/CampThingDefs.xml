@@ -397,7 +397,7 @@
       <li Class="CompProperties_Refuelable">
         <fuelConsumptionRate>5.0</fuelConsumptionRate>
         <fuelCapacity>20.0</fuelCapacity>
-        <fuelConsumptionPerTickInRain>0.00002</fuelConsumptionPerTickInRain>
+        <fuelConsumptionPerTickInRain>0</fuelConsumptionPerTickInRain>
         <fuelFilter>
           <thingDefs>
             <li>WoodLog</li>
@@ -523,7 +523,7 @@
     </graphicData>
     <statBases>
       <MarketValue>12</MarketValue>
-      <WorkToMake>250</WorkToMake>
+      <WorkToMake>220</WorkToMake>
       <Nutrition>0.8</Nutrition>
       <FoodPoisonChanceFixedHuman>0</FoodPoisonChanceFixedHuman>
     </statBases>

@@ -114,6 +114,63 @@
     <workSkill>Cooking</workSkill>
   </RecipeDef>
 
+
+  <RecipeDef ParentName="CookMealBase">
+    <defName>CACookTribalGrillSnack</defName>
+    <label>cook a grill snack</label>
+    <description>Cook a grill snack.</description>
+    <jobString>Cooking grill snack.</jobString>
+    <workAmount>250</workAmount>
+    <workSpeedStat>CookSpeed</workSpeedStat>
+    <requiredGiverWorkType>Cooking</requiredGiverWorkType>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_CookMeal</soundWorking>
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>FoodRaw</li>
+          </categories>
+        </filter>
+        <count>0.4</count>
+      </li>
+    </ingredients>
+    <products>
+      <CATribalGrillSnack>1</CATribalGrillSnack>
+    </products>
+    <workSkill>Cooking</workSkill>
+  </RecipeDef>
+
+  <RecipeDef ParentName="CookMealBase">
+    <defName>CACookTribalGrillSnackBulk</defName>
+    <label>cook a grill snack x4</label>
+    <description>Cook 4 grill snacks.</description>
+    <jobString>Cooking 4 grill snacks.</jobString>
+    <workAmount>1000</workAmount>
+    <workSpeedStat>CookSpeed</workSpeedStat>
+    <requiredGiverWorkType>Cooking</requiredGiverWorkType>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_CookMeal</soundWorking>
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>FoodRaw</li>
+          </categories>
+        </filter>
+        <count>1.6</count>
+      </li>
+    </ingredients>
+    <products>
+      <CATribalGrillSnack>4</CATribalGrillSnack>
+    </products>
+    <workSkill>Cooking</workSkill>
+  </RecipeDef>
+
   <RecipeDef>
     <defName>CABurnApparel</defName>
     <label>burn apparel</label>
