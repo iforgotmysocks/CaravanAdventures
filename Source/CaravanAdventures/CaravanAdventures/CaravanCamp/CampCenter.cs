@@ -70,7 +70,7 @@ namespace CaravanAdventures.CaravanCamp
         {
             control = CampHelper.PrepAndGenerateThing(CampDefOf.CACampControl, this.CellRect.CenterCell, map, default, campAssetListRef) as ThingWithComps;
 
-            campFire = CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDefOf.Campfire), this.CellRect.CenterCell, map, Rot4.South, campAssetListRef) as Building_WorkTable;
+            campFire = CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(CampDefOf.CACampfireTribalRoast), this.CellRect.CenterCell, map, Rot4.South, campAssetListRef) as Building_WorkTable;
             var gatherSpotComp = campFire?.TryGetComp<CompGatherSpot>();
             if (gatherSpotComp != null) gatherSpotComp.Active = true;
 
@@ -116,7 +116,7 @@ namespace CaravanAdventures.CaravanCamp
         public virtual void ApplyRecipesTribal(Caravan caravan)
         {
             var colonists = caravan.PawnsListForReading.Where(col => col.IsFreeColonist).ToList();
-            var bill = new Bill_Production(DefDatabase<RecipeDef>.GetNamed("CookMealSimpleBulk")) { targetCount = colonists.Count != 0 ? colonists.Count * 3 : 12, repeatMode = BillRepeatModeDefOf.TargetCount };
+            var bill = new Bill_Production(CampDefOf.CACookTribalGrillSnackBulk) { targetCount = colonists.Count != 0 ? colonists.Count * 3 : 12, repeatMode = BillRepeatModeDefOf.TargetCount };
             campFire.BillStack.AddBill(bill);
             if (ModSettings.campStorageAndJobsAllowHumanMeat) bill.ingredientFilter.SetAllow(ThingDefOf.Meat_Human, true);
             if (ModSettings.campStorageAndJobsAllowInsectMeat) bill.ingredientFilter.SetAllow(ThingDef.Named("Meat_Megaspider"), true);

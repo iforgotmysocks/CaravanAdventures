@@ -25,6 +25,7 @@ namespace CaravanAdventures.CaravanCamp
         public static ThingDef CAAirConditioningHeater;
         public static ThingDef CACooler;
         public static ThingDef CACampfireRoast;
+        public static ThingDef CACampfireTribalRoast;
         public static ThingDef CASpacerBedroll;
         public static ThingDef CASpacerBedrollDouble;
         public static ThingDef CATentDoor;
@@ -42,5 +43,9 @@ namespace CaravanAdventures.CaravanCamp
 
         public static RecipeDef CACookGrillSnack;
         public static RecipeDef CACookGrillSnackBulk;
+
+
+        public static RecipeDef CACookTribalGrillSnack;
+        public static RecipeDef CACookTribalGrillSnackBulk;
     }
 }
