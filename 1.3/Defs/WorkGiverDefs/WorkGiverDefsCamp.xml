@@ -11,6 +11,7 @@
     <priorityInType>98</priorityInType>
     <fixedBillGiverDefs>
       <li>CACampfireRoast</li>
+      <li>CACampfireTribalRoast</li>
     </fixedBillGiverDefs>
     <verb>cook</verb>
     <gerund>cooking at</gerund>
@@ -29,6 +30,7 @@
     <priorityInType>30</priorityInType>
     <fixedBillGiverDefs>
       <li>CACampfireRoast</li>
+      <li>CACampfireTribalRoast</li>
     </fixedBillGiverDefs>
     <verb>work at</verb>
     <gerund>working at</gerund>
