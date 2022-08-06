@@ -61,6 +61,8 @@ namespace CaravanAdventures
         public static bool autoSelectPawns = true;
         public static bool autoSelectItems = true;
 
+        public static bool showAdditionalPawnStatsInCaravanFormDialog;
+
         // abilities
         // - ancient gift
         public static float ancientGiftPassivePsyfocusGainPerSec = 0.00035f;
@@ -186,6 +188,8 @@ namespace CaravanAdventures
             // filters
             Scribe_Values.Look(ref autoSelectPawns, "autoSelectPawns", true);
             Scribe_Values.Look(ref autoSelectItems, "autoSelectItems", true);
+
+            Scribe_Values.Look(ref showAdditionalPawnStatsInCaravanFormDialog, "showAdditionalPawnStatsInCaravanFormDialog", false);
 
             // abilities
             // - ancient gift

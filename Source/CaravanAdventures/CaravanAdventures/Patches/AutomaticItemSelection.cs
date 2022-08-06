@@ -52,11 +52,44 @@ namespace CaravanAdventures.Patches
             var orgDialog_FormCaravan_PostOpen = AccessTools.Method(typeof(Dialog_FormCaravan), "PostOpen");
             var postDialog_FormCaravan_PostOpen = new HarmonyMethod(typeof(AutomaticItemSelection).GetMethod(nameof(Dialog_FormCaravan_PostOpen_Postfix)));
             HarmonyPatcher.harmony.Patch(orgDialog_FormCaravan_PostOpen, null, postDialog_FormCaravan_PostOpen);
+
+            if (ModSettings.showAdditionalPawnStatsInCaravanFormDialog)
+            {
+                var org = AccessTools.Method(typeof(TransferableUIUtility), "DrawTransferableInfo");
+                var postUI = new HarmonyMethod(typeof(AutomaticItemSelection).GetMethod(nameof(DrawTransferableInfo_Postfix)));
+                HarmonyPatcher.harmony.Patch(org, null, postUI);
+            }
         }
 
         public static void OnGUI_Postfix(TransferableOneWayWidget __instance, List<Section> ___sections, List<Section> __state, Rect inRect, ref bool anythingChanged)
         {
             DoOwnCaravanFormButtons(___sections, ref anythingChanged);
+        }
+
+        public static void DrawTransferableInfo_Postfix(Transferable trad, Rect idRect, Color labelColor)
+        {
+            var pawn = trad?.AnyThing as Pawn;
+            if (pawn == null || pawn?.RaceProps?.Humanlike != true) return;
+            var str = BuildStringToAppendForSettings(pawn);
+            if (str == "") return;
+
+            Text.Anchor = TextAnchor.MiddleLeft;
+            Rect prefixRect = new Rect(idRect.xMax - 30f, 0f, 30f, idRect.height);
+            Text.WordWrap = false;
+            //GUI.color = labelColor;
+            Widgets.Label(prefixRect, BuildStringToAppendForSettings(pawn));
+            //GUI.color = Color.white;
+            Text.WordWrap = true;
+        }
+
+        private static string BuildStringToAppendForSettings(Pawn x)
+        {
+            var str = "";
+            //if (x?.abilities?.abilities?.Any() ?? false) str += "P";
+            if (x?.health?.hediffSet?.HasHediff(HediffDefOf.PsychicAmplifier) == true) str += "P";
+            if (x?.story?.traits?.HasTrait(TraitDefOf.Tough) == true) str += "T";
+            if (str == "") return str;
+            return $"({string.Join(",", str)})";
         }
 
         // currently disabled -> using PostOpen
