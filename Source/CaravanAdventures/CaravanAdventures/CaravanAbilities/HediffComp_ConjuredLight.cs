@@ -14,6 +14,8 @@ namespace CaravanAdventures.CaravanAbilities
         private int fleckTicks;
         private float swirlRadius = 3f;
 
+        public Vector3 swirlPoint;
+
         private List<Swirly> swirlies = new List<Swirly>(); 
         public override string CompLabelInBracketsExtra => base.CompLabelInBracketsExtra + ((int)ModSettings.lightDuration - ticksToDisappear).ToStringTicksToPeriod(true, true);
         public HediffCompProperties_ConjuredLight Props => (HediffCompProperties_ConjuredLight)props;
@@ -44,17 +46,11 @@ namespace CaravanAdventures.CaravanAbilities
                 }
             }
 
-            
             if (fleckTicks > 120 && Pawn?.Spawned == true)
             {
                 fleckTicks = 0;
-
                 if (swirlies.Count == 0) GenerateSwirlies();
-                // todo ensure new pos is actually a little distance from the current position
-                var newPos = GetNewPointOnPlayerPath();
-
-                // todo calculate and adjust next fleckTick to update position based on range between positions of current and new swirlPoint
-                swirlPoint = newPos;
+                swirlPoint = GetNewPointOnPlayerPath();
             }
 
             foreach (var swirly in swirlies) swirly.Swirl();
@@ -69,17 +65,23 @@ namespace CaravanAdventures.CaravanAbilities
             for (int i = 0; i < Rand.Range(30, 35); i++) swirlies.Add(new Swirly(this, 120, Rand.Range(0, 50)));
         }
 
-        public Vector3 swirlPoint;
-
-        private Vector3 GetNewRandomPointAroundPlayer() => Pawn.DrawPos + new Vector3(Rand.Range(-swirlRadius, swirlRadius), 0, Rand.Range(-swirlRadius, swirlRadius));
+        private Vector3 GetNewRandomPosAroundPos(Vector3 pos, float radius = 2f) => pos + new Vector3(Rand.Range(-radius, radius), 0, Rand.Range(-radius, radius));
 
         public Vector3 GetNewPointOnPlayerPath()
         {
             IntVec3? node = null;
             var path = Pawn?.pather?.curPath;
-            if (path != null) node = path?.Peek(path.NodesLeftCount - 1);
-            if (node == null || !node.HasValue) return GetNewRandomPointAroundPlayer();
-            return GenRadial.RadialCellsAround(node.Value, 2, false).RandomElement().ToVector3Shifted();
+            if (path != null) node = path.NodesLeftCount - 1 > GetForwardCellByPawnSpeed() ? path?.Peek(GetForwardCellByPawnSpeed()) : (path.NodesLeftCount - 1 > 0 ? path?.Peek(path.NodesLeftCount - 1) : null);
+            if (node == null || !node.HasValue) return GetNewRandomPosAroundPos(Pawn.DrawPos, swirlRadius);
+            return GetNewRandomPosAroundPos(node.Value.ToVector3Shifted(), swirlRadius);
+        }
+
+        // todo get target cell by speed.
+        private int GetForwardCellByPawnSpeed()
+        {
+            var speed = Pawn?.GetStatValue(StatDefOf.MoveSpeed) ?? 5;
+            if (speed < 8) return (int)(speed * 2);
+            return (int)(speed * 2.5);
         }
 
         public override void CompExposeData()

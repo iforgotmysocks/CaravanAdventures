@@ -38,7 +38,7 @@ namespace CaravanAdventures.CaravanAbilities
             {
                 ticks = 0;
                 if (currentPos == default) currentPos = parent.Pawn.DrawPos;
-                var newPoint = GetNewPointOnPlayerPath();
+                var newPoint = GetSwirlPointAroundNewLocation();
                 MoveFromCurrentPos(newPoint);
                 currentPos = newPoint;
             }
@@ -63,12 +63,5 @@ namespace CaravanAdventures.CaravanAbilities
         //private Vector3 GetNewRandomPointAroundPlayer() => GenRadial.RadialCellsAround(parent.swirlPoint, 1, false).RandomElement().ToVector3Shifted();
 
         private Vector3 GetSwirlPointAroundNewLocation() => parent.swirlPoint + new Vector3(Rand.Range(-swirlRadius, swirlRadius), 0, Rand.Range(-swirlRadius, swirlRadius));
-
-        public Vector3 GetNewPointOnPlayerPath()
-        {
-            var node = parent.Pawn?.pather?.curPath?.FirstNode;
-            if (node == null || !node.HasValue) return GetSwirlPointAroundNewLocation();
-            return GenRadial.RadialCellsAround(node.Value, 2, false).RandomElement().ToVector3Shifted();
-        }
     }
 }
