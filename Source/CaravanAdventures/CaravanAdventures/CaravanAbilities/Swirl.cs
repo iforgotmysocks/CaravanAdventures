@@ -60,8 +60,6 @@ namespace CaravanAdventures.CaravanAbilities
             parent.Pawn.Map.flecks.CreateFleck(dataStatic);
         }
 
-        //private Vector3 GetNewRandomPointAroundPlayer() => GenRadial.RadialCellsAround(parent.swirlPoint, 1, false).RandomElement().ToVector3Shifted();
-
         private Vector3 GetSwirlPointAroundNewLocation() => parent.swirlPoint + new Vector3(Rand.Range(-swirlRadius, swirlRadius), 0, Rand.Range(-swirlRadius, swirlRadius));
     }
 }
