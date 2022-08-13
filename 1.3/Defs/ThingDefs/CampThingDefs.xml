@@ -723,7 +723,7 @@
   <!-- trade beacon -->
   <ThingDef ParentName="CATentBase">
     <defName>CAOrbitalTradeBeacon</defName>
-    <label>orbital trade beacon</label>
+    <label>orbital camp trade beacon</label>
     <description>Required for orbital trading. You can only sell goods to orbital traders if they're near an orbital trade beacon.</description>
     <thingClass>Building_OrbitalTradeBeacon</thingClass>
     <graphicData>
@@ -794,7 +794,7 @@
   <!-- generator -->
   <ThingDef ParentName="CATentBase">
     <defName>CAChemfuelPoweredGenerator</defName>
-    <label>chemfuel powered generator</label>
+    <label>chemfuel powered camp generator</label>
     <description>Produces power by consuming chemfuel. Must be periodically refueled by hand.</description>
     <thingClass>Building</thingClass>
     <graphicData>
