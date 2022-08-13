@@ -28,7 +28,7 @@ namespace CaravanAdventures.Settings
         public override void DoWindowContents(Rect wrect)
         {
             var options = new Listing_Standard();
-            var viewRect = new Rect(0f, 0f, windowRect.width - 65, Patches.Compatibility.SoS2Patch.Installed() ? 1300 : 1150);
+            var viewRect = new Rect(0f, 0f, windowRect.width - 65, Patches.Compatibility.SoS2Patch.Installed() ? 1310 : 1160);
             var smallerOutRect = new Rect(wrect.x, wrect.y, wrect.width, wrect.height - 50);
 
             Widgets.BeginScrollView(smallerOutRect, ref scrollPos, viewRect);
@@ -93,6 +93,7 @@ namespace CaravanAdventures.Settings
             ModSettings.lightDuration = options.Slider(ModSettings.lightDuration, 60f, 300000);
             options.Label($"Caravan travel speed multiplier: {Math.Round(ModSettings.magicLightCaravanSpeedMult, 1)}");
             ModSettings.magicLightCaravanSpeedMult = options.Slider(ModSettings.magicLightCaravanSpeedMult, 0.1f, 5f);
+            options.CheckboxLabeled("Show mystical guiding light animation", ref ModSettings.enableGuidingLightAnimation);
 
             options.Gap();
 

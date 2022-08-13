@@ -16,12 +16,10 @@ namespace CaravanAdventures.CaravanAbilities
 
         public Vector3 swirlPoint;
 
-        private List<Swirly> swirlies = new List<Swirly>(); 
+        private List<Swirly> swirlies = new List<Swirly>();
         public override string CompLabelInBracketsExtra => base.CompLabelInBracketsExtra + ((int)ModSettings.lightDuration - ticksToDisappear).ToStringTicksToPeriod(true, true);
         public HediffCompProperties_ConjuredLight Props => (HediffCompProperties_ConjuredLight)props;
         public override string CompTipStringExtra => base.CompTipStringExtra + $"Caravan travel speed: x{Math.Round(ModSettings.magicLightCaravanSpeedMult, 1)}";
-
-        public override void CompPostMake() => GenerateSwirlies();
 
         public override void CompPostPostRemoved()
         {
@@ -34,7 +32,7 @@ namespace CaravanAdventures.CaravanAbilities
         public override void CompPostTick(ref float severityAdjustment)
         {
             base.CompPostTick(ref severityAdjustment);
-           
+
             if (ticksToDisappear > ModSettings.lightDuration) Pawn.health.RemoveHediff(this.parent);
 
             if (ticks > 500)
@@ -46,15 +44,17 @@ namespace CaravanAdventures.CaravanAbilities
                 }
             }
 
-            if (fleckTicks > 120 && Pawn?.Spawned == true && Pawn.Map != null)
+            if (ModSettings.enableGuidingLightAnimation)
             {
-                fleckTicks = 0;
-                if (swirlies.Count == 0) GenerateSwirlies();
-                swirlPoint = GetNewPointOnPlayerPath();
+                if (fleckTicks > 120 && Pawn?.Spawned == true && Pawn.Map != null)
+                {
+                    fleckTicks = 0;
+                    if (swirlies.Count == 0) GenerateSwirlies();
+                    swirlPoint = GetNewPointOnPlayerPath();
+                }
+
+                if (Pawn?.Spawned == true && Pawn.Map != null) foreach (var swirly in swirlies) swirly.Swirl();
             }
-
-
-            if (Pawn?.Spawned == true && Pawn.Map != null) foreach(var swirly in swirlies) swirly.Swirl();
 
             fleckTicks++;
             ticks++;

@@ -89,6 +89,7 @@ namespace CaravanAdventures
         // - light
         public static float lightDuration = 180000f;
         public static float magicLightCaravanSpeedMult = 1.5f;
+        public static bool enableGuidingLightAnimation = true;
 
         // compatibility
         public static bool sos2AuraHeatManagementEnabled = true;
@@ -217,6 +218,7 @@ namespace CaravanAdventures
             // - light
             Scribe_Values.Look(ref lightDuration, "lightDuration", 180000);
             Scribe_Values.Look(ref magicLightCaravanSpeedMult, "magicLightCaravanSpeedMult", 1.5f);
+            Scribe_Values.Look(ref enableGuidingLightAnimation, "enableGuidingLightAnimation", true);
 
             // compatibility
             Scribe_Values.Look(ref sos2AuraHeatManagementEnabled, "sos2AuraHeatManagementEnabled", true);
