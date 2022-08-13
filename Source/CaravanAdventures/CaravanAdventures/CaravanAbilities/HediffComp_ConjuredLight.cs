@@ -46,14 +46,15 @@ namespace CaravanAdventures.CaravanAbilities
                 }
             }
 
-            if (fleckTicks > 120 && Pawn?.Spawned == true)
+            if (fleckTicks > 120 && Pawn?.Spawned == true && Pawn.Map != null)
             {
                 fleckTicks = 0;
                 if (swirlies.Count == 0) GenerateSwirlies();
                 swirlPoint = GetNewPointOnPlayerPath();
             }
 
-            foreach (var swirly in swirlies) swirly.Swirl();
+
+            if (Pawn?.Spawned == true && Pawn.Map != null) foreach(var swirly in swirlies) swirly.Swirl();
 
             fleckTicks++;
             ticks++;
@@ -76,7 +77,6 @@ namespace CaravanAdventures.CaravanAbilities
             return GetNewRandomPosAroundPos(node.Value.ToVector3Shifted(), swirlRadius);
         }
 
-        // todo get target cell by speed.
         private int GetForwardCellByPawnSpeed()
         {
             var speed = Pawn?.GetStatValue(StatDefOf.MoveSpeed) ?? 5;
