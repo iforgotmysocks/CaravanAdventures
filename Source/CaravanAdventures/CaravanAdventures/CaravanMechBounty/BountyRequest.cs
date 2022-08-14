@@ -387,12 +387,15 @@ namespace CaravanAdventures.CaravanMechBounty
                 disabled = !CanRecruitVeteran(cost, out var reason),
                 disabledReason = reason
             });
-            node.options.Add(new DiaOption("CABountyExchangeVeteranRecruitment_EnlistTribal".Translate(costTribal))
+            if (ModsConfig.RoyaltyActive)
             {
-                link = PickVeteranPersonality(node, costTribal, true),
-                disabled = !CanRecruitVeteran(costTribal, out reason),
-                disabledReason = reason
-            });
+                node.options.Add(new DiaOption("CABountyExchangeVeteranRecruitment_EnlistTribal".Translate(costTribal))
+                {
+                    link = PickVeteranPersonality(node, costTribal, true),
+                    disabled = !CanRecruitVeteran(costTribal, out reason),
+                    disabledReason = reason
+                });
+            }
             node.options.Add(new DiaOption("CABountyBack".Translate()) { linkLateBind = () => CreateMainMenuNode() });
             return node;
         }
