@@ -20,7 +20,7 @@ namespace CaravanAdventures.CaravanMechBounty
 
         private static Pawn PrepareVeteranPawn(TraitDef selPersonality, TraitDef selSkill)
         {
-            var genPawnRequest = new PawnGenerationRequest(CaravanStory.StoryDefOf.CASacrilegHunters_ExperiencedHunter, Faction.OfPlayer)
+            var genPawnRequest = new PawnGenerationRequest(ModSettings.storyEnabled ? CaravanStory.StoryDefOf.CASacrilegHunters_ExperiencedHunter : PawnKindDefOf.SpaceRefugee, Faction.OfPlayer)
             {
                 MustBeCapableOfViolence = true,
                 AllowAddictions = false,
@@ -86,6 +86,7 @@ namespace CaravanAdventures.CaravanMechBounty
             veteran.skills.skills.FirstOrDefault(skill => skill.def == SkillDefOf.Construction).Level = Rand.Range(7, 15);
             veteran.skills.skills.FirstOrDefault(skill => skill.def == SkillDefOf.Construction).passion = Rand.Chance(0.5f) ? Passion.Major : Passion.Minor;
         }
+
         private static void ConfigureVeteranHediffs(Pawn veteran)
         {
             if (ModsConfig.RoyaltyActive)
