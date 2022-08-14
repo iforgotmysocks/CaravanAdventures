@@ -98,4 +98,6 @@
   <CABountyKillMessageReward>报酬：</CABountyKillMessageReward>
   <!-- EN: Total credit:  -->
   <CABountyKillMessageCredit>点数总计：</CABountyKillMessageCredit>
+
+  <CABountyExchangeVeteranRecruitment_EnlistTribal>Enlist top tribal veteran for {0} bounty credits</CABountyExchangeVeteranRecruitment_EnlistTribal>
 </LanguageData>

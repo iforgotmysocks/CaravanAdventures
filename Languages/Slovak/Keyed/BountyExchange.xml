@@ -52,4 +52,7 @@
   <CABountyKillMessageBounty>Bounty-kill: </CABountyKillMessageBounty>
   <CABountyKillMessageReward>Reward: </CABountyKillMessageReward>
   <CABountyKillMessageCredit>Total credit: </CABountyKillMessageCredit>
+
+  
+  <CABountyExchangeVeteranRecruitment_EnlistTribal>Enlist top tribal veteran for {0} bounty credits</CABountyExchangeVeteranRecruitment_EnlistTribal>
 </LanguageData>
