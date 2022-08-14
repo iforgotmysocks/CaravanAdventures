@@ -45,10 +45,10 @@ namespace CaravanAdventures.CaravanStory
 
         private readonly IntRange timeoutDaysRange = new IntRange(10, 12);
 
-        public IntRange ShrineDistance => Helper.Debug() 
-            ? new IntRange(2, 4) 
-            : wasShrineAmbushNoLuck 
-                ? new IntRange(ModSettings.shrineDistance.min / 5, ModSettings.shrineDistance.max / 5) 
+        public IntRange ShrineDistance => Helper.Debug()
+            ? new IntRange(2, 4)
+            : wasShrineAmbushNoLuck
+                ? new IntRange(ModSettings.shrineDistance.min / 5, ModSettings.shrineDistance.max / 5)
                 : ModSettings.shrineDistance;
 
         private int shrineTileUnsuccessfulCounter = 0;
@@ -176,7 +176,7 @@ namespace CaravanAdventures.CaravanStory
 
         public override void WorldComponentTick()
         {
-            base.WorldComponentTick();  
+            base.WorldComponentTick();
             RunDebugActionsOnceAtStartUp();
 
             if (!RoyaltyActiveCheck()) return;
@@ -195,7 +195,8 @@ namespace CaravanAdventures.CaravanStory
                 if (earthquakeSustainer == null) earthquakeSustainer = SoundDef.Named("CAEarthquake").TrySpawnSustainer(SoundInfo.OnCamera(MaintenanceType.None));
                 earthquakeSustainer.Maintain();
                 Find.CameraDriver.shaker.DoShake(10);
-                if (ticks == 1200) {
+                if (ticks == 1200)
+                {
                     earthquakeSustainer.End();
                     doEarthQuake = false;
                 }
@@ -245,19 +246,19 @@ namespace CaravanAdventures.CaravanStory
                     questCont.LastJudgment.StartApocalypse(-0.1f);
                 }
             }
-            if (questCont.FriendlyCaravan.friendlyCaravanCounter == 0) Helper.RunSavelyWithDelay(() => 
+            if (questCont.FriendlyCaravan.friendlyCaravanCounter == 0) Helper.RunSavelyWithDelay(() =>
                     CompCache.StoryWC.questCont.FriendlyCaravan.TryCreateFriendlyCaravan(
-                        ref questCont.FriendlyCaravan.friendlyCaravanCounter), 
+                        ref questCont.FriendlyCaravan.friendlyCaravanCounter),
                     ref questCont.FriendlyCaravan.friendlyCaravanCounter, 60000);
-            
-            if (questCont.Village.villageGenerationCounter == 0) Helper.RunSavelyWithDelay(() => 
+
+            if (questCont.Village.villageGenerationCounter == 0) Helper.RunSavelyWithDelay(() =>
                 StoryUtility.GenerateFriendlyVillage(
-                    ref questCont.Village.villageGenerationCounter, questCont.Village.RespawnVillage), 
+                    ref questCont.Village.villageGenerationCounter, questCont.Village.RespawnVillage),
                 ref questCont.Village.villageGenerationCounter);
-            
-            if (shrineRevealCounter == 0) Helper.RunSavelyWithDelay(() => 
+
+            if (shrineRevealCounter == 0) Helper.RunSavelyWithDelay(() =>
                 TryCreateNewShrine(
-                    ref shrineRevealCounter), 
+                    ref shrineRevealCounter),
                 ref shrineRevealCounter);
 
             ticks++;
@@ -288,7 +289,7 @@ namespace CaravanAdventures.CaravanStory
             DLog.Message($"Applying debug actions once");
             // todo added cleanup of faction settlement in 1.2.4 to be able to remove CAFriendlyMechanoid faction in a couple patches
             Helper.RunSavely(() => StoryUtility.ClearFriendlyMechFaction(), false, "", true);
-
+            
             ranDebugActionsOnceAtStartUp = true;
         }
 
@@ -354,7 +355,7 @@ namespace CaravanAdventures.CaravanStory
                     return -1;
                 }
             }
-         
+
             return tile;
         }
 
@@ -364,7 +365,7 @@ namespace CaravanAdventures.CaravanStory
         public void SetSFsStartingWith(string start, bool value = false) => storyFlags.Keys.Where(x => x.StartsWith(start)).ToList().ForEach(key => storyFlags[key] = value);
         public string BuildCurrentShrinePrefix(bool ignoreLimit = false) => ignoreLimit ? "Shrine" + countShrinesCompleted + 1 : "Shrine" + (countShrinesCompleted < shrineMaximum + 1 ? countShrinesCompleted + 1 : shrineMaximum + 1) + "_";
         public string BuildMaxShrinePrefix() => "Shrine" + shrineMaximum + "_";
-        public int GetCurrentShrineCounter(bool ignoreLimit = false) => ignoreLimit ? countShrinesCompleted + 1 : countShrinesCompleted < shrineMaximum +1 ? countShrinesCompleted + 1 : shrineMaximum + 1;
+        public int GetCurrentShrineCounter(bool ignoreLimit = false) => ignoreLimit ? countShrinesCompleted + 1 : countShrinesCompleted < shrineMaximum + 1 ? countShrinesCompleted + 1 : shrineMaximum + 1;
         public int GetShrineMaxiumum => shrineMaximum;
 
         public List<AbilityDef> GetUnlockedSpells() => unlockedSpells;
@@ -404,7 +405,7 @@ namespace CaravanAdventures.CaravanStory
             storyFlags.Keys.Where(x => x != "SacrilegHuntersBetrayal").ToList().ForEach(key => storyFlags[key] = true);
             unlockedSpells = new List<AbilityDef>();
             foreach (var spell in DefDatabase<AbilityDef>.AllDefsListForReading.Where(x => x.defName.StartsWith("CAAncient"))) unlockedSpells.Add(spell);
-            
+
             mechBossKillCounters.Clear();
             shrineRevealCounter = -1;
             ticks = -1;
