@@ -43,16 +43,11 @@ namespace CaravanAdventures
             return selAssembly;
         }
 
-        public static IEnumerable<T> PickSomeInRandomOrder<T>(IEnumerable<T> items, int count)
+        public static IEnumerable<T> PickSomeInRandomOrder<T>(this IEnumerable<T> items, int count)
         {
             var random = new System.Random(DateTime.Now.Millisecond);
             var randomSortTable = new Dictionary<double, T>();
-
-            foreach (var item in items)
-            {
-                randomSortTable[random.NextDouble()] = item;
-            }
-
+            foreach (var item in items) randomSortTable[random.NextDouble()] = item;
             return randomSortTable.OrderBy(x => x.Key).Take(count).Select(x => x.Value);
         }
 
@@ -113,8 +108,12 @@ namespace CaravanAdventures
         internal static void PrintWorldPawns()
         {
             if (Find.World == null) return;
-            DLog.Message($"wp total: {Find.World.worldPawns.AllPawnsAliveOrDead.Count} wp alive: {Find.World.worldPawns.AllPawnsAlive.Count} dead: {Find.World.worldPawns.AllPawnsDead.Count}");
-            DLog.Message($"wp player: {Find.World.worldPawns.AllPawnsAliveOrDead.Where(x => x.Faction == Faction.OfPlayer).Count()} wp alive: {Find.World.worldPawns.AllPawnsAlive.Where(x => x.Faction == Faction.OfPlayer).Count()} dead: {Find.World.worldPawns.AllPawnsDead.Where(x => x.Faction == Faction.OfPlayer).Count()}");
+            DLog.Message($"wp total: {Find.World.worldPawns.AllPawnsAliveOrDead.Count} " +
+                $"wp alive: {Find.World.worldPawns.AllPawnsAlive.Count} " +
+                $"dead: {Find.World.worldPawns.AllPawnsDead.Count}");
+            DLog.Message($"wp player: {Find.World.worldPawns.AllPawnsAliveOrDead.Where(x => x.Faction == Faction.OfPlayer).Count()} " +
+                $"wp alive: {Find.World.worldPawns.AllPawnsAlive.Where(x => x.Faction == Faction.OfPlayer).Count()} " +
+                $"dead: {Find.World.worldPawns.AllPawnsDead.Where(x => x.Faction == Faction.OfPlayer).Count()}");
 
             foreach (var pawn in PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_FreeColonists)
             {

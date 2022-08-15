@@ -9,7 +9,7 @@ namespace CaravanAdventures.Patches.Compatibility
     {
         public static void ApplyPatches(Assembly assembly)
         {
-            if (!ModSettings.storyEnabled) return;
+            if (!ModsConfig.RoyaltyActive) return;
             var org = AccessTools.Method(assembly.GetType("VFECore.Patch_GameComponentUtility+LoadedGame"), "Validator");
             var post = new HarmonyMethod(typeof(VFECoreFriendlyFactionDetectionPatch).GetMethod(nameof(VFECore_Patch_GameComponentUtility_LoadedGame_Validator_Postfix)));
             HarmonyPatcher.harmony.Patch(org, null, post);
