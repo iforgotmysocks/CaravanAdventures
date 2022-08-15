@@ -108,7 +108,7 @@ namespace CaravanAdventures
             Helper.RunSavely(() =>
             {
                 var vfeCoreAssembly = Helper.GetAssembly("VFECore", detectedAssemblies);
-                if (vfeCoreAssembly != null && ModSettings.storyEnabled)
+                if (vfeCoreAssembly != null && ModsConfig.RoyaltyActive)
                 {
                     Log.Message($"Patching VFE from bringing up the faction dialog for no longer needed faction");
                     Patches.Compatibility.VFECoreFriendlyFactionDetectionPatch.ApplyPatches(vfeCoreAssembly);
