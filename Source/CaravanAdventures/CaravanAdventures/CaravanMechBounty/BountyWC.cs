@@ -81,6 +81,7 @@ namespace CaravanAdventures.CaravanMechBounty
         {
             base.WorldComponentTick();
 
+            if (bountyFaction == null) return;
             if (CheckCanStartBountyNotificationCounter())
             {
                 DLog.Message($"Starting bounty notification counter at {BountyNotificationDelay}");
