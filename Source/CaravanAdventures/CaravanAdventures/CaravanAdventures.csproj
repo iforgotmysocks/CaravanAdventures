@@ -193,6 +193,7 @@
     <Compile Include="Patches\Compatibility\VFECoreFriendlyFactionDetectionPatch.cs" />
     <Compile Include="Patches\Compatibility\WinstonWavesPatch.cs" />
     <Compile Include="Patches\LetterRemovalPatch.cs" />
+    <Compile Include="Patches\SacHunterDisableAtWorldGenPatches.cs" />
     <Compile Include="Patches\SpDecayLevelIncrease.cs" />
     <Compile Include="Patches\ApocalypsePatches.cs" />
     <Compile Include="Patches\BossPatches.cs" />
@@ -243,7 +244,7 @@
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_BuildVersioningStyle="None.None.None.Increment" BuildVersion_StartDate="2000/1/1" />
+      <UserProperties BuildVersion_StartDate="2000/1/1" BuildVersion_BuildVersioningStyle="None.None.None.Increment" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
