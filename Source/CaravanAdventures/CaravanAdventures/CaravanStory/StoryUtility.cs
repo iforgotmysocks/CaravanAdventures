@@ -323,49 +323,49 @@ namespace CaravanAdventures.CaravanStory
             CompCache.StoryWC.SetSF("IntroVillage_Created");
         }
 
-        internal static void ClearFriendlyMechFaction()
+        public static void RemoveFaction(string defname = "CAFriendlyMechanoid", string messageFactionName = "CA friendly mech")
         {
-            var factionDef = DefDatabase<FactionDef>.GetNamedSilentFail("CAFriendlyMechanoid");
+            var factionDef = DefDatabase<FactionDef>.GetNamedSilentFail(defname);
             if (factionDef == null) return;
 
             if (Find.World == null) return;
-            var settlements = Find.World?.worldObjects?.AllWorldObjects?.Where(x => x?.Faction?.def == factionDef);
-            if (settlements != null && settlements.Count() != 0)
-            {
-                foreach (var settlement in settlements.Reverse<WorldObject>())
-                {
-                    DLog.Message($"Removing no longer needed CA friendly mech settlement.");
-                    if (settlement is MapParent parent && parent.HasMap) Current.Game.DeinitAndRemoveMap(parent.Map);
-                    settlement.Destroy();
-                }
-            }
 
             var faction = Find.FactionManager.AllFactions.FirstOrDefault(x => x?.def == factionDef);
             if (faction == null)
             {
                 // todo remove, log just debug
-                DLog.Message($"Friendly mech faction is null");
+                DLog.Message($"{messageFactionName} faction is null");
                 return;
             }
 
+            Helper.RunSavely(() =>
+            {
+                foreach (var pawn in PawnsFinder.AllMaps_Spawned.Where(x => x.Faction == faction).Reverse<Pawn>()) pawn.Destroy();
+                foreach (var pawn in PawnsFinder.AllCaravansAndTravelingTransportPods_Alive.Where(x => x.Faction == faction).Reverse<Pawn>()) pawn.Destroy();
+            });
+
             faction.temporary = true;
 
-            foreach (var pawn in PawnsFinder.AllMaps_Spawned.Where(x => x.Faction == faction)) pawn.Destroy();
-            foreach (var pawn in PawnsFinder.AllCaravansAndTravelingTransportPods_Alive.Where(x => x.Faction == faction)) pawn.Destroy();
+            var settlements = Find.World?.worldObjects?.AllWorldObjects?.Where(x => x?.Faction?.def == factionDef);
 
-            // rest happens on it's own when removed
-            //faction.RemoveAllRelations();
-            //var removeFactionInfo = typeof(FactionManager).GetMethod("Remove", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
-            //if (removeFactionInfo == null)
-            //{
-            //    DLog.Message($"Didn't find method to remove faction");
-            //    return;
-            //}
-            //DLog.Message($"Removing faction {faction.Name} of def: {factionDef.defName}");
-            //removeFactionInfo.Invoke(Find.FactionManager, new object[] { faction });
+            if (settlements != null && settlements.Count() != 0)
+            {
+                foreach (var settlement in settlements.Reverse<WorldObject>())
+                {
+                    Helper.RunSavely(() =>
+                    {
+                        DLog.Message($"Removing no longer needed {messageFactionName} settlement." + (ModsConfig.IdeologyActive ? "The possibly following Notify error can be ignored" : ""));
+                        if (settlement is MapParent parent && parent?.HasMap == true) Current.Game.DeinitAndRemoveMap(parent.Map);
+                        settlement.Destroy();
+                    });
+                }
+            }
+            
+            //typeof(FactionManager).GetMethod("Remove", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).Invoke(Find.FactionManager, new object[] { faction });
+            DLog.Message($"{messageFactionName} should now be removed");
         }
 
-        internal static void RemoveStoryComponentsNoRoyalty()
+        public static void RemoveStoryComponentsNoRoyalty()
         {
             RemoveStoryOrMod();
         }
@@ -422,7 +422,7 @@ namespace CaravanAdventures.CaravanStory
             return centerPoint;
         }
 
-        internal static void RemoveStoryOrMod(bool removeFullMod = false)
+        public static void RemoveStoryOrMod(bool removeFullMod = false)
         {
             if (Find.World == null)
             {
@@ -434,12 +434,15 @@ namespace CaravanAdventures.CaravanStory
             Helper.RunSavely(RestartStory);
             Helper.RunSavely(() =>
             {
-                foreach (var settlement in Find.World.worldObjects.Settlements.Reverse<Settlement>())
-                {
-                    if (settlement?.Faction?.def != StoryDefOf.CASacrilegHunters) continue;
-                    if (settlement.HasMap) Current.Game.DeinitAndRemoveMap(settlement.Map);
-                    settlement.Destroy();
-                }
+                Helper.RunSavely(() => RemoveFaction("CASacrilegHunters", "Sacrileg Hunters"));
+                //foreach (var settlement in Find.World.worldObjects.Settlements.Reverse<Settlement>())
+                //{
+                //    if (settlement?.Faction?.def != StoryDefOf.CASacrilegHunters) continue;
+                //    if (settlement.HasMap) Current.Game.DeinitAndRemoveMap(settlement.Map);
+                //    settlement.Destroy();
+
+                //    // todo remove rest of the faction!!!
+                //}
 
                 if (removeFullMod)
                 {
@@ -466,7 +469,7 @@ namespace CaravanAdventures.CaravanStory
             });
         }
 
-        internal static void FindUnfoggedMechsAndWakeUp(Map map)
+        public static void FindUnfoggedMechsAndWakeUp(Map map)
         {
             map.mapPawns.SpawnedPawnsInFaction(Faction.OfMechanoids)
                 .Where(mech => !mech.Awake() && !mech.GetRoom().Fogged)
@@ -555,7 +558,7 @@ namespace CaravanAdventures.CaravanStory
             Helper.RunSavely(() => { if (CheckIfPawnIsNaked(girl)) GiveClothes(girl); });
         }
 
-        private static void GiveClothes(Pawn pawn)
+        public static void GiveClothes(Pawn pawn)
         {
             pawn.apparel.HasBasicApparel(out var hasPants, out var hasShirt);
             var stuff = ThingDefOf.Hyperweave ?? ThingDefOf.Cloth;
@@ -569,7 +572,7 @@ namespace CaravanAdventures.CaravanStory
             if (shirt != null) pawn.apparel.Wear(shirt);
         }
 
-        private static bool CheckIfPawnIsNaked(Pawn pawn)
+        public static bool CheckIfPawnIsNaked(Pawn pawn)
         {
             if (pawn == null) return false;
             if (pawn?.apparel?.AnyApparel == true) return false;
@@ -657,7 +660,7 @@ namespace CaravanAdventures.CaravanStory
             return sacrilegHunters;
         }
 
-        private static void SetSacNeutralToPossibleFactions(Faction sacrilegHunters)
+        public static void SetSacNeutralToPossibleFactions(Faction sacrilegHunters)
         {
             foreach (var faction in Find.FactionManager.AllFactionsListForReading)
             {

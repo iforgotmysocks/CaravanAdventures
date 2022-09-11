@@ -167,7 +167,7 @@ namespace CaravanAdventures
 
         public static IEnumerable<ThingDef> FilteredStuffs(this IEnumerable<ThingDef> things, IEnumerable<StuffCategoryDef> stuffCatsToExlude, IEnumerable<ThingDef> stuffsToExclude = null)
         {
-            if (!(things?.Any() ?? false))
+            if (!things?.Any() ?? true)
             {
                 Log.Error($"Tried to process faulty enumerable.");
                 return null;
