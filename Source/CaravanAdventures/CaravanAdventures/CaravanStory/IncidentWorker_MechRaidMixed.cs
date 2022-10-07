@@ -77,18 +77,22 @@ namespace CaravanAdventures.CaravanStory
 			}
 			base.SendStandardLetter(baseLetterLabel, baseLetterText, this.GetLetterDef(), parms, list2, Array.Empty<NamedArgument>());
 			parms.raidStrategy.Worker.MakeLords(parms, list);
-			LessonAutoActivator.TeachOpportunity(ConceptDefOf.EquippingWeapons, OpportunityType.Critical);
-			if (!PlayerKnowledgeDatabase.IsComplete(ConceptDefOf.ShieldBelts))
-			{
-				for (int j = 0; j < list.Count; j++)
-				{
-					if (list[j].apparel.WornApparel.Any((Apparel ap) => ap is ShieldBelt))
-					{
-						LessonAutoActivator.TeachOpportunity(ConceptDefOf.ShieldBelts, OpportunityType.Critical);
-						break;
-					}
-				}
-			}
+
+			// todo fix shield belt
+
+			//LessonAutoActivator.TeachOpportunity(ConceptDefOf.EquippingWeapons, OpportunityType.Critical);
+			//if (!PlayerKnowledgeDatabase.IsComplete(ConceptDefOf.ShieldBelts))
+			//{
+			//	for (int j = 0; j < list.Count; j++)
+			//	{
+			//		if (list[j].apparel.WornApparel.Any((Apparel ap) => ap is ShieldBel))
+			//		{
+			//			LessonAutoActivator.TeachOpportunity(ConceptDefOf.ShieldBelts, OpportunityType.Critical);
+			//			break;
+			//		}
+			//	}
+			//}
+
 			return true;
 		}
 	}

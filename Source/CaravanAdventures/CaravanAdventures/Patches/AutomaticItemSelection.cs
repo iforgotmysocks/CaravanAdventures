@@ -44,7 +44,8 @@ namespace CaravanAdventures.Patches
                 typeof(Map),
                 typeof(bool),
                 typeof(Action),
-                typeof(bool)
+                typeof(bool),
+                typeof(IntVec3?)
             });
             var postDialog_FormCaravan = new HarmonyMethod(typeof(AutomaticItemSelection).GetMethod(nameof(Dialog_FormCaravan_Postfix)));
             HarmonyPatcher.harmony.Patch(orgDialog_FormCaravan, null, postDialog_FormCaravan);

@@ -167,7 +167,7 @@ namespace CaravanAdventures.CaravanAbilities
                 isActive = () => protectsTheShip,
                 defaultLabel = "sos2ProtectSpaceship".Translate(),
                 defaultDesc = "sos2ProtectSpaceshipDesc".Translate(),
-                order = 198f,
+                Order = 198f,
                 icon = ContentFinder<Texture2D>.Get("UI/Abilities/Protect", true),
                 toggleAction = () =>
                 {

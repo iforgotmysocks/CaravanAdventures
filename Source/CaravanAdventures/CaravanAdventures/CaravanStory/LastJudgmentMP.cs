@@ -204,7 +204,7 @@ namespace CaravanAdventures.CaravanStory
 			{
 				return;
 			}
-			if (GenHostility.AnyHostileActiveThreatToPlayer_NewTemp(base.Map, false))
+			if (GenHostility.AnyHostileActiveThreatToPlayer(base.Map, false))
 			{
 				return;
 			}

@@ -69,7 +69,7 @@ namespace CaravanAdventures.CaravanImprovements
                 {
                     defaultLabel = "SettleWithoutUnloading".Translate(),
                     defaultDesc = "SettleWithoutUnloadingDesc".Translate(),
-                    order = 198f,
+                    Order = 198f,
                     icon = ContentFinder<Texture2D>.Get("UI/Icons/Settle/SettleWithoutUnloading_up", true),
                     action = () => {
                         Action settleAction = () => SettleWithoutDroppingGear(caravan);
@@ -89,7 +89,7 @@ namespace CaravanAdventures.CaravanImprovements
                 {
                     defaultLabel = "SettleWithCampLabel".Translate() + (ModSettings.showSupplyCostsInGizmo ? $" ({suppliesAvailable}/{campCost})" : ""),
                     defaultDesc = "SettleWithCampDesc".Translate(),
-                    order = 198f,
+                    Order = 198f,
                     icon = ContentFinder<Texture2D>.Get("UI/Icons/Settle/SettleCamp_up", true),
                     action = () => {
                         Action settleAction = () => SettleWithoutDroppingGear(caravan, true);
@@ -110,7 +110,7 @@ namespace CaravanAdventures.CaravanImprovements
                     toggleAction = () => allowNightTravel = !allowNightTravel,
                     defaultLabel = "AllowNightTravel".Translate(),
                     defaultDesc = "AllowNightTravelDesc".Translate(),
-                    order = 199f,
+                    Order = 199f,
                     icon = ContentFinder<Texture2D>.Get("UI/Icons/Settle/Nighttravel", true),
                 };
                 yield return cmdAllowNightTravel;

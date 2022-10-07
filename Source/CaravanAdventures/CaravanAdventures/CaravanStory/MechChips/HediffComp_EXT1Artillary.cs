@@ -52,7 +52,7 @@ namespace CaravanAdventures.CaravanStory.MechChips
         {
             producedMechs.RemoveAll(x => x == null || x.Dead);
             if (producedMechs.Count() > 15) return;
-            if (GenHostility.AnyHostileActiveThreatTo_NewTemp(Pawn.Map, Pawn.Faction))
+            if (GenHostility.AnyHostileActiveThreatTo(Pawn.Map, Pawn.Faction))
             {
                 var spawnPos = GetMinionSpawnPosition(Pawn.Position, Pawn.Map);
                 if (spawnPos != null)

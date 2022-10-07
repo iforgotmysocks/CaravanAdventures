@@ -60,7 +60,7 @@ namespace CaravanAdventures.CaravanIncidents
 
 		public static Pawn GenerateGirl(int tile)
 		{
-			Pawn pawn = PawnGenerator.GeneratePawn(new PawnGenerationRequest(PawnKindDefOf.SpaceRefugee, GetFactionForGirl(), PawnGenerationContext.NonPlayer, tile, false, false, false, false, true, false, 0, true, true, true, true, false, false, false, false, 0f, 0f, null, 0, null, null, null, null, null, 20f, null, Gender.Female, null, null, null, null));
+			Pawn pawn = PawnGenerator.GeneratePawn(new PawnGenerationRequest(PawnKindDefOf.SpaceRefugee, GetFactionForGirl(), PawnGenerationContext.NonPlayer, tile, false, false, false, false, true, 0, true, false, false, true, false, false, false, false, false, 0f, 0f, null, 0, null, null, null, null, null, 20f, null, Gender.Female, null, null, null, null));
 			pawn.story.traits.allTraits.RemoveAll(x => x.def == TraitDefOf.Beauty);
 			pawn.story.traits.GainTrait(new Trait(TraitDefOf.Beauty, 2));
 			if (!pawn.story.traits.allTraits.Any(x => x.def == TraitDefOf.Tough || x.def == TraitDefOf.Wimp) && Rand.Chance(0.4f)) pawn.story.traits.GainTrait(new Trait(TraitDefOf.Tough));

@@ -33,11 +33,11 @@ namespace CaravanAdventures.CaravanCamp.Buildings
                 if (flag)
                 {
                     this.GetRoom().Temperature += num2;
-                    this.compPowerTrader.PowerOutput = -props.basePowerConsumption;
+                    this.compPowerTrader.PowerOutput = -props.PowerConsumption;
                 }
                 else
                 {
-                    this.compPowerTrader.PowerOutput = -props.basePowerConsumption * this.compTempControl.Props.lowPowerConsumptionFactor;
+                    this.compPowerTrader.PowerOutput = -props.PowerConsumption * this.compTempControl.Props.lowPowerConsumptionFactor;
                 }
 
                 this.compTempControl.operatingAtHighPower = flag;

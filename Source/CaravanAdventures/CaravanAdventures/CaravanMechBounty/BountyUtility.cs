@@ -45,32 +45,32 @@ namespace CaravanAdventures.CaravanMechBounty
         {
             var tribalCatName = MeditationFocusDefOf.Natural?.requiredBackstoriesAny?.FirstOrDefault()?.categoryName ?? "Tribal";
 
-            if ((veteran?.story?.childhood?.disallowedTraits?.Any() ?? true)
-                || (veteran?.story?.childhood?.DisabledWorkTypes?.Any() ?? true
-                || CanUseTribalBackstory(tribal) && (!veteran?.story?.childhood?.spawnCategories?.Contains(tribalCatName) ?? false)))
-                veteran.story.childhood = BackstoryDatabase.allBackstories
+            if ((veteran?.story?.Childhood?.disallowedTraits?.Any() ?? true)
+                || (veteran?.story?.Childhood?.DisabledWorkTypes?.Any() ?? true
+                || CanUseTribalBackstory(tribal) && (!veteran?.story?.Childhood?.spawnCategories?.Contains(tribalCatName) ?? false)))
+                veteran.story.Childhood = DefDatabase<BackstoryDef>.AllDefsListForReading
                     .Where(backstory =>
-                    (CanUseTribalBackstory(tribal) ? backstory.Value.spawnCategories.Contains(tribalCatName) : true)
-                    && (!backstory.Value?.DisabledWorkTypes?.Any() ?? true)
-                    && (!backstory.Value?.disallowedTraits?.Any() ?? true)
-                    && backstory.Value?.slot == BackstorySlot.Childhood
-                    && ((backstory.Value?.skillGainsResolved?.Any(x => x.Key == SkillDefOf.Shooting && x.Value > 0) ?? false)
-                        || (backstory.Value?.skillGainsResolved?.Any(x => x.Key == SkillDefOf.Melee && x.Value > 0) ?? false))
-                    ).InRandomOrder().FirstOrDefault().Value;
+                    (CanUseTribalBackstory(tribal) ? backstory.spawnCategories.Contains(tribalCatName) : true)
+                    && (!backstory?.DisabledWorkTypes?.Any() ?? true)
+                    && (!backstory?.disallowedTraits?.Any() ?? true)
+                    && backstory?.slot == BackstorySlot.Childhood
+                    && ((backstory?.skillGains?.Any(x => x.Key == SkillDefOf.Shooting && x.Value > 0) ?? false)
+                        || (backstory?.skillGains?.Any(x => x.Key == SkillDefOf.Melee && x.Value > 0) ?? false))
+                    ).InRandomOrder().FirstOrDefault();
         }
 
         private static void CheckVeteranAdultBackstory(Pawn veteran)
         {
-            if ((veteran?.story?.adulthood?.disallowedTraits?.Any() ?? true)
-              || (veteran?.story?.adulthood?.DisabledWorkTypes?.Any() ?? true))
-                veteran.story.adulthood = BackstoryDatabase.allBackstories
+            if ((veteran?.story?.Adulthood?.disallowedTraits?.Any() ?? true)
+              || (veteran?.story?.Adulthood?.DisabledWorkTypes?.Any() ?? true))
+                veteran.story.Adulthood = DefDatabase<BackstoryDef>.AllDefsListForReading
                     .Where(backstory =>
-                    (!backstory.Value?.DisabledWorkTypes?.Any() ?? true)
-                    && (!backstory.Value?.disallowedTraits?.Any() ?? true)
-                    && backstory.Value.slot == BackstorySlot.Adulthood
-                    && ((backstory.Value?.skillGainsResolved?.Any(x => x.Key == SkillDefOf.Shooting && x.Value > 0) ?? false)
-                        || (backstory.Value?.skillGainsResolved?.Any(x => x.Key == SkillDefOf.Melee && x.Value > 0) ?? false))
-                    ).InRandomOrder().FirstOrDefault().Value;
+                    (!backstory?.DisabledWorkTypes?.Any() ?? true)
+                    && (!backstory?.disallowedTraits?.Any() ?? true)
+                    && backstory.slot == BackstorySlot.Adulthood
+                    && ((backstory?.skillGains?.Any(x => x.Key == SkillDefOf.Shooting && x.Value > 0) ?? false)
+                        || (backstory?.skillGains?.Any(x => x.Key == SkillDefOf.Melee && x.Value > 0) ?? false))
+                    ).InRandomOrder().FirstOrDefault();
         }
 
         private static void AdjustVeteranSkills(Pawn veteran)

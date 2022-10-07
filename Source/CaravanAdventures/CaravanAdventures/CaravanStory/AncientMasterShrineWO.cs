@@ -88,7 +88,7 @@ namespace CaravanAdventures.CaravanStory
             var boss = StoryUtility.GetFittingMechBoss();
             GenSpawn.Spawn(boss, pos, map, WipeMode.Vanish);
             var compDormant = boss.TryGetComp<CompWakeUpDormant>();
-            if (compDormant != null) compDormant.wakeUpIfColonistClose = true;
+            if (compDormant != null) compDormant.wakeUpIfTargetClose = true;
 
             return boss;
         }
@@ -238,7 +238,6 @@ namespace CaravanAdventures.CaravanStory
             GenSpawn.Spawn(casket, curCell, map, rotation, WipeMode.Vanish);
             var pawn = PawnGenerator.GeneratePawn(new PawnGenerationRequest(PawnKindDefOf.AncientSoldier, Faction.OfAncientsHostile)
             {
-                FixedMelanin = 0.1f,
                 CanGeneratePawnRelations = false,
                 ColonistRelationChanceFactor = 0,
                 RelationWithExtraPawnChanceFactor = 0,
@@ -304,7 +303,7 @@ namespace CaravanAdventures.CaravanStory
                 var mech = spawnedMechs[idx++];
                 GenSpawn.Spawn(mech, cell, map, WipeMode.Vanish);
                 var compDormant = mech.TryGetComp<CompWakeUpDormant>();
-                if (compDormant != null) compDormant.wakeUpIfColonistClose = true;
+                if (compDormant != null) compDormant.wakeUpIfTargetClose = true;
             }
 
             var combinedMechs = spawnedMechs.ToList();
@@ -379,7 +378,7 @@ namespace CaravanAdventures.CaravanStory
                 {
                     defaultLabel = "GiveUpOnClueLabel".Translate(),
                     defaultDesc = "GiveUpOnClueDesc".Translate(),
-                    order = 198f,
+                    Order = 198f,
                     icon = ContentFinder<Texture2D>.Get("UI/commands/AbandonHome", true),
                     action = () =>
                     {

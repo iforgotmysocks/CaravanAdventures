@@ -451,7 +451,7 @@ namespace CaravanAdventures.CaravanStory
         {
             // currently used to check if bandits are defeated
             if (this.wonBattle) return;
-            if (GenHostility.AnyHostileActiveThreatToPlayer_NewTemp(base.Map, false)) return;
+            if (GenHostility.AnyHostileActiveThreatToPlayer(base.Map, false)) return;
             else
             {
                 Find.LetterStack.ReceiveLetter("MasterShrineVictoryLetterLabel".Translate(), "MasterShrineVictoryLetterMessage".Translate(), LetterDefOf.PositiveEvent, this, null, null, null, null);
@@ -473,7 +473,7 @@ namespace CaravanAdventures.CaravanStory
                 {
                     defaultLabel = "Story_Shrine1_GiveUpOnShrineLabel".Translate(),
                     defaultDesc = "Story_Shrine1_GiveUpOnShrineDesc".Translate(),
-                    order = 198f,
+                    Order = 198f,
                     icon = ContentFinder<Texture2D>.Get("UI/commands/AbandonHome", true),
                     action = () =>
                     {
