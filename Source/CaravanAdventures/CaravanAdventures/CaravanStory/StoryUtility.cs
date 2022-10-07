@@ -62,7 +62,7 @@ namespace CaravanAdventures.CaravanStory
             if (mech.def == ThingDef.Named("Mech_Pikeman")) reward += 7;
             else if (mech.def == ThingDef.Named("Mech_Scyther")) reward += 10;
             else if (mech.def == ThingDef.Named("Mech_Lancer")) reward += 15;
-            else if (mech.def == ThingDef.Named("Mech_Centipede")) reward += 45;
+            else if (mech.def == ThingDef.Named("Mech_CentipedeBlaster")) reward += 45;
             else if (mech.def == ThingDef.Named("CAEndBossMech")) reward += 1000;
             else if (CompCache.StoryWC.BossDefs().Contains(mech.def)) reward += 500;
             else
@@ -530,7 +530,7 @@ namespace CaravanAdventures.CaravanStory
         {
             if (CompCache.StoryWC.questCont.Village.StoryContact != null && !CompCache.StoryWC.questCont.Village.StoryContact.Dead) return;
 
-            var girl = PawnGenerator.GeneratePawn(new PawnGenerationRequest()
+            var girl = PawnGenerator.GeneratePawn(new PawnGenerationRequest(StoryDefOf.CASacrilegHunters_ExperiencedHunterVillage)
             {
                 Context = PawnGenerationContext.NonPlayer,
                 FixedBiologicalAge = 19,
@@ -540,7 +540,7 @@ namespace CaravanAdventures.CaravanStory
                 AllowGay = false,
                 AllowDead = false,
                 Faction = StoryUtility.EnsureSacrilegHunters(),
-                KindDef = StoryDefOf.CASacrilegHunters_ExperiencedHunterVillage,
+                //KindDef = StoryDefOf.CASacrilegHunters_ExperiencedHunterVillage,
                 ProhibitedTraits = new List<TraitDef> { TraitDef.Named("Wimp") },
                 MustBeCapableOfViolence = true,
             });

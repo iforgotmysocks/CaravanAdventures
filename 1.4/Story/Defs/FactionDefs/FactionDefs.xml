@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+
+  <FactionDef ParentName="FactionBase" Name="CASacrilegHuntersFactionBase" Abstract="True">
+    <pawnSingular>Sacrileg Hunter</pawnSingular>
+    <pawnsPlural>Sacrileg Hunters</pawnsPlural>
+    <categoryTag>Outlander</categoryTag>
+    <listOrderPriority>30</listOrderPriority>
+    <settlementGenerationWeight>0.3</settlementGenerationWeight>
+    <hidden>false</hidden>
+    <requiredCountAtGameStart>1</requiredCountAtGameStart>
+    <canMakeRandomly>true</canMakeRandomly>
+    <canSiege>true</canSiege>
+    <canStageAttacks>true</canStageAttacks>
+    <leaderTitle>prime councilor</leaderTitle>
+    <factionIconPath>World/WorldObjects/Expanding/Town</factionIconPath>
+    <factionNameMaker>CANamerFactionSacrilegHunters</factionNameMaker>
+    <settlementNameMaker>NamerSettlementOutlander</settlementNameMaker>
+    <techLevel>Ultra</techLevel>
+    <!--<allowedMemes>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Structure_Archist</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Transhumanist</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">HumanPrimacy</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Loyalist</li>
+    </allowedMemes>-->
+    <requiredMemes>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Structure_Archist</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Transhumanist</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">HumanPrimacy</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Loyalist</li>
+    </requiredMemes>
+    <allowedCultures>
+      <li>Rustican</li>
+    </allowedCultures>
+    <disallowedMemes>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Structure_Animist</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Nudism</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Blindsight</li>
+    </disallowedMemes>
+    <structureMemeWeights>
+      <Structure_TheistEmbodied MayRequire="Ludeon.RimWorld.Ideology">1</Structure_TheistEmbodied>
+      <Structure_TheistAbstract MayRequire="Ludeon.RimWorld.Ideology">2</Structure_TheistAbstract>
+      <Structure_Ideological MayRequire="Ludeon.RimWorld.Ideology">1</Structure_Ideological>
+      <Structure_Archist MayRequire="Ludeon.RimWorld.Ideology">1</Structure_Archist>
+      <Structure_OriginChristian MayRequire="Ludeon.RimWorld.Ideology">1</Structure_OriginChristian>
+      <Structure_OriginIslamic MayRequire="Ludeon.RimWorld.Ideology">1</Structure_OriginIslamic>
+      <Structure_OriginHindu MayRequire="Ludeon.RimWorld.Ideology">1</Structure_OriginHindu>
+      <Structure_OriginBuddhist MayRequire="Ludeon.RimWorld.Ideology">1</Structure_OriginBuddhist>
+    </structureMemeWeights>
+    <backstoryFilters>
+      <li>
+        <categories>
+          <li>Outlander</li>
+        </categories>
+        <commonality>0.95</commonality>
+      </li>
+      <li>
+        <categories>
+          <li>Offworld</li>
+        </categories>
+        <commonality>0.05</commonality>
+      </li>
+    </backstoryFilters>
+    <!--<geneticVariance>0.8</geneticVariance>-->
+    <caravanTraderKinds>
+      <li>Caravan_Outlander_BulkGoods</li>
+      <li>Caravan_Outlander_CombatSupplier</li>
+      <li>Caravan_Outlander_Exotic</li>
+      <li>Caravan_Outlander_PirateMerchant</li>
+    </caravanTraderKinds>
+    <visitorTraderKinds>
+      <li>Visitor_Outlander_Standard</li>
+    </visitorTraderKinds>
+    <baseTraderKinds>
+      <li>Base_Outlander_Standard</li>
+    </baseTraderKinds>
+    <allowedArrivalTemperatureRange>-40~45</allowedArrivalTemperatureRange>
+    <raidLootMaker>CASacrilegHuntersRaidLootMaker</raidLootMaker>
+    <maxPawnCostPerTotalPointsCurve>
+      <points>
+        <li>(0,35)</li>
+        <li>(70, 50)</li>
+        <li>(700, 100)</li>
+        <li>(1300, 150)</li>
+        <li>(100000, 10000)</li>
+      </points>
+    </maxPawnCostPerTotalPointsCurve>
+    <pawnGroupMakers>
+      <!--<li>
+        <kindDef>Combat</kindDef>
+        <options>
+          <Villager>5</Villager>
+          <Town_Guard>10</Town_Guard>
+          <Grenadier_Destructive>1.5</Grenadier_Destructive>
+          <Mercenary_Slasher>7</Mercenary_Slasher>
+          <Mercenary_Gunner>10</Mercenary_Gunner>
+          <Mercenary_Elite>10</Mercenary_Elite>
+          <Town_Councilman>10</Town_Councilman>
+        </options>
+      </li>
+      <li>
+        <kindDef>Peaceful</kindDef>
+        <options>
+          <Villager>20</Villager>
+          <Town_Guard>10</Town_Guard>
+          <Town_Councilman>10</Town_Councilman>
+        </options>
+      </li>
+      <li>
+        <kindDef>Trader</kindDef>
+        <traders>
+          <Town_Trader>1</Town_Trader>
+        </traders>
+        <carriers>
+          <Muffalo>6</Muffalo>
+          <Dromedary>5</Dromedary>
+          <Alpaca>2</Alpaca>
+          <Elephant>1</Elephant>
+        </carriers>
+        <guards>
+          <Villager>3</Villager>
+          <Town_Guard>10</Town_Guard>
+          <Grenadier_Destructive>1.5</Grenadier_Destructive>
+          <Mercenary_Slasher>7</Mercenary_Slasher>
+          <Mercenary_Gunner>10</Mercenary_Gunner>
+          <Mercenary_Elite>10</Mercenary_Elite>
+        </guards>
+      </li>
+      <li>
+        <kindDef>Settlement</kindDef>
+        <options>
+          <Villager>10</Villager>
+          <Town_Guard>10</Town_Guard>
+          <Grenadier_Destructive>1.5</Grenadier_Destructive>
+          <Mercenary_Slasher>7</Mercenary_Slasher>
+          <Mercenary_Gunner>10</Mercenary_Gunner>
+          <Mercenary_Elite>10</Mercenary_Elite>
+          <Town_Councilman>10</Town_Councilman>
+        </options>
+      </li>-->
+
+      <li>
+        <kindDef>Combat</kindDef>
+        <options>
+          <CASacrilegHunters_Town_Councilman>1</CASacrilegHunters_Town_Councilman>
+          <CASacrilegHunters_Hunter>10</CASacrilegHunters_Hunter>
+          <CASacrilegHunters_ExperiencedHunter>2</CASacrilegHunters_ExperiencedHunter>
+        </options>
+      </li>
+      <li>
+        <kindDef>Peaceful</kindDef>
+        <options>
+          <CASacrilegHunters_Villager>10</CASacrilegHunters_Villager>
+          <CASacrilegHunters_Hunter>15</CASacrilegHunters_Hunter>
+          <CASacrilegHunters_ExperiencedHunter>2</CASacrilegHunters_ExperiencedHunter>
+          <CASacrilegHunters_Town_Guard>1</CASacrilegHunters_Town_Guard>
+          <CASacrilegHunters_Town_Councilman>10</CASacrilegHunters_Town_Councilman>
+        </options>
+      </li>
+      <li>
+        <kindDef>Trader</kindDef>
+        <traders>
+          <Town_Trader>1</Town_Trader>
+        </traders>
+        <carriers>
+          <Muffalo>6</Muffalo>
+          <Dromedary>5</Dromedary>
+          <Alpaca>2</Alpaca>
+          <Elephant>1</Elephant>
+        </carriers>
+        <guards>
+          <CASacrilegHunters_Villager>3</CASacrilegHunters_Villager>
+          <CASacrilegHunters_Hunter>10</CASacrilegHunters_Hunter>
+          <CASacrilegHunters_ExperiencedHunter>2</CASacrilegHunters_ExperiencedHunter>
+          <Grenadier_Destructive>1.5</Grenadier_Destructive>
+        </guards>
+      </li>
+      <li>
+        <kindDef>Settlement</kindDef>
+        <options>
+          <CASacrilegHunters_Villager>10</CASacrilegHunters_Villager>
+          <CASacrilegHunters_Town_Councilman>1</CASacrilegHunters_Town_Councilman>
+          <CASacrilegHunters_HunterVillage>20</CASacrilegHunters_HunterVillage>
+          <CASacrilegHunters_ExperiencedHunterVillage>4</CASacrilegHunters_ExperiencedHunterVillage>
+        </options>
+      </li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">
+        <kindDef>Miners</kindDef>
+        <commonality>1</commonality>
+        <options>
+          <Miner>1</Miner>
+        </options>
+      </li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">
+        <kindDef>Hunters</kindDef>
+        <commonality>1</commonality>
+        <options>
+          <Hunter>1</Hunter>
+        </options>
+      </li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">
+        <kindDef>Loggers</kindDef>
+        <commonality>1</commonality>
+        <options>
+          <Logger>1</Logger>
+        </options>
+      </li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">
+        <kindDef>Farmers</kindDef>
+        <commonality>1</commonality>
+        <options>
+          <Farmer>1</Farmer>
+        </options>
+      </li>
+    </pawnGroupMakers>
+    <settlementTexturePath>World/WorldObjects/DefaultSettlement</settlementTexturePath>
+  </FactionDef>
+
+  <ThingSetMakerDef>
+    <defName>CASacrilegHuntersRaidLootMaker</defName>
+    <root Class="ThingSetMaker_MarketValue">
+      <fixedParams>
+        <filter>
+          <thingDefs>
+            <li>Silver</li>
+            <li>MedicineIndustrial</li>
+            <li>ComponentIndustrial</li>
+            <li>MealSurvivalPack</li>
+            <li>Neutroamine</li>
+          </thingDefs>
+        </filter>
+      </fixedParams>
+    </root>
+  </ThingSetMakerDef>
+
+  <FactionDef ParentName="CASacrilegHuntersFactionBase">
+    <defName>CASacrilegHunters</defName>
+    <label>Sacrileg Hunters</label>
+    <description>A technologically well advanced faction which crashlanded on this rimworld with their generation ship. Their speciallization lies in retrieving old artifacts and hunting for treasure, which helped them enormously to get a quick foothold on this planet, which is covered with old structures.</description>
+    <!--<colorSpectrum>
+			<li>(0.35, 0.30, 0.60)</li>
+			<li>(0.45, 0.40, 0.90)</li>
+		</colorSpectrum>-->
+    <colorSpectrum>
+      <li>(0.93, 0.59, 0.22)</li>
+      <!--<li>(0.35, 0.90, 0.57)</li>-->
+      <!--<li>(0.25, 0.66, 0.94)</li>-->
+      <!--<li>(0.98, 0.75, 0.37)</li>-->
+      <!--<li>(0.97, 0.62, 0.52)</li>-->
+    </colorSpectrum>
+  </FactionDef>
+
+  <RulePackDef>
+    <defName>CANamerFactionSacrilegHunters</defName>
+    <include>
+      <li>EmpireNameUtility</li>
+    </include>
+    <rulePack>
+      <rulesStrings>
+        <li>r_name(p=2)->Sacrileg Hunters</li>
+        <li>r_name->Sacrileg Hunters</li>
+      </rulesStrings>
+    </rulePack>
+  </RulePackDef>
+
+  <FactionDef ParentName="FactionBase">
+    <defName>CAFriendlyMechanoid</defName>
+    <label>mechanoid hive</label>
+    <pawnSingular>mechanoid</pawnSingular>
+    <pawnsPlural>mechanoids</pawnsPlural>
+    <factionNameMaker>NamerFactionMechanoid</factionNameMaker>
+    <factionIconPath>World/WorldObjects/Expanding/Mechanoids</factionIconPath>
+    <raidCommonalityFromPointsCurve>
+      <points>
+        <li>(300,  0)</li>
+        <li>(700,  1)</li>
+        <li>(1400, 2)</li>
+        <li>(2800, 2.5)</li>
+        <li>(4000, 2.8)</li>
+      </points>
+    </raidCommonalityFromPointsCurve>
+    <raidLootMaker>MechanoidRaidLootMaker</raidLootMaker>
+    <raidLootValueFromPointsCurve>
+      <points>
+        <li>(35,     8)</li>
+        <li>(100,   60)</li>
+        <li>(1000, 250)</li>
+        <li>(2000, 400)</li>
+        <li>(4000, 500)</li>
+      </points>
+    </raidLootValueFromPointsCurve>
+    <humanlikeFaction>false</humanlikeFaction>
+    <hidden>true</hidden>
+    <autoFlee>false</autoFlee>
+    <canUseAvoidGrid>false</canUseAvoidGrid>
+    <techLevel>Ultra</techLevel>
+    <maxPawnCostPerTotalPointsCurve>
+      <points>
+        <li>(400,200)</li>
+        <li>(900,300)</li>
+        <li>(100000,10000)</li>
+      </points>
+    </maxPawnCostPerTotalPointsCurve>
+    <pawnGroupMakers>
+      <li>
+        <kindDef>Combat</kindDef>
+        <commonality>100</commonality>
+        <options>
+          <Mech_CentipedeBlaster>10</Mech_CentipedeBlaster>
+          <Mech_Lancer>10</Mech_Lancer>
+          <Mech_Scyther>10</Mech_Scyther>
+          <Mech_Pikeman>10</Mech_Pikeman>
+        </options>
+      </li>
+      <li>
+        <kindDef>Combat</kindDef>
+        <commonality>80</commonality>
+        <options>
+          <Mech_CentipedeBlaster>10</Mech_CentipedeBlaster>
+          <Mech_Lancer>10</Mech_Lancer>
+          <Mech_Pikeman>10</Mech_Pikeman>
+        </options>
+      </li>
+      <li>
+        <kindDef>Combat</kindDef>
+        <commonality>70</commonality>
+        <options>
+          <Mech_Scyther>10</Mech_Scyther>
+        </options>
+      </li>
+      <li>
+        <kindDef>Combat</kindDef>
+        <commonality>30</commonality>
+        <options>
+          <Mech_CentipedeBlaster>10</Mech_CentipedeBlaster>
+        </options>
+      </li>
+    </pawnGroupMakers>
+    <settlementTexturePath>World/WorldObjects/DefaultSettlement</settlementTexturePath>
+    <allowedArrivalTemperatureRange>-100~200</allowedArrivalTemperatureRange>
+  </FactionDef>
+</Defs>

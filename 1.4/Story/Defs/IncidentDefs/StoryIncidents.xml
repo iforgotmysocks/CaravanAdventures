@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+
+	<IncidentDef>
+		<defName>CAFriendlyCaravan</defName>
+		<label>trader caravan arrival</label>
+		<targetTags>
+			<li>Map_PlayerHome</li>
+		</targetTags>
+		<workerClass>CaravanAdventures.CaravanStory.IncidentWorker_FriendlyCaravanVisit</workerClass>
+		<category>FactionArrival</category>
+		<baseChance>0</baseChance>
+		<requireColonistsPresent>True</requireColonistsPresent>
+	</IncidentDef>
+
+  <IncidentDef>
+    <defName>CAMechRaidMixed</defName>
+    <label>enemy raid</label>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>CaravanAdventures.CaravanStory.IncidentWorker_MechRaidMixed</workerClass>
+    <baseChance>0</baseChance>
+    <category>ThreatBig</category>
+    <pointsScaleable>true</pointsScaleable>
+    <tale>Raid</tale>
+  </IncidentDef>
+  
+</Defs>

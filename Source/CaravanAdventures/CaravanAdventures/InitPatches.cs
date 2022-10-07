@@ -70,7 +70,7 @@ namespace CaravanAdventures
                 commonality = 100,
                 options = new List<PawnGenOption>() { 
                     // todo move defs to a modextension or another def to allow mod support
-                    new PawnGenOption() { kind = PawnKindDef.Named("Mech_Centipede"), selectionWeight = 10f },
+                    new PawnGenOption() { kind = PawnKindDef.Named("Mech_CentipedeBlaster"), selectionWeight = 10f },
                     new PawnGenOption() { kind = PawnKindDef.Named("Mech_Lancer"), selectionWeight = 10f },
                     new PawnGenOption() { kind = PawnKindDef.Named("Mech_Scyther"), selectionWeight = 10f },
                     new PawnGenOption() { kind = PawnKindDef.Named("Mech_Pikeman"), selectionWeight = 10f }

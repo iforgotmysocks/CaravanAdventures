@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--<AbilityDef Name="PsycastBase" Abstract="True" MayRequire="Ludeon.RimWorld.Royalty">
+    <abilityClass>Psycast</abilityClass>
+    <category>Psychic</category>
+    <statBases>
+      <Ability_Duration>0</Ability_Duration>
+    </statBases>
+    <warmupSound>PsycastCastLoop</warmupSound>
+    <verbProperties>
+      <verbClass>Verb_CastPsycast</verbClass>
+      <range>24.9</range>
+      <requireLineOfSight>True</requireLineOfSight>
+      <warmupTime>1</warmupTime>
+      <targetParams>
+        <canTargetBuildings>False</canTargetBuildings>
+        <canTargetAnimals>False</canTargetAnimals>
+        <thingCategory>Item</thingCategory>
+        <mapObjectTargetsMustBeAutoAttackable>False</mapObjectTargetsMustBeAutoAttackable>
+      </targetParams>
+    </verbProperties>
+  </AbilityDef>-->
+
+  <AbilityDef ParentName="PsycastBase" MayRequire="Ludeon.RimWorld.Royalty">
+    <defName>CAAncientMeditate</defName>
+    <label>ancient meditation</label>
+    <description>Absorbs psychic energy from nature and restores it for the user. Other colonists standing close to the caster regain a small amount aswell. Requires the ancient gift.</description>
+    <level>0</level>
+    <iconPath>UI/Abilities/Meditate</iconPath>
+    <canUseAoeToGetTargets>False</canUseAoeToGetTargets>
+    <displayGizmoWhileUndrafted>True</displayGizmoWhileUndrafted>
+    <disableGizmoWhileUndrafted>False</disableGizmoWhileUndrafted>
+    <statBases>
+      <Ability_EntropyGain>60</Ability_EntropyGain>
+      <Ability_PsyfocusCost>0</Ability_PsyfocusCost>
+    </statBases>
+    <verbProperties>
+      <warmupTime>30</warmupTime>
+      <range>5</range>
+      <targetParams>
+        <canTargetSelf>True</canTargetSelf>
+        <canTargetAnimals>False</canTargetAnimals>
+        <canTargetPawns>True</canTargetPawns>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class = "CompProperties_AbilityGiveHediff">
+        <compClass>CaravanAdventures.CaravanAbilities.CompAbilityEffect_AncientMeditate</compClass>
+        <hediffDef>CADrainNature</hediffDef>
+        <psychic>True</psychic>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <AbilityDef ParentName="PsycastBase" MayRequire="Ludeon.RimWorld.Royalty">
+    <defName>CAAncientThunderBolt</defName>
+    <label>ancient thunder bolt</label>
+    <description>Powerful ancient psypower, a targeted thunder blast with area damage. Requires the ancient gift.</description>
+    <level>0</level>
+    <iconPath>UI/Abilities/Thunderbolt</iconPath>
+    <canUseAoeToGetTargets>False</canUseAoeToGetTargets>
+    <statBases>
+      <Ability_EntropyGain>65</Ability_EntropyGain>
+      <Ability_PsyfocusCost>0.20</Ability_PsyfocusCost>
+      <Ability_EffectRadius>4</Ability_EffectRadius>
+      <!--<Ability_Duration>3</Ability_Duration>-->
+    </statBases>
+    <verbProperties>
+      <warmupTime>0.25</warmupTime>
+      <range>29.9</range>
+      <targetParams>
+        <canTargetPawns>False</canTargetPawns>
+        <canTargetLocations>True</canTargetLocations>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="CaravanAdventures.CaravanAbilities.CompProperties_AbilityAncientThunderBold">
+        <goodwillImpact>-35</goodwillImpact>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <AbilityDef ParentName="PsycastBase" MayRequire="Ludeon.RimWorld.Royalty">
+    <defName>CAAncientMechSignal</defName>
+    <label>ancient mech signal</label>
+    <description>Summons a group of mechanoid scythers to the caster's aid. Requires the ancient gift.</description>
+    <level>0</level>
+    <iconPath>UI/Abilities/CallScyther</iconPath>
+    <canUseAoeToGetTargets>False</canUseAoeToGetTargets>
+    <statBases>
+      <Ability_EntropyGain>30</Ability_EntropyGain>
+      <Ability_PsyfocusCost>0.15</Ability_PsyfocusCost>
+      <Ability_EffectRadius>2</Ability_EffectRadius>
+      <!--<Ability_Duration>3</Ability_Duration>-->
+    </statBases>
+    <verbProperties>
+      <warmupTime>0.25</warmupTime>
+      <range>29.9</range>
+      <targetParams>
+        <canTargetPawns>True</canTargetPawns>
+        <canTargetSelf>True</canTargetSelf>
+        <canTargetLocations>True</canTargetLocations>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="CaravanAdventures.CaravanAbilities.CompProperties_AbilityAncientMechSignal">
+        <goodwillImpact>-5</goodwillImpact>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <!--<AbilityDef ParentName="PsycastBase" MayRequire="Ludeon.RimWorld.Royalty">
+    <defName>CAAncientInvisibility</defName>
+    <label>ancient invisibility</label>
+    <description>Psychically manipulate the visual centers of everyone nearby, rendering them unable to perceive a particular individual for a short time.</description>
+    <level>0</level>
+    <iconPath>UI/Abilities/Invisibility</iconPath>
+    <hotKey>Misc12</hotKey>
+    <statBases>
+      <Ability_EntropyGain>45</Ability_EntropyGain>
+      <Ability_PsyfocusCost>0.03</Ability_PsyfocusCost>
+      <Ability_Duration>60</Ability_Duration>
+    </statBases>
+    <verbProperties>
+      <warmupTime>0.25</warmupTime>
+      <range>19.9</range>
+      <onlyManualCast>True</onlyManualCast>
+      <targetParams>
+        <canTargetSelf>True</canTargetSelf>
+        <canTargetAnimals>True</canTargetAnimals>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class = "CompProperties_AbilityGiveHediff">
+        <compClass>CompAbilityEffect_GiveHediff</compClass>
+        <hediffDef>PsychicInvisibility</hediffDef>
+        <psychic>True</psychic>
+      </li>
+    </comps>
+  </AbilityDef>-->
+
+  <!--<AbilityDef ParentName="PsycastBase" MayRequire="Ludeon.RimWorld.Royalty">
+    <defName>CAAncientProtectiveAura</defName>
+    <label>ancient protective aura</label>
+    <description>Protects the target from a large part of incoming damage, fire and heals wounds over time (even permanent ones when active long enough). \n\nReduces the overall heat a pawn can handle and accelerates psyfocus drain by 2% / day while active. The effect of this spell disappears if it is cast a second time on the target or if the targeted pawn runs out of psyfocus. \n\nThe effect is weaker and drains more psyfocus when cast on pawns without the ancient gift.</description>
+    <level>0</level>
+		<displayGizmoWhileUndrafted>True</displayGizmoWhileUndrafted>
+		<disableGizmoWhileUndrafted>False</disableGizmoWhileUndrafted>
+    <iconPath>UI/Abilities/Painblock</iconPath>
+    <hotKey>Misc12</hotKey>
+    <statBases>
+      <Ability_EntropyGain>30</Ability_EntropyGain>
+      <Ability_PsyfocusCost>0</Ability_PsyfocusCost>
+    </statBases>
+    <verbProperties>
+      <warmupTime>0.25</warmupTime>
+      <range>5</range>
+      <onlyManualCast>True</onlyManualCast>
+      <targetParams>
+        <canTargetSelf>True</canTargetSelf>
+        <canTargetAnimals>False</canTargetAnimals>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class = "CaravanAdventures.CaravanAbilities.CompProperties_GiveToggleableHediff">
+        <compClass>CaravanAdventures.CaravanAbilities.CompAbilityEffect_GiveToggleableHediff</compClass>
+        <hediffDef>CAAncientProtectiveAura</hediffDef>
+        <hediffSecondary>CAAncientProtectiveAuraWeak</hediffSecondary>
+        <psychic>True</psychic>
+      </li>
+    </comps>
+  </AbilityDef>-->
+
+  <AbilityDef ParentName="PsycastBase" MayRequire="Ludeon.RimWorld.Royalty">
+    <defName>CAAncientCoordinator</defName>
+    <label>ancient coordinator</label>
+    <description>The caster aswell as 4 other colonists are granted the power of the ancient protective aura without any downsides as long as the caster is alive. However, every other pawn exceeding the limit of 5 will die. Requires the ancient gift.</description>
+    <level>0</level>
+    <displayGizmoWhileUndrafted>True</displayGizmoWhileUndrafted>
+    <disableGizmoWhileUndrafted>False</disableGizmoWhileUndrafted>
+    <targetRequired>False</targetRequired>
+    <canUseAoeToGetTargets>False</canUseAoeToGetTargets>
+    <!--<showPsycastEffects>False</showPsycastEffects>-->
+    <iconPath>UI/Abilities/Circles</iconPath>
+    <hotKey>Misc12</hotKey>
+    <statBases>
+      <Ability_EntropyGain>30</Ability_EntropyGain>
+      <Ability_PsyfocusCost>0</Ability_PsyfocusCost>
+    </statBases>
+    <verbProperties>
+      <warmupTime>0</warmupTime>
+      <range>0</range>
+      <drawAimPie>False</drawAimPie>
+      <requireLineOfSight>False</requireLineOfSight>
+      <!--<onlyManualCast>True</onlyManualCast>-->
+      <targetParams>
+        <canTargetSelf>True</canTargetSelf>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class = "CaravanAdventures.CaravanAbilities.CompProperties_GiveToggleableHediff">
+        <compClass>CaravanAdventures.CaravanAbilities.CompAbilityEffect_GiveToggleableHediff</compClass>
+        <hediffDef>CAAncientCoordinator</hediffDef>
+        <psychic>True</psychic>
+        <onlyApplyToSelf>True</onlyApplyToSelf>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <AbilityDef ParentName="PsycastBase" MayRequire="Ludeon.RimWorld.Royalty">
+    <defName>CAAncientProtectiveAura</defName>
+    <label>ancient protective aura</label>
+    <description>Allows the caster to channel psyfocus to directly strenghten the bodies capabilities in almost any humanly possible way. Agility, melee combat, aswell as endurance are highly increased. It also protects the target from a large part of incoming damage, fire, heals wounds over time (even permanent ones when active long enough). \n\nReduces the overall heat a pawn can handle and accelerates psyfocus drain by 20% / day while active. The effect of this spell disappears if cast a second time or no more psyfocus is available. \n\nRequires the ancient gift, unless enhanced by The Ancient Coordinator spell.</description>
+    <level>0</level>
+    <displayGizmoWhileUndrafted>True</displayGizmoWhileUndrafted>
+    <disableGizmoWhileUndrafted>False</disableGizmoWhileUndrafted>
+    <targetRequired>False</targetRequired>
+    <canUseAoeToGetTargets>False</canUseAoeToGetTargets>
+    <!--<showPsycastEffects>False</showPsycastEffects>-->
+    <iconPath>UI/Abilities/Protect</iconPath>
+    <hotKey>Misc12</hotKey>
+    <statBases>
+      <Ability_EntropyGain>30</Ability_EntropyGain>
+      <Ability_PsyfocusCost>0</Ability_PsyfocusCost>
+    </statBases>
+    <verbProperties>
+      <warmupTime>0</warmupTime>
+      <range>0</range>
+      <drawAimPie>False</drawAimPie>
+      <requireLineOfSight>False</requireLineOfSight>
+      <!--<onlyManualCast>True</onlyManualCast>-->
+      <targetParams>
+        <canTargetSelf>True</canTargetSelf>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class = "CaravanAdventures.CaravanAbilities.CompProperties_GiveToggleableHediff">
+        <compClass>CaravanAdventures.CaravanAbilities.CompAbilityEffect_GiveToggleableHediff</compClass>
+        <hediffDef>CAAncientProtectiveAura</hediffDef>
+        <psychic>True</psychic>
+        <onlyApplyToSelf>True</onlyApplyToSelf>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <AbilityDef ParentName="PsycastBase" MayRequire="Ludeon.RimWorld.Royalty">
+    <defName>CAConjureLight</defName>
+    <label>mystical guiding light</label>
+    <description>A support light for travels that increases the travelers speed, may it be on a map or caravan. Can't be cast on the road and has a lengthy preperation time. Lasts 3 days.</description>
+    <level>1</level>
+    <iconPath>UI/Abilities/GuidingLight</iconPath>
+    <hotKey>Misc12</hotKey>
+    <displayGizmoWhileUndrafted>True</displayGizmoWhileUndrafted>
+    <disableGizmoWhileUndrafted>False</disableGizmoWhileUndrafted>
+    <showGizmoOnWorldView>False</showGizmoOnWorldView>
+    <targetRequired>False</targetRequired>
+    <canUseAoeToGetTargets>False</canUseAoeToGetTargets>
+    <statBases>
+      <Ability_EntropyGain>5</Ability_EntropyGain>
+      <Ability_PsyfocusCost>0.1</Ability_PsyfocusCost>
+      <Ability_Duration>3000</Ability_Duration>
+    </statBases>
+    <verbProperties>
+      <warmupTime>15</warmupTime>
+      <range>0</range>
+      <requireLineOfSight>False</requireLineOfSight>
+      <targetParams>
+        <canTargetSelf>True</canTargetSelf>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="CompProperties_AbilityGiveHediff">
+        <compClass>CompAbilityEffect_GiveHediff</compClass>
+        <hediffDef>CAConjuredLight</hediffDef>
+        <onlyBrain>True</onlyBrain>
+        <psychic>True</psychic>
+        <replaceExisting>true</replaceExisting>
+        <onlyApplyToSelf>True</onlyApplyToSelf>
+      </li>
+    </comps>
+  </AbilityDef>
+
+</Defs>

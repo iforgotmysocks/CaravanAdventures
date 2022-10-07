@@ -12,4 +12,10 @@
     <li IfModActive="Ludeon.Rimworld.Royalty">1.3/Story</li>
     <li IfModActive="CETeam.CombatExtended">1.3/CEPatches</li>
   </v1.3>
+  <v1.4>
+    <li>/</li>
+    <li>1.4</li>
+    <li IfModActive="Ludeon.Rimworld.Royalty">1.4/Story</li>
+    <li IfModActive="CETeam.CombatExtended">1.4/CEPatches</li>
+  </v1.4>
 </loadFolders>
