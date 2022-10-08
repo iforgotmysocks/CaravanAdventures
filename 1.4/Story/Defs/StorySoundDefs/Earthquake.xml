@@ -11,8 +11,8 @@
 		<subSounds>
 			<li>
 				<grains>
-					<li Class="AudioGrain_Folder">
-						<clipFolderPath>Earthquake/zatar_earthquake</clipFolderPath>
+					<li Class="AudioGrain_Clip">
+						<clipPath>Earthquake/zatar_earthquake</clipPath>
 					</li>
 				</grains>
 				<volumeRange>150~200</volumeRange>

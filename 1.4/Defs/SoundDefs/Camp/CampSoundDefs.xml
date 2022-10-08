@@ -10,8 +10,8 @@
     <subSounds>
       <li>
         <grains>
-          <li Class="AudioGrain_Folder">
-            <clipFolderPath>Camp/PackUpTent</clipFolderPath>
+          <li Class="AudioGrain_Clip">
+            <clipPath>Camp/PackUpTent</clipPath>
           </li>
         </grains>
         <volumeRange>40~40</volumeRange>

@@ -11,11 +11,10 @@
 		<subSounds>
 			<li>
 				<grains>
-					<li Class="AudioGrain_Folder">
-						<clipFolderPath>AnimaTreeWhispers/zapsplat_whispers</clipFolderPath>
+					<li Class="AudioGrain_Clip">
+						<clipPath>AnimaTreeWhispers/zapsplat_whispers</clipPath>
 					</li>
 				</grains>
-        <muteWhenPaused>true</muteWhenPaused>
 				<volumeRange>5~30</volumeRange>
 				<pitchRange>0.9~1.1</pitchRange>
 				<sustainLoop>True</sustainLoop>

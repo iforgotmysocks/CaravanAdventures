@@ -11,8 +11,8 @@
 		<subSounds>
 			<li>
 				<grains>
-					<li Class="AudioGrain_Folder">
-						<clipFolderPath>Bosses/Attacks/slice1_audione</clipFolderPath>
+					<li Class="AudioGrain_Clip">
+						<clipPath>Bosses/Attacks/slice1_audione</clipPath>
 					</li>
 				</grains>
 				<volumeRange>50~50</volumeRange>
@@ -34,8 +34,8 @@
     <subSounds>
       <li>
         <grains>
-          <li Class="AudioGrain_Folder">
-            <clipFolderPath>Bosses/Attacks/slice2_freefire66</clipFolderPath>
+          <li Class="AudioGrain_Clip">
+            <clipPath>Bosses/Attacks/slice2_freefire66</clipPath>
           </li>
         </grains>
         <volumeRange>30~30</volumeRange>
@@ -57,8 +57,8 @@
     <subSounds>
       <li>
         <grains>
-          <li Class="AudioGrain_Folder">
-            <clipFolderPath>Bosses/Attacks/slice3_TheBuilder15</clipFolderPath>
+          <li Class="AudioGrain_Clip">
+            <clipPath>Bosses/Attacks/slice3_TheBuilder15</clipPath>
           </li>
         </grains>
         <volumeRange>50~50</volumeRange>
@@ -80,8 +80,8 @@
     <subSounds>
       <li>
         <grains>
-          <li Class="AudioGrain_Folder">
-            <clipFolderPath>Bosses/Attacks/slice4_Aleks41</clipFolderPath>
+          <li Class="AudioGrain_Clip">
+            <clipPath>Bosses/Attacks/slice4_Aleks41</clipPath>
           </li>
         </grains>
         <volumeRange>50~50</volumeRange>
