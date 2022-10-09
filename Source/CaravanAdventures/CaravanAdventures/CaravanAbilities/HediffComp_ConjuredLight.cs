@@ -19,7 +19,7 @@ namespace CaravanAdventures.CaravanAbilities
         private List<Swirly> swirlies = new List<Swirly>();
         public override string CompLabelInBracketsExtra => base.CompLabelInBracketsExtra + ((int)ModSettings.lightDuration - ticksToDisappear).ToStringTicksToPeriod(true, true);
         public HediffCompProperties_ConjuredLight Props => (HediffCompProperties_ConjuredLight)props;
-        public override string CompTipStringExtra => base.CompTipStringExtra + $"Caravan travel speed: x{Math.Round(ModSettings.magicLightCaravanSpeedMult, 1)}";
+        public override string CompTipStringExtra => base.CompTipStringExtra + $"  - Caravan travel speed: x{Math.Round(ModSettings.magicLightCaravanSpeedMult, 1)}";
 
         public override void CompPostPostRemoved()
         {
