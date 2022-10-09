@@ -23,10 +23,6 @@
       <li>SpacerMilitary</li>
       <li>BeltDefensePop</li>
     </apparelTags>
-    <apparelRequired>
-      <li>Apparel_PowerArmorHelmet</li>
-      <li>Apparel_PowerArmor</li>
-    </apparelRequired>
     <specificApparelRequirements Inherit="False">
       <li>
         <bodyPartGroup>Torso</bodyPartGroup>
@@ -114,20 +110,35 @@
 	<PawnKindDef ParentName="CASacrilegHunters_ExperiencedHunterBase">
 		<defName>CASacrilegHunters_ExperiencedHunterVillage</defName>
 		<apparelAllowHeadgearChance>0</apparelAllowHeadgearChance>
+    <apparelRequired>
+      <li>Apparel_PowerArmor</li>
+    </apparelRequired>
 	</PawnKindDef>
 
 	<PawnKindDef ParentName="CASacrilegHunters_ExperiencedHunterBase">
 		<defName>CASacrilegHunters_ExperiencedHunter</defName>
+    <apparelRequired>
+      <li>Apparel_PowerArmorHelmet</li>
+      <li>Apparel_PowerArmor</li>
+    </apparelRequired>
 		<apparelAllowHeadgearChance>100</apparelAllowHeadgearChance>
 	</PawnKindDef>
 
   <PawnKindDef ParentName="CASacrilegHunters_HunterBase">
     <defName>CASacrilegHunters_HunterVillage</defName>
+    <apparelRequired>
+      <li>Apparel_PowerArmorHelmet</li>
+      <li>Apparel_PowerArmor</li>
+    </apparelRequired>
     <apparelAllowHeadgearChance>0</apparelAllowHeadgearChance>
   </PawnKindDef>
 
   <PawnKindDef ParentName="CASacrilegHunters_HunterBase">
     <defName>CASacrilegHunters_Hunter</defName>
+    <apparelRequired>
+      <li>Apparel_PowerArmorHelmet</li>
+      <li>Apparel_PowerArmor</li>
+    </apparelRequired>
     <apparelAllowHeadgearChance>100</apparelAllowHeadgearChance>
   </PawnKindDef>
 
