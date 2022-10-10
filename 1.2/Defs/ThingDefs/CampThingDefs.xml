@@ -1004,6 +1004,7 @@
     <burnableByRecipe>true</burnableByRecipe>
     <healthAffectsPrice>false</healthAffectsPrice>
     <tradeability>None</tradeability>
+    <generateCommonality>0</generateCommonality>
     <!--<minRewardCount>30</minRewardCount>-->
     <stuffProps>
       <categories>
