@@ -354,7 +354,7 @@ namespace CaravanAdventures.CaravanStory
                 {
                     Helper.RunSavely(() =>
                     {
-                        DLog.Message($"Removing no longer needed {messageFactionName} settlement." + (ModsConfig.IdeologyActive ? "The possibly following Notify error can be ignored" : ""));
+                        DLog.Message($"Removing no longer needed {messageFactionName} settlement.");
                         if (settlement is MapParent parent && parent?.HasMap == true) Current.Game.DeinitAndRemoveMap(parent.Map);
                         settlement.Destroy();
                     });
