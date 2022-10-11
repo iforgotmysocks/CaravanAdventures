@@ -105,13 +105,13 @@
     <uiIconPath>Things/Building/Door/DoorSimple_MenuIcon</uiIconPath>
     <costStuffCount>25</costStuffCount>
   </ThingDef>
-  
-    <ThingDef ParentName="CATentDoorBase">
+
+  <ThingDef ParentName="CATentDoorBase">
     <defName>CATentFenceDoor</defName>
     <label>fence door</label>
-      <stuffCategories>
-        <li>Woody</li>
-      </stuffCategories>
+    <stuffCategories>
+      <li>Woody</li>
+    </stuffCategories>
     <description>Divides rooms. Simple doors must be manually opened, which slows people down. The amount of slowdown depends on what the door is made of.</description>
     <statBases>
       <WorkToBuild>850</WorkToBuild>
@@ -395,7 +395,7 @@
       <li Class="CompProperties_Refuelable">
         <fuelConsumptionRate>5.0</fuelConsumptionRate>
         <fuelCapacity>20.0</fuelCapacity>
-        <fuelConsumptionPerTickInRain>0.00002</fuelConsumptionPerTickInRain>
+        <fuelConsumptionPerTickInRain>0</fuelConsumptionPerTickInRain>
         <fuelFilter>
           <thingDefs>
             <li>WoodLog</li>
@@ -521,7 +521,7 @@
     </graphicData>
     <statBases>
       <MarketValue>12</MarketValue>
-      <WorkToMake>250</WorkToMake>
+      <WorkToMake>220</WorkToMake>
       <Nutrition>0.8</Nutrition>
       <FoodPoisonChanceFixedHuman>0</FoodPoisonChanceFixedHuman>
     </statBases>
@@ -715,11 +715,11 @@
       <li>Electricity</li>
     </researchPrerequisites>-->
   </ThingDef>
-  
+
   <!-- trade beacon -->
   <ThingDef ParentName="CATentBase">
     <defName>CAOrbitalTradeBeacon</defName>
-    <label>orbital trade beacon</label>
+    <label>orbital camp trade beacon</label>
     <description>Required for orbital trading. You can only sell goods to orbital traders if they're near an orbital trade beacon.</description>
     <thingClass>Building_OrbitalTradeBeacon</thingClass>
     <graphicData>
@@ -745,7 +745,7 @@
       <Mass>5</Mass>
     </statBases>
     <tickerType>Normal</tickerType>
-   <drawerType>MapMeshAndRealTime</drawerType>
+    <drawerType>MapMeshAndRealTime</drawerType>
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
     <fillPercent>0.15</fillPercent>
     <costList>
@@ -786,11 +786,11 @@
     </researchPrerequisites>-->
   </ThingDef>
 
-  
+
   <!-- generator -->
   <ThingDef ParentName="CATentBase">
     <defName>CAChemfuelPoweredGenerator</defName>
-    <label>chemfuel powered generator</label>
+    <label>chemfuel powered camp generator</label>
     <description>Produces power by consuming chemfuel. Must be periodically refueled by hand.</description>
     <thingClass>Building</thingClass>
     <graphicData>
@@ -871,7 +871,7 @@
       <li>Electricity</li>
     </researchPrerequisites>
     <constructionSkillPrerequisite>6</constructionSkillPrerequisite>-->
-  </ThingDef>  
+  </ThingDef>
 
   <TerrainDef Name="CATentFloorBase" Parent="CATentBase" Abstract="True">
     <layerable>true</layerable>
