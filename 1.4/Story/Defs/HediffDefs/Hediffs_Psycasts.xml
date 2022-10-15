@@ -48,6 +48,7 @@
           <ImmunityGainSpeed>3</ImmunityGainSpeed>
           <MoveSpeed>2</MoveSpeed>
           <ToxicEnvironmentResistance>0.8</ToxicEnvironmentResistance>
+          <ToxicResistance>0.8</ToxicResistance>
           <MentalBreakThreshold>-0.20</MentalBreakThreshold>
           <MeleeDodgeChance>15</MeleeDodgeChance>
           <!--<MeleeHitChance>15</MeleeHitChance>-->
