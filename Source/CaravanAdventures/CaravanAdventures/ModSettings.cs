@@ -297,6 +297,7 @@ namespace CaravanAdventures
         }
 
         private bool showRestartReminder = false;
+        internal static bool useStorageShelfs = true;
 
         public void DoWindowContents(Rect wrect)
         {

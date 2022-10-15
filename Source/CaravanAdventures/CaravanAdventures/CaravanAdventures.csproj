@@ -93,11 +93,13 @@
     <Compile Include="CaravanCamp\CampModExt.cs" />
     <Compile Include="CaravanCamp\CompCampControl.cs" />
     <Compile Include="CaravanCamp\IAreaRestrictionTent.cs" />
+    <Compile Include="CaravanCamp\IMultiShelfTent.cs" />
     <Compile Include="CaravanCamp\IRecipeHolder.cs" />
     <Compile Include="CaravanCamp\IShelfTent.cs" />
     <Compile Include="CaravanCamp\IZoneTent.cs" />
     <Compile Include="CaravanCamp\JobDriver_StartPackingUp.cs" />
     <Compile Include="CaravanCamp\PlantTent.cs" />
+    <Compile Include="CaravanCamp\ShelfStorageTent.cs" />
     <Compile Include="CaravanCamp\SlaveTent.cs" />
     <Compile Include="CaravanCamp\StorageTent.cs" />
     <Compile Include="CaravanCamp\FoodTent.cs" />
@@ -243,7 +245,7 @@
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_StartDate="2000/1/1" BuildVersion_BuildVersioningStyle="None.None.None.Increment" />
+      <UserProperties BuildVersion_BuildVersioningStyle="None.None.None.Increment" BuildVersion_StartDate="2000/1/1" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

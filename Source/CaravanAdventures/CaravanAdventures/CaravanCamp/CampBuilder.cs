@@ -500,6 +500,13 @@ namespace CaravanAdventures.CaravanCamp
                 shelfTent.FillShelfs(map, caravan);
             }
 
+            foreach (var shelfTent in campParts.OfType<IMultiShelfTent>())
+            {
+                if (tribal) break;
+                shelfTent.FillShelfs(map, caravan);
+            }
+
+
             foreach (var storageTent in campParts.OfType<StorageTent>()) storageTent.ApplyInventory(map, caravan);
 
             foreach (var areaRestrictionTent in campParts.OfType<IAreaRestrictionTent>())
