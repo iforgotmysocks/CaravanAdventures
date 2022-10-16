@@ -34,6 +34,7 @@ namespace CaravanAdventures.CaravanCamp
 
         private void BuildShelfs(Map map, List<Thing> campAssetListRef, ShelfDirection shelfDirection)
         {
+            // todo link shelfs for each tent
             switch (shelfDirection)
             {
                 case ShelfDirection.Vertical:
@@ -51,22 +52,38 @@ namespace CaravanAdventures.CaravanCamp
                 case ShelfDirection.Horizontal:
                     for (int i = 0; i < 5; i++)
                     {
+                        if (i == 2)
+                        {
+                            var cellSpotSingle = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 2 - (2 * i) && cell.z == CellRect.maxZ - 1);
+                            if (!GenerateShelf(map, campAssetListRef, shelfDirection, cellSpotSingle, Rot4.South, true)) continue;
+                            continue;
+                        }
                         var cellSpotShelf = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 1 - (2 * i) && cell.z == CellRect.maxZ - 1);
                         if (!GenerateShelf(map, campAssetListRef, shelfDirection, cellSpotShelf, Rot4.South)) continue;
                     }
                     for (int i = 0; i < 5; i++)
                     {
-                        var cellSpotShelf = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 1 - (2*i) && cell.z == CellRect.maxZ - 1);
+                        if (i == 2)
+                        {
+                            var cellSpotSingle = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 2 - (2 * i) && cell.z == CellRect.maxZ - 3);
+                            if (!GenerateShelf(map, campAssetListRef, shelfDirection, cellSpotSingle, Rot4.North, true)) continue;
+                            continue;
+                        }
+                        var cellSpotShelf = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 2 - (2 * i) && cell.z == CellRect.maxZ - 3);
                         if (!GenerateShelf(map, campAssetListRef, shelfDirection, cellSpotShelf, Rot4.North)) continue;
                     }
+                    var singleShelfSpotEast = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.minX + 1 && cell.z == CellRect.minZ + 2);
+                    GenerateShelf(map, campAssetListRef, shelfDirection, singleShelfSpotEast, Rot4.East, true);
+                    var singleShelfSpotWest = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 1 && cell.z == CellRect.minZ + 2);
+                    GenerateShelf(map, campAssetListRef, shelfDirection, singleShelfSpotWest, Rot4.West, true);
                     //var hss = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX - 1 && cell.z == CellRect.maxZ - 1);
                     break;
             }
         }
 
-        private bool GenerateShelf(Map map, List<Thing> campAssetListRef, ShelfDirection shelfDirection, IntVec3 cellSpotShelf, Rot4 rot)
+        private bool GenerateShelf(Map map, List<Thing> campAssetListRef, ShelfDirection shelfDirection, IntVec3 cellSpotShelf, Rot4 rot, bool small = false)
         {
-            var shelf = ThingMaker.MakeThing(ThingDef.Named("Shelf"), ThingDefOf.WoodLog) as Building_Storage;
+            var shelf = ThingMaker.MakeThing(ThingDef.Named(small ? "ShelfSmall" : "Shelf"), ThingDefOf.WoodLog) as Building_Storage;
             if (shelf == null)
             {
                 DLog.Error($"Error creating shelf for storage tent, shelf is null");

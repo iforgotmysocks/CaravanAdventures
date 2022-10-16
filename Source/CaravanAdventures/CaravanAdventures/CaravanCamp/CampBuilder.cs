@@ -69,6 +69,7 @@ namespace CaravanAdventures.CaravanCamp
 
         public static int PreemptivelyCalculateCampCosts(Caravan caravan)
         {
+            // todo adjust to new shelf tents
             if (ModSettings.hasSupplyCostsDisabled) return 0;
             var buildingCosts = 0;
             buildingCosts += (int)Math.Ceiling(caravan.PawnsListForReading.Where(x => x.IsColonist || x.IsPrisoner).Count() / 3.0 * 3);
@@ -124,7 +125,6 @@ namespace CaravanAdventures.CaravanCamp
             if (ModSettings.generateStorageForAllInventory)
             {
                 var tent = new StorageTent();
-                var cellsPerTent = (tent.CoordSize * tentSize.x) * (tentSize.z - 2);
                 var foodTent = campParts.OfType<FoodTent>()?.FirstOrDefault();
                 var itemsToSubstract = foodTent == null
                     ? 0
@@ -132,8 +132,27 @@ namespace CaravanAdventures.CaravanCamp
                         .Where(x => CampHelper.GetOrderedThingsOfCategoryFromCaravan(caravan, foodTent.GetValidFoods, foodTent.GetUnvalidFoods)
                             .Contains(x))
                         .Count());
-                var tentsAmount = Math.Ceiling((CaravanInventoryUtility.AllInventoryItems(caravan).Count - itemsToSubstract) / (float)cellsPerTent);
-                for (int i = 0; i < tentsAmount; i++) campParts.Add(new StorageTent());
+
+                var itemCount = CaravanInventoryUtility.AllInventoryItems(caravan).Count - itemsToSubstract;
+                var cellsPerTent = (tent.CoordSize * tentSize.x) * (tentSize.z - 2);
+                var regularTentAmount = 0.0;
+                if (ModSettings.useStorageShelfs)
+                {
+                    var tempShelf = ThingMaker.MakeThing(ThingDef.Named("Shelf"), ThingDefOf.WoodLog) as Building_Storage;
+                    var itemAmountRequiringRegularTent = CaravanInventoryUtility.AllInventoryItems(caravan)?.Where(x => !tempShelf?.Accepts(x) ?? true)?.Count() ?? 0;
+                    var itemAmountShelfTents = itemCount - itemAmountRequiringRegularTent;
+                    var cellsPerShelfTent = cellsPerTent * (2f / 3f) * 3;
+                    var shelfTentAmount = Math.Ceiling(itemAmountShelfTents / (float)cellsPerShelfTent);
+
+                    DLog.Message($"itemAmountRequiringRegularTent: {itemAmountRequiringRegularTent} itemAmountShelfTents: {itemAmountShelfTents} cellsPerTent {cellsPerTent} cellsPerShelfTent: {cellsPerShelfTent} shelfTentAmount: {shelfTentAmount}");
+
+                    regularTentAmount = Math.Ceiling(itemAmountRequiringRegularTent / (float)cellsPerTent);
+                    for (int i = 0; i < shelfTentAmount; i++) campParts.Add(new ShelfStorageTent());
+                }
+                else regularTentAmount = Math.Ceiling(itemCount / (float)cellsPerTent);
+                for (int i = 0; i < regularTentAmount; i++) campParts.Add(new StorageTent());
+
+                DLog.Message($"storage tents: {campParts.OfType<StorageTent>().Count()} shelf storage tent: {campParts.OfType<ShelfStorageTent>().Count()}");
             }
 
             List<List<Pawn>> colonistRelationShipPairs = GetRelationShipPairs(colonists);
