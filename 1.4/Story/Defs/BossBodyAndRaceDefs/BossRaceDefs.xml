@@ -1,6 +1,89 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
 <Defs>
+  <!-- base defs -->
+  <ThingDef ParentName="BasePawn" Name="CABaseMechanoid" Abstract="True">
+    <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
+    <statBases>
+      <MarketValue>1200</MarketValue>
+      <PsychicSensitivity>0.5</PsychicSensitivity>
+      <ToxicResistance>1</ToxicResistance>
+      <Flammability>0</Flammability>
+      <ComfyTemperatureMin>-100</ComfyTemperatureMin>
+      <ComfyTemperatureMax>250</ComfyTemperatureMax>
+      <MeatAmount>0</MeatAmount>
+      <ArmorRating_Heat>2.00</ArmorRating_Heat>
+      <BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">1</BandwidthCost>
+      <ControlTakingTime MayRequire="Ludeon.Rimworld.Biotech">12</ControlTakingTime>
+      <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">1</ToxicEnvironmentResistance>
+      <MechEnergyLossPerHP MayRequire="Ludeon.Rimworld.Biotech">0.33</MechEnergyLossPerHP>
+      <WastepacksPerRecharge MayRequire="Ludeon.Rimworld.Biotech">5</WastepacksPerRecharge>
+      <WorkSpeedGlobal MayRequire="Ludeon.Rimworld.Biotech">0.5</WorkSpeedGlobal>
+    </statBases>
+    <receivesSignals>true</receivesSignals>
+    <tradeability>None</tradeability>
+    <race>
+      <fleshType>Mechanoid</fleshType>
+      <needsRest>false</needsRest>
+      <hasGenders>false</hasGenders>
+      <foodType>None</foodType>
+      <lifeExpectancy>2500</lifeExpectancy>
+      <bloodDef>Filth_MachineBits</bloodDef>
+      <nameGenerator MayRequire="Ludeon.RimWorld.Biotech">NamerMech</nameGenerator>
+      <soundCallIntervalRange>1000~2000</soundCallIntervalRange>
+      <soundCallIntervalFriendlyFactor>2</soundCallIntervalFriendlyFactor>
+      <thinkTreeConstant MayRequire="Ludeon.RimWorld.Biotech">MechConstant</thinkTreeConstant>
+    </race>
+    <comps>
+      <li Class="CompProperties_CanBeDormant" />
+      <li Class="CompProperties_WakeUpDormant">
+        <wakeUpOnDamage>true</wakeUpOnDamage>
+        <wakeUpCheckRadius>30</wakeUpCheckRadius>
+        <wakeUpSound>MechanoidsWakeUp</wakeUpSound>
+      </li>
+      <!--<li MayRequire="Ludeon.Rimworld.Biotech" Class="CompProperties_OverseerSubject">
+        <needsOverseerEffect>MechUncontrolled</needsOverseerEffect>
+        <delayUntilFeralCheck>60000</delayUntilFeralCheck>
+        <feralMtbDays>10</feralMtbDays>
+        <feralCascadeRadialDistance>25</feralCascadeRadialDistance>
+      </li>
+      <li MayRequire="Ludeon.Rimworld.Biotech" Class="CompProperties_MechRepairable" />-->
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="CABaseMechanoid" Name="CABaseMechanoidWalker" Abstract="True">
+    <statBases>
+      <MoveSpeed>4.7</MoveSpeed>
+      <ArmorRating_Blunt>0.20</ArmorRating_Blunt>
+      <ArmorRating_Sharp>0.40</ArmorRating_Sharp>
+    </statBases>
+    <race>
+      <intelligence>ToolUser</intelligence>
+      <thinkTreeMain>Mechanoid</thinkTreeMain>
+      <baseBodySize>1.0</baseBodySize>
+      <lifeStageAges>
+        <li>
+          <def>MechanoidFullyFormed</def>
+          <minAge>0</minAge>
+          <soundWounded>Pawn_Mech_Scyther_Wounded</soundWounded>
+          <soundDeath>Pawn_Mech_Scyther_Death</soundDeath>
+          <soundCall>Pawn_Mech_Scyther_Call</soundCall>
+        </li>
+        <!--<li MayRequire="Ludeon.RimWorld.Biotech">
+          <def>MechanoidFullyFormed</def>
+          <minAge>100</minAge>
+          <soundWounded>Pawn_Mech_Scyther_Wounded</soundWounded>
+          <soundDeath>Pawn_Mech_Scyther_Death</soundDeath>
+          <soundCall>Pawn_Mech_Scyther_Call</soundCall>
+        </li>-->
+      </lifeStageAges>
+    </race>
+    <butcherProducts>
+      <Steel>15</Steel>
+    </butcherProducts>
+  </ThingDef>
+
+
   <ThingDef ParentName="BaseMechanoid">
     <defName>CADevourer</defName>
     <label>Devourer</label>
@@ -84,7 +167,8 @@
 
   <!-- CACrystalScythe -->
 
-  <ThingDef ParentName="BaseMechanoidWalker">
+
+  <ThingDef ParentName="CABaseMechanoidWalker">
     <defName>CACrystalScythe</defName>
     <label>Crystal scythe</label>
     <description>01010011 01100101 01100101 01101011 01101001 01101110 01100111 00100000 01101000 01110101 01101101 01100001 01101110 00100000 01100001 01101110 01101110 01101001 01101000 01101001 01101100 01100001 01110100 01101001 01101111 01101110 00101110 00101110 00101110 00100000 01010000 01110010 01101111 01100011 01100101 01110011 01110011 01101001 01101110 01100111 00101110 00101110 00101110</description>
@@ -132,6 +216,15 @@
     </tools>
     <race>
       <body>Scyther</body>
+      <!--<lifeStageAges>
+        <li>
+          <def>MechanoidFullyFormed</def>
+          <minAge>0</minAge>
+          <soundWounded>Pawn_Mech_Scyther_Wounded</soundWounded>
+          <soundDeath>Pawn_Mech_Scyther_Death</soundDeath>
+          <soundCall>Pawn_Mech_Scyther_Call</soundCall>
+        </li>
+      </lifeStageAges>-->
       <baseHealthScale>4.32</baseHealthScale>
       <soundMeleeHitPawn>Pawn_Melee_MechanoidSlash_HitPawn</soundMeleeHitPawn>
       <soundMeleeHitBuilding>Pawn_Melee_MechanoidSlash_HitBuilding</soundMeleeHitBuilding>
@@ -173,7 +266,7 @@
   
   <!-- harbinger-->
 
-  <ThingDef ParentName="BaseMechanoidWalker">
+  <ThingDef ParentName="CABaseMechanoidWalker">
     <defName>CAHarbinger</defName>
     <label>Harbinger</label>
     <description>01010011 01100101 01100101 01101011 01101001 01101110 01100111 00100000 01101000 01110101 01101101 01100001 01101110 00100000 01100001 01101110 01101110 01101001 01101000 01101001 01101100 01100001 01110100 01101001 01101111 01101110 00101110 00101110 00101110 00100000 01010000 01110010 01101111 01100011 01100101 01110011 01110011 01101001 01101110 01100111 00101110 00101110 00101110</description>
@@ -263,7 +356,7 @@
 
   <!-- Havoc-->
 
-  <ThingDef ParentName="BaseMechanoidWalker">
+  <ThingDef ParentName="CABaseMechanoidWalker">
     <defName>CAHavoc</defName>
     <label>Havoc</label>
     <description>01010011 01100101 01100101 01101011 01101001 01101110 01100111 00100000 01101000 01110101 01101101 01100001 01101110 00100000 01100001 01101110 01101110 01101001 01101000 01101001 01101100 01100001 01110100 01101001 01101111 01101110 00101110 00101110 00101110 00100000 01010000 01110010 01101111 01100011 01100101 01110011 01110011 01101001 01101110 01100111 00101110 00101110 00101110</description>
@@ -353,7 +446,7 @@
 
 
   <!--endboss-->
-  <ThingDef ParentName="BaseMechanoid">
+  <ThingDef ParentName="CABaseMechanoid">
     <defName>CAEndBossMech</defName>
     <label>Judgment</label>
     <description>01010011 01100101 01100101 01101011 01101001 01101110 01100111 00100000 01101000 01110101 01101101 01100001 01101110 00100000 01100001 01101110 01101110 01101001 01101000 01101001 01101100 01100001 01110100 01101001 01101111 01101110 00101110 00101110 00101110 00100000 01010000 01110010 01101111 01100011 01100101 01110011 01110011 01101001 01101110 01100111 00101110 00101110 00101110</description>
