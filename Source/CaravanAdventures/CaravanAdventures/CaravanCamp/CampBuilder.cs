@@ -86,15 +86,33 @@ namespace CaravanAdventures.CaravanCamp
             {
                 var foodTent = new FoodTent();
                 var tent = new StorageTent();
-                var cellsPerTent = (tent.CoordSize * ModSettings.tentSize.x) * (ModSettings.tentSize.z - 2);
+
+                buildingCosts += ModSettings.campSupplyCostStorageTent;
+              
                 var itemsToSubstract = foodTent == null
                     ? 0
                     : Math.Min(30, CaravanInventoryUtility.AllInventoryItems(caravan)
                         .Where(x => CampHelper.GetOrderedThingsOfCategoryFromCaravan(caravan, foodTent.GetValidFoods, foodTent.GetUnvalidFoods)
                             .Contains(x))
                         .Count());
-                var tentsAmount = Math.Ceiling((CaravanInventoryUtility.AllInventoryItems(caravan).Count - itemsToSubstract) / (float)cellsPerTent);
-                for (int i = 0; i < tentsAmount; i++) buildingCosts += tent.SupplyCost;
+
+                var cellsPerTent = (tent.CoordSize * ModSettings.tentSize.x) * (ModSettings.tentSize.z - 2);
+
+                var itemCount = CaravanInventoryUtility.AllInventoryItems(caravan).Count - itemsToSubstract;
+                var regularTentAmount = 0.0;
+                if (ModSettings.useStorageShelfs)
+                {
+                    var tempShelf = ThingMaker.MakeThing(ThingDef.Named("Shelf"), ThingDefOf.WoodLog) as Building_Storage;
+                    var itemAmountRequiringRegularTent = CaravanInventoryUtility.AllInventoryItems(caravan)?.Where(x => x != null && (!tempShelf.Accepts(x) || x is MinifiedThing))?.Count() ?? 0;
+                    var itemAmountShelfTents = itemCount - itemAmountRequiringRegularTent;
+                    var cellsPerShelfTent = cellsPerTent * (2f / 3f) * 3;
+                    var shelfTentAmount = Math.Ceiling(itemAmountShelfTents / (float)cellsPerShelfTent);
+
+                    regularTentAmount = itemAmountRequiringRegularTent < (float)cellsPerTent ? 0 : Math.Ceiling(itemAmountRequiringRegularTent / (float)cellsPerTent);
+                    for (int i = 0; i < shelfTentAmount; i++) buildingCosts += ModSettings.campSupplyCostStorageTent;
+                }
+                else regularTentAmount = Math.Ceiling(itemCount / (float)cellsPerTent);
+                for (int i = 0; i < regularTentAmount; i++) buildingCosts += ModSettings.campSupplyCostStorageTent;
             }
             if (buildingCosts > ModSettings.maxCampSupplyCost) buildingCosts = ModSettings.maxCampSupplyCost;
             return buildingCosts;
@@ -136,7 +154,7 @@ namespace CaravanAdventures.CaravanCamp
                 var itemCount = CaravanInventoryUtility.AllInventoryItems(caravan).Count - itemsToSubstract;
                 var cellsPerTent = (tent.CoordSize * tentSize.x) * (tentSize.z - 2);
                 var regularTentAmount = 0.0;
-                if (ModSettings.useStorageShelfs)
+                if (ModSettings.useStorageShelfs && ResearchProjectDef.Named("ComplexFurniture")?.ProgressPercent != 1f)
                 {
                     var tempShelf = ThingMaker.MakeThing(ThingDef.Named("Shelf"), ThingDefOf.WoodLog) as Building_Storage;
                     var itemAmountRequiringRegularTent = CaravanInventoryUtility.AllInventoryItems(caravan)?.Where(x => x != null && (!tempShelf.Accepts(x) || x is MinifiedThing))?.Count() ?? 0;
@@ -514,13 +532,13 @@ namespace CaravanAdventures.CaravanCamp
 
             foreach (var shelfTent in campParts.OfType<IShelfTent>())
             {
-                if (tribal) break;
+                //if (tribal) break;
                 shelfTent.FillShelfs(map, caravan);
             }
 
             foreach (var shelfTent in campParts.OfType<IMultiShelfTent>())
             {
-                if (tribal) break;
+                //if (tribal) break;
                 shelfTent.FillShelfs(map, caravan);
             }
 

@@ -179,6 +179,7 @@ namespace CaravanAdventures.CaravanCamp
 
         public virtual void FillShelfs(Map map, Caravan caravan)
         {
+            if (shelf == null || ResearchProjectDef.Named("ComplexFurniture")?.ProgressPercent != 1f) return;
             foreach (var cell in shelf.AllSlotCells())
             {
                 var stuff = CampHelper.GetFirstOrderedThingOfCategoryFromCaravan(caravan, new[] { ThingCategoryDefOf.Leathers, ThingCategoryDef.Named("Textiles") }, new[] { ThingDef.Named("Leather_Thrumbo") });

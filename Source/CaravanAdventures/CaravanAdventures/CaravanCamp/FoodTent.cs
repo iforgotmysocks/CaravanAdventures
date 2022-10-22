@@ -49,7 +49,7 @@ namespace CaravanAdventures.CaravanCamp
             zone.settings.filter.SetAllow(ThingCategoryDefOf.CorpsesInsect, ModSettings.campStorageAndJobsAllowInsectMeat);
             zone.settings.filter.SetAllow(ThingCategoryDefOf.CorpsesHumanlike, ModSettings.campStorageAndJobsAllowHumanMeat);
             zone.settings.filter.SetAllow(ThingDefOf.Meat_Human, ModSettings.campStorageAndJobsAllowHumanMeat);
-            zone.settings.Priority = StoragePriority.Preferred;
+            zone.settings.Priority = StoragePriority.Important;
             zone.label = "CAFoodZoneLabel".Translate();
             CellRect.Cells.Where(cell => cell != null && !CellRect.EdgeCells.Contains(cell)).ToList().ForEach(cell => zone.AddCell(cell));
             //zone.CheckContiguous();

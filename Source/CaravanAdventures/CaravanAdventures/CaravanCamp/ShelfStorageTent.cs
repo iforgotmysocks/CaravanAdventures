@@ -11,7 +11,6 @@ namespace CaravanAdventures.CaravanCamp
     public class ShelfStorageTent : Tent, IMultiShelfTent
     {
         protected List<Building_Storage> shelfs;
-
         public ShelfStorageTent()
         {
             CoordSize = 2;
@@ -48,7 +47,6 @@ namespace CaravanAdventures.CaravanCamp
 
         private void BuildShelfs(Map map, List<Thing> campAssetListRef, ShelfDirection shelfDirection)
         {
-            // todo link shelfs for each tent
             switch (shelfDirection)
             {
                 case ShelfDirection.Vertical:
@@ -111,10 +109,17 @@ namespace CaravanAdventures.CaravanCamp
         public override void BuildTribal(Map map, List<Thing> campAssetListRef)
         {
             base.BuildTribal(map, campAssetListRef);
+
+            if (!ModSettings.useStorageShelfs || ResearchProjectDef.Named("ComplexFurniture")?.ProgressPercent != 1f) return;
+            if (CellRect.Width > CellRect.Height) BuildShelfs(map, campAssetListRef, ShelfDirection.Horizontal);
+            else BuildShelfs(map, campAssetListRef, ShelfDirection.Vertical);
+
+            LinkShelfs(map);
         }
 
         public void FillShelfs(Map map, Caravan caravan)
         {
+            if ((!shelfs?.Any(x => x != null) ?? true) || ResearchProjectDef.Named("ComplexFurniture")?.ProgressPercent != 1f) return;
             if (!ModSettings.generateStorageForAllInventory || !ModSettings.useStorageShelfs) return;
             Helper.RunSavely(() =>
             {

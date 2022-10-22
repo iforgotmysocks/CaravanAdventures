@@ -109,7 +109,7 @@ namespace CaravanAdventures.CaravanCamp
 
         public void FillShelfs(Map map, Caravan caravan)
         {
-            if (shelf == null) return;
+            if (shelf == null || ResearchProjectDef.Named("ComplexFurniture")?.ProgressPercent != 1f) return;
             foreach (var cell in shelf.AllSlotCells())
             {
                 var medicine = caravan.AllThings.FirstOrDefault(thing => (new[] {ThingDefOf.Hay, ThingDefOf.Kibble}).Contains(thing.def));
