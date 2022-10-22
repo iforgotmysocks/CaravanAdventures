@@ -15,6 +15,7 @@
 						<clipPath>AnimaTreeWhispers/zapsplat_whispers</clipPath>
 					</li>
 				</grains>
+        <muteWhenPaused>true</muteWhenPaused>
 				<volumeRange>5~30</volumeRange>
 				<pitchRange>0.9~1.1</pitchRange>
 				<sustainLoop>True</sustainLoop>
