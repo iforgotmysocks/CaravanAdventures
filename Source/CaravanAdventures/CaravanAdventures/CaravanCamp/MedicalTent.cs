@@ -70,7 +70,7 @@ namespace CaravanAdventures.CaravanCamp
 
         public virtual void FillShelfs(Map map, Caravan caravan)
         {
-            if (shelf == null || ResearchProjectDef.Named("ComplexFurniture")?.ProgressPercent != 1f) return;
+            if (shelf == null) return;
             foreach (var cell in shelf.AllSlotCells())
             {
                 var medicine = caravan.AllThings.FirstOrDefault(thing => validMedicine.Contains(thing.def));

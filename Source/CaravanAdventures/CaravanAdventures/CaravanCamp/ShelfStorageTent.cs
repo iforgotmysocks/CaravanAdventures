@@ -119,7 +119,7 @@ namespace CaravanAdventures.CaravanCamp
 
         public void FillShelfs(Map map, Caravan caravan)
         {
-            if ((!shelfs?.Any(x => x != null) ?? true) || ResearchProjectDef.Named("ComplexFurniture")?.ProgressPercent != 1f) return;
+            if (!shelfs?.Any(x => x != null) ?? true) return;
             if (!ModSettings.generateStorageForAllInventory || !ModSettings.useStorageShelfs) return;
             Helper.RunSavely(() =>
             {

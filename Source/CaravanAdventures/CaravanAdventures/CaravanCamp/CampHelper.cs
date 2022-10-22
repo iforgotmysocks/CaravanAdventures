@@ -102,5 +102,10 @@ namespace CaravanAdventures.CaravanCamp
             if (fuelPerc != 100) refuelComp.ConsumeFuel(refuelComp.Fuel);
             refuelComp.Refuel(refuelComp.GetFuelCountToFullyRefuel() * fuelPerc / 100f);
         }
+
+        public static bool CanUseShelfTents(bool tribal = false)
+        {
+            return ResearchProjectDef.Named("ComplexFurniture")?.ProgressPercent == 1f || !tribal;
+        }
     }
 }
