@@ -87,7 +87,7 @@ namespace CaravanAdventures.CaravanImprovements
 
                 var cmdSettleWithCamp = new Command_Settle
                 {
-                    defaultLabel = "SettleWithCampLabel".Translate() + (ModSettings.showSupplyCostsInGizmo ? $" ({suppliesAvailable}/{campCost})" : ""),
+                    defaultLabel = "SettleWithCampLabel".Translate() + (ModSettings.showSupplyCostsInGizmo ? $" ({campCost}/{suppliesAvailable})" : ""),
                     defaultDesc = "SettleWithCampDesc".Translate(),
                     Order = 198f,
                     icon = ContentFinder<Texture2D>.Get("UI/Icons/Settle/SettleCamp_up", true),
