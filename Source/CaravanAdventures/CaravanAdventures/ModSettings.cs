@@ -43,6 +43,7 @@ namespace CaravanAdventures
         public static bool campStorageAndJobsAllowInsectMeat;
         public static bool leaveCampControlOptionAfterPackingUp;
         public static bool allowMeatForChemfuelProduction;
+        public static bool useStorageShelfs = true;
 
         // camp cost TODO -> create defs for tent types and move it there
         public static int campSupplyCostAnimalArea = 1;
@@ -185,6 +186,7 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref campStorageAndJobsAllowHumanMeat, "campStorageAndJobsAllowHumanMeat", false);
             Scribe_Values.Look(ref leaveCampControlOptionAfterPackingUp, "leaveCampControlOptionAfterPackingUp", false);
             Scribe_Values.Look(ref allowMeatForChemfuelProduction, "allowMeatForChemfuelProduction", false);
+            Scribe_Values.Look(ref useStorageShelfs, "useStorageShelfs", true);
 
             // filters
             Scribe_Values.Look(ref autoSelectPawns, "autoSelectPawns", true);
@@ -297,7 +299,6 @@ namespace CaravanAdventures
         }
 
         private bool showRestartReminder = false;
-        internal static bool useStorageShelfs = true;
 
         public void DoWindowContents(Rect wrect)
         {

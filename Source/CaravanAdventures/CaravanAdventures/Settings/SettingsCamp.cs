@@ -60,6 +60,7 @@ namespace CaravanAdventures.Settings
             options.CheckboxLabeled("Allow meat for chemfuel production", ref ModSettings.allowMeatForChemfuelProduction);
             options.CheckboxLabeled("Auto apply zone for snow to be cleared within the camp", ref ModSettings.autoApplyCampClearSnowArea);
             options.CheckboxLabeled("Generate storage for all inventory items", ref ModSettings.generateStorageForAllInventory, "When disabled, most items will remain packed on the animals");
+            options.CheckboxLabeled("Use storage tents with shelfs", ref ModSettings.useStorageShelfs, "Adds another storage tent kind with shelfs as needed. When disabled, no shelf storage tents will be generated");
             options.CheckboxLabeled("Set up a stone cutting table instead of the art bench if researched", ref ModSettings.preferStonecutting);
             options.CheckboxLabeled("Let animals mostly free instead of limiting them to their small animal area", ref ModSettings.letAnimalsRunFree);
             options.CheckboxLabeled("Restrict animal zone food to kibble and hay", ref ModSettings.useAnimalOnlyFoodForAnimalArea, "When disabled, corn and vegetables will also be used as feed");
