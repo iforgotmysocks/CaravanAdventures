@@ -30,6 +30,20 @@ namespace CaravanAdventures.CaravanCamp
             if (!ModSettings.useStorageShelfs) return;
             if (CellRect.Width > CellRect.Height) BuildShelfs(map, campAssetListRef, ShelfDirection.Horizontal);
             else BuildShelfs(map, campAssetListRef, ShelfDirection.Vertical);
+
+            LinkShelfs(map);
+        }
+
+        private void LinkShelfs(Map map)
+        {
+            var group = map.storageGroups.NewGroup();
+            if (!shelfs?.Any() ?? true) return;
+            group.InitFrom(shelfs.FirstOrDefault());
+            foreach (var shelf in shelfs)
+            {
+                if (shelf == null) continue;
+                shelf.SetStorageGroup(group);
+            }
         }
 
         private void BuildShelfs(Map map, List<Thing> campAssetListRef, ShelfDirection shelfDirection)
@@ -104,16 +118,23 @@ namespace CaravanAdventures.CaravanCamp
             if (!ModSettings.generateStorageForAllInventory || !ModSettings.useStorageShelfs) return;
             Helper.RunSavely(() =>
             {
-                var orderedItems = CaravanInventoryUtility.AllInventoryItems(caravan).OrderByDescending(x => x.def?.thingCategories?.FirstOrDefault() != null).ThenBy(x => x.def?.thingCategories?.FirstOrDefault().defName).ThenBy(x => x.MarketValue).ToList();
+                var tempShelf = ThingMaker.MakeThing(ThingDef.Named("Shelf"), ThingDefOf.WoodLog) as Building_Storage;
+                var orderedItems = CaravanInventoryUtility
+                    .AllInventoryItems(caravan)
+                    .Where(x => x != null && tempShelf.Accepts(x) && !(x is MinifiedThing))
+                    .OrderByDescending(x => x.def?.thingCategories?.FirstOrDefault() != null)
+                    .ThenBy(x => x.def?.thingCategories?.FirstOrDefault().defName)
+                    .ThenBy(x => x.MarketValue).ToList();
+
                 foreach (var cell in shelfs.SelectMany(shelf => shelf.AllSlotCellsList()).Reverse<IntVec3>())
                 {
-                    DLog.Message($"trying to place {orderedItems?.LastOrDefault()?.def?.defName} in cell {cell.x} {cell.y}");
+                    //DLog.Message($"trying to place {orderedItems?.LastOrDefault()?.def?.defName} in cell {cell.x} {cell.y}");
                     for (; ; )
                     {
                         if (!orderedItems?.Any() ?? true) return;
+                        if (cell.GetItemCount(map) >= cell.GetMaxItemsAllowedInCell(map)) break;
                         var stack = orderedItems.Pop();
                         if (stack == null) return;
-                        if (cell.GetItemCount(map) >= cell.GetMaxItemsAllowedInCell(map)) break;
                         //DLog.Message($"Tent {this.Coords.First().x} {this.Coords.First().z} placing: {stack.Label}");
                         if (!cell.Filled(map)) GenDrop.TryDropSpawn(stack, cell, map, ThingPlaceMode.Direct, out var result);
                     }

@@ -139,15 +139,14 @@ namespace CaravanAdventures.CaravanCamp
                 if (ModSettings.useStorageShelfs)
                 {
                     var tempShelf = ThingMaker.MakeThing(ThingDef.Named("Shelf"), ThingDefOf.WoodLog) as Building_Storage;
-                    var itemAmountRequiringRegularTent = CaravanInventoryUtility.AllInventoryItems(caravan)?.Where(x => !tempShelf?.Accepts(x) ?? true)?.Count() ?? 0;
+                    var itemAmountRequiringRegularTent = CaravanInventoryUtility.AllInventoryItems(caravan)?.Where(x => x != null && (!tempShelf.Accepts(x) || x is MinifiedThing))?.Count() ?? 0;
                     var itemAmountShelfTents = itemCount - itemAmountRequiringRegularTent;
                     var cellsPerShelfTent = cellsPerTent * (2f / 3f) * 3;
                     var shelfTentAmount = Math.Ceiling(itemAmountShelfTents / (float)cellsPerShelfTent);
 
-                    DLog.Message($"itemAmountRequiringRegularTent: {itemAmountRequiringRegularTent} itemAmountShelfTents: {itemAmountShelfTents} cellsPerTent {cellsPerTent} cellsPerShelfTent: {cellsPerShelfTent} shelfTentAmount: {shelfTentAmount}");
-
-                    regularTentAmount = Math.Ceiling(itemAmountRequiringRegularTent / (float)cellsPerTent);
+                    regularTentAmount = itemAmountRequiringRegularTent < (float)cellsPerTent ? 0 : Math.Ceiling(itemAmountRequiringRegularTent / (float)cellsPerTent);
                     for (int i = 0; i < shelfTentAmount; i++) campParts.Add(new ShelfStorageTent());
+                    DLog.Message($"itemAmountRequiringRegularTent: {itemAmountRequiringRegularTent} itemAmountShelfTents: {itemAmountShelfTents} cellsPerTent {cellsPerTent} cellsPerShelfTent: {cellsPerShelfTent} shelfTentAmount: {shelfTentAmount}");
                 }
                 else regularTentAmount = Math.Ceiling(itemCount / (float)cellsPerTent);
                 for (int i = 0; i < regularTentAmount; i++) campParts.Add(new StorageTent());
@@ -524,7 +523,6 @@ namespace CaravanAdventures.CaravanCamp
                 if (tribal) break;
                 shelfTent.FillShelfs(map, caravan);
             }
-
 
             foreach (var storageTent in campParts.OfType<StorageTent>()) storageTent.ApplyInventory(map, caravan);
 
