@@ -100,7 +100,7 @@ namespace CaravanAdventures.CaravanCamp
 
                 var itemCount = CaravanInventoryUtility.AllInventoryItems(caravan).Count - itemsToSubstract;
                 var regularTentAmount = 0.0;
-                if (ModSettings.useStorageShelfs)
+                if (ModSettings.useStorageShelfs && ResearchProjectDef.Named("ComplexFurniture")?.ProgressPercent == 1f)
                 {
                     var tempShelf = ThingMaker.MakeThing(ThingDef.Named("Shelf"), ThingDefOf.WoodLog) as Building_Storage;
                     var itemAmountRequiringRegularTent = CaravanInventoryUtility.AllInventoryItems(caravan)?.Where(x => x != null && (!tempShelf.Accepts(x) || x is MinifiedThing))?.Count() ?? 0;
@@ -154,7 +154,7 @@ namespace CaravanAdventures.CaravanCamp
                 var itemCount = CaravanInventoryUtility.AllInventoryItems(caravan).Count - itemsToSubstract;
                 var cellsPerTent = (tent.CoordSize * tentSize.x) * (tentSize.z - 2);
                 var regularTentAmount = 0.0;
-                if (ModSettings.useStorageShelfs && ResearchProjectDef.Named("ComplexFurniture")?.ProgressPercent != 1f)
+                if (ModSettings.useStorageShelfs && ResearchProjectDef.Named("ComplexFurniture")?.ProgressPercent == 1f)
                 {
                     var tempShelf = ThingMaker.MakeThing(ThingDef.Named("Shelf"), ThingDefOf.WoodLog) as Building_Storage;
                     var itemAmountRequiringRegularTent = CaravanInventoryUtility.AllInventoryItems(caravan)?.Where(x => x != null && (!tempShelf.Accepts(x) || x is MinifiedThing))?.Count() ?? 0;
