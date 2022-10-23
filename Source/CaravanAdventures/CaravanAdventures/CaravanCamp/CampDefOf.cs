@@ -45,7 +45,7 @@ namespace CaravanAdventures.CaravanCamp
         public static RecipeDef CACookGrillSnackBulk;
 
 
-        public static RecipeDef CACookTribalGrillSnack;
-        public static RecipeDef CACookTribalGrillSnackBulk;
+        //public static RecipeDef CACookTribalGrillSnack;
+        //public static RecipeDef CACookTribalGrillSnackBulk;
     }
 }
