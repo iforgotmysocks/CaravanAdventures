@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
 <Defs>
-	<FactionDef ParentName="HumanFactionBase" Name="CASacrilegHuntersFactionBase" Abstract="True">
+	<FactionDef ParentName="FactionBase" Name="CASacrilegHuntersFactionBase" Abstract="True">
 		<pawnSingular>Sacrileg Hunter</pawnSingular>
 		<pawnsPlural>Sacrileg Hunters</pawnsPlural>
 		<categoryTag>Outlander</categoryTag>
 		<listOrderPriority>30</listOrderPriority>
 		<settlementGenerationWeight>0.3</settlementGenerationWeight>
+    <hidden>false</hidden>
 		<requiredCountAtGameStart>1</requiredCountAtGameStart>
 		<canMakeRandomly>true</canMakeRandomly>
-		<canSiege>false</canSiege>
-		<hidden>false</hidden>
-		<canStageAttacks>false</canStageAttacks>
+		<canSiege>true</canSiege>
+		<canStageAttacks>true</canStageAttacks>
 		<leaderTitle>prime councilor</leaderTitle>
 		<factionIconPath>World/WorldObjects/Expanding/Town</factionIconPath>
-		<!--<factionNameMaker>NamerFactionOutlander</factionNameMaker>-->
 		<factionNameMaker>CANamerFactionSacrilegHunters</factionNameMaker>
 		<settlementNameMaker>NamerSettlementOutlander</settlementNameMaker>
 		<techLevel>Ultra</techLevel>

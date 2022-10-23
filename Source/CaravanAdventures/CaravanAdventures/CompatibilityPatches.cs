@@ -97,7 +97,7 @@ namespace CaravanAdventures
 
             ExecuteHarmonyCompatibilityPatches();
 
-            Log.Message($"CA patches complete. v{System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString().TrimEnd(new[] { '.', '0' })} (1.3)");
+            Log.Message($"CA patches complete. v{System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString().TrimEnd(new[] { '.', '0' })} (1.4)");
         }
 
         public static void ExecuteHarmonyCompatibilityPatches()
