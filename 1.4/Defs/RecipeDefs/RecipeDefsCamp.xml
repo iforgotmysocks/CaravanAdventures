@@ -114,8 +114,7 @@
     <workSkill>Cooking</workSkill>
   </RecipeDef>
 
-
-  <RecipeDef ParentName="CookMealBase">
+  <!--<RecipeDef ParentName="CookMealBase">
     <defName>CACookTribalGrillSnack</defName>
     <label>cook a grill snack</label>
     <description>Cook a grill snack.</description>
@@ -169,7 +168,7 @@
       <CATribalGrillSnack>4</CATribalGrillSnack>
     </products>
     <workSkill>Cooking</workSkill>
-  </RecipeDef>
+  </RecipeDef>-->
 
   <RecipeDef>
     <defName>CABurnApparel</defName>
