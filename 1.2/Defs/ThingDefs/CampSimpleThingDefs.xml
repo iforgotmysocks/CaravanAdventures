@@ -311,8 +311,8 @@
     <hasInteractionCell>True</hasInteractionCell>
     <interactionCellOffset>(0,0,-1)</interactionCellOffset>
     <recipes>
-      <li>CACookTribalGrillSnack</li>
-      <li>CACookTribalGrillSnackBulk</li>
+      <li>CACookGrillSnack</li>
+      <li>CACookGrillSnackBulk</li>
       <li>CookMealSimple</li>
       <li>CookMealSimpleBulk</li>
       <li>CookMealSurvival</li>
@@ -335,7 +335,7 @@
     </building>
   </ThingDef>
 
-  <ThingDef ParentName="CAGrillSnackBase">
+  <!--<ThingDef ParentName="CAGrillSnackBase">
     <defName>CATribalGrillSnack</defName>
     <label>grill snack</label>
     <description>A tasty grill snack, not as nutritious as a simple meal, but doesn't cause food poisoning.</description>
@@ -355,7 +355,7 @@
       <ingestSound>Meal_Eat</ingestSound>
     </ingestible>
     <tradeability>None</tradeability>
-  </ThingDef>
+  </ThingDef>-->
 
 
 </Defs>
