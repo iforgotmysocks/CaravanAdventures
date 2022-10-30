@@ -39,6 +39,7 @@ namespace CaravanAdventures.CaravanCamp
             shelf.GetStoreSettings().filter.SetAllow(ThingDefOf.MedicineHerbal, true);
             shelf.GetStoreSettings().filter.SetAllow(ThingDefOf.MedicineIndustrial, true);
             shelf.GetStoreSettings().filter.SetAllow(ThingDefOf.MedicineUltratech, true);
+            shelf.GetStoreSettings().Priority = StoragePriority.Important;
             campAssetListRef.Add(GenSpawn.Spawn(shelf, cellSpotShelf, map, Rot4.West, WipeMode.Vanish));
         }
 
