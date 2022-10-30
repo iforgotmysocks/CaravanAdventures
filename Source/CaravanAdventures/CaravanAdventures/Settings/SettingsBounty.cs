@@ -89,6 +89,12 @@ namespace CaravanAdventures.Settings
             ModSettings.alliedAssistanceDurationInDays = options.Slider(ModSettings.alliedAssistanceDurationInDays, 0.1f, 60f);
             options.Label($"Veteran availability in days: {Math.Round(ModSettings.veteranResetTimeInDays, 1)}");
             ModSettings.veteranResetTimeInDays = options.Slider(ModSettings.veteranResetTimeInDays, 0.1f, 60f);
+            options.CheckboxLabeled("Add random gene reward if biotech is installed", ref ModSettings.useGeneRewards);
+            if (ModSettings.useGeneRewards)
+            {
+                options.Label($"Chance for the gene to be type archite: {Math.Round(ModSettings.architeGeneChance, 0)}%");
+                ModSettings.architeGeneChance = options.Slider(ModSettings.architeGeneChance, 0f, 100f);
+            }
             options.CheckboxLabeled("Allow bounty gained by buildings (turrets etc)", ref ModSettings.allowBountyFromBuildingInstigators);
             options.CheckboxLabeled("Allow exchanging bounty points for silver", ref ModSettings.allowBuyingBountyWithSilver);
             options.Label($"Bounty value multiplier. (Default: 1 silver ~ 0.25 bounty credit): {Math.Round(ModSettings.bountyValueMult, 2)}");

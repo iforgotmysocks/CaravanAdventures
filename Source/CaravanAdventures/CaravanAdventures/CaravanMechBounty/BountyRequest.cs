@@ -125,7 +125,7 @@ namespace CaravanAdventures.CaravanMechBounty
         private DiaNode GetItemOverview(DiaNode parent)
         {
             var node = new DiaNode("CABountyExchangeRequestItemTitle".Translate(CompCache.BountyWC.BountyPoints, GetRestockTimeString()));
-            foreach (var item in GenerateItemStock(ModSettings.itemStockAmount, 1))
+            foreach (var item in GenerateItemStock(ModSettings.itemStockAmount, 1, 1))
             {
                 if (item == null) continue;
                 var link = new Dialog_InfoCard.Hyperlink { thing = item.GetInnerIfMinified(), def = item.GetInnerIfMinified().def };
@@ -173,49 +173,71 @@ namespace CaravanAdventures.CaravanMechBounty
 
         private object[] customRewardsRoyalty = !ModsConfig.RoyaltyActive ? new object[] { } : new object[] { ThingCategoryDef.Named("WeaponsMeleeBladelink"), ThingDef.Named("AnimusStone") };
         private List<object> customRewards = new List<object>() { ThingDefOf.VanometricPowerCell, ThingDefOf.InfiniteChemreactor };
-        private List<Thing> GenerateItemStock(int itemCount, int customItemCount = 0)
+        private List<GeneDef> customRewardsGene = new List<GeneDef>() {
+            DefDatabase<GeneDef>.AllDefs.FirstOrDefault(x => x.defName == "Ageless"),
+            DefDatabase<GeneDef>.AllDefs.FirstOrDefault(x => x.defName == "TotalHealing"),
+            DefDatabase<GeneDef>.AllDefs.FirstOrDefault(x => x.defName == "DiseaseFree"),
+            DefDatabase<GeneDef>.AllDefs.FirstOrDefault(x => x.defName == "PerfectImmunity"),
+            DefDatabase<GeneDef>.AllDefs.FirstOrDefault(x => x.defName == "Deathless"),
+            DefDatabase<GeneDef>.AllDefs.FirstOrDefault(x => x.defName == "ArchiteMetabolism")
+        };
+
+        private List<Thing> GenerateItemStock(int itemCount, int customItemCount = 0, int customGeneCount = 0)
         {
             if (ModsConfig.RoyaltyActive) customRewards.AddRange(customRewardsRoyalty);
+            if (!ModsConfig.BiotechActive || !ModSettings.useGeneRewards) customGeneCount = 0;
 
             if (CompCache.BountyWC.CurrentTradeItemStock == null) CompCache.BountyWC.CurrentTradeItemStock = new List<Thing>();
             if (CompCache.BountyWC.OngoingItemDelay > 0) return CompCache.BountyWC.CurrentTradeItemStock;
             CompCache.BountyWC.CurrentTradeItemStock.Clear();
-            for (int i = 0; i < itemCount; i++) CompCache.BountyWC.CurrentTradeItemStock.Add(GenerateItem(500 * (i + 1), CompCache.BountyWC.CurrentTradeItemStock, null));
+            for (int i = 0; i < itemCount; i++) CompCache.BountyWC.CurrentTradeItemStock.Add(GenerateItem(500 * (i + 1), CompCache.BountyWC.CurrentTradeItemStock));
             for (int i = 0; i < customItemCount; i++) CompCache.BountyWC.CurrentTradeItemStock.Add(GenerateItem(0, CompCache.BountyWC.CurrentTradeItemStock, customRewards));
+            for (int i = 0; i < customGeneCount; i++) CompCache.BountyWC.CurrentTradeItemStock.Add(GenerateItem(0, CompCache.BountyWC.CurrentTradeItemStock, customRewardsGene));
             CompCache.BountyWC.OngoingItemDelay = ModSettings.itemRestockDurationInDays * 60000;
             return CompCache.BountyWC.CurrentTradeItemStock;
         }
 
-        private Thing GenerateItem(float credits, List<Thing> itemsToAvoid, List<object> customItems)
+        private Thing GenerateItem(float credits, List<Thing> itemsToAvoid)
         {
-            //var rewards = RewardsGenerator.Generate(new RewardsGeneratorParams() { thingRewardItemsOnly = true, minGeneratedRewardValue = credits * 2, disallowedThingDefs = itemsToAvoid.Select(x => x.def).ToList() });
-            //var rewardItems = rewards.FirstOrDefault((x) => x is Reward_Items) as Reward_Items;
-
-            if (customItems != null && customItems?.Count != 0)
-            {
-                Thing customReward = null;
-                object picked = customItems.RandomElementByWeight(item =>
-                {
-                    if (item is ThingCategoryDef catDef && catDef == ThingCategoryDef.Named("WeaponsMeleeBladelink")) return 0.8f;
-                    return 0.3f;
-                });
-
-                if (picked is ThingDef pickedDef) customReward = ThingMaker.MakeThing(pickedDef);
-                else if (picked is ThingCategoryDef pickedCat) customReward = ThingMaker.MakeThing(pickedCat.childThingDefs.RandomElement());
-                if (customReward != null && customReward.TryGetQuality(out var quality))
-                {
-                    quality = (QualityCategory)Rand.RangeInclusive(2, 6);
-                    customReward.TryGetComp<CompQuality>().SetQuality(quality, ArtGenerationContext.Outsider);
-                }
-
-                if (customReward is Building) customReward = customReward.TryMakeMinified();
-
-                return customReward;
-            }
-
             var rewardItems = new Reward_Items();
             rewardItems.InitFromValue(credits * 2, new RewardsGeneratorParams() { thingRewardItemsOnly = true, minGeneratedRewardValue = credits * 2, disallowedThingDefs = itemsToAvoid.Select(x => x.def).ToList() }, out var usedCredits);
             return rewardItems.ItemsListForReading.FirstOrDefault();
+        }
+
+        private Thing GenerateItem(float credits, List<Thing> itemsToAvoid, List<object> customItems)
+        {
+            if (!customItems?.Any() ?? true) return null;
+            Thing customReward = null;
+            object picked = customItems.RandomElementByWeight(item =>
+            {
+                if (item is ThingCategoryDef catDef && catDef == ThingCategoryDef.Named("WeaponsMeleeBladelink")) return 0.8f;
+                return 0.3f;
+            });
+
+            if (picked is ThingDef pickedDef) customReward = ThingMaker.MakeThing(pickedDef);
+            else if (picked is ThingCategoryDef pickedCat) customReward = ThingMaker.MakeThing(pickedCat.childThingDefs.RandomElement());
+            if (customReward != null && customReward.TryGetQuality(out var quality))
+            {
+                quality = (QualityCategory)Rand.RangeInclusive(2, 6);
+                customReward.TryGetComp<CompQuality>().SetQuality(quality, ArtGenerationContext.Outsider);
+            }
+
+            if (customReward is Building) customReward = customReward.TryMakeMinified();
+
+            return customReward;
+        }
+
+        private Thing GenerateItem(float credits, List<Thing> itemsToAvoid, List<GeneDef> customItems)
+        {
+            if (!ModsConfig.BiotechActive || (!customItems?.Any() ?? true)) return null;
+            var container = ThingDefOf.Genepack;
+            var containerItem = ThingMaker.MakeThing(container) as Genepack;
+            var existingGene = containerItem?.GeneSet?.GenesListForReading?.FirstOrDefault();
+            if (existingGene == null) return null;
+            if (ModSettings.architeGeneChance == 0 || !Rand.Chance(ModSettings.architeGeneChance / 100f)) return containerItem; 
+            foreach (var gene in containerItem.GeneSet.GenesListForReading.Reverse<GeneDef>()) containerItem.GeneSet.Debug_RemoveGene(gene);
+            containerItem.GeneSet.AddGene(customItems.RandomElement());
+            return containerItem;
         }
 
         private bool CanPurchaseItem(Thing thing, out string reason)
