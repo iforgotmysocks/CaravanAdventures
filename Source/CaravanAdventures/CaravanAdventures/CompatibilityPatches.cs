@@ -64,7 +64,7 @@ namespace CaravanAdventures
                     }
                     else Log.Warning($"Caravan Adventures: Applying patch for realruins failed");
                 }
-            }, false, "Following error happend while trying to patching SOS2 for compatibility with CA, but was catched savely:");
+            }, false, "Following error happend while trying to patching SOS2 for compatibility with CA, but was caught safely:");
 
             Helper.RunSavely(() =>
             {
@@ -145,7 +145,7 @@ namespace CaravanAdventures
             }, false, ErrorMessage("RimWar"));
         }
 
-        private static string ErrorMessage(string modName) => $"Following error happend while trying to patch {modName} for compatibility with CA, but was catched savely:\n";
+        private static string ErrorMessage(string modName) => $"Following error happend while trying to patch {modName} for compatibility with CA, but was caught safely:\n";
 
     }
 
