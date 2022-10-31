@@ -99,7 +99,7 @@ namespace CaravanAdventures.CaravanStory
             Current.ProgramState = ProgramState.MapInitializing;
 
             //todo skip mechs and add insects instead for rimedieval
-            Helper.RunSavely(() =>
+            Helper.RunSafely(() =>
             {
                 foreach (var room in GetAncientShrineRooms(map))
                 {

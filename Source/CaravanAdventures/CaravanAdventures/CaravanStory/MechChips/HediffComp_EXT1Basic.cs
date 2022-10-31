@@ -26,8 +26,8 @@ namespace CaravanAdventures.CaravanStory.MechChips
             if (ticks > 60)
             {
                 ticks = 0;
-                Helper.RunSavely(NegateNegativeEffects);
-                Helper.RunSavely(MakeSureDeadWhenDowned);
+                Helper.RunSafely(NegateNegativeEffects);
+                Helper.RunSafely(MakeSureDeadWhenDowned);
             }
 
             ticks++;

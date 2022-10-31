@@ -146,7 +146,7 @@ namespace CaravanAdventures.CaravanStory
 							customLetterDef = ModSettings.mutedShrineMessages ? LetterDefOf.NeutralEvent : LetterDefOf.NegativeEvent
                         };
                         DLog.Message($"Default threat points: {StorytellerUtility.DefaultThreatPointsNow(incidentParms.target)}");
-						Helper.RunSavely(() => IncidentDefOf.RaidEnemy.Worker.TryExecute(incidentParms));
+						Helper.RunSafely(() => IncidentDefOf.RaidEnemy.Worker.TryExecute(incidentParms));
 						this.ticksLeftToSendRaid = (int)(Rand.Range(18f, 24f) * 2500f);
 						ticksLeftTillLeaveIfNoEnemies = defaultTicksTillLeave;
 						if (toggleIncreaseStrenthByCounter) increaseStrengthCounter++;

@@ -121,7 +121,7 @@ namespace CaravanAdventures.CaravanCamp
         {
             if (!shelfs?.Any(x => x != null) ?? true) return;
             if (!ModSettings.generateStorageForAllInventory || !ModSettings.useStorageShelfs) return;
-            Helper.RunSavely(() =>
+            Helper.RunSafely(() =>
             {
                 var tempShelf = ThingMaker.MakeThing(ThingDef.Named("Shelf"), ThingDefOf.WoodLog) as Building_Storage;
                 var orderedItems = CaravanInventoryUtility

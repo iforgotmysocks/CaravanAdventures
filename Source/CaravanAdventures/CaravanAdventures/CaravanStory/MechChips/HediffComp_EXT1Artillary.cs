@@ -33,7 +33,7 @@ namespace CaravanAdventures.CaravanStory.MechChips
 
             if (ticks % 250 == 0)
             {
-                Helper.RunSavely(ManufactureScyther);
+                Helper.RunSafely(ManufactureScyther);
             }
 
             if (ticks % 450 == 0)

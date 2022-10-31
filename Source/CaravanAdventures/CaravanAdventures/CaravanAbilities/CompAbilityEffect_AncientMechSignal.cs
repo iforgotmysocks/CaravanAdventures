@@ -21,7 +21,7 @@ namespace CaravanAdventures.CaravanAbilities
 
             AffectedCells(target, map).Where(x => x.Standable(map))
                 .InRandomOrder().Take(Rand.RangeInclusive(ModSettings.scytherRange.min, ModSettings.scytherRange.max)).ToList()
-                .ForEach(cell => scythers.Add(Helper.RunSavely(() => SpawnScyther(cell, parent.pawn, faction))));
+                .ForEach(cell => scythers.Add(Helper.RunSafely(() => SpawnScyther(cell, parent.pawn, faction))));
 
             if (target.Pawn != null) LordMaker.MakeNewLord(parent.pawn.Faction, new LordJob_EscortPawn(target.Pawn), map, scythers);
             else if (target.Cell != default) LordMaker.MakeNewLord(parent.pawn.Faction, new LordJob_AssistColony(parent.pawn.Faction, target.Cell), map, scythers);

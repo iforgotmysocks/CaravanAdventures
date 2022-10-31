@@ -125,7 +125,7 @@ namespace CaravanAdventures.CaravanStory.Quests
                 raidArrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn
             };
 
-            if (Helper.RunSavely(() => StoryDefOf.CAFriendlyCaravan.Worker.TryExecute(incidentParms)))
+            if (Helper.RunSafely(() => StoryDefOf.CAFriendlyCaravan.Worker.TryExecute(incidentParms)))
             {
                 DLog.Message($"CA trade caravan created successfully");
                 friendlyCaravanCounter = BaseDelayFurtherFriendlyCaravan;

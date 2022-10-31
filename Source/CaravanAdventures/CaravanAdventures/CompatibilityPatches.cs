@@ -15,7 +15,7 @@ namespace CaravanAdventures
         {
             detectedAssemblies = detectedAssemblies ?? new List<(string, Assembly)>();
 
-            Helper.RunSavely(() =>
+            Helper.RunSafely(() =>
             {
                 var alienRaceAssembly = Helper.GetAssembly("alienrace", detectedAssemblies);
                 if (alienRaceAssembly != null && ModSettings.caravanFormingFilterSelectionEnabled)
@@ -25,7 +25,7 @@ namespace CaravanAdventures
                 }
             }, false, ErrorMessage("alien races"));
 
-            Helper.RunSavely(() =>
+            Helper.RunSafely(() =>
             {
                 var alphaBiomesAssembly = Helper.GetAssembly("alphabiomes", detectedAssemblies);
                 if (alphaBiomesAssembly != null)
@@ -39,7 +39,7 @@ namespace CaravanAdventures
                 }
             }, false, ErrorMessage("alpha biomes"));
 
-            Helper.RunSavely(() =>
+            Helper.RunSafely(() =>
             {
                 var rgwWastelandAssembly = Helper.GetAssembly("RGW_Wasteland", detectedAssemblies);
                 if (rgwWastelandAssembly != null)
@@ -53,7 +53,7 @@ namespace CaravanAdventures
                 }
             }, false, ErrorMessage("Regrowth - Wasteland"));
 
-            Helper.RunSavely(() =>
+            Helper.RunSafely(() =>
             {
                 var realRuinsAssembly = Helper.GetAssembly("realruins", detectedAssemblies);
                 if (realRuinsAssembly != null)
@@ -66,7 +66,7 @@ namespace CaravanAdventures
                 }
             }, false, "Following error happend while trying to patching SOS2 for compatibility with CA, but was caught safely:");
 
-            Helper.RunSavely(() =>
+            Helper.RunSafely(() =>
             {
                 var sos2Assembly = Helper.GetAssembly("shipshaveinsides", detectedAssemblies);
                 if (sos2Assembly != null && ModSettings.storyEnabled)
@@ -75,7 +75,7 @@ namespace CaravanAdventures
                 }
             }, false, ErrorMessage("SOS2"));
 
-            Helper.RunSavely(() =>
+            Helper.RunSafely(() =>
             {
 
                 var assembly = Helper.GetAssembly("VanillaPsycastsExpanded", detectedAssemblies);
@@ -85,7 +85,7 @@ namespace CaravanAdventures
                 }
             }, false, ErrorMessage("Vanilla Psycasts Expanded"));
 
-            Helper.RunSavely(() =>
+            Helper.RunSafely(() =>
             {
                 var assembly = Helper.GetAssembly("rimedieval", detectedAssemblies);
                 if (assembly != null && ModSettings.storyEnabled)
@@ -105,7 +105,7 @@ namespace CaravanAdventures
             detectedAssemblies = detectedAssemblies ?? new List<(string, Assembly)>();
 
             // todo - remove friendly faction detection patch after faction removal
-            Helper.RunSavely(() =>
+            Helper.RunSafely(() =>
             {
                 var vfeCoreAssembly = Helper.GetAssembly("VFECore", detectedAssemblies);
                 if (vfeCoreAssembly != null && ModsConfig.RoyaltyActive)
@@ -115,7 +115,7 @@ namespace CaravanAdventures
                 }
             }, false, ErrorMessage("VFECore"));
 
-            Helper.RunSavely(() =>
+            Helper.RunSafely(() =>
             {
                 var vsewwAssembly = Helper.GetAssembly("VSEWW", detectedAssemblies);
                 if (vsewwAssembly != null && ModSettings.storyEnabled)
@@ -125,7 +125,7 @@ namespace CaravanAdventures
                 }
             }, false, ErrorMessage("Winston Waves"));
 
-            Helper.RunSavely(() =>
+            Helper.RunSafely(() =>
             {
                 if (ModSettings.storyEnabled && detectedAssemblies.Any(x => x.assemblyString == "shipshaveinsides"))
                 {
@@ -134,7 +134,7 @@ namespace CaravanAdventures
                 }
             }, false, ErrorMessage("SoS2"));
 
-            Helper.RunSavely(() =>
+            Helper.RunSafely(() =>
             {
                 var rimWarAssembly = Helper.GetAssembly("RimWar", detectedAssemblies);
                 if (ModSettings.storyEnabled && rimWarAssembly != null)

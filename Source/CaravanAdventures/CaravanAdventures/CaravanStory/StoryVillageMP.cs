@@ -70,7 +70,7 @@ namespace CaravanAdventures.CaravanStory
                     if (storyChar != null)
                     {
                         if (storyChar.Spawned) storyChar.DeSpawn();
-                        Helper.RunSavely(() => StoryUtility.FreshenUpPawn(storyChar));
+                        Helper.RunSafely(() => StoryUtility.FreshenUpPawn(storyChar));
                         GenSpawn.Spawn(storyChar, storyContactCell, Map);
                         StoryUtility.AssignDialog("StoryVillage_Conversation", storyChar, GetType().ToString(), "ConversationFinished");
                         AddNewLordAndAssignStoryChar(storyChar);
@@ -170,7 +170,7 @@ namespace CaravanAdventures.CaravanStory
                 raidStrategy = RaidStrategyDefOf.ImmediateAttack
             };
             DLog.Message($"Default threat points: {StorytellerUtility.DefaultThreatPointsNow(incidentParms.target)}");
-            if (Helper.RunSavely(() => StoryDefOf.CAMechRaidMixed.Worker.TryExecute(incidentParms)) != true)
+            if (Helper.RunSafely(() => StoryDefOf.CAMechRaidMixed.Worker.TryExecute(incidentParms)) != true)
             {
                 Log.Error($"Creating CA mech raid failed due to some incompatibility, error above.");
             };

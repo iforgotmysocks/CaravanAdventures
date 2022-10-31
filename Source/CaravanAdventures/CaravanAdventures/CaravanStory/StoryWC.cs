@@ -187,7 +187,7 @@ namespace CaravanAdventures.CaravanStory
             if (mechFactionRemovalTicks >= 22222)
             {
                 mechFactionRemovalTicks = 0;
-                Helper.RunSavely(() => StoryUtility.RemoveFaction(), false, "", true);
+                Helper.RunSafely(() => StoryUtility.RemoveFaction(), false, "", true);
             }
 
             if (doEarthQuake && ticks > 0 && ticks <= 1200)
@@ -229,7 +229,7 @@ namespace CaravanAdventures.CaravanStory
                 if (CheckShouldWatchOverVillage())
                 {
                     DLog.Message($"Checking for settlement availability. Counter: {questCont.Village.villageGenerationCounter}");
-                    Helper.RunSavely(questCont.Village.TryCheckVillageAndEnsure);
+                    Helper.RunSafely(questCont.Village.TryCheckVillageAndEnsure);
                 }
 
                 if (CheckCanStartCountDownOnNewShrine() && !debugFlags["ShrinesDone"])
@@ -288,7 +288,7 @@ namespace CaravanAdventures.CaravanStory
 
             DLog.Message($"Applying debug actions once");
             // todo added cleanup of faction settlement in 1.2.4 to be able to remove CAFriendlyMechanoid faction in a couple patches
-            Helper.RunSavely(() => StoryUtility.RemoveFaction(), false, "", true);
+            Helper.RunSafely(() => StoryUtility.RemoveFaction(), false, "", true);
             
             ranDebugActionsOnceAtStartUp = true;
         }

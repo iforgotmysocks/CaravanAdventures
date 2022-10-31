@@ -93,7 +93,7 @@ namespace CaravanAdventures.CaravanStory
             DLog.Message($"Assistance with {incidentParms.points} points and kind: {incidentParms.pawnKind?.defName}, targetspot default? {spawnSpot == default} if yes, a colonist should be selected as drop spot");
             if (spawnSpot == default && map.mapPawns.AnyColonistSpawned) spawnSpot = map.mapPawns.FreeColonists.Where(col => col.Spawned).RandomElement().Position;
             if (spawnSpot != default) incidentParms.spawnCenter = spawnSpot;
-            if (Helper.RunSavely(() => IncidentDefOf.RaidFriendly.Worker.TryExecute(incidentParms)) != true)
+            if (Helper.RunSafely(() => IncidentDefOf.RaidFriendly.Worker.TryExecute(incidentParms)) != true)
             {
                 Log.Error($"Dropping in the sacrileg hunter faction failed due to some incompatibility, error above.");
             };
@@ -338,7 +338,7 @@ namespace CaravanAdventures.CaravanStory
                 return;
             }
 
-            Helper.RunSavely(() =>
+            Helper.RunSafely(() =>
             {
                 foreach (var pawn in PawnsFinder.AllMaps_Spawned.Where(x => x.Faction == faction).Reverse<Pawn>()) pawn.Destroy();
                 foreach (var pawn in PawnsFinder.AllCaravansAndTravelingTransportPods_Alive.Where(x => x.Faction == faction).Reverse<Pawn>()) pawn.Destroy();
@@ -352,7 +352,7 @@ namespace CaravanAdventures.CaravanStory
             {
                 foreach (var settlement in settlements.Reverse<WorldObject>())
                 {
-                    Helper.RunSavely(() =>
+                    Helper.RunSafely(() =>
                     {
                         DLog.Message($"Removing no longer needed {messageFactionName} settlement." + (ModsConfig.IdeologyActive ? "The possibly following Notify error can be ignored" : ""));
                         if (settlement is MapParent parent && parent?.HasMap == true) Current.Game.DeinitAndRemoveMap(parent.Map);
@@ -383,7 +383,7 @@ namespace CaravanAdventures.CaravanStory
             if (pawn?.needs?.rest != null) pawn.needs.rest.CurLevel = pawn.needs.rest.MaxLevel;
             if (pawn?.needs?.comfort != null) pawn.needs.comfort.CurLevel = pawn.needs.comfort.MaxLevel;
 
-            Helper.RunSavely(() => { if (CheckIfPawnIsNaked(pawn)) GiveClothes(pawn); });
+            Helper.RunSafely(() => { if (CheckIfPawnIsNaked(pawn)) GiveClothes(pawn); });
         }
 
         public static IntVec3 GetCenterOfSettlementBase(Map map, Faction faction, bool useMapCenterAsFallback = false)
@@ -431,10 +431,10 @@ namespace CaravanAdventures.CaravanStory
                 return;
             }
 
-            Helper.RunSavely(RestartStory);
-            Helper.RunSavely(() =>
+            Helper.RunSafely(RestartStory);
+            Helper.RunSafely(() =>
             {
-                Helper.RunSavely(() => RemoveFaction("CASacrilegHunters", "Sacrileg Hunters"));
+                Helper.RunSafely(() => RemoveFaction("CASacrilegHunters", "Sacrileg Hunters"));
                 //foreach (var settlement in Find.World.worldObjects.Settlements.Reverse<Settlement>())
                 //{
                 //    if (settlement?.Faction?.def != StoryDefOf.CASacrilegHunters) continue;
@@ -555,7 +555,7 @@ namespace CaravanAdventures.CaravanStory
             if (!Find.WorldPawns.Contains(girl)) Find.WorldPawns.PassToWorld(girl, PawnDiscardDecideMode.KeepForever);
             CompCache.StoryWC.questCont.Village.StoryContact = girl;
 
-            Helper.RunSavely(() => { if (CheckIfPawnIsNaked(girl)) GiveClothes(girl); });
+            Helper.RunSafely(() => { if (CheckIfPawnIsNaked(girl)) GiveClothes(girl); });
         }
 
         public static void GiveClothes(Pawn pawn)
@@ -610,7 +610,7 @@ namespace CaravanAdventures.CaravanStory
             if (sacrilegHunters == null)
             {
                 if (DefDatabase<FactionDef>.GetNamedSilentFail("CASacrilegHunters") == null) return null;
-                sacrilegHunters = Helper.RunSavely(() => FactionGenerator.NewGeneratedFaction(new FactionGeneratorParms(DefDatabase<FactionDef>.GetNamedSilentFail("CASacrilegHunters"), default, false)));
+                sacrilegHunters = Helper.RunSafely(() => FactionGenerator.NewGeneratedFaction(new FactionGeneratorParms(DefDatabase<FactionDef>.GetNamedSilentFail("CASacrilegHunters"), default, false)));
 
                 if (sacrilegHunters == null)
                 {
@@ -681,7 +681,7 @@ namespace CaravanAdventures.CaravanStory
             foreach (var faction in Find.FactionManager.AllFactionsListForReading)
             {
                 if (faction == Faction.OfPlayer || (!skipPermanentEnemyCheck && faction.def.permanentEnemy) || faction == factionToAdjust) continue;
-                Helper.RunSavely(() => faction.SetRelation(new FactionRelation() { baseGoodwill = goodwill, kind = kind, other = factionToAdjust }));
+                Helper.RunSafely(() => faction.SetRelation(new FactionRelation() { baseGoodwill = goodwill, kind = kind, other = factionToAdjust }));
             }
         }
 

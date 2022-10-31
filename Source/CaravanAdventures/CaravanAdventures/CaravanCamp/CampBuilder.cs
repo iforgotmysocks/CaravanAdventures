@@ -573,7 +573,7 @@ namespace CaravanAdventures.CaravanCamp
             foreach (var animal in animals.Reverse())
             {
                 if (ModSettings.letAnimalsRunFree && animal?.RaceProps?.trainability != null && animal?.RaceProps?.trainability != TrainabilityDefOf.None) continue;
-                Helper.RunSavely(() => PlaceIntoAnimalArea(animalArea, animal));
+                Helper.RunSafely(() => PlaceIntoAnimalArea(animalArea, animal));
             }
         }
 

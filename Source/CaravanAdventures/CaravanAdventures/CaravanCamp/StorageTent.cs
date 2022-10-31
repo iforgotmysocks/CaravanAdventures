@@ -41,7 +41,7 @@ namespace CaravanAdventures.CaravanCamp
         public virtual void ApplyInventory(Map map, Caravan caravan)
         {
             if (!ModSettings.generateStorageForAllInventory) return;
-            Helper.RunSavely(() => {
+            Helper.RunSafely(() => {
                 var orderedItems = CaravanInventoryUtility.AllInventoryItems(caravan).OrderByDescending(x => x.def?.thingCategories?.FirstOrDefault() != null).ThenBy(x => x.def?.thingCategories?.FirstOrDefault().defName).ThenBy(x => x.MarketValue).ToList();
                 foreach (var cell in zone.Cells.Reverse<IntVec3>())
                 {

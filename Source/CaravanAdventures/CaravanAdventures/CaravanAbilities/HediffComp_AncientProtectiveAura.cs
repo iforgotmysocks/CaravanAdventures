@@ -88,7 +88,7 @@ namespace CaravanAdventures.CaravanAbilities
                 if (ModSettings.regulateBodyTemperature) ReduceHeatOrCold();
             }
 
-            if ((ticksSincePsyCost == 100 || ticksSincePsyCost == 400) && Pawn?.Map != null && ModSettings.enableAncientAuraAnimation) Helper.RunSavely(() =>
+            if ((ticksSincePsyCost == 100 || ticksSincePsyCost == 400) && Pawn?.Map != null && ModSettings.enableAncientAuraAnimation) Helper.RunSafely(() =>
             {
                 if (!ModsConfig.RoyaltyActive) return;
                 if (Pawn.Position.ShouldSpawnMotesAt(parent.pawn.Map))

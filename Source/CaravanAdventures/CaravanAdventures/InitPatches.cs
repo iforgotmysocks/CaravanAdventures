@@ -14,27 +14,27 @@ namespace CaravanAdventures
         public static bool storyPatchesLoaded = false;
         static InitPatches()
         {
-            Helper.RunSavely(FilterCombs.InitFilterSets);
+            Helper.RunSafely(FilterCombs.InitFilterSets);
 
             if (ModsConfig.RoyaltyActive && ModSettings.storyEnabled)
             {
-                Helper.RunSavely(PatchAddNewMechanoidPawnGroupMakerDef);
-                Helper.RunSavely(PatchTreeDef_AddTalkOption);
-                Helper.RunSavely(PatchHumanDef_AddTalkOption);
-                Helper.RunSavely(PatchRemoveRoyalTitleRequirements);
-                if (ModSettings.noFreeStuff) Helper.RunSavely(PatchSacHunterItemDropStats);
+                Helper.RunSafely(PatchAddNewMechanoidPawnGroupMakerDef);
+                Helper.RunSafely(PatchTreeDef_AddTalkOption);
+                Helper.RunSafely(PatchHumanDef_AddTalkOption);
+                Helper.RunSafely(PatchRemoveRoyalTitleRequirements);
+                if (ModSettings.noFreeStuff) Helper.RunSafely(PatchSacHunterItemDropStats);
                 storyPatchesLoaded = true;
             }
             if (!ModSettings.storyEnabled && ModsConfig.RoyaltyActive)
             {
-                Helper.RunSavely(DisableFactionVillageCreation);
+                Helper.RunSafely(DisableFactionVillageCreation);
             }
 
-            if (ModSettings.caravanCampEnabled) Helper.RunSavely(PatchAddCaravanDecisionsComp);
-            if (ModSettings.caravanCampEnabled) Helper.RunSavely(PatchAddPsychiteTeaToCampFire);
-            if (!ModSettings.caravanIncidentsEnabled) Helper.RunSavely(PatchIncidentsTo0Chance);
-            if (ModSettings.buffSettlementFoodAndSilverAvailability) Helper.RunSavely(PatchIncreaseBaseWealthAndFood);
-            if (ModSettings.buffShrineRewards) Helper.RunSavely(PatchAncientShrineDefs_MoreShrinesAndBetterRewards);
+            if (ModSettings.caravanCampEnabled) Helper.RunSafely(PatchAddCaravanDecisionsComp);
+            if (ModSettings.caravanCampEnabled) Helper.RunSafely(PatchAddPsychiteTeaToCampFire);
+            if (!ModSettings.caravanIncidentsEnabled) Helper.RunSafely(PatchIncidentsTo0Chance);
+            if (ModSettings.buffSettlementFoodAndSilverAvailability) Helper.RunSafely(PatchIncreaseBaseWealthAndFood);
+            if (ModSettings.buffShrineRewards) Helper.RunSafely(PatchAncientShrineDefs_MoreShrinesAndBetterRewards);
 
             CompatibilityPatches.ExecuteCompatibilityPatches();
         }

@@ -121,9 +121,9 @@ namespace CaravanAdventures
             }
         }
 
-        public static void RunSavely(Action action, bool suppressError = false, string failMessage = "", bool useDLog = false) => RunSavely(() => { action(); return 0; }, suppressError, failMessage, useDLog);
+        public static void RunSafely(Action action, bool suppressError = false, string failMessage = "", bool useDLog = false) => RunSafely(() => { action(); return 0; }, suppressError, failMessage, useDLog);
 
-        public static T RunSavely<T>(Func<T> action, bool suppressError = false, string failMessage = "", bool useDLog = false)
+        public static T RunSafely<T>(Func<T> action, bool suppressError = false, string failMessage = "", bool useDLog = false)
         {
             try
             {
