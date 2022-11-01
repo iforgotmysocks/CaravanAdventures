@@ -131,7 +131,7 @@ namespace CaravanAdventures
         public static int itemStockAmount = 6;
         public static bool showBountyRewardInfo = false;
         public static bool useGeneRewards = true;
-        public static float architeGeneChance = 20f;
+        public static float architeGeneChance = 15f;
         public static int buyableGeneAmount = 2;
 
         // travel companions
@@ -262,7 +262,7 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref itemStockAmount, "itemStockAmount", 6);
             Scribe_Values.Look(ref showBountyRewardInfo, "showBountyRewardInfo", false);
             Scribe_Values.Look(ref useGeneRewards, "useGeneRewards", true);
-            Scribe_Values.Look(ref architeGeneChance, "architeGeneChance", 20f);
+            Scribe_Values.Look(ref architeGeneChance, "architeGeneChance", 15f);
             Scribe_Values.Look(ref buyableGeneAmount, "buyableGeneAmount", 2);
 
             // travel companions
