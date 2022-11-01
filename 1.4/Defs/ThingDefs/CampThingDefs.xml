@@ -226,7 +226,7 @@
     </graphicData>
     <castEdgeShadows>true</castEdgeShadows>
     <minifiedDef>MinifiedThing</minifiedDef>
-    <tickerType>Rare</tickerType>
+    <tickerType>Normal</tickerType>
     <passability>PassThroughOnly</passability>
     <size>(1, 1)</size>
     <statBases>
