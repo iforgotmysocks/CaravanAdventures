@@ -3,6 +3,19 @@
 <Defs>
   <!-- todo priorities ? -->
   <WorkGiverDef>
+    <defName>HaulToGeneBank</defName>
+    <label>bank genepack</label>
+    <giverClass>WorkGiver_HaulToGeneBank</giverClass>
+    <workType>Hauling</workType>
+    <verb>bank</verb>
+    <gerund>banking</gerund>
+    <priorityInType>111</priorityInType>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+  </WorkGiverDef>
+
+  <WorkGiverDef>
     <defName>CADoBillsCookCampfireRoast</defName>
     <label>cook meals at campfire</label>
     <giverClass>WorkGiver_DoBill</giverClass>
