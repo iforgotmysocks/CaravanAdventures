@@ -66,17 +66,17 @@ namespace CaravanAdventures.Settings
 
             // dafuq does getPayload do
             Widgets.Dropdown<List<Faction>, Faction>(
-                rect, 
-                Find.FactionManager.AllFactions.ToList(), 
-                (List<Faction> factions) => { return factions.FirstOrDefault(); }, 
-                GenerateDropDownElements, 
+                rect,
+                Find.FactionManager.AllFactions.ToList(),
+                (List<Faction> factions) => { return factions.FirstOrDefault(); },
+                GenerateDropDownElements,
                 CompCache.BountyWC.BountyFaction != null ? new TaggedString($"{CompCache.BountyWC.BountyFaction.NameColored} ({CompCache.BountyWC.BountyFaction.GoodwillWith(Faction.OfPlayerSilentFail)})") : new TaggedString("Please select a faction"));
 
             // only for testing purposes, remove
             var serviceAvailable = CompCache.BountyWC.BountyServiceAvailable;
             options.CheckboxLabeled("Bounty services enabled", ref serviceAvailable);
             CompCache.BountyWC.BountyServiceAvailable = serviceAvailable;
-            
+
             options.CheckboxLabeled("Show bounty credit message with details upon a kill", ref ModSettings.showBountyRewardInfo);
 
             options.Label($"Envoy duration to improve relations with bounties in days: {Math.Round(ModSettings.envoyDurationTimeForBountyRelationHagglingInDays, 1)}");
@@ -90,16 +90,23 @@ namespace CaravanAdventures.Settings
             options.Label($"Veteran availability in days: {Math.Round(ModSettings.veteranResetTimeInDays, 1)}");
             ModSettings.veteranResetTimeInDays = options.Slider(ModSettings.veteranResetTimeInDays, 0.1f, 60f);
             options.CheckboxLabeled("Add random gene reward if biotech is installed", ref ModSettings.useGeneRewards);
-            if (ModSettings.useGeneRewards)
+            if (ModsConfig.BiotechActive)
             {
-                options.Label($"Chance for the gene to be type archite: {Math.Round(ModSettings.architeGeneChance, 0)}%");
-                ModSettings.architeGeneChance = options.Slider(ModSettings.architeGeneChance, 0f, 100f);
+                if (ModSettings.useGeneRewards)
+                {
+                    options.Label($"Buyable gene amount: {ModSettings.buyableGeneAmount}%");
+                    ModSettings.buyableGeneAmount = Convert.ToInt32(options.Slider(ModSettings.buyableGeneAmount, 0f, 10f));
+
+                    options.Label($"Chance for the gene to be type archite: {Math.Round(ModSettings.architeGeneChance, 0)}%");
+                    ModSettings.architeGeneChance = options.Slider(ModSettings.architeGeneChance, 0f, 100f);
+                }
             }
+
             options.CheckboxLabeled("Allow bounty gained by buildings (turrets etc)", ref ModSettings.allowBountyFromBuildingInstigators);
             options.CheckboxLabeled("Allow exchanging bounty points for silver", ref ModSettings.allowBuyingBountyWithSilver);
             options.Label($"Bounty value multiplier. (Default: 1 silver ~ 0.25 bounty credit): {Math.Round(ModSettings.bountyValueMult, 2)}");
             ModSettings.bountyValueMult = (float)Math.Round(options.Slider(ModSettings.bountyValueMult, 0.1f, 4f), 2);
-             
+
             //options.EndScrollView(ref viewRect);
             options.End();
 
