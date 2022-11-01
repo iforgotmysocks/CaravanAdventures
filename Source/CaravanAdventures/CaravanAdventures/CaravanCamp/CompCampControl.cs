@@ -61,6 +61,7 @@ namespace CaravanAdventures.CaravanCamp
                     Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation($"{(tribal ? "CALeaveImmediatelyPackupCampTribal" : "CALeaveImmediatelyPackupCamp")}".Translate(Convert.ToInt32(resourceCount * 0.7)), delegate
                     {
                         var mp = parent.Map.Parent;
+                        FixPawns();
                         Current.Game.DeinitAndRemoveMap(parent.Map);
                         mp.Destroy();
 
@@ -78,6 +79,26 @@ namespace CaravanAdventures.CaravanCamp
                 }, false));
             });
 
+        }
+
+        private void FixPawns()
+        {
+            // todo improve... not sure why vanilla chose to use all pawns here, lets find pawns that use that colony as their actually home and use those instead
+            foreach (Pawn pawn in PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_Colonists)
+            {
+                Helper.RunSafely(() =>
+                {
+                    if (pawn?.genes != null) pawn.genes.Notify_NewColony();
+                    var memoryThoughtHandler = pawn?.needs?.mood?.thoughts?.memories;
+                    if (memoryThoughtHandler == null) return;
+                    memoryThoughtHandler.RemoveMemoriesOfDef(ThoughtDefOf.NewColonyOptimism);
+                    memoryThoughtHandler.RemoveMemoriesOfDef(ThoughtDefOf.NewColonyHope);
+                    if (pawn.IsFreeNonSlaveColonist)
+                    {
+                        memoryThoughtHandler.TryGainMemory(ThoughtDefOf.NewColonyOptimism, null, null);
+                    }
+                });
+            }
         }
 
         private void ForceReform(MapParent mapParent)
