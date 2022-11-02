@@ -29,7 +29,10 @@ namespace CaravanAdventures.Settings
         public override void DoWindowContents(Rect wrect)
         {
             var options = new Listing_Standard();
-            options.Begin(wrect);
+            var viewRect = new Rect(0f, 0f, windowRect.width - 65, 800);
+            var smallerOutRect = new Rect(wrect.x, wrect.y, wrect.width, wrect.height - 50);
+            Widgets.BeginScrollView(smallerOutRect, ref scrollPos, viewRect);
+            options.Begin(viewRect);
 
             Text.Font = GameFont.Medium;
             options.Label("Camp settings:".Colorize(Color.green), 40f);
@@ -75,7 +78,9 @@ namespace CaravanAdventures.Settings
             options.Label($"Starting fuel percentage for camp-gear: {ModSettings.fuelStartingFillPercentage}%");
             ModSettings.fuelStartingFillPercentage = Convert.ToInt32(options.Slider(ModSettings.fuelStartingFillPercentage, 0, 100));
             options.CheckboxLabeled("Leave camp control available after packing up (will be invisible)", ref ModSettings.leaveCampControlOptionAfterPackingUp);
+            if (CompatibilityPatches.InDetectedAssemblies("VSEWW")) options.CheckboxLabeled($"Enable Winston Wave fights on camps", ref ModSettings.allowWinstonWaveFightsOnCamps);
             options.End();
+            Widgets.EndScrollView();
         }
 
         private IEnumerable<Widgets.DropdownMenuElement<Faction>> GenerateDropDownElements(List<Faction> factions)

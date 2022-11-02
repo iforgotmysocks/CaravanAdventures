@@ -44,6 +44,7 @@ namespace CaravanAdventures
         public static bool leaveCampControlOptionAfterPackingUp;
         public static bool allowMeatForChemfuelProduction;
         public static bool useStorageShelfs = true;
+        public static bool allowWinstonWaveFightsOnCamps = true;
 
         // camp cost TODO -> create defs for tent types and move it there
         public static int campSupplyCostAnimalArea = 1;
@@ -190,6 +191,7 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref leaveCampControlOptionAfterPackingUp, "leaveCampControlOptionAfterPackingUp", false);
             Scribe_Values.Look(ref allowMeatForChemfuelProduction, "allowMeatForChemfuelProduction", false);
             Scribe_Values.Look(ref useStorageShelfs, "useStorageShelfs", true);
+            Scribe_Values.Look(ref allowWinstonWaveFightsOnCamps, "allowWinstonWaveFightsOnCamps", true);
 
             // filters
             Scribe_Values.Look(ref autoSelectPawns, "autoSelectPawns", true);
