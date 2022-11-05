@@ -29,6 +29,13 @@ namespace CaravanAdventures.CaravanAbilities
         {
             var relevantThings = things.Where(x => x is Pawn || x is Building).ToList();
             var waist = DefDatabase<BodyPartDef>.GetNamed("Waist");
+            var newBossDefNames = new List<string>
+            {
+                "Mech_Centurion",
+                "Mech_Diabolus",
+                "Mech_Warqueen",
+                "Mech_Apocriton"
+            };
 
             for (var i = relevantThings.Count - 1; i >= 0; i--)
             {
@@ -37,7 +44,7 @@ namespace CaravanAdventures.CaravanAbilities
                 {
                     var pawn = (Pawn)thing;
                     if (pawn == pawnToExclude || pawn.Dead) continue;
-                    var isBoss = CompCache.StoryWC.BossDefs().Contains(pawn.def);
+                    var isBoss = CompCache.StoryWC.BossDefs().Contains(pawn.def) || newBossDefNames.Contains(pawn?.kindDef?.defName);
                     var count = Rand.Range(5, 8);
                     foreach (var part in Helper.PickSomeInRandomOrder(pawn.RaceProps.body.AllParts.Where(part => part.def != AbilityDefOf.Finger && part.def != AbilityDefOf.Toe && part.def.defName != "Tongue"), count))
                     {
