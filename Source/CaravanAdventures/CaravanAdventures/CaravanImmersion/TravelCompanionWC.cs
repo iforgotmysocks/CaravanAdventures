@@ -81,12 +81,12 @@ namespace CaravanAdventures.CaravanImmersion
 
                 foreach (var mainPawn in playerPawns)
                 {
-                    if (mainPawn.Dead || mainPawn.IsBorrowedByAnyFaction()  || mainPawn.HasExtraMiniFaction() || mainPawn.HasExtraHomeFaction()) continue;
+                    if (mainPawn.Dead || mainPawn.IsBorrowedByAnyFaction()  || mainPawn.HasExtraMiniFaction() || mainPawn.HasExtraHomeFaction() || IsKid(mainPawn)) continue;
                     if (!mainPawn.IsSlave || (mainPawn.IsSlave && !ModSettings.excludeSlavesFromTravelCompanions))
                     {
                         foreach (var pawn in playerPawns)
                         {
-                            if (pawn == mainPawn || pawn.IsBorrowedByAnyFaction() || pawn.Dead || pawn.HasExtraMiniFaction() || pawn.HasExtraHomeFaction() || (pawn.IsSlave && ModSettings.excludeSlavesFromTravelCompanions)) continue;
+                            if (pawn == mainPawn || pawn.IsBorrowedByAnyFaction() || pawn.Dead || pawn.HasExtraMiniFaction() || pawn.HasExtraHomeFaction() || (pawn.IsSlave && ModSettings.excludeSlavesFromTravelCompanions) || IsKid(pawn)) continue;
                             var currentRelation = pawn.relations.DirectRelations.FirstOrDefault(x => (x.def.GetModExtension<TravelCompanionModExt>()?.isTravelCompanionRelation ?? false) == true && x.otherPawn == mainPawn);
                             var newRelation = CalculateNewRelation(mainPawn, pawn);
                             if (newRelation == null)
@@ -106,7 +106,9 @@ namespace CaravanAdventures.CaravanImmersion
                     foreach (var relation in mainPawn.relations.DirectRelations.Reverse<DirectPawnRelation>())
                     {
                         if (relation?.def?.GetModExtension<TravelCompanionModExt>() == null) continue;
-                        if (relation?.otherPawn?.Dead == true || (relation?.otherPawn?.IsSlave == true && ModSettings.excludeSlavesFromTravelCompanions))
+                        if (relation?.otherPawn?.Dead == true 
+                            || (relation?.otherPawn?.IsSlave == true && ModSettings.excludeSlavesFromTravelCompanions) 
+                            || IsKid(relation.otherPawn))
                         {
                             mainPawn.relations.RemoveDirectRelation(relation.def, relation.otherPawn);
                         }
@@ -114,6 +116,8 @@ namespace CaravanAdventures.CaravanImmersion
                 }
             }
         }
+
+        private bool IsKid(Pawn pawn) => pawn?.ageTracker?.AgeBiologicalYears != null && pawn?.ageTracker?.AgeBiologicalYears <= 14;
 
         private TravelCompanionDef CalculateNewRelation(Pawn mainPawn, Pawn pawn)
         {
