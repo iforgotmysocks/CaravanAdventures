@@ -8,21 +8,16 @@
     <match Class="PatchOperationSequence">
       <success>Always</success>
       <operations>
-
         <li Class="PatchOperationAdd">
           <xpath>
-            Defs/PawnKindDef[defName = "CASacrilegHunters_HunterBase"
-            or defName = "CASacrilegHunters_Hunter"
-            or defName = "CASacrilegHunters_ExperiencedHunterBase"
+            Defs/PawnKindDef[defName = "CASacrilegHunters_Hunter"
             or defName = "CASacrilegHunters_ExperiencedHunter"
             or defName = "CASacrilegHunters_HunterVillage"
-            or defName = "CASacrilegHunters_ExperiencedHunterVillage"]
+            or defName = "CASacrilegHunters_ExperiencedHunterVillage"]/apparelRequired
           </xpath>
           <value>
-            <apparelRequired>
               <li>CE_Apparel_Backpack</li>
               <li>CE_Apparel_TacVest</li>
-            </apparelRequired>
           </value>
         </li>
         <li Class="PatchOperationAddModExtension">
