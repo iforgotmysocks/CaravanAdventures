@@ -85,7 +85,7 @@ namespace CaravanAdventures
         public static int maxLinkedAuraPawns = 4;
         public static bool excludeSlavesFromCoordinator = false;
         public static bool attackspeedIncreaseForAncientProtectiveAura = true;
-        public static float attackspeedMultiplier = 0.5f;
+        public static float attackspeedMultiplierNegated = 0.60f;
         public static bool regulateBodyTemperature = true;
         public static bool enableAncientAuraAnimation = true;
         // - light
@@ -219,7 +219,7 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref maxLinkedAuraPawns, "maxLinkedAuraPawns", 4);
             Scribe_Values.Look(ref excludeSlavesFromCoordinator, "excludeSlavesFromCoordinator", false);
             Scribe_Values.Look(ref attackspeedIncreaseForAncientProtectiveAura, "attackspeedIncreaseForAncientProtectiveAura", true);
-            Scribe_Values.Look(ref attackspeedMultiplier, "attackspeedMultiplier", 0.5f);
+            Scribe_Values.Look(ref attackspeedMultiplierNegated, "attackspeedMultiplierNegated", 0.60f);
             Scribe_Values.Look(ref regulateBodyTemperature, "regulateBodyTemperature", true);
             Scribe_Values.Look(ref enableAncientAuraAnimation, "enableAncientAuraAnimation", true);
             // - light

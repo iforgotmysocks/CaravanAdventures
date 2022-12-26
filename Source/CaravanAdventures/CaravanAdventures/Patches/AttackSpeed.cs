@@ -2,6 +2,7 @@
 using RimWorld;
 using Verse;
 using HarmonyLib;
+using CaravanAdventures.CaravanAbilities;
 
 namespace CaravanAdventures.Patches
 {
@@ -23,7 +24,7 @@ namespace CaravanAdventures.Patches
                     || !__instance.IsMeleeAttack
                     || attacker.health.hediffSet.hediffs.FirstOrDefault(x => x?.def == CaravanAbilities.AbilityDefOf.CAAncientGift) == null) return;
 
-            __result *= ModSettings.attackspeedMultiplier;
+            __result *= HediffComp_AncientGift.AttackSpeedMultiplier;
         }
 
     }

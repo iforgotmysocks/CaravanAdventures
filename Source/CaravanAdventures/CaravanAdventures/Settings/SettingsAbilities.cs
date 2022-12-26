@@ -45,7 +45,7 @@ namespace CaravanAdventures.Settings
             if (ModSettings.attackspeedIncreaseForAncientProtectiveAura)
             {
                 options.Label($"Melee attack speed: {CaravanAbilities.HediffComp_AncientGift.AttackSpeedInBonusPercent}%", -1);
-                ModSettings.attackspeedMultiplier = options.Slider(ModSettings.attackspeedMultiplier, 1f, 0.1f);
+                ModSettings.attackspeedMultiplierNegated = options.Slider(ModSettings.attackspeedMultiplierNegated, 0f, 0.9f);
             }
             options.Gap();
 

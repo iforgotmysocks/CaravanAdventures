@@ -18,7 +18,8 @@ namespace CaravanAdventures.CaravanAbilities
             ticks++;
         }
 
-        public static double AttackSpeedInBonusPercent => Math.Round(100 / (ModSettings.attackspeedMultiplier), 0);
+        public static float AttackSpeedMultiplier => 1f - ModSettings.attackspeedMultiplierNegated;
+        public static double AttackSpeedInBonusPercent => Math.Round(100 / AttackSpeedMultiplier, 0);
         public static double PsyfocusRegInPercentPerHour => Math.Round(ModSettings.ancientGiftPassivePsyfocusGainPerSec * 100 * 40f, 2);
         public override string CompTipStringExtra => $"  - Melee attack speed: x{AttackSpeedInBonusPercent}%"
             + $"\n  - Psyfocus regeneration: {PsyfocusRegInPercentPerHour}% / h";
