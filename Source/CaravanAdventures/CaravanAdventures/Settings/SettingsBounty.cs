@@ -94,7 +94,7 @@ namespace CaravanAdventures.Settings
             {
                 if (ModSettings.useGeneRewards)
                 {
-                    options.Label($"Buyable gene amount: {ModSettings.buyableGeneAmount}%");
+                    options.Label($"Buyable gene amount: {ModSettings.buyableGeneAmount}");
                     ModSettings.buyableGeneAmount = Convert.ToInt32(options.Slider(ModSettings.buyableGeneAmount, 0f, 10f));
 
                     options.Label($"Chance for the gene to be type archite: {Math.Round(ModSettings.architeGeneChance, 0)}%");
