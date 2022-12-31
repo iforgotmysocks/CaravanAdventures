@@ -179,7 +179,8 @@ namespace CaravanAdventures.CaravanMechBounty
             DefDatabase<GeneDef>.AllDefs.FirstOrDefault(x => x.defName == "DiseaseFree"),
             DefDatabase<GeneDef>.AllDefs.FirstOrDefault(x => x.defName == "PerfectImmunity"),
             DefDatabase<GeneDef>.AllDefs.FirstOrDefault(x => x.defName == "Deathless"),
-            DefDatabase<GeneDef>.AllDefs.FirstOrDefault(x => x.defName == "ArchiteMetabolism")
+            DefDatabase<GeneDef>.AllDefs.FirstOrDefault(x => x.defName == "ArchiteMetabolism"),
+            DefDatabase<GeneDef>.AllDefs.FirstOrDefault(x => x.defName == "XenogermReimplanter")
         };
 
         private List<Thing> GenerateItemStock(int itemCount, int customItemCount = 0, int customGeneCount = 0)
