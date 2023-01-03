@@ -199,6 +199,7 @@
     <Compile Include="Patches\Compatibility\WinstonWavesPatch.cs" />
     <Compile Include="Patches\CustomIconPatches.cs" />
     <Compile Include="Patches\KeepApparelOnHostileMapsPatch.cs" />
+    <Compile Include="Patches\EngageMeleePatches.cs" />
     <Compile Include="Patches\SpDecayLevelIncrease.cs" />
     <Compile Include="Patches\ApocalypsePatches.cs" />
     <Compile Include="Patches\BossPatches.cs" />

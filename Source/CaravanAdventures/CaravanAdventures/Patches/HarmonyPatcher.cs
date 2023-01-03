@@ -30,6 +30,7 @@ namespace CaravanAdventures.Patches
             if (ModSettings.spDecayLevelIncrease) SpDecayLevelIncrease.ApplyPatches();
             if (ModSettings.showLetterRemoval) CustomIconPatches.ApplyPatches();
             if (ModSettings.keepApparelOnHostileMaps) KeepApparelOnHostileMapsPatch.ApplyPatches();
+            if (ModSettings.enableEngageMeleeFeature) EngageMeleePatches.ApplyPatches();
         }
 
         /// <summary>

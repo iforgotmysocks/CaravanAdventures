@@ -40,7 +40,7 @@ namespace CaravanAdventures
             if (ModSettings.buffShrineRewards) Helper.RunSafely(PatchAncientShrineDefs_MoreShrinesAndBetterRewards);
             if (ModSettings.increaseFireFoamPopperDetectionRange) Helper.RunSafely(PatchIncreaseFireFoamPopperDetectionRange);
             if (!ModSettings.enableSortingByPawnTitle) Helper.RunSafely(PatchRemovePawnTitleComparerDef);
-            if (ModSettings.enableAttackGizmo) Helper.RunSafely(PatchHumanDef_AddMeleeAttackComp);
+            if (ModSettings.enableEngageMeleeFeature) Helper.RunSafely(PatchHumanDef_AddMeleeAttackComp);
 
             CompatibilityPatches.ExecuteCompatibilityPatches();
         }

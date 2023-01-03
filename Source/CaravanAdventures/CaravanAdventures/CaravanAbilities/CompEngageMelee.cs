@@ -13,6 +13,8 @@ using Verse.Sound;
 
 namespace CaravanAdventures.CaravanAbilities
 {
+    public enum EngageMeleeBehaviour { None, Disabled, Enabled, SavedIndividually};
+
     internal class CompEngageMelee : ThingComp
     {
         private bool enabled;
@@ -22,11 +24,14 @@ namespace CaravanAdventures.CaravanAbilities
 
         public bool Enabled { get => enabled; set => enabled = value; }
 
-        public override void Initialize(CompProperties props)
+        public override void PostExposeData()
         {
-            base.Initialize(props);
-            // todo
-            enabled = ModSettings.attackMeleeEnabledByDefault;
+            base.PostExposeData();
+            if (ModSettings.engageMeleeBehaviour == EngageMeleeBehaviour.SavedIndividually) Scribe_Values.Look(ref enabled, "enabled", false);
+            if (Scribe.mode == LoadSaveMode.PostLoadInit)
+            {
+                if (ModSettings.engageMeleeBehaviour == EngageMeleeBehaviour.Enabled) enabled = true;
+            }
         }
 
         public override void CompTick()
@@ -52,7 +57,7 @@ namespace CaravanAdventures.CaravanAbilities
                     | TargetScanFlags.NeedLOSToNonPawns 
                     | TargetScanFlags.NeedReachableIfCantHitFromMyPos 
                     | TargetScanFlags.NeedThreat 
-                    | TargetScanFlags.NeedAutoTargetable, null, 0f, ModSettings.attackMeleeRange, default(IntVec3), float.MaxValue, false, true, false);
+                    | TargetScanFlags.NeedAutoTargetable, null, 0f, ModSettings.engageMeleeRange, default(IntVec3), float.MaxValue, false, true, false);
 
                 //Thing target = null;
                 //var cells = GenRadial.RadialCellsAround(pawn.Position, AttackRange, false).Where(cell => cell.Standable(pawn.Map));
