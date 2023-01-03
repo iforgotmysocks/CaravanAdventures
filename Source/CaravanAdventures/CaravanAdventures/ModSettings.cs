@@ -149,6 +149,9 @@ namespace CaravanAdventures
         public static bool increaseFireFoamPopperDetectionRange;
         public static bool keepApparelOnHostileMaps;
         public static bool enableSortingByPawnTitle;
+        public static bool enableAttackGizmo;
+        public static float attackMeleeRange = 18f;
+        public static bool attackMeleeEnabledByDefault;
 
         // categories enabled
         public static bool caravanCampEnabled = true;
@@ -286,6 +289,9 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref increaseFireFoamPopperDetectionRange, "increaseFireFoamPopperDetectionRange", false);
             Scribe_Values.Look(ref keepApparelOnHostileMaps, "keepApparelOnHostileMaps", false);
             Scribe_Values.Look(ref enableSortingByPawnTitle, "enableSortingByPawnTitle", false);
+            Scribe_Values.Look(ref enableAttackGizmo, "enableAttackGizmo", false);
+            Scribe_Values.Look(ref attackMeleeRange, "attackMeleeRange", 18f);
+            Scribe_Values.Look(ref attackMeleeEnabledByDefault, "attackMeleeEnabledByDefault", false);
 
             // categories enabled
             Scribe_Values.Look(ref caravanCampEnabled, "caravanCampEnabled", true);

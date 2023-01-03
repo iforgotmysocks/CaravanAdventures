@@ -69,9 +69,11 @@
     <Compile Include="CaravanAbilities\CompAbilityEffect_AncientMechSignal.cs" />
     <Compile Include="CaravanAbilities\CompAbilityEffect_AncientThunderBold.cs" />
     <Compile Include="CaravanAbilities\CompAbilityEffect_GiveToggleableHediff.cs" />
+    <Compile Include="CaravanAbilities\CompEngageMelee.cs" />
     <Compile Include="CaravanAbilities\CompProperties_AbilityAncientMeditate.cs" />
     <Compile Include="CaravanAbilities\CompProperties_AbilityAncientMechSignal.cs" />
     <Compile Include="CaravanAbilities\CompProperties_AbilityAncientThunderBold.cs" />
+    <Compile Include="CaravanAbilities\CompProperties_EngageMelee.cs" />
     <Compile Include="CaravanAbilities\CompProperties_GiveToggleableHediff.cs" />
     <Compile Include="CaravanAbilities\HediffCompProperties_AncientProtectiveAura.cs" />
     <Compile Include="CaravanAbilities\HediffCompProperties_OverheatingBrain.cs" />

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CaravanAdventures.CaravanAbilities;
 using CaravanAdventures.CaravanItemSelection;
 using CaravanAdventures.CaravanStory;
 using RimWorld;
@@ -12,6 +13,7 @@ namespace CaravanAdventures
     static class InitPatches
     {
         public static bool storyPatchesLoaded = false;
+        public static bool meleeAttackPatched;
         static InitPatches()
         {
             Helper.RunSafely(FilterCombs.InitFilterSets);
@@ -38,6 +40,7 @@ namespace CaravanAdventures
             if (ModSettings.buffShrineRewards) Helper.RunSafely(PatchAncientShrineDefs_MoreShrinesAndBetterRewards);
             if (ModSettings.increaseFireFoamPopperDetectionRange) Helper.RunSafely(PatchIncreaseFireFoamPopperDetectionRange);
             if (!ModSettings.enableSortingByPawnTitle) Helper.RunSafely(PatchRemovePawnTitleComparerDef);
+            if (ModSettings.enableAttackGizmo) Helper.RunSafely(PatchHumanDef_AddMeleeAttackComp);
 
             CompatibilityPatches.ExecuteCompatibilityPatches();
         }
@@ -152,6 +155,21 @@ namespace CaravanAdventures
             // todo reenable?
             var compProp = new CompProperties_Talk();
             if (!humanDef.comps.Any(x => x is CompProperties_Talk)) humanDef.comps.Add(compProp);
+        }
+
+        private static void PatchHumanDef_AddMeleeAttackComp()
+        {
+            var humanDef = DefDatabase<ThingDef>.GetNamed("Human");
+
+            if (humanDef == null)
+            {
+                DLog.Message("HumanDef is null");
+                return;
+            }
+
+            var compProp = new CompProperties_EngageMelee();
+            if (!humanDef.comps.Any(x => x is CompProperties_EngageMelee)) humanDef.comps.Add(compProp);
+            meleeAttackPatched = true;
         }
 
         private static void PatchAncientShrineDefs_MoreShrinesAndBetterRewards()

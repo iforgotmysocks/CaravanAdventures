@@ -48,7 +48,25 @@ namespace CaravanAdventures.Settings
                 $"eat and tend to themselves without undressing damaged gear. Only helpful when trying to avoid tattered apparel via filter settings.");
 
             options.CheckboxLabeled($"Enable pawn title sorter in caravan forming menu.", ref ModSettings.enableSortingByPawnTitle, "Enable an additional sorter for the caravan forming dialog allowing to sort pawns by their title.");
-
+            
+            options.Gap();
+            options.CheckboxLabeled("Enable button for automatic melee engagements", ref ModSettings.enableAttackGizmo, "Enable button allowing drafted melee pawns to walk up to and attack hostiles themselves");
+            options.Gap(6f);
+            if (ModSettings.enableAttackGizmo)
+            {
+                if (!InitPatches.meleeAttackPatched) options.Label($"Please restart the game for auto melee engagements to become available.");
+                else
+                {
+                    var rect = options.GetRect(Text.LineHeight);
+                    Widgets.Label(rect, $"Auto engage range in cells: {Math.Round(ModSettings.attackMeleeRange, 0)}");
+                    rect.x += (options.ColumnWidth / 3) * 2;
+                    rect.width = options.ColumnWidth / 3;
+                    Widgets.HorizontalSlider(rect, ref ModSettings.attackMeleeRange, new FloatRange(1f, 50f), Math.Round(ModSettings.attackMeleeRange, 0).ToString(), 0);
+                    ModSettings.attackMeleeRange = (float)Math.Round(ModSettings.attackMeleeRange, 0);
+                    options.Gap(4f);
+                    options.CheckboxLabeled($"Enable drafted melee engagements by default", ref ModSettings.attackMeleeEnabledByDefault);
+                }
+            }
             options.End();
         }
 
