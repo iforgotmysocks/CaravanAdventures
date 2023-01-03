@@ -8,4 +8,7 @@
 
   <sos2ProtectSpaceship>Protect Spaceship</sos2ProtectSpaceship>
   <sos2ProtectSpaceshipDesc>Allows the ancient protective aura to transfer incoming heat of the ship to this pawn when enabled.</sos2ProtectSpaceshipDesc>
+
+  <CAengageMelee>Engage drafted</CAengageMelee>
+  <CAengageMeleeDesc>Allow drafted melee pawns to walk up to and attack hostiles themselves</CAengageMeleeDesc>
 </LanguageData>

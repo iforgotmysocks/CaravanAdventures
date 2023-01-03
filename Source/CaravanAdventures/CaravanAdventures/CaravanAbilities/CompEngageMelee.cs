@@ -84,8 +84,8 @@ namespace CaravanAdventures.CaravanAbilities
             yield return new Command_Toggle
             {
                 isActive = () => enabled,
-                defaultLabel = "engageMelee".Translate(),
-                defaultDesc = "engageMeleeDesc".Translate(),
+                defaultLabel = "CAengageMelee".Translate(),
+                defaultDesc = "CAengageMeleeDesc".Translate(),
                 Order = 1f,
                 icon = ContentFinder<Texture2D>.Get("UI/Commands/Draft", true),
                 toggleAction = () =>
