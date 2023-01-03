@@ -14,13 +14,13 @@ namespace CaravanAdventures.Patches
         public static readonly Texture2D CaravanSettings = ContentFinder<Texture2D>.Get("UI/Buttons/CaravanSettings", true);
     }
 
-    class LetterRemovalPatch
+    class CustomIconPatches
     {
         public static void ApplyPatches()
         {
             if (!ModSettings.showLetterRemoval) return;
             var letterOrg = AccessTools.Method(typeof(PlaySettings), nameof(PlaySettings.DoPlaySettingsGlobalControls));
-            var letterPost = new HarmonyMethod(typeof(LetterRemovalPatch).GetMethod(nameof(PlaySettingsDoPlaySettingsGlobalControlsPostfix)));
+            var letterPost = new HarmonyMethod(typeof(CustomIconPatches).GetMethod(nameof(PlaySettingsDoPlaySettingsGlobalControlsPostfix)));
             HarmonyPatcher.harmony.Patch(letterOrg, null, letterPost);
         }
 
