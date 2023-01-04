@@ -1,4 +1,5 @@
-﻿using RimWorld;
+﻿using CaravanAdventures.CaravanStory;
+using RimWorld;
 using System;
 using UnityEngine;
 using Verse;
@@ -80,8 +81,11 @@ namespace CaravanAdventures.Settings
             options.CheckboxLabeled("Mute ancient master shrine detection patrol notifications", ref ModSettings.mutedShrineMessages);
 
             options.Gap();
+            var sacRelEmpire = ModSettings.sacHuntersHostileTowardsEmpire;
+            var sacRelNatEnemies = ModSettings.sacHuntersHostileTowardsNaturalEnemies;
             options.CheckboxLabeled("Should sacrileg hunters be hostile towards the empire?", ref ModSettings.sacHuntersHostileTowardsEmpire);
             options.CheckboxLabeled("Should sacrileg hunters be hostile towards natural enemies?", ref ModSettings.sacHuntersHostileTowardsNaturalEnemies, "Natural enemies are factions like the rough outlanders or rough tribes, they're not permanent enemies and can become allies, but start out with hostile tendencies.");
+            if (sacRelEmpire != ModSettings.sacHuntersHostileTowardsEmpire || sacRelNatEnemies != ModSettings.sacHuntersHostileTowardsNaturalEnemies) StoryUtility.EnsureSacrilegHunters();
 
             options.CheckboxLabeled("Remove royal title requirements", ref ModSettings.removeRoyalTitleRequirements);
             options.CheckboxLabeled("Only remove Acolyte and Knight title requirements", ref ModSettings.removeOnlyAcolyteAndKnightRoyalTitleRequirements);
