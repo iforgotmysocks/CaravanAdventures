@@ -147,18 +147,13 @@ namespace CaravanAdventures
         public static bool buffShrineRewards;
         public static bool spDecayLevelIncrease;
         public static bool showLetterRemoval;
-<<<<<<< HEAD
         public static bool increaseFireFoamPopperDetectionRange;
         public static bool keepApparelOnHostileMaps;
         public static bool enableSortingByPawnTitle;
-        public static bool enableAttackGizmo;
-        public static float attackMeleeRange = 18f;
-        public static bool attackMeleeEnabledByDefault;
-=======
         public static bool enableEngageMeleeFeature;
         public static float engageMeleeRange = 18f;
         public static EngageMeleeBehaviour engageMeleeBehaviour;
->>>>>>> 56dc03d (improvements)
+        public static bool engageMeleeChaseHostiles;
 
         // categories enabled
         public static bool caravanCampEnabled = true;
@@ -293,18 +288,13 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref buffShrineRewards, "buffShrineRewards", true);
             Scribe_Values.Look(ref spDecayLevelIncrease, "spDecayLevelIncrease", false);
             Scribe_Values.Look(ref showLetterRemoval, "showLetterRemoval", false);
-<<<<<<< HEAD
             Scribe_Values.Look(ref increaseFireFoamPopperDetectionRange, "increaseFireFoamPopperDetectionRange", false);
             Scribe_Values.Look(ref keepApparelOnHostileMaps, "keepApparelOnHostileMaps", false);
             Scribe_Values.Look(ref enableSortingByPawnTitle, "enableSortingByPawnTitle", false);
-            Scribe_Values.Look(ref enableAttackGizmo, "enableAttackGizmo", false);
-            Scribe_Values.Look(ref attackMeleeRange, "attackMeleeRange", 18f);
-            Scribe_Values.Look(ref attackMeleeEnabledByDefault, "attackMeleeEnabledByDefault", false);
-=======
             Scribe_Values.Look(ref enableEngageMeleeFeature, "enableEngageMeleeFeature", false);
             Scribe_Values.Look(ref engageMeleeRange, "engageMeleeRange", 18f);
             Scribe_Values.Look(ref engageMeleeBehaviour, "engageMeleeBehaviour", EngageMeleeBehaviour.SavedIndividually);
->>>>>>> 56dc03d (improvements)
+            Scribe_Values.Look(ref engageMeleeChaseHostiles, "engageMeleeChaseHostiles", true);
 
             // categories enabled
             Scribe_Values.Look(ref caravanCampEnabled, "caravanCampEnabled", true);

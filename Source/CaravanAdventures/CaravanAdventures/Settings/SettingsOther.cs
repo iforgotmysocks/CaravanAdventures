@@ -81,6 +81,7 @@ namespace CaravanAdventures.Settings
                         behaviours => behaviours.FirstOrDefault(),
                         behaviours => behaviours.Select(behaviour => new Widgets.DropdownMenuElement<string> { option = new FloatMenuOption(behaviour, () => ModSettings.engageMeleeBehaviour = (EngageMeleeBehaviour)Enum.Parse(ModSettings.engageMeleeBehaviour.GetType(), behaviour)), payload = behaviour }),
                         new TaggedString($"{Enum.GetName(ModSettings.engageMeleeBehaviour.GetType(), ModSettings.engageMeleeBehaviour)}"));
+                    options.CheckboxLabeled($"Chase fleeing targets:", ref ModSettings.engageMeleeChaseHostiles);
                 }
             }
 
