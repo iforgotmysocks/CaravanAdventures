@@ -29,7 +29,7 @@ namespace CaravanAdventures.CaravanAbilities
         {
             base.PostExposeData();
             Scribe_Values.Look(ref currentAssignedJobsLoadId, "currentAssignedJobsLoadId");
-            if (ModSettings.engageMeleeBehaviour == EngageMeleeBehaviour.SavedIndividually) Scribe_Values.Look(ref enabled, "enabled", false);
+            if (ModSettings.engageMeleeBehaviour == EngageMeleeBehaviour.SavedIndividually) Scribe_Values.Look(ref enabled, "engageMeleeEnabled", false);
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
                 if (ModSettings.engageMeleeBehaviour == EngageMeleeBehaviour.Enabled) enabled = true;
@@ -38,7 +38,6 @@ namespace CaravanAdventures.CaravanAbilities
 
         public override void CompTick()
         {
-            //base.CompTick();
             if (ticks == -1) ticks = Rand.Range(0, Props.interval);
             if (!enabled) return;
 
@@ -48,8 +47,6 @@ namespace CaravanAdventures.CaravanAbilities
 
                 var pawn = parent as Pawn;
 
-                //if (pawn?.Name?.ToStringShort == "Xosve") DLog.Message($"checking pawn {pawn?.NameShortColored} curjob {pawn?.CurJob?.def?.defName} playerforced {pawn?.CurJob?.playerForced} loadID {pawn?.CurJob?.loadID} assignedId: {currentAssignedJobsLoadId}");
-
                 if (!pawn.Drafted
                     || pawn.Faction != Faction.OfPlayer
                     || (pawn?.CurJob?.playerForced == true && pawn.CurJob.loadID != currentAssignedJobsLoadId)
@@ -57,7 +54,6 @@ namespace CaravanAdventures.CaravanAbilities
                     || pawn?.CurrentEffectiveVerb?.IsMeleeAttack != true) return;
 
                 var curTarget = pawn?.CurJob?.targetA.Pawn;
-                //DLog.Message($"current job target {curTarget?.NameShortColored} with def: {curTarget?.CurJobDef?.defName}");
 
                 if (!ModSettings.engageMeleeChaseHostiles
                     && curTarget != null
@@ -66,8 +62,7 @@ namespace CaravanAdventures.CaravanAbilities
                     || curTarget?.CurJobDef == JobDefOf.FleeAndCower
                     || curTarget?.MentalStateDef == MentalStateDefOf.PanicFlee))
                 {
-                    //DLog.Message($"Trying to end job against fleeing target {(curTarget as Pawn)?.NameShortColored} on attacker {pawn.NameShortColored}");
-                    pawn.mindState.enemyTarget = null;
+                    //pawn.mindState.enemyTarget = null;
                     pawn.jobs.EndCurrentJob(JobCondition.Succeeded);
                 }
 
@@ -80,7 +75,6 @@ namespace CaravanAdventures.CaravanAbilities
                     | (ModSettings.engageMeleeChaseHostiles ? TargetScanFlags.NeedThreat : TargetScanFlags.NeedActiveThreat)
                     | TargetScanFlags.NeedAutoTargetable, null, 0f, ModSettings.engageMeleeRange, default(IntVec3), float.MaxValue, false, true, false);
 
-                //DLog.Message($"target: {(target as Pawn)?.NameShortColored}");
 
                 //Thing target = null;
                 //var cells = GenRadial.RadialCellsAround(pawn.Position, AttackRange, false).Where(cell => cell.Standable(pawn.Map));
