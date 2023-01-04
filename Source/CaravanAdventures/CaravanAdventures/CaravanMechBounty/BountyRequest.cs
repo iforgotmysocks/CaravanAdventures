@@ -525,7 +525,7 @@ namespace CaravanAdventures.CaravanMechBounty
             var currentSilver = GetCurrentSilver();
             var node = new DiaNode("CABountyExchangeSilverForBounty".Translate(CompCache.BountyWC.BountyPoints, currentSilver, faction.def.LabelCap, GetVeteranTimeString()));
             var cost = 500;
-            node.options.Add(new DiaOption("CABountyExchangeSilverForBountyOption".Translate(cost, Convert.ToInt32(cost * ModSettings.bountyValueMult)))
+            node.options.Add(new DiaOption("CABountyExchangeSilverForBountyOption".Translate(cost, Convert.ToInt32(cost * ModSettings.bountyValueMult * (1 - ModSettings.bountyCreditPurchaseCostMult))))
             {
                 linkLateBind = () => BuyBountyWithMoneyOverview(parent),
                 action = () => ExchangeSilverForBounty(cost),
@@ -533,7 +533,7 @@ namespace CaravanAdventures.CaravanMechBounty
                 disabledReason = reason
             });
             var cost2 = 1000;
-            node.options.Add(new DiaOption("CABountyExchangeSilverForBountyOption".Translate(cost2, Convert.ToInt32(cost2 * ModSettings.bountyValueMult)))
+            node.options.Add(new DiaOption("CABountyExchangeSilverForBountyOption".Translate(cost2, Convert.ToInt32(cost2 * ModSettings.bountyValueMult * (1 - ModSettings.bountyCreditPurchaseCostMult))))
             {
                 linkLateBind = () => BuyBountyWithMoneyOverview(parent),
                 action = () => ExchangeSilverForBounty(cost2),
@@ -541,7 +541,7 @@ namespace CaravanAdventures.CaravanMechBounty
                 disabledReason = reason
             });
             var cost3 = 5000;
-            node.options.Add(new DiaOption("CABountyExchangeSilverForBountyOption".Translate(cost3, Convert.ToInt32(cost3 * ModSettings.bountyValueMult)))
+            node.options.Add(new DiaOption("CABountyExchangeSilverForBountyOption".Translate(cost3, Convert.ToInt32(cost3 * ModSettings.bountyValueMult * (1 - ModSettings.bountyCreditPurchaseCostMult))))
             {
                 linkLateBind = () => BuyBountyWithMoneyOverview(parent),
                 action = () => ExchangeSilverForBounty(cost3),
@@ -549,7 +549,7 @@ namespace CaravanAdventures.CaravanMechBounty
                 disabledReason = reason
             });
             var cost4 = 25000;
-            node.options.Add(new DiaOption("CABountyExchangeSilverForBountyOption".Translate(cost4, Convert.ToInt32(cost4 * ModSettings.bountyValueMult)))
+            node.options.Add(new DiaOption("CABountyExchangeSilverForBountyOption".Translate(cost4, Convert.ToInt32(cost4 * ModSettings.bountyValueMult * (1 - ModSettings.bountyCreditPurchaseCostMult))))
             {
                 linkLateBind = () => BuyBountyWithMoneyOverview(parent),
                 action = () => ExchangeSilverForBounty(cost4),
@@ -573,6 +573,7 @@ namespace CaravanAdventures.CaravanMechBounty
 
         private void ExchangeSilverForBounty(int cost)
         {
+            cost = Convert.ToInt32(cost * (1 - ModSettings.bountyCreditPurchaseCostMult));
             if (requestor?.Map?.Biome?.defName == Patches.Compatibility.SoS2Patch.OuterSpaceBiomeName) LaunchSilverFromSpace(ThingDefOf.Silver, cost, requestor.Map, null);
             else TradeUtility.LaunchSilver(requestor.Map, cost);
             CompCache.BountyWC.BountyPoints += Convert.ToInt32(cost * ModSettings.bountyValueMult);

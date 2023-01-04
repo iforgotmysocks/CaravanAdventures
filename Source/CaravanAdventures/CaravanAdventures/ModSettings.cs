@@ -134,6 +134,7 @@ namespace CaravanAdventures
         public static bool useGeneRewards = true;
         public static float architeGeneChance = 15f;
         public static int buyableGeneAmount = 2;
+        public static float bountyCreditPurchaseCostMult = 0.68f;
 
         // travel companions
         public static bool excludeSlavesFromTravelCompanions;
@@ -266,6 +267,7 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref useGeneRewards, "useGeneRewards", true);
             Scribe_Values.Look(ref architeGeneChance, "architeGeneChance", 15f);
             Scribe_Values.Look(ref buyableGeneAmount, "buyableGeneAmount", 2);
+            Scribe_Values.Look(ref bountyCreditPurchaseCostMult, "bountyCreditPurchaseCostMult", 0.68f);
 
             // travel companions
             Scribe_Values.Look(ref excludeSlavesFromTravelCompanions, "excludeSlavesFromTravelCompanions", false);

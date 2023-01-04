@@ -53,11 +53,8 @@ namespace CaravanAdventures.Settings
 
             Text.Font = GameFont.Small;
             options.Gap();
-            options.Label("Here bounty settings can be configured.");
-            options.Gap();
 
-
-            options.Label("(Matters when royalty, or rather the story isn't enabled and sacrileg hunters don't exist)");
+            options.Label("Select bounty faction. Other factions only choosable if story disabled.");
             var rect = options.GetRect(Text.LineHeight);
             Widgets.Label(rect, "Select the desired bounty faction:");
 
@@ -106,6 +103,8 @@ namespace CaravanAdventures.Settings
             options.CheckboxLabeled("Allow exchanging bounty points for silver", ref ModSettings.allowBuyingBountyWithSilver);
             options.Label($"Bounty value multiplier. (Default: 1 silver ~ 0.25 bounty credit): {Math.Round(ModSettings.bountyValueMult, 2)}");
             ModSettings.bountyValueMult = (float)Math.Round(options.Slider(ModSettings.bountyValueMult, 0.1f, 4f), 2);
+            options.Label($"Bounty credit purchase cost percentage: {Math.Round(ModSettings.bountyCreditPurchaseCostMult * 100, 0)}%", -1, "Reduction of points by this amount for conversion services.");
+            ModSettings.bountyCreditPurchaseCostMult = (float)Math.Round(options.Slider(ModSettings.bountyCreditPurchaseCostMult, 0f, 0.99f), 2);
 
             //options.EndScrollView(ref viewRect);
             options.End();
