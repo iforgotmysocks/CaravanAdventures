@@ -54,7 +54,7 @@ namespace CaravanAdventures.Settings
             options.CheckboxLabeled($"Enable pawn title sorter in caravan forming menu.", ref ModSettings.enableSortingByPawnTitle, "Enable an additional sorter for the caravan forming dialog allowing to sort pawns by their title.");
             
             options.Gap();
-            options.CheckboxLabeled("Enable button for automatic melee engagements", ref ModSettings.enableEngageMeleeFeature, "Enable button allowing drafted melee pawns to walk up to and attack hostiles themselves");
+            options.CheckboxLabeled("Enable toggle for automatic melee engagements while drafted", ref ModSettings.enableEngageMeleeFeature, "Enable button allowing drafted melee pawns to walk up to and attack hostiles themselves");
             options.Gap(6f);
             if (ModSettings.enableEngageMeleeFeature)
             {

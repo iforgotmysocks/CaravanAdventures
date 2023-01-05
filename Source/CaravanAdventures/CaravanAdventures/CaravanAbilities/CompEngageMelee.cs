@@ -106,7 +106,7 @@ namespace CaravanAdventures.CaravanAbilities
                 Order = 1f,
                 icon = ContentFinder<Texture2D>.Get("UI/Commands/Draft", true),
                 toggleAction = () => enabled = !enabled,
-                hotKey = KeyBindingDefOf.Misc4
+                hotKey = DefDatabase<KeyBindingDef>.GetNamed("CAEngageMelee")
             };
         }
 
