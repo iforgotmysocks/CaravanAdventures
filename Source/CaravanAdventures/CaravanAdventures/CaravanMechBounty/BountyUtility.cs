@@ -1,5 +1,4 @@
 ﻿using RimWorld;
-using System;
 using System.Linq;
 using Verse;
 
@@ -75,17 +74,31 @@ namespace CaravanAdventures.CaravanMechBounty
 
         private static void AdjustVeteranSkills(Pawn veteran)
         {
-            veteran.skills.skills.FirstOrDefault(skill => skill.def == SkillDefOf.Shooting).Level = Rand.Range(15, 19);
-            veteran.skills.skills.FirstOrDefault(skill => skill.def == SkillDefOf.Shooting).passion = Rand.Chance(0.8f) ? Passion.Major : Passion.Minor;
+            var count = 0;
+            foreach (var skill in veteran.skills.skills.InRandomOrder())
+            {
+                skill.passion = Passion.Minor;
 
-            veteran.skills.skills.FirstOrDefault(skill => skill.def == SkillDefOf.Melee).Level = Rand.Range(15, 19);
-            veteran.skills.skills.FirstOrDefault(skill => skill.def == SkillDefOf.Melee).passion = Rand.Chance(0.8f) ? Passion.Major : Passion.Minor;
-
-            veteran.skills.skills.FirstOrDefault(skill => skill.def == SkillDefOf.Medicine).Level = Rand.Range(7, 15);
-            veteran.skills.skills.FirstOrDefault(skill => skill.def == SkillDefOf.Medicine).passion = Rand.Chance(0.5f) ? Passion.Major : Passion.Minor;
-
-            veteran.skills.skills.FirstOrDefault(skill => skill.def == SkillDefOf.Construction).Level = Rand.Range(7, 15);
-            veteran.skills.skills.FirstOrDefault(skill => skill.def == SkillDefOf.Construction).passion = Rand.Chance(0.5f) ? Passion.Major : Passion.Minor;
+                switch (skill?.def?.defName)
+                {
+                    case "Shooting":
+                    case "Melee":
+                        skill.Level = Rand.Range(15, 19);
+                        break;
+                    case "Medicine":
+                    case "Construction":
+                        skill.Level = Rand.Range(7, 15);
+                        break;
+                    case "Artistic":
+                    case "Intellectual":
+                        skill.passion = Passion.None;
+                        break;
+                    default:
+                        if (count == 0) skill.passion = Passion.None;
+                        count++;
+                        break;
+                }
+            }
         }
 
         private static void ConfigureVeteranHediffs(Pawn veteran)
