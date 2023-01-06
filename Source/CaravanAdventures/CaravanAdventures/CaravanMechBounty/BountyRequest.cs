@@ -573,10 +573,9 @@ namespace CaravanAdventures.CaravanMechBounty
 
         private void ExchangeSilverForBounty(int cost)
         {
-            cost = Convert.ToInt32(cost * (1 - ModSettings.bountyCreditPurchaseCostMult));
             if (requestor?.Map?.Biome?.defName == Patches.Compatibility.SoS2Patch.OuterSpaceBiomeName) LaunchSilverFromSpace(ThingDefOf.Silver, cost, requestor.Map, null);
             else TradeUtility.LaunchSilver(requestor.Map, cost);
-            CompCache.BountyWC.BountyPoints += Convert.ToInt32(cost * ModSettings.bountyValueMult);
+            CompCache.BountyWC.BountyPoints += Convert.ToInt32(cost * ModSettings.bountyValueMult * (1 - ModSettings.bountyCreditPurchaseCostMult));
         }
 
         private void LaunchSilverFromSpace(ThingDef resDef, int debt, Map map, TradeShip trader = null)
