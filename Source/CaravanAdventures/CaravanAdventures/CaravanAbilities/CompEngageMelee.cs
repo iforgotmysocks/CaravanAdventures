@@ -107,11 +107,18 @@ namespace CaravanAdventures.CaravanAbilities
                 defaultDesc = "CAengageMeleeDesc".Translate(),
                 Order = 1f,
                 icon = ContentFinder<Texture2D>.Get("UI/Commands/Draft", true),
-                toggleAction = () => enabled = !enabled,
+                toggleAction = ToggleAndCheckForActiveJobCancellation,
                 hotKey = DefDatabase<KeyBindingDef>.GetNamed("CAEngageMelee")
             };
         }
 
+        private void ToggleAndCheckForActiveJobCancellation()
+        {
+            enabled = !enabled;
 
+            var pawn = parent as Pawn;
+            if (pawn?.CurJob?.loadID != currentAssignedJobsLoadId || enabled) return;
+            pawn.jobs.EndCurrentJob(JobCondition.Succeeded);
+        }
     }
 }
