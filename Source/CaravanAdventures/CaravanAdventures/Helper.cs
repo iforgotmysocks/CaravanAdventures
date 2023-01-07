@@ -1,4 +1,5 @@
-﻿using RimWorld;
+﻿using CaravanAdventures.CaravanStory;
+using RimWorld;
 using RimWorld.Planet;
 using System;
 using System.Collections.Generic;
@@ -114,6 +115,9 @@ namespace CaravanAdventures
             DLog.Message($"wp player: {Find.World.worldPawns.AllPawnsAliveOrDead.Where(x => x.Faction == Faction.OfPlayer).Count()} " +
                 $"wp alive: {Find.World.worldPawns.AllPawnsAlive.Where(x => x.Faction == Faction.OfPlayer).Count()} " +
                 $"dead: {Find.World.worldPawns.AllPawnsDead.Where(x => x.Faction == Faction.OfPlayer).Count()}");
+            if (ModSettings.storyEnabled) DLog.Message($"wp sachunters: {Find.World.worldPawns.AllPawnsAliveOrDead.Where(x => x.Faction == StoryUtility.FactionOfSacrilegHunters).Count()} " +
+                $"wp alive: {Find.World.worldPawns.AllPawnsAlive.Where(x => x.Faction == StoryUtility.FactionOfSacrilegHunters).Count()} " +
+                $"dead: {Find.World.worldPawns.AllPawnsDead.Where(x => x.Faction == StoryUtility.FactionOfSacrilegHunters).Count()}");
 
             foreach (var pawn in PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_FreeColonists)
             {
