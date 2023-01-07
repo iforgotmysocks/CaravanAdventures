@@ -46,12 +46,7 @@ namespace CaravanAdventures.CaravanAbilities
                 ticks = 0;
 
                 var pawn = parent as Pawn;
-
-                if (!pawn.Drafted
-                    || pawn.Faction != Faction.OfPlayer
-                    || (pawn?.CurJob?.playerForced == true && pawn.CurJob.loadID != currentAssignedJobsLoadId)
-                    || pawn.WorkTagIsDisabled(WorkTags.Violent)
-                    || pawn?.CurrentEffectiveVerb?.IsMeleeAttack != true) return;
+                if (InvalidPawnForEngage(pawn, true)) return;
 
                 var curTarget = pawn?.CurJob?.targetA.Pawn;
 
@@ -93,10 +88,17 @@ namespace CaravanAdventures.CaravanAbilities
             ticks++;
         }
 
+        public bool InvalidPawnForEngage(Pawn pawn, bool checkJob = false) => pawn == null
+                    || !pawn.Drafted
+                    || pawn.Faction != Faction.OfPlayer
+                    || (checkJob && (pawn?.CurJob?.playerForced == true && pawn.CurJob.loadID != currentAssignedJobsLoadId))
+                    || pawn.WorkTagIsDisabled(WorkTags.Violent)
+                    || pawn?.equipment?.Primary?.def?.IsMeleeWeapon != true;
+
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
         {
             if (base.CompGetGizmosExtra() != null) foreach (var baseGiz in base.CompGetGizmosExtra()) if (baseGiz != null) yield return baseGiz;
-            if (!(parent as Pawn).Drafted || (parent as Pawn)?.CurrentEffectiveVerb?.IsMeleeAttack != true) yield break;
+            if (InvalidPawnForEngage(parent as Pawn)) yield break;
 
             yield return new Command_Toggle
             {
