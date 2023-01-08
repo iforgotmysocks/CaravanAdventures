@@ -145,6 +145,7 @@ namespace CaravanAdventures
         public static bool buffShrineRewards;
         public static bool spDecayLevelIncrease;
         public static bool showLetterRemoval;
+        public static bool increaseFireFoamPopperDetectionRange;
 
         // categories enabled
         public static bool caravanCampEnabled = true;
@@ -278,6 +279,7 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref buffShrineRewards, "buffShrineRewards", true);
             Scribe_Values.Look(ref spDecayLevelIncrease, "spDecayLevelIncrease", false);
             Scribe_Values.Look(ref showLetterRemoval, "showLetterRemoval", false);
+            Scribe_Values.Look(ref increaseFireFoamPopperDetectionRange, "increaseFireFoamPopperDetectionRange", false);
 
             // categories enabled
             Scribe_Values.Look(ref caravanCampEnabled, "caravanCampEnabled", true);

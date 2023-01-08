@@ -16,7 +16,7 @@ namespace CaravanAdventures.Settings
 
             width = 600f;
         }
-        
+
         protected override void SetInitialSizeAndPosition()
         {
             windowRect = new Rect((UI.screenWidth - width) / 2f, (UI.screenHeight - InitialSize.y) / 2f, width, InitialSize.y);
@@ -36,8 +36,11 @@ namespace CaravanAdventures.Settings
             options.CheckboxLabeled("Increase npc settlement's available silver and food by 2-3 and 1.5-2, respectively", ref ModSettings.buffSettlementFoodAndSilverAvailability);
             options.CheckboxLabeled("Increased ancient shrines and reward chance (hover for more info)", ref ModSettings.buffShrineRewards, "Adds the possibility for an additional ancient danger to appear and adds a chance for a second valuable item when raiding ancient shrines (heavily nerfed for story master shrines)");
             options.CheckboxLabeled("Increase skill point decay level from 10 to 15", ref ModSettings.spDecayLevelIncrease, "Increases the level to 15, when the skill decay starts to set in, so your travelers have it easier being on the road for longer durations");
-            options.CheckboxLabeled("Show letter removal icon", ref ModSettings.showLetterRemoval);
             options.CheckboxLabeled("Show additional Psycaster or Tough trait info on Caravan dialog", ref ModSettings.showAdditionalPawnStatsInCaravanFormDialog);
+            options.Gap();
+            options.Label($"Helping settings that have nothing to do with traveling but improve general gameplay:");
+            options.CheckboxLabeled("Show letter removal icon", ref ModSettings.showLetterRemoval);
+            options.CheckboxLabeled($"Increase firefoam popper detection range from 3 to 5 cells", ref ModSettings.increaseFireFoamPopperDetectionRange);
             options.End();
         }
 

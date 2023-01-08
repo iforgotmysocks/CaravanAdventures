@@ -35,6 +35,7 @@ namespace CaravanAdventures
             if (!ModSettings.caravanIncidentsEnabled) Helper.RunSafely(PatchIncidentsTo0Chance);
             if (ModSettings.buffSettlementFoodAndSilverAvailability) Helper.RunSafely(PatchIncreaseBaseWealthAndFood);
             if (ModSettings.buffShrineRewards) Helper.RunSafely(PatchAncientShrineDefs_MoreShrinesAndBetterRewards);
+            if (ModSettings.increaseFireFoamPopperDetectionRange) Helper.RunSafely(PatchIncreaseFireFoamPopperDetectionRange);
 
             CompatibilityPatches.ExecuteCompatibilityPatches();
         }
@@ -206,6 +207,15 @@ namespace CaravanAdventures
                 incident.allowedBiomes = new List<BiomeDef>();
                 incident.baseChance = 0;
             }
+        }
+
+        private static void PatchIncreaseFireFoamPopperDetectionRange()
+        {
+            var def = DefDatabase<ThingDef>.AllDefsListForReading.FirstOrDefault(x => x.defName.StartsWith("FirefoamPopper"));
+            if (def == null) return;
+            var triggerComp = (def.comps.FirstOrDefault(x => x is CompProperties_ProximityFuse)) as CompProperties_ProximityFuse;
+            if (triggerComp == null) return;
+            triggerComp.radius = 5;
         }
     }
 }
