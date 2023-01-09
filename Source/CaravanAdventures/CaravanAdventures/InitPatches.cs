@@ -23,6 +23,7 @@ namespace CaravanAdventures
                 Helper.RunSafely(PatchHumanDef_AddTalkOption);
                 Helper.RunSafely(PatchRemoveRoyalTitleRequirements);
                 if (ModSettings.noFreeStuff) Helper.RunSafely(PatchSacHunterItemDropStats);
+                AdjustProtectiveAuraIncomingDamageMultiplier();
                 storyPatchesLoaded = true;
             }
             if (!ModSettings.storyEnabled && ModsConfig.RoyaltyActive)
@@ -51,6 +52,7 @@ namespace CaravanAdventures
 
         private static void DisableFactionVillageCreation()
         {
+            DLog.Message($"Disabling story village spawns");
             CaravanStory.StoryDefOf.CASacrilegHunters.settlementGenerationWeight = 0;
             CaravanStory.StoryDefOf.CASacrilegHunters.requiredCountAtGameStart = 0;
         }
@@ -216,6 +218,24 @@ namespace CaravanAdventures
             var triggerComp = (def.comps.FirstOrDefault(x => x is CompProperties_ProximityFuse)) as CompProperties_ProximityFuse;
             if (triggerComp == null) return;
             triggerComp.radius = 5;
+        }
+
+        public static void AdjustProtectiveAuraIncomingDamageMultiplier()
+        {
+            Helper.RunSafely(() =>
+            {
+                var ancientGift = DefDatabase<HediffDef>.AllDefs.FirstOrDefault(x => x == CaravanAbilities.AbilityDefOf.CAAncientProtectiveAura);
+                var stage = ancientGift?.stages?.FirstOrDefault();
+                var statFactor = stage?.statFactors?.FirstOrDefault(x => x?.stat == StatDefOf.IncomingDamageFactor);
+                if (statFactor == null) return;
+                statFactor.value = ModSettings.ancientProtectiveAuraDamageReduction;
+
+                ancientGift = DefDatabase<HediffDef>.AllDefs.FirstOrDefault(x => x == CaravanAbilities.AbilityDefOf.CAAncientProtectiveAuraLinked);
+                stage = ancientGift?.stages?.FirstOrDefault();
+                statFactor = stage?.statFactors?.FirstOrDefault(x => x?.stat == StatDefOf.IncomingDamageFactor);
+                if (statFactor == null) return;
+                statFactor.value = ModSettings.ancientProtectiveAuraDamageReduction;
+            });
         }
     }
 }

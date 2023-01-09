@@ -77,6 +77,10 @@ namespace CaravanAdventures.Settings
             options.Gap(24f);
 
             options.Label("Ancient protective aura".Colorize(Color.green));
+            options.Label($"Damage reduction multiplier: {Math.Round(ModSettings.ancientProtectiveAuraDamageReduction, 2)}");
+            var checkVal = ModSettings.ancientProtectiveAuraDamageReduction;
+            ModSettings.ancientProtectiveAuraDamageReduction = options.Slider(ModSettings.ancientProtectiveAuraDamageReduction, 0f, 1f);
+            if (ModSettings.ancientProtectiveAuraDamageReduction != checkVal) InitPatches.AdjustProtectiveAuraIncomingDamageMultiplier();
             options.Label($"Damage healed per second: {Math.Round(ModSettings.healingPerSecond, 2)}");
             ModSettings.healingPerSecond = options.Slider(ModSettings.healingPerSecond, 0f, 1f);
             options.Label($"Max allowed linked pawns for the coordinator spell: {ModSettings.maxLinkedAuraPawns}");

@@ -80,6 +80,7 @@ namespace CaravanAdventures
         public static float plantScoreMultiplier = 2.0f;
         // - protective aura
         public static float healingPerSecond = 0.05f;
+        public static float ancientProtectiveAuraDamageReduction = 0.3f;
         public static bool onlyHealPermWhenGifted = false;
         public static bool stopMentalBreaks = false;
         public static int maxLinkedAuraPawns = 4;
@@ -216,6 +217,7 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref plantScoreMultiplier, "plantScoreMultiplier", 2.25f);
             // - protective aura
             Scribe_Values.Look(ref healingPerSecond, "healingPerSecond", 0.05f);
+            Scribe_Values.Look(ref ancientProtectiveAuraDamageReduction, "ancientProtectiveAuraDamageReduction", 0.3f);
             Scribe_Values.Look(ref stopMentalBreaks, "stopMentalBreaks", false);
             Scribe_Values.Look(ref onlyHealPermWhenGifted, "onlyHealPermWhenGifted", false);
             Scribe_Values.Look(ref maxLinkedAuraPawns, "maxLinkedAuraPawns", 4);
