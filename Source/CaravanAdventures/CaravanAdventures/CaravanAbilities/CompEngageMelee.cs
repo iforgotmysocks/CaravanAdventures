@@ -44,34 +44,16 @@ namespace CaravanAdventures.CaravanAbilities
             if (ticks == Props.interval)
             {
                 ticks = 0;
-
                 var pawn = parent as Pawn;
-
-                // todo remove, debugging
-                if (ModSettings.debug && pawn.Name.ToStringShort != "Marissa") return;
-
-                if (InvalidPawnForEngage(pawn, true))
-                {
-                    // todo debugging, remove
-                    if (pawn?.CurJob == null) DLog.Message($"Canceling with no job");
-                    else if (pawn?.CurJob.def == JobDefOf.AttackMelee) DLog.Message($"Canceling with existing melee attack job");
-                    return;
-                }
+                if (InvalidPawnForEngage(pawn, true)) return;
+                
                 var curTarget = pawn?.CurJob?.targetA.Pawn;
-
                 if (!ModSettings.engageMeleeChaseHostiles
                     && curTarget != null
                     && pawn?.CurJob?.def == JobDefOf.AttackMelee
                     && (curTarget?.CurJobDef == JobDefOf.Flee
                     || curTarget?.CurJobDef == JobDefOf.FleeAndCower
-                    || curTarget?.MentalStateDef == MentalStateDefOf.PanicFlee))
-                {
-                    //pawn.mindState.enemyTarget = null;
-                    pawn.jobs.EndCurrentJob(JobCondition.Succeeded);
-                }
-
-                // todo disabled to check if we should switch target if a better one comes close
-                //if (pawn?.CurJob?.playerForced == true) return;
+                    || curTarget?.MentalStateDef == MentalStateDefOf.PanicFlee)) pawn.jobs.EndCurrentJob(JobCondition.Succeeded);
 
                 Thing target = (Thing)AttackTargetFinder.BestAttackTarget(pawn,
                     TargetScanFlags.NeedLOSToPawns
@@ -86,29 +68,11 @@ namespace CaravanAdventures.CaravanAbilities
                     if (pawn?.Position.IsValid == true
                         && pawn?.CurJob?.targetA.IsValid == true
                         && target?.Position.IsValid == true
-                        && pawn.Position.DistanceTo(pawn.CurJob.targetA.Cell) <= pawn.Position.DistanceTo(target.Position))
-                    {
-                        DLog.Message($"Avoiding to switch target from current: {pawn?.CurJob?.targetA.Pawn?.NameShortColored} to {(target as Pawn)?.NameShortColored} kk: {pawn.records.GetValue(RecordDefOf.Kills)}");
-                        return;
-                    }
-
-                    DLog.Message($"Switching target from current: {pawn?.CurJob?.targetA.Pawn?.NameShortColored} to {(target as Pawn)?.NameShortColored}");
-                    DLog.Message($"Range current: {pawn.Position.DistanceTo(pawn.CurJob.targetA.Cell)} range new: {pawn.Position.DistanceTo(target.Position)} kk: {pawn.records.GetValue(RecordDefOf.Kills)}");
+                        && pawn.Position.DistanceTo(pawn.CurJob.targetA.Cell) <= pawn.Position.DistanceTo(target.Position)) return;
                 }
              
-                //Thing target = null;
-                //var cells = GenRadial.RadialCellsAround(pawn.Position, AttackRange, false).Where(cell => cell.Standable(pawn.Map));
-                //var pawns = cells.SelectMany(cell => cell.GetThingList(pawn.Map).OfType<Pawn>()).ToList();
-                //if (pawns != null && pawns.Count() != 0) target = pawns.FirstOrDefault(x => GenHostility.IsActiveThreatToPlayer(x));
-
                 if (target == null) return;
-
-
-                DLog.Message($"Giving auto job to attack {(target as Pawn)?.NameShortColored} kk: {pawn.records.GetValue(RecordDefOf.Kills)}");
                 Job job = JobMaker.MakeJob(JobDefOf.AttackMelee, target);
-                //job.maxNumMeleeAttacks = 1;
-                //job.expiryInterval = 200;
-                //job.reactingToMeleeThreat = true;
                 currentAssignedJobsLoadId = job.loadID;
                 pawn.jobs.TryTakeOrderedJob(job);
             }
