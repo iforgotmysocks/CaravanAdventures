@@ -140,7 +140,7 @@ namespace CaravanAdventures.Patches
             if (thingFlag) return;
             var anythingChanged = false;
             if (ModSettings.autoSelectItems || ModSettings.autoSelectPawns) SelectThings(__instance.transferables, ref anythingChanged);
-            if (anythingChanged) Traverse.Create(__instance).Method("CountToTransferChanged").GetValue();
+            if (anythingChanged) Traverse.Create(__instance).Method("Notify_TransferablesChanged").GetValue();
             thingFlag = true;
         }
 
@@ -158,6 +158,7 @@ namespace CaravanAdventures.Patches
                 else if (!ModSettings.autoSelectItems && !isPawn) continue;
 
                 FilterHelper.SetAmount(trans, selected.Select(x => x.stackCount).Sum());
+                DLog.Message($"setting anything changed true");
                 anythingChanged = true;
             }
         }
