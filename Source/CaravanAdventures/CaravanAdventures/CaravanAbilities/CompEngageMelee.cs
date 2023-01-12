@@ -84,7 +84,7 @@ namespace CaravanAdventures.CaravanAbilities
                     || pawn.Faction != Faction.OfPlayer
                     || (checkJob && (pawn?.CurJob?.playerForced == true && pawn.CurJob.loadID != currentAssignedJobsLoadId))
                     || pawn.WorkTagIsDisabled(WorkTags.Violent)
-                    || pawn?.equipment?.Primary?.def?.IsMeleeWeapon != true;
+                    || (pawn?.equipment?.Primary?.def?.IsMeleeWeapon != true && pawn?.equipment?.Primary != null);
 
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
         {
