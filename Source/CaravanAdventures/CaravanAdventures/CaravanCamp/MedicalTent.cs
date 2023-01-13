@@ -11,6 +11,8 @@ namespace CaravanAdventures.CaravanCamp
         protected ThingDef[] validMedicine = new[] { ThingDefOf.MedicineUltratech, ThingDefOf.MedicineIndustrial, ThingDefOf.MedicineHerbal };
         protected Building_Storage shelf;
         protected Zone_Stockpile zone;
+        protected Building geneBank;
+
         public MedicalTent()
         {
             this.CoordSize = 2;
@@ -41,6 +43,10 @@ namespace CaravanAdventures.CaravanCamp
             shelf.GetStoreSettings().filter.SetAllow(ThingDefOf.MedicineUltratech, true);
             shelf.GetStoreSettings().Priority = StoragePriority.Important;
             campAssetListRef.Add(GenSpawn.Spawn(shelf, cellSpotShelf, map, Rot4.West, WipeMode.Vanish));
+
+            if (!ModsConfig.BiotechActive) return;
+            var cellGene = CellRect.Cells.FirstOrDefault(cell => cell.z == CellRect.minZ + 1 && cell.x == CellRect.minX + 2);
+            geneBank = CampHelper.PrepAndGenerateThing(DefDatabase<ThingDef>.AllDefs.FirstOrDefault(x => x.defName == "CAGeneBank"), cellGene, map, Rot4.North, campAssetListRef) as Building;
         }
 
         public override void BuildTribal(Map map, List<Thing> campAssetListRef)
@@ -78,6 +84,17 @@ namespace CaravanAdventures.CaravanCamp
                 if (medicine == null) break;
                 if (!cell.Filled(map)) GenDrop.TryDropSpawn(medicine, cell, map, ThingPlaceMode.Direct, out var result); 
             }
+
+            if (geneBank == null || !ModsConfig.BiotechActive) return;
+            var geneBankComp = geneBank.GetComp<CompGenepackContainer>();
+            if (geneBankComp == null) return;
+
+            foreach (var pack in caravan.AllThings.OfType<Genepack>().Reverse())
+            {
+                if (geneBankComp.Full) break;
+                geneBankComp.innerContainer.TryAddOrTransfer(pack);
+            }
+            
         }
 
         public virtual Building_Storage GetShelf() => shelf;
