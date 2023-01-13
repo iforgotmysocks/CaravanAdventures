@@ -75,26 +75,53 @@ namespace CaravanAdventures.CaravanMechBounty
         private static void AdjustVeteranSkills(Pawn veteran)
         {
             var count = 0;
+            var majorPassionPoints = 0;
+
+            var majorCombatPassion = Rand.Chance(0.3f);
+            var majorOther = Rand.Chance(0.3f);
             foreach (var skill in veteran.skills.skills.InRandomOrder())
             {
                 skill.passion = Passion.Minor;
 
+                // todo check why passions don't match with 9
                 switch (skill?.def?.defName)
                 {
                     case "Shooting":
                     case "Melee":
                         skill.Level = Rand.Range(15, 19);
+                        if (majorCombatPassion)
+                        {
+                            majorCombatPassion = false;
+                            skill.passion = Passion.Major;
+                            majorPassionPoints++;
+                        }
                         break;
                     case "Medicine":
                     case "Construction":
+                    case "Plants":
                         skill.Level = Rand.Range(7, 15);
+                        if (majorOther)
+                        {
+                            majorOther = false;
+                            skill.passion = Passion.Major;
+                            majorPassionPoints++;
+                        }
                         break;
                     case "Artistic":
                     case "Intellectual":
                         skill.passion = Passion.None;
                         break;
                     default:
-                        if (count == 0) skill.passion = Passion.None;
+                        if (majorOther)
+                        {
+                            majorOther = false;
+                            skill.passion = Passion.Major;
+                            majorPassionPoints += 2;
+                        }
+                        else
+                        {
+                            if (count <= majorPassionPoints) skill.passion = Passion.None;
+                        }
                         count++;
                         break;
                 }
