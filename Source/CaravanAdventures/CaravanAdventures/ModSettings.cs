@@ -147,6 +147,7 @@ namespace CaravanAdventures
         public static bool spDecayLevelIncrease;
         public static bool showLetterRemoval;
         public static bool increaseFireFoamPopperDetectionRange;
+        public static bool keepApparelOnHostileMaps;
 
         // categories enabled
         public static bool caravanCampEnabled = true;
@@ -282,6 +283,7 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref spDecayLevelIncrease, "spDecayLevelIncrease", false);
             Scribe_Values.Look(ref showLetterRemoval, "showLetterRemoval", false);
             Scribe_Values.Look(ref increaseFireFoamPopperDetectionRange, "increaseFireFoamPopperDetectionRange", false);
+            Scribe_Values.Look(ref keepApparelOnHostileMaps, "keepApparelOnHostileMaps", false);
 
             // categories enabled
             Scribe_Values.Look(ref caravanCampEnabled, "caravanCampEnabled", true);

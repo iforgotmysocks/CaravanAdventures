@@ -41,6 +41,12 @@ namespace CaravanAdventures.Settings
             options.Label($"Helping settings that have nothing to do with traveling but improve general gameplay:");
             options.CheckboxLabeled("Show letter removal icon", ref ModSettings.showLetterRemoval);
             options.CheckboxLabeled($"Increase firefoam popper detection range from 3 to 5 cells", ref ModSettings.increaseFireFoamPopperDetectionRange);
+
+            options.CheckboxLabeled($"{(ModSettings.keepApparelOnHostileMaps && !Patches.KeepApparelOnHostileMapsPatch.PatchApplied ? "(Requires restart) " : "")}" +
+                $"Stop colonists from dropping worn out apparel on non player maps", ref ModSettings.keepApparelOnHostileMaps, 
+                $"Disregards the hit-point filtersetting to drop damaged apparel while pawns are on hostile maps so the player can undraft pawns to have them " +
+                $"eat and tend to themselves without undressing damaged gear. Only helpful when trying to avoid tattered apparel via filter settings.");
+
             options.End();
         }
 
