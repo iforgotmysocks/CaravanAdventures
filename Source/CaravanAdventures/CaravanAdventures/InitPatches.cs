@@ -67,17 +67,24 @@ namespace CaravanAdventures
         private static void PatchAddNewMechanoidPawnGroupMakerDef()
         {
             var mechFactionDef = FactionDefOf.Mechanoid;
-            mechFactionDef.pawnGroupMakers.Add(new PawnGroupMaker()
+
+            var mechs = DefDatabase<PawnKindDef>.AllDefs.Where(x => x.defName.ToLower().StartsWith("mech_") && x.combatPower > 50 && x.combatPower <= 400).Select(x => new PawnGenOption() { kind = x, selectionWeight = 10f }).ToList();
+            if (!mechs?.Any() ?? true)
             {
-                kindDef = CaravanStory.StoryDefOf.CAMechanoidPawnGroupKindCombatMixed,
-                commonality = 100,
-                options = new List<PawnGenOption>() { 
+                mechs = new List<PawnGenOption>() { 
                     // todo move defs to a modextension or another def to allow mod support
                     new PawnGenOption() { kind = PawnKindDef.Named("Mech_CentipedeBlaster"), selectionWeight = 10f },
                     new PawnGenOption() { kind = PawnKindDef.Named("Mech_Lancer"), selectionWeight = 10f },
                     new PawnGenOption() { kind = PawnKindDef.Named("Mech_Scyther"), selectionWeight = 10f },
                     new PawnGenOption() { kind = PawnKindDef.Named("Mech_Pikeman"), selectionWeight = 10f }
-                }
+                };
+            }
+
+            mechFactionDef.pawnGroupMakers.Add(new PawnGroupMaker()
+            {
+                kindDef = CaravanStory.StoryDefOf.CAMechanoidPawnGroupKindCombatMixed,
+                commonality = 100,
+                options = mechs
             });
         }
 
