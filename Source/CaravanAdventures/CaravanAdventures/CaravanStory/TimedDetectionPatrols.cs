@@ -143,6 +143,7 @@ namespace CaravanAdventures.CaravanStory
 							points = raidPoints * (1 + increaseStrengthCounter * 0.2f),
 							faction = this.RaidFaction,
 							raidArrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn,
+							raidStrategy = RaidStrategyDefOf.ImmediateAttack,
 							customLetterDef = ModSettings.mutedShrineMessages ? LetterDefOf.NeutralEvent : LetterDefOf.NegativeEvent
                         };
                         DLog.Message($"Default threat points: {StorytellerUtility.DefaultThreatPointsNow(incidentParms.target)}");
