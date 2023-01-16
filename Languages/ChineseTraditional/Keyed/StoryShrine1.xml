@@ -178,4 +178,6 @@
   <Story_Shrine5_Apocalypse_Dia2_1>[{0}陷入了沉思]瀆神獵人的夥伴們並不知道，當幹掉機械怪物時，我從星球深處感受到了某些東西。那東西還在下面...嗯？等等。我想我可以通過一些放大裝置來接觸到它。但有什麼東西強大到足以充當放大裝置呢？\n\n啊哈！我想到了。那棵生命之樹！正是它選擇我當了救世主。但如果我真這麼做了，會發生什麼呢？我真的真的想知道嗎？呃，不過現在嘛...是時候該休息一下了...</Story_Shrine5_Apocalypse_Dia2_1>
   <!-- EN: Let's move on. -->
   <Story_Shrine5_Apocalypse_Dia2_1_Option1>讓我們繼續行動吧。</Story_Shrine5_Apocalypse_Dia2_1_Option1>
+
+  <CAStoryCurrentTemperature>Current temperature:</CAStoryCurrentTemperature>
 </LanguageData>

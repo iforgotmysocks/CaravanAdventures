@@ -99,4 +99,6 @@
   <Story_Shrine5_Apocalypse_Dia2Title>You look around as you step out of the portal's room</Story_Shrine5_Apocalypse_Dia2Title>
   <Story_Shrine5_Apocalypse_Dia2_1>[{0} deep in thoughts] The sacrileg hunters have no idea, that I felt something deep within the planet, when I killed the mechanoid monster. It's still down there... waiting. I may be able to reach it with some amplifier, but what could be that powerful?\n\nOh! Yes, maybe the tree, that chose me to begin with. But what might happen if I do? Do I even want to find out? Hmm, but for now it's time to get some rest...</Story_Shrine5_Apocalypse_Dia2_1>
   <Story_Shrine5_Apocalypse_Dia2_1_Option1>Let's move on.</Story_Shrine5_Apocalypse_Dia2_1_Option1>
+
+  <CAStoryCurrentTemperature>Current temperature:</CAStoryCurrentTemperature>
 </LanguageData>

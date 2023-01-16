@@ -176,4 +176,6 @@
   <Story_Shrine5_Apocalypse_Dia2_1>[{0}陷入了沉思]渎神猎人的伙伴们并不知道，当干掉机械怪物时，我从星球深处感受到了某些东西。那东西还在下面...嗯？等等。我想我可以通过一些放大装置来接触到它，但有什么东西强大到足以充当放大装置呢？\n\n啊哈！我想到了。那棵仙树！正是它选择我当了救世主。但如果我真这么做了，会发生什么呢？我真的真的想知道吗？呃，不过现在嘛...是时候该休息一下了...</Story_Shrine5_Apocalypse_Dia2_1>
   <!-- EN: Let's move on. -->
   <Story_Shrine5_Apocalypse_Dia2_1_Option1>让我们继续行动吧。</Story_Shrine5_Apocalypse_Dia2_1_Option1>
+
+  <CAStoryCurrentTemperature>Current temperature:</CAStoryCurrentTemperature>
 </LanguageData>
