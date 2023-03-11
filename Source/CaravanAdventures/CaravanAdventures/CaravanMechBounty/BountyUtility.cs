@@ -35,6 +35,7 @@ namespace CaravanAdventures.CaravanMechBounty
             }
             foreach (var trait in veteran.story.traits.allTraits.Reverse<Trait>()) veteran.story.traits.allTraits.Remove(trait);
             if (TraitDefOf.Tough != null) veteran.story.traits.GainTrait(new Trait(TraitDefOf.Tough));
+            if (TraitDefOf.Beauty != null && Rand.Chance(0.2f)) veteran.story.traits.GainTrait(new Trait(TraitDefOf.Beauty, 2));
             if (selPersonality != null) veteran.story.traits.GainTrait(new Trait(selPersonality, selPersonality.degreeDatas.OrderByDescending(data => data.degree).FirstOrDefault().degree));
             if (selSkill != null) veteran.story.traits.GainTrait(new Trait(selSkill, selSkill.degreeDatas.OrderByDescending(data => data.degree).FirstOrDefault().degree));
             return veteran;
