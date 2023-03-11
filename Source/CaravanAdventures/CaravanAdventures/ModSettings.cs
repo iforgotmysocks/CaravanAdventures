@@ -148,6 +148,7 @@ namespace CaravanAdventures
         public static bool showLetterRemoval;
         public static bool increaseFireFoamPopperDetectionRange;
         public static bool keepApparelOnHostileMaps;
+        public static bool enableSortingByPawnTitle;
 
         // categories enabled
         public static bool caravanCampEnabled = true;
@@ -284,6 +285,7 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref showLetterRemoval, "showLetterRemoval", false);
             Scribe_Values.Look(ref increaseFireFoamPopperDetectionRange, "increaseFireFoamPopperDetectionRange", false);
             Scribe_Values.Look(ref keepApparelOnHostileMaps, "keepApparelOnHostileMaps", false);
+            Scribe_Values.Look(ref enableSortingByPawnTitle, "enableSortingByPawnTitle", false);
 
             // categories enabled
             Scribe_Values.Look(ref caravanCampEnabled, "caravanCampEnabled", true);
@@ -448,7 +450,7 @@ namespace CaravanAdventures
                 new TaggedString($"\nToggling a mod category requires a game restart to take effect.\n\nSome sub-category settings may also require a restart, but do not get a specific notification."),
                 "Gotcha",
                 () => { },
-                null, 
+                null,
                 null,
                 "Restart reminder"));
             }

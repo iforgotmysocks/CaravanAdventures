@@ -37,8 +37,18 @@ namespace CaravanAdventures
             if (ModSettings.buffSettlementFoodAndSilverAvailability) Helper.RunSafely(PatchIncreaseBaseWealthAndFood);
             if (ModSettings.buffShrineRewards) Helper.RunSafely(PatchAncientShrineDefs_MoreShrinesAndBetterRewards);
             if (ModSettings.increaseFireFoamPopperDetectionRange) Helper.RunSafely(PatchIncreaseFireFoamPopperDetectionRange);
+            if (!ModSettings.enableSortingByPawnTitle) Helper.RunSafely(PatchRemovePawnTitleComparerDef);
 
             CompatibilityPatches.ExecuteCompatibilityPatches();
+        }
+
+        private static void PatchRemovePawnTitleComparerDef()
+        {
+            DLog.Message($"removing comparerdef");
+            var comparerDef = DefDatabase<TransferableSorterDef>.GetNamed("CAPawnTitle");
+            if (comparerDef == null) return;
+            typeof(DefDatabase<TransferableSorterDef>).GetMethod("Remove", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic).Invoke(null, new object[] { comparerDef });
+            DLog.Message($"removed comparerdef");
         }
 
         private static void PatchSacHunterItemDropStats()

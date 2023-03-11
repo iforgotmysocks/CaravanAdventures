@@ -47,6 +47,8 @@ namespace CaravanAdventures.Settings
                 $"Disregards the hit-point filtersetting to drop damaged apparel while pawns are on hostile maps so the player can undraft pawns to have them " +
                 $"eat and tend to themselves without undressing damaged gear. Only helpful when trying to avoid tattered apparel via filter settings.");
 
+            options.CheckboxLabeled($"Enable pawn title sorter in caravan forming menu.", ref ModSettings.enableSortingByPawnTitle, "Enable an additional sorter for the caravan forming dialog allowing to sort pawns by their title.");
+
             options.End();
         }
 

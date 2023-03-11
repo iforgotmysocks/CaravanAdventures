@@ -124,6 +124,7 @@
     <Compile Include="CaravanItemSelection\FilterCombs.cs" />
     <Compile Include="CaravanItemSelection\FilterHelper.cs" />
     <Compile Include="CaravanItemSelection\FilterSet.cs" />
+    <Compile Include="CaravanItemSelection\TransferableComparer_PawnTitle.cs" />
     <Compile Include="CaravanMechBounty\BountyRequest.cs" />
     <Compile Include="CaravanMechBounty\BountyUtility.cs" />
     <Compile Include="CaravanMechBounty\BountyWC.cs" />
@@ -246,7 +247,7 @@
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_BuildVersioningStyle="None.None.None.Increment" BuildVersion_StartDate="2000/1/1" />
+      <UserProperties BuildVersion_StartDate="2000/1/1" BuildVersion_BuildVersioningStyle="None.None.None.Increment" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
