@@ -41,7 +41,7 @@ namespace CaravanAdventures.CaravanStory
 
             if (ticks >= 60000)
             {
-                TempOffset += ModSettings.apocalypseTemperatureChangePerDay;
+                TempOffset -= ModSettings.apocalypseTemperatureChangePerDay;
                 ticks = 0;
             }
             ticks++;

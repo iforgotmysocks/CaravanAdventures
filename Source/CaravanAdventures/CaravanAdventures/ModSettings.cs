@@ -105,7 +105,7 @@ namespace CaravanAdventures
         public static bool storyEnabled = true;
         public static bool limitLargeMapSizesToTestedSize = true;
         public static bool apocalypseEnabled = true;
-        public static float apocalypseTemperatureChangePerDay = -0.084f;
+        public static float apocalypseTemperatureChangePerDay = 0.084f;
         public static bool issueFurtherShrineLocationsAfterStoryEnd = true;
         public static bool sacHuntersHostileTowardsEmpire = false;
         public static bool sacHuntersHostileTowardsNaturalEnemies = true;
@@ -242,7 +242,7 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref storyEnabled, "storyEnabled", true);
             Scribe_Values.Look(ref limitLargeMapSizesToTestedSize, "limitLargeMapSizesToTestedSize", true);
             Scribe_Values.Look(ref apocalypseEnabled, "apocalypseEnabled", true);
-            Scribe_Values.Look(ref apocalypseTemperatureChangePerDay, "apocalypseTemperatureChangePerDay", -0.084f);
+            Scribe_Values.Look(ref apocalypseTemperatureChangePerDay, "apocalypseTemperatureChangePerDay", 0.084f);
             Scribe_Values.Look(ref issueFurtherShrineLocationsAfterStoryEnd, "issueFurtherShrineLocationsAfterStoryEnd", true);
             Scribe_Values.Look(ref sacHuntersHostileTowardsEmpire, "sacHuntersHostileTowardsEmpire", false);
             Scribe_Values.Look(ref sacHuntersHostileTowardsNaturalEnemies, "sacHuntersHostileTowardsNaturalEnemies", true);
