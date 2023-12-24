@@ -18,7 +18,7 @@ namespace CaravanAdventures.Patches.Compatibility
 
         private static Type compShipHeatSourceType;
         private static FieldInfo parentPropInfo;
-        private static MethodInfo addHeatMethodInfo;
+        //private static MethodInfo addHeatMethodInfo;
 
         private static Pawn capableAuraPawn;
 
@@ -40,18 +40,20 @@ namespace CaravanAdventures.Patches.Compatibility
             }
             if (ModSettings.sos2AuraHeatManagementEnabled)
             {
-                var addHeatOrg = AccessTools.Method(assembly.GetType("RimWorld.CompShipHeatSource"), "AddHeatToNetwork");
+                var addHeatOrg = AccessTools.Method(assembly.GetType("RimWorld.CompShipHeat"), "AddHeatToNetwork");
+                Log.Warning($"addHeatOrg: {addHeatOrg}");
                 var addHeatPre = new HarmonyMethod(typeof(SoS2Patch), nameof(SoS2Patch.CompShipHeatSource_AddHeatToNetwork_Prefix));
                 HarmonyPatcher.harmony.Patch(addHeatOrg, addHeatPre, null);
                 LoadReflectionNecessities();
             }
 
-            var orgSwitchNew = AccessTools.Method(assembly.GetType("SaveOurShip2.WorldSwitchUtility"), "SwitchToNewWorld");
-            var postfixSwitchNew = new HarmonyMethod(typeof(SoS2Patch), nameof(SoS2Patch.WorldSwitchUtility_SwitchToNewWorld_Postfix));
-            HarmonyPatcher.harmony.Patch(orgSwitchNew, null, postfixSwitchNew);
+            // apparently going back and forth between worlds doesn't exist anymore, so we'll disable those patches for now
+            //var orgSwitchNew = AccessTools.Method(assembly.GetType("SaveOurShip2.WorldSwitchUtility"), "SwitchToNewWorld");
+            //var postfixSwitchNew = new HarmonyMethod(typeof(SoS2Patch), nameof(SoS2Patch.WorldSwitchUtility_SwitchToNewWorld_Postfix));
+            //HarmonyPatcher.harmony.Patch(orgSwitchNew, null, postfixSwitchNew);
 
-            var orgSwitchLast = AccessTools.Method(assembly.GetType("SaveOurShip2.WorldSwitchUtility"), "ReturnToPreviousWorld");
-            HarmonyPatcher.harmony.Patch(orgSwitchLast, null, postfixSwitchNew);
+            //var orgSwitchLast = AccessTools.Method(assembly.GetType("SaveOurShip2.WorldSwitchUtility"), "ReturnToPreviousWorld");
+            //HarmonyPatcher.harmony.Patch(orgSwitchLast, null, postfixSwitchNew);
         }
 
         internal static void Reset()
@@ -63,7 +65,7 @@ namespace CaravanAdventures.Patches.Compatibility
         {
             compShipHeatSourceType = assembly.GetType("RimWorld.CompShipHeatSource");
             parentPropInfo = compShipHeatSourceType.BaseType.BaseType.GetField("parent", BindingFlags.Instance | BindingFlags.Public);
-            addHeatMethodInfo = compShipHeatSourceType.GetMethod("AddHeatToNetwork", BindingFlags.Public | BindingFlags.Instance);
+            //addHeatMethodInfo = compShipHeatSourceType.GetMethod("AddHeatToNetwork", BindingFlags.Public | BindingFlags.Instance);
         }
 
         public static void ShipInteriorMod2_hasSpaceSuit_Postfix(ref bool __result, Pawn pawn)
@@ -87,9 +89,9 @@ namespace CaravanAdventures.Patches.Compatibility
             CaravanStory.StoryUtility.ResetCurrentStoryStageSubProgress();
         }
 
-        public static void CompShipHeatSource_AddHeatToNetwork_Prefix(object __instance, ref float amount, bool remove = false)
+        public static void CompShipHeatSource_AddHeatToNetwork_Prefix(object __instance, ref float amount)
         {
-            if (remove || amount < 6) return;
+            if (amount < 15) return;
 
             var parentValue = (ThingWithComps)parentPropInfo.GetValue(__instance);
             var map = parentValue?.Map;
