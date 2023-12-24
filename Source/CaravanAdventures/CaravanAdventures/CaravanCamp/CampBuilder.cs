@@ -563,7 +563,17 @@ namespace CaravanAdventures.CaravanCamp
             }
         }
 
-        protected virtual void GiveHappyThoughts() => caravan.PawnsListForReading.Where(pawn => pawn.IsColonist).ToList().ForEach(pawn => pawn.needs.mood.thoughts.memories.TryGainMemory(ThoughtDef.Named("CACamping")));
+        protected virtual void GiveHappyThoughts()
+        {
+            try
+            {
+                caravan.PawnsListForReading.Where(pawn => pawn?.IsColonist == true).ToList().ForEach(pawn => pawn?.needs?.mood?.thoughts?.memories?.TryGainMemory(ThoughtDef.Named("CACamping")));
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Failed assigning camping mood bonus. Error: {e.ToString()}");
+            }
+        }
 
         protected virtual void MoveAnimalsToAnimalArea()
         {
