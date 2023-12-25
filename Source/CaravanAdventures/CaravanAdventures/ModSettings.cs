@@ -1,11 +1,18 @@
 ﻿using CaravanAdventures.CaravanAbilities;
 using CaravanAdventures.CaravanStory;
 using CaravanAdventures.Settings;
+using RimWorld;
 using UnityEngine;
 using Verse;
 
 namespace CaravanAdventures
 {
+    public enum StoryMode
+    {
+        Normal,
+        Performance,
+    }
+
     class ModSettings : Verse.ModSettings
     {
         // not saved!
@@ -114,6 +121,7 @@ namespace CaravanAdventures
         public static bool whisperDisabledManually = false;
         public static bool noFreeStuff = false;
         public static int delayStoryDays = 0;
+        public static StoryMode storyMode = StoryMode.Normal;
 
         // shrines
         public static float shrineMechDifficultyMultiplier = 1.2f;
@@ -256,6 +264,7 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref whisperDisabledManually, "whisperDisabledManually", false);
             Scribe_Values.Look(ref noFreeStuff, "noFreeStuff", false);
             Scribe_Values.Look(ref delayStoryDays, "delayStoryDays", 0);
+            Scribe_Values.Look(ref storyMode, "storyMode", StoryMode.Normal);
 
             // shrines
             Scribe_Values.Look(ref shrineMechDifficultyMultiplier, "shrineMechDifficultyMultiplier", 1.2f);
@@ -475,6 +484,7 @@ namespace CaravanAdventures
             checkRestart = setting;
             return ref setting;
         }
+
 
     }
 }

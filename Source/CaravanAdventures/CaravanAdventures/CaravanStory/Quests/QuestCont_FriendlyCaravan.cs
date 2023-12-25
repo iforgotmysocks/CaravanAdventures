@@ -120,7 +120,7 @@ namespace CaravanAdventures.CaravanStory.Quests
             var incidentParms = new IncidentParms
             {
                 target = selectedMap,
-                points = 2000f,
+                points = StoryUtility.GetIncPoints(1500f, 500f),
                 faction = StoryUtility.FactionOfSacrilegHunters,
                 raidArrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn
             };

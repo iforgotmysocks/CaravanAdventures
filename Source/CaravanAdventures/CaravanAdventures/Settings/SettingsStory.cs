@@ -1,6 +1,8 @@
 ﻿using CaravanAdventures.CaravanStory;
 using RimWorld;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Verse;
 
@@ -29,20 +31,42 @@ namespace CaravanAdventures.Settings
         public override void DoWindowContents(Rect wrect)
         {
             var options = new Listing_Standard();
-            options.Begin(wrect);
+            //options.Begin(wrect);
 
             //var viewRect = new Rect(0f, 0f, windowRect.width - 150, 1200f);
             //options.BeginScrollView(wrect, ref scrollPos, ref viewRect);
+
+            var viewRect = new Rect(0f, 0f, wrect.width - 26f, 830);
+            var smallerOutRect = new Rect(wrect.x, wrect.y, wrect.width, wrect.height - 50);
+            Widgets.BeginScrollView(smallerOutRect, ref this.scrollPos, viewRect);
+            options.Begin(viewRect);
 
             Text.Font = GameFont.Medium;
             options.Label("Story settings:".Colorize(Color.green), 40f);
 
             Text.Font = GameFont.Small;
+            options.Gap();
+
+            var rect = options.GetRect(Text.LineHeight + 6);
+            rect.width = options.ColumnWidth * 0.7f;
+
+            Widgets.Label(rect, "Select your preferred storymode: ");
+
+            rect.x += options.ColumnWidth / 2;
+            rect.width = options.ColumnWidth / 4;
+
+            Widgets.Dropdown(rect, ModSettings.storyMode, null, GenerateStoryModeDropDownContent, Enum.GetName(ModSettings.storyMode.GetType(), ModSettings.storyMode));
+
+            options.Gap();
+            options.Label("Normal: provides the default story experience, hard but fun");
+            options.Label("Performance: Reduces the amount of pawns and mechs spawned by a siginificant amount, and may be preferable when utilizing aging hardware or huge mod lists.");
+            options.Gap();
+            options.Gap();
 
             options.CheckboxLabeled("Disable the quest faction starting gift and lootability", ref ModSettings.noFreeStuff, "Disable the quest faction starting help and apply max biocode chance and DeathAcidifiers");
             options.CheckboxLabeled("Mute the anima tree whisper sound", ref ModSettings.whisperDisabledManually, "Takes a few seconds to take effect when the game is unpaused");
             
-            var rect = options.GetRect(Text.LineHeight);
+            rect = options.GetRect(Text.LineHeight);
             rect.width = options.ColumnWidth * 0.7f;
             Widgets.Label(rect, "Delay the story by additional days, default is 0:");
             var delayInDays = Widgets.TextField(ModSettings.BRect(options.ColumnWidth - 40, rect.y, 40, Text.LineHeight), ModSettings.delayStoryDays.ToString());
@@ -92,10 +116,15 @@ namespace CaravanAdventures.Settings
             options.Gap();
 
 
-            //options.EndScrollView(ref viewRect);
             options.End();
+            Widgets.EndScrollView();
 
         }
 
+        private IEnumerable<Widgets.DropdownMenuElement<StoryMode>> GenerateStoryModeDropDownContent(StoryMode target)
+        {
+            foreach (var difficulty in Enum.GetValues(typeof(StoryMode)).Cast<StoryMode>())
+                yield return new Widgets.DropdownMenuElement<StoryMode>() { option = new FloatMenuOption(difficulty.ToString(), () => ModSettings.storyMode = difficulty), payload = difficulty };
+        }
     }
 }

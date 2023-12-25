@@ -36,7 +36,7 @@ namespace CaravanAdventures.CaravanStory
                     if (CompCache.StoryWC.GetCurrentShrineCounter() != CompCache.StoryWC.GetShrineMaxiumum) mp.boss = AddBoss(map, caravan, mainRoom);
                     else mp.lastJudgmentEntrance = InitCellarEntrace(map);
                     CompCache.StoryWC.wasShrineAmbushNoLuck = (mp.boss == null && mp.lastJudgmentEntrance == null);
-                    DLog.Message($"Was shrine ambush: {CompCache.StoryWC.wasShrineAmbushNoLuck}");
+                    DLog.Message($"Was shrine ambush?: {CompCache.StoryWC.wasShrineAmbushNoLuck}");
                 }
                 else
                 {
@@ -151,7 +151,7 @@ namespace CaravanAdventures.CaravanStory
         private void AddSpacers(Room room, Map map, Caravan caravan)
         {
             var casketCount = 0;
-            if (room.CellCount > minMainRoomSize) casketCount = 6;
+            if (room.CellCount > minMainRoomSize) casketCount = (int)StoryUtility.GetIncPoints(6, 2);
             //else if (room.CellCount > 240) casketCount = 4;
             //else if (room.CellCount > 120) casketCount = 2;
             else return;
@@ -270,6 +270,7 @@ namespace CaravanAdventures.CaravanStory
 
         private void AddMechanoidsToRoom(Room room, Map map, Caravan caravan, Pawn boss = null, bool removedHives = false)
         {
+            if (ModSettings.storyMode == StoryMode.Performance && Rand.Chance(0.5f)) return;
             var incidentParms = StorytellerUtility.DefaultParmsNow(IncidentCategoryDefOf.ThreatBig, caravan);
             incidentParms.faction = Faction.OfMechanoids;
 
@@ -337,6 +338,8 @@ namespace CaravanAdventures.CaravanStory
             selected = Math.Min(selected, room.CellCount >= minMainRoomSize 
                     ? ModSettings.maxShrineCombatPoints * 50f 
                     : ModSettings.maxShrineCombatPoints);
+
+            selected = Math.Max(80, StoryUtility.GetIncPoints(selected));
 
             var mechPawnGroupMakerParams = new PawnGroupMakerParms
             {

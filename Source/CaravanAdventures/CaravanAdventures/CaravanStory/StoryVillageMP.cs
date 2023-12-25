@@ -164,7 +164,7 @@ namespace CaravanAdventures.CaravanStory
             {
                 target = Map,
                 //incidentParms.points = StorytellerUtility.DefaultThreatPointsNow(incidentParms.target) * 2.5f;
-                points = 32000,
+                points = StoryUtility.GetIncPoints(32000f),
                 faction = Faction.OfMechanoids,
                 raidArrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn,
                 raidStrategy = RaidStrategyDefOf.ImmediateAttack
@@ -178,7 +178,7 @@ namespace CaravanAdventures.CaravanStory
             CompCache.StoryWC.SetSF("IntroVillage_MechsArrived");
 
             GetComponent<TimedDetectionPatrols>().Init(Faction.OfMechanoids);
-            GetComponent<TimedDetectionPatrols>().StartDetectionCountdown(30000, -1);
+            GetComponent<TimedDetectionPatrols>().StartDetectionCountdown(30000, -1, (int)StoryUtility.GetIncPoints(8000, 5000));
         }
 
         public override MapGeneratorDef MapGeneratorDef => CaravanStorySiteDefOf.CAStoryVillageMG;
@@ -202,7 +202,7 @@ namespace CaravanAdventures.CaravanStory
                 }
                 if (ticksTillReinforcements == 0)
                 {
-                    StoryUtility.GetAssistanceFromAlliedFaction(StoryUtility.FactionOfSacrilegHunters, Map, 6500, 7000, centerPoint);
+                    StoryUtility.GetAssistanceFromAlliedFaction(StoryUtility.FactionOfSacrilegHunters, Map, StoryUtility.GetIncPoints(6500, custDevider: 32), StoryUtility.GetIncPoints(7000, custDevider: 32), centerPoint);
                     CompCache.StoryWC.SetSF("IntroVillage_ReinforcementsArrived");
                     ReinforcementConvo();
                     CheckShouldCiviliansFlee();

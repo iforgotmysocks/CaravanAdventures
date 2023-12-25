@@ -871,5 +871,15 @@ namespace CaravanAdventures.CaravanStory
             }
             return false;
         }
+
+        internal static float GetIncPoints(float normal, float? performance = null, int? custDevider = null)
+        {
+            if (ModSettings.storyMode == StoryMode.Performance)
+            {
+                if (performance != null) return (float)performance;
+                else return normal / (custDevider ?? 6);
+            } 
+            return normal;
+        }
     }
 }

@@ -179,10 +179,10 @@
       <li>
         <kindDef>Settlement</kindDef>
         <options>
-          <CASacrilegHunters_Villager>10</CASacrilegHunters_Villager>
+          <CASacrilegHunters_Villager>12</CASacrilegHunters_Villager>
           <CASacrilegHunters_Town_Councilman>1</CASacrilegHunters_Town_Councilman>
-          <CASacrilegHunters_HunterVillage>20</CASacrilegHunters_HunterVillage>
-          <CASacrilegHunters_ExperiencedHunterVillage>4</CASacrilegHunters_ExperiencedHunterVillage>
+          <CASacrilegHunters_HunterVillage>10</CASacrilegHunters_HunterVillage>
+          <CASacrilegHunters_ExperiencedHunterVillage>2</CASacrilegHunters_ExperiencedHunterVillage>
         </options>
       </li>
       <li MayRequire="Ludeon.RimWorld.Ideology">

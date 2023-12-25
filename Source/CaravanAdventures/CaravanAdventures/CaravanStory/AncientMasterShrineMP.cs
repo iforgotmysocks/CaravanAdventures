@@ -61,12 +61,14 @@ namespace CaravanAdventures.CaravanStory
             //Log.Message($"Not matching count: {notMatching.Count()}");
             //Log.Message($"Map has boss: {boss != null}");
 
+            var raidPoints = (int)(8000 * (1 + CompCache.StoryWC.GetCurrentShrineCounter() / 10));
             if (boss != null || lastJudgmentEntrance != null)
             {
                 wonBattle = true;
 
+
                 GetComponent<TimedDetectionPatrols>().Init();
-                GetComponent<TimedDetectionPatrols>().StartDetectionCountdown(60000, -1, (int)(8000 * (1 + CompCache.StoryWC.GetCurrentShrineCounter() / 10)));
+                GetComponent<TimedDetectionPatrols>().StartDetectionCountdown(60000, -1, (int)StoryUtility.GetIncPoints(raidPoints));
 
                 if (boss != null) bossWasSpawned = true;
                 if (lastJudgmentEntrance != null) lastJudgementEntraceWasSpawned = true;
@@ -74,7 +76,7 @@ namespace CaravanAdventures.CaravanStory
             else
             {
                 GetComponent<TimedDetectionPatrols>().Init();
-                GetComponent<TimedDetectionPatrols>().StartDetectionCountdown(180000, -1, (int)(8000 * (1 + CompCache.StoryWC.GetCurrentShrineCounter() / 10)));
+                GetComponent<TimedDetectionPatrols>().StartDetectionCountdown(180000, -1, (int)StoryUtility.GetIncPoints(raidPoints));
                 GetComponent<TimedDetectionPatrols>().ToggleIncreaseStrenthByCounter = true;
             }
             CompCache.StoryWC.SetShrineSF("Created");
@@ -303,7 +305,7 @@ namespace CaravanAdventures.CaravanStory
             if (CompCache.StoryWC.GetCurrentShrineCounter() == 1)
             {
                 var diaNode = new DiaNode("Story_Shrine1_SacrilegHunters_Dia1_1".Translate(storyChar.NameShortColored));
-                diaNode.options.Add(new DiaOption("Story_Shrine1_SacrilegHunters_Dia1_1_Option1".Translate()) { resolveTree = true, action = () => StoryUtility.GetAssistanceFromAlliedFaction(StoryUtility.FactionOfSacrilegHunters, Map, 3000 * ModSettings.hunterAssistanceMult, 4000 * ModSettings.hunterAssistanceMult) });
+                diaNode.options.Add(new DiaOption("Story_Shrine1_SacrilegHunters_Dia1_1_Option1".Translate()) { resolveTree = true, action = CallAssistance });
                 diaNode.options.Add(new DiaOption("Story_Shrine1_SacrilegHunters_Dia1_1_Option2".Translate()) { resolveTree = true });
 
                 TaggedString taggedString = "Story_Shrine1_SacrilegHunters_DiaTitle".Translate(storyChar.NameShortColored);
@@ -313,7 +315,7 @@ namespace CaravanAdventures.CaravanStory
             else if (CompCache.StoryWC.GetCurrentShrineCounter() == CompCache.StoryWC.GetShrineMaxiumum)
             {
                 var diaNode = new DiaNode("Story_Shrine5_SacrilegHunters_Dia1_1".Translate());
-                diaNode.options.Add(new DiaOption("Story_Shrine5_SacrilegHunters_Dia1_1_Option1".Translate()) { resolveTree = true, action = () => StoryUtility.GetAssistanceFromAlliedFaction(StoryUtility.FactionOfSacrilegHunters, Map, 3000 * ModSettings.hunterAssistanceMult, 4000 * ModSettings.hunterAssistanceMult) });
+                diaNode.options.Add(new DiaOption("Story_Shrine5_SacrilegHunters_Dia1_1_Option1".Translate()) { resolveTree = true, action = CallAssistance });
                 diaNode.options.Add(new DiaOption("Story_Shrine5_SacrilegHunters_Dia1_1_Option2".Translate()) { resolveTree = true });
 
                 TaggedString taggedString = "Story_Shrine1_SacrilegHunters_DiaTitle".Translate(storyChar.NameShortColored);
@@ -323,7 +325,7 @@ namespace CaravanAdventures.CaravanStory
             else
             {
                 var diaNode = new DiaNode("Story_Shrine2_SacrilegHunters_Dia1_1".Translate());
-                diaNode.options.Add(new DiaOption("Story_Shrine2_SacrilegHunters_Dia1_1_Option1".Translate()) { resolveTree = true, action = () => StoryUtility.GetAssistanceFromAlliedFaction(StoryUtility.FactionOfSacrilegHunters, Map, 3000 * ModSettings.hunterAssistanceMult, 4000 * ModSettings.hunterAssistanceMult) });
+                diaNode.options.Add(new DiaOption("Story_Shrine2_SacrilegHunters_Dia1_1_Option1".Translate()) { resolveTree = true, action = CallAssistance });
                 diaNode.options.Add(new DiaOption("Story_Shrine2_SacrilegHunters_Dia1_1_Option2".Translate()) { resolveTree = true });
 
                 TaggedString taggedString = "Story_Shrine1_SacrilegHunters_DiaTitle".Translate(storyChar.NameShortColored);
@@ -331,6 +333,8 @@ namespace CaravanAdventures.CaravanStory
                 Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
             }
         }
+
+        private void CallAssistance() => StoryUtility.GetAssistanceFromAlliedFaction(StoryUtility.FactionOfSacrilegHunters, Map, StoryUtility.GetIncPoints(3000) * ModSettings.hunterAssistanceMult, StoryUtility.GetIncPoints(4000) * ModSettings.hunterAssistanceMult);
 
         private void CheckBossDefeated()
         {
