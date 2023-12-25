@@ -41,7 +41,6 @@ namespace CaravanAdventures.Patches.Compatibility
             if (ModSettings.sos2AuraHeatManagementEnabled)
             {
                 var addHeatOrg = AccessTools.Method(assembly.GetType("RimWorld.CompShipHeat"), "AddHeatToNetwork");
-                Log.Warning($"addHeatOrg: {addHeatOrg}");
                 var addHeatPre = new HarmonyMethod(typeof(SoS2Patch), nameof(SoS2Patch.CompShipHeatSource_AddHeatToNetwork_Prefix));
                 HarmonyPatcher.harmony.Patch(addHeatOrg, addHeatPre, null);
                 LoadReflectionNecessities();
@@ -82,10 +81,6 @@ namespace CaravanAdventures.Patches.Compatibility
 
         public static void WorldSwitchUtility_SwitchToNewWorld_Postfix()
         {
-            // todo reset some saved things
-            // - bounty wc selected faction
-            // - saved story pawn?
-
             CaravanStory.StoryUtility.ResetCurrentStoryStageSubProgress();
         }
 
