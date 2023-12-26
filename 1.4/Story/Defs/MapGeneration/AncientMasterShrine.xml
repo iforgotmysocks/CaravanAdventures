@@ -7,7 +7,7 @@
 			<li>RocksFromGrid</li>
 			<li>CAScatterMoreShrines</li>
 			<li>CAScatterMasterShrines</li>
-			<li>CACaveHives</li>
+			<!--<li>CACaveHives</li>-->
 			<li MayRequire="Ludeon.RimWorld.Royalty">AnimaTrees</li>
 		</genSteps>
 	</MapGeneratorDef>

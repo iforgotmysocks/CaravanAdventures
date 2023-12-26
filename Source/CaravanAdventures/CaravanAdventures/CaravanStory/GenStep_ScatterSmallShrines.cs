@@ -6,17 +6,17 @@ using Verse;
 namespace CaravanAdventures.CaravanStory
 {
     class GenStep_ScatterSmallShrines : GenStep_ScatterShrines
-	{
-		public override int SeedPart
-		{
-			get
-			{
-				return 1841232483;
-			}
-		}
+    {
+        public override int SeedPart
+        {
+            get
+            {
+                return 1841232483;
+            }
+        }
 
-		protected override bool CanScatterAt(IntVec3 c, Map map)
-		{
+        protected override bool CanScatterAt(IntVec3 c, Map map)
+        {
             //if (!base.CanScatterAt(c, map))
             //{
             //	return false;
@@ -26,8 +26,8 @@ namespace CaravanAdventures.CaravanStory
             {
                 return false;
             }
-			return true;
-		}
+            return true;
+        }
 
         protected override void ScatterAt(IntVec3 loc, Map map, GenStepParams parms, int stackCount = 1)
         {
@@ -59,6 +59,8 @@ namespace CaravanAdventures.CaravanStory
             resolveParams.disableSinglePawn = new bool?(true);
             resolveParams.disableHives = new bool?(true);
             resolveParams.makeWarningLetter = new bool?(false);
+            if (ModSettings.storyMode == StoryMode.Performance) resolveParams.podContentsType = PodContentsType.Empty;
+            else if (Rand.Chance(0.5f)) resolveParams.podContentsType = PodContentsType.Empty;
             BaseGen.globalSettings.map = map;
             BaseGen.symbolStack.Push("ancientTemple", resolveParams, null);
             BaseGen.Generate();

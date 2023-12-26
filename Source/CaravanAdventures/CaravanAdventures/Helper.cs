@@ -108,17 +108,23 @@ namespace CaravanAdventures
 
         internal static void PrintWorldPawns()
         {
-            if (Find.World == null) return;
+            if (Find.World == null || !ModSettings.debugMessages) return;
             DLog.Message($"wp total: {Find.World.worldPawns.AllPawnsAliveOrDead.Count} " +
                 $"wp alive: {Find.World.worldPawns.AllPawnsAlive.Count} " +
                 $"dead: {Find.World.worldPawns.AllPawnsDead.Count}");
             DLog.Message($"wp player: {Find.World.worldPawns.AllPawnsAliveOrDead.Where(x => x.Faction == Faction.OfPlayer).Count()} " +
                 $"wp alive: {Find.World.worldPawns.AllPawnsAlive.Where(x => x.Faction == Faction.OfPlayer).Count()} " +
                 $"dead: {Find.World.worldPawns.AllPawnsDead.Where(x => x.Faction == Faction.OfPlayer).Count()}");
+            DLog.Message($"wp mechs: {Find.World.worldPawns.AllPawnsAliveOrDead.Where(x => x.Faction == Faction.OfMechanoids).Count()} " +
+                $"wp alive: {Find.World.worldPawns.AllPawnsAlive.Where(x => x.Faction == Faction.OfMechanoids).Count()} " +
+                $"dead: {Find.World.worldPawns.AllPawnsDead.Where(x => x.Faction == Faction.OfMechanoids).Count()}");
             if (ModSettings.storyEnabled) DLog.Message($"wp sachunters: {Find.World.worldPawns.AllPawnsAliveOrDead.Where(x => x.Faction == StoryUtility.FactionOfSacrilegHunters).Count()} " +
                 $"wp alive: {Find.World.worldPawns.AllPawnsAlive.Where(x => x.Faction == StoryUtility.FactionOfSacrilegHunters).Count()} " +
                 $"dead: {Find.World.worldPawns.AllPawnsDead.Where(x => x.Faction == StoryUtility.FactionOfSacrilegHunters).Count()}");
+        }
 
+        public static void PrintPawnTemperature()
+        {
             foreach (var pawn in PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_FreeColonists)
             {
                 DLog.Message($"Name: {pawn.NameShortColored} Temp: {pawn.AmbientTemperature} Spawned: {pawn.Spawned}");

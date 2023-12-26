@@ -289,6 +289,10 @@ namespace CaravanAdventures.CaravanStory
             DLog.Message($"Applying debug actions once");
             // todo added cleanup of faction settlement in 1.2.4 to be able to remove CAFriendlyMechanoid faction in a couple patches
             Helper.RunSafely(() => StoryUtility.RemoveFaction(), false, "", true);
+
+
+            // todo remove
+            Helper.PrintWorldPawns();
             
             ranDebugActionsOnceAtStartUp = true;
         }

@@ -14,7 +14,7 @@ namespace CaravanAdventures.CaravanStory
     {
         // todo label
         private Room mainRoom = null;
-        private int minMainRoomSize = 1500;
+        private readonly int minMainRoomSize = 1500;
         private AncientMasterShrineMP mp = null;
 
         public void Notify_CaravanArrived(Caravan caravan)
@@ -270,7 +270,7 @@ namespace CaravanAdventures.CaravanStory
 
         private void AddMechanoidsToRoom(Room room, Map map, Caravan caravan, Pawn boss = null, bool removedHives = false)
         {
-            if (ModSettings.storyMode == StoryMode.Performance && Rand.Chance(0.5f)) return;
+            if (ModSettings.storyMode == StoryMode.Performance && Rand.Chance(0.5f) && room != mainRoom && room.CellCount < minMainRoomSize) return;
             var incidentParms = StorytellerUtility.DefaultParmsNow(IncidentCategoryDefOf.ThreatBig, caravan);
             incidentParms.faction = Faction.OfMechanoids;
 
