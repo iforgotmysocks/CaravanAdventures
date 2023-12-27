@@ -158,7 +158,6 @@ namespace CaravanAdventures.Patches
                 else if (!ModSettings.autoSelectItems && !isPawn) continue;
 
                 FilterHelper.SetAmount(trans, selected.Select(x => x.stackCount).Sum());
-                DLog.Message($"setting anything changed true");
                 anythingChanged = true;
             }
         }
