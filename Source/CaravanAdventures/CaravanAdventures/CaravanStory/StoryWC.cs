@@ -7,29 +7,6 @@ using System.Linq;
 using Verse;
 using Verse.Sound;
 
-// high prio:
-
-// - check ClearFriendlyMechFaction and test / finish removal
-
-// - story: 
-// --> when removing shrines, and all pawns are dead, don't continue the conversation... xD
-
-// -- story continuation: 
-// -- (optional branch, possible merge) add comm device gizmo to the gifted hediff, that is visible, when the player isn't hostile towards hunters -> opens dialog with hunters
-
-// - spawn tree for tree wisper quest if it doesn't exist yet !!
-
-// med prio:
-// - add check to master shrine location selection, that keeps it away from a player settlement
-// --> show tips about how to handle a shrine when first entering (and create a "show tips" link in the quest window, 
-//          that opens a window showing tips how to handle shrines: shrines stay, 
-//          shrines can be fled and come back when better equipped, allies can be used...)
-// - camp: doesn't uncover open zones when rock is removed
-
-// low prio:
-// - collect player responses and use them to determine the support strength for troups at shrines
-// - balance village hunter strenght depending on player character wealth
-// - export shrine stuff to seperate questCont
 
 namespace CaravanAdventures.CaravanStory
 {
@@ -293,7 +270,7 @@ namespace CaravanAdventures.CaravanStory
 
             // todo remove
             Helper.PrintWorldPawns();
-            
+
             ranDebugActionsOnceAtStartUp = true;
         }
 

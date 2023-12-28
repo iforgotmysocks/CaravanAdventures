@@ -143,7 +143,7 @@
       <li>
         <kindDef>Combat</kindDef>
         <options>
-          <!--<CASacrilegHunters_Town_Councilman>1</CASacrilegHunters_Town_Councilman>-->
+          <CASacrilegHunters_Town_Councilman>1</CASacrilegHunters_Town_Councilman>
           <CASacrilegHunters_Hunter>10</CASacrilegHunters_Hunter>
           <CASacrilegHunters_ExperiencedHunter>2</CASacrilegHunters_ExperiencedHunter>
         </options>

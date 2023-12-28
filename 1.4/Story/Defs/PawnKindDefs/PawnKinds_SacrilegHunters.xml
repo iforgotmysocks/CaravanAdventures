@@ -29,12 +29,12 @@
       <li>
         <bodyPartGroup>Torso</bodyPartGroup>
         <apparelLayer>OnSkin</apparelLayer>
-        <stuff>Synthread</stuff>
+        <stuff>Leather_GuineaPig</stuff>
       </li>
       <li>
         <bodyPartGroup>Legs</bodyPartGroup>
         <apparelLayer>OnSkin</apparelLayer>
-        <stuff>Synthread</stuff>
+        <stuff>Leather_GuineaPig</stuff>
       </li>
     </specificApparelRequirements>
     <weaponMoney>1500~2000</weaponMoney>
@@ -113,6 +113,8 @@
 		<defName>CASacrilegHunters_ExperiencedHunterVillage</defName>
     <apparelRequired>
       <li>Apparel_PowerArmor</li>
+      <li>Apparel_CollarShirt</li>
+      <li>Apparel_Pants</li>
     </apparelRequired>
 		<apparelAllowHeadgearChance>0</apparelAllowHeadgearChance>
 	</PawnKindDef>
@@ -122,6 +124,8 @@
     <apparelRequired>
       <li>Apparel_PowerArmorHelmet</li>
       <li>Apparel_PowerArmor</li>
+      <li>Apparel_CollarShirt</li>
+      <li>Apparel_Pants</li>
     </apparelRequired>
 		<apparelAllowHeadgearChance>100</apparelAllowHeadgearChance>
 	</PawnKindDef>
@@ -130,6 +134,8 @@
     <defName>CASacrilegHunters_HunterVillage</defName>
     <apparelRequired>
       <li>Apparel_PowerArmor</li>
+      <li>Apparel_CollarShirt</li>
+      <li>Apparel_Pants</li>
     </apparelRequired>
     <apparelAllowHeadgearChance>0</apparelAllowHeadgearChance>
   </PawnKindDef>
@@ -139,6 +145,8 @@
     <apparelRequired>
       <li>Apparel_PowerArmorHelmet</li>
       <li>Apparel_PowerArmor</li>
+      <li>Apparel_CollarShirt</li>
+      <li>Apparel_Pants</li>
     </apparelRequired>
     <apparelAllowHeadgearChance>100</apparelAllowHeadgearChance>
   </PawnKindDef>
@@ -152,12 +160,12 @@
 		<minGenerationAge>30</minGenerationAge>
 		<isFighter>false</isFighter>
 		<gearHealthRange>1~1</gearHealthRange>
-		<itemQuality>Good</itemQuality>
+		<itemQuality>Excellent</itemQuality>
 		<weaponMoney>200~200</weaponMoney>
 		<weaponTags>
 			<li>Gun</li>
 		</weaponTags>
-		<apparelMoney>700~1200</apparelMoney>
+		<apparelMoney>3000~4000</apparelMoney>
 		<apparelTags>
        <li>IndustrialBasic</li>
       <li>IndustrialAdvanced</li>
@@ -165,8 +173,33 @@
 			<li>BeltDefensePop</li>
 		</apparelTags>
 		<apparelRequired>
-			<li>Apparel_BowlerHat</li>
+			<li>Apparel_Tuque</li>
+      <li>Apparel_Parka</li>
+      <li>Apparel_CollarShirt</li>
+      <li>Apparel_Pants</li>
 		</apparelRequired>
+    <specificApparelRequirements Inherit="False">
+      <li>
+        <bodyPartGroup>UpperHead</bodyPartGroup>
+        <apparelLayer>Shell</apparelLayer>
+        <stuff>Leather_GuineaPig</stuff>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>OnSkin</apparelLayer>
+        <stuff>Leather_GuineaPig</stuff>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>Shell</apparelLayer>
+        <stuff>Leather_GuineaPig</stuff>
+      </li>
+      <li>
+        <bodyPartGroup>Legs</bodyPartGroup>
+        <apparelLayer>OnSkin</apparelLayer>
+        <stuff>Leather_GuineaPig</stuff>
+      </li>
+    </specificApparelRequirements>
 		<techHediffsChance>0.15</techHediffsChance>
 		<techHediffsMoney>600~1500</techHediffsMoney>
 		<techHediffsTags>
