@@ -53,7 +53,7 @@ namespace CaravanAdventures.CaravanStory.MechChips
         protected virtual void LaserAttack()
         {
             var cells = GenRadial.RadialCellsAround(Pawn.Position, 17, false).Where(cell => cell.InBounds(Pawn.Map));
-            var pawns = cells.SelectMany(cell => cell.GetThingList(Pawn.Map).OfType<Pawn>().Where(pawn => !pawn.RaceProps.IsMechanoid)).ToList();
+            var pawns = cells.SelectMany(cell => cell.GetThingList(Pawn.Map).OfType<Pawn>().Where(pawn => Helper.ExpRM ? pawn.Faction != Helper.ExpRMNewFaction : !pawn.RaceProps.IsMechanoid)).ToList();
 
             foreach (var pawn in pawns) lasers.Add(new RapidLaser(pawn, Pawn, 10, 15, 7, 4, 0, 1));
         }

@@ -27,9 +27,11 @@ namespace CaravanAdventures.CaravanStory.Quests
         {
             var rewardDef = ModSettings.noFreeStuff 
                 ? DefDatabase<ThingDef>.GetNamedSilentFail("WoodLog") 
-                : (DefDatabase<ResearchProjectDef>.GetNamedSilentFail("Electricity")?.ProgressPercent == 1f
-                    ? DefDatabase<ThingDef>.GetNamedSilentFail("VanometricPowerCell")
-                    : DefDatabase<ThingDef>.GetNamedSilentFail("Apparel_ShieldBelt"));
+                : (Helper.ExpRM 
+                    ? DefDatabase<ThingDef>.GetNamedSilentFail("MeleeWeapon_LongSword") 
+                    : (DefDatabase<ResearchProjectDef>.GetNamedSilentFail("Electricity")?.ProgressPercent == 1f
+                        ? DefDatabase<ThingDef>.GetNamedSilentFail("VanometricPowerCell")
+                        : DefDatabase<ThingDef>.GetNamedSilentFail("Apparel_ShieldBelt")));
 
             DiaNode diaNode = null;
 

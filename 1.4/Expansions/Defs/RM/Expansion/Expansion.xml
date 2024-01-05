@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+
+
+  <CaravanAdventures.Expansions.ExpansionDef>
+    <defName>ExpRimedieval</defName>
+    <assemblyName>Rimedieval</assemblyName>
+    <expansionName>Rimedieval</expansionName>
+    <replacesContent>true</replacesContent>
+    <langKeyPrefix>RM_</langKeyPrefix>
+    <expSettingsDef>ExpRimedievalSettings</expSettingsDef>
+  </CaravanAdventures.Expansions.ExpansionDef>
+
+  <CaravanAdventures.Expansions.Settings.ExpSettingsDef>
+    <defName>ExpRimedievalSettings</defName>
+    <ancientMechSignalPawnKind>Spelopede</ancientMechSignalPawnKind>
+    <primaryEnemyFactionDef>Insect</primaryEnemyFactionDef>
+    <bossDefPrefix>RMBossMech</bossDefPrefix>
+    <endBossPawnKindDef>RMEndBossMech</endBossPawnKindDef>
+  </CaravanAdventures.Expansions.Settings.ExpSettingsDef>
+
+</Defs>

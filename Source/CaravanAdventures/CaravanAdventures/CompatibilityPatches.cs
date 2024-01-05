@@ -92,11 +92,8 @@ namespace CaravanAdventures
                 var assembly = Helper.GetAssembly("rimedieval", detectedAssemblies);
                 if (assembly != null && ModSettings.storyEnabled)
                 {
-                    if (!Patches.Compatibility.Rimedieval.CheckRimedievalMechsDisabled(assembly)) return;
-                    Log.Message($"Pausing story while rimedieval is enabled and mechs are suppressed");
-
-                    // todo instead:
-                    // Log.Message($"Caravan Adventures: Startig up in Rimedieval Mode");
+                    Patches.Compatibility.Rimedieval.CheckRimedievalMechsDisabled(assembly);
+                    Log.Message($"Caravan Adventures: Startig up in Medieval mode [experimental], as rimedieval was detected.");
                 }
             }, false, ErrorMessage("Rimedieval"));
 
@@ -162,22 +159,6 @@ namespace CaravanAdventures
 
         private static string ErrorMessage(string modName) => $"Following error happend while trying to patch {modName} for compatibility with CA, but was caught safely:\n";
 
-        internal static void TryRegionStuff()
-        {
-            foreach (var map in Find.Maps)
-            {
-                //DLog.Message($"editing with parent faction {map.ParentFaction?.GetCallLabel() ?? "nope"}");
-                //map.regionAndRoomUpdater.Enabled = false;
-                //DLog.Message($"region updater disabled");
-                int casketsdestroyed = 0;
-                foreach (var casket in map.listerThings.AllThings.OfType<Building_CryptosleepCasket>().Reverse()) { casket.Destroy(); casketsdestroyed++; }
-                DLog.Message($"destroyed caskets: {casketsdestroyed}");
-
-                //int pawns = 0;
-                //foreach (var pawn in map.mapPawns.AllPawns.Where(x => x?.Faction != Faction.OfPlayer).Reverse()) { pawn.Destroy(); pawns++; }
-                //DLog.Message($"destroyed pawns: {pawns}");
-            }
-        }
     }
 
     //[HarmonyPatch(typeof(Thing), "Destroy")]
@@ -227,19 +208,19 @@ namespace CaravanAdventures
         //}
     }
 
-    [HarmonyPatch(typeof(RegionAndRoomUpdater), "CreateOrUpdateRooms")]
-    class RimedievelRegionUpdaterCheck2
-    {
-        public static string methodname;
-        public static void Prefix()
-        {
-            DLog.Message($"before update CreateOrUpdateRooms");
-        }
+    //[HarmonyPatch(typeof(RegionAndRoomUpdater), "CreateOrUpdateRooms")]
+    //class RimedievelRegionUpdaterCheck2
+    //{
+    //    public static string methodname;
+    //    public static void Prefix()
+    //    {
+    //        DLog.Message($"before update CreateOrUpdateRooms");
+    //    }
 
-        public static void Postfix()
-        {
-            DLog.Message($"after update CreateOrUpdateRooms");
-        }
-    }
+    //    public static void Postfix()
+    //    {
+    //        DLog.Message($"after update CreateOrUpdateRooms");
+    //    }
+    //}
 
 }

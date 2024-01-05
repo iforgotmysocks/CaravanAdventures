@@ -58,7 +58,7 @@ namespace CaravanAdventures.CaravanStory.MechChips
         protected void SliceSurroundingEnemies()
         {
             var cells = GenRadial.RadialCellsAround(Pawn.Position, 4, false).Where(cell => cell.InBounds(Pawn.Map));
-            var pawns = cells.SelectMany(cell => cell.GetThingList(Pawn.Map).OfType<Pawn>().Where(pawn => pawn.Faction != Faction.OfMechanoids)).ToList();
+            var pawns = cells.SelectMany(cell => cell.GetThingList(Pawn.Map).OfType<Pawn>().Where(pawn => pawn.Faction != Helper.ExpRMNewFaction)).ToList();
             if (pawns != null && pawns.Count() != 0)
             {
                 pawns.ForEach(pawn => Enumerable.Range(0, 3).ToList().ForEach(run => pawn.TakeDamage(new DamageInfo(DamageDefOf.Scratch, 7, 0.5f, -1, Pawn, pawn.health.hediffSet.GetRandomNotMissingPart(DamageDefOf.Burn, BodyPartHeight.Undefined, BodyPartDepth.Outside)))));

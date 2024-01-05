@@ -57,17 +57,14 @@ namespace CaravanAdventures.CaravanStory.MechChips
                 var spawnPos = GetMinionSpawnPosition(Pawn.Position, Pawn.Map);
                 if (spawnPos != null)
                 {
-                    var scyther = PawnGenerator.GeneratePawn(PawnKindDef.Named("Mech_Scyther"), Faction.OfMechanoids);
+                    var scyther = PawnGenerator.GeneratePawn(PawnKindDef.Named(Helper.ExpSettings?.ancientMechSignalPawnKind?.defName ?? "Mech_Scyther"), Helper.ExpRMNewFaction);
                     scyther.health.AddHediff(HediffDef.Named("CAOverheatingBrain"), scyther.health.hediffSet.GetBrain());
                     GenSpawn.Spawn(scyther, spawnPos, Pawn.Map, WipeMode.Vanish);
                     var lord = Pawn.GetLord();
                     if (lord != null) lord.AddPawn(scyther);
                     producedMechs.Add(scyther);
                 }
-
-                
             }
-          
         }
 
         protected bool LaunchBombardmentOnCurrentTarget()
@@ -90,7 +87,7 @@ namespace CaravanAdventures.CaravanStory.MechChips
         protected void ExpanseBurningSteam(int rangeInCells = 6)
         {
             var cells = GenRadial.RadialCellsAround(Pawn.Position, rangeInCells, false).Where(cell => cell.Standable(Pawn.Map));
-            var pawns = cells.SelectMany(cell => cell.GetThingList(Pawn.Map).OfType<Pawn>().Where(pawn => !pawn.RaceProps.IsMechanoid)).ToList();
+            var pawns = cells.SelectMany(cell => cell.GetThingList(Pawn.Map).OfType<Pawn>().Where(pawn => Helper.ExpRM ? pawn.Faction != Helper.ExpRMNewFaction : !pawn.RaceProps.IsMechanoid)).ToList();
             if (pawns != null && pawns.Count() != 0)
             {
                 foreach (var cell in cells)

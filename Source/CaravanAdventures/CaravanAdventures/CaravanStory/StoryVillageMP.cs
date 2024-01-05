@@ -92,7 +92,8 @@ namespace CaravanAdventures.CaravanStory
             var raidLords = Map.lordManager.lords.Where(lord => lord.faction == StoryUtility.FactionOfSacrilegHunters);
             DLog.Message($"hunter lords: {raidLords.Select(lord => lord.ownedPawns).Count()}");
 
-            if (Faction.OfMechanoids == null && !Helper.ExpRM) StoryUtility.EnsureEvilMechanoidFaction(FactionRelationKind.Hostile);
+            if (Helper.ExpRM && DefDatabase<FactionDef>.AllDefsListForReading.FirstOrDefault(x => Helper.Exp.expSettingsDef.primaryEnemyFactionDef == x) == null) StoryUtility.EnsureEvilHostileFactionForExpansion(true);
+            else if (!Helper.ExpRM && Faction.OfMechanoids == null) StoryUtility.EnsureEvilMechanoidFaction(FactionRelationKind.Hostile);
 
             foreach (var lord in raidLords.Reverse())
             {
@@ -164,21 +165,24 @@ namespace CaravanAdventures.CaravanStory
             {
                 target = Map,
                 //incidentParms.points = StorytellerUtility.DefaultThreatPointsNow(incidentParms.target) * 2.5f;
-                points = StoryUtility.GetIncPoints(Helper.ExpRM ? 16000f : 32000f),
-                faction = Find.FactionManager.FirstFactionOfDef(Helper.ExpSettings?.primaryEnemyFactionDef) ?? Faction.OfMechanoids,
+                points = StoryUtility.GetIncPoints(32000f),
+                faction = Helper.ExpRMNewFaction,
                 raidArrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn,
-                raidStrategy = RaidStrategyDefOf.ImmediateAttack
+                raidStrategy = RaidStrategyDefOf.ImmediateAttack,
+                customLetterDef = LetterDefOf.ThreatBig,
+                infestationLocOverride = centerPoint
             };
             DLog.Message($"Default threat points: {StorytellerUtility.DefaultThreatPointsNow(incidentParms.target)}");
-            if (Helper.RunSafely(() => Helper.ExpRM ? IncidentDefOf.RaidEnemy.Worker.TryExecute(incidentParms) : StoryDefOf.CAMechRaidMixed.Worker.TryExecute(incidentParms)) != true)
+            if (Helper.RunSafely(() => Helper.ExpRM ? StoryDefOf.CAUnusualInfestation.Worker.TryExecute(incidentParms) : StoryDefOf.CAMechRaidMixed.Worker.TryExecute(incidentParms)) != true)
             {
                 Log.Error($"Creating CA mech raid failed due to some incompatibility, error above.");
             };
 
             CompCache.StoryWC.SetSF("IntroVillage_MechsArrived");
 
-            GetComponent<TimedDetectionPatrols>().Init(Find.FactionManager.FirstFactionOfDef(Helper.ExpSettings?.primaryEnemyFactionDef) ?? Faction.OfMechanoids);
-            GetComponent<TimedDetectionPatrols>().StartDetectionCountdown(30000, -1, (int)StoryUtility.GetIncPoints(8000, 5000));
+            var comp = GetComponent<TimedDetectionPatrols>();
+            comp.Init(Helper.ExpRMNewFaction);
+            comp.StartDetectionCountdown(30000, -1, (int)StoryUtility.GetIncPoints(8000, 5000));
         }
 
         public override MapGeneratorDef MapGeneratorDef => CaravanStorySiteDefOf.CAStoryVillageMG;
@@ -366,7 +370,7 @@ namespace CaravanAdventures.CaravanStory
             {
                 yield return baseOptions;
             }
-          
+
             yield break;
         }
 

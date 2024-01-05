@@ -27,4 +27,17 @@
     <tale>Raid</tale>
   </IncidentDef>
   
+  <IncidentDef>
+    <defName>CAUnusualInfestation</defName>
+    <label>unusual infestation</label>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>CaravanAdventures.CaravanStory.IncidentWorker_UnusualInfestation</workerClass>
+    <baseChance>0</baseChance>
+    <category>ThreatBig</category>
+    <pointsScaleable>true</pointsScaleable>
+  </IncidentDef>
+  
+  
 </Defs>

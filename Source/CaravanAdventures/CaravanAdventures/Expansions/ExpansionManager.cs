@@ -8,7 +8,6 @@ namespace CaravanAdventures.Expansions
 {
     class ExpansionManager
     {
-        // todo - change back, just debug
-        public static ExpansionDef ActiveExpansion => Expansions.ExpansionDefOf.ExpRimedieval; // CompatibilityPatches.RMInst ? Expansions.ExpansionDefOf.ExpRimedieval : null;
+        public static ExpansionDef ActiveExpansion => CompatibilityPatches.RMInst ? Expansions.ExpansionDefOf.ExpRimedieval : null;
     }
 }

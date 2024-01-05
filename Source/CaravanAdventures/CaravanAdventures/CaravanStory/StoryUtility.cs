@@ -487,6 +487,7 @@ namespace CaravanAdventures.CaravanStory
                 });
         }
 
+        [Obsolete]
         public static Faction CreateOrGetFriendlyMechFaction()
         {
             var relations = new List<FactionRelation>();
@@ -679,6 +680,7 @@ namespace CaravanAdventures.CaravanStory
             var sacrilegHunters = Find.FactionManager.AllFactions.FirstOrDefault(x => x?.def?.defName != null && x.def?.defName == Helper.ExpRMNewFaction?.def?.defName);
             if (sacrilegHunters == null)
             {
+                DLog.Message($"Creating evil faction for expansionmod");
                 if (DefDatabase<FactionDef>.GetNamedSilentFail(Helper.ExpSettings?.primaryEnemyFactionDef?.defName) == null) return null;
                 sacrilegHunters = Helper.RunSafely(() => FactionGenerator.NewGeneratedFaction(new FactionGeneratorParms(DefDatabase<FactionDef>.GetNamedSilentFail(Helper.ExpSettings?.primaryEnemyFactionDef?.defName), default, false)));
 

@@ -11,6 +11,8 @@ namespace CaravanAdventures.CaravanStory
         public static FactionDef CASacrilegHunters;
         [MayRequireRoyalty]
         public static IncidentDef CAFriendlyCaravan;
+        [MayRequireRoyalty]
+        public static IncidentDef CAUnusualInfestation;
 
         [MayRequireRoyalty]
         public static PawnKindDef CASacrilegHunters_Town_Councilman;

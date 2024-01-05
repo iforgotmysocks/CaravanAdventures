@@ -101,22 +101,32 @@ namespace CaravanAdventures.CaravanStory
             //todo skip mechs and add insects instead for rimedieval
             Helper.RunSafely(() =>
             {
+                // we're killing insects as they can distract incoming help and have them march across the entire map while mechs destroy the player
+                KillRemainingHivesAndInsectsOnMap(map);
                 foreach (var room in GetAncientShrineRooms(map))
                 {
                     AddSpacers(room, map, caravan);
                     AddMechanoidsToRoom(room, map, caravan, boss, RemoveHivesFromRoom(room));
                     RemoveRewardsFromSmallShrines(room);
                 }
-                // we're killing insects as they can distract incoming help and have them march across the entire map while mechs destroy the player
-                KillRemainingHivesAndInsectsOnMap(map);
             });
             Current.ProgramState = stateBackup;
         }
 
         private void KillRemainingHivesAndInsectsOnMap(Map map)
         {
-            foreach (var hive in map.spawnedThings.Where(thing => thing.def == ThingDefOf.Hive && thing.Faction == Faction.OfInsects).Reverse()) hive.Destroy();
-            foreach (var insect in map.mapPawns.AllPawnsSpawned.Where(pawn => pawn.Faction == Faction.OfInsects).Reverse()) insect.Destroy();
+            if (Helper.ExpRM)
+            {
+                var insects = map.mapPawns.AllPawnsSpawned.Where(pawn => pawn?.def?.defName == "DankPyon_Deathstinger");
+                if (insects?.Any() == true) foreach (var insect in insects.Reverse()) insect.Destroy();
+                var hives = map.spawnedThings.Where(thing => thing?.def?.defName == "DankPyon_HornetNest");
+                if (hives?.Any() == true) foreach (var hive in hives.Reverse()) hive.Destroy();
+            }
+            else
+            {
+                foreach (var hive in map.spawnedThings.Where(thing => thing.def == ThingDefOf.Hive && thing.Faction == Faction.OfInsects).Reverse()) hive.Destroy();
+                foreach (var insect in map.mapPawns.AllPawnsSpawned.Where(pawn => pawn.Faction == Faction.OfInsects).Reverse()) insect.Destroy();
+            }
         }
 
         private bool RemoveHivesFromRoom(Room room)
@@ -276,7 +286,7 @@ namespace CaravanAdventures.CaravanStory
             incidentParms.faction = Helper.ExpRMNewFaction;
 
             var mechPawnGroupMakerParams = CalculateMechPawnGroupMakerParams(room, map, caravan, removedHives, incidentParms);
-            var spawnedMechs = PawnGroupMakerUtility.GeneratePawns(mechPawnGroupMakerParams, true).ToList();
+            var spawnedMechs = Helper.ExpRM ? GenerateInsectPawns(mechPawnGroupMakerParams) : PawnGroupMakerUtility.GeneratePawns(mechPawnGroupMakerParams, true).ToList();
 
             if (!spawnedMechs.Any()) return;
 
@@ -312,10 +322,34 @@ namespace CaravanAdventures.CaravanStory
             combinedMechs.AddRange(existingMechs);
 
             var newLord = LordMaker.MakeNewLord(incidentParms.faction, new LordJob_SleepThenAssaultColony(incidentParms.faction), map, combinedMechs);
-
-            // LordJob_SleepThenMechanoidsDefend
             if (boss != null && room == mainRoom && !newLord.ownedPawns.Contains(boss)) newLord.AddPawn(boss);
-            if (!Helper.ExpRM) GenStep_SleepingMechanoids.SendMechanoidsToSleepImmediately(spawnedMechs);
+            GenStep_SleepingMechanoids.SendMechanoidsToSleepImmediately(spawnedMechs);
+        }
+
+        private List<Pawn> GenerateInsectPawns(PawnGroupMakerParms mechPawnGroupMakerParams)
+        {
+            var pointsLeft = mechPawnGroupMakerParams.points;
+            var list = new List<Pawn>();
+            var num = 0;
+            while (pointsLeft > 0f)
+            {
+                num++;
+                if (num > 1000)
+                {
+                    Log.Error("Too many iterations.");
+                    break;
+                }
+                if (!Hive.spawnablePawnKinds.Where((PawnKindDef x) => x.combatPower <= pointsLeft).TryRandomElement(out var result))
+                {
+                    break;
+                }
+                Pawn pawn = PawnGenerator.GeneratePawn(result, Faction.OfInsects);
+                pawn.mindState.spawnedByInfestationThingComp = false;
+                list.Add(pawn);
+                pointsLeft -= result.combatPower;
+            }
+            DLog.Message($"created {list.Count} insects");
+            return list;
         }
 
         private PawnGroupMakerParms CalculateMechPawnGroupMakerParams(Room room, Map map, Caravan caravan, bool removedHives, IncidentParms incidentParms)

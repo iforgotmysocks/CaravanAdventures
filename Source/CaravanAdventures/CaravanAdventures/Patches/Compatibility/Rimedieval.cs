@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CaravanAdventures.CaravanStory;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -21,5 +22,6 @@ namespace CaravanAdventures.Patches.Compatibility
             MechsDisabled = disabledMechanoidsResult;
             return disabledMechanoidsResult;
         }
+
     }
 }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Verse;
+using Verse.AI.Group;
 using Verse.Sound;
 
 namespace CaravanAdventures.CaravanStory
@@ -62,28 +63,66 @@ namespace CaravanAdventures.CaravanStory
             //Log.Message($"Map has boss: {boss != null}");
 
             var raidPoints = (int)(8000 * (1 + CompCache.StoryWC.GetCurrentShrineCounter() / 10));
+            var patrolComp = GetComponent<TimedDetectionPatrols>();
             if (boss != null || lastJudgmentEntrance != null)
             {
                 wonBattle = true;
 
-
-                GetComponent<TimedDetectionPatrols>().Init();
-                GetComponent<TimedDetectionPatrols>().StartDetectionCountdown(60000, -1, (int)StoryUtility.GetIncPoints(raidPoints));
+                patrolComp?.Init(Helper.ExpRMNewFaction);
+                patrolComp?.StartDetectionCountdown(60000, -1, (int)StoryUtility.GetIncPoints(raidPoints));
 
                 if (boss != null) bossWasSpawned = true;
                 if (lastJudgmentEntrance != null) lastJudgementEntraceWasSpawned = true;
             }
             else
             {
-                GetComponent<TimedDetectionPatrols>().Init();
-                GetComponent<TimedDetectionPatrols>().StartDetectionCountdown(180000, -1, (int)StoryUtility.GetIncPoints(raidPoints));
-                GetComponent<TimedDetectionPatrols>().ToggleIncreaseStrenthByCounter = true;
+                patrolComp.Init(Helper.ExpRMNewFaction);
+                patrolComp.StartDetectionCountdown(180000, -1, (int)StoryUtility.GetIncPoints(raidPoints));
+                patrolComp.ToggleIncreaseStrenthByCounter = true;
             }
             CompCache.StoryWC.SetShrineSF("Created");
             Quests.QuestUtility.UpdateQuestLocation(Quests.StoryQuestDefOf.CA_FindAncientShrine, this);
 
             var playerPawn = Map?.mapPawns?.FreeColonistsSpawned?.FirstOrDefault();
             if (playerPawn != null) CameraJumper.TryJumpAndSelect(playerPawn);
+        }
+
+        public override void Tick()
+        {
+            base.Tick();
+            if (base.HasMap)
+            {
+                CheckBossDefeated();
+                CheckWonBattle();
+
+                if (!CompCache.StoryWC.storyFlags["Judgment_Completed"] && lastJudgmentEntrance != null && checkRangeForJudgmentTicks >= 60)
+                {
+                    CheckGenerateAndEnterLastJudgment();
+                    checkRangeForJudgmentTicks = 0;
+                }
+
+                if (checkDormantTicks == 240)
+                {
+                    StoryUtility.FindUnfoggedMechsAndWakeUp(Map);
+                    checkDormantTicks = 0;
+                }
+
+                if (constTicks == 2400 && (boss != null || lastJudgmentEntrance != null))
+                {
+                    StoryUtility.EnsureSacrilegHunters();
+                    HunterAssistanceDialog();
+                }
+
+                if (constTicks == 5000 && lastJudgmentEntrance != null)
+                {
+                    StoryUtility.EnsureSacrilegHunters();
+                    CheckPortalRevealedDialog();
+                }
+
+                constTicks++;
+                checkRangeForJudgmentTicks++;
+                checkDormantTicks++;
+            }
         }
 
         public override bool ShouldRemoveMapNow(out bool alsoRemoveWorldObject)
@@ -187,44 +226,6 @@ namespace CaravanAdventures.CaravanStory
                     break;
             }
 
-        }
-
-        public override void Tick()
-        {
-            base.Tick();
-            if (base.HasMap)
-            {
-                CheckBossDefeated();
-                CheckWonBattle();
-
-                if (!CompCache.StoryWC.storyFlags["Judgment_Completed"] && lastJudgmentEntrance != null && checkRangeForJudgmentTicks >= 60)
-                {
-                    CheckGenerateAndEnterLastJudgment();
-                    checkRangeForJudgmentTicks = 0;
-                }
-
-                if (checkDormantTicks == 240)
-                {
-                    StoryUtility.FindUnfoggedMechsAndWakeUp(Map);
-                    checkDormantTicks = 0;
-                }
-
-                if (constTicks == 2400 && (boss != null || lastJudgmentEntrance != null))
-                {
-                    StoryUtility.EnsureSacrilegHunters();
-                    HunterAssistanceDialog();
-                }
-
-                if (constTicks == 5000 && lastJudgmentEntrance != null)
-                {
-                    StoryUtility.EnsureSacrilegHunters();
-                    CheckPortalRevealedDialog();
-                }
-
-                constTicks++;
-                checkRangeForJudgmentTicks++;
-                checkDormantTicks++;
-            }
         }
 
         private void CheckPortalRevealedDialog()
@@ -417,14 +418,27 @@ namespace CaravanAdventures.CaravanStory
 
         private void WakeAllMechanoids()
         {
-            Map.mapPawns.AllPawnsSpawned.Where(x => x?.RaceProps?.IsMechanoid == true && !x?.Dead == true).ToList().ForEach(mech =>
+            Map.mapPawns.AllPawnsSpawned.Where(x => x.Faction == Helper.ExpRMNewFaction && !x?.Dead == true).ToList().ForEach(mech =>
             {
                 var comp = mech.TryGetComp<CompWakeUpDormant>();
-                if (comp != null) comp.Activate();
+                comp?.Activate();
             });
+            if (Helper.ExpRM) RileUpInsects();
             FreeAllMechsOnMap();
+            var patrolComp = GetComponent<TimedDetectionPatrols>();
+            if (patrolComp != null) patrolComp.ToggleIncreaseStrenthByCounter = true;
 
-            GetComponent<TimedDetectionPatrols>().ToggleIncreaseStrenthByCounter = true;
+        }
+
+        private void RileUpInsects()
+        {
+            var insects = Map.mapPawns.AllPawns.Where(x => x.RaceProps.Insect); // && x.Faction == Faction.OfInsects); // && x.HostileTo(Faction.OfPlayer));
+            if (!insects.Any()) return;
+            foreach (var insect in insects) insect.mindState.mentalStateHandler.TryStartMentalState(MentalStateDefOf.Manhunter);
+            return;
+            var insectLords = insects.Select(x => x.GetLord()).Distinct().Where(x => x != null);
+            foreach (var lord in insectLords) Map.lordManager.RemoveLord(lord);
+            LordMaker.MakeNewLord(Faction.OfInsects, new LordJob_AssaultColony(Faction.OfInsects, false, false, false, false, false), Map, insects);
         }
 
         private void FreeAllMechsOnMap()
@@ -439,7 +453,7 @@ namespace CaravanAdventures.CaravanStory
                     if (StoryUtility.FloodUnfogAdjacent(room.Map.fogGrid, Map, cellToStartUnfog, false)) sendLetter = true;
 
                     var wallToBreak = room.BorderCells.Where(x => x.GetFirstBuilding(Map)?.def == ThingDefOf.Wall && GenRadial.RadialCellsAround(x, 1, false).Any(y => y.InBounds(Map) && y.UsesOutdoorTemperature(Map) && y.Walkable(Map))).InRandomOrder()?.Select(x => x.GetFirstBuilding(Map))?.FirstOrDefault();
-                    if (wallToBreak != null) wallToBreak.Destroy();
+                    wallToBreak?.Destroy();
                 }
                 catch (Exception e)
                 {
