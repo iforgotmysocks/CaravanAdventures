@@ -26,16 +26,11 @@ namespace CaravanAdventures.CaravanStory
         protected int raidPoints = 8000;
         protected Faction forcedFaction = null;
 
-        protected IncidentDef raidDef = StoryDefOf.CAMechRaidMixed;
-        protected string raidMessage = "MessageCaravanDetectedRaidArrived";
-
         // medieval
         protected List<Hive> hivesToIgnore = null;
 
-        //private new readonly IncidentDef raidDef =  StoryDefOf.CAUnusualInfestation;
-        //private new readonly string raidMessage = "MessageCaravanDetectedRaidArrived";
-
-
+        public IncidentDef RaidDef => Helper.ExpRM ? StoryDefOf.CAUnusualInfestation : StoryDefOf.CAMechRaidMixed;
+        public string RaidMessage => "MessageCaravanDetectedRaidArrived";
 
         public bool NextRaidCountdownActiveAndVisible => this.ticksLeftToSendRaid >= 0 && this.ticksLeftTillNotifyPlayer == 0;
         public bool ToggleIncreaseStrenthByCounter { get => toggleIncreaseStrenthByCounter; set => toggleIncreaseStrenthByCounter = value; }
@@ -54,17 +49,11 @@ namespace CaravanAdventures.CaravanStory
             Scribe_References.Look(ref forcedFaction, "forcedFaction");
             Scribe_Values.Look(ref toggleIncreaseStrenthByCounter, "toggleIncreaseStrenthByCounter", false);
             Scribe_Values.Look(ref increaseStrengthCounter, "increaseStrengthCounter", 0);
-            Scribe_Defs.Look(ref raidDef, "raidDef");
-            Scribe_Values.Look(ref raidMessage, "raidMessage");
         }
 
-        public virtual void Init(Faction forcedFaction = null, IncidentDef raidDef = null, string raidMessage = null)
+        public virtual void Init(Faction forcedFaction = null)
         {
             this.forcedFaction = forcedFaction;
-            if (raidDef != null)  this.raidDef = raidDef;
-            else if (Helper.ExpRM) this.raidDef = StoryDefOf.CAUnusualInfestation;
-            if (raidMessage != null) this.raidMessage = raidMessage;
-            else if (Helper.ExpRM) this.raidMessage = "MessageCaravanDetectedRaidArrivedInsects";
             var mapParent = (MapParent)this.parent;
             if (!mapParent.HasMap) return;
             lordsToExcludeFromRaidLogic = mapParent.Map.lordManager.lords.Where(lord => lord.faction == RaidFaction).ToList();
@@ -164,11 +153,11 @@ namespace CaravanAdventures.CaravanStory
                 customLetterDef = ModSettings.mutedShrineMessages ? LetterDefOf.NeutralEvent : LetterDefOf.ThreatBig
             };
             DLog.Message($"Default threat points: {StorytellerUtility.DefaultThreatPointsNow(incidentParms.target)}");
-            Helper.RunSafely(() => raidDef.Worker.TryExecute(incidentParms));
+            Helper.RunSafely(() => RaidDef.Worker.TryExecute(incidentParms));
             this.ticksLeftToSendRaid = (int)(Rand.Range(18f, 24f) * 2500f);
             ticksLeftTillLeaveIfNoEnemies = defaultTicksTillLeave;
             if (toggleIncreaseStrenthByCounter) increaseStrengthCounter++;
-            Messages.Message(raidMessage.Translate(incidentParms.faction.def.pawnsPlural, incidentParms.faction, this.ticksLeftToSendRaid.ToStringTicksToDays("F1")), ModSettings.mutedShrineMessages ? MessageTypeDefOf.SilentInput : MessageTypeDefOf.ThreatBig, true);
+            Messages.Message(RaidMessage.Translate(incidentParms.faction.def.pawnsPlural, incidentParms.faction, this.ticksLeftToSendRaid.ToStringTicksToDays("F1")), ModSettings.mutedShrineMessages ? MessageTypeDefOf.SilentInput : MessageTypeDefOf.ThreatBig, true);
         }
 
         private void MakeInsectsAngry(MapParent mapParent)

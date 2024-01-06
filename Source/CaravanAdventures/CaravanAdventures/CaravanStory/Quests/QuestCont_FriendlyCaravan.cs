@@ -33,10 +33,12 @@ namespace CaravanAdventures.CaravanStory.Quests
                         ? DefDatabase<ThingDef>.GetNamedSilentFail("VanometricPowerCell")
                         : DefDatabase<ThingDef>.GetNamedSilentFail("Apparel_ShieldBelt")));
 
+            var stuffDef = Helper.ExpRM ? DefDatabase<ThingDef>.GetNamedSilentFail("Uranium") : null;
+
             DiaNode diaNode = null;
 
             var diaNode6_1 = new DiaNode("TradeCaravan_Dia1_6_1".Translate(addressed.NameShortColored, rewardDef != null ? rewardDef.LabelCap.ToString().Colorize(UnityEngine.Color.green) : "", GenderUtility.GetPossessive(addressed.gender)));
-            diaNode6_1.options.Add(new DiaOption("TradeCaravan_Dia1_6_1_Option1".Translate()) { action = () => ConversationFinished(initiator, addressed, true, rewardDef), resolveTree = true });
+            diaNode6_1.options.Add(new DiaOption("TradeCaravan_Dia1_6_1_Option1".Translate()) { action = () => ConversationFinished(initiator, addressed, true, rewardDef, stuffDef), resolveTree = true });
             var diaNode6_2 = new DiaNode("TradeCaravan_Dia1_6_2".Translate(addressed.NameShortColored));
             diaNode6_2.options.Add(new DiaOption("TradeCaravan_Dia1_6_2_Option1".Translate()) { action = () => ConversationFinished(initiator, addressed), resolveTree = true });
 
@@ -62,7 +64,7 @@ namespace CaravanAdventures.CaravanStory.Quests
             Find.Archive.Add(new ArchivedDialog(diaNode.text, taggedString));
         }
 
-        private void ConversationFinished(Pawn initiator, Pawn addressed, bool reward = false, ThingDef rewardDef = null)
+        private void ConversationFinished(Pawn initiator, Pawn addressed, bool reward = false, ThingDef rewardDef = null, ThingDef stuffDef = null)
         {
             CompCache.StoryWC.questCont.FriendlyCaravan.storyContactBondedPawn = initiator;
             CompCache.StoryWC.SetSF("TradeCaravan_DialogFinished");
@@ -77,7 +79,7 @@ namespace CaravanAdventures.CaravanStory.Quests
             }
             else if (reward && rewardDef != null)
             {
-                var belt = ThingMaker.MakeThing(rewardDef);
+                var belt = ThingMaker.MakeThing(rewardDef, stuffDef);
                 var beltQual = belt.TryGetComp<CompQuality>();
                 if (beltQual != null) beltQual.SetQuality(QualityCategory.Masterwork, ArtGenerationContext.Colony);
                 GenSpawn.Spawn(belt, addressed.Position, addressed.Map, WipeMode.VanishOrMoveAside);

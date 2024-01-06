@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
 <Defs>
-
-
   <CaravanAdventures.Expansions.ExpansionDef>
     <defName>ExpRimedieval</defName>
     <assemblyName>Rimedieval</assemblyName>
@@ -19,5 +17,4 @@
     <bossDefPrefix>RMBossMech</bossDefPrefix>
     <endBossPawnKindDef>RMEndBossMech</endBossPawnKindDef>
   </CaravanAdventures.Expansions.Settings.ExpSettingsDef>
-
 </Defs>
