@@ -185,8 +185,9 @@ namespace CaravanAdventures.CaravanMechBounty
 
         private List<Thing> GenerateItemStock(int itemCount, int customItemCount = 0, int customGeneCount = 0)
         {
-            if (ModsConfig.RoyaltyActive) customRewards.AddRange(customRewardsRoyalty);
-            if (!ModsConfig.BiotechActive || !ModSettings.useGeneRewards) customGeneCount = 0;
+            if (ModsConfig.RoyaltyActive && !Helper.ExpRM) customRewards.AddRange(customRewardsRoyalty);
+            if (!ModsConfig.BiotechActive || !ModSettings.useGeneRewards || Helper.ExpRM) customGeneCount = 0;
+            if (Helper.ExpRM) customItemCount = 0;
 
             if (CompCache.BountyWC.CurrentTradeItemStock == null) CompCache.BountyWC.CurrentTradeItemStock = new List<Thing>();
             if (CompCache.BountyWC.OngoingItemDelay > 0) return CompCache.BountyWC.CurrentTradeItemStock;

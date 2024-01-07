@@ -236,7 +236,7 @@ namespace CaravanAdventures.CaravanCamp
 
         protected virtual void CalculateCostAndDetermineType(bool tribal = false)
         {
-            if (tribal)
+            if (tribal || Helper.ExpRM)
             {
                 this.tribal = true;
                 return;

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Royalty</li>
+      <li>Rimedieval</li>
+    </mods>
+    <match Class="PatchOperationSequence">
+      <success>Always</success>
+      <operations>
+
+        <li Class="PatchOperationRemove">
+          <xpath>
+            Defs/PawnKindDef[@Name = "CASacrilegHunters_ExperiencedHunterBase"]/techHediffsRequired
+          </xpath>
+        </li>
+
+        <li Class="PatchOperationReplace">
+          <xpath>
+            Defs/PawnKindDef[
+            @Name = "CASacrilegHunters_ExperiencedHunterBase"
+            or @Name = "CASacrilegHunters_HunterBase"
+            or defName = "CASacrilegHunters_Town_Councilman"
+            or defName = "CASacrilegHunters_Town_Trader"
+            or defName = "CASacrilegHunters_Villager"
+            or defName = "CASacrilegHunters_Town_Guard"
+            ]/techHediffsChance
+          </xpath>
+          <value>
+            <techHediffsChance>0.0</techHediffsChance>
+          </value>
+        </li>
+
+      </operations>
+    </match>
+  </Operation>
+
+</Patch>
