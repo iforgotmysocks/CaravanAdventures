@@ -48,6 +48,8 @@ namespace CaravanAdventures.CaravanStory
         public Dictionary<string, bool> storyFlags;
         private List<string> flagsToAdd = new List<string>
         {
+            "ShowedSetupMenu",
+
             "TradeCaravan_InitCountDownStarted",
             "TradeCaravan_Arrived",
             "TradeCaravan_DialogFinished",
@@ -159,6 +161,12 @@ namespace CaravanAdventures.CaravanStory
             if (!RoyaltyActiveCheck()) return;
 
             if (ticks == -1) StoryUtility.EnsureSacrilegHunters(FactionRelationKind.Neutral);
+
+            if (ticks == 120 && !storyFlags["ShowedSetupMenu"] && !ModSettings.disableSetupWindow)
+            {
+                Find.WindowStack.Add(new Dialogs.NewStorySettings());
+                storyFlags["ShowedSetupMenu"] = true;
+            }
 
             // todo temporary - remove once friendly mech faction is removed
             if (mechFactionRemovalTicks >= 22222)

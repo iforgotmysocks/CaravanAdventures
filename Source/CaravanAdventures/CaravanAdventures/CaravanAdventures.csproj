@@ -132,6 +132,7 @@
     <Compile Include="CaravanMechBounty\BountyWC.cs" />
     <Compile Include="CaravanStory\AncientMasterShrineMP.cs" />
     <Compile Include="CaravanStory\CaravanArrivalAction_StoryVillageMP.cs" />
+    <Compile Include="CaravanStory\Dialogs\NewStorySettings.cs" />
     <Compile Include="CaravanStory\GameCondition_Apocalypse.cs" />
     <Compile Include="CaravanStory\GenStep_ScatterMasterShrines_Old.cs" />
     <Compile Include="CaravanStory\GenStep_ScatterSmallShrines.cs" />
@@ -256,7 +257,7 @@
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_StartDate="2000/1/1" BuildVersion_BuildVersioningStyle="None.None.None.Increment" />
+      <UserProperties BuildVersion_BuildVersioningStyle="None.None.None.Increment" BuildVersion_StartDate="2000/1/1" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

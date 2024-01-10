@@ -36,7 +36,7 @@ namespace CaravanAdventures.Settings
             //var viewRect = new Rect(0f, 0f, windowRect.width - 150, 1200f);
             //options.BeginScrollView(wrect, ref scrollPos, ref viewRect);
 
-            var viewRect = new Rect(0f, 0f, wrect.width - 26f, 830);
+            var viewRect = new Rect(0f, 0f, wrect.width - 26f, 850);
             var smallerOutRect = new Rect(wrect.x, wrect.y, wrect.width, wrect.height - 50);
             Widgets.BeginScrollView(smallerOutRect, ref this.scrollPos, viewRect);
             options.Begin(viewRect);
@@ -58,11 +58,12 @@ namespace CaravanAdventures.Settings
             Widgets.Dropdown(rect, ModSettings.storyMode, null, GenerateStoryModeDropDownContent, Enum.GetName(ModSettings.storyMode.GetType(), ModSettings.storyMode));
 
             options.Gap();
-            options.Label("Normal: provides the default story experience, hard but fun");
+            options.Label("Normal: provides the default story experience, hard but fun.");
             options.Label("Performance: Reduces the amount of pawns and mechs spawned by a siginificant amount, and may be preferable when utilizing aging hardware or huge mod lists.");
             options.Gap();
             options.Gap();
 
+            options.CheckboxLabeled("Disable the story config popup on new game start", ref ModSettings.disableSetupWindow);
             options.CheckboxLabeled("Disable the quest faction starting gift and lootability", ref ModSettings.noFreeStuff, "Disable the quest faction starting help and apply max biocode chance and DeathAcidifiers");
             options.CheckboxLabeled("Mute the anima tree whisper sound", ref ModSettings.whisperDisabledManually, "Takes a few seconds to take effect when the game is unpaused");
             
@@ -114,7 +115,6 @@ namespace CaravanAdventures.Settings
             options.CheckboxLabeled("Remove royal title requirements", ref ModSettings.removeRoyalTitleRequirements);
             options.CheckboxLabeled("Only remove Acolyte and Knight title requirements", ref ModSettings.removeOnlyAcolyteAndKnightRoyalTitleRequirements);
             options.Gap();
-
 
             options.End();
             Widgets.EndScrollView();

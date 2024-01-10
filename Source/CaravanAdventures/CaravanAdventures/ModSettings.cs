@@ -1,7 +1,6 @@
 ﻿using CaravanAdventures.CaravanAbilities;
 using CaravanAdventures.CaravanStory;
 using CaravanAdventures.Settings;
-using RimWorld;
 using UnityEngine;
 using Verse;
 
@@ -122,6 +121,7 @@ namespace CaravanAdventures
         public static bool noFreeStuff = false;
         public static int delayStoryDays = 0;
         public static StoryMode storyMode = StoryMode.Normal;
+        public static bool disableSetupWindow;
 
         // shrines
         public static float shrineMechDifficultyMultiplier = 1.2f;
@@ -265,6 +265,7 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref noFreeStuff, "noFreeStuff", false);
             Scribe_Values.Look(ref delayStoryDays, "delayStoryDays", 0);
             Scribe_Values.Look(ref storyMode, "storyMode", StoryMode.Normal);
+            Scribe_Values.Look(ref disableSetupWindow, "disableSetupWindow", false);
 
             // shrines
             Scribe_Values.Look(ref shrineMechDifficultyMultiplier, "shrineMechDifficultyMultiplier", 1.2f);
