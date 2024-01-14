@@ -31,7 +31,7 @@ namespace CaravanAdventures.CaravanStory
             Map map = (Map)parms.target;
             Thing thing = InfestationUtility.SpawnTunnels(Mathf.Max(GenMath.RoundRandom(parms.points / HivePoints), 1), map, spawnAnywhereIfNoGoodCell: true, parms.infestationLocOverride.HasValue, null, parms.infestationLocOverride);
 
-            ChoiceLetter choiceLetter = LetterMaker.MakeLetter(parms.customLetterLabel ?? "CALabelStrangeInfestation", parms.customLetterText ?? "CATextStrangeInfestation", parms.customLetterDef ?? LetterDefOf.ThreatBig, new LookTargets() { targets = new List<RimWorld.Planet.GlobalTargetInfo> { thing } }, parms.faction, parms.quest, parms.letterHyperlinkThingDefs);
+            ChoiceLetter choiceLetter = LetterMaker.MakeLetter((parms.customLetterLabel ?? "CALabelStrangeInfestation").Translate(), (parms.customLetterText ?? "CATextStrangeInfestation").Translate(), parms.customLetterDef ?? LetterDefOf.ThreatBig, new LookTargets() { targets = new List<RimWorld.Planet.GlobalTargetInfo> { thing } }, parms.faction, parms.quest, parms.letterHyperlinkThingDefs);
             Find.LetterStack.ReceiveLetter(choiceLetter);
 
             Find.TickManager.slower.SignalForceNormalSpeedShort();

@@ -148,12 +148,17 @@ namespace CaravanAdventures.CaravanStory
                 //incidentParms.points = StorytellerUtility.DefaultThreatPointsNow(incidentParms.target) * 2.5f;
                 points = raidPoints * (1 + increaseStrengthCounter * 0.2f),
                 faction = this.RaidFaction,
-                raidArrivalMode = Helper.ExpRM ? PawnsArrivalModeDefOf.EdgeWalkIn : null,
-                raidStrategy = Helper.ExpRM ? RaidStrategyDefOf.ImmediateAttack : null,
+                raidArrivalMode = Helper.ExpRM ? null : PawnsArrivalModeDefOf.EdgeWalkIn,
+                raidStrategy = Helper.ExpRM ? null : RaidStrategyDefOf.ImmediateAttack,
                 customLetterDef = ModSettings.mutedShrineMessages ? LetterDefOf.NeutralEvent : LetterDefOf.ThreatBig
             };
             DLog.Message($"Default threat points: {StorytellerUtility.DefaultThreatPointsNow(incidentParms.target)}");
-            Helper.RunSafely(() => RaidDef.Worker.TryExecute(incidentParms));
+            if (!Helper.RunSafely(() => RaidDef.Worker.TryExecute(incidentParms)))
+            {
+                DLog.Message($"Creating raid failed, trying again in 1 hour");
+                this.ticksLeftToSendRaid = 2500;
+                return;
+            }
             this.ticksLeftToSendRaid = (int)(Rand.Range(18f, 24f) * 2500f);
             ticksLeftTillLeaveIfNoEnemies = defaultTicksTillLeave;
             if (toggleIncreaseStrenthByCounter) increaseStrengthCounter++;
@@ -164,7 +169,7 @@ namespace CaravanAdventures.CaravanStory
         {
             DLog.Message($"patrol started making insects angry");
             var insects = mapParent.Map.mapPawns.AllPawnsSpawned.Where(pawn => pawn.Faction == RaidFaction);
-            foreach (var insect in insects) insect.mindState.mentalStateHandler.TryStartMentalState(MentalStateDefOf.Manhunter);
+            foreach (var insect in insects) insect.mindState.mentalStateHandler.TryStartMentalState(MentalStateDefOf.ManhunterPermanent);
         }
 
         protected virtual void HaveRaidRetreat(MapParent mapParent)

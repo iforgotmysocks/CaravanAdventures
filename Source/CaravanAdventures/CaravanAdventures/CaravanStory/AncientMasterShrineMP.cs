@@ -101,6 +101,8 @@ namespace CaravanAdventures.CaravanStory
                     checkRangeForJudgmentTicks = 0;
                 }
 
+                if (checkDormantTicks == 120 && Helper.ExpRM) CheckRileUpInsects();
+
                 if (checkDormantTicks == 240)
                 {
                     StoryUtility.FindUnfoggedMechsAndWakeUp(Map);
@@ -423,22 +425,18 @@ namespace CaravanAdventures.CaravanStory
                 var comp = mech.TryGetComp<CompWakeUpDormant>();
                 comp?.Activate();
             });
-            if (Helper.ExpRM) RileUpInsects();
             FreeAllMechsOnMap();
             var patrolComp = GetComponent<TimedDetectionPatrols>();
             if (patrolComp != null) patrolComp.ToggleIncreaseStrenthByCounter = true;
 
         }
 
-        private void RileUpInsects()
+        private void CheckRileUpInsects()
         {
-            var insects = Map.mapPawns.AllPawns.Where(x => x.RaceProps.Insect); // && x.Faction == Faction.OfInsects); // && x.HostileTo(Faction.OfPlayer));
+            if (!bossDefeatedAndRewardsGiven || !GenHostility.AnyHostileActiveThreatTo(Map, Helper.ExpRMNewFaction)) return;
+            var insects = Map.mapPawns.AllPawns.Where(x => x.RaceProps.Insect && x?.MentalStateDef != MentalStateDefOf.ManhunterPermanent); // && x.Faction == Faction.OfInsects); // && x.HostileTo(Faction.OfPlayer));
             if (!insects.Any()) return;
-            foreach (var insect in insects) insect.mindState.mentalStateHandler.TryStartMentalState(MentalStateDefOf.Manhunter);
-            return;
-            var insectLords = insects.Select(x => x.GetLord()).Distinct().Where(x => x != null);
-            foreach (var lord in insectLords) Map.lordManager.RemoveLord(lord);
-            LordMaker.MakeNewLord(Faction.OfInsects, new LordJob_AssaultColony(Faction.OfInsects, false, false, false, false, false), Map, insects);
+            foreach (var insect in insects) insect.mindState.mentalStateHandler.TryStartMentalState(MentalStateDefOf.ManhunterPermanent);
         }
 
         private void FreeAllMechsOnMap()
