@@ -24,7 +24,13 @@ namespace CaravanAdventures.Patches
         public static void PawnKillPostfix(Pawn __instance, DamageInfo? dinfo, Hediff exactCulprit = null)
         {
             // todo may need to improve that faction check...
-            if (!ModSettings.bountyEnabled || CompCache.StoryWC == null || dinfo == null || CompCache.BountyWC?.BountyServiceAvailable != true || __instance?.Faction?.def == null || (__instance?.Faction != Faction.OfMechanoids && !CompatibilityDefOf.CACompatDef.additionalBountyFactionDefsToAdd.Contains(__instance?.Faction?.def?.defName))) return;
+            if (!ModSettings.bountyEnabled 
+                || CompCache.StoryWC == null 
+                || dinfo == null 
+                || CompCache.BountyWC?.BountyServiceAvailable != true 
+                || __instance?.Faction?.def == null 
+                || (__instance?.Faction != Helper.ExpRMNewFaction
+                    && !CompatibilityDefOf.CACompatDef.additionalBountyFactionDefsToAdd.Contains(__instance?.Faction?.def?.defName))) return;
             var instigator = ModSettings.allowBountyFromBuildingInstigators ? dinfo.Value.Instigator : dinfo.Value.Instigator as Pawn;
             if (instigator == null || instigator?.Faction != Faction.OfPlayer) return;
             CaravanStory.StoryUtility.AddBountyPointsForKilledMech(__instance);
