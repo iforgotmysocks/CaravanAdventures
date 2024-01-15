@@ -434,7 +434,7 @@ namespace CaravanAdventures.CaravanStory
         private void CheckRileUpInsects()
         {
             if (!bossDefeatedAndRewardsGiven || !GenHostility.AnyHostileActiveThreatTo(Map, Helper.ExpRMNewFaction)) return;
-            var insects = Map.mapPawns.AllPawns.Where(x => x.RaceProps.Insect && x?.MentalStateDef != MentalStateDefOf.ManhunterPermanent); // && x.Faction == Faction.OfInsects); // && x.HostileTo(Faction.OfPlayer));
+            var insects = Map.mapPawns.AllPawns.Where(x => x.Faction == Helper.ExpRMNewFaction && x?.MentalStateDef != MentalStateDefOf.ManhunterPermanent); // && x.Faction == Faction.OfInsects); // && x.HostileTo(Faction.OfPlayer));
             if (!insects.Any()) return;
             foreach (var insect in insects) insect.mindState.mentalStateHandler.TryStartMentalState(MentalStateDefOf.ManhunterPermanent);
         }
