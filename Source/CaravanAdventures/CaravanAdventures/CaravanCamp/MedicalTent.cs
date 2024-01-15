@@ -110,7 +110,7 @@ namespace CaravanAdventures.CaravanCamp
             zone.settings.filter.SetAllow(ThingDefOf.MedicineHerbal, true);
             zone.settings.filter.SetAllow(ThingDefOf.MedicineIndustrial, true);
             zone.settings.filter.SetAllow(ThingDefOf.MedicineUltratech, true);
-            zone.settings.Priority = StoragePriority.Preferred;
+            zone.settings.Priority = StoragePriority.Important;
             zone.label = "CAMedicineZone".Translate();
             zoneCells.ToList().ForEach(cell => zone.AddCell(cell));
         }
