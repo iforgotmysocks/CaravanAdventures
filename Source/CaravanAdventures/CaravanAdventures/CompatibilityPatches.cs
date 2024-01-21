@@ -93,6 +93,7 @@ namespace CaravanAdventures
                 if (assembly != null && ModSettings.storyEnabled)
                 {
                     Patches.Compatibility.Rimedieval.CheckRimedievalMechsDisabled(assembly);
+                    Patches.Compatibility.Rimedieval.RemoveSacHunterTechHediffs();
                     Log.Message($"Caravan Adventures: Startig up in Medieval mode [experimental], as rimedieval was detected.");
                 }
             }, false, ErrorMessage("Rimedieval"));

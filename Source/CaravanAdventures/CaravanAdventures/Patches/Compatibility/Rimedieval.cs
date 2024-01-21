@@ -23,5 +23,13 @@ namespace CaravanAdventures.Patches.Compatibility
             return disabledMechanoidsResult;
         }
 
+        public static void RemoveSacHunterTechHediffs()
+        {
+            foreach (var def in DefDatabase<PawnKindDef>.AllDefs.Where(x => x.defName.StartsWith("CASacrilegHunters")))
+            {
+                def.techHediffsChance = 0f;
+                def.techHediffsRequired = new List<ThingDef>();
+            }
+        }
     }
 }
