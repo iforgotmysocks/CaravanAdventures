@@ -58,7 +58,6 @@
     <defName>CAMech_Scyther</defName>
     <label>scyther</label>
     <race>CAMech_Scyther</race>
-    <combatPower>150</combatPower>
     <lifeStages>
       <!--<li MayRequire="Ludeon.Rimworld.Biotech">
         <bodyGraphicData>
@@ -91,6 +90,13 @@
     </weaponTags>
     <techHediffsChance>1</techHediffsChance>
     <techHediffsMoney>9999~9999</techHediffsMoney>
+
+    <!-- lets try to disable it -->
+    <combatPower>340282346638528859811704183484516925440</combatPower>
+    <allowInMechClusters>false</allowInMechClusters>
+    <canBeSapper>false</canBeSapper>
+    <canArriveManhunter>false</canArriveManhunter>
+    
   </PawnKindDef>
 
 </Defs>
