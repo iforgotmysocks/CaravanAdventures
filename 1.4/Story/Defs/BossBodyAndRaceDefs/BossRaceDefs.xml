@@ -49,6 +49,10 @@
       </li>
       <li MayRequire="Ludeon.Rimworld.Biotech" Class="CompProperties_MechRepairable" />-->
     </comps>
+    <butcherProducts>
+      <Steel>2000</Steel>
+      <Plasteel>600</Plasteel>
+    </butcherProducts>
   </ThingDef>
 
   <ThingDef ParentName="CABaseMechanoid" Name="CABaseMechanoidWalker" Abstract="True">
@@ -78,9 +82,6 @@
         </li>-->
       </lifeStageAges>
     </race>
-    <butcherProducts>
-      <Steel>15</Steel>
-    </butcherProducts>
   </ThingDef>
 
 
