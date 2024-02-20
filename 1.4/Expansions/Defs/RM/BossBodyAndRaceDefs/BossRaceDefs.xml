@@ -49,6 +49,9 @@
       </li>
       <li MayRequire="Ludeon.Rimworld.Biotech" Class="CompProperties_MechRepairable" />-->
     </comps>
+    <butcherProducts>
+      <Steel>15</Steel>
+    </butcherProducts>
   </ThingDef>
 
   <ThingDef ParentName="RMBaseMechanoid" Name="RMBaseMechanoidWalker" Abstract="True">
@@ -79,7 +82,8 @@
       </lifeStageAges>
     </race>
     <butcherProducts>
-      <Steel>15</Steel>
+      <Steel>30</Steel>
+      <Plasteel>10</Plasteel>
     </butcherProducts>
   </ThingDef>
 
@@ -126,10 +130,6 @@
       <soundMeleeHitBuilding>Pawn_Melee_MechanoidBash_HitBuilding</soundMeleeHitBuilding>
       <soundMeleeMiss>Pawn_Melee_MechanoidBash_Miss</soundMeleeMiss>
     </race>
-    <butcherProducts>
-      <Steel>30</Steel>
-      <Plasteel>10</Plasteel>
-    </butcherProducts>
   </ThingDef>
 
   <!--<PawnKindDef ParentName="BaseMechanoidKind">-->

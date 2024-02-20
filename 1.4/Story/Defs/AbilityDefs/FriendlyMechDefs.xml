@@ -51,6 +51,10 @@
     <statBases>
       <!--<BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">2</BandwidthCost>-->
     </statBases>
+    <butcherProducts>
+      <Steel>30</Steel>
+      <Plasteel>10</Plasteel>
+    </butcherProducts>
   </ThingDef>
 
 
