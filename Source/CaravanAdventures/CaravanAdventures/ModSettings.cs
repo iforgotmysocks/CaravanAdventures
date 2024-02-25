@@ -103,6 +103,7 @@ namespace CaravanAdventures
 
         // compatibility
         public static bool sos2AuraHeatManagementEnabled = true;
+        // remains for compatibility, no longer used
         public static bool sos2AuraPreventsHypoxia = true;
         public static float sos2AuraHeatMult = 100f;
         public static float sos2HeatAbsorptionPercentage = 100f;

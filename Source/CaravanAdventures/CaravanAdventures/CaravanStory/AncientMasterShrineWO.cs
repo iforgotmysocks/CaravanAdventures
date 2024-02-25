@@ -374,7 +374,7 @@ namespace CaravanAdventures.CaravanStory
                     ? ModSettings.maxShrineCombatPoints * 50f 
                     : ModSettings.maxShrineCombatPoints);
 
-            selected = Math.Max(80, StoryUtility.GetIncPoints(selected));
+            selected = Math.Max(Helper.ExpRM ? 0 : 80, StoryUtility.GetIncPoints(selected));
 
             var mechPawnGroupMakerParams = new PawnGroupMakerParms
             {

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
 <Defs>
-
+  <!-- used for ancient mech signal spell -->
   <ThingDef ParentName="CABaseMechanoidWalker">
     <defName>CAMech_Scyther</defName>
-    <label>strange scyther</label>
+    <label>summoned scyther</label>
     <description>Fast, spindly, human-sized combat mechanoids specializing in rapid approach and close-range combat. Their bodies are covered in points and blades, but they mostly use their two arm blades to lop off limbs or gut their victims alive.</description>
     <tools>
       <li>
@@ -60,7 +60,7 @@
 
   <PawnKindDef ParentName="BaseMechanoidKind">
     <defName>CAMech_Scyther</defName>
-    <label>scyther</label>
+    <label>summoned scyther</label>
     <race>CAMech_Scyther</race>
     <lifeStages>
       <!--<li MayRequire="Ludeon.Rimworld.Biotech">
@@ -95,7 +95,7 @@
     <techHediffsChance>1</techHediffsChance>
     <techHediffsMoney>9999~9999</techHediffsMoney>
 
-    <!-- lets try to disable it -->
+    <!-- lets try to disable it for other use cases -->
     <combatPower>340282346638528859811704183484516925440</combatPower>
     <allowInMechClusters>false</allowInMechClusters>
     <canBeSapper>false</canBeSapper>

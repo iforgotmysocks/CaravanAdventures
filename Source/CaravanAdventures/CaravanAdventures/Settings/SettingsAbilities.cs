@@ -106,7 +106,6 @@ namespace CaravanAdventures.Settings
                 Text.Font = GameFont.Medium;
                 options.Label("Compatibility Settings:".Colorize(Color.green), 30f);
                 Text.Font = GameFont.Small;
-                options.CheckboxLabeled("(SoS2) Protective Aura prevents Hypoxia", ref ModSettings.sos2AuraPreventsHypoxia);
                 options.CheckboxLabeled("(Sos2) Enable ship heat absorption for ancient aura", ref ModSettings.sos2AuraHeatManagementEnabled);
                 if (ModSettings.sos2AuraHeatManagementEnabled)
                 {

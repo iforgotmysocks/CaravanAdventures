@@ -32,7 +32,7 @@ namespace CaravanAdventures.CaravanAbilities
 
         private Pawn SpawnScyther(IntVec3 intVec, Pawn pawn, Faction faction)
         {
-            var scyther = PawnGenerator.GeneratePawn(PawnKindDef.Named(Helper.ExpSettings?.ancientMechSignalPawnKind?.defName ?? "Mech_Scyther"), faction);
+            var scyther = PawnGenerator.GeneratePawn(PawnKindDef.Named(Helper.ExpSettings?.ancientMechSignalPawnKind?.defName ?? "CAMech_Scyther"), faction);
             scyther.health.AddHediff(HediffDef.Named("CAOverheatingBrain"), scyther.health.hediffSet.GetBrain());
             scyther.forceNoDeathNotification = true;
             GenSpawn.Spawn(scyther, intVec, pawn.Map, WipeMode.Vanish);
