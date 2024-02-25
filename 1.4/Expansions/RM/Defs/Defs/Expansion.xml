@@ -6,6 +6,7 @@
     <assemblyName>Rimedieval</assemblyName>
     <expansionName>Rimedieval</expansionName>
     <replacesContent>true</replacesContent>
+    <!-- text replacement still needs to be added -->
     <langKeyPrefix>RM_</langKeyPrefix>
     <expSettingsDef>ExpRimedievalSettings</expSettingsDef>
   </CaravanAdventures.Expansions.ExpansionDef>
@@ -14,7 +15,8 @@
     <defName>ExpRimedievalSettings</defName>
     <ancientMechSignalPawnKind>Spelopede</ancientMechSignalPawnKind>
     <primaryEnemyFactionDef>Insect</primaryEnemyFactionDef>
-    <bossDefPrefix>RMBossMech</bossDefPrefix>
-    <endBossPawnKindDef>RMEndBossMech</endBossPawnKindDef>
+    <!-- disabled to use default mechs with a patch for now -->
+    <!--<bossDefPrefix>RMBossMech</bossDefPrefix>-->
+    <!--<endBossPawnKindDef>RMEndBossMech</endBossPawnKindDef>-->
   </CaravanAdventures.Expansions.Settings.ExpSettingsDef>
 </Defs>

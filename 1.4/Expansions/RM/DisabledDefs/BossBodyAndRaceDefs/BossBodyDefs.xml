@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
 <Defs>
-	<BodyDef>
+	<BodyDef MayRequire="Ogam.Rimedieval">
 		<defName>RMBossMechDevourerBody</defName>
 		<label>Devourer</label>
 		<corePart>
@@ -95,7 +95,7 @@
 		</corePart>
 	</BodyDef>
 
-	<BodyDef>
+	<BodyDef MayRequire="Ogam.Rimedieval">
 		<defName>RMCrystalScytheBody</defName>
 		<label>Crystal scythe</label>
 		<corePart>

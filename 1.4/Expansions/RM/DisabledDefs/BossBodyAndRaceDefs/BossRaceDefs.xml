@@ -2,7 +2,7 @@
 
 <Defs>
   <!-- base defs -->
-  <ThingDef ParentName="BasePawn" Name="RMBaseMechanoid" Abstract="True">
+  <ThingDef ParentName="BasePawn" Name="RMBaseMechanoid" Abstract="True" MayRequire="Ogam.Rimedieval">
     <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
     <statBases>
       <MarketValue>1200</MarketValue>
@@ -54,7 +54,7 @@
     </butcherProducts>
   </ThingDef>
 
-  <ThingDef ParentName="RMBaseMechanoid" Name="RMBaseMechanoidWalker" Abstract="True">
+  <ThingDef ParentName="RMBaseMechanoid" Name="RMBaseMechanoidWalker" Abstract="True" MayRequire="Ogam.Rimedieval">
     <statBases>
       <MoveSpeed>4.7</MoveSpeed>
       <ArmorRating_Blunt>0.20</ArmorRating_Blunt>
@@ -114,7 +114,7 @@
       <intelligence>ToolUser</intelligence>
       <thinkTreeMain>Mechanoid</thinkTreeMain>
       <body>MechanicalCentipede</body>
-      <baseBodySize>10.2</baseBodySize>
+      <baseBodySize>3.2</baseBodySize>
       <baseHealthScale>10</baseHealthScale>
       <lifeStageAges>
         <li>
