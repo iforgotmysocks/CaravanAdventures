@@ -51,11 +51,11 @@
         <bountyPoints>150</bountyPoints>
       </li>
       <li>
-        <raceDefName>MechCenturion</raceDefName>
+        <raceDefName>Mech_Centurion</raceDefName>
         <bountyPoints>75</bountyPoints>
       </li>
       <li>
-        <raceDefName>MechWarqueen</raceDefName>
+        <raceDefName>Mech_Warqueen</raceDefName>
         <bountyPoints>125</bountyPoints>
       </li>
       <li>
