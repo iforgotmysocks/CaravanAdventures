@@ -278,8 +278,7 @@ namespace CaravanAdventures.CaravanStory
             //CompatibilityPatches.TryRegionStuff();
             if (Helper.ExpRM) StoryUtility.EnsureEvilHostileFactionForExpansion(true);
 
-            // todo disable
-            Helper.PrintWorldPawns();
+            //Helper.PrintWorldPawns();
 
             ranDebugActionsOnceAtStartUp = true;
         }

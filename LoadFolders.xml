@@ -19,6 +19,5 @@
     <li IfModActive="CETeam.CombatExtended">1.4/CEPatches</li>
     <li IfModActive="Ludeon.Rimworld.Royalty">1.4/Expansions/RM/Defs</li>
     <li IfModActive="Ludeon.Rimworld.Royalty">1.4/Expansions/RM/Patches</li>
-    <!--<li IfModActive="CETeam.CombatExtended">1.4/Expansions/RM/CEPatches</li>-->
   </v1.4>
 </loadFolders>
