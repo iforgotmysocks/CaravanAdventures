@@ -15,11 +15,6 @@ namespace CaravanAdventures.CaravanStory.MechChips.Abilities
         public float AbsorbedDamage { get => absorbedDamage; set => absorbedDamage = value; }
         public float DamageFluxPerSec { get => damageFluxPerSec; set => damageFluxPerSec = value; }
 
-        public override void Draw()
-        {
-            base.Draw();
-        }
-
         public override void Tick()
         {
             base.Tick();

@@ -115,7 +115,7 @@ namespace CaravanAdventures.CaravanStory.MechChips.Abilities
             base.Impact(hitThing, blockedByShield);
         }
 
-        public override void Draw()
+        protected override void DrawAt(Vector3 drawLoc, bool flip = false)
         {
             float num = this.ArcHeightFactor * GenMath.InverseParabola(this.DistanceCoveredFraction);
             Vector3 drawPos = realPosition;
@@ -127,6 +127,19 @@ namespace CaravanAdventures.CaravanStory.MechChips.Abilities
             Graphics.DrawMesh(MeshPool.GridPlane(this.def.graphicData.drawSize), position, realRotation, this.def.DrawMatSingle, 0);
             base.Comps_PostDraw();
         }
+
+        //public override void Draw()
+        //{
+        //    float num = this.ArcHeightFactor * GenMath.InverseParabola(this.DistanceCoveredFraction);
+        //    Vector3 drawPos = realPosition;
+        //    Vector3 position = realPosition + new Vector3(0f, 0f, 1f) * num;
+        //    if (this.def.projectile.shadowSize > 0f)
+        //    {
+        //        this.DrawShadow(drawPos, num);
+        //    }
+        //    Graphics.DrawMesh(MeshPool.GridPlane(this.def.graphicData.drawSize), position, realRotation, this.def.DrawMatSingle, 0);
+        //    base.Comps_PostDraw();
+        //}
 
         private void DrawShadow(Vector3 drawLoc, float height)
         {

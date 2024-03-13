@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Rimedieval</li>
+    </mods>
+    <match Class="PatchOperationSequence">
+      <success>Always</success>
+      <operations>
+
+        <!--<li Class="PatchOperationReplace">
+          <xpath>Defs/PawnKindDef[defName="CADevourer" or defName="CACrystalScythe" or defName="CAHarbinger" or defName="CAHavoc" or defName="CAEndBossMech"]/lifeStages/li/bodyGraphicData/drawSize</xpath>
+          <value>
+            <drawSize>3</drawSize>
+          </value>
+        </li>-->
+
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ThingDef[@Name="CABaseMechanoid"]/race/fleshType</xpath>
+          <value>
+            <fleshType>Insectoid</fleshType>
+          </value>
+        </li>
+
+      </operations>
+    </match>
+  </Operation>
+
+</Patch>

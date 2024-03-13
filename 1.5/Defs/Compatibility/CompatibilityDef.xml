@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+  <!-- This def is used for mod compatibility. 
+  To exclude races from TravelCompanions or to add 
+  new mechanoids to the bounty system, you can patch this def.-->
+  <CaravanAdventures.CompatibilityDef>
+    <defName>CACompatDef</defName>
+
+    <!-- add race defs to exclude here -->
+    <raceDefsToExcludeFromTravelCompanions>
+      <li>RSPeacekeeperDefender</li>
+    </raceDefsToExcludeFromTravelCompanions>
+
+    <!-- add a race def's mod extention, which should be used to identify all race defs instead here, beware to include the namespace -->
+    <racesWithModExtsToExcludeFromTravelCompanions>
+      <li>RimsecSecurity.RSPeacekeeperModExt</li>
+    </racesWithModExtsToExcludeFromTravelCompanions>
+
+    <!-- add biome def names that conflict with ancient shrine map generation. Indicators for incompatibility are missing shrine walls -->
+    <excludedBiomeDefNamesForStoryShrineGeneration>
+      <!-- <li>SampleDefName</li> -->
+    </excludedBiomeDefNamesForStoryShrineGeneration>
+
+    <!-- add race defs to exclude from the ancient coordinator spell here -->
+    <raceDefsToExcludeFromAncientCoordinator>
+      <li>RSPeacekeeperDefender</li>
+      <li>SoSHologramRace</li>
+    </raceDefsToExcludeFromAncientCoordinator>
+
+    <!-- add a race def's mod extention, which should be used to identify all race defs instead here, beware to include the namespace -->
+    <racesWithModExtsToExcludeFromAncientCoordinator>
+      <li>RimsecSecurity.RSPeacekeeperModExt</li>
+    </racesWithModExtsToExcludeFromAncientCoordinator>
+
+    <!-- if ur race defs belong to a new faction that isn't mechanoids, add the faction def here-->
+    <additionalBountyFactionDefsToAdd>
+      <li>VFE_Mechanoid</li>
+    </additionalBountyFactionDefsToAdd>
+
+    <!-- add new mechanoid race defs with their bounty point rewards for a kill. Default bounties range from 12 to 45 points. Default for non listed mechanoids is 12 points (with a few exceptions). -->
+    <mechanoidBountyToAdd>
+      <!-- sample -->
+      <li>
+        <raceDefName>CABossMechHavoc</raceDefName>
+        <bountyPoints>500</bountyPoints>
+      </li>
+      <!-- Biotech - Bosses -->
+      <li>
+        <raceDefName>Mech_Apocriton</raceDefName>
+        <bountyPoints>150</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>Mech_Centurion</raceDefName>
+        <bountyPoints>75</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>Mech_Warqueen</raceDefName>
+        <bountyPoints>125</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>Mech_Diabolus</raceDefName>
+        <bountyPoints>100</bountyPoints>
+      </li>
+      <!-- Biotech - other mechs where 12 points aren't appropriate -->
+      <li>
+        <raceDefName>Mech_Militor</raceDefName>
+        <bountyPoints>8</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>Mech_Lifter</raceDefName>
+        <bountyPoints>4</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>Mech_Constructoid</raceDefName>
+        <bountyPoints>6</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>Mech_Fabricor</raceDefName>
+        <bountyPoints>6</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>Mech_Agrihand</raceDefName>
+        <bountyPoints>5</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>Mech_Cleansweeper</raceDefName>
+        <bountyPoints>4</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>Mech_WarUrchin</raceDefName>
+        <bountyPoints>4</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>Mech_Paramedic</raceDefName>
+        <bountyPoints>4</bountyPoints>
+      </li>
+    </mechanoidBountyToAdd>
+
+  </CaravanAdventures.CompatibilityDef>
+
+</Defs>

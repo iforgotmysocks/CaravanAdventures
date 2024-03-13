@@ -337,7 +337,7 @@ namespace CaravanAdventures.CaravanCamp
                 map.roofGrid.SetRoof(c, null);
                 map.fogGrid.Unfog(c);
                 var terrain = map.terrainGrid.TerrainAt(c);
-                if (!terrain.affordances.Any(x => (new[] { TerrainAffordanceDefOf.Bridgeable, TerrainAffordanceDefOf.Diggable, TerrainAffordanceDefOf.Light }).Contains(x))) map.terrainGrid.SetTerrain(c, TerrainDefOf.Gravel);
+                if (!terrain.affordances.Any(x => (new[] { TerrainAffordanceDefOf.Bridgeable, DefDatabase<TerrainAffordanceDef>.GetNamedSilentFail("Diggable"), TerrainAffordanceDefOf.Light }).Contains(x))) map.terrainGrid.SetTerrain(c, TerrainDefOf.Gravel);
                 else if (terrain.affordances.Contains(TerrainAffordanceDefOf.Bridgeable) && !terrain.affordances.Contains(TerrainAffordanceDefOf.Light)) map.terrainGrid.SetTerrain(c, TerrainDefOf.Bridge);
             }
             campSiteRect.ExpandedBy(1).EdgeCells.ToList().ForEach(cell => map.fogGrid.Unfog(cell));

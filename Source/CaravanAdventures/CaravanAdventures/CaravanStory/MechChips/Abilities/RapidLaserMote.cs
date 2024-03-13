@@ -18,7 +18,7 @@ namespace CaravanAdventures.CaravanStory.MechChips.Abilities
         private Material bufferMat = BeamMat;
         public IntVec3 offset = new IntVec3(0, 0, 0);
 
-        public override void Draw()
+        protected override void DrawAt(Vector3 drawLoc, bool flip = false)
         {
             if (launchObject == default || targetObject == default) return;
             launchPos = launchObject.Thing.DrawPos + offset.ToVector3();

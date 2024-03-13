@@ -62,13 +62,13 @@ namespace CaravanAdventures.CaravanCamp
         {
             var animalArea = new Area_Allowed(map.areaManager);
             map.areaManager.AllAreas.Add(animalArea);
-            animalArea.SetLabel("CAAnimalNoFoodAreaLabel".Translate());
+            animalArea.RenamableLabel = "CAAnimalNoFoodAreaLabel".Translate();
             map.AllCells.ToList().ForEach(cell => animalArea[cell] = true);
             parts.OfType<IZoneTent>().Where(part => part.GetZone() != null).Select(part => part.GetZone()).ToList().ForEach(zone => zone.Cells.ForEach(cell => animalArea[cell] = false));
             parts.OfType<PlantTent>().ToList().ForEach(tent => tent.CellRect.Cells.Where(cell => !tent.CellRect.EdgeCells.Contains(cell)).ToList().ForEach(cell => animalArea[cell] = false));
             animalArea.AreaUpdate();
 
-            if (assignAnimals) foreach (var animal in caravan.PawnsListForReading.Where(pawn => pawn.RaceProps.Animal)) animal.playerSettings.AreaRestriction = animalArea;
+            if (assignAnimals) foreach (var animal in caravan.PawnsListForReading.Where(pawn => pawn.RaceProps.Animal)) animal.playerSettings.AreaRestrictionInPawnCurrentMap = animalArea;
         }
 
         public static void AssignQualityReflectiveOfSkill(Building thing, int skillLevel, int lowestSkill = 6)

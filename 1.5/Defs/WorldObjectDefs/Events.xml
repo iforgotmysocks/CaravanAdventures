@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+  <WorldObjectDef>
+    <defName>CADamselInDistressMapParent</defName>
+    <label>Damsel in distress</label>
+    <description>A damsel in distress</description>
+    <worldObjectClass>CaravanAdventures.CaravanIncidents.DamselInDistressMapParent</worldObjectClass>
+    <texture>World/WorldObjects/Ambush</texture>
+    <expandingIcon>true</expandingIcon>
+    <expandingIconTexture>World/WorldObjects/Expanding/Ambush</expandingIconTexture>
+    <expandingIconPriority>80</expandingIconPriority>
+    <expandMore>true</expandMore>
+    <blockExitGridUntilBattleIsWon>false</blockExitGridUntilBattleIsWon>
+    <isTempIncidentMapOwner>true</isTempIncidentMapOwner>
+    <IncidentTargetTags>
+      <li>Map_TempIncident</li>
+    </IncidentTargetTags>
+    <comps>
+      <li Class="WorldObjectCompProperties_FormCaravan" />
+			<li Class="WorldObjectCompProperties_TimedDetectionRaids" />
+    </comps>
+  </WorldObjectDef>
+
+</Defs>

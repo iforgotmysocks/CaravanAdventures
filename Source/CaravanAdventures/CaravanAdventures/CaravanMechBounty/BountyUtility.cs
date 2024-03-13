@@ -34,8 +34,8 @@ namespace CaravanAdventures.CaravanMechBounty
                 if (veteran.ageTracker.AgeChronologicalTicks < newAge) veteran.ageTracker.AgeChronologicalTicks = newAge;
             }
             foreach (var trait in veteran.story.traits.allTraits.Reverse<Trait>()) veteran.story.traits.allTraits.Remove(trait);
-            if (TraitDefOf.Tough != null) veteran.story.traits.GainTrait(new Trait(TraitDefOf.Tough));
-            if (TraitDefOf.Beauty != null && Rand.Chance(0.2f)) veteran.story.traits.GainTrait(new Trait(TraitDefOf.Beauty, 2));
+            if (DefDatabase<TraitDef>.GetNamedSilentFail("Tough") != null) veteran.story.traits.GainTrait(new Trait(DefDatabase<TraitDef>.GetNamedSilentFail("Tough")));
+            if (DefDatabase<TraitDef>.GetNamedSilentFail("Beauty") != null && Rand.Chance(0.2f)) veteran.story.traits.GainTrait(new Trait(DefDatabase<TraitDef>.GetNamedSilentFail("Beauty"), 2));
             if (selPersonality != null) veteran.story.traits.GainTrait(new Trait(selPersonality, selPersonality.degreeDatas.OrderByDescending(data => data.degree).FirstOrDefault().degree));
             if (selSkill != null) veteran.story.traits.GainTrait(new Trait(selSkill, selSkill.degreeDatas.OrderByDescending(data => data.degree).FirstOrDefault().degree));
             return veteran;
@@ -54,8 +54,8 @@ namespace CaravanAdventures.CaravanMechBounty
                     && (!backstory?.DisabledWorkTypes?.Any() ?? true)
                     && (!backstory?.disallowedTraits?.Any() ?? true)
                     && backstory?.slot == BackstorySlot.Childhood
-                    && ((backstory?.skillGains?.Any(x => x.Key == SkillDefOf.Shooting && x.Value > 0) ?? false)
-                        || (backstory?.skillGains?.Any(x => x.Key == SkillDefOf.Melee && x.Value > 0) ?? false))
+                    && ((backstory?.skillGains?.Any(x => x.skill == SkillDefOf.Shooting && x.amount > 0) ?? false)
+                        || (backstory?.skillGains?.Any(x => x.skill == SkillDefOf.Melee && x.amount > 0) ?? false))
                     ).InRandomOrder().FirstOrDefault();
         }
 
@@ -68,8 +68,8 @@ namespace CaravanAdventures.CaravanMechBounty
                     (!backstory?.DisabledWorkTypes?.Any() ?? true)
                     && (!backstory?.disallowedTraits?.Any() ?? true)
                     && backstory.slot == BackstorySlot.Adulthood
-                    && ((backstory?.skillGains?.Any(x => x.Key == SkillDefOf.Shooting && x.Value > 0) ?? false)
-                        || (backstory?.skillGains?.Any(x => x.Key == SkillDefOf.Melee && x.Value > 0) ?? false))
+                    && ((backstory?.skillGains?.Any(x => x.skill == SkillDefOf.Shooting && x.amount > 0) ?? false)
+                        || (backstory?.skillGains?.Any(x => x.skill == SkillDefOf.Melee && x.amount > 0) ?? false))
                     ).InRandomOrder().FirstOrDefault();
         }
 

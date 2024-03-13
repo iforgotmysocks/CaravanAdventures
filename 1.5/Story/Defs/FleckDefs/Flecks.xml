@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Defs>
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>AncientProtectiveAuraFleck</defName>
+    <graphicData>
+      <texPath>Other/ForceField</texPath>
+      <!--<shaderType>TransparentPostLight</shaderType>-->
+      <shaderType>MoteGlow</shaderType>
+      <color>(0.6, 1, 0.6)</color>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.5</fadeInTime>
+    <solidTime>1</solidTime>
+    <fadeOutTime>0.5</fadeOutTime>
+    <growthRate>1</growthRate>
+  </FleckDef>
+
+  <FleckDef Name="ConjuredLightParentOrg" ParentName="FleckBase_Thrown" Abstract="true">
+    <fadeInTime>0.5</fadeInTime>
+    <solidTime>1</solidTime>
+    <fadeOutTime>0.5</fadeOutTime>
+    <growthRate>0.2</growthRate>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+  </FleckDef>
+
+  <FleckDef Name="ConjuredLightParent" ParentName="FleckBase_Thrown" Abstract="true">
+    <fadeInTime>0.5</fadeInTime>
+    <solidTime>1.2</solidTime>
+    <fadeOutTime>0.2</fadeOutTime>
+    <growthRate>0.2</growthRate>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+  </FleckDef>
+
+  <FleckDef Name="ConjuredLightParentSolid" ParentName="FleckBase_Thrown" Abstract="true">
+    <fadeInTime>0</fadeInTime>
+    <solidTime>3</solidTime>
+    <fadeOutTime>0</fadeOutTime>
+    <growthRate>0.2</growthRate>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+  </FleckDef>
+  
+  <FleckDef ParentName="ConjuredLightParent">
+    <defName>ConjuredLightFleck</defName>
+    <graphicData>
+      <texPath>Things/Flecks/ConjuredLight</texPath>
+      <!--<shaderType>TransparentPostLight</shaderType>-->
+      <color>(0.6, 1, 0.6)</color>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>(1,1)</drawSize>
+    </graphicData>
+  </FleckDef>
+
+  <FleckDef ParentName="ConjuredLightParent">
+    <defName>ConjuredLightFleckSmallRotate1</defName>
+    <graphicData>
+      <texPath>Things/Flecks/ConjuredLightSmallCorner1</texPath>
+      <!--<shaderType>TransparentPostLight</shaderType>-->
+      <color>(0.6, 1, 0.6)</color>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>(1,1)</drawSize>
+    </graphicData>
+  </FleckDef>
+
+  <FleckDef ParentName="ConjuredLightParent">
+    <defName>ConjuredLightFleckSmallRotate2</defName>
+    <graphicData>
+      <texPath>Things/Flecks/ConjuredLightSmallCorner2</texPath>
+      <!--<shaderType>TransparentPostLight</shaderType>-->
+      <color>(0.6, 1, 0.6)</color>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>(1,1)</drawSize>
+    </graphicData>
+  </FleckDef>
+
+  <FleckDef ParentName="ConjuredLightParent">
+    <defName>ConjuredLightFleckSmallRotate3</defName>
+    <graphicData>
+      <texPath>Things/Flecks/ConjuredLightSmallCorner3</texPath>
+      <!--<shaderType>TransparentPostLight</shaderType>-->
+      <color>(0.6, 1, 0.6)</color>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>(1,1)</drawSize>
+    </graphicData>
+  </FleckDef>
+  
+  
+</Defs>

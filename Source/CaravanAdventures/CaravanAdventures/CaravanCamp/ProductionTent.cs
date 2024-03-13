@@ -94,16 +94,16 @@ namespace CaravanAdventures.CaravanCamp
             var cooler = CampHelper.PrepAndGenerateThing(ThingDefOf.PassiveCooler, passiveCoolerPos, map, default, campAssetListRef);
             CampHelper.RefuelByPerc(cooler, -1);
 
-            CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDefOf.Stool, ThingDefOf.WoodLog), new IntVec3(CellRect.minX + 3, 0, CellRect.minZ + 2), map, default, campAssetListRef);
-            CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDefOf.Stool, ThingDefOf.WoodLog), new IntVec3(CellRect.minX + 4, 0, CellRect.minZ + 2), map, default, campAssetListRef);
-            CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDefOf.Stool, ThingDefOf.WoodLog), new IntVec3(CellRect.maxX - 2, 0, CellRect.minZ + 2), map, default, campAssetListRef);
-            CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDefOf.Stool, ThingDefOf.WoodLog), new IntVec3(CellRect.maxX - 3, 0, CellRect.minZ + 2), map, default, campAssetListRef);
+            CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(DefDatabase<ThingDef>.GetNamedSilentFail("Stool"), ThingDefOf.WoodLog), new IntVec3(CellRect.minX + 3, 0, CellRect.minZ + 2), map, default, campAssetListRef);
+            CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(DefDatabase<ThingDef>.GetNamedSilentFail("Stool"), ThingDefOf.WoodLog), new IntVec3(CellRect.minX + 4, 0, CellRect.minZ + 2), map, default, campAssetListRef);
+            CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(DefDatabase<ThingDef>.GetNamedSilentFail("Stool"), ThingDefOf.WoodLog), new IntVec3(CellRect.maxX - 2, 0, CellRect.minZ + 2), map, default, campAssetListRef);
+            CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(DefDatabase<ThingDef>.GetNamedSilentFail("Stool"), ThingDefOf.WoodLog), new IntVec3(CellRect.maxX - 3, 0, CellRect.minZ + 2), map, default, campAssetListRef);
         }
 
         public virtual void ApplyRecipes(Caravan caravan)
         {
             var bill = new Bill_Production(DefDatabase<RecipeDef>.GetNamed("ButcherCorpseFlesh")) { repeatMode = BillRepeatModeDefOf.Forever };
-            bill.ingredientFilter.SetAllow(ThingCategoryDefOf.CorpsesInsect, ModSettings.campStorageAndJobsAllowInsectMeat);
+            bill.ingredientFilter.SetAllow(DefDatabase<ThingCategoryDef>.GetNamedSilentFail("CorpsesInsect"), ModSettings.campStorageAndJobsAllowInsectMeat);
             bill.ingredientFilter.SetAllow(ThingCategoryDefOf.CorpsesHumanlike, ModSettings.campStorageAndJobsAllowHumanMeat);
             tableButcher.BillStack.AddBill(bill);
 
@@ -154,7 +154,7 @@ namespace CaravanAdventures.CaravanCamp
             }
                 
             var bill = new Bill_Production(DefDatabase<RecipeDef>.GetNamed("ButcherCorpseFlesh")) { repeatMode = BillRepeatModeDefOf.Forever };
-            bill.ingredientFilter.SetAllow(ThingCategoryDefOf.CorpsesInsect, ModSettings.campStorageAndJobsAllowHumanMeat);
+            bill.ingredientFilter.SetAllow(DefDatabase<ThingCategoryDef>.GetNamedSilentFail("CorpsesInsect"), ModSettings.campStorageAndJobsAllowHumanMeat);
             bill.ingredientFilter.SetAllow(ThingCategoryDefOf.CorpsesHumanlike, ModSettings.campStorageAndJobsAllowHumanMeat);
             tableButcher.BillStack.AddBill(bill);
 

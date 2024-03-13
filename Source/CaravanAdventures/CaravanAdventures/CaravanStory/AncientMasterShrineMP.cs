@@ -423,7 +423,8 @@ namespace CaravanAdventures.CaravanStory
             Map.mapPawns.AllPawnsSpawned.Where(x => x.Faction == Helper.ExpRMNewFaction && !x?.Dead == true).ToList().ForEach(mech =>
             {
                 var comp = mech.TryGetComp<CompWakeUpDormant>();
-                comp?.Activate();
+                // todo v1.7 check up on this, may need approvements
+                comp?.Activate(Map.mapPawns.FreeColonistsSpawned.FirstOrDefault());
             });
             FreeAllMechsOnMap();
             var patrolComp = GetComponent<TimedDetectionPatrols>();
@@ -514,12 +515,12 @@ namespace CaravanAdventures.CaravanStory
             if (!bossDefeatedAndRewardsGiven) CompCache.StoryWC.ResetCurrentShrineFlags();
             if (lastJudgmentMP != null && !CompCache.StoryWC.storyFlags["Judgment_StoryOverDialog"])
             {
-                Current.Game.DeinitAndRemoveMap(lastJudgmentMP.Map);
+                Current.Game.DeinitAndRemoveMap(lastJudgmentMP.Map, false);
                 lastJudgmentMP.Destroy();
                 CompCache.StoryWC.SetSFsStartingWith("Judgment");
             }
             this.abandonShrine = true;
-            Current.Game.DeinitAndRemoveMap(Map);
+            Current.Game.DeinitAndRemoveMap(Map, false);
             this.Destroy();
         }
 

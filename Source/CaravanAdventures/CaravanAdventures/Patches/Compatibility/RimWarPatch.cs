@@ -39,7 +39,7 @@ namespace CaravanAdventures.Patches.Compatibility
             Log.Message($"Updated the current rimwar victory / rival faction from sacrileg hunters to {newHostileFaction}.");
             var existingLetter = Find.LetterStack.LettersListForReading.LastOrDefault();
             if (existingLetter != null) Find.LetterStack.RemoveLetter(existingLetter);
-            Find.LetterStack.ReceiveLetter("RW_VictoryChallengeLabel".Translate(), "RW_VictoryChallengeMessage".Translate(newHostileFaction.Name), LetterDefOf.ThreatBig, null);
+            Find.LetterStack.ReceiveLetter("RW_VictoryChallengeLabel".Translate(), "RW_VictoryChallengeMessage".Translate(newHostileFaction.Name), LetterDefOf.ThreatBig, null, null, null, null);
         }
     }
 }

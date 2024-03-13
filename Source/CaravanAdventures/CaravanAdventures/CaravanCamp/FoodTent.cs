@@ -9,7 +9,7 @@ namespace CaravanAdventures.CaravanCamp
     public class FoodTent : Tent, IZoneTent
     {
         protected Zone_Stockpile zone;
-        protected ThingCategoryDef[] validFoods = new[] { ThingCategoryDefOf.FoodMeals, ThingCategoryDefOf.Foods, ThingCategoryDefOf.MeatRaw };
+        protected ThingCategoryDef[] validFoods = new[] { DefDatabase<ThingCategoryDef>.GetNamedSilentFail("FoodMeals"), ThingCategoryDefOf.Foods, ThingCategoryDefOf.MeatRaw };
         protected ThingDef[] unvalidFoods = new[] { ThingDefOf.Kibble, ThingDefOf.Hay, ThingDefOf.MealSurvivalPack };
 
         public FoodTent()
@@ -46,7 +46,7 @@ namespace CaravanAdventures.CaravanCamp
             zone.settings.filter.SetAllow(ThingDefOf.Hay, false);
             zone.settings.filter.SetAllow(ThingDef.Named("Meat_Megaspider"), ModSettings.campStorageAndJobsAllowInsectMeat);
             zone.settings.filter.SetAllow(ThingCategoryDefOf.CorpsesAnimal, true);
-            zone.settings.filter.SetAllow(ThingCategoryDefOf.CorpsesInsect, ModSettings.campStorageAndJobsAllowInsectMeat);
+            zone.settings.filter.SetAllow(DefDatabase<ThingCategoryDef>.GetNamedSilentFail("CorpsesInsect"), ModSettings.campStorageAndJobsAllowInsectMeat);
             zone.settings.filter.SetAllow(ThingCategoryDefOf.CorpsesHumanlike, ModSettings.campStorageAndJobsAllowHumanMeat);
             zone.settings.filter.SetAllow(ThingDefOf.Meat_Human, ModSettings.campStorageAndJobsAllowHumanMeat);
             zone.settings.Priority = StoragePriority.Important;
@@ -58,7 +58,7 @@ namespace CaravanAdventures.CaravanCamp
         public virtual void ApplyInventory(Map map, Caravan caravan)
         {
             if (ModSettings.campStorageAndJobsAllowHumanMeat) validFoods.Append(ThingCategoryDefOf.CorpsesHumanlike);
-            if (ModSettings.campStorageAndJobsAllowInsectMeat) validFoods.Append(ThingCategoryDefOf.CorpsesInsect);
+            if (ModSettings.campStorageAndJobsAllowInsectMeat) validFoods.Append(DefDatabase<ThingCategoryDef>.GetNamedSilentFail("CorpsesInsect"));
 
             foreach (var cell in zone.Cells)
             {

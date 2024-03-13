@@ -51,7 +51,7 @@ namespace CaravanAdventures.CaravanStory
 		{
 			var terrain = c.GetTerrain(map);
 			if (terrain.affordances.Contains(surfaceType)) return true;
-			else if (terrain.affordances.Contains(TerrainAffordanceDefOf.Bridgeable) || terrain.affordances.Contains(TerrainAffordanceDefOf.Diggable))
+			else if (terrain.affordances.Contains(TerrainAffordanceDefOf.Bridgeable) || terrain.affordances.Contains(DefDatabase<TerrainAffordanceDef>.GetNamedSilentFail("Diggable")))
 			{
 				//map.terrainGrid.SetTerrain(c, TerrainDefOf.FlagstoneSandstone);
 				return true;
@@ -173,7 +173,7 @@ namespace CaravanAdventures.CaravanStory
 				{
 					if (!map.terrainGrid.TerrainAt(c2).affordances.Contains(terrainAffordanceNeed))
 					{
-						if (map.terrainGrid.TerrainAt(c2).affordances.Contains(TerrainAffordanceDefOf.Bridgeable) || map.terrainGrid.TerrainAt(c2).affordances.Contains(TerrainAffordanceDefOf.Diggable)) newTerrainCells.Add(c2);
+						if (map.terrainGrid.TerrainAt(c2).affordances.Contains(TerrainAffordanceDefOf.Bridgeable) || map.terrainGrid.TerrainAt(c2).affordances.Contains(DefDatabase<TerrainAffordanceDef>.GetNamedSilentFail("Diggable"))) newTerrainCells.Add(c2);
 						else
 						{
 							DLog.Message($"Failing affordance for terrain def: {map.terrainGrid.TerrainAt(c2).defName}");
@@ -188,7 +188,7 @@ namespace CaravanAdventures.CaravanStory
 							TerrainDef terrainDef = thingList[i].def.entityDefToBuild as TerrainDef;
 							if (terrainDef != null && !terrainDef.affordances.Contains(terrainAffordanceNeed))
 							{
-								if (!terrainDef.affordances.Contains(TerrainAffordanceDefOf.Bridgeable) && !terrainDef.affordances.Contains(TerrainAffordanceDefOf.Diggable))
+								if (!terrainDef.affordances.Contains(TerrainAffordanceDefOf.Bridgeable) && !terrainDef.affordances.Contains(DefDatabase<TerrainAffordanceDef>.GetNamedSilentFail("Diggable")))
 								{
 									DLog.Message($"thinglist affordinace failed");
 									return false;

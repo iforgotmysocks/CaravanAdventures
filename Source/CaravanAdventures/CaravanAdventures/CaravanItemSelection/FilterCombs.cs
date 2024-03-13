@@ -30,7 +30,7 @@ namespace CaravanAdventures.CaravanItemSelection
                 ThingCategoryDefOf.Corpses,
                 ThingCategoryDefOf.CorpsesAnimal,
                 ThingCategoryDefOf.CorpsesHumanlike,
-                ThingCategoryDefOf.CorpsesInsect,
+                DefDatabase<ThingCategoryDef>.GetNamedSilentFail("CorpsesInsect"),
                 ThingCategoryDefOf.CorpsesMechanoid })
             {
                 Name = "Corpses",

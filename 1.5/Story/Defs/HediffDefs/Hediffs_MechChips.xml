@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <HediffDef Name="MechChipHediffBase" Abstract = "True">
+    <hediffClass>HediffWithComps</hediffClass>
+    <comps>
+      <li Class="HediffCompProperties_DisappearsOnDeath"/>
+    </comps>
+  </HediffDef>
+
+  <HediffDef ParentName = "MechChipHediffBase">
+    <defName>CAEXT1Basic</defName>
+    <label>EXT1 Basic</label>
+    <isBad>false</isBad>
+    <everCurableByItem>false</everCurableByItem>
+    <defaultLabelColor>(255, 20, 20)</defaultLabelColor>
+    <description>Enables machines to use advanced combat logic depending on the version, connect to dormant networks and utilize a set of terrifying abilities.</description>
+    <comps>
+      <li Class="CaravanAdventures.CaravanStory.MechChips.HediffCompProperties_EXT1Basic">
+        <compClass>CaravanAdventures.CaravanStory.MechChips.HediffComp_EXT1Basic</compClass>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <statOffsets>
+					<MoveSpeed>0</MoveSpeed>
+          <ArmorRating_Sharp>0.5</ArmorRating_Sharp>
+					<PsychicSensitivity>-0.2</PsychicSensitivity>
+        </statOffsets>
+        <statFactors>
+          <IncomingDamageFactor>0.7</IncomingDamageFactor>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef ParentName = "MechChipHediffBase">
+    <defName>CAEXT1Artillary</defName>
+    <label>EXT1 Artillary</label>
+    <isBad>false</isBad>
+    <everCurableByItem>false</everCurableByItem>
+    <defaultLabelColor>(255, 20, 20)</defaultLabelColor>
+    <description>Enables machines to use advanced combat logic depending on the version, connect to dormant networks and utilize a set of terrifying abilities.</description>
+    <comps>
+      <li Class="CaravanAdventures.CaravanStory.MechChips.HediffCompProperties_EXT1Basic">
+        <compClass>CaravanAdventures.CaravanStory.MechChips.HediffComp_EXT1Artillary</compClass>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <statOffsets>
+          <MoveSpeed>-1</MoveSpeed>
+          <ArmorRating_Sharp>0.2</ArmorRating_Sharp>
+          <ArmorRating_Blunt>0.3</ArmorRating_Blunt>
+        </statOffsets>
+        <statFactors>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+	
+  <HediffDef ParentName = "MechChipHediffBase">
+    <defName>CAEXT1Melee</defName>
+    <label>EXT1 Melee</label>
+    <isBad>false</isBad>
+    <everCurableByItem>false</everCurableByItem>
+    <defaultLabelColor>(255, 20, 20)</defaultLabelColor>
+    <description>Enables machines to use advanced combat logic depending on the version, connect to dormant networks and utilize a set of terrifying abilities.</description>
+    <comps>
+      <li Class="CaravanAdventures.CaravanStory.MechChips.HediffCompProperties_EXT1Melee">
+        <compClass>CaravanAdventures.CaravanStory.MechChips.HediffComp_EXT1Melee</compClass>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <statOffsets>
+					<MoveSpeed>+1</MoveSpeed>
+        </statOffsets>
+        <statFactors>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+  
+  <HediffDef ParentName = "MechChipHediffBase">
+    <defName>CAEXT1Laser</defName>
+    <label>EXT1 Laser</label>
+    <isBad>false</isBad>
+    <everCurableByItem>false</everCurableByItem>
+    <defaultLabelColor>(255, 20, 20)</defaultLabelColor>
+    <description>Enables machines to use advanced combat logic depending on the version, connect to dormant networks and utilize a set of terrifying abilities.</description>
+    <comps>
+      <li>
+        <compClass>CaravanAdventures.CaravanStory.MechChips.HediffComp_EXT1Laser</compClass>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <statOffsets>
+        </statOffsets>
+        <statFactors>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef ParentName = "MechChipHediffBase">
+    <defName>CAEXT1Guardian</defName>
+    <label>EXT1 Guardian</label>
+    <isBad>false</isBad>
+    <everCurableByItem>false</everCurableByItem>
+    <defaultLabelColor>(255, 20, 20)</defaultLabelColor>
+    <description>Enables machines to use advanced combat logic depending on the version, connect to dormant networks and utilize a set of terrifying abilities.</description>
+    <comps>
+      <li>
+        <compClass>CaravanAdventures.CaravanStory.MechChips.HediffComp_EXT1Guardian</compClass>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <statOffsets>
+        </statOffsets>
+        <statFactors>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef ParentName = "MechChipHediffBase">
+    <defName>CAEXT1Missile</defName>
+    <label>EXT1 Missile</label>
+    <isBad>false</isBad>
+    <everCurableByItem>false</everCurableByItem>
+    <defaultLabelColor>(255, 20, 20)</defaultLabelColor>
+    <description>Enables machines to use advanced combat logic depending on the version, connect to dormant networks and utilize a set of terrifying abilities.</description>
+    <comps>
+      <li>
+        <compClass>CaravanAdventures.CaravanStory.MechChips.HediffComp_EXT1Missile</compClass>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <statOffsets>
+        </statOffsets>
+        <statFactors>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+</Defs>

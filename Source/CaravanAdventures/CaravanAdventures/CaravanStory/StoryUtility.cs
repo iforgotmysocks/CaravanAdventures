@@ -356,7 +356,7 @@ namespace CaravanAdventures.CaravanStory
                     Helper.RunSafely(() =>
                     {
                         DLog.Message($"Removing no longer needed {messageFactionName} settlement." + (ModsConfig.IdeologyActive ? "The possibly following Notify error can be ignored" : ""));
-                        if (settlement is MapParent parent && parent?.HasMap == true) Current.Game.DeinitAndRemoveMap(parent.Map);
+                        if (settlement is MapParent parent && parent?.HasMap == true) Current.Game.DeinitAndRemoveMap(parent.Map, false);
                         settlement.Destroy();
                     });
                 }
@@ -561,8 +561,8 @@ namespace CaravanAdventures.CaravanStory
             //girl.story.hairDef = 
             DLog.Message("Generated main quest pawn");
 
-            girl.story.traits.allTraits.RemoveAll(x => x.def == TraitDefOf.Beauty);
-            girl.story.traits.GainTrait(new Trait(TraitDefOf.Beauty, 2));
+            girl.story.traits.allTraits.RemoveAll(x => x.def == DefDatabase<TraitDef>.GetNamedSilentFail("Beauty"));
+            girl.story.traits.GainTrait(new Trait(DefDatabase<TraitDef>.GetNamedSilentFail("Beauty"), 2));
 
             if (!Find.WorldPawns.Contains(girl)) Find.WorldPawns.PassToWorld(girl, PawnDiscardDecideMode.KeepForever);
             CompCache.StoryWC.questCont.Village.StoryContact = girl;
@@ -573,7 +573,7 @@ namespace CaravanAdventures.CaravanStory
         public static void GiveClothes(Pawn pawn)
         {
             pawn.apparel.HasBasicApparel(out var hasPants, out var hasShirt);
-            var stuff = ThingDefOf.Hyperweave ?? ThingDefOf.Cloth;
+            var stuff = DefDatabase<ThingDef>.GetNamedSilentFail("Hyperweave") ?? ThingDefOf.Cloth;
             if (!hasPants)
             {
                 var pants = ThingMaker.MakeThing(DefDatabase<ThingDef>.GetNamedSilentFail("Apparel_Pants"), stuff) as Apparel;
@@ -828,7 +828,7 @@ namespace CaravanAdventures.CaravanStory
                 DLog.Message($"Trying to destroy settlement {settlement.Name}");
                 DLog.Message($"settlement mp: {settlement.def.defName}");
                 if (settlement.def.defName != "StoryVillageMP") return;
-                if (settlement.HasMap) Current.Game.DeinitAndRemoveMap(settlement.Map);
+                if (settlement.HasMap) Current.Game.DeinitAndRemoveMap(settlement.Map, false);
                 settlement.Destroy();
             }
             var destroyedSettlement = CompCache.StoryWC.questCont.Village.DestroyedSettlement;
@@ -837,7 +837,7 @@ namespace CaravanAdventures.CaravanStory
                 DLog.Message($"Trying to destroy destroyed settlement");
                 DLog.Message($"destroyed settlement mp: {destroyedSettlement.def.defName}");
                 if (destroyedSettlement.def != WorldObjectDefOf.DestroyedSettlement) return;
-                if (destroyedSettlement.HasMap) Current.Game.DeinitAndRemoveMap(destroyedSettlement.Map);
+                if (destroyedSettlement.HasMap) Current.Game.DeinitAndRemoveMap(destroyedSettlement.Map, false);
                 destroyedSettlement.Destroy();
             }
 
@@ -855,7 +855,7 @@ namespace CaravanAdventures.CaravanStory
                 var mapParent = site as MapParent;
                 if (mapParent != null)
                 {
-                    if (mapParent.HasMap) Current.Game.DeinitAndRemoveMap(mapParent.Map);
+                    if (mapParent.HasMap) Current.Game.DeinitAndRemoveMap(mapParent.Map, false);
                     else DLog.Warning($"Didn't have a map to remove: {site.Label} {site.def.defName}");
                 }
                 else DLog.Warning($"Couldn't convert site to MapParent and check for a map to remove: {site.Label} {site.def.defName}");

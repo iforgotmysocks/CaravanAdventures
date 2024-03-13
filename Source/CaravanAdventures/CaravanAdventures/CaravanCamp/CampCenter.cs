@@ -31,13 +31,13 @@ namespace CaravanAdventures.CaravanCamp
             CampHelper.PrepAndGenerateThing(ThingDefOf.TorchLamp, location, map, default, campAssetListRef);
 
             location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.minX + 2 && cell.z == CellRect.maxZ - 1);
-            CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDefOf.Stool, ThingDefOf.WoodLog), location, map, default, campAssetListRef);
+            CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(DefDatabase<ThingDef>.GetNamedSilentFail("Stool"), ThingDefOf.WoodLog), location, map, default, campAssetListRef);
 
             location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.minX + 3 && cell.z == CellRect.minZ);
             CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("Table1x2c"), ThingDefOf.WoodLog), location, map, Rot4.East, campAssetListRef);
 
             CellRect.Cells.Where(cell => cell.z == CellRect.minZ + 1 && cell.x != CellRect.minX + 2).ToList().ForEach(cell =>
-            CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDefOf.Stool, ThingDefOf.WoodLog), cell, map, default, campAssetListRef));
+            CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(DefDatabase<ThingDef>.GetNamedSilentFail("Stool"), ThingDefOf.WoodLog), cell, map, default, campAssetListRef));
 
             location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.minX && cell.z == CellRect.minZ + 2);
             CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("Column"), ThingDefOf.WoodLog), location, map, Rot4.North, campAssetListRef);
@@ -46,13 +46,13 @@ namespace CaravanAdventures.CaravanCamp
             CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("Column"), ThingDefOf.WoodLog), location, map, Rot4.North, campAssetListRef);
 
             location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.minX && cell.z == CellRect.maxZ);
-            CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDefOf.Stool, ThingDefOf.WoodLog), location, map, default, campAssetListRef);
+            CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(DefDatabase<ThingDef>.GetNamedSilentFail("Stool"), ThingDefOf.WoodLog), location, map, default, campAssetListRef);
 
             location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.minX + 1 && cell.z == CellRect.maxZ);
             CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("ChessTable"), ThingDefOf.WoodLog), location, map, default, campAssetListRef);
 
             location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.minX + 2 && cell.z == CellRect.maxZ);
-            CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDefOf.Stool, ThingDefOf.WoodLog), location, map, default, campAssetListRef);
+            CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(DefDatabase<ThingDef>.GetNamedSilentFail("Stool"), ThingDefOf.WoodLog), location, map, default, campAssetListRef);
 
             location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.maxX && cell.z == CellRect.maxZ);
             CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("HorseshoesPin"), ThingDefOf.WoodLog), location, map, default, campAssetListRef);

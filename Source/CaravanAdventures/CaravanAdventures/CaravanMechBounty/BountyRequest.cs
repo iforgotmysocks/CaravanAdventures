@@ -172,7 +172,7 @@ namespace CaravanAdventures.CaravanMechBounty
         }
 
         private object[] customRewardsRoyalty = !ModsConfig.RoyaltyActive ? new object[] { } : new object[] { ThingCategoryDef.Named("WeaponsMeleeBladelink"), ThingDef.Named("AnimusStone") };
-        private List<object> customRewards = new List<object>() { ThingDefOf.VanometricPowerCell, ThingDefOf.InfiniteChemreactor };
+        private List<object> customRewards = new List<object>() { DefDatabase<ThingDef>.GetNamedSilentFail("VanometricPowerCell"), DefDatabase<ThingDef>.GetNamedSilentFail("InfiniteChemreactor") };
         private List<GeneDef> customRewardsGene = new List<GeneDef>() {
             DefDatabase<GeneDef>.AllDefs.FirstOrDefault(x => x.defName == "Ageless"),
             DefDatabase<GeneDef>.AllDefs.FirstOrDefault(x => x.defName == "TotalHealing"),
@@ -236,7 +236,7 @@ namespace CaravanAdventures.CaravanMechBounty
             var containerItem = ThingMaker.MakeThing(container) as Genepack;
             var existingGene = containerItem?.GeneSet?.GenesListForReading?.FirstOrDefault();
             if (existingGene == null) return null;
-            if (ModSettings.architeGeneChance == 0 || !Rand.Chance(ModSettings.architeGeneChance / 100f)) return containerItem; 
+            if (ModSettings.architeGeneChance == 0 || !Rand.Chance(ModSettings.architeGeneChance / 100f)) return containerItem;
             foreach (var gene in containerItem.GeneSet.GenesListForReading.Reverse<GeneDef>()) containerItem.GeneSet.Debug_RemoveGene(gene);
             containerItem.GeneSet.AddGene(customItems.RandomElement());
             return containerItem;
@@ -427,7 +427,7 @@ namespace CaravanAdventures.CaravanMechBounty
         private DiaNode PickVeteranPersonality(DiaNode parent, int cost, bool tribal = false)
         {
             var personalityTraits = new[] {
-                TraitDefOf.Cannibal,
+                 DefDatabase<TraitDef>.GetNamedSilentFail("Cannibal"),
                 TraitDefOf.Bloodlust,
                 TraitDefOf.Psychopath,
                 TraitDefOf.Transhumanist,
@@ -457,7 +457,7 @@ namespace CaravanAdventures.CaravanMechBounty
         {
             var skillTraits = new[] {
                 DefDatabase<TraitDef>.GetNamedSilentFail("Nimble"),
-                TraitDefOf.SpeedOffset
+                DefDatabase<TraitDef>.GetNamedSilentFail("SpeedOffset"),
             };
             var node = new DiaNode("CABountyExchangeVeteranRecruitment_ChooseSkill".Translate());
             foreach (var skill in skillTraits)

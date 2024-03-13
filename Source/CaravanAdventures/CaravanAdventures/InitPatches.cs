@@ -195,8 +195,8 @@ namespace CaravanAdventures
                 var newOption = option;
                 var thingSetMaker_Count = newOption.thingSetMaker as ThingSetMaker_Count;
                 // maybe reserve this for special rewards?
-                thingSetMaker_Count.fixedParams.filter.Allows(ThingDefOf.VanometricPowerCell);
-                thingSetMaker_Count.fixedParams.filter.Allows(ThingDefOf.InfiniteChemreactor);
+                thingSetMaker_Count.fixedParams.filter.Allows(DefDatabase<ThingDef>.GetNamedSilentFail("VanometricPowerCell"));
+                thingSetMaker_Count.fixedParams.filter.Allows(DefDatabase<ThingDef>.GetNamedSilentFail("InfiniteChemreactor"));
                 root.options.Add(newOption);
 
                 {

@@ -70,7 +70,7 @@ namespace CaravanAdventures.CaravanCamp
             CampHelper.RefuelByPerc(caheater, ModSettings.fuelStartingFillPercentage);
 
             var plantPos = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.minX + 1 && cell.z == CellRect.minZ + 1);
-            CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDefOf.Stool, ThingDefOf.WoodLog), plantPos, map, default, campAssetListRef);
+            CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(DefDatabase<ThingDef>.GetNamedSilentFail("Stool"), ThingDefOf.WoodLog), plantPos, map, default, campAssetListRef);
             //var plant = CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDefOf.PlantPot, ThingDefOf.WoodLog), plantPos, map, default, campAssetListRef) as Building_PlantGrower;
 
             //var realPlant = CampHelper.PrepAndGenerateThing(plant.GetPlantDefToGrow(), plant.Position, map, default, campAssetListRef, true) as Plant;

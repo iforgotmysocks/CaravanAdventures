@@ -29,7 +29,7 @@ namespace CaravanAdventures.CaravanCamp
             foreach (var edgeCell in CellRect.EdgeCells)
             {
                 if (entranceCells.Contains(edgeCell)) continue;
-                var thing = ThingMaker.MakeThing(ThingDefOf.Fence, ThingDefOf.WoodLog);
+                var thing = ThingMaker.MakeThing(DefDatabase<ThingDef>.GetNamedSilentFail("Fence"), ThingDefOf.WoodLog);
                 thing.SetFaction(Faction.OfPlayer);
                 campAssetListRef.Add(GenSpawn.Spawn(thing, edgeCell, map));
             }
@@ -76,7 +76,7 @@ namespace CaravanAdventures.CaravanCamp
             // only works with 1 animal area right now!
             animalArea = new Area_Allowed(map.areaManager);
             map.areaManager.AllAreas.Add(animalArea);
-            animalArea.SetLabel("CAAnimalAreaLabel".Translate());
+            animalArea.RenamableLabel = "CAAnimalAreaLabel".Translate();
             CellRect.Cells.Where(cell => cell != null && !CellRect.EdgeCells.Contains(cell)).ToList().ForEach(cell => animalArea[cell] = true);
             animalArea.AreaUpdate();
         }
@@ -84,7 +84,7 @@ namespace CaravanAdventures.CaravanCamp
         public virtual void AssignPawnsToAreas(Map map, Caravan caravan)
         {
             if (ModSettings.letAnimalsRunFree) return;
-            foreach (var animal in caravan.PawnsListForReading.Where(pawn => pawn.RaceProps.Animal)) animal.playerSettings.AreaRestriction = animalArea;
+            foreach (var animal in caravan.PawnsListForReading.Where(pawn => pawn.RaceProps.Animal)) animal.playerSettings.AreaRestrictionInPawnCurrentMap = animalArea;
         }
 
         public virtual Zone GetZone() => zone;

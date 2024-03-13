@@ -62,7 +62,7 @@ namespace CaravanAdventures.CaravanCamp
                     {
                         var mp = parent.Map.Parent;
                         FixPawns();
-                        Current.Game.DeinitAndRemoveMap(parent.Map);
+                        Current.Game.DeinitAndRemoveMap(parent.Map, false);
                         mp.Destroy();
 
                         if (tribal) return;

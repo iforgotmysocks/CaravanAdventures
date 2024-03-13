@@ -88,7 +88,7 @@ namespace CaravanAdventures.Patches
             var str = "";
             //if (x?.abilities?.abilities?.Any() ?? false) str += "P";
             if (x?.health?.hediffSet?.HasHediff(HediffDefOf.PsychicAmplifier) == true) str += "P";
-            if (x?.story?.traits?.HasTrait(TraitDefOf.Tough) == true) str += "T";
+            if (x?.story?.traits?.HasTrait(DefDatabase<TraitDef>.GetNamedSilentFail("Tough")) == true) str += "T";
             if (str == "") return str;
             return $"({string.Join(",", str)})";
         }
