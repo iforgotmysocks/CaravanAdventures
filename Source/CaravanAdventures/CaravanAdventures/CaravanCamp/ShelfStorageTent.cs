@@ -35,13 +35,20 @@ namespace CaravanAdventures.CaravanCamp
 
         private void LinkShelfs(Map map)
         {
-            var group = map.storageGroups.NewGroup();
-            if (!shelfs?.Any() ?? true) return;
-            group.InitFrom(shelfs.FirstOrDefault());
-            foreach (var shelf in shelfs)
+            try
             {
-                if (shelf == null) continue;
-                shelf.SetStorageGroup(group);
+                var group = map.storageGroups.NewGroup();
+                if (!shelfs?.Any() ?? true) return;
+                group.InitFrom(shelfs.FirstOrDefault());
+                foreach (var shelf in shelfs)
+                {
+                    if (shelf == null) continue;
+                    shelf.SetStorageGroup(group);
+                }
+            }
+            catch (Exception e)
+            {
+                DLog.Error($"Error linking shelfs: {e}");
             }
         }
 

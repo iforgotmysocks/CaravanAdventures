@@ -423,7 +423,6 @@ namespace CaravanAdventures.CaravanStory
             Map.mapPawns.AllPawnsSpawned.Where(x => x.Faction == Helper.ExpRMNewFaction && !x?.Dead == true).ToList().ForEach(mech =>
             {
                 var comp = mech.TryGetComp<CompWakeUpDormant>();
-                // todo v1.7 check up on this, may need approvements
                 comp?.Activate(Map.mapPawns.FreeColonistsSpawned.FirstOrDefault());
             });
             FreeAllMechsOnMap();

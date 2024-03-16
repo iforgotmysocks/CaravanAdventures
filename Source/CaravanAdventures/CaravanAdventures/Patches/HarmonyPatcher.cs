@@ -13,6 +13,7 @@ namespace CaravanAdventures.Patches
             if (ModSettings.caravanCampEnabled)
             {
                 CaravanTravel.ApplyPatches();
+                CaravanCamp.ApplyPatches();
                 if (ModSettings.caravanCampProximityRemoval) CaravanCampProximityRemoval.ApplyPatches();
             }
             if (ModSettings.caravanFormingFilterSelectionEnabled) AutomaticItemSelection.ApplyPatches();

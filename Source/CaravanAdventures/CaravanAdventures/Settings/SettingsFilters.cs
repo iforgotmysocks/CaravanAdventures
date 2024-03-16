@@ -2,6 +2,7 @@
 using UnityEngine;
 using Verse;
 using CaravanAdventures.CaravanItemSelection;
+using System.Collections.Generic;
 
 namespace CaravanAdventures.Settings
 {
@@ -67,7 +68,7 @@ namespace CaravanAdventures.Settings
 
             options.Label("Pack up:".Colorize(Color.green), 24f);
             var packUpRect = options.GetRect(400);
-            ThingFilterUI.DoThingFilterConfigWindow(packUpRect, scrollPosPackup, InitGC.packUpFilter);
+            ThingFilterUI.DoThingFilterConfigWindow(packUpRect, scrollPosPackup, InitGC.packUpFilter, ThingFilter.CreateOnlyEverStorableThingFilter());
             options.Gap();
             options.CheckboxLabeled("Exclude other items", ref InitGC.packUpExclusive, "When active, the button will disable other items instead of just adding the filtered ones");
             options.Gap();
@@ -76,7 +77,7 @@ namespace CaravanAdventures.Settings
 
             options.Label("Goods:".Colorize(Color.green), 24f);
             var goodsRect = options.GetRect(400);
-            ThingFilterUI.DoThingFilterConfigWindow(goodsRect, scrollPosGoods, InitGC.goodsFilter);
+            ThingFilterUI.DoThingFilterConfigWindow(goodsRect, scrollPosGoods, InitGC.goodsFilter, ThingFilter.CreateOnlyEverStorableThingFilter());
             options.Gap();
             options.CheckboxLabeled("Exclude other items", ref InitGC.goodsExclusive, "When active, the button will disable other items instead of just adding the filtered ones");
             options.Gap();
@@ -85,7 +86,7 @@ namespace CaravanAdventures.Settings
 
             options.Label("Goods2:".Colorize(Color.green), 24f);
             var journeyRect = options.GetRect(400);
-            ThingFilterUI.DoThingFilterConfigWindow(journeyRect, scrollPosJourney, InitGC.journeyFilter);
+            ThingFilterUI.DoThingFilterConfigWindow(journeyRect, scrollPosJourney, InitGC.journeyFilter, ThingFilter.CreateOnlyEverStorableThingFilter());
             options.Gap();
             options.CheckboxLabeled("Exclude other items", ref InitGC.journeyExclusive, "When active, the button will disable other items instead of just adding the filtered ones");
             options.Gap();

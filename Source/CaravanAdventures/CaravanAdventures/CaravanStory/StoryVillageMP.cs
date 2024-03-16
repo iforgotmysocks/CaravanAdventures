@@ -170,7 +170,7 @@ namespace CaravanAdventures.CaravanStory
                 raidArrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn,
                 raidStrategy = RaidStrategyDefOf.ImmediateAttack,
                 customLetterDef = LetterDefOf.ThreatBig,
-                infestationLocOverride = centerPoint
+                infestationLocOverride = Helper.ExpRM ? (IntVec3?)centerPoint : null
             };
             DLog.Message($"Default threat points: {StorytellerUtility.DefaultThreatPointsNow(incidentParms.target)}");
             if (Helper.RunSafely(() => Helper.ExpRM ? StoryDefOf.CAUnusualInfestation.Worker.TryExecute(incidentParms) : StoryDefOf.CAMechRaidMixed.Worker.TryExecute(incidentParms)) != true)

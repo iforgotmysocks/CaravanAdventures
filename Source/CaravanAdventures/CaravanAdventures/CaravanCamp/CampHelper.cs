@@ -26,6 +26,23 @@ namespace CaravanAdventures.CaravanCamp
             return CellFinder.RandomCell(map);
         }
 
+        public static IntVec3 FindCenterCellExcludeFoggedCheck(Map map, Predicate<IntVec3> extraCellValidator)
+        {
+            TraverseParms traverseParms = TraverseParms.For(TraverseMode.NoPassClosedDoors).WithFenceblocked(forceFenceblocked: true);
+            Predicate<IntVec3> baseValidator = (IntVec3 x) => x.Standable(map) && map.reachability.CanReachMapEdge(x, traverseParms);
+            if (extraCellValidator != null && RCellFinder.TryFindRandomCellNearTheCenterOfTheMapWith((IntVec3 x) => baseValidator(x) && extraCellValidator(x), map, out var result))
+            {
+                return result;
+            }
+            if (RCellFinder.TryFindRandomCellNearTheCenterOfTheMapWith(baseValidator, map, out result))
+            {
+                return result;
+            }
+            Log.Warning("Could not find any valid cell.");
+            return CellFinder.RandomCell(map);
+        }
+
+
         public static Thing PrepAndGenerateThing(object objThing, IntVec3 cell, Map map, Rot4 rot, List<Thing> campAssetListRef, bool skipFaction = false)
         {
             var spawnedThing = objThing is Thing thing ? GenSpawn.Spawn(thing, cell, map, rot) 

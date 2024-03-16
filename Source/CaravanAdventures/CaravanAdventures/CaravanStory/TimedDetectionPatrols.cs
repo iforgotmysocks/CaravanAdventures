@@ -167,6 +167,7 @@ namespace CaravanAdventures.CaravanStory
 
         private void MakeInsectsAngry(MapParent mapParent)
         {
+            if (!Helper.ExpRM) return;
             DLog.Message($"patrol started making insects angry");
             var insects = mapParent.Map.mapPawns.AllPawnsSpawned.Where(pawn => pawn.Faction == RaidFaction);
             foreach (var insect in insects) insect.mindState.mentalStateHandler.TryStartMentalState(MentalStateDefOf.ManhunterPermanent);

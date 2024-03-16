@@ -50,6 +50,7 @@ namespace CaravanAdventures.CaravanCamp
             PaySupplyCost();
             TransformTerrain();
             GenerateBuildings();
+            UnfogBuildings();
             UpdateAreas();
             ApplyZonesAndInventory();
             GenerateRecipes();
@@ -57,9 +58,21 @@ namespace CaravanAdventures.CaravanCamp
             MoveAnimalsToAnimalArea();
             MovePrisonersToCells();
             InformPlayerHighTechCosts();
-
             Current.ProgramState = stateBackup;
+            GetOrGenerateMapUtility.UnfogMapFromEdge(map);
+
             return true;
+        }
+
+        private void UnfogBuildings()
+        {
+            foreach(var campRect in campParts)
+            {
+                foreach (var c in campRect.CellRect.Cells.Where(cell => !campRect.CellRect.EdgeCells.Contains(cell)))
+                {
+                    if (c.Fogged(map)) map.fogGrid.Unfog(c);
+                }
+            }
         }
 
         private void WarnPlayerAndCancelCampBuild(ProgramState stateBackup, string warning)
@@ -255,7 +268,7 @@ namespace CaravanAdventures.CaravanCamp
 
         protected virtual bool AssignCampLayout()
         {
-            campCenterSpot = CampHelper.FindCenterCell(map, (IntVec3 x) => x.GetRoom(map).CellCount >= 600);
+            campCenterSpot = CampHelper.FindCenterCellExcludeFoggedCheck(map, (IntVec3 x) => x.GetRoom(map).CellCount >= 600);
             var campCenter = campParts.OfType<CampCenter>().FirstOrDefault();
             campCenter.Coords.Add(new IntVec3(0, 0, 0));
             var failedTentCounter = 0;
@@ -314,33 +327,37 @@ namespace CaravanAdventures.CaravanCamp
 
         protected virtual void TransformTerrain()
         {
+            var processedRooms = new List<Room>();
             foreach (var c in campSiteRect.ExpandedBy(1).Cells)
             {
                 var room = c.GetRoom(map);
-
-                if (room != null && room.CellCount < 700 && room.ContainsThing(ThingDefOf.AncientCryptosleepCasket))
+                if (room == null) continue;
+                if (processedRooms.Contains(room)) continue;
+                if (room.CellCount < 700 && room.ContainsThing(ThingDefOf.AncientCryptosleepCasket))
                 {
                     foreach (var roomCell in room.Cells)
                     {
                         foreach (var thing in map.thingGrid.ThingsListAt(roomCell).Reverse<Thing>()) if (thing.def.destroyable) thing.Destroy();
                     }
-                    CaravanStory.StoryUtility.FloodUnfogAdjacent(room.Map.fogGrid, room.Map, room.Cells.FirstOrDefault(cell => !room.BorderCells.Contains(cell)));
+                    // fogging is now handled later
+                    //CaravanStory.StoryUtility.FloodUnfogAdjacent(room.Map.fogGrid, room.Map, room.Cells.FirstOrDefault(cell => !room.BorderCells.Contains(cell)));
 
-                    var roomRect = CellRect.FromLimits(room.Cells.MinBy(cell => cell.x + cell.z), room.Cells.MaxBy(cell => cell.x + cell.z));
-                    foreach (var cell in roomRect.ExpandedBy(1).Cells) if (cell.Fogged(map)) map.fogGrid.Unfog(cell);
+                    //var roomRect = CellRect.FromLimits(room.Cells.MinBy(cell => cell.x + cell.z), room.Cells.MaxBy(cell => cell.x + cell.z));
+                    //foreach (var cell in roomRect.ExpandedBy(1).Cells) if (cell.Fogged(map)) map.fogGrid.Unfog(cell);
                 }
+                processedRooms.Add(room);
             }
 
             foreach (var c in campSiteRect.Cells)
             {
                 foreach (var thing in map.thingGrid.ThingsListAt(c).Reverse<Thing>()) if (thing.def.destroyable && thing.def?.category != ThingCategory.Plant && thing.def?.altitudeLayer != AltitudeLayer.LowPlant) thing.Destroy();
                 map.roofGrid.SetRoof(c, null);
-                map.fogGrid.Unfog(c);
+                //map.fogGrid.Unfog(c);
                 var terrain = map.terrainGrid.TerrainAt(c);
                 if (!terrain.affordances.Any(x => (new[] { TerrainAffordanceDefOf.Bridgeable, DefDatabase<TerrainAffordanceDef>.GetNamedSilentFail("Diggable"), TerrainAffordanceDefOf.Light }).Contains(x))) map.terrainGrid.SetTerrain(c, TerrainDefOf.Gravel);
                 else if (terrain.affordances.Contains(TerrainAffordanceDefOf.Bridgeable) && !terrain.affordances.Contains(TerrainAffordanceDefOf.Light)) map.terrainGrid.SetTerrain(c, TerrainDefOf.Bridge);
             }
-            campSiteRect.ExpandedBy(1).EdgeCells.ToList().ForEach(cell => map.fogGrid.Unfog(cell));
+            //campSiteRect.ExpandedBy(1).EdgeCells.ToList().ForEach(cell => map.fogGrid.Unfog(cell));
         }
 
         protected virtual CellRect CalcCampSiteRect()

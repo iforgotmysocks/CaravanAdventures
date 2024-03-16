@@ -238,6 +238,7 @@ namespace CaravanAdventures.CaravanStory
         {
             if (!CompCache.StoryWC.storyFlags["Start_CanReceiveGift"]) return;
             var gifted = CompCache.StoryWC.questCont.StoryStart.Gifted;
+
             if (gifted != null && !gifted.Dead && !gifted.Destroyed && gifted.Faction == Faction.OfPlayer && !forceStrip) return;
             else if (gifted != null && (gifted.Dead || gifted.Faction != Faction.OfPlayer || forceStrip))
             {
@@ -248,8 +249,7 @@ namespace CaravanAdventures.CaravanStory
                 }
             }
 
-            // todo choose best candidate
-            // todo make sure the pawn isn't psychially unsensitive.
+            // todo when no sensitive pawn could be found, use an insensitive one
             gifted = pawn ?? PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction?.Where(x =>
                 (x?.RaceProps?.Humanlike ?? false)
                 && !x.HasExtraHomeFaction() && !x.HasExtraMiniFaction()
