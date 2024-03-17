@@ -55,6 +55,7 @@ namespace CaravanAdventures.CaravanCamp
                 if (!ModSettings.useAnimalOnlyFoodForAnimalArea) shelf.GetStoreSettings().filter.SetAllow(ThingCategoryDefOf.PlantFoodRaw, true);
                 shelf.GetStoreSettings().filter.SetAllow(ThingDefOf.Hay, true);
                 shelf.GetStoreSettings().filter.SetAllow(ThingDefOf.Kibble, true);
+                shelf.GetStoreSettings().Priority = StoragePriority.Important;
                 campAssetListRef.Add(GenSpawn.Spawn(shelf, cellSpotShelf, map, Rot4.West, WipeMode.Vanish));
             }
 

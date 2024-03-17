@@ -32,9 +32,11 @@ namespace CaravanAdventures
             {
                 Helper.RunSafely(DisableFactionVillageCreation);
             }
-
-            if (ModSettings.caravanCampEnabled) Helper.RunSafely(PatchAddCaravanDecisionsComp);
-            if (ModSettings.caravanCampEnabled) Helper.RunSafely(PatchAddPsychiteTeaToCampFire);
+            if (ModSettings.caravanCampEnabled)
+            {
+                Helper.RunSafely(PatchAddCaravanDecisionsComp);
+                Helper.RunSafely(PatchAddPsychiteTeaToCampFire);
+            }
             if (!ModSettings.caravanIncidentsEnabled) Helper.RunSafely(PatchIncidentsTo0Chance);
             if (ModSettings.buffSettlementFoodAndSilverAvailability) Helper.RunSafely(PatchIncreaseBaseWealthAndFood);
             if (ModSettings.buffShrineRewards) Helper.RunSafely(PatchAncientShrineDefs_MoreShrinesAndBetterRewards);
