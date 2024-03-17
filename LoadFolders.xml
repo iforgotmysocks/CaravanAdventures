@@ -23,9 +23,9 @@
   <v1.5>
     <li>/</li>
     <li>1.5</li>
-    <li IfModActive="Ludeon.Rimworld.Royalty">1.4/Story</li>
-    <li IfModActive="CETeam.CombatExtended">1.4/CEPatches</li>
-    <li IfModActive="Ludeon.Rimworld.Royalty">1.4/Expansions/RM/Defs</li>
-    <li IfModActive="Ludeon.Rimworld.Royalty">1.4/Expansions/RM/Patches</li>
+    <li IfModActive="Ludeon.Rimworld.Royalty">1.5/Story</li>
+    <li IfModActive="CETeam.CombatExtended">1.5/CEPatches</li>
+    <li IfModActive="Ludeon.Rimworld.Royalty">1.5/Expansions/RM/Defs</li>
+    <li IfModActive="Ludeon.Rimworld.Royalty">1.5/Expansions/RM/Patches</li>
   </v1.5>
 </loadFolders>
