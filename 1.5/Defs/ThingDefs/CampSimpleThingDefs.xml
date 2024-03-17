@@ -319,10 +319,13 @@
       <li>CookMealSurvivalBulk</li>
       <li>Make_Pemmican</li>
       <li>Make_PemmicanBulk</li>
+      <li MayRequire="Ludeon.RimWorld.Biotech">Make_BabyFood</li>
+      <li MayRequire="Ludeon.RimWorld.Biotech">Make_BabyFoodBulk</li>
       <!--<li>BurnApparel</li>-->
       <li>CABurnApparel</li>
       <li>BurnWeapon</li>
       <li>BurnDrugs</li>
+
     </recipes>
     <inspectorTabs>
       <li>ITab_Bills</li>

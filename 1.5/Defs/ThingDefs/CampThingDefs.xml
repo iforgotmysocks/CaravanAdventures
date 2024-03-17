@@ -520,6 +520,8 @@
       <li>CookMealSurvivalBulk</li>
       <li>Make_Pemmican</li>
       <li>Make_PemmicanBulk</li>
+      <li MayRequire="Ludeon.RimWorld.Biotech">Make_BabyFood</li>
+      <li MayRequire="Ludeon.RimWorld.Biotech">Make_BabyFoodBulk</li>
       <!--<li>BurnApparel</li>-->
       <li>CABurnApparel</li>
       <li>BurnWeapon</li>
@@ -901,8 +903,8 @@
       </li>
       <li Class="CompProperties_Flickable" />
       <li Class="CompProperties_Refuelable">
-        <fuelConsumptionRate>25</fuelConsumptionRate>
-        <fuelCapacity>125</fuelCapacity>
+        <fuelConsumptionRate>15</fuelConsumptionRate>
+        <fuelCapacity>75</fuelCapacity>
         <fuelFilter>
           <thingDefs>
             <li>Chemfuel</li>
