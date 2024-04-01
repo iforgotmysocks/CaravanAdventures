@@ -27,9 +27,9 @@ namespace CaravanAdventures.CaravanMechBounty
             };
             var veteran = PawnGenerator.GeneratePawn(genPawnRequest);
             if (veteran == null) return null;
-            if (veteran.ageTracker.AgeBiologicalYears > 50)
+            if (veteran.ageTracker.AgeBiologicalYears < 18 || veteran.ageTracker.AgeBiologicalYears > 30)
             {
-                var newAge = veteran.ageTracker.AgeBiologicalTicks = 60000 * 60 * Rand.Range(20, 45);
+                var newAge = veteran.ageTracker.AgeBiologicalTicks = 60000 * 60 * Rand.Range(20, 30);
                 veteran.ageTracker.AgeBiologicalTicks = newAge;
                 if (veteran.ageTracker.AgeChronologicalTicks < newAge) veteran.ageTracker.AgeChronologicalTicks = newAge;
             }

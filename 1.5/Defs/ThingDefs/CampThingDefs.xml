@@ -105,13 +105,13 @@
     <uiIconPath>Things/Building/Door/DoorSimple_MenuIcon</uiIconPath>
     <costStuffCount>25</costStuffCount>
   </ThingDef>
-  
-    <ThingDef ParentName="CATentDoorBase">
+
+  <ThingDef ParentName="CATentDoorBase">
     <defName>CATentFenceDoor</defName>
     <label>fence door</label>
-      <stuffCategories>
-        <li>Woody</li>
-      </stuffCategories>
+    <stuffCategories>
+      <li>Woody</li>
+    </stuffCategories>
     <description>Divides rooms. Simple doors must be manually opened, which slows people down. The amount of slowdown depends on what the door is made of.</description>
     <statBases>
       <WorkToBuild>850</WorkToBuild>
@@ -198,9 +198,9 @@
     </statBases>
     <interactionCellIcon>DiningChair</interactionCellIcon>
     <comps>
-      <li>
-        <compClass>CompReportWorkSpeed</compClass>
-      </li>
+        <li Class="CompProperties_ReportWorkSpeed">
+          <workSpeedStat>WorkTableWorkSpeedFactor</workSpeedStat>
+        </li>
     </comps>
     <placeWorkers>
       <li>PlaceWorker_ReportWorkSpeedPenalties</li>
@@ -225,7 +225,8 @@
       </shadowData>
     </graphicData>
     <castEdgeShadows>true</castEdgeShadows>
-    <minifiedDef>MinifiedThing</minifiedDef>
+    <!--<minifiedDef>MinifiedThing</minifiedDef>-->
+    <minifiedDef />
     <tickerType>Normal</tickerType>
     <passability>PassThroughOnly</passability>
     <size>(1, 1)</size>
@@ -235,9 +236,9 @@
       <Mass>20</Mass>
       <Flammability>0.5</Flammability>
     </statBases>
-    <thingCategories>
+    <!--<thingCategories>
       <li>BuildingsProduction</li>
-    </thingCategories>
+    </thingCategories>-->
     <inspectorTabs>
       <li>ITab_ContentsGenepackHolder</li>
     </inspectorTabs>
@@ -784,7 +785,7 @@
       <li>Electricity</li>
     </researchPrerequisites>-->
   </ThingDef>
-  
+
   <!-- trade beacon -->
   <ThingDef ParentName="CATentBase">
     <defName>CAOrbitalTradeBeacon</defName>
@@ -814,7 +815,7 @@
       <Mass>5</Mass>
     </statBases>
     <tickerType>Normal</tickerType>
-   <drawerType>MapMeshAndRealTime</drawerType>
+    <drawerType>MapMeshAndRealTime</drawerType>
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
     <fillPercent>0.15</fillPercent>
     <costList>
@@ -855,7 +856,7 @@
     </researchPrerequisites>-->
   </ThingDef>
 
-  
+
   <!-- generator -->
   <ThingDef ParentName="CATentBase">
     <defName>CAChemfuelPoweredGenerator</defName>
@@ -941,7 +942,7 @@
       <li>Electricity</li>
     </researchPrerequisites>
     <constructionSkillPrerequisite>6</constructionSkillPrerequisite>-->
-  </ThingDef>  
+  </ThingDef>
 
   <TerrainDef Name="CATentFloorBase" Parent="CATentBase" Abstract="True">
     <layerable>true</layerable>
