@@ -93,6 +93,7 @@ namespace CaravanAdventures.CaravanStory
 			resolveParams.rect = rect;
 			resolveParams.disableSinglePawn = new bool?(true);
 			resolveParams.disableHives = true;
+			resolveParams.fleshbeastsCount = 0;
 			resolveParams.makeWarningLetter = new bool?(true);
 			BaseGen.globalSettings.map = map;
 			BaseGen.symbolStack.Push("ancientTemple", resolveParams, null);

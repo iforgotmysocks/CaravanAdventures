@@ -138,6 +138,13 @@ namespace CaravanAdventures.CaravanMechBounty
                     if (names != null) personaTraitString = " (" + string.Join(", ", names) + ")";
                 }
 
+
+                if (ModsConfig.BiotechActive && item is Genepack genepack)
+                {
+                    var effects = genepack.GeneSet?.GenesListForReading?.Select(g => g.LabelCap);
+                    if (effects != null) personaTraitString += " (" + string.Join(", ", effects) + ")";
+                }
+
                 node.options.Add(new DiaOption((item.LabelCap + personaTraitString))
                 {
                     //disabled = !CanPurchaseItem(item, out var reason),

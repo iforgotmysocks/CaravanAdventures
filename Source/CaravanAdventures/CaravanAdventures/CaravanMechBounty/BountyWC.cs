@@ -28,7 +28,7 @@ namespace CaravanAdventures.CaravanMechBounty
         public float OngoingVeteranDelay { get => ongoingVeteranDelay; set => ongoingVeteranDelay = value; }
         public float BountyNotificationCounter { get => bountyNotificationCounter; set => bountyNotificationCounter = value; }
         public bool BountyServiceAvailable { get => bountyServiceAvailable; set => bountyServiceAvailable = value; }
-        public float BountyNotificationDelay => Helper.Debug() ? 1000 : 60000 * 2;
+        public float BountyNotificationDelay => Helper.Debug() ? 1000 : 60000;
         public Faction BountyFaction
         {
             get

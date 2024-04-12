@@ -58,6 +58,7 @@ namespace CaravanAdventures.CaravanStory
             resolveParams.rect = rect;
             resolveParams.disableSinglePawn = new bool?(true);
             resolveParams.disableHives = new bool?(true);
+            resolveParams.fleshbeastsCount = 0;
             resolveParams.makeWarningLetter = new bool?(false);
             if (ModSettings.storyMode == StoryMode.Performance) resolveParams.podContentsType = PodContentsType.Empty;
             else if (Rand.Chance(0.5f)) resolveParams.podContentsType = PodContentsType.Empty;
