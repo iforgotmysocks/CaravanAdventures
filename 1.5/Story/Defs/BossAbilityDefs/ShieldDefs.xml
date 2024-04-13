@@ -14,7 +14,7 @@
     <graphicData>
       <texPath>Things/Empty</texPath>
       <graphicClass>Graphic_Single</graphicClass>
-      <drawSize>0</drawSize>
+      <drawSize>0.1</drawSize>
       <!--<shadowData>
         <volume>(0.3, 0.2, 0.3)</volume>
         <offset>(0,0,-0.1)</offset>
