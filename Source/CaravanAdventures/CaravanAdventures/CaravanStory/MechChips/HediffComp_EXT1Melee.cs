@@ -87,8 +87,7 @@ namespace CaravanAdventures.CaravanStory.MechChips
                 var map = Pawn.Map;
                 try
                 {
-                    // todo v1.7 nre here!
-                    PawnFlyer pawnFlyer = PawnFlyer.MakeFlyer(DefDatabase<ThingDef>.GetNamedSilentFail("PawnJumper"), Pawn, Pawn.mindState.enemyTarget.Position, 
+                    PawnFlyer pawnFlyer = PawnFlyer.MakeFlyer(DefDatabase<ThingDef>.GetNamedSilentFail("PawnFlyer"), Pawn, Pawn.mindState.enemyTarget.Position, 
                             DefDatabase<EffecterDef>.AllDefsListForReading.FirstOrDefault(x => x?.defName == "JumpFlightEffect"),
                             DefDatabase<SoundDef>.AllDefsListForReading.FirstOrDefault(x => x?.defName == "JumpPackLand"));
                     if (pawnFlyer != null)

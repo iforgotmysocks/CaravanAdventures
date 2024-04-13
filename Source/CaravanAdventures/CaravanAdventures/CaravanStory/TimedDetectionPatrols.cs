@@ -98,7 +98,7 @@ namespace CaravanAdventures.CaravanStory
 
         public override void CompTick()
         {
-            if (ModSettings.debugMessages) if (ticksLeftToSendRaid % 100 == 0) DLog.Message($"{this.parent.Label}: notify / raid {ticksLeftTillNotifyPlayer} / {ticksLeftToSendRaid}");
+            if (ModSettings.debugMessages) if (ticksLeftToSendRaid % 1000 == 0) DLog.Message($"{this.parent.Label}: notify / raid {ticksLeftTillNotifyPlayer} / {ticksLeftToSendRaid}");
 
             var mapParent = (MapParent)this.parent;
             if (mapParent.HasMap)
