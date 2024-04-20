@@ -17,7 +17,7 @@ namespace CaravanAdventures.CaravanAbilities
         private int permTickCount = new IntRange(10000, 12000).RandomInRange;
         private Hediff_Injury[] sortedInjuries;
         private bool noInjuries = false;
-        private string[] sicknessesToBeHealed = new[] { "WoundInfection", "Flu", "Plague", "HeartAttack", "FoodPoisoning", "CatatonicBreakdown", "PsychicVertigo", "HeartAttack", "MuscleParasites", "SensoryMechanites", "FibrousMechanites", "GutWorms" };
+        private string[] sicknessesToBeHealed = new[] { "WoundInfection", "Flu", "Plague", "HeartAttack", "FoodPoisoning", "CatatonicBreakdown", "PsychicVertigo", "HeartAttack", "MuscleParasites", "SensoryMechanites", "FibrousMechanites", "GutWorms", "MetalhorrorImplant", "CubeInterest", "RevenantHypnosis" };
         private string[] permanentToBeHealed = new[] { "PsychicComa", "Abasia", "Carcinoma", "ChemicalDamageModerate", "ChemicalDamageSevere", "Cirrhosis", "TraumaSavant" };
         private Pawn connector = null;
         private int statusCheckTickCount = new IntRange(55, 65).RandomInRange;
