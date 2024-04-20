@@ -18,6 +18,9 @@ namespace CaravanAdventures
         // todo - add replacesMechanoidFaction field to Expansion and replace rimedieval with the field check
         public static bool ExpRM => Expansions.ExpansionManager.ActiveExpansion?.expansionName?.ToLower() == "rimedieval";
         public static Faction ExpRMNewFaction => Helper.ExpRM ? Find.FactionManager.FirstFactionOfDef(Helper.ExpSettings.primaryEnemyFactionDef) ?? Faction.OfMechanoids : Faction.OfMechanoids;
+
+        public static string VersionString => System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
         public static bool Debug() => ModSettings.debug;
 
         public static string LocPrefix(this string baseString)

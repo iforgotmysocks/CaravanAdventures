@@ -19,6 +19,7 @@ namespace CaravanAdventures.CaravanStory
         private int countShrinesCompleted = 0;
         private int shrineMaximum = 5;
         public bool wasShrineAmbushNoLuck = false;
+        private string lastAppliedActionVersion = string.Empty;
 
         private readonly IntRange timeoutDaysRange = new IntRange(10, 12);
 
@@ -30,7 +31,7 @@ namespace CaravanAdventures.CaravanStory
 
         private int shrineTileUnsuccessfulCounter = 0;
         private List<AbilityDef> unlockedSpells = new List<AbilityDef>();
-        private bool ranDebugActionsOnceAtStartUp;
+        private bool ranActionsOnceAtStartUp;
         private IEnumerable<ThingDef> bossDefs;
 
         public Dictionary<PawnKindDef, int> mechBossKillCounters = new Dictionary<PawnKindDef, int>();
@@ -93,6 +94,7 @@ namespace CaravanAdventures.CaravanStory
         {
             base.ExposeData();
             Scribe_Collections.Look(ref storyFlags, "storyFlags", LookMode.Value);
+            Scribe_Values.Look(ref lastAppliedActionVersion, "lastAppliedActionVersion", string.Empty);
             Scribe_Collections.Look(ref unlockedSpells, "unlockedSpells", LookMode.Def);
             Scribe_Collections.Look(ref mechBossKillCounters, "mechBossKillCounters", LookMode.Def);
             Scribe_Values.Look(ref ticks, "ticks", -1);
@@ -156,7 +158,7 @@ namespace CaravanAdventures.CaravanStory
         public override void WorldComponentTick()
         {
             base.WorldComponentTick();
-            RunDebugActionsOnceAtStartUp();
+            RunActionsOnceAtStartUp();
 
             if (!RoyaltyActiveCheck()) return;
 
@@ -267,20 +269,37 @@ namespace CaravanAdventures.CaravanStory
             return true;
         }
 
-        private void RunDebugActionsOnceAtStartUp()
+        private void RunActionsOnceAtStartUp()
         {
-            if (ranDebugActionsOnceAtStartUp) return;
+            if (ranActionsOnceAtStartUp) return;
+            Helper.RunSafely(() => RunUpdateActionForCurrentAssemblyVersion(), false, "", true);
 
-            DLog.Message($"Applying debug actions once");
+            DLog.Message($"Applying debug actions once per startup");
             // todo added cleanup of faction settlement in 1.2.4 to be able to remove CAFriendlyMechanoid faction in a couple patches
             Helper.RunSafely(() => StoryUtility.RemoveFaction(), false, "", true);
 
             //CompatibilityPatches.TryRegionStuff();
-            if (Helper.ExpRM) StoryUtility.EnsureEvilHostileFactionForExpansion(true);
+            if (Helper.ExpRM) Helper.RunSafely(() => StoryUtility.EnsureEvilHostileFactionForExpansion(true), false, "", true);
 
             //Helper.PrintWorldPawns();
 
-            ranDebugActionsOnceAtStartUp = true;
+            ranActionsOnceAtStartUp = true;
+        }
+
+        private void RunUpdateActionForCurrentAssemblyVersion()
+        {
+            if (Helper.Debug()) DLog.Message($"Last applied action version: {lastAppliedActionVersion}");
+            if (lastAppliedActionVersion == Helper.VersionString)
+            {
+                DLog.Message($"Skipping already applied version actions for {Helper.VersionString}");
+                return; 
+            }
+
+            DLog.Message($"Running version actions for {Helper.VersionString}");
+            if (ModSettings.storyEnabled && storyFlags["TradeCaravan_Arrived"]) StoryUtility.EnsureSacrilegHunters();
+            lastAppliedActionVersion = Helper.VersionString;
+
+            if (Helper.Debug()) DLog.Message($"Applied version actions for: {lastAppliedActionVersion}");
         }
 
         public IEnumerable<ThingDef> BossDefs() => bossDefs ?? (bossDefs = StoryUtility.ReadBossDefNames());

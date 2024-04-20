@@ -1,6 +1,7 @@
 ﻿using CaravanAdventures.CaravanAbilities;
 using CaravanAdventures.CaravanStory;
 using CaravanAdventures.Settings;
+using System.Collections.Generic;
 using UnityEngine;
 using Verse;
 

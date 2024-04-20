@@ -609,7 +609,7 @@ namespace CaravanAdventures.CaravanStory
             if (hediff == null) return false;
             var comp = hediff.TryGetComp<CaravanAbilities.HediffComp_AncientProtectiveAura>();
             if (comp == null) return false;
-            return comp.ProtectsTheShip;
+            return comp.ProtectsTheShip; 
         }
 
         public static bool HasAuraPawn(this Map map) => map.mapPawns.AllPawnsSpawned.Any(x => IsAuraProtected(x));
@@ -739,14 +739,16 @@ namespace CaravanAdventures.CaravanStory
             foreach (var faction in Find.FactionManager.AllFactionsListForReading)
             {
                 if (faction == Faction.OfPlayer || faction.def.permanentEnemy || faction == sacrilegHunters) continue;
-                if (ModSettings.sacHuntersHostileTowardsEmpire && faction == Faction.OfEmpire || ModSettings.sacHuntersHostileTowardsNaturalEnemies && faction.def.naturalEnemy)
+                if (ModSettings.sacHuntersHostileTowardsEmpire && faction == Faction.OfEmpire 
+                    || ModSettings.sacHuntersHostileTowardsNaturalEnemies && faction.def.naturalEnemy
+                    || ModsConfig.AnomalyActive && faction == Faction.OfEntities)
                 {
                     faction.SetRelation(new FactionRelation() { baseGoodwill = -100, kind = FactionRelationKind.Hostile, other = sacrilegHunters });
                     continue;
                 }
                 faction.SetRelation(new FactionRelation() { baseGoodwill = 0, kind = FactionRelationKind.Neutral, other = sacrilegHunters });
             }
-        }
+        } 
 
         private static void SetStandingForPossibleFactions(Faction factionToAdjust, FactionRelationKind kind, int goodwill, bool skipPermanentEnemyCheck = false)
         {
