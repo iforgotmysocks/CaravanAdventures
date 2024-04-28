@@ -447,7 +447,6 @@ namespace CaravanAdventures.CaravanStory
 
                 if (removeFullMod)
                 {
-                    ModSettings.apocalypseEnabled = false;
                     ModSettings.bountyEnabled = false;
                     ModSettings.caravanCampEnabled = false;
                     ModSettings.caravanFormingFilterSelectionEnabled = false;
