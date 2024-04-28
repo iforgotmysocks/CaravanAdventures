@@ -27,7 +27,7 @@ namespace CaravanAdventures.Patches.Compatibility
             SoS2Patch.assembly = assembly;
             if (ModSettings.sos2AuraHeatManagementEnabled)
             {
-                var addHeatOrg = AccessTools.Method(assembly.GetType("RimWorld.CompShipHeat"), "AddHeatToNetwork");
+                var addHeatOrg = AccessTools.Method(assembly.GetType("SaveOurShip2.CompShipHeat"), "AddHeatToNetwork");
                 var addHeatPre = new HarmonyMethod(typeof(SoS2Patch), nameof(SoS2Patch.CompShipHeatSource_AddHeatToNetwork_Prefix));
                 HarmonyPatcher.harmony.Patch(addHeatOrg, addHeatPre, null);
                 LoadReflectionNecessities();
@@ -41,10 +41,10 @@ namespace CaravanAdventures.Patches.Compatibility
 
         private static void LoadReflectionNecessities()
         {
-            compShipHeatSourceType = assembly.GetType("RimWorld.CompShipHeatSource");
+            compShipHeatSourceType = assembly.GetType("SaveOurShip2.CompShipHeatSource");
             parentPropInfo = compShipHeatSourceType.BaseType.BaseType.GetField("parent", BindingFlags.Instance | BindingFlags.Public);
             //addHeatMethodInfo = compShipHeatSourceType.GetMethod("AddHeatToNetwork", BindingFlags.Public | BindingFlags.Instance);
-        }
+        } 
 
         public static void CompShipHeatSource_AddHeatToNetwork_Prefix(object __instance, ref float amount)
         {
