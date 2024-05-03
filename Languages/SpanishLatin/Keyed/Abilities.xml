@@ -9,4 +9,5 @@
 
   <CAengageMelee>Engage drafted</CAengageMelee>
   <CAengageMeleeDesc>Allow drafted melee pawns to walk up to and attack hostiles themselves</CAengageMeleeDesc>
+  <CAancientGiftRemoved>The ancient gift left {0}, it appears another chosen one is already gifted.</CAancientGiftRemoved>
 </LanguageData>
