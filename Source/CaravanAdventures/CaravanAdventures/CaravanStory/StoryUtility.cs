@@ -963,5 +963,14 @@ namespace CaravanAdventures.CaravanStory
             } 
             return normal;
         }
+
+        internal static void StripGiftFromPawn(Pawn gifted)
+        {
+            gifted.health.hediffSet.hediffs.Remove(gifted.health.hediffSet.hediffs.FirstOrDefault(x => x.def.defName == "CAAncientGift"));
+            foreach (var ability in gifted.abilities.abilities.Where(x => x.def.defName.StartsWith("CAAncient")).Reverse())
+            {
+                gifted.abilities.RemoveAbility(ability.def);
+            }
+        }
     }
 }

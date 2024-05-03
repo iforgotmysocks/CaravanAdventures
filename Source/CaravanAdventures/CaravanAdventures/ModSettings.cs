@@ -76,6 +76,7 @@ namespace CaravanAdventures
         // abilities
         // - ancient gift
         public static float ancientGiftPassivePsyfocusGainPerSec = 0.00035f;
+        public static bool onlyAllowOneConcurrentlyGiftedPawn = true;
         // - ancient mech signal
         public static IntRange scytherRange = new IntRange(2, 4);
         // - thunderbolt
@@ -222,6 +223,7 @@ namespace CaravanAdventures
             // abilities
             // - ancient gift
             Scribe_Values.Look(ref ancientGiftPassivePsyfocusGainPerSec, "ancientGiftPassivePsyfocusGainPerSec", 0.00035f);
+            Scribe_Values.Look(ref onlyAllowOneConcurrentlyGiftedPawn, "onlyAllowOneConcurrentlyGiftedPawn", true);
             // - ancient mech signal
             Scribe_Values.Look(ref scytherRange, "scytherRange", new IntRange(2, 4));
             // - thunderbolt

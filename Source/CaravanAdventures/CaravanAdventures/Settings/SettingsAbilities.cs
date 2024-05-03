@@ -28,7 +28,7 @@ namespace CaravanAdventures.Settings
         public override void DoWindowContents(Rect wrect)
         {
             var options = new Listing_Standard();
-            var viewRect = new Rect(0f, 0f, windowRect.width - 65, Patches.Compatibility.SoS2Patch.Installed() ? 1350 : 1160);
+            var viewRect = new Rect(0f, 0f, windowRect.width - 65, Patches.Compatibility.SoS2Patch.Installed() ? 1370 : 1180);
             var smallerOutRect = new Rect(wrect.x, wrect.y, wrect.width, wrect.height - 50);
 
             Widgets.BeginScrollView(smallerOutRect, ref scrollPos, viewRect);
@@ -41,6 +41,7 @@ namespace CaravanAdventures.Settings
             options.Label("Ancient Gift:".Colorize(Color.green), 24f);
             options.Label("Passive psyfocus gain per sec: " + Math.Round(ModSettings.ancientGiftPassivePsyfocusGainPerSec * 100, 2) + "%");
             ModSettings.ancientGiftPassivePsyfocusGainPerSec = options.Slider(ModSettings.ancientGiftPassivePsyfocusGainPerSec, 0.00001f, 0.01f);
+            options.CheckboxLabeled("Only allow one pawn to be concurrently gifted", ref ModSettings.onlyAllowOneConcurrentlyGiftedPawn);
             options.CheckboxLabeled("Enable melee attack speed boost", ref ModSettings.attackspeedIncreaseForAncientProtectiveAura);
             if (ModSettings.attackspeedIncreaseForAncientProtectiveAura)
             {

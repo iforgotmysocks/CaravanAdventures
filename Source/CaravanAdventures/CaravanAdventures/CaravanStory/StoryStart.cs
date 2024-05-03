@@ -240,14 +240,7 @@ namespace CaravanAdventures.CaravanStory
             var gifted = CompCache.StoryWC.questCont.StoryStart.Gifted;
 
             if (gifted != null && !gifted.Dead && !gifted.Destroyed && gifted.Faction == Faction.OfPlayer && !forceStrip) return;
-            else if (gifted != null && (gifted.Dead || gifted.Faction != Faction.OfPlayer || forceStrip))
-            {
-                gifted.health.hediffSet.hediffs.Remove(gifted.health.hediffSet.hediffs.FirstOrDefault(x => x.def.defName == "CAAncientGift"));
-                foreach (var ability in gifted.abilities.abilities.Where(x => x.def.defName.StartsWith("CAAncient")).Reverse())
-                {
-                    gifted.abilities.RemoveAbility(ability.def);
-                }
-            }
+            else if (gifted != null && (gifted.Dead || gifted.Faction != Faction.OfPlayer || forceStrip)) StoryUtility.StripGiftFromPawn(gifted);
 
             // todo when no sensitive pawn could be found, use an insensitive one
             gifted = pawn ?? PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction?.Where(x =>

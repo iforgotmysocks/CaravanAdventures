@@ -1,11 +1,15 @@
-﻿using System;
+﻿using CaravanAdventures.CaravanStory;
+using RimWorld;
+using System;
 using Verse;
 
 namespace CaravanAdventures.CaravanAbilities
 {
     public class HediffComp_AncientGift : HediffComp
     {
-        private int ticks = 0;
+        private long ticks = 0;
+        private uint checkRemoveDupesTicks = 0;
+
         public override void CompPostTick(ref float severityAdjustment)
         {
             base.CompPostTick(ref severityAdjustment);
@@ -15,7 +19,21 @@ namespace CaravanAdventures.CaravanAbilities
                 ticks = 0;
                 Pawn.psychicEntropy.OffsetPsyfocusDirectly(ModSettings.ancientGiftPassivePsyfocusGainPerSec);
             }
+
+            if (ModSettings.onlyAllowOneConcurrentlyGiftedPawn && checkRemoveDupesTicks >= 2000)
+            {
+                checkRemoveDupesTicks = 0;
+                var isStoryPawn = CompCache.StoryWC.questCont.StoryStart?.Gifted == this.parent.pawn;
+                DLog.Message($"Checking if current pawn is storypawn: {isStoryPawn}");
+                if (!isStoryPawn)
+                {
+                    StoryUtility.StripGiftFromPawn(this.parent.pawn);
+                    Messages.Message("CaravanAdventures_AncientGiftRemoved".Translate(this.parent.pawn.Name.ToString()), this.parent.pawn, MessageTypeDefOf.NegativeEvent);
+                }
+            }
+
             ticks++;
+            checkRemoveDupesTicks++;
         }
 
         public static float AttackSpeedMultiplier => 1f - ModSettings.attackspeedMultiplierNegated;
