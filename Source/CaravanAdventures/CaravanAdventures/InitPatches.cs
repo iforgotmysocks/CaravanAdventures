@@ -110,7 +110,7 @@ namespace CaravanAdventures
             {
                 DLog.Message($"adjusting base {curBase.defName}");
                 var silverGen = curBase.stockGenerators.FirstOrDefault(gen => gen.HandlesThingDef(ThingDefOf.Silver));
-                if (silverGen != null) silverGen.countRange = new IntRange(silverGen.countRange.min * 3, silverGen.countRange.max * 2);
+                if (silverGen != null) silverGen.countRange = new IntRange(silverGen.countRange.min * 5, silverGen.countRange.max * 4);
 
                 var foodGen = curBase.stockGenerators.FirstOrDefault(gen => gen.countRange.min > 3 && gen.HandlesThingDef(ThingDefOf.MealSimple));
                 if (foodGen != null) foodGen.countRange = new IntRange(foodGen.countRange.min * 2, Convert.ToInt32(foodGen.countRange.max * 1.5));
