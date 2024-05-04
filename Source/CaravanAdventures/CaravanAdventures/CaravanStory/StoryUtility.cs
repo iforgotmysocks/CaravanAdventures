@@ -115,6 +115,11 @@ namespace CaravanAdventures.CaravanStory
                 comp.parent = addressed;
                 addressed.AllComps.Add(comp);
             }
+            if (comp.actionsCt.Any(action => action.Id == id))
+            {
+                if (!skipAlreadyExistsWarning) Log.Warning($"CompTalk dialog id: {id} already exists");
+                return;
+            }
             var talkSetToAdd = new TalkSet()
             {
                 Id = id,
@@ -125,16 +130,10 @@ namespace CaravanAdventures.CaravanStory
                 MethodName = methodName,
                 Repeatable = repeatable,
             };
-            if (comp.actionsCt.Any(action => action.Id == talkSetToAdd.Id))
-            {
-                if (!skipAlreadyExistsWarning) Log.Warning($"CompTalk dialog id: {talkSetToAdd.Id} already exists");
-            }
-            else
-            {
-                comp.actionsCt.Add(talkSetToAdd);
-                comp.ShowQuestionMark = showQuestionMark;
-                comp.Enabled = enabled;
-            }
+
+            comp.actionsCt.Add(talkSetToAdd);
+            comp.ShowQuestionMark = showQuestionMark;
+            comp.Enabled = enabled;
         }
 
         public static bool RemoveDialog(ThingWithComps addressed, string id)
@@ -361,7 +360,7 @@ namespace CaravanAdventures.CaravanStory
                     });
                 }
             }
-            
+
             //typeof(FactionManager).GetMethod("Remove", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).Invoke(Find.FactionManager, new object[] { faction });
             DLog.Message($"{messageFactionName} should now be removed");
         }
@@ -608,7 +607,7 @@ namespace CaravanAdventures.CaravanStory
             if (hediff == null) return false;
             var comp = hediff.TryGetComp<CaravanAbilities.HediffComp_AncientProtectiveAura>();
             if (comp == null) return false;
-            return comp.ProtectsTheShip; 
+            return comp.ProtectsTheShip;
         }
 
         public static bool HasAuraPawn(this Map map) => map.mapPawns.AllPawnsSpawned.Any(x => IsAuraProtected(x));
@@ -738,7 +737,7 @@ namespace CaravanAdventures.CaravanStory
             foreach (var faction in Find.FactionManager.AllFactionsListForReading)
             {
                 if (faction == Faction.OfPlayer || faction.def.permanentEnemy || faction == sacrilegHunters) continue;
-                if (ModSettings.sacHuntersHostileTowardsEmpire && faction == Faction.OfEmpire 
+                if (ModSettings.sacHuntersHostileTowardsEmpire && faction == Faction.OfEmpire
                     || ModSettings.sacHuntersHostileTowardsNaturalEnemies && faction.def.naturalEnemy
                     || ModsConfig.AnomalyActive && faction == Faction.OfEntities)
                 {
@@ -747,7 +746,7 @@ namespace CaravanAdventures.CaravanStory
                 }
                 faction.SetRelation(new FactionRelation() { baseGoodwill = 0, kind = FactionRelationKind.Neutral, other = sacrilegHunters });
             }
-        } 
+        }
 
         private static void SetStandingForPossibleFactions(Faction factionToAdjust, FactionRelationKind kind, int goodwill, bool skipPermanentEnemyCheck = false)
         {
@@ -880,8 +879,8 @@ namespace CaravanAdventures.CaravanStory
         public static Pawn GetFittingMechBoss(bool endboss = false)
         {
             // we skip the devourer as the first boss as it can be rather... tricky to fight.
-            var possibleBosses = DefDatabase<PawnKindDef>.AllDefsListForReading.Where(x => 
-            (Helper.ExpRM || x.RaceProps.IsMechanoid) 
+            var possibleBosses = DefDatabase<PawnKindDef>.AllDefsListForReading.Where(x =>
+            (Helper.ExpRM || x.RaceProps.IsMechanoid)
             && x.defName.ToLower().StartsWith(Helper.ExpRM ? Helper.ExpSettings?.bossDefPrefix?.ToLower() ?? "cabossmech" : "cabossmech")
             && (Helper.ExpRM || (CompCache.StoryWC.mechBossKillCounters.Count != 0 || x.defName != "CABossMechDevourer")));
 
@@ -960,7 +959,7 @@ namespace CaravanAdventures.CaravanStory
             {
                 if (performance != null) return (float)performance;
                 else return normal / (custDevider ?? 6);
-            } 
+            }
             return normal;
         }
 
