@@ -24,7 +24,6 @@ namespace CaravanAdventures.CaravanAbilities
             {
                 checkRemoveDupesTicks = 0;
                 var isStoryPawn = CompCache.StoryWC.questCont.StoryStart?.Gifted == this.parent.pawn;
-                DLog.Message($"Checking if current pawn is storypawn: {isStoryPawn}");
                 if (!isStoryPawn)
                 {
                     StoryUtility.StripGiftFromPawn(this.parent.pawn);

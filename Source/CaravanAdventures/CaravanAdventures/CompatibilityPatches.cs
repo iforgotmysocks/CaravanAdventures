@@ -23,7 +23,7 @@ namespace CaravanAdventures
                 if (alienRaceAssembly != null && ModSettings.caravanFormingFilterSelectionEnabled)
                 {
                     Log.Message($"Caravan Adventures: Applying patch for AlienRaces - adding alienrace corpses to caravan dialog filter");
-                    FilterCombs.packUp.appliedFilters.FirstOrDefault(filter => filter.Name == "Corpses").ThingCategoryDefs.Add(ThingCategoryDef.Named("alienCorpseCategory"));
+                    FilterCombs.packUp.appliedFilters.FirstOrDefault(filter => filter.Name == "Corpses").ThingCategoryDefs.Add(ThingCategoryDef.Named("HAR_AlienCorpseCategory")); // HAR_AlienCorpseCategory
                 }
             }, false, ErrorMessage("alien races"));
 
@@ -99,8 +99,8 @@ namespace CaravanAdventures
             }, false, ErrorMessage("Rimedieval"));
 
             ExecuteHarmonyCompatibilityPatches();
-
-            Log.Message($"CA patches complete. v{System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString().TrimEnd(new[] { '.', '0' })} (1.4)");
+            // todo  *update game version when needed!
+            Log.Message($"CA patches complete. v{System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString().TrimEnd(new[] { '.', '0' })} (1.5)");
         }
 
         public static void ExecuteHarmonyCompatibilityPatches()
