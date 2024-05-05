@@ -241,7 +241,7 @@ namespace CaravanAdventures.CaravanStory
 
             if (gifted != null && !gifted.Dead && !gifted.Destroyed && gifted.Faction == Faction.OfPlayer && !gifted.IsKidnapped() && !forceStrip) return;
             else if (gifted != null && (gifted.Dead || gifted.Faction != Faction.OfPlayer || gifted.IsKidnapped() || forceStrip)) StoryUtility.StripGiftFromPawn(gifted);
-             
+
             // todo when no sensitive pawn could be found, use an insensitive one
             gifted = pawn ?? PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction?.Where(x =>
                 (x?.RaceProps?.Humanlike ?? false)
@@ -257,8 +257,11 @@ namespace CaravanAdventures.CaravanStory
 
             DLog.Message(gifted.Name + " " + gifted.NameFullColored);
 
-            FleckMaker.Static(gifted.Position, gifted.Map, FleckDefOf.PsycastAreaEffect, 6f);
-            SoundDefOf.PsycastPsychicPulse.PlayOneShot(new TargetInfo(gifted));
+            if (gifted.Map != null)
+            {
+                FleckMaker.Static(gifted.Position, gifted.Map, FleckDefOf.PsycastAreaEffect, 6f);
+                SoundDefOf.PsycastPsychicPulse.PlayOneShot(new TargetInfo(gifted));
+            }
 
             gifted.health.AddHediff(DefDatabase<HediffDef>.AllDefs.FirstOrDefault(x => x.defName == "PsychicAmplifier"), gifted.health.hediffSet.GetBrain());
             gifted.health.AddHediff(DefDatabase<HediffDef>.AllDefs.FirstOrDefault(x => x.defName == "CAAncientGift"), gifted.health.hediffSet.GetBrain());
