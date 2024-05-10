@@ -48,23 +48,21 @@ namespace CaravanAdventures.CaravanStory
                 specificAction.Finished = true;
             };
             yield return TalkTo;
-            yield break;
         }
 
         private object GetQuestCont(string className)
         {
-            object questCont = null;
-            questCont = typeof(QuestCont).GetProperty(className.Split('_').LastOrDefault())?.GetValue(CompCache.StoryWC.questCont);
+            object questCont = typeof(QuestCont).GetProperty(className.Split('_').LastOrDefault())?.GetValue(CompCache.StoryWC.questCont);
             return questCont;
         }
 
         private object FindComponentWithName(string className)
         {
             object component = null;
-            component = Current.Game.GetComponent(Type.GetType(className));
-            if (component == null) component = Find.World.GetComponent(Type.GetType(className));
-            if (component == null) component = Find.Maps.Where(x => x.Parent != null && x.Parent.GetType() == Type.GetType(className)).Select(map => map.Parent).FirstOrDefault();
-            if (component == null) component = Find.Maps.Where(x => x.GetComponent(Type.GetType(className)) != null).Select(map => map.GetComponent(Type.GetType(className))).FirstOrDefault();
+            component = Current.Game.GetComponent(Type.GetType(className))
+                ?? (object)Find.World.GetComponent(Type.GetType(className))
+                ?? (object)Find.Maps.Where(x => x.Parent != null && x.Parent.GetType() == Type.GetType(className)).Select(map => map.Parent).FirstOrDefault()
+                ?? Find.Maps.Where(x => x.GetComponent(Type.GetType(className)) != null).Select(map => map.GetComponent(Type.GetType(className))).FirstOrDefault();
             return component;
         }
     }

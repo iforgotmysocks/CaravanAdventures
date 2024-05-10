@@ -117,7 +117,7 @@ namespace CaravanAdventures.CaravanImmersion
             }
         }
 
-        private bool IsKid(Pawn pawn) => pawn?.ageTracker?.AgeBiologicalYears != null && pawn?.ageTracker?.AgeBiologicalYears <= 14;
+        private bool IsKid(Pawn pawn) => pawn?.ageTracker?.AgeBiologicalYears != null && pawn?.ageTracker?.AgeBiologicalYears <= 13;
 
         private TravelCompanionDef CalculateNewRelation(Pawn mainPawn, Pawn pawn)
         {
