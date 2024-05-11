@@ -1062,7 +1062,7 @@
     </graphicData>
     <statBases>
       <MaxHitPoints>200</MaxHitPoints>
-      <MarketValue>12</MarketValue>
+      <MarketValue>3</MarketValue>
       <Mass>0.001</Mass>
       <Flammability>0.1</Flammability>
       <DeteriorationRate>0</DeteriorationRate>
