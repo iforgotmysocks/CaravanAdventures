@@ -253,7 +253,7 @@
     </descriptionHyperlinks>
     <comps>
       <li Class="CompProperties_GenepackContainer">
-        <maxCapacity>20</maxCapacity>
+        <maxCapacity>30</maxCapacity>
       </li>
       <li Class="CompProperties_Refuelable">
         <fuelConsumptionRate>3.0</fuelConsumptionRate>
