@@ -19,6 +19,9 @@
       <MechEnergyLossPerHP MayRequire="Ludeon.Rimworld.Biotech">0.33</MechEnergyLossPerHP>
       <WastepacksPerRecharge MayRequire="Ludeon.Rimworld.Biotech">5</WastepacksPerRecharge>
       <WorkSpeedGlobal MayRequire="Ludeon.Rimworld.Biotech">0.5</WorkSpeedGlobal>
+      <HypoxiaResistance MayRequire="kentington.saveourship2">1</HypoxiaResistance>
+      <DecompressionResistance MayRequire="kentington.saveourship2">1</DecompressionResistance>
+      <VacuumSpeedMultiplier MayRequire="kentington.saveourship2">4</VacuumSpeedMultiplier>
     </statBases>
     <receivesSignals>true</receivesSignals>
     <tradeability>None</tradeability>
