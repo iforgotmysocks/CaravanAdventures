@@ -105,10 +105,10 @@ namespace CaravanAdventures
 
         private static void PatchIncreaseBaseWealthAndFood() 
         {
-            var bases = DefDatabase<TraderKindDef>.AllDefsListForReading.Where(def => def.defName.ToLower().StartsWith("base_"));
+            var bases = DefDatabase<TraderKindDef>.AllDefsListForReading.Where(def => def.defName.ToLower().StartsWith("base_") || def.defName.ToLower().StartsWith("orbital_"));
             foreach (var curBase in bases)
             {
-                DLog.Message($"adjusting base {curBase.defName}");
+                DLog.Message($"adjusting trader {curBase.defName}");
                 var silverGen = curBase.stockGenerators.FirstOrDefault(gen => gen.HandlesThingDef(ThingDefOf.Silver));
                 if (silverGen != null) silverGen.countRange = new IntRange(silverGen.countRange.min * 5, silverGen.countRange.max * 4);
 
