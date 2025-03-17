@@ -212,7 +212,7 @@
     </building>
   </ThingDef>
 
-  <ThingDef ParentName="CATentBase">
+  <ThingDef MayRequire="Ludeon.RimWorld.Biotech" ParentName="CATentBase">
     <defName>CAGeneBank</defName>
     <label>compct gene bank</label>
     <description>This building can store genepacks and make them usable to create new xenogerms, when placed near a gene assembler. Large gene libraries require many gene banks.\n\nWhen powered, gene banks prevent genepacks from deteriorating and will slowly repair deterioration.</description>
