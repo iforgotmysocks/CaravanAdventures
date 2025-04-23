@@ -8,16 +8,17 @@ namespace CaravanAdventures.CaravanMechBounty
     {
         public static Pawn GenerateVeteran(TraitDef selPersonality = null, TraitDef selSkill = null, bool tribal = false)
         {
-            var veteran = PrepareVeteranPawn(selPersonality, selSkill);
+            var veteran = PrepareVeteranPawn(selPersonality, selSkill, tribal);
             if (veteran == null) return null;
             CheckVeteranChildhoodBackstory(veteran, tribal);
             CheckVeteranAdultBackstory(veteran);
-            AdjustVeteranSkills(veteran);
+            AdjustVeteranSkills(veteran, tribal);
             ConfigureVeteranHediffs(veteran);
+            veteran.Notify_DisabledWorkTypesChanged();
             return veteran;
         }
 
-        private static Pawn PrepareVeteranPawn(TraitDef selPersonality, TraitDef selSkill)
+        private static Pawn PrepareVeteranPawn(TraitDef selPersonality, TraitDef selSkill, bool tribal)
         {
             var genPawnRequest = new PawnGenerationRequest(ModSettings.storyEnabled ? CaravanStory.StoryDefOf.CASacrilegHunters_ExperiencedHunter : PawnKindDefOf.SpaceRefugee, Faction.OfPlayer)
             {
@@ -35,7 +36,9 @@ namespace CaravanAdventures.CaravanMechBounty
             }
             foreach (var trait in veteran.story.traits.allTraits.Reverse<Trait>()) veteran.story.traits.allTraits.Remove(trait);
             if (DefDatabase<TraitDef>.GetNamedSilentFail("Tough") != null) veteran.story.traits.GainTrait(new Trait(DefDatabase<TraitDef>.GetNamedSilentFail("Tough")));
-            if (DefDatabase<TraitDef>.GetNamedSilentFail("Beauty") != null && Rand.Chance(0.2f)) veteran.story.traits.GainTrait(new Trait(DefDatabase<TraitDef>.GetNamedSilentFail("Beauty"), 2));
+
+            var beautyChance = tribal ? 0.5f : 0.2f;
+            if (DefDatabase<TraitDef>.GetNamedSilentFail("Beauty") != null && Rand.Chance(beautyChance)) veteran.story.traits.GainTrait(new Trait(DefDatabase<TraitDef>.GetNamedSilentFail("Beauty"), 2));
             if (selPersonality != null) veteran.story.traits.GainTrait(new Trait(selPersonality, selPersonality.degreeDatas.OrderByDescending(data => data.degree).FirstOrDefault().degree));
             if (selSkill != null) veteran.story.traits.GainTrait(new Trait(selSkill, selSkill.degreeDatas.OrderByDescending(data => data.degree).FirstOrDefault().degree));
             return veteran;
@@ -73,18 +76,19 @@ namespace CaravanAdventures.CaravanMechBounty
                     ).InRandomOrder().FirstOrDefault();
         }
 
-        private static void AdjustVeteranSkills(Pawn veteran)
+        private static void AdjustVeteranSkills(Pawn veteran, bool tribal)
         {
-            var count = 0;
-            var majorPassionPoints = 0;
-
+            var majorPassionsReduceMinorPassionAmount = !tribal;
             var majorCombatPassion = Rand.Chance(0.3f);
             var majorOther = Rand.Chance(0.3f);
+
+            var availablePassionPoints = tribal ? 5 : 4; // 9 max - 5 predefined
+            var extraTribalPassionAvailable = tribal;
+
             foreach (var skill in veteran.skills.skills.InRandomOrder())
             {
                 skill.passion = Passion.Minor;
 
-                // todo check why passions don't match with 9
                 switch (skill?.def?.defName)
                 {
                     case "Shooting":
@@ -94,7 +98,7 @@ namespace CaravanAdventures.CaravanMechBounty
                         {
                             majorCombatPassion = false;
                             skill.passion = Passion.Major;
-                            majorPassionPoints++;
+                            availablePassionPoints--;
                         }
                         break;
                     case "Medicine":
@@ -105,25 +109,38 @@ namespace CaravanAdventures.CaravanMechBounty
                         {
                             majorOther = false;
                             skill.passion = Passion.Major;
-                            majorPassionPoints++;
+                            availablePassionPoints--;
                         }
                         break;
-                    case "Artistic":
-                    case "Intellectual":
-                        skill.passion = Passion.None;
-                        break;
                     default:
+                        if (availablePassionPoints <= 0)
+                        {
+                            skill.passion = Passion.None;
+                            break;
+                        }
+
+                        if ((new[] { "Artistic", "Intellectual" }).Contains(skill?.def?.defName)
+                            && !extraTribalPassionAvailable)
+                        {
+                            skill.passion = Passion.None;
+                            break;
+                        }
+                        else if ((new[] { "Artistic", "Intellectual" }).Contains(skill?.def?.defName))
+                        {
+                            // if we allow major and it would fall on a non-important skill, it would take a passion point
+                            // away from important skills which may make the pawn worse for the situation, instead of improve it
+                            if (majorOther) availablePassionPoints++;
+                        }
+                        extraTribalPassionAvailable = false;
+
                         if (majorOther)
                         {
                             majorOther = false;
                             skill.passion = Passion.Major;
-                            majorPassionPoints += 2;
+                            availablePassionPoints--;
                         }
-                        else
-                        {
-                            if (count <= majorPassionPoints) skill.passion = Passion.None;
-                        }
-                        count++;
+
+                        availablePassionPoints--;
                         break;
                 }
             }
