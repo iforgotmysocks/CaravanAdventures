@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using CaravanAdventures.CaravanStory;
 using RimWorld;
 using Verse;
 
@@ -131,12 +132,13 @@ namespace CaravanAdventures.CaravanAbilities
 
         private bool TryAddPawn(List<Pawn> pawns)
         {
+            var gifted = StoryUtility.GetGiftedPawn();
             RemovePawnsNoLongerApplying(pawns);
             if (linkedPawns.Count >= pawns.Count || linkedPawns.Count >= ModSettings.maxLinkedAuraPawns) return false;
-            var pawnToAdd = pawns.FirstOrDefault(pawn => !linkedPawns.Contains(pawn)
+            var pawnToAdd = pawns.Where(pawn => !linkedPawns.Contains(pawn)
                 && !pawn.health.hediffSet.HasHediff(AbilityDefOf.CAAncientProtectiveAuraLinked)
-                && !pawn.health.hediffSet.HasHediff(AbilityDefOf.CAAncientGift
-                ));
+                && !pawn.health.hediffSet.HasHediff(AbilityDefOf.CAAncientGift))
+                .OrderBy(p => p.Position.IsValid).ThenBy(p => p.Map != gifted.Map ? float.MaxValue : gifted?.Position.DistanceTo(p.Position)).FirstOrDefault();
             if (pawnToAdd == null) return false;
             DLog.Message($"Adding {pawnToAdd} as linked aura pawn");
             AddLinkedHediffToPawn(pawnToAdd, Pawn);
