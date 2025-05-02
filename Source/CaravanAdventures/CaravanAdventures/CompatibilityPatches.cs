@@ -107,16 +107,6 @@ namespace CaravanAdventures
         {
             detectedAssemblies = detectedAssemblies ?? new List<(string, Assembly)>();
 
-            // todo - remove friendly faction detection patch after faction removal
-            Helper.RunSafely(() =>
-            {
-                var vfeCoreAssembly = Helper.GetAssembly("VFECore", detectedAssemblies);
-                if (vfeCoreAssembly != null && ModsConfig.RoyaltyActive)
-                {
-                    Log.Message($"Patching VFE from bringing up the faction dialog for no longer needed faction");
-                    Patches.Compatibility.VFECoreFriendlyFactionDetectionPatch.ApplyPatches(vfeCoreAssembly);
-                }
-            }, false, ErrorMessage("VFECore"));
 
             Helper.RunSafely(() =>
             {
