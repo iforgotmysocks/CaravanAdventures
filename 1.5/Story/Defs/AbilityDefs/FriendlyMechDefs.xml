@@ -96,7 +96,9 @@
     <techHediffsMoney>9999~9999</techHediffsMoney>
 
     <!-- lets try to disable it for other use cases -->
-    <combatPower>340282346638528859811704183484516925440</combatPower>
+	  <!-- <isFighter>false</isFighter/> -->
+	  <maxPerGroup>0</maxPerGroup>
+    <combatPower>15</combatPower>
     <allowInMechClusters>false</allowInMechClusters>
     <canBeSapper>false</canBeSapper>
     <canArriveManhunter>false</canArriveManhunter>
