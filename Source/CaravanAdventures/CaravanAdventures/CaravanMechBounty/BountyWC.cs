@@ -54,9 +54,9 @@ namespace CaravanAdventures.CaravanMechBounty
             bountyServiceAvailable = false;
         }
 
-        public override void FinalizeInit()
+        public override void FinalizeInit(bool fromLoad)
         {
-            base.FinalizeInit();
+            base.FinalizeInit(fromLoad);
             CompCache.BountyWC = null;
 
             if (bountyFaction == null) bountyFaction = CaravanStory.StoryUtility.FactionOfSacrilegHunters ?? Find.FactionManager?.AllFactionsListForReading?.FirstOrDefault(x => x.def == FactionDefOf.OutlanderCivil);

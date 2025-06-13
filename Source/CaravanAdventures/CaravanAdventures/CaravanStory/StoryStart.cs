@@ -243,7 +243,7 @@ namespace CaravanAdventures.CaravanStory
             else if (gifted != null && (gifted.Dead || gifted.Faction != Faction.OfPlayer || gifted.IsKidnapped() || forceStrip)) StoryUtility.StripGiftFromPawn(gifted);
 
             // todo when no sensitive pawn could be found, use an insensitive one
-            gifted = pawn ?? PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction?.Where(x =>
+            gifted = pawn ?? PawnsFinder.AllMapsCaravansAndTravellingTransporters_Alive_OfPlayerFaction?.Where(x =>
                 (x?.RaceProps?.Humanlike ?? false)
                 && !x.HasExtraHomeFaction() && !x.HasExtraMiniFaction()
                 && x?.psychicEntropy?.IsPsychicallySensitive == true

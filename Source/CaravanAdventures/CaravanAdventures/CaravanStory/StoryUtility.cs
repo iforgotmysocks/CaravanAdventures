@@ -89,7 +89,7 @@ namespace CaravanAdventures.CaravanStory
                 points = Rand.Range(pointsMin, pointsMax),
                 raidNeverFleeIndividual = true,
                 raidStrategy = RaidStrategyDefOf.ImmediateAttackFriendly,
-                raidArrivalMode = PawnsArrivalModeDefOf.EdgeDrop
+                raidArrivalMode = PawnsArrivalModeDefOf.EdgeDrop,
             };
             DLog.Message($"Assistance with {incidentParms.points} points and kind: {incidentParms.pawnKind?.defName}, targetspot default? {spawnSpot == default} if yes, a colonist should be selected as drop spot");
             if (spawnSpot == default && map.mapPawns.AnyColonistSpawned) spawnSpot = map.mapPawns.FreeColonists.Where(col => col.Spawned).RandomElement().Position;
@@ -341,7 +341,7 @@ namespace CaravanAdventures.CaravanStory
             Helper.RunSafely(() =>
             {
                 foreach (var pawn in PawnsFinder.AllMaps_Spawned.Where(x => x.Faction == faction).Reverse<Pawn>()) pawn.Destroy();
-                foreach (var pawn in PawnsFinder.AllCaravansAndTravelingTransportPods_Alive.Where(x => x.Faction == faction).Reverse<Pawn>()) pawn.Destroy();
+                foreach (var pawn in PawnsFinder.AllMapsCaravansAndTravellingTransporters_Alive.Where(x => x.Faction == faction).Reverse<Pawn>()) pawn.Destroy();
             });
 
             faction.temporary = true;
@@ -389,7 +389,7 @@ namespace CaravanAdventures.CaravanStory
         public static IntVec3 GetCenterOfSettlementBase(Map map, Faction faction, bool useMapCenterAsFallback = false)
         {
             var coords = new List<IntVec3>();
-            map.regionGrid.allRooms
+            map.regionGrid.AllRooms
                 .Where(room => !room.Regions
                 .Any(region => region.DangerFor(map.mapPawns.AllPawnsSpawned
                 .Where(x => x.Faction == faction).FirstOrDefault()) == Danger.Deadly)
@@ -521,7 +521,7 @@ namespace CaravanAdventures.CaravanStory
             return faction;
         }
 
-        public static bool TryGenerateDistantTile(out int newTile, int minDist, int maxDist)
+        public static bool TryGenerateDistantTile(out PlanetTile newTile, int minDist, int maxDist)
         {
             int startTile = -1;
             Caravan caravan;
@@ -532,7 +532,7 @@ namespace CaravanAdventures.CaravanStory
                 if (caravan != null) startTile = caravan.Tile;
                 else DLog.Message($"caraavn is null");
             }
-            return TileFinder.TryFindNewSiteTile(out newTile, minDist, maxDist, false, TileFinderMode.Near, startTile, false);
+            return TileFinder.TryFindNewSiteTile(out newTile, minDist, maxDist, false, null, startTile, false);
         }
 
         public static void GenerateStoryContact()

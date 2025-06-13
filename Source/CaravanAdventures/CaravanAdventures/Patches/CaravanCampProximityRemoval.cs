@@ -11,9 +11,10 @@ namespace CaravanAdventures.Patches
         public static void ApplyPatches()
         {
             if (!ModSettings.caravanCampEnabled) return;
-            var org = AccessTools.Method(typeof(SettlementProximityGoodwillUtility), nameof(SettlementProximityGoodwillUtility.AppendProximityGoodwillOffsets));
-            var post = new HarmonyMethod(typeof(CaravanCampProximityRemoval).GetMethod(nameof(AppendProximityGoodwillOffsetsPostfix)));
-            HarmonyPatcher.harmony.Patch(org, null, post);
+            // todo 1.6 fix
+            //var org = AccessTools.Method(typeof(SettlementProximityGoodwillUtility), nameof(SettlementProximityGoodwillUtility.AppendProximityGoodwillOffsets));
+            //var post = new HarmonyMethod(typeof(CaravanCampProximityRemoval).GetMethod(nameof(AppendProximityGoodwillOffsetsPostfix)));
+            //HarmonyPatcher.harmony.Patch(org, null, post);
         }
 
         public static void AppendProximityGoodwillOffsetsPostfix(int tile, List<Pair<Settlement, int>> outOffsets, bool ignoreIfAlreadyMinGoodwill, bool ignorePermanentlyHostile)

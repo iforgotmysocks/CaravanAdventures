@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Defs>
+	<JobDef>
+		<defName>CACampInformPackingUp</defName>
+		<driverClass>CaravanAdventures.CaravanCamp.JobDriver_StartPackingUp</driverClass>
+    <reportString>Packing up camp at TargetA.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+	</JobDef>
+</Defs>

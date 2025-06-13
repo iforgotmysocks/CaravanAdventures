@@ -35,7 +35,7 @@ namespace CaravanAdventures.CaravanStory
                 return false;
             }
             float points = parms.points;
-            parms.points = IncidentWorker_Raid.AdjustedRaidPoints(parms.points, parms.raidArrivalMode, parms.raidStrategy, parms.faction, combat);
+            parms.points = IncidentWorker_Raid.AdjustedRaidPoints(parms.points, parms.raidArrivalMode, parms.raidStrategy, parms.faction, combat, parms.target);
             List<Pawn> list = parms.raidStrategy.Worker.SpawnThreats(parms);
             if (list == null)
             {

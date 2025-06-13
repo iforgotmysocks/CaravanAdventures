@@ -58,7 +58,7 @@ namespace CaravanAdventures
 
         private static void PatchSacHunterItemDropStats()
         {
-            foreach (var kind in DefDatabase<PawnKindDef>.AllDefsListForReading.Where(x => x.defaultFactionType == StoryDefOf.CASacrilegHunters))
+            foreach (var kind in DefDatabase<PawnKindDef>.AllDefsListForReading.Where(x => x.defaultFactionDef == StoryDefOf.CASacrilegHunters))
             {
                 kind.biocodeWeaponChance = 1f;
                 if (kind?.techHediffsRequired != null) kind.techHediffsRequired.Add(ThingDef.Named("DeathAcidifier"));

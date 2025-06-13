@@ -28,4 +28,12 @@
     <li IfModActive="Ludeon.Rimworld.Royalty">1.5/Expansions/RM/Defs</li>
     <li IfModActive="Ludeon.Rimworld.Royalty">1.5/Expansions/RM/Patches</li>
   </v1.5>
+  <v1.6>
+    <li>/</li>
+    <li>1.6</li>
+    <li IfModActive="Ludeon.Rimworld.Royalty">1.6/Story</li>
+    <li IfModActive="CETeam.CombatExtended">1.6/CEPatches</li>
+    <li IfModActive="Ludeon.Rimworld.Royalty">1.6/Expansions/RM/Defs</li>
+    <li IfModActive="Ludeon.Rimworld.Royalty">1.6/Expansions/RM/Patches</li>
+  </v1.6>
 </loadFolders>

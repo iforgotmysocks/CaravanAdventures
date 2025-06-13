@@ -54,7 +54,7 @@ namespace CaravanAdventures.CaravanStory
 			return false;
 		}
 
-		public override void Tick()
+		protected override void Tick()
 		{
 			base.Tick();
 			if (base.HasMap)

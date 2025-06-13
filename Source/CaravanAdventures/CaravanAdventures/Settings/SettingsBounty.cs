@@ -103,7 +103,7 @@ namespace CaravanAdventures.Settings
             options.CheckboxLabeled("Allow exchanging bounty points for silver", ref ModSettings.allowBuyingBountyWithSilver);
             options.Label($"Bounty value multiplier. (Default: 1 silver ~ 0.25 bounty credit): {Math.Round(ModSettings.bountyValueMult, 2)}");
             ModSettings.bountyValueMult = (float)Math.Round(options.Slider(ModSettings.bountyValueMult, 0.1f, 4f), 2);
-            options.Label($"Bounty credit purchase cost percentage: {Math.Round(ModSettings.bountyCreditPurchaseCostMult * 100, 0)}%", -1, "Reduction of points by this amount for conversion services.");
+            options.Label(new TaggedString($"Bounty credit purchase cost percentage: {Math.Round(ModSettings.bountyCreditPurchaseCostMult * 100, 0)}%"), -1, "Reduction of points by this amount for conversion services.");
             ModSettings.bountyCreditPurchaseCostMult = (float)Math.Round(options.Slider(ModSettings.bountyCreditPurchaseCostMult, 0f, 0.99f), 2);
 
             //options.EndScrollView(ref viewRect);

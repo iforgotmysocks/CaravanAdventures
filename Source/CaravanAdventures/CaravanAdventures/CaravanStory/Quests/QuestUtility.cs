@@ -17,7 +17,7 @@ namespace CaravanAdventures.CaravanStory.Quests
                 return;
             }
             Slate slate = new Slate();
-            if (questDef.CanRun(slate))
+            if (true) // questDef.CanRun(slate)
             {
                 var quest = RimWorld.QuestUtility.GenerateQuestAndMakeAvailable(questDef, slate);
                 if (!string.IsNullOrEmpty(questName)) quest.name = questName.Translate(GetNamedArgumentsFromObjects(questNameParms));
@@ -43,7 +43,7 @@ namespace CaravanAdventures.CaravanStory.Quests
         public static void GenerateStoryQuest_old(QuestScriptDef questDef, bool directlyAccept = true)
         {
             Slate slate = new Slate();
-            if (questDef.CanRun(slate))
+            if (questDef.CanRun(slate, null))
             {
                 var quest = RimWorld.QuestUtility.GenerateQuestAndMakeAvailable(questDef, slate);
                 RimWorld.QuestUtility.SendLetterQuestAvailable(quest);

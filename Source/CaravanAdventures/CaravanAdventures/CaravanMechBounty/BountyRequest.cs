@@ -284,7 +284,7 @@ namespace CaravanAdventures.CaravanMechBounty
             }
 
             if (ModsConfig.RoyaltyActive && item.def == ThingDefOf.PsychicAmplifier) Find.History.lastPsylinkAvailable = Find.TickManager.TicksGame;
-            var activeDropPodInfo = new ActiveDropPodInfo();
+            var activeDropPodInfo = new ActiveTransporterInfo();
             activeDropPodInfo.innerContainer.TryAddRangeOrTransfer(things, true, false);
             DropPodUtility.MakeDropPodAt(validPosition, requestor.Map, activeDropPodInfo);
             Messages.Message("CABountyExchangeRequestItem_ItemArrived".Translate(this.faction.Named("FACTION")), new LookTargets(validPosition, requestor.Map), MessageTypeDefOf.NeutralEvent, true);

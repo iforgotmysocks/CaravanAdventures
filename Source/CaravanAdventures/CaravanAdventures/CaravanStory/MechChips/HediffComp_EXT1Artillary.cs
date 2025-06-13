@@ -55,7 +55,7 @@ namespace CaravanAdventures.CaravanStory.MechChips
             if (GenHostility.AnyHostileActiveThreatTo(Pawn.Map, Pawn.Faction))
             {
                 var spawnPos = GetMinionSpawnPosition(Pawn.Position, Pawn.Map);
-                if (spawnPos != null)
+                if (spawnPos != IntVec3.Invalid)
                 {
                     var scyther = PawnGenerator.GeneratePawn(PawnKindDef.Named(Helper.ExpSettings?.ancientMechSignalPawnKind?.defName ?? "Mech_Scyther"), Helper.ExpRMNewFaction);
                     scyther.health.AddHediff(HediffDef.Named("CAOverheatingBrain"), scyther.health.hediffSet.GetBrain());

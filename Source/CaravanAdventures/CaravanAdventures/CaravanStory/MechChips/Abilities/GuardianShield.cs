@@ -15,7 +15,7 @@ namespace CaravanAdventures.CaravanStory.MechChips.Abilities
         public float AbsorbedDamage { get => absorbedDamage; set => absorbedDamage = value; }
         public float DamageFluxPerSec { get => damageFluxPerSec; set => damageFluxPerSec = value; }
 
-        public override void Tick()
+        protected override void Tick()
         {
             base.Tick();
             if (owner == null || owner.Dead || this.Map == null) Destroy();

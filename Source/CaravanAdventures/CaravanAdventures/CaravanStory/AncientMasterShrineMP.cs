@@ -61,7 +61,7 @@ namespace CaravanAdventures.CaravanStory
             //var notMatching = generatedMechs.Where(x => !Map.mapPawns.AllPawns.Where(y => y.RaceProps.IsMechanoid).Any(z => z.ThingID == x.ThingID));
             //Log.Message($"Not matching count: {notMatching.Count()}");
             //Log.Message($"Map has boss: {boss != null}");
-
+            DLog.Message($"init1");
             var raidPoints = (int)(8000 * (1 + CompCache.StoryWC.GetCurrentShrineCounter() / 10));
             var patrolComp = GetComponent<TimedDetectionPatrols>();
             if (boss != null || lastJudgmentEntrance != null)
@@ -87,7 +87,7 @@ namespace CaravanAdventures.CaravanStory
             if (playerPawn != null) CameraJumper.TryJumpAndSelect(playerPawn);
         }
 
-        public override void Tick()
+        protected override void Tick()
         {
             base.Tick();
             if (base.HasMap)
@@ -442,7 +442,7 @@ namespace CaravanAdventures.CaravanStory
         private void FreeAllMechsOnMap()
         {
             var sendLetter = false;
-            foreach (var room in Map.regionGrid.allRooms.Where(room => room.ContainsThing(ThingDefOf.AncientCryptosleepCasket) && room.Fogged).Reverse())
+            foreach (var room in Map.regionGrid.AllRooms.Where(room => room.ContainsThing(ThingDefOf.AncientCryptosleepCasket) && room.Fogged).Reverse())
             {
                 try
                 {

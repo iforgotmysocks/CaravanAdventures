@@ -32,7 +32,7 @@ namespace CaravanAdventures.CaravanStory
 			return storyVillageMP != null && storyVillageMP.Spawned;
 		}
 
-		public override FloatMenuAcceptanceReport StillValid(Caravan caravan, int destinationTile)
+		public override FloatMenuAcceptanceReport StillValid(Caravan caravan, PlanetTile destinationTile)
 		{
 			FloatMenuAcceptanceReport floatMenuAcceptanceReport = base.StillValid(caravan, destinationTile);
 			if (!floatMenuAcceptanceReport) return floatMenuAcceptanceReport;

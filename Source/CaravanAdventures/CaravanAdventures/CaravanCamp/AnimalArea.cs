@@ -78,7 +78,7 @@ namespace CaravanAdventures.CaravanCamp
             animalArea = new Area_Allowed(map.areaManager);
             map.areaManager.AllAreas.Add(animalArea);
             animalArea.RenamableLabel = "CAAnimalAreaLabel".Translate();
-            CellRect.Cells.Where(cell => cell != null && !CellRect.EdgeCells.Contains(cell)).ToList().ForEach(cell => animalArea[cell] = true);
+            CellRect.Cells.Where(cell => cell != IntVec3.Invalid && !CellRect.EdgeCells.Contains(cell)).ToList().ForEach(cell => animalArea[cell] = true);
             animalArea.AreaUpdate();
         }
 

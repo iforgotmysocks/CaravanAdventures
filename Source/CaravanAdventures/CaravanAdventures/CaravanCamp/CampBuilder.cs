@@ -59,9 +59,29 @@ namespace CaravanAdventures.CaravanCamp
             MovePrisonersToCells();
             InformPlayerHighTechCosts();
             Current.ProgramState = stateBackup;
-            GetOrGenerateMapUtility.UnfogMapFromEdge(map);
+            UnfogMapFromEdge(map);
 
             return true;
+        }
+
+        private static void UnfogMapFromEdge(Map map)
+        {
+            Predicate<IntVec3> validator = delegate (IntVec3 c)
+            {
+                if (!c.Standable(map))
+                {
+                    return false;
+                }
+                if (c.Roofed(map))
+                {
+                    return false;
+                }
+                return map.reachability.CanReachMapEdge(c, TraverseParms.For(TraverseMode.NoPassClosedDoorsOrWater)) ? true : false;
+            };
+            if (CellFinder.TryFindRandomCellNear(map.Center, map, 30, validator, out var result) || CellFinder.TryFindRandomEdgeCellWith(validator, map, 0f, out result) || CellFinder.TryFindRandomCell(map, validator, out result))
+            {
+                FloodFillerFog.FloodUnfog(result, map);
+            }
         }
 
         private void UnfogBuildings()
@@ -515,7 +535,7 @@ namespace CaravanAdventures.CaravanCamp
             foreach (var cell in campSiteRect)
             {
                 map.areaManager.Home[cell] = true;
-                if (ModSettings.autoApplyCampClearSnowArea) if (!cell.Roofed(map)) map.areaManager.SnowClear[cell] = true;
+                if (ModSettings.autoApplyCampClearSnowArea) if (!cell.Roofed(map)) map.areaManager.SnowOrSandClear[cell] = true;
             }
 
             foreach (var tent in campParts.OfType<Tent>())

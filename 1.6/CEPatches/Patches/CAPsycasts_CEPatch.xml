@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Royalty</li>
+    </mods>
+    <match Class="PatchOperationSequence">
+      <success>Always</success>
+      <operations>
+
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/HediffDef[defName="CAAncientProtectiveAuraLinked" or defName="CAAncientProtectiveAura"]/stages/li/statOffsets/MeleeDodgeChance</xpath>
+          <value>
+            <MeleeDodgeChance>0.3</MeleeDodgeChance>
+          </value>
+        </li>
+
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/HediffDef[defName="CAAncientProtectiveAuraLinked" or defName="CAAncientProtectiveAura"]/stages/li/statOffsets/MeleeHitChance</xpath>
+          <value>
+            <MeleeHitChance>0.15</MeleeHitChance>
+          </value>
+        </li>
+
+      </operations>
+    </match>
+  </Operation>
+
+</Patch>

@@ -35,7 +35,7 @@ namespace CaravanAdventures.CaravanCamp
             map.zoneManager.RegisterZone(zone);
             zone.settings.filter.SetAllow(SpecialThingFilterDef.Named("AllowBiocodedWeapons"), false);
             zone.settings.filter.SetAllow(SpecialThingFilterDef.Named("AllowDeadmansApparel"), false);
-            CellRect.Cells.Where(cell => cell != null && !CellRect.EdgeCells.Contains(cell)).ToList().ForEach(cell => zone.AddCell(cell));
+            CellRect.Cells.Where(cell => cell != IntVec3.Invalid && !CellRect.EdgeCells.Contains(cell)).ToList().ForEach(cell => zone.AddCell(cell));
         }
 
         public virtual void ApplyInventory(Map map, Caravan caravan)

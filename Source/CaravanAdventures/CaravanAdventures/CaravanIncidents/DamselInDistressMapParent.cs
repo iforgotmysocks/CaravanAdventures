@@ -13,7 +13,7 @@ namespace CaravanAdventures.CaravanIncidents
         private bool[] diaFlags = new bool[10];
         private float joinDiaRange = 5f;
 
-        public override void Tick()
+        protected override void Tick()
         {
             base.Tick();
             if (base.HasMap)

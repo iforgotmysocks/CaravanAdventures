@@ -49,12 +49,12 @@ namespace CaravanAdventures.CaravanStory.MechChips.Abilities
             if (equipment != null)
             {
                 this.equipmentDef = equipment.def;
-                this.weaponDamageMultiplier = equipment.GetStatValue(StatDefOf.RangedWeapon_DamageMultiplier, true);
+                //this.weaponDamageMultiplier = equipment.GetStatValue(StatDefOf.RangedWeapon_DamageMultiplier, true);
             }
             else
             {
                 this.equipmentDef = null;
-                this.weaponDamageMultiplier = 1f;
+                //this.weaponDamageMultiplier = 1f;
             }
             this.destination = usedTarget.Cell.ToVector3Shifted() + Gen.RandomHorizontalVector(0.3f);
             this.ticksToImpact = Mathf.CeilToInt(this.StartingTicksToImpact);
@@ -70,7 +70,7 @@ namespace CaravanAdventures.CaravanStory.MechChips.Abilities
         }
 
 
-        public override void Tick()
+        protected override void Tick()
         {
             map = usedTarget.Thing?.Map ?? Map;
             if (map == null) {
@@ -416,7 +416,7 @@ namespace CaravanAdventures.CaravanStory.MechChips.Abilities
             ThingDef preExplosionSpawnThingDef = this.def.projectile.preExplosionSpawnThingDef;
             float preExplosionSpawnChance = this.def.projectile.preExplosionSpawnChance;
             int preExplosionSpawnThingCount = this.def.projectile.preExplosionSpawnThingCount;
-            GenExplosion.DoExplosion(position, map2, explosionRadius, damageDef, launcher, damageAmount, armorPenetration, soundExplode, equipmentDef, def, thing, postExplosionSpawnThingDef, postExplosionSpawnChance, postExplosionSpawnThingCount, GasType.BlindSmoke, this.def.projectile.applyDamageToExplosionCellsNeighbors, preExplosionSpawnThingDef, preExplosionSpawnChance, preExplosionSpawnThingCount, this.def.projectile.explosionChanceToStartFire, this.def.projectile.explosionDamageFalloff, new float?(this.origin.AngleToFlat(this.destination)), null);
+            GenExplosion.DoExplosion(position, map2, explosionRadius, damageDef, launcher, damageAmount, armorPenetration, soundExplode, equipmentDef, def, thing, postExplosionSpawnThingDef, postExplosionSpawnChance, postExplosionSpawnThingCount, GasType.BlindSmoke, null, 255, this.def.projectile.applyDamageToExplosionCellsNeighbors, preExplosionSpawnThingDef, preExplosionSpawnChance, preExplosionSpawnThingCount, this.def.projectile.explosionChanceToStartFire, this.def.projectile.explosionDamageFalloff, new float?(this.origin.AngleToFlat(this.destination)), null);
         }
 
     }

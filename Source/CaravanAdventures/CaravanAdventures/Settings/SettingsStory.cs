@@ -92,7 +92,7 @@ namespace CaravanAdventures.Settings
             ModSettings.hunterAssistanceMult = options.Slider(ModSettings.hunterAssistanceMult, 0.2f, 2f);
             options.Gap();
 
-            options.Label("Ancient shrine min/max spawn distance from the player's settlement:".Colorize(Color.green), 40f, "If the distance is too large for the world map, the distance will be halfed for the next attempt.");
+            options.Label(new TaggedString("Ancient shrine min/max spawn distance from the player's settlement:".Colorize(Color.green)), 40f, "If the distance is too large for the world map, the distance will be halfed for the next attempt.");
             //options.Label("Multiplier: " + Math.Round(ModSettings.shrineDistance, 2) + "  (default: 1.2)");
             options.IntRange(ref ModSettings.shrineDistance, 50, 800);
             options.Gap();

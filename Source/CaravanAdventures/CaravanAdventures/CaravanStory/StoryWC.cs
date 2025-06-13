@@ -110,9 +110,9 @@ namespace CaravanAdventures.CaravanStory
         {
         }
 
-        public override void FinalizeInit()
+        public override void FinalizeInit(bool fromLoad)
         {
-            base.FinalizeInit();
+            base.FinalizeInit(fromLoad);
             CompCache.StoryWC = null;
             Patches.Compatibility.SoS2Patch.Reset();
 
@@ -337,16 +337,17 @@ namespace CaravanAdventures.CaravanStory
 
         private int GetShrineLocation()
         {
-            int tile = -1;
+            PlanetTile tile;
             var newRange = new IntRange(ShrineDistance.min / (shrineTileUnsuccessfulCounter + 1), ShrineDistance.max);
             if (CompatibilityDefOf.CACompatDef.excludedBiomeDefNamesForStoryShrineGeneration.Any())
             {
                 DLog.Message($"Trying to skip biome defs.");
-                var startTile = -1;
+                PlanetTile startTile;
                 TileFinder.TryFindRandomPlayerTile(out startTile, true);
                 if (startTile == -1) startTile = Find.World.worldObjects?.Caravans?.FirstOrDefault(x => x?.IsPlayerControlled == true)?.Tile ?? -1;
-                if (!TileFinder.TryFindPassableTileWithTraversalDistance(startTile, newRange.min, newRange.max, out tile, (int x) =>
-                    !CompatibilityDefOf.CACompatDef.excludedBiomeDefNamesForStoryShrineGeneration.Contains(Find.World.grid[x].biome?.defName)))
+                if (!TileFinder.TryFindPassableTileWithTraversalDistance(startTile, newRange.min, newRange.max, out tile, (PlanetTile x) =>
+                    // todo 1.6 check if nullcheck makes sense
+                    !Find.World.grid[x].Biomes?.Any(b => CompatibilityDefOf.CACompatDef.excludedBiomeDefNamesForStoryShrineGeneration.Contains(b.defName)) ?? true))
                 {
                     shrineTileUnsuccessfulCounter++;
                     DLog.Message("Couldn't find tile to create a new shrine");

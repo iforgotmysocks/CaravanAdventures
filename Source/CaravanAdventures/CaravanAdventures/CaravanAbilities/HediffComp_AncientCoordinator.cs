@@ -80,7 +80,7 @@ namespace CaravanAdventures.CaravanAbilities
                     Pawn.health.RemoveHediff(parent);
                     return;
                 }
-                var pawns = PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_Colonists.Where(pawn => !pawn.HasExtraHomeFaction()
+                var pawns = PawnsFinder.AllMapsCaravansAndTravellingTransporters_Alive_Colonists.Where(pawn => !pawn.HasExtraHomeFaction()
                     && !pawn.HasExtraMiniFaction()
                     && pawn != Pawn
                     && !pawn.IsKidnapped()

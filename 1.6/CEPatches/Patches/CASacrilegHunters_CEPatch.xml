@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Royalty</li>
+    </mods>
+    <match Class="PatchOperationSequence">
+      <success>Always</success>
+      <operations>
+        <li Class="PatchOperationAdd">
+          <xpath>
+            Defs/PawnKindDef[defName = "CASacrilegHunters_Hunter"
+            or defName = "CASacrilegHunters_ExperiencedHunter"
+            or defName = "CASacrilegHunters_HunterVillage"
+            or defName = "CASacrilegHunters_ExperiencedHunterVillage"]/apparelRequired
+          </xpath>
+          <value>
+              <li>CE_Apparel_Backpack</li>
+              <li>CE_Apparel_TacVest</li>
+          </value>
+        </li>
+        <li Class="PatchOperationAddModExtension">
+          <xpath>
+            Defs/PawnKindDef[defName = "CASacrilegHunters_Hunter"
+            or defName = "CASacrilegHunters_ExperiencedHunter"]
+          </xpath>
+          <value>
+            <li Class="CombatExtended.LoadoutPropertiesExtension">
+              <primaryMagazineCount>
+                <min>4</min>
+                <max>8</max>
+              </primaryMagazineCount>
+            </li>
+          </value>
+        </li>
+
+        <li Class="PatchOperationAddModExtension">
+          <xpath>
+            Defs/PawnKindDef[defName = "CASacrilegHunters_HunterVillage"
+            or defName = "CASacrilegHunters_ExperiencedHunterVillage"]
+          </xpath>
+          <value>
+            <li Class="CombatExtended.LoadoutPropertiesExtension">
+              <primaryMagazineCount>
+                <min>2</min>
+                <max>6</max>
+              </primaryMagazineCount>
+            </li>
+          </value>
+        </li>
+
+        <li Class="PatchOperationAddModExtension">
+          <xpath>Defs/PawnKindDef[defName="CASacrilegHunters_Villager" or defName="CASacrilegHunters_Town_Trader" or defName="CASacrilegHunters_Town_Councilman"]</xpath>
+          <value>
+            <li Class="CombatExtended.LoadoutPropertiesExtension">
+              <primaryMagazineCount>
+                <min>1</min>
+                <max>2</max>
+              </primaryMagazineCount>
+              <sidearms>
+                <li>
+                  <generateChance>0.5</generateChance>
+                  <sidearmMoney>
+                    <min>20</min>
+                    <max>120</max>
+                  </sidearmMoney>
+                  <weaponTags>
+                    <li>CE_Sidearm_Melee</li>
+                  </weaponTags>
+                </li>
+              </sidearms>
+            </li>
+          </value>
+        </li>
+
+        <li Class="PatchOperationAddModExtension">
+          <xpath>Defs/PawnKindDef[defName="CASacrilegHunters_Town_Guard"]</xpath>
+          <value>
+            <li Class="CombatExtended.LoadoutPropertiesExtension">
+              <primaryMagazineCount>
+                <min>2</min>
+                <max>4</max>
+              </primaryMagazineCount>
+              <sidearms>
+                <li>
+                  <generateChance>0.5</generateChance>
+                  <sidearmMoney>
+                    <min>20</min>
+                    <max>120</max>
+                  </sidearmMoney>
+                  <weaponTags>
+                    <li>CE_Sidearm_Melee</li>
+                  </weaponTags>
+                </li>
+              </sidearms>
+            </li>
+          </value>
+        </li>
+
+      </operations>
+    </match>
+  </Operation>
+
+</Patch>

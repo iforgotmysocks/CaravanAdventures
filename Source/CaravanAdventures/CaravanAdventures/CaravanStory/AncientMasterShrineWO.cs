@@ -30,9 +30,12 @@ namespace CaravanAdventures.CaravanStory
                 Map map = CaravanIncidentUtility.GetOrGenerateMapForIncident(caravan, StoryUtility.GetAllowedMapSizeConcideringSettings(), CaravanStorySiteDefOf.CAAncientMasterShrineMP);
                 mp = map.Parent as AncientMasterShrineMP;
                 mainRoom = GetAncientShrineRooms(map).FirstOrDefault();
-
-                if (mainRoom.CellCount > minMainRoomSize) //  && mainRoom.CellCount < map.AllCells.Count() / 2
+                // todo 1.6 issue might be related to reduced mineral and ancient shrine spawn chance!
+                if (mainRoom == null) DLog.Message($"mainRoom was null");
+                
+                if (mainRoom != null && mainRoom.CellCount > minMainRoomSize) //  && mainRoom.CellCount < map.AllCells.Count() / 2
                 {
+                    DLog.Message($"1");
                     if (CompCache.StoryWC.GetCurrentShrineCounter() != CompCache.StoryWC.GetShrineMaxiumum) mp.boss = AddBoss(map, caravan, mainRoom);
                     else mp.lastJudgmentEntrance = InitCellarEntrace(map);
                     CompCache.StoryWC.wasShrineAmbushNoLuck = (mp.boss == null && mp.lastJudgmentEntrance == null);
@@ -40,13 +43,17 @@ namespace CaravanAdventures.CaravanStory
                 }
                 else
                 {
+                    DLog.Message($"2");
                     AddBandits(map, caravan);
                     CompCache.StoryWC.wasShrineAmbushNoLuck = true;
                 }
+                DLog.Message($"3");
                 AdjustAncientShrines(map, caravan, mp.boss);
 
+                DLog.Message($"4");
                 //(Pawn x) => CellFinder.RandomSpawnCellForPawnNear(playerStartingSpot, map, 4)
                 CaravanEnterMapUtility.Enter(caravan, map, CaravanEnterMode.Edge, CaravanDropInventoryMode.DoNotDrop, true);
+                DLog.Message($"5");
                 Find.TickManager.CurTimeSpeed = TimeSpeed.Paused;
 
                 mp.Init();

@@ -24,9 +24,9 @@ namespace CaravanAdventures.CaravanImmersion
             Scribe_Values.Look(ref wasActive, "wasActive", false);
         }
 
-        public override void FinalizeInit()
+        public override void FinalizeInit(bool fromLoad)
         {
-            base.FinalizeInit();
+            base.FinalizeInit(fromLoad);
             relationShipsWithImpact = DefDatabase<PawnRelationDef>.AllDefsListForReading.Where(x => !x.HasModExtension<TravelCompanionModExt>() && (x.familyByBloodRelation || (x.reflexive && !x.defName.StartsWith("Ex")))).ToList();
         }
 
@@ -49,7 +49,7 @@ namespace CaravanAdventures.CaravanImmersion
 
         public void RemoveRelations()
         {
-            var playerPawns = PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction.Where(x => x.RaceProps.Humanlike).ToList();
+            var playerPawns = PawnsFinder.AllMapsCaravansAndTravellingTransporters_Alive_OfPlayerFaction.Where(x => x.RaceProps.Humanlike).ToList();
 
             foreach (var mainPawn in playerPawns)
             {
@@ -66,7 +66,7 @@ namespace CaravanAdventures.CaravanImmersion
             if (ticks > 1200)
             {
                 ticks = 0;
-                var playerPawns = PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction.Where(x => x.RaceProps.Humanlike).ToList();
+                var playerPawns = PawnsFinder.AllMapsCaravansAndTravellingTransporters_Alive_OfPlayerFaction.Where(x => x.RaceProps.Humanlike).ToList();
                 playerPawns.RemoveAll(x =>
                 {
                     if (CompatibilityDefOf.CACompatDef.raceDefsToExcludeFromTravelCompanions.Contains(x.def.defName)) return true;
@@ -150,7 +150,7 @@ namespace CaravanAdventures.CaravanImmersion
         // currently shelved
         private void ApplySocialThoughts()
         {
-            var playerPawns = PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction.Where(x => x.RaceProps.Humanlike).ToList();
+            var playerPawns = PawnsFinder.AllMapsCaravansAndTravellingTransporters_Alive_OfPlayerFaction.Where(x => x.RaceProps.Humanlike).ToList();
 
             foreach (var mainPawn in playerPawns)
             {

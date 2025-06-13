@@ -84,7 +84,7 @@ namespace CaravanAdventures.CaravanCamp
         private void FixPawns()
         {
             // todo improve... not sure why vanilla chose to use all pawns here, lets find pawns that use that colony as their actually home and use those instead
-            foreach (Pawn pawn in PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_Colonists)
+            foreach (Pawn pawn in PawnsFinder.AllMapsCaravansAndTravellingTransporters_Alive_Colonists)
             {
                 Helper.RunSafely(() =>
                 {
