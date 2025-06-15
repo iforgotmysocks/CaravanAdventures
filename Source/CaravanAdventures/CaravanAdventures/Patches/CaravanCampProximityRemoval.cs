@@ -11,13 +11,12 @@ namespace CaravanAdventures.Patches
         public static void ApplyPatches()
         {
             if (!ModSettings.caravanCampEnabled) return;
-            // todo 1.6 fix
-            //var org = AccessTools.Method(typeof(SettlementProximityGoodwillUtility), nameof(SettlementProximityGoodwillUtility.AppendProximityGoodwillOffsets));
-            //var post = new HarmonyMethod(typeof(CaravanCampProximityRemoval).GetMethod(nameof(AppendProximityGoodwillOffsetsPostfix)));
-            //HarmonyPatcher.harmony.Patch(org, null, post);
+            var org = AccessTools.Method(typeof(SettlementProximityGoodwillUtility), nameof(SettlementProximityGoodwillUtility.AppendProximityGoodwillOffsets));
+            var post = new HarmonyMethod(typeof(CaravanCampProximityRemoval).GetMethod(nameof(AppendProximityGoodwillOffsetsPostfix)));
+            HarmonyPatcher.harmony.Patch(org, null, post);
         }
 
-        public static void AppendProximityGoodwillOffsetsPostfix(int tile, List<Pair<Settlement, int>> outOffsets, bool ignoreIfAlreadyMinGoodwill, bool ignorePermanentlyHostile)
+        public static void AppendProximityGoodwillOffsetsPostfix(PlanetTile tile, List<Pair<Settlement, int>> outOffsets, bool ignoreIfAlreadyMinGoodwill, bool ignorePermanentlyHostile)
         {
             var isCamp = Find.World?.worldObjects?.SettlementAt(tile)?.Map?.listerBuildings?.allBuildingsColonist?.FirstOrDefault(y => y?.def?.defName == "CACampControl") != null;
             if (!isCamp) return;
