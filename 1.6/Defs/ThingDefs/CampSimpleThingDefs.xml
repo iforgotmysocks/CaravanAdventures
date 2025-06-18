@@ -65,6 +65,8 @@
     <!--<designationCategory>Structure</designationCategory>-->
     <staticSunShadowHeight>1.0</staticSunShadowHeight>
     <blockLight>true</blockLight>
+    <!-- todo 1.6 not sure if we need it-->
+    <!--<drawStyleCategory></drawStyleCategory>-->
     <canOverlapZones>false</canOverlapZones>
     <fertility>0</fertility>
     <stuffCategories>

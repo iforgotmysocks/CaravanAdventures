@@ -100,7 +100,7 @@ namespace CaravanAdventures
 
             ExecuteHarmonyCompatibilityPatches();
             // todo  *update game version when needed!
-            Log.Message($"CA patches complete. v{System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString().TrimEnd(new[] { '.', '0' })} (1.5)");
+            Log.Message($"CA patches complete. v{System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString().TrimEnd(new[] { '.', '0' })} (1.6)");
         }
 
         public static void ExecuteHarmonyCompatibilityPatches()
