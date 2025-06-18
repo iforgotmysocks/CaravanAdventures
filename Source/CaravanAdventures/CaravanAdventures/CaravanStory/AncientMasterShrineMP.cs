@@ -61,7 +61,6 @@ namespace CaravanAdventures.CaravanStory
             //var notMatching = generatedMechs.Where(x => !Map.mapPawns.AllPawns.Where(y => y.RaceProps.IsMechanoid).Any(z => z.ThingID == x.ThingID));
             //Log.Message($"Not matching count: {notMatching.Count()}");
             //Log.Message($"Map has boss: {boss != null}");
-            DLog.Message($"init1");
             var raidPoints = (int)(8000 * (1 + CompCache.StoryWC.GetCurrentShrineCounter() / 10));
             var patrolComp = GetComponent<TimedDetectionPatrols>();
             if (boss != null || lastJudgmentEntrance != null)
@@ -134,8 +133,8 @@ namespace CaravanAdventures.CaravanStory
             //|| !base.Map.mapPawns.AnyPawnBlockingMapRemoval && CompCache.StoryWC.GetCurrentShrineCounter(true) - 1 == CompCache.StoryWC.GetShrineMaxiumum && CompCache.StoryWC.storyFlags["Judgment_Completed"])
 
             if ((boss == null && !lastJudgementEntraceWasSpawned
-            || bossDefeatedAndRewardsGiven
-            || CompCache.StoryWC.GetCurrentShrineCounter(true) - 1 == CompCache.StoryWC.GetShrineMaxiumum && CompCache.StoryWC.storyFlags["Judgment_Completed"]
+                || bossDefeatedAndRewardsGiven
+                || CompCache.StoryWC.GetCurrentShrineCounter(true) - 1 == CompCache.StoryWC.GetShrineMaxiumum && CompCache.StoryWC.storyFlags["Judgment_Completed"]
             ) && !base.Map.mapPawns.AnyPawnBlockingMapRemoval)
             {
                 DLog.Message($"Prepping to remove map now current shrine counter {CompCache.StoryWC.GetCurrentShrineCounter(true) - 1} max counter: {CompCache.StoryWC.GetShrineMaxiumum}");

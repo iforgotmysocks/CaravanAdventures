@@ -85,7 +85,6 @@ namespace CaravanAdventures.CaravanStory
                 target = map,
                 faction = faction,
                 raidArrivalModeForQuickMilitaryAid = true,
-                // todo by wealth, the richer, the less help // 7500 - 8000
                 points = Rand.Range(pointsMin, pointsMax),
                 raidNeverFleeIndividual = true,
                 raidStrategy = RaidStrategyDefOf.ImmediateAttackFriendly,
@@ -94,7 +93,7 @@ namespace CaravanAdventures.CaravanStory
             DLog.Message($"Assistance with {incidentParms.points} points and kind: {incidentParms.pawnKind?.defName}, targetspot default? {spawnSpot == default} if yes, a colonist should be selected as drop spot");
             if (spawnSpot == default && map.mapPawns.AnyColonistSpawned) spawnSpot = map.mapPawns.FreeColonists.Where(col => col.Spawned).RandomElement().Position;
             if (spawnSpot != default) incidentParms.spawnCenter = spawnSpot;
-            if (Helper.RunSafely(() => IncidentDefOf.RaidFriendly.Worker.TryExecute(incidentParms)) != true)
+            if (!Helper.RunSafely(() => IncidentDefOf.RaidFriendly.Worker.TryExecute(incidentParms)))
             {
                 Log.Error($"Dropping in the sacrileg hunter faction failed due to some incompatibility, error above.");
             };

@@ -177,7 +177,7 @@ namespace CaravanAdventures.CaravanStory
             if (Helper.RunSafely(() => Helper.ExpRM ? StoryDefOf.CAUnusualInfestation.Worker.TryExecute(incidentParms) : StoryDefOf.CAMechRaidMixed.Worker.TryExecute(incidentParms)) != true)
             {
                 Log.Error($"Creating CA mech raid failed due to some incompatibility, error above.");
-            };
+            }
 
             CompCache.StoryWC.SetSF("IntroVillage_MechsArrived");
 
@@ -219,7 +219,7 @@ namespace CaravanAdventures.CaravanStory
             destroyedSettlement.SetFaction(factionBase.Faction);
             Find.WorldObjects.Add(destroyedSettlement);
             StringBuilder stringBuilder = new StringBuilder();
-            bool num =  HasAnyOtherBase(factionBase);
+            bool num = HasAnyOtherBase(factionBase);
             if (false) // num && destroyedSettlement.TryGetComponent<TimedDetectionRaids>(out var comp))
             {
                 //comp.CopyFrom(factionBase.GetComponent<TimedDetectionRaids>());
@@ -409,7 +409,7 @@ namespace CaravanAdventures.CaravanStory
             foreach (var civ in civs)
             {
                 var lord = civ.GetLord();
-                if (lord != null) lord.ownedPawns.Remove(civ);
+                lord?.RemovePawn(civ);
                 if (lord != null && lord.ownedPawns.Count == 0) Map.lordManager.RemoveLord(lord);
             }
 
@@ -420,8 +420,6 @@ namespace CaravanAdventures.CaravanStory
 
         private void CheckPlayerLeftAndAbandon()
         {
-            // todo 1.6 looks like the remaining map is lord related. Upon death of all misshandled pawns the map disapwns.
-
             if (!CompCache.StoryWC.storyFlags["IntroVillage_MechsArrived"] || !HasMap || !mainCharLeftOrDied) return;
             // change to remove when downed?
             if (timerTillRemoval > 0)
