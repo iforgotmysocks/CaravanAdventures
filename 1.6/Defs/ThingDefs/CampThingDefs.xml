@@ -72,6 +72,7 @@
     <blockLight>true</blockLight>
     <drawerType>RealtimeOnly</drawerType>
     <building>
+      <paintable>true</paintable>
       <isInert>true</isInert>
       <canPlaceOverWall>true</canPlaceOverWall>
       <soundDoorOpenPowered>Door_OpenPowered</soundDoorOpenPowered>
@@ -102,6 +103,7 @@
     <graphicData>
       <texPath>Things/Building/Door/DoorSimple_Mover</texPath>
       <graphicClass>Graphic_Single</graphicClass>
+      <color>(220, 240, 255)</color> <!-- old color: (255, 155, 41) -->
       <damageData>
         <!--  no damage marks because they don't move with the door
         <rect>(0,0.12,1,0.76)</rect>-->
@@ -991,7 +993,7 @@
     <renderPrecedence>230</renderPrecedence>
     <description>Concrete tiles. Cheap, but neutral in terms of looks and slow to build.</description>
     <texturePath>Terrain/Surfaces/Carpet</texturePath>
-    <color>(255, 155, 41)</color>
+    <color>(180, 180, 200)</color> <!-- old color: (255, 155, 41)-->
     <statBases>
       <WorkToBuild>10</WorkToBuild>
     </statBases>
@@ -1022,7 +1024,7 @@
         <edgeLeft>Damage/Edge</edgeLeft>
         <edgeRight>Damage/Edge</edgeRight>
       </damageData>
-      <color>(55, 55, 255)</color>
+      <color>(220, 240, 255)</color> <!-- old color: (255, 155, 41) -->
     </graphicData>
     <uiIconPath>Things/Building/Linked/WallSmooth_MenuIcon</uiIconPath>
     <statBases>
