@@ -87,9 +87,6 @@ namespace CaravanAdventures.CaravanStory
         private bool doEarthQuake = false;
         private Sustainer earthquakeSustainer;
 
-        // todo remove when friendly mech faction is removed
-        private int mechFactionRemovalTicks = 0;
-
         public override void ExposeData()
         {
             base.ExposeData();
@@ -170,13 +167,6 @@ namespace CaravanAdventures.CaravanStory
                 storyFlags["ShowedSetupMenu"] = true;
             }
 
-            // todo temporary - remove once friendly mech faction is removed
-            if (mechFactionRemovalTicks >= 22222)
-            {
-                mechFactionRemovalTicks = 0;
-                Helper.RunSafely(() => StoryUtility.RemoveFaction(), false, "", true);
-            }
-
             if (doEarthQuake && ticks > 0 && ticks <= 1200)
             {
                 if (earthquakeSustainer == null) earthquakeSustainer = SoundDef.Named("CAEarthquake").TrySpawnSustainer(SoundInfo.OnCamera(MaintenanceType.None));
@@ -252,8 +242,6 @@ namespace CaravanAdventures.CaravanStory
             questCont.FriendlyCaravan.friendlyCaravanCounter--;
             questCont.Village.villageGenerationCounter--;
             shrineRevealCounter--;
-
-            mechFactionRemovalTicks++;
         }
 
         private bool RoyaltyActiveCheck()
@@ -275,8 +263,6 @@ namespace CaravanAdventures.CaravanStory
             Helper.RunSafely(() => RunUpdateActionForCurrentAssemblyVersion(), false, "", true);
 
             DLog.Message($"Applying debug actions once per startup");
-            // todo added cleanup of faction settlement in 1.2.4 to be able to remove CAFriendlyMechanoid faction in a couple patches
-            Helper.RunSafely(() => StoryUtility.RemoveFaction(), false, "", true);
 
             //CompatibilityPatches.TryRegionStuff();
             if (Helper.ExpRM) Helper.RunSafely(() => StoryUtility.EnsureEvilHostileFactionForExpansion(true), false, "", true);

@@ -322,7 +322,7 @@ namespace CaravanAdventures.CaravanStory
             CompCache.StoryWC.SetSF("IntroVillage_Created");
         }
 
-        public static void RemoveFaction(string defname = "CAFriendlyMechanoid", string messageFactionName = "CA friendly mech")
+        public static void RemoveFaction(string defname, string messageFactionName = "CA friendly mech")
         {
             var factionDef = DefDatabase<FactionDef>.GetNamedSilentFail(defname);
             if (factionDef == null) return;
