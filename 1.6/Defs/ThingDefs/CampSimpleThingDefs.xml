@@ -5,6 +5,7 @@
   <TerrainDef ParentName="CATentFloorBase">
     <defName>CAMakeshiftTentFloor</defName>
     <label>tent floor</label>
+    <isPaintable>true</isPaintable>
     <renderPrecedence>230</renderPrecedence>
     <description>Makeshift tent floor.</description>
     <texturePath>Terrain/Surfaces/Carpet</texturePath>
@@ -44,9 +45,9 @@
     <statBases>
       <MaxHitPoints>80</MaxHitPoints>
       <WorkToBuild>20</WorkToBuild>
-      <Flammability>1</Flammability>
+      <Flammability>0.6</Flammability>
     </statBases>
-    <costStuffCount>5</costStuffCount>
+    <!--<costStuffCount>5</costStuffCount>-->
     <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
     <altitudeLayer>Building</altitudeLayer>
     <passability>Impassable</passability>
@@ -58,7 +59,7 @@
     <rotatable>false</rotatable>
     <selectable>true</selectable>
     <neverMultiSelect>true</neverMultiSelect>
-    <useStuffTerrainAffordance>true</useStuffTerrainAffordance>
+    <!--<useStuffTerrainAffordance>true</useStuffTerrainAffordance>-->
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
     <!-- Best affordance needed for stone -->
     <holdsRoof>true</holdsRoof>
@@ -70,9 +71,10 @@
     <canOverlapZones>false</canOverlapZones>
     <fertility>0</fertility>
     <stuffCategories>
-      <li>Leathery</li>
+      <!--<li>Leathery</li>-->
     </stuffCategories>
     <building>
+      <paintable>true</paintable>
       <isInert>true</isInert>
       <ai_chillDestination>false</ai_chillDestination>
       <blueprintGraphicData>
@@ -87,42 +89,6 @@
         <multiplier>2</multiplier>
       </li>
     </damageMultipliers>
-  </ThingDef>
-
-  <ThingDef ParentName="ResourceBase">
-    <defName>CAMakeshiftTentLeather</defName>
-    <label>Makeshift leather</label>
-    <description>Makeshift tent leather stitched together by all sorts of leathers.</description>
-    <graphicData>
-      <texPath>Things/Item/Resource/Leather</texPath>
-      <graphicClass>Graphic_StackCount</graphicClass>
-      <color>(62,37,22)</color>
-    </graphicData>
-    <statBases>
-      <MaxHitPoints>60</MaxHitPoints>
-      <DeteriorationRate>2</DeteriorationRate>
-      <Mass>0.03</Mass>
-      <Flammability>1</Flammability>
-      <MarketValue>2.1</MarketValue>
-    </statBases>
-    <!--<thingCategories>
-      <li>Leathers</li>
-    </thingCategories>-->
-    <burnableByRecipe>true</burnableByRecipe>
-    <healthAffectsPrice>false</healthAffectsPrice>
-    <tradeability>None</tradeability>
-    <generateCommonality>0</generateCommonality>
-    <stuffProps>
-      <color>(62,37,22)</color>
-      <commonality>0</commonality>
-      <statFactors>
-        <Beauty>1.5</Beauty>
-        <MaxHitPoints>1</MaxHitPoints>
-      </statFactors>
-      <categories>
-        <li>Leathery</li>
-      </categories>
-    </stuffProps>
   </ThingDef>
 
   <!-- bedrolls  -->
@@ -156,10 +122,10 @@
     </comps>
     <size>(1,2)</size>
     <stuffCategories>
-      <li>Fabric</li>
-      <li>Leathery</li>
+      <!--<li>Fabric</li>
+      <li>Leathery</li>-->
     </stuffCategories>
-    <costStuffCount>40</costStuffCount>
+    <!--<costStuffCount>40</costStuffCount>-->
     <building>
       <bed_showSleeperBody>false</bed_showSleeperBody>
       <bed_healPerDay>4</bed_healPerDay>
@@ -200,10 +166,10 @@
     </comps>
     <size>(2,2)</size>
     <stuffCategories>
-      <li>Fabric</li>
-      <li>Leathery</li>
+      <!--<li>Fabric</li>
+      <li>Leathery</li>-->
     </stuffCategories>
-    <costStuffCount>85</costStuffCount>
+    <!--<costStuffCount>85</costStuffCount>-->
     <building>
       <bed_showSleeperBody>false</bed_showSleeperBody>
       <bed_healPerDay>4</bed_healPerDay>
@@ -339,27 +305,6 @@
     </building>
   </ThingDef>
 
-  <!--<ThingDef ParentName="CAGrillSnackBase">
-    <defName>CATribalGrillSnack</defName>
-    <label>grill snack</label>
-    <description>A tasty grill snack, not as nutritious as a simple meal, but doesn't cause food poisoning.</description>
-    <graphicData>
-      <texPath>Things/Item/Meal/GrillSnack</texPath>
-      <graphicClass>Graphic_StackCount</graphicClass>
-    </graphicData>
-    <statBases>
-      <MarketValue>12</MarketValue>
-      <WorkToMake>250</WorkToMake>
-      <Nutrition>0.7</Nutrition>
-      <FoodPoisonChanceFixedHuman>0</FoodPoisonChanceFixedHuman>
-    </statBases>
-    <ingestible>
-      <preferability>MealSimple</preferability>
-      <ingestEffect>EatVegetarian</ingestEffect>
-      <ingestSound>Meal_Eat</ingestSound>
-    </ingestible>
-    <tradeability>None</tradeability>
-  </ThingDef>-->
 
 
 </Defs>

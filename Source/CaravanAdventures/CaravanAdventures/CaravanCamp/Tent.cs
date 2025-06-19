@@ -28,7 +28,7 @@ namespace CaravanAdventures.CaravanCamp
             var entranceCells = GetEntraceCells();
             foreach (var cell in entranceCells)
             {
-                var door = ThingMaker.MakeThing(CampDefOf.CATentDoor, CampDefOf.CASpacerTentFabric);
+                var door = ThingMaker.MakeThing(CampDefOf.CATentDoor);
                 door.SetFaction(Faction.OfPlayer);
                 campAssetListRef.Add(GenSpawn.Spawn(door, cell, map));
             }
@@ -36,7 +36,7 @@ namespace CaravanAdventures.CaravanCamp
             foreach (var edgeCell in CellRect.EdgeCells)
             {
                 if (entranceCells.Contains(edgeCell)) continue;
-                var thing = ThingMaker.MakeThing(CampDefOf.CATentWall, CampDefOf.CASpacerTentFabric);
+                var thing = ThingMaker.MakeThing(CampDefOf.CATentWall);
                 thing.SetFaction(Faction.OfPlayer);
                 campAssetListRef.Add(GenSpawn.Spawn(thing, edgeCell, map));
             }
@@ -53,7 +53,7 @@ namespace CaravanAdventures.CaravanCamp
             var entranceCells = GetEntraceCells();
             foreach (var cell in entranceCells)
             {
-                var door = ThingMaker.MakeThing(CampDefOf.CATentDoor, CampDefOf.CAMakeshiftTentLeather);
+                var door = ThingMaker.MakeThing(CampDefOf.CATentDoor);
                 door.SetFaction(Faction.OfPlayer);
                 campAssetListRef.Add(GenSpawn.Spawn(door, cell, map));
             }
@@ -61,7 +61,7 @@ namespace CaravanAdventures.CaravanCamp
             foreach (var edgeCell in CellRect.EdgeCells)
             {
                 if (entranceCells.Contains(edgeCell)) continue;
-                var thing = ThingMaker.MakeThing(CampDefOf.CAMakeshiftTentWall, CampDefOf.CAMakeshiftTentLeather);
+                var thing = ThingMaker.MakeThing(CampDefOf.CAMakeshiftTentWall);
                 thing.SetFaction(Faction.OfPlayer);
                 campAssetListRef.Add(GenSpawn.Spawn(thing, edgeCell, map));
             }

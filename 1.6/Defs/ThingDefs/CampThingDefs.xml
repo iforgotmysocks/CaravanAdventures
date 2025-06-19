@@ -5,6 +5,9 @@
     <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
     <resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
     <tradeability>None</tradeability>
+    <statBases>
+      <MarketValue>0</MarketValue>
+    </statBases>
     <modExtensions>
       <li Class="CaravanAdventures.CaravanCamp.CampModExt"></li>
     </modExtensions>
@@ -19,6 +22,9 @@
     </modExtensions>
     <thingClass>Building_Bed</thingClass>
     <altitudeLayer>Building</altitudeLayer>
+    <statBases>
+      <MarketValue>0</MarketValue>
+    </statBases>
     <comps>
       <li Class="CompProperties_AssignableToPawn">
         <drawAssignmentOverlay>false</drawAssignmentOverlay>
@@ -48,18 +54,18 @@
     <fillPercent>1</fillPercent>
     <useHitPoints>true</useHitPoints>
     <stuffCategories>
-      <li>Leathery</li>
+      <!--<li>Leathery</li>-->
     </stuffCategories>
     <statBases>
       <MaxHitPoints>80</MaxHitPoints>
-      <Flammability>1.0</Flammability>
+      <Flammability>0</Flammability>
     </statBases>
     <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
     <selectable>true</selectable>
     <tickerType>Normal</tickerType>
     <rotatable>false</rotatable>
     <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
-    <useStuffTerrainAffordance>true</useStuffTerrainAffordance>
+    <!--<useStuffTerrainAffordance>true</useStuffTerrainAffordance>-->
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
     <holdsRoof>true</holdsRoof>
     <staticSunShadowHeight>1.0</staticSunShadowHeight>
@@ -103,7 +109,7 @@
       </damageData>
     </graphicData>
     <uiIconPath>Things/Building/Door/DoorSimple_MenuIcon</uiIconPath>
-    <costStuffCount>25</costStuffCount>
+    <!--<costStuffCount>25</costStuffCount>-->
   </ThingDef>
 
   <ThingDef ParentName="CATentDoorBase">
@@ -126,7 +132,7 @@
       </damageData>
     </graphicData>
     <uiIconPath>Things/Building/Door/DoorSimple_MenuIcon</uiIconPath>
-    <costStuffCount>25</costStuffCount>
+    <costStuffCount>5</costStuffCount>
   </ThingDef>
 
 
@@ -981,6 +987,7 @@
   <TerrainDef ParentName="CATentFloorBase">
     <defName>CATentFloor</defName>
     <label>Tent Floor</label>
+    <isPaintable>true</isPaintable>
     <renderPrecedence>230</renderPrecedence>
     <description>Concrete tiles. Cheap, but neutral in terms of looks and slow to build.</description>
     <texturePath>Terrain/Surfaces/Carpet</texturePath>
@@ -1015,16 +1022,17 @@
         <edgeLeft>Damage/Edge</edgeLeft>
         <edgeRight>Damage/Edge</edgeRight>
       </damageData>
-      <color>(255, 155, 41)</color>
+      <color>(55, 55, 255)</color>
     </graphicData>
     <uiIconPath>Things/Building/Linked/WallSmooth_MenuIcon</uiIconPath>
     <statBases>
-      <MaxHitPoints>100</MaxHitPoints>
+      <MaxHitPoints>200</MaxHitPoints>
+      <!--<MarketValue>3</MarketValue>-->
       <WorkToBuild>20</WorkToBuild>
-      <Flammability>0.1</Flammability>
+      <Flammability>0</Flammability>
       <Beauty>2</Beauty>
     </statBases>
-    <costStuffCount>5</costStuffCount>
+    <!--<costStuffCount>5</costStuffCount>-->
     <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
     <altitudeLayer>Building</altitudeLayer>
     <passability>Impassable</passability>
@@ -1036,7 +1044,7 @@
     <rotatable>false</rotatable>
     <selectable>true</selectable>
     <neverMultiSelect>true</neverMultiSelect>
-    <useStuffTerrainAffordance>true</useStuffTerrainAffordance>
+    <!--<useStuffTerrainAffordance>true</useStuffTerrainAffordance>-->
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
     <!-- Best affordance needed for stone -->
     <holdsRoof>true</holdsRoof>
@@ -1045,10 +1053,11 @@
     <blockLight>true</blockLight>
     <canOverlapZones>false</canOverlapZones>
     <fertility>0</fertility>
-    <stuffCategories>
+    <!--<stuffCategories>
       <li>Fabric</li>
-    </stuffCategories>
+    </stuffCategories>-->
     <building>
+      <paintable>true</paintable>
       <isInert>true</isInert>
       <ai_chillDestination>false</ai_chillDestination>
       <blueprintGraphicData>
@@ -1065,94 +1074,7 @@
     </damageMultipliers>
   </ThingDef>
 
-  <!-- fabric -->
-  <ThingDef ParentName="ResourceBase">
-    <defName>CASpacerTentFabric</defName>
-    <label>spacer fabric</label>
-    <description>Nano-fibers woven into sheets molecule-by-molecule using specialized production mechanites. While it flexes freely most of the time, it stiffens to absorb blows as they land, and is incredibly difficult to break. The secrets of its production are known only to the most advanced glitterworld cultures.</description>
-    <graphicData>
-      <texPath>Things/Item/Resource/Hyperweave</texPath>
-      <graphicClass>Graphic_StackCount</graphicClass>
-    </graphicData>
-    <statBases>
-      <MaxHitPoints>200</MaxHitPoints>
-      <MarketValue>3</MarketValue>
-      <Mass>0.001</Mass>
-      <Flammability>0.1</Flammability>
-      <DeteriorationRate>0</DeteriorationRate>
-      <!--<StuffPower_Armor_Sharp>2.00</StuffPower_Armor_Sharp>
-      <StuffPower_Armor_Blunt>0.54</StuffPower_Armor_Blunt>
-      <StuffPower_Armor_Heat>2.88</StuffPower_Armor_Heat>
-      <StuffPower_Insulation_Cold>26</StuffPower_Insulation_Cold>
-      <StuffPower_Insulation_Heat>26</StuffPower_Insulation_Heat>-->
-    </statBases>
-    <burnableByRecipe>true</burnableByRecipe>
-    <healthAffectsPrice>false</healthAffectsPrice>
-    <generateCommonality>0</generateCommonality>
-    <tradeability>None</tradeability>
-    <!--<minRewardCount>30</minRewardCount>-->
-    <stuffProps>
-      <categories>
-        <li>Fabric</li>
-      </categories>
-      <commonality>0</commonality>
-      <!--<color>(0,106,126)</color>-->
-      <color>(255, 155, 41)</color>
-      <statFactors>
-        <Flammability>0.1</Flammability>
-        <MaxHitPoints>2</MaxHitPoints>
-        <Beauty>2</Beauty>
-      </statFactors>
-    </stuffProps>
-    <!--<thingCategories>
-      <li>Textiles</li>
-    </thingCategories>-->
-  </ThingDef>
 
-  <!-- fence -->
-  <ThingDef ParentName="CATentBase">
-    <defName>CAFencePost</defName>
-    <label>animal fence post</label>
-    <description>An animal fence post</description>
-    <category>Building</category>
-    <graphicData>
-      <texPath>Things/Building/Misc/TorchLamp</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
-      <drawRotated>false</drawRotated>
-      <damageData>
-        <rect>(0.35,0.35,0.3,0.3)</rect>
-      </damageData>
-    </graphicData>
-    <uiIconPath>Things/Building/Misc/TorchLamp_MenuIcon</uiIconPath>
-    <uiIconScale>0.85</uiIconScale>
-    <rotatable>false</rotatable>
-    <altitudeLayer>Building</altitudeLayer>
-    <passability>PassThroughOnly</passability>
-    <!--<passability>Impassable</passability>-->
-    <pathCost>14</pathCost>
-    <constructEffect>ConstructWood</constructEffect>
-    <tickerType>Never</tickerType>
-    <!--<drawerType>RealtimeOnly</drawerType>-->
-    <fillPercent>0.15</fillPercent>
-    <statBases>
-      <MaxHitPoints>75</MaxHitPoints>
-      <WorkToBuild>100</WorkToBuild>
-      <Flammability>0</Flammability>
-      <MeditationFocusStrength>0.0</MeditationFocusStrength>
-    </statBases>
-    <selectable>true</selectable>
-    <costList>
-      <WoodLog>5</WoodLog>
-    </costList>
-    <comps>
-    </comps>
-    <building>
-      <!--<artificialForMeditationPurposes>false</artificialForMeditationPurposes>-->
-    </building>
-    <soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
-    <placeWorkers>
-    </placeWorkers>
-  </ThingDef>
 
   <!-- bedrolls  -->
   <ThingDef ParentName="CABedBase">
@@ -1186,10 +1108,10 @@
     </comps>
     <size>(1,2)</size>
     <stuffCategories>
-      <li>Fabric</li>
-      <li>Leathery</li>
+      <!--<li>Fabric</li>
+      <li>Leathery</li>-->
     </stuffCategories>
-    <costStuffCount>40</costStuffCount>
+    <!--<costStuffCount>40</costStuffCount>-->
     <building>
       <bed_showSleeperBody>false</bed_showSleeperBody>
       <bed_healPerDay>6</bed_healPerDay>
@@ -1231,10 +1153,10 @@
     </comps>
     <size>(2,2)</size>
     <stuffCategories>
-      <li>Fabric</li>
-      <li>Leathery</li>
+      <!--<li>Fabric</li>
+      <li>Leathery</li>-->
     </stuffCategories>
-    <costStuffCount>85</costStuffCount>
+    <!--<costStuffCount>85</costStuffCount>-->
     <building>
       <bed_showSleeperBody>false</bed_showSleeperBody>
       <bed_healPerDay>6</bed_healPerDay>

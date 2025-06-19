@@ -10,14 +10,10 @@ namespace CaravanAdventures.CaravanCamp
         public static TerrainDef CATentFloor;
         public static TerrainDef CAMakeshiftTentFloor;
 
-        public static ThingDef CASpacerTentFabric;
-        public static ThingDef CAMakeshiftTentLeather;
-
         public static ThingDef CATentWall;
-        public static ThingDef CAFencePost;
-        public static ThingDef CACampControl;
+        public static ThingDef CACampControl; 
 
-        public static ThingDef CAMakeshiftTentWall;
+        public static ThingDef CAMakeshiftTentWall; 
 
         public static JobDef CACampInformPackingUp;
         public static SoundDef CAPackUpTent;

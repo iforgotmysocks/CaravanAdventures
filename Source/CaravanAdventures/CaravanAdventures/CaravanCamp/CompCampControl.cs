@@ -194,10 +194,10 @@ namespace CaravanAdventures.CaravanCamp
                             }
                         }
 
-                        if (prison && (asset.def == CampDefOf.CATentWall || asset.def == CampDefOf.CATentDoor && asset.Stuff == CampDefOf.CASpacerTentFabric))
+                        if (prison && (asset.def == CampDefOf.CATentWall || asset.def == CampDefOf.CATentDoor))
                         {
                             asset.Destroy();
-                            var wall = asset.def == CampDefOf.CATentDoor ? ThingMaker.MakeThing(CampDefOf.CATentDoor, CampDefOf.CAMakeshiftTentLeather) : ThingMaker.MakeThing(CampDefOf.CAMakeshiftTentWall, CampDefOf.CAMakeshiftTentLeather);
+                            var wall = asset.def == CampDefOf.CATentDoor ? ThingMaker.MakeThing(CampDefOf.CATentDoor) : ThingMaker.MakeThing(CampDefOf.CAMakeshiftTentWall);
                             wall.SetFaction(Faction.OfPlayer);
                             GenSpawn.Spawn(wall, asset.Position, parent.Map);
                             continue;
