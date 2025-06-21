@@ -4,7 +4,7 @@
 	<HediffDef Name="CAAncientPsycastHediffBase" Abstract="True">
 		<hediffClass>HediffWithComps</hediffClass>
 		<comps>
-			<li Class="HediffCompProperties_DisappearsOnDeath"/>
+			<!-- <li Class="HediffCompProperties_DisappearsOnDeath"/> -->
 		</comps>
 	</HediffDef>
 
