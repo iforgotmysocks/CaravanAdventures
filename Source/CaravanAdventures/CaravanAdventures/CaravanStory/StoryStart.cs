@@ -239,7 +239,12 @@ namespace CaravanAdventures.CaravanStory
             if (!CompCache.StoryWC.storyFlags["Start_CanReceiveGift"]) return;
             var gifted = CompCache.StoryWC.questCont.StoryStart.Gifted;
 
-            if (gifted != null && !gifted.Dead && !gifted.Destroyed && gifted.Faction == Faction.OfPlayer && !gifted.IsKidnapped() && !forceStrip) return;
+            if (gifted != null 
+                && (!gifted.Dead || (gifted.Dead && StoryUtility.DeathRefusalPossibleWhileDead(gifted))) 
+                && (!gifted.Destroyed || gifted.Destroyed && StoryUtility.DeathRefusalPossibleWhileDead(gifted)) 
+                && gifted.Faction == Faction.OfPlayer 
+                && !gifted.IsKidnapped() 
+                && !forceStrip) return;
             else if (gifted != null && (gifted.Dead || gifted.Faction != Faction.OfPlayer || gifted.IsKidnapped() || forceStrip)) StoryUtility.StripGiftFromPawn(gifted);
 
             // todo when no sensitive pawn could be found, use an insensitive one
@@ -264,7 +269,7 @@ namespace CaravanAdventures.CaravanStory
             }
 
             gifted.health.AddHediff(DefDatabase<HediffDef>.AllDefs.FirstOrDefault(x => x.defName == "PsychicAmplifier"), gifted.health.hediffSet.GetBrain());
-            gifted.health.AddHediff(DefDatabase<HediffDef>.AllDefs.FirstOrDefault(x => x.defName == "CAAncientGift"), gifted.health.hediffSet.GetBrain());
+            gifted.health.AddHediff(DefDatabase<HediffDef>.AllDefs.FirstOrDefault(x => x.defName == "CAAncientGift"));
 
             if (!calledByTree)
             {
