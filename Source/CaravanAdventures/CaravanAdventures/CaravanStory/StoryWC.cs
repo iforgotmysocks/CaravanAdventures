@@ -279,7 +279,7 @@ namespace CaravanAdventures.CaravanStory
             Helper.RunSafely(() => StoryUtility.RemoveFaction(), false, "", true);
 
             //CompatibilityPatches.TryRegionStuff();
-            if (Helper.ExpRM) Helper.RunSafely(() => StoryUtility.EnsureEvilHostileFactionForExpansion(true), false, "", true);
+            if (Helper.ExpRM && ModSettings.storyEnabled) Helper.RunSafely(() => StoryUtility.EnsureEvilHostileFactionForExpansion(true), false, "", true);
 
             //Helper.PrintWorldPawns();
 
