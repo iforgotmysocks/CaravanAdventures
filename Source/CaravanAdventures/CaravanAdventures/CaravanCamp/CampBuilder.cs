@@ -59,46 +59,24 @@ namespace CaravanAdventures.CaravanCamp
             MovePrisonersToCells();
             InformPlayerHighTechCosts();
             Current.ProgramState = stateBackup;
-            UnfogMapFromEdge(map);
 
             return true;
         }
 
-        private static void UnfogMapFromEdge(Map map)
-        {
-            Predicate<IntVec3> validator = delegate (IntVec3 c)
-            {
-                if (!c.Standable(map))
-                {
-                    return false;
-                }
-                if (c.Roofed(map))
-                {
-                    return false;
-                }
-                return map.reachability.CanReachMapEdge(c, TraverseParms.For(TraverseMode.NoPassClosedDoorsOrWater)) ? true : false;
-            };
-            if (CellFinder.TryFindRandomCellNear(map.Center, map, 30, validator, out var result) || CellFinder.TryFindRandomEdgeCellWith(validator, map, 0f, out result) || CellFinder.TryFindRandomCell(map, validator, out result))
-            {
-                FloodFillerFog.FloodUnfog(result, map);
-            }
-        }
-
         private void UnfogBuildings()
         {
-            foreach(var campRect in campParts)
+            foreach (var cell in campSiteRect.ExpandedBy(1))
             {
-                foreach (var c in campRect.CellRect.Cells.Where(cell => !campRect.CellRect.EdgeCells.Contains(cell)))
-                {
-                    if (c.Fogged(map)) map.fogGrid.Unfog(c);
-                }
+                if (!cell.Fogged(map)) continue;
+                map.fogGrid.FloodUnfogAdjacent(cell, false);
             }
-        }
+        } 
 
-        private void WarnPlayerAndCancelCampBuild(ProgramState stateBackup, string warning)
-        {
-            throw new NotImplementedException();
-        }
+        // todo in case of an error, try to undo the settlement process instead of crashting to the menu
+        //private void WarnPlayerAndCancelCampBuild(ProgramState stateBackup, string warning)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public static int PreemptivelyCalculateCampCosts(Caravan caravan)
         {

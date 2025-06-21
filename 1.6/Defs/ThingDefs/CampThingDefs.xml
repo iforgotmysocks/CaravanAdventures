@@ -311,6 +311,7 @@
         <cornerBR>Damage/Corner</cornerBR>
       </damageData>
     </graphicData>
+    <minifiedDef />
     <castEdgeShadows>true</castEdgeShadows>
     <staticSunShadowHeight>0.20</staticSunShadowHeight>
     <altitudeLayer>Building</altitudeLayer>

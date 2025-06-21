@@ -66,7 +66,7 @@ namespace CaravanAdventures.CaravanCamp
             base.BuildTribal(map, campAssetListRef);
 
             var location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.minX + 2 && cell.z == CellRect.minZ + 2);
-            CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("SimpleResearchBench"), ThingDefOf.WoodLog), location, map, Rot4.West, campAssetListRef);
+            CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(CampDefOf.CAWorkshopResearchBench, ThingDefOf.WoodLog), location, map, Rot4.West, campAssetListRef);
 
             location = CellRect.Cells.FirstOrDefault(cell => cell.x == CellRect.minX + 4 && cell.z == CellRect.minZ + 3);
             if (ModSettings.preferStonecutting && ResearchProjectDef.Named("Stonecutting")?.ProgressPercent == 1f) CampHelper.PrepAndGenerateThing(ThingMaker.MakeThing(ThingDef.Named("TableStonecutter"), ThingDefOf.WoodLog), location, map, Rot4.North, campAssetListRef);
