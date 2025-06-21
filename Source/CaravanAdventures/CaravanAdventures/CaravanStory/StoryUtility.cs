@@ -971,5 +971,8 @@ namespace CaravanAdventures.CaravanStory
                 gifted.abilities.RemoveAbility(ability.def);
             }
         }
+
+        internal static bool DeathRefusalPossibleWhileDead(Pawn gifted) 
+            => gifted.health.hediffSet.hediffs.FirstOrDefault(x => x.def.defName == "DeathRefusal" || x.def.defName == "DeathRefusalCreepJoiner") != null && gifted.ParentHolder is Corpse;
     }
 }
