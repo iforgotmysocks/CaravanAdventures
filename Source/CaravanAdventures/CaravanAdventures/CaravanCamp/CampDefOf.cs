@@ -14,6 +14,7 @@ namespace CaravanAdventures.CaravanCamp
         public static ThingDef CACampControl; 
 
         public static ThingDef CAMakeshiftTentWall; 
+        public static ThingDef CAMakeshiftTentDoor; 
 
         public static JobDef CACampInformPackingUp;
         public static SoundDef CAPackUpTent;

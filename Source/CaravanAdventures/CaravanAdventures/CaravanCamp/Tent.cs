@@ -53,7 +53,7 @@ namespace CaravanAdventures.CaravanCamp
             var entranceCells = GetEntraceCells();
             foreach (var cell in entranceCells)
             {
-                var door = ThingMaker.MakeThing(CampDefOf.CATentDoor);
+                var door = ThingMaker.MakeThing(CampDefOf.CAMakeshiftTentDoor);
                 door.SetFaction(Faction.OfPlayer);
                 campAssetListRef.Add(GenSpawn.Spawn(door, cell, map));
             }
