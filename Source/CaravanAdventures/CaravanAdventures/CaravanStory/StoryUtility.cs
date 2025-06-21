@@ -738,7 +738,8 @@ namespace CaravanAdventures.CaravanStory
                 if (faction == Faction.OfPlayer || faction.def.permanentEnemy || faction == sacrilegHunters) continue;
                 if (ModSettings.sacHuntersHostileTowardsEmpire && faction == Faction.OfEmpire
                     || ModSettings.sacHuntersHostileTowardsNaturalEnemies && faction.def.naturalEnemy
-                    || ModsConfig.AnomalyActive && faction == Faction.OfEntities)
+                    || ModsConfig.AnomalyActive && faction == Faction.OfEntities
+                    || faction == Faction.OfInsects)
                 {
                     faction.SetRelation(new FactionRelation() { baseGoodwill = -100, kind = FactionRelationKind.Hostile, other = sacrilegHunters });
                     continue;

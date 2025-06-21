@@ -265,7 +265,7 @@ namespace CaravanAdventures.CaravanStory
             DLog.Message($"Applying debug actions once per startup");
 
             //CompatibilityPatches.TryRegionStuff();
-            if (Helper.ExpRM) Helper.RunSafely(() => StoryUtility.EnsureEvilHostileFactionForExpansion(true), false, "", true);
+            if (Helper.ExpRM && ModSettings.storyEnabled) Helper.RunSafely(() => StoryUtility.EnsureEvilHostileFactionForExpansion(true), false, "", true);
 
             //Helper.PrintWorldPawns();
 
