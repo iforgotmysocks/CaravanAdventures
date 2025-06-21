@@ -286,7 +286,7 @@
   <!-- research -->
   <ThingDef ParentName="CABenchBase">
     <defName>CAWorkshopResearchBench</defName>
-    <label>Workshop research bench</label>
+    <label>workshop research bench</label>
     <description>A simple bench with writing implements and simple measurement devices. Researchers work here to discover new things.</description>
     <thingClass>Building_ResearchBench</thingClass>
     <size>(3,2)</size> <!--3,2-->
