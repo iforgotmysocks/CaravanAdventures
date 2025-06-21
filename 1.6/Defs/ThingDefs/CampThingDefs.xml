@@ -198,13 +198,13 @@
     <canOverlapZones>false</canOverlapZones>
     <minifiedDef>MinifiedThing</minifiedDef>
     <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
-    <thingCategories>
+    <!--<thingCategories>
       <li>BuildingsProduction</li>
-    </thingCategories>
+    </thingCategories>-->
     <statBases>
       <Mass>20</Mass>
     </statBases>
-    <interactionCellIcon>DiningChair</interactionCellIcon>
+    <!--<interactionCellIcon>DiningChair</interactionCellIcon>-->
     <comps>
         <li Class="CompProperties_ReportWorkSpeed">
           <workSpeedStat>WorkTableWorkSpeedFactor</workSpeedStat>
@@ -215,7 +215,7 @@
     </placeWorkers>
     <building>
       <buildingTags>
-        <li>Production</li>
+        <!--<li>Production</li>-->
       </buildingTags>
     </building>
   </ThingDef>
@@ -283,6 +283,66 @@
     </comps>
   </ThingDef>
 
+  <!-- research -->
+  <ThingDef ParentName="CABenchBase">
+    <defName>CAWorkshopResearchBench</defName>
+    <label>Workshop research bench</label>
+    <description>A simple bench with writing implements and simple measurement devices. Researchers work here to discover new things.</description>
+    <thingClass>Building_ResearchBench</thingClass>
+    <size>(3,2)</size> <!--3,2-->
+    <stuffCategories>
+      <li>Metallic</li>
+      <li>Woody</li>
+      <li>Stony</li>
+    </stuffCategories>
+    <!--<costStuffCount>75</costStuffCount>-->
+    <!--<costList>
+      <Steel>25</Steel>
+    </costList>-->
+    <graphicData>
+      <texPath>Things/Building/Production/ResearchBenchSimple</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(5,4)</drawSize> <!-- 5, 4 -->
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+    </graphicData>
+    <castEdgeShadows>true</castEdgeShadows>
+    <staticSunShadowHeight>0.20</staticSunShadowHeight>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <statBases>
+      <MaxHitPoints>250</MaxHitPoints>
+      <WorkToBuild>2800</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <ResearchSpeedFactor>0.75</ResearchSpeedFactor>
+    </statBases>
+    <placeWorkers>
+      <li>PlaceWorker_PreventInteractionSpotOverlap</li>
+      <li>PlaceWorker_DrawLinesToBookcasesInRoom</li>
+    </placeWorkers>
+    <fillPercent>0.5</fillPercent>
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+    <hasInteractionCell>true</hasInteractionCell>
+    <!--<designationCategory>Production</designationCategory>-->
+    <!--<uiOrder>2600</uiOrder>-->
+    <surfaceType>Item</surfaceType>
+    <building>
+      <paintable>true</paintable>
+      <workTableRoomRole>Workshop</workTableRoomRole>
+      <workTableNotInRoomRoleFactor>0.8</workTableNotInRoomRoleFactor>
+    </building>
+    <comps Inherit="False">
+      <li Class="CompProperties_ReportWorkSpeed">
+        <workSpeedStat>ResearchSpeedFactor</workSpeedStat>
+      </li>
+    </comps>
+  </ThingDef>
 
   <ThingDef ParentName="CABenchBase">
     <defName>CASpacerBiofuelRefinery</defName>
@@ -495,7 +555,7 @@
         <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
       </li>
       <li Class="CompProperties_Glower">
-        <glowRadius>12</glowRadius>
+        <glowRadius>14</glowRadius>
         <glowColor>(252,187,113,0)</glowColor>
       </li>
       <li Class="CompProperties_HeatPusher">
@@ -690,7 +750,7 @@
         <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
       </li>
       <li Class="CompProperties_Glower">
-        <glowRadius>13</glowRadius>
+        <glowRadius>14</glowRadius>
         <glowColor>(150,150,180,0)</glowColor>
       </li>
       <li Class="CompProperties_HeatPusher">
@@ -794,7 +854,7 @@
         <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
       </li>
       <li Class="CompProperties_Glower">
-        <glowRadius>13</glowRadius>
+        <glowRadius>14</glowRadius>
         <glowColor>(150,150,180,0)</glowColor>
       </li>
       <li Class="CompProperties_HeatPusher">
@@ -850,7 +910,7 @@
     </building>
     <comps>
       <li Class="CompProperties_Glower">
-        <glowRadius>13</glowRadius>
+        <glowRadius>14</glowRadius>
         <glowColor>(150,150,180,0)</glowColor>
       </li>
       <li Class="CompProperties_Flickable"/>
@@ -1110,10 +1170,10 @@
     </comps>
     <size>(1,2)</size>
     <stuffCategories>
-      <!--<li>Fabric</li>
-      <li>Leathery</li>-->
+      <li>Fabric</li>
+      <li>Leathery</li>
     </stuffCategories>
-    <!--<costStuffCount>40</costStuffCount>-->
+    <costStuffCount>40</costStuffCount>
     <building>
       <bed_showSleeperBody>false</bed_showSleeperBody>
       <bed_healPerDay>6</bed_healPerDay>
@@ -1155,10 +1215,10 @@
     </comps>
     <size>(2,2)</size>
     <stuffCategories>
-      <!--<li>Fabric</li>
-      <li>Leathery</li>-->
+      <li>Fabric</li>
+      <li>Leathery</li>
     </stuffCategories>
-    <!--<costStuffCount>85</costStuffCount>-->
+    <costStuffCount>85</costStuffCount>
     <building>
       <bed_showSleeperBody>false</bed_showSleeperBody>
       <bed_healPerDay>6</bed_healPerDay>

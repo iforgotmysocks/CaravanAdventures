@@ -29,6 +29,7 @@ namespace CaravanAdventures.CaravanCamp
         public static ThingDef CATentFenceDoor;
         public static ThingDef CAMiniCommsConsole;
         public static ThingDef CAOrbitalTradeBeacon;
+        public static ThingDef CAWorkshopResearchBench;
 
         public static ThingDef CAChemfuelPoweredGenerator;
 

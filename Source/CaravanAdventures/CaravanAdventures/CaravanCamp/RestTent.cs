@@ -37,7 +37,7 @@ namespace CaravanAdventures.CaravanCamp
                 if (lover != null && !lover.IsPrisoner && shareBed && i == 0) continue;
                 else if (lover != null && !lover.IsPrisoner && shareBed && i == 1)
                 {
-                    var dbThing = ThingMaker.MakeThing(CampDefOf.CASpacerBedrollDouble);
+                    var dbThing = ThingMaker.MakeThing(CampDefOf.CASpacerBedrollDouble, ThingDefOf.Cloth);
                     var doubleBed = GenSpawn.Spawn(dbThing, cellSpots[i], map, Rot4.South);
                     doubleBed.SetFaction(Faction.OfPlayer);
                     campAssetListRef.Add(doubleBed);
@@ -50,7 +50,7 @@ namespace CaravanAdventures.CaravanCamp
                 }
                 else
                 {
-                    var thing = ThingMaker.MakeThing(CampDefOf.CASpacerBedroll);
+                    var thing = ThingMaker.MakeThing(CampDefOf.CASpacerBedroll, ThingDefOf.Cloth);
                     var bed = GenSpawn.Spawn(thing, cellSpots[i], map, Rot4.South);
                     bed.SetFaction(Faction.OfPlayer);
                     campAssetListRef.Add(bed);
@@ -97,7 +97,7 @@ namespace CaravanAdventures.CaravanCamp
                 if (lover != null && shareBed && i == 0) continue;
                 else if (lover != null && shareBed && i == 1)
                 {
-                    var dbThing = ThingMaker.MakeThing(CampDefOf.CAMakeshiftBedrollDouble);
+                    var dbThing = ThingMaker.MakeThing(CampDefOf.CAMakeshiftBedrollDouble, ThingDefOf.Cloth);
                     var doubleBed = GenSpawn.Spawn(dbThing, cellSpots[i], map, Rot4.South);
                     doubleBed.SetFaction(Faction.OfPlayer);
                     campAssetListRef.Add(doubleBed);
@@ -110,7 +110,7 @@ namespace CaravanAdventures.CaravanCamp
                 }
                 else
                 {
-                    var thing = ThingMaker.MakeThing(CampDefOf.CAMakeshiftBedroll);
+                    var thing = ThingMaker.MakeThing(CampDefOf.CAMakeshiftBedroll, ThingDefOf.Cloth);
                     var bed = GenSpawn.Spawn(thing, cellSpots[i], map, Rot4.South);
                     bed.SetFaction(Faction.OfPlayer);
                     campAssetListRef.Add(bed);

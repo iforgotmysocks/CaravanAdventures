@@ -144,10 +144,10 @@
     </comps>
     <size>(1,2)</size>
     <stuffCategories>
-      <!--<li>Fabric</li>
-      <li>Leathery</li>-->
+      <li>Fabric</li>
+      <li>Leathery</li>
     </stuffCategories>
-    <!--<costStuffCount>40</costStuffCount>-->
+    <costStuffCount>40</costStuffCount>
     <building>
       <bed_showSleeperBody>false</bed_showSleeperBody>
       <bed_healPerDay>4</bed_healPerDay>
@@ -188,10 +188,10 @@
     </comps>
     <size>(2,2)</size>
     <stuffCategories>
-      <!--<li>Fabric</li>
-      <li>Leathery</li>-->
+      <li>Fabric</li>
+      <li>Leathery</li>
     </stuffCategories>
-    <!--<costStuffCount>85</costStuffCount>-->
+    <costStuffCount>85</costStuffCount>
     <building>
       <bed_showSleeperBody>false</bed_showSleeperBody>
       <bed_healPerDay>4</bed_healPerDay>
