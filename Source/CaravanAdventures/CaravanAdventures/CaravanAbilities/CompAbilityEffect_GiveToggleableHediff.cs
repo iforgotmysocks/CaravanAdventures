@@ -38,7 +38,7 @@ namespace CaravanAdventures.CaravanAbilities
                 else
                 {
                     var hediff = HediffMaker.MakeHediff(selectedHediffDef, target);
-                    target.health.AddHediff(hediff, target.health.hediffSet.GetBrain(), null, null);
+                    target.health.AddHediff(hediff, null, null, null);
                 }
             }
         }
