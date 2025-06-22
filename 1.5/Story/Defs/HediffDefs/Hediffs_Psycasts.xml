@@ -4,7 +4,7 @@
 	<HediffDef Name="CAAncientPsycastHediffBase" Abstract="True">
 		<hediffClass>HediffWithComps</hediffClass>
 		<comps>
-			<li Class="HediffCompProperties_DisappearsOnDeath"/>
+			 <li Class="HediffCompProperties_DisappearsOnDeath"/> 
 		</comps>
 	</HediffDef>
 
@@ -121,7 +121,7 @@
 		</stages>
 	</HediffDef>
 
-	<HediffDef ParentName="CAAncientPsycastHediffBase">
+	<HediffDef> <!-- ParentName="CAAncientPsycastHediffBase" --> <!-- removed parent as we keep the ancient gift on the pawn if he has death refusal -->
 		<defName>CAAncientGift</defName>
 		<label>Ancient Gift</label>
 		<description>The Ancient Gift, a power to access long forgotten potential which enables the gifted to cast ancient spells. Slow psyfocus recovery even without meditation and superb speed in melee combat or with a blade is spoken about in stories aswell.</description>
@@ -141,6 +141,7 @@
 				</statFactors>
 			</li>
 		</stages>
+    <hediffClass>HediffWithComps</hediffClass>
 		<comps>
 			<li Class="HediffCompProperties">
 				<compClass>CaravanAdventures.CaravanAbilities.HediffComp_AncientGift</compClass>
