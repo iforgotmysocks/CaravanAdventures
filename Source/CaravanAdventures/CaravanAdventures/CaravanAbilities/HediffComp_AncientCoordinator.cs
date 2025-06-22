@@ -58,7 +58,7 @@ namespace CaravanAdventures.CaravanAbilities
             var linkedComp = createdHediff.TryGetComp<HediffComp_AncientProtectiveAura>();
             if (linkedComp == null) return;
             linkedComp.Connector = connector;
-            pawn.health.AddHediff(createdHediff, pawn.health.hediffSet.GetBrain());
+            pawn.health.AddHediff(createdHediff);
         }
 
         public override void CompPostTick(ref float severityAdjustment)
