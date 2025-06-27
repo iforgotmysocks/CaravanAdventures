@@ -68,6 +68,7 @@
       <MaxHitPoints>80</MaxHitPoints>
       <WorkToBuild>20</WorkToBuild>
       <Flammability>0.6</Flammability>
+      <Beauty>2</Beauty>
     </statBases>
     <!--<costStuffCount>5</costStuffCount>-->
     <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
@@ -133,6 +134,7 @@
       <ImmunityGainSpeedFactor>1.05</ImmunityGainSpeedFactor>
       <Comfort>0.68</Comfort>
       <WorkToBuild>600</WorkToBuild>
+      <Beauty>10</Beauty>
     </statBases>
     <comps>
       <li Class="CompProperties_AffectedByFacilities">
@@ -177,6 +179,7 @@
       <ImmunityGainSpeedFactor>1.05</ImmunityGainSpeedFactor>
       <Comfort>0.68</Comfort>
       <WorkToBuild>1100</WorkToBuild>
+      <Beauty>20</Beauty>
     </statBases>
     <comps>
       <li Class="CompProperties_AffectedByFacilities">

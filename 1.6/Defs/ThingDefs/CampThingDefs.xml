@@ -966,7 +966,7 @@
       <MaxHitPoints>300</MaxHitPoints>
       <WorkToBuild>2500</WorkToBuild>
       <Flammability>1.0</Flammability>
-      <Beauty>-20</Beauty>
+      <Beauty>-10</Beauty>
     </statBases>
     <drawerType>MapMeshAndRealTime</drawerType>
     <tickerType>Normal</tickerType>
@@ -1039,7 +1039,7 @@
       <li>Floor</li>
     </tags>
     <statBases>
-      <Beauty>1</Beauty>
+      <Beauty>3</Beauty>
     </statBases>
     <!--<designationCategory>Floors</designationCategory>-->
     <fertility>0</fertility>
@@ -1093,7 +1093,7 @@
       <!--<MarketValue>3</MarketValue>-->
       <WorkToBuild>20</WorkToBuild>
       <Flammability>0</Flammability>
-      <Beauty>2</Beauty>
+      <Beauty>3</Beauty>
     </statBases>
     <!--<costStuffCount>5</costStuffCount>-->
     <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
@@ -1152,6 +1152,7 @@
     </graphicData>
     <castEdgeShadows>True</castEdgeShadows>
     <statBases>
+      <MarketValue>10</MarketValue>
       <MaxHitPoints>75</MaxHitPoints>
       <Flammability>0.1</Flammability>
       <Mass>2.5</Mass>
@@ -1160,6 +1161,7 @@
       <SurgerySuccessChanceFactor>1.25</SurgerySuccessChanceFactor>
       <Comfort>0.90</Comfort>
       <WorkToBuild>600</WorkToBuild>
+      <Beauty>15</Beauty>
     </statBases>
     <comps>
       <li Class="CompProperties_AffectedByFacilities">
@@ -1198,6 +1200,7 @@
     </graphicData>
     <castEdgeShadows>True</castEdgeShadows>
     <statBases>
+      <MarketValue>20</MarketValue>
       <Flammability>0.1</Flammability>
       <Mass>4.5</Mass>
       <BedRestEffectiveness>1.3</BedRestEffectiveness>
@@ -1205,6 +1208,7 @@
       <ImmunityGainSpeedFactor>1.25</ImmunityGainSpeedFactor>
       <Comfort>0.90</Comfort>
       <WorkToBuild>1100</WorkToBuild>
+      <Beauty>30</Beauty>
     </statBases>
     <comps>
       <li Class="CompProperties_AffectedByFacilities">
