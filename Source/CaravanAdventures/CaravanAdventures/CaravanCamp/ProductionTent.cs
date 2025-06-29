@@ -13,6 +13,8 @@ namespace CaravanAdventures.CaravanCamp
         protected Building_WorkTable refinery;
         protected Building_Storage shelf;
 
+        protected float _minClothingHp = 0.51f;
+        protected float _maxClothingHp = 1f;
         public ProductionTent()
         {
             CoordSize = 2;
@@ -107,24 +109,24 @@ namespace CaravanAdventures.CaravanCamp
             bill.ingredientFilter.SetAllow(ThingCategoryDefOf.CorpsesHumanlike, ModSettings.campStorageAndJobsAllowHumanMeat);
             tableButcher.BillStack.AddBill(bill);
 
-            var pantsBill = new Bill_ProductionWithUft(DefDatabase<RecipeDef>.GetNamed("Make_Apparel_Pants")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 1, hpRange = new FloatRange(0.9f, 1f), includeTainted = false, qualityRange = new QualityRange(QualityCategory.Normal, QualityCategory.Legendary) };
+            var pantsBill = new Bill_ProductionWithUft(DefDatabase<RecipeDef>.GetNamed("Make_Apparel_Pants")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 1, hpRange = new FloatRange(_minClothingHp, _maxClothingHp), includeTainted = false, qualityRange = new QualityRange(QualityCategory.Normal, QualityCategory.Legendary) };
             handTailoringBench.BillStack.AddBill(pantsBill);
 
-            var shirtBill = new Bill_ProductionWithUft(DefDatabase<RecipeDef>.GetNamed("Make_Apparel_CollarShirt")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 1, hpRange = new FloatRange(0.9f, 1f), includeTainted = false, qualityRange = new QualityRange(QualityCategory.Normal, QualityCategory.Legendary) };
+            var shirtBill = new Bill_ProductionWithUft(DefDatabase<RecipeDef>.GetNamed("Make_Apparel_CollarShirt")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 1, hpRange = new FloatRange(_minClothingHp, _maxClothingHp), includeTainted = false, qualityRange = new QualityRange(QualityCategory.Normal, QualityCategory.Legendary) };
             handTailoringBench.BillStack.AddBill(shirtBill);
 
-            var dusterBill = new Bill_ProductionWithUft(DefDatabase<RecipeDef>.GetNamed("Make_Apparel_Duster")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 1, hpRange = new FloatRange(0.9f, 1f), includeTainted = false, qualityRange = new QualityRange(QualityCategory.Normal, QualityCategory.Legendary) };
+            var dusterBill = new Bill_ProductionWithUft(DefDatabase<RecipeDef>.GetNamed("Make_Apparel_Duster")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 1, hpRange = new FloatRange(_minClothingHp, _maxClothingHp), includeTainted = false, qualityRange = new QualityRange(QualityCategory.Normal, QualityCategory.Legendary) };
             handTailoringBench.BillStack.AddBill(dusterBill);
 
-            var parkaBill = new Bill_ProductionWithUft(DefDatabase<RecipeDef>.GetNamed("Make_Apparel_Parka")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 1, hpRange = new FloatRange(0.9f, 1f), includeTainted = false, qualityRange = new QualityRange(QualityCategory.Normal, QualityCategory.Legendary) };
+            var parkaBill = new Bill_ProductionWithUft(DefDatabase<RecipeDef>.GetNamed("Make_Apparel_Parka")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 1, hpRange = new FloatRange(_minClothingHp, _maxClothingHp), includeTainted = false, qualityRange = new QualityRange(QualityCategory.Normal, QualityCategory.Legendary) };
             handTailoringBench.BillStack.AddBill(parkaBill);
 
             if (caravan.PawnsListForReading.Any(col => col.IsSlave))
             {
-                var slaveCollar = new Bill_ProductionWithUft(DefDatabase<RecipeDef>.GetNamed("Make_Apparel_Collar")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 1, hpRange = new FloatRange(0.9f, 1f), includeTainted = false, qualityRange = new QualityRange(QualityCategory.Awful, QualityCategory.Legendary) };
+                var slaveCollar = new Bill_ProductionWithUft(DefDatabase<RecipeDef>.GetNamed("Make_Apparel_Collar")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 1, hpRange = new FloatRange(_minClothingHp, _maxClothingHp), includeTainted = false, qualityRange = new QualityRange(QualityCategory.Awful, QualityCategory.Legendary) };
                 handTailoringBench.BillStack.AddBill(slaveCollar);
 
-                var slaveChainThingy = new Bill_ProductionWithUft(DefDatabase<RecipeDef>.GetNamed("Make_Apparel_BodyStrap")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 1, hpRange = new FloatRange(0.9f, 1f), includeTainted = false, qualityRange = new QualityRange(QualityCategory.Awful, QualityCategory.Legendary) };
+                var slaveChainThingy = new Bill_ProductionWithUft(DefDatabase<RecipeDef>.GetNamed("Make_Apparel_BodyStrap")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 1, hpRange = new FloatRange(_minClothingHp, _maxClothingHp), includeTainted = false, qualityRange = new QualityRange(QualityCategory.Awful, QualityCategory.Legendary) };
                 handTailoringBench.BillStack.AddBill(slaveChainThingy);
             }
 
@@ -158,21 +160,21 @@ namespace CaravanAdventures.CaravanCamp
             bill.ingredientFilter.SetAllow(ThingCategoryDefOf.CorpsesHumanlike, ModSettings.campStorageAndJobsAllowHumanMeat);
             tableButcher.BillStack.AddBill(bill);
 
-            var bowBill = new Bill_ProductionWithUft(DefDatabase<RecipeDef>.GetNamed("Make_Bow_Recurve")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 1, hpRange = new FloatRange(0.9f, 1f), includeTainted = false, qualityRange = new QualityRange(QualityCategory.Normal, QualityCategory.Legendary) };
+            var bowBill = new Bill_ProductionWithUft(DefDatabase<RecipeDef>.GetNamed("Make_Bow_Recurve")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 1, hpRange = new FloatRange(_minClothingHp, _maxClothingHp), includeTainted = false, qualityRange = new QualityRange(QualityCategory.Normal, QualityCategory.Legendary) };
             handTailoringBench.BillStack.AddBill(bowBill);
 
-            var pantsBill = new Bill_ProductionWithUft(DefDatabase<RecipeDef>.GetNamed("Make_Apparel_TribalA")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 1, hpRange = new FloatRange(0.9f, 1f), includeTainted = false, qualityRange = new QualityRange(QualityCategory.Normal, QualityCategory.Legendary) };
+            var pantsBill = new Bill_ProductionWithUft(DefDatabase<RecipeDef>.GetNamed("Make_Apparel_TribalA")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 1, hpRange = new FloatRange(_minClothingHp, _maxClothingHp), includeTainted = false, qualityRange = new QualityRange(QualityCategory.Normal, QualityCategory.Legendary) };
             handTailoringBench.BillStack.AddBill(pantsBill);
 
-            var shirtBill = new Bill_ProductionWithUft(DefDatabase<RecipeDef>.GetNamed("Make_Apparel_WarMask")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 1, hpRange = new FloatRange(0.9f, 1f), includeTainted = false, qualityRange = new QualityRange(QualityCategory.Normal, QualityCategory.Legendary) };
+            var shirtBill = new Bill_ProductionWithUft(DefDatabase<RecipeDef>.GetNamed("Make_Apparel_WarMask")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 1, hpRange = new FloatRange(_minClothingHp, _maxClothingHp), includeTainted = false, qualityRange = new QualityRange(QualityCategory.Normal, QualityCategory.Legendary) };
             handTailoringBench.BillStack.AddBill(shirtBill);
 
             if (caravan.PawnsListForReading.Any(col => col.IsSlave))
             {
-                var slaveCollar = new Bill_ProductionWithUft(DefDatabase<RecipeDef>.GetNamed("Make_Apparel_Collar")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 1, hpRange = new FloatRange(0.9f, 1f), includeTainted = false, qualityRange = new QualityRange(QualityCategory.Awful, QualityCategory.Legendary) };
+                var slaveCollar = new Bill_ProductionWithUft(DefDatabase<RecipeDef>.GetNamed("Make_Apparel_Collar")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 1, hpRange = new FloatRange(_minClothingHp, _maxClothingHp), includeTainted = false, qualityRange = new QualityRange(QualityCategory.Awful, QualityCategory.Legendary) };
                 handTailoringBench.BillStack.AddBill(slaveCollar);
 
-                var slaveChainThingy = new Bill_ProductionWithUft(DefDatabase<RecipeDef>.GetNamed("Make_Apparel_BodyStrap")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 1, hpRange = new FloatRange(0.9f, 1f), includeTainted = false, qualityRange = new QualityRange(QualityCategory.Awful, QualityCategory.Legendary) };
+                var slaveChainThingy = new Bill_ProductionWithUft(DefDatabase<RecipeDef>.GetNamed("Make_Apparel_BodyStrap")) { repeatMode = BillRepeatModeDefOf.TargetCount, targetCount = 1, hpRange = new FloatRange(_minClothingHp, _maxClothingHp), includeTainted = false, qualityRange = new QualityRange(QualityCategory.Awful, QualityCategory.Legendary) };
                 handTailoringBench.BillStack.AddBill(slaveChainThingy);
             }
         }
