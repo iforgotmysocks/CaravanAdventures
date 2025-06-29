@@ -158,6 +158,9 @@ namespace CaravanAdventures.CaravanMechBounty
             var joywire = veteran.health.hediffSet.hediffs.FirstOrDefault(hediff => hediff.def == HediffDef.Named("Joywire"));
             if (joywire != null) veteran.health.hediffSet.hediffs.Remove(joywire);
 
+            var deathAcidifier = veteran.health.hediffSet.hediffs.FirstOrDefault(hediff => hediff.def == HediffDef.Named("DeathAcidifier"));
+            if (deathAcidifier != null) veteran.health.hediffSet.hediffs.Remove(deathAcidifier);
+
             foreach (var hediff in veteran.health.hediffSet.hediffs.Where(hediff => hediff.def.isBad).Reverse()) HealthUtility.Cure(hediff);
         }
 
