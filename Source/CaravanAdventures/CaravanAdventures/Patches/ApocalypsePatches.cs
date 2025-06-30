@@ -40,23 +40,19 @@ namespace CaravanAdventures.Patches
         //    return true;
         //}
 
-        private static GameCondition _cachedApo = null;
+        private static GameCondition_Apocalypse _cachedApo = null;
         public static void Aggregate_Postfix(ref float __result, GameConditionManager __instance)
         {
-            DLog.Message($"postfix aggregating result before own adjustment: {__result}");
-            //DLog.Message($"number of active conditions: {__instance.ActiveConditions.Count}");
-
-            //DLog.Message($"Does patch target the right manager?? {Find.World.GameConditionManager == __instance}");
-            //DLog.Message($"ownermap? {__instance?.ownerMap != null} {__instance?.ownerMap?.Parent?.Faction?.Name}");
-
-
             // todo 1.6 add check for space, we only want that applied on planetmaps
             if (__instance.ownerMap == null) return;
-            if (_cachedApo == null) _cachedApo = Find.World.GameConditionManager.ActiveConditions.FirstOrDefault(x => x.def == StoryDefOf.CAGameCondition_Apocalypse);
+            if (_cachedApo == null) _cachedApo = Find.World.GameConditionManager.ActiveConditions.FirstOrDefault(x => x.def == StoryDefOf.CAGameCondition_Apocalypse) as GameCondition_Apocalypse;
             if (_cachedApo == null) return;
+            if (!_cachedApo.Active)
+            {
+                _cachedApo = null;
+                return;
+            }
             __result += _cachedApo.TemperatureOffset();
-
-            DLog.Message($"postfix aggregating result after own adjustment: {__result}");
         }
 
         public static void OffsetFromSeasonCycle_Postfix(ref float __result, PlanetTile tile)

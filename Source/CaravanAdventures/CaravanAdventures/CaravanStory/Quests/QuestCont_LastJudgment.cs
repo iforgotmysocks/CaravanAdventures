@@ -27,7 +27,6 @@ namespace CaravanAdventures.CaravanStory.Quests
 				apocalypse = (GameCondition_Apocalypse)GameConditionMaker.MakeConditionPermanent(StoryDefOf.CAGameCondition_Apocalypse);
 				apocalypse.TempOffset = minTemp;
 				apocalypse.Permanent = true;
-                //apocalypse.startTick = Find.TickManager.TicksGame;
                 //RegisterApocalypseOnAllMaps();
 				Find.World.gameConditionManager.RegisterCondition(apocalypse);
             }
@@ -47,7 +46,7 @@ namespace CaravanAdventures.CaravanStory.Quests
 				apocalypse.End();
 				apocalypse = null;
 			}
-			StartApocalypse(minTemp);
+			if (ModSettings.apocalypseEnabled) StartApocalypse(minTemp);
         }
 
         public void CreateLastJudgment(ref LastJudgmentMP lastJudgmentMP, int tile)

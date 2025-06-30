@@ -11,6 +11,8 @@ namespace CaravanAdventures.CaravanStory
         private int ticks;
         private bool active = false;
 
+        public bool Active => active;
+
         public override void ExposeData()
         {
             base.ExposeData();
@@ -52,5 +54,16 @@ namespace CaravanAdventures.CaravanStory
             return TempOffset;
         }
 
+        public override void Init()
+        {
+            active = true;
+            base.Init();
+        }
+
+        public override void End()
+        {
+            active = false;
+            base.End();
+        }
     }
 }
