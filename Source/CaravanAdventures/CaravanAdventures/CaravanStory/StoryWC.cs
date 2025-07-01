@@ -292,11 +292,16 @@ namespace CaravanAdventures.CaravanStory
             if (lastAppliedActionVersion == Helper.VersionString)
             {
                 DLog.Message($"Skipping already applied version actions for {Helper.VersionString}");
-                return; 
+                return;
             }
 
             DLog.Message($"Running version actions for {Helper.VersionString}");
-            if (ModSettings.storyEnabled && storyFlags["TradeCaravan_Arrived"]) StoryUtility.EnsureSacrilegHunters();
+            Helper.RunSafely(() =>
+            {
+                if (ModSettings.storyEnabled && storyFlags["TradeCaravan_Arrived"]) StoryUtility.EnsureSacrilegHunters();
+                ModSettings.scytherRange = new IntRange(1, 3);
+                ModSettings.ancientProtectiveAuraDamageReduction = 0.5f;
+            });
             lastAppliedActionVersion = Helper.VersionString;
 
             if (Helper.Debug()) DLog.Message($"Applied version actions for: {lastAppliedActionVersion}");
