@@ -78,7 +78,7 @@ namespace CaravanAdventures
         public static float ancientGiftPassivePsyfocusGainPerSec = 0.00035f;
         public static bool onlyAllowOneConcurrentlyGiftedPawn = true;
         // - ancient mech signal
-        public static IntRange scytherRange = new IntRange(2, 4);
+        public static IntRange scytherRange = new IntRange(1, 3);
         // - thunderbolt
         public static float mechanoidDissmemberChance = 0.6f;
         public static float humanDissmemberChance = 0.3f;
@@ -89,7 +89,7 @@ namespace CaravanAdventures
         public static float plantScoreMultiplier = 2.0f;
         // - protective aura
         public static float healingPerSecond = 0.05f;
-        public static float ancientProtectiveAuraDamageReduction = 0.3f;
+        public static float ancientProtectiveAuraDamageReduction = 0.5f;
         public static bool onlyHealPermWhenGifted = false;
         public static bool stopMentalBreaks = false;
         public static int maxLinkedAuraPawns = 4;
