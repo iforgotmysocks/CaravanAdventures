@@ -83,6 +83,7 @@ namespace CaravanAdventures.CaravanAbilities
                 var pawns = PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_Colonists.Where(pawn => !pawn.HasExtraHomeFaction()
                     && !pawn.HasExtraMiniFaction()
                     && pawn != Pawn
+                    && !pawn.Dead
                     && !pawn.IsKidnapped()
                     && !(pawn.IsSlave && ModSettings.excludeSlavesFromCoordinator)
                     && !CompatibilityDefOf.CACompatDef.raceDefsToExcludeFromAncientCoordinator.Contains(pawn.def.defName)
@@ -95,7 +96,7 @@ namespace CaravanAdventures.CaravanAbilities
                         .ToList()
                         .Contains(x))
                     ).ToList();
-                if (!TryAddPawn(pawns)) TryKillPawn(pawns);
+                if (!TryAddPawn(pawns) && !ModSettings.disableAncientCoordinatorKillingPawnsPastTheLimit) TryKillPawn(pawns);
                 ticks = 0;
             }
 
@@ -148,13 +149,14 @@ namespace CaravanAdventures.CaravanAbilities
 
         private void RemovePawnsNoLongerApplying(List<Pawn> pawns)
         {
-            if (linkedPawns.Count < pawns.Count) return;
+            if (linkedPawns.Count <= ModSettings.maxLinkedAuraPawns && pawns.Count <= linkedPawns.Count) return;
             var pawnsToRemove = linkedPawns.Where(p =>
                 p == null
                 || p.Dead
                 || p.HasExtraHomeFaction()
                 || p.HasExtraMiniFaction()
                 || p.IsKidnapped()
+                || p.IsGhoul
                 || p.IsSlave && ModSettings.excludeSlavesFromCoordinator
                 || CompatibilityDefOf.CACompatDef.raceDefsToExcludeFromAncientCoordinator.Contains(p.def.defName)
                 || CompatibilityDefOf.CACompatDef.racesWithModExtsToExcludeFromAncientCoordinator

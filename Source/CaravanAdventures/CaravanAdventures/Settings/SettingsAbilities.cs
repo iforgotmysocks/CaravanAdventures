@@ -28,7 +28,7 @@ namespace CaravanAdventures.Settings
         public override void DoWindowContents(Rect wrect)
         {
             var options = new Listing_Standard();
-            var viewRect = new Rect(0f, 0f, windowRect.width - 65, Patches.Compatibility.SoS2Patch.Installed() ? 1370 : 1180);
+            var viewRect = new Rect(0f, 0f, windowRect.width - 65, Patches.Compatibility.SoS2Patch.Installed() ? 1410 : 1220);
             var smallerOutRect = new Rect(wrect.x, wrect.y, wrect.width, wrect.height - 50);
 
             Widgets.BeginScrollView(smallerOutRect, ref scrollPos, viewRect);
@@ -86,6 +86,7 @@ namespace CaravanAdventures.Settings
             ModSettings.healingPerSecond = options.Slider(ModSettings.healingPerSecond, 0f, 1f);
             options.Label($"Max allowed linked pawns for the coordinator spell: {ModSettings.maxLinkedAuraPawns}");
             ModSettings.maxLinkedAuraPawns = Convert.ToInt32(options.Slider(ModSettings.maxLinkedAuraPawns, 1f, 10f));
+            options.CheckboxLabeled("Pawns past the Ancient Coordinator Spell's limits no longer die", ref ModSettings.disableAncientCoordinatorKillingPawnsPastTheLimit);
             options.CheckboxLabeled("Exclude slaves from the coordinator empowered version of the ancient aura", ref ModSettings.excludeSlavesFromCoordinator);
             options.CheckboxLabeled("Can stop mental breaks?", ref ModSettings.stopMentalBreaks);
             options.CheckboxLabeled("Only heal permanent wounds when pawn has ancient gift?", ref ModSettings.onlyHealPermWhenGifted);
@@ -95,7 +96,7 @@ namespace CaravanAdventures.Settings
 
             options.Label("Mystical guiding light".Colorize(Color.green));
             options.Label($"Duration in days: {Math.Round(ModSettings.lightDuration / 60000, 2)}");
-            ModSettings.lightDuration = options.Slider(ModSettings.lightDuration, 60f, 300000);
+            ModSettings.lightDuration = options.Slider(ModSettings.lightDuration, 60f, 600000f);
             options.Label($"Caravan travel speed multiplier: {Math.Round(ModSettings.magicLightCaravanSpeedMult, 1)}");
             ModSettings.magicLightCaravanSpeedMult = options.Slider(ModSettings.magicLightCaravanSpeedMult, 0.1f, 5f);
             options.CheckboxLabeled("Show mystical guiding light animation", ref ModSettings.enableGuidingLightAnimation);

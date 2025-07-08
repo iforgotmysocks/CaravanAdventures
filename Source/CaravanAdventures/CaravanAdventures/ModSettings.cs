@@ -93,6 +93,7 @@ namespace CaravanAdventures
         public static bool onlyHealPermWhenGifted = false;
         public static bool stopMentalBreaks = false;
         public static int maxLinkedAuraPawns = 4;
+        public static bool disableAncientCoordinatorKillingPawnsPastTheLimit = false;
         public static bool excludeSlavesFromCoordinator = false;
         public static bool attackspeedIncreaseForAncientProtectiveAura = true;
         public static float attackspeedMultiplierNegated = 0.60f;
@@ -241,6 +242,7 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref onlyHealPermWhenGifted, "onlyHealPermWhenGifted", false);
             Scribe_Values.Look(ref maxLinkedAuraPawns, "maxLinkedAuraPawns", 4);
             Scribe_Values.Look(ref excludeSlavesFromCoordinator, "excludeSlavesFromCoordinator", false);
+            Scribe_Values.Look(ref disableAncientCoordinatorKillingPawnsPastTheLimit, "disableAncientCoordinatorKillingPawnsPastTheLimit", false);
             Scribe_Values.Look(ref attackspeedIncreaseForAncientProtectiveAura, "attackspeedIncreaseForAncientProtectiveAura", true);
             Scribe_Values.Look(ref attackspeedMultiplierNegated, "attackspeedMultiplierNegated", 0.60f);
             Scribe_Values.Look(ref regulateBodyTemperature, "regulateBodyTemperature", true);
