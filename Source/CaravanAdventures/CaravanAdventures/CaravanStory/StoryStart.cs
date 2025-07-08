@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using RimWorld;
 using Verse;
@@ -169,7 +170,8 @@ namespace CaravanAdventures.CaravanStory
                 var gifted = StoryUtility.GetGiftedPawn();
 
                 var subDiaNode = new DiaNode("Story_Start_Dia1_2_Neg".Translate());
-                subDiaNode.options.Add(new DiaOption("Story_Start_Dia1_2_Neg_Option1".Translate()) { resolveTree = true, action = () => CheckEnsureGifted(initiator, true, true) });
+                subDiaNode.options.Add(new DiaOption("Story_Start_Dia1_2_Neg_Option1".Translate()) { resolveTree = true, action = () => CheckEnsureGifted(initiator, true, true, false) });
+                subDiaNode.options.Add(new DiaOption("Story_Start_Dia1_2_Neg_Option2".Translate()) { resolveTree = true, action = () => CheckEnsureGifted(initiator, true, true) });
 
                 diaNode = new DiaNode("Story_Start_Dia1_Me_End_GiftAlreadyRecieved".Translate());
                 diaNode.options.Add(new DiaOption("Story_Start_Dia1_Me_End_Bye".Translate()) { resolveTree = true });
@@ -234,10 +236,12 @@ namespace CaravanAdventures.CaravanStory
             }
         }
 
-        public void CheckEnsureGifted(Pawn pawn = null, bool forceStrip = false, bool calledByTree = false)
+        // todo add dialog to choose whether to transfer psycasts or not
+        public void CheckEnsureGifted(Pawn pawn = null, bool forceStrip = false, bool calledByTree = false, bool transferOtherPsycasts = true)
         {
             if (!CompCache.StoryWC.storyFlags["Start_CanReceiveGift"]) return;
             var gifted = CompCache.StoryWC.questCont.StoryStart.Gifted;
+            (int psyLevel, List<Psycast> psycasts) transferData = (0, new List<Psycast>());
 
             if (gifted != null 
                 && (!gifted.Dead || (gifted.Dead && StoryUtility.DeathRefusalPossibleWhileDead(gifted))) 
@@ -245,8 +249,11 @@ namespace CaravanAdventures.CaravanStory
                 && gifted.Faction == Faction.OfPlayer 
                 && !gifted.IsKidnapped() 
                 && !forceStrip) return;
-            else if (gifted != null && (gifted.Dead || gifted.Faction != Faction.OfPlayer || gifted.IsKidnapped() || forceStrip)) StoryUtility.StripGiftFromPawn(gifted);
-
+            else if (gifted != null && (gifted.Dead || gifted.Faction != Faction.OfPlayer || gifted.IsKidnapped() || forceStrip))
+            {
+                StoryUtility.StripGiftFromPawn(gifted); 
+                if (transferOtherPsycasts) StoryUtility.TransferOtherPsycasts(gifted, ref transferData);
+            }
             // todo when no sensitive pawn could be found, use an insensitive one
             gifted = pawn ?? PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction?.Where(x =>
                 (x?.RaceProps?.Humanlike ?? false)
@@ -283,20 +290,36 @@ namespace CaravanAdventures.CaravanStory
 
             var spellCount = gifted?.abilities?.abilities?.Count;
             AddUnlockedAbilities(gifted);
+            // todo add dialog to choose whether to transfer psycasts or not
+            if (transferOtherPsycasts) AddTransferedAbilities(transferData, gifted);
             CompCache.StoryWC.questCont.StoryStart.Gifted = gifted;
             if ((spellCount == 0 || spellCount == 1) && !CompatibilityPatches.InDetectedAssemblies("VanillaPsycastsExpanded")) AddAdditionalSpells(gifted);
             Find.LetterStack.ReceiveLetter("CA_Story_ReceivedGiftLetterTitle".Translate(), "CA_Story_ReceivedGiftLetterDesc".Translate(gifted.NameShortColored, GenderUtility.GetPronoun(gifted.gender)), LetterDefOf.PositiveEvent);
         }
 
+        private void AddTransferedAbilities((int psylevel, List<Psycast> psycasts) transferData, Pawn gifted)
+        {
+            DLog.Message($"Setting psylink level to {transferData.psylevel} for {gifted.Name}");
+            if (transferData.psylevel > 0)
+            {
+                var levelsToCorrect = transferData.psylevel - gifted.GetPsylinkLevel();
+                if (levelsToCorrect <= 0) return;
+                gifted.ChangePsylinkLevel(levelsToCorrect, false);
+            }
+
+            if (!transferData.psycasts?.Any() ?? true) return;
+            foreach (var psycast in transferData.psycasts) gifted.abilities.GainAbility(psycast.def);
+        }
+
         private void AddUnlockedAbilities(Pawn chosen)
         {
             if (CompCache.StoryWC.debugFlags["DebugAllAbilities"]) DefDatabase<AbilityDef>.AllDefsListForReading
-                   .Where(x => x.defName.StartsWith("CAAncient"))
-                   .ToList()
-                   .ForEach(spell =>
-                   {
-                       if (!CompCache.StoryWC.GetUnlockedSpells().Contains(spell)) CompCache.StoryWC.GetUnlockedSpells().Add(spell);
-                   });
+                .Where(x => x.defName.StartsWith("CAAncient"))
+                .ToList()
+                .ForEach(spell =>
+                {
+                    if (!CompCache.StoryWC.GetUnlockedSpells().Contains(spell)) CompCache.StoryWC.GetUnlockedSpells().Add(spell);
+                });
 
             var abilityDefs = CompCache.StoryWC.GetUnlockedSpells();
 

@@ -975,5 +975,21 @@ namespace CaravanAdventures.CaravanStory
 
         internal static bool DeathRefusalPossibleWhileDead(Pawn gifted) 
             => gifted.health.hediffSet.hediffs.FirstOrDefault(x => x.def.defName == "DeathRefusal" || x.def.defName == "DeathRefusalCreepJoiner") != null && gifted.ParentHolder is Corpse;
+        
+        internal static void TransferOtherPsycasts(Pawn gifted, ref (int psyLevel, List<Psycast> psycasts) transferData)
+        {
+            if (transferData.psycasts == null) return;
+            foreach (var ability in gifted.abilities.abilities.OfType<Psycast>().Reverse())
+            {
+                if (ability == null) continue;
+                transferData.psycasts.Add(ability);
+                gifted.abilities.RemoveAbility(ability.def);
+            }
+
+            transferData.psyLevel = gifted.GetPsylinkLevel();
+            var hediff = gifted.health.hediffSet.hediffs.FirstOrDefault(x => x.def.defName == "PsychicAmplifier");
+            gifted.health.hediffSet.hediffs.Remove(hediff);
+            gifted.health.Notify_HediffChanged(hediff);
+        }
     }
 }
