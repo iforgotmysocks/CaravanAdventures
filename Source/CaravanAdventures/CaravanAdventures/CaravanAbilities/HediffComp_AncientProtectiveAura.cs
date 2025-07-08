@@ -70,7 +70,7 @@ namespace CaravanAdventures.CaravanAbilities
             if (ticksSinceStatusCheck > statusCheckTickCount)
             {
                 ticksSinceStatusCheck = 0;
-                if (Props.linked && (Pawn.Faction != Faction.OfPlayer || connector == null || connector.Dead || connector.Faction != Faction.OfPlayer || !IsGifted(connector) || !IsCoordinatorActive(connector)))
+                if (Props.linked && (Pawn.Faction != Faction.OfPlayer || connector == null || connector.Dead || connector.Destroyed || connector.Faction != Faction.OfPlayer || !IsGifted(connector) || !IsCoordinatorActive(connector)))
                 {
                     Pawn.health.RemoveHediff(parent);
                     return;
