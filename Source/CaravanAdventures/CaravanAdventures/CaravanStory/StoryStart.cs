@@ -251,7 +251,7 @@ namespace CaravanAdventures.CaravanStory
                 && !forceStrip) return;
             else if (gifted != null && (gifted.Dead || gifted.Faction != Faction.OfPlayer || gifted.IsKidnapped() || forceStrip))
             {
-                StoryUtility.StripGiftFromPawn(gifted); 
+                StoryUtility.StripGiftFromPawn(gifted);
                 if (transferOtherPsycasts) StoryUtility.TransferOtherPsycasts(gifted, ref transferData);
             }
             // todo when no sensitive pawn could be found, use an insensitive one
@@ -303,8 +303,7 @@ namespace CaravanAdventures.CaravanStory
             if (transferData.psylevel > 0)
             {
                 var levelsToCorrect = transferData.psylevel - gifted.GetPsylinkLevel();
-                if (levelsToCorrect <= 0) return;
-                gifted.ChangePsylinkLevel(levelsToCorrect, false);
+                if (levelsToCorrect > 0) gifted.ChangePsylinkLevel(levelsToCorrect, false);
             }
 
             if (!transferData.psycasts?.Any() ?? true) return;
