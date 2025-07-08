@@ -21,7 +21,7 @@
 	<!-- EN: Sorry, I can't, but there may be someone better suited... -->
   <Story_Start_Dia1_Me_SomeoneBetter>抱歉，我实在做不到...我想可能会有比我更合适的人选...</Story_Start_Dia1_Me_SomeoneBetter>
 	<!-- EN: The location of the first spell will reveal itself to you soon. Good luck on your journey, chosen one. -->
-  <Story_Start_Dia1_Me_End_Accepted>首个能力的位置即将揭示——愿汝一路顺风——天选之人——</Story_Start_Dia1_Me_End_Accepted>
+  <Story_Start_Dia1_Me_End_Accepted>首个能力的位置即将揭示——愿汝一路顺风——天选之人——  \n\n\n(提示：另一个棋子可以通过与树对话来获得古老的礼物。)</Story_Start_Dia1_Me_End_Accepted>
 	<!-- EN: We hope you are right. -->
   <Story_Start_Dia1_Me_End_Denied>愿汝言是也——</Story_Start_Dia1_Me_End_Denied>
 	<!-- EN: Bye. -->
@@ -34,6 +34,7 @@
   <Story_Start_Dia1_2_Neg>但愿如此——若无事——毋再扰——</Story_Start_Dia1_2_Neg>
 	<!-- EN: Thank you! -->
   <Story_Start_Dia1_2_Neg_Option1>非常感谢！</Story_Start_Dia1_2_Neg_Option1>
+  <Story_Start_Dia1_2_Neg_Option2>谢谢！请把他们的常规 psylink 和 psycast 也转过来。</Story_Start_Dia1_2_Neg_Option2>
 
   <!-- EN: Received ancient gift -->
   <CA_Story_ReceivedGiftLetterTitle>获得远古天赋</CA_Story_ReceivedGiftLetterTitle>
