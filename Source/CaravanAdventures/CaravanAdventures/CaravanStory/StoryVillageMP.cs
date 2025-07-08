@@ -424,12 +424,11 @@ namespace CaravanAdventures.CaravanStory
             // change to remove when downed?
             if (timerTillRemoval > 0)
             {
-
                 if (timerTillRemoval % 100 == 0) DLog.Message($"timerTilll  greater 0 {timerTillRemoval}");
                 return;
             }
             //if (Map.mapPawns.FreeColonistsSpawned.Any(x => !x.Dead)) return;
-            DLog.Message($"{Map.mapPawns.AnyPawnBlockingMapRemoval}");
+            DLog.Message($"AnyPawnBlockingMapRemoval: {Map.mapPawns.AnyPawnBlockingMapRemoval}");
             if (Map.mapPawns.AnyPawnBlockingMapRemoval) return;
 
             DLog.Message($"Removing map");
