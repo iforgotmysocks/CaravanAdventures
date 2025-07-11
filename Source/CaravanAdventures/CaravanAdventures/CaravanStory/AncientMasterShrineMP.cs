@@ -50,6 +50,8 @@ namespace CaravanAdventures.CaravanStory
             Scribe_References.Look(ref lastJudgmentMP, "lastJudgmentMap");
         }
 
+        public override bool GravShipCanLandOn => false;
+
         public void Init()
         {
             // debug

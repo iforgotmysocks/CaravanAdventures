@@ -23,6 +23,7 @@
 			<!--<li Class="WorldObjectCompProperties_TimedDetectionRaids" />-->
 			<!--<li Class="WorldObjectCompProperties_Timeout" />-->
     </comps>
+	<canHaveMap>false</canHaveMap>
   </WorldObjectDef>
 
 	<WorldObjectDef>
