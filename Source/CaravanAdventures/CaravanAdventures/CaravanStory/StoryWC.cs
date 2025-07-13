@@ -285,8 +285,6 @@ namespace CaravanAdventures.CaravanStory
             Helper.RunSafely(() =>
             {
                 if (ModSettings.storyEnabled && storyFlags["TradeCaravan_Arrived"]) StoryUtility.EnsureSacrilegHunters();
-                ModSettings.scytherRange = new IntRange(1, 3);
-                ModSettings.ancientProtectiveAuraDamageReduction = 0.5f;
             });
             lastAppliedActionVersion = Helper.VersionString;
 
