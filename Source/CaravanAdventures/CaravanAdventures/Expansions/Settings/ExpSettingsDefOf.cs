@@ -1,9 +1,4 @@
 ﻿using RimWorld;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CaravanAdventures.Expansions.Settings
 {
@@ -11,6 +6,7 @@ namespace CaravanAdventures.Expansions.Settings
     class ExpSettingsDefOf
     {
 #pragma warning disable CS0649
+        [MayRequireRoyalty]
         public static ExpSettingsDef ExpRimedievalSettings;
     }
 }
