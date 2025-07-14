@@ -81,7 +81,8 @@ namespace CaravanAdventures.CaravanMechBounty
         {
             base.WorldComponentTick();
 
-            if (bountyFaction == null) return;
+            if (!ModSettings.bountyEnabled || bountyFaction == null) return;
+
             if (CheckCanStartBountyNotificationCounter())
             {
                 DLog.Message($"Starting bounty notification counter at {BountyNotificationDelay}");
@@ -91,8 +92,7 @@ namespace CaravanAdventures.CaravanMechBounty
 
             if (bountyNotificationCounter == 0)
             {
-                Find.LetterStack.ReceiveLetter("StoryVillage_Response_BountyInitiatedTitle".Translate(), "StoryVillage_Response_BountyInitiatedDesc".Translate(bountyFaction.NameColored, (Helper.ExpRM ? Find.FactionManager.FirstFactionOfDef(Helper.ExpSettings.primaryEnemyFactionDef) : Faction.OfMechanoids).NameColored), LetterDefOf.PositiveEvent);
-                bountyServiceAvailable = true;
+                if (!TryEnableBounty()) bountyNotificationCounter = BountyNotificationDelay * 2;
             }
 
             bountyNotificationCounter--;
@@ -100,6 +100,19 @@ namespace CaravanAdventures.CaravanMechBounty
             ongoingItemDelay--;
             ongoingEnvoyDelay--;
             ongoingVeteranDelay--;
+        }
+
+        public bool TryEnableBounty()
+        {
+            var bountyEnemyFaction = Helper.ExpRM ? Find.FactionManager.FirstFactionOfDef(Helper.ExpSettings.primaryEnemyFactionDef) : Faction.OfMechanoids;
+            if (bountyEnemyFaction == null)
+            {
+                DLog.Message($"bounty couldn't be enabled, due to bounty faction being null");
+                return false;
+            }
+            bountyServiceAvailable = true;
+            Find.LetterStack.ReceiveLetter("StoryVillage_Response_BountyInitiatedTitle".Translate(), "StoryVillage_Response_BountyInitiatedDesc".Translate(bountyFaction.NameColored, (Helper.ExpRM ? Find.FactionManager.FirstFactionOfDef(Helper.ExpSettings.primaryEnemyFactionDef) : Faction.OfMechanoids).NameColored), LetterDefOf.PositiveEvent);
+            return true;
         }
 
         public void ResetBountyFeature()
