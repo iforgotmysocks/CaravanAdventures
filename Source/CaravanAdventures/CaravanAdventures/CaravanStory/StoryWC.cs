@@ -288,6 +288,7 @@ namespace CaravanAdventures.CaravanStory
 
         private void RunUpdateActionForCurrentAssemblyVersion()
         {
+            // todo create a faction based on own config file, so it doesn't trigger for every savegame start
             if (Helper.Debug()) DLog.Message($"Last applied action version: {lastAppliedActionVersion}");
             if (lastAppliedActionVersion == Helper.VersionString)
             {
@@ -423,7 +424,7 @@ namespace CaravanAdventures.CaravanStory
             ticks = -1;
             countShrinesCompleted = 5;
 
-            CompCache.BountyWC.BountyServiceAvailable = true;
+            CompCache.BountyWC.TryEnableBounty();
             CompCache.BountyWC.BountyNotificationCounter = -1;
         }
 
