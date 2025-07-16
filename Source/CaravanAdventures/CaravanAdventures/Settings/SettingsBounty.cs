@@ -105,6 +105,7 @@ namespace CaravanAdventures.Settings
             ModSettings.bountyValueMult = (float)Math.Round(options.Slider(ModSettings.bountyValueMult, 0.1f, 4f), 2);
             options.Label(new TaggedString($"Bounty credit purchase cost percentage: {Math.Round(ModSettings.bountyCreditPurchaseCostMult * 100, 0)}%"), -1, "Reduction of points by this amount for conversion services.");
             ModSettings.bountyCreditPurchaseCostMult = (float)Math.Round(options.Slider(ModSettings.bountyCreditPurchaseCostMult, 0f, 0.99f), 2);
+            options.CheckboxLabeled("Use equal number of minor passions for Veterans", ref ModSettings.useEqualMinorPassionsForVeterans, "With this option enabled, all skills will have at least one minor passion.");
 
             //options.EndScrollView(ref viewRect);
             options.End();

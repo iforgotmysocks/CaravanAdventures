@@ -79,71 +79,78 @@ namespace CaravanAdventures.CaravanMechBounty
 
         private static void AdjustVeteranSkills(Pawn veteran, bool tribal)
         {
-            var majorPassionsReduceMinorPassionAmount = !tribal;
             var majorCombatPassion = Rand.Chance(0.3f);
             var majorOther = Rand.Chance(0.3f);
 
-            var availablePassionPoints = tribal ? 5 : 4; // 9 max - 5 predefined
-            var extraTribalPassionAvailable = tribal;
+            var importantSkills = new[] { "Medicine", "Construction", "Plants", "Intellectual" };
+            var combatSkills = new[] { "Shooting", "Melee" };
 
+            if (ModSettings.useEqualMinorPassionsForVeterans || tribal && !majorCombatPassion && !majorOther) AssignEqualMinorPassions(veteran, tribal, importantSkills, combatSkills);
+            else AssignWithMajorPassions(veteran, ref majorCombatPassion, ref majorOther, tribal, importantSkills, combatSkills);
+        }
+
+        private static void AssignEqualMinorPassions(Pawn veteran, bool tribal, string[] importantSkills, string[] combatSkills)
+        {
+            SetBaseLevelAndMinorPassions(veteran, importantSkills, combatSkills);
+            if (!tribal) return;
+            var isCombatPassion = Rand.Chance(0.75f);
+            if (isCombatPassion)
+            {
+                var flag = Rand.Chance(0.5f);
+                SkillRecord selectedSkill = null;
+                if (flag) selectedSkill = veteran.skills.skills.FirstOrDefault(x => x.def.defName == "Shooting");
+                else selectedSkill = veteran.skills.skills.FirstOrDefault(x => x.def.defName == "Melee");
+                if (selectedSkill != null) selectedSkill.passion = Passion.Major;
+            }
+            else
+            {
+                var skill = veteran.skills.skills.Where(x => !combatSkills.Contains(x.def.defName)).RandomElement();
+                if (skill != null) skill.passion = Passion.Major;
+            }
+        }
+
+        private static void AssignWithMajorPassions(Pawn veteran, ref bool majorCombatPassion, ref bool majorOther, bool tribal, string[] importantSkills, string[] combatSkills)
+        {
+            SetBaseLevelAndMinorPassions(veteran, importantSkills, combatSkills);
+            var passionsToTake = 0;
+            if (majorCombatPassion)
+            {
+                var flag = Rand.Chance(0.5f);
+                SkillRecord selectedSkill = null;
+                if (flag) selectedSkill = veteran.skills.skills.FirstOrDefault(x => x.def.defName == "Shooting");
+                else selectedSkill = veteran.skills.skills.FirstOrDefault(x => x.def.defName == "Melee");
+                if (selectedSkill != null)
+                {
+                    selectedSkill.passion = Passion.Major;
+                    passionsToTake++;
+                }
+            }
+            if (majorOther)
+            {
+                var skill = veteran.skills.skills.Where(x => !combatSkills.Contains(x.def.defName)).RandomElement();
+                if (skill != null)
+                {
+                    skill.passion = Passion.Major;
+                    passionsToTake++;
+                }
+            }
+            if (tribal) passionsToTake--;
+            if (passionsToTake <= 0) return;
+            for (int i = 0; i < passionsToTake; i++)
+            {
+                var skill = veteran.skills.skills.Where(x => !combatSkills.Contains(x.def.defName) && !importantSkills.Contains(x.def.defName) && x.passion != Passion.Major).RandomElement();
+                if (skill == null) continue;
+                skill.passion = Passion.None;
+            }
+        }
+
+        private static void SetBaseLevelAndMinorPassions(Pawn veteran, string[] importantSkills, string[] combatSkills)
+        {
             foreach (var skill in veteran.skills.skills.InRandomOrder())
             {
                 skill.passion = Passion.Minor;
-
-                switch (skill?.def?.defName)
-                {
-                    case "Shooting":
-                    case "Melee":
-                        skill.Level = Rand.Range(15, 19);
-                        if (majorCombatPassion)
-                        {
-                            majorCombatPassion = false;
-                            skill.passion = Passion.Major;
-                            availablePassionPoints--;
-                        }
-                        break;
-                    case "Medicine":
-                    case "Construction":
-                    case "Plants":
-                        skill.Level = Rand.Range(7, 15);
-                        if (majorOther)
-                        {
-                            majorOther = false;
-                            skill.passion = Passion.Major;
-                            availablePassionPoints--;
-                        }
-                        break;
-                    default:
-                        if (availablePassionPoints <= 0)
-                        {
-                            skill.passion = Passion.None;
-                            break;
-                        }
-
-                        if ((new[] { "Artistic", "Intellectual" }).Contains(skill?.def?.defName)
-                            && !extraTribalPassionAvailable)
-                        {
-                            skill.passion = Passion.None;
-                            break;
-                        }
-                        else if ((new[] { "Artistic", "Intellectual" }).Contains(skill?.def?.defName))
-                        {
-                            // if we allow major and it would fall on a non-important skill, it would take a passion point
-                            // away from important skills which may make the pawn worse for the situation, instead of improve it
-                            if (majorOther) availablePassionPoints++;
-                        }
-                        extraTribalPassionAvailable = false;
-
-                        if (majorOther)
-                        {
-                            majorOther = false;
-                            skill.passion = Passion.Major;
-                            availablePassionPoints--;
-                        }
-
-                        availablePassionPoints--;
-                        break;
-                }
+                if (combatSkills.Contains(skill.def.defName)) skill.Level = Rand.Range(15, 19);
+                if (importantSkills.Contains(skill.def.defName)) skill.Level = Rand.Range(7, 15);
             }
         }
 

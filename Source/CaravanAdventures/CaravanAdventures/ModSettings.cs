@@ -149,6 +149,7 @@ namespace CaravanAdventures
         public static float architeGeneChance = 7f;
         public static int buyableGeneAmount = 2;
         public static float bountyCreditPurchaseCostMult = 0.68f;
+        public static bool useEqualMinorPassionsForVeterans;
 
         // travel companions
         public static bool excludeSlavesFromTravelCompanions;
@@ -294,6 +295,7 @@ namespace CaravanAdventures
             Scribe_Values.Look(ref architeGeneChance, "architeGeneChanceDefaultUpdate", 7f);
             Scribe_Values.Look(ref buyableGeneAmount, "buyableGeneAmount", 2);
             Scribe_Values.Look(ref bountyCreditPurchaseCostMult, "bountyCreditPurchaseCostMult", 0.68f);
+            Scribe_Values.Look(ref useEqualMinorPassionsForVeterans, "useEqualMinorPassionsForVeterans", false);
 
             // travel companions
             Scribe_Values.Look(ref excludeSlavesFromTravelCompanions, "excludeSlavesFromTravelCompanions", false);
