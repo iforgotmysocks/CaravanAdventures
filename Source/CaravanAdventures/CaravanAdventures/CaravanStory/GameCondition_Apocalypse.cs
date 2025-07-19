@@ -1,4 +1,5 @@
-﻿using RimWorld;
+﻿using CaravanAdventures.Patches;
+using RimWorld;
 using System;
 using Verse;
 
@@ -63,6 +64,7 @@ namespace CaravanAdventures.CaravanStory
         public override void End()
         {
             active = false;
+            ApocalypsePatches.CachedApo = null;
             base.End();
         }
     }

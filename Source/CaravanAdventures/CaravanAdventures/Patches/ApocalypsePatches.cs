@@ -40,19 +40,20 @@ namespace CaravanAdventures.Patches
         //    return true;
         //}
 
-        private static GameCondition_Apocalypse _cachedApo = null;
+        public static GameCondition_Apocalypse CachedApo { get; set; }
+
         public static void Aggregate_Postfix(ref float __result, GameConditionManager __instance)
         {
             // todo 1.6 add check for space, we only want that applied on planetmaps
             if (__instance.ownerMap == null) return;
-            if (_cachedApo == null) _cachedApo = Find.World.GameConditionManager.ActiveConditions.FirstOrDefault(x => x.def == StoryDefOf.CAGameCondition_Apocalypse) as GameCondition_Apocalypse;
-            if (_cachedApo == null) return;
-            if (!_cachedApo.Active)
+            if (CachedApo == null) CachedApo = Find.World.GameConditionManager.ActiveConditions.FirstOrDefault(x => x.def == StoryDefOf.CAGameCondition_Apocalypse) as GameCondition_Apocalypse;
+            if (CachedApo == null) return;
+            if (!CachedApo.Active)
             {
-                _cachedApo = null;
+                CachedApo = null;
                 return;
             }
-            __result += _cachedApo.TemperatureOffset();
+            __result += CachedApo.TemperatureOffset();
         }
 
         public static void OffsetFromSeasonCycle_Postfix(ref float __result, PlanetTile tile)
