@@ -20,6 +20,8 @@ namespace CaravanAdventures.CaravanMechBounty
             this.root = result;
             this.requestor = negotiator;
             this.faction = faction;
+
+            if (ModsConfig.OdysseyActive) customRewardsGene.Add(breathlessGeneDef);
         }
 
         public DiaOption CreateInitialDiaMenu() => new DiaOption("CABountyExchangeOpenOption".Translate()) { linkLateBind = () => CreateMainMenuNode() };
@@ -187,8 +189,10 @@ namespace CaravanAdventures.CaravanMechBounty
             DefDatabase<GeneDef>.AllDefs.FirstOrDefault(x => x.defName == "PerfectImmunity"),
             DefDatabase<GeneDef>.AllDefs.FirstOrDefault(x => x.defName == "Deathless"),
             DefDatabase<GeneDef>.AllDefs.FirstOrDefault(x => x.defName == "ArchiteMetabolism"),
-            DefDatabase<GeneDef>.AllDefs.FirstOrDefault(x => x.defName == "XenogermReimplanter")
+            DefDatabase<GeneDef>.AllDefs.FirstOrDefault(x => x.defName == "XenogermReimplanter"),
         };
+
+        private GeneDef breathlessGeneDef = DefDatabase<GeneDef>.AllDefs.FirstOrDefault(x => x.defName == "VacuumResistance_Total");
 
         private List<Thing> GenerateItemStock(int itemCount, int customItemCount = 0, int customGeneCount = 0)
         {
