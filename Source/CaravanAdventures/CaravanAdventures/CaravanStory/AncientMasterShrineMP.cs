@@ -351,6 +351,7 @@ namespace CaravanAdventures.CaravanStory
             if (CompCache.StoryWC.GetUnlockedSpells().Count < DefDatabase<AbilityDef>.AllDefsListForReading.Where(x => x.defName.StartsWith("CAAncient") && x != endSpell).Count())
             {
                 spell = DefDatabase<AbilityDef>.AllDefsListForReading.Where(x => x.defName.StartsWith("CAAncient") && x != endSpell && !CompCache.StoryWC.GetUnlockedSpells().Contains(x)).InRandomOrder().FirstOrDefault();
+                if (Helper.Debug() && CompCache.StoryWC.GetCurrentShrineCounter() == 1) spell = DefDatabase<AbilityDef>.AllDefsListForReading.FirstOrDefault(x => x.defName.StartsWith("CAAncientProtectiveAura"));
                 LearnSpell(gifted, spell);
             }
             else if (CompCache.StoryWC.GetCurrentShrineCounter() >= CompCache.StoryWC.GetShrineMaxiumum && !CompCache.StoryWC.GetUnlockedSpells().Contains(endSpell))
@@ -429,7 +430,6 @@ namespace CaravanAdventures.CaravanStory
             FreeAllMechsOnMap();
             var patrolComp = GetComponent<TimedDetectionPatrols>();
             if (patrolComp != null) patrolComp.ToggleIncreaseStrenthByCounter = true;
-
         }
 
         private void CheckRileUpInsects()
