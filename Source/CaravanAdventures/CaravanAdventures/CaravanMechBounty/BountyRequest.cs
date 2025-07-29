@@ -21,6 +21,7 @@ namespace CaravanAdventures.CaravanMechBounty
             this.requestor = negotiator;
             this.faction = faction;
 
+            if (ModsConfig.RoyaltyActive && !Helper.ExpRM) customRewards.AddRange(customRewardsRoyalty);
             if (ModsConfig.OdysseyActive) customRewardsGene.Add(breathlessGeneDef);
         }
 
@@ -196,7 +197,6 @@ namespace CaravanAdventures.CaravanMechBounty
 
         private List<Thing> GenerateItemStock(int itemCount, int customItemCount = 0, int customGeneCount = 0)
         {
-            if (ModsConfig.RoyaltyActive && !Helper.ExpRM) customRewards.AddRange(customRewardsRoyalty);
             if (!ModsConfig.BiotechActive || !ModSettings.useGeneRewards || Helper.ExpRM) customGeneCount = 0;
             if (Helper.ExpRM) customItemCount = 0;
 
