@@ -5,9 +5,11 @@ namespace CaravanAdventures
 {
     public class Main : Mod
     {
+        internal static ModSettings Settings { get; set; }
+
         public Main(ModContentPack content) : base(content)
         {
-            GetSettings<ModSettings>();
+            Settings = GetSettings<ModSettings>();
             HarmonyPatcher.RunEarlyPatches();
         }
 
