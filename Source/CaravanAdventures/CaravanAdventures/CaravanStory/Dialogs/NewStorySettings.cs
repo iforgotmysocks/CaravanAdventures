@@ -98,6 +98,7 @@ namespace CaravanAdventures.CaravanStory.Dialogs
             GUI.color = Color.white;
             options.End();
             //Widgets.EndScrollView();
+            Main.Settings.Write();
         }
 
         private IEnumerable<Widgets.DropdownMenuElement<StoryMode>> GenerateStoryModeDropDownContent(StoryMode target)
