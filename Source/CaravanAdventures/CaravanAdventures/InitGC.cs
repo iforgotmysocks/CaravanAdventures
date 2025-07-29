@@ -63,14 +63,15 @@ namespace CaravanAdventures
         {
             if (removeRuinsTick > 60000)
             {
-                var settlements = Find.WorldObjects.AllWorldObjects.Where(settlement => (settlement.def == WorldObjectDefOf.AbandonedSettlement || settlement.def == WorldObjectDefOf.GravshipLaunch) && settlement.Faction.IsPlayer);
-                DLog.Message($"Trying to remove {settlements.Count()} settlements");
+                removeRuinsTick = 0;
+                var settlements = Find.WorldObjects.AllWorldObjects.Where(settlement => settlement != null && (settlement.def == WorldObjectDefOf.AbandonedSettlement || settlement.def == WorldObjectDefOf.GravshipLaunch || settlement.def == WorldObjectDefOf.AbandonedCamp) && settlement?.Faction?.IsPlayer == true);
+                DLog.Message($"Trying to remove {settlements?.Count()} settlements");
+                if (!(settlements?.Any() ?? false)) return; 
 
                 foreach (var settlement in settlements.Reverse())
                 {
                     Find.WorldObjects.Remove(settlement);
                 }
-                removeRuinsTick = 0;
             }
         }
 
