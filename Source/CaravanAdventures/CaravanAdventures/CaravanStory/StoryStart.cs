@@ -1,7 +1,8 @@
-﻿using System;
+﻿using RimWorld;
+using RimWorld.Planet;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using RimWorld;
 using Verse;
 using Verse.Sound;
 
@@ -243,13 +244,14 @@ namespace CaravanAdventures.CaravanStory
             var gifted = CompCache.StoryWC.questCont.StoryStart.Gifted;
             (int psyLevel, List<Psycast> psycasts) transferData = (0, new List<Psycast>());
 
-            if (gifted != null 
-                && (!gifted.Dead || (gifted.Dead && StoryUtility.DeathRefusalPossibleWhileDead(gifted))) 
-                && (!gifted.Destroyed || gifted.Destroyed && StoryUtility.DeathRefusalPossibleWhileDead(gifted)) 
-                && gifted.Faction == Faction.OfPlayer 
-                && !gifted.IsKidnapped() 
+            if (gifted != null
+                && (!gifted.Dead || (gifted.Dead && StoryUtility.DeathRefusalPossibleWhileDead(gifted)))
+                && (!gifted.Destroyed || gifted.Destroyed && StoryUtility.DeathRefusalPossibleWhileDead(gifted))
+                && gifted.Faction == Faction.OfPlayer
+                && !gifted.IsKidnapped()
+                && IsPlayerAccessiblePawn(gifted)
                 && !forceStrip) return;
-            else if (gifted != null && (gifted.Dead || gifted.Faction != Faction.OfPlayer || gifted.IsKidnapped() || forceStrip))
+            else if (gifted != null && (gifted.Dead || gifted.Faction != Faction.OfPlayer || gifted.IsKidnapped() || !IsPlayerAccessiblePawn(gifted) || forceStrip))
             {
                 StoryUtility.StripGiftFromPawn(gifted);
                 if (transferOtherPsycasts) StoryUtility.TransferOtherPsycasts(gifted, ref transferData);
@@ -295,6 +297,15 @@ namespace CaravanAdventures.CaravanStory
             CompCache.StoryWC.questCont.StoryStart.Gifted = gifted;
             if ((spellCount == 0 || spellCount == 1) && !CompatibilityPatches.InDetectedAssemblies("VanillaPsycastsExpanded")) AddAdditionalSpells(gifted);
             Find.LetterStack.ReceiveLetter("CA_Story_ReceivedGiftLetterTitle".Translate(), "CA_Story_ReceivedGiftLetterDesc".Translate(gifted.NameShortColored, GenderUtility.GetPronoun(gifted.gender)), LetterDefOf.PositiveEvent);
+        }
+
+        private static bool IsPlayerAccessiblePawn(Pawn p)
+        {
+            if (p == null) return false;
+            if (p.Spawned && (p.IsFreeColonist || p.IsPrisonerOfColony)) return true;
+            if (p.IsPlayerControlledCaravanMember()) return true;
+            if (p.InCryptosleep) return true;
+            return false;
         }
 
         private void AddTransferedAbilities((int psylevel, List<Psycast> psycasts) transferData, Pawn gifted)
