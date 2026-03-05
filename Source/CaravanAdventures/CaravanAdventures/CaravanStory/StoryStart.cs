@@ -299,12 +299,36 @@ namespace CaravanAdventures.CaravanStory
             Find.LetterStack.ReceiveLetter("CA_Story_ReceivedGiftLetterTitle".Translate(), "CA_Story_ReceivedGiftLetterDesc".Translate(gifted.NameShortColored, GenderUtility.GetPronoun(gifted.gender)), LetterDefOf.PositiveEvent);
         }
 
+        //private static bool IsPlayerAccessiblePawn(Pawn p)
+        //{
+        //    if (p == null) return false;
+        //    if (p.Spawned && (p.IsFreeColonist || p.IsPrisonerOfColony)) return true;
+        //    if (p.IsPlayerControlledCaravanMember()) return true;
+        //    if (p.InCryptosleep) return true;
+        //    return false;
+        //}
+
         private static bool IsPlayerAccessiblePawn(Pawn p)
         {
             if (p == null) return false;
             if (p.Spawned && (p.IsFreeColonist || p.IsPrisonerOfColony)) return true;
             if (p.IsPlayerControlledCaravanMember()) return true;
-            if (p.InCryptosleep) return true;
+            if (p.BrieflyDespawned()) return true;
+            if (p.InContainerEnclosed) return DoesEnclosingThingExistOnAMap(p);
+            return false;
+        }
+
+        private static bool DoesEnclosingThingExistOnAMap(Pawn p)
+        {
+            if (p == null) return false;
+
+            var holder = p.ParentHolder;
+            for (int i = 0; i < 50 && holder != null; i++)
+            {
+                if (holder is Map || holder is ActiveTransporterInfo || holder is TravellingTransporters || holder is ShuttleIncoming) return true;
+                holder = holder.ParentHolder;
+            }
+
             return false;
         }
 
