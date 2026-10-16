@@ -1,263 +1,59 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1060135A-785A-42BE-86F7-816749B6AF1F}</ProjectGuid>
+    <TargetFramework>net10.0</TargetFramework>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CaravanAdventures</RootNamespace>
     <AssemblyName>CaravanAdventures</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <DebugType>portable</DebugType>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <RimWorldManagedDir Condition="'$(RimWorldManagedDir)' == ''">$(MSBuildProjectDirectory)/../../../../..</RimWorldManagedDir>
+    <ModAssembliesDir Condition="'$(ModAssembliesDir)' == ''">$(MSBuildProjectDirectory)/../../../1.7/Assemblies</ModAssembliesDir>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="0Harmony, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Lib.Harmony.2.1.0\lib\net472\0Harmony.dll</HintPath>
-    </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\..\..\..\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <HintPath>$(RimWorldManagedDir)/Assembly-CSharp.dll</HintPath>
+      <Private>false</Private>
     </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.InteropServices.RuntimeInformation" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
-    <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\RimWorldWin64_Data\Managed\UnityEngine.dll</HintPath>
+    <Reference Include="UnityStubs">
+      <HintPath>$(RimWorldManagedDir)/UnityStubs.dll</HintPath>
+      <Private>false</Private>
     </Reference>
-    <Reference Include="UnityEngine.CoreModule">
-      <HintPath>..\..\..\..\..\RimWorldWin64_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.IMGUIModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\RimWorldWin64_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.TextRenderingModule">
-      <HintPath>..\..\..\..\..\RimWorldWin64_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
+    <Reference Include="Waylith">
+      <HintPath>$(RimWorldManagedDir)/Waylith.dll</HintPath>
+      <Private>false</Private>
     </Reference>
   </ItemGroup>
+
+  <ItemGroup Condition="'$(HarmonyAssemblyPath)' == ''">
+    <PackageReference Include="Lib.Harmony" Version="2.4.3" IncludeAssets="compile" PrivateAssets="all" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(HarmonyAssemblyPath)' != ''">
+    <Reference Include="0Harmony">
+      <HintPath>$(HarmonyAssemblyPath)</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="CaravanAbilities\AbilityDefOf.cs" />
-    <Compile Include="CaravanAbilities\CompAbilityEffect_AncientMeditate.cs" />
-    <Compile Include="CaravanAbilities\CompAbilityEffect_AncientMechSignal.cs" />
-    <Compile Include="CaravanAbilities\CompAbilityEffect_AncientThunderBold.cs" />
-    <Compile Include="CaravanAbilities\CompAbilityEffect_GiveToggleableHediff.cs" />
-    <Compile Include="CaravanAbilities\CompEngageMelee.cs" />
-    <Compile Include="CaravanAbilities\CompProperties_AbilityAncientMeditate.cs" />
-    <Compile Include="CaravanAbilities\CompProperties_AbilityAncientMechSignal.cs" />
-    <Compile Include="CaravanAbilities\CompProperties_AbilityAncientThunderBold.cs" />
-    <Compile Include="CaravanAbilities\CompProperties_EngageMelee.cs" />
-    <Compile Include="CaravanAbilities\CompProperties_GiveToggleableHediff.cs" />
-    <Compile Include="CaravanAbilities\HediffCompProperties_AncientProtectiveAura.cs" />
-    <Compile Include="CaravanAbilities\HediffCompProperties_OverheatingBrain.cs" />
-    <Compile Include="CaravanAbilities\HediffCompProperties_ConjuredLight.cs" />
-    <Compile Include="CaravanAbilities\HediffComp_AncientCoordinator.cs" />
-    <Compile Include="CaravanAbilities\HediffComp_AncientProtectiveAura.cs" />
-    <Compile Include="CaravanAbilities\HediffComp_OverheatingBrain.cs" />
-    <Compile Include="CaravanAbilities\HediffComp_AncientGift.cs" />
-    <Compile Include="CaravanAbilities\HediffComp_ConjuredLight.cs" />
-    <Compile Include="CaravanAbilities\HediffComp_DrainNature.cs" />
-    <Compile Include="CaravanAbilities\Swirl.cs" />
-    <Compile Include="CaravanCamp\AnimalArea.cs" />
-    <Compile Include="CaravanCamp\Buildings\Building_AirConditioningHeater.cs" />
-    <Compile Include="CaravanCamp\CampArea.cs" />
-    <Compile Include="CaravanCamp\CampBuilder.cs" />
-    <Compile Include="CaravanCamp\CampCenter.cs" />
-    <Compile Include="CaravanCamp\CampDefOf.cs" />
-    <Compile Include="CaravanCamp\CampHelper.cs" />
-    <Compile Include="CaravanCamp\CampModExt.cs" />
-    <Compile Include="CaravanCamp\CompCampControl.cs" />
-    <Compile Include="CaravanCamp\IAreaRestrictionTent.cs" />
-    <Compile Include="CaravanCamp\IMultiShelfTent.cs" />
-    <Compile Include="CaravanCamp\IRecipeHolder.cs" />
-    <Compile Include="CaravanCamp\IShelfTent.cs" />
-    <Compile Include="CaravanCamp\IZoneTent.cs" />
-    <Compile Include="CaravanCamp\JobDriver_StartPackingUp.cs" />
-    <Compile Include="CaravanCamp\PlantTent.cs" />
-    <Compile Include="CaravanCamp\ShelfStorageTent.cs" />
-    <Compile Include="CaravanCamp\SlaveTent.cs" />
-    <Compile Include="CaravanCamp\StorageTent.cs" />
-    <Compile Include="CaravanCamp\FoodTent.cs" />
-    <Compile Include="CaravanCamp\MedicalTent.cs" />
-    <Compile Include="CaravanCamp\PrisonerTent.cs" />
-    <Compile Include="CaravanCamp\ProductionTent.cs" />
-    <Compile Include="CaravanCamp\RestTent.cs" />
-    <Compile Include="CaravanCamp\Tent.cs" />
-    <Compile Include="CaravanImmersion\ThoughtWorker_TravelCompanions.cs" />
-    <Compile Include="CaravanImmersion\TravelCompanionDef.cs" />
-    <Compile Include="CaravanImmersion\TravelCompanionDefOf.cs" />
-    <Compile Include="CaravanImmersion\TravelCompanionModExt.cs" />
-    <Compile Include="CaravanImmersion\TravelCompanionWC.cs" />
-    <Compile Include="CaravanImprovements\CaravanEnterMapImprovementUtility.cs" />
-    <Compile Include="CaravanImprovements\CompCaravanDecisions.cs" />
-    <Compile Include="CaravanImprovements\UnloadItemsAlert.cs" />
-    <Compile Include="CaravanImprovements\CompUnloadItems.cs" />
-    <Compile Include="CaravanIncidents\CaravanIncidentMapParentDefOfs.cs" />
-    <Compile Include="CaravanIncidents\DamselInDistressUtility.cs" />
-    <Compile Include="CaravanIncidents\DamselInDistressMapParent.cs" />
-    <Compile Include="CaravanIncidents\IncidentWorker_CaravanDamselInDistress.cs" />
-    <Compile Include="CaravanItemSelection\FilterCombs.cs" />
-    <Compile Include="CaravanItemSelection\FilterHelper.cs" />
-    <Compile Include="CaravanItemSelection\FilterSet.cs" />
-    <Compile Include="CaravanItemSelection\TransferableComparer_PawnTitle.cs" />
-    <Compile Include="CaravanMechBounty\BountyRequest.cs" />
-    <Compile Include="CaravanMechBounty\BountyUtility.cs" />
-    <Compile Include="CaravanMechBounty\BountyWC.cs" />
-    <Compile Include="CaravanStory\AncientMasterShrineMP.cs" />
-    <Compile Include="CaravanStory\CaravanArrivalAction_StoryVillageMP.cs" />
-    <Compile Include="CaravanStory\Dialogs\NewStorySettings.cs" />
-    <Compile Include="CaravanStory\GameCondition_Apocalypse.cs" />
-    <Compile Include="CaravanStory\GenStep_ScatterMasterShrines_Old.cs" />
-    <Compile Include="CaravanStory\GenStep_ScatterSmallShrines.cs" />
-    <Compile Include="CaravanStory\IncidentWorker_FriendlyCaravanVisit.cs" />
-    <Compile Include="CaravanStory\IncidentWorker_UnusualInfestation.cs" />
-    <Compile Include="CaravanStory\IncidentWorker_MechRaidMixed.cs" />
-    <Compile Include="CaravanStory\JobDefOf.cs" />
-    <Compile Include="CaravanStory\JobDriver_Talk.cs" />
-    <Compile Include="CaravanStory\LastJudgmentMP.cs" />
-    <Compile Include="CaravanStory\Lords\LordJob_DefendBaseAgaintHostiles.cs" />
-    <Compile Include="CaravanStory\Lords\Trigger_AttackWithReinforcements.cs" />
-    <Compile Include="CaravanStory\Lords\Trigger_ChanceOnMechHarmNPCBuilding.cs" />
-    <Compile Include="CaravanStory\MechChips\Abilities\GuardianShield.cs" />
-    <Compile Include="CaravanStory\MechChips\Abilities\ProjectileHomingMissile.cs" />
-    <Compile Include="CaravanStory\MechChips\Abilities\RapidLaser.cs" />
-    <Compile Include="CaravanStory\MechChips\Abilities\RapidLaserMote.cs" />
-    <Compile Include="CaravanStory\MechChips\Abilities\CirclingBladesMote.cs" />
-    <Compile Include="CaravanStory\MechChips\Abilities\MechChipAbilitySoundDefOf.cs" />
-    <Compile Include="CaravanStory\MechChips\HediffComp_EXT1Basic.cs" />
-    <Compile Include="CaravanStory\MechChips\HediffComp_EXT1Guardian.cs" />
-    <Compile Include="CaravanStory\MechChips\HediffComp_EXT1Missile.cs" />
-    <Compile Include="CaravanStory\MechChips\HediffComp_EXT1Laser.cs" />
-    <Compile Include="CaravanStory\Quests\QuestCont.cs" />
-    <Compile Include="CaravanStory\Quests\QuestCont_FriendlyCaravan.cs" />
-    <Compile Include="CaravanStory\Quests\QuestCont_LastJudgment.cs" />
-    <Compile Include="CaravanStory\Quests\QuestCont_StoryStart.cs" />
-    <Compile Include="CaravanStory\Quests\QuestCont_Village.cs" />
-    <Compile Include="CaravanStory\Quests\QuestNode_Temp.cs" />
-    <Compile Include="CaravanStory\Quests\QuestPart_AddLocations.cs" />
-    <Compile Include="CaravanStory\Quests\QuestUtility.cs" />
-    <Compile Include="CaravanStory\Quests\StoryQuestDefOf.cs" />
-    <Compile Include="CaravanStory\StoryDefOf.cs" />
-    <Compile Include="CaravanStory\StoryVillageMP.cs" />
-    <Compile Include="CaravanStory\MechChips\HediffCompProperties_EXT1Melee.cs" />
-    <Compile Include="CaravanStory\MechChips\HediffCompProperties_EXT1Basic.cs" />
-    <Compile Include="CaravanStory\MechChips\HediffComp_EXT1Melee.cs" />
-    <Compile Include="CaravanStory\MechChips\HediffComp_EXT1Artillary.cs" />
-    <Compile Include="CaravanStory\MechChips\MechChipModExt.cs" />
-    <Compile Include="CaravanStory\StoryUtility.cs" />
-    <Compile Include="CaravanStory\AncientMasterShrineWO.cs" />
-    <Compile Include="CaravanStory\CaravanArrivalAction_AncientMasterShrineWO.cs" />
-    <Compile Include="CaravanStory\CaravanStorySiteDefOf.cs" />
-    <Compile Include="CaravanStory\CompTalk.cs" />
-    <Compile Include="CaravanStory\CompProperties_Talk.cs" />
-    <Compile Include="CaravanStory\GenStep_ScatterMasterShrines.cs" />
-    <Compile Include="CaravanStory\StoryWC.cs" />
-    <Compile Include="CaravanStory\StoryStart.cs" />
-    <Compile Include="CaravanStory\TimedDetectionPatrols.cs" />
-    <Compile Include="CompatibilityDef.cs" />
-    <Compile Include="CompCache.cs" />
-    <Compile Include="DLog.cs" />
-    <Compile Include="Expansions\ExpansionDef.cs" />
-    <Compile Include="Expansions\ExpansionDefOf.cs" />
-    <Compile Include="Expansions\ExpansionManager.cs" />
-    <Compile Include="Expansions\Settings\ExpSettingsDef.cs" />
-    <Compile Include="Expansions\Settings\ExpSettingsDefOf.cs" />
-    <Compile Include="Helper.cs" />
-    <Compile Include="InitGC.cs" />
-    <Compile Include="InitPatches.cs" />
-    <Compile Include="Main.cs" />
-    <Compile Include="ModSettings.cs" />
-    <Compile Include="CompatibilityPatches.cs" />
-    <Compile Include="Patches\AbilityNeurotrainerDefGenerator.cs" />
-    <Compile Include="Patches\CaravanCamp.cs" />
-    <Compile Include="Patches\CaravanMagicLight.cs" />
-    <Compile Include="Patches\AttackSpeed.cs" />
-    <Compile Include="Patches\CaravanCampProximityRemoval.cs" />
-    <Compile Include="Patches\Compatibility\Rimedieval.cs" />
-    <Compile Include="Patches\Compatibility\RimWarPatch.cs" />
-    <Compile Include="Patches\Compatibility\SoS2Patch.cs" />
-    <Compile Include="Patches\Compatibility\WinstonWavesPatch.cs" />
-    <Compile Include="Patches\CustomIconPatches.cs" />
-    <Compile Include="Patches\KeepApparelOnHostileMapsPatch.cs" />
-    <Compile Include="Patches\EngageMeleePatches.cs" />
-    <Compile Include="Patches\SpDecayLevelIncrease.cs" />
-    <Compile Include="Patches\ApocalypsePatches.cs" />
-    <Compile Include="Patches\BossPatches.cs" />
-    <Compile Include="Patches\CaravanTravel.cs" />
-    <Compile Include="Extensions.cs" />
-    <Compile Include="Patches\HarmonyPatcher.cs" />
-    <Compile Include="Patches\AutomaticItemSelection.cs" />
-    <Compile Include="Patches\KillBountyPatches.cs" />
-    <Compile Include="Patches\TalkPawnGUIOverlay.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Settings\SettingsTravelCompanions.cs" />
-    <Compile Include="Settings\SettingsOther.cs" />
-    <Compile Include="Settings\SettingsCamp.cs" />
-    <Compile Include="Settings\SettingsBounty.cs" />
-    <Compile Include="Settings\SettingsStory.cs" />
-    <Compile Include="Settings\SettingsFilters.cs" />
-    <Compile Include="Settings\SettingsAbilities.cs" />
+    <Content Include="../../../About/About.xml" Link="About.xml" />
+    <None Include="../../../README.md" Link="README.md" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\..\About\About.xml">
-      <Link>About.xml</Link>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\..\README.md">
-      <Link>README.md</Link>
-    </None>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
+
+  <Target Name="ValidateGameReferences" BeforeTargets="ResolveAssemblyReferences">
+    <Error Condition="!Exists('$(RimWorldManagedDir)/Assembly-CSharp.dll')"
+           Text="Game assemblies are missing. Set RimWorldManagedDir to the directory containing RimWorld 1.7's Assembly-CSharp.dll." />
+    <Error Condition="!Exists('$(RimWorldManagedDir)/UnityStubs.dll') or !Exists('$(RimWorldManagedDir)/Waylith.dll')"
+           Text="RimWorld 1.7 engine assemblies are missing. RimWorldManagedDir must also contain UnityStubs.dll and Waylith.dll." />
+    <Error Condition="'$(HarmonyAssemblyPath)' != '' and !Exists('$(HarmonyAssemblyPath)')"
+           Text="HarmonyAssemblyPath does not point to an existing 0Harmony.dll." />
   </Target>
-  <Target Name="AfterBuild">
+
+  <Target Name="CopyModAssembly" AfterTargets="Build">
+    <MakeDir Directories="$(ModAssembliesDir)" />
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ModAssembliesDir)" SkipUnchangedFiles="true" />
   </Target>
-  -->
-  <Target Name="SpicNSpan" AfterTargets="Clean">
-    <!-- common vars https://msdn.microsoft.com/en-us/library/c02as0cs.aspx?f=255&MSPPError=-2147217396 -->
-    <RemoveDir Directories="$(TargetDir)" />
-    <!-- bin -->
-    <RemoveDir Directories="$(ProjectDir)$(BaseIntermediateOutputPath)" />
-    <!-- obj -->
-  </Target>
-  <PropertyGroup>
-    <PostBuildEvent>copy /Y "$(TargetDir)$(ProjectName).dll" "$(SolutionDir)\..\..\1.6\Assemblies\$(ProjectName).dll"</PostBuildEvent>
-  </PropertyGroup>
-  <ProjectExtensions>
-    <VisualStudio>
-      <UserProperties BuildVersion_BuildVersioningStyle="None.None.None.Increment" BuildVersion_StartDate="2000/1/1" />
-    </VisualStudio>
-  </ProjectExtensions>
 </Project>

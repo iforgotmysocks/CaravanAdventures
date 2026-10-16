@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+  <!-- This def is used for mod compatibility. 
+  To exclude races from TravelCompanions or to add 
+  new mechanoids to the bounty system, you can patch this def.-->
+  <CaravanAdventures.CompatibilityDef>
+    <defName>CACompatDef</defName>
+
+    <!-- add race defs to exclude here -->
+    <raceDefsToExcludeFromTravelCompanions>
+      <li>RSPeacekeeperDefender</li>
+    </raceDefsToExcludeFromTravelCompanions>
+
+    <!-- add a race def's mod extention, which should be used to identify all race defs instead here, beware to include the namespace -->
+    <racesWithModExtsToExcludeFromTravelCompanions>
+      <li>RimsecSecurity.RSPeacekeeperModExt</li>
+    </racesWithModExtsToExcludeFromTravelCompanions>
+
+    <!-- add biome def names that conflict with ancient shrine map generation. Indicators for incompatibility are missing shrine walls -->
+    <excludedBiomeDefNamesForStoryShrineGeneration>
+      <!-- <li>SampleDefName</li> -->
+    </excludedBiomeDefNamesForStoryShrineGeneration>
+
+    <!-- add race defs to exclude from the ancient coordinator spell here -->
+    <raceDefsToExcludeFromAncientCoordinator>
+      <li>RSPeacekeeperDefender</li>
+      <li>SoSHologramRace</li>
+    </raceDefsToExcludeFromAncientCoordinator>
+
+    <!-- add a race def's mod extention, which should be used to identify all race defs instead here, beware to include the namespace -->
+    <racesWithModExtsToExcludeFromAncientCoordinator>
+      <li>RimsecSecurity.RSPeacekeeperModExt</li>
+    </racesWithModExtsToExcludeFromAncientCoordinator>
+
+    <!-- if ur race defs belong to a new faction that isn't mechanoids, add the faction def here-->
+    <additionalBountyFactionDefsToAdd>
+      <li>VFE_Mechanoid</li>
+    </additionalBountyFactionDefsToAdd>
+
+    <!-- add new mechanoid race defs with their bounty point rewards for a kill. Default bounties range from 12 to 45 points. Default for non listed mechanoids is 12 points (with a few exceptions). -->
+    <mechanoidBountyToAdd>
+      <!-- sample -->
+      <li>
+        <raceDefName>CABossMechHavoc</raceDefName>
+        <bountyPoints>500</bountyPoints>
+      </li>
+      <!--Biotech Non-Bosses - Giltiti-->
+      <li>
+        <raceDefName>Mech_Thermite_Breach</raceDefName>
+        <bountyPoints>20</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>Mech_CentipedeGunner</raceDefName>
+        <bountyPoints>45</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>Mech_CentipedeBurner</raceDefName>
+        <bountyPoints>45</bountyPoints>
+      </li>
+      <!-- Biotech - Bosses -->
+      <li>
+        <raceDefName>Mech_Apocriton</raceDefName>
+        <bountyPoints>150</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>Mech_Centurion</raceDefName>
+        <bountyPoints>75</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>Mech_Warqueen</raceDefName>
+        <bountyPoints>125</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>Mech_Diabolus</raceDefName>
+        <bountyPoints>100</bountyPoints>
+      </li>
+      <!-- Biotech - other mechs where 12 points aren't appropriate -->
+      <li>
+        <raceDefName>Mech_Militor</raceDefName>
+        <bountyPoints>8</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>Mech_Lifter</raceDefName>
+        <bountyPoints>4</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>Mech_Constructoid</raceDefName>
+        <bountyPoints>6</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>Mech_Fabricor</raceDefName>
+        <bountyPoints>6</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>Mech_Agrihand</raceDefName>
+        <bountyPoints>5</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>Mech_Cleansweeper</raceDefName>
+        <bountyPoints>4</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>Mech_WarUrchin</raceDefName>
+        <bountyPoints>4</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>Mech_Paramedic</raceDefName>
+        <bountyPoints>4</bountyPoints>
+      </li>
+      <!--Alpha Mechs patch - Giltiti-->
+      <li>
+        <raceDefName>AM_Starfire</raceDefName>
+        <bountyPoints>125</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>AM_Siegemelter</raceDefName>
+        <bountyPoints>125</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>AM_Siegebreaker</raceDefName>
+        <bountyPoints>100</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>AM_Phalanx</raceDefName>
+        <bountyPoints>30</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>AM_WarEmpress</raceDefName>
+        <bountyPoints>200</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>AM_Phalanx</raceDefName>
+        <bountyPoints>30</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>AM_Mech_Sagittarius</raceDefName>
+        <bountyPoints>20</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>AM_Mech_Polychoron</raceDefName>
+        <bountyPoints>25</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>AM_Mech_Optio</raceDefName>
+        <bountyPoints>25</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>AM_Mech_Munifex</raceDefName>
+        <bountyPoints>20</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>AM_Lux</raceDefName>
+        <bountyPoints>18</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>AM_Legate</raceDefName>
+        <bountyPoints>125</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>AM_Mech_Artilleron</raceDefName>
+        <bountyPoints>7</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>AM_Mech_Bellicor</raceDefName>
+        <bountyPoints>7</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>AM_Mech_Guttersnipe</raceDefName>
+        <bountyPoints>4</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>AM_Infernus</raceDefName>
+        <bountyPoints>175</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>AM_Apoptosis</raceDefName>
+        <bountyPoints>225</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>AM_Aura</raceDefName>
+        <bountyPoints>15</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>AM_Blitzkrieg</raceDefName>
+        <bountyPoints>4</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>AM_Daggersnout</raceDefName>
+        <bountyPoints>7</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>AM_Demolisher</raceDefName>
+        <bountyPoints>30</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>AM_Fireworm</raceDefName>
+        <bountyPoints>20</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>AM_Goliath</raceDefName>
+        <bountyPoints>45</bountyPoints>
+      </li>
+      <!--Integrated Implants Patch - Giltiti-->
+      <li>
+        <raceDefName>LTS_Mech_Isopod</raceDefName>
+        <bountyPoints>4</bountyPoints>
+      </li>
+      <!--Vanilla Factions Expanded Mechanoids - Giltiti-->
+      <li>
+        <raceDefName>VFE_Mech_Termite</raceDefName>
+        <bountyPoints>25</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>VFE_Mech_Siegebreaker</raceDefName>
+        <bountyPoints>100</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>VFE_Mech_Pikeman</raceDefName>
+        <bountyPoints>7</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>VFE_Mech_Phalanx</raceDefName>
+        <bountyPoints>30</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>VFE_Mech_Lancer</raceDefName>
+        <bountyPoints>15</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>VFE_Mech_Knight</raceDefName>
+        <bountyPoints>18</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>VFE_Mech_Goliath</raceDefName>
+        <bountyPoints>45</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>VFE_Mech_Fireworm</raceDefName>
+        <bountyPoints>20</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>VFE_Mech_Centipede</raceDefName>
+        <bountyPoints>45</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>VFE_Mech_Aura</raceDefName>
+        <bountyPoints>15</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>VFE_AdvTermite</raceDefName>
+        <bountyPoints>40</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>VFE_AdvancedScyther</raceDefName>
+        <bountyPoints>15</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>VFE_AdvancedPikeman</raceDefName>
+        <bountyPoints>12</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>VFE_AdvancedLancer</raceDefName>
+        <bountyPoints>18</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>VFE_AdvancedKnight</raceDefName>
+        <bountyPoints>24</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>VFE_Advanced_Siegebreaker</raceDefName>
+        <bountyPoints>125</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>VFE_Advanced_Phalanx</raceDefName>
+        <bountyPoints>35</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>VFE_AdvancedInquisitor</raceDefName>
+        <bountyPoints>18</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>VFE_AdvancedCentipede</raceDefName>
+        <bountyPoints>60</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>VFE_Advanced_Goliath</raceDefName>
+        <bountyPoints>60</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>VFE_Advanced_Fireworm</raceDefName>
+        <bountyPoints>30</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>VFE_Advanced_Aura</raceDefName>
+        <bountyPoints>21</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>VFE_Advanced_Daggersnout</raceDefName>
+        <bountyPoints>10</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>VFE_AncientMech_AncientCarpenter</raceDefName>
+        <bountyPoints>40</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>VFE_Mech_AdvancedCarpenter</raceDefName>
+        <bountyPoints>50</bountyPoints>
+      </li>
+      <li>
+        <raceDefName>VFE_Mech_Carpenter</raceDefName>
+        <bountyPoints>30</bountyPoints>
+      </li>
+    </mechanoidBountyToAdd>
+
+  </CaravanAdventures.CompatibilityDef>
+
+</Defs>

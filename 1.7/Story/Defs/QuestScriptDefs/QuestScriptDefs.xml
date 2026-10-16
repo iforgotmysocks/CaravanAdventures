@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <QuestScriptDef Name="CAQuestScriptDefBase" Abstract="True">
+    <!--<isRootSpecial>true</isRootSpecial>-->
+    <!--<hideOnCleanup>true</hideOnCleanup>-->
+    <endOnColonyMove>false</endOnColonyMove>
+    <rootSelectionWeight>0</rootSelectionWeight>
+    <rootMinPoints>350</rootMinPoints>
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->Temp</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription->Temp</li>
+      </rulesStrings>
+    </questDescriptionRules>
+    <root Class="CaravanAdventures.CaravanStory.Quests.QuestNode_Temp" />
+  </QuestScriptDef>
+
+  <QuestScriptDef ParentName="CAQuestScriptDefBase">
+    <defName>CA_TradeCaravan</defName>
+  </QuestScriptDef>
+
+  <QuestScriptDef ParentName="CAQuestScriptDefBase">
+    <defName>CA_StoryVillage_Arrival</defName>
+  </QuestScriptDef>
+
+  <QuestScriptDef ParentName="CAQuestScriptDefBase">
+    <defName>CA_TheTree</defName>
+  </QuestScriptDef>
+
+  <QuestScriptDef ParentName="CAQuestScriptDefBase">
+    <defName>CA_FindAncientShrine</defName>
+  </QuestScriptDef>
+
+</Defs>

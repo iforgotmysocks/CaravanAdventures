@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Defs>
+  <TransferableSorterDef>
+    <defName>CAPawnTitle</defName>
+    <label>pawn title</label>
+    <comparerClass>CaravanAdventures.CaravanItemSelection.TransferableComparer_PawnTitle</comparerClass>
+  </TransferableSorterDef>
+</Defs>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Defs>
+	  <GameConditionDef>
+    <defName>CAGameCondition_Apocalypse</defName>
+    <conditionClass>CaravanAdventures.CaravanStory.GameCondition_Apocalypse</conditionClass>
+    <label>Encroaching Apocalypse</label>
+    <description>Unknown mechanoid technology is generating an encroaching apocalypse causing the planet's temperature to keep dropping until every living being dies. The cause of this condition shouldn't be ignored too long.\n\nCurrent temperature adjustment: {0}</description>
+    <descriptionFuture>Unknown mechanoid technology is generating an encroaching apocalypse causing the planet's temperature to keep dropping until every living being dies. The cause of this condition needs to be found quickly.</descriptionFuture>
+    <endMessage>The apocalypse has been stopped.</endMessage>
+    <letterText>Unknown mechanoid technology is generating an encroaching apocalypse causing the planet's temperature to keep dropping until every living being dies. The cause of this condition needs to be found quickly.</letterText>
+    <letterDef>NegativeEvent</letterDef>
+    <exclusiveConditions>
+      <!--<li>HeatWave</li>
+			<li>ColdSnap</li>-->
+			<li>CAGameCondition_Apocalypse</li>
+		</exclusiveConditions>
+  </GameConditionDef>
+</Defs> 

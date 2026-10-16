@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>CAShrinePortal</defName>
+		<label>Mechanoid Portal</label>
+		<description>A portal constructed by mechanoids. It seems to lead somewhere. The encryptions conclude that only someone with the ancient gift can use it.</description>
+		<graphicData>
+			<texPath>Things/Buildings/Shrine/Portal</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<selectable>true</selectable>
+		<comps>
+			<li Class="CompProperties_Glower">
+				<glowRadius>3</glowRadius>
+				<glowColor>(255,0,0,0)</glowColor>
+			</li>
+			<li Class="CompProperties_HeatPusher">
+				<compClass>CompHeatPusherPowered</compClass>
+				<heatPerSecond>3.5</heatPerSecond>
+				<heatPushMaxTemperature>23</heatPushMaxTemperature>
+			</li>
+		</comps>
+    <useHitPoints>false</useHitPoints>
+		<building>
+			<isInert>true</isInert>
+			<isEdifice>false</isEdifice>
+			<deconstructible>false</deconstructible>
+			<claimable>false</claimable>
+		</building>
+    <destroyable>false</destroyable>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>CARedLight</defName>
+		<label>Red light</label>
+		<description>A red light, it shines red</description>
+		<graphicData>
+			<texPath>Things/Buildings/Misc/Empty</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<selectable>false</selectable>
+		<comps>
+			<li Class="CompProperties_Glower">
+				<glowRadius>5</glowRadius>
+				<glowColor>(255,0,0,0)</glowColor>
+			</li>
+			<li Class="CompProperties_HeatPusher">
+				<compClass>CompHeatPusherPowered</compClass>
+				<heatPerSecond>3.5</heatPerSecond>
+				<heatPushMaxTemperature>23</heatPushMaxTemperature>
+			</li>
+		</comps>
+		<building>
+			<isInert>true</isInert>
+			<isEdifice>false</isEdifice>
+			<deconstructible>false</deconstructible>
+		</building>
+	</ThingDef>
+
+</Defs>

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Linq;
 using RimWorld;
 using Verse;
@@ -62,9 +64,29 @@ namespace CaravanAdventures.Patches
             }
         }
 
-        public static void OnGUI_Postfix(TransferableOneWayWidget __instance, List<Section> ___sections, List<Section> __state, Rect inRect, ref bool anythingChanged)
+        public static void OnGUI_Postfix(IList ___sections, ref bool anythingChanged)
         {
             DoOwnCaravanFormButtons(___sections, ref anythingChanged);
+        }
+
+        private static readonly Type sectionType = AccessTools.Inner(typeof(TransferableOneWayWidget), "Section");
+        private static readonly FieldInfo sectionTitle = AccessTools.Field(sectionType, "title");
+        private static readonly FieldInfo sectionTransferables = AccessTools.Field(sectionType, "transferables");
+        private static readonly FieldInfo sectionCachedTransferables = AccessTools.Field(sectionType, "cachedTransferables");
+
+        private static List<Section> ReadSections(IList sections)
+        {
+            var result = new List<Section>(sections.Count);
+            foreach (var section in sections)
+            {
+                result.Add(new Section
+                {
+                    title = (string)sectionTitle.GetValue(section),
+                    transferables = (IEnumerable<TransferableOneWay>)sectionTransferables.GetValue(section),
+                    cachedTransferables = (List<TransferableOneWay>)sectionCachedTransferables.GetValue(section)
+                });
+            }
+            return result;
         }
 
         public static void DrawTransferableInfo_Postfix(Transferable trad, Rect idRect, Color labelColor)
@@ -176,7 +198,7 @@ namespace CaravanAdventures.Patches
             if (detectedPeople.Count > 0) caravanMembers = detectedPeople;
         }
 
-        private static void DoOwnCaravanFormButtons(List<Section> sections, ref bool anythingChanged)
+        private static void DoOwnCaravanFormButtons(IList sections, ref bool anythingChanged)
         {
             GUI.BeginGroup(new Rect(525f, 0f, 525f, 27f));
             Text.Font = GameFont.Tiny;
@@ -187,25 +209,25 @@ namespace CaravanAdventures.Patches
             Rect rect2 = new Rect(rect.xMax + 10f, 0f, 40f, 27f);
             if (Widgets.ButtonText(rect2, "CAFormingTradePresetAll".Translate(), true, true, true))
             {
-                FilterCombs.ApplyAll(sections);
+                FilterCombs.ApplyAll(ReadSections(sections));
                 anythingChanged = true;
             }
             if (Widgets.ButtonText(new Rect(rect2.xMax + 5f, 0f, 65f, 27f), "CAFormingTradePresetPackUp".Translate(), true, true, true))
             {
-                FilterCombs.ApplyPackUp(sections);
+                FilterCombs.ApplyPackUp(ReadSections(sections));
                 anythingChanged = true;
             }
            
             if (Widgets.ButtonText(new Rect(rect2.xMax + 10f + 65f, 0f, 65f, 27f), "CAFormingTradePresetGoods".Translate(), true, true, true))
             {
-                FilterCombs.ApplyGoods(sections);
+                FilterCombs.ApplyGoods(ReadSections(sections));
                 anythingChanged = true;
             }
 
             if (Widgets.ButtonText(new Rect(rect2.xMax + 15f + 130f, 0f, 65f, 27f), "CAFormingTradePresetGoods2".Translate(), true, true, true))
             {
                 //FilterCombs.ApplyJourney(sections, caravanMembers);
-                FilterCombs.ApplyGoods2(sections);
+                FilterCombs.ApplyGoods2(ReadSections(sections));
                 anythingChanged = true;
             }
 
@@ -216,7 +238,7 @@ namespace CaravanAdventures.Patches
 
             if (Widgets.ButtonText(new Rect(rect2.xMax + 25f + 222f, 0f, 45f, 27f), "CAFormingTradePresetClear".Translate(), true, true, true))
             {
-                FilterCombs.ApplyNone(sections);
+                FilterCombs.ApplyNone(ReadSections(sections));
                 anythingChanged = true;
             }
             Widgets.CheckboxLabeled(new Rect(rect2.xMax + 30f + 267f, 0f, 77f, 30f), "CAFormingTradePresetSupply".Translate(), ref InitGC.autoSupplyDisabled);

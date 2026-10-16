@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThoughtDef>
+    <defName>CACamping</defName>
+    <durationDays>6</durationDays>
+    <validWhileDespawned>true</validWhileDespawned>
+    <stages>
+      <li>
+        <label>camping</label>
+        <description>Being out in nature with my companions, enjoying this adventure and the freedom.</description>
+        <baseMoodEffect>6</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+</Defs>

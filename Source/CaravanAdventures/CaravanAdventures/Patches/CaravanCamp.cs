@@ -19,7 +19,7 @@ namespace CaravanAdventures.Patches
             HarmonyPatcher.harmony.Patch(org, pre, null);
         }
 
-        public static bool NewStorageNamePrefix(StorageGroupManager __instance, ref string __result)
+        public static bool NewStorageNamePrefix(ref string __result)
         {
             if (!ModSettings.caravanCampEnabled) return true;
             if (Current.Game?.CurrentMap?.zoneManager != null) return true;

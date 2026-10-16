@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Royalty</li>
+    </mods>
+    <match Class="PatchOperationSequence">
+      <success>Always</success>
+      <operations>
+
+        <li Class="PatchOperationAddModExtension">
+          <xpath>Defs/ThingDef[defName="CAMech_Scyther"]</xpath>
+          <value>
+            <li Class="CombatExtended.RacePropertiesExtensionCE">
+              <bodyShape>Humanoid</bodyShape>
+            </li>
+          </value>
+        </li>
+
+       <li Class="PatchOperationAdd">
+          <xpath>Defs/ThingDef[defName="CAMech_Scyther"]/statBases</xpath>
+          <value>
+            <CarryWeight>50</CarryWeight>
+            <CarryBulk>20</CarryBulk>
+            <AimingAccuracy>1.0</AimingAccuracy>
+            <ShootingAccuracyPawn>1.5</ShootingAccuracyPawn>
+            <MeleeDodgeChance>0.13</MeleeDodgeChance>
+            <MeleeCritChance>0.12</MeleeCritChance>
+            <MeleeParryChance>0.09</MeleeParryChance>
+            <MaxHitPoints>200</MaxHitPoints>
+          </value>
+        </li>
+        
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ThingDef[defName="CAMech_Scyther"]/tools</xpath>
+          <value>
+            <tools>
+              <li Class="CombatExtended.ToolCE">
+                <label>left blade</label>
+                <capacities>
+                  <li>Cut</li>
+                </capacities>
+                <power>43</power>
+                <cooldownTime>2.07</cooldownTime>
+                <linkedBodyPartsGroup>LeftBlade</linkedBodyPartsGroup>
+                <armorPenetrationSharp>2.16</armorPenetrationSharp>
+                <armorPenetrationBlunt>5.4</armorPenetrationBlunt>
+                <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+              </li>
+              <li Class="CombatExtended.ToolCE">
+                <label>left blade</label>
+                <capacities>
+                  <li>Stab</li>
+                </capacities>
+                <power>24</power>
+                <cooldownTime>1.33</cooldownTime>
+                <linkedBodyPartsGroup>LeftBlade</linkedBodyPartsGroup>
+                <armorPenetrationSharp>40</armorPenetrationSharp>
+                <armorPenetrationBlunt>20</armorPenetrationBlunt>
+                <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+              </li>
+              <li Class="CombatExtended.ToolCE">
+                <label>right blade</label>
+                <capacities>
+                  <li>Cut</li>
+                </capacities>
+                <power>43</power>
+                <cooldownTime>2.07</cooldownTime>
+                <linkedBodyPartsGroup>RightBlade</linkedBodyPartsGroup>
+                <armorPenetrationSharp>2.16</armorPenetrationSharp>
+                <armorPenetrationBlunt>5.4</armorPenetrationBlunt>
+                <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+              </li>
+              <li Class="CombatExtended.ToolCE">
+                <label>right blade</label>
+                <capacities>
+                  <li>Stab</li>
+                </capacities>
+                <power>24</power>
+                <cooldownTime>1.33</cooldownTime>
+                <linkedBodyPartsGroup>RightBlade</linkedBodyPartsGroup>
+                <armorPenetrationSharp>40</armorPenetrationSharp>
+                <armorPenetrationBlunt>20</armorPenetrationBlunt>
+                <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+              </li>
+              <li Class="CombatExtended.ToolCE">
+                <label>head</label>
+                <capacities>
+                  <li>Blunt</li>
+                </capacities>
+                <power>6</power>
+                <cooldownTime>5.9</cooldownTime>
+                <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+                <chanceFactor>0.2</chanceFactor>
+                <armorPenetrationBlunt>1.875</armorPenetrationBlunt>
+              </li>
+            </tools>
+          </value>
+        </li>
+
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="CAMech_Scyther"]/comps</xpath>
+          <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="CAMech_Scyther"]</xpath>
+            <value>
+              <comps />
+            </value>
+          </nomatch>
+        </li>
+
+        <li Class="PatchOperationAdd">
+          <xpath>Defs/ThingDef[defName="CAMech_Scyther"]/comps</xpath>
+          <value>
+            <li Class="CombatExtended.CompProperties_ArmorDurability">
+              <Durability>1160</Durability>
+              <Regenerates>true</Regenerates>
+              <RegenInterval>1250</RegenInterval>
+              <RegenValue>5</RegenValue>
+              <Repairable>true</Repairable>
+              <RepairIngredients>
+                <Steel>5</Steel>
+                <Plasteel>5</Plasteel>
+              </RepairIngredients>
+              <RepairTime>300</RepairTime>
+              <RepairValue>200</RepairValue>
+              <CanOverHeal>true</CanOverHeal>
+              <MaxOverHeal>116</MaxOverHeal>
+              <MinArmorPct>0.75</MinArmorPct>
+            </li>
+          </value>
+        </li>
+
+      </operations>
+    </match>
+  </Operation>
+
+</Patch>
