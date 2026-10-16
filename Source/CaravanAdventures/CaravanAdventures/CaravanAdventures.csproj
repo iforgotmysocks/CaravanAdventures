@@ -1,10 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <OutputType>Library</OutputType>
     <RootNamespace>CaravanAdventures</RootNamespace>
     <AssemblyName>CaravanAdventures</AssemblyName>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Version>1.9.0</Version>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>disable</Nullable>
     <DebugType>portable</DebugType>
@@ -43,13 +43,14 @@
     <None Include="../../../README.md" Link="README.md" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
   <Target Name="ValidateGameReferences" BeforeTargets="ResolveAssemblyReferences">
-    <Error Condition="!Exists('$(RimWorldManagedDir)/Assembly-CSharp.dll')"
-           Text="Game assemblies are missing. Set RimWorldManagedDir to the directory containing RimWorld 1.7's Assembly-CSharp.dll." />
-    <Error Condition="!Exists('$(RimWorldManagedDir)/UnityStubs.dll') or !Exists('$(RimWorldManagedDir)/Waylith.dll')"
-           Text="RimWorld 1.7 engine assemblies are missing. RimWorldManagedDir must also contain UnityStubs.dll and Waylith.dll." />
-    <Error Condition="'$(HarmonyAssemblyPath)' != '' and !Exists('$(HarmonyAssemblyPath)')"
-           Text="HarmonyAssemblyPath does not point to an existing 0Harmony.dll." />
+    <Error Condition="!Exists('$(RimWorldManagedDir)/Assembly-CSharp.dll')" Text="Game assemblies are missing. Set RimWorldManagedDir to the directory containing RimWorld 1.7's Assembly-CSharp.dll." />
+    <Error Condition="!Exists('$(RimWorldManagedDir)/UnityStubs.dll') or !Exists('$(RimWorldManagedDir)/Waylith.dll')" Text="RimWorld 1.7 engine assemblies are missing. RimWorldManagedDir must also contain UnityStubs.dll and Waylith.dll." />
+    <Error Condition="'$(HarmonyAssemblyPath)' != '' and !Exists('$(HarmonyAssemblyPath)')" Text="HarmonyAssemblyPath does not point to an existing 0Harmony.dll." />
   </Target>
 
   <Target Name="CopyModAssembly" AfterTargets="Build">
