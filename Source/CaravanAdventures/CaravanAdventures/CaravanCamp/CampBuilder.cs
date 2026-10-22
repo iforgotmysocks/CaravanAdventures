@@ -469,7 +469,7 @@ namespace CaravanAdventures.CaravanCamp
                 var selCol = prodColList.FirstOrDefault(col => prodColList.Any(otherCol => otherCol != col && (new[] {
                         col.relations.GetFirstDirectRelationPawn(PawnRelationDefOf.Spouse),
                         col.relations.GetFirstDirectRelationPawn(PawnRelationDefOf.Lover),
-                        col.relations.GetFirstDirectRelationPawn(PawnRelationDefOf.Fiance)}).Contains(otherCol)));
+                        col.relations.GetFirstDirectRelationPawn(PawnRelationDefOf.Fiance)}).Any(partner => partner == otherCol)));
 
                 if (selCol == null) break;
                 var otherPawn = CampHelper.ExistingColonistLovePartner(selCol, colonists);
